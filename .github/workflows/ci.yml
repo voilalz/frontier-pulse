@@ -24,11 +24,18 @@ jobs:
           python-version: "3.12"
       - name: Run unit tests
         run: python -m unittest discover -s tests -v
+      - name: Check browser JavaScript syntax
+        run: node --check public/assets/app.js
       - name: Build and validate a fixture edition
         run: >-
           python scripts/update_news.py
           --fixture tests/fixtures/articles.json
           --output /tmp/frontier-news.json
+          --archive-dir /tmp/frontier-archive
+          --archive-index /tmp/frontier-archive/index.json
+          --search-index /tmp/frontier-archive/search-index.json
+          --status-output /tmp/frontier-status.json
           --skip-ai
           --now 2026-07-16T00:00:00Z
-
+      - name: Render fixture email digest
+        run: python scripts/send_digest.py --input /tmp/frontier-news.json --dry-run

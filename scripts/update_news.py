@@ -34,7 +34,7 @@ from typing import Any, Iterable
 from zoneinfo import ZoneInfo
 
 LOGGER = logging.getLogger("frontier-pulse")
-USER_AGENT = "FrontierPulseBot/1.2 (+https://github.com/voilalz/frontier-pulse; daily public-interest news index)"
+USER_AGENT = "FrontierPulseBot/1.3 (+https://github.com/voilalz/frontier-pulse; daily public-interest news index)"
 CATEGORIES = ("AI", "航空航天", "军事动态", "局部冲突", "前沿技术", "无人系统")
 
 
@@ -53,6 +53,9 @@ class Article:
     tags: list[str] = field(default_factory=list)
     raw_score: float = 0.0
     corroboration: int = 1
+    evidence_sources: list[dict[str, str]] = field(default_factory=list)
+    score_components: dict[str, int] = field(default_factory=dict)
+    score_reasons: list[str] = field(default_factory=list)
 
 
 def utc_now() -> datetime:
@@ -368,13 +371,46 @@ def same_event_title(first: str, second: str) -> bool:
     return len(shared) >= 3 and overlap >= 0.35 and bool(shared.intersection(first_acronyms, second_acronyms))
 
 
+def source_evidence(article: Article) -> dict[str, str]:
+    """Return the public metadata needed to inspect one supporting source."""
+    return {
+        "name": article.source,
+        "domain": article.domain,
+        "url": article.url,
+        "publishedAt": article.published_at.isoformat().replace("+00:00", "Z"),
+    }
+
+
+def ensure_evidence_sources(article: Article) -> None:
+    if not article.evidence_sources:
+        article.evidence_sources = [source_evidence(article)]
+
+
+def merge_evidence_sources(target: Article, incoming: Article) -> None:
+    ensure_evidence_sources(target)
+    ensure_evidence_sources(incoming)
+    known_urls = {canonical_url(item.get("url", "")) for item in target.evidence_sources}
+    for evidence in incoming.evidence_sources:
+        url = canonical_url(evidence.get("url", ""))
+        if url and url not in known_urls:
+            target.evidence_sources.append(evidence)
+            known_urls.add(url)
+    independent_sources = {
+        (item.get("domain") or item.get("name") or "").strip().lower()
+        for item in target.evidence_sources
+        if item.get("domain") or item.get("name")
+    }
+    target.corroboration = max(1, len(independent_sources))
+
+
 def deduplicate(articles: Iterable[Article]) -> list[Article]:
     unique: list[Article] = []
     urls: dict[str, Article] = {}
     for article in sorted(articles, key=lambda item: item.published_at, reverse=True):
+        ensure_evidence_sources(article)
         key = canonical_url(article.url)
         if key in urls:
-            urls[key].corroboration += 1
+            merge_evidence_sources(urls[key], article)
             if not urls[key].description and article.description:
                 urls[key].description = article.description
             continue
@@ -382,7 +418,7 @@ def deduplicate(articles: Iterable[Article]) -> list[Article]:
         for existing in unique:
             close_in_time = abs((existing.published_at - article.published_at).total_seconds()) <= 24 * 3600
             if close_in_time and same_event_title(article.title, existing.title):
-                existing.corroboration += 1
+                merge_evidence_sources(existing, article)
                 if not existing.description and article.description:
                     existing.description = article.description
                 duplicate = True
@@ -409,16 +445,24 @@ def classify(article: Article, config: dict[str, Any]) -> tuple[str, list[str]]:
     return winner, tags
 
 
-def source_weight(article: Article, config: dict[str, Any]) -> int:
-    for domain, weight in config.get("source_weights", {}).items():
-        if article.domain == domain or article.domain.endswith("." + domain):
+def outlet_weight(article_domain: str, name: str, config: dict[str, Any]) -> int:
+    for weighted_domain, weight in config.get("source_weights", {}).items():
+        if article_domain == weighted_domain or article_domain.endswith("." + weighted_domain):
             return int(weight)
     for feed in config.get("rss_feeds", []):
-        if article.source == feed["name"]:
+        if name == feed["name"]:
             return int(feed.get("weight", 12))
-    if article.domain.endswith((".gov", ".mil")):
+    if article_domain.endswith((".gov", ".mil")):
         return 18
     return 10
+
+
+def source_weight(article: Article, config: dict[str, Any]) -> int:
+    ensure_evidence_sources(article)
+    return max(
+        outlet_weight(evidence.get("domain", ""), evidence.get("name", ""), config)
+        for evidence in article.evidence_sources
+    )
 
 
 def score_articles(articles: list[Article], config: dict[str, Any], now: datetime) -> list[Article]:
@@ -429,6 +473,8 @@ def score_articles(articles: list[Article], config: dict[str, Any], now: datetim
             continue
         article.category, article.tags = classify(article, config)
         text = f"{article.title} {article.description}".lower()
+        if any(keyword_matches(text, keyword) for keyword in config.get("editorial_exclude_keywords", [])):
+            continue
         relevance_hits = {
             keyword.lower()
             for definition in config["categories"].values()
@@ -437,7 +483,12 @@ def score_articles(articles: list[Article], config: dict[str, Any], now: datetim
         }
         if not relevance_hits:
             continue
-        keyword_score = sum(int(points) for keyword, points in config.get("impact_keywords", {}).items() if keyword_matches(text, keyword))
+        impact_hits = [
+            keyword
+            for keyword in config.get("impact_keywords", {})
+            if keyword_matches(text, keyword)
+        ]
+        keyword_score = sum(int(config["impact_keywords"][keyword]) for keyword in impact_hits)
         age_hours = max(0.0, (now - article.published_at).total_seconds() / 3600)
         recency = max(0.0, 20.0 - age_hours * 0.5)
         priority = int(config["categories"][article.category].get("priority", 8))
@@ -445,7 +496,32 @@ def score_articles(articles: list[Article], config: dict[str, Any], now: datetim
         corroboration = min(12, max(0, article.corroboration - 1) * 4)
         relevance = min(12, len(relevance_hits) * 2)
         penalty = min(24, sum(12 for keyword in config.get("editorial_penalty_keywords", []) if keyword_matches(text, keyword)))
-        article.raw_score = min(100.0, 15 + source_weight(article, config) + priority + recency + min(22, keyword_score) + relevance + evidence + corroboration - penalty)
+        source = source_weight(article, config)
+        article.score_components = {
+            "基础分": 15,
+            "来源": source,
+            "主题优先级": priority,
+            "时效": round(recency),
+            "影响信号": min(22, keyword_score),
+            "主题相关性": relevance,
+            "证据完整度": evidence,
+            "多源印证": corroboration,
+            "编辑降权": penalty,
+        }
+        total = sum(value for key, value in article.score_components.items() if key != "编辑降权") - penalty
+        article.raw_score = min(100.0, max(0.0, total))
+        reasons = [
+            f"来源权重 {source}/20",
+            f"发布约 {age_hours:.1f} 小时",
+            f"命中 {len(relevance_hits)} 个主题信号",
+        ]
+        if impact_hits:
+            reasons.append("影响信号：" + "、".join(impact_hits[:3]))
+        if article.corroboration > 1:
+            reasons.append(f"{article.corroboration} 个独立来源相互印证")
+        if penalty:
+            reasons.append(f"编辑质量降权 -{penalty}")
+        article.score_reasons = reasons
         scored.append(article)
     return sorted(scored, key=lambda item: (item.raw_score, item.published_at), reverse=True)
 
@@ -491,6 +567,17 @@ def fallback_summary(article: Article) -> str:
     return f"据{article.source}公开信息，{article.title}。现有元数据有限，详情应以原始报道为准。"
 
 
+def confidence_assessment(article: Article, config: dict[str, Any]) -> tuple[str, str]:
+    """Explain source confidence without pretending to verify the underlying claim."""
+    weight = source_weight(article, config)
+    count = max(1, article.corroboration)
+    if count >= 3 or (count >= 2 and weight >= 17):
+        return "高", f"主来源权重 {weight}/20，且有 {count} 个独立来源报道；仍应以原文和一手材料为准。"
+    if count >= 2 or weight >= 16:
+        return "中", f"来源权重 {weight}/20，共 {count} 个独立来源；关键事实建议继续交叉核验。"
+    return "待核验", f"当前仅收录 1 个来源（权重 {weight}/20），不代表事实已经独立证实。"
+
+
 def extract_response_text(payload: dict[str, Any]) -> str:
     for output in payload.get("output", []):
         if output.get("type") != "message":
@@ -509,13 +596,15 @@ def ai_select(candidates: list[Article], config: dict[str, Any], api_key: str) -
         "type": "object",
         "properties": {
             "id": {"type": "string"},
+            "titleZh": {"type": "string"},
             "category": {"type": "string", "enum": category_enum},
             "score": {"type": "integer", "minimum": 0, "maximum": 100},
             "summary": {"type": "string"},
+            "keyFacts": {"type": "array", "items": {"type": "string"}},
             "why": {"type": "string"},
             "tags": {"type": "array", "items": {"type": "string"}},
         },
-        "required": ["id", "category", "score", "summary", "why", "tags"],
+        "required": ["id", "titleZh", "category", "score", "summary", "keyFacts", "why", "tags"],
         "additionalProperties": False,
     }
     schema = {
@@ -547,16 +636,18 @@ def ai_select(candidates: list[Article], config: dict[str, Any], api_key: str) -
             "ruleCategory": article.category,
             "ruleScore": round(article.raw_score),
             "corroboration": article.corroboration,
+            "sources": article.evidence_sources,
         }
         for article in candidates
     ]
     body = {
-        "model": os.getenv("OPENAI_MODEL") or config.get("openai_model", "gpt-5-nano"),
+        "model": os.getenv("OPENAI_MODEL") or config.get("openai_model", "gpt-5.6-luna"),
         "store": False,
         "instructions": (
             "你是国际科技与安全新闻编辑。只能依据提供的标题、描述、来源和时间工作，不得补写候选材料中没有的事实。"
             "从候选中选择恰好10条最重要且类别尽量多样的新闻，优先考虑全球影响、技术/政策拐点、可信来源、时效与多源印证。"
-            "输出简洁中文摘要（每条不超过90字）、为什么重要（不超过70字）、0-100重要度和最多3个短标签。"
+            "为每条生成忠实、自然的中文标题（保留机构、型号和专有名词），并输出不超过90字的中文摘要、2至3条可由候选材料直接支持的关键事实、"
+            "不超过70字的为什么重要、0-100重要度和最多3个短标签。关键事实不得把推断写成事实。"
             "军事与冲突新闻保持中性、事实与判断分离；信息不足时明确使用‘据公开信息’等保守表达。"
         ),
         "input": "候选新闻证据：\n" + json.dumps(evidence, ensure_ascii=False),
@@ -567,15 +658,27 @@ def ai_select(candidates: list[Article], config: dict[str, Any], api_key: str) -
     return json.loads(extract_response_text(payload))
 
 
-def item_from_article(article: Article, editorial: dict[str, Any] | None = None) -> dict[str, Any]:
+def item_from_article(article: Article, config: dict[str, Any], editorial: dict[str, Any] | None = None) -> dict[str, Any]:
     editorial = editorial or {}
     score = int(editorial.get("score", round(article.raw_score)))
     category = editorial.get("category") if editorial.get("category") in CATEGORIES else article.category
     tags = [clean_text(tag, 24) for tag in editorial.get("tags", article.tags) if clean_text(tag)][:3]
+    summary = clean_text(editorial.get("summary") or fallback_summary(article), 220)
+    key_facts = [clean_text(fact, 140) for fact in editorial.get("keyFacts", []) if clean_text(fact)][:3]
+    if not key_facts:
+        key_facts = [summary]
+    ensure_evidence_sources(article)
+    confidence, confidence_reason = confidence_assessment(article, config)
+    score_reasons = list(article.score_reasons)
+    score_basis = "AI编辑评分" if editorial else "规则评分"
+    if editorial:
+        score_reasons = [f"AI 编辑重要度 {score}/100", f"规则参考分 {round(article.raw_score)}/100", *score_reasons]
     return {
         "id": article.id,
-        "title": article.title,
-        "summary": clean_text(editorial.get("summary") or fallback_summary(article), 220),
+        "title": clean_text(editorial.get("titleZh") or article.title, 180),
+        "originalTitle": article.title,
+        "summary": summary,
+        "keyFacts": key_facts,
         "why": clean_text(editorial.get("why") or WHY_TEMPLATES[category], 180),
         "category": category,
         "source": article.source,
@@ -583,9 +686,15 @@ def item_from_article(article: Article, editorial: dict[str, Any] | None = None)
         "publishedAt": article.published_at.isoformat().replace("+00:00", "Z"),
         "url": article.url,
         "score": max(0, min(100, score)),
+        "scoreBasis": score_basis,
+        "scoreComponents": article.score_components,
+        "scoreReasons": score_reasons,
+        "confidence": confidence,
+        "confidenceReason": confidence_reason,
         "tags": tags,
         "image": article.image,
         "corroboration": article.corroboration,
+        "sources": article.evidence_sources,
     }
 
 
@@ -616,30 +725,39 @@ def build_report(candidates: list[Article], config: dict[str, Any], now: datetim
                 if candidate and candidate not in ai_order:
                     ai_order.append(candidate)
                     editorial_by_id[candidate.id] = item
-            for article in selected:
-                if article not in ai_order:
-                    ai_order.append(article)
-            selected = ai_order[:top_n]
+            if len(ai_order) != top_n:
+                raise ValueError(f"OpenAI editorial pass returned {len(ai_order)} unique valid items; expected {top_n}")
+            selected = ai_order
             ai_brief = ai_result.get("brief")
             method = "openai"
         except Exception as exc:
             LOGGER.warning("OpenAI editorial pass failed; using deterministic fallback: %s", exc)
-    items = [item_from_article(article, editorial_by_id.get(article.id)) for article in selected]
+    items = [item_from_article(article, config, editorial_by_id.get(article.id)) for article in selected]
     items.sort(key=lambda item: (item["score"], item["publishedAt"]), reverse=True)
-    source_count = len({article.domain or article.source for article in candidates})
+    source_count = len({
+        (evidence.get("domain") or evidence.get("name") or "").lower()
+        for article in candidates
+        for evidence in (article.evidence_sources or [source_evidence(article)])
+        if evidence.get("domain") or evidence.get("name")
+    })
     brief = ai_brief if isinstance(ai_brief, dict) else fallback_brief(items, source_count)
     signals = [clean_text(signal, 180) for signal in brief.get("signals", []) if clean_text(signal)][:3]
     if len(signals) < 3:
         signals = fallback_brief(items, source_count)["signals"]
     local_time = now.astimezone(ZoneInfo(config.get("timezone", "Asia/Tokyo")))
     return {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "editionDate": local_time.strftime("%Y-%m-%d"),
         "timezone": config.get("timezone", "Asia/Tokyo"),
         "method": method,
         "candidateCount": len(candidates),
         "sourceCount": source_count,
+        "scoring": {
+            "label": "重要度，不等同于事实真伪",
+            "formula": "基础分 + 来源 + 主题优先级 + 时效 + 影响信号 + 相关性 + 证据完整度 + 多源印证 - 编辑降权",
+            "confidenceNote": "置信度仅反映已收录来源的权重与独立来源数量，不替代事实核查。",
+        },
         "brief": {
             "headline": clean_text(brief.get("headline"), 120) or items[0]["title"],
             "summary": clean_text(brief.get("summary"), 260) or fallback_brief(items, source_count)["summary"],
@@ -654,7 +772,11 @@ def validate_report(report: dict[str, Any], expected_count: int) -> None:
     if not isinstance(items, list) or len(items) != expected_count:
         raise ValueError(f"report must contain exactly {expected_count} items")
     ids: set[str] = set()
-    required = {"id", "title", "summary", "why", "category", "source", "publishedAt", "url", "score", "tags"}
+    required = {
+        "id", "title", "originalTitle", "summary", "keyFacts", "why", "category", "source",
+        "publishedAt", "url", "score", "scoreBasis", "scoreComponents", "scoreReasons",
+        "confidence", "confidenceReason", "tags", "sources",
+    }
     for index, item in enumerate(items, 1):
         missing = required.difference(item)
         if missing:
@@ -666,9 +788,13 @@ def validate_report(report: dict[str, Any], expected_count: int) -> None:
             raise ValueError(f"invalid category: {item['category']}")
         if not str(item["url"]).startswith(("http://", "https://")):
             raise ValueError(f"invalid URL in item {index}")
+        if not isinstance(item["keyFacts"], list) or not item["keyFacts"]:
+            raise ValueError(f"item {index} must include at least one key fact")
+        if not isinstance(item["sources"], list) or not item["sources"]:
+            raise ValueError(f"item {index} must include at least one source")
 
 
-def write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
+def write_json_atomic(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     encoded = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
     with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as handle:
@@ -677,10 +803,113 @@ def write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
     os.replace(temp_name, path)
 
 
+def read_json_safe(path: Path, fallback: Any) -> Any:
+    try:
+        with path.open("r", encoding="utf-8") as handle:
+            return json.load(handle)
+    except (OSError, ValueError, TypeError):
+        return fallback
+
+
+def archive_report(
+    report: dict[str, Any],
+    archive_dir: Path,
+    index_output: Path,
+    search_output: Path,
+    retention_days: int,
+) -> None:
+    """Store one replaceable-by-date edition plus compact navigation/search indexes."""
+    edition = str(report["editionDate"])
+    archive_path = archive_dir / f"{edition}.json"
+    write_json_atomic(archive_path, report)
+
+    previous_index = read_json_safe(index_output, {})
+    editions = previous_index.get("editions", []) if isinstance(previous_index, dict) else []
+    category_counts: dict[str, int] = {}
+    for item in report["items"]:
+        category = str(item.get("category", "其他"))
+        category_counts[category] = category_counts.get(category, 0) + 1
+    entry = {
+        "editionDate": edition,
+        "generatedAt": report["generatedAt"],
+        "headline": report.get("brief", {}).get("headline", ""),
+        "summary": report.get("brief", {}).get("summary", ""),
+        "method": report.get("method", "rules"),
+        "itemCount": len(report["items"]),
+        "sourceCount": int(report.get("sourceCount", 0)),
+        "categoryCounts": category_counts,
+        "file": f"./data/archive/{edition}.json",
+    }
+    editions = [item for item in editions if isinstance(item, dict) and item.get("editionDate") != edition]
+    editions.append(entry)
+    editions.sort(key=lambda item: str(item.get("editionDate", "")), reverse=True)
+    editions = editions[: max(1, retention_days)]
+    write_json_atomic(index_output, {
+        "schemaVersion": 1,
+        "generatedAt": report["generatedAt"],
+        "timezone": report.get("timezone", "Asia/Tokyo"),
+        "editions": editions,
+    })
+
+    previous_search = read_json_safe(search_output, {})
+    search_items = previous_search.get("items", []) if isinstance(previous_search, dict) else []
+    allowed_editions = {str(item.get("editionDate")) for item in editions}
+    search_items = [
+        item for item in search_items
+        if isinstance(item, dict)
+        and item.get("editionDate") != edition
+        and str(item.get("editionDate")) in allowed_editions
+    ]
+    searchable_fields = (
+        "id", "title", "originalTitle", "summary", "keyFacts", "why", "category", "source",
+        "country", "publishedAt", "url", "score", "scoreBasis", "scoreComponents", "scoreReasons", "confidence",
+        "confidenceReason", "tags", "corroboration", "sources",
+    )
+    for item in report["items"]:
+        compact = {field: item[field] for field in searchable_fields if field in item}
+        compact["editionDate"] = edition
+        search_items.append(compact)
+    search_items.sort(key=lambda item: (str(item.get("editionDate", "")), int(item.get("score", 0))), reverse=True)
+    write_json_atomic(search_output, {
+        "schemaVersion": 1,
+        "generatedAt": report["generatedAt"],
+        "timezone": report.get("timezone", "Asia/Tokyo"),
+        "editionCount": len(editions),
+        "items": search_items,
+    })
+
+
+def write_pipeline_status(
+    path: Path,
+    *,
+    state: str,
+    now: datetime,
+    message: str,
+    report: dict[str, Any] | None = None,
+) -> None:
+    previous = read_json_safe(path, {})
+    previous = previous if isinstance(previous, dict) else {}
+    success = state == "ok" and report is not None
+    payload = {
+        "schemaVersion": 1,
+        "state": state,
+        "lastAttemptAt": now.isoformat().replace("+00:00", "Z"),
+        "lastSuccessAt": now.isoformat().replace("+00:00", "Z") if success else previous.get("lastSuccessAt"),
+        "editionDate": report.get("editionDate") if success else previous.get("editionDate"),
+        "itemCount": len(report.get("items", [])) if success else previous.get("itemCount", 0),
+        "message": clean_text(message, 300),
+    }
+    write_json_atomic(path, payload)
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate the Frontier Pulse daily dataset")
     parser.add_argument("--config", type=Path, default=Path("config/news_config.json"))
     parser.add_argument("--output", type=Path, default=Path("public/data/news.json"))
+    parser.add_argument("--archive-dir", type=Path, default=Path("public/data/archive"))
+    parser.add_argument("--archive-index", type=Path, default=Path("public/data/archive/index.json"))
+    parser.add_argument("--search-index", type=Path, default=Path("public/data/archive/search-index.json"))
+    parser.add_argument("--status-output", type=Path, default=Path("public/data/status.json"))
     parser.add_argument("--fixture", type=Path, help="Use a local fixture instead of live sources")
     parser.add_argument("--skip-ai", action="store_true", help="Disable the optional OpenAI editorial pass")
     parser.add_argument("--allow-low-volume", action="store_true", help="Allow fewer candidates than min_candidates")
@@ -691,25 +920,41 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"), format="%(levelname)s %(message)s")
-    config = load_config(args.config)
     now = parse_datetime(args.now, utc_now()) if args.now else utc_now()
-    if args.fixture:
-        raw = collect_fixture(args.fixture, now)
-    else:
-        raw = collect_rss(config, now) + collect_gdelt(config, now)
-    candidates = score_articles(deduplicate(raw), config, now)
-    minimum = int(config["min_candidates"])
-    if len(candidates) < minimum and not args.allow_low_volume:
-        LOGGER.error("Only %d eligible candidates; refusing to overwrite the current edition (minimum %d)", len(candidates), minimum)
+    try:
+        config = load_config(args.config)
+        if args.fixture:
+            raw = collect_fixture(args.fixture, now)
+        else:
+            raw = collect_rss(config, now) + collect_gdelt(config, now)
+        candidates = score_articles(deduplicate(raw), config, now)
+        minimum = int(config["min_candidates"])
+        if len(candidates) < minimum and not args.allow_low_volume:
+            raise RuntimeError(
+                f"只有 {len(candidates)} 条合格候选，低于安全阈值 {minimum}；已保留上一期内容"
+            )
+        if len(candidates) < int(config["top_n"]):
+            raise RuntimeError(f"至少需要 {int(config['top_n'])} 条候选，当前仅 {len(candidates)} 条")
+        report = build_report(candidates, config, now, args.skip_ai)
+        validate_report(report, int(config["top_n"]))
+        archive_report(
+            report,
+            args.archive_dir,
+            args.archive_index,
+            args.search_index,
+            int(config.get("archive_retention_days", 730)),
+        )
+        write_json_atomic(args.output, report)
+        write_pipeline_status(args.status_output, state="ok", now=now, message="日报更新成功", report=report)
+        LOGGER.info("Wrote %s with %d stories using %s selection", args.output, len(report["items"]), report["method"])
+        return 0
+    except Exception as exc:
+        LOGGER.error("Daily update failed: %s", exc)
+        try:
+            write_pipeline_status(args.status_output, state="failed", now=now, message=str(exc))
+        except Exception as status_exc:
+            LOGGER.error("Could not write pipeline status: %s", status_exc)
         return 2
-    if len(candidates) < int(config["top_n"]):
-        LOGGER.error("Need at least %d candidates, got %d", int(config["top_n"]), len(candidates))
-        return 2
-    report = build_report(candidates, config, now, args.skip_ai)
-    validate_report(report, int(config["top_n"]))
-    write_json_atomic(args.output, report)
-    LOGGER.info("Wrote %s with %d stories using %s selection", args.output, len(report["items"]), report["method"])
-    return 0
 
 
 if __name__ == "__main__":
