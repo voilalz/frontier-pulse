@@ -1,4 +1,6 @@
-# Cloudflare Pages + GitHub Actions 上线清单
+# Cloudflare 静态托管 + GitHub Actions 上线清单
+
+当前公开地址使用 `workers.dev`。Pages、Workers Static Assets 或自定义 Worker 都可能提供静态文件，不能只凭域名后缀判断部署类型；应在 Cloudflare Dashboard 的 Deployments/Settings 中核对构建来源、关联 Commit 和输出目录。仓库的 `_headers` 已在线上实测生效，但每次切换部署路线后仍必须重新验收。
 
 ## 方案 A：Cloudflare Git Integration（推荐）
 
@@ -36,6 +38,7 @@
 - `public/data/news.json` 包含 `timezone: Asia/Tokyo`；
 - `items` 恰好为 10 条；
 - Cloudflare Deployment 对应最新提交。
+- `public/feed.xml` 存在且可被 Atom 阅读器解析。
 
 之后工作流会在每天 `Asia/Tokyo 08:00` 自动运行。GitHub 的计划任务不是分钟级 SLA，高负载时可能延后。
 
@@ -94,6 +97,7 @@ Actions Variables：
 2. 输入 `news.frontier.com`。
 3. 如果 `frontier.com` 的 DNS 已托管到同一 Cloudflare 账户，系统会自动创建记录和 TLS 证书。
 4. 如果 DNS 在其他服务商，按 Cloudflare 显示的目标创建 CNAME，并等待证书变为 `Active`。
+5. 同步更新 GitHub Variable `SITE_URL`、`config/news_config.json` 的 `site_url`，以及 `public/index.html` 中 canonical/OG/Twitter 图片的绝对地址。
 
 若你不控制 `frontier.com`，请改用自己拥有的域名，例如 `news.你的域名.com`；仅修改网页代码无法取得第三方域名。
 
@@ -104,9 +108,12 @@ Actions Variables：
 - 历史页可切换日期；输入关键词后能检索多个日期。
 - 收藏页刷新后仍保留内容；关注页能添加与删除本机关注词。
 - 每条新闻可展开关键事实、多来源、置信度与评分解释。
+- 搜索索引清单按月加载 `search-YYYY-MM.json`，展开搜索结果时再请求当期完整归档。
+- `/feed.xml` 可订阅；单条新闻的复制链接能定位到 `#item-...`。
 - `public/data/status.json` 显示 `state: ok`；模拟失败时网页出现更新失败警告且不回退样例。
 - GitHub Actions 的 CI、Daily news update 均为绿色。
 - Cloudflare Pages 使用 HTTPS 正常访问。
+- `Production smoke test` 通过，CSP、`nosniff` 和各类 JSON 的 `Cache-Control` 没有缺失或重复。
 - 自定义域名状态为 `Active`，且 DNS 没有重复 A/AAAA/CNAME 记录。
 
 ## 常见故障
@@ -120,3 +127,17 @@ Actions Variables：
 - `git push` 被拒绝：检查 Actions 的 `Read and write permissions` 和 `main` 分支保护规则。
 - Pages 没有更新：确认项目连接的是 `voilalz/frontier-pulse` 的 `main`，输出目录为 `public`。
 - 自定义域名证书未签发：检查 DNS 是否存在冲突记录，并确认该域名确实属于当前 Cloudflare Zone。
+
+## 线上响应头与缓存验收
+
+`_headers` 在不同 Cloudflare 托管形态下的加载路径不同；若是完全自定义的 Worker 代码，可能需要在 Worker 响应中显式写入同等响应头。部署后运行：
+
+```bash
+curl -fsSI https://你的域名/
+curl -fsSI https://你的域名/data/news.json
+curl -fsSI https://你的域名/data/status.json
+curl -fsSI https://你的域名/data/archive/search-index.json
+python scripts/check_production.py --site-url https://你的域名/
+```
+
+预期首页有 CSP、`X-Content-Type-Options: nosniff`；`news.json` 为 `max-age=300`，`status.json` 为 `max-age=60`，归档与搜索清单为 `max-age=300`。同一个响应不应出现两组 `max-age`。常规前端请求不追加时间戳，只有用户主动点击刷新时才绕过缓存。
