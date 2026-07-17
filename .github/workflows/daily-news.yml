@@ -21,7 +21,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0
+          fetch-depth: 2
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
@@ -34,6 +34,7 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+          SITE_URL: ${{ vars.SITE_URL }}
         run: >-
           python scripts/update_news.py
           --output public/data/news.json
@@ -41,6 +42,7 @@ jobs:
           --archive-index public/data/archive/index.json
           --search-index public/data/archive/search-index.json
           --status-output public/data/status.json
+          --feed-output public/feed.xml
       - name: Verify exactly 10 stories
         if: steps.collect.outcome == 'success'
         run: >-
@@ -48,11 +50,12 @@ jobs:
           assert p.get('timezone') == 'Asia/Tokyo', p.get('timezone');
           assert len(p.get('items', [])) == 10, len(p.get('items', []));
           assert all(x.get('keyFacts') and x.get('sources') for x in p['items']);
+          assert __import__('pathlib').Path('public/feed.xml').exists();
           print('Validated edition', p.get('editionDate'), 'with 10 stories')"
       - name: Commit edition, archive and public status
         if: always()
         run: |
-          git add -A -- public/data/news.json public/data/status.json public/data/archive
+          git add -A -- public/data/news.json public/data/status.json public/data/archive public/feed.xml
           if git diff --cached --quiet; then
             echo "No data change"
             exit 0
@@ -60,7 +63,8 @@ jobs:
           git config user.name "frontier-pulse-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "chore(data): refresh daily frontier brief and archive"
-          git pull --rebase origin main
+          git fetch origin main --depth=20
+          git rebase origin/main
           git push origin HEAD:main
       - name: Send administrator email digest
         if: steps.collect.outcome == 'success'

@@ -34,7 +34,7 @@ from typing import Any, Iterable
 from zoneinfo import ZoneInfo
 
 LOGGER = logging.getLogger("frontier-pulse")
-USER_AGENT = "FrontierPulseBot/1.3 (+https://github.com/voilalz/frontier-pulse; daily public-interest news index)"
+USER_AGENT = "FrontierPulseBot/1.4 (+https://github.com/voilalz/frontier-pulse; daily public-interest news index)"
 CATEGORIES = ("AI", "航空航天", "军事动态", "局部冲突", "前沿技术", "无人系统")
 
 
@@ -50,6 +50,7 @@ class Article:
     published_at: datetime
     category: str = "前沿技术"
     image: str = ""
+    date_estimated: bool = False
     tags: list[str] = field(default_factory=list)
     raw_score: float = 0.0
     corroboration: int = 1
@@ -74,31 +75,36 @@ def clean_text(value: Any, limit: int = 0) -> str:
     return text
 
 
-def parse_datetime(value: Any, fallback: datetime) -> datetime:
+def parse_datetime_checked(value: Any, fallback: datetime) -> tuple[datetime, bool]:
+    """Parse a timestamp and report whether the safe fallback had to be used."""
     raw = clean_text(value)
     if not raw:
-        return fallback
+        return fallback, True
     candidates = [raw, raw.replace("Z", "+00:00")]
     for candidate in candidates:
         try:
             parsed = datetime.fromisoformat(candidate)
             if parsed.tzinfo is None:
                 parsed = parsed.replace(tzinfo=timezone.utc)
-            return parsed.astimezone(timezone.utc)
+            return parsed.astimezone(timezone.utc), False
         except ValueError:
             pass
     for pattern in ("%Y%m%dT%H%M%SZ", "%Y%m%d%H%M%S", "%Y-%m-%d %H:%M:%S"):
         try:
-            return datetime.strptime(raw, pattern).replace(tzinfo=timezone.utc)
+            return datetime.strptime(raw, pattern).replace(tzinfo=timezone.utc), False
         except ValueError:
             pass
     try:
         parsed = parsedate_to_datetime(raw)
         if parsed.tzinfo is None:
             parsed = parsed.replace(tzinfo=timezone.utc)
-        return parsed.astimezone(timezone.utc)
+        return parsed.astimezone(timezone.utc), False
     except (TypeError, ValueError, OverflowError):
-        return fallback
+        return fallback, True
+
+
+def parse_datetime(value: Any, fallback: datetime) -> datetime:
+    return parse_datetime_checked(value, fallback)[0]
 
 
 def canonical_url(value: str) -> str:
@@ -137,19 +143,40 @@ def http_get(url: str, *, timeout: int = 18, max_bytes: int = 5_000_000, attempt
     raise RuntimeError(f"GET {url} failed: {error}")
 
 
-def http_post_json(url: str, body: dict[str, Any], api_key: str, *, timeout: int = 90) -> dict[str, Any]:
-    request = urllib.request.Request(
-        url,
-        data=json.dumps(body, ensure_ascii=False).encode("utf-8"),
-        method="POST",
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-            "User-Agent": USER_AGENT,
-        },
-    )
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        return json.loads(response.read().decode("utf-8"))
+def http_post_json(
+    url: str,
+    body: dict[str, Any],
+    api_key: str,
+    *,
+    timeout: int = 120,
+    attempts: int = 2,
+) -> dict[str, Any]:
+    """POST JSON with one bounded backoff retry for transient API failures."""
+    encoded = json.dumps(body, ensure_ascii=False).encode("utf-8")
+    error: Exception | None = None
+    for attempt in range(attempts):
+        request = urllib.request.Request(
+            url,
+            data=encoded,
+            method="POST",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+                "User-Agent": USER_AGENT,
+            },
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                return json.loads(response.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            error = exc
+            if exc.code not in {408, 409, 425, 429, 500, 502, 503, 504}:
+                break
+        except (urllib.error.URLError, TimeoutError, ValueError, json.JSONDecodeError) as exc:
+            error = exc
+        if attempt + 1 < attempts:
+            time.sleep(1.5 * (2 ** attempt))
+    raise RuntimeError(f"POST {url} failed after {attempts} attempts: {error}")
 
 
 def domain_from_url(url: str) -> str:
@@ -193,6 +220,9 @@ def collect_gdelt(config: dict[str, Any], now: datetime) -> list[Article]:
         if not title or not target:
             continue
         domain = clean_text(item.get("domain")) or domain_from_url(target)
+        published_at, date_estimated = parse_datetime_checked(
+            item.get("seendate"), now - timedelta(hours=lookback)
+        )
         collected.append(
             Article(
                 id=article_id(target, title),
@@ -202,9 +232,10 @@ def collect_gdelt(config: dict[str, Any], now: datetime) -> list[Article]:
                 source=domain or "GDELT",
                 domain=domain,
                 country=clean_text(item.get("sourcecountry")) or "国际",
-                published_at=parse_datetime(item.get("seendate"), now),
+                published_at=published_at,
                 category="前沿技术",
                 image=str(item.get("socialimage") or ""),
+                date_estimated=date_estimated,
             )
         )
     LOGGER.info("GDELT produced %d candidates", len(collected))
@@ -249,6 +280,7 @@ def entry_image(node: ET.Element) -> str:
 
 def collect_rss(config: dict[str, Any], now: datetime) -> list[Article]:
     feeds = list(config.get("rss_feeds", []))
+    safe_date_fallback = now - timedelta(hours=int(config.get("lookback_hours", 24)))
 
     def fetch_feed(feed: dict[str, Any]) -> list[Article]:
         try:
@@ -266,6 +298,7 @@ def collect_rss(config: dict[str, Any], now: datetime) -> list[Article]:
             description = child_text(node, ("description", "summary", "content", "encoded"))
             published = child_text(node, ("pubdate", "published", "updated", "date"))
             domain = domain_from_url(target)
+            published_at, date_estimated = parse_datetime_checked(published, safe_date_fallback)
             batch.append(
                 Article(
                     id=article_id(target, title),
@@ -275,9 +308,10 @@ def collect_rss(config: dict[str, Any], now: datetime) -> list[Article]:
                     source=feed["name"],
                     domain=domain,
                     country="国际",
-                    published_at=parse_datetime(published, now),
+                    published_at=published_at,
                     category=feed.get("default_category", "前沿技术"),
                     image=entry_image(node),
+                    date_estimated=date_estimated,
                 )
             )
         LOGGER.info("RSS %s produced %d candidates", feed["name"], len(batch))
@@ -302,6 +336,9 @@ def collect_fixture(path: Path, now: datetime) -> list[Article]:
         title = clean_text(item.get("title"), 300)
         if not title or not url:
             continue
+        published_at, date_estimated = parse_datetime_checked(
+            item.get("publishedAt") or item.get("published_at"), now - timedelta(hours=24)
+        )
         articles.append(
             Article(
                 id=str(item.get("id") or article_id(url, title)),
@@ -311,9 +348,10 @@ def collect_fixture(path: Path, now: datetime) -> list[Article]:
                 source=clean_text(item.get("source")) or domain_from_url(url),
                 domain=clean_text(item.get("domain")) or domain_from_url(url),
                 country=clean_text(item.get("country")) or "国际",
-                published_at=parse_datetime(item.get("publishedAt") or item.get("published_at"), now),
+                published_at=published_at,
                 category=item.get("category", "前沿技术"),
                 image=str(item.get("image") or ""),
+                date_estimated=date_estimated,
             )
         )
     return articles
@@ -371,6 +409,47 @@ def same_event_title(first: str, second: str) -> bool:
     return len(shared) >= 3 and overlap >= 0.35 and bool(shared.intersection(first_acronyms, second_acronyms))
 
 
+def wire_family(article: Article) -> str:
+    """Identify explicit wire-service provenance without treating republishers as independent."""
+    domain = article.domain.lower()
+    source = clean_text(article.source).lower()
+    description = clean_text(article.description)[:500]
+    if domain == "reuters.com" or domain.endswith(".reuters.com") or source == "reuters":
+        return "wire:reuters"
+    if domain == "apnews.com" or domain.endswith(".apnews.com") or source in {"ap", "associated press"}:
+        return "wire:ap"
+    if re.search(r"(?:^|[\s(—-])reuters(?:[\s),.:;—-]|$)", description, flags=re.I):
+        return "wire:reuters"
+    if re.search(r"\bassociated press\b", description, flags=re.I) or re.search(
+        r"(?:^|[\s(—-])AP(?:[\s),.:;—-]|$)", description
+    ):
+        return "wire:ap"
+    return ""
+
+
+def source_group(article: Article) -> str:
+    family = wire_family(article)
+    if family:
+        return family
+    identity = (article.domain or article.source or canonical_url(article.url)).strip().lower()
+    return "outlet:" + identity
+
+
+def descriptions_look_syndicated(first: Article, second: Article) -> bool:
+    first_text = clean_text(first.description).lower()
+    second_text = clean_text(second.description).lower()
+    if len(first_text) >= 80 and len(second_text) >= 80:
+        if SequenceMatcher(None, first_text[:700], second_text[:700]).ratio() >= 0.88:
+            return True
+    if wire_family(first) or wire_family(second):
+        first_title = normalized_title(first.title)
+        second_title = normalized_title(second.title)
+        return min(len(first_title), len(second_title)) >= 24 and SequenceMatcher(
+            None, first_title, second_title
+        ).ratio() >= 0.94
+    return False
+
+
 def source_evidence(article: Article) -> dict[str, str]:
     """Return the public metadata needed to inspect one supporting source."""
     return {
@@ -378,6 +457,7 @@ def source_evidence(article: Article) -> dict[str, str]:
         "domain": article.domain,
         "url": article.url,
         "publishedAt": article.published_at.isoformat().replace("+00:00", "Z"),
+        "evidenceGroup": source_group(article),
     }
 
 
@@ -389,6 +469,15 @@ def ensure_evidence_sources(article: Article) -> None:
 def merge_evidence_sources(target: Article, incoming: Article) -> None:
     ensure_evidence_sources(target)
     ensure_evidence_sources(incoming)
+    if descriptions_look_syndicated(target, incoming):
+        wire_group = wire_family(target) or wire_family(incoming)
+        group = wire_group or target.evidence_sources[0].get("evidenceGroup")
+        if not group or group.startswith("outlet:"):
+            digest = hashlib.sha1(normalized_title(target.title).encode("utf-8")).hexdigest()[:12]
+            group = f"syndication:{digest}"
+        target.evidence_sources[0]["evidenceGroup"] = group
+        for evidence in incoming.evidence_sources:
+            evidence["evidenceGroup"] = group
     known_urls = {canonical_url(item.get("url", "")) for item in target.evidence_sources}
     for evidence in incoming.evidence_sources:
         url = canonical_url(evidence.get("url", ""))
@@ -396,9 +485,9 @@ def merge_evidence_sources(target: Article, incoming: Article) -> None:
             target.evidence_sources.append(evidence)
             known_urls.add(url)
     independent_sources = {
-        (item.get("domain") or item.get("name") or "").strip().lower()
+        (item.get("evidenceGroup") or item.get("domain") or item.get("name") or "").strip().lower()
         for item in target.evidence_sources
-        if item.get("domain") or item.get("name")
+        if item.get("evidenceGroup") or item.get("domain") or item.get("name")
     }
     target.corroboration = max(1, len(independent_sources))
 
@@ -492,10 +581,14 @@ def score_articles(articles: list[Article], config: dict[str, Any], now: datetim
         age_hours = max(0.0, (now - article.published_at).total_seconds() / 3600)
         recency = max(0.0, 20.0 - age_hours * 0.5)
         priority = int(config["categories"][article.category].get("priority", 8))
-        evidence = 3 if len(article.description) >= 80 else (1 if article.description else 0)
+        # GDELT and some high-quality feeds expose title/link metadata but no description.
+        # Give complete title/link metadata a small baseline instead of systematically
+        # treating those collectors as evidence-free.
+        evidence = 3 if len(article.description) >= 80 else 2
         corroboration = min(12, max(0, article.corroboration - 1) * 4)
         relevance = min(12, len(relevance_hits) * 2)
         penalty = min(24, sum(12 for keyword in config.get("editorial_penalty_keywords", []) if keyword_matches(text, keyword)))
+        date_penalty = 7 if article.date_estimated else 0
         source = source_weight(article, config)
         article.score_components = {
             "基础分": 15,
@@ -507,8 +600,11 @@ def score_articles(articles: list[Article], config: dict[str, Any], now: datetim
             "证据完整度": evidence,
             "多源印证": corroboration,
             "编辑降权": penalty,
+            "日期异常降权": date_penalty,
         }
-        total = sum(value for key, value in article.score_components.items() if key != "编辑降权") - penalty
+        total = sum(
+            value for key, value in article.score_components.items() if not key.endswith("降权")
+        ) - penalty - date_penalty
         article.raw_score = min(100.0, max(0.0, total))
         reasons = [
             f"来源权重 {source}/20",
@@ -521,6 +617,8 @@ def score_articles(articles: list[Article], config: dict[str, Any], now: datetim
             reasons.append(f"{article.corroboration} 个独立来源相互印证")
         if penalty:
             reasons.append(f"编辑质量降权 -{penalty}")
+        if article.date_estimated:
+            reasons.append(f"发布时间无法解析，按 {int(config['lookback_hours'])} 小时窗口边缘处理并降权")
         article.score_reasons = reasons
         scored.append(article)
     return sorted(scored, key=lambda item: (item.raw_score, item.published_at), reverse=True)
@@ -543,12 +641,35 @@ def choose_diverse(candidates: list[Article], config: dict[str, Any], count: int
         domain_counts[domain_key] = domain_counts.get(domain_key, 0) + 1
         if len(selected) == count:
             return selected
-    for article in candidates:
-        if article not in selected:
-            selected.append(article)
-            if len(selected) == count:
-                break
-    return selected
+    raise ValueError(
+        f"多样性约束后仅能选出 {len(selected)} 条；需要 {count} 条，"
+        f"每类上限 {category_limit}、每域名上限 {domain_limit}"
+    )
+
+
+def validate_ai_diversity(
+    selected: list[Article],
+    editorial_by_id: dict[str, dict[str, Any]],
+    config: dict[str, Any],
+) -> None:
+    """Apply the same hard diversity limits after the AI editorial pass."""
+    category_limit = int(config["per_category_limit"])
+    domain_limit = int(config["per_domain_limit"])
+    categories: dict[str, int] = {}
+    domains: dict[str, int] = {}
+    for article in selected:
+        editorial = editorial_by_id.get(article.id, {})
+        category = editorial.get("category") if editorial.get("category") in CATEGORIES else article.category
+        domain = article.domain or article.source
+        categories[category] = categories.get(category, 0) + 1
+        domains[domain] = domains.get(domain, 0) + 1
+    crowded_categories = {name: count for name, count in categories.items() if count > category_limit}
+    crowded_domains = {name: count for name, count in domains.items() if count > domain_limit}
+    if crowded_categories or crowded_domains:
+        raise ValueError(
+            "OpenAI 选稿未通过多样性校验："
+            f"类别超限={crowded_categories or '无'}，域名超限={crowded_domains or '无'}"
+        )
 
 
 WHY_TEMPLATES = {
@@ -600,9 +721,9 @@ def ai_select(candidates: list[Article], config: dict[str, Any], api_key: str) -
             "category": {"type": "string", "enum": category_enum},
             "score": {"type": "integer", "minimum": 0, "maximum": 100},
             "summary": {"type": "string"},
-            "keyFacts": {"type": "array", "items": {"type": "string"}},
+            "keyFacts": {"type": "array", "items": {"type": "string"}, "minItems": 2, "maxItems": 3},
             "why": {"type": "string"},
-            "tags": {"type": "array", "items": {"type": "string"}},
+            "tags": {"type": "array", "items": {"type": "string"}, "maxItems": 3},
         },
         "required": ["id", "titleZh", "category", "score", "summary", "keyFacts", "why", "tags"],
         "additionalProperties": False,
@@ -615,12 +736,12 @@ def ai_select(candidates: list[Article], config: dict[str, Any], api_key: str) -
                 "properties": {
                     "headline": {"type": "string"},
                     "summary": {"type": "string"},
-                    "signals": {"type": "array", "items": {"type": "string"}},
+                    "signals": {"type": "array", "items": {"type": "string"}, "minItems": 3, "maxItems": 3},
                 },
                 "required": ["headline", "summary", "signals"],
                 "additionalProperties": False,
             },
-            "items": {"type": "array", "items": item_schema},
+            "items": {"type": "array", "items": item_schema, "minItems": 10, "maxItems": 10},
         },
         "required": ["brief", "items"],
         "additionalProperties": False,
@@ -652,10 +773,21 @@ def ai_select(candidates: list[Article], config: dict[str, Any], api_key: str) -
         ),
         "input": "候选新闻证据：\n" + json.dumps(evidence, ensure_ascii=False),
         "text": {"format": {"type": "json_schema", "name": "frontier_daily", "strict": True, "schema": schema}},
-        "max_output_tokens": 6000,
+        "max_output_tokens": int(config.get("openai_max_output_tokens", 8000)),
     }
-    payload = http_post_json("https://api.openai.com/v1/responses", body, api_key)
-    return json.loads(extract_response_text(payload))
+    error: Exception | None = None
+    for attempt in range(2):
+        try:
+            payload = http_post_json("https://api.openai.com/v1/responses", body, api_key)
+            result = json.loads(extract_response_text(payload))
+            if len(result.get("items", [])) != 10:
+                raise ValueError("structured response did not contain exactly 10 items")
+            return result
+        except (ValueError, TypeError, json.JSONDecodeError) as exc:
+            error = exc
+            if attempt == 0:
+                time.sleep(1.5)
+    raise RuntimeError(f"OpenAI structured output could not be parsed after one retry: {error}")
 
 
 def item_from_article(article: Article, config: dict[str, Any], editorial: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -714,8 +846,11 @@ def build_report(candidates: list[Article], config: dict[str, Any], now: datetim
     editorial_by_id: dict[str, dict[str, Any]] = {}
     ai_brief: dict[str, Any] | None = None
     method = "rules"
+    editorial_status = "disabled" if skip_ai else "not-configured"
+    pipeline_warnings: list[str] = []
     api_key = os.getenv("OPENAI_API_KEY", "").strip()
     if api_key and not skip_ai:
+        editorial_status = "running"
         try:
             ai_result = ai_select(shortlist, config, api_key)
             allowed = {article.id: article for article in shortlist}
@@ -727,18 +862,24 @@ def build_report(candidates: list[Article], config: dict[str, Any], now: datetim
                     editorial_by_id[candidate.id] = item
             if len(ai_order) != top_n:
                 raise ValueError(f"OpenAI editorial pass returned {len(ai_order)} unique valid items; expected {top_n}")
+            validate_ai_diversity(ai_order, editorial_by_id, config)
             selected = ai_order
             ai_brief = ai_result.get("brief")
             method = "openai"
+            editorial_status = "ok"
         except Exception as exc:
-            LOGGER.warning("OpenAI editorial pass failed; using deterministic fallback: %s", exc)
+            reason = clean_text(str(exc), 220) or exc.__class__.__name__
+            editorial_status = "fallback"
+            pipeline_warnings.append(f"AI 编辑失败，已使用规则选稿：{reason}")
+            editorial_by_id.clear()
+            LOGGER.warning("OpenAI editorial pass failed; using deterministic fallback: %s", reason)
     items = [item_from_article(article, config, editorial_by_id.get(article.id)) for article in selected]
     items.sort(key=lambda item: (item["score"], item["publishedAt"]), reverse=True)
     source_count = len({
-        (evidence.get("domain") or evidence.get("name") or "").lower()
+        (evidence.get("evidenceGroup") or evidence.get("domain") or evidence.get("name") or "").lower()
         for article in candidates
         for evidence in (article.evidence_sources or [source_evidence(article)])
-        if evidence.get("domain") or evidence.get("name")
+        if evidence.get("evidenceGroup") or evidence.get("domain") or evidence.get("name")
     })
     brief = ai_brief if isinstance(ai_brief, dict) else fallback_brief(items, source_count)
     signals = [clean_text(signal, 180) for signal in brief.get("signals", []) if clean_text(signal)][:3]
@@ -746,11 +887,13 @@ def build_report(candidates: list[Article], config: dict[str, Any], now: datetim
         signals = fallback_brief(items, source_count)["signals"]
     local_time = now.astimezone(ZoneInfo(config.get("timezone", "Asia/Tokyo")))
     return {
-        "schemaVersion": 2,
+        "schemaVersion": 3,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "editionDate": local_time.strftime("%Y-%m-%d"),
         "timezone": config.get("timezone", "Asia/Tokyo"),
         "method": method,
+        "editorialStatus": editorial_status,
+        "warnings": pipeline_warnings,
         "candidateCount": len(candidates),
         "sourceCount": source_count,
         "scoring": {
@@ -803,12 +946,90 @@ def write_json_atomic(path: Path, payload: Any) -> None:
     os.replace(temp_name, path)
 
 
+def write_atom_feed(report: dict[str, Any], path: Path, site_url: str) -> None:
+    """Publish a standards-based Atom feed without introducing a backend service."""
+    atom = "http://www.w3.org/2005/Atom"
+    ET.register_namespace("", atom)
+    feed = ET.Element(f"{{{atom}}}feed")
+    ET.SubElement(feed, f"{{{atom}}}id").text = "urn:frontier-pulse:daily"
+    ET.SubElement(feed, f"{{{atom}}}title").text = "智域前沿 · 全球科技与安全态势日报"
+    ET.SubElement(feed, f"{{{atom}}}updated").text = str(report["generatedAt"])
+    ET.SubElement(feed, f"{{{atom}}}subtitle").text = clean_text(report.get("brief", {}).get("summary"), 260)
+
+    base = site_url.strip().rstrip("/") + "/" if site_url.strip() else ""
+    if base.startswith(("http://", "https://")):
+        ET.SubElement(feed, f"{{{atom}}}link", {"rel": "self", "href": urllib.parse.urljoin(base, "feed.xml")})
+        ET.SubElement(feed, f"{{{atom}}}link", {"rel": "alternate", "href": base})
+
+    edition = str(report.get("editionDate", ""))
+    for item in report.get("items", []):
+        item_id = clean_text(item.get("id"))
+        entry = ET.SubElement(feed, f"{{{atom}}}entry")
+        ET.SubElement(entry, f"{{{atom}}}id").text = f"urn:frontier-pulse:{edition}:{item_id}"
+        ET.SubElement(entry, f"{{{atom}}}title").text = clean_text(item.get("title"))
+        published_at = clean_text(item.get("publishedAt") or report["generatedAt"])
+        ET.SubElement(entry, f"{{{atom}}}updated").text = published_at
+        ET.SubElement(entry, f"{{{atom}}}published").text = published_at
+        ET.SubElement(entry, f"{{{atom}}}category", {"term": clean_text(item.get("category") or "前沿技术")})
+        author = ET.SubElement(entry, f"{{{atom}}}author")
+        ET.SubElement(author, f"{{{atom}}}name").text = clean_text(item.get("source") or "公开来源")
+        if base.startswith(("http://", "https://")):
+            anchor = re.sub(r"[^a-zA-Z0-9_-]+", "-", item_id).strip("-") or "story"
+            permalink = urllib.parse.urljoin(base, f"?view=history&date={edition}#item-{anchor}")
+            ET.SubElement(entry, f"{{{atom}}}link", {"rel": "alternate", "href": permalink})
+        source_url = str(item.get("url", ""))
+        if source_url.startswith(("http://", "https://")):
+            ET.SubElement(entry, f"{{{atom}}}link", {"rel": "related", "href": source_url})
+        facts = "；".join(clean_text(fact) for fact in item.get("keyFacts", []) if clean_text(fact))
+        content = clean_text(item.get("summary"))
+        if facts:
+            content += f" 关键事实：{facts}"
+        ET.SubElement(entry, f"{{{atom}}}summary").text = content
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tree = ET.ElementTree(feed)
+    with tempfile.NamedTemporaryFile("wb", dir=path.parent, delete=False) as handle:
+        tree.write(handle, encoding="utf-8", xml_declaration=True)
+        temp_name = handle.name
+    os.replace(temp_name, path)
+
+
 def read_json_safe(path: Path, fallback: Any) -> Any:
     try:
         with path.open("r", encoding="utf-8") as handle:
             return json.load(handle)
     except (OSError, ValueError, TypeError):
         return fallback
+
+
+SEARCHABLE_FIELDS = (
+    "id", "title", "originalTitle", "summary", "keyFacts", "category", "source",
+    "country", "publishedAt", "tags",
+)
+
+
+def compact_search_item(item: dict[str, Any], edition: str) -> dict[str, Any]:
+    compact = {field: item[field] for field in SEARCHABLE_FIELDS if field in item}
+    compact["editionDate"] = edition
+    compact["_compact"] = True
+    return compact
+
+
+def read_existing_search_items(search_output: Path) -> list[dict[str, Any]]:
+    previous = read_json_safe(search_output, {})
+    if not isinstance(previous, dict):
+        return []
+    if isinstance(previous.get("items"), list):
+        return [item for item in previous["items"] if isinstance(item, dict)]
+    items: list[dict[str, Any]] = []
+    for shard in previous.get("shards", []):
+        month = str(shard.get("month", "")) if isinstance(shard, dict) else ""
+        if not re.fullmatch(r"\d{4}-\d{2}", month):
+            continue
+        payload = read_json_safe(search_output.parent / f"search-{month}.json", {})
+        if isinstance(payload, dict) and isinstance(payload.get("items"), list):
+            items.extend(item for item in payload["items"] if isinstance(item, dict))
+    return items
 
 
 def archive_report(
@@ -851,8 +1072,7 @@ def archive_report(
         "editions": editions,
     })
 
-    previous_search = read_json_safe(search_output, {})
-    search_items = previous_search.get("items", []) if isinstance(previous_search, dict) else []
+    search_items = read_existing_search_items(search_output)
     allowed_editions = {str(item.get("editionDate")) for item in editions}
     search_items = [
         item for item in search_items
@@ -860,22 +1080,62 @@ def archive_report(
         and item.get("editionDate") != edition
         and str(item.get("editionDate")) in allowed_editions
     ]
-    searchable_fields = (
-        "id", "title", "originalTitle", "summary", "keyFacts", "why", "category", "source",
-        "country", "publishedAt", "url", "score", "scoreBasis", "scoreComponents", "scoreReasons", "confidence",
-        "confidenceReason", "tags", "corroboration", "sources",
-    )
     for item in report["items"]:
-        compact = {field: item[field] for field in searchable_fields if field in item}
-        compact["editionDate"] = edition
-        search_items.append(compact)
+        search_items.append(compact_search_item(item, edition))
     search_items.sort(key=lambda item: (str(item.get("editionDate", "")), int(item.get("score", 0))), reverse=True)
+
+    monthly: dict[str, list[dict[str, Any]]] = {}
+    for item in search_items:
+        item_edition = str(item.get("editionDate", ""))
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", item_edition):
+            continue
+        monthly.setdefault(item_edition[:7], []).append(compact_search_item(item, item_edition))
+
+    shards: list[dict[str, Any]] = []
+    active_shard_names: set[str] = set()
+    for month in sorted(monthly, reverse=True):
+        items = sorted(
+            monthly[month],
+            key=lambda item: (str(item.get("editionDate", "")), str(item.get("publishedAt", ""))),
+            reverse=True,
+        )
+        shard_name = f"search-{month}.json"
+        active_shard_names.add(shard_name)
+        shard_path = search_output.parent / shard_name
+        previous_shard = read_json_safe(shard_path, {})
+        shard_generated_at = report["generatedAt"]
+        if month != edition[:7] and isinstance(previous_shard, dict):
+            shard_generated_at = previous_shard.get("generatedAt") or shard_generated_at
+        write_json_atomic(shard_path, {
+            "schemaVersion": 2,
+            "generatedAt": shard_generated_at,
+            "timezone": report.get("timezone", "Asia/Tokyo"),
+            "month": month,
+            "itemCount": len(items),
+            "items": items,
+        })
+        dates = sorted({str(item["editionDate"]) for item in items})
+        shards.append({
+            "month": month,
+            "file": f"./data/archive/{shard_name}",
+            "itemCount": len(items),
+            "editionCount": len(dates),
+            "fromDate": dates[0],
+            "toDate": dates[-1],
+        })
+
+    for old_shard in search_output.parent.glob("search-????-??.json"):
+        if old_shard.name not in active_shard_names:
+            old_shard.unlink()
+
     write_json_atomic(search_output, {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "generatedAt": report["generatedAt"],
         "timezone": report.get("timezone", "Asia/Tokyo"),
         "editionCount": len(editions),
-        "items": search_items,
+        "itemCount": sum(len(items) for items in monthly.values()),
+        "searchableFields": list(SEARCHABLE_FIELDS),
+        "shards": shards,
     })
 
 
@@ -891,13 +1151,16 @@ def write_pipeline_status(
     previous = previous if isinstance(previous, dict) else {}
     success = state == "ok" and report is not None
     payload = {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "state": state,
         "lastAttemptAt": now.isoformat().replace("+00:00", "Z"),
         "lastSuccessAt": now.isoformat().replace("+00:00", "Z") if success else previous.get("lastSuccessAt"),
         "editionDate": report.get("editionDate") if success else previous.get("editionDate"),
         "itemCount": len(report.get("items", [])) if success else previous.get("itemCount", 0),
         "message": clean_text(message, 300),
+        "method": report.get("method") if success else previous.get("method"),
+        "editorialStatus": report.get("editorialStatus") if success else previous.get("editorialStatus"),
+        "warnings": report.get("warnings", []) if success else previous.get("warnings", []),
     }
     write_json_atomic(path, payload)
 
@@ -910,6 +1173,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--archive-index", type=Path, default=Path("public/data/archive/index.json"))
     parser.add_argument("--search-index", type=Path, default=Path("public/data/archive/search-index.json"))
     parser.add_argument("--status-output", type=Path, default=Path("public/data/status.json"))
+    parser.add_argument("--feed-output", type=Path, default=Path("public/feed.xml"))
     parser.add_argument("--fixture", type=Path, help="Use a local fixture instead of live sources")
     parser.add_argument("--skip-ai", action="store_true", help="Disable the optional OpenAI editorial pass")
     parser.add_argument("--allow-low-volume", action="store_true", help="Allow fewer candidates than min_candidates")
@@ -945,7 +1209,15 @@ def main(argv: list[str] | None = None) -> int:
             int(config.get("archive_retention_days", 730)),
         )
         write_json_atomic(args.output, report)
-        write_pipeline_status(args.status_output, state="ok", now=now, message="日报更新成功", report=report)
+        write_atom_feed(
+            report,
+            args.feed_output,
+            os.getenv("SITE_URL", "").strip() or str(config.get("site_url", "")),
+        )
+        success_message = "日报更新成功"
+        if report.get("warnings"):
+            success_message += "；" + "；".join(report["warnings"])
+        write_pipeline_status(args.status_output, state="ok", now=now, message=success_message, report=report)
         LOGGER.info("Wrote %s with %d stories using %s selection", args.output, len(report["items"]), report["method"])
         return 0
     except Exception as exc:

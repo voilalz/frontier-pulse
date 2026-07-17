@@ -7,12 +7,12 @@
     archive: "./data/archive/index.json",
     search: "./data/archive/search-index.json",
   };
-  const TIMEZONE = "Asia/Tokyo";
   const CATEGORIES = ["AI", "航空航天", "军事动态", "局部冲突", "前沿技术", "无人系统"];
   const VIEWS = new Set(["latest", "history", "bookmarks", "watchlist"]);
   const CACHE_KEY = "fp-last-good-report-v2";
   const BOOKMARK_KEY = "fp-bookmarks-v2";
   const WATCH_KEY = "fp-watchwords-v1";
+  const THEME_KEY = "fp-theme-v1";
 
   const $ = (id) => document.getElementById(id);
   const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({
@@ -56,20 +56,25 @@
     items: [],
     visible: [],
     archiveIndex: null,
+    searchManifest: null,
     searchItems: null,
+    editionCache: new Map(),
+    expandedKeys: new Set(),
     pipelineStatus: null,
     bookmarks: storedBookmarks,
     watchwords: readStorage(WATCH_KEY, []).filter((word) => typeof word === "string").slice(0, 20),
     latestLoadError: "",
     usingCache: false,
+    theme: readStorage(THEME_KEY, "") || (window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light"),
+    hashHandled: false,
   };
 
   function formatDate(value, includeTime = true) {
     const date = new Date(value);
     if (Number.isNaN(date.valueOf())) return "时间未知";
     const options = includeTime
-      ? { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false, timeZone: TIMEZONE }
-      : { year: "numeric", month: "2-digit", day: "2-digit", timeZone: TIMEZONE };
+      ? { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false, timeZoneName: "short" }
+      : { year: "numeric", month: "2-digit", day: "2-digit" };
     return new Intl.DateTimeFormat("zh-CN", options).format(date);
   }
 
@@ -83,6 +88,7 @@
     return {
       name: clean(source?.name || fallback.source || source?.domain || "原始来源"),
       domain: clean(source?.domain),
+      evidenceGroup: clean(source?.evidenceGroup || source?.domain || source?.name),
       url,
       publishedAt: clean(source?.publishedAt || fallback.publishedAt),
     };
@@ -110,8 +116,9 @@
       country: clean(raw.country, "国际"),
       publishedAt: clean(raw.publishedAt),
       url: safeUrl(raw.url || sources[0]?.url),
-      score: Math.max(0, Math.min(100, Number(raw.score) || 0)),
-      scoreBasis: clean(raw.scoreBasis, "规则评分"),
+      image: safeUrl(raw.image),
+      score: Number.isFinite(Number(raw.score)) ? Math.max(0, Math.min(100, Number(raw.score))) : null,
+      scoreBasis: clean(raw.scoreBasis, raw._compact ? "按需加载" : "规则评分"),
       scoreComponents: raw.scoreComponents && typeof raw.scoreComponents === "object" ? raw.scoreComponents : {},
       scoreReasons: (Array.isArray(raw.scoreReasons) ? raw.scoreReasons : []).map((reason) => clean(reason)).filter(Boolean),
       confidence: clean(raw.confidence, Number(raw.corroboration) > 1 ? "中" : "待核验"),
@@ -120,6 +127,7 @@
       corroboration: Math.max(1, Number(raw.corroboration) || sources.length || 1),
       sources,
       editionDate: clean(raw.editionDate || editionDate),
+      _compact: Boolean(raw._compact),
     };
     item._bookmarkKey = clean(raw._bookmarkKey) || itemKey(item);
     return item;
@@ -139,10 +147,10 @@
     };
   }
 
-  async function fetchJson(url, noStore = false) {
+  async function fetchJson(url, bypassCache = false) {
     const separator = url.includes("?") ? "&" : "?";
-    const target = noStore ? `${url}${separator}t=${Date.now()}` : url;
-    const response = await fetch(target, { cache: noStore ? "no-store" : "default" });
+    const target = bypassCache ? `${url}${separator}t=${Date.now()}` : url;
+    const response = await fetch(target, { cache: bypassCache ? "no-store" : "default" });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return response.json();
   }
@@ -201,6 +209,13 @@
       showAlert("warning", "日报条目数量异常", `生产日报应包含 10 条新闻，当前读取到 ${report?.items?.length || 0} 条。`);
       return;
     }
+    const warnings = Array.isArray(state.pipelineStatus?.warnings) ? state.pipelineStatus.warnings.filter(Boolean) : [];
+    if (state.pipelineStatus?.editorialStatus === "fallback" || warnings.length) {
+      badge.textContent = "规则回退";
+      badge.classList.add("warning");
+      showAlert("warning", "日报已更新，但 AI 编辑发生降级", warnings.join("；") || state.pipelineStatus.message || "已使用规则模式生成本期内容。");
+      return;
+    }
     badge.textContent = "在线";
     hideAlert();
   }
@@ -215,23 +230,24 @@
     try { localStorage.removeItem("fp-bookmarks"); } catch (_) { /* ignore */ }
   }
 
-  async function loadPipelineStatus() {
+  async function loadPipelineStatus(bypassCache = false) {
     try {
-      const status = await fetchJson(ENDPOINTS.status, true);
+      const status = await fetchJson(ENDPOINTS.status, bypassCache);
       state.pipelineStatus = status && typeof status === "object" ? status : null;
     } catch (_) {
       state.pipelineStatus = null;
     }
   }
 
-  async function loadLatest(showToast = false) {
+  async function loadLatest(showToast = false, bypassCache = false) {
     $("dataState").textContent = "同步中";
     state.latestLoadError = "";
     state.usingCache = false;
-    const statusPromise = loadPipelineStatus();
+    const statusPromise = loadPipelineStatus(bypassCache);
     try {
-      const report = normalizeReport(await fetchJson(ENDPOINTS.latest, true));
+      const report = normalizeReport(await fetchJson(ENDPOINTS.latest, bypassCache));
       state.latestReport = report;
+      state.editionCache.set(report.editionDate, report);
       writeStorage(CACHE_KEY, report);
       migrateLegacyBookmarks(report.items);
       if (showToast) toast("已读取最新日报");
@@ -253,10 +269,10 @@
     }
   }
 
-  async function ensureArchiveIndex() {
-    if (state.archiveIndex) return state.archiveIndex;
+  async function ensureArchiveIndex(bypassCache = false) {
+    if (state.archiveIndex && !bypassCache) return state.archiveIndex;
     try {
-      const payload = await fetchJson(ENDPOINTS.archive, true);
+      const payload = await fetchJson(ENDPOINTS.archive, bypassCache);
       const editions = (Array.isArray(payload?.editions) ? payload.editions : [])
         .filter((item) => /^\d{4}-\d{2}-\d{2}$/.test(item?.editionDate || ""))
         .sort((a, b) => b.editionDate.localeCompare(a.editionDate));
@@ -267,12 +283,26 @@
     return state.archiveIndex;
   }
 
-  async function ensureSearchIndex() {
-    if (state.searchItems) return state.searchItems;
+  async function ensureSearchIndex(bypassCache = false) {
+    if (state.searchItems && !bypassCache) return state.searchItems;
     try {
-      const payload = await fetchJson(ENDPOINTS.search, true);
-      state.searchItems = (Array.isArray(payload?.items) ? payload.items : [])
-        .map((item, index) => normalizeItem(item, index, item.editionDate))
+      const payload = await fetchJson(ENDPOINTS.search, bypassCache);
+      state.searchManifest = payload;
+      let rawItems = Array.isArray(payload?.items) ? payload.items : [];
+      if (Number(payload?.schemaVersion) >= 2 && Array.isArray(payload?.shards)) {
+        rawItems = [];
+        const shards = payload.shards.filter((shard) => /^\.\/data\/archive\/search-\d{4}-\d{2}\.json$/.test(clean(shard?.file)));
+        for (let index = 0; index < shards.length; index += 4) {
+          const batch = await Promise.all(shards.slice(index, index + 4).map(async (shard) => {
+            const shardPayload = await fetchJson(shard.file, bypassCache);
+            return Array.isArray(shardPayload?.items) ? shardPayload.items : [];
+          }));
+          rawItems.push(...batch.flat());
+        }
+      }
+      const compactIndex = Number(payload?.schemaVersion) >= 2;
+      state.searchItems = rawItems
+        .map((item, index) => normalizeItem({ ...item, _compact: compactIndex || item._compact }, index, item.editionDate))
         .slice(0, 10000);
     } catch (_) {
       state.searchItems = state.latestReport?.items || [];
@@ -286,7 +316,7 @@
     return [...dates].sort().reverse();
   }
 
-  async function loadEdition(date) {
+  async function loadEdition(date, bypassCache = false) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return;
     state.editionDate = date;
     if (date === state.latestReport?.editionDate) {
@@ -294,10 +324,16 @@
       state.items = state.latestReport?.items || [];
       return;
     }
+    if (!bypassCache && state.editionCache.has(date)) {
+      state.currentReport = state.editionCache.get(date);
+      state.items = state.currentReport.items;
+      return;
+    }
     $("stories").setAttribute("aria-busy", "true");
     $("stories").innerHTML = '<div class="loading"></div>';
     try {
-      const report = normalizeReport(await fetchJson(`./data/archive/${date}.json`, true));
+      const report = normalizeReport(await fetchJson(`./data/archive/${date}.json`, bypassCache));
+      state.editionCache.set(date, report);
       state.currentReport = report;
       state.items = report.items;
     } catch (error) {
@@ -313,7 +349,20 @@
     if (state.view === "history" && state.editionDate) query.set("date", state.editionDate);
     if (state.query) query.set("q", state.query);
     const suffix = query.toString();
-    history.replaceState(null, "", `${location.pathname}${suffix ? `?${suffix}` : ""}`);
+    history.replaceState(null, "", `${location.pathname}${suffix ? `?${suffix}` : ""}${location.hash || ""}`);
+  }
+
+  function applyTheme(theme, persist = false) {
+    state.theme = theme === "dark" ? "dark" : "light";
+    document.documentElement.dataset.theme = state.theme;
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", state.theme === "dark" ? "#0b151b" : "#102a38");
+    const button = $("themeBtn");
+    if (button) {
+      button.textContent = state.theme === "dark" ? "☀" : "◐";
+      button.title = state.theme === "dark" ? "切换浅色模式" : "切换深色模式";
+      button.setAttribute("aria-label", button.title);
+    }
+    if (persist) writeStorage(THEME_KEY, state.theme);
   }
 
   function renderViewCopy() {
@@ -356,7 +405,7 @@
   }
 
   function uniqueSourceCount(items) {
-    return new Set(items.flatMap((item) => item.sources.map((source) => source.domain || source.name))).size;
+    return new Set(items.flatMap((item) => item.sources.map((source) => source.evidenceGroup || source.domain || source.name))).size;
   }
 
   function renderBrief() {
@@ -393,6 +442,55 @@
     return [item.title, item.originalTitle, item.summary, item.why, item.source, item.country, ...item.keyFacts, ...item.tags, ...item.sources.map((source) => source.name)].join(" ").toLocaleLowerCase();
   }
 
+  function highlightText(value) {
+    const text = String(value ?? "");
+    const terms = clean(state.query).split(/\s+/).filter(Boolean).slice(0, 8);
+    if (!terms.length) return esc(text);
+    const pattern = terms.map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
+    if (!pattern) return esc(text);
+    const matcher = new RegExp(`(${pattern})`, "gi");
+    return text.split(matcher).map((part, index) => index % 2 ? `<mark>${esc(part)}</mark>` : esc(part)).join("");
+  }
+
+  function anchorId(item) {
+    const safe = clean(item.id).replace(/[^a-zA-Z0-9_-]+/g, "-").replace(/^-+|-+$/g, "") || "story";
+    return `item-${safe}`;
+  }
+
+  function captureViewportAnchor() {
+    const stories = [...document.querySelectorAll("#stories .story")];
+    const top = document.querySelector(".topbar")?.getBoundingClientRect().bottom || 0;
+    const anchor = stories.find((story) => story.getBoundingClientRect().bottom > top + 8);
+    return anchor ? { key: anchor.dataset.key, offset: anchor.getBoundingClientRect().top } : null;
+  }
+
+  function restoreViewportAnchor(snapshot) {
+    if (!snapshot) return;
+    requestAnimationFrame(() => {
+      const anchor = [...document.querySelectorAll("#stories .story")].find((story) => story.dataset.key === snapshot.key);
+      if (anchor) window.scrollBy(0, anchor.getBoundingClientRect().top - snapshot.offset);
+    });
+  }
+
+  async function hydrateCompactItem(item) {
+    if (!item?._compact || !/^\d{4}-\d{2}-\d{2}$/.test(item.editionDate)) return item;
+    let report = state.editionCache.get(item.editionDate);
+    if (!report) {
+      report = normalizeReport(await fetchJson(`./data/archive/${item.editionDate}.json`));
+      state.editionCache.set(item.editionDate, report);
+    }
+    const full = report.items.find((candidate) => candidate.id === item.id);
+    if (!full) throw new Error("当期归档中找不到这条新闻");
+    const key = itemKey(item);
+    full._bookmarkKey = key;
+    const replace = (items) => items?.map((candidate) => itemKey(candidate) === key ? full : candidate);
+    state.items = replace(state.items);
+    state.searchItems = replace(state.searchItems);
+    state.bookmarks = replace(state.bookmarks);
+    writeStorage(BOOKMARK_KEY, state.bookmarks);
+    return full;
+  }
+
   function viewFilteredItems(includeCategory = true) {
     const query = state.query.toLocaleLowerCase();
     const watchwords = state.watchwords.map((word) => word.toLocaleLowerCase());
@@ -422,51 +520,59 @@
       ? `<p class="original-title" lang="en">原题：${esc(item.originalTitle)}</p>` : "";
     const sources = item.sources.map((source, sourceIndex) => `<li><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.name || source.domain || `来源 ${sourceIndex + 1}`)}</a>${source.publishedAt ? ` · ${esc(formatDate(source.publishedAt))}` : ""}</li>`).join("");
     const components = Object.entries(item.scoreComponents).map(([name, value]) => {
-      const sign = name === "编辑降权" ? "−" : "+";
+      const sign = name.endsWith("降权") ? "−" : "+";
       return `<li>${esc(name)} ${sign}${esc(value)}</li>`;
     }).join("");
     const scoreReasons = item.scoreReasons.length
       ? item.scoreReasons.map((reason) => `<li>${esc(reason)}</li>`).join("")
       : "<li>旧版归档未保存评分分项。</li>";
     const detailsId = `details-${esc(item.id)}-${index}`;
-    return `<article class="story" data-key="${esc(itemKey(item))}">
+    const key = itemKey(item);
+    const opened = state.expandedKeys.has(key) ? " open" : "";
+    const visual = item.image ? `<figure class="story-visual"><img src="${esc(item.image)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"></figure>` : "";
+    const detailContent = item._compact
+      ? '<div class="detail-loading">展开后将按需读取当期归档中的完整来源、关键事实与评分解释。</div>'
+      : `<div class="detail-grid">
+          <section><h4>关键事实</h4><ul>${item.keyFacts.map((fact) => `<li>${highlightText(fact)}</li>`).join("")}</ul><h4>为什么重要</h4><p>${esc(item.why)}</p></section>
+          <section><h4>来源与置信度</h4><p>${esc(item.confidenceReason)}</p><ul class="source-list">${sources || "<li>没有可用来源链接</li>"}</ul></section>
+          <section><h4>重要度为什么是 ${item.score}</h4><ul>${scoreReasons}</ul>${components ? `<ul class="score-components">${components}</ul>` : ""}<p>重要度用于排序，不是对报道真伪的概率判断。</p></section>
+        </div>`;
+    return `<article class="story" id="${esc(anchorId(item))}" data-key="${esc(key)}">
       <span class="rank">${String(index + 1).padStart(2, "0")}</span>
-      <div class="story-main">
+      <div class="story-main${item.image ? " has-image" : ""}">${visual}<div class="story-copy">
         <div class="meta">
           <span class="cat" data-category="${esc(item.category)}">${esc(item.category)}</span>
           <b>${esc(item.source)}</b><span>${esc(item.country)}</span><span>${esc(formatDate(item.publishedAt))}</span>
           ${item.editionDate ? `<span>${esc(item.editionDate)} 版</span>` : ""}
           <span class="confidence" data-confidence="${esc(item.confidence)}">置信度 ${esc(item.confidence)}</span>
         </div>
-        <h3>${esc(item.title)}</h3>${original}<p class="summary">${esc(item.summary)}</p>
+        <h3>${highlightText(item.title)}</h3>${original}<p class="summary">${highlightText(item.summary)}</p>
         <div class="tags">${item.tags.map((tag) => `<span>${esc(tag)}</span>`).join("")}</div>
-      </div>
+      </div></div>
       <div class="story-side">
-        <div class="score"><b>${item.score}</b><small>${esc(item.scoreBasis)}</small></div>
+        <div class="score"><b>${item.score ?? "—"}</b><small>${esc(item.scoreBasis)}</small></div>
         <div class="story-actions">
           <button type="button" data-bookmark title="${saved ? "取消收藏" : "收藏"}" aria-label="${saved ? "取消收藏" : "收藏"}">${saved ? "★" : "☆"}</button>
+          <button type="button" data-share title="复制本条链接" aria-label="复制本条链接">⌁</button>
           ${item.url ? `<a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer" title="打开主来源" aria-label="打开主来源">↗</a>` : ""}
         </div>
       </div>
-      <details class="details" id="${detailsId}">
-        <summary>展开关键事实、来源与评分解释</summary>
-        <div class="detail-grid">
-          <section><h4>关键事实</h4><ul>${item.keyFacts.map((fact) => `<li>${esc(fact)}</li>`).join("")}</ul><h4>为什么重要</h4><p>${esc(item.why)}</p></section>
-          <section><h4>来源与置信度</h4><p>${esc(item.confidenceReason)}</p><ul class="source-list">${sources || "<li>没有可用来源链接</li>"}</ul></section>
-          <section><h4>重要度为什么是 ${item.score}</h4><ul>${scoreReasons}</ul>${components ? `<ul class="score-components">${components}</ul>` : ""}<p>重要度用于排序，不是对报道真伪的概率判断。</p></section>
-        </div>
+      <details class="details" id="${detailsId}" data-details-key="${esc(key)}"${opened}>
+        <summary>${item._compact ? "加载完整详情" : "展开关键事实、来源与评分解释"}</summary>
+        ${detailContent}
       </details>
     </article>`;
   }
 
   function renderStories() {
+    const viewport = captureViewportAnchor();
     const saved = bookmarkSet();
     const visible = viewFilteredItems(true).sort((a, b) => state.sort === "latest"
       ? new Date(b.publishedAt) - new Date(a.publishedAt)
-      : b.score - a.score || new Date(b.publishedAt) - new Date(a.publishedAt));
+      : Number(b.score ?? -1) - Number(a.score ?? -1) || new Date(b.publishedAt) - new Date(a.publishedAt));
     state.visible = visible.slice(0, 200);
     const noteParts = [`显示 ${state.visible.length} 条`];
-    if (state.view === "history" && state.query) noteParts.push("跨日期索引");
+    if (state.view === "history" && state.query) noteParts.push("按月分片的跨日期索引");
     if (state.view === "watchlist") noteParts.push(`${state.watchwords.length} 个关注词`);
     $("resultNote").textContent = noteParts.join(" · ");
     if (!state.visible.length) {
@@ -476,9 +582,17 @@
           : "没有匹配的新闻，请更换分类、日期或搜索词。";
       $("stories").innerHTML = `<div class="empty"><b>暂无结果</b>${esc(message)}</div>`;
     } else {
-      $("stories").innerHTML = state.visible.map((item, index) => renderStory(item, index, saved.has(itemKey(item)))).join("");
+      const grouped = state.view === "watchlist" || (state.view === "history" && state.query);
+      let previousEdition = "";
+      $("stories").innerHTML = state.visible.map((item, index) => {
+        const heading = grouped && item.editionDate !== previousEdition
+          ? `<h3 class="edition-group">${esc(item.editionDate || "日期未知")} 版</h3>` : "";
+        previousEdition = item.editionDate;
+        return heading + renderStory(item, index, saved.has(itemKey(item)));
+      }).join("");
     }
     $("stories").setAttribute("aria-busy", "false");
+    restoreViewportAnchor(viewport);
   }
 
   function renderWatchwords() {
@@ -510,21 +624,21 @@
       state.items = state.latestReport?.items || [];
       state.editionDate = state.latestReport?.editionDate || "";
     } else if (view === "history") {
-      await ensureArchiveIndex();
+      await ensureArchiveIndex(Boolean(options.bypassCache));
       const dates = availableDates();
       state.editionDate = options.date || state.editionDate || dates[0] || state.latestReport?.editionDate || "";
       if (state.query) {
-        state.items = await ensureSearchIndex();
+        state.items = await ensureSearchIndex(Boolean(options.bypassCache));
         state.currentReport = null;
       } else if (state.editionDate) {
-        await loadEdition(state.editionDate);
+        await loadEdition(state.editionDate, Boolean(options.bypassCache));
       }
     } else if (view === "bookmarks") {
       state.currentReport = null;
       state.items = state.bookmarks.map((item, index) => normalizeItem(item, index, item.editionDate));
     } else {
       state.currentReport = null;
-      state.items = await ensureSearchIndex();
+      state.items = await ensureSearchIndex(Boolean(options.bypassCache));
     }
     renderAll();
   }
@@ -547,11 +661,52 @@
     renderStories();
   }
 
+  async function copyText(value) {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(value);
+      return;
+    }
+    const input = document.createElement("textarea");
+    input.value = value;
+    input.setAttribute("readonly", "");
+    input.style.position = "fixed";
+    input.style.opacity = "0";
+    document.body.append(input);
+    input.select();
+    document.execCommand("copy");
+    input.remove();
+  }
+
+  async function shareStory(key) {
+    const item = state.visible.find((candidate) => itemKey(candidate) === key);
+    if (!item) return;
+    const url = new URL(location.pathname, location.origin);
+    if (item.editionDate) {
+      url.searchParams.set("view", "history");
+      url.searchParams.set("date", item.editionDate);
+    }
+    url.hash = anchorId(item);
+    try {
+      await copyText(url.href);
+      toast("已复制本条新闻链接");
+    } catch (_) {
+      toast("浏览器未允许复制，请从地址栏复制");
+    }
+  }
+
+  function scrollToInitialHash() {
+    if (state.hashHandled || !location.hash) return;
+    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (!target) return;
+    state.hashHandled = true;
+    requestAnimationFrame(() => target.scrollIntoView({ block: "start" }));
+  }
+
   function openDialog(type) {
     if (type === "email") {
       $("dialogEyebrow").textContent = "DAILY EMAIL DIGEST";
       $("dialogTitle").textContent = "每日邮件推送";
-      $("dialogContent").innerHTML = `<p>邮件由 GitHub Actions 在日报成功生成后，通过管理员配置的 SMTP 账户发送。收件人地址只存放在加密的 GitHub Secrets 中，不会出现在网页或源码里。</p><ol><li>在仓库 Actions Secrets 配置 <code>SMTP_HOST</code>、<code>SMTP_USERNAME</code>、<code>SMTP_PASSWORD</code>、<code>EMAIL_FROM</code> 和 <code>EMAIL_TO</code>。</li><li>可选配置 <code>SITE_URL</code>，让邮件中的“查看日报”链接指向正式域名。</li><li>手动运行一次 Daily news update 验证邮件。未配置时流程会安全跳过，不影响网站更新。</li></ol><p>当前静态版不开放匿名订阅，以避免邮箱收集、滥发和合规风险；管理员可在 <code>EMAIL_TO</code> 中维护多个收件人。</p>`;
+      $("dialogContent").innerHTML = `<p>邮件由 GitHub Actions 在日报成功生成后，通过管理员配置的 SMTP 账户发送。收件人地址只存放在加密的 GitHub Secrets 中，不会出现在网页或源码里。</p><ol><li>在仓库 Actions Secrets 配置 <code>SMTP_HOST</code>、<code>SMTP_USERNAME</code>、<code>SMTP_PASSWORD</code>、<code>EMAIL_FROM</code> 和 <code>EMAIL_TO</code>。</li><li>可选配置 <code>SITE_URL</code>，让邮件中的“查看日报”链接指向正式域名。</li><li>手动运行一次 Daily news update 验证邮件。未配置时流程会安全跳过，不影响网站更新。</li></ol><p>普通访问者可以通过页面顶部的 <a href="./feed.xml">Atom 订阅</a>在阅读器中接收更新，无需提交邮箱。公开网页仍不开放匿名邮件登记，以避免邮箱收集、滥发和合规风险；管理员可在 <code>EMAIL_TO</code> 中维护多个收件人。</p>`;
     } else {
       $("dialogEyebrow").textContent = "SCORING METHODOLOGY";
       $("dialogTitle").textContent = "评分与置信度如何理解";
@@ -584,6 +739,8 @@
     }
     const bookmarkButton = event.target.closest("[data-bookmark]");
     if (bookmarkButton) { toggleBookmark(bookmarkButton.closest(".story").dataset.key); return; }
+    const shareButton = event.target.closest("[data-share]");
+    if (shareButton) { await shareStory(shareButton.closest(".story").dataset.key); return; }
     const removeWord = event.target.closest("[data-remove-word]");
     if (removeWord) {
       state.watchwords = state.watchwords.filter((word) => word !== removeWord.dataset.removeWord);
@@ -591,6 +748,33 @@
       renderAll();
     }
   });
+
+  $("stories").addEventListener("toggle", async (event) => {
+    const details = event.target.closest("details[data-details-key]");
+    if (!details) return;
+    const key = details.dataset.detailsKey;
+    if (!details.open) {
+      state.expandedKeys.delete(key);
+      return;
+    }
+    state.expandedKeys.add(key);
+    const item = state.visible.find((candidate) => itemKey(candidate) === key);
+    if (!item?._compact || details.dataset.loading) return;
+    details.dataset.loading = "true";
+    const loading = details.querySelector(".detail-loading");
+    if (loading) loading.textContent = "正在读取当期归档详情…";
+    try {
+      await hydrateCompactItem(item);
+      renderStories();
+    } catch (error) {
+      if (loading) loading.textContent = `详情加载失败：${clean(error?.message, "未知错误")}`;
+      delete details.dataset.loading;
+    }
+  }, true);
+
+  $("stories").addEventListener("error", (event) => {
+    if (event.target.matches(".story-visual img")) event.target.closest(".story-visual")?.remove();
+  }, true);
 
   $("search").value = state.query;
   $("search").addEventListener("input", (event) => {
@@ -623,9 +807,9 @@
     renderAll(); toast("已添加关注词");
   });
   $("reloadBtn").addEventListener("click", async () => {
-    state.archiveIndex = null; state.searchItems = null;
-    await loadLatest(true);
-    await switchView(state.view, { date: state.editionDate });
+    state.archiveIndex = null; state.searchManifest = null; state.searchItems = null; state.editionCache.clear();
+    await loadLatest(true, true);
+    await switchView(state.view, { date: state.editionDate, bypassCache: true });
   });
   $("exportBtn").addEventListener("click", () => {
     const payload = { exportedAt: new Date().toISOString(), view: state.view, query: state.query, items: state.visible };
@@ -638,6 +822,7 @@
     toast("已导出当前结果");
   });
   $("emailBtn").addEventListener("click", () => openDialog("email"));
+  $("themeBtn").addEventListener("click", () => applyTheme(state.theme === "dark" ? "light" : "dark", true));
   $("scoringHelp").addEventListener("click", () => openDialog("scoring"));
   document.querySelector("[data-close-dialog]").addEventListener("click", () => $("infoDialog").close());
   $("infoDialog").addEventListener("click", (event) => { if (event.target === $("infoDialog")) $("infoDialog").close(); });
@@ -649,10 +834,15 @@
   });
 
   async function init() {
+    applyTheme(state.theme);
     $("stories").innerHTML = '<div class="loading"></div><div class="loading"></div>';
     await loadLatest();
     await ensureArchiveIndex();
     await switchView(initialView, { date: initialDate });
+    scrollToInitialHash();
+    if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+      navigator.serviceWorker.register("./sw.js").catch(() => { /* offline support is optional */ });
+    }
   }
 
   init().catch((error) => {
