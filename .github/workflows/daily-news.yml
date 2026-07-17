@@ -1,0 +1,54 @@
+name: Daily news update
+
+on:
+  schedule:
+    - cron: "0 8 * * *"
+      timezone: "Asia/Tokyo"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-news-main
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Collect, rank and summarize the latest 24 hours
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+        run: python scripts/update_news.py --output public/data/news.json
+      - name: Verify exactly 10 stories
+        run: >-
+          python -c "import json; p=json.load(open('public/data/news.json', encoding='utf-8'));
+          assert p.get('timezone') == 'Asia/Tokyo', p.get('timezone');
+          assert len(p.get('items', [])) == 10, len(p.get('items', []));
+          print('Validated edition', p.get('editionDate'), 'with 10 stories')"
+      - name: Commit the new edition
+        run: |
+          if git diff --quiet -- public/data/news.json; then
+            echo "No data change"
+            exit 0
+          fi
+          git config user.name "frontier-pulse-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/news.json
+          git commit -m "chore(data): refresh daily frontier brief"
+          git pull --rebase origin main
+          git push origin HEAD:main
+

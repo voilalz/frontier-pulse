@@ -1,0 +1,112 @@
+{
+  "site_name": "智域前沿",
+  "timezone": "Asia/Tokyo",
+  "lookback_hours": 24,
+  "top_n": 10,
+  "candidate_limit": 36,
+  "min_candidates": 10,
+  "per_category_limit": 3,
+  "per_domain_limit": 2,
+  "openai_model": "gpt-5-nano",
+  "gdelt_endpoint": "https://api.gdeltproject.org/api/v2/doc/doc",
+  "categories": {
+    "AI": {
+      "priority": 10,
+      "query": "(\"artificial intelligence\" OR \"foundation model\" OR \"AI model\" OR \"machine learning\" OR \"AI safety\")",
+      "keywords": ["artificial intelligence", "foundation model", "large language model", "ai model", "machine learning", "ai safety", "neural network", "generative ai", "openai", "llm", "chatbot", "deep learning", "人工智能", "大模型", "机器学习"]
+    },
+    "航空航天": {
+      "priority": 9,
+      "query": "(spacecraft OR satellite OR rocket OR aerospace OR launch OR orbit OR hypersonic)",
+      "keywords": ["spacecraft", "satellite", "rocket", "aerospace", "aircraft", "aviation", "flight test", "launch", "orbit", "space station", "lunar", "mars", "hypersonic", "航空", "航天", "卫星", "火箭", "高超声速"]
+    },
+    "军事动态": {
+      "priority": 10,
+      "query": "(\"defense technology\" OR \"military technology\" OR missile OR radar OR \"electronic warfare\" OR procurement)",
+      "keywords": ["defense ministry", "defense department", "defense technology", "defence", "military", "missile", "radar", "electronic warfare", "procurement", "warship", "fighter jet", "armed forces", "air force", "navy", "army", "pentagon", "nato", "军队", "军事", "导弹", "雷达", "电子战", "军工"]
+    },
+    "局部冲突": {
+      "priority": 10,
+      "query": "(Ukraine OR Gaza OR Israel OR Iran OR Taiwan OR \"Red Sea\" OR conflict) AND (drone OR missile OR military OR attack OR ceasefire)",
+      "keywords": ["ukraine", "russia", "gaza", "israel", "iran", "taiwan", "red sea", "conflict", "attack", "ceasefire", "strike", "escalation", "冲突", "袭击", "停火", "升级", "乌克兰", "加沙"]
+    },
+    "前沿技术": {
+      "priority": 8,
+      "query": "(\"quantum computing\" OR fusion OR photonics OR semiconductor OR robotics OR biotechnology OR \"advanced materials\")",
+      "keywords": ["quantum", "fusion", "photonics", "semiconductor", "robotics", "biotechnology", "advanced materials", "superconduct", "chip", "量子", "聚变", "光子", "半导体", "机器人", "生物技术", "先进材料"]
+    },
+    "无人系统": {
+      "priority": 10,
+      "query": "(drone OR UAV OR UAS OR unmanned OR \"autonomous system\" OR \"loitering munition\")",
+      "keywords": ["drone", "uav", "uas", "unmanned", "autonomous system", "loitering munition", "counter-uas", "loyal wingman", "collaborative combat aircraft", "cca", "unmanned surface vessel", "musv", "robotic vehicle", "无人机", "无人系统", "自主系统", "巡飞弹", "反无人机"]
+    }
+  },
+  "rss_feeds": [
+    {"name": "NASA", "url": "https://www.nasa.gov/feed/", "default_category": "航空航天", "weight": 20},
+    {"name": "SpaceNews", "url": "https://spacenews.com/feed/", "default_category": "航空航天", "weight": 16},
+    {"name": "Breaking Defense", "url": "https://breakingdefense.com/feed/", "default_category": "军事动态", "weight": 16},
+    {"name": "Defense News", "url": "https://www.defensenews.com/arc/outboundfeeds/rss/?outputType=xml", "default_category": "军事动态", "weight": 16},
+    {"name": "The War Zone", "url": "https://www.twz.com/feed", "default_category": "军事动态", "weight": 15},
+    {"name": "MIT Technology Review", "url": "https://www.technologyreview.com/feed/", "default_category": "前沿技术", "weight": 17},
+    {"name": "IEEE Spectrum", "url": "https://spectrum.ieee.org/feeds/feed.rss", "default_category": "前沿技术", "weight": 17},
+    {"name": "Ars Technica", "url": "https://feeds.arstechnica.com/arstechnica/technology-lab", "default_category": "AI", "weight": 15}
+  ],
+  "source_weights": {
+    "reuters.com": 20,
+    "apnews.com": 19,
+    "nasa.gov": 20,
+    "defense.gov": 19,
+    "darpa.mil": 19,
+    "nato.int": 18,
+    "bbc.com": 17,
+    "bbc.co.uk": 17,
+    "technologyreview.com": 17,
+    "spectrum.ieee.org": 17,
+    "ieee.org": 17,
+    "spacenews.com": 16,
+    "breakingdefense.com": 16,
+    "defensenews.com": 16,
+    "twz.com": 15,
+    "arstechnica.com": 15,
+    "theguardian.com": 15
+  },
+  "impact_keywords": {
+    "first": 5,
+    "launch": 4,
+    "deploy": 6,
+    "contract": 4,
+    "test": 4,
+    "breakthrough": 6,
+    "production": 5,
+    "export control": 6,
+    "sanction": 5,
+    "ceasefire": 6,
+    "escalation": 7,
+    "attack": 6,
+    "strike": 6,
+    "missile": 5,
+    "nuclear": 7,
+    "quantum": 5,
+    "autonomous": 5,
+    "drone swarm": 6,
+    "首次": 5,
+    "部署": 6,
+    "合同": 4,
+    "试验": 4,
+    "突破": 6,
+    "量产": 5,
+    "停火": 6,
+    "升级": 7,
+    "袭击": 6
+  },
+  "editorial_penalty_keywords": [
+    "newsletter",
+    "career advice",
+    "crossposted",
+    "podcast",
+    "opinion",
+    "commentary",
+    "book review",
+    "remembered as"
+  ]
+}
