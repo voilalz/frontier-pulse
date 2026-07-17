@@ -3,6 +3,22 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   X-Frame-Options: SAMEORIGIN
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https: data:; connect-src 'self'; font-src 'self' data:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests
 
 /data/news.json
   Cache-Control: public, max-age=300, must-revalidate
+
+/data/status.json
+  Cache-Control: public, max-age=60, must-revalidate
+
+/data/archive/index.json
+  Cache-Control: public, max-age=300, must-revalidate
+
+/data/archive/search-index.json
+  Cache-Control: public, max-age=300, must-revalidate
+
+/data/archive/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/assets/*
+  Cache-Control: public, max-age=3600, must-revalidate

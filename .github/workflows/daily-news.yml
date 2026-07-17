@@ -29,26 +29,55 @@ jobs:
       - name: Run unit tests
         run: python -m unittest discover -s tests -v
       - name: Collect, rank and summarize the latest 24 hours
+        id: collect
+        continue-on-error: true
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
-        run: python scripts/update_news.py --output public/data/news.json
+        run: >-
+          python scripts/update_news.py
+          --output public/data/news.json
+          --archive-dir public/data/archive
+          --archive-index public/data/archive/index.json
+          --search-index public/data/archive/search-index.json
+          --status-output public/data/status.json
       - name: Verify exactly 10 stories
+        if: steps.collect.outcome == 'success'
         run: >-
           python -c "import json; p=json.load(open('public/data/news.json', encoding='utf-8'));
           assert p.get('timezone') == 'Asia/Tokyo', p.get('timezone');
           assert len(p.get('items', [])) == 10, len(p.get('items', []));
+          assert all(x.get('keyFacts') and x.get('sources') for x in p['items']);
           print('Validated edition', p.get('editionDate'), 'with 10 stories')"
-      - name: Commit the new edition
+      - name: Commit edition, archive and public status
+        if: always()
         run: |
-          if git diff --quiet -- public/data/news.json; then
+          git add -A -- public/data/news.json public/data/status.json public/data/archive
+          if git diff --cached --quiet; then
             echo "No data change"
             exit 0
           fi
           git config user.name "frontier-pulse-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/data/news.json
-          git commit -m "chore(data): refresh daily frontier brief"
+          git commit -m "chore(data): refresh daily frontier brief and archive"
           git pull --rebase origin main
           git push origin HEAD:main
-
+      - name: Send administrator email digest
+        if: steps.collect.outcome == 'success'
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ vars.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_USE_SSL: ${{ vars.SMTP_USE_SSL }}
+          SMTP_STARTTLS: ${{ vars.SMTP_STARTTLS }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_REPLY_TO: ${{ secrets.EMAIL_REPLY_TO }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: python scripts/send_digest.py --input public/data/news.json
+      - name: Mark failed collection
+        if: steps.collect.outcome == 'failure'
+        run: |
+          echo "The previous edition was retained and public/data/status.json records the failure."
+          exit 1
