@@ -1,96 +1,217 @@
 {
-  "schemaVersion": 3,
-  "generatedAt": "2026-07-21T00:02:14Z",
+  "schemaVersion": 4,
+  "generatedAt": "2026-07-21T11:48:08Z",
   "editionDate": "2026-07-21",
   "timezone": "Asia/Tokyo",
   "method": "rules",
-  "editorialStatus": "not-configured",
-  "warnings": [],
-  "candidateCount": 26,
-  "sourceCount": 6,
+  "editorialStatus": "fallback",
+  "editorialProvider": "deepseek",
+  "editorialModel": "deepseek-v4-flash",
+  "translatedItemCount": 0,
+  "warnings": [
+    "AI 编辑失败，已使用规则选稿：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required"
+  ],
+  "candidateCount": 44,
+  "freshCandidateCount": 44,
+  "supplementalCandidateCount": 0,
+  "freshItemCount": 10,
+  "supplementalItemCount": 0,
+  "coverageStatus": "complete",
+  "effectiveLookbackHours": 24,
+  "sourceCount": 41,
   "scoring": {
     "label": "重要度，不等同于事实真伪",
     "formula": "基础分 + 来源 + 主题优先级 + 时效 + 影响信号 + 相关性 + 证据完整度 + 多源印证 - 编辑降权",
     "confidenceNote": "置信度仅反映已收录来源的权重与独立来源数量，不替代事实核查。"
   },
   "brief": {
-    "headline": "Lockheed rolls out cheaper Patriot, MBDA showcases low-cost interceptor",
-    "summary": "本期从 6 个公开信源筛选出 10 条重点事件，覆盖科技、AI、航空航天、安全动态与无人系统。",
+    "headline": "Embraer, Anduril pursuing Barracuda missiles on C-390",
+    "summary": "本期从 41 个公开信源筛选出 10 条重点事件，覆盖科技、AI、航空航天、安全动态与无人系统。",
     "signals": [
-      "军事动态：Displayed in a truck mounted configuration at the show, the new MBDA weapon is an upgrade to the company’s ground-launched, Advanced Short Range Air-to-Air Missile (ASRAAM) a…",
-      "军事动态：1st Lt. Tyler James Feehan, 25, and Pvt. Isabella Gonzales, 19, were killed in action in an Iranian ballistic missile and drone attack in Jordan.",
-      "军事动态：Trump said the ex-Qatari 747 is going to be upgraded soon when asked about the lack of defensive countermeasures on the new jet."
+      "军事动态：Embraer and Anduril signed an MOU on the Barracuda missile, though no timeline for a first test was available.",
+      "局部冲突：A fire engulfed a shopping centre in Ukraine's Sumy after Russian drone strikes hit the building.",
+      "局部冲突：The duties mark a major escalation in trade tensions between the North American neighbours."
     ]
   },
   "items": [
     {
-      "id": "843d7fd05db4ba",
-      "title": "Lockheed rolls out cheaper Patriot, MBDA showcases low-cost interceptor",
-      "originalTitle": "Lockheed rolls out cheaper Patriot, MBDA showcases low-cost interceptor",
-      "summary": "Displayed in a truck mounted configuration at the show, the new MBDA weapon is an upgrade to the company’s ground-launched, Advanced Short Range Air-to-Air Missile (ASRAAM) and ca…",
+      "id": "71474c976ca6ba",
+      "contentType": "news",
+      "title": "Embraer, Anduril pursuing Barracuda missiles on C-390",
+      "originalTitle": "Embraer, Anduril pursuing Barracuda missiles on C-390",
+      "summary": "Embraer and Anduril signed an MOU on the Barracuda missile, though no timeline for a first test was available.",
       "keyFacts": [
-        "Displayed in a truck mounted configuration at the show, the new MBDA weapon is an upgrade to the company’s ground-launched, Advanced Short Range Air-to-Air Missile (ASRAAM) and ca…"
+        "Embraer and Anduril signed an MOU on the Barracuda missile, though no timeline for a first test was available."
       ],
       "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
       "category": "军事动态",
       "source": "Breaking Defense",
       "country": "国际",
-      "publishedAt": "2026-07-20T20:42:00Z",
-      "url": "https://breakingdefense.com/2026/07/lockheed-rolls-out-cheaper-patriot-mbda-showcases-low-cost-interceptor",
+      "publishedAt": "2026-07-21T10:47:08Z",
+      "url": "https://breakingdefense.com/2026/07/embraer-anduril-pursuing-barracuda-missiles-on-c-390",
       "score": 79,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 5,
-        "主题相关性": 4,
+        "时效": 19,
+        "影响信号": 14,
+        "主题相关性": 2,
         "证据完整度": 3,
-        "多源印证": 8,
+        "多源印证": 0,
         "编辑降权": 0,
-        "日期异常降权": 0
+        "日期异常降权": 0,
+        "补充窗口降权": 0
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.3 小时",
-        "命中 2 个主题信号",
-        "影响信号：missile",
-        "3 个独立来源相互印证"
+        "发布约 1.0 小时",
+        "命中 1 个主题信号",
+        "影响信号：first、test、missile"
       ],
-      "confidence": "高",
-      "confidenceReason": "主来源权重 16/20，且有 3 个独立来源报道；仍应以原文和一手材料为准。",
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
         "missile"
       ],
       "image": "",
-      "corroboration": 3,
+      "corroboration": 1,
       "sources": [
         {
           "name": "Breaking Defense",
           "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/07/lockheed-rolls-out-cheaper-patriot-mbda-showcases-low-cost-interceptor",
-          "publishedAt": "2026-07-20T20:42:00Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        },
-        {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/land/pac-3-adapted-capability-effector-is-lockheeds-new-low-cost-patriot-interceptor",
-          "publishedAt": "2026-07-20T17:58:07Z",
-          "evidenceGroup": "outlet:twz.com"
-        },
-        {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/news/your-military/2026/07/20/lockheed-martin-announces-cheaper-patriot-interceptor-missile",
-          "publishedAt": "2026-07-20T14:44:54Z",
-          "evidenceGroup": "outlet:defensenews.com"
+          "url": "https://breakingdefense.com/2026/07/embraer-anduril-pursuing-barracuda-missiles-on-c-390",
+          "publishedAt": "2026-07-21T10:47:08Z",
+          "evidenceGroup": "syndication:5d3823053817"
         }
-      ]
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false
+    },
+    {
+      "id": "e6021f34ace937",
+      "contentType": "news",
+      "title": "Huge fire at Ukraine shopping centre after Russian drone strike",
+      "originalTitle": "Huge fire at Ukraine shopping centre after Russian drone strike",
+      "summary": "A fire engulfed a shopping centre in Ukraine's Sumy after Russian drone strikes hit the building.",
+      "keyFacts": [
+        "A fire engulfed a shopping centre in Ukraine's Sumy after Russian drone strikes hit the building."
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-07-21T09:52:56Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/7/21/huge-fire-at-ukraine-shopping-centre-after-russian-drone-strike?traffic_source=rss",
+      "score": 75,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 6,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 1.9 小时",
+        "命中 3 个主题信号",
+        "影响信号：strike"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "ukraine",
+        "strike"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/7/21/huge-fire-at-ukraine-shopping-centre-after-russian-drone-strike?traffic_source=rss",
+          "publishedAt": "2026-07-21T09:52:56Z",
+          "evidenceGroup": "syndication:da46027c3684"
+        }
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false
+    },
+    {
+      "id": "eadcf942268118",
+      "contentType": "news",
+      "title": "Trump slaps 50% tariffs on Canada and Carney vows to 'intensify' trade talks",
+      "originalTitle": "Trump slaps 50% tariffs on Canada and Carney vows to 'intensify' trade talks",
+      "summary": "The duties mark a major escalation in trade tensions between the North American neighbours.",
+      "keyFacts": [
+        "The duties mark a major escalation in trade tensions between the North American neighbours."
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-07-21T11:42:41Z",
+      "url": "https://www.bbc.co.uk/news/articles/cg4dzq3x3e1o?at_medium=RSS&at_campaign=rss",
+      "score": 74,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 7,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 0.1 小时",
+        "命中 1 个主题信号",
+        "影响信号：escalation"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "escalation"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/a06b/live/1dd117f0-84dc-11f1-b976-0b9c15b0ccfc.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cg4dzq3x3e1o?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-07-21T11:42:41Z",
+          "evidenceGroup": "syndication:a1c8c82fba85"
+        }
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false
     },
     {
       "id": "2dcf9c55f52b62",
+      "contentType": "news",
       "title": "Pentagon identifies American soldiers killed in Iranian attack in Jordan",
       "originalTitle": "Pentagon identifies American soldiers killed in Iranian attack in Jordan",
       "summary": "1st Lt. Tyler James Feehan, 25, and Pvt. Isabella Gonzales, 19, were killed in action in an Iranian ballistic missile and drone attack in Jordan.",
@@ -103,23 +224,24 @@
       "country": "国际",
       "publishedAt": "2026-07-20T15:47:49Z",
       "url": "https://www.defensenews.com/flashpoints/middle-east/2026/07/20/pentagon-identifies-american-soliders-killed-in-iranian-attack-in-jordan",
-      "score": 79,
+      "score": 73,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 10,
         "影响信号": 11,
         "主题相关性": 8,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
-        "日期异常降权": 0
+        "日期异常降权": 0,
+        "补充窗口降权": 0
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 8.2 小时",
+        "发布约 20.0 小时",
         "命中 4 个主题信号",
         "影响信号：attack、missile"
       ],
@@ -137,24 +259,89 @@
           "domain": "defensenews.com",
           "url": "https://www.defensenews.com/flashpoints/middle-east/2026/07/20/pentagon-identifies-american-soliders-killed-in-iranian-attack-in-jordan",
           "publishedAt": "2026-07-20T15:47:49Z",
-          "evidenceGroup": "outlet:defensenews.com"
+          "evidenceGroup": "syndication:4e371a5f7037"
         }
-      ]
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false
     },
     {
-      "id": "e5e749f2af67a5",
-      "title": "New VC-25B Air Force One Will Be Pulled From Service To Be “Maxed Out” With Upgrades",
-      "originalTitle": "New VC-25B Air Force One Will Be Pulled From Service To Be “Maxed Out” With Upgrades",
-      "summary": "Trump said the ex-Qatari 747 is going to be upgraded soon when asked about the lack of defensive countermeasures on the new jet.",
+      "id": "0d14c9682ec09a",
+      "contentType": "news",
+      "title": "KBR organizes defense technology business to pursue Golden Dome work",
+      "originalTitle": "KBR organizes defense technology business to pursue Golden Dome work",
+      "summary": "Company points to digital engineering, space tracking and missile-defense experience",
       "keyFacts": [
-        "Trump said the ex-Qatari 747 is going to be upgraded soon when asked about the lack of defensive countermeasures on the new jet."
+        "Company points to digital engineering, space tracking and missile-defense experience"
       ],
       "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
       "category": "军事动态",
-      "source": "The War Zone",
+      "source": "SpaceNews",
       "country": "国际",
-      "publishedAt": "2026-07-20T20:20:16Z",
-      "url": "https://www.twz.com/news-features/new-vc-25b-air-force-one-will-be-pulled-from-service-to-be-maxed-out-with-upgrades",
+      "publishedAt": "2026-07-21T10:00:00Z",
+      "url": "https://spacenews.com/kbr-organizes-defense-technology-business-to-pursue-golden-dome-work",
+      "score": 72,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 5,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 1.8 小时",
+        "命中 2 个主题信号",
+        "影响信号：missile"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "defense technology",
+        "missile"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/kbr-organizes-defense-technology-business-to-pursue-golden-dome-work",
+          "publishedAt": "2026-07-21T10:00:00Z",
+          "evidenceGroup": "syndication:603ea8ba0730"
+        }
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false
+    },
+    {
+      "id": "950706501434ed",
+      "contentType": "news",
+      "title": "Five Palestinians killed in fire after Israeli attack in Gaza",
+      "originalTitle": "Five Palestinians killed in fire after Israeli attack in Gaza",
+      "summary": "An Israeli air attack on an apartment in Gaza City set the building on fire, killing five people.",
+      "keyFacts": [
+        "An Israeli air attack on an apartment in Gaza City set the building on fire, killing five people."
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-07-21T07:55:43Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/7/21/five-palestinians-die-in-fire-after-israeli-attack-in-gaza?traffic_source=rss",
       "score": 72,
       "scoreBasis": "规则评分",
       "scoreComponents": {
@@ -162,154 +349,229 @@
         "来源": 16,
         "主题优先级": 10,
         "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
+        "影响信号": 6,
+        "主题相关性": 4,
         "证据完整度": 3,
-        "多源印证": 8,
+        "多源印证": 0,
         "编辑降权": 0,
-        "日期异常降权": 0
+        "日期异常降权": 0,
+        "补充窗口降权": 0
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.7 小时",
-        "命中 1 个主题信号",
-        "3 个独立来源相互印证"
+        "发布约 3.9 小时",
+        "命中 2 个主题信号",
+        "影响信号：attack"
       ],
-      "confidence": "高",
-      "confidenceReason": "主来源权重 16/20，且有 3 个独立来源报道；仍应以原文和一手材料为准。",
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "air force"
+        "attack",
+        "gaza"
       ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/07/vc-25b-maxed-out-defensive-capabilities-trump.jpg?quality=85",
-      "corroboration": 3,
+      "image": "",
+      "corroboration": 1,
       "sources": [
         {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/news-features/new-vc-25b-air-force-one-will-be-pulled-from-service-to-be-maxed-out-with-upgrades",
-          "publishedAt": "2026-07-20T20:20:16Z",
-          "evidenceGroup": "outlet:twz.com"
-        },
-        {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/news/your-military/2026/07/20/new-air-force-one-to-get-maxed-out-upgrades-after-security-questions",
-          "publishedAt": "2026-07-20T15:21:27Z",
-          "evidenceGroup": "outlet:defensenews.com"
-        },
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/07/qatari-air-force-one-will-be-taken-offline-for-maxed-out-upgrades-trump",
-          "publishedAt": "2026-07-20T08:20:40Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/7/21/five-palestinians-die-in-fire-after-israeli-attack-in-gaza?traffic_source=rss",
+          "publishedAt": "2026-07-21T07:55:43Z",
+          "evidenceGroup": "syndication:eb89b0141d85"
         }
-      ]
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false
     },
     {
-      "id": "da66efab13e130",
-      "title": "Thunderstruck: Anduril unveils autonomous attack rotorcraft",
-      "originalTitle": "Thunderstruck: Anduril unveils autonomous attack rotorcraft",
-      "summary": "Anduril's autonomous attack rotorcraft, dubbed Thunder, is designed to operate with current and next-generation crewed attack helicopter platforms.",
+      "id": "a94006a0074625",
+      "contentType": "news",
+      "title": "US Marine Corps turns to AI-powered Bullfrog as drone threats expand",
+      "originalTitle": "US Marine Corps turns to AI-powered Bullfrog as drone threats expand",
+      "summary": "Allen Control Systems announced Monday that the Marine Corps has chosen the Bullfrog autonomous weapon system to integrate into its airborne defenses.",
       "keyFacts": [
-        "Anduril's autonomous attack rotorcraft, dubbed Thunder, is designed to operate with current and next-generation crewed attack helicopter platforms."
+        "Allen Control Systems announced Monday that the Marine Corps has chosen the Bullfrog autonomous weapon system to integrate into its airborne defenses."
       ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
+      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
+      "category": "无人系统",
       "source": "Defense News",
       "country": "国际",
-      "publishedAt": "2026-07-20T14:01:14Z",
-      "url": "https://www.defensenews.com/industry/techwatch/2026/07/20/thunderstruck-anduril-unveils-autonomous-attack-rotorcraft",
-      "score": 72,
+      "publishedAt": "2026-07-21T11:30:00Z",
+      "url": "https://www.defensenews.com/news/your-military/2026/07/21/us-marine-corps-turns-to-ai-powered-bullfrog-as-drone-threats-expand",
+      "score": 71,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 11,
+        "时效": 20,
+        "影响信号": 5,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
-        "日期异常降权": 0
+        "日期异常降权": 0,
+        "补充窗口降权": 0
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 10.0 小时",
+        "发布约 0.3 小时",
         "命中 1 个主题信号",
-        "影响信号：attack、autonomous"
+        "影响信号：autonomous"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "attack"
+        "drone"
       ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/IV4Q33PY3VGWXGGM4AJTMATYBA.png",
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/FXINYOQYLVADVPRTKGLAOGAG4Y.jpeg",
       "corroboration": 1,
       "sources": [
         {
           "name": "Defense News",
           "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/industry/techwatch/2026/07/20/thunderstruck-anduril-unveils-autonomous-attack-rotorcraft",
-          "publishedAt": "2026-07-20T14:01:14Z",
-          "evidenceGroup": "outlet:defensenews.com"
+          "url": "https://www.defensenews.com/news/your-military/2026/07/21/us-marine-corps-turns-to-ai-powered-bullfrog-as-drone-threats-expand",
+          "publishedAt": "2026-07-21T11:30:00Z",
+          "evidenceGroup": "syndication:45000a0bfae1"
+        },
+        {
+          "name": "C4ISRNET",
+          "domain": "c4isrnet.com",
+          "url": "https://www.c4isrnet.com/news/your-military/2026/07/21/us-marine-corps-turns-to-ai-powered-bullfrog-as-drone-threats-expand",
+          "publishedAt": "2026-07-21T11:30:00Z",
+          "evidenceGroup": "syndication:45000a0bfae1"
         }
-      ]
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false
     },
     {
-      "id": "5b7890a75f9043",
-      "title": "Anduril Brings The Thunder With Autonomous Tiltrotor Attack Drone Concept",
-      "originalTitle": "Anduril Brings The Thunder With Autonomous Tiltrotor Attack Drone Concept",
-      "summary": "Thunder is designed to fly deep into hostile airspace at low altitude as a highly autonomous wingman for AH-64 Apaches and MV-75 Cheyennes.",
+      "id": "78ad42080a5f90",
+      "contentType": "news",
+      "title": "US rocket-launch bottleneck worries Sweden, which just launched its first military satellite",
+      "originalTitle": "US rocket-launch bottleneck worries Sweden, which just launched its first military satellite",
+      "summary": "The country sped up the launch due to the “severe security situation.”",
       "keyFacts": [
-        "Thunder is designed to fly deep into hostile airspace at low altitude as a highly autonomous wingman for AH-64 Apaches and MV-75 Cheyennes."
+        "The country sped up the launch due to the “severe security situation.”"
       ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "The War Zone",
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "Defense One",
       "country": "国际",
-      "publishedAt": "2026-07-20T11:30:26Z",
-      "url": "https://www.twz.com/news-features/anduril-brings-the-thunder-with-autonomous-tiltrotor-attack-drone-concept",
-      "score": 72,
+      "publishedAt": "2026-07-20T17:36:06Z",
+      "url": "https://www.defenseone.com/defense-systems/2026/07/sweden-needs-us-get-satellites-orbit-launch-tempo-problem-space-chief-says/414880",
+      "score": 70,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 14,
-        "影响信号": 11,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 11,
+        "影响信号": 9,
+        "主题相关性": 8,
+        "证据完整度": 2,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 18.2 小时",
+        "命中 4 个主题信号",
+        "影响信号：first、launch"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "satellite",
+        "rocket",
+        "launch"
+      ],
+      "image": "https://cdn.defenseone.com/media/img/cd/2026/07/20/9660852/thumb.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense One",
+          "domain": "defenseone.com",
+          "url": "https://www.defenseone.com/defense-systems/2026/07/sweden-needs-us-get-satellites-orbit-launch-tempo-problem-space-chief-says/414880",
+          "publishedAt": "2026-07-20T17:36:06Z",
+          "evidenceGroup": "outlet:defenseone.com"
+        }
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false
+    },
+    {
+      "id": "e6f97166928cc7",
+      "contentType": "news",
+      "title": "Advancing next-gen AI with materials science innovation",
+      "originalTitle": "Advancing next-gen AI with materials science innovation",
+      "summary": "The conversation about AI often centers on algorithms, computing power, or huge investments in new semiconductor fabrication plants and hyperscale data centers. But beneath each o…",
+      "keyFacts": [
+        "The conversation about AI often centers on algorithms, computing power, or huge investments in new semiconductor fabrication plants and hyperscale data centers. But beneath each o…"
+      ],
+      "why": "该进展可能缩短技术工程化周期，并改变关键产业与供应链竞争。",
+      "category": "前沿技术",
+      "source": "MIT Technology Review",
+      "country": "国际",
+      "publishedAt": "2026-07-21T10:37:34Z",
+      "url": "https://www.technologyreview.com/2026/07/21/1140602/advancing-next-gen-ai-with-materials-science-innovation",
+      "score": 66,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 8,
+        "时效": 19,
+        "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
-        "日期异常降权": 0
+        "日期异常降权": 0,
+        "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 12.5 小时",
-        "命中 2 个主题信号",
-        "影响信号：attack、autonomous"
+        "来源权重 17/20",
+        "发布约 1.2 小时",
+        "命中 2 个主题信号"
       ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "attack"
+        "advanced materials",
+        "semiconductor"
       ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/07/Anduril-Thunder-tiltrotor-attack-drone-unveiled.jpg?quality=85",
+      "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/news-features/anduril-brings-the-thunder-with-autonomous-tiltrotor-attack-drone-concept",
-          "publishedAt": "2026-07-20T11:30:26Z",
-          "evidenceGroup": "outlet:twz.com"
+          "name": "MIT Technology Review",
+          "domain": "technologyreview.com",
+          "url": "https://www.technologyreview.com/2026/07/21/1140602/advancing-next-gen-ai-with-materials-science-innovation",
+          "publishedAt": "2026-07-21T10:37:34Z",
+          "evidenceGroup": "outlet:technologyreview.com"
         }
-      ]
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false
     },
     {
       "id": "357fbcb7339798",
+      "contentType": "news",
       "title": "From Hampton to Mars: How NASA Langley Helped Land on the Red Planet",
       "originalTitle": "From Hampton to Mars: How NASA Langley Helped Land on the Red Planet",
       "summary": "Fifty years ago, NASA’s Viking 1 and 2 landers made the first successful landings on Mars, opening a new era in planetary exploration. Behind that achievement was a team at NASA’s…",
@@ -322,23 +584,24 @@
       "country": "国际",
       "publishedAt": "2026-07-20T15:47:15Z",
       "url": "https://www.nasa.gov/general/from-hampton-to-mars-how-nasa-langley-helped-land-on-the-red-planet",
-      "score": 70,
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 20,
         "主题优先级": 9,
-        "时效": 16,
+        "时效": 10,
         "影响信号": 5,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
-        "日期异常降权": 0
+        "日期异常降权": 0,
+        "补充窗口降权": 0
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 8.2 小时",
+        "发布约 20.0 小时",
         "命中 1 个主题信号",
         "影响信号：first"
       ],
@@ -357,211 +620,12 @@
           "publishedAt": "2026-07-20T15:47:15Z",
           "evidenceGroup": "outlet:nasa.gov"
         }
-      ]
-    },
-    {
-      "id": "61653dcd05bae5",
-      "title": "Our First View of the Surface of Mars",
-      "originalTitle": "Our First View of the Surface of Mars",
-      "summary": "“Touchdown, we have touchdown!” At 5:12 a.m. PDT, July 20, 1976, mission controllers at NASA’s Jet Propulsion Laboratory erupted in cheers as they learned that the Viking 1 lander…",
-      "keyFacts": [
-        "“Touchdown, we have touchdown!” At 5:12 a.m. PDT, July 20, 1976, mission controllers at NASA’s Jet Propulsion Laboratory erupted in cheers as they learned that the Viking 1 lander…"
       ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "NASA",
-      "country": "国际",
-      "publishedAt": "2026-07-20T15:38:29Z",
-      "url": "https://www.nasa.gov/image-article/our-first-view-of-the-surface-of-mars",
-      "score": 70,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 20,
-        "主题优先级": 9,
-        "时效": 16,
-        "影响信号": 5,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 20/20",
-        "发布约 8.4 小时",
-        "命中 1 个主题信号",
-        "影响信号：first"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "mars"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "NASA",
-          "domain": "nasa.gov",
-          "url": "https://www.nasa.gov/image-article/our-first-view-of-the-surface-of-mars",
-          "publishedAt": "2026-07-20T15:38:29Z",
-          "evidenceGroup": "outlet:nasa.gov"
-        }
-      ]
-    },
-    {
-      "id": "8cb10cdbbf9489",
-      "title": "Anduril reveals Thunder, a ‘loyal wingman’ drone for helicopters",
-      "originalTitle": "Anduril reveals Thunder, a ‘loyal wingman’ drone for helicopters",
-      "summary": "The company describes Thunder as a fully autonomous armed reconnaissance tiltrotor aircraft developed from lessons learned from the company’s Fury aircraft.",
-      "keyFacts": [
-        "The company describes Thunder as a fully autonomous armed reconnaissance tiltrotor aircraft developed from lessons learned from the company’s Fury aircraft."
-      ],
-      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
-      "category": "无人系统",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-07-20T11:30:00Z",
-      "url": "https://breakingdefense.com/2026/07/anduril-reveals-thunder-a-loyal-wingman-drone-for-helicopters",
-      "score": 69,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 14,
-        "影响信号": 5,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 12.5 小时",
-        "命中 3 个主题信号",
-        "影响信号：autonomous"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "loyal wingman",
-        "drone"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/07/anduril-reveals-thunder-a-loyal-wingman-drone-for-helicopters",
-          "publishedAt": "2026-07-20T11:30:00Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ]
-    },
-    {
-      "id": "80474c9fe3f99c",
-      "title": "SEM-Guided Low-kV FIB Finishing for Leading-Edge Semiconductor Failure Analysis",
-      "originalTitle": "SEM-Guided Low-kV FIB Finishing for Leading-Edge Semiconductor Failure Analysis",
-      "summary": "Discover how the ZEISS Crossbeam 750 FIBSEM sets a new benchmark for precise TEM lamella prep, tomography, and advanced nanofabrication. This delivers better resolution, better SN…",
-      "keyFacts": [
-        "Discover how the ZEISS Crossbeam 750 FIBSEM sets a new benchmark for precise TEM lamella prep, tomography, and advanced nanofabrication. This delivers better resolution, better SN…"
-      ],
-      "why": "该进展可能缩短技术工程化周期，并改变关键产业与供应链竞争。",
-      "category": "前沿技术",
-      "source": "IEEE Spectrum",
-      "country": "国际",
-      "publishedAt": "2026-07-20T15:55:00Z",
-      "url": "https://event.on24.com/wcc/r/5418459/287E3D5B99470D34C830D69A24B3B207",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 8,
-        "时效": 16,
-        "影响信号": 5,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 8.1 小时",
-        "命中 1 个主题信号",
-        "影响信号：first"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "semiconductor"
-      ],
-      "image": "https://assets.rbl.ms/66728517/origin.png",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "IEEE Spectrum",
-          "domain": "event.on24.com",
-          "url": "https://event.on24.com/wcc/r/5418459/287E3D5B99470D34C830D69A24B3B207",
-          "publishedAt": "2026-07-20T15:55:00Z",
-          "evidenceGroup": "outlet:event.on24.com"
-        }
-      ]
-    },
-    {
-      "id": "36c8594a74da4d",
-      "title": "AI rocket engine startup LegendSpace raises $29.5 million angel round",
-      "originalTitle": "AI rocket engine startup LegendSpace raises $29.5 million angel round",
-      "summary": "HELSINKI — A six-month-old Chinese startup aiming to use artificial intelligence to compress rocket engine development cycles has raised $29.5 million in angel funding. LegendSpac…",
-      "keyFacts": [
-        "HELSINKI — A six-month-old Chinese startup aiming to use artificial intelligence to compress rocket engine development cycles has raised $29.5 million in angel funding. LegendSpac…"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-07-20T11:18:13Z",
-      "url": "https://spacenews.com/ai-rocket-engine-startup-legendspace-raises-29-5-million-angel-round",
-      "score": 61,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 14,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 12.7 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "rocket"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/ai-rocket-engine-startup-legendspace-raises-29-5-million-angel-round",
-          "publishedAt": "2026-07-20T11:18:13Z",
-          "evidenceGroup": "outlet:spacenews.com"
-        }
-      ]
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false
     }
   ]
 }

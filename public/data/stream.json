@@ -1,13 +1,13 @@
 {
-  "schemaVersion": 1,
-  "generatedAt": "2026-07-21T11:19:42Z",
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-21T11:48:08Z",
   "timezone": "Asia/Tokyo",
   "rangeHours": 24,
-  "itemCount": 45,
-  "totalCandidateCount": 45,
+  "itemCount": 44,
+  "totalCandidateCount": 44,
   "truncated": false,
   "categoryCounts": {
-    "军事动态": 13,
+    "军事动态": 12,
     "局部冲突": 16,
     "无人系统": 5,
     "航空航天": 7,
@@ -16,18 +16,26 @@
   },
   "sourceCounts": {
     "Defense News": 10,
-    "Al Jazeera": 7,
+    "Al Jazeera": 8,
     "BBC World": 5,
     "Breaking Defense": 5,
-    "Defense One": 4,
     "NASA": 4,
-    "The War Zone": 4,
+    "Defense One": 3,
+    "The War Zone": 3,
     "TechCrunch AI": 2,
     "European Space Agency": 1,
     "IEEE Spectrum": 1,
     "MIT Technology Review": 1,
     "SpaceNews": 1
   },
+  "translationProvider": "",
+  "translationModel": "",
+  "translatedItemCount": 0,
+  "translationWarnings": [
+    "新闻中文翻译批次失败：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required",
+    "新闻中文翻译批次失败：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required",
+    "新闻中文翻译连续失败 2 个批次，已停止后续调用并保留原始元数据"
+  ],
   "items": [
     {
       "id": "71474c976ca6ba",
@@ -44,13 +52,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T10:47:08Z",
       "url": "https://breakingdefense.com/2026/07/embraer-anduril-pursuing-barracuda-missiles-on-c-390",
-      "score": 80,
+      "score": 79,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 20,
+        "时效": 19,
         "影响信号": 14,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -61,7 +69,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 0.5 小时",
+        "发布约 1.0 小时",
         "命中 1 个主题信号",
         "影响信号：first、test、missile"
       ],
@@ -78,14 +86,15 @@
           "domain": "breakingdefense.com",
           "url": "https://breakingdefense.com/2026/07/embraer-anduril-pursuing-barracuda-missiles-on-c-390",
           "publishedAt": "2026-07-21T10:47:08Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
+          "evidenceGroup": "syndication:5d3823053817"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
+      "isTopStory": true,
       "streamRank": 1
     },
     {
@@ -120,7 +129,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.4 小时",
+        "发布约 1.9 小时",
         "命中 3 个主题信号",
         "影响信号：strike"
       ],
@@ -138,81 +147,16 @@
           "domain": "aljazeera.com",
           "url": "https://www.aljazeera.com/video/newsfeed/2026/7/21/huge-fire-at-ukraine-shopping-centre-after-russian-drone-strike?traffic_source=rss",
           "publishedAt": "2026-07-21T09:52:56Z",
-          "evidenceGroup": "outlet:aljazeera.com"
+          "evidenceGroup": "syndication:da46027c3684"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
+      "isTopStory": true,
       "streamRank": 2
-    },
-    {
-      "id": "31d16025de84b2",
-      "contentType": "news",
-      "title": "Lebanese army says troops deploying in 'pilot zone' after Israeli withdrawal",
-      "originalTitle": "Lebanese army says troops deploying in 'pilot zone' after Israeli withdrawal",
-      "summary": "A US-brokered agreement should see Israeli troops pulling out of a small part of Lebanon occupied during their conflict with Hezbollah.",
-      "keyFacts": [
-        "A US-brokered agreement should see Israeli troops pulling out of a small part of Lebanon occupied during their conflict with Hezbollah."
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-07-21T10:43:48Z",
-      "url": "https://www.bbc.co.uk/news/articles/cy8mynlmn55o?at_medium=RSS&at_campaign=rss",
-      "score": 73,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 20,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 4,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 0.6 小时",
-        "命中 2 个主题信号",
-        "2 个独立来源相互印证"
-      ],
-      "confidence": "高",
-      "confidenceReason": "主来源权重 17/20，且有 2 个独立来源报道；仍应以原文和一手材料为准。",
-      "tags": [
-        "conflict"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/0d3d/live/a63a1b50-84e1-11f1-bee8-53ce494e1abc.jpg",
-      "corroboration": 2,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cy8mynlmn55o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-07-21T10:43:48Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        },
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/7/21/lebanese-return-to-pilot-zone-villages-they-say-israel-never-occupied?traffic_source=rss",
-          "publishedAt": "2026-07-21T03:29:37Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 3
     },
     {
       "id": "eadcf942268118",
@@ -227,15 +171,15 @@
       "category": "局部冲突",
       "source": "BBC World",
       "country": "国际",
-      "publishedAt": "2026-07-21T09:16:21Z",
+      "publishedAt": "2026-07-21T11:42:41Z",
       "url": "https://www.bbc.co.uk/news/articles/cg4dzq3x3e1o?at_medium=RSS&at_campaign=rss",
-      "score": 73,
+      "score": 74,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 20,
         "影响信号": 7,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -246,7 +190,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 2.1 小时",
+        "发布约 0.1 小时",
         "命中 1 个主题信号",
         "影响信号：escalation"
       ],
@@ -262,16 +206,17 @@
           "name": "BBC World",
           "domain": "bbc.co.uk",
           "url": "https://www.bbc.co.uk/news/articles/cg4dzq3x3e1o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-07-21T09:16:21Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
+          "publishedAt": "2026-07-21T11:42:41Z",
+          "evidenceGroup": "syndication:a1c8c82fba85"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 4
+      "isTopStory": true,
+      "streamRank": 3
     },
     {
       "id": "2dcf9c55f52b62",
@@ -288,23 +233,24 @@
       "country": "国际",
       "publishedAt": "2026-07-20T15:47:49Z",
       "url": "https://www.defensenews.com/flashpoints/middle-east/2026/07/20/pentagon-identifies-american-soliders-killed-in-iranian-attack-in-jordan",
-      "score": 79,
+      "score": 73,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 10,
         "影响信号": 11,
         "主题相关性": 8,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
-        "日期异常降权": 0
+        "日期异常降权": 0,
+        "补充窗口降权": 0
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 8.2 小时",
+        "发布约 20.0 小时",
         "命中 4 个主题信号",
         "影响信号：attack、missile"
       ],
@@ -322,15 +268,16 @@
           "domain": "defensenews.com",
           "url": "https://www.defensenews.com/flashpoints/middle-east/2026/07/20/pentagon-identifies-american-soliders-killed-in-iranian-attack-in-jordan",
           "publishedAt": "2026-07-20T15:47:49Z",
-          "evidenceGroup": "outlet:defensenews.com"
+          "evidenceGroup": "syndication:4e371a5f7037"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": true,
-      "streamRank": 5
+      "streamRank": 4
     },
     {
       "id": "0d14c9682ec09a",
@@ -364,7 +311,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.3 小时",
+        "发布约 1.8 小时",
         "命中 2 个主题信号",
         "影响信号：missile"
       ],
@@ -382,15 +329,16 @@
           "domain": "spacenews.com",
           "url": "https://spacenews.com/kbr-organizes-defense-technology-business-to-pursue-golden-dome-work",
           "publishedAt": "2026-07-21T10:00:00Z",
-          "evidenceGroup": "outlet:spacenews.com"
+          "evidenceGroup": "syndication:603ea8ba0730"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 6
+      "isTopStory": true,
+      "streamRank": 5
     },
     {
       "id": "950706501434ed",
@@ -424,7 +372,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.4 小时",
+        "发布约 3.9 小时",
         "命中 2 个主题信号",
         "影响信号：attack"
       ],
@@ -442,15 +390,16 @@
           "domain": "aljazeera.com",
           "url": "https://www.aljazeera.com/video/newsfeed/2026/7/21/five-palestinians-die-in-fire-after-israeli-attack-in-gaza?traffic_source=rss",
           "publishedAt": "2026-07-21T07:55:43Z",
-          "evidenceGroup": "outlet:aljazeera.com"
+          "evidenceGroup": "syndication:eb89b0141d85"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 7
+      "isTopStory": true,
+      "streamRank": 6
     },
     {
       "id": "b3364390fac3dd",
@@ -484,7 +433,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.8 小时",
+        "发布约 10.3 小时",
         "命中 2 个主题信号",
         "影响信号：missile",
         "2 个独立来源相互印证"
@@ -502,7 +451,7 @@
           "domain": "defenseone.com",
           "url": "https://www.defenseone.com/technology/2026/07/lockheed-martin-unveils-baby-patriot-missile-address-urgent-gap/414897",
           "publishedAt": "2026-07-21T01:29:40Z",
-          "evidenceGroup": "outlet:defenseone.com"
+          "evidenceGroup": "syndication:08656db06df8"
         },
         {
           "name": "Defense News",
@@ -512,11 +461,79 @@
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
+      "streamRank": 7
+    },
+    {
+      "id": "a94006a0074625",
+      "contentType": "news",
+      "title": "US Marine Corps turns to AI-powered Bullfrog as drone threats expand",
+      "originalTitle": "US Marine Corps turns to AI-powered Bullfrog as drone threats expand",
+      "summary": "Allen Control Systems announced Monday that the Marine Corps has chosen the Bullfrog autonomous weapon system to integrate into its airborne defenses.",
+      "keyFacts": [
+        "Allen Control Systems announced Monday that the Marine Corps has chosen the Bullfrog autonomous weapon system to integrate into its airborne defenses."
+      ],
+      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
+      "category": "无人系统",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-07-21T11:30:00Z",
+      "url": "https://www.defensenews.com/news/your-military/2026/07/21/us-marine-corps-turns-to-ai-powered-bullfrog-as-drone-threats-expand",
+      "score": 71,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 5,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 0.3 小时",
+        "命中 1 个主题信号",
+        "影响信号：autonomous"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "drone"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/FXINYOQYLVADVPRTKGLAOGAG4Y.jpeg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/news/your-military/2026/07/21/us-marine-corps-turns-to-ai-powered-bullfrog-as-drone-threats-expand",
+          "publishedAt": "2026-07-21T11:30:00Z",
+          "evidenceGroup": "syndication:45000a0bfae1"
+        },
+        {
+          "name": "C4ISRNET",
+          "domain": "c4isrnet.com",
+          "url": "https://www.c4isrnet.com/news/your-military/2026/07/21/us-marine-corps-turns-to-ai-powered-bullfrog-as-drone-threats-expand",
+          "publishedAt": "2026-07-21T11:30:00Z",
+          "evidenceGroup": "syndication:45000a0bfae1"
+        }
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": true,
       "streamRank": 8
     },
     {
@@ -551,7 +568,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 0.4 小时",
+        "发布约 0.9 小时",
         "命中 1 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -585,12 +602,75 @@
           "evidenceGroup": "outlet:twz.com"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 9
+    },
+    {
+      "id": "78ad42080a5f90",
+      "contentType": "news",
+      "title": "US rocket-launch bottleneck worries Sweden, which just launched its first military satellite",
+      "originalTitle": "US rocket-launch bottleneck worries Sweden, which just launched its first military satellite",
+      "summary": "The country sped up the launch due to the “severe security situation.”",
+      "keyFacts": [
+        "The country sped up the launch due to the “severe security situation.”"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "Defense One",
+      "country": "国际",
+      "publishedAt": "2026-07-20T17:36:06Z",
+      "url": "https://www.defenseone.com/defense-systems/2026/07/sweden-needs-us-get-satellites-orbit-launch-tempo-problem-space-chief-says/414880",
+      "score": 70,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 11,
+        "影响信号": 9,
+        "主题相关性": 8,
+        "证据完整度": 2,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 18.2 小时",
+        "命中 4 个主题信号",
+        "影响信号：first、launch"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "satellite",
+        "rocket",
+        "launch"
+      ],
+      "image": "https://cdn.defenseone.com/media/img/cd/2026/07/20/9660852/thumb.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense One",
+          "domain": "defenseone.com",
+          "url": "https://www.defenseone.com/defense-systems/2026/07/sweden-needs-us-get-satellites-orbit-launch-tempo-problem-space-chief-says/414880",
+          "publishedAt": "2026-07-20T17:36:06Z",
+          "evidenceGroup": "outlet:defenseone.com"
+        }
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": true,
+      "streamRank": 10
     },
     {
       "id": "843d7fd05db4ba",
@@ -607,23 +687,24 @@
       "country": "国际",
       "publishedAt": "2026-07-20T20:42:00Z",
       "url": "https://breakingdefense.com/2026/07/lockheed-rolls-out-cheaper-patriot-mbda-showcases-low-cost-interceptor",
-      "score": 79,
+      "score": 73,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 12,
         "影响信号": 5,
         "主题相关性": 4,
         "证据完整度": 3,
         "多源印证": 8,
         "编辑降权": 0,
-        "日期异常降权": 0
+        "日期异常降权": 0,
+        "补充窗口降权": 0
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.3 小时",
+        "发布约 15.1 小时",
         "命中 2 个主题信号",
         "影响信号：missile",
         "3 个独立来源相互印证"
@@ -658,38 +739,105 @@
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": true,
-      "streamRank": 10
+      "isTopStory": false,
+      "streamRank": 11
     },
     {
-      "id": "78ad42080a5f90",
+      "id": "31d16025de84b2",
       "contentType": "news",
-      "title": "US rocket-launch bottleneck worries Sweden, which just launched its first military satellite",
-      "originalTitle": "US rocket-launch bottleneck worries Sweden, which just launched its first military satellite",
-      "summary": "The country sped up the launch due to the “severe security situation.”",
+      "title": "Lebanese army says troops deploying in 'pilot zone' after Israeli withdrawal",
+      "originalTitle": "Lebanese army says troops deploying in 'pilot zone' after Israeli withdrawal",
+      "summary": "A US-brokered agreement should see Israeli troops pulling out of a small part of Lebanon occupied during their conflict with Hezbollah.",
       "keyFacts": [
-        "The country sped up the launch due to the “severe security situation.”"
+        "A US-brokered agreement should see Israeli troops pulling out of a small part of Lebanon occupied during their conflict with Hezbollah."
       ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "Defense One",
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
       "country": "国际",
-      "publishedAt": "2026-07-20T17:36:06Z",
-      "url": "https://www.defenseone.com/defense-systems/2026/07/sweden-needs-us-get-satellites-orbit-launch-tempo-problem-space-chief-says/414880",
-      "score": 70,
+      "publishedAt": "2026-07-21T10:43:48Z",
+      "url": "https://www.bbc.co.uk/news/articles/cy8mynlmn55o?at_medium=RSS&at_campaign=rss",
+      "score": 68,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 1.1 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "conflict"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/0d3d/live/a63a1b50-84e1-11f1-bee8-53ce494e1abc.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cy8mynlmn55o?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-07-21T10:43:48Z",
+          "evidenceGroup": "syndication:f7cdc16cbed1"
+        },
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/7/21/lebanese-return-to-pilot-zone-villages-they-say-israel-never-occupied?traffic_source=rss",
+          "publishedAt": "2026-07-21T03:29:37Z",
+          "evidenceGroup": "syndication:f7cdc16cbed1"
+        }
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 12
+    },
+    {
+      "id": "f567fce3bffe72",
+      "contentType": "news",
+      "title": "EXCLUSIVE: Air Force halts F-16 ejection seat competition",
+      "originalTitle": "EXCLUSIVE: Air Force halts F-16 ejection seat competition",
+      "summary": "The 90-day suspension tees up a final decision on whether to compete a deal for new ejection seats on the F-16, despite a previous move by the Air Force to reopen the Next Generat…",
+      "keyFacts": [
+        "The 90-day suspension tees up a final decision on whether to compete a deal for new ejection seats on the F-16, despite a previous move by the Air Force to reopen the Next Generat…"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-07-21T11:29:38Z",
+      "url": "https://breakingdefense.com/2026/07/exclusive-air-force-halts-f-16-ejection-seat-competition",
+      "score": 66,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
-        "主题优先级": 9,
-        "时效": 11,
-        "影响信号": 9,
-        "主题相关性": 8,
-        "证据完整度": 2,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
         "日期异常降权": 0,
@@ -697,34 +845,91 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 17.7 小时",
-        "命中 4 个主题信号",
-        "影响信号：first、launch"
+        "发布约 0.3 小时",
+        "命中 1 个主题信号"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "satellite",
-        "rocket",
-        "launch"
+        "air force"
       ],
-      "image": "https://cdn.defenseone.com/media/img/cd/2026/07/20/9660852/thumb.jpg",
+      "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Defense One",
-          "domain": "defenseone.com",
-          "url": "https://www.defenseone.com/defense-systems/2026/07/sweden-needs-us-get-satellites-orbit-launch-tempo-problem-space-chief-says/414880",
-          "publishedAt": "2026-07-20T17:36:06Z",
-          "evidenceGroup": "outlet:defenseone.com"
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/07/exclusive-air-force-halts-f-16-ejection-seat-competition",
+          "publishedAt": "2026-07-21T11:29:38Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 11
+      "streamRank": 13
+    },
+    {
+      "id": "4452ce6328abf4",
+      "contentType": "news",
+      "title": "Hamas’s new leader must bridge a movement divided over Iran",
+      "originalTitle": "Hamas’s new leader must bridge a movement divided over Iran",
+      "summary": "After a one-vote victory, Khalil al-Hayya must reconcile rival currents while preserving Hamas’s independence.",
+      "keyFacts": [
+        "After a one-vote victory, Khalil al-Hayya must reconcile rival currents while preserving Hamas’s independence."
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-07-21T11:24:05Z",
+      "url": "https://www.aljazeera.com/opinions/2026/7/21/hamass-new-leader-must-bridge-a-movement-divided-over-iran?traffic_source=rss",
+      "score": 66,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 0.4 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "iran"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/opinions/2026/7/21/hamass-new-leader-must-bridge-a-movement-divided-over-iran?traffic_source=rss",
+          "publishedAt": "2026-07-21T11:24:05Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 14
     },
     {
       "id": "e6f97166928cc7",
@@ -741,13 +946,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T10:37:34Z",
       "url": "https://www.technologyreview.com/2026/07/21/1140602/advancing-next-gen-ai-with-materials-science-innovation",
-      "score": 67,
+      "score": 66,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 8,
-        "时效": 20,
+        "时效": 19,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -758,7 +963,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 0.7 小时",
+        "发布约 1.2 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -778,260 +983,13 @@
           "evidenceGroup": "outlet:technologyreview.com"
         }
       ],
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 12
-    },
-    {
-      "id": "e5e749f2af67a5",
-      "contentType": "news",
-      "title": "New VC-25B Air Force One Will Be Pulled From Service To Be “Maxed Out” With Upgrades",
-      "originalTitle": "New VC-25B Air Force One Will Be Pulled From Service To Be “Maxed Out” With Upgrades",
-      "summary": "Trump said the ex-Qatari 747 is going to be upgraded soon when asked about the lack of defensive countermeasures on the new jet.",
-      "keyFacts": [
-        "Trump said the ex-Qatari 747 is going to be upgraded soon when asked about the lack of defensive countermeasures on the new jet."
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "The War Zone",
-      "country": "国际",
-      "publishedAt": "2026-07-20T20:20:16Z",
-      "url": "https://www.twz.com/news-features/new-vc-25b-air-force-one-will-be-pulled-from-service-to-be-maxed-out-with-upgrades",
-      "score": 72,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 8,
-        "编辑降权": 0,
-        "日期异常降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 3.7 小时",
-        "命中 1 个主题信号",
-        "3 个独立来源相互印证"
-      ],
-      "confidence": "高",
-      "confidenceReason": "主来源权重 16/20，且有 3 个独立来源报道；仍应以原文和一手材料为准。",
-      "tags": [
-        "air force"
-      ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/07/vc-25b-maxed-out-defensive-capabilities-trump.jpg?quality=85",
-      "corroboration": 3,
-      "sources": [
-        {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/news-features/new-vc-25b-air-force-one-will-be-pulled-from-service-to-be-maxed-out-with-upgrades",
-          "publishedAt": "2026-07-20T20:20:16Z",
-          "evidenceGroup": "outlet:twz.com"
-        },
-        {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/news/your-military/2026/07/20/new-air-force-one-to-get-maxed-out-upgrades-after-security-questions",
-          "publishedAt": "2026-07-20T15:21:27Z",
-          "evidenceGroup": "outlet:defensenews.com"
-        },
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/07/qatari-air-force-one-will-be-taken-offline-for-maxed-out-upgrades-trump",
-          "publishedAt": "2026-07-20T08:20:40Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": true,
-      "streamRank": 13
-    },
-    {
-      "id": "82d804a096dea8",
-      "contentType": "news",
-      "title": "Anduril pitches a robot wingman for US Army helicopters",
-      "originalTitle": "Anduril pitches a robot wingman for US Army helicopters",
-      "summary": "The defense firm unveiled work on an autonomous tiltrotor just weeks after winning Air Force’s CCA contract.",
-      "keyFacts": [
-        "The defense firm unveiled work on an autonomous tiltrotor just weeks after winning Air Force’s CCA contract."
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Defense One",
-      "country": "国际",
-      "publishedAt": "2026-07-20T11:30:00Z",
-      "url": "https://www.defenseone.com/defense-systems/2026/07/anduril-pitches-robot-wingman-us-army-helicopters/414868",
-      "score": 67,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 8,
-        "影响信号": 9,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 23.8 小时",
-        "命中 3 个主题信号",
-        "影响信号：contract、autonomous"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "air force",
-        "army"
-      ],
-      "image": "https://cdn.defenseone.com/media/img/cd/2026/07/17/2026_Thunder_GTM_Front_Main_5x2/thumb.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Defense One",
-          "domain": "defenseone.com",
-          "url": "https://www.defenseone.com/defense-systems/2026/07/anduril-pitches-robot-wingman-us-army-helicopters/414868",
-          "publishedAt": "2026-07-20T11:30:00Z",
-          "evidenceGroup": "outlet:defenseone.com"
-        }
-      ],
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 14
-    },
-    {
-      "id": "656a02b6d4c88e",
-      "contentType": "news",
-      "title": "Arizona’s primary elections: Which US races to watch and why they matter",
-      "originalTitle": "Arizona’s primary elections: Which US races to watch and why they matter",
-      "summary": "From the governor’s race to Democratic divisions over Gaza, here’s what could shape Arizona elections on Tuesday.",
-      "keyFacts": [
-        "From the governor’s race to Democratic divisions over Gaza, here’s what could shape Arizona elections on Tuesday."
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-07-21T10:28:16Z",
-      "url": "https://www.aljazeera.com/news/2026/7/21/arizonas-primary-elections-which-us-races-to-watch-and-why-they-matter?traffic_source=rss",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 20,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 0.9 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "gaza"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/7/21/arizonas-primary-elections-which-us-races-to-watch-and-why-they-matter?traffic_source=rss",
-          "publishedAt": "2026-07-21T10:28:16Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
       "streamRank": 15
-    },
-    {
-      "id": "e7bfb097513ea0",
-      "contentType": "news",
-      "title": "Lebanon’s Joseph Aoun to meet Trump: What to expect",
-      "originalTitle": "Lebanon’s Joseph Aoun to meet Trump: What to expect",
-      "summary": "The Lebanese president is seeking Washington's support for his agenda, including diplomacy with Israel.",
-      "keyFacts": [
-        "The Lebanese president is seeking Washington's support for his agenda, including diplomacy with Israel."
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-07-21T10:27:31Z",
-      "url": "https://www.aljazeera.com/news/2026/7/21/lebanons-joseph-aoun-to-meet-trump-what-to-expect?traffic_source=rss",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 20,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 0.9 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "israel"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/7/21/lebanons-joseph-aoun-to-meet-trump-what-to-expect?traffic_source=rss",
-          "publishedAt": "2026-07-21T10:27:31Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 16
     },
     {
       "id": "d299f4599f1f84",
@@ -1065,7 +1023,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 1.5 小时",
+        "发布约 2.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1081,9 +1039,84 @@
           "domain": "bbc.co.uk",
           "url": "https://www.bbc.co.uk/news/articles/cx25wg2x26do?at_medium=RSS&at_campaign=rss",
           "publishedAt": "2026-07-21T09:48:20Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
+          "evidenceGroup": "syndication:0f1fefc0ef22"
         }
       ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 16
+    },
+    {
+      "id": "e5e749f2af67a5",
+      "contentType": "news",
+      "title": "New VC-25B Air Force One Will Be Pulled From Service To Be “Maxed Out” With Upgrades",
+      "originalTitle": "New VC-25B Air Force One Will Be Pulled From Service To Be “Maxed Out” With Upgrades",
+      "summary": "Trump said the ex-Qatari 747 is going to be upgraded soon when asked about the lack of defensive countermeasures on the new jet.",
+      "keyFacts": [
+        "Trump said the ex-Qatari 747 is going to be upgraded soon when asked about the lack of defensive countermeasures on the new jet."
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-07-20T20:20:16Z",
+      "url": "https://www.twz.com/news-features/new-vc-25b-air-force-one-will-be-pulled-from-service-to-be-maxed-out-with-upgrades",
+      "score": 66,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 12,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 8,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 15.5 小时",
+        "命中 1 个主题信号",
+        "3 个独立来源相互印证"
+      ],
+      "confidence": "高",
+      "confidenceReason": "主来源权重 16/20，且有 3 个独立来源报道；仍应以原文和一手材料为准。",
+      "tags": [
+        "air force"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/07/vc-25b-maxed-out-defensive-capabilities-trump.jpg?quality=85",
+      "corroboration": 3,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/news-features/new-vc-25b-air-force-one-will-be-pulled-from-service-to-be-maxed-out-with-upgrades",
+          "publishedAt": "2026-07-20T20:20:16Z",
+          "evidenceGroup": "syndication:cd57bd78fd44"
+        },
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/news/your-military/2026/07/20/new-air-force-one-to-get-maxed-out-upgrades-after-security-questions",
+          "publishedAt": "2026-07-20T15:21:27Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        },
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/07/qatari-air-force-one-will-be-taken-offline-for-maxed-out-upgrades-trump",
+          "publishedAt": "2026-07-20T08:20:40Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
@@ -1106,23 +1139,24 @@
       "country": "国际",
       "publishedAt": "2026-07-20T14:01:14Z",
       "url": "https://www.defensenews.com/industry/techwatch/2026/07/20/thunderstruck-anduril-unveils-autonomous-attack-rotorcraft",
-      "score": 72,
+      "score": 66,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 15,
+        "时效": 9,
         "影响信号": 11,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
-        "日期异常降权": 0
+        "日期异常降权": 0,
+        "补充窗口降权": 0
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 10.0 小时",
+        "发布约 21.8 小时",
         "命中 1 个主题信号",
         "影响信号：attack、autonomous"
       ],
@@ -1139,73 +1173,134 @@
           "domain": "defensenews.com",
           "url": "https://www.defensenews.com/industry/techwatch/2026/07/20/thunderstruck-anduril-unveils-autonomous-attack-rotorcraft",
           "publishedAt": "2026-07-20T14:01:14Z",
-          "evidenceGroup": "outlet:defensenews.com"
+          "evidenceGroup": "syndication:4d25f4521715"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": true,
+      "isTopStory": false,
       "streamRank": 18
     },
     {
-      "id": "5b7890a75f9043",
+      "id": "656a02b6d4c88e",
       "contentType": "news",
-      "title": "Anduril Brings The Thunder With Autonomous Tiltrotor Attack Drone Concept",
-      "originalTitle": "Anduril Brings The Thunder With Autonomous Tiltrotor Attack Drone Concept",
-      "summary": "Thunder is designed to fly deep into hostile airspace at low altitude as a highly autonomous wingman for AH-64 Apaches and MV-75 Cheyennes.",
+      "title": "Arizona’s primary elections: Which US races to watch and why they matter",
+      "originalTitle": "Arizona’s primary elections: Which US races to watch and why they matter",
+      "summary": "From the governor’s race to Democratic divisions over Gaza, here’s what could shape Arizona elections on Tuesday.",
       "keyFacts": [
-        "Thunder is designed to fly deep into hostile airspace at low altitude as a highly autonomous wingman for AH-64 Apaches and MV-75 Cheyennes."
+        "From the governor’s race to Democratic divisions over Gaza, here’s what could shape Arizona elections on Tuesday."
       ],
       "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
       "category": "局部冲突",
-      "source": "The War Zone",
+      "source": "Al Jazeera",
       "country": "国际",
-      "publishedAt": "2026-07-20T11:30:26Z",
-      "url": "https://www.twz.com/news-features/anduril-brings-the-thunder-with-autonomous-tiltrotor-attack-drone-concept",
-      "score": 72,
+      "publishedAt": "2026-07-21T10:28:16Z",
+      "url": "https://www.aljazeera.com/news/2026/7/21/arizonas-primary-elections-which-us-races-to-watch-and-why-they-matter?traffic_source=rss",
+      "score": 65,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 15,
+        "来源": 16,
         "主题优先级": 10,
-        "时效": 14,
-        "影响信号": 11,
-        "主题相关性": 4,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
-        "日期异常降权": 0
+        "日期异常降权": 0,
+        "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 12.5 小时",
-        "命中 2 个主题信号",
-        "影响信号：attack、autonomous"
+        "来源权重 16/20",
+        "发布约 1.3 小时",
+        "命中 1 个主题信号"
       ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "attack"
+        "gaza"
       ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/07/Anduril-Thunder-tiltrotor-attack-drone-unveiled.jpg?quality=85",
+      "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/news-features/anduril-brings-the-thunder-with-autonomous-tiltrotor-attack-drone-concept",
-          "publishedAt": "2026-07-20T11:30:26Z",
-          "evidenceGroup": "outlet:twz.com"
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/7/21/arizonas-primary-elections-which-us-races-to-watch-and-why-they-matter?traffic_source=rss",
+          "publishedAt": "2026-07-21T10:28:16Z",
+          "evidenceGroup": "syndication:18a877efa2ae"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": true,
+      "isTopStory": false,
       "streamRank": 19
+    },
+    {
+      "id": "e7bfb097513ea0",
+      "contentType": "news",
+      "title": "Lebanon’s Joseph Aoun to meet Trump: What to expect",
+      "originalTitle": "Lebanon’s Joseph Aoun to meet Trump: What to expect",
+      "summary": "The Lebanese president is seeking Washington's support for his agenda, including diplomacy with Israel.",
+      "keyFacts": [
+        "The Lebanese president is seeking Washington's support for his agenda, including diplomacy with Israel."
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-07-21T10:27:31Z",
+      "url": "https://www.aljazeera.com/news/2026/7/21/lebanons-joseph-aoun-to-meet-trump-what-to-expect?traffic_source=rss",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 1.3 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "israel"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/7/21/lebanons-joseph-aoun-to-meet-trump-what-to-expect?traffic_source=rss",
+          "publishedAt": "2026-07-21T10:27:31Z",
+          "evidenceGroup": "syndication:2bdb0d055bf4"
+        }
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 20
     },
     {
       "id": "70426243bfb6c9",
@@ -1239,7 +1334,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 2.2 小时",
+        "发布约 2.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1255,67 +1350,10 @@
           "domain": "aljazeera.com",
           "url": "https://www.aljazeera.com/news/2026/7/21/hormuz-tankers-on-fire-as-us-iran-continue-attacks-whats-the-latest?traffic_source=rss",
           "publishedAt": "2026-07-21T09:04:50Z",
-          "evidenceGroup": "outlet:aljazeera.com"
+          "evidenceGroup": "syndication:b873c72084c4"
         }
       ],
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 20
-    },
-    {
-      "id": "b8027abd234c69",
-      "contentType": "news",
-      "title": "‘Active in BDS’: Document reveals how Israel scrutinised global NGOs",
-      "originalTitle": "‘Active in BDS’: Document reveals how Israel scrutinised global NGOs",
-      "summary": "An internal government file obtained by Al Jazeera shows how Israel collected data on groups it suspected supported BDS.",
-      "keyFacts": [
-        "An internal government file obtained by Al Jazeera shows how Israel collected data on groups it suspected supported BDS."
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-07-21T06:26:35Z",
-      "url": "https://www.aljazeera.com/news/2026/7/21/critic-to-israel-document-reveals-how-israel-scrutinised-global-ngos?traffic_source=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.9 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "israel"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/7/21/critic-to-israel-document-reveals-how-israel-scrutinised-global-ngos?traffic_source=rss",
-          "publishedAt": "2026-07-21T06:26:35Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
@@ -1338,23 +1376,24 @@
       "country": "国际",
       "publishedAt": "2026-07-20T15:47:15Z",
       "url": "https://www.nasa.gov/general/from-hampton-to-mars-how-nasa-langley-helped-land-on-the-red-planet",
-      "score": 70,
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 20,
         "主题优先级": 9,
-        "时效": 16,
+        "时效": 10,
         "影响信号": 5,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
-        "日期异常降权": 0
+        "日期异常降权": 0,
+        "补充窗口降权": 0
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 8.2 小时",
+        "发布约 20.0 小时",
         "命中 1 个主题信号",
         "影响信号：first"
       ],
@@ -1374,6 +1413,7 @@
           "evidenceGroup": "outlet:nasa.gov"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
@@ -1396,23 +1436,24 @@
       "country": "国际",
       "publishedAt": "2026-07-20T15:38:29Z",
       "url": "https://www.nasa.gov/image-article/our-first-view-of-the-surface-of-mars",
-      "score": 70,
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 20,
         "主题优先级": 9,
-        "时效": 16,
+        "时效": 10,
         "影响信号": 5,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
-        "日期异常降权": 0
+        "日期异常降权": 0,
+        "补充窗口降权": 0
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 8.4 小时",
+        "发布约 20.2 小时",
         "命中 1 个主题信号",
         "影响信号：first"
       ],
@@ -1432,12 +1473,72 @@
           "evidenceGroup": "outlet:nasa.gov"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": true,
+      "isTopStory": false,
       "streamRank": 23
+    },
+    {
+      "id": "b8027abd234c69",
+      "contentType": "news",
+      "title": "‘Active in BDS’: Document reveals how Israel scrutinised global NGOs",
+      "originalTitle": "‘Active in BDS’: Document reveals how Israel scrutinised global NGOs",
+      "summary": "An internal government file obtained by Al Jazeera shows how Israel collected data on groups it suspected supported BDS.",
+      "keyFacts": [
+        "An internal government file obtained by Al Jazeera shows how Israel collected data on groups it suspected supported BDS."
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-07-21T06:26:35Z",
+      "url": "https://www.aljazeera.com/news/2026/7/21/critic-to-israel-document-reveals-how-israel-scrutinised-global-ngos?traffic_source=rss",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 5.4 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "israel"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/7/21/critic-to-israel-document-reveals-how-israel-scrutinised-global-ngos?traffic_source=rss",
+          "publishedAt": "2026-07-21T06:26:35Z",
+          "evidenceGroup": "syndication:9d2f1410b46e"
+        }
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 24
     },
     {
       "id": "c7d70ca5955cdb",
@@ -1471,7 +1572,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.0 小时",
+        "发布约 5.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1487,15 +1588,16 @@
           "domain": "aljazeera.com",
           "url": "https://www.aljazeera.com/news/2026/7/21/we-just-want-to-live-palestinians-in-gaza-react-to-hamas-election?traffic_source=rss",
           "publishedAt": "2026-07-21T06:18:42Z",
-          "evidenceGroup": "outlet:aljazeera.com"
+          "evidenceGroup": "syndication:70ba6e035d8c"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 24
+      "streamRank": 25
     },
     {
       "id": "f75104c6af4aee",
@@ -1529,7 +1631,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 16.4 小时",
+        "发布约 16.9 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1549,70 +1651,12 @@
           "evidenceGroup": "outlet:nasa.gov"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 25
-    },
-    {
-      "id": "8cb10cdbbf9489",
-      "contentType": "news",
-      "title": "Anduril reveals Thunder, a ‘loyal wingman’ drone for helicopters",
-      "originalTitle": "Anduril reveals Thunder, a ‘loyal wingman’ drone for helicopters",
-      "summary": "The company describes Thunder as a fully autonomous armed reconnaissance tiltrotor aircraft developed from lessons learned from the company’s Fury aircraft.",
-      "keyFacts": [
-        "The company describes Thunder as a fully autonomous armed reconnaissance tiltrotor aircraft developed from lessons learned from the company’s Fury aircraft."
-      ],
-      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
-      "category": "无人系统",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-07-20T11:30:00Z",
-      "url": "https://breakingdefense.com/2026/07/anduril-reveals-thunder-a-loyal-wingman-drone-for-helicopters",
-      "score": 69,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 14,
-        "影响信号": 5,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 12.5 小时",
-        "命中 3 个主题信号",
-        "影响信号：autonomous"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "loyal wingman",
-        "drone"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/07/anduril-reveals-thunder-a-loyal-wingman-drone-for-helicopters",
-          "publishedAt": "2026-07-20T11:30:00Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": true,
       "streamRank": 26
     },
     {
@@ -1647,7 +1691,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 9.1 小时",
+        "发布约 9.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1663,9 +1707,10 @@
           "domain": "bbc.co.uk",
           "url": "https://www.bbc.co.uk/news/articles/c1m1rr90dzxo?at_medium=RSS&at_campaign=rss",
           "publishedAt": "2026-07-21T02:16:05Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
+          "evidenceGroup": "syndication:fda920c2e729"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
@@ -1705,7 +1750,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 14.0 小时",
+        "发布约 14.5 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "中",
@@ -1726,6 +1771,7 @@
           "evidenceGroup": "outlet:defenseone.com"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
@@ -1765,7 +1811,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 15.3 小时",
+        "发布约 15.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1784,6 +1830,7 @@
           "evidenceGroup": "outlet:nasa.gov"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
@@ -1823,7 +1870,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 18.2 小时",
+        "发布约 18.7 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "中",
@@ -1839,9 +1886,10 @@
           "domain": "defensenews.com",
           "url": "https://www.defensenews.com/industry/techwatch/2026/07/20/air-force-begins-piloted-flights-autonomy-tests-for-modified-f-16s",
           "publishedAt": "2026-07-20T17:08:42Z",
-          "evidenceGroup": "outlet:defensenews.com"
+          "evidenceGroup": "syndication:de24a53ece2c"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
@@ -1881,7 +1929,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 19.3 小时",
+        "发布约 19.8 小时",
         "命中 1 个主题信号",
         "影响信号：production"
       ],
@@ -1908,12 +1956,73 @@
           "evidenceGroup": "syndication:8792f337aa59"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 31
+    },
+    {
+      "id": "80474c9fe3f99c",
+      "contentType": "news",
+      "title": "SEM-Guided Low-kV FIB Finishing for Leading-Edge Semiconductor Failure Analysis",
+      "originalTitle": "SEM-Guided Low-kV FIB Finishing for Leading-Edge Semiconductor Failure Analysis",
+      "summary": "Discover how the ZEISS Crossbeam 750 FIBSEM sets a new benchmark for precise TEM lamella prep, tomography, and advanced nanofabrication. This delivers better resolution, better SN…",
+      "keyFacts": [
+        "Discover how the ZEISS Crossbeam 750 FIBSEM sets a new benchmark for precise TEM lamella prep, tomography, and advanced nanofabrication. This delivers better resolution, better SN…"
+      ],
+      "why": "该进展可能缩短技术工程化周期，并改变关键产业与供应链竞争。",
+      "category": "前沿技术",
+      "source": "IEEE Spectrum",
+      "country": "国际",
+      "publishedAt": "2026-07-20T15:55:00Z",
+      "url": "https://event.on24.com/wcc/r/5418459/287E3D5B99470D34C830D69A24B3B207",
+      "score": 60,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 8,
+        "时效": 10,
+        "影响信号": 5,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 19.9 小时",
+        "命中 1 个主题信号",
+        "影响信号：first"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "semiconductor"
+      ],
+      "image": "https://assets.rbl.ms/66728517/origin.png",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "IEEE Spectrum",
+          "domain": "event.on24.com",
+          "url": "https://event.on24.com/wcc/r/5418459/287E3D5B99470D34C830D69A24B3B207",
+          "publishedAt": "2026-07-20T15:55:00Z",
+          "evidenceGroup": "outlet:event.on24.com"
+        }
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 32
     },
     {
       "id": "43ebe193cdd7f3",
@@ -1930,13 +2039,13 @@
       "country": "国际",
       "publishedAt": "2026-07-20T12:30:00Z",
       "url": "https://www.esa.int/ESA_Multimedia/Images/2026/07/Plato_s_electronics_ready_for_space",
-      "score": 61,
+      "score": 60,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 19,
         "主题优先级": 9,
-        "时效": 9,
+        "时效": 8,
         "影响信号": 4,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1947,7 +2056,7 @@
       },
       "scoreReasons": [
         "来源权重 19/20",
-        "发布约 22.8 小时",
+        "发布约 23.3 小时",
         "命中 1 个主题信号",
         "影响信号：test"
       ],
@@ -1967,66 +2076,7 @@
           "evidenceGroup": "outlet:esa.int"
         }
       ],
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 32
-    },
-    {
-      "id": "fdcb28b5611176",
-      "contentType": "news",
-      "title": "US Air Force seeking air defense missile system to protect air bases",
-      "originalTitle": "US Air Force seeking air defense missile system to protect air bases",
-      "summary": "The U.S. Air Force has put out a request for a new air defense missile system to defend the service’s installations against cruise missiles and drones.",
-      "keyFacts": [
-        "The U.S. Air Force has put out a request for a new air defense missile system to defend the service’s installations against cruise missiles and drones."
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Defense News",
-      "country": "国际",
-      "publishedAt": "2026-07-20T11:30:00Z",
-      "url": "https://www.defensenews.com/industry/techwatch/2026/07/20/us-air-force-seeking-air-defense-missile-system-to-protect-air-bases",
-      "score": 61,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 8,
-        "影响信号": 5,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 23.8 小时",
-        "命中 2 个主题信号",
-        "影响信号：missile"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "air force",
-        "missile"
-      ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/WR6UQYTZAFE7VPT3JXTSE4CL2Q.JPG",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/industry/techwatch/2026/07/20/us-air-force-seeking-air-defense-missile-system-to-protect-air-bases",
-          "publishedAt": "2026-07-20T11:30:00Z",
-          "evidenceGroup": "outlet:defensenews.com"
-        }
-      ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
@@ -2049,13 +2099,13 @@
       "country": "国际",
       "publishedAt": "2026-07-20T22:36:32Z",
       "url": "https://www.twz.com/sea/where-are-the-aircraft-carriers-july-20-2026",
-      "score": 60,
+      "score": 59,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 9,
-        "时效": 14,
+        "时效": 13,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -2066,7 +2116,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 12.7 小时",
+        "发布约 13.2 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "待核验",
@@ -2082,132 +2132,16 @@
           "domain": "twz.com",
           "url": "https://www.twz.com/sea/where-are-the-aircraft-carriers-july-20-2026",
           "publishedAt": "2026-07-20T22:36:32Z",
-          "evidenceGroup": "outlet:twz.com"
+          "evidenceGroup": "syndication:8596d5c86e60"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 34
-    },
-    {
-      "id": "8a3b5482011764",
-      "contentType": "news",
-      "title": "Houthi Blockade On Saudi Red Sea Oil Transits Threatens To Widen War, Strangle Energy Supply (Updated)",
-      "originalTitle": "Houthi Blockade On Saudi Red Sea Oil Transits Threatens To Widen War, Strangle Energy Supply (Updated)",
-      "summary": "If the Houthis start attacking ships near the Bab El-Mandeb Strait, it could peel-off U.S. resources from the Iran operation and exacerbate oil shortages.",
-      "keyFacts": [
-        "If the Houthis start attacking ships near the Bab El-Mandeb Strait, it could peel-off U.S. resources from the Iran operation and exacerbate oil shortages."
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "The War Zone",
-      "country": "国际",
-      "publishedAt": "2026-07-20T20:41:43Z",
-      "url": "https://www.twz.com/news-features/houthis-blockade-on-saudi-red-sea-oil-transits-threatens-to-widen-war-strangle-energy-supply",
-      "score": 60,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 13,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 14.6 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "red sea",
-        "iran"
-      ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/07/Iran-houthi-blockade-oil-saudi.jpg?quality=85",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/news-features/houthis-blockade-on-saudi-red-sea-oil-transits-threatens-to-widen-war-strangle-energy-supply",
-          "publishedAt": "2026-07-20T20:41:43Z",
-          "evidenceGroup": "outlet:twz.com"
-        }
-      ],
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 35
-    },
-    {
-      "id": "80474c9fe3f99c",
-      "contentType": "news",
-      "title": "SEM-Guided Low-kV FIB Finishing for Leading-Edge Semiconductor Failure Analysis",
-      "originalTitle": "SEM-Guided Low-kV FIB Finishing for Leading-Edge Semiconductor Failure Analysis",
-      "summary": "Discover how the ZEISS Crossbeam 750 FIBSEM sets a new benchmark for precise TEM lamella prep, tomography, and advanced nanofabrication. This delivers better resolution, better SN…",
-      "keyFacts": [
-        "Discover how the ZEISS Crossbeam 750 FIBSEM sets a new benchmark for precise TEM lamella prep, tomography, and advanced nanofabrication. This delivers better resolution, better SN…"
-      ],
-      "why": "该进展可能缩短技术工程化周期，并改变关键产业与供应链竞争。",
-      "category": "前沿技术",
-      "source": "IEEE Spectrum",
-      "country": "国际",
-      "publishedAt": "2026-07-20T15:55:00Z",
-      "url": "https://event.on24.com/wcc/r/5418459/287E3D5B99470D34C830D69A24B3B207",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 8,
-        "时效": 16,
-        "影响信号": 5,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 8.1 小时",
-        "命中 1 个主题信号",
-        "影响信号：first"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "semiconductor"
-      ],
-      "image": "https://assets.rbl.ms/66728517/origin.png",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "IEEE Spectrum",
-          "domain": "event.on24.com",
-          "url": "https://event.on24.com/wcc/r/5418459/287E3D5B99470D34C830D69A24B3B207",
-          "publishedAt": "2026-07-20T15:55:00Z",
-          "evidenceGroup": "outlet:event.on24.com"
-        }
-      ],
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": true,
-      "streamRank": 36
     },
     {
       "id": "fcbb414e3403cf",
@@ -2241,7 +2175,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 14.2 小时",
+        "发布约 14.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2257,15 +2191,76 @@
           "domain": "breakingdefense.com",
           "url": "https://breakingdefense.com/2026/07/air-force-one-maxxing-ccas-everywhere-and-gcaps-future",
           "publishedAt": "2026-07-20T21:10:00Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
+          "evidenceGroup": "syndication:75caaefc92b8"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 37
+      "streamRank": 35
+    },
+    {
+      "id": "8a3b5482011764",
+      "contentType": "news",
+      "title": "Houthi Blockade On Saudi Red Sea Oil Transits Threatens To Widen War, Strangle Energy Supply (Updated)",
+      "originalTitle": "Houthi Blockade On Saudi Red Sea Oil Transits Threatens To Widen War, Strangle Energy Supply (Updated)",
+      "summary": "If the Houthis start attacking ships near the Bab El-Mandeb Strait, it could peel-off U.S. resources from the Iran operation and exacerbate oil shortages.",
+      "keyFacts": [
+        "If the Houthis start attacking ships near the Bab El-Mandeb Strait, it could peel-off U.S. resources from the Iran operation and exacerbate oil shortages."
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-07-20T20:41:43Z",
+      "url": "https://www.twz.com/news-features/houthis-blockade-on-saudi-red-sea-oil-transits-threatens-to-widen-war-strangle-energy-supply",
+      "score": 59,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 12,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 15.1 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "red sea",
+        "iran"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/07/Iran-houthi-blockade-oil-saudi.jpg?quality=85",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/news-features/houthis-blockade-on-saudi-red-sea-oil-transits-threatens-to-widen-war-strangle-energy-supply",
+          "publishedAt": "2026-07-20T20:41:43Z",
+          "evidenceGroup": "syndication:e5ba99e7b626"
+        }
+      ],
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 36
     },
     {
       "id": "502e6d35fbb790",
@@ -2299,7 +2294,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 15.8 小时",
+        "发布约 16.2 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2315,15 +2310,16 @@
           "domain": "techcrunch.com",
           "url": "https://techcrunch.com/2026/07/20/openai-is-scared-of-open-weight-models-should-the-us-be",
           "publishedAt": "2026-07-20T19:33:25Z",
-          "evidenceGroup": "outlet:techcrunch.com"
+          "evidenceGroup": "syndication:07380e02a418"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 38
+      "streamRank": 37
     },
     {
       "id": "eec583e7f07f68",
@@ -2357,7 +2353,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 21.9 小时",
+        "发布约 22.4 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -2383,12 +2379,13 @@
           "evidenceGroup": "syndication:09bcd4bc4f47"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 39
+      "streamRank": 38
     },
     {
       "id": "d573260cad05eb",
@@ -2422,7 +2419,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 14.0 小时",
+        "发布约 14.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2438,15 +2435,16 @@
           "domain": "techcrunch.com",
           "url": "https://techcrunch.com/2026/07/20/google-is-working-on-a-new-ai-chip-designed-to-make-gemini-more-efficient",
           "publishedAt": "2026-07-20T21:21:15Z",
-          "evidenceGroup": "outlet:techcrunch.com"
+          "evidenceGroup": "syndication:411e7b63e138"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 40
+      "streamRank": 39
     },
     {
       "id": "5596dff59193b4",
@@ -2480,7 +2478,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 19.3 小时",
+        "发布约 19.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2496,15 +2494,16 @@
           "domain": "breakingdefense.com",
           "url": "https://breakingdefense.com/2026/07/marine-corps-selects-new-robotic-weapon-system-for-l-madis-integration",
           "publishedAt": "2026-07-20T16:02:08Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
+          "evidenceGroup": "syndication:03fc5770b151"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 41
+      "streamRank": 40
     },
     {
       "id": "6cf7bbf4093c41",
@@ -2538,7 +2537,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 20.2 小时",
+        "发布约 20.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2564,12 +2563,13 @@
           "evidenceGroup": "syndication:b51f9d22f572"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 42
+      "streamRank": 41
     },
     {
       "id": "31d72344891d8a",
@@ -2603,7 +2603,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 21.3 小时",
+        "发布约 21.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2619,15 +2619,16 @@
           "domain": "bbc.co.uk",
           "url": "https://www.bbc.co.uk/news/articles/cx25nzkyj50o?at_medium=RSS&at_campaign=rss",
           "publishedAt": "2026-07-20T14:02:31Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
+          "evidenceGroup": "syndication:514d05783d9e"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 43
+      "streamRank": 42
     },
     {
       "id": "566f96c53305f1",
@@ -2644,13 +2645,13 @@
       "country": "国际",
       "publishedAt": "2026-07-20T12:30:00Z",
       "url": "https://www.defensenews.com/industry/techwatch/2026/07/20/trust-between-operators-ccas-starts-with-simulations-former-air-force-secretary",
-      "score": 55,
+      "score": 54,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 9,
+        "时效": 8,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2661,7 +2662,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 22.8 小时",
+        "发布约 23.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2687,12 +2688,13 @@
           "evidenceGroup": "syndication:f7cc11e31746"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 44
+      "streamRank": 43
     },
     {
       "id": "fac1540696d51f",
@@ -2726,7 +2728,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 23.3 小时",
+        "发布约 23.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2742,15 +2744,16 @@
           "domain": "defensenews.com",
           "url": "https://www.defensenews.com/news/your-military/2026/07/20/as-fighter-pilots-prepare-to-command-drone-wingmen-bae-bets-on-new-helmet-tech",
           "publishedAt": "2026-07-20T11:59:54Z",
-          "evidenceGroup": "outlet:defensenews.com"
+          "evidenceGroup": "syndication:37c814977d91"
         }
       ],
+      "translationProvider": "",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 45
+      "streamRank": 44
     }
   ]
 }

@@ -1,12 +1,40 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 4,
   "state": "ok",
-  "lastAttemptAt": "2026-07-21T00:02:14Z",
-  "lastSuccessAt": "2026-07-21T00:02:14Z",
+  "lastAttemptAt": "2026-07-21T11:48:08Z",
+  "lastSuccessAt": "2026-07-21T11:48:08Z",
   "editionDate": "2026-07-21",
   "itemCount": 10,
-  "message": "日报更新成功",
+  "message": "日报更新成功；AI 编辑失败，已使用规则选稿：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required；论文中文编辑批次失败（1-10）：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required；论文中文编辑批次失败（11-20）：POST https://api.deepseek.com/c…",
   "method": "rules",
-  "editorialStatus": "not-configured",
-  "warnings": []
+  "editorialStatus": "fallback",
+  "editorialProvider": "deepseek",
+  "editorialModel": "deepseek-v4-flash",
+  "translatedItemCount": 0,
+  "warnings": [
+    "AI 编辑失败，已使用规则选稿：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required"
+  ],
+  "coverageStatus": "complete",
+  "freshItemCount": 10,
+  "supplementalItemCount": 0,
+  "effectiveLookbackHours": 24,
+  "streamItemCount": 44,
+  "streamTranslationProvider": "",
+  "streamTranslationModel": "",
+  "streamTranslatedItemCount": 0,
+  "streamTranslationWarnings": [
+    "新闻中文翻译批次失败：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required",
+    "新闻中文翻译批次失败：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required",
+    "新闻中文翻译连续失败 2 个批次，已停止后续调用并保留原始元数据"
+  ],
+  "researchItemCount": 60,
+  "researchEditorialStatus": "fallback",
+  "researchEditorialProvider": "deepseek",
+  "researchEditorialModel": "deepseek-v4-flash",
+  "researchTranslatedItemCount": 0,
+  "researchWarnings": [
+    "论文中文编辑批次失败（1-10）：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required",
+    "论文中文编辑批次失败（11-20）：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required",
+    "论文中文编辑连续失败 2 个批次，已停止后续调用并保留原始摘要"
+  ]
 }
