@@ -939,9 +939,25 @@
     syncUrl();
   }
 
+  function renderViewLoading(view) {
+    state.view = view;
+    document.querySelectorAll("[data-view]").forEach((link) => {
+      const active = link.dataset.view === view && link.closest("nav");
+      link.classList.toggle("active", Boolean(active));
+      if (link.closest("nav")) link.setAttribute("aria-current", active ? "page" : "false");
+    });
+    $("dataState").className = "state-badge";
+    $("dataState").textContent = view === "research" ? "读取论文" : "读取动态";
+    $("stories").setAttribute("aria-busy", "true");
+    $("stories").innerHTML = '<div class="loading"></div><div class="loading"></div>';
+    $("resultNote").textContent = view === "research" ? "正在读取论文雷达…" : "正在读取全量动态…";
+    syncUrl();
+  }
+
   async function switchView(view, options = {}) {
     if (!VIEWS.has(view)) return;
-    state.view = view;
+    if (["stream", "research"].includes(view)) renderViewLoading(view);
+    else state.view = view;
     state.category = "全部";
     state.visibleLimit = PAGE_SIZE;
     if (view === "latest") {
@@ -1081,26 +1097,31 @@
   }
 
   document.addEventListener("click", async (event) => {
-    const viewButton = event.target.closest("[data-view]");
-    if (viewButton) { await switchView(viewButton.dataset.view); return; }
-    const categoryButton = event.target.closest("[data-category]");
+    const target = event.target instanceof Element ? event.target : event.target.parentElement;
+    const viewButton = target?.closest("[data-view]");
+    if (viewButton && VIEWS.has(viewButton.dataset.view)) {
+      event.preventDefault();
+      await switchView(viewButton.dataset.view);
+      return;
+    }
+    const categoryButton = target?.closest("[data-category]");
     if (categoryButton?.closest("#filters")) {
       state.category = categoryButton.dataset.category;
       state.visibleLimit = PAGE_SIZE;
       renderFilters(); renderBrief(); renderStories(); return;
     }
-    const rangeButton = event.target.closest("[data-range]");
+    const rangeButton = target?.closest("[data-range]");
     if (rangeButton?.closest("#rangeControls")) {
       state.rangeHours = Number(rangeButton.dataset.range) || 24;
       state.visibleLimit = PAGE_SIZE;
       renderAll();
       return;
     }
-    const bookmarkButton = event.target.closest("[data-bookmark]");
+    const bookmarkButton = target?.closest("[data-bookmark]");
     if (bookmarkButton) { toggleBookmark(bookmarkButton.closest(".story").dataset.key); return; }
-    const shareButton = event.target.closest("[data-share]");
+    const shareButton = target?.closest("[data-share]");
     if (shareButton) { await shareStory(shareButton.closest(".story").dataset.key); return; }
-    const removeWord = event.target.closest("[data-remove-word]");
+    const removeWord = target?.closest("[data-remove-word]");
     if (removeWord) {
       state.watchwords = state.watchwords.filter((word) => word !== removeWord.dataset.removeWord);
       writeStorage(WATCH_KEY, state.watchwords);
