@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: daily-news-main
+  group: frontier-data-main
   cancel-in-progress: false
 
 jobs:
@@ -42,20 +42,27 @@ jobs:
           --archive-index public/data/archive/index.json
           --search-index public/data/archive/search-index.json
           --status-output public/data/status.json
+          --stream-output public/data/stream.json
+          --stream-status-output public/data/stream-status.json
+          --research-output public/data/research.json
           --feed-output public/feed.xml
-      - name: Verify exactly 10 stories
+      - name: Verify daily brief, full stream and research radar
         if: steps.collect.outcome == 'success'
         run: >-
           python -c "import json; p=json.load(open('public/data/news.json', encoding='utf-8'));
+          s=json.load(open('public/data/stream.json', encoding='utf-8'));
+          r=json.load(open('public/data/research.json', encoding='utf-8'));
           assert p.get('timezone') == 'Asia/Tokyo', p.get('timezone');
           assert len(p.get('items', [])) == 10, len(p.get('items', []));
           assert all(x.get('keyFacts') and x.get('sources') for x in p['items']);
+          assert s.get('itemCount') == len(s.get('items', [])) and s.get('itemCount', 0) > 0;
+          assert r.get('itemCount') == len(r.get('items', []));
           assert __import__('pathlib').Path('public/feed.xml').exists();
-          print('Validated edition', p.get('editionDate'), 'with 10 stories')"
+          print('Validated edition', p.get('editionDate'), 'with 10 stories,', s['itemCount'], 'stream items and', r['itemCount'], 'papers')"
       - name: Commit edition, archive and public status
         if: always()
         run: |
-          git add -A -- public/data/news.json public/data/status.json public/data/archive public/feed.xml
+          git add -A -- public/data/news.json public/data/status.json public/data/stream.json public/data/stream-status.json public/data/research.json public/data/archive public/feed.xml
           if git diff --cached --quiet; then
             echo "No data change"
             exit 0

@@ -23,6 +23,9 @@ class UpdateNewsTests(unittest.TestCase):
         self.now = datetime(2026, 7, 16, 0, 0, tzinfo=timezone.utc)
         self.config = MODULE.load_config(ROOT / "config" / "news_config.json")
         self.articles = MODULE.collect_fixture(ROOT / "tests" / "fixtures" / "articles.json", self.now)
+        self.papers = MODULE.collect_research_fixture(
+            ROOT / "tests" / "fixtures" / "papers.json", self.now, self.config
+        )
 
     def test_fixture_builds_valid_diverse_report(self):
         previous = os.environ.pop("OPENAI_API_KEY", None)
@@ -40,6 +43,62 @@ class UpdateNewsTests(unittest.TestCase):
         self.assertTrue(all(item["originalTitle"] and item["keyFacts"] for item in report["items"]))
         self.assertTrue(all(item["scoreReasons"] and item["confidenceReason"] for item in report["items"]))
         self.assertTrue(all(item["sources"] for item in report["items"]))
+        self.assertTrue(all(item["contentType"] == "news" for item in report["items"]))
+
+    def test_full_stream_preserves_all_qualified_candidates_and_top_flags(self):
+        candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
+        daily = MODULE.build_report(candidates, self.config, self.now, skip_ai=True)
+        daily["items"][0]["title"] = "每日版中文编辑标题"
+        top_items = {item["id"]: item for item in daily["items"]}
+        stream = MODULE.build_stream_report(candidates, self.config, self.now, top_items)
+        MODULE.validate_stream_report(stream)
+        self.assertEqual(stream["itemCount"], len(candidates))
+        self.assertEqual(sum(bool(item["isTopStory"]) for item in stream["items"]), 10)
+        self.assertEqual(next(item for item in stream["items"] if item["id"] == daily["items"][0]["id"])["title"], "每日版中文编辑标题")
+        self.assertEqual(sum(stream["categoryCounts"].values()), len(candidates))
+        self.assertFalse(stream["truncated"])
+
+    def test_research_radar_uses_separate_schema_and_scoring(self):
+        papers = MODULE.score_research_papers(self.papers, self.config, self.now)
+        report = MODULE.build_research_report(papers, self.config, self.now, skip_ai=True)
+        MODULE.validate_research_report(report, allow_empty=False)
+        self.assertEqual(report["itemCount"], 6)
+        self.assertGreaterEqual(len(report["areaCounts"]), 3)
+        self.assertTrue(all(item["contentType"] == "paper" for item in report["items"]))
+        self.assertTrue(all(item["authors"] and item["pdfUrl"] for item in report["items"]))
+        self.assertTrue(all("预印本" in item["peerReviewStatus"] for item in report["items"]))
+
+    def test_research_selection_prevents_one_area_from_crowding_out_others(self):
+        papers = []
+        for area_index, area in enumerate(("人工智能", "天文与空间科学", "量子技术")):
+            for index in range(10):
+                papers.append(MODULE.ResearchPaper(
+                    id=f"{area_index}-{index}", title=f"{area} paper {index}", abstract="evidence " * 80,
+                    url=f"https://arxiv.org/abs/{area_index}.{index}", pdf_url="", source="arXiv",
+                    published_at=self.now, updated_at=self.now, research_area=area,
+                    score=100 - area_index - index / 100,
+                ))
+        papers.sort(key=lambda paper: paper.score, reverse=True)
+        config = {**self.config, "research": {**self.config["research"], "limit": 12, "per_area_limit": 4}}
+        selected = MODULE.choose_research_diverse(papers, config)
+        counts = {area: sum(paper.research_area == area for paper in selected) for area in {paper.research_area for paper in selected}}
+        self.assertEqual(counts, {"人工智能": 4, "天文与空间科学": 4, "量子技术": 4})
+
+    def test_arxiv_queries_are_grouped_and_rate_limited(self):
+        empty_feed = b'<feed xmlns="http://www.w3.org/2005/Atom"></feed>'
+        with mock.patch.object(MODULE, "http_get", return_value=empty_feed) as get, mock.patch.object(MODULE.time, "sleep") as sleep:
+            self.assertEqual(MODULE.collect_arxiv(self.config, self.now), [])
+        labels = {definition["label"] for definition in self.config["research"]["arxiv_categories"]}
+        self.assertEqual(get.call_count, len(labels))
+        self.assertEqual(sleep.call_count, len(labels) - 1)
+        self.assertTrue(all(call.kwargs.get("attempts") == 1 for call in get.call_args_list))
+        queries = [
+            MODULE.urllib.parse.parse_qs(MODULE.urllib.parse.urlsplit(call.args[0]).query)["search_query"][0]
+            for call in get.call_args_list
+        ]
+        space_query = next(query for query in queries if "astro-ph.CO" in query)
+        self.assertIn("astro-ph.EP", space_query)
+        self.assertIn(" OR ", space_query)
 
     def test_deduplicate_merges_tracking_urls(self):
         first = self.articles[0]
@@ -112,6 +171,9 @@ class UpdateNewsTests(unittest.TestCase):
             archive_index = archive / "index.json"
             search_index = archive / "search-index.json"
             status_output = root / "status.json"
+            stream_output = root / "stream.json"
+            stream_status_output = root / "stream-status.json"
+            research_output = root / "research.json"
             feed_output = root / "feed.xml"
             status = MODULE.main([
                 "--config", str(ROOT / "config" / "news_config.json"),
@@ -121,6 +183,10 @@ class UpdateNewsTests(unittest.TestCase):
                 "--archive-index", str(archive_index),
                 "--search-index", str(search_index),
                 "--status-output", str(status_output),
+                "--stream-output", str(stream_output),
+                "--stream-status-output", str(stream_status_output),
+                "--research-output", str(research_output),
+                "--research-fixture", str(ROOT / "tests" / "fixtures" / "papers.json"),
                 "--feed-output", str(feed_output),
                 "--skip-ai",
                 "--now", "2026-07-16T00:00:00Z",
@@ -140,13 +206,21 @@ class UpdateNewsTests(unittest.TestCase):
             self.assertEqual(len(shard["items"]), 10)
             self.assertTrue(all(item.get("_compact") for item in shard["items"]))
             self.assertTrue(all("scoreComponents" not in item and "sources" not in item for item in shard["items"]))
+            self.assertTrue(all("isSupplemental" in item and "selectionWindowHours" in item for item in shard["items"]))
             atom = ET.parse(feed_output).getroot()
             self.assertEqual(len(atom.findall("{http://www.w3.org/2005/Atom}entry")), 10)
             pipeline_status = json.loads(status_output.read_text(encoding="utf-8"))
             self.assertEqual(pipeline_status["state"], "ok")
             self.assertEqual(pipeline_status["editorialStatus"], "disabled")
+            stream = json.loads(stream_output.read_text(encoding="utf-8"))
+            research = json.loads(research_output.read_text(encoding="utf-8"))
+            self.assertEqual(pipeline_status["streamItemCount"], stream["itemCount"])
+            self.assertEqual(pipeline_status["researchItemCount"], 6)
+            self.assertGreater(stream["itemCount"], 10)
+            self.assertEqual(research["itemCount"], 6)
+            self.assertEqual(json.loads(stream_status_output.read_text(encoding="utf-8"))["state"], "ok")
 
-    def test_failure_writes_status_without_overwriting_latest(self):
+    def test_irrecoverable_shortfall_writes_status_without_overwriting_latest(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             output = root / "news.json"
@@ -162,6 +236,9 @@ class UpdateNewsTests(unittest.TestCase):
                 "--archive-index", str(root / "archive" / "index.json"),
                 "--search-index", str(root / "archive" / "search-index.json"),
                 "--status-output", str(status_output),
+                "--stream-output", str(root / "stream.json"),
+                "--research-output", str(root / "research.json"),
+                "--stream-status-output", str(root / "stream-status.json"),
                 "--skip-ai",
                 "--now", "2026-07-16T00:00:00Z",
             ])
@@ -169,7 +246,111 @@ class UpdateNewsTests(unittest.TestCase):
             self.assertEqual(json.loads(output.read_text(encoding="utf-8")), {"sentinel": True})
             status = json.loads(status_output.read_text(encoding="utf-8"))
             self.assertEqual(status["state"], "failed")
-            self.assertIn("低于安全阈值", status["message"])
+            self.assertIn("分层补采后仍只有", status["message"])
+
+    def test_daily_shortfall_is_backfilled_from_bounded_windows(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            fixture = root / "low-volume.json"
+            items = []
+            for index, article in enumerate(self.articles[:12]):
+                item = MODULE.asdict(article)
+                item["published_at"] = (
+                    self.now - timedelta(hours=8 + index)
+                    if index < 6 else self.now - timedelta(hours=30 + index - 6)
+                ).isoformat()
+                items.append(item)
+            fixture.write_text(json.dumps(items, ensure_ascii=False), encoding="utf-8")
+            output = root / "news.json"
+            status_output = root / "status.json"
+            stream_output = root / "stream.json"
+            result = MODULE.main([
+                "--config", str(ROOT / "config" / "news_config.json"),
+                "--fixture", str(fixture),
+                "--output", str(output),
+                "--archive-dir", str(root / "archive"),
+                "--archive-index", str(root / "archive" / "index.json"),
+                "--search-index", str(root / "archive" / "search-index.json"),
+                "--status-output", str(status_output),
+                "--stream-output", str(stream_output),
+                "--stream-status-output", str(root / "stream-status.json"),
+                "--research-output", str(root / "research.json"),
+                "--feed-output", str(root / "feed.xml"),
+                "--skip-ai", "--skip-research",
+                "--now", "2026-07-16T00:00:00Z",
+            ])
+            self.assertEqual(result, 0)
+            report = json.loads(output.read_text(encoding="utf-8"))
+            status = json.loads(status_output.read_text(encoding="utf-8"))
+            stream = json.loads(stream_output.read_text(encoding="utf-8"))
+            self.assertEqual(len(report["items"]), 10)
+            self.assertLess(stream["itemCount"], 10)
+            self.assertEqual(report["freshItemCount"], stream["itemCount"])
+            self.assertEqual(report["supplementalItemCount"], 10 - stream["itemCount"])
+            self.assertEqual(report["coverageStatus"], "supplemented")
+            self.assertTrue(all(item["selectionNote"] for item in report["items"] if item["isSupplemental"]))
+            self.assertEqual(status["state"], "ok")
+            self.assertEqual(status["supplementalItemCount"], report["supplementalItemCount"])
+
+    def test_daily_shortfall_reuses_only_fresh_validated_stream_cache(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            fixture = root / "partial-live-fetch.json"
+            fixture.write_text(
+                json.dumps([MODULE.asdict(item) for item in self.articles[:2]], default=str),
+                encoding="utf-8",
+            )
+            scored = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
+            cached_items = [MODULE.item_from_article(article, self.config) for article in scored[:12]]
+            stream_output = root / "stream.json"
+            stream_output.write_text(json.dumps({
+                "schemaVersion": 1,
+                "generatedAt": self.now.isoformat().replace("+00:00", "Z"),
+                "itemCount": len(cached_items),
+                "items": cached_items,
+            }, ensure_ascii=False), encoding="utf-8")
+            output = root / "news.json"
+            result = MODULE.main([
+                "--config", str(ROOT / "config" / "news_config.json"),
+                "--fixture", str(fixture),
+                "--output", str(output),
+                "--archive-dir", str(root / "archive"),
+                "--archive-index", str(root / "archive" / "index.json"),
+                "--search-index", str(root / "archive" / "search-index.json"),
+                "--status-output", str(root / "status.json"),
+                "--stream-output", str(stream_output),
+                "--stream-status-output", str(root / "stream-status.json"),
+                "--research-output", str(root / "research.json"),
+                "--feed-output", str(root / "feed.xml"),
+                "--skip-ai", "--skip-research",
+                "--now", "2026-07-16T00:00:00Z",
+            ])
+            self.assertEqual(result, 0)
+            report = json.loads(output.read_text(encoding="utf-8"))
+            self.assertEqual(len(report["items"]), 10)
+            self.assertEqual(report["supplementalItemCount"], 0)
+            self.assertGreaterEqual(json.loads(stream_output.read_text(encoding="utf-8"))["itemCount"], 10)
+
+    def test_diversity_limits_relax_in_tiers_instead_of_failing(self):
+        candidates = []
+        for index in range(10):
+            article = MODULE.Article(**{
+                **MODULE.asdict(self.articles[0]),
+                "id": f"same-domain-{index}",
+                "url": f"https://same-source.example/story-{index}",
+                "domain": "same-source.example",
+                "category": "AI",
+                "published_at": self.now - timedelta(minutes=index),
+                "raw_score": 90 - index,
+            })
+            candidates.append(article)
+        selected = MODULE.choose_diverse(candidates, self.config, 10)
+        self.assertEqual(len(selected), 10)
+        self.assertEqual(sum(article.diversity_relaxed for article in selected), 8)
+        report = MODULE.build_report(candidates, self.config, self.now, skip_ai=True)
+        self.assertEqual(len(report["items"]), 10)
+        self.assertEqual(report["coverageStatus"], "supplemented")
+        self.assertTrue(any("分级放宽配额" in warning for warning in report["warnings"]))
 
     def test_sponsored_content_is_excluded(self):
         sponsored = MODULE.Article(**{

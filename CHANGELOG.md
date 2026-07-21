@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.5.0 — Full stream, research radar and homepage hierarchy
+
+### Information coverage
+
+- Added a separately cached 24-hour qualified stream, capped at 300 items and refreshed every three hours without replacing the daily Top 10.
+- Added 6/12/24-hour, source, topic and keyword filters plus incremental rendering for the larger stream payload.
+- Added an arXiv-backed seven-day research radar for AI, robotics/autonomy, space science, quantum and advanced materials.
+- Research entries have their own relevance score and schema, including authors, categories, PDF link and explicit preprint/peer-review status.
+- Optional AI editing produces Chinese paper titles, summaries, research questions, methods, findings and limitations; metadata fallback remains usable and visible.
+
+### Information hierarchy and operations
+
+- Rebuilt the homepage around a Top 3 must-read layer, a compact executive brief and the complete Top 10.
+- Added dedicated research cards, Top 10 badges inside the full stream, source filters, result counts and “load more” controls.
+- Added `stream-status.json`, cache policies for the new payloads, a v1.5 offline cache, pipeline tests and a three-hour stream workflow.
+- Daily status now records stream and research counts plus research editorial warnings.
+- Expanded the qualified stream from 8 to 18 international feeds, adding ESA, FlightGlobal, C4ISRNET, Defense One, DARPA, BBC World, Al Jazeera, TechCrunch AI, Google DeepMind and Hugging Face.
+- Fixed low-volume daily failures with a three-stage recovery path: reuse a validated stream cache no older than eight hours, progressively backfill from 36/48/72-hour windows with an explicit freshness penalty, then relax topic/source quotas in tiers.
+- Supplemental or quota-relaxed stories are marked in the payload and UI; `status.json` records coverage state, fresh/supplemental counts and the effective lookback window.
+- The 24-hour full stream remains semantically strict and may contain fewer than ten items; only the daily brief is required to contain exactly ten.
+
 ## 1.4.0 — Data quality, scalable archive and reader experience
 
 ### Data and reliability

@@ -1,7 +1,7 @@
 "use strict";
 
 const CACHE_PREFIX = "frontier-pulse-";
-const CACHE_NAME = `${CACHE_PREFIX}v1.4`;
+const CACHE_NAME = `${CACHE_PREFIX}v1.5`;
 const APP_SHELL = [
   "./",
   "./index.html",
