@@ -7,13 +7,14 @@
 
 ## 已实现功能
 
-- AI 中文标题、摘要、2–3 条关键事实和“为什么重要”；没有 API Key 时保留证据型规则摘要，不编造翻译。
+- DeepSeek V4 Flash 或 OpenAI 可生成中文标题、摘要、2–3 条关键事实和“为什么重要”；没有 API Key 时保留证据型规则摘要，不伪装为已翻译。
 - 18 个国际 RSS/Atom 信源 + GDELT 并行采集，覆盖官方机构、航空航天、AI、科技、军情与全球冲突媒体，并执行 24 小时时间窗、链接清洗、同事件去重和来源合并。
 - Reuters/AP 等通稿转载会按证据网络折算，不会因多个转载域名虚增“独立来源”；无效日期按时间窗边缘处理并降权。
 - 每日 Top 10、多主题与来源限额，过滤 Sponsored / Advertorial 等商业样稿。
 - 独立“全量动态”视图保留最多 300 条通过时间窗、相关性、去重与商业内容过滤的候选，可按 6/12/24 小时、来源、主题和关键词筛选；每日 Top 10 在流中明确标记。
-- 独立“论文雷达”读取 arXiv 官方 Atom API，覆盖 AI、机器学习、机器人、无人与控制系统、空间科学、量子和先进材料；区分新闻重要度与研究相关度，并明确标注预印本状态。
-- 配置 API Key 时，论文雷达为前 20 篇生成中文标题、摘要、研究问题、方法、主要发现与局限；失败时保留原始摘要并公开告警，不伪造中文编辑结果。
+- 独立“论文雷达”读取 arXiv 官方 Atom API，覆盖 AI、机器学习、机器人、无人与控制系统、空间科学、量子和先进材料；除分类采集外，系统采集词会直接查询论文标题和摘要。
+- “我的论文关键词”可在浏览器保存最多 20 个中英文词，自动筛选、命中高亮并生成专属论文流；个人词不上传，系统实际采集词则公开显示在页面上。
+- 配置 DeepSeek 时，论文雷达可分批为最多 60 篇生成中文标题、摘要、研究问题、方法、主要发现与局限；全量动态最多翻译 120 条，并复用未变化条目的既有翻译以控制成本。单个批次失败不会删除原始内容。
 - 首页重构为“今日必读 Top 3 → 执行摘要 → 完整 Top 10”，减少首屏信息拥挤，同时保留全部证据详情。
 - 展示一个事件的全部来源、独立来源数量、来源置信度和可展开的评分分项。
 - 按日归档、日期前后切换，以及按月分片的轻量跨日期搜索；完整评分与来源在展开时按需读取当期归档。
@@ -31,8 +32,8 @@
 1. 并行读取配置中的公开 RSS/Atom 与 GDELT，清洗元数据，将同一事件的独立来源合并到 `sources[]`。
 2. 按来源、时效、主题、影响信号、证据完整度和多源印证进行规则评分，并把全部合格候选写入 `stream.json`。
 3. 若 24 小时合格候选不足 10 条，先合并最近一次已验证的三小时动态缓存，再按 36/48/72 小时逐级补充并施加时效降权；若只是候选分布过度集中，则分级放宽主题/来源配额，而不是让整期刷新失败。
-4. 配置 `OPENAI_API_KEY` 时，调用 OpenAI Responses API 完成中文编辑和 Top 10 复核；网络/结构化输出允许一次退避重试，结果仍须通过类别与来源多样性校验。
-5. 独立读取 arXiv 论文元数据，按主题相关性、摘要完整度与新鲜度排序；可选 AI 中文编辑不会参与新闻 Top 10 评分。
+4. 配置 `DEEPSEEK_API_KEY` 时，调用 DeepSeek Chat Completions（JSON 输出、关闭思考模式）完成 Top 10 中文编辑，并分批翻译动态流；也保留 OpenAI Responses 作为可选后备。网络/结构化输出允许一次退避重试，选稿结果仍须通过类别与来源多样性校验。
+5. 独立按 arXiv 分类与 `research.collection_keywords` 查询标题/摘要，合并去重后按主题相关性、摘要完整度与新鲜度排序；可选 AI 中文编辑不会改变原始论文元数据。
 6. 校验日报恰好 10 条后，写入最新一期、按日归档、月度搜索分片、Atom Feed 和健康状态；全量动态保持严格 24 小时语义，允许低流量日少于 10 条。
 7. 只有在 72 小时内仍无法找到 10 条可验证候选，或完全没有 24 小时候选时，才保留上一版真实日报并记录失败，绝不生成虚构新闻。
 8. GitHub Actions 提交数据，Cloudflare 自动发布；配置 SMTP 时再发送邮件。
@@ -99,14 +100,50 @@ python -m http.server 8000 --directory public
 python scripts/update_news.py
 ```
 
-## 启用 AI 中文编辑
+## 启用 DeepSeek V4 Flash 中文翻译
 
 在 GitHub 仓库进入 `Settings → Secrets and variables → Actions`：
 
-- Secret `OPENAI_API_KEY`：必需；不应写入源码。
-- Variable `OPENAI_MODEL`：可选，默认 `gpt-5.6-luna`。
+- 在 **Secrets** 页添加 `DEEPSEEK_API_KEY`。值只粘贴到 GitHub 的加密输入框，不要发到聊天、Issue、代码或 Cloudflare 前端变量。
+- 在 **Variables** 页添加 `AI_PROVIDER=deepseek`。
+- 在 **Variables** 页添加 `DEEPSEEK_MODEL=deepseek-v4-flash`。仓库默认值相同，但显式配置便于审计。
 
-手动运行 `Actions → Daily news update → Run workflow`。成功后 `public/data/news.json` 应显示 `method: openai`，且每条包含 `title`（中文编辑标题）、`originalTitle`、`summary` 和 `keyFacts`。若 AI 调用、解析或多样性校验失败，系统使用规则版并把原因写入 `status.json.warnings`；页面会显示“规则回退”，而不是只在 Actions 日志中留痕。
+然后依次手动运行：
+
+1. `Actions → Daily news update → Run workflow`，生成 Top 10 和论文中文编辑。
+2. `Actions → Full stream update → Run workflow`，补齐全量动态中文翻译。
+3. 等待 Cloudflare 发布最新 `main`，在网页中确认卡片出现“DeepSeek 中文”。
+
+成功后可检查：
+
+- `public/data/news.json`：`method: deepseek`、`editorialModel: deepseek-v4-flash`，条目含中文 `title`、`summary` 与 `keyFacts`。
+- `public/data/research.json`：`editorialProvider: deepseek`、`translatedItemCount > 0`。
+- `public/data/stream.json`：`translationProvider: deepseek`、`translatedItemCount > 0`。
+- `public/data/status.json` 和 `stream-status.json`：记录模型、翻译数量及公开的批次警告，但绝不包含密钥。
+
+本地运行可复制 `.env.example` 中的变量到当前终端环境，再执行 `python scripts/update_news.py`。不要提交真实 `.env`。系统使用官方兼容地址 `https://api.deepseek.com/chat/completions`；模型与 JSON 输出参数以 [DeepSeek 官方 API 文档](https://api-docs.deepseek.com/) 为准。
+
+若 DeepSeek 调用、解析或多样性校验失败，Top 10 自动回退规则版；论文与动态只保留成功批次，并显示翻译不完整警告。原始标题、摘要和链接不会因翻译失败而丢失。`AI_PROVIDER=auto` 时优先选择已配置的 DeepSeek；仅在没有 DeepSeek 密钥时选择 OpenAI，不会在一次失败调用中跨供应商自动重试。若要继续使用 OpenAI，则设置 `AI_PROVIDER=openai`、Secret `OPENAI_API_KEY` 和 Variable `OPENAI_MODEL`。
+
+## 论文关键词：个人筛选与服务器采集
+
+这是两个不同层级，避免用户误以为本机输入会改变所有人的采集任务：
+
+- **我的论文关键词**：在“论文雷达”页面逐个添加，最多 20 个。只写入当前浏览器 `localStorage`，立即筛选现有论文、突出命中位置并生成“我的论文流”。若中文词没有命中英文原文，可再添加对应英文术语。
+- **系统采集词**：由管理员修改 `config/news_config.json` 的 `research.collection_keywords`。每日任务会用 `ti:` 与 `abs:` 搜索 arXiv 标题和摘要，因此能发现不在既有分类候选中的特定方向。它是全站共享配置，修改后需要重新运行日报。
+
+一个采集词的配置示例：
+
+```json
+{
+  "label": "多模态智能体",
+  "query": "multimodal agent",
+  "aliases": ["multimodal agents", "multimodal AI agent", "多模态智能体"],
+  "priority": 10
+}
+```
+
+`label` 用于中文展示，`query` 与最多若干 `aliases` 组成 arXiv 标题/摘要查询，`priority` 影响研究相关度。最多读取前 20 个有效定义；建议优先使用英文专业术语，并把中文作为标签或匹配别名。arXiv 查询字段语法和限速要求见 [arXiv API User's Manual](https://info.arxiv.org/help/api/user-manual.html)。
 
 ## 缓存、搜索与订阅
 
@@ -114,7 +151,7 @@ python scripts/update_news.py
 - 只有点击页面刷新按钮时才追加 `t=...` 并使用 `cache: no-store`。
 - `search-index.json` 只列出月度分片；分片不保存 `scoreComponents`、`scoreReasons`、`confidenceReason` 等详情字段。用户展开搜索结果时再读取 `YYYY-MM-DD.json`。
 - `stream.json` 缓存 5 分钟并由三小时工作流更新；`research.json` 缓存 30 分钟并由每日工作流更新。两者都采用分页渲染，避免一次创建数百个 DOM 节点。
-- 论文查询按研究方向合并分类、单连接顺序执行，并在请求之间等待 3.1 秒；同一查询每天只运行一次，符合 [arXiv API 限速与缓存建议](https://info.arxiv.org/help/api/tou.html)。
+- 论文查询按研究方向合并分类，并为每个系统采集词查询标题与摘要；所有查询单连接顺序执行，请求间等待 3.1 秒，同一批任务每天运行一次，符合 [arXiv API 限速与缓存建议](https://info.arxiv.org/help/api/tou.html)。
 - 阅读器订阅地址为 `/feed.xml`。这是匿名、无邮箱收集的公开 Atom Feed；管理员 SMTP 邮件仍是另一条独立通道。
 - `.github/workflows/production-smoke.yml` 每日检查线上 CSP、`nosniff`、ETag/缓存头与 Feed。也可本地运行：
 
@@ -160,7 +197,7 @@ python scripts/check_production.py --site-url https://frontier-pulse.jiumi674.wo
 - 采集窗口：`lookback_hours`，默认 24
 - 全量流上限：`stream_limit`，默认 300
 - 低流量恢复：`daily_recovery.stream_cache_max_age_hours` 与 `daily_recovery.backfill_windows_hours`
-- 论文窗口、上限和研究方向：`research.lookback_days`、`research.limit`、`research.arxiv_categories`
+- 论文窗口、上限、研究方向与采集词：`research.lookback_days`、`research.limit`、`research.arxiv_categories`、`research.collection_keywords`
 - 每日条数：`top_n`，当前前端和校验固定为 10
 - 搜索索引保留期：`archive_retention_days`，默认 730 期
 - 前端过期阈值：`public/assets/app.js` 中的 36 小时判断

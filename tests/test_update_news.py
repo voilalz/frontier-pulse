@@ -67,6 +67,10 @@ class UpdateNewsTests(unittest.TestCase):
         self.assertTrue(all(item["contentType"] == "paper" for item in report["items"]))
         self.assertTrue(all(item["authors"] and item["pdfUrl"] for item in report["items"]))
         self.assertTrue(all("预印本" in item["peerReviewStatus"] for item in report["items"]))
+        swarm = next(item for item in report["items"] if item["id"] == "arxiv:2607.14093")
+        self.assertIn("蜂群机器人", swarm["collectionKeywords"])
+        self.assertEqual(report["schemaVersion"], 2)
+        self.assertEqual(len(report["collectionKeywords"]), 3)
 
     def test_research_selection_prevents_one_area_from_crowding_out_others(self):
         papers = []
@@ -89,8 +93,10 @@ class UpdateNewsTests(unittest.TestCase):
         with mock.patch.object(MODULE, "http_get", return_value=empty_feed) as get, mock.patch.object(MODULE.time, "sleep") as sleep:
             self.assertEqual(MODULE.collect_arxiv(self.config, self.now), [])
         labels = {definition["label"] for definition in self.config["research"]["arxiv_categories"]}
-        self.assertEqual(get.call_count, len(labels))
-        self.assertEqual(sleep.call_count, len(labels) - 1)
+        keyword_definitions = self.config["research"]["collection_keywords"]
+        expected_queries = len(labels) + len(keyword_definitions)
+        self.assertEqual(get.call_count, expected_queries)
+        self.assertEqual(sleep.call_count, expected_queries - 1)
         self.assertTrue(all(call.kwargs.get("attempts") == 1 for call in get.call_args_list))
         queries = [
             MODULE.urllib.parse.parse_qs(MODULE.urllib.parse.urlsplit(call.args[0]).query)["search_query"][0]
@@ -99,6 +105,105 @@ class UpdateNewsTests(unittest.TestCase):
         space_query = next(query for query in queries if "astro-ph.CO" in query)
         self.assertIn("astro-ph.EP", space_query)
         self.assertIn(" OR ", space_query)
+        keyword_queries = [query for query in queries if "ti:" in query]
+        self.assertEqual(len(keyword_queries), len(keyword_definitions))
+        self.assertTrue(all("abs:" in query for query in keyword_queries))
+        self.assertTrue(any('ti:"multimodal agent"' in query for query in keyword_queries))
+
+    def test_deepseek_v4_flash_runtime_and_json_request(self):
+        with mock.patch.dict(os.environ, {
+            "AI_PROVIDER": "auto",
+            "DEEPSEEK_API_KEY": "server-side-secret",
+            "DEEPSEEK_MODEL": "deepseek-v4-flash",
+            "OPENAI_API_KEY": "openai-fallback",
+        }):
+            runtime = MODULE.resolve_ai_runtime(self.config)
+        self.assertEqual(runtime["provider"], "deepseek")
+        self.assertEqual(runtime["model"], "deepseek-v4-flash")
+        self.assertEqual(runtime["endpoint"], "https://api.deepseek.com/chat/completions")
+
+        response = {"choices": [{"message": {"content": '{"items": []}'}}]}
+        schema = {
+            "type": "object",
+            "properties": {"items": {"type": "array", "items": {"type": "string"}}},
+            "required": ["items"],
+            "additionalProperties": False,
+        }
+        with mock.patch.object(MODULE, "http_post_json", return_value=response) as post:
+            result = MODULE.request_structured_json(
+                runtime,
+                instructions="请返回 JSON。",
+                input_text="输入",
+                schema_name="test_schema",
+                schema=schema,
+                example={"items": []},
+                max_tokens=500,
+            )
+        self.assertEqual(result, {"items": []})
+        endpoint, body, api_key = post.call_args.args
+        self.assertEqual(endpoint, "https://api.deepseek.com/chat/completions")
+        self.assertEqual(api_key, "server-side-secret")
+        self.assertEqual(body["model"], "deepseek-v4-flash")
+        self.assertEqual(body["response_format"], {"type": "json_object"})
+        self.assertEqual(body["thinking"], {"type": "disabled"})
+        self.assertNotIn("server-side-secret", json.dumps(body))
+
+    def test_deepseek_daily_output_is_locally_validated_before_use(self):
+        candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
+        runtime = {
+            "provider": "deepseek", "api_key": "secret", "model": "deepseek-v4-flash",
+            "endpoint": "https://api.deepseek.com/chat/completions",
+        }
+        malformed = {"items": [{"id": candidates[0].id}] * 10}
+        with mock.patch.object(MODULE, "request_structured_json", return_value=malformed) as request, mock.patch.object(
+            MODULE.time, "sleep"
+        ):
+            with self.assertRaisesRegex(RuntimeError, "could not be parsed"):
+                MODULE.ai_select(candidates[:12], self.config, runtime)
+        self.assertEqual(request.call_count, 2)
+
+    def test_stream_translation_keeps_partial_results_and_warning(self):
+        candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:2]
+        runtime = {
+            "provider": "deepseek", "api_key": "secret", "model": "deepseek-v4-flash",
+            "endpoint": "https://api.deepseek.com/chat/completions",
+        }
+        translated = {
+            "items": [{
+                "id": candidates[0].id,
+                "titleZh": "中文标题",
+                "summary": "中文摘要",
+                "tags": ["测试"],
+            }],
+        }
+        with mock.patch.object(MODULE, "request_structured_json", return_value=translated):
+            translations, warnings = MODULE.ai_translate_articles(candidates, self.config, runtime)
+        self.assertEqual(list(translations), [candidates[0].id])
+        self.assertTrue(translations[candidates[0].id]["_translationOnly"])
+        self.assertEqual(translations[candidates[0].id]["_provider"], "deepseek")
+        self.assertEqual(len(warnings), 1)
+        stream = MODULE.build_stream_report(
+            candidates, self.config, self.now, translations=translations,
+            translation_runtime=runtime, translation_warnings=warnings,
+        )
+        self.assertEqual(stream["translatedItemCount"], 1)
+        self.assertEqual(stream["translationProvider"], "deepseek")
+        self.assertEqual(stream["items"][0]["scoreBasis"], "AI翻译 · 规则评分")
+
+    def test_stream_translation_stops_after_two_consecutive_batch_failures(self):
+        candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:3]
+        runtime = {
+            "provider": "deepseek", "api_key": "secret", "model": "deepseek-v4-flash",
+            "endpoint": "https://api.deepseek.com/chat/completions",
+        }
+        config = {**self.config, "stream_translation_batch_size": 1}
+        with mock.patch.object(
+            MODULE, "request_structured_json", side_effect=RuntimeError("temporary provider outage")
+        ) as request:
+            translations, warnings = MODULE.ai_translate_articles(candidates, config, runtime)
+        self.assertEqual(translations, {})
+        self.assertEqual(request.call_count, 2)
+        self.assertTrue(any("连续失败 2 个批次" in warning for warning in warnings))
 
     def test_deduplicate_merges_tracking_urls(self):
         first = self.articles[0]
@@ -193,6 +298,7 @@ class UpdateNewsTests(unittest.TestCase):
             ])
             self.assertEqual(status, 0)
             payload = json.loads(output.read_text(encoding="utf-8"))
+            self.assertEqual(payload["schemaVersion"], 4)
             self.assertEqual(payload["editionDate"], "2026-07-16")
             self.assertEqual(payload["timezone"], "Asia/Tokyo")
             self.assertEqual(payload["method"], "rules")
@@ -210,15 +316,20 @@ class UpdateNewsTests(unittest.TestCase):
             atom = ET.parse(feed_output).getroot()
             self.assertEqual(len(atom.findall("{http://www.w3.org/2005/Atom}entry")), 10)
             pipeline_status = json.loads(status_output.read_text(encoding="utf-8"))
+            self.assertEqual(pipeline_status["schemaVersion"], 4)
             self.assertEqual(pipeline_status["state"], "ok")
             self.assertEqual(pipeline_status["editorialStatus"], "disabled")
             stream = json.loads(stream_output.read_text(encoding="utf-8"))
             research = json.loads(research_output.read_text(encoding="utf-8"))
+            self.assertEqual(stream["schemaVersion"], 2)
+            self.assertEqual(research["schemaVersion"], 2)
             self.assertEqual(pipeline_status["streamItemCount"], stream["itemCount"])
             self.assertEqual(pipeline_status["researchItemCount"], 6)
             self.assertGreater(stream["itemCount"], 10)
             self.assertEqual(research["itemCount"], 6)
-            self.assertEqual(json.loads(stream_status_output.read_text(encoding="utf-8"))["state"], "ok")
+            stream_status = json.loads(stream_status_output.read_text(encoding="utf-8"))
+            self.assertEqual(stream_status["schemaVersion"], 2)
+            self.assertEqual(stream_status["state"], "ok")
 
     def test_irrecoverable_shortfall_writes_status_without_overwriting_latest(self):
         with tempfile.TemporaryDirectory() as directory:

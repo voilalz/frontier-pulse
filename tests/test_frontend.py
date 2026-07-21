@@ -50,12 +50,12 @@ class FrontendTests(unittest.TestCase):
         app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
         worker = (ROOT / "public" / "sw.js").read_text(encoding="utf-8")
         headers = (ROOT / "public" / "_headers").read_text(encoding="utf-8")
-        self.assertIn("./assets/app.js?v=1.5.1", index)
-        self.assertIn("./assets/styles.css?v=1.5.1", index)
+        self.assertIn("./assets/app.js?v=1.6.0", index)
+        self.assertIn("./assets/styles.css?v=1.6.0", index)
         self.assertIn('event.preventDefault();\n      await switchView(viewButton.dataset.view);', app)
         self.assertIn('request.mode === "navigate"', worker)
         self.assertIn("frontier-pulse-", worker)
-        self.assertIn("v1.5.1", worker)
+        self.assertIn("v1.6.0", worker)
         self.assertIn("/assets/*\n  Cache-Control: public, max-age=0, must-revalidate", headers)
 
     def test_cache_is_bypassed_only_for_manual_refresh(self):
@@ -88,6 +88,24 @@ class FrontendTests(unittest.TestCase):
         self.assertNotIn("/data/archive/search-index.json\n", headers)
         self.assertIn("/data/stream.json\n  Cache-Control: public, max-age=300", headers)
         self.assertIn("/data/research.json\n  Cache-Control: public, max-age=1800", headers)
+
+    def test_personal_research_keywords_and_deepseek_translation_ui_are_safe(self):
+        index = (ROOT / "public" / "index.html").read_text(encoding="utf-8")
+        app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
+        styles = (ROOT / "public" / "assets" / "styles.css").read_text(encoding="utf-8")
+        for element_id in (
+            "researchKeywordPanel", "researchKeywordForm", "researchKeywordInput",
+            "researchKeywordChips", "collectionKeywordChips", "mineResearchCount",
+        ):
+            self.assertIn(f'id="{element_id}"', index)
+        self.assertIn("fp-research-keywords-v1", app)
+        self.assertIn("最多保存 20 个论文关键词", app)
+        self.assertIn("matchedResearchKeywords", app)
+        self.assertIn("data-research-scope", index + app)
+        self.assertIn("collectionKeywords", app)
+        self.assertIn("DeepSeek 中文", app)
+        self.assertIn(".research-keyword-panel", styles)
+        self.assertNotIn("DEEPSEEK_API_KEY", index + app + styles)
 
 
 if __name__ == "__main__":

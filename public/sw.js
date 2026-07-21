@@ -1,12 +1,12 @@
 "use strict";
 
 const CACHE_PREFIX = "frontier-pulse-";
-const CACHE_NAME = `${CACHE_PREFIX}v1.5.1`;
+const CACHE_NAME = `${CACHE_PREFIX}v1.6.0`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./assets/styles.css?v=1.5.1",
-  "./assets/app.js?v=1.5.1",
+  "./assets/styles.css?v=1.6.0",
+  "./assets/app.js?v=1.6.0",
   "./favicon.svg",
   "./og-card.png",
 ];

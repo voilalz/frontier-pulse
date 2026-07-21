@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.6.0 — Personal research signals and DeepSeek translation
+
+### Research discovery
+
+- Added up to 20 browser-local Chinese or English paper keywords, a dedicated personal paper stream, persistent scope selection, match counts and in-card highlighting.
+- Added administrator-managed `research.collection_keywords`; each definition searches arXiv title and abstract fields in addition to the existing category queries, then merges results by arXiv ID.
+- Published system collection keywords in `research.json` and the research UI so readers can distinguish server-side discovery from local filtering.
+- Keyword hits now boost research relevance transparently and appear in the paper metadata and score explanation.
+
+### Chinese translation and resilience
+
+- Added a provider adapter for DeepSeek Chat Completions and OpenAI Responses. DeepSeek defaults to `deepseek-v4-flash`, JSON output and disabled thinking for deterministic translation tasks.
+- Added server-side DeepSeek translation for Top 10 news, up to 120 full-stream items and up to 60 research papers; API keys never enter static assets or generated payloads.
+- Split stream and research translation into bounded batches, retained successful batches on partial failure, and exposed provider, model, translated count and warnings in public status data.
+- Reused translations for unchanged stream items to reduce recurring API cost and latency.
+- Added dedicated GitHub Actions Secret/Variable wiring, DeepSeek setup documentation, offline provider tests and a v1.6 Service Worker cache boundary.
+
 ## 1.5.0 — Full stream, research radar and homepage hierarchy
 
 ### Information coverage
