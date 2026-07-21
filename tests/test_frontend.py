@@ -29,6 +29,7 @@ class FrontendTests(unittest.TestCase):
         styles = (ROOT / "public" / "assets" / "styles.css").read_text(encoding="utf-8")
         for view in ("stream", "research"):
             self.assertIn(f'data-view="{view}"', index)
+            self.assertIn(f'href="./?view={view}" data-view="{view}"', index)
         for endpoint in ("./data/stream.json", "./data/research.json", "./data/stream-status.json"):
             self.assertIn(endpoint, app)
         self.assertIn('id="spotlightStories"', index)
@@ -43,6 +44,19 @@ class FrontendTests(unittest.TestCase):
         self.assertIn(".supplemental-badge", styles)
         self.assertIn(".spotlight-grid", styles)
         self.assertIn(".paper-detail", styles)
+
+    def test_view_navigation_survives_stale_scripts_and_assets_revalidate(self):
+        index = (ROOT / "public" / "index.html").read_text(encoding="utf-8")
+        app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
+        worker = (ROOT / "public" / "sw.js").read_text(encoding="utf-8")
+        headers = (ROOT / "public" / "_headers").read_text(encoding="utf-8")
+        self.assertIn("./assets/app.js?v=1.5.1", index)
+        self.assertIn("./assets/styles.css?v=1.5.1", index)
+        self.assertIn('event.preventDefault();\n      await switchView(viewButton.dataset.view);', app)
+        self.assertIn('request.mode === "navigate"', worker)
+        self.assertIn("frontier-pulse-", worker)
+        self.assertIn("v1.5.1", worker)
+        self.assertIn("/assets/*\n  Cache-Control: public, max-age=0, must-revalidate", headers)
 
     def test_cache_is_bypassed_only_for_manual_refresh(self):
         app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")

@@ -1,12 +1,12 @@
 "use strict";
 
 const CACHE_PREFIX = "frontier-pulse-";
-const CACHE_NAME = `${CACHE_PREFIX}v1.5`;
+const CACHE_NAME = `${CACHE_PREFIX}v1.5.1`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./assets/styles.css",
-  "./assets/app.js",
+  "./assets/styles.css?v=1.5.1",
+  "./assets/app.js?v=1.5.1",
   "./favicon.svg",
   "./og-card.png",
 ];
@@ -58,5 +58,6 @@ self.addEventListener("fetch", (event) => {
     return;
   }
   const isData = url.pathname.includes("/data/") || url.pathname.endsWith("/feed.xml");
-  event.respondWith(isData ? networkFirst(request) : staleWhileRevalidate(request));
+  const isNavigation = request.mode === "navigate" || request.destination === "document";
+  event.respondWith(isData || isNavigation ? networkFirst(request) : staleWhileRevalidate(request));
 });
