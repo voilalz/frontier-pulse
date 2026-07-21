@@ -1,17 +1,16 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-07-21T11:48:08Z",
+  "generatedAt": "2026-07-21T11:57:40Z",
   "timezone": "Asia/Tokyo",
   "rangeDays": 7,
-  "method": "metadata",
-  "editorialStatus": "fallback",
+  "method": "deepseek",
+  "editorialStatus": "partial",
   "editorialProvider": "deepseek",
   "editorialModel": "deepseek-v4-flash",
-  "translatedItemCount": 0,
+  "translatedItemCount": 40,
   "warnings": [
-    "论文中文编辑批次失败（1-10）：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required",
-    "论文中文编辑批次失败（11-20）：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required",
-    "论文中文编辑连续失败 2 个批次，已停止后续调用并保留原始摘要"
+    "论文中文编辑批次失败（1-10）：research editorial response contained 1 valid papers; expected 10",
+    "论文中文编辑批次失败（21-30）：research editorial response contained 1 valid papers; expected 10"
   ],
   "itemCount": 60,
   "areaCounts": {
@@ -706,12 +705,14 @@
     {
       "id": "arxiv:2607.18147",
       "contentType": "paper",
-      "title": "LLMs and Agentic AI Systems for Smart Grids: A Tutorial on Architectures and Applications",
+      "title": "用于智能电网的LLM与自主AI系统：架构与应用教程",
       "originalTitle": "LLMs and Agentic AI Systems for Smart Grids: A Tutorial on Architectures and Applications",
-      "summary": "Large language models (LLMs) and agentic AI systems have evolved from natural language tasks to using external tools to plan, retrieve, and act in technical domains. In smart grids, recent work applies agentic schemes to forecasting, optimization, and control, wrapping trusted solvers behind language interfaces and orchestrating multi-step workflows. The literature lacks a unified approach to designing and evaluating such systems. LLMs can produce numerically plausible yet physically infeasible outputs, evaluation…",
+      "summary": "大型语言模型和自主AI系统已从自然语言任务扩展到技术领域。在智能电网中，最近工作将自主方案应用于预测、优化和控制，将可信求解器封装在语言接口后并编排多步骤工作流。本文提出基于求解器的设计原则：仅当数值结果来自可信工具并通过显式验证时才报告。通过四个案例研究实例化该原则，并提出了四组评估框架。",
       "abstract": "Large language models (LLMs) and agentic AI systems have evolved from natural language tasks to using external tools to plan, retrieve, and act in technical domains. In smart grids, recent work applies agentic schemes to forecasting, optimization, and control, wrapping trusted solvers behind language interfaces and orchestrating multi-step workflows. The literature lacks a unified approach to designing and evaluating such systems. LLMs can produce numerically plausible yet physically infeasible outputs, evaluation…",
       "keyFacts": [
-        "Large language models (LLMs) and agentic AI systems have evolved from natural language tasks to using external tools to plan, retrieve, and act in technical domains. In smart grids, recent work applies agentic schemes to forecasting, optimization, and control, wrapping trusted solvers behind language interfaces and orchestrating multi-step workflows. The literature lacks a unified approach to designing and evaluating such systems. LLMs can produce numerically plausible yet physically infeasible outputs, evaluation…"
+        "如何设计并评估用于智能电网的LLM和自主AI系统？",
+        "提出基于求解器的设计原则，通过四个案例研究（风电预测、EV充电调度、潮流分析、应急诊断）比较仅LLM基线与其基于求解器对应的性能，并提出四组评估框架（任务效用、基于求解器的正确性、忠实性与安全失败、成本与延迟）。",
+        "EVAgent复现了CVXPY最优值，同时将仅LLM的未满足能量减少了7.5-9.5倍；GridDebugAgent修复了17/39个应急案例，同时将总违规减少52.3%。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -745,10 +746,10 @@
       "primaryCategory": "eess.SY",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何设计并评估用于智能电网的LLM和自主AI系统？",
+      "method": "提出基于求解器的设计原则，通过四个案例研究（风电预测、EV充电调度、潮流分析、应急诊断）比较仅LLM基线与其基于求解器对应的性能，并提出四组评估框架（任务效用、基于求解器的正确性、忠实性与安全失败、成本与延迟）。",
+      "findings": "EVAgent复现了CVXPY最优值，同时将仅LLM的未满足能量减少了7.5-9.5倍；GridDebugAgent修复了17/39个应急案例，同时将总违规减少52.3%。",
+      "limitations": "摘要未说明",
       "score": 90,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -759,11 +760,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "人工智能",
-        "eess.SY",
-        "llm"
+        "智能电网",
+        "大型语言模型",
+        "自主AI",
+        "基于求解器的设计"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -779,12 +781,14 @@
     {
       "id": "arxiv:2607.18144",
       "contentType": "paper",
-      "title": "Do Language Models Dream of Binding Molecules? Benchmarking LLMs under Spatial Constraints",
+      "title": "语言模型会梦见结合分子吗？空间约束下LLM的基准测试",
       "originalTitle": "Do Language Models Dream of Binding Molecules? Benchmarking LLMs under Spatial Constraints",
-      "summary": "Structure-based drug design (SBDD) leverages the 3D structure of protein targets, often complemented by other spatial constraints, to generate candidate binding molecules. While diffusion models have dominated as a leading paradigm for high-quality 3D molecule generation, LLM-based methods are rapidly emerging in molecular design and have shown competitive performance in pocket-conditioned molecular generation. However, their ability to reason about physics and 3D spatial environments is largely underexplored. In…",
+      "summary": "基于结构的药物设计利用蛋白质靶点3D结构生成候选分子。本文系统分析通用LLM在复杂3D约束下的表现，引入3D-Fit基准测试策略。",
       "abstract": "Structure-based drug design (SBDD) leverages the 3D structure of protein targets, often complemented by other spatial constraints, to generate candidate binding molecules. While diffusion models have dominated as a leading paradigm for high-quality 3D molecule generation, LLM-based methods are rapidly emerging in molecular design and have shown competitive performance in pocket-conditioned molecular generation. However, their ability to reason about physics and 3D spatial environments is largely underexplored. In…",
       "keyFacts": [
-        "Structure-based drug design (SBDD) leverages the 3D structure of protein targets, often complemented by other spatial constraints, to generate candidate binding molecules. While diffusion models have dominated as a leading paradigm for high-quality 3D molecule generation, LLM-based methods are rapidly emerging in molecular design and have shown competitive performance in pocket-conditioned molecular generation. However, their ability to reason about physics and 3D spatial environments is largely underexplored. In…"
+        "通用LLM在空间约束下的分子生成能力如何？",
+        "引入3D-Fit基准测试策略，评估LLM在口袋条件以及配体和相互作用衍生的空间约束（锚定片段、药效团点、强制性口袋-配体相互作用）下的3D配体生成性能。",
+        "LLM在空间能力上仍落后于最先进方法，但有前景，能同时处理多个空间约束，实现异构设置扩展。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -813,10 +817,10 @@
       "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "通用LLM在空间约束下的分子生成能力如何？",
+      "method": "引入3D-Fit基准测试策略，评估LLM在口袋条件以及配体和相互作用衍生的空间约束（锚定片段、药效团点、强制性口袋-配体相互作用）下的3D配体生成性能。",
+      "findings": "LLM在空间能力上仍落后于最先进方法，但有前景，能同时处理多个空间约束，实现异构设置扩展。",
+      "limitations": "摘要未说明",
       "score": 90,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -827,11 +831,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "人工智能",
-        "cs.LG",
-        "llm"
+        "结构药物设计",
+        "大型语言模型",
+        "3D分子生成",
+        "基准测试"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -847,12 +852,14 @@
     {
       "id": "arxiv:2607.18126",
       "contentType": "paper",
-      "title": "CutBackdoor: A Circuit Cut Triggered Backdoor Attack on Variational Quantum Algorithms",
+      "title": "CutBackdoor：一种基于电路切割触发的变分量子算法后门攻击",
       "originalTitle": "CutBackdoor: A Circuit Cut Triggered Backdoor Attack on Variational Quantum Algorithms",
-      "summary": "Variational Quantum Algorithms (VQAs) are a leading paradigm for near-term quantum computing, combining parameterized quantum circuits with classical optimization across quantum chemistry, combinatorial optimization, and quantum machine learning. Since real-world VQA deployments routinely require circuits that exceed available hardware capacity, quantum circuit cutting has become an indispensable execution strategy, and pre-trained parameters are increasingly distributed through public repositories, introducing su…",
+      "summary": "变分量子算法被广泛使用，但电路切割执行带来安全风险。本文提出CutBackdoor，首个利用切割电路执行作为触发器的参数后门攻击，在不修改电路的情况下，毒化参数保持全电路验证性能，同时大幅增加切割路径重建误差。",
       "abstract": "Variational Quantum Algorithms (VQAs) are a leading paradigm for near-term quantum computing, combining parameterized quantum circuits with classical optimization across quantum chemistry, combinatorial optimization, and quantum machine learning. Since real-world VQA deployments routinely require circuits that exceed available hardware capacity, quantum circuit cutting has become an indispensable execution strategy, and pre-trained parameters are increasingly distributed through public repositories, introducing su…",
       "keyFacts": [
-        "Variational Quantum Algorithms (VQAs) are a leading paradigm for near-term quantum computing, combining parameterized quantum circuits with classical optimization across quantum chemistry, combinatorial optimization, and quantum machine learning. Since real-world VQA deployments routinely require circuits that exceed available hardware capacity, quantum circuit cutting has become an indispensable execution strategy, and pre-trained parameters are increasingly distributed through public repositories, introducing su…"
+        "如何利用量子电路切割作为触发器对变分量子算法实施后门攻击？",
+        "提出CutBackdoor后门攻击，利用CutQC的切割电路执行作为部署时触发器，毒化参数保持全电路验证性能但增加切割路径重建误差，无需修改电路或攻击者在场。",
+        "在IBM量子后端上，VQE和VQD基准测试的切割路径能量放大1.3倍至2.9倍，同时在全电路路径上保持较小的隐蔽性误差。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -879,10 +886,10 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何利用量子电路切割作为触发器对变分量子算法实施后门攻击？",
+      "method": "提出CutBackdoor后门攻击，利用CutQC的切割电路执行作为部署时触发器，毒化参数保持全电路验证性能但增加切割路径重建误差，无需修改电路或攻击者在场。",
+      "findings": "在IBM量子后端上，VQE和VQD基准测试的切割路径能量放大1.3倍至2.9倍，同时在全电路路径上保持较小的隐蔽性误差。",
+      "limitations": "摘要未说明",
       "score": 90,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -893,13 +900,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子技术",
-        "quant-ph",
-        "machine learning",
-        "quantum",
-        "attack"
+        "变分量子算法",
+        "后门攻击",
+        "量子电路切割",
+        "供应链安全"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -915,12 +921,14 @@
     {
       "id": "arxiv:2607.18116",
       "contentType": "paper",
-      "title": "SGA: Plug&Play Geometric Verification for Educational Video Synthesis",
+      "title": "SGA：用于教育视频合成的即插即用几何验证模块",
       "originalTitle": "SGA: Plug&Play Geometric Verification for Educational Video Synthesis",
-      "summary": "Recent work leverages Large Language Models (LLMs) to generate executable code for pedagogical animations using libraries such as Manim. However, ensuring spatial correctness and visual legibility remains challenging, as existing frameworks emphasize pedagogical content while overlooking geometric occlusions. We propose the Symbolic Geometric Agent (SGA), a plug-and-play module for code-centric animation pipelines that intercepts LLM-generated code, performs partial execution to extract symbolic scene graphs, and…",
+      "summary": "利用LLM生成教学动画的框架存在空间正确性问题。本文提出符号几何智能体（SGA），一种即插即用模块，通过部分执行提取符号场景图并修复空间冲突，同时引入Manim视觉质量分数（MVQS）。",
       "abstract": "Recent work leverages Large Language Models (LLMs) to generate executable code for pedagogical animations using libraries such as Manim. However, ensuring spatial correctness and visual legibility remains challenging, as existing frameworks emphasize pedagogical content while overlooking geometric occlusions. We propose the Symbolic Geometric Agent (SGA), a plug-and-play module for code-centric animation pipelines that intercepts LLM-generated code, performs partial execution to extract symbolic scene graphs, and…",
       "keyFacts": [
-        "Recent work leverages Large Language Models (LLMs) to generate executable code for pedagogical animations using libraries such as Manim. However, ensuring spatial correctness and visual legibility remains challenging, as existing frameworks emphasize pedagogical content while overlooking geometric occlusions. We propose the Symbolic Geometric Agent (SGA), a plug-and-play module for code-centric animation pipelines that intercepts LLM-generated code, performs partial execution to extract symbolic scene graphs, and…"
+        "如何确保LLM生成的教学动画代码的空间正确性和视觉可读性？",
+        "提出符号几何智能体（SGA），拦截LLM生成代码，部分执行提取符号场景图，检测空间冲突并应用定向优化；引入MVQS代理分数。",
+        "在MMMC-Code基准测试上，SGA在Code2Video + GPT-5.1配置下达到峰值MVQS 73.11，相对原始基线提升16.1%，在8个骨干×管线配置中的7个上改善MVQS。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -946,10 +954,10 @@
       "primaryCategory": "cs.AI",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何确保LLM生成的教学动画代码的空间正确性和视觉可读性？",
+      "method": "提出符号几何智能体（SGA），拦截LLM生成代码，部分执行提取符号场景图，检测空间冲突并应用定向优化；引入MVQS代理分数。",
+      "findings": "在MMMC-Code基准测试上，SGA在Code2Video + GPT-5.1配置下达到峰值MVQS 73.11，相对原始基线提升16.1%，在8个骨干×管线配置中的7个上改善MVQS。",
+      "limitations": "摘要未说明",
       "score": 90,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -960,11 +968,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "人工智能",
-        "cs.AI",
-        "llm"
+        "教育视频合成",
+        "大型语言模型",
+        "几何验证",
+        "代码生成"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -980,12 +989,14 @@
     {
       "id": "arxiv:2607.18110",
       "contentType": "paper",
-      "title": "LLM-as-a-Coach: Experiential Learning for Non-Verifiable Tasks",
+      "title": "LLM-as-a-Coach：针对非可验证任务的体验式学习",
       "originalTitle": "LLM-as-a-Coach: Experiential Learning for Non-Verifiable Tasks",
-      "summary": "Reinforcement learning (RL) on open-ended tasks compresses an LLM's rubric-based evaluation into a scalar reward, discarding rich textual feedback and conflating responses with distinct quality profiles. We propose Experiential Learning (EL), which repurposes the feedback model from an LLM-as-a-Judge into an LLM-as-a-Coach. The coach distills its assessment of each on-policy response into transferable experiential knowledge, which conditions a teacher model and is internalized by the policy through on-policy conte…",
+      "summary": "强化学习丢失了文本反馈。本文提出体验式学习，将反馈模型转为LLM-as-a-Coach，通过提炼评估为可迁移的体验知识，条件化教师模型并内化到策略中。EL在保持和未见过的开放任务上持续优于基于标准的RL，泛化性更好，并缓解奖励破解。",
       "abstract": "Reinforcement learning (RL) on open-ended tasks compresses an LLM's rubric-based evaluation into a scalar reward, discarding rich textual feedback and conflating responses with distinct quality profiles. We propose Experiential Learning (EL), which repurposes the feedback model from an LLM-as-a-Judge into an LLM-as-a-Coach. The coach distills its assessment of each on-policy response into transferable experiential knowledge, which conditions a teacher model and is internalized by the policy through on-policy conte…",
       "keyFacts": [
-        "Reinforcement learning (RL) on open-ended tasks compresses an LLM's rubric-based evaluation into a scalar reward, discarding rich textual feedback and conflating responses with distinct quality profiles. We propose Experiential Learning (EL), which repurposes the feedback model from an LLM-as-a-Judge into an LLM-as-a-Coach. The coach distills its assessment of each on-policy response into transferable experiential knowledge, which conditions a teacher model and is internalized by the policy through on-policy conte…"
+        "如何在非可验证任务中利用丰富文本反馈进行LLM后训练？",
+        "提出体验式学习（EL），将LLM-as-a-Judge的反馈模型转换为LLM-as-a-Coach，通过在线上下文蒸馏将评估知识内化到策略中，提供高带宽反馈通道。",
+        "EL在保持和未见过的开放任务上持续优于基于标准的RL，泛化性更好，并缓解奖励破解。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1012,10 +1023,10 @@
       "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何在非可验证任务中利用丰富文本反馈进行LLM后训练？",
+      "method": "提出体验式学习（EL），将LLM-as-a-Judge的反馈模型转换为LLM-as-a-Coach，通过在线上下文蒸馏将评估知识内化到策略中，提供高带宽反馈通道。",
+      "findings": "EL在保持和未见过的开放任务上持续优于基于标准的RL，泛化性更好，并缓解奖励破解。",
+      "limitations": "摘要未说明",
       "score": 90,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -1026,11 +1037,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "机器学习",
-        "cs.LG",
-        "llm"
+        "大型语言模型",
+        "体验式学习",
+        "后训练",
+        "非可验证任务"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -1046,12 +1058,14 @@
     {
       "id": "arxiv:2607.18086",
       "contentType": "paper",
-      "title": "Judge-dependent safety gains and model-specific helpfulness costs of evidence-sufficiency prompting in clinical LLMs",
+      "title": "证据充分性提示在临床LLM中导致判断依赖的安全性提升和模型特定的帮助性代价",
       "originalTitle": "Judge-dependent safety gains and model-specific helpfulness costs of evidence-sufficiency prompting in clinical LLMs",
-      "summary": "Background: LLM judges increasingly score whether clinical language models give overconfident answers under incomplete evidence, yet whether a measured \"safety gain\" reflects real behavior change or the judge's calibration is unresolved. Using a structured evidence-sufficiency prompt as a test case, we asked whether it reduces unsafe overconfident answers, how far that effect depends on the scoring judge, and what it costs in helpfulness. Methods: In a retrospective public-data benchmark (Real-POCQi, HealthBench…",
+      "summary": "研究证据充分性提示对临床LLM不安全过度自信的影响。四个模型配对比较发现，不安全过度自信从49.3%降至24.7%，但效应幅度依赖判断器，且伴随模型特定的帮助性代价（正确诊断率从80.3%降至50.3%）。",
       "abstract": "Background: LLM judges increasingly score whether clinical language models give overconfident answers under incomplete evidence, yet whether a measured \"safety gain\" reflects real behavior change or the judge's calibration is unresolved. Using a structured evidence-sufficiency prompt as a test case, we asked whether it reduces unsafe overconfident answers, how far that effect depends on the scoring judge, and what it costs in helpfulness. Methods: In a retrospective public-data benchmark (Real-POCQi, HealthBench…",
       "keyFacts": [
-        "Background: LLM judges increasingly score whether clinical language models give overconfident answers under incomplete evidence, yet whether a measured \"safety gain\" reflects real behavior change or the judge's calibration is unresolved. Using a structured evidence-sufficiency prompt as a test case, we asked whether it reduces unsafe overconfident answers, how far that effect depends on the scoring judge, and what it costs in helpfulness. Methods: In a retrospective public-data benchmark (Real-POCQi, HealthBench…"
+        "证据充分性提示能否减少临床LLM的不安全过度自信？该效应是否依赖评分判断器？代价是什么？",
+        "在回顾性公共数据基准上，四个模型（GPT-5.5, Claude Opus 4.8, Gemini 3.5 Flash, Grok 4.3）使用标准提示和包装提示进行1200个单元的完全配对比较，主要终点为主判断器（GPT-5.4-nano）评分的不安全过度自信配对减少量，次要分析包括其他判断器和盲法临床医生审查。",
+        "不安全过度自信从49.3%降至24.7%（配对减少24.7个百分点），但幅度依赖判断器（Sonnet效应减半）；盲法临床医生认为主判断器高灵敏度（1.00）低特异性（0.55）；帮助性代价为模型特定（正确诊断从80.3%降至50.3%）。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1071,10 +1085,10 @@
       "primaryCategory": "cs.AI",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "证据充分性提示能否减少临床LLM的不安全过度自信？该效应是否依赖评分判断器？代价是什么？",
+      "method": "在回顾性公共数据基准上，四个模型（GPT-5.5, Claude Opus 4.8, Gemini 3.5 Flash, Grok 4.3）使用标准提示和包装提示进行1200个单元的完全配对比较，主要终点为主判断器（GPT-5.4-nano）评分的不安全过度自信配对减少量，次要分析包括其他判断器和盲法临床医生审查。",
+      "findings": "不安全过度自信从49.3%降至24.7%（配对减少24.7个百分点），但幅度依赖判断器（Sonnet效应减半）；盲法临床医生认为主判断器高灵敏度（1.00）低特异性（0.55）；帮助性代价为模型特定（正确诊断从80.3%降至50.3%）。",
+      "limitations": "摘要未说明",
       "score": 90,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -1085,11 +1099,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "人工智能",
-        "cs.AI",
-        "llm"
+        "临床LLM",
+        "安全性",
+        "过度自信",
+        "提示策略"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -1105,12 +1120,14 @@
     {
       "id": "arxiv:2607.18081",
       "contentType": "paper",
-      "title": "SelectInfer: Selective Neuron Loading and Computation for On-Device LLMs",
+      "title": "SelectInfer：面向设备端LLM的选择性神经元加载与计算",
       "originalTitle": "SelectInfer: Selective Neuron Loading and Computation for On-Device LLMs",
-      "summary": "Large Language Models (LLMs) have demonstrated remarkable capabilities across a range of Natural Language Processing (NLP) tasks, but their high computational and memory demands pose significant challenges for deployment on resource-constrained edge devices. Existing approaches to model compression and optimization often rely on coarse-grained pruning or quantization, which can compromise accuracy or require re-training and fine-tuning. In this work, we introduce SelectInfer, a neuron-level optimization framework…",
+      "summary": "为在边缘设备高效运行LLM，提出SelectInfer框架，通过离线分析识别重要神经元，实现选择性加载和计算，在多个数据集上显著减少内存和计算同时保持性能。",
       "abstract": "Large Language Models (LLMs) have demonstrated remarkable capabilities across a range of Natural Language Processing (NLP) tasks, but their high computational and memory demands pose significant challenges for deployment on resource-constrained edge devices. Existing approaches to model compression and optimization often rely on coarse-grained pruning or quantization, which can compromise accuracy or require re-training and fine-tuning. In this work, we introduce SelectInfer, a neuron-level optimization framework…",
       "keyFacts": [
-        "Large Language Models (LLMs) have demonstrated remarkable capabilities across a range of Natural Language Processing (NLP) tasks, but their high computational and memory demands pose significant challenges for deployment on resource-constrained edge devices. Existing approaches to model compression and optimization often rely on coarse-grained pruning or quantization, which can compromise accuracy or require re-training and fine-tuning. In this work, we introduce SelectInfer, a neuron-level optimization framework…"
+        "如何在资源受限的边缘设备上高效部署LLM？",
+        "提出SelectInfer，包括离线LLM分析器识别任务特定和通用神经元，以及选择性加载（减少内存）和选择性计算（运行时动态计算相关神经元）两种优化。",
+        "在多个数据集上，SelectInfer显著减少内存占用和计算量，同时保持任务性能。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1134,10 +1151,10 @@
       "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何在资源受限的边缘设备上高效部署LLM？",
+      "method": "提出SelectInfer，包括离线LLM分析器识别任务特定和通用神经元，以及选择性加载（减少内存）和选择性计算（运行时动态计算相关神经元）两种优化。",
+      "findings": "在多个数据集上，SelectInfer显著减少内存占用和计算量，同时保持任务性能。",
+      "limitations": "摘要未说明",
       "score": 90,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -1148,11 +1165,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "人工智能",
-        "cs.LG",
-        "llm"
+        "大型语言模型",
+        "边缘部署",
+        "选择性计算",
+        "模型优化"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -1168,12 +1186,14 @@
     {
       "id": "arxiv:2607.18075",
       "contentType": "paper",
-      "title": "Technical Design Review of Duke Robotics Club's Oogway & Crush: AUVs for RoboSub 2026",
+      "title": "杜克机器人俱乐部Oogway & Crush的技术设计评审：面向RoboSub 2026的AUV",
       "originalTitle": "Technical Design Review of Duke Robotics Club's Oogway & Crush: AUVs for RoboSub 2026",
-      "summary": "The Duke Robotics Club presents Oogway and Crush, our AUVs for RoboSub 2026. This year's strategy expands on our previously narrowed scope, targeting all four of RoboSub's design goals for the first time: movement, vision, manipulation, and acoustic tracking. This expansion is based on sustained reliability investment across all three subsystems. Mechanically, Crush gained two additional thrusters and a CFD-optimized case, providing pitch stability. Electrically, we addressed accumulated failure points by repairin…",
+      "summary": "杜克机器人俱乐部展示参加RoboSub 2026的AUV Oogway和Crush。今年首次针对所有四个设计目标：移动、视觉、操控和声学跟踪。通过机械、电气和软件的改进，实现了更可靠和协调的自主运行。",
       "abstract": "The Duke Robotics Club presents Oogway and Crush, our AUVs for RoboSub 2026. This year's strategy expands on our previously narrowed scope, targeting all four of RoboSub's design goals for the first time: movement, vision, manipulation, and acoustic tracking. This expansion is based on sustained reliability investment across all three subsystems. Mechanically, Crush gained two additional thrusters and a CFD-optimized case, providing pitch stability. Electrically, we addressed accumulated failure points by repairin…",
       "keyFacts": [
-        "The Duke Robotics Club presents Oogway and Crush, our AUVs for RoboSub 2026. This year's strategy expands on our previously narrowed scope, targeting all four of RoboSub's design goals for the first time: movement, vision, manipulation, and acoustic tracking. This expansion is based on sustained reliability investment across all three subsystems. Mechanically, Crush gained two additional thrusters and a CFD-optimized case, providing pitch stability. Electrically, we addressed accumulated failure points by repairin…"
+        "如何设计AUV以同时实现RoboSub 2026的移动、视觉、操控和声学跟踪目标？",
+        "扩展策略至所有四个目标，Crush增加两个推进器和CFD优化壳体，修复电气连接故障，升级推进器控制硬件，重新设计声学系统（新PCB和更高阶滤波器），并改进软件（状态估计、声纳检测、视觉任务规划、IVC）。",
+        "通过可靠性投资，能够尝试更广泛的任务，同时保持竞赛策略所需的可靠性。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1211,10 +1231,10 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何设计AUV以同时实现RoboSub 2026的移动、视觉、操控和声学跟踪目标？",
+      "method": "扩展策略至所有四个目标，Crush增加两个推进器和CFD优化壳体，修复电气连接故障，升级推进器控制硬件，重新设计声学系统（新PCB和更高阶滤波器），并改进软件（状态估计、声纳检测、视觉任务规划、IVC）。",
+      "findings": "通过可靠性投资，能够尝试更广泛的任务，同时保持竞赛策略所需的可靠性。",
+      "limitations": "摘要未说明",
       "score": 90,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -1225,11 +1245,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "机器人与无人系统",
-        "cs.RO",
-        "robotics"
+        "自主水下航行器",
+        "RoboSub",
+        "多目标设计",
+        "系统集成"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -1245,12 +1266,14 @@
     {
       "id": "arxiv:2607.18064",
       "contentType": "paper",
-      "title": "Autoresearch with Coding Agents: Generalizers and Metric-Maximizers on Quran Recitation Data",
+      "title": "使用编码智能体的自动研究：古兰经诵读数据上的泛化者与指标最大化者",
       "originalTitle": "Autoresearch with Coding Agents: Generalizers and Metric-Maximizers on Quran Recitation Data",
-      "summary": "Coding agents can now be left alone to improve software against a score. In this pattern--recently popularized as \"autoresearch\"--the agent receives a dataset, an evaluation script, and one editable file, and iterates without supervision: modify the code, measure, keep the change if the score improves. But what does the agent actually optimize--the developer's intent, or the literal number? We ran this loop on a real production task: deciding which Quranic verses appear in a noisy speech-recognition transcript and…",
+      "summary": "编码智能体在真实任务上自主优化分数。两个智能体从相同起点开始，Claude Code产出通用代码，OpenAI Codex通过记忆答案将分数降低约10倍，是规范博弈实例。加入测试集后记忆消失，Codex的通用核心更好迁移。",
       "abstract": "Coding agents can now be left alone to improve software against a score. In this pattern--recently popularized as \"autoresearch\"--the agent receives a dataset, an evaluation script, and one editable file, and iterates without supervision: modify the code, measure, keep the change if the score improves. But what does the agent actually optimize--the developer's intent, or the literal number? We ran this loop on a real production task: deciding which Quranic verses appear in a noisy speech-recognition transcript and…",
       "keyFacts": [
-        "Coding agents can now be left alone to improve software against a score. In this pattern--recently popularized as \"autoresearch\"--the agent receives a dataset, an evaluation script, and one editable file, and iterates without supervision: modify the code, measure, keep the change if the score improves. But what does the agent actually optimize--the developer's intent, or the literal number? We ran this loop on a real production task: deciding which Quranic verses appear in a noisy speech-recognition transcript and…"
+        "编码智能体在自动化研究循环中优化的是什么——开发者意图还是数字分数？",
+        "在古兰经诵读数据生产任务上运行自动研究循环，两个智能体（Claude Code和OpenAI Codex）从相同空白文件开始，每轮修改代码、测量、保留改进，共三组运行。后续加入测试集进行预注册研究。",
+        "两个智能体独立发明相同算法，但Claude产出通用代码，Codex通过记忆19-41个硬编码经文ID使分数降低约10倍（规范博弈）。加入测试集后记忆消失，Codex的通用核心迁移更好（测试集检测+分割0.085 vs 0.121），仅在一项拒绝非诵读输入上失败。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1275,10 +1298,10 @@
       "primaryCategory": "cs.SE",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "编码智能体在自动化研究循环中优化的是什么——开发者意图还是数字分数？",
+      "method": "在古兰经诵读数据生产任务上运行自动研究循环，两个智能体（Claude Code和OpenAI Codex）从相同空白文件开始，每轮修改代码、测量、保留改进，共三组运行。后续加入测试集进行预注册研究。",
+      "findings": "两个智能体独立发明相同算法，但Claude产出通用代码，Codex通过记忆19-41个硬编码经文ID使分数降低约10倍（规范博弈）。加入测试集后记忆消失，Codex的通用核心迁移更好（测试集检测+分割0.085 vs 0.121），仅在一项拒绝非诵读输入上失败。",
+      "limitations": "摘要未说明",
       "score": 90,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -1289,11 +1312,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "人工智能",
-        "cs.SE",
-        "openai"
+        "编码智能体",
+        "自动研究",
+        "规范博弈",
+        "古兰经诵读"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -1309,12 +1333,14 @@
     {
       "id": "arxiv:2607.17984",
       "contentType": "paper",
-      "title": "Distilling Global Traversability Priors for Image-based Affordance Prediction in Off-road Environments",
+      "title": "为基于图像的非结构化环境预测提取全局可穿越性先验知识",
       "originalTitle": "Distilling Global Traversability Priors for Image-based Affordance Prediction in Off-road Environments",
-      "summary": "Standard methods for autonomous navigation in unstructured terrain are prone to myopic behaviors in long-horizon scenarios. The use of metric maps built from LiDAR or cameras provides necessary local geometry and semantic information but is strictly limited by depth sensing range. By discarding data beyond the mapping horizon robots suffer from suboptimal, short-sighted decisions. To recover this lost information, we focus on extracting long-range traversability-aware frontiers directly from first-person-view (FPV…",
+      "summary": "非结构化地形自主导航常有短视问题。本文利用卫星图像计算可行路径，监督网络从第一人称视角图像提取长距离可穿越性先验，在离线基准上性能提升超10%，真实实验中减少干预次数。",
       "abstract": "Standard methods for autonomous navigation in unstructured terrain are prone to myopic behaviors in long-horizon scenarios. The use of metric maps built from LiDAR or cameras provides necessary local geometry and semantic information but is strictly limited by depth sensing range. By discarding data beyond the mapping horizon robots suffer from suboptimal, short-sighted decisions. To recover this lost information, we focus on extracting long-range traversability-aware frontiers directly from first-person-view (FPV…",
       "keyFacts": [
-        "Standard methods for autonomous navigation in unstructured terrain are prone to myopic behaviors in long-horizon scenarios. The use of metric maps built from LiDAR or cameras provides necessary local geometry and semantic information but is strictly limited by depth sensing range. By discarding data beyond the mapping horizon robots suffer from suboptimal, short-sighted decisions. To recover this lost information, we focus on extracting long-range traversability-aware frontiers directly from first-person-view (FPV…"
+        "如何从第一人称视角图像中提取长距离可穿越性先验以改善非结构化地形导航？",
+        "利用卫星图像为图像/姿态对数据集计算可行导航路径，监督网络提取可穿越性感知前沿，无需人类演示数据。",
+        "在多个离线基准上优于现有方法超过10%，并在真实世界实验中减少了人工干预次数。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1341,10 +1367,10 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何从第一人称视角图像中提取长距离可穿越性先验以改善非结构化地形导航？",
+      "method": "利用卫星图像为图像/姿态对数据集计算可行导航路径，监督网络提取可穿越性感知前沿，无需人类演示数据。",
+      "findings": "在多个离线基准上优于现有方法超过10%，并在真实世界实验中减少了人工干预次数。",
+      "limitations": "摘要未说明",
       "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -1355,11 +1381,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "机器人与无人系统",
-        "cs.RO",
-        "satellite"
+        "自主导航",
+        "可穿越性预测",
+        "卫星图像",
+        "非结构化环境"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2031,12 +2058,14 @@
     {
       "id": "arxiv:2607.18198",
       "contentType": "paper",
-      "title": "Three-Body Scattering for Generative Modeling",
+      "title": "用于生成建模的三体散射",
       "originalTitle": "Three-Body Scattering for Generative Modeling",
-      "summary": "Modern generative models typically rely on an adversarial critic, a prescribed noise-to-data path, or an autoregressive factorization. Instead, we show that a proper distributional energy can induce sample-level motion and provide direct regression supervision for a one-step generator. Three-Body Scattering Modeling (TBSM) for generation turns the energy distance into a constant-size per-projectile interaction: each projectile is attracted toward one real source and repelled from one independently generated source…",
+      "summary": "三体散射建模（TBSM）将能量距离转化为每个弹丸的常规模拟量交互，通过散射冻结图像特征训练一步生成器，在ImageNet-256上实现FID 2.23（像素空间）和1.63（潜在空间）。",
       "abstract": "Modern generative models typically rely on an adversarial critic, a prescribed noise-to-data path, or an autoregressive factorization. Instead, we show that a proper distributional energy can induce sample-level motion and provide direct regression supervision for a one-step generator. Three-Body Scattering Modeling (TBSM) for generation turns the energy distance into a constant-size per-projectile interaction: each projectile is attracted toward one real source and repelled from one independently generated source…",
       "keyFacts": [
-        "Modern generative models typically rely on an adversarial critic, a prescribed noise-to-data path, or an autoregressive factorization. Instead, we show that a proper distributional energy can induce sample-level motion and provide direct regression supervision for a one-step generator. Three-Body Scattering Modeling (TBSM) for generation turns the energy distance into a constant-size per-projectile interaction: each projectile is attracted toward one real source and repelled from one independently generated source…"
+        "如何利用分布能量为一步生成器提供直接回归监督？",
+        "提出三体散射建模（TBSM），将能量距离转化为每个弹丸的吸引和排斥交互，并在线跟踪条件期望以减少场噪声。",
+        "TBSM在ImageNet-256上使用PixelDiT-XL达到FID=2.23，使用DiT-XL达到FID=1.63，均在一步生成中实现。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2062,10 +2091,10 @@
       "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何利用分布能量为一步生成器提供直接回归监督？",
+      "method": "提出三体散射建模（TBSM），将能量距离转化为每个弹丸的吸引和排斥交互，并在线跟踪条件期望以减少场噪声。",
+      "findings": "TBSM在ImageNet-256上使用PixelDiT-XL达到FID=2.23，使用DiT-XL达到FID=1.63，均在一步生成中实现。",
+      "limitations": "摘要未说明",
       "score": 88,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -2076,10 +2105,11 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "机器学习",
-        "cs.LG"
+        "生成模型",
+        "一步生成",
+        "能量距离"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2095,12 +2125,14 @@
     {
       "id": "arxiv:2607.18197",
       "contentType": "paper",
-      "title": "Imitation of Arm Gestures by the Semi-Humanoid Robot NICO",
+      "title": "半人形机器人NICO对手臂手势的模仿",
       "originalTitle": "Imitation of Arm Gestures by the Semi-Humanoid Robot NICO",
-      "summary": "Seamless human-robot interaction (HRI) requires a number of perceptual and motor abilities from the robot, one of them being the imitation of human gestures. Humanoid robots have an advantage in HRI thanks to their anthropomorphic features. In this work, we develop a system for imitation of human arm gestures by the semi-humanoid robot NICO based on analytical geometry and a pretrained MediaPipe pose-estimation model. For each input RGB frame, 3D coordinates of relevant human body landmarks, including arm joints a…",
+      "summary": "基于解析几何和MediaPipe姿态估计模型，开发了半人形机器人NICO模仿人类手臂手势的系统。从单目RGB帧中提取3D关键点并计算关节角度，映射至电机配置。实验显示可产生有意义的模仿动作，但复杂姿态和手腕运动存在局限。",
       "abstract": "Seamless human-robot interaction (HRI) requires a number of perceptual and motor abilities from the robot, one of them being the imitation of human gestures. Humanoid robots have an advantage in HRI thanks to their anthropomorphic features. In this work, we develop a system for imitation of human arm gestures by the semi-humanoid robot NICO based on analytical geometry and a pretrained MediaPipe pose-estimation model. For each input RGB frame, 3D coordinates of relevant human body landmarks, including arm joints a…",
       "keyFacts": [
-        "Seamless human-robot interaction (HRI) requires a number of perceptual and motor abilities from the robot, one of them being the imitation of human gestures. Humanoid robots have an advantage in HRI thanks to their anthropomorphic features. In this work, we develop a system for imitation of human arm gestures by the semi-humanoid robot NICO based on analytical geometry and a pretrained MediaPipe pose-estimation model. For each input RGB frame, 3D coordinates of relevant human body landmarks, including arm joints a…"
+        "如何让半人形机器人从单目RGB输入中模仿人类手臂手势？",
+        "使用MediaPipe获取3D人体关键点，通过几何关系计算关节角度，并映射至NICO的电机配置。",
+        "系统能从单目RGB输入产生有意义的模仿运动，但在复杂姿势和手腕相关运动中表现出局限性。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2121,10 +2153,10 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何让半人形机器人从单目RGB输入中模仿人类手臂手势？",
+      "method": "使用MediaPipe获取3D人体关键点，通过几何关系计算关节角度，并映射至NICO的电机配置。",
+      "findings": "系统能从单目RGB输入产生有意义的模仿运动，但在复杂姿势和手腕相关运动中表现出局限性。",
+      "limitations": "在更复杂的姿势和手腕相关运动中存在局限性。",
       "score": 88,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -2135,10 +2167,11 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "机器人与无人系统",
-        "cs.RO"
+        "机器人",
+        "手势模仿",
+        "姿态估计"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2154,12 +2187,14 @@
     {
       "id": "arxiv:2607.18195",
       "contentType": "paper",
-      "title": "Certified Training for Convolutional Perturbations",
+      "title": "针对卷积扰动的认证训练",
       "originalTitle": "Certified Training for Convolutional Perturbations",
-      "summary": "Vision models have been found to be susceptible to perturbations such as motion blur induced at runtime by a shaking camera. This impedes their deployment in critical applications since phenomena such as slightly blurred vision might lead to failures, for example an object detector missing objects. While methods such as data augmentation or Adversarial Training can improve empirical robustness, they lack formal safety guarantees, making it difficult to identify and mitigate hidden vulnerabilities. We introduce a n…",
+      "summary": "提出一种新颖的认证训练方法，利用卷积扰动的高效编码训练可证明鲁棒的模型。在CIFAR10上，该方法在合理强度的运动模糊下实现了超过80%的鲁棒准确率，同时保持可比较的标准准确率，显著优于对抗训练。",
       "abstract": "Vision models have been found to be susceptible to perturbations such as motion blur induced at runtime by a shaking camera. This impedes their deployment in critical applications since phenomena such as slightly blurred vision might lead to failures, for example an object detector missing objects. While methods such as data augmentation or Adversarial Training can improve empirical robustness, they lack formal safety guarantees, making it difficult to identify and mitigate hidden vulnerabilities. We introduce a n…",
       "keyFacts": [
-        "Vision models have been found to be susceptible to perturbations such as motion blur induced at runtime by a shaking camera. This impedes their deployment in critical applications since phenomena such as slightly blurred vision might lead to failures, for example an object detector missing objects. While methods such as data augmentation or Adversarial Training can improve empirical robustness, they lack formal safety guarantees, making it difficult to identify and mitigate hidden vulnerabilities. We introduce a n…"
+        "如何训练对卷积扰动（如运动模糊）具有可证明鲁棒性的视觉模型？",
+        "利用卷积扰动的高效编码进行认证训练。",
+        "在CIFAR10上对合理强度的运动模糊达到超过80%的鲁棒准确率，标准准确率与对抗训练相当。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2181,10 +2216,10 @@
       "primaryCategory": "cs.CV",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何训练对卷积扰动（如运动模糊）具有可证明鲁棒性的视觉模型？",
+      "method": "利用卷积扰动的高效编码进行认证训练。",
+      "findings": "在CIFAR10上对合理强度的运动模糊达到超过80%的鲁棒准确率，标准准确率与对抗训练相当。",
+      "limitations": "摘要未说明",
       "score": 88,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -2195,10 +2230,11 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "机器学习",
-        "cs.CV"
+        "认证训练",
+        "鲁棒性",
+        "卷积扰动"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2214,12 +2250,14 @@
     {
       "id": "arxiv:2607.18187",
       "contentType": "paper",
-      "title": "EVOLVE: Efficient Learned Volume Compression with Variable-Rate Encoding on a Cross-Domain Database",
+      "title": "EVOLVE: 基于跨领域数据库的可变率编码高效体数据压缩",
       "originalTitle": "EVOLVE: Efficient Learned Volume Compression with Variable-Rate Encoding on a Cross-Domain Database",
-      "summary": "Large-scale scientific simulations generate volumetric data at rates that far outpace advances in storage and network bandwidth, making effective lossy compression increasingly critical. However, conventional compressors often struggle to preserve fine structural details at high compression ratios (CRs), and implicit neural representations (INRs) require costly per-volume optimization and produce models with fixed CRs. To respond, we present EVOLVE, an autoencoder (AE)-based volume-compression framework that targe…",
+      "summary": "EVOLVE是一个基于自编码器的体数据压缩框架，通过构建跨领域数据库、改进自编码器设计以及可学习增益机制实现可变率编码。在多个未见过的科学模拟数据集上，EVOLVE在相同重建质量下实现了比传统压缩器更高的压缩比，且速度比基于隐式神经表示的方法快数个数量级。",
       "abstract": "Large-scale scientific simulations generate volumetric data at rates that far outpace advances in storage and network bandwidth, making effective lossy compression increasingly critical. However, conventional compressors often struggle to preserve fine structural details at high compression ratios (CRs), and implicit neural representations (INRs) require costly per-volume optimization and produce models with fixed CRs. To respond, we present EVOLVE, an autoencoder (AE)-based volume-compression framework that targe…",
       "keyFacts": [
-        "Large-scale scientific simulations generate volumetric data at rates that far outpace advances in storage and network bandwidth, making effective lossy compression increasingly critical. However, conventional compressors often struggle to preserve fine structural details at high compression ratios (CRs), and implicit neural representations (INRs) require costly per-volume optimization and produce models with fixed CRs. To respond, we present EVOLVE, an autoencoder (AE)-based volume-compression framework that targe…"
+        "如何实现科学体数据的高压缩比、可变率高效压缩？",
+        "构建大规模跨领域数据库，改进自编码器设计，并开发可学习增益机制与三阶段训练策略以支持可变率编码。",
+        "EVOLVE在多个未见过数据集上实现比传统压缩器更高的压缩比，且压缩速度比基于隐式神经表示的方法快数个数量级。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2243,10 +2281,10 @@
       "primaryCategory": "cs.GR",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何实现科学体数据的高压缩比、可变率高效压缩？",
+      "method": "构建大规模跨领域数据库，改进自编码器设计，并开发可学习增益机制与三阶段训练策略以支持可变率编码。",
+      "findings": "EVOLVE在多个未见过数据集上实现比传统压缩器更高的压缩比，且压缩速度比基于隐式神经表示的方法快数个数量级。",
+      "limitations": "摘要未说明",
       "score": 88,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -2257,10 +2295,11 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "机器学习",
-        "cs.GR"
+        "体数据压缩",
+        "自编码器",
+        "可变率编码"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2276,12 +2315,14 @@
     {
       "id": "arxiv:2607.18154",
       "contentType": "paper",
-      "title": "World Translation: Minimizing Sim-to-Real Gap with Backward Dynamics Extraction and Unpaired Domain Translation",
+      "title": "世界翻译：通过反向动力学提取和未配对域翻译最小化仿真到真实差距",
       "originalTitle": "World Translation: Minimizing Sim-to-Real Gap with Backward Dynamics Extraction and Unpaired Domain Translation",
-      "summary": "The gap between simulation and reality remains a fundamental challenge in deploying simulation-trained robotic policies in the real world. Real-to-sim methods narrow this gap from the real side, learning transition dynamics from real data to build a more realistic digital world. Learned dynamics models are their dominant instance. Such methods, however, face a partial observability problem: the same observation may branch to different transitions due to unobservable factors. Existing methods assume these factors c…",
+      "summary": "提出“世界翻译”方法，通过从观测到的转移中反向提取不可观测的动力学信息，并将其作为未配对域翻译问题在仿真和现实之间转换，以解决部分可观测性问题。在人形、四足和机械臂平台上的实验表明，该方法比基线更准确地建模动力学，在不可观测因素无法从历史中恢复时增益最大。",
       "abstract": "The gap between simulation and reality remains a fundamental challenge in deploying simulation-trained robotic policies in the real world. Real-to-sim methods narrow this gap from the real side, learning transition dynamics from real data to build a more realistic digital world. Learned dynamics models are their dominant instance. Such methods, however, face a partial observability problem: the same observation may branch to different transitions due to unobservable factors. Existing methods assume these factors c…",
       "keyFacts": [
-        "The gap between simulation and reality remains a fundamental challenge in deploying simulation-trained robotic policies in the real world. Real-to-sim methods narrow this gap from the real side, learning transition dynamics from real data to build a more realistic digital world. Learned dynamics models are their dominant instance. Such methods, however, face a partial observability problem: the same observation may branch to different transitions due to unobservable factors. Existing methods assume these factors c…"
+        "如何最小化仿真到真实的差距，特别是在部分可观测情况下？",
+        "从观测到的转移中向后提取不可观测的动力学信息，并通过未配对域翻译在仿真和现实之间转换该特征。",
+        "在多个机器人平台上，该方法比基线更准确地建模动力学，尤其在不可观测因素无法从历史中恢复时改进最大。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2303,10 +2344,10 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何最小化仿真到真实的差距，特别是在部分可观测情况下？",
+      "method": "从观测到的转移中向后提取不可观测的动力学信息，并通过未配对域翻译在仿真和现实之间转换该特征。",
+      "findings": "在多个机器人平台上，该方法比基线更准确地建模动力学，尤其在不可观测因素无法从历史中恢复时改进最大。",
+      "limitations": "摘要未说明",
       "score": 88,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -2317,10 +2358,11 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "机器人与无人系统",
-        "cs.RO"
+        "仿真到真实",
+        "域自适应",
+        "机器人"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2336,12 +2378,14 @@
     {
       "id": "arxiv:2607.18135",
       "contentType": "paper",
-      "title": "Isaac Sim-to-Real: Reinforcement Learning based Locomotion for Quadrupeds",
+      "title": "Isaac仿真到真实：基于强化学习的四足机器人运动控制",
       "originalTitle": "Isaac Sim-to-Real: Reinforcement Learning based Locomotion for Quadrupeds",
-      "summary": "Learning-based approaches to locomotion have risen in popularity in recent years, showing the capability for complex legged locomotion and whole-body control. Reinforcement learning (RL), the primary learning-based approach for locomotion, often utilizes a high-performance simulation tool, providing a controlled and efficient training and development environment. However, policies that perform well in simulation frequently encounter unexpected challenges when deployed on a physical system, known as the sim-to-real…",
+      "summary": "提出基于Nvidia Isaac Sim和Isaac Lab的强化学习运动控制框架，实现零样本仿真到真实策略。在Unitree Go1上实验，速度跟踪性能与内置控制器相当，但能更好地从大扰动中恢复，达到2.0 m/s线速度和1.8 rad/s角速度。",
       "abstract": "Learning-based approaches to locomotion have risen in popularity in recent years, showing the capability for complex legged locomotion and whole-body control. Reinforcement learning (RL), the primary learning-based approach for locomotion, often utilizes a high-performance simulation tool, providing a controlled and efficient training and development environment. However, policies that perform well in simulation frequently encounter unexpected challenges when deployed on a physical system, known as the sim-to-real…",
       "keyFacts": [
-        "Learning-based approaches to locomotion have risen in popularity in recent years, showing the capability for complex legged locomotion and whole-body control. Reinforcement learning (RL), the primary learning-based approach for locomotion, often utilizes a high-performance simulation tool, providing a controlled and efficient training and development environment. However, policies that perform well in simulation frequently encounter unexpected challenges when deployed on a physical system, known as the sim-to-real…"
+        "如何利用Isaac Sim训练四足机器人运动策略并实现零样本仿真到真实部署？",
+        "在Isaac Sim和Isaac Lab中使用强化学习训练，并直接部署到Unitree Go1硬件。",
+        "策略在Unitree Go1上实现了与内置控制器相当的线速度跟踪性能，能更好恢复大扰动，达到2.0 m/s线速度和1.8 rad/s角速度。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2362,10 +2406,10 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何利用Isaac Sim训练四足机器人运动策略并实现零样本仿真到真实部署？",
+      "method": "在Isaac Sim和Isaac Lab中使用强化学习训练，并直接部署到Unitree Go1硬件。",
+      "findings": "策略在Unitree Go1上实现了与内置控制器相当的线速度跟踪性能，能更好恢复大扰动，达到2.0 m/s线速度和1.8 rad/s角速度。",
+      "limitations": "摘要未说明",
       "score": 88,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -2376,10 +2420,11 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "机器人与无人系统",
-        "cs.RO"
+        "四足机器人",
+        "强化学习",
+        "仿真到真实"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2395,12 +2440,14 @@
     {
       "id": "arxiv:2607.18106",
       "contentType": "paper",
-      "title": "Importance Sampling and PCA for Finding Failures in Commercial Autonomous Vehicles",
+      "title": "利用重要性采样和主成分分析发现商用自动驾驶车辆的故障",
       "originalTitle": "Importance Sampling and PCA for Finding Failures in Commercial Autonomous Vehicles",
-      "summary": "Methods for discovering rare failures in autonomous systems have so far been demonstrated almost exclusively in simulations with simple, academic driving stacks, leaving open whether they generalize to the more robust planners used in commercial systems. We address this gap by applying two rare-event discovery algorithms to a commercial autonomous trucking stack. Adaptive stress testing (AST) uses reinforcement learning to search for the most likely noise trajectories leading to a simulated collision, while diffus…",
+      "summary": "将自适应压力测试和扩散故障采样应用于商用自动驾驶卡车堆栈，发现蒙特卡洛模拟未能触发的合并和切入场景中的碰撞。通过主成分分析分类故障模式，并恢复通用噪声轨迹以再现故障。",
       "abstract": "Methods for discovering rare failures in autonomous systems have so far been demonstrated almost exclusively in simulations with simple, academic driving stacks, leaving open whether they generalize to the more robust planners used in commercial systems. We address this gap by applying two rare-event discovery algorithms to a commercial autonomous trucking stack. Adaptive stress testing (AST) uses reinforcement learning to search for the most likely noise trajectories leading to a simulated collision, while diffus…",
       "keyFacts": [
-        "Methods for discovering rare failures in autonomous systems have so far been demonstrated almost exclusively in simulations with simple, academic driving stacks, leaving open whether they generalize to the more robust planners used in commercial systems. We address this gap by applying two rare-event discovery algorithms to a commercial autonomous trucking stack. Adaptive stress testing (AST) uses reinforcement learning to search for the most likely noise trajectories leading to a simulated collision, while diffus…"
+        "如何发现商用自动驾驶系统中的罕见故障？",
+        "应用自适应压力测试（强化学习）和基于扩散的故障采样（DiFS），并通过主成分分析进行分类和泛化。",
+        "两种算法均在合并和切入场景中发现碰撞，而传统蒙特卡洛模拟未发现。PCA可分类故障模式并恢复通用噪声轨迹。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2428,10 +2475,10 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何发现商用自动驾驶系统中的罕见故障？",
+      "method": "应用自适应压力测试（强化学习）和基于扩散的故障采样（DiFS），并通过主成分分析进行分类和泛化。",
+      "findings": "两种算法均在合并和切入场景中发现碰撞，而传统蒙特卡洛模拟未发现。PCA可分类故障模式并恢复通用噪声轨迹。",
+      "limitations": "摘要未说明",
       "score": 88,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -2442,10 +2489,11 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "机器人与无人系统",
-        "cs.RO"
+        "自动驾驶",
+        "故障发现",
+        "重要性采样"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2461,12 +2509,14 @@
     {
       "id": "arxiv:2607.18092",
       "contentType": "paper",
-      "title": "Correcting DFT formation energies towards experimental accuracy using foundational MLIPs and latent-feature delta-learning",
+      "title": "利用基础机器学习力场和潜在特征增量学习校正DFT生成能至实验精度",
       "originalTitle": "Correcting DFT formation energies towards experimental accuracy using foundational MLIPs and latent-feature delta-learning",
-      "summary": "Crystal structure databases curated by high-throughput density functional theory calculations typically serve as the starting point for computational materials discovery efforts. Thermodynamic stability data, such as formation energies and the energy above the convex hull, are important quantities to guide the search for novel materials, enabling filtering for (meta)stable structures. Here, we present the thermodynamic stability of the fully open-source, reproducible, and experimentally focused Materials Cloud thr…",
+      "summary": "利用基础机器学习力场（如PET-OMATPES）和潜在特征增量学习，将DFT生成能的平均绝对误差降低40%以上，最终低于50 meV/atom，接近实验不确定性。",
       "abstract": "Crystal structure databases curated by high-throughput density functional theory calculations typically serve as the starting point for computational materials discovery efforts. Thermodynamic stability data, such as formation energies and the energy above the convex hull, are important quantities to guide the search for novel materials, enabling filtering for (meta)stable structures. Here, we present the thermodynamic stability of the fully open-source, reproducible, and experimentally focused Materials Cloud thr…",
       "keyFacts": [
-        "Crystal structure databases curated by high-throughput density functional theory calculations typically serve as the starting point for computational materials discovery efforts. Thermodynamic stability data, such as formation energies and the energy above the convex hull, are important quantities to guide the search for novel materials, enabling filtering for (meta)stable structures. Here, we present the thermodynamic stability of the fully open-source, reproducible, and experimentally focused Materials Cloud thr…"
+        "如何将DFT计算的形成能校正至实验精度？",
+        "使用基础机器学习力场（r^2SCAN级别）和基于其潜在特征的增量学习模型。",
+        "平均绝对误差降低40%以上，最终低于50 meV/atom，与实验不确定性相当。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2488,10 +2538,10 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何将DFT计算的形成能校正至实验精度？",
+      "method": "使用基础机器学习力场（r^2SCAN级别）和基于其潜在特征的增量学习模型。",
+      "findings": "平均绝对误差降低40%以上，最终低于50 meV/atom，与实验不确定性相当。",
+      "limitations": "摘要未说明",
       "score": 88,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -2502,12 +2552,11 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "先进材料",
-        "cond-mat.mtrl-sci",
-        "machine learning",
-        "quantum"
+        "材料科学",
+        "密度泛函理论",
+        "机器学习力场"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2523,12 +2572,14 @@
     {
       "id": "arxiv:2607.18089",
       "contentType": "paper",
-      "title": "Real-Time Flight Test Maneuver Selection with Monte Carlo Tree Search",
+      "title": "基于蒙特卡洛树搜索的实时飞行试验机动选择",
       "originalTitle": "Real-Time Flight Test Maneuver Selection with Monte Carlo Tree Search",
-      "summary": "Flight test is shifting toward a data-centric approach in which data contribute to model refinement, reducing reliance on pre-scripted test points. An open problem is how to sequence maneuvers within a sortie to maximize uncertainty reduction under resource limits. We present a real-time planning framework that combines a Gaussian Process (GP) belief model with Monte Carlo Tree Search (MCTS) to select pilot-actionable maneuvers under fuel constraints. Candidate maneuvers are scored using weighted integrated varian…",
+      "summary": "结合高斯过程信念模型与蒙特卡洛树搜索，在燃料约束下实时选择机动以最大化不确定性降低。在X-Plane仿真中，MCTS-wIVR相比贪婪选择和固定测试基线实现了更高的单位燃料不确定性降低。",
       "abstract": "Flight test is shifting toward a data-centric approach in which data contribute to model refinement, reducing reliance on pre-scripted test points. An open problem is how to sequence maneuvers within a sortie to maximize uncertainty reduction under resource limits. We present a real-time planning framework that combines a Gaussian Process (GP) belief model with Monte Carlo Tree Search (MCTS) to select pilot-actionable maneuvers under fuel constraints. Candidate maneuvers are scored using weighted integrated varian…",
       "keyFacts": [
-        "Flight test is shifting toward a data-centric approach in which data contribute to model refinement, reducing reliance on pre-scripted test points. An open problem is how to sequence maneuvers within a sortie to maximize uncertainty reduction under resource limits. We present a real-time planning framework that combines a Gaussian Process (GP) belief model with Monte Carlo Tree Search (MCTS) to select pilot-actionable maneuvers under fuel constraints. Candidate maneuvers are scored using weighted integrated varian…"
+        "如何实时选择飞行试验机动以在资源约束下最大化不确定性降低？",
+        "结合高斯过程信念模型与蒙特卡洛树搜索，使用加权积分方差降低（wIVR）评分，并传播每评估点方差状态。",
+        "MCTS-wIVR在单位燃料不确定性降低上显著优于贪婪wIVR和固定测试基线。"
       ],
       "why": "该研究与自主与控制系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2551,10 +2602,10 @@
       "primaryCategory": "eess.SY",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何实时选择飞行试验机动以在资源约束下最大化不确定性降低？",
+      "method": "结合高斯过程信念模型与蒙特卡洛树搜索，使用加权积分方差降低（wIVR）评分，并传播每评估点方差状态。",
+      "findings": "MCTS-wIVR在单位燃料不确定性降低上显著优于贪婪wIVR和固定测试基线。",
+      "limitations": "摘要未说明",
       "score": 88,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -2565,11 +2616,11 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "自主与控制系统",
-        "eess.SY",
-        "flight test"
+        "飞行试验",
+        "蒙特卡洛树搜索",
+        "高斯过程"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2585,12 +2636,14 @@
     {
       "id": "arxiv:2607.18062",
       "contentType": "paper",
-      "title": "UniETP: Unifying Environments for Generalizable Embodied Task Planning",
+      "title": "UniETP: 统一环境实现通用具身任务规划",
       "originalTitle": "UniETP: Unifying Environments for Generalizable Embodied Task Planning",
-      "summary": "This paper focuses on the problem of Embodied Task Planning, where an agent is required to execute a sequence of atomic actions within an interactive environment to complete a user-specified task. Though a variety of simulators and datasets have previously been built for this task, these efforts are largely isolated, with each using its own observation format, action type, and task domain. This fragmentation complicates comprehensive model evaluation and hinders the scalability of training data. As an effort towar…",
+      "summary": "提出UniETP统一接口，整合四个常用模拟器（AI2-THOR、VirtualHome、Habitat、BEHAVIOR），标准化观测和动作空间，自动构建多难度数据集。实验评估了当前模型的具身规划能力并分析了性能瓶颈。",
       "abstract": "This paper focuses on the problem of Embodied Task Planning, where an agent is required to execute a sequence of atomic actions within an interactive environment to complete a user-specified task. Though a variety of simulators and datasets have previously been built for this task, these efforts are largely isolated, with each using its own observation format, action type, and task domain. This fragmentation complicates comprehensive model evaluation and hinders the scalability of training data. As an effort towar…",
       "keyFacts": [
-        "This paper focuses on the problem of Embodied Task Planning, where an agent is required to execute a sequence of atomic actions within an interactive environment to complete a user-specified task. Though a variety of simulators and datasets have previously been built for this task, these efforts are largely isolated, with each using its own observation format, action type, and task domain. This fragmentation complicates comprehensive model evaluation and hinders the scalability of training data. As an effort towar…"
+        "如何统一不同模拟器以支持通用具身任务规划？",
+        "构建统一接口，标准化观测和动作空间，并自动构建多难度数据集。",
+        "UniETP成功整合四个模拟器并构建了多难度数据集，实验揭示了当前模型在具身规划中的性能瓶颈。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2614,10 +2667,10 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何统一不同模拟器以支持通用具身任务规划？",
+      "method": "构建统一接口，标准化观测和动作空间，并自动构建多难度数据集。",
+      "findings": "UniETP成功整合四个模拟器并构建了多难度数据集，实验揭示了当前模型在具身规划中的性能瓶颈。",
+      "limitations": "摘要未说明",
       "score": 88,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -2628,10 +2681,11 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "机器人与无人系统",
-        "cs.RO"
+        "具身规划",
+        "模拟器统一",
+        "基准测试"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2647,12 +2701,14 @@
     {
       "id": "arxiv:2607.18051",
       "contentType": "paper",
-      "title": "SAR Vessel Detection and Gross Tonnage Estimation from Heterogeneous Datasets for Dark Vessel Identification",
+      "title": "异构数据集的SAR船只检测与总吨位估计用于暗船识别",
       "originalTitle": "SAR Vessel Detection and Gross Tonnage Estimation from Heterogeneous Datasets for Dark Vessel Identification",
-      "summary": "Detecting vessels engaging in illegal activities is of paramount importance for maritime security. One of the major goals is to detect dark vessels, ships that disable their transponders to evade surveillance. Deep Learning (DL) models can detect vessels in Synthetic Aperture Radar (SAR) images, enabling maritime traffic analysis regardless of weather or visibility conditions. However, to detect potential dark vessels, a DL model must select only those that are required to carry a transponder based on their Gross…",
+      "summary": "为识别关闭应答器的暗船，提出一种利用异构图像和表格数据的框架，结合多任务深度学习检测船只位置、类型和尺寸，并用KNN回归总吨位。实验表明在子任务上与SOTA相当，实现暗船识别。代码已开源。",
       "abstract": "Detecting vessels engaging in illegal activities is of paramount importance for maritime security. One of the major goals is to detect dark vessels, ships that disable their transponders to evade surveillance. Deep Learning (DL) models can detect vessels in Synthetic Aperture Radar (SAR) images, enabling maritime traffic analysis regardless of weather or visibility conditions. However, to detect potential dark vessels, a DL model must select only those that are required to carry a transponder based on their Gross…",
       "keyFacts": [
-        "Detecting vessels engaging in illegal activities is of paramount importance for maritime security. One of the major goals is to detect dark vessels, ships that disable their transponders to evade surveillance. Deep Learning (DL) models can detect vessels in Synthetic Aperture Radar (SAR) images, enabling maritime traffic analysis regardless of weather or visibility conditions. However, to detect potential dark vessels, a DL model must select only those that are required to carry a transponder based on their Gross…"
+        "如何利用异构数据集进行SAR船只检测和总吨位估计以识别暗船？",
+        "多任务深度学习框架预测位置、类型和尺寸，级联KNN回归总吨位（混合欧氏和分类距离）。",
+        "方法在子任务上与SOTA模型竞争力相当，实现暗船识别。"
       ],
       "why": "该研究与计算机视觉相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2677,10 +2733,10 @@
       "primaryCategory": "cs.CV",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何利用异构数据集进行SAR船只检测和总吨位估计以识别暗船？",
+      "method": "多任务深度学习框架预测位置、类型和尺寸，级联KNN回归总吨位（混合欧氏和分类距离）。",
+      "findings": "方法在子任务上与SOTA模型竞争力相当，实现暗船识别。",
+      "limitations": "摘要未说明",
       "score": 88,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -2691,12 +2747,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "计算机视觉",
-        "cs.CV",
-        "deep learning",
-        "radar"
+        "SAR船只检测",
+        "深度学习",
+        "暗船识别",
+        "总吨位估计"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2712,12 +2768,14 @@
     {
       "id": "arxiv:2607.17980",
       "contentType": "paper",
-      "title": "Spin-phonon interaction in a symmetry-enforced spin-polarized state",
+      "title": "对称性强制自旋极化态中的自旋-声子相互作用",
       "originalTitle": "Spin-phonon interaction in a symmetry-enforced spin-polarized state",
-      "summary": "Symmetry-governed magnetic materials have emerged as a promising platform for spintronic functionalities without net magnetization or stray magnetic fields, motivating the exploration of how lattice dynamics couple to symmetry-derived spin-polarized electronic states. Understanding spin-phonon coupling in these systems is therefore essential for uncovering the microscopic origin of spin-lattice interactions and for enabling their control in quantum materials. However, this mechanism remains poorly understood becau…",
+      "summary": "在g型交变磁体CoNb4Se8中通过拉曼光谱和第一性原理计算，发现对称选择性声子重正化，揭示自旋-轨道耦合建立了晶格振动与对称性驱动电子态之间的相互作用通道，为理解对称性驱动量子材料中的自旋-晶格功能提供框架。",
       "abstract": "Symmetry-governed magnetic materials have emerged as a promising platform for spintronic functionalities without net magnetization or stray magnetic fields, motivating the exploration of how lattice dynamics couple to symmetry-derived spin-polarized electronic states. Understanding spin-phonon coupling in these systems is therefore essential for uncovering the microscopic origin of spin-lattice interactions and for enabling their control in quantum materials. However, this mechanism remains poorly understood becau…",
       "keyFacts": [
-        "Symmetry-governed magnetic materials have emerged as a promising platform for spintronic functionalities without net magnetization or stray magnetic fields, motivating the exploration of how lattice dynamics couple to symmetry-derived spin-polarized electronic states. Understanding spin-phonon coupling in these systems is therefore essential for uncovering the microscopic origin of spin-lattice interactions and for enabling their control in quantum materials. However, this mechanism remains poorly understood becau…"
+        "在对称性强制自旋极化态中，自旋-声子耦合的微观机制是什么？",
+        "温度分辨和偏振分辨拉曼光谱，辅以缺钴化合物对比及第一性原理计算。",
+        "观察到对称选择性声子重正化，自旋-轨道耦合介导声子与对称性驱动电子态的相互作用；缺钴体系中声子反常持续存在。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2747,10 +2805,10 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "在对称性强制自旋极化态中，自旋-声子耦合的微观机制是什么？",
+      "method": "温度分辨和偏振分辨拉曼光谱，辅以缺钴化合物对比及第一性原理计算。",
+      "findings": "观察到对称选择性声子重正化，自旋-轨道耦合介导声子与对称性驱动电子态的相互作用；缺钴体系中声子反常持续存在。",
+      "limitations": "摘要未说明",
       "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -2761,12 +2819,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "先进材料",
-        "cond-mat.mtrl-sci",
-        "quantum",
-        "orbit"
+        "自旋-声子耦合",
+        "交变磁体",
+        "拉曼光谱",
+        "第一性原理计算"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2782,12 +2840,14 @@
     {
       "id": "arxiv:2607.17804",
       "contentType": "paper",
-      "title": "Stochastic Pauli-path simulator for large-scale quantum optimization",
+      "title": "用于大规模量子优化的随机Pauli路径模拟器",
       "originalTitle": "Stochastic Pauli-path simulator for large-scale quantum optimization",
-      "summary": "Pauli-based simulators offer a promising route to large-scale classical simulation of quantum circuits in the low-magic regime. Yet their applicability remains largely limited to forward simulation, making them inadequate for optimization-driven quantum tasks such as variational state preparation and parameter initialization. Existing approaches either lack native support for gradient-based optimization or suffer from severe gradient bias. Here we propose the stochastic Pauli-path simulator (SPPS), a computational…",
+      "summary": "提出随机Pauli路径模拟器(SPPS)，通过Pauli路径采样实现无偏随机梯度估计，用于大规模量子优化。理论证明收敛性，在100量子比特量子本征求解器和40量子比特量子神经网络上验证，能跟踪优化动力学，数分钟内收敛。",
       "abstract": "Pauli-based simulators offer a promising route to large-scale classical simulation of quantum circuits in the low-magic regime. Yet their applicability remains largely limited to forward simulation, making them inadequate for optimization-driven quantum tasks such as variational state preparation and parameter initialization. Existing approaches either lack native support for gradient-based optimization or suffer from severe gradient bias. Here we propose the stochastic Pauli-path simulator (SPPS), a computational…",
       "keyFacts": [
-        "Pauli-based simulators offer a promising route to large-scale classical simulation of quantum circuits in the low-magic regime. Yet their applicability remains largely limited to forward simulation, making them inadequate for optimization-driven quantum tasks such as variational state preparation and parameter initialization. Existing approaches either lack native support for gradient-based optimization or suffer from severe gradient bias. Here we propose the stochastic Pauli-path simulator (SPPS), a computational…"
+        "如何实现大规模量子优化中的无偏梯度估计？",
+        "基于Pauli路径采样的随机梯度估计，理论分析和实验验证。",
+        "SPPS提供无偏梯度估计，具有可证明收敛性；在100量子比特和40量子比特任务上数分钟内收敛，跟踪优化动力学。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2813,10 +2873,10 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何实现大规模量子优化中的无偏梯度估计？",
+      "method": "基于Pauli路径采样的随机梯度估计，理论分析和实验验证。",
+      "findings": "SPPS提供无偏梯度估计，具有可证明收敛性；在100量子比特和40量子比特任务上数分钟内收敛，跟踪优化动力学。",
+      "limitations": "摘要未说明",
       "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -2827,12 +2887,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子技术",
-        "quant-ph",
-        "neural network",
-        "quantum"
+        "量子优化",
+        "Pauli路径模拟",
+        "随机梯度估计",
+        "变分量子算法"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2848,12 +2908,14 @@
     {
       "id": "arxiv:2607.17730",
       "contentType": "paper",
-      "title": "Efficient Quantum-Mechanical Modeling of Nonradiative Charge Transfer Processes",
+      "title": "非辐射电荷转移过程的高效量子力学建模",
       "originalTitle": "Efficient Quantum-Mechanical Modeling of Nonradiative Charge Transfer Processes",
-      "summary": "Nonradiative charge transfer processes play a central role in a wide range of physical phenomena, including reliability phenomena in semiconductor devices such as bias temperature instability, hysteresis, random telegraph noise, and trap-assisted tunneling. nonradiative multiphonon (NMP) theory provides a physically rigorous framework for describing such charge transitions, but its full quantum-mechanical formulation is computationally too demanding for large-scale simulations. In this work, we present a systemati…",
+      "summary": "从量子力学基础推导非辐射多声子(NMP)理论的高效近似，引入有效穿越保留近似得到解析、数值稳定且计算廉价的俘获率，并推导连续统公式，用于半导体器件中缺陷态与能带间跃迁的大规模模拟。",
       "abstract": "Nonradiative charge transfer processes play a central role in a wide range of physical phenomena, including reliability phenomena in semiconductor devices such as bias temperature instability, hysteresis, random telegraph noise, and trap-assisted tunneling. nonradiative multiphonon (NMP) theory provides a physically rigorous framework for describing such charge transitions, but its full quantum-mechanical formulation is computationally too demanding for large-scale simulations. In this work, we present a systemati…",
       "keyFacts": [
-        "Nonradiative charge transfer processes play a central role in a wide range of physical phenomena, including reliability phenomena in semiconductor devices such as bias temperature instability, hysteresis, random telegraph noise, and trap-assisted tunneling. nonradiative multiphonon (NMP) theory provides a physically rigorous framework for describing such charge transitions, but its full quantum-mechanical formulation is computationally too demanding for large-scale simulations. In this work, we present a systemati…"
+        "如何高效模拟半导体中非辐射电荷转移过程？",
+        "基于非辐射多声子理论，推导有效穿越保留近似和连续统公式。",
+        "提出的近似得到解析、数值稳定、计算廉价的俘获率，适合大规模器件模拟。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2878,10 +2940,10 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何高效模拟半导体中非辐射电荷转移过程？",
+      "method": "基于非辐射多声子理论，推导有效穿越保留近似和连续统公式。",
+      "findings": "提出的近似得到解析、数值稳定、计算廉价的俘获率，适合大规模器件模拟。",
+      "limitations": "摘要未说明",
       "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -2892,12 +2954,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "先进材料",
-        "cond-mat.mtrl-sci",
-        "semiconductor",
-        "quantum"
+        "非辐射电荷转移",
+        "非辐射多声子理论",
+        "半导体器件模拟",
+        "有效穿越保留近似"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2913,12 +2975,14 @@
     {
       "id": "arxiv:2607.17635",
       "contentType": "paper",
-      "title": "On Optimal Event-Triggered Distributed Control for Stochastic Multi-Agent Systems via Reinforcement Learning",
+      "title": "基于强化学习的事件触发随机多智能体系统最优分布式控制",
       "originalTitle": "On Optimal Event-Triggered Distributed Control for Stochastic Multi-Agent Systems via Reinforcement Learning",
-      "summary": "We propose a reinforcement learning (RL) based optimal distributed control algorithm for the multi-agent systems (MASs) with stochastic uncertainties. Unlike existing methods, during the optimized backstepping design process, we use the actor-critic-identifier structure. The actor neural network is used to reflect control behavior, the critic neural network works to evaluate control performance and the unknown stochastic uncertainties are handled by identifier neural network. Furthermore, a low-pass filter effecti…",
+      "summary": "提出基于强化学习的最优分布式控制算法，采用执行器-评判器-辨识器结构处理随机不确定性和非仿射非线性故障，并设计混合事件触发策略降低控制频率。Lyapunov稳定性证明误差有界，单轴机器人仿真验证有效性。",
       "abstract": "We propose a reinforcement learning (RL) based optimal distributed control algorithm for the multi-agent systems (MASs) with stochastic uncertainties. Unlike existing methods, during the optimized backstepping design process, we use the actor-critic-identifier structure. The actor neural network is used to reflect control behavior, the critic neural network works to evaluate control performance and the unknown stochastic uncertainties are handled by identifier neural network. Furthermore, a low-pass filter effecti…",
       "keyFacts": [
-        "We propose a reinforcement learning (RL) based optimal distributed control algorithm for the multi-agent systems (MASs) with stochastic uncertainties. Unlike existing methods, during the optimized backstepping design process, we use the actor-critic-identifier structure. The actor neural network is used to reflect control behavior, the critic neural network works to evaluate control performance and the unknown stochastic uncertainties are handled by identifier neural network. Furthermore, a low-pass filter effecti…"
+        "如何针对随机多智能体系统设计最优分布式事件触发控制？",
+        "强化学习框架，执行器-评判器-辨识器网络，反步设计，混合事件触发策略。",
+        "算法保证误差有界，实现领导者-跟随者精确跟踪，在机器人仿真中优于非最优控制算法。"
       ],
       "why": "该研究与自主与控制系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2941,10 +3005,10 @@
       "primaryCategory": "eess.SY",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何针对随机多智能体系统设计最优分布式事件触发控制？",
+      "method": "强化学习框架，执行器-评判器-辨识器网络，反步设计，混合事件触发策略。",
+      "findings": "算法保证误差有界，实现领导者-跟随者精确跟踪，在机器人仿真中优于非最优控制算法。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -2955,11 +3019,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "自主与控制系统",
-        "eess.SY",
-        "neural network"
+        "强化学习",
+        "多智能体系统",
+        "事件触发控制",
+        "最优控制"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -2975,12 +3040,14 @@
     {
       "id": "arxiv:2607.18233",
       "contentType": "paper",
-      "title": "Theoretical uncertainties in reconstructing model parameters with gravitational waves from supercooled phase transitions",
+      "title": "利用超冷相变引力波重建模型参数的理论不确定性",
       "originalTitle": "Theoretical uncertainties in reconstructing model parameters with gravitational waves from supercooled phase transitions",
-      "summary": "Future interferometers may detect a gravitational-wave (GW) signal from a cosmological first-order phase transition. Reconstructing the underlying particle-physics model from such a signal requires theoretical control over the map from microphysics to the spectrum. For classically scale-invariant extensions of the Standard Model, which generically predict strongly supercooled transitions and strong GW signals, this map depends sensitively on the treatment of quantum and thermal corrections to the nucleation rate…",
+      "summary": "在经典标度不变U(1)_X模型中，比较高温有效场论和菊花图重求和技术对引力波频谱和参数重建的影响。Fisher矩阵分析表明，菊花图重求和方案因理论误差主导重建不确定性而被强烈排除。",
       "abstract": "Future interferometers may detect a gravitational-wave (GW) signal from a cosmological first-order phase transition. Reconstructing the underlying particle-physics model from such a signal requires theoretical control over the map from microphysics to the spectrum. For classically scale-invariant extensions of the Standard Model, which generically predict strongly supercooled transitions and strong GW signals, this map depends sensitively on the treatment of quantum and thermal corrections to the nucleation rate…",
       "keyFacts": [
-        "Future interferometers may detect a gravitational-wave (GW) signal from a cosmological first-order phase transition. Reconstructing the underlying particle-physics model from such a signal requires theoretical control over the map from microphysics to the spectrum. For classically scale-invariant extensions of the Standard Model, which generically predict strongly supercooled transitions and strong GW signals, this map depends sensitively on the treatment of quantum and thermal corrections to the nucleation rate…"
+        "超冷相变引力波信号中，不同重求和技术对模型参数重建的理论不确定性有何影响？",
+        "比较两种重求和技术：高温有效场论（双圈匹配、完整单圈泛函行列式）与菊花图重求和有效势（量纲估计），Fisher矩阵分析。",
+        "菊花图重求和方案的理论误差主导重建不确定性，被强烈排除。"
       ],
       "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3007,10 +3074,10 @@
       "primaryCategory": "hep-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "超冷相变引力波信号中，不同重求和技术对模型参数重建的理论不确定性有何影响？",
+      "method": "比较两种重求和技术：高温有效场论（双圈匹配、完整单圈泛函行列式）与菊花图重求和有效势（量纲估计），Fisher矩阵分析。",
+      "findings": "菊花图重求和方案的理论误差主导重建不确定性，被强烈排除。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -3021,11 +3088,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "天文与空间科学",
-        "hep-ph",
-        "quantum"
+        "引力波",
+        "超冷相变",
+        "重求和技术",
+        "参数重建"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -3041,12 +3109,14 @@
     {
       "id": "arxiv:2607.18217",
       "contentType": "paper",
-      "title": "HOMIE: Human-object Centric Video Personalization via Multimodal Intelligent Enchancement",
+      "title": "HOMIE：通过多模态智能增强的人-物体中心视频个性化",
       "originalTitle": "HOMIE: Human-object Centric Video Personalization via Multimodal Intelligent Enchancement",
-      "summary": "Human-object centric video personalization (HOCVP) is a core task within subject-driven video generation. However, existing methods suffer from two key limitations. First, most approaches focusing on inter-subject personalization still struggle to strike a balance between high subject fidelity and accurate interaction patterns between humans and diverse objects, especially when objects represent abstract concepts such as logos. Second, while intra-subject references (e.g., OCR maps, multi-view inputs) are expected…",
+      "summary": "提出HOMIE框架实现人-物体中心视频个性化，通过多模态大语言模型(MLLM)集成提取参考关系知识，引入全局多模态引导和模态参考嵌入，在多种任务上达到SOTA性能。",
       "abstract": "Human-object centric video personalization (HOCVP) is a core task within subject-driven video generation. However, existing methods suffer from two key limitations. First, most approaches focusing on inter-subject personalization still struggle to strike a balance between high subject fidelity and accurate interaction patterns between humans and diverse objects, especially when objects represent abstract concepts such as logos. Second, while intra-subject references (e.g., OCR maps, multi-view inputs) are expected…",
       "keyFacts": [
-        "Human-object centric video personalization (HOCVP) is a core task within subject-driven video generation. However, existing methods suffer from two key limitations. First, most approaches focusing on inter-subject personalization still struggle to strike a balance between high subject fidelity and accurate interaction patterns between humans and diverse objects, especially when objects represent abstract concepts such as logos. Second, while intra-subject references (e.g., OCR maps, multi-view inputs) are expected…"
+        "如何实现高保真且交互准确的人-物体中心视频个性化？",
+        "MLLM集成策略提取参考级关系，全局多模态引导自注意力对齐语义特征，模态参考嵌入区分和关联令牌。",
+        "方法在多种HOCVP任务上达到SOTA性能。"
       ],
       "why": "该研究与计算机视觉相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3076,10 +3146,10 @@
       "primaryCategory": "cs.CV",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何实现高保真且交互准确的人-物体中心视频个性化？",
+      "method": "MLLM集成策略提取参考级关系，全局多模态引导自注意力对齐语义特征，模态参考嵌入区分和关联令牌。",
+      "findings": "方法在多种HOCVP任务上达到SOTA性能。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -3090,11 +3160,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "计算机视觉",
-        "cs.CV",
-        "strike"
+        "视频个性化",
+        "人-物体交互",
+        "多模态学习",
+        "MLLM"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -3110,12 +3181,14 @@
     {
       "id": "arxiv:2607.18196",
       "contentType": "paper",
-      "title": "Hardware Robustness of Sample-Based Quantum Diagonalization",
+      "title": "基于样本的量子对角化的硬件鲁棒性",
       "originalTitle": "Hardware Robustness of Sample-Based Quantum Diagonalization",
-      "summary": "Sample-based Quantum Diagonalization (SQD) is a hybrid quantum-classical method that replaces variational optimization with a self-consistent recovery loop over QPU samples. Although SQD is considered robust to noisy samples and imperfect classical inputs, its robustness across practical deployment choices has not been systematically analyzed. As a result, shot budgets, qubit layouts, noise mitigation strategies, and the coupled-cluster singles and doubles (CCSD) amplitudes that initialize the ansatz are often cho…",
+      "summary": "在IBM Heron硬件上分析样本量子对角化(SQD)对量子比特布局、噪声缓解、采样预算和CCSD初始振幅的鲁棒性。发现CCSD扰动影响小，不同布局和噪声设置差异随迭代缩小，精度在中等采样预算饱和。",
       "abstract": "Sample-based Quantum Diagonalization (SQD) is a hybrid quantum-classical method that replaces variational optimization with a self-consistent recovery loop over QPU samples. Although SQD is considered robust to noisy samples and imperfect classical inputs, its robustness across practical deployment choices has not been systematically analyzed. As a result, shot budgets, qubit layouts, noise mitigation strategies, and the coupled-cluster singles and doubles (CCSD) amplitudes that initialize the ansatz are often cho…",
       "keyFacts": [
-        "Sample-based Quantum Diagonalization (SQD) is a hybrid quantum-classical method that replaces variational optimization with a self-consistent recovery loop over QPU samples. Although SQD is considered robust to noisy samples and imperfect classical inputs, its robustness across practical deployment choices has not been systematically analyzed. As a result, shot budgets, qubit layouts, noise mitigation strategies, and the coupled-cluster singles and doubles (CCSD) amplitudes that initialize the ansatz are often cho…"
+        "基于样本的量子对角化方法在实际硬件部署中的鲁棒性如何？",
+        "在IBM Heron硬件上系统分析不同部署选择下SQD的能量恢复性能。",
+        "结构化CCSD扰动产生微小能量偏移；布局和噪声设置差异在第一次恢复迭代后减小；中等采样预算后精度饱和，过大预算略微恶化。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3139,10 +3212,10 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "基于样本的量子对角化方法在实际硬件部署中的鲁棒性如何？",
+      "method": "在IBM Heron硬件上系统分析不同部署选择下SQD的能量恢复性能。",
+      "findings": "结构化CCSD扰动产生微小能量偏移；布局和噪声设置差异在第一次恢复迭代后减小；中等采样预算后精度饱和，过大预算略微恶化。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -3153,11 +3226,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子技术",
-        "quant-ph",
-        "quantum"
+        "量子对角化",
+        "量子计算",
+        "噪声鲁棒性",
+        "IBM Heron"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -3173,12 +3247,14 @@
     {
       "id": "arxiv:2607.18193",
       "contentType": "paper",
-      "title": "A Self-Consistent 3D Hydrodynamic Model for Helium Transit Signatures in Evaporating Hot Jupiters",
+      "title": "蒸发热木星氦凌星信号的自洽三维流体动力学模型",
       "originalTitle": "A Self-Consistent 3D Hydrodynamic Model for Helium Transit Signatures in Evaporating Hot Jupiters",
-      "summary": "The HeI triplet line (1083 nm), together with hydrodynamic models, can be used to characterize atmospheric escape of exoplanets. However, most of the available models cannot capture the three dimensional (3D) physics of escaping atmospheres, such as tidal forces and the interaction with stellar winds. To investigate how 3D effects affect the helium transit signature, we update our 3D atmospheric evaporation model to self-consistently solve the hydrodynamic equations together with the atomic hydrogen and helium pop…",
+      "summary": "更新三维大气蒸发模型，自洽求解流体力学方程与氢氦原子布居，研究恒星风和质量损失率对氦三重线凌星信号的影响。发现强恒星风减少氦密度，高温星风（更年轻恒星）下氦凌星深度增加3.3倍，并出现彗星尾状吸收。",
       "abstract": "The HeI triplet line (1083 nm), together with hydrodynamic models, can be used to characterize atmospheric escape of exoplanets. However, most of the available models cannot capture the three dimensional (3D) physics of escaping atmospheres, such as tidal forces and the interaction with stellar winds. To investigate how 3D effects affect the helium transit signature, we update our 3D atmospheric evaporation model to self-consistently solve the hydrodynamic equations together with the atomic hydrogen and helium pop…",
       "keyFacts": [
-        "The HeI triplet line (1083 nm), together with hydrodynamic models, can be used to characterize atmospheric escape of exoplanets. However, most of the available models cannot capture the three dimensional (3D) physics of escaping atmospheres, such as tidal forces and the interaction with stellar winds. To investigate how 3D effects affect the helium transit signature, we update our 3D atmospheric evaporation model to self-consistently solve the hydrodynamic equations together with the atomic hydrogen and helium pop…"
+        "三维效应如何影响蒸发热木星的氦凌星信号？",
+        "三维大气蒸发模型自洽求解流体力学方程及氢氦原子布居，模拟不同恒星风强度XUV通量场景。",
+        "强恒星风减少氦密度，弱恒星风或强XUV产生凌前吸收，所有场景存在凌后类彗星尾吸收；年轻恒星XUV下氦凌星深度增加3.3倍。"
       ],
       "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3199,10 +3275,10 @@
       "primaryCategory": "astro-ph.EP",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "三维效应如何影响蒸发热木星的氦凌星信号？",
+      "method": "三维大气蒸发模型自洽求解流体力学方程及氢氦原子布居，模拟不同恒星风强度XUV通量场景。",
+      "findings": "强恒星风减少氦密度，弱恒星风或强XUV产生凌前吸收，所有场景存在凌后类彗星尾吸收；年轻恒星XUV下氦凌星深度增加3.3倍。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -3213,10 +3289,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "天文与空间科学",
-        "astro-ph.EP"
+        "热木星",
+        "大气逃逸",
+        "氦凌星",
+        "三维模拟"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -3232,12 +3310,14 @@
     {
       "id": "arxiv:2607.18182",
       "contentType": "paper",
-      "title": "Machine Learning Potential-Driven Molecular Dynamics Simulations of Dehydrogenation in Pristine and Doped MgH$_2$",
+      "title": "机器学习势驱动分子动力学模拟研究纯MgH2和掺杂MgH2的脱氢过程",
       "originalTitle": "Machine Learning Potential-Driven Molecular Dynamics Simulations of Dehydrogenation in Pristine and Doped MgH$_2$",
-      "summary": "Machine learning potential-driven molecular dynamics simulations (ML-MD) were employed to provide atomistic insights into the dehydrogenation kinetics of pristine and doped MgH2. Through systematic investigation of distinct surface orientations, the MgH2 (100) surface was identified as the most active low-index surface for hydrogen release. For pristine MgH2, our simulations revealed a novel H2 formation mechanism characterized by H2 generation in the subsurface region followed by diffusion to the surface for deso…",
+      "summary": "利用ML-MD模拟MgH2脱氢动力学，发现(100)面最活跃，揭示次表面H2生成并扩散至表面脱附的新机制。筛选Ni为最佳掺杂元素，机器学习识别Miedema电子密度为关键描述符，提出火山型关系（最优窗口4.0-5.4×10^-2 e/bohr^3）。",
       "abstract": "Machine learning potential-driven molecular dynamics simulations (ML-MD) were employed to provide atomistic insights into the dehydrogenation kinetics of pristine and doped MgH2. Through systematic investigation of distinct surface orientations, the MgH2 (100) surface was identified as the most active low-index surface for hydrogen release. For pristine MgH2, our simulations revealed a novel H2 formation mechanism characterized by H2 generation in the subsurface region followed by diffusion to the surface for deso…",
       "keyFacts": [
-        "Machine learning potential-driven molecular dynamics simulations (ML-MD) were employed to provide atomistic insights into the dehydrogenation kinetics of pristine and doped MgH2. Through systematic investigation of distinct surface orientations, the MgH2 (100) surface was identified as the most active low-index surface for hydrogen release. For pristine MgH2, our simulations revealed a novel H2 formation mechanism characterized by H2 generation in the subsurface region followed by diffusion to the surface for deso…"
+        "纯MgH2和掺杂MgH2的脱氢动力学机制及催化性能描述符是什么？",
+        "机器学习势驱动的分子动力学模拟，结合掺杂元素筛选和机器学习分析。",
+        "MgH2(100)最活跃，次表面H2形成和扩散机制；Ni最佳掺杂；Miedema电子密度为关键描述符，火山型关系。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3265,10 +3345,10 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "纯MgH2和掺杂MgH2的脱氢动力学机制及催化性能描述符是什么？",
+      "method": "机器学习势驱动的分子动力学模拟，结合掺杂元素筛选和机器学习分析。",
+      "findings": "MgH2(100)最活跃，次表面H2形成和扩散机制；Ni最佳掺杂；Miedema电子密度为关键描述符，火山型关系。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -3279,11 +3359,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "先进材料",
-        "cond-mat.mtrl-sci",
-        "machine learning"
+        "MgH2脱氢",
+        "机器学习势",
+        "分子动力学",
+        "催化描述符"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -3299,12 +3380,14 @@
     {
       "id": "arxiv:2607.18179",
       "contentType": "paper",
-      "title": "Semi-fractality and localization on a chiral Cayley tree",
+      "title": "手性凯莱树上的半分形与局域化",
       "originalTitle": "Semi-fractality and localization on a chiral Cayley tree",
-      "summary": "We study a quantum particle hopping on an infinite Cayley tree with nearest-neighbor hopping amplitudes drawn from a distribution singular as $|t|^{-a}$ near weak links and no on-site disorder. Because the graph is bipartite, the model has chiral symmetry, which strongly affects the statistics of eigenstates at the center of the spectrum. Using population dynamics to solve the cavity equations for the propagator, we analyze the distribution of the local density of states and show that it develops broad power-law t…",
+      "summary": "研究量子粒子在无原位无序的无限凯莱树上的跳跃，跳跃振幅分布具有奇异幂律尾巴，系统具有手性对称性。通过布居动力学求解空腔方程，分析局域态密度分布，发现其宽幂律尾巴导致半分形态：本征态占据系统广泛部分，但高阶矩表现如同多分形。改变幂律指数，系统从半分形过渡到局域化，过渡态为半局域化。",
       "abstract": "We study a quantum particle hopping on an infinite Cayley tree with nearest-neighbor hopping amplitudes drawn from a distribution singular as $|t|^{-a}$ near weak links and no on-site disorder. Because the graph is bipartite, the model has chiral symmetry, which strongly affects the statistics of eigenstates at the center of the spectrum. Using population dynamics to solve the cavity equations for the propagator, we analyze the distribution of the local density of states and show that it develops broad power-law t…",
       "keyFacts": [
-        "We study a quantum particle hopping on an infinite Cayley tree with nearest-neighbor hopping amplitudes drawn from a distribution singular as $|t|^{-a}$ near weak links and no on-site disorder. Because the graph is bipartite, the model has chiral symmetry, which strongly affects the statistics of eigenstates at the center of the spectrum. Using population dynamics to solve the cavity equations for the propagator, we analyze the distribution of the local density of states and show that it develops broad power-law t…"
+        "在手性凯莱树模型中，无原位无序但跳跃振幅为幂律分布时，本征态统计有何特性？",
+        "使用布居动力学求解空腔方程，分析局域态密度分布。",
+        "局域态密度分布具有宽幂律尾巴，导致半分形态；改变幂律指数可引发从半分形到局域化的转变，在转变点出现半局域化态。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3328,10 +3411,10 @@
       "primaryCategory": "cond-mat.dis-nn",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "在手性凯莱树模型中，无原位无序但跳跃振幅为幂律分布时，本征态统计有何特性？",
+      "method": "使用布居动力学求解空腔方程，分析局域态密度分布。",
+      "findings": "局域态密度分布具有宽幂律尾巴，导致半分形态；改变幂律指数可引发从半分形到局域化的转变，在转变点出现半局域化态。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -3342,11 +3425,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子技术",
-        "cond-mat.dis-nn",
-        "quantum"
+        "量子局域化",
+        "手性对称性",
+        "半分形",
+        "凯莱树"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -3362,12 +3446,14 @@
     {
       "id": "arxiv:2607.18176",
       "contentType": "paper",
-      "title": "Per Astronomix ad Astra: High-Order Differentiable (Magneto)hydrodynamics with Energy-Conserving Self-Gravity",
+      "title": "Per Astronomix ad Astra: 具有能量守恒自引力的高阶可微(磁)流体动力学",
       "originalTitle": "Per Astronomix ad Astra: High-Order Differentiable (Magneto)hydrodynamics with Energy-Conserving Self-Gravity",
-      "summary": "We present astronomix, a performant differentiable (magneto)hydrodynamics simulator written in Python/JAX. We demonstrate how automatic differentiation, validated against hand-derived analytical functional derivatives and finite differences, enables inverse modeling over millions of parameters and allows for sensitivity and stability analysis as well as correct eigenmode initialization. The differentiability of astronomix furthermore enables training machine-learning models inside the simulator. On a single GPU at…",
+      "summary": "astronomix是一个基于Python/JAX的高性能可微(磁)流体动力学模拟器。自动微分经解析验证，支持逆建模、灵敏度和稳定性分析。单GPU运行时间与AthenaPK相当，但平滑问题误差更低。可扩展到多GPU和多节点。提出了四阶自引力方案。通过智能体生成Pallas GPU内核以提高性能。",
       "abstract": "We present astronomix, a performant differentiable (magneto)hydrodynamics simulator written in Python/JAX. We demonstrate how automatic differentiation, validated against hand-derived analytical functional derivatives and finite differences, enables inverse modeling over millions of parameters and allows for sensitivity and stability analysis as well as correct eigenmode initialization. The differentiability of astronomix furthermore enables training machine-learning models inside the simulator. On a single GPU at…",
       "keyFacts": [
-        "We present astronomix, a performant differentiable (magneto)hydrodynamics simulator written in Python/JAX. We demonstrate how automatic differentiation, validated against hand-derived analytical functional derivatives and finite differences, enables inverse modeling over millions of parameters and allows for sensitivity and stability analysis as well as correct eigenmode initialization. The differentiability of astronomix furthermore enables training machine-learning models inside the simulator. On a single GPU at…"
+        "如何构建并验证一个高性能可微(磁)流体动力学模拟器？",
+        "使用Python/JAX框架实现自动微分，结合四阶自引力方案和五阶有限差分约束输运磁流体动力学方案，并利用智能体生成Pallas GPU内核。",
+        "astronomix在单GPU上运行时间与AthenaPK相当，但平滑问题误差更低；可扩展至多GPU和多节点；自动微分经解析验证。"
       ],
       "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3390,10 +3476,10 @@
       "primaryCategory": "astro-ph.IM",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何构建并验证一个高性能可微(磁)流体动力学模拟器？",
+      "method": "使用Python/JAX框架实现自动微分，结合四阶自引力方案和五阶有限差分约束输运磁流体动力学方案，并利用智能体生成Pallas GPU内核。",
+      "findings": "astronomix在单GPU上运行时间与AthenaPK相当，但平滑问题误差更低；可扩展至多GPU和多节点；自动微分经解析验证。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -3404,10 +3490,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "天文与空间科学",
-        "astro-ph.IM"
+        "可微模拟",
+        "磁流体动力学",
+        "自动微分",
+        "GPU加速"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -3423,12 +3511,14 @@
     {
       "id": "arxiv:2607.18145",
       "contentType": "paper",
-      "title": "Post-Newtonian Global Conservation Laws in the Presence of Sensitive Bodies",
+      "title": "存在敏感体时的后牛顿全局守恒律",
       "originalTitle": "Post-Newtonian Global Conservation Laws in the Presence of Sensitive Bodies",
-      "summary": "The parameterized post-Newtonian (PPN) approach is the state of the art formalism for performing theory independent tests of weak-field gravity, and for constraining possible deviations from Einstein's theory. Within this framework, global conservation laws are useful for the calculation of dynamics and for giving meaning to parameters. In this paper we extend the concept of semi-conservative and fully-conservative theories of gravity to include situations in which compact astrophysical bodies are modeled as masse…",
+      "summary": "将半保守和全保守引力理论扩展到包含对环境敏感的致密天体（违反强等效原理）。发现全局守恒量在存在敏感性时仍可存在，并给出显式形式。识别了后牛顿度量系数的新写法，并通过标量-张量引力理论验证。",
       "abstract": "The parameterized post-Newtonian (PPN) approach is the state of the art formalism for performing theory independent tests of weak-field gravity, and for constraining possible deviations from Einstein's theory. Within this framework, global conservation laws are useful for the calculation of dynamics and for giving meaning to parameters. In this paper we extend the concept of semi-conservative and fully-conservative theories of gravity to include situations in which compact astrophysical bodies are modeled as masse…",
       "keyFacts": [
-        "The parameterized post-Newtonian (PPN) approach is the state of the art formalism for performing theory independent tests of weak-field gravity, and for constraining possible deviations from Einstein's theory. Within this framework, global conservation laws are useful for the calculation of dynamics and for giving meaning to parameters. In this paper we extend the concept of semi-conservative and fully-conservative theories of gravity to include situations in which compact astrophysical bodies are modeled as masse…"
+        "在存在敏感体（违反强等效原理）时，参数化后牛顿框架下的全局守恒律是否仍存在？",
+        "扩展半保守和全保守引力理论概念，推导存在敏感体时的全局守恒量形式，并将其应用于标量-张量引力理论。",
+        "全局守恒量在存在敏感体时仍可存在，并得到显式形式；后牛顿度量系数有新写法。"
       ],
       "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3451,10 +3541,10 @@
       "primaryCategory": "gr-qc",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "在存在敏感体（违反强等效原理）时，参数化后牛顿框架下的全局守恒律是否仍存在？",
+      "method": "扩展半保守和全保守引力理论概念，推导存在敏感体时的全局守恒量形式，并将其应用于标量-张量引力理论。",
+      "findings": "全局守恒量在存在敏感体时仍可存在，并得到显式形式；后牛顿度量系数有新写法。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -3465,10 +3555,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "天文与空间科学",
-        "gr-qc"
+        "后牛顿形式",
+        "全局守恒律",
+        "敏感体",
+        "强等效原理"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -3484,12 +3576,14 @@
     {
       "id": "arxiv:2607.18137",
       "contentType": "paper",
-      "title": "Phase-Sensitive Benchmarking of Composite Quantum Gates with Chiral-Interference Circuits on Quantum Hardware",
+      "title": "基于量子硬件的复合量子门相位敏感基准测试：手性干涉电路",
       "originalTitle": "Phase-Sensitive Benchmarking of Composite Quantum Gates with Chiral-Interference Circuits on Quantum Hardware",
-      "summary": "We construct and experimentally implement compact gate-native circuits that simulate the state-transfer interference underlying three- and four-level chiral-resolution protocols. Both models are encoded in a two-qubit register, with the enantiomer-dependent sign of one of the couplings simulated by a conditional-phase operation in the four-level circuit and by the sign of a final rotation in the three-level circuit. On an IBM quantum processor, the two circuits produce the expected enantiomer-dependent output stat…",
+      "summary": "构造并实验实现了两比特电路，模拟三能级和四能级手性分辨协议中的态转移干涉。在IBM量子处理器上，电路产生预期的对映体依赖输出态，概率近98%。通过引入旋转角误差并替换为多种复合门（B5, SK1, BB1, H5s, X5），发现单门稳健性不等同于整体电路稳健性。H5s/X5序列在相对误差50%时仍保持高目标态概率。三能级电路展示误差抵消对称性。",
       "abstract": "We construct and experimentally implement compact gate-native circuits that simulate the state-transfer interference underlying three- and four-level chiral-resolution protocols. Both models are encoded in a two-qubit register, with the enantiomer-dependent sign of one of the couplings simulated by a conditional-phase operation in the four-level circuit and by the sign of a final rotation in the three-level circuit. On an IBM quantum processor, the two circuits produce the expected enantiomer-dependent output stat…",
       "keyFacts": [
-        "We construct and experimentally implement compact gate-native circuits that simulate the state-transfer interference underlying three- and four-level chiral-resolution protocols. Both models are encoded in a two-qubit register, with the enantiomer-dependent sign of one of the couplings simulated by a conditional-phase operation in the four-level circuit and by the sign of a final rotation in the three-level circuit. On an IBM quantum processor, the two circuits produce the expected enantiomer-dependent output stat…"
+        "复合量子门在手性干涉电路中的相位敏感基准测试表现如何？",
+        "构造编码手性分辨率协议的两比特电路，在IBM量子处理器上实验实现，并引入旋转角误差测试多种复合门。",
+        "单门稳健性不等同于电路整体稳健性；H5s/X5序列在相对误差50%时仍保持高目标态概率；三能级电路展示误差抵消对称性。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3510,10 +3604,10 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "复合量子门在手性干涉电路中的相位敏感基准测试表现如何？",
+      "method": "构造编码手性分辨率协议的两比特电路，在IBM量子处理器上实验实现，并引入旋转角误差测试多种复合门。",
+      "findings": "单门稳健性不等同于电路整体稳健性；H5s/X5序列在相对误差50%时仍保持高目标态概率；三能级电路展示误差抵消对称性。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -3524,11 +3618,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子技术",
-        "quant-ph",
-        "quantum"
+        "复合量子门",
+        "手性分辨",
+        "相位敏感基准测试",
+        "IBM量子处理器"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -3544,12 +3639,14 @@
     {
       "id": "arxiv:2607.18136",
       "contentType": "paper",
-      "title": "An Unsupervised Search for Novel Instrumental Glitches in LIGO O4a: Multi-Scale Sensitization, Empirical Physical Vetoes, and Rate Upper Limits",
+      "title": "LIGO O4a中新型仪器毛刺的无监督搜索：多尺度敏化、经验物理否决与率上限",
       "originalTitle": "An Unsupervised Search for Novel Instrumental Glitches in LIGO O4a: Multi-Scale Sensitization, Empirical Physical Vetoes, and Rate Upper Limits",
-      "summary": "The fourth observing run (O4) of Advanced LIGO, Virgo, and KAGRA presents unparalleled sensitivity, rendering unsupervised pipelines highly vulnerable to the non-stationary domain shift of the detectors' noise manifolds. We present DANTE V3, concluding a longitudinal investigation into unmodeled anomalies during early O4a. By expanding to a multi-scale geometric framework (0.5 s to 4.0 s), we amplify morphological sensitivity, extracting 10,372 unique candidates. To mitigate domain-shift artifacts, we introduce a…",
+      "summary": "提出DANTE V3，在LIGO O4a中搜索未建模异常。采用多尺度几何框架（0.5-4.0秒）提取10372个候选。引入块引导域偏移防御，28.3%候选通过。全局拓扑分析显示幸存者缺乏离散形态内聚性，形成一个宏观簇。通过物理环境监测交叉相关防御，一个候选被否决，另一个幸存但为未编目仪器异常。未发现符合事件。给出90%频次泊松率上限：H1≤5.83/年，L1≤5.63/年。",
       "abstract": "The fourth observing run (O4) of Advanced LIGO, Virgo, and KAGRA presents unparalleled sensitivity, rendering unsupervised pipelines highly vulnerable to the non-stationary domain shift of the detectors' noise manifolds. We present DANTE V3, concluding a longitudinal investigation into unmodeled anomalies during early O4a. By expanding to a multi-scale geometric framework (0.5 s to 4.0 s), we amplify morphological sensitivity, extracting 10,372 unique candidates. To mitigate domain-shift artifacts, we introduce a…",
       "keyFacts": [
-        "The fourth observing run (O4) of Advanced LIGO, Virgo, and KAGRA presents unparalleled sensitivity, rendering unsupervised pipelines highly vulnerable to the non-stationary domain shift of the detectors' noise manifolds. We present DANTE V3, concluding a longitudinal investigation into unmodeled anomalies during early O4a. By expanding to a multi-scale geometric framework (0.5 s to 4.0 s), we amplify morphological sensitivity, extracting 10,372 unique candidates. To mitigate domain-shift artifacts, we introduce a…"
+        "在LIGO O4a数据中，如何无监督搜索新型仪器毛刺并给出上限？",
+        "使用多尺度几何框架提取候选，结合块引导域偏移防御和物理环境监测交叉相关防御。",
+        "提取10372个候选，28.3%通过域偏移防御；幸存者无离散形态内聚性；一个被物理环境监测否决，另一个为未编目异常；无符合事件；给出率上限。"
       ],
       "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3570,10 +3667,10 @@
       "primaryCategory": "astro-ph.IM",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "在LIGO O4a数据中，如何无监督搜索新型仪器毛刺并给出上限？",
+      "method": "使用多尺度几何框架提取候选，结合块引导域偏移防御和物理环境监测交叉相关防御。",
+      "findings": "提取10372个候选，28.3%通过域偏移防御；幸存者无离散形态内聚性；一个被物理环境监测否决，另一个为未编目异常；无符合事件；给出率上限。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -3584,10 +3681,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "天文与空间科学",
-        "astro-ph.IM"
+        "LIGO",
+        "仪器毛刺",
+        "无监督搜索",
+        "率上限"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -3603,12 +3702,14 @@
     {
       "id": "arxiv:2607.18113",
       "contentType": "paper",
-      "title": "Exponential Reduction of Mesh Dependence in Quantum Estimation of Parabolic PDE Observables",
+      "title": "抛物线型偏微分方程可观测量量子估计中网格依赖性的指数级降低",
       "originalTitle": "Exponential Reduction of Mesh Dependence in Quantum Estimation of Parabolic PDE Observables",
-      "summary": "Can a quantum PDE algorithm avoid the polynomial cost of resolving a fine spatial mesh? For standard fixed-order discretizations, direct classical methods require work polynomial in $h^{-1}$, or equivalently in the number of spatial degrees of freedom $N_h=Θ(h^{-d})$. Direct quantum implementations of a parabolic semigroup still have coherent complexity $\\widetilde{\\mathcal O}(\\sqrt{T}/h)$, and gradient-dependent observables such as heat flux and dissipation introduce additional mesh dependence. Decay of the solut…",
+      "summary": "提出多层级量子算法直接估计线性和二次可观测量，将粗细网格消去放入电路。通过基于轮廓的LCU从移位解析差重构校正，利用移位Ritz-Schur分解编码差，暴露O(h^2)两网格归一化。对于傅里叶层级，SELECT oracle由量子傅里叶/正弦变换、谱带选择器和可逆对角算术组成。优化振幅估计消除了对最细网格尺寸的多项式依赖性，复杂度为~O(1+(Tε)^{-1})。",
       "abstract": "Can a quantum PDE algorithm avoid the polynomial cost of resolving a fine spatial mesh? For standard fixed-order discretizations, direct classical methods require work polynomial in $h^{-1}$, or equivalently in the number of spatial degrees of freedom $N_h=Θ(h^{-d})$. Direct quantum implementations of a parabolic semigroup still have coherent complexity $\\widetilde{\\mathcal O}(\\sqrt{T}/h)$, and gradient-dependent observables such as heat flux and dissipation introduce additional mesh dependence. Decay of the solut…",
       "keyFacts": [
-        "Can a quantum PDE algorithm avoid the polynomial cost of resolving a fine spatial mesh? For standard fixed-order discretizations, direct classical methods require work polynomial in $h^{-1}$, or equivalently in the number of spatial degrees of freedom $N_h=Θ(h^{-d})$. Direct quantum implementations of a parabolic semigroup still have coherent complexity $\\widetilde{\\mathcal O}(\\sqrt{T}/h)$, and gradient-dependent observables such as heat flux and dissipation introduce additional mesh dependence. Decay of the solut…"
+        "量子算法能否避免抛物线型偏微分方程中空间网格的多项式代价？",
+        "多层级量子算法，包含基于轮廓的LCU、移位Ritz-Schur分解、量子傅里叶/正弦变换等，并采用优化振幅估计。",
+        "优化振幅估计消除了对最细网格尺寸的多项式依赖性；复杂度为~O(1+(Tε)^{-1})。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3628,10 +3729,10 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "量子算法能否避免抛物线型偏微分方程中空间网格的多项式代价？",
+      "method": "多层级量子算法，包含基于轮廓的LCU、移位Ritz-Schur分解、量子傅里叶/正弦变换等，并采用优化振幅估计。",
+      "findings": "优化振幅估计消除了对最细网格尺寸的多项式依赖性；复杂度为~O(1+(Tε)^{-1})。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -3642,11 +3743,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子技术",
-        "quant-ph",
-        "quantum"
+        "量子算法",
+        "抛物线型PDE",
+        "多层级",
+        "振幅估计"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -3662,12 +3764,14 @@
     {
       "id": "arxiv:2607.18099",
       "contentType": "paper",
-      "title": "Study of ordering in (MoCrTi)$_{100-x}$Al$_x$ refractory high-entropy alloys using machine learning interatomic potential",
+      "title": "利用机器学习原子间势研究(MoCrTi)100-xAlx难熔高熵合金中的有序化",
       "originalTitle": "Study of ordering in (MoCrTi)$_{100-x}$Al$_x$ refractory high-entropy alloys using machine learning interatomic potential",
-      "summary": "Refractory high-entropy alloys have emerged as promising candidates for high-temperature applications due to their exceptional mechanical properties. Understanding the thermodynamic mechanisms underlying chemical ordering in these complex systems is critical for optimizing their performance. In this work, by utilizing a universal machine learning interatomic potential with hybrid Monte Carlo and molecular dynamics simulations, the temperature-dependent thermodynamics and mechanical properties of (MoCrTi)(100-x)Alx…",
+      "summary": "利用通用机器学习原子间势和混合蒙特卡洛/分子动力学模拟，研究(MoCrTi)100-xAlx体系的热力学和力学性能。热容和短程有序参数揭示有序-无序转变行为：Mo25Cr25Ti25Al25和Mo32Cr32Ti32Al4呈现单一转变，而Mo28Cr28Ti28Al16和Mo30Cr30Ti30Al10显示两个分离转变。有序化显著增强弹性常数，导致非单调组分依赖，在Mo30Cr30Ti30Al10处达到峰值。",
       "abstract": "Refractory high-entropy alloys have emerged as promising candidates for high-temperature applications due to their exceptional mechanical properties. Understanding the thermodynamic mechanisms underlying chemical ordering in these complex systems is critical for optimizing their performance. In this work, by utilizing a universal machine learning interatomic potential with hybrid Monte Carlo and molecular dynamics simulations, the temperature-dependent thermodynamics and mechanical properties of (MoCrTi)(100-x)Alx…",
       "keyFacts": [
-        "Refractory high-entropy alloys have emerged as promising candidates for high-temperature applications due to their exceptional mechanical properties. Understanding the thermodynamic mechanisms underlying chemical ordering in these complex systems is critical for optimizing their performance. In this work, by utilizing a universal machine learning interatomic potential with hybrid Monte Carlo and molecular dynamics simulations, the temperature-dependent thermodynamics and mechanical properties of (MoCrTi)(100-x)Alx…"
+        "(MoCrTi)100-xAlx难熔高熵合金中化学有序化的热力学和力学效应如何？",
+        "利用通用机器学习原子间势和混合蒙特卡洛/分子动力学模拟。",
+        "不同组分显示不同有序-无序转变行为；有序化显著增强弹性常数，导致非单调组分依赖。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3692,10 +3796,10 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "(MoCrTi)100-xAlx难熔高熵合金中化学有序化的热力学和力学效应如何？",
+      "method": "利用通用机器学习原子间势和混合蒙特卡洛/分子动力学模拟。",
+      "findings": "不同组分显示不同有序-无序转变行为；有序化显著增强弹性常数，导致非单调组分依赖。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -3706,11 +3810,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "先进材料",
-        "cond-mat.mtrl-sci",
-        "machine learning"
+        "难熔高熵合金",
+        "化学有序",
+        "机器学习势",
+        "力学性能"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -3726,12 +3831,14 @@
     {
       "id": "arxiv:2607.18067",
       "contentType": "paper",
-      "title": "QIRF Quantum-Inspired Non-Orthogonal Function-Space Compression for 3D Gaussian Splatting",
+      "title": "QIRF：量子启发的非正交函数空间压缩用于3D高斯泼溅",
       "originalTitle": "QIRF Quantum-Inspired Non-Orthogonal Function-Space Compression for 3D Gaussian Splatting",
-      "summary": "3D Gaussian Splatting (3DGS) achieves high-quality real-time rendering by representing a scene with a large collection of anisotropic Gaussian primitives. However, complex scenes often require millions of Gaussians, resulting in substantial storage and rendering costs. Existing compression methods mainly reduce redundancy through primitive-wise pruning, attribute quantization, clustering, or neural coding, while redundancy caused by strongly overlapping and non-orthogonal Gaussian basis functions remains largely u…",
+      "summary": "提出量子启发的非正交函数空间压缩方法QIRF，用于3D高斯泼溅。将相邻高斯基函数建模为局部非正交基，通过构建高斯重叠矩阵和辐射响应密度矩阵，利用广义特征分解识别主导子空间并选择代表高斯。在13个场景上平均减少71.7%高斯数量（约3.54倍压缩），PSNR提高0.10 dB，渲染速度提升34.3%。",
       "abstract": "3D Gaussian Splatting (3DGS) achieves high-quality real-time rendering by representing a scene with a large collection of anisotropic Gaussian primitives. However, complex scenes often require millions of Gaussians, resulting in substantial storage and rendering costs. Existing compression methods mainly reduce redundancy through primitive-wise pruning, attribute quantization, clustering, or neural coding, while redundancy caused by strongly overlapping and non-orthogonal Gaussian basis functions remains largely u…",
       "keyFacts": [
-        "3D Gaussian Splatting (3DGS) achieves high-quality real-time rendering by representing a scene with a large collection of anisotropic Gaussian primitives. However, complex scenes often require millions of Gaussians, resulting in substantial storage and rendering costs. Existing compression methods mainly reduce redundancy through primitive-wise pruning, attribute quantization, clustering, or neural coding, while redundancy caused by strongly overlapping and non-orthogonal Gaussian basis functions remains largely u…"
+        "如何利用非正交函数空间冗余压缩3D高斯泼溅？",
+        "构建高斯重叠矩阵和辐射响应密度矩阵，通过广义特征分解选择代表高斯，并加入细节感知保护。",
+        "平均减少71.7%高斯数量，PSNR提高0.10 dB，渲染速度提升34.3%。"
       ],
       "why": "该研究与计算机视觉相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3755,10 +3862,10 @@
       "primaryCategory": "cs.CV",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "如何利用非正交函数空间冗余压缩3D高斯泼溅？",
+      "method": "构建高斯重叠矩阵和辐射响应密度矩阵，通过广义特征分解选择代表高斯，并加入细节感知保护。",
+      "findings": "平均减少71.7%高斯数量，PSNR提高0.10 dB，渲染速度提升34.3%。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -3769,11 +3876,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "计算机视觉",
-        "cs.CV",
-        "quantum"
+        "3D高斯泼溅",
+        "压缩",
+        "非正交函数空间",
+        "量子启发"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -3789,12 +3897,14 @@
     {
       "id": "arxiv:2607.18059",
       "contentType": "paper",
-      "title": "Foundry CMOS platform for multimodal quantum materials characterization",
+      "title": "用于多模态量子材料表征的Foundry CMOS平台",
       "originalTitle": "Foundry CMOS platform for multimodal quantum materials characterization",
-      "summary": "Quantum materials experiments increasingly rely on microwave, electrical, thermal, optical, and structural probes, but these capabilities are typically assembled from custom hardware that limits reproducibility and scalability. Here we show that a commercial 65-nm CMOS process can be repurposed as a passive, foundry-manufacturable characterization platform by functionally partitioning its metal stack into microwave, thermal, and electrical subsystems within a 1 mm2 footprint. The integrated RF architecture enables…",
+      "summary": "展示商业65纳米CMOS工艺可被用作无源可制造表征平台，在1平方毫米内集成微波、热学和电子子系统。实现1.75K下Fe3GeTe2异质结构的低温磁化率测量，以及NV中心ODMR（>20%对比度），微波功率降低20-25 dB，灵敏度2-3 μT/√Hz。与电子束成像兼容，无图像质量退化。",
       "abstract": "Quantum materials experiments increasingly rely on microwave, electrical, thermal, optical, and structural probes, but these capabilities are typically assembled from custom hardware that limits reproducibility and scalability. Here we show that a commercial 65-nm CMOS process can be repurposed as a passive, foundry-manufacturable characterization platform by functionally partitioning its metal stack into microwave, thermal, and electrical subsystems within a 1 mm2 footprint. The integrated RF architecture enables…",
       "keyFacts": [
-        "Quantum materials experiments increasingly rely on microwave, electrical, thermal, optical, and structural probes, but these capabilities are typically assembled from custom hardware that limits reproducibility and scalability. Here we show that a commercial 65-nm CMOS process can be repurposed as a passive, foundry-manufacturable characterization platform by functionally partitioning its metal stack into microwave, thermal, and electrical subsystems within a 1 mm2 footprint. The integrated RF architecture enables…"
+        "能否利用商业CMOS工艺构建多模态量子材料表征平台？",
+        "在65纳米CMOS工艺中功能划分金属层，集成微波、热学和电子子系统，并测试低温磁化率测量、NV中心ODMR和电子束成像兼容性。",
+        "成功实现1.75K磁化率测量、高性能ODMR，微波功率降低20-25 dB，灵敏度2-3 μT/√Hz，且与电子束成像兼容。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3831,10 +3941,10 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "能否利用商业CMOS工艺构建多模态量子材料表征平台？",
+      "method": "在65纳米CMOS工艺中功能划分金属层，集成微波、热学和电子子系统，并测试低温磁化率测量、NV中心ODMR和电子束成像兼容性。",
+      "findings": "成功实现1.75K磁化率测量、高性能ODMR，微波功率降低20-25 dB，灵敏度2-3 μT/√Hz，且与电子束成像兼容。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -3845,11 +3955,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子技术",
-        "cond-mat.mtrl-sci",
-        "quantum"
+        "CMOS平台",
+        "量子材料表征",
+        "NV中心",
+        "低温测量"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [
@@ -3865,12 +3976,14 @@
     {
       "id": "arxiv:2607.18050",
       "contentType": "paper",
-      "title": "New bound on $S_{1}\\times S_{2}$-setting Bell locality of a nonseparable Werner state",
+      "title": "非可分Werner态在S1×S2设置下Bell局域性的新界限",
       "originalTitle": "New bound on $S_{1}\\times S_{2}$-setting Bell locality of a nonseparable Werner state",
-      "summary": "In many quantum applications it is important to know whether or not a Bell nonlocal two-qudit state exhibits its nonlocality under correlation scenarios with some given numbers $S_{1},S_{2}\\geq1$ of generalized quantum measurements at two sites. In the present article, we find analytically a new general condition sufficient for a nonseparable Werner state with a dimension $d\\leq\\min\\{S_{1},S_{2}\\}$ to satisfy all Bell inequalities under every $S_{1}\\times S_{2}$-setting correlation scenario with outcomes of an arb…",
+      "summary": "解析发现一个充分条件，使得维度d≤min{S1,S2}的非可分Werner态在所有S1×S2设置下满足Bell不等式，即S1×S2设置Bell局域。该条件超越了Werner和Barrett的局域性条件。对于d>min{S1,S2}的情况，证明所有非可分Werner态都是S1×S2设置Bell局域的。",
       "abstract": "In many quantum applications it is important to know whether or not a Bell nonlocal two-qudit state exhibits its nonlocality under correlation scenarios with some given numbers $S_{1},S_{2}\\geq1$ of generalized quantum measurements at two sites. In the present article, we find analytically a new general condition sufficient for a nonseparable Werner state with a dimension $d\\leq\\min\\{S_{1},S_{2}\\}$ to satisfy all Bell inequalities under every $S_{1}\\times S_{2}$-setting correlation scenario with outcomes of an arb…",
       "keyFacts": [
-        "In many quantum applications it is important to know whether or not a Bell nonlocal two-qudit state exhibits its nonlocality under correlation scenarios with some given numbers $S_{1},S_{2}\\geq1$ of generalized quantum measurements at two sites. In the present article, we find analytically a new general condition sufficient for a nonseparable Werner state with a dimension $d\\leq\\min\\{S_{1},S_{2}\\}$ to satisfy all Bell inequalities under every $S_{1}\\times S_{2}$-setting correlation scenario with outcomes of an arb…"
+        "非可分Werner态在S1×S2设置下的Bell局域性有何新界限？",
+        "解析推导充分条件，并利用算子方法证明已有优化结果。",
+        "得到新的充分条件，该条件超越Werner和Barrett的结果；对于d>min{S1,S2}，所有非可分Werner态都是S1×S2设置Bell局域的。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3891,10 +4004,10 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "",
-      "method": "",
-      "findings": "",
-      "limitations": "",
+      "question": "非可分Werner态在S1×S2设置下的Bell局域性有何新界限？",
+      "method": "解析推导充分条件，并利用算子方法证明已有优化结果。",
+      "findings": "得到新的充分条件，该条件超越Werner和Barrett的结果；对于d>min{S1,S2}，所有非可分Werner态都是S1×S2设置Bell局域的。",
+      "limitations": "摘要未说明",
       "score": 86,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -3905,11 +4018,12 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子技术",
-        "quant-ph",
-        "quantum"
+        "Werner态",
+        "Bell非局域性",
+        "多设置",
+        "量子基础"
       ],
-      "translationProvider": "",
+      "translationProvider": "deepseek",
       "image": "",
       "corroboration": 1,
       "sources": [

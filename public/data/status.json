@@ -1,40 +1,37 @@
 {
   "schemaVersion": 4,
   "state": "ok",
-  "lastAttemptAt": "2026-07-21T11:48:08Z",
-  "lastSuccessAt": "2026-07-21T11:48:08Z",
+  "lastAttemptAt": "2026-07-21T11:57:40Z",
+  "lastSuccessAt": "2026-07-21T11:57:40Z",
   "editionDate": "2026-07-21",
   "itemCount": 10,
-  "message": "日报更新成功；AI 编辑失败，已使用规则选稿：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required；论文中文编辑批次失败（1-10）：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required；论文中文编辑批次失败（11-20）：POST https://api.deepseek.com/c…",
+  "message": "日报更新成功；AI 编辑失败，已使用规则选稿：OpenAI 选稿未通过多样性校验：类别超限={'军事动态': 4}，域名超限=无；论文中文编辑批次失败（1-10）：research editorial response contained 1 valid papers; expected 10；论文中文编辑批次失败（21-30）：research editorial response contained 1 valid papers; expected 10",
   "method": "rules",
   "editorialStatus": "fallback",
   "editorialProvider": "deepseek",
   "editorialModel": "deepseek-v4-flash",
   "translatedItemCount": 0,
   "warnings": [
-    "AI 编辑失败，已使用规则选稿：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required"
+    "AI 编辑失败，已使用规则选稿：OpenAI 选稿未通过多样性校验：类别超限={'军事动态': 4}，域名超限=无"
   ],
   "coverageStatus": "complete",
   "freshItemCount": 10,
   "supplementalItemCount": 0,
   "effectiveLookbackHours": 24,
-  "streamItemCount": 44,
-  "streamTranslationProvider": "",
-  "streamTranslationModel": "",
-  "streamTranslatedItemCount": 0,
+  "streamItemCount": 45,
+  "streamTranslationProvider": "deepseek",
+  "streamTranslationModel": "deepseek-v4-flash",
+  "streamTranslatedItemCount": 32,
   "streamTranslationWarnings": [
-    "新闻中文翻译批次失败：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required",
-    "新闻中文翻译批次失败：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required",
-    "新闻中文翻译连续失败 2 个批次，已停止后续调用并保留原始元数据"
+    "新闻中文翻译批次不完整：2/12"
   ],
   "researchItemCount": 60,
-  "researchEditorialStatus": "fallback",
+  "researchEditorialStatus": "partial",
   "researchEditorialProvider": "deepseek",
   "researchEditorialModel": "deepseek-v4-flash",
-  "researchTranslatedItemCount": 0,
+  "researchTranslatedItemCount": 40,
   "researchWarnings": [
-    "论文中文编辑批次失败（1-10）：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required",
-    "论文中文编辑批次失败（11-20）：POST https://api.deepseek.com/chat/completions failed after 2 attempts: HTTP Error 402: Payment Required",
-    "论文中文编辑连续失败 2 个批次，已停止后续调用并保留原始摘要"
+    "论文中文编辑批次失败（1-10）：research editorial response contained 1 valid papers; expected 10",
+    "论文中文编辑批次失败（21-30）：research editorial response contained 1 valid papers; expected 10"
   ]
 }
