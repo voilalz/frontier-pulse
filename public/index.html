@@ -4,23 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="每日筛选全球科技、AI、航空航天、军事动态、局部冲突、前沿技术与无人系统新闻。">
+  <meta name="description" content="聚合全球科技、AI、航空航天、安全动态、无人系统与前沿论文，提供每日 Top 10、全量动态和中文研究雷达。">
   <meta name="theme-color" content="#102a38">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
-  <meta property="og:title" content="智域前沿 · 全球科技与安全态势日报">
-  <meta property="og:description" content="每天筛选全球科技、AI、航空航天、安全动态与无人系统十条重点新闻。">
+  <meta property="og:title" content="智域前沿 · 全球科技、安全与研究情报">
+  <meta property="og:description" content="每日 Top 10、24 小时全量动态与前沿论文雷达，附中文摘要、来源和评分解释。">
   <meta property="og:url" content="https://frontier-pulse.jiumi674.workers.dev/">
   <meta property="og:image" content="https://frontier-pulse.jiumi674.workers.dev/og-card.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="智域前沿 · 全球科技与安全态势日报">
-  <meta name="twitter:description" content="每日十条全球科技与安全重点新闻，附中文摘要、关键事实与来源解释。">
+  <meta name="twitter:title" content="智域前沿 · 全球科技、安全与研究情报">
+  <meta name="twitter:description" content="每日 Top 10、24 小时全量动态与前沿论文雷达，附中文摘要、来源和评分解释。">
   <meta name="twitter:image" content="https://frontier-pulse.jiumi674.workers.dev/og-card.png">
   <link rel="canonical" href="https://frontier-pulse.jiumi674.workers.dev/">
   <link rel="alternate" type="application/atom+xml" title="智域前沿每日版" href="./feed.xml">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./assets/styles.css">
-  <title>智域前沿 · 全球科技与安全态势日报</title>
+  <title>智域前沿 · 全球科技、安全与研究情报</title>
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
@@ -32,7 +32,9 @@
       </button>
       <span class="state-badge" id="dataState">连接中</span>
       <nav class="view-tabs" aria-label="内容视图">
-        <button class="active" type="button" data-view="latest">今日</button>
+        <button class="active" type="button" data-view="latest">今日简报</button>
+        <button type="button" data-view="stream">全量动态</button>
+        <button type="button" data-view="research">论文雷达</button>
         <button type="button" data-view="history">历史</button>
         <button type="button" data-view="bookmarks">收藏</button>
         <button type="button" data-view="watchlist">关注</button>
@@ -58,10 +60,10 @@
   </div>
 
   <main id="main">
-    <section class="shell hero">
+    <section class="shell hero hero-compact">
       <div>
         <p class="eyebrow" id="viewEyebrow">DAILY INTELLIGENCE BRIEF</p>
-        <h1 id="viewTitle">全球科技与安全<br>态势日报</h1>
+        <h1 id="viewTitle">全球前沿情报，先看最重要的</h1>
         <p class="hero-copy" id="viewDescription">从全球公开信源中去重、交叉比对并筛选每日十条重点事件。摘要用于快速判断，关键结论请回到原文核验。</p>
       </div>
       <div class="date-control" id="dateControl">
@@ -75,6 +77,14 @@
       </div>
     </section>
 
+    <section class="shell spotlight" id="spotlightSection" aria-labelledby="spotlightTitle">
+      <div class="section-intro">
+        <div><p class="eyebrow">TODAY'S MUST READ</p><h2 id="spotlightTitle">今日必读</h2></div>
+        <p>三条最值得先看的事件；继续向下浏览完整 Top 10。</p>
+      </div>
+      <div class="spotlight-grid" id="spotlightStories" aria-live="polite"></div>
+    </section>
+
     <section class="shell brief" id="briefSection" aria-labelledby="briefHeadline">
       <div class="brief-main">
         <div class="brief-label"><b>EXECUTIVE BRIEF</b><i></i><span id="briefMethod">读取中</span></div>
@@ -82,20 +92,19 @@
         <p id="briefSummary">请稍候。</p>
         <ol class="brief-points" id="briefPoints"></ol>
         <div class="brief-footer">
-          <span><b id="itemCount">—</b>重点事件</span>
-          <span><b id="sourceCount">—</b>公开信源</span>
-          <span><b id="categoryCount">—</b>主题领域</span>
+          <span><b id="itemCount">—</b><em id="itemCountLabel">重点事件</em></span>
+          <span><b id="sourceCount">—</b><em id="sourceCountLabel">公开信源</em></span>
+          <span><b id="categoryCount">—</b><em id="categoryCountLabel">主题领域</em></span>
           <span class="brief-updated" id="briefUpdated">—</span>
+          <button type="button" id="scoringHelp">评分方法</button>
         </div>
       </div>
-      <aside class="method-card">
-        <span class="radar" aria-hidden="true"><i></i></span>
-        <p class="method-kicker">EVIDENCE FIRST</p>
-        <h3>可解释的重要度</h3>
-        <p>分数综合来源、时效、影响信号与多源印证；置信度仅描述来源证据，不等同于事实真伪。</p>
-        <button type="button" id="scoringHelp">查看评分方法</button>
-      </aside>
     </section>
+
+    <aside class="shell research-notice" id="researchNotice" hidden>
+      <b>研究阅读提示</b>
+      <p>论文条目优先来自公开预印本资料库。中文摘要只用于快速理解，不代表研究已经同行评审或独立复现。</p>
+    </aside>
 
     <section class="shell watch-panel" id="watchPanel" hidden>
       <div>
@@ -115,14 +124,25 @@
         <div><p class="eyebrow" id="feedEyebrow">TOP STORIES</p><h2 id="feedTitle">今日要闻</h2><p id="resultNote">正在加载…</p></div>
         <div class="feed-actions">
           <button class="action subtle" id="exportBtn" type="button">导出当前结果</button>
+          <label class="source-filter" id="sourceFilterWrap" hidden>
+            <span class="sr-only">筛选来源</span>
+            <select id="sourceFilter" aria-label="筛选来源"><option value="全部">全部来源</option></select>
+          </label>
           <div class="sort" aria-label="排序方式">
             <button class="active" type="button" data-sort="score">重要度</button>
             <button type="button" data-sort="latest">时间</button>
           </div>
         </div>
       </div>
+      <div class="rangebar" id="rangeControls" hidden aria-label="动态时间范围">
+        <span>发布时间</span>
+        <button type="button" data-range="6">6 小时</button>
+        <button type="button" data-range="12">12 小时</button>
+        <button class="active" type="button" data-range="24">24 小时</button>
+      </div>
       <div class="filterbar" id="filters" aria-label="新闻分类"></div>
       <div class="stories" id="stories" aria-live="polite" aria-busy="true"></div>
+      <button class="load-more" id="loadMoreBtn" type="button" hidden>加载更多</button>
     </section>
   </main>
 

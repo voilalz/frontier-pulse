@@ -1,0 +1,64 @@
+name: Full stream update
+
+on:
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: frontier-data-main
+  cancel-in-progress: false
+
+jobs:
+  refresh-stream:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Collect the qualified 24-hour stream
+        id: collect
+        continue-on-error: true
+        run: >-
+          python scripts/update_news.py
+          --stream-only
+          --skip-ai
+          --skip-research
+          --stream-output public/data/stream.json
+          --stream-status-output public/data/stream-status.json
+      - name: Verify stream payload
+        if: steps.collect.outcome == 'success'
+        run: >-
+          python -c "import json; p=json.load(open('public/data/stream.json', encoding='utf-8'));
+          assert p.get('itemCount') == len(p.get('items', []));
+          assert p.get('itemCount', 0) > 0;
+          assert all(x.get('contentType') == 'news' and x.get('url') for x in p['items']);
+          print('Validated', p['itemCount'], 'qualified stream items')"
+      - name: Commit stream data and status
+        if: always()
+        run: |
+          git add -A -- public/data/stream.json public/data/stream-status.json
+          if git diff --cached --quiet; then
+            echo "No stream data change"
+            exit 0
+          fi
+          git config user.name "frontier-pulse-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(data): refresh qualified full stream"
+          git fetch origin main --depth=20
+          git rebase origin/main
+          git push origin HEAD:main
+      - name: Mark failed stream collection
+        if: steps.collect.outcome == 'failure'
+        run: |
+          echo "The previous full stream was retained and stream-status.json records the failure."
+          exit 1

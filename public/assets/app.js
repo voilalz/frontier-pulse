@@ -3,13 +3,19 @@
 
   const ENDPOINTS = {
     latest: "./data/news.json",
+    stream: "./data/stream.json",
+    streamStatus: "./data/stream-status.json",
+    research: "./data/research.json",
     status: "./data/status.json",
     archive: "./data/archive/index.json",
     search: "./data/archive/search-index.json",
   };
   const CATEGORIES = ["AI", "航空航天", "军事动态", "局部冲突", "前沿技术", "无人系统"];
-  const VIEWS = new Set(["latest", "history", "bookmarks", "watchlist"]);
+  const VIEWS = new Set(["latest", "stream", "research", "history", "bookmarks", "watchlist"]);
+  const PAGE_SIZE = 24;
   const CACHE_KEY = "fp-last-good-report-v2";
+  const STREAM_CACHE_KEY = "fp-last-good-stream-v1";
+  const RESEARCH_CACHE_KEY = "fp-last-good-research-v1";
   const BOOKMARK_KEY = "fp-bookmarks-v2";
   const WATCH_KEY = "fp-watchwords-v1";
   const THEME_KEY = "fp-theme-v1";
@@ -42,6 +48,7 @@
   const params = new URLSearchParams(location.search);
   const initialView = VIEWS.has(params.get("view")) ? params.get("view") : "latest";
   const initialDate = /^\d{4}-\d{2}-\d{2}$/.test(params.get("date") || "") ? params.get("date") : "";
+  const initialRange = [6, 12, 24].includes(Number(params.get("range"))) ? Number(params.get("range")) : 24;
   const legacyBookmarks = readStorage("fp-bookmarks", []).filter((item) => typeof item === "string");
   const storedBookmarks = readStorage(BOOKMARK_KEY, []).filter((item) => item && typeof item === "object");
 
@@ -49,12 +56,19 @@
     view: initialView,
     query: clean(params.get("q")),
     category: "全部",
+    source: clean(params.get("source"), "全部"),
+    rangeHours: initialRange,
     sort: "score",
     editionDate: initialDate,
     latestReport: null,
+    streamReport: null,
+    researchReport: null,
+    streamStatus: null,
     currentReport: null,
     items: [],
     visible: [],
+    visibleLimit: PAGE_SIZE,
+    totalVisible: 0,
     archiveIndex: null,
     searchManifest: null,
     searchItems: null,
@@ -64,6 +78,8 @@
     bookmarks: storedBookmarks,
     watchwords: readStorage(WATCH_KEY, []).filter((word) => typeof word === "string").slice(0, 20),
     latestLoadError: "",
+    streamLoadError: "",
+    researchLoadError: "",
     usingCache: false,
     theme: readStorage(THEME_KEY, "") || (window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light"),
     hashHandled: false,
@@ -106,16 +122,20 @@
     const summary = clean(raw.summary, "暂无摘要，请阅读原文核验。");
     const item = {
       id: clean(raw.id, `item-${index}`),
+      contentType: clean(raw.contentType, "news"),
       title: clean(raw.title),
       originalTitle: clean(raw.originalTitle || raw.title),
       summary,
       keyFacts: (Array.isArray(raw.keyFacts) ? raw.keyFacts : [summary]).map((fact) => clean(fact)).filter(Boolean).slice(0, 4),
       why: clean(raw.why, "该事件的重要性需要结合后续公开信息继续判断。"),
       category: clean(raw.category, "前沿技术"),
+      researchArea: clean(raw.researchArea),
       source: clean(raw.source || sources[0]?.name, "未知来源"),
       country: clean(raw.country, "国际"),
       publishedAt: clean(raw.publishedAt),
+      updatedAt: clean(raw.updatedAt || raw.publishedAt),
       url: safeUrl(raw.url || sources[0]?.url),
+      pdfUrl: safeUrl(raw.pdfUrl),
       image: safeUrl(raw.image),
       score: Number.isFinite(Number(raw.score)) ? Math.max(0, Math.min(100, Number(raw.score))) : null,
       scoreBasis: clean(raw.scoreBasis, raw._compact ? "按需加载" : "规则评分"),
@@ -126,6 +146,21 @@
       tags: (Array.isArray(raw.tags) ? raw.tags : []).map((tag) => clean(tag)).filter(Boolean).slice(0, 5),
       corroboration: Math.max(1, Number(raw.corroboration) || sources.length || 1),
       sources,
+      authors: (Array.isArray(raw.authors) ? raw.authors : []).map((author) => clean(author)).filter(Boolean).slice(0, 20),
+      arxivCategories: (Array.isArray(raw.arxivCategories) ? raw.arxivCategories : []).map((category) => clean(category)).filter(Boolean),
+      primaryCategory: clean(raw.primaryCategory),
+      peerReviewStatus: clean(raw.peerReviewStatus),
+      abstract: clean(raw.abstract),
+      question: clean(raw.question),
+      method: clean(raw.method),
+      findings: clean(raw.findings),
+      limitations: clean(raw.limitations),
+      isTopStory: Boolean(raw.isTopStory),
+      streamRank: Number(raw.streamRank) || null,
+      isSupplemental: Boolean(raw.isSupplemental),
+      selectionWindowHours: Math.max(24, Number(raw.selectionWindowHours) || 24),
+      selectionNote: clean(raw.selectionNote),
+      diversityRelaxed: Boolean(raw.diversityRelaxed),
       editionDate: clean(raw.editionDate || editionDate),
       _compact: Boolean(raw._compact),
     };
@@ -144,6 +179,18 @@
       generatedAt: clean(payload.generatedAt),
       method: clean(payload.method, "rules"),
       items: payload.items.slice(0, 100).map((item, index) => normalizeItem(item, index, editionDate)),
+    };
+  }
+
+  function normalizeCollection(payload, type) {
+    if (!payload || typeof payload !== "object" || !Array.isArray(payload.items)) {
+      throw new Error(`${type === "paper" ? "论文" : "动态"}数据文件不可用`);
+    }
+    const limit = type === "paper" ? 200 : 500;
+    return {
+      ...payload,
+      generatedAt: clean(payload.generatedAt),
+      items: payload.items.slice(0, limit).map((item, index) => normalizeItem({ ...item, contentType: item.contentType || type }, index)),
     };
   }
 
@@ -210,14 +257,99 @@
       return;
     }
     const warnings = Array.isArray(state.pipelineStatus?.warnings) ? state.pipelineStatus.warnings.filter(Boolean) : [];
-    if (state.pipelineStatus?.editorialStatus === "fallback" || warnings.length) {
+    const supplemented = state.pipelineStatus?.coverageStatus === "supplemented"
+      || Number(state.pipelineStatus?.supplementalItemCount) > 0
+      || report?.items?.some((item) => item.isSupplemental || item.diversityRelaxed);
+    if (supplemented) {
+      badge.textContent = "安全补足";
+      badge.classList.add("warning");
+      showAlert("warning", "本期 Top 10 已使用透明补全", warnings.join("；")
+        || "24 小时候选量或分布不足，系统使用了明确标记的扩展窗口或分级配额补足；没有生成虚构新闻。");
+      return;
+    }
+    if (state.pipelineStatus?.editorialStatus === "fallback") {
       badge.textContent = "规则回退";
       badge.classList.add("warning");
       showAlert("warning", "日报已更新，但 AI 编辑发生降级", warnings.join("；") || state.pipelineStatus.message || "已使用规则模式生成本期内容。");
       return;
     }
+    if (warnings.length) {
+      badge.textContent = "有警告";
+      badge.classList.add("warning");
+      showAlert("warning", "日报已更新，但存在运行警告", warnings.join("；"));
+      return;
+    }
     badge.textContent = "在线";
     hideAlert();
+  }
+
+  function updateViewHealth() {
+    if (state.view === "stream") {
+      const badge = $("dataState");
+      badge.className = "state-badge";
+      if (state.streamLoadError) {
+        badge.textContent = state.streamReport?.items?.length ? "动态缓存" : "动态失败";
+        badge.classList.add(state.streamReport?.items?.length ? "warning" : "failed");
+        showAlert(state.streamReport?.items?.length ? "warning" : "failed", "全量动态读取异常", state.streamReport?.items?.length
+          ? `当前展示上次成功读取的真实动态流。错误：${state.streamLoadError}`
+          : `没有可用的全量动态数据。错误：${state.streamLoadError}`);
+        return;
+      }
+      if (state.streamStatus?.state === "failed") {
+        badge.textContent = "动态更新失败";
+        badge.classList.add("failed");
+        showAlert("failed", "最近一次全量动态更新失败", `${state.streamStatus.message || "三小时采集未成功完成"}；当前保留上一版真实动态。`);
+        return;
+      }
+      if (reportAgeHours(state.streamReport) > 7) {
+        badge.textContent = "动态已过期";
+        badge.classList.add("warning");
+        showAlert("warning", "全量动态可能已经过期", `当前动态生成于 ${formatDate(state.streamReport?.generatedAt)}，已超过 7 小时。请检查三小时更新工作流。`);
+        return;
+      }
+      badge.textContent = "动态在线";
+      hideAlert();
+      return;
+    }
+    if (state.view === "research") {
+      const badge = $("dataState");
+      badge.className = "state-badge";
+      const items = state.researchReport?.items || [];
+      if (state.researchLoadError) {
+        badge.textContent = items.length ? "论文缓存" : "论文失败";
+        badge.classList.add(items.length ? "warning" : "failed");
+        showAlert(items.length ? "warning" : "failed", "论文雷达读取异常", items.length
+          ? `当前展示上次成功读取的真实论文数据。错误：${state.researchLoadError}`
+          : `没有可用的论文数据。错误：${state.researchLoadError}`);
+        return;
+      }
+      if (!items.length) {
+        badge.textContent = "暂无论文";
+        badge.classList.add("warning");
+        showAlert("warning", "论文雷达暂无条目", "本期未抓取到符合研究方向与时间窗的论文，请检查 arXiv 可用性和研究分类配置。");
+        return;
+      }
+      if (reportAgeHours(state.researchReport) > 36) {
+        badge.textContent = "论文已过期";
+        badge.classList.add("warning");
+        showAlert("warning", "论文雷达可能已经过期", `当前论文数据生成于 ${formatDate(state.researchReport?.generatedAt)}，已超过 36 小时。`);
+        return;
+      }
+      const warnings = [
+        ...(Array.isArray(state.researchReport?.warnings) ? state.researchReport.warnings : []),
+        ...(Array.isArray(state.pipelineStatus?.researchWarnings) ? state.pipelineStatus.researchWarnings : []),
+      ].filter(Boolean);
+      if (["fallback", "stale"].includes(state.pipelineStatus?.researchEditorialStatus) || warnings.length) {
+        badge.textContent = state.pipelineStatus?.researchEditorialStatus === "stale" ? "论文未更新" : "论文规则版";
+        badge.classList.add("warning");
+        showAlert("warning", "论文雷达已降级", [...new Set(warnings)].join("；") || "本期保留论文元数据与原始摘要，未完成 AI 中文编辑。");
+        return;
+      }
+      badge.textContent = "论文在线";
+      hideAlert();
+      return;
+    }
+    updateHealth(state.latestReport);
   }
 
   function migrateLegacyBookmarks(items) {
@@ -267,6 +399,50 @@
       state.items = state.latestReport?.items || [];
       state.editionDate = state.latestReport?.editionDate || state.editionDate;
     }
+  }
+
+  async function loadStream(showToast = false, bypassCache = false) {
+    state.streamLoadError = "";
+    try {
+      const [payload, status] = await Promise.all([
+        fetchJson(ENDPOINTS.stream, bypassCache),
+        fetchJson(ENDPOINTS.streamStatus, bypassCache).catch(() => null),
+      ]);
+      state.streamReport = normalizeCollection(payload, "news");
+      state.streamStatus = status && typeof status === "object" ? status : null;
+      writeStorage(STREAM_CACHE_KEY, state.streamReport);
+      if (showToast) toast(`已读取 ${state.streamReport.items.length} 条全量动态`);
+    } catch (error) {
+      state.streamLoadError = clean(error?.message, "未知错误");
+      try {
+        state.streamReport = normalizeCollection(readStorage(STREAM_CACHE_KEY, null), "news");
+        showAlert("warning", "全量动态暂时无法更新", `当前展示上次成功读取的动态流。错误：${clean(error?.message, "未知错误")}`);
+      } catch (_) {
+        state.streamReport = { generatedAt: "", rangeHours: 24, items: [] };
+        showAlert("failed", "无法读取全量动态", clean(error?.message, "未知错误"));
+      }
+    }
+    return state.streamReport;
+  }
+
+  async function loadResearch(showToast = false, bypassCache = false) {
+    state.researchLoadError = "";
+    try {
+      const payload = await fetchJson(ENDPOINTS.research, bypassCache);
+      state.researchReport = normalizeCollection(payload, "paper");
+      writeStorage(RESEARCH_CACHE_KEY, state.researchReport);
+      if (showToast) toast(`已读取 ${state.researchReport.items.length} 篇论文`);
+    } catch (error) {
+      state.researchLoadError = clean(error?.message, "未知错误");
+      try {
+        state.researchReport = normalizeCollection(readStorage(RESEARCH_CACHE_KEY, null), "paper");
+        showAlert("warning", "论文雷达暂时无法更新", `当前展示上次成功读取的论文数据。错误：${clean(error?.message, "未知错误")}`);
+      } catch (_) {
+        state.researchReport = { generatedAt: "", rangeDays: 7, items: [] };
+        showAlert("failed", "无法读取论文雷达", clean(error?.message, "未知错误"));
+      }
+    }
+    return state.researchReport;
   }
 
   async function ensureArchiveIndex(bypassCache = false) {
@@ -347,6 +523,8 @@
     const query = new URLSearchParams();
     if (state.view !== "latest") query.set("view", state.view);
     if (state.view === "history" && state.editionDate) query.set("date", state.editionDate);
+    if (state.view === "stream" && state.rangeHours !== 24) query.set("range", String(state.rangeHours));
+    if (state.view === "stream" && state.source !== "全部") query.set("source", state.source);
     if (state.query) query.set("q", state.query);
     const suffix = query.toString();
     history.replaceState(null, "", `${location.pathname}${suffix ? `?${suffix}` : ""}${location.hash || ""}`);
@@ -367,7 +545,9 @@
 
   function renderViewCopy() {
     const copy = {
-      latest: ["DAILY INTELLIGENCE BRIEF", "全球科技与安全态势日报", "从全球公开信源中去重、交叉比对并筛选每日十条重点事件。摘要用于快速判断，关键结论请回到原文核验。", "TOP STORIES", "今日要闻"],
+      latest: ["DAILY INTELLIGENCE BRIEF", "全球前沿情报，先看最重要的", "每日十条重点事件，先呈现必读内容，再提供证据、来源与评分解释。", "TOP 10 BRIEF", "今日完整 Top 10"],
+      stream: ["QUALIFIED FULL STREAM", `过去 ${state.rangeHours} 小时全量动态`, "展示所有通过主题相关性、时间窗、去重和商业内容过滤的合格候选。", "FULL STREAM", "全部合格动态"],
+      research: ["RESEARCH RADAR", "前沿论文雷达", "聚合 AI、机器人、无人系统、空间科学、量子与先进材料研究，预印本状态始终明确标注。", "PAPERS & PREPRINTS", "最新研究论文"],
       history: ["ARCHIVE & DISCOVERY", "历史归档与跨日检索", "按日期回看每日版；输入搜索词后，将自动切换为跨日期检索。", "ARCHIVE", state.query ? "跨日期搜索" : "历史要闻"],
       bookmarks: ["PERSONAL COLLECTION", "我的收藏", "收藏内容完整保存在当前浏览器，不会上传服务器。", "SAVED STORIES", "收藏新闻"],
       watchlist: ["PERSONAL WATCHLIST", "关注词情报流", "用本机关注词扫描已有归档，快速追踪技术、机构、地区与装备型号。", "WATCHED SIGNALS", "关注词命中"],
@@ -378,6 +558,15 @@
     $("feedEyebrow").textContent = copy[3];
     $("feedTitle").textContent = copy[4];
     $("watchPanel").hidden = state.view !== "watchlist";
+    $("spotlightSection").hidden = state.view !== "latest";
+    $("researchNotice").hidden = state.view !== "research";
+    $("rangeControls").hidden = state.view !== "stream";
+    $("sourceFilterWrap").hidden = state.view !== "stream";
+    $("search").placeholder = state.view === "research" ? "搜索论文、作者、摘要…" : "搜索标题、摘要、来源…";
+    document.querySelectorAll("[data-range]").forEach((button) => {
+      button.classList.toggle("active", Number(button.dataset.range) === state.rangeHours);
+      button.setAttribute("aria-pressed", String(Number(button.dataset.range) === state.rangeHours));
+    });
     document.querySelectorAll("[data-view]").forEach((button) => {
       button.classList.toggle("active", button.dataset.view === state.view && button.closest("nav"));
       if (button.closest("nav")) button.setAttribute("aria-current", button.dataset.view === state.view ? "page" : "false");
@@ -408,14 +597,44 @@
     return new Set(items.flatMap((item) => item.sources.map((source) => source.evidenceGroup || source.domain || source.name))).size;
   }
 
+  function valueCounts(items, getter) {
+    const counts = Object.create(null);
+    items.forEach((item) => {
+      const key = clean(getter(item), "其他");
+      counts[key] = (counts[key] || 0) + 1;
+    });
+    return counts;
+  }
+
   function renderBrief() {
     const report = state.currentReport;
     const items = state.items;
+    const metricItems = ["stream", "research"].includes(state.view) ? viewFilteredItems(true) : items;
     let headline = report?.brief?.headline;
     let summary = report?.brief?.summary;
     let signals = Array.isArray(report?.brief?.signals) ? report.brief.signals : [];
     let method = report?.method === "openai" ? "AI 编辑 + 规则校验" : report ? "规则评分" : "本机视图";
-    if (!report) {
+    if (state.view === "stream") {
+      const total = Number(report?.totalCandidateCount) || items.length;
+      const hasFilters = state.rangeHours !== 24 || state.source !== "全部" || state.category !== "全部" || Boolean(state.query);
+      headline = `${metricItems.length} 条合格动态进入当前 ${state.rangeHours} 小时视图`;
+      summary = hasFilters
+        ? `当前筛选从 ${items.length} 条已收录动态中命中 ${metricItems.length} 条；可继续调整时间、来源、主题或关键词。`
+        : report?.truncated
+          ? `共发现 ${total} 条合格候选；当前载荷展示评分最高的 ${items.length} 条。`
+          : `共发现并保留 ${total} 条合格候选；Top 10 条目会在卡片中单独标记。`;
+      const categoryCounts = valueCounts(metricItems, (item) => item.category);
+      signals = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1]).slice(0, 3)
+        .map(([category, count]) => `${category}：${count} 条动态`);
+      method = "每 3 小时采集 · 规则去重";
+    } else if (state.view === "research") {
+      headline = `${metricItems.length} 篇前沿论文进入当前研究视图`;
+      summary = `${metricItems.length === items.length ? "覆盖" : `从 ${items.length} 篇论文中筛选出 ${metricItems.length} 篇，覆盖`}最近 ${Number(report?.rangeDays) || 7} 天公开研究元数据；预印本不等同于已经同行评审。`;
+      const areaCounts = valueCounts(metricItems, (item) => item.researchArea || "前沿研究");
+      signals = Object.entries(areaCounts).sort((a, b) => b[1] - a[1]).slice(0, 3)
+        .map(([area, count]) => `${area}：${count} 篇`);
+      method = report?.method === "openai" ? "AI 中文编辑 · 元数据校验" : "论文元数据 · 独立评分";
+    } else if (!report) {
       if (state.view === "bookmarks") {
         headline = `已收藏 ${items.length} 条值得持续跟踪的事件`;
         summary = "收藏是本机快照，即使新闻离开最新一期，也可从这里继续打开来源与评分说明。";
@@ -432,14 +651,34 @@
     $("briefSummary").textContent = clean(summary, "当前视图没有可展示的新闻。");
     $("briefPoints").innerHTML = signals.slice(0, 3).map((signal) => `<li>${esc(signal)}</li>`).join("");
     $("briefMethod").textContent = method;
-    $("itemCount").textContent = items.length;
-    $("sourceCount").textContent = uniqueSourceCount(items);
-    $("categoryCount").textContent = new Set(items.map((item) => item.category)).size;
+    $("itemCount").textContent = metricItems.length;
+    $("sourceCount").textContent = uniqueSourceCount(metricItems);
+    $("categoryCount").textContent = new Set(metricItems.map((item) => state.view === "research" ? item.researchArea : item.category)).size;
+    $("itemCountLabel").textContent = state.view === "research" ? "篇论文" : state.view === "stream" ? "条动态" : "重点事件";
+    $("sourceCountLabel").textContent = state.view === "research" ? "资料库" : "公开信源";
+    $("categoryCountLabel").textContent = state.view === "research" ? "研究方向" : "主题领域";
     $("briefUpdated").textContent = report?.generatedAt ? `生成于 ${formatDate(report.generatedAt)}` : "本机个性化视图";
   }
 
+  function renderSpotlight() {
+    if (state.view !== "latest") return;
+    const items = (state.latestReport?.items || []).slice(0, 3);
+    $("spotlightStories").innerHTML = items.length ? items.map((item, index) => `
+      <article class="spotlight-card">
+        <div class="spotlight-meta"><b>0${index + 1}</b><span>${esc(item.category)}</span><span>${esc(item.source)}</span>${item.isSupplemental ? `<span class="supplemental-badge">补充观察 · ${item.selectionWindowHours}h</span>` : ""}</div>
+        <h3>${highlightText(item.title)}</h3>
+        <p>${highlightText(item.summary)}</p>
+        <a href="#${esc(anchorId(item))}">查看关键事实与来源 <span aria-hidden="true">↓</span></a>
+      </article>`).join("") : '<div class="empty"><b>今日必读暂不可用</b>请检查日报更新状态。</div>';
+  }
+
   function searchableText(item) {
-    return [item.title, item.originalTitle, item.summary, item.why, item.source, item.country, ...item.keyFacts, ...item.tags, ...item.sources.map((source) => source.name)].join(" ").toLocaleLowerCase();
+    return [
+      item.title, item.originalTitle, item.summary, item.abstract, item.why, item.source, item.country,
+      item.researchArea, item.primaryCategory, item.question, item.method, item.findings, item.limitations,
+      ...item.authors, ...item.arxivCategories, ...item.keyFacts, ...item.tags,
+      ...item.sources.map((source) => source.name),
+    ].join(" ").toLocaleLowerCase();
   }
 
   function highlightText(value) {
@@ -491,29 +730,98 @@
     return full;
   }
 
-  function viewFilteredItems(includeCategory = true) {
+  function facetValue(item) {
+    return state.view === "research" ? clean(item.researchArea, "前沿研究") : item.category;
+  }
+
+  function viewFilteredItems(includeCategory = true, includeSource = true) {
     const query = state.query.toLocaleLowerCase();
     const watchwords = state.watchwords.map((word) => word.toLocaleLowerCase());
+    const streamAnchor = new Date(state.streamReport?.generatedAt).valueOf() || Date.now();
+    const rangeThreshold = streamAnchor - state.rangeHours * 3_600_000;
     return state.items.filter((item) => {
       const haystack = searchableText(item);
       const watchMatch = state.view !== "watchlist" || (watchwords.length && watchwords.some((word) => haystack.includes(word)));
       const queryMatch = !query || haystack.includes(query);
-      const categoryMatch = !includeCategory || state.category === "全部" || item.category === state.category;
-      return watchMatch && queryMatch && categoryMatch;
+      const categoryMatch = !includeCategory || state.category === "全部" || facetValue(item) === state.category;
+      const sourceMatch = !includeSource || state.view !== "stream" || state.source === "全部" || item.source === state.source;
+      const rangeMatch = state.view !== "stream" || new Date(item.publishedAt).valueOf() >= rangeThreshold;
+      return watchMatch && queryMatch && categoryMatch && sourceMatch && rangeMatch;
     });
   }
 
   function renderFilters() {
     const base = viewFilteredItems(false);
-    const labels = ["全部", ...CATEGORIES.filter((category) => base.some((item) => item.category === category))];
+    const available = [...new Set(base.map(facetValue).filter(Boolean))];
+    const ordered = state.view === "research"
+      ? available.sort((a, b) => base.filter((item) => facetValue(item) === b).length - base.filter((item) => facetValue(item) === a).length)
+      : [...CATEGORIES.filter((category) => available.includes(category)), ...available.filter((category) => !CATEGORIES.includes(category))];
+    const labels = ["全部", ...ordered];
     if (!labels.includes(state.category)) state.category = "全部";
     $("filters").innerHTML = labels.map((category) => {
-      const count = category === "全部" ? base.length : base.filter((item) => item.category === category).length;
+      const count = category === "全部" ? base.length : base.filter((item) => facetValue(item) === category).length;
       return `<button type="button" data-category="${esc(category)}" class="${state.category === category ? "active" : ""}" aria-pressed="${state.category === category}">${esc(category)} <span>${count}</span></button>`;
     }).join("");
   }
 
+  function renderSourceFilter() {
+    if (state.view !== "stream") return;
+    const base = viewFilteredItems(false, false);
+    const counts = new Map();
+    base.forEach((item) => counts.set(item.source, (counts.get(item.source) || 0) + 1));
+    const sources = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+    if (state.source !== "全部" && !counts.has(state.source)) state.source = "全部";
+    $("sourceFilter").innerHTML = [
+      `<option value="全部">全部来源（${base.length}）</option>`,
+      ...sources.map(([source, count]) => `<option value="${esc(source)}">${esc(source)}（${count}）</option>`),
+    ].join("");
+    $("sourceFilter").value = state.source;
+  }
+
   function bookmarkSet() { return new Set(state.bookmarks.map(itemKey)); }
+
+  function renderPaper(item, index, saved) {
+    const key = itemKey(item);
+    const opened = state.expandedKeys.has(key) ? " open" : "";
+    const authors = item.authors.length ? item.authors.slice(0, 6).join("、") + (item.authors.length > 6 ? " 等" : "") : "作者信息未提供";
+    const original = item.originalTitle && item.originalTitle !== item.title
+      ? `<p class="original-title" lang="en">原题：${esc(item.originalTitle)}</p>` : "";
+    const researchFields = [
+      ["研究问题", item.question], ["方法", item.method], ["主要发现", item.findings], ["局限性", item.limitations],
+    ].filter(([, value]) => value);
+    const structured = researchFields.length
+      ? researchFields.map(([label, value]) => `<section><h4>${esc(label)}</h4><p>${highlightText(value)}</p></section>`).join("")
+      : `<section><h4>原始摘要</h4><p>${highlightText(item.abstract || item.summary)}</p></section>`;
+    return `<article class="story paper-card" id="${esc(anchorId(item))}" data-key="${esc(key)}">
+      <span class="rank">${String(index + 1).padStart(2, "0")}</span>
+      <div class="story-main"><div class="story-copy">
+        <div class="meta">
+          <span class="cat paper-cat">${esc(item.researchArea || "前沿研究")}</span>
+          <b>${esc(item.source)}</b><span>${esc(formatDate(item.publishedAt, false))}</span>
+          <span class="review-status">${esc(item.peerReviewStatus || "评审状态未标注")}</span>
+        </div>
+        <h3>${highlightText(item.title)}</h3>${original}
+        <p class="paper-authors">${esc(authors)}</p>
+        <p class="summary">${highlightText(item.summary)}</p>
+        <div class="tags">${item.tags.map((tag) => `<span>${esc(tag)}</span>`).join("")}</div>
+      </div></div>
+      <div class="story-side">
+        <div class="score"><b>${item.score ?? "—"}</b><small>研究相关度</small></div>
+        <div class="story-actions">
+          <button type="button" data-bookmark title="${saved ? "取消收藏" : "收藏"}" aria-label="${saved ? "取消收藏" : "收藏"}">${saved ? "★" : "☆"}</button>
+          <button type="button" data-share title="复制本条链接" aria-label="复制本条链接">⌁</button>
+          ${item.pdfUrl ? `<a href="${esc(item.pdfUrl)}" target="_blank" rel="noopener noreferrer" title="打开 PDF" aria-label="打开论文 PDF">PDF</a>` : ""}
+          ${item.url ? `<a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer" title="打开论文页面" aria-label="打开论文页面">↗</a>` : ""}
+        </div>
+      </div>
+      <details class="details" data-details-key="${esc(key)}"${opened}>
+        <summary>展开研究问题、方法、发现与局限</summary>
+        <div class="detail-grid paper-detail">${structured}
+          <section><h4>论文元数据</h4><p>${esc(authors)}</p><p>${esc(item.arxivCategories.join(" · ") || item.primaryCategory)}</p><p>${esc(item.confidenceReason)}</p></section>
+        </div>
+      </details>
+    </article>`;
+  }
 
   function renderStory(item, index, saved) {
     const original = item.originalTitle && item.originalTitle !== item.title
@@ -535,13 +843,16 @@
       : `<div class="detail-grid">
           <section><h4>关键事实</h4><ul>${item.keyFacts.map((fact) => `<li>${highlightText(fact)}</li>`).join("")}</ul><h4>为什么重要</h4><p>${esc(item.why)}</p></section>
           <section><h4>来源与置信度</h4><p>${esc(item.confidenceReason)}</p><ul class="source-list">${sources || "<li>没有可用来源链接</li>"}</ul></section>
-          <section><h4>重要度为什么是 ${item.score}</h4><ul>${scoreReasons}</ul>${components ? `<ul class="score-components">${components}</ul>` : ""}<p>重要度用于排序，不是对报道真伪的概率判断。</p></section>
+          <section><h4>重要度为什么是 ${item.score}</h4><ul>${scoreReasons}</ul>${components ? `<ul class="score-components">${components}</ul>` : ""}${item.selectionNote ? `<p class="selection-note">${esc(item.selectionNote)}</p>` : ""}<p>重要度用于排序，不是对报道真伪的概率判断。</p></section>
         </div>`;
     return `<article class="story" id="${esc(anchorId(item))}" data-key="${esc(key)}">
       <span class="rank">${String(index + 1).padStart(2, "0")}</span>
       <div class="story-main${item.image ? " has-image" : ""}">${visual}<div class="story-copy">
         <div class="meta">
           <span class="cat" data-category="${esc(item.category)}">${esc(item.category)}</span>
+          ${item.isTopStory ? '<span class="top-story-badge">今日 Top 10</span>' : ""}
+          ${item.isSupplemental ? `<span class="supplemental-badge">补充观察 · ${item.selectionWindowHours}h</span>` : ""}
+          ${item.diversityRelaxed ? '<span class="quota-badge">配额补足</span>' : ""}
           <b>${esc(item.source)}</b><span>${esc(item.country)}</span><span>${esc(formatDate(item.publishedAt))}</span>
           ${item.editionDate ? `<span>${esc(item.editionDate)} 版</span>` : ""}
           <span class="confidence" data-confidence="${esc(item.confidence)}">置信度 ${esc(item.confidence)}</span>
@@ -570,8 +881,11 @@
     const visible = viewFilteredItems(true).sort((a, b) => state.sort === "latest"
       ? new Date(b.publishedAt) - new Date(a.publishedAt)
       : Number(b.score ?? -1) - Number(a.score ?? -1) || new Date(b.publishedAt) - new Date(a.publishedAt));
-    state.visible = visible.slice(0, 200);
-    const noteParts = [`显示 ${state.visible.length} 条`];
+    state.totalVisible = visible.length;
+    const paginated = state.view === "stream" || state.view === "research";
+    state.visible = visible.slice(0, paginated ? state.visibleLimit : 200);
+    const unit = state.view === "research" ? "篇" : "条";
+    const noteParts = [`显示 ${state.visible.length} / ${state.totalVisible} ${unit}`];
     if (state.view === "history" && state.query) noteParts.push("按月分片的跨日期索引");
     if (state.view === "watchlist") noteParts.push(`${state.watchwords.length} 个关注词`);
     $("resultNote").textContent = noteParts.join(" · ");
@@ -588,9 +902,13 @@
         const heading = grouped && item.editionDate !== previousEdition
           ? `<h3 class="edition-group">${esc(item.editionDate || "日期未知")} 版</h3>` : "";
         previousEdition = item.editionDate;
-        return heading + renderStory(item, index, saved.has(itemKey(item)));
+        return heading + (item.contentType === "paper"
+          ? renderPaper(item, index, saved.has(itemKey(item)))
+          : renderStory(item, index, saved.has(itemKey(item))));
       }).join("");
     }
+    $("loadMoreBtn").hidden = !paginated || state.visible.length >= state.totalVisible;
+    if (!$("loadMoreBtn").hidden) $("loadMoreBtn").textContent = `再加载 ${Math.min(PAGE_SIZE, state.totalVisible - state.visible.length)} ${unit}`;
     $("stories").setAttribute("aria-busy", "false");
     restoreViewportAnchor(viewport);
   }
@@ -604,14 +922,20 @@
   function renderAll() {
     renderViewCopy();
     renderDateControl();
-    renderBrief();
+    renderSpotlight();
     renderWatchwords();
+    renderSourceFilter();
     renderFilters();
+    renderBrief();
     renderStories();
     const report = state.currentReport || state.latestReport;
     $("dataNote").textContent = report?.generatedAt
-      ? `数据生成于 ${formatDate(report.generatedAt)}；军事、冲突与前沿技术信息请优先核验一手来源。`
-      : "当前视图没有远程日报元数据。";
+      ? state.view === "research"
+        ? `论文雷达生成于 ${formatDate(report.generatedAt)}；预印本与中文摘要不能替代完整论文和同行评审。`
+        : state.view === "stream"
+          ? `全量动态更新于 ${formatDate(report.generatedAt)}；动态流是合格候选集合，Top 10 仍以每日简报为准。`
+          : `数据生成于 ${formatDate(report.generatedAt)}；军事、冲突与前沿技术信息请优先核验一手来源。`
+      : "当前视图没有远程数据。";
     syncUrl();
   }
 
@@ -619,10 +943,24 @@
     if (!VIEWS.has(view)) return;
     state.view = view;
     state.category = "全部";
+    state.visibleLimit = PAGE_SIZE;
     if (view === "latest") {
+      state.sort = "score";
       state.currentReport = state.latestReport;
       state.items = state.latestReport?.items || [];
       state.editionDate = state.latestReport?.editionDate || "";
+    } else if (view === "stream") {
+      state.sort = "latest";
+      await loadStream(Boolean(options.showToast), Boolean(options.bypassCache));
+      state.currentReport = state.streamReport;
+      state.items = state.streamReport?.items || [];
+      state.editionDate = "";
+    } else if (view === "research") {
+      state.sort = "score";
+      await loadResearch(Boolean(options.showToast), Boolean(options.bypassCache));
+      state.currentReport = state.researchReport;
+      state.items = state.researchReport?.items || [];
+      state.editionDate = "";
     } else if (view === "history") {
       await ensureArchiveIndex(Boolean(options.bypassCache));
       const dates = availableDates();
@@ -640,6 +978,11 @@
       state.currentReport = null;
       state.items = await ensureSearchIndex(Boolean(options.bypassCache));
     }
+    if (["stream", "research"].includes(view) && location.hash.startsWith("#item-")) {
+      state.visibleLimit = Math.max(PAGE_SIZE, state.items.length);
+    }
+    document.querySelectorAll("[data-sort]").forEach((button) => button.classList.toggle("active", button.dataset.sort === state.sort));
+    updateViewHealth();
     renderAll();
   }
 
@@ -684,6 +1027,8 @@
     if (item.editionDate) {
       url.searchParams.set("view", "history");
       url.searchParams.set("date", item.editionDate);
+    } else if (["stream", "research"].includes(state.view)) {
+      url.searchParams.set("view", state.view);
     }
     url.hash = anchorId(item);
     try {
@@ -709,8 +1054,13 @@
       $("dialogContent").innerHTML = `<p>邮件由 GitHub Actions 在日报成功生成后，通过管理员配置的 SMTP 账户发送。收件人地址只存放在加密的 GitHub Secrets 中，不会出现在网页或源码里。</p><ol><li>在仓库 Actions Secrets 配置 <code>SMTP_HOST</code>、<code>SMTP_USERNAME</code>、<code>SMTP_PASSWORD</code>、<code>EMAIL_FROM</code> 和 <code>EMAIL_TO</code>。</li><li>可选配置 <code>SITE_URL</code>，让邮件中的“查看日报”链接指向正式域名。</li><li>手动运行一次 Daily news update 验证邮件。未配置时流程会安全跳过，不影响网站更新。</li></ol><p>普通访问者可以通过页面顶部的 <a href="./feed.xml">Atom 订阅</a>在阅读器中接收更新，无需提交邮箱。公开网页仍不开放匿名邮件登记，以避免邮箱收集、滥发和合规风险；管理员可在 <code>EMAIL_TO</code> 中维护多个收件人。</p>`;
     } else {
       $("dialogEyebrow").textContent = "SCORING METHODOLOGY";
-      $("dialogTitle").textContent = "评分与置信度如何理解";
-      $("dialogContent").innerHTML = `<ul><li><b>重要度：</b>综合基础分、来源权重、主题优先级、时效、影响词、主题相关性、描述完整度和多源印证，并扣除评论、播客等编辑降权。</li><li><b>AI 编辑分：</b>启用 AI 时，模型只可依据候选标题、描述、来源和时间重新选择与评分；规则分仍作为解释性参考。</li><li><b>置信度：</b>只反映收录来源权重和独立来源数量，不是“为真概率”。“待核验”意味着当前仅有单一来源。</li><li><b>关键事实：</b>必须能由候选元数据直接支持；任何重要决定仍应打开来源并寻找一手文件。</li></ul>`;
+      if (state.view === "research") {
+        $("dialogTitle").textContent = "论文相关度如何理解";
+        $("dialogContent").innerHTML = `<ul><li><b>研究相关度：</b>综合关注领域优先级、标题与摘要的主题命中、摘要完整度和发布时间，仅用于排列阅读顺序。</li><li><b>预印本：</b>arXiv 条目不代表已经同行评审、独立复现或获得学术共同体认可。</li><li><b>中文编辑：</b>配置 AI 时只依据标题与摘要提炼问题、方法、发现和局限；摘要未说明的内容必须明确标注。</li><li><b>研究判断：</b>重要结论应回到完整论文、实验设置、数据和后续评审。</li></ul>`;
+      } else {
+        $("dialogTitle").textContent = "评分与置信度如何理解";
+        $("dialogContent").innerHTML = `<ul><li><b>重要度：</b>综合基础分、来源权重、主题优先级、时效、影响词、主题相关性、描述完整度和多源印证，并扣除评论、播客等编辑降权。</li><li><b>AI 编辑分：</b>启用 AI 时，模型只可依据候选标题、描述、来源和时间重新选择与评分；规则分仍作为解释性参考。</li><li><b>置信度：</b>只反映收录来源权重和独立来源数量，不是“为真概率”。“待核验”意味着当前仅有单一来源。</li><li><b>关键事实：</b>必须能由候选元数据直接支持；任何重要决定仍应打开来源并寻找一手文件。</li></ul>`;
+      }
     }
     $("infoDialog").showModal();
   }
@@ -718,6 +1068,7 @@
   let searchTimer;
   async function handleSearch(value) {
     state.query = clean(value);
+    state.visibleLimit = PAGE_SIZE;
     if (state.view === "history") {
       if (state.query) {
         state.currentReport = null;
@@ -735,7 +1086,15 @@
     const categoryButton = event.target.closest("[data-category]");
     if (categoryButton?.closest("#filters")) {
       state.category = categoryButton.dataset.category;
-      renderFilters(); renderStories(); return;
+      state.visibleLimit = PAGE_SIZE;
+      renderFilters(); renderBrief(); renderStories(); return;
+    }
+    const rangeButton = event.target.closest("[data-range]");
+    if (rangeButton?.closest("#rangeControls")) {
+      state.rangeHours = Number(rangeButton.dataset.range) || 24;
+      state.visibleLimit = PAGE_SIZE;
+      renderAll();
+      return;
     }
     const bookmarkButton = event.target.closest("[data-bookmark]");
     if (bookmarkButton) { toggleBookmark(bookmarkButton.closest(".story").dataset.key); return; }
@@ -783,9 +1142,19 @@
   });
   document.querySelectorAll("[data-sort]").forEach((button) => button.addEventListener("click", () => {
     state.sort = button.dataset.sort;
+    state.visibleLimit = PAGE_SIZE;
     document.querySelectorAll("[data-sort]").forEach((item) => item.classList.toggle("active", item === button));
     renderStories();
   }));
+  $("sourceFilter").addEventListener("change", (event) => {
+    state.source = event.target.value || "全部";
+    state.visibleLimit = PAGE_SIZE;
+    renderAll();
+  });
+  $("loadMoreBtn").addEventListener("click", () => {
+    state.visibleLimit += PAGE_SIZE;
+    renderStories();
+  });
   $("editionPicker").addEventListener("change", async (event) => {
     state.query = ""; $("search").value = "";
     await switchView("history", { date: event.target.value });

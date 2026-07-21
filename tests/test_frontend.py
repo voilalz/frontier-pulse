@@ -23,6 +23,27 @@ class FrontendTests(unittest.TestCase):
         self.assertIn("payload?.shards", app)
         self.assertIn("hydrateCompactItem", app)
 
+    def test_full_stream_and_research_radar_are_wired(self):
+        index = (ROOT / "public" / "index.html").read_text(encoding="utf-8")
+        app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
+        styles = (ROOT / "public" / "assets" / "styles.css").read_text(encoding="utf-8")
+        for view in ("stream", "research"):
+            self.assertIn(f'data-view="{view}"', index)
+        for endpoint in ("./data/stream.json", "./data/research.json", "./data/stream-status.json"):
+            self.assertIn(endpoint, app)
+        self.assertIn('id="spotlightStories"', index)
+        self.assertIn('id="rangeControls"', index)
+        self.assertIn('id="sourceFilter"', index)
+        self.assertIn('id="loadMoreBtn"', index)
+        self.assertIn("renderPaper", app)
+        self.assertIn("researchArea", app)
+        self.assertIn("isTopStory", app)
+        self.assertIn("isSupplemental", app)
+        self.assertIn("本期 Top 10 已使用透明补全", app)
+        self.assertIn(".supplemental-badge", styles)
+        self.assertIn(".spotlight-grid", styles)
+        self.assertIn(".paper-detail", styles)
+
     def test_cache_is_bypassed_only_for_manual_refresh(self):
         app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
         self.assertIn("fetchJson(ENDPOINTS.latest, bypassCache)", app)
@@ -51,6 +72,8 @@ class FrontendTests(unittest.TestCase):
         self.assertIn("object-src 'none'", headers)
         self.assertIn("worker-src 'self'", headers)
         self.assertNotIn("/data/archive/search-index.json\n", headers)
+        self.assertIn("/data/stream.json\n  Cache-Control: public, max-age=300", headers)
+        self.assertIn("/data/research.json\n  Cache-Control: public, max-age=1800", headers)
 
 
 if __name__ == "__main__":
