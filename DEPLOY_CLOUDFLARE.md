@@ -57,15 +57,30 @@
 
 `.github/workflows/pages-deployment.yml` 使用 Wrangler 将 `public` 目录部署到 `frontier-pulse` 项目。未设置启用变量时，该部署任务会安全跳过，不影响推荐的 Git Integration 方案。
 
-## AI 中文标题、摘要和关键事实（推荐）
+## DeepSeek V4 Flash 中文标题、摘要和关键事实（推荐）
 
-在 GitHub Actions Secrets 中添加 `OPENAI_API_KEY`。可在 Variables 中设置 `OPENAI_MODEL`；未设置时使用仓库默认的 `gpt-5.6-luna`。没有 API Key 时，采集、Top 10 规则筛选和保守摘要仍会正常运行，但系统不会假装已经完成中文翻译。
+在 GitHub 仓库打开 `Settings → Secrets and variables → Actions`：
 
-手动运行后检查 `public/data/news.json`：
+Actions Secrets：
 
-- `method` 应为 `openai`；
+- `DEEPSEEK_API_KEY`：DeepSeek 控制台生成的密钥，只放在加密 Secret。
+
+Actions Variables：
+
+- `AI_PROVIDER=deepseek`
+- `DEEPSEEK_MODEL=deepseek-v4-flash`
+
+密钥由 GitHub Actions 的 Python 采集脚本在服务端读取，Cloudflare 只托管生成后的静态 JSON；不要把密钥设置为 Pages 公开环境变量、写进 `public/`、提交到仓库或放入浏览器 JavaScript。没有 API Key 时，采集、Top 10 规则筛选和保守摘要仍会正常运行，但系统不会假装已经完成中文翻译。
+
+依次手动运行 `Daily news update` 和 `Full stream update`，再检查：
+
+- `public/data/news.json.method` 应为 `deepseek`；
+- `public/data/news.json.editorialModel` 应为 `deepseek-v4-flash`；
 - 每条应有 `title`、`originalTitle`、`summary` 和非空 `keyFacts`；
 - `sources`、`scoreReasons` 和 `confidenceReason` 应非空。
+- `public/data/research.json.translatedItemCount` 和 `public/data/stream.json.translatedItemCount` 应大于 0。
+
+若只希望使用 OpenAI，改为 `AI_PROVIDER=openai`，并配置 Secret `OPENAI_API_KEY` 与 Variable `OPENAI_MODEL`。完整说明、降级语义和论文采集词示例见 README 的“启用 DeepSeek V4 Flash 中文翻译”。
 
 ## 邮件推送（可选）
 
@@ -107,6 +122,7 @@ Actions Variables：
 - 页面显示最新生成日期与 10 条重点事件。
 - 历史页可切换日期；输入关键词后能检索多个日期。
 - 收藏页刷新后仍保留内容；关注页能添加与删除本机关注词。
+- 论文雷达可保存、删除最多 20 个个人关键词；“我的论文流”能筛选并高亮命中，系统采集词列表可见。
 - 每条新闻可展开关键事实、多来源、置信度与评分解释。
 - 搜索索引清单按月加载 `search-YYYY-MM.json`，展开搜索结果时再请求当期完整归档。
 - `/feed.xml` 可订阅；单条新闻的复制链接能定位到 `#item-...`。
@@ -120,7 +136,8 @@ Actions Variables：
 
 - `Only N eligible candidates`：有效候选不足 10 条，脚本会拒绝覆盖上一期；稍后手动重试或维护 `config/news_config.json` 中的信源。
 - RSS/GDELT 出现 `403`、`429` 或超时：其他信源仍会继续；持续失败时替换该信源。
-- OpenAI 调用失败：自动降级到规则筛选，不阻断日报。
+- DeepSeek/OpenAI 调用失败：Top 10 自动降级到规则筛选；论文和动态保留成功翻译批次及原始元数据，不阻断发布。
+- 页面显示“翻译不完整”：查看 `stream-status.json.translationWarnings` 或 `status.json.researchWarnings`；通常是单批 API 超时、限流或 JSON 不完整，可稍后重跑对应工作流。
 - 页面显示“数据过期”：`generatedAt` 已超过 36 小时；检查日报工作流、信源和 Cloudflare 最新部署。
 - 页面显示“最近一次自动更新失败”：打开 `public/data/status.json` 或 Actions 日志查看已公开的简短原因；上一期数据不会被覆盖。
 - 邮件未发送：先确认工作流中 `Send administrator email digest` 步骤是否显示跳过配置；再核对 SMTP 端口、SSL/STARTTLS 和授权码。

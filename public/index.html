@@ -19,7 +19,7 @@
   <link rel="canonical" href="https://frontier-pulse.jiumi674.workers.dev/">
   <link rel="alternate" type="application/atom+xml" title="智域前沿每日版" href="./feed.xml">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./assets/styles.css?v=1.5.1">
+  <link rel="stylesheet" href="./assets/styles.css?v=1.6.0">
   <title>智域前沿 · 全球科技、安全与研究情报</title>
 </head>
 <body>
@@ -106,6 +106,30 @@
       <p>论文条目优先来自公开预印本资料库。中文摘要只用于快速理解，不代表研究已经同行评审或独立复现。</p>
     </aside>
 
+    <section class="shell research-keyword-panel" id="researchKeywordPanel" hidden aria-labelledby="researchKeywordTitle">
+      <div class="research-keyword-copy">
+        <p class="eyebrow">PERSONAL PAPER SIGNALS</p>
+        <h2 id="researchKeywordTitle">我的论文关键词</h2>
+        <p>最多保存 20 个中英文关键词，只保存在当前浏览器。论文标题、摘要、研究字段和系统采集标签命中后会高亮，并进入你的专属论文流。</p>
+        <div class="research-scope" role="group" aria-label="论文流范围">
+          <button class="active" type="button" data-research-scope="all" aria-pressed="true">全部论文 <span id="allResearchCount">0</span></button>
+          <button type="button" data-research-scope="mine" aria-pressed="false">我的论文流 <span id="mineResearchCount">0</span></button>
+        </div>
+      </div>
+      <div class="research-keyword-tools">
+        <form id="researchKeywordForm">
+          <label for="researchKeywordInput">添加关键词 <span id="researchKeywordLimit">0 / 20</span></label>
+          <div><input id="researchKeywordInput" maxlength="60" placeholder="例如：多模态智能体"><button type="submit">添加</button></div>
+          <div class="watch-chips" id="researchKeywordChips" aria-live="polite"></div>
+        </form>
+        <div class="collection-keywords">
+          <b>系统采集词</b>
+          <p>这些词会直接搜索 arXiv 的标题与摘要；个人关键词则用于本机筛选。</p>
+          <div id="collectionKeywordChips"></div>
+        </div>
+      </div>
+    </section>
+
     <section class="shell watch-panel" id="watchPanel" hidden>
       <div>
         <p class="eyebrow">LOCAL WATCHLIST</p>
@@ -148,7 +172,7 @@
 
   <footer class="shell foot">
     <p id="dataNote">正在检查数据状态…</p>
-    <p>仅保存新闻元数据与短摘要 · 收藏和关注词只保存在本机</p>
+    <p>仅保存新闻与论文元数据及短摘要 · 收藏、关注词和论文关键词只保存在本机</p>
   </footer>
 
   <dialog id="infoDialog">
@@ -158,6 +182,6 @@
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
   <noscript><div class="noscript">此页面需要 JavaScript 才能读取和筛选日报数据。</div></noscript>
-  <script src="./assets/app.js?v=1.5.1" defer></script>
+  <script src="./assets/app.js?v=1.6.0" defer></script>
 </body>
 </html>

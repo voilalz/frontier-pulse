@@ -2,10 +2,10 @@
 """Build the daily Frontier Pulse static news dataset.
 
 The collector uses only Python's standard library so GitHub Actions can run it
-without a dependency install. OpenAI is optional: when OPENAI_API_KEY is set,
-one Responses API request selects and summarizes the daily top stories. When it
-is absent or unavailable, deterministic ranking and evidence-preserving
-summaries keep the pipeline operational.
+without a dependency install. DeepSeek or OpenAI editorial translation is
+optional. When neither provider is configured or an API is unavailable,
+deterministic ranking and evidence-preserving summaries keep the pipeline
+operational.
 """
 
 from __future__ import annotations
@@ -34,7 +34,7 @@ from typing import Any, Iterable
 from zoneinfo import ZoneInfo
 
 LOGGER = logging.getLogger("frontier-pulse")
-USER_AGENT = "FrontierPulseBot/1.5 (+https://github.com/voilalz/frontier-pulse; public-interest news and research index)"
+USER_AGENT = "FrontierPulseBot/1.6 (+https://github.com/voilalz/frontier-pulse; public-interest news and research index)"
 CATEGORIES = ("AI", "航空航天", "军事动态", "局部冲突", "前沿技术", "无人系统")
 
 
@@ -78,6 +78,7 @@ class ResearchPaper:
     primary_category: str = ""
     research_area: str = "前沿研究"
     tags: list[str] = field(default_factory=list)
+    collection_keywords: list[str] = field(default_factory=list)
     score: float = 0.0
     date_estimated: bool = False
 
@@ -224,6 +225,30 @@ def load_config(path: Path) -> dict[str, Any]:
     if missing:
         raise ValueError(f"config is missing categories: {', '.join(missing)}")
     return config
+
+
+def resolve_ai_runtime(config: dict[str, Any]) -> dict[str, str] | None:
+    """Resolve one server-side editorial provider without exposing keys to output."""
+    requested = clean_text(os.getenv("AI_PROVIDER") or config.get("ai_provider") or "auto").lower()
+    deepseek_key = os.getenv("DEEPSEEK_API_KEY", "").strip()
+    openai_key = os.getenv("OPENAI_API_KEY", "").strip()
+    if requested in {"", "auto"}:
+        requested = "deepseek" if deepseek_key else "openai" if openai_key else "none"
+    if requested == "deepseek" and deepseek_key:
+        return {
+            "provider": "deepseek",
+            "api_key": deepseek_key,
+            "model": clean_text(os.getenv("DEEPSEEK_MODEL") or config.get("deepseek_model") or "deepseek-v4-flash"),
+            "endpoint": "https://api.deepseek.com/chat/completions",
+        }
+    if requested == "openai" and openai_key:
+        return {
+            "provider": "openai",
+            "api_key": openai_key,
+            "model": clean_text(os.getenv("OPENAI_MODEL") or config.get("openai_model") or "gpt-5.6-luna"),
+            "endpoint": "https://api.openai.com/v1/responses",
+        }
+    return None
 
 
 def collect_gdelt(
@@ -492,6 +517,47 @@ def research_definitions(config: dict[str, Any]) -> list[dict[str, Any]]:
     ]
 
 
+def research_keyword_definitions(config: dict[str, Any]) -> list[dict[str, Any]]:
+    """Normalize up to 20 administrator-managed arXiv keyword queries."""
+    raw_definitions = config.get("research", {}).get("collection_keywords", [])
+    normalized: list[dict[str, Any]] = []
+    for raw in raw_definitions if isinstance(raw_definitions, list) else []:
+        definition = {"query": raw, "label": raw} if isinstance(raw, str) else raw
+        if not isinstance(definition, dict):
+            continue
+        query = clean_text(definition.get("query") or definition.get("term"), 120)
+        label = clean_text(definition.get("label") or query, 40)
+        if not query or not label:
+            continue
+        aliases = [
+            clean_text(alias, 120) for alias in definition.get("aliases", [])
+            if clean_text(alias)
+        ] if isinstance(definition.get("aliases", []), list) else []
+        try:
+            priority = int(definition.get("priority", 8))
+        except (TypeError, ValueError):
+            priority = 8
+        normalized.append({
+            "query": query,
+            "label": label,
+            "priority": max(1, min(10, priority)),
+            "aliases": list(dict.fromkeys([query, *aliases])),
+        })
+        if len(normalized) >= 20:
+            break
+    return normalized
+
+
+def arxiv_keyword_query(term: str) -> str:
+    """Build a literal title-or-abstract query instead of accepting raw Lucene syntax."""
+    literal = clean_text(term, 120).replace('"', " ")
+    literal = re.sub(r"\s+", " ", literal).strip()
+    if not literal:
+        return ""
+    encoded = f'"{literal}"' if " " in literal else literal
+    return f"(ti:{encoded} OR abs:{encoded})"
+
+
 def research_area_for(categories: list[str], config: dict[str, Any]) -> tuple[str, int]:
     category_set = set(categories)
     for definition in research_definitions(config):
@@ -507,7 +573,8 @@ def collect_arxiv(config: dict[str, Any], now: datetime) -> list[ResearchPaper]:
     """Collect relevant preprints from arXiv's public Atom API."""
     research = config.get("research", {})
     definitions = research_definitions(config)
-    if not definitions:
+    keyword_definitions = research_keyword_definitions(config)
+    if not definitions and not keyword_definitions:
         return []
     endpoint = str(research.get("arxiv_endpoint", "https://export.arxiv.org/api/query"))
     fetch_limit = max(1, min(100, int(research.get("per_area_fetch_limit", 24))))
@@ -517,12 +584,25 @@ def collect_arxiv(config: dict[str, Any], now: datetime) -> list[ResearchPaper]:
     for definition in definitions:
         label = clean_text(definition.get("label")) or clean_text(definition["id"])
         query_groups.setdefault(label, []).append(clean_text(definition["id"]))
-    for index, (label, category_ids) in enumerate(query_groups.items()):
+    query_specs: list[tuple[str, str, int]] = []
+    for label, category_ids in query_groups.items():
         category_query = " OR ".join(f"cat:{category_id}" for category_id in category_ids)
+        query_specs.append((label, f"({category_query})" if len(category_ids) > 1 else category_query, fetch_limit))
+    keyword_fetch_limit = max(1, min(100, int(research.get("per_keyword_fetch_limit", 20))))
+    for definition in keyword_definitions:
+        alias_queries: list[str] = []
+        for alias in definition["aliases"][:6]:
+            query = arxiv_keyword_query(str(alias))
+            if query and query not in alias_queries:
+                alias_queries.append(query)
+        if alias_queries:
+            query = f"({' OR '.join(alias_queries)})" if len(alias_queries) > 1 else alias_queries[0]
+            query_specs.append((f"关键词：{definition['label']}", query, keyword_fetch_limit))
+    for index, (label, search_query, result_limit) in enumerate(query_specs):
         params = {
-            "search_query": f"({category_query})" if len(category_ids) > 1 else category_query,
+            "search_query": search_query,
             "start": "0",
-            "max_results": str(fetch_limit),
+            "max_results": str(result_limit),
             "sortBy": "submittedDate",
             "sortOrder": "descending",
         }
@@ -533,7 +613,7 @@ def collect_arxiv(config: dict[str, Any], now: datetime) -> list[ResearchPaper]:
             root = ET.fromstring(http_get(url, timeout=30, max_bytes=8_000_000, attempts=1))
             roots.append(root)
             count = sum(1 for node in root.iter() if local_name(node.tag) == "entry")
-            LOGGER.info("arXiv area %s produced %d entries", label, count)
+            LOGGER.info("arXiv query %s produced %d entries", label, count)
         except Exception as exc:
             LOGGER.warning("arXiv area %s failed: %s", label, exc)
     if not roots:
@@ -573,6 +653,14 @@ def collect_arxiv(config: dict[str, Any], now: datetime) -> list[ResearchPaper]:
             if local_name(child.tag) == "primary_category" and child.attrib.get("term")
         ), categories[0] if categories else "")
         area, _priority = research_area_for(categories or [primary], config)
+        source_text = f"{title} {abstract}".lower()
+        keyword_labels = [
+            str(definition["label"])
+            for definition in keyword_definitions
+            if any(keyword_matches(source_text, alias) for alias in definition["aliases"])
+        ]
+        if area == "前沿研究" and keyword_labels:
+            area = keyword_labels[0]
         alternate = ""
         pdf_url = ""
         for child in node.iter():
@@ -599,6 +687,7 @@ def collect_arxiv(config: dict[str, Any], now: datetime) -> list[ResearchPaper]:
             categories=categories,
             primary_category=primary,
             research_area=area,
+            collection_keywords=keyword_labels,
             date_estimated=date_estimated,
         ))
         known_ids.add(arxiv_id)
@@ -635,6 +724,10 @@ def collect_research_fixture(path: Path, now: datetime, config: dict[str, Any]) 
             categories=categories,
             primary_category=primary,
             research_area=clean_text(item.get("researchArea")) or area,
+            collection_keywords=[
+                clean_text(keyword, 40) for keyword in item.get("collectionKeywords", [])
+                if clean_text(keyword)
+            ][:20],
             date_estimated=date_estimated,
         ))
     return papers
@@ -652,6 +745,7 @@ def score_research_papers(
         for definition in config.get("categories", {}).values()
         for keyword in definition.get("keywords", [])
     }
+    collection_definitions = research_keyword_definitions(config)
     for paper in papers:
         if max(paper.published_at, paper.updated_at) < threshold or paper.published_at > now + timedelta(hours=2):
             continue
@@ -659,11 +753,25 @@ def score_research_papers(
         paper.research_area = paper.research_area or area
         text = f"{paper.title} {paper.abstract}".lower()
         matched = [keyword for keyword in signal_keywords if keyword_matches(text, keyword)]
+        collection_matches = [
+            definition for definition in collection_definitions
+            if any(keyword_matches(text, alias) for alias in definition["aliases"])
+        ]
+        paper.collection_keywords = list(dict.fromkeys([
+            *paper.collection_keywords,
+            *(str(definition["label"]) for definition in collection_matches),
+        ]))[:20]
+        if paper.research_area == "前沿研究" and paper.collection_keywords:
+            paper.research_area = paper.collection_keywords[0]
         age_days = max(0.0, (now - max(paper.published_at, paper.updated_at)).total_seconds() / 86_400)
         freshness = max(0.0, 28.0 - age_days * 4)
         evidence = 8 if len(paper.abstract) >= 500 else 5 if len(paper.abstract) >= 180 else 2
-        paper.score = min(100.0, 35 + priority * 2 + freshness + min(14, len(matched) * 2) + evidence)
-        human_tags = [paper.research_area, paper.primary_category, *sorted(matched, key=len, reverse=True)]
+        collection_boost = min(18, sum(max(2, int(definition["priority"]) - 5) for definition in collection_matches))
+        paper.score = min(100.0, 35 + priority * 2 + freshness + min(14, len(matched) * 2) + collection_boost + evidence)
+        human_tags = [
+            paper.research_area, *paper.collection_keywords, paper.primary_category,
+            *sorted(matched, key=len, reverse=True),
+        ]
         paper.tags = list(dict.fromkeys(clean_text(tag, 28) for tag in human_tags if clean_text(tag)))[:5]
         scored.append(paper)
     return sorted(scored, key=lambda paper: (paper.score, paper.updated_at), reverse=True)
@@ -1107,7 +1215,73 @@ def extract_response_text(payload: dict[str, Any]) -> str:
     raise ValueError("OpenAI response did not contain output_text")
 
 
-def ai_select(candidates: list[Article], config: dict[str, Any], api_key: str) -> dict[str, Any]:
+def extract_chat_completion_text(payload: dict[str, Any]) -> str:
+    choices = payload.get("choices", [])
+    if isinstance(choices, list) and choices:
+        message = choices[0].get("message", {}) if isinstance(choices[0], dict) else {}
+        content = message.get("content") if isinstance(message, dict) else None
+        if isinstance(content, str) and content.strip():
+            return content
+    raise ValueError("DeepSeek response did not contain message content")
+
+
+def parse_json_object(value: str) -> dict[str, Any]:
+    text = value.strip()
+    if text.startswith("```"):
+        text = re.sub(r"^```(?:json)?\s*", "", text, flags=re.I)
+        text = re.sub(r"\s*```$", "", text)
+    parsed = json.loads(text)
+    if not isinstance(parsed, dict):
+        raise ValueError("AI response must be one JSON object")
+    return parsed
+
+
+def request_structured_json(
+    runtime: dict[str, str],
+    *,
+    instructions: str,
+    input_text: str,
+    schema_name: str,
+    schema: dict[str, Any],
+    example: dict[str, Any],
+    max_tokens: int,
+) -> dict[str, Any]:
+    """Call OpenAI Responses or DeepSeek ChatCompletions with local validation."""
+    if runtime["provider"] == "deepseek":
+        system_prompt = (
+            instructions
+            + " 只输出一个合法 JSON 对象，不要输出 Markdown、解释或思考过程。"
+            + " JSON 输出示例："
+            + json.dumps(example, ensure_ascii=False)
+            + " 字段约束："
+            + json.dumps(schema, ensure_ascii=False, separators=(",", ":"))
+        )
+        body = {
+            "model": runtime["model"],
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": input_text},
+            ],
+            "response_format": {"type": "json_object"},
+            "thinking": {"type": "disabled"},
+            "max_tokens": max_tokens,
+            "stream": False,
+        }
+        payload = http_post_json(runtime["endpoint"], body, runtime["api_key"])
+        return parse_json_object(extract_chat_completion_text(payload))
+    body = {
+        "model": runtime["model"],
+        "store": False,
+        "instructions": instructions,
+        "input": input_text,
+        "text": {"format": {"type": "json_schema", "name": schema_name, "strict": True, "schema": schema}},
+        "max_output_tokens": max_tokens,
+    }
+    payload = http_post_json(runtime["endpoint"], body, runtime["api_key"])
+    return parse_json_object(extract_response_text(payload))
+
+
+def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[str, str]) -> dict[str, Any]:
     category_enum = list(CATEGORIES)
     item_schema = {
         "type": "object",
@@ -1157,37 +1331,79 @@ def ai_select(candidates: list[Article], config: dict[str, Any], api_key: str) -
         }
         for article in candidates
     ]
-    body = {
-        "model": os.getenv("OPENAI_MODEL") or config.get("openai_model", "gpt-5.6-luna"),
-        "store": False,
-        "instructions": (
-            "你是国际科技与安全新闻编辑。只能依据提供的标题、描述、来源和时间工作，不得补写候选材料中没有的事实。"
-            "从候选中选择恰好10条最重要且类别尽量多样的新闻，优先考虑全球影响、技术/政策拐点、可信来源、时效与多源印证。"
-            "为每条生成忠实、自然的中文标题（保留机构、型号和专有名词），并输出不超过90字的中文摘要、2至3条可由候选材料直接支持的关键事实、"
-            "不超过70字的为什么重要、0-100重要度和最多3个短标签。关键事实不得把推断写成事实。"
-            "军事与冲突新闻保持中性、事实与判断分离；信息不足时明确使用‘据公开信息’等保守表达。"
-        ),
-        "input": "候选新闻证据：\n" + json.dumps(evidence, ensure_ascii=False),
-        "text": {"format": {"type": "json_schema", "name": "frontier_daily", "strict": True, "schema": schema}},
-        "max_output_tokens": int(config.get("openai_max_output_tokens", 8000)),
+    instructions = (
+        "你是国际科技与安全新闻编辑。只能依据提供的标题、描述、来源和时间工作，不得补写候选材料中没有的事实。"
+        "从候选中选择恰好10条最重要且类别尽量多样的新闻，优先考虑全球影响、技术/政策拐点、可信来源、时效与多源印证。"
+        "为每条生成忠实、自然的中文标题（保留机构、型号和专有名词），并输出不超过90字的中文摘要、2至3条可由候选材料直接支持的关键事实、"
+        "不超过70字的为什么重要、0-100重要度和最多3个短标签。关键事实不得把推断写成事实。"
+        "军事与冲突新闻保持中性、事实与判断分离；信息不足时明确使用‘据公开信息’等保守表达。"
+    )
+    example_item = {
+        "id": candidates[0].id,
+        "titleZh": "忠实的中文标题",
+        "category": candidates[0].category,
+        "score": 80,
+        "summary": "不超过90字的中文摘要",
+        "keyFacts": ["可核验事实一", "可核验事实二"],
+        "why": "为什么重要",
+        "tags": ["标签"],
+    }
+    example = {
+        "brief": {"headline": "今日态势标题", "summary": "总体摘要", "signals": ["信号一", "信号二", "信号三"]},
+        "items": [example_item],
     }
     error: Exception | None = None
     for attempt in range(2):
         try:
-            payload = http_post_json("https://api.openai.com/v1/responses", body, api_key)
-            result = json.loads(extract_response_text(payload))
-            if len(result.get("items", [])) != 10:
+            result = request_structured_json(
+                runtime,
+                instructions=instructions,
+                input_text="候选新闻证据：\n" + json.dumps(evidence, ensure_ascii=False),
+                schema_name="frontier_daily",
+                schema=schema,
+                example=example,
+                max_tokens=int(config.get("ai_max_output_tokens", config.get("openai_max_output_tokens", 8000))),
+            )
+            items = result.get("items", [])
+            if not isinstance(items, list) or len(items) != 10:
                 raise ValueError("structured response did not contain exactly 10 items")
+            allowed_ids = {article.id for article in candidates}
+            seen_ids: set[str] = set()
+            for item in items:
+                if not isinstance(item, dict):
+                    raise ValueError("daily editorial item must be an object")
+                item_id = clean_text(item.get("id"))
+                if item_id not in allowed_ids or item_id in seen_ids:
+                    raise ValueError(f"daily editorial response contained invalid or duplicate id: {item_id}")
+                seen_ids.add(item_id)
+                if item.get("category") not in CATEGORIES:
+                    raise ValueError(f"daily editorial response contained invalid category: {item.get('category')}")
+                try:
+                    score = int(item.get("score"))
+                except (TypeError, ValueError):
+                    raise ValueError("daily editorial score must be an integer") from None
+                if not 0 <= score <= 100:
+                    raise ValueError("daily editorial score must be between 0 and 100")
+                if not all(clean_text(item.get(field_name)) for field_name in ("titleZh", "summary", "why")):
+                    raise ValueError("daily editorial item is missing title, summary or importance")
+                facts = item.get("keyFacts")
+                tags = item.get("tags")
+                if not isinstance(facts, list) or not 2 <= len([fact for fact in facts if clean_text(fact)]) <= 3:
+                    raise ValueError("daily editorial item must contain 2-3 key facts")
+                if not isinstance(tags, list):
+                    raise ValueError("daily editorial tags must be an array")
+                item["score"] = score
             return result
         except (ValueError, TypeError, json.JSONDecodeError) as exc:
             error = exc
             if attempt == 0:
                 time.sleep(1.5)
-    raise RuntimeError(f"OpenAI structured output could not be parsed after one retry: {error}")
+    raise RuntimeError(f"{runtime['provider']} structured output could not be parsed after one retry: {error}")
 
 
 def item_from_article(article: Article, config: dict[str, Any], editorial: dict[str, Any] | None = None) -> dict[str, Any]:
     editorial = editorial or {}
+    translation_only = bool(editorial.get("_translationOnly"))
     score = int(editorial.get("score", round(article.raw_score)))
     category = editorial.get("category") if editorial.get("category") in CATEGORIES else article.category
     tags = [clean_text(tag, 24) for tag in editorial.get("tags", article.tags) if clean_text(tag)][:3]
@@ -1198,8 +1414,8 @@ def item_from_article(article: Article, config: dict[str, Any], editorial: dict[
     ensure_evidence_sources(article)
     confidence, confidence_reason = confidence_assessment(article, config)
     score_reasons = list(article.score_reasons)
-    score_basis = "AI编辑评分" if editorial else "规则评分"
-    if editorial:
+    score_basis = "AI翻译 · 规则评分" if translation_only else "AI编辑评分" if editorial else "规则评分"
+    if editorial and not translation_only:
         score_reasons = [f"AI 编辑重要度 {score}/100", f"规则参考分 {round(article.raw_score)}/100", *score_reasons]
     return {
         "id": article.id,
@@ -1224,6 +1440,7 @@ def item_from_article(article: Article, config: dict[str, Any], editorial: dict[
         "image": article.image,
         "corroboration": article.corroboration,
         "sources": article.evidence_sources,
+        "translationProvider": clean_text(editorial.get("_provider")),
         "isSupplemental": article.is_supplemental,
         "selectionWindowHours": article.selection_window_hours,
         "selectionNote": article.selection_note,
@@ -1231,26 +1448,115 @@ def item_from_article(article: Article, config: dict[str, Any], editorial: dict[
     }
 
 
+def ai_translate_articles(
+    articles: list[Article], config: dict[str, Any], runtime: dict[str, str]
+) -> tuple[dict[str, dict[str, Any]], list[str]]:
+    """Translate full-stream metadata in bounded batches without changing ranking."""
+    translations: dict[str, dict[str, Any]] = {}
+    warnings: list[str] = []
+    batch_size = max(1, min(20, int(config.get("stream_translation_batch_size", 12))))
+    consecutive_failures = 0
+    for start in range(0, len(articles), batch_size):
+        batch = articles[start:start + batch_size]
+        allowed_ids = [article.id for article in batch]
+        item_schema = {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string", "enum": allowed_ids},
+                "titleZh": {"type": "string"},
+                "summary": {"type": "string"},
+                "tags": {"type": "array", "items": {"type": "string"}, "maxItems": 3},
+            },
+            "required": ["id", "titleZh", "summary", "tags"],
+            "additionalProperties": False,
+        }
+        schema = {
+            "type": "object",
+            "properties": {
+                "items": {"type": "array", "items": item_schema, "minItems": len(batch), "maxItems": len(batch)},
+            },
+            "required": ["items"],
+            "additionalProperties": False,
+        }
+        evidence = [{
+            "id": article.id,
+            "title": article.title,
+            "description": clean_text(article.description, 900),
+            "source": article.source,
+            "publishedAt": article.published_at.isoformat().replace("+00:00", "Z"),
+        } for article in batch]
+        example = {"items": [{
+            "id": allowed_ids[0], "titleZh": "忠实的中文标题",
+            "summary": "不超过120字的中文摘要", "tags": ["标签"],
+        }]}
+        try:
+            result = request_structured_json(
+                runtime,
+                instructions=(
+                    "你是科技新闻翻译编辑。逐条把标题和已有描述忠实翻译、压缩为自然中文，保留机构、型号、数值和不确定性。"
+                    "不得补充输入中不存在的事实，不得改变立场；描述为空时明确写‘现有元数据未提供摘要’。"
+                    "每条输出中文标题、不超过120字的中文摘要和最多3个短标签。"
+                ),
+                input_text="待翻译新闻元数据：\n" + json.dumps(evidence, ensure_ascii=False),
+                schema_name="frontier_stream_translation",
+                schema=schema,
+                example=example,
+                max_tokens=int(config.get("stream_translation_max_tokens", 10000)),
+            )
+            batch_items: dict[str, dict[str, Any]] = {}
+            for item in result.get("items", []):
+                item_id = clean_text(item.get("id")) if isinstance(item, dict) else ""
+                if (
+                    item_id in allowed_ids
+                    and item_id not in batch_items
+                    and clean_text(item.get("titleZh"))
+                    and clean_text(item.get("summary"))
+                ):
+                    batch_items[item_id] = {
+                        **item,
+                        "tags": item.get("tags", []) if isinstance(item.get("tags", []), list) else [],
+                        "_translationOnly": True,
+                        "_provider": runtime["provider"],
+                    }
+            translations.update(batch_items)
+            consecutive_failures = 0
+            if len(batch_items) != len(batch):
+                warnings.append(f"新闻中文翻译批次不完整：{len(batch_items)}/{len(batch)}")
+        except Exception as exc:
+            reason = clean_text(str(exc), 160) or exc.__class__.__name__
+            warnings.append(f"新闻中文翻译批次失败：{reason}")
+            LOGGER.warning("Stream translation batch failed: %s", reason)
+            consecutive_failures += 1
+            if consecutive_failures >= 2 and start + batch_size < len(articles):
+                warnings.append("新闻中文翻译连续失败 2 个批次，已停止后续调用并保留原始元数据")
+                break
+    return translations, warnings
+
+
 def build_stream_report(
     candidates: list[Article],
     config: dict[str, Any],
     now: datetime,
     top_stories: set[str] | dict[str, dict[str, Any]] | None = None,
+    translations: dict[str, dict[str, Any]] | None = None,
+    translation_runtime: dict[str, str] | None = None,
+    translation_warnings: list[str] | None = None,
 ) -> dict[str, Any]:
     """Publish the complete qualified 24-hour candidate stream, capped for payload safety."""
     limit = max(1, int(config.get("stream_limit", 300)))
     selected = candidates[:limit]
     featured_items = top_stories if isinstance(top_stories, dict) else {}
     featured = set(featured_items) if featured_items else set(top_stories or set())
+    translations = translations or {}
     items: list[dict[str, Any]] = []
     for article in selected:
-        item = item_from_article(article, config)
+        item = item_from_article(article, config, translations.get(article.id))
         daily_item = featured_items.get(article.id)
         if isinstance(daily_item, dict):
             for field_name in (
                 "title", "originalTitle", "summary", "keyFacts", "why", "category", "score",
                 "scoreBasis", "scoreComponents", "scoreReasons", "confidence", "confidenceReason",
-                "tags", "sources", "corroboration",
+                "tags", "sources", "corroboration", "translationProvider",
             ):
                 if field_name in daily_item:
                     item[field_name] = daily_item[field_name]
@@ -1265,7 +1571,7 @@ def build_stream_report(
         category_counts[category] = category_counts.get(category, 0) + 1
         source_counts[source] = source_counts.get(source, 0) + 1
     return {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "timezone": config.get("timezone", "Asia/Tokyo"),
         "rangeHours": int(config.get("lookback_hours", 24)),
@@ -1274,12 +1580,16 @@ def build_stream_report(
         "truncated": len(candidates) > limit,
         "categoryCounts": category_counts,
         "sourceCounts": dict(sorted(source_counts.items(), key=lambda pair: (-pair[1], pair[0]))),
+        "translationProvider": translation_runtime.get("provider") if translation_runtime else "",
+        "translationModel": translation_runtime.get("model") if translation_runtime else "",
+        "translatedItemCount": sum(bool(item.get("translationProvider")) for item in items),
+        "translationWarnings": list(translation_warnings or []),
         "items": items,
     }
 
 
 def ai_edit_research(
-    papers: list[ResearchPaper], config: dict[str, Any], api_key: str
+    papers: list[ResearchPaper], config: dict[str, Any], runtime: dict[str, str]
 ) -> dict[str, dict[str, Any]]:
     allowed_ids = [paper.id for paper in papers]
     item_schema = {
@@ -1318,28 +1628,45 @@ def ai_edit_research(
         "categories": paper.categories,
         "publishedAt": paper.published_at.isoformat().replace("+00:00", "Z"),
     } for paper in papers]
-    body = {
-        "model": os.getenv("OPENAI_MODEL") or config.get("openai_model", "gpt-5.6-luna"),
-        "store": False,
-        "instructions": (
+    example = {"items": [{
+        "id": allowed_ids[0],
+        "titleZh": "忠实的中文论文标题",
+        "summaryZh": "不超过140字的中文摘要",
+        "question": "研究问题",
+        "method": "论文摘要明确说明的方法",
+        "findings": "论文摘要明确说明的发现",
+        "limitations": "摘要未说明",
+        "tags": ["研究标签"],
+    }]}
+    result = request_structured_json(
+        runtime,
+        instructions=(
             "你是前沿研究编辑。只能依据论文标题和摘要，不得补充摘要中不存在的实验结果。"
             "为每篇论文生成忠实的中文标题、不超过140字的中文摘要，并分别提炼研究问题、方法、主要发现和局限性。"
             "摘要未明确局限时写‘摘要未说明’，预印本不得描述为已经同行评审。专有名词、模型名和数值必须保真。"
         ),
-        "input": "研究论文元数据：\n" + json.dumps(evidence, ensure_ascii=False),
-        "text": {"format": {"type": "json_schema", "name": "frontier_research", "strict": True, "schema": schema}},
-        "max_output_tokens": int(config.get("research_openai_max_output_tokens", 10000)),
-    }
-    payload = http_post_json("https://api.openai.com/v1/responses", body, api_key)
-    result = json.loads(extract_response_text(payload))
+        input_text="研究论文元数据：\n" + json.dumps(evidence, ensure_ascii=False),
+        schema_name="frontier_research",
+        schema=schema,
+        example=example,
+        max_tokens=int(config.get("research_ai_max_output_tokens", config.get("research_openai_max_output_tokens", 10000))),
+    )
     edited: dict[str, dict[str, Any]] = {}
     allowed = set(allowed_ids)
     for item in result.get("items", []):
-        item_id = clean_text(item.get("id"))
-        if item_id in allowed and item_id not in edited:
+        item_id = clean_text(item.get("id")) if isinstance(item, dict) else ""
+        required_text = ("titleZh", "summaryZh", "question", "method", "findings", "limitations")
+        if (
+            item_id in allowed
+            and item_id not in edited
+            and all(clean_text(item.get(field_name)) for field_name in required_text)
+            and isinstance(item.get("tags"), list)
+        ):
             edited[item_id] = item
     if len(edited) != len(papers):
         raise ValueError(f"research editorial response contained {len(edited)} valid papers; expected {len(papers)}")
+    for item in edited.values():
+        item["_provider"] = runtime["provider"]
     return edited
 
 
@@ -1385,6 +1712,7 @@ def research_item_from_paper(
         "authors": paper.authors,
         "arxivCategories": paper.categories,
         "primaryCategory": paper.primary_category,
+        "collectionKeywords": paper.collection_keywords,
         "peerReviewStatus": "预印本 · 未经 arXiv 同行评审" if paper.source.lower() == "arxiv" else "评审状态未标注",
         "question": clean_text(editorial.get("question"), 320),
         "method": clean_text(editorial.get("method"), 320),
@@ -1393,10 +1721,15 @@ def research_item_from_paper(
         "score": max(0, min(100, round(paper.score))),
         "scoreBasis": "研究相关度",
         "scoreComponents": {},
-        "scoreReasons": [f"主题：{paper.research_area}", "按主题相关性、摘要完整度与发布时间排序"],
+        "scoreReasons": [
+            f"主题：{paper.research_area}",
+            *([f"采集关键词：{'、'.join(paper.collection_keywords)}"] if paper.collection_keywords else []),
+            "按主题相关性、摘要完整度与发布时间排序",
+        ],
         "confidence": "预印本" if paper.source.lower() == "arxiv" else "资料源",
         "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
         "tags": tags,
+        "translationProvider": clean_text(editorial.get("_provider")),
         "image": "",
         "corroboration": 1,
         "sources": [source],
@@ -1412,33 +1745,53 @@ def build_research_report(
     warnings: list[str] = []
     method = "metadata"
     editorial_status = "disabled" if skip_ai else "not-configured"
-    api_key = os.getenv("OPENAI_API_KEY", "").strip()
-    if selected and api_key and not skip_ai:
-        try:
-            ai_limit = max(1, min(len(selected), int(research.get("ai_limit", 20))))
-            editorial = ai_edit_research(selected[:ai_limit], config, api_key)
-            method = "openai"
-            editorial_status = "ok"
-        except Exception as exc:
-            reason = clean_text(str(exc), 220) or exc.__class__.__name__
-            warnings.append(f"论文中文编辑失败，已保留原始摘要：{reason}")
-            editorial_status = "fallback"
-            LOGGER.warning("Research editorial pass failed; using metadata fallback: %s", reason)
+    runtime = resolve_ai_runtime(config) if not skip_ai else None
+    target_count = 0
+    if selected and runtime:
+        default_limit = research.get("deepseek_ai_limit", len(selected)) if runtime["provider"] == "deepseek" else research.get("ai_limit", 20)
+        target_count = max(1, min(len(selected), int(default_limit)))
+        batch_size = max(1, min(20, int(research.get("ai_batch_size", 10))))
+        consecutive_failures = 0
+        for start in range(0, target_count, batch_size):
+            batch = selected[start:min(target_count, start + batch_size)]
+            try:
+                editorial.update(ai_edit_research(batch, config, runtime))
+                consecutive_failures = 0
+            except Exception as exc:
+                reason = clean_text(str(exc), 180) or exc.__class__.__name__
+                warnings.append(f"论文中文编辑批次失败（{start + 1}-{start + len(batch)}）：{reason}")
+                LOGGER.warning("Research editorial batch failed: %s", reason)
+                consecutive_failures += 1
+                if consecutive_failures >= 2 and start + batch_size < target_count:
+                    warnings.append("论文中文编辑连续失败 2 个批次，已停止后续调用并保留原始摘要")
+                    break
+        if editorial:
+            method = runtime["provider"]
+        editorial_status = "ok" if len(editorial) == target_count else "partial" if editorial else "fallback"
+        if editorial_status != "ok" and not warnings:
+            warnings.append(f"论文中文编辑不完整：{len(editorial)}/{target_count}")
     items = [research_item_from_paper(paper, editorial.get(paper.id)) for paper in selected]
     area_counts: dict[str, int] = {}
     for item in items:
         area = str(item.get("researchArea", "前沿研究"))
         area_counts[area] = area_counts.get(area, 0) + 1
     return {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "timezone": config.get("timezone", "Asia/Tokyo"),
         "rangeDays": int(research.get("lookback_days", 7)),
         "method": method,
         "editorialStatus": editorial_status,
+        "editorialProvider": runtime.get("provider") if runtime else "",
+        "editorialModel": runtime.get("model") if runtime else "",
+        "translatedItemCount": len(editorial),
         "warnings": warnings,
         "itemCount": len(items),
         "areaCounts": area_counts,
+        "collectionKeywords": [
+            {"label": definition["label"], "query": definition["query"]}
+            for definition in research_keyword_definitions(config)
+        ],
         "items": items,
     }
 
@@ -1461,32 +1814,33 @@ def build_report(candidates: list[Article], config: dict[str, Any], now: datetim
     method = "rules"
     editorial_status = "disabled" if skip_ai else "not-configured"
     pipeline_warnings: list[str] = []
-    api_key = os.getenv("OPENAI_API_KEY", "").strip()
-    if api_key and not skip_ai:
+    runtime = resolve_ai_runtime(config) if not skip_ai else None
+    if runtime:
         editorial_status = "running"
         try:
-            ai_result = ai_select(shortlist, config, api_key)
+            ai_result = ai_select(shortlist, config, runtime)
             allowed = {article.id: article for article in shortlist}
             ai_order: list[Article] = []
             for item in ai_result.get("items", []):
                 candidate = allowed.get(str(item.get("id")))
                 if candidate and candidate not in ai_order:
                     ai_order.append(candidate)
+                    item["_provider"] = runtime["provider"]
                     editorial_by_id[candidate.id] = item
             if len(ai_order) != top_n:
-                raise ValueError(f"OpenAI editorial pass returned {len(ai_order)} unique valid items; expected {top_n}")
+                raise ValueError(f"AI editorial pass returned {len(ai_order)} unique valid items; expected {top_n}")
             validate_ai_diversity(ai_order, editorial_by_id, config)
             selected = ai_order
             ai_brief = ai_result.get("brief")
-            method = "openai"
+            method = runtime["provider"]
             editorial_status = "ok"
         except Exception as exc:
             reason = clean_text(str(exc), 220) or exc.__class__.__name__
             editorial_status = "fallback"
             pipeline_warnings.append(f"AI 编辑失败，已使用规则选稿：{reason}")
             editorial_by_id.clear()
-            LOGGER.warning("OpenAI editorial pass failed; using deterministic fallback: %s", reason)
-    if method == "openai":
+            LOGGER.warning("AI editorial pass failed; using deterministic fallback: %s", reason)
+    if method in {"openai", "deepseek"}:
         # The AI result has already passed the strict category/domain check, so
         # discard any relaxation flags left by the deterministic preview pass.
         for article in selected:
@@ -1520,12 +1874,15 @@ def build_report(candidates: list[Article], config: dict[str, Any], now: datetim
         signals = fallback_brief(items, source_count)["signals"]
     local_time = now.astimezone(ZoneInfo(config.get("timezone", "Asia/Tokyo")))
     return {
-        "schemaVersion": 3,
+        "schemaVersion": 4,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "editionDate": local_time.strftime("%Y-%m-%d"),
         "timezone": config.get("timezone", "Asia/Tokyo"),
         "method": method,
         "editorialStatus": editorial_status,
+        "editorialProvider": runtime.get("provider") if runtime else "",
+        "editorialModel": runtime.get("model") if runtime else "",
+        "translatedItemCount": len(editorial_by_id),
         "warnings": pipeline_warnings,
         "candidateCount": len(candidates),
         "freshCandidateCount": sum(not article.is_supplemental for article in candidates),
@@ -1574,6 +1931,9 @@ def validate_report(report: dict[str, Any], expected_count: int) -> None:
             raise ValueError(f"item {index} must include at least one key fact")
         if not isinstance(item["sources"], list) or not item["sources"]:
             raise ValueError(f"item {index} must include at least one source")
+    translated = sum(bool(item.get("translationProvider")) for item in items)
+    if int(report.get("translatedItemCount", translated)) != translated:
+        raise ValueError("daily translatedItemCount does not match items")
 
 
 def validate_stream_report(report: dict[str, Any]) -> None:
@@ -1587,6 +1947,9 @@ def validate_stream_report(report: dict[str, Any]) -> None:
         raise ValueError("stream report contains missing or duplicate ids")
     if any(item.get("contentType") != "news" for item in items):
         raise ValueError("stream report may only contain news items")
+    translated = sum(bool(item.get("translationProvider")) for item in items)
+    if int(report.get("translatedItemCount", translated)) != translated:
+        raise ValueError("stream translatedItemCount does not match items")
 
 
 def validate_research_report(report: dict[str, Any], *, allow_empty: bool = True) -> None:
@@ -1605,6 +1968,9 @@ def validate_research_report(report: dict[str, Any], *, allow_empty: bool = True
         ids.add(item_id)
         if not str(item.get("url", "")).startswith(("http://", "https://")):
             raise ValueError(f"research item {index} has invalid URL")
+    translated = sum(bool(item.get("translationProvider")) for item in items)
+    if int(report.get("translatedItemCount", translated)) != translated:
+        raise ValueError("research translatedItemCount does not match items")
 
 
 def write_json_atomic(path: Path, payload: Any) -> None:
@@ -1824,7 +2190,7 @@ def write_pipeline_status(
     previous = previous if isinstance(previous, dict) else {}
     success = state == "ok" and report is not None
     payload = {
-        "schemaVersion": 3,
+        "schemaVersion": 4,
         "state": state,
         "lastAttemptAt": now.isoformat().replace("+00:00", "Z"),
         "lastSuccessAt": now.isoformat().replace("+00:00", "Z") if success else previous.get("lastSuccessAt"),
@@ -1833,14 +2199,24 @@ def write_pipeline_status(
         "message": clean_text(message, 300),
         "method": report.get("method") if success else previous.get("method"),
         "editorialStatus": report.get("editorialStatus") if success else previous.get("editorialStatus"),
+        "editorialProvider": report.get("editorialProvider") if success else previous.get("editorialProvider"),
+        "editorialModel": report.get("editorialModel") if success else previous.get("editorialModel"),
+        "translatedItemCount": int(report.get("translatedItemCount", 0)) if success else previous.get("translatedItemCount", 0),
         "warnings": report.get("warnings", []) if success else previous.get("warnings", []),
         "coverageStatus": report.get("coverageStatus") if success else previous.get("coverageStatus"),
         "freshItemCount": int(report.get("freshItemCount", 0)) if success else previous.get("freshItemCount", 0),
         "supplementalItemCount": int(report.get("supplementalItemCount", 0)) if success else previous.get("supplementalItemCount", 0),
         "effectiveLookbackHours": int(report.get("effectiveLookbackHours", 0)) if success else previous.get("effectiveLookbackHours", 0),
         "streamItemCount": int(stream_report.get("itemCount", 0)) if success and stream_report else previous.get("streamItemCount", 0),
+        "streamTranslationProvider": stream_report.get("translationProvider") if success and stream_report else previous.get("streamTranslationProvider"),
+        "streamTranslationModel": stream_report.get("translationModel") if success and stream_report else previous.get("streamTranslationModel"),
+        "streamTranslatedItemCount": int(stream_report.get("translatedItemCount", 0)) if success and stream_report else previous.get("streamTranslatedItemCount", 0),
+        "streamTranslationWarnings": stream_report.get("translationWarnings", []) if success and stream_report else previous.get("streamTranslationWarnings", []),
         "researchItemCount": int(research_report.get("itemCount", 0)) if success and research_report else previous.get("researchItemCount", 0),
         "researchEditorialStatus": research_report.get("editorialStatus") if success and research_report else previous.get("researchEditorialStatus"),
+        "researchEditorialProvider": research_report.get("editorialProvider") if success and research_report else previous.get("researchEditorialProvider"),
+        "researchEditorialModel": research_report.get("editorialModel") if success and research_report else previous.get("researchEditorialModel"),
+        "researchTranslatedItemCount": int(research_report.get("translatedItemCount", 0)) if success and research_report else previous.get("researchTranslatedItemCount", 0),
         "researchWarnings": research_report.get("warnings", []) if success and research_report else previous.get("researchWarnings", []),
     }
     write_json_atomic(path, payload)
@@ -1858,11 +2234,15 @@ def write_stream_status(
     previous = previous if isinstance(previous, dict) else {}
     success = state == "ok" and stream_report is not None
     write_json_atomic(path, {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "state": state,
         "lastAttemptAt": now.isoformat().replace("+00:00", "Z"),
         "lastSuccessAt": now.isoformat().replace("+00:00", "Z") if success else previous.get("lastSuccessAt"),
         "itemCount": int(stream_report.get("itemCount", 0)) if success else previous.get("itemCount", 0),
+        "translationProvider": stream_report.get("translationProvider") if success else previous.get("translationProvider"),
+        "translationModel": stream_report.get("translationModel") if success else previous.get("translationModel"),
+        "translatedItemCount": int(stream_report.get("translatedItemCount", 0)) if success else previous.get("translatedItemCount", 0),
+        "translationWarnings": stream_report.get("translationWarnings", []) if success else previous.get("translationWarnings", []),
         "message": clean_text(message, 300),
     })
 
@@ -1881,7 +2261,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--feed-output", type=Path, default=Path("public/feed.xml"))
     parser.add_argument("--fixture", type=Path, help="Use a local fixture instead of live sources")
     parser.add_argument("--research-fixture", type=Path, help="Use a local research fixture instead of arXiv")
-    parser.add_argument("--skip-ai", action="store_true", help="Disable the optional OpenAI editorial pass")
+    parser.add_argument("--skip-ai", action="store_true", help="Disable optional DeepSeek/OpenAI editorial translation")
     parser.add_argument("--skip-research", action="store_true", help="Do not refresh the research radar")
     parser.add_argument("--stream-only", action="store_true", help="Refresh the full stream without replacing the daily Top 10")
     parser.add_argument("--now", help="Override current time for deterministic tests")
@@ -1988,7 +2368,64 @@ def main(argv: list[str] | None = None) -> int:
                 str(item["id"]): item for item in previous_items
                 if isinstance(item, dict) and clean_text(item.get("id"))
             }
-        stream_report = build_stream_report(stream_candidates, config, now, top_stories)
+        stream_runtime = resolve_ai_runtime(config) if not args.skip_ai else None
+        stream_translations: dict[str, dict[str, Any]] = {}
+        stream_translation_warnings: list[str] = []
+        if (
+            stream_runtime
+            and stream_runtime["provider"] == "deepseek"
+            and bool(config.get("stream_translation_enabled", True))
+        ):
+            previous_stream = read_json_safe(args.stream_output, {})
+            current_by_id = {article.id: article for article in stream_candidates}
+            can_reuse_translations = (
+                isinstance(previous_stream, dict)
+                and clean_text(previous_stream.get("translationProvider")) == stream_runtime["provider"]
+                and clean_text(previous_stream.get("translationModel")) == stream_runtime["model"]
+            )
+            previous_stream_items = previous_stream.get("items", []) if can_reuse_translations else []
+            for item in previous_stream_items if isinstance(previous_stream_items, list) else []:
+                item_id = clean_text(item.get("id")) if isinstance(item, dict) else ""
+                article = current_by_id.get(item_id)
+                if (
+                    article
+                    and clean_text(item.get("translationProvider")) == stream_runtime["provider"]
+                    and clean_text(item.get("originalTitle")) == clean_text(article.title)
+                    and clean_text(item.get("title"))
+                    and clean_text(item.get("summary"))
+                ):
+                    stream_translations[item_id] = {
+                        "titleZh": item["title"],
+                        "summary": item["summary"],
+                        "tags": item.get("tags", []),
+                        "_translationOnly": True,
+                        "_provider": stream_runtime["provider"],
+                    }
+            translation_limit = max(0, min(
+                int(config.get("stream_limit", 300)),
+                int(config.get("stream_translation_limit", 120)),
+            ))
+            already_translated = {
+                item_id for item_id, item in top_stories.items()
+                if isinstance(item, dict) and clean_text(item.get("translationProvider"))
+            } | set(stream_translations)
+            translation_candidates = [
+                article for article in stream_candidates[:translation_limit]
+                if article.id not in already_translated
+            ]
+            new_translations, stream_translation_warnings = ai_translate_articles(
+                translation_candidates, config, stream_runtime
+            )
+            stream_translations.update(new_translations)
+        stream_report = build_stream_report(
+            stream_candidates,
+            config,
+            now,
+            top_stories,
+            stream_translations,
+            stream_runtime if stream_translations else None,
+            stream_translation_warnings,
+        )
         validate_stream_report(stream_report)
 
         research_report: dict[str, Any] | None = None

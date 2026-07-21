@@ -18,6 +18,8 @@
   const RESEARCH_CACHE_KEY = "fp-last-good-research-v1";
   const BOOKMARK_KEY = "fp-bookmarks-v2";
   const WATCH_KEY = "fp-watchwords-v1";
+  const RESEARCH_KEYWORDS_KEY = "fp-research-keywords-v1";
+  const RESEARCH_SCOPE_KEY = "fp-research-scope-v1";
   const THEME_KEY = "fp-theme-v1";
 
   const $ = (id) => document.getElementById(id);
@@ -49,6 +51,8 @@
   const initialView = VIEWS.has(params.get("view")) ? params.get("view") : "latest";
   const initialDate = /^\d{4}-\d{2}-\d{2}$/.test(params.get("date") || "") ? params.get("date") : "";
   const initialRange = [6, 12, 24].includes(Number(params.get("range"))) ? Number(params.get("range")) : 24;
+  const storedResearchScope = readStorage(RESEARCH_SCOPE_KEY, "all") === "mine" ? "mine" : "all";
+  const initialResearchScope = params.get("scope") === "mine" ? "mine" : storedResearchScope;
   const legacyBookmarks = readStorage("fp-bookmarks", []).filter((item) => typeof item === "string");
   const storedBookmarks = readStorage(BOOKMARK_KEY, []).filter((item) => item && typeof item === "object");
 
@@ -77,6 +81,11 @@
     pipelineStatus: null,
     bookmarks: storedBookmarks,
     watchwords: readStorage(WATCH_KEY, []).filter((word) => typeof word === "string").slice(0, 20),
+    researchKeywords: [...new Set(readStorage(RESEARCH_KEYWORDS_KEY, [])
+      .filter((word) => typeof word === "string")
+      .map((word) => clean(word).slice(0, 60))
+      .filter(Boolean))].slice(0, 20),
+    researchScope: initialResearchScope,
     latestLoadError: "",
     streamLoadError: "",
     researchLoadError: "",
@@ -84,6 +93,7 @@
     theme: readStorage(THEME_KEY, "") || (window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light"),
     hashHandled: false,
   };
+  if (!state.researchKeywords.length) state.researchScope = "all";
 
   function formatDate(value, includeTime = true) {
     const date = new Date(value);
@@ -148,6 +158,7 @@
       sources,
       authors: (Array.isArray(raw.authors) ? raw.authors : []).map((author) => clean(author)).filter(Boolean).slice(0, 20),
       arxivCategories: (Array.isArray(raw.arxivCategories) ? raw.arxivCategories : []).map((category) => clean(category)).filter(Boolean),
+      collectionKeywords: (Array.isArray(raw.collectionKeywords) ? raw.collectionKeywords : []).map((keyword) => clean(keyword)).filter(Boolean).slice(0, 20),
       primaryCategory: clean(raw.primaryCategory),
       peerReviewStatus: clean(raw.peerReviewStatus),
       abstract: clean(raw.abstract),
@@ -161,6 +172,7 @@
       selectionWindowHours: Math.max(24, Number(raw.selectionWindowHours) || 24),
       selectionNote: clean(raw.selectionNote),
       diversityRelaxed: Boolean(raw.diversityRelaxed),
+      translationProvider: clean(raw.translationProvider),
       editionDate: clean(raw.editionDate || editionDate),
       _compact: Boolean(raw._compact),
     };
@@ -307,6 +319,16 @@
         showAlert("warning", "全量动态可能已经过期", `当前动态生成于 ${formatDate(state.streamReport?.generatedAt)}，已超过 7 小时。请检查三小时更新工作流。`);
         return;
       }
+      const translationWarnings = [
+        ...(Array.isArray(state.streamReport?.translationWarnings) ? state.streamReport.translationWarnings : []),
+        ...(Array.isArray(state.streamStatus?.translationWarnings) ? state.streamStatus.translationWarnings : []),
+      ].filter(Boolean);
+      if (translationWarnings.length) {
+        badge.textContent = "翻译不完整";
+        badge.classList.add("warning");
+        showAlert("warning", "全量动态已更新，但部分中文翻译失败", [...new Set(translationWarnings)].join("；"));
+        return;
+      }
       badge.textContent = "动态在线";
       hideAlert();
       return;
@@ -339,10 +361,12 @@
         ...(Array.isArray(state.researchReport?.warnings) ? state.researchReport.warnings : []),
         ...(Array.isArray(state.pipelineStatus?.researchWarnings) ? state.pipelineStatus.researchWarnings : []),
       ].filter(Boolean);
-      if (["fallback", "stale"].includes(state.pipelineStatus?.researchEditorialStatus) || warnings.length) {
-        badge.textContent = state.pipelineStatus?.researchEditorialStatus === "stale" ? "论文未更新" : "论文规则版";
+      const researchEditorialStatus = state.pipelineStatus?.researchEditorialStatus || state.researchReport?.editorialStatus;
+      if (["partial", "fallback", "stale"].includes(researchEditorialStatus) || warnings.length) {
+        badge.textContent = researchEditorialStatus === "stale" ? "论文未更新"
+          : researchEditorialStatus === "partial" ? "论文部分翻译" : "论文规则版";
         badge.classList.add("warning");
-        showAlert("warning", "论文雷达已降级", [...new Set(warnings)].join("；") || "本期保留论文元数据与原始摘要，未完成 AI 中文编辑。");
+        showAlert("warning", researchEditorialStatus === "partial" ? "论文雷达部分批次未完成翻译" : "论文雷达已降级", [...new Set(warnings)].join("；") || "本期保留论文元数据与原始摘要，未完成 AI 中文编辑。");
         return;
       }
       badge.textContent = "论文在线";
@@ -525,6 +549,7 @@
     if (state.view === "history" && state.editionDate) query.set("date", state.editionDate);
     if (state.view === "stream" && state.rangeHours !== 24) query.set("range", String(state.rangeHours));
     if (state.view === "stream" && state.source !== "全部") query.set("source", state.source);
+    if (state.view === "research" && state.researchScope === "mine" && state.researchKeywords.length) query.set("scope", "mine");
     if (state.query) query.set("q", state.query);
     const suffix = query.toString();
     history.replaceState(null, "", `${location.pathname}${suffix ? `?${suffix}` : ""}${location.hash || ""}`);
@@ -560,6 +585,7 @@
     $("watchPanel").hidden = state.view !== "watchlist";
     $("spotlightSection").hidden = state.view !== "latest";
     $("researchNotice").hidden = state.view !== "research";
+    $("researchKeywordPanel").hidden = state.view !== "research";
     $("rangeControls").hidden = state.view !== "stream";
     $("sourceFilterWrap").hidden = state.view !== "stream";
     $("search").placeholder = state.view === "research" ? "搜索论文、作者、摘要…" : "搜索标题、摘要、来源…";
@@ -606,6 +632,15 @@
     return counts;
   }
 
+  function providerLabel(report) {
+    const method = clean(report?.method).toLocaleLowerCase();
+    const provider = clean(report?.translationProvider || (["deepseek", "openai"].includes(method)
+      ? report?.editorialProvider || method : "")).toLocaleLowerCase();
+    if (provider === "deepseek") return "DeepSeek V4 Flash";
+    if (provider === "openai") return "OpenAI";
+    return "";
+  }
+
   function renderBrief() {
     const report = state.currentReport;
     const items = state.items;
@@ -613,7 +648,8 @@
     let headline = report?.brief?.headline;
     let summary = report?.brief?.summary;
     let signals = Array.isArray(report?.brief?.signals) ? report.brief.signals : [];
-    let method = report?.method === "openai" ? "AI 编辑 + 规则校验" : report ? "规则评分" : "本机视图";
+    const provider = providerLabel(report);
+    let method = provider ? `${provider} 编辑 + 规则校验` : report ? "规则评分" : "本机视图";
     if (state.view === "stream") {
       const total = Number(report?.totalCandidateCount) || items.length;
       const hasFilters = state.rangeHours !== 24 || state.source !== "全部" || state.category !== "全部" || Boolean(state.query);
@@ -626,14 +662,16 @@
       const categoryCounts = valueCounts(metricItems, (item) => item.category);
       signals = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1]).slice(0, 3)
         .map(([category, count]) => `${category}：${count} 条动态`);
-      method = "每 3 小时采集 · 规则去重";
+      method = Number(report?.translatedItemCount) > 0
+        ? `每 3 小时采集 · ${providerLabel(report) || "AI"} 中文翻译`
+        : "每 3 小时采集 · 规则去重";
     } else if (state.view === "research") {
       headline = `${metricItems.length} 篇前沿论文进入当前研究视图`;
       summary = `${metricItems.length === items.length ? "覆盖" : `从 ${items.length} 篇论文中筛选出 ${metricItems.length} 篇，覆盖`}最近 ${Number(report?.rangeDays) || 7} 天公开研究元数据；预印本不等同于已经同行评审。`;
       const areaCounts = valueCounts(metricItems, (item) => item.researchArea || "前沿研究");
       signals = Object.entries(areaCounts).sort((a, b) => b[1] - a[1]).slice(0, 3)
         .map(([area, count]) => `${area}：${count} 篇`);
-      method = report?.method === "openai" ? "AI 中文编辑 · 元数据校验" : "论文元数据 · 独立评分";
+      method = provider ? `${provider} 中文编辑 · 元数据校验` : "论文元数据 · 独立评分";
     } else if (!report) {
       if (state.view === "bookmarks") {
         headline = `已收藏 ${items.length} 条值得持续跟踪的事件`;
@@ -676,14 +714,32 @@
     return [
       item.title, item.originalTitle, item.summary, item.abstract, item.why, item.source, item.country,
       item.researchArea, item.primaryCategory, item.question, item.method, item.findings, item.limitations,
-      ...item.authors, ...item.arxivCategories, ...item.keyFacts, ...item.tags,
+      ...item.authors, ...item.arxivCategories, ...item.collectionKeywords, ...item.keyFacts, ...item.tags,
       ...item.sources.map((source) => source.name),
     ].join(" ").toLocaleLowerCase();
   }
 
+  function matchedResearchKeywords(item) {
+    const haystack = searchableText(item);
+    return state.researchKeywords.filter((keyword) => haystack.includes(keyword.toLocaleLowerCase()));
+  }
+
+  function activeHighlightTerms() {
+    const terms = clean(state.query).split(/\s+/).filter(Boolean).slice(0, 8);
+    if (state.view === "research") terms.push(...state.researchKeywords);
+    const unique = [];
+    const seen = new Set();
+    terms.forEach((term) => {
+      const value = clean(term);
+      const key = value.toLocaleLowerCase();
+      if (value && !seen.has(key)) { seen.add(key); unique.push(value); }
+    });
+    return unique.sort((a, b) => b.length - a.length).slice(0, 28);
+  }
+
   function highlightText(value) {
     const text = String(value ?? "");
-    const terms = clean(state.query).split(/\s+/).filter(Boolean).slice(0, 8);
+    const terms = activeHighlightTerms();
     if (!terms.length) return esc(text);
     const pattern = terms.map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
     if (!pattern) return esc(text);
@@ -742,11 +798,13 @@
     return state.items.filter((item) => {
       const haystack = searchableText(item);
       const watchMatch = state.view !== "watchlist" || (watchwords.length && watchwords.some((word) => haystack.includes(word)));
+      const researchMatch = state.view !== "research" || state.researchScope !== "mine"
+        || (state.researchKeywords.length && matchedResearchKeywords(item).length);
       const queryMatch = !query || haystack.includes(query);
       const categoryMatch = !includeCategory || state.category === "全部" || facetValue(item) === state.category;
       const sourceMatch = !includeSource || state.view !== "stream" || state.source === "全部" || item.source === state.source;
       const rangeMatch = state.view !== "stream" || new Date(item.publishedAt).valueOf() >= rangeThreshold;
-      return watchMatch && queryMatch && categoryMatch && sourceMatch && rangeMatch;
+      return watchMatch && researchMatch && queryMatch && categoryMatch && sourceMatch && rangeMatch;
     });
   }
 
@@ -792,6 +850,12 @@
     const structured = researchFields.length
       ? researchFields.map(([label, value]) => `<section><h4>${esc(label)}</h4><p>${highlightText(value)}</p></section>`).join("")
       : `<section><h4>原始摘要</h4><p>${highlightText(item.abstract || item.summary)}</p></section>`;
+    const personalHits = matchedResearchKeywords(item);
+    const keywordBadges = [
+      ...personalHits.slice(0, 4).map((keyword) => `<span class="keyword-hit">我的关键词 · ${esc(keyword)}</span>`),
+      ...item.collectionKeywords.filter((keyword) => !personalHits.some((hit) => hit.toLocaleLowerCase() === keyword.toLocaleLowerCase()))
+        .slice(0, 3).map((keyword) => `<span class="collection-hit">采集命中 · ${esc(keyword)}</span>`),
+    ].join("");
     return `<article class="story paper-card" id="${esc(anchorId(item))}" data-key="${esc(key)}">
       <span class="rank">${String(index + 1).padStart(2, "0")}</span>
       <div class="story-main"><div class="story-copy">
@@ -799,10 +863,12 @@
           <span class="cat paper-cat">${esc(item.researchArea || "前沿研究")}</span>
           <b>${esc(item.source)}</b><span>${esc(formatDate(item.publishedAt, false))}</span>
           <span class="review-status">${esc(item.peerReviewStatus || "评审状态未标注")}</span>
+          ${item.translationProvider ? `<span class="translation-badge">${esc(item.translationProvider === "deepseek" ? "DeepSeek 中文" : "AI 中文")}</span>` : ""}
         </div>
         <h3>${highlightText(item.title)}</h3>${original}
         <p class="paper-authors">${esc(authors)}</p>
         <p class="summary">${highlightText(item.summary)}</p>
+        ${keywordBadges ? `<div class="keyword-hits">${keywordBadges}</div>` : ""}
         <div class="tags">${item.tags.map((tag) => `<span>${esc(tag)}</span>`).join("")}</div>
       </div></div>
       <div class="story-side">
@@ -856,6 +922,7 @@
           <b>${esc(item.source)}</b><span>${esc(item.country)}</span><span>${esc(formatDate(item.publishedAt))}</span>
           ${item.editionDate ? `<span>${esc(item.editionDate)} 版</span>` : ""}
           <span class="confidence" data-confidence="${esc(item.confidence)}">置信度 ${esc(item.confidence)}</span>
+          ${item.translationProvider ? `<span class="translation-badge">${esc(item.translationProvider === "deepseek" ? "DeepSeek 中文" : "AI 中文")}</span>` : ""}
         </div>
         <h3>${highlightText(item.title)}</h3>${original}<p class="summary">${highlightText(item.summary)}</p>
         <div class="tags">${item.tags.map((tag) => `<span>${esc(tag)}</span>`).join("")}</div>
@@ -888,11 +955,14 @@
     const noteParts = [`显示 ${state.visible.length} / ${state.totalVisible} ${unit}`];
     if (state.view === "history" && state.query) noteParts.push("按月分片的跨日期索引");
     if (state.view === "watchlist") noteParts.push(`${state.watchwords.length} 个关注词`);
+    if (state.view === "research" && state.researchScope === "mine") noteParts.push(`${state.researchKeywords.length} 个论文关键词 · 专属论文流`);
     $("resultNote").textContent = noteParts.join(" · ");
     if (!state.visible.length) {
       const message = state.view === "watchlist" && !state.watchwords.length
         ? "先添加一个关注词，匹配结果会显示在这里。"
         : state.view === "bookmarks" ? "尚未收藏新闻。点击新闻卡片上的 ☆ 即可收藏。"
+          : state.view === "research" && !state.researchKeywords.length ? "先添加论文关键词，系统会自动生成你的专属论文流。"
+            : state.view === "research" && state.researchScope === "mine" ? "当前论文中暂无关键词命中；可添加英文同义词，或由管理员把该方向加入系统采集词。"
           : "没有匹配的新闻，请更换分类、日期或搜索词。";
       $("stories").innerHTML = `<div class="empty"><b>暂无结果</b>${esc(message)}</div>`;
     } else {
@@ -919,11 +989,40 @@
       : '<span class="method-kicker">尚未添加关注词</span>';
   }
 
+  function renderResearchKeywords() {
+    const panel = $("researchKeywordPanel");
+    if (!panel) return;
+    const keywords = state.researchKeywords;
+    const mineCount = state.items.filter((item) => item.contentType === "paper" && matchedResearchKeywords(item).length).length;
+    $("researchKeywordLimit").textContent = `${keywords.length} / 20`;
+    $("allResearchCount").textContent = state.items.filter((item) => item.contentType === "paper").length;
+    $("mineResearchCount").textContent = mineCount;
+    $("researchKeywordChips").innerHTML = keywords.length
+      ? keywords.map((keyword) => `<button class="watch-chip" type="button" data-remove-research-keyword="${esc(keyword)}" title="移除论文关键词">${esc(keyword)}<span>×</span></button>`).join("")
+      : '<span class="method-kicker">尚未添加论文关键词</span>';
+    document.querySelectorAll("[data-research-scope]").forEach((button) => {
+      const active = button.dataset.researchScope === state.researchScope;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+      if (button.dataset.researchScope === "mine") button.disabled = !keywords.length;
+    });
+    const configured = Array.isArray(state.researchReport?.collectionKeywords)
+      ? state.researchReport.collectionKeywords : [];
+    $("collectionKeywordChips").innerHTML = configured.length
+      ? configured.map((definition) => {
+        const label = clean(typeof definition === "string" ? definition : definition?.label || definition?.query);
+        const query = clean(typeof definition === "object" ? definition?.query : "");
+        return label ? `<span title="${esc(query ? `arXiv 标题/摘要查询：${query}` : label)}">${esc(label)}</span>` : "";
+      }).join("")
+      : '<span class="method-kicker">管理员尚未配置额外采集词</span>';
+  }
+
   function renderAll() {
     renderViewCopy();
     renderDateControl();
     renderSpotlight();
     renderWatchwords();
+    renderResearchKeywords();
     renderSourceFilter();
     renderFilters();
     renderBrief();
@@ -1072,7 +1171,7 @@
       $("dialogEyebrow").textContent = "SCORING METHODOLOGY";
       if (state.view === "research") {
         $("dialogTitle").textContent = "论文相关度如何理解";
-        $("dialogContent").innerHTML = `<ul><li><b>研究相关度：</b>综合关注领域优先级、标题与摘要的主题命中、摘要完整度和发布时间，仅用于排列阅读顺序。</li><li><b>预印本：</b>arXiv 条目不代表已经同行评审、独立复现或获得学术共同体认可。</li><li><b>中文编辑：</b>配置 AI 时只依据标题与摘要提炼问题、方法、发现和局限；摘要未说明的内容必须明确标注。</li><li><b>研究判断：</b>重要结论应回到完整论文、实验设置、数据和后续评审。</li></ul>`;
+        $("dialogContent").innerHTML = `<ul><li><b>研究相关度：</b>综合关注领域优先级、标题与摘要的主题命中、系统采集词、摘要完整度和发布时间，仅用于排列阅读顺序。</li><li><b>我的论文关键词：</b>只在当前浏览器中筛选和高亮已采集论文；添加后自动进入专属论文流，不会上传服务器。</li><li><b>系统采集词：</b>由仓库配置直接查询 arXiv 标题与摘要，可发现既有分类候选之外的特定方向。</li><li><b>预印本：</b>arXiv 条目不代表已经同行评审、独立复现或获得学术共同体认可。</li><li><b>中文编辑：</b>配置 DeepSeek 或 OpenAI 时只依据标题与摘要提炼问题、方法、发现和局限；摘要未说明的内容必须明确标注。</li><li><b>研究判断：</b>重要结论应回到完整论文、实验设置、数据和后续评审。</li></ul>`;
       } else {
         $("dialogTitle").textContent = "评分与置信度如何理解";
         $("dialogContent").innerHTML = `<ul><li><b>重要度：</b>综合基础分、来源权重、主题优先级、时效、影响词、主题相关性、描述完整度和多源印证，并扣除评论、播客等编辑降权。</li><li><b>AI 编辑分：</b>启用 AI 时，模型只可依据候选标题、描述、来源和时间重新选择与评分；规则分仍作为解释性参考。</li><li><b>置信度：</b>只反映收录来源权重和独立来源数量，不是“为真概率”。“待核验”意味着当前仅有单一来源。</li><li><b>关键事实：</b>必须能由候选元数据直接支持；任何重要决定仍应打开来源并寻找一手文件。</li></ul>`;
@@ -1117,6 +1216,16 @@
       renderAll();
       return;
     }
+    const researchScopeButton = target?.closest("[data-research-scope]");
+    if (researchScopeButton) {
+      const scope = researchScopeButton.dataset.researchScope;
+      if (scope === "mine" && !state.researchKeywords.length) { toast("请先添加论文关键词"); return; }
+      state.researchScope = scope === "mine" ? "mine" : "all";
+      state.visibleLimit = PAGE_SIZE;
+      writeStorage(RESEARCH_SCOPE_KEY, state.researchScope);
+      renderAll();
+      return;
+    }
     const bookmarkButton = target?.closest("[data-bookmark]");
     if (bookmarkButton) { toggleBookmark(bookmarkButton.closest(".story").dataset.key); return; }
     const shareButton = target?.closest("[data-share]");
@@ -1125,6 +1234,17 @@
     if (removeWord) {
       state.watchwords = state.watchwords.filter((word) => word !== removeWord.dataset.removeWord);
       writeStorage(WATCH_KEY, state.watchwords);
+      renderAll();
+      return;
+    }
+    const removeResearchKeyword = target?.closest("[data-remove-research-keyword]");
+    if (removeResearchKeyword) {
+      const keyword = removeResearchKeyword.dataset.removeResearchKeyword;
+      state.researchKeywords = state.researchKeywords.filter((word) => word !== keyword);
+      if (!state.researchKeywords.length) state.researchScope = "all";
+      writeStorage(RESEARCH_KEYWORDS_KEY, state.researchKeywords);
+      writeStorage(RESEARCH_SCOPE_KEY, state.researchScope);
+      state.visibleLimit = PAGE_SIZE;
       renderAll();
     }
   });
@@ -1195,6 +1315,25 @@
     state.watchwords.push(word); input.value = "";
     writeStorage(WATCH_KEY, state.watchwords);
     renderAll(); toast("已添加关注词");
+  });
+  $("researchKeywordForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const input = $("researchKeywordInput");
+    const keyword = clean(input.value).slice(0, 60);
+    if (!keyword) return;
+    if (state.researchKeywords.some((item) => item.toLocaleLowerCase() === keyword.toLocaleLowerCase())) {
+      toast("该论文关键词已存在");
+      return;
+    }
+    if (state.researchKeywords.length >= 20) { toast("最多保存 20 个论文关键词"); return; }
+    state.researchKeywords.push(keyword);
+    state.researchScope = "mine";
+    state.visibleLimit = PAGE_SIZE;
+    input.value = "";
+    writeStorage(RESEARCH_KEYWORDS_KEY, state.researchKeywords);
+    writeStorage(RESEARCH_SCOPE_KEY, state.researchScope);
+    renderAll();
+    toast("已添加并切换到专属论文流");
   });
   $("reloadBtn").addEventListener("click", async () => {
     state.archiveIndex = null; state.searchManifest = null; state.searchItems = null; state.editionCache.clear();

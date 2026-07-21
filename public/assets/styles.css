@@ -138,6 +138,26 @@ a { color: inherit; }
 .watch-chip { padding: 5px 8px; border: 1px solid #b8c9c1; border-radius: 999px; background: #fff; color: var(--teal); font-size: 9px; cursor: pointer; }
 .watch-chip span { margin-left: 5px; color: #929b97; }
 
+.research-keyword-panel { margin-top: 14px; padding: 25px 27px; border: 1px solid #b9cec4; border-radius: 13px; background: linear-gradient(135deg, #edf5ef, #f5f4ee); display: grid; grid-template-columns: minmax(0, .85fr) minmax(420px, 1.15fr); gap: 34px; }
+.research-keyword-panel[hidden] { display: none; }
+.research-keyword-panel h2 { margin: 0; font-size: 25px; }
+.research-keyword-copy > p:not(.eyebrow) { max-width: 510px; margin: 8px 0 0; color: var(--muted); font-size: 11px; line-height: 1.72; }
+.research-scope { width: fit-content; margin-top: 18px; padding: 3px; border: 1px solid #c4d0ca; border-radius: 8px; background: rgba(255,255,255,.65); display: flex; }
+.research-scope button { padding: 8px 11px; border: 0; border-radius: 5px; background: transparent; color: var(--muted); font-size: 10px; cursor: pointer; }
+.research-scope button span { margin-left: 4px; font: 9px ui-monospace, monospace; }
+.research-scope button.active { background: var(--ink); color: var(--card); }
+.research-scope button:disabled { opacity: .45; cursor: not-allowed; }
+.research-keyword-tools { min-width: 0; }
+.research-keyword-tools form > label { margin-bottom: 7px; display: flex; justify-content: space-between; color: var(--muted); font-size: 10px; }
+.research-keyword-tools form > div:first-of-type { display: flex; }
+.research-keyword-tools input { height: 40px; min-width: 0; flex: 1; padding: 0 11px; border: 1px solid #b9c9c1; border-radius: 7px 0 0 7px; background: #fff; color: var(--ink); outline: none; }
+.research-keyword-tools form button[type="submit"] { padding: 0 17px; border: 0; border-radius: 0 7px 7px 0; background: var(--teal); color: #fff; font-weight: 700; cursor: pointer; }
+.collection-keywords { margin-top: 16px; padding-top: 13px; border-top: 1px solid #cfd8d2; }
+.collection-keywords > b { color: var(--ink); font-size: 10px; }
+.collection-keywords > p { margin: 3px 0 8px; color: var(--muted); font-size: 9px; line-height: 1.55; }
+.collection-keywords > div { display: flex; gap: 5px; flex-wrap: wrap; }
+.collection-keywords > div > span:not(.method-kicker) { padding: 4px 7px; border: 1px solid #c5d4cc; border-radius: 999px; background: rgba(255,255,255,.7); color: var(--teal); font-size: 8px; }
+
 .feed { padding: 54px 0 36px; }
 .feed-head { margin-bottom: 18px; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
 .feed-head h2 { margin: 0; font-size: 34px; letter-spacing: -.045em; }
@@ -187,8 +207,13 @@ a { color: inherit; }
 .paper-authors { margin: -1px 0 8px; color: #78858b; font-size: 9px; line-height: 1.55; }
 .paper-cat { background: #e6ecf8; color: #4d6594; }
 .review-status { padding: 4px 7px; border: 1px solid #dfcfa9; border-radius: 4px; background: #fff6df; color: #8d671e; font-size: 8px; font-weight: 750; }
+.translation-badge { padding: 4px 7px; border-radius: 4px; background: #e5f1ef; color: var(--teal); font-size: 8px; font-weight: 750; }
 .tags { margin-top: 10px; display: flex; gap: 5px; flex-wrap: wrap; }
 .tags span { padding: 3px 6px; border: 1px solid #e0e2de; border-radius: 4px; color: #7e898e; font-size: 8px; }
+.keyword-hits { margin-top: 10px; display: flex; gap: 5px; flex-wrap: wrap; }
+.keyword-hits span { padding: 4px 7px; border-radius: 999px; font-size: 8px; font-weight: 750; }
+.keyword-hit { border: 1px solid #e0bd56; background: #fff3bb; color: #74580d; }
+.collection-hit { border: 1px solid #aacbc1; background: #e7f3ef; color: var(--teal); }
 .story-side { padding-left: 17px; border-left: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .score { text-align: center; }
 .score b { display: block; color: var(--signal); font: 22px ui-monospace, monospace; }
@@ -272,6 +297,11 @@ html[data-theme="dark"] .sort button.active,
 html[data-theme="dark"] .score-components li,
 html[data-theme="dark"] .watch-chip { background: #203139; color: var(--ink); }
 html[data-theme="dark"] .watch-panel { border-color: #315048; background: #10251f; }
+html[data-theme="dark"] .research-keyword-panel { border-color: #315048; background: linear-gradient(135deg, #10251f, #111f26); }
+html[data-theme="dark"] .research-keyword-tools input,
+html[data-theme="dark"] .research-scope,
+html[data-theme="dark"] .collection-keywords > div > span:not(.method-kicker) { border-color: var(--line); background: #17272e; color: var(--ink); }
+html[data-theme="dark"] .research-scope button.active { background: var(--teal); color: #071512; }
 html[data-theme="dark"] .research-notice { border-color: #315048; background: #10251f; }
 html[data-theme="dark"] .rangebar button.active { background: #15332d; }
 html[data-theme="dark"] .review-status { border-color: #5f5128; background: #332b18; color: #e5c36c; }
@@ -279,6 +309,9 @@ html[data-theme="dark"] .top-story-badge { background: #3c241d; color: #ef9b79; 
 html[data-theme="dark"] .supplemental-badge { background: #3d2e19; color: #e6b767; }
 html[data-theme="dark"] .quota-badge { background: #2e2940; color: #b9a8df; }
 html[data-theme="dark"] .selection-note { background: #302719; color: #d9b36b !important; }
+html[data-theme="dark"] .translation-badge,
+html[data-theme="dark"] .collection-hit { background: #15332d; color: #91d6cc; }
+html[data-theme="dark"] .keyword-hit { border-color: #746424; background: #3c3518; color: #ead477; }
 html[data-theme="dark"] .summary,
 html[data-theme="dark"] .detail-grid p,
 html[data-theme="dark"] .detail-grid li,
@@ -298,6 +331,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
   .spotlight-card:first-child { grid-column: 1 / -1; grid-row: auto; }
   .detail-grid { grid-template-columns: 1fr 1fr; }
   .detail-grid section:last-child { grid-column: 1 / -1; }
+  .research-keyword-panel { grid-template-columns: 1fr; gap: 21px; }
 }
 
 @media (max-width: 680px) {
@@ -320,6 +354,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
   .brief-footer { margin-inline: -21px; padding-inline: 21px; flex-wrap: wrap; }
   .brief-updated { width: 100%; margin: 0; }
   .watch-panel { grid-template-columns: 1fr; gap: 20px; }
+  .research-keyword-panel { padding: 22px 20px; }
   .feed { padding-top: 42px; }
   .feed-head { display: block; }
   .feed-actions { margin-top: 13px; justify-content: space-between; flex-wrap: wrap; }

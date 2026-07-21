@@ -12,8 +12,16 @@
     "backfill_windows_hours": [36, 48, 72]
   },
   "archive_retention_days": 730,
+  "ai_provider": "auto",
+  "deepseek_model": "deepseek-v4-flash",
+  "stream_translation_enabled": true,
+  "stream_translation_limit": 120,
+  "stream_translation_batch_size": 12,
+  "stream_translation_max_tokens": 10000,
+  "ai_max_output_tokens": 8000,
   "openai_model": "gpt-5.6-luna",
   "openai_max_output_tokens": 8000,
+  "research_ai_max_output_tokens": 10000,
   "research_openai_max_output_tokens": 10000,
   "site_url": "https://frontier-pulse.jiumi674.workers.dev/",
   "gdelt_endpoint": "https://api.gdeltproject.org/api/v2/doc/doc",
@@ -73,10 +81,33 @@
     "lookback_days": 7,
     "limit": 60,
     "ai_limit": 20,
+    "deepseek_ai_limit": 60,
+    "ai_batch_size": 10,
     "per_area_limit": 12,
     "per_area_fetch_limit": 24,
+    "per_keyword_fetch_limit": 20,
     "request_delay_seconds": 3.1,
     "arxiv_endpoint": "https://export.arxiv.org/api/query",
+    "collection_keywords": [
+      {
+        "label": "多模态智能体",
+        "query": "multimodal agent",
+        "aliases": ["multimodal agents", "multimodal AI agent", "多模态智能体"],
+        "priority": 10
+      },
+      {
+        "label": "蜂群机器人",
+        "query": "swarm robotics",
+        "aliases": ["robot swarm", "UAV swarm", "UAV swarms", "multi-robot coordination", "蜂群机器人"],
+        "priority": 10
+      },
+      {
+        "label": "高超声速制导",
+        "query": "hypersonic guidance",
+        "aliases": ["hypersonic vehicle guidance", "hypersonic control", "高超声速制导"],
+        "priority": 10
+      }
+    ],
     "arxiv_categories": [
       {"id": "cs.AI", "label": "人工智能", "priority": 10},
       {"id": "cs.LG", "label": "机器学习", "priority": 10},

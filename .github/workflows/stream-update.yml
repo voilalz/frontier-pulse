@@ -15,7 +15,7 @@ concurrency:
 jobs:
   refresh-stream:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -28,10 +28,13 @@ jobs:
       - name: Collect the qualified 24-hour stream
         id: collect
         continue-on-error: true
+        env:
+          AI_PROVIDER: ${{ vars.AI_PROVIDER }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          DEEPSEEK_MODEL: ${{ vars.DEEPSEEK_MODEL }}
         run: >-
           python scripts/update_news.py
           --stream-only
-          --skip-ai
           --skip-research
           --stream-output public/data/stream.json
           --stream-status-output public/data/stream-status.json
