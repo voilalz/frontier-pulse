@@ -116,14 +116,14 @@ python scripts/update_news.py
 
 成功后可检查：
 
-- `public/data/news.json`：`method: deepseek`、`editorialModel: deepseek-v4-flash`，条目含中文 `title`、`summary` 与 `keyFacts`。
+- `public/data/news.json`：`selectionMethod` 记录选稿方式，`translationStatus: ok`、`translationModel: deepseek-v4-flash`、`translatedItemCount: 10`，条目含中文 `title`、`summary` 与 `keyFacts`。
 - `public/data/research.json`：`editorialProvider: deepseek`、`translatedItemCount > 0`。
 - `public/data/stream.json`：`translationProvider: deepseek`、`translatedItemCount > 0`。
 - `public/data/status.json` 和 `stream-status.json`：记录模型、翻译数量、缺失 ID、重试次数、逐项失败原因和完成原因，但绝不包含密钥或原始提示词。
 
 本地运行可复制 `.env.example` 中的变量到当前终端环境，再执行 `python scripts/update_news.py`。不要提交真实 `.env`。系统使用官方兼容地址 `https://api.deepseek.com/chat/completions`；模型与 JSON 输出参数以 [DeepSeek 官方 API 文档](https://api-docs.deepseek.com/) 为准。
 
-若 DeepSeek 调用、解析或多样性校验失败，Top 10 自动回退规则版；论文与动态保留成功条目，只对缺失项按更小批次继续重试，并在连续两次无有效结果时熔断。原始标题、摘要和链接不会因翻译失败而丢失。`AI_PROVIDER=auto` 时优先选择已配置的 DeepSeek；仅在没有 DeepSeek 密钥时选择 OpenAI，不会在一次失败调用中跨供应商自动重试。若要继续使用 OpenAI，则设置 `AI_PROVIDER=openai`、Secret `OPENAI_API_KEY` 和 Variable `OPENAI_MODEL`。
+选稿与中文编辑从 v1.8 起是两个独立阶段。若 DeepSeek/OpenAI 选稿调用、解析或多样性校验失败，系统使用规则 Top 10，但仍会对这 10 条单独执行中文翻译。日报翻译每批默认 5 条，保留成功条目并只对缺失 ID 拆分重试；同一 ID 在全量动态中已有同提供方、同模型且原始标题未变的翻译会直接复用。原始标题、摘要和链接不会因翻译失败而丢失。`AI_PROVIDER=auto` 时优先选择已配置的 DeepSeek；仅在没有 DeepSeek 密钥时选择 OpenAI，不会在一次失败调用中跨供应商自动重试。若要继续使用 OpenAI，则设置 `AI_PROVIDER=openai`、Secret `OPENAI_API_KEY` 和 Variable `OPENAI_MODEL`。
 
 ## 论文关键词：个人筛选与服务器采集
 

@@ -162,25 +162,13 @@ class UpdateNewsTests(unittest.TestCase):
                 MODULE.ai_select(candidates[:12], self.config, runtime)
         self.assertEqual(request.call_count, 2)
 
-    def test_daily_editorial_uses_sequence_indices_and_restores_stable_ids(self):
+    def test_daily_selection_uses_sequence_indices_and_restores_stable_ids(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:12]
         runtime = {
             "provider": "deepseek", "api_key": "secret", "model": "deepseek-v4-flash",
             "endpoint": "https://api.deepseek.com/chat/completions",
         }
-        response = {
-            "brief": {"headline": "今日", "summary": "摘要", "signals": ["一", "二", "三"]},
-            "items": [{
-                "index": index,
-                "titleZh": f"标题{index}",
-                "category": candidates[index - 1].category,
-                "score": 80,
-                "summary": "中文摘要",
-                "keyFacts": ["事实一", "事实二"],
-                "why": "重要性",
-                "tags": ["测试"],
-            } for index in range(1, 11)],
-        }
+        response = {"items": [{"index": index, "score": 80} for index in range(1, 11)]}
         with mock.patch.object(MODULE, "request_structured_json", return_value=response) as request:
             result = MODULE.ai_select(candidates, self.config, runtime)
         self.assertEqual([item["id"] for item in result["items"]], [item.id for item in candidates[:10]])
@@ -188,6 +176,31 @@ class UpdateNewsTests(unittest.TestCase):
         payload = request.call_args.kwargs["input_text"]
         self.assertIn('"index": 1', payload)
         self.assertNotIn(candidates[0].id, payload)
+        self.assertNotIn("titleZh", request.call_args.kwargs["schema"]["properties"]["items"]["items"]["properties"])
+
+    def test_daily_translation_is_a_separate_resilient_batch(self):
+        candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:2]
+        runtime = {
+            "provider": "deepseek", "api_key": "secret", "model": "deepseek-v4-flash",
+            "endpoint": "https://api.deepseek.com/chat/completions",
+        }
+        response = {"items": [{
+            "index": index,
+            "titleZh": f"中文标题{index}",
+            "summary": "中文摘要",
+            "keyFacts": ["事实一", "事实二"],
+            "why": "重要性",
+            "tags": ["测试"],
+        } for index in range(1, 3)]}
+        with mock.patch.object(MODULE, "request_structured_json", return_value=response) as request:
+            translated, warnings, diagnostics = MODULE.ai_translate_daily_articles(
+                candidates, self.config, runtime
+            )
+        self.assertEqual(set(translated), {article.id for article in candidates})
+        self.assertTrue(all(item["_translationOnly"] for item in translated.values()))
+        self.assertEqual(warnings, [])
+        self.assertEqual(diagnostics["completionReason"], "complete_first_pass")
+        self.assertNotIn(candidates[0].id, request.call_args.kwargs["input_text"])
 
     def test_stream_translation_splits_and_retries_only_missing_sequence_indices(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:4]
@@ -221,8 +234,46 @@ class UpdateNewsTests(unittest.TestCase):
         )
         self.assertEqual(stream["translatedItemCount"], 4)
         self.assertEqual(stream["translationProvider"], "deepseek")
-        self.assertEqual(stream["items"][0]["scoreBasis"], "AI翻译 · 规则评分")
+        self.assertEqual(stream["items"][0]["scoreBasis"], "规则评分")
         MODULE.validate_stream_report(stream)
+
+    def test_stream_translation_is_not_overwritten_by_rule_daily_fields(self):
+        candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
+        article = candidates[0]
+        daily_item = MODULE.item_from_article(article, self.config)
+        translations = {article.id: {
+            "titleZh": "全量动态中文标题",
+            "summary": "全量动态中文摘要",
+            "tags": ["中文标签"],
+            "_translationOnly": True,
+            "_provider": "deepseek",
+        }}
+        stream = MODULE.build_stream_report(
+            [article], self.config, self.now,
+            top_stories={article.id: daily_item},
+            translations=translations,
+        )
+        self.assertEqual(stream["items"][0]["title"], "全量动态中文标题")
+        self.assertEqual(stream["items"][0]["summary"], "全量动态中文摘要")
+        self.assertEqual(stream["items"][0]["translationProvider"], "deepseek")
+
+    def test_unchanged_stream_translation_is_recovered_by_stable_news_id(self):
+        candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:2]
+        runtime = {
+            "provider": "deepseek", "api_key": "secret", "model": "deepseek-v4-flash",
+            "endpoint": "https://api.deepseek.com/chat/completions",
+        }
+        translations = {article.id: {
+            "titleZh": f"中文：{article.title}", "summary": "中文摘要", "tags": ["复用"],
+            "_translationOnly": True, "_provider": "deepseek",
+        } for article in candidates}
+        previous = MODULE.build_stream_report(
+            candidates, self.config, self.now,
+            translations=translations, translation_runtime=runtime,
+        )
+        reusable = MODULE.reusable_stream_translations(previous, candidates, runtime)
+        self.assertEqual(set(reusable), {article.id for article in candidates})
+        self.assertTrue(all(value["_reuseSource"] == "stream" for value in reusable.values()))
 
     def test_stream_translation_records_missing_ids_and_completion_reason(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:2]
@@ -375,7 +426,7 @@ class UpdateNewsTests(unittest.TestCase):
             ])
             self.assertEqual(status, 0)
             payload = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(payload["schemaVersion"], 5)
+            self.assertEqual(payload["schemaVersion"], 6)
             self.assertEqual(payload["editionDate"], "2026-07-16")
             self.assertEqual(payload["timezone"], "Asia/Tokyo")
             self.assertEqual(payload["method"], "rules")
@@ -393,12 +444,14 @@ class UpdateNewsTests(unittest.TestCase):
             atom = ET.parse(feed_output).getroot()
             self.assertEqual(len(atom.findall("{http://www.w3.org/2005/Atom}entry")), 10)
             pipeline_status = json.loads(status_output.read_text(encoding="utf-8"))
-            self.assertEqual(pipeline_status["schemaVersion"], 5)
+            self.assertEqual(pipeline_status["schemaVersion"], 6)
             self.assertEqual(pipeline_status["state"], "ok")
-            self.assertEqual(pipeline_status["editorialStatus"], "disabled")
+            self.assertEqual(pipeline_status["selectionMethod"], "rules")
+            self.assertEqual(pipeline_status["translationStatus"], "disabled")
+            self.assertNotIn("editorialStatus", pipeline_status)
             stream = json.loads(stream_output.read_text(encoding="utf-8"))
             research = json.loads(research_output.read_text(encoding="utf-8"))
-            self.assertEqual(stream["schemaVersion"], 3)
+            self.assertEqual(stream["schemaVersion"], 4)
             self.assertEqual(research["schemaVersion"], 3)
             self.assertEqual(pipeline_status["streamItemCount"], stream["itemCount"])
             self.assertEqual(pipeline_status["researchItemCount"], 6)
@@ -573,31 +626,188 @@ class UpdateNewsTests(unittest.TestCase):
 
     def test_ai_selection_must_pass_category_diversity(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:10]
-        editorial = {article.id: {"category": "AI"} for article in candidates}
+        for article in candidates[:4]:
+            article.category = "AI"
         with self.assertRaisesRegex(ValueError, "多样性"):
-            MODULE.validate_ai_diversity(candidates, editorial, self.config)
+            MODULE.validate_ai_diversity(candidates, self.config, "deepseek")
 
-    def test_ai_failure_is_exposed_as_pipeline_warning(self):
+    def test_ai_selection_failure_does_not_block_daily_translation(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
-        with mock.patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}), mock.patch.object(
+        def translate(articles, _config, runtime):
+            translated = {article.id: {
+                "titleZh": f"中文：{article.title}", "summary": "中文摘要",
+                "keyFacts": ["事实一", "事实二"], "why": "重要性", "tags": ["测试"],
+                "_translationOnly": True, "_provider": runtime["provider"],
+            } for article in articles}
+            return translated, [], {
+                "requestedItemCount": len(articles), "completedItemCount": len(articles),
+                "missingItemCount": 0, "missingItemIds": [], "missingItems": [],
+                "initialBatchSize": 5, "initialBatchCount": 2, "requestCount": 2,
+                "retryRequestCount": 0, "providerFailureCount": 0, "structuralFailureCount": 0,
+                "completionReason": "complete_first_pass", "completionMessage": "全部完成",
+                "lastProviderError": "",
+            }
+        with mock.patch.dict(os.environ, {
+            "AI_PROVIDER": "openai", "OPENAI_API_KEY": "test-key", "DEEPSEEK_API_KEY": "",
+        }), mock.patch.object(
             MODULE, "ai_select", side_effect=RuntimeError("HTTP 429 temporary limit")
-        ):
+        ), mock.patch.object(MODULE, "ai_translate_daily_articles", side_effect=translate):
             report = MODULE.build_report(candidates, self.config, self.now, skip_ai=False)
         self.assertEqual(report["method"], "rules")
-        self.assertEqual(report["editorialStatus"], "fallback")
-        self.assertIn("429", report["warnings"][0])
+        self.assertEqual(report["selectionMethod"], "rules")
+        self.assertEqual(report["selectionDiagnostics"]["status"], "rejected")
+        self.assertEqual(report["translationStatus"], "ok")
+        self.assertEqual(report["translatedItemCount"], 10)
+        self.assertIn("OpenAI", report["selectionWarnings"][0])
+        self.assertIn("429", report["selectionWarnings"][0])
+        self.assertTrue(all(item["translationProvider"] == "openai" for item in report["items"]))
         with tempfile.TemporaryDirectory() as directory:
             status_path = Path(directory) / "status.json"
             MODULE.write_pipeline_status(
                 status_path,
                 state="ok",
                 now=self.now,
-                message="日报更新成功；" + report["warnings"][0],
+                message="日报更新成功；" + report["selectionWarnings"][0],
                 report=report,
             )
             status = json.loads(status_path.read_text(encoding="utf-8"))
-        self.assertEqual(status["editorialStatus"], "fallback")
-        self.assertIn("429", status["warnings"][0])
+        self.assertEqual(status["selectionMethod"], "rules")
+        self.assertEqual(status["translationStatus"], "ok")
+        self.assertEqual(status["translatedItemCount"], 10)
+        self.assertNotIn("editorialStatus", status)
+
+    def test_pipeline_status_migrates_legacy_fallback_without_reusing_that_label(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "status.json"
+            path.write_text(json.dumps({
+                "itemCount": 10, "translatedItemCount": 0,
+                "method": "rules", "editorialStatus": "fallback",
+            }), encoding="utf-8")
+            MODULE.write_pipeline_status(
+                path, state="failed", now=self.now, message="当次采集失败"
+            )
+            status = json.loads(path.read_text(encoding="utf-8"))
+        self.assertEqual(status["translationStatus"], "failed")
+        self.assertEqual(status["selectionMethod"], "rules")
+        self.assertNotIn("editorialStatus", status)
+
+    def test_daily_partial_translation_has_its_own_status_and_missing_ids(self):
+        candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
+        translated_id = MODULE.choose_diverse(
+            candidates[:self.config["candidate_limit"]], self.config, 10
+        )[0].id
+        missing_ids = [article.id for article in MODULE.choose_diverse(
+            candidates[:self.config["candidate_limit"]], self.config, 10
+        ) if article.id != translated_id]
+        partial = {
+            translated_id: {
+                "titleZh": "唯一成功的中文标题", "summary": "中文摘要",
+                "keyFacts": ["事实一", "事实二"], "why": "重要性", "tags": [],
+                "_translationOnly": True, "_provider": "deepseek",
+            }
+        }
+        diagnostics = {
+            "requestedItemCount": 10, "completedItemCount": 1, "missingItemCount": 9,
+            "missingItemIds": missing_ids,
+            "missingItems": [{"id": item_id, "reason": "provider_error"} for item_id in missing_ids],
+            "initialBatchSize": 5, "initialBatchCount": 2, "requestCount": 4,
+            "retryRequestCount": 2, "providerFailureCount": 2, "structuralFailureCount": 0,
+            "completionReason": "partial_after_retry", "completionMessage": "拆分重试后仍有缺失",
+            "lastProviderError": "temporary",
+        }
+        with mock.patch.dict(os.environ, {
+            "AI_PROVIDER": "deepseek", "DEEPSEEK_API_KEY": "test-key", "OPENAI_API_KEY": "",
+        }), mock.patch.object(MODULE, "ai_select", side_effect=RuntimeError("选稿不可用")), mock.patch.object(
+            MODULE, "ai_translate_daily_articles", return_value=(partial, ["日报中文翻译不完整"], diagnostics)
+        ):
+            report = MODULE.build_report(candidates, self.config, self.now, skip_ai=False)
+        self.assertEqual(report["selectionMethod"], "rules")
+        self.assertEqual(report["translationStatus"], "partial")
+        self.assertEqual(report["translatedItemCount"], 1)
+        self.assertEqual(report["translationDiagnostics"]["totalMissingItemCount"], 9)
+        self.assertEqual(report["translationDiagnostics"]["missingItemIds"], missing_ids)
+        MODULE.validate_report(report, 10)
+
+    def test_diversity_rejection_uses_rules_but_still_translates(self):
+        candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
+        for article in candidates[:3]:
+            article.domain = "crowded.example"
+        ai_result = {"items": [
+            {"id": article.id, "score": 90 - index}
+            for index, article in enumerate(candidates[:10])
+        ]}
+        translated_ids = []
+        def translate(articles, _config, runtime):
+            translated_ids.extend(article.id for article in articles)
+            return ({article.id: {
+                "titleZh": f"中文：{article.title}", "summary": "中文摘要",
+                "keyFacts": ["事实一", "事实二"], "why": "重要性", "tags": [],
+                "_translationOnly": True, "_provider": runtime["provider"],
+            } for article in articles}, [], {
+                "requestedItemCount": len(articles), "completedItemCount": len(articles),
+                "missingItemCount": 0, "missingItemIds": [], "missingItems": [],
+                "initialBatchSize": 5, "initialBatchCount": 2, "requestCount": 2,
+                "retryRequestCount": 0, "providerFailureCount": 0, "structuralFailureCount": 0,
+                "completionReason": "complete_first_pass", "completionMessage": "全部完成", "lastProviderError": "",
+            })
+        with mock.patch.dict(os.environ, {
+            "AI_PROVIDER": "deepseek", "DEEPSEEK_API_KEY": "test-key", "OPENAI_API_KEY": "",
+        }), mock.patch.object(MODULE, "ai_select", return_value=ai_result), mock.patch.object(
+            MODULE, "ai_translate_daily_articles", side_effect=translate
+        ):
+            report = MODULE.build_report(candidates, self.config, self.now, skip_ai=False)
+        self.assertEqual(report["selectionMethod"], "rules")
+        self.assertEqual(report["translationStatus"], "ok")
+        self.assertEqual(len(translated_ids), 10)
+        self.assertIn("DeepSeek 选稿未通过多样性校验", report["selectionWarnings"][0])
+
+    def test_daily_reuses_existing_stream_translations_by_news_id(self):
+        candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
+        selected = MODULE.choose_diverse(candidates[:self.config["candidate_limit"]], self.config, 10)
+        reusable = {article.id: {
+            "titleZh": f"复用中文：{article.title}", "summary": "已有中文摘要",
+            "tags": ["复用"], "_translationOnly": True, "_provider": "deepseek",
+        } for article in selected}
+        with mock.patch.dict(os.environ, {
+            "AI_PROVIDER": "deepseek", "DEEPSEEK_API_KEY": "test-key", "OPENAI_API_KEY": "",
+        }), mock.patch.object(MODULE, "ai_select", side_effect=RuntimeError("选稿不可用")), mock.patch.object(
+            MODULE, "request_structured_json"
+        ) as request:
+            report = MODULE.build_report(
+                candidates, self.config, self.now, skip_ai=False,
+                reusable_translations=reusable,
+            )
+        request.assert_not_called()
+        self.assertEqual(report["selectionMethod"], "rules")
+        self.assertEqual(report["translationStatus"], "ok")
+        self.assertEqual(report["translatedItemCount"], 10)
+        self.assertEqual(report["translationDiagnostics"]["reusedItemCount"], 10)
+        self.assertEqual(report["translationDiagnostics"]["requestedItemCount"], 0)
+
+    def test_successful_ai_selection_and_translation_keep_separate_provenance(self):
+        candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
+        selected = MODULE.choose_diverse(candidates[:self.config["candidate_limit"]], self.config, 10)
+        ai_result = {"items": [
+            {"id": article.id, "score": 95 - index}
+            for index, article in enumerate(selected)
+        ]}
+        reusable = {article.id: {
+            "titleZh": f"中文：{article.title}", "summary": "中文摘要",
+            "tags": ["复用"], "_translationOnly": True, "_provider": "deepseek",
+        } for article in selected}
+        with mock.patch.dict(os.environ, {
+            "AI_PROVIDER": "deepseek", "DEEPSEEK_API_KEY": "test-key", "OPENAI_API_KEY": "",
+        }), mock.patch.object(MODULE, "ai_select", return_value=ai_result):
+            report = MODULE.build_report(
+                candidates, self.config, self.now, skip_ai=False,
+                reusable_translations=reusable,
+            )
+        self.assertEqual(report["selectionMethod"], "deepseek")
+        self.assertEqual(report["translationStatus"], "ok")
+        self.assertEqual(report["translatedItemCount"], 10)
+        self.assertTrue(all(item["selectionProvider"] == "deepseek" for item in report["items"]))
+        self.assertTrue(all(item["translationProvider"] == "deepseek" for item in report["items"]))
+        self.assertTrue(all(item["scoreBasis"] == "AI选稿 · 规则校验" for item in report["items"]))
 
     def test_openai_http_post_retries_one_transient_failure(self):
         class Response:

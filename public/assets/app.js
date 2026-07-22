@@ -269,20 +269,53 @@
       return;
     }
     const warnings = Array.isArray(state.pipelineStatus?.warnings) ? state.pipelineStatus.warnings.filter(Boolean) : [];
+    const translationWarnings = [
+      ...(Array.isArray(state.pipelineStatus?.translationWarnings) ? state.pipelineStatus.translationWarnings : []),
+      ...(Array.isArray(report?.translationWarnings) ? report.translationWarnings : []),
+      batchDiagnosticWarning(state.pipelineStatus?.translationDiagnostics || report?.translationDiagnostics, "日报"),
+    ].filter(Boolean);
+    const translationStatus = clean(state.pipelineStatus?.translationStatus || report?.translationStatus);
+    const translatedItemCount = Number(state.pipelineStatus?.translatedItemCount ?? report?.translatedItemCount) || 0;
+    if (["partial", "failed"].includes(translationStatus)) {
+      badge.textContent = translationStatus === "partial" ? "部分中文" : "翻译失败";
+      badge.classList.add("warning");
+      showAlert(
+        "warning",
+        translationStatus === "partial" ? "日报已更新，但部分中文翻译失败" : "日报已更新，但中文翻译失败",
+        [...new Set(translationWarnings)].join("；") || `Top 10 中已完成 ${translatedItemCount} 条中文翻译；英文规则字段仍可用。`,
+      );
+      return;
+    }
+    const selectionWarnings = [
+      ...(Array.isArray(state.pipelineStatus?.selectionWarnings) ? state.pipelineStatus.selectionWarnings : []),
+      ...(Array.isArray(report?.selectionWarnings) ? report.selectionWarnings : []),
+    ].filter(Boolean);
     const supplemented = state.pipelineStatus?.coverageStatus === "supplemented"
       || Number(state.pipelineStatus?.supplementalItemCount) > 0
       || report?.items?.some((item) => item.isSupplemental || item.diversityRelaxed);
     if (supplemented) {
       badge.textContent = "安全补足";
       badge.classList.add("warning");
-      showAlert("warning", "本期 Top 10 已使用透明补全", warnings.join("；")
+      showAlert("warning", "本期 Top 10 已使用透明补全", [...new Set(selectionWarnings)].join("；") || warnings.join("；")
         || "24 小时候选量或分布不足，系统使用了明确标记的扩展窗口或分级配额补足；没有生成虚构新闻。");
       return;
     }
-    if (state.pipelineStatus?.editorialStatus === "fallback") {
-      badge.textContent = "规则回退";
+    const selectionMethod = clean(state.pipelineStatus?.selectionMethod || report?.selectionMethod || report?.method);
+    const selectionRejected = (state.pipelineStatus?.selectionDiagnostics || report?.selectionDiagnostics)?.status === "rejected";
+    if (selectionMethod === "rules" && selectionRejected) {
+      badge.textContent = translationStatus === "ok" ? "规则选稿 · 中文" : "规则选稿";
       badge.classList.add("warning");
-      showAlert("warning", "日报已更新，但 AI 编辑发生降级", warnings.join("；") || state.pipelineStatus.message || "已使用规则模式生成本期内容。");
+      showAlert(
+        "warning",
+        translationStatus === "ok" ? "AI 选稿未采用，中文翻译已独立完成" : "AI 选稿未采用",
+        [...new Set(selectionWarnings)].join("；") || "本期使用经多样性校验的规则 Top 10。",
+      );
+      return;
+    }
+    if (!translationStatus && state.pipelineStatus?.editorialStatus === "fallback") {
+      badge.textContent = "旧版回退";
+      badge.classList.add("warning");
+      showAlert("warning", "日报已更新，但当时使用旧版 AI 回退流程", warnings.join("；") || state.pipelineStatus.message || "请等待 v1.8 数据管道下一次更新。");
       return;
     }
     if (warnings.length) {
@@ -637,19 +670,24 @@
   }
 
   function providerLabel(report) {
-    const method = clean(report?.method).toLocaleLowerCase();
-    const provider = clean(report?.translationProvider || (["deepseek", "openai"].includes(method)
-      ? report?.editorialProvider || method : "")).toLocaleLowerCase();
+    const provider = clean(report?.translationProvider || report?.editorialProvider).toLocaleLowerCase();
     if (provider === "deepseek") return "DeepSeek V4 Flash";
     if (provider === "openai") return "OpenAI";
     return "";
   }
 
+  function selectionLabel(report) {
+    const method = clean(report?.selectionMethod || report?.method).toLocaleLowerCase();
+    if (method === "deepseek") return "DeepSeek";
+    if (method === "openai") return "OpenAI";
+    return method === "rules" ? "规则 Top 10" : "规则";
+  }
+
   function batchDiagnosticWarning(diagnostics, contentLabel) {
-    const missing = Number(diagnostics?.missingItemCount) || 0;
+    const missing = Number(diagnostics?.totalMissingItemCount ?? diagnostics?.missingItemCount) || 0;
     if (!missing) return "";
-    const requested = Number(diagnostics?.requestedItemCount) || 0;
-    const completed = Number(diagnostics?.completedItemCount) || 0;
+    const requested = Number(diagnostics?.targetItemCount ?? diagnostics?.requestedItemCount) || 0;
+    const completed = Number(diagnostics?.totalTranslatedItemCount ?? diagnostics?.completedItemCount) || 0;
     const reason = clean(diagnostics?.completionMessage, "拆分重试后仍有条目缺失");
     return `${contentLabel}翻译完成 ${completed}/${requested}，仍缺失 ${missing} 条：${reason}；缺失 ID 与原因已写入公开状态数据`;
   }
@@ -662,7 +700,11 @@
     let summary = report?.brief?.summary;
     let signals = Array.isArray(report?.brief?.signals) ? report.brief.signals : [];
     const provider = providerLabel(report);
-    let method = provider ? `${provider} 编辑 + 规则校验` : report ? "规则评分" : "本机视图";
+    const translatedCount = Number(report?.translatedItemCount) || 0;
+    const reportItemCount = Array.isArray(report?.items) ? report.items.length : items.length;
+    let method = report
+      ? `${selectionLabel(report)}选稿 · ${provider ? `${provider} 中文编辑 ${translatedCount}/${reportItemCount}` : "规则摘要"}`
+      : "本机视图";
     if (state.view === "stream") {
       const total = Number(report?.totalCandidateCount) || items.length;
       const hasFilters = state.rangeHours !== 24 || state.source !== "全部" || state.category !== "全部" || Boolean(state.query);

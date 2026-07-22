@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.8.0 — Independent selection and Chinese translation
+
+- Split the daily pipeline into two independent stages: Top 10 selection first, then Chinese translation/editing of the final selected set.
+- When AI selection fails parsing or diversity validation, the deterministic Top 10 is retained and still sent through the Chinese translation stage.
+- Added `selectionMethod`, `translationStatus` and `translatedItemCount` as separate public health fields, with dedicated selection/translation warnings and diagnostics.
+- Added five-item resilient daily translation batches with split retries and per-ID completion reasons.
+- Reused unchanged full-stream translations by stable news ID, provider, model and original title before requesting new daily translations.
+- Changed Top 10/full-stream merging so translated Chinese text always wins over untranslated rule fields, while ranking and evidence metadata still come from the daily item.
+- Replaced the hard-coded OpenAI diversity error with the active provider's public name.
+- Bumped daily/stream schemas and the Service Worker cache boundary for the new contracts.
+
 ## 1.7.0 — Resilient AI batches and conflict-safe publishing
 
 - Reduced DeepSeek stream batches from 12 to 6 items and research batches from 10 to 5 items.
