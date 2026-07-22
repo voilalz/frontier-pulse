@@ -1,26 +1,26 @@
 {
   "schemaVersion": 4,
-  "generatedAt": "2026-07-22T03:48:55Z",
+  "generatedAt": "2026-07-22T08:46:03Z",
   "timezone": "Asia/Tokyo",
   "rangeHours": 24,
-  "itemCount": 58,
-  "totalCandidateCount": 58,
+  "itemCount": 56,
+  "totalCandidateCount": 56,
   "truncated": false,
   "categoryCounts": {
-    "局部冲突": 16,
+    "局部冲突": 17,
     "AI": 3,
-    "航空航天": 16,
     "军事动态": 16,
-    "无人系统": 6,
+    "航空航天": 14,
+    "无人系统": 5,
     "前沿技术": 1
   },
   "sourceCounts": {
-    "Al Jazeera": 13,
-    "Breaking Defense": 9,
-    "Defense News": 9,
-    "NASA": 6,
+    "Al Jazeera": 12,
+    "Breaking Defense": 10,
+    "Defense News": 8,
     "SpaceNews": 6,
     "BBC World": 5,
+    "NASA": 5,
     "The War Zone": 5,
     "Defense One": 2,
     "TechCrunch AI": 2,
@@ -28,27 +28,90 @@
   },
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
-  "translatedItemCount": 58,
+  "translatedItemCount": 56,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 20,
-    "completedItemCount": 20,
+    "requestedItemCount": 13,
+    "completedItemCount": 13,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 4,
-    "requestCount": 4,
-    "retryRequestCount": 0,
-    "providerFailureCount": 0,
+    "initialBatchCount": 3,
+    "requestCount": 5,
+    "retryRequestCount": 2,
+    "providerFailureCount": 1,
     "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
-    "lastProviderError": "",
-    "reusedItemCount": 38,
+    "completionReason": "complete_after_retry",
+    "completionMessage": "缺失条目经拆分重试后已全部完成",
+    "lastProviderError": "Expecting property name enclosed in double quotes: line 22 column 7 (char 537)",
+    "reusedItemCount": 43,
     "featuredTranslatedItemCount": 0
   },
   "items": [
+    {
+      "id": "d27a33d94c9321",
+      "contentType": "news",
+      "title": "美国恢复对伊朗打击，特朗普威胁攻击地下核设施",
+      "originalTitle": "US renews strikes on Iran as Trump threatens to attack underground nuclear site",
+      "summary": "美国总统威胁要瞄准伊朗关键核设施，这是连续第11晚袭击发生前的表态。",
+      "keyFacts": [
+        "美国总统威胁要瞄准伊朗关键核设施，这是连续第11晚袭击发生前的表态。"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-07-22T03:05:08Z",
+      "url": "https://www.bbc.co.uk/news/articles/cdrv0p37k8jo?at_medium=RSS&at_campaign=rss",
+      "score": 79,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 13,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 5.7 小时",
+        "命中 2 个主题信号",
+        "影响信号：attack、nuclear"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国",
+        "伊朗",
+        "核设施"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/9a13/live/5d582620-8572-11f1-bee8-53ce494e1abc.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cdrv0p37k8jo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-07-22T03:05:08Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 1
+    },
     {
       "id": "b1e12612abca25",
       "contentType": "news",
@@ -64,13 +127,13 @@
       "country": "国际",
       "publishedAt": "2026-07-22T02:39:13Z",
       "url": "https://www.aljazeera.com/news/2026/7/22/how-armed-group-alliances-are-reshaping-malis-conflict-and-the-wider-sahel?traffic_source=rss",
-      "score": 79,
+      "score": 77,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 17,
         "影响信号": 6,
         "主题相关性": 6,
         "证据完整度": 3,
@@ -81,7 +144,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.2 小时",
+        "发布约 6.1 小时",
         "命中 3 个主题信号",
         "影响信号：attack",
         "2 个独立来源相互印证"
@@ -118,69 +181,6 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 1
-    },
-    {
-      "id": "0ba57f51592c2f",
-      "contentType": "news",
-      "title": "俄罗斯白天袭击扎波罗热致三人死亡",
-      "originalTitle": "Daytime Russian strike kills three in Zaporizhzhia",
-      "summary": "俄罗斯对乌克兰扎波罗热发动制导航空炸弹袭击，至少造成3人死亡、13人受伤。",
-      "keyFacts": [
-        "俄罗斯对乌克兰扎波罗热发动制导航空炸弹袭击，至少造成3人死亡、13人受伤。"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-07-21T20:48:18Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/7/21/daytime-russian-strike-kills-three-in-zaporizhzhia?traffic_source=rss",
-      "score": 80,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 12,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 3.2 小时",
-        "命中 3 个主题信号",
-        "影响信号：attack、strike"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "俄乌战争",
-        "扎波罗热",
-        "空袭"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/7/21/daytime-russian-strike-kills-three-in-zaporizhzhia?traffic_source=rss",
-          "publishedAt": "2026-07-21T20:48:18Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": true,
       "streamRank": 2
     },
     {
@@ -198,13 +198,13 @@
       "country": "国际",
       "publishedAt": "2026-07-22T02:36:55Z",
       "url": "https://www.aljazeera.com/news/2026/7/22/unprecedented-openai-says-ai-models-autonomously-hacked-another-company?traffic_source=rss",
-      "score": 74,
+      "score": 72,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 17,
         "影响信号": 9,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -215,7 +215,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.2 小时",
+        "发布约 6.2 小时",
         "命中 1 个主题信号",
         "影响信号：test、autonomous"
       ],
@@ -245,6 +245,264 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 3
+    },
+    {
+      "id": "e28a02e1e1a443",
+      "contentType": "news",
+      "title": "洛克希德·马丁和雷声公司高管称，乌克兰爱国者导弹生产谈判处于‘早期’阶段",
+      "originalTitle": "Lockheed, RTX in ‘early’ talks for Ukraine Patriot production, execs say",
+      "summary": "雷声公司的汤姆·拉利伯蒂表示：“与美国政府合作，我们正在……确定什么是可行的，什么对乌克兰最有利。”",
+      "keyFacts": [
+        "雷声公司的汤姆·拉利伯蒂表示：“与美国政府合作，我们正在……确定什么是可行的，什么对乌克兰最有利。”"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-07-22T06:30:00Z",
+      "url": "https://breakingdefense.com/2026/07/lockheed-rtx-in-early-talks-for-ukraine-patriot-production-execs-say",
+      "score": 70,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 5,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 2.3 小时",
+        "命中 1 个主题信号",
+        "影响信号：production"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "乌克兰",
+        "爱国者导弹",
+        "生产"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/07/lockheed-rtx-in-early-talks-for-ukraine-patriot-production-execs-say",
+          "publishedAt": "2026-07-22T06:30:00Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 4
+    },
+    {
+      "id": "9075f89e317e16",
+      "contentType": "news",
+      "title": "赫格塞斯称，伊朗战争迄今已耗费美国3750亿美元，五角大楼寻求更多拨款",
+      "originalTitle": "Iran war has cost US $37.5bn so far, Hegseth says, as Pentagon seeks billions more",
+      "summary": "听证会因抗议和争吵而中断，赫格塞斯在战争关键时刻作证。",
+      "keyFacts": [
+        "听证会因抗议和争吵而中断，赫格塞斯在战争关键时刻作证。"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-07-22T02:15:05Z",
+      "url": "https://www.bbc.co.uk/news/articles/c70gek2kqyno?at_medium=RSS&at_campaign=rss",
+      "score": 70,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 4,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 6.5 小时",
+        "命中 2 个主题信号",
+        "2 个独立来源相互印证"
+      ],
+      "confidence": "高",
+      "confidenceReason": "主来源权重 17/20，且有 2 个独立来源报道；仍应以原文和一手材料为准。",
+      "tags": [
+        "美国",
+        "伊朗战争",
+        "军费"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/dd9c/live/8cde08d0-8552-11f1-b976-0b9c15b0ccfc.jpg",
+      "corroboration": 2,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c70gek2kqyno?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-07-22T02:15:05Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        },
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/news/pentagon-congress/2026/07/21/cost-of-iran-war-rises-to-375-billion-pentagon-requests-671-billion-more",
+          "publishedAt": "2026-07-21T23:13:23Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 5
+    },
+    {
+      "id": "4ce2c9e1e40602",
+      "contentType": "news",
+      "title": "泽连斯基因连日抗议解职乌军最高指挥官",
+      "originalTitle": "Zelensky sacks Ukraine's top army commander after days of protests",
+      "summary": "此举发生在颇受欢迎的国防部长费多罗夫被解职数天后。",
+      "keyFacts": [
+        "此举发生在颇受欢迎的国防部长费多罗夫被解职数天后。"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-07-22T05:37:43Z",
+      "url": "https://www.bbc.co.uk/news/articles/cyvl35z3917o?at_medium=RSS&at_campaign=rss",
+      "score": 69,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 0,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 3.1 小时",
+        "命中 3 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "乌克兰",
+        "泽连斯基",
+        "军事领导层"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/34b7/live/e3e52d70-853e-11f1-ab57-69b83adbeeff.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cyvl35z3917o?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-07-22T05:37:43Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 6
+    },
+    {
+      "id": "6cbdabc102d88f",
+      "contentType": "news",
+      "title": "伊朗战争直播：德黑兰在美军轰炸后攻击巴林、科威特和约旦",
+      "originalTitle": "Iran war live: Tehran attacks Bahrain, Kuwait, Jordan after US bombings",
+      "summary": "特朗普威胁“非常猛烈地”轰炸一个名为镐山的疑似伊朗核设施。",
+      "keyFacts": [
+        "特朗普威胁“非常猛烈地”轰炸一个名为镐山的疑似伊朗核设施。"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-07-22T00:00:15Z",
+      "url": "https://www.aljazeera.com/news/liveblog/2026/7/22/iran-war-live-us-launches-new-attacks-hegseth-says-war-has-cost-37-5bn?traffic_source=rss",
+      "score": 69,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 7,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 8.8 小时",
+        "命中 1 个主题信号",
+        "影响信号：nuclear"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "美国",
+        "核设施"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/liveblog/2026/7/22/iran-war-live-us-launches-new-attacks-hegseth-says-war-has-cost-37-5bn?traffic_source=rss",
+          "publishedAt": "2026-07-22T00:00:15Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 7
     },
     {
       "id": "70f25039cb8483",
@@ -298,265 +556,6 @@
           "url": "https://www.twz.com/space/could-this-new-northrop-spacecraft-use-its-robotic-arms-to-attack-enemy-satellites",
           "publishedAt": "2026-07-21T19:45:35Z",
           "evidenceGroup": "outlet:twz.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": true,
-      "streamRank": 4
-    },
-    {
-      "id": "6cbdabc102d88f",
-      "contentType": "news",
-      "title": "伊朗战争直播：美国发动新攻击；赫格塞斯称战争已耗资375亿美元",
-      "originalTitle": "Iran war live: US launches new attacks; Hegseth says war has cost $37.5bn",
-      "summary": "特朗普威胁要“非常猛烈地”轰炸疑似伊朗核设施“镐山”。",
-      "keyFacts": [
-        "特朗普威胁要“非常猛烈地”轰炸疑似伊朗核设施“镐山”。"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-07-22T00:00:15Z",
-      "url": "https://www.aljazeera.com/news/liveblog/2026/7/22/iran-war-live-us-launches-new-attacks-hegseth-says-war-has-cost-37-5bn?traffic_source=rss",
-      "score": 71,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 7,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 3.8 小时",
-        "命中 1 个主题信号",
-        "影响信号：nuclear"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美伊冲突",
-        "核设施",
-        "战争成本"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/liveblog/2026/7/22/iran-war-live-us-launches-new-attacks-hegseth-says-war-has-cost-37-5bn?traffic_source=rss",
-          "publishedAt": "2026-07-22T00:00:15Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        },
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/7/21/hegseth-says-iran-war-has-cost-37-5bn-in-latest-official-us-account?traffic_source=rss",
-          "publishedAt": "2026-07-21T21:17:06Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 5
-    },
-    {
-      "id": "bf095877f01cdf",
-      "contentType": "news",
-      "title": "伊朗为米纳布学校遇袭死亡的儿童举行葬礼",
-      "originalTitle": "Iran holds funerals for children killed in Minab school strike",
-      "summary": "伊朗为2月28日美国对米纳布一所学校的袭击中丧生的32名儿童举行了葬礼。",
-      "keyFacts": [
-        "伊朗为2月28日美国对米纳布一所学校的袭击中丧生的32名儿童举行了葬礼。"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-07-21T21:13:02Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/7/21/iran-holds-funerals-for-children-killed-in-minab-school-strike?traffic_source=rss",
-      "score": 73,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 6,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 2.8 小时",
-        "命中 2 个主题信号",
-        "影响信号：strike"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美伊冲突",
-        "平民伤亡",
-        "学校袭击"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/7/21/iran-holds-funerals-for-children-killed-in-minab-school-strike?traffic_source=rss",
-          "publishedAt": "2026-07-21T21:13:02Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": true,
-      "streamRank": 6
-    },
-    {
-      "id": "242ce36d918aa0",
-      "contentType": "news",
-      "title": "哈利勒·哈亚将如何塑造哈马斯领导层？",
-      "originalTitle": "How will Khalil al-Hayya’s leadership shape Hamas?",
-      "summary": "新上任的哈马斯领导人哈亚面临在加沙脆弱停火背景下交出权力的压力。",
-      "keyFacts": [
-        "新上任的哈马斯领导人哈亚面临在加沙脆弱停火背景下交出权力的压力。"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-07-21T21:03:58Z",
-      "url": "https://www.aljazeera.com/video/inside-story/2026/7/21/how-will-khalil-al-hayyas-leadership-shape-hamas?traffic_source=rss",
-      "score": 71,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 6,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.7 小时",
-        "命中 2 个主题信号",
-        "影响信号：ceasefire"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "哈马斯",
-        "加沙",
-        "领导权"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/inside-story/2026/7/21/how-will-khalil-al-hayyas-leadership-shape-hamas?traffic_source=rss",
-          "publishedAt": "2026-07-21T21:03:58Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 7
-    },
-    {
-      "id": "0277db438edb71",
-      "contentType": "news",
-      "title": "加沙以色列袭击致12人死亡，包括一家六口",
-      "originalTitle": "Israeli strikes in Gaza kill 12, including family of six, medics say",
-      "summary": "据医务人员称，袭击造成12人死亡，其中包括费拉斯·马斯里及其妻子和四个孩子。以色列军方表示袭击目标是一名哈马斯特工。",
-      "keyFacts": [
-        "据医务人员称，袭击造成12人死亡，其中包括费拉斯·马斯里及其妻子和四个孩子。以色列军方表示袭击目标是一名哈马斯特工。"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-07-21T15:54:11Z",
-      "url": "https://www.bbc.co.uk/news/articles/c0qv0pdj18go?at_medium=RSS&at_campaign=rss",
-      "score": 73,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 6,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 8.1 小时",
-        "命中 3 个主题信号",
-        "影响信号：attack"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "加沙",
-        "以色列",
-        "哈马斯"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/2b85/live/38d92850-8511-11f1-bee8-53ce494e1abc.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/c0qv0pdj18go?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-07-21T15:54:11Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
       "selectionProvider": "",
@@ -695,6 +694,130 @@
       "streamRank": 10
     },
     {
+      "id": "e08dce5b3457b8",
+      "contentType": "news",
+      "title": "官方称乌克兰再次击中俄罗斯在线零售商Wildberries的仓库",
+      "originalTitle": "More warehouses of Russian online retailer Wildberries hit by Ukraine, officials say",
+      "summary": "位于克拉斯诺达尔和斯塔夫罗波尔地区的Wildberries物流枢纽夜间遭到袭击。",
+      "keyFacts": [
+        "位于克拉斯诺达尔和斯塔夫罗波尔地区的Wildberries物流枢纽夜间遭到袭击。"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-07-22T08:37:13Z",
+      "url": "https://www.bbc.co.uk/news/articles/c36de9n4pxpo?at_medium=RSS&at_campaign=rss",
+      "score": 67,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 0.1 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "乌克兰",
+        "俄罗斯",
+        "Wildberries"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/3c7e/live/17a04300-859b-11f1-a6e0-e3aa80f742c2.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c36de9n4pxpo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-07-22T08:37:13Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 11
+    },
+    {
+      "id": "ddfa92a4f0ad93",
+      "contentType": "news",
+      "title": "伊朗防空系统启动，火焰因美军袭击升起",
+      "originalTitle": "Air defences activate in Iran and flames rise from US attacks",
+      "summary": "德黑兰传出爆炸声，美军称已完成连续第11天对伊朗的打击。",
+      "keyFacts": [
+        "德黑兰传出爆炸声，美军称已完成连续第11天对伊朗的打击。"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-07-22T07:28:29Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/7/22/air-defences-activate-in-iran-and-flames-rise-from-us-attacks?traffic_source=rss",
+      "score": 67,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 1.3 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "美国",
+        "防空系统"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/7/22/air-defences-activate-in-iran-and-flames-rise-from-us-attacks?traffic_source=rss",
+          "publishedAt": "2026-07-22T07:28:29Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 12
+    },
+    {
       "id": "37ed9afaa921ed",
       "contentType": "news",
       "title": "NISAR的L波段雷达揭示南极‘蜂鸟’",
@@ -709,13 +832,13 @@
       "country": "国际",
       "publishedAt": "2026-07-22T00:33:08Z",
       "url": "https://science.nasa.gov/photojournal/nisars-l-band-radar-reveals-hummingbird-in-antarctica",
-      "score": 69,
+      "score": 67,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 20,
         "主题优先级": 9,
-        "时效": 18,
+        "时效": 16,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -726,7 +849,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 3.3 小时",
+        "发布约 8.2 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -754,69 +877,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 11
-    },
-    {
-      "id": "4ce2c9e1e40602",
-      "contentType": "news",
-      "title": "泽连斯基因连日抗议解职乌军最高指挥官",
-      "originalTitle": "Zelensky sacks Ukraine's top army commander after days of protests",
-      "summary": "此举发生在颇受欢迎的国防部长费多罗夫被解职数天后。",
-      "keyFacts": [
-        "此举发生在颇受欢迎的国防部长费多罗夫被解职数天后。"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-07-21T23:59:34Z",
-      "url": "https://www.bbc.co.uk/news/articles/cyvl35z3917o?at_medium=RSS&at_campaign=rss",
-      "score": 69,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 3.8 小时",
-        "命中 3 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "乌克兰",
-        "泽连斯基",
-        "军事领导层"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/34b7/live/e3e52d70-853e-11f1-ab57-69b83adbeeff.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cyvl35z3917o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-07-21T23:59:34Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 12
+      "streamRank": 13
     },
     {
       "id": "35a3b96b6e2624",
@@ -879,7 +940,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": true,
-      "streamRank": 13
+      "streamRank": 14
     },
     {
       "id": "3ca08e50e5cdf5",
@@ -896,13 +957,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T18:07:46Z",
       "url": "https://breakingdefense.com/2026/07/israels-iai-unveils-ellyon-next-gen-electronic-attack-and-intel-gathering-mission-aircraft",
-      "score": 69,
+      "score": 67,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 15,
+        "时效": 13,
         "影响信号": 6,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -913,7 +974,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.7 小时",
+        "发布约 14.6 小时",
         "命中 2 个主题信号",
         "影响信号：attack"
       ],
@@ -942,32 +1003,32 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 14
+      "streamRank": 15
     },
     {
-      "id": "eadcf942268118",
+      "id": "434d6ead781120",
       "contentType": "news",
-      "title": "特朗普宣布对加拿大加征50%关税，卡尼考虑所有选项",
-      "originalTitle": "Carney looking at 'all options' as Trump announces 50% tariffs on Canada",
-      "summary": "关税标志着北美邻国间贸易紧张局势重大升级。",
+      "title": "巴勒斯坦周记：选举前夕，以色列加大进攻",
+      "originalTitle": "Palestine weekly: Ahead of elections, Israel doubles down on attacks",
+      "summary": "加沙哀悼，以色列袭击造成数十人死亡，包括儿童和流离失所的家庭，多个家庭被埋葬。",
       "keyFacts": [
-        "关税标志着北美邻国间贸易紧张局势重大升级。"
+        "加沙哀悼，以色列袭击造成数十人死亡，包括儿童和流离失所的家庭，多个家庭被埋葬。"
       ],
       "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
       "category": "局部冲突",
-      "source": "BBC World",
+      "source": "Al Jazeera",
       "country": "国际",
-      "publishedAt": "2026-07-21T17:33:22Z",
-      "url": "https://www.bbc.co.uk/news/articles/cg4dzq3x3e1o?at_medium=RSS&at_campaign=rss",
-      "score": 69,
+      "publishedAt": "2026-07-22T03:46:11Z",
+      "url": "https://www.aljazeera.com/news/2026/7/22/palestine-weekly-ahead-of-elections-israel-doubles-down-on-attacks?traffic_source=rss",
+      "score": 66,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 17,
+        "来源": 16,
         "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 7,
-        "主题相关性": 2,
+        "时效": 18,
+        "影响信号": 0,
+        "主题相关性": 4,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -975,26 +1036,26 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 10.3 小时",
-        "命中 1 个主题信号",
-        "影响信号：escalation"
+        "来源权重 16/20",
+        "发布约 5.0 小时",
+        "命中 2 个主题信号"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "关税",
-        "加拿大"
+        "巴以冲突",
+        "以色列",
+        "加沙"
       ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/a06b/live/1dd117f0-84dc-11f1-b976-0b9c15b0ccfc.jpg",
+      "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cg4dzq3x3e1o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-07-21T17:33:22Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/7/22/palestine-weekly-ahead-of-elections-israel-doubles-down-on-attacks?traffic_source=rss",
+          "publishedAt": "2026-07-22T03:46:11Z",
+          "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
       "selectionProvider": "",
@@ -1004,7 +1065,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 15
+      "streamRank": 16
     },
     {
       "id": "568f7fb0d9f366",
@@ -1021,13 +1082,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T15:23:54Z",
       "url": "https://www.nasa.gov/directorates/stmd/niac/niac-studies/precision-astrometry-using-optically-independent-spacecraft-for-graviational-wave-detection",
-      "score": 69,
+      "score": 66,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 20,
         "主题优先级": 9,
-        "时效": 14,
+        "时效": 11,
         "影响信号": 6,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1038,7 +1099,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 12.4 小时",
+        "发布约 17.4 小时",
         "命中 1 个主题信号",
         "影响信号：deploy"
       ],
@@ -1067,7 +1128,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 16
+      "streamRank": 17
     },
     {
       "id": "cbe4b569bdba39",
@@ -1137,7 +1198,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": true,
-      "streamRank": 17
+      "streamRank": 18
     },
     {
       "id": "4b532634d63f7c",
@@ -1154,13 +1215,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T12:49:52Z",
       "url": "https://www.defensenews.com/global/europe/2026/07/21/russia-may-use-captured-ukrainian-drones-against-poland-and-baltics-warsaw-warns",
-      "score": 69,
+      "score": 66,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 13,
+        "时效": 10,
         "影响信号": 6,
         "主题相关性": 6,
         "证据完整度": 3,
@@ -1171,7 +1232,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 15.0 小时",
+        "发布约 19.9 小时",
         "命中 3 个主题信号",
         "影响信号：attack"
       ],
@@ -1200,7 +1261,193 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 18
+      "streamRank": 19
+    },
+    {
+      "id": "7a060145391c05",
+      "contentType": "news",
+      "title": "鲁比奥称美国对伊朗谈判持开放态度但德黑兰不认真",
+      "originalTitle": "US ‘open’ to negotiations with Iran but Tehran not ‘serious’, Rubio says",
+      "summary": "美国国务卿表示伊朗控制霍尔木兹海峡树立‘危险先例’，袭击仍在继续。",
+      "keyFacts": [
+        "美国国务卿表示伊朗控制霍尔木兹海峡树立‘危险先例’，袭击仍在继续。"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-07-22T07:35:26Z",
+      "url": "https://www.aljazeera.com/news/2026/7/22/us-open-to-negotiations-with-iran-but-tehran-not-serious-rubio-says?traffic_source=rss",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 1.2 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美伊关系",
+        "制裁",
+        "霍尔木兹海峡"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/7/22/us-open-to-negotiations-with-iran-but-tehran-not-serious-rubio-says?traffic_source=rss",
+          "publishedAt": "2026-07-22T07:35:26Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 20
+    },
+    {
+      "id": "425dd12aceebb2",
+      "contentType": "news",
+      "title": "阿尔及利亚：有毒的殖民",
+      "originalTitle": "Algeria: Toxic colonisation",
+      "summary": "证词和文件揭示法国军队在阿尔及利亚独立战争中非法使用化学武器。",
+      "keyFacts": [
+        "证词和文件揭示法国军队在阿尔及利亚独立战争中非法使用化学武器。"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-07-22T07:23:42Z",
+      "url": "https://www.aljazeera.com/video/featured-documentaries/2026/7/22/algeria-toxic-colonisation?traffic_source=rss",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 1.4 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "阿尔及利亚",
+        "法国",
+        "化学武器"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/featured-documentaries/2026/7/22/algeria-toxic-colonisation?traffic_source=rss",
+          "publishedAt": "2026-07-22T07:23:42Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 21
+    },
+    {
+      "id": "6333b72669874a",
+      "contentType": "news",
+      "title": "美国针对中国，拟禁止军用级无人机进口",
+      "originalTitle": "US targets China in move to ban military-grade drone imports",
+      "summary": "拟议规则将要求美国监管机构阻止主要来自中国的蜂群能力无人机进入市场。",
+      "keyFacts": [
+        "拟议规则将要求美国监管机构阻止主要来自中国的蜂群能力无人机进入市场。"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-07-22T02:21:57Z",
+      "url": "https://www.aljazeera.com/news/2026/7/22/us-targets-china-in-move-to-ban-military-grade-drone-imports?traffic_source=rss",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 6.4 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国",
+        "中国",
+        "无人机禁令"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/7/22/us-targets-china-in-move-to-ban-military-grade-drone-imports?traffic_source=rss",
+          "publishedAt": "2026-07-22T02:21:57Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 22
     },
     {
       "id": "63d98b65070fb3",
@@ -1263,24 +1510,24 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": true,
-      "streamRank": 19
+      "streamRank": 23
     },
     {
-      "id": "6333b72669874a",
+      "id": "cd3dfccf9e6aeb",
       "contentType": "news",
-      "title": "美国针对中国，拟禁止军用级无人机进口",
-      "originalTitle": "US targets China in move to ban military-grade drone imports",
-      "summary": "拟议规则将要求美国监管机构阻止主要来自中国的蜂群能力无人机进入市场。",
+      "title": "鲁比奥称伊朗在霍尔木兹的伤亡将树立危险先例",
+      "originalTitle": "Iran toll in Hormuz would set ‘dangerous precedent’ says Rubio",
+      "summary": "现有元数据未提供摘要",
       "keyFacts": [
-        "拟议规则将要求美国监管机构阻止主要来自中国的蜂群能力无人机进入市场。"
+        "现有元数据未提供摘要"
       ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
       "source": "Al Jazeera",
       "country": "国际",
-      "publishedAt": "2026-07-22T02:21:57Z",
-      "url": "https://www.aljazeera.com/news/2026/7/22/us-targets-china-in-move-to-ban-military-grade-drone-imports?traffic_source=rss",
-      "score": 67,
+      "publishedAt": "2026-07-22T07:10:36Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/7/22/iran-toll-in-hormuz-would-set-dangerous-precedent-says-rubio?traffic_source=rss",
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
@@ -1288,8 +1535,8 @@
         "主题优先级": 10,
         "时效": 19,
         "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
+        "主题相关性": 2,
+        "证据完整度": 2,
         "多源印证": 0,
         "编辑降权": 0,
         "日期异常降权": 0,
@@ -1297,15 +1544,15 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.4 小时",
-        "命中 2 个主题信号"
+        "发布约 1.6 小时",
+        "命中 1 个主题信号"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "美国",
-        "中国",
-        "无人机禁令"
+        "伊朗",
+        "霍尔木兹海峡",
+        "美国"
       ],
       "image": "",
       "corroboration": 1,
@@ -1313,253 +1560,8 @@
         {
           "name": "Al Jazeera",
           "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/7/22/us-targets-china-in-move-to-ban-military-grade-drone-imports?traffic_source=rss",
-          "publishedAt": "2026-07-22T02:21:57Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 20
-    },
-    {
-      "id": "48ddfa468d41cc",
-      "contentType": "news",
-      "title": "泽连斯基在抗议后更换乌克兰军事领导人",
-      "originalTitle": "Zelenskyy replaces Ukraine military chief after protests",
-      "summary": "被更换的军事领导人瑟尔斯基曾与上周被解职的前国防部长费多罗夫发生冲突，此举引发抗议。",
-      "keyFacts": [
-        "被更换的军事领导人瑟尔斯基曾与上周被解职的前国防部长费多罗夫发生冲突，此举引发抗议。"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-07-21T21:58:32Z",
-      "url": "https://www.aljazeera.com/news/2026/7/21/zelenskyy-replaces-ukraine-military-chief-after-protests?traffic_source=rss",
-      "score": 67,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 5.8 小时",
-        "命中 3 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "乌克兰",
-        "军事领导更迭"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/7/21/zelenskyy-replaces-ukraine-military-chief-after-protests?traffic_source=rss",
-          "publishedAt": "2026-07-21T21:58:32Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 21
-    },
-    {
-      "id": "eecaa3b0ae47a8",
-      "contentType": "news",
-      "title": "星际弹弓资源调查计划",
-      "originalTitle": "Interworld Slingshot Resource Surveys",
-      "summary": "提出利用高速飞越航天器搭载拉曼光谱仪进行轨道矿物测绘，无需着陆或采样，可评估月球冰、小行星矿石及火星卫星挥发物。",
-      "keyFacts": [
-        "提出利用高速飞越航天器搭载拉曼光谱仪进行轨道矿物测绘，无需着陆或采样，可评估月球冰、小行星矿石及火星卫星挥发物。"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "NASA",
-      "country": "国际",
-      "publishedAt": "2026-07-21T15:23:49Z",
-      "url": "https://www.nasa.gov/directorates/stmd/niac/niac-studies/interworld-slingshot-resource-surveys",
-      "score": 67,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 20,
-        "主题优先级": 9,
-        "时效": 14,
-        "影响信号": 0,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 20/20",
-        "发布约 12.4 小时",
-        "命中 3 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "资源探测",
-        "光谱仪",
-        "NASA"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "NASA",
-          "domain": "nasa.gov",
-          "url": "https://www.nasa.gov/directorates/stmd/niac/niac-studies/interworld-slingshot-resource-surveys",
-          "publishedAt": "2026-07-21T15:23:49Z",
-          "evidenceGroup": "outlet:nasa.gov"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 22
-    },
-    {
-      "id": "8e69ba95fa7d51",
-      "contentType": "news",
-      "title": "伊朗战争成本升至375亿美元，五角大楼再申请671亿美元",
-      "originalTitle": "Cost of Iran war rises to $37.5 billion, Pentagon requests $67.1 billion more",
-      "summary": "国防部长赫格塞思周二向参议员表示，伊朗战争迄今已耗费国防部375亿美元，他要求追加671亿美元紧急资金。",
-      "keyFacts": [
-        "国防部长赫格塞思周二向参议员表示，伊朗战争迄今已耗费国防部375亿美元，他要求追加671亿美元紧急资金。"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Defense News",
-      "country": "国际",
-      "publishedAt": "2026-07-21T23:13:23Z",
-      "url": "https://www.defensenews.com/news/pentagon-congress/2026/07/21/cost-of-iran-war-rises-to-375-billion-pentagon-requests-671-billion-more",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.6 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "伊朗战争",
-        "国防预算"
-      ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/YQY2LLTXPJC75M2EAWHIJ7DAHA.JPG",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/news/pentagon-congress/2026/07/21/cost-of-iran-war-rises-to-375-billion-pentagon-requests-671-billion-more",
-          "publishedAt": "2026-07-21T23:13:23Z",
-          "evidenceGroup": "outlet:defensenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 23
-    },
-    {
-      "id": "1ef59f0a36323b",
-      "contentType": "news",
-      "title": "黎巴嫩军队在美国支持计划下部署至试点区",
-      "originalTitle": "Lebanese army deploys in ‘pilot zones’ under US-backed plan",
-      "summary": "黎巴嫩军队开始在三座南部城镇部署，作为美国支持的同以色列框架协议的一部分。",
-      "keyFacts": [
-        "黎巴嫩军队开始在三座南部城镇部署，作为美国支持的同以色列框架协议的一部分。"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-07-21T22:56:12Z",
-      "url": "https://www.aljazeera.com/video/2026/7/21/lebanese-army-deploys-in-pilot-zones-under-us-backed-plan?traffic_source=rss",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.9 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "黎巴嫩",
-        "部署"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/2026/7/21/lebanese-army-deploys-in-pilot-zones-under-us-backed-plan?traffic_source=rss",
-          "publishedAt": "2026-07-21T22:56:12Z",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/7/22/iran-toll-in-hormuz-would-set-dangerous-precedent-says-rubio?traffic_source=rss",
+          "publishedAt": "2026-07-22T07:10:36Z",
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
@@ -1573,29 +1575,29 @@
       "streamRank": 24
     },
     {
-      "id": "c4ce6c15a4223c",
+      "id": "9482da36dc52dd",
       "contentType": "news",
-      "title": "英国考虑台风战机与携带流星空空导弹的CCA无人机配对",
-      "originalTitle": "Typhoons Paired With CCA Fighter Drones Armed With Meteor Missiles Eyed By UK",
-      "summary": "新兴概念设想台风战斗机借助新型雷达和下一代座舱指挥忠诚僚机无人机。",
+      "title": "美国将打击范围扩大至第11个连续轰炸夜",
+      "originalTitle": "US expands strikes on 11th straight night of attacks",
+      "summary": "美军连续第11个夜晚发动打击，范围扩展至此前未受攻击的伊朗省份。",
       "keyFacts": [
-        "新兴概念设想台风战斗机借助新型雷达和下一代座舱指挥忠诚僚机无人机。"
+        "美军连续第11个夜晚发动打击，范围扩展至此前未受攻击的伊朗省份。"
       ],
-      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
-      "category": "无人系统",
-      "source": "The War Zone",
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Al Jazeera",
       "country": "国际",
-      "publishedAt": "2026-07-21T21:18:25Z",
-      "url": "https://www.twz.com/air/typhoons-paired-with-cca-fighter-drones-armed-with-meteor-missiles-eyed-by-uk",
-      "score": 66,
+      "publishedAt": "2026-07-22T05:05:25Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/7/22/us-expands-strikes-on-11th-straight-night-of-attacks?traffic_source=rss",
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 15,
+        "来源": 16,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 18,
         "影响信号": 0,
-        "主题相关性": 6,
+        "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -1603,26 +1605,26 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 6.5 小时",
-        "命中 3 个主题信号"
+        "来源权重 16/20",
+        "发布约 3.7 小时",
+        "命中 1 个主题信号"
       ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "英国",
-        "台风",
-        "无人机"
+        "美伊冲突",
+        "军事打击",
+        "伊朗"
       ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/07/TYPHOON-WITH-CCA.jpg?quality=85",
+      "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/air/typhoons-paired-with-cca-fighter-drones-armed-with-meteor-missiles-eyed-by-uk",
-          "publishedAt": "2026-07-21T21:18:25Z",
-          "evidenceGroup": "outlet:twz.com"
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/7/22/us-expands-strikes-on-11th-straight-night-of-attacks?traffic_source=rss",
+          "publishedAt": "2026-07-22T05:05:25Z",
+          "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
       "selectionProvider": "",
@@ -1635,28 +1637,28 @@
       "streamRank": 25
     },
     {
-      "id": "e9fc661f27dd02",
+      "id": "f924f6556ce7a3",
       "contentType": "news",
-      "title": "“融合项目”将在莫哈韦沙漠测试下一代通信设备",
-      "originalTitle": "Project Convergence to stress-test next-gen comms gear in sweltering Mojave Desert",
-      "summary": "第4步兵师的NGC2原型将在酷热沙漠中进行最终测试，为陆军后续采购决策提供依据。",
+      "title": "赫格塞斯被斥为‘失败者’，同时透露战争耗费370亿美元",
+      "originalTitle": "Hegseth called a ‘failure’ over Iran as he reveals $37b cost of war",
+      "summary": "美国防长皮特·赫格塞斯与密歇根参议员激烈交锋，对方称其为失败领导者。",
       "keyFacts": [
-        "第4步兵师的NGC2原型将在酷热沙漠中进行最终测试，为陆军后续采购决策提供依据。"
+        "美国防长皮特·赫格塞斯与密歇根参议员激烈交锋，对方称其为失败领导者。"
       ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
       "country": "国际",
-      "publishedAt": "2026-07-21T19:16:52Z",
-      "url": "https://breakingdefense.com/2026/07/project-convergence-to-stress-test-next-gen-comms-gear-in-sweltering-mojave-desert",
-      "score": 66,
+      "publishedAt": "2026-07-22T05:02:51Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/7/22/hegseth-called-a-failure-over-iran-as-he-reveals-37b-cost-of-war?traffic_source=rss",
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 4,
+        "时效": 18,
+        "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
@@ -1666,26 +1668,25 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 8.5 小时",
-        "命中 1 个主题信号",
-        "影响信号：test"
+        "发布约 3.7 小时",
+        "命中 1 个主题信号"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "融合项目",
-        "NGC2",
-        "通信测试"
+        "美国防部",
+        "伊朗",
+        "战争成本"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/07/project-convergence-to-stress-test-next-gen-comms-gear-in-sweltering-mojave-desert",
-          "publishedAt": "2026-07-21T19:16:52Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/7/22/hegseth-called-a-failure-over-iran-as-he-reveals-37b-cost-of-war?traffic_source=rss",
+          "publishedAt": "2026-07-22T05:02:51Z",
+          "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
       "selectionProvider": "",
@@ -1712,13 +1713,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T18:14:52Z",
       "url": "https://www.nasa.gov/missions/nisar/us-india-satellite-delivers-data-reveals-hummingbird-in-antarctica",
-      "score": 66,
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 20,
         "主题优先级": 9,
-        "时效": 15,
+        "时效": 13,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -1729,7 +1730,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 9.6 小时",
+        "发布约 14.5 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1760,29 +1761,29 @@
       "streamRank": 27
     },
     {
-      "id": "6fe99634987ef3",
+      "id": "eecaa3b0ae47a8",
       "contentType": "news",
-      "title": "Anthropic与Physical Intelligence的传闻搅动AI推特圈",
-      "originalTitle": "The Anthropic-Physical Intelligence rumor roiling AI Twitter",
-      "summary": "Anthropic和OpenAI在2026年的激进收购行动为周末传闻埋下伏笔。",
+      "title": "星际弹弓资源调查计划",
+      "originalTitle": "Interworld Slingshot Resource Surveys",
+      "summary": "提出利用高速飞越航天器搭载拉曼光谱仪进行轨道矿物测绘，无需着陆或采样，可评估月球冰、小行星矿石及火星卫星挥发物。",
       "keyFacts": [
-        "Anthropic和OpenAI在2026年的激进收购行动为周末传闻埋下伏笔。"
+        "提出利用高速飞越航天器搭载拉曼光谱仪进行轨道矿物测绘，无需着陆或采样，可评估月球冰、小行星矿石及火星卫星挥发物。"
       ],
-      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
-      "category": "AI",
-      "source": "TechCrunch AI",
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
       "country": "国际",
-      "publishedAt": "2026-07-22T03:20:57Z",
-      "url": "https://techcrunch.com/2026/07/21/the-anthropic-physical-intelligence-rumor-roiling-ai-twitter",
-      "score": 65,
+      "publishedAt": "2026-07-21T15:23:49Z",
+      "url": "https://www.nasa.gov/directorates/stmd/niac/niac-studies/interworld-slingshot-resource-surveys",
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 20,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 11,
         "影响信号": 0,
-        "主题相关性": 2,
+        "主题相关性": 6,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -1790,26 +1791,26 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 0.5 小时",
-        "命中 1 个主题信号"
+        "来源权重 20/20",
+        "发布约 17.4 小时",
+        "命中 3 个主题信号"
       ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "confidence": "中",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "AI",
-        "收购",
-        "传闻"
+        "资源探测",
+        "光谱仪",
+        "NASA"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "TechCrunch AI",
-          "domain": "techcrunch.com",
-          "url": "https://techcrunch.com/2026/07/21/the-anthropic-physical-intelligence-rumor-roiling-ai-twitter",
-          "publishedAt": "2026-07-22T03:20:57Z",
-          "evidenceGroup": "outlet:techcrunch.com"
+          "name": "NASA",
+          "domain": "nasa.gov",
+          "url": "https://www.nasa.gov/directorates/stmd/niac/niac-studies/interworld-slingshot-resource-surveys",
+          "publishedAt": "2026-07-21T15:23:49Z",
+          "evidenceGroup": "outlet:nasa.gov"
         }
       ],
       "selectionProvider": "",
@@ -1820,68 +1821,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 28
-    },
-    {
-      "id": "2eee2b4a2d9201",
-      "contentType": "news",
-      "title": "前拜登官员认为黎巴嫩“试点区”方案难以奏效",
-      "originalTitle": "Former Biden official can’t see ‘pilot zones’ scheme working in Lebanon",
-      "summary": "Gavito称以色列可能继续在黎巴嫩推进极限施压，出于安全考虑，全面撤军不太可能。",
-      "keyFacts": [
-        "Gavito称以色列可能继续在黎巴嫩推进极限施压，出于安全考虑，全面撤军不太可能。"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-07-22T01:21:29Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/7/22/aje-onl-nf_gavito-cant-see-pilot-zones-working-in-lebanon-210726?traffic_source=rss",
-      "score": 65,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 2.5 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "黎巴嫩",
-        "以色列",
-        "政治"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/7/22/aje-onl-nf_gavito-cant-see-pilot-zones-working-in-lebanon-210726?traffic_source=rss",
-          "publishedAt": "2026-07-22T01:21:29Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 29
     },
     {
       "id": "9e3767ef58d1d7",
@@ -1898,13 +1837,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T22:34:02Z",
       "url": "https://breakingdefense.com/2026/07/hegseth-offers-37-5b-price-tag-for-certain-aspects-of-iran-war",
-      "score": 65,
+      "score": 63,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 15,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -1915,7 +1854,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.2 小时",
+        "发布约 10.2 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1942,32 +1881,32 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 30
+      "streamRank": 29
     },
     {
-      "id": "541691b0ca1c2e",
+      "id": "c4ce6c15a4223c",
       "contentType": "news",
-      "title": "被罢免的土耳其反对派领袖计划组建新党",
-      "originalTitle": "Deposed Turkish opposition leader plans new party",
-      "summary": "厄兹居尔·厄泽尔在法院解除其CHP领导人职务后，希望组建新的主要反对党。",
+      "title": "英国考虑台风战机与携带流星空空导弹的CCA无人机配对",
+      "originalTitle": "Typhoons Paired With CCA Fighter Drones Armed With Meteor Missiles Eyed By UK",
+      "summary": "新兴概念设想台风战斗机借助新型雷达和下一代座舱指挥忠诚僚机无人机。",
       "keyFacts": [
-        "厄兹居尔·厄泽尔在法院解除其CHP领导人职务后，希望组建新的主要反对党。"
+        "新兴概念设想台风战斗机借助新型雷达和下一代座舱指挥忠诚僚机无人机。"
       ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "Al Jazeera",
+      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
+      "category": "无人系统",
+      "source": "The War Zone",
       "country": "国际",
-      "publishedAt": "2026-07-21T20:23:45Z",
-      "url": "https://www.aljazeera.com/news/2026/7/21/deposed-turkish-opposition-leader-plans-new-party?traffic_source=rss",
-      "score": 65,
+      "publishedAt": "2026-07-21T21:18:25Z",
+      "url": "https://www.twz.com/air/typhoons-paired-with-cca-fighter-drones-armed-with-meteor-missiles-eyed-by-uk",
+      "score": 63,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 16,
-        "影响信号": 4,
-        "主题相关性": 2,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 14,
+        "影响信号": 0,
+        "主题相关性": 6,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -1975,27 +1914,26 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 7.4 小时",
-        "命中 1 个主题信号",
-        "影响信号：launch"
+        "来源权重 15/20",
+        "发布约 11.5 小时",
+        "命中 3 个主题信号"
       ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
       "tags": [
-        "土耳其",
-        "反对派",
-        "新政"
+        "英国",
+        "台风",
+        "无人机"
       ],
-      "image": "",
+      "image": "https://www.twz.com/wp-content/uploads/2026/07/TYPHOON-WITH-CCA.jpg?quality=85",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/7/21/deposed-turkish-opposition-leader-plans-new-party?traffic_source=rss",
-          "publishedAt": "2026-07-21T20:23:45Z",
-          "evidenceGroup": "outlet:aljazeera.com"
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/air/typhoons-paired-with-cca-fighter-drones-armed-with-meteor-missiles-eyed-by-uk",
+          "publishedAt": "2026-07-21T21:18:25Z",
+          "evidenceGroup": "outlet:twz.com"
         }
       ],
       "selectionProvider": "",
@@ -2005,7 +1943,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 31
+      "streamRank": 30
     },
     {
       "id": "2d2dbe307b2878",
@@ -2022,13 +1960,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T19:58:15Z",
       "url": "https://www.twz.com/news-features/munitions-expenditures-in-iran-war-take-center-stage-at-senate-hearing",
-      "score": 65,
+      "score": 63,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 14,
         "影响信号": 0,
         "主题相关性": 6,
         "证据完整度": 3,
@@ -2039,7 +1977,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 7.8 小时",
+        "发布约 12.8 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "待核验",
@@ -2067,6 +2005,69 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
+      "streamRank": 31
+    },
+    {
+      "id": "e9fc661f27dd02",
+      "contentType": "news",
+      "title": "“融合项目”将在莫哈韦沙漠测试下一代通信设备",
+      "originalTitle": "Project Convergence to stress-test next-gen comms gear in sweltering Mojave Desert",
+      "summary": "第4步兵师的NGC2原型将在酷热沙漠中进行最终测试，为陆军后续采购决策提供依据。",
+      "keyFacts": [
+        "第4步兵师的NGC2原型将在酷热沙漠中进行最终测试，为陆军后续采购决策提供依据。"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-07-21T19:16:52Z",
+      "url": "https://breakingdefense.com/2026/07/project-convergence-to-stress-test-next-gen-comms-gear-in-sweltering-mojave-desert",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 13,
+        "影响信号": 4,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 13.5 小时",
+        "命中 1 个主题信号",
+        "影响信号：test"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "融合项目",
+        "NGC2",
+        "通信测试"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/07/project-convergence-to-stress-test-next-gen-comms-gear-in-sweltering-mojave-desert",
+          "publishedAt": "2026-07-21T19:16:52Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
       "streamRank": 32
     },
     {
@@ -2084,13 +2085,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T16:45:09Z",
       "url": "https://www.defensenews.com/global/europe/2026/07/21/new-british-prime-minister-gains-early-defense-win-with-canada-fighter-jet-tie-up",
-      "score": 65,
+      "score": 63,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 14,
+        "时效": 12,
         "影响信号": 5,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2101,7 +2102,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 11.1 小时",
+        "发布约 16.0 小时",
         "命中 1 个主题信号",
         "影响信号：first"
       ],
@@ -2133,29 +2134,29 @@
       "streamRank": 33
     },
     {
-      "id": "eb114e84debc5b",
+      "id": "6fe99634987ef3",
       "contentType": "news",
-      "title": "光泳示踪物用于30-100公里高空遥感",
-      "originalTitle": "Photophoretic Tracers for Near-Space Remote Sensing at 30-100 km Altitudes",
-      "summary": "提出利用光泳悬浮示踪物进行高空遥感，这些轻质结构可悬浮数月，通过卫星激光雷达或雷达追踪，提供强回波信号。",
+      "title": "Anthropic与Physical Intelligence的传闻搅动AI推特圈",
+      "originalTitle": "The Anthropic-Physical Intelligence rumor roiling AI Twitter",
+      "summary": "Anthropic和OpenAI在2026年的激进收购行动为周末传闻埋下伏笔。",
       "keyFacts": [
-        "提出利用光泳悬浮示踪物进行高空遥感，这些轻质结构可悬浮数月，通过卫星激光雷达或雷达追踪，提供强回波信号。"
+        "Anthropic和OpenAI在2026年的激进收购行动为周末传闻埋下伏笔。"
       ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "NASA",
+      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
+      "category": "AI",
+      "source": "TechCrunch AI",
       "country": "国际",
-      "publishedAt": "2026-07-21T15:23:43Z",
-      "url": "https://www.nasa.gov/directorates/stmd/photophoretic-tracers-for-near-space-remote-sensing-at-30-100-km-altitudes",
-      "score": 65,
+      "publishedAt": "2026-07-22T03:20:57Z",
+      "url": "https://techcrunch.com/2026/07/21/the-anthropic-physical-intelligence-rumor-roiling-ai-twitter",
+      "score": 62,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 20,
-        "主题优先级": 9,
-        "时效": 14,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 17,
         "影响信号": 0,
-        "主题相关性": 4,
+        "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -2163,26 +2164,26 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 20/20",
-        "发布约 12.4 小时",
-        "命中 2 个主题信号"
+        "来源权重 15/20",
+        "发布约 5.4 小时",
+        "命中 1 个主题信号"
       ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
       "tags": [
-        "遥感",
-        "大气探测",
-        "NASA"
+        "AI",
+        "收购",
+        "传闻"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "NASA",
-          "domain": "nasa.gov",
-          "url": "https://www.nasa.gov/directorates/stmd/photophoretic-tracers-for-near-space-remote-sensing-at-30-100-km-altitudes",
-          "publishedAt": "2026-07-21T15:23:43Z",
-          "evidenceGroup": "outlet:nasa.gov"
+          "name": "TechCrunch AI",
+          "domain": "techcrunch.com",
+          "url": "https://techcrunch.com/2026/07/21/the-anthropic-physical-intelligence-rumor-roiling-ai-twitter",
+          "publishedAt": "2026-07-22T03:20:57Z",
+          "evidenceGroup": "outlet:techcrunch.com"
         }
       ],
       "selectionProvider": "",
@@ -2193,6 +2194,68 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 34
+    },
+    {
+      "id": "2eee2b4a2d9201",
+      "contentType": "news",
+      "title": "前拜登官员认为黎巴嫩“试点区”方案难以奏效",
+      "originalTitle": "Former Biden official can’t see ‘pilot zones’ scheme working in Lebanon",
+      "summary": "Gavito称以色列可能继续在黎巴嫩推进极限施压，出于安全考虑，全面撤军不太可能。",
+      "keyFacts": [
+        "Gavito称以色列可能继续在黎巴嫩推进极限施压，出于安全考虑，全面撤军不太可能。"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-07-22T01:21:29Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/7/22/aje-onl-nf_gavito-cant-see-pilot-zones-working-in-lebanon-210726?traffic_source=rss",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.4 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "黎巴嫩",
+        "以色列",
+        "政治"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/7/22/aje-onl-nf_gavito-cant-see-pilot-zones-working-in-lebanon-210726?traffic_source=rss",
+          "publishedAt": "2026-07-22T01:21:29Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 35
     },
     {
       "id": "7d0ee9dee6af7f",
@@ -2209,13 +2272,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T15:14:41Z",
       "url": "https://www.defensenews.com/pentagon/2026/07/21/hanwha-philly-shipyard-awarded-2-billion-to-build-2-missile-tracking-vessels",
-      "score": 65,
+      "score": 62,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 14,
+        "时效": 11,
         "影响信号": 5,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2226,7 +2289,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 12.6 小时",
+        "发布约 17.5 小时",
         "命中 1 个主题信号",
         "影响信号：missile"
       ],
@@ -2254,131 +2317,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 35
-    },
-    {
-      "id": "a312b459c773d2",
-      "contentType": "news",
-      "title": "美国连续第11晚攻击伊朗",
-      "originalTitle": "US attacks Iran for 11th consecutive night",
-      "summary": "伊朗西北部大不里士、首都德黑兰及南部多地报告爆炸。",
-      "keyFacts": [
-        "伊朗西北部大不里士、首都德黑兰及南部多地报告爆炸。"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-07-21T23:46:00Z",
-      "url": "https://www.aljazeera.com/news/2026/7/21/explosions-in-iran-as-us-launches-new-strikes?traffic_source=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.0 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美国",
-        "伊朗",
-        "冲突"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/7/21/explosions-in-iran-as-us-launches-new-strikes?traffic_source=rss",
-          "publishedAt": "2026-07-21T23:46:00Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
       "streamRank": 36
-    },
-    {
-      "id": "31d16025de84b2",
-      "contentType": "news",
-      "title": "黎巴嫩军队：以色列撤军后部队部署于“试点区”",
-      "originalTitle": "Lebanese army says troops deploying in 'pilot zone' after Israeli withdrawal",
-      "summary": "美国斡旋的协议将使以色列军队撤出黎巴嫩一小部分被占领土，该地区在黎以冲突期间被占领。",
-      "keyFacts": [
-        "美国斡旋的协议将使以色列军队撤出黎巴嫩一小部分被占领土，该地区在黎以冲突期间被占领。"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-07-21T18:07:34Z",
-      "url": "https://www.bbc.co.uk/news/articles/cy8mynlmn55o?at_medium=RSS&at_campaign=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 9.7 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "黎巴嫩",
-        "以色列",
-        "撤军"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/6ff6/live/ae6301f0-852e-11f1-b976-0b9c15b0ccfc.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cy8mynlmn55o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-07-21T18:07:34Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 37
     },
     {
       "id": "0d14c9682ec09a",
@@ -2395,13 +2334,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T10:00:00Z",
       "url": "https://spacenews.com/kbr-organizes-defense-technology-business-to-pursue-golden-dome-work",
-      "score": 64,
+      "score": 62,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 11,
+        "时效": 9,
         "影响信号": 5,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -2412,7 +2351,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 17.8 小时",
+        "发布约 22.8 小时",
         "命中 2 个主题信号",
         "影响信号：missile"
       ],
@@ -2440,30 +2379,30 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 38
+      "streamRank": 37
     },
     {
-      "id": "da0728b91aa036",
+      "id": "554248dc4bc79e",
       "contentType": "news",
-      "title": "无人机拍摄西班牙野火烧焦景观",
-      "originalTitle": "Drone shows scorched landscape after Spain wildfire",
-      "summary": "无人机拍摄显示西班牙野火烧毁超过3万公顷森林后的景象。",
+      "title": "Zenno Astronautics将迁至美国",
+      "originalTitle": "Zenno Astronautics to relocate to the United States",
+      "summary": "专注于超导磁体用于航天器姿态控制的新西兰初创公司Zenno Astronautics计划将总部迁至美国。",
       "keyFacts": [
-        "无人机拍摄显示西班牙野火烧毁超过3万公顷森林后的景象。"
+        "专注于超导磁体用于航天器姿态控制的新西兰初创公司Zenno Astronautics计划将总部迁至美国。"
       ],
-      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
-      "category": "无人系统",
-      "source": "Al Jazeera",
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
       "country": "国际",
-      "publishedAt": "2026-07-21T21:21:12Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/7/21/drone-shows-scorched-landscape-after-spain-wildfire?traffic_source=rss",
-      "score": 63,
+      "publishedAt": "2026-07-21T22:11:49Z",
+      "url": "https://spacenews.com/zenno-astronautics-to-relocate-to-the-united-states",
+      "score": 60,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
+        "主题优先级": 9,
+        "时效": 15,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2474,25 +2413,87 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.5 小时",
+        "发布约 10.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "西班牙",
-        "野火",
-        "无人机"
+        "航天",
+        "初创公司",
+        "迁址"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/7/21/drone-shows-scorched-landscape-after-spain-wildfire?traffic_source=rss",
-          "publishedAt": "2026-07-21T21:21:12Z",
-          "evidenceGroup": "outlet:aljazeera.com"
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/zenno-astronautics-to-relocate-to-the-united-states",
+          "publishedAt": "2026-07-21T22:11:49Z",
+          "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 38
+    },
+    {
+      "id": "2d296644797850",
+      "contentType": "news",
+      "title": "伊朗警告保加利亚不要协助美军行动",
+      "originalTitle": "Iran warns Bulgaria against aiding US military operations",
+      "summary": "伊朗外交部发言人周二警告保加利亚，不要允许美国利用其领土对伊朗采取军事行动。",
+      "keyFacts": [
+        "伊朗外交部发言人周二警告保加利亚，不要允许美国利用其领土对伊朗采取军事行动。"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-07-21T16:43:44Z",
+      "url": "https://www.defensenews.com/news/pentagon-congress/2026/07/21/iran-warns-bulgaria-against-aiding-us-military-operations",
+      "score": 60,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 12,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 16.0 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "保加利亚",
+        "美军"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/AZJOHAVA5RE27NNMZGPGJ334BI.JPG",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/news/pentagon-congress/2026/07/21/iran-warns-bulgaria-against-aiding-us-military-operations",
+          "publishedAt": "2026-07-21T16:43:44Z",
+          "evidenceGroup": "outlet:defensenews.com"
         }
       ],
       "selectionProvider": "",
@@ -2503,6 +2504,130 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 39
+    },
+    {
+      "id": "f661f77e957691",
+      "contentType": "news",
+      "title": "伊朗为何在霍尔木兹海峡冒如此大的风险",
+      "originalTitle": "Why Iran is risking so much over the Strait of Hormuz",
+      "summary": "随着与美国的冲突持续，伊朗领导人面临的选择无一提供明确的胜利之路。",
+      "keyFacts": [
+        "随着与美国的冲突持续，伊朗领导人面临的选择无一提供明确的胜利之路。"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-07-21T14:36:47Z",
+      "url": "https://www.bbc.co.uk/news/articles/cwymx3eevpjo?at_medium=RSS&at_campaign=rss",
+      "score": 60,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 11,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 18.2 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "霍尔木兹海峡",
+        "美伊冲突"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/65aa/live/e4791990-84fd-11f1-8b9b-a724b687bb3b.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cwymx3eevpjo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-07-21T14:36:47Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 40
+    },
+    {
+      "id": "ac2b6180e0ba6b",
+      "contentType": "news",
+      "title": "德国组件供应商deltaVision融资1020万欧元",
+      "originalTitle": "German component supplier deltaVision raises 10.2 million euros",
+      "summary": "德国航天器组件开发商deltaVision融资1020万欧元（约1160万美元），用于扩大阀门及相关设备生产，重点支持太空在轨加油。",
+      "keyFacts": [
+        "德国航天器组件开发商deltaVision融资1020万欧元（约1160万美元），用于扩大阀门及相关设备生产，重点支持太空在轨加油。"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
+      "country": "国际",
+      "publishedAt": "2026-07-21T11:57:21Z",
+      "url": "https://spacenews.com/german-component-supplier-deltavision-raises-10-2-million-euros",
+      "score": 60,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 10,
+        "影响信号": 5,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 20.8 小时",
+        "命中 1 个主题信号",
+        "影响信号：production"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "融资",
+        "太空"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/german-component-supplier-deltavision-raises-10-2-million-euros",
+          "publishedAt": "2026-07-21T11:57:21Z",
+          "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 41
     },
     {
       "id": "a94006a0074625",
@@ -2572,69 +2697,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": true,
-      "streamRank": 40
-    },
-    {
-      "id": "554248dc4bc79e",
-      "contentType": "news",
-      "title": "Zenno Astronautics将迁至美国",
-      "originalTitle": "Zenno Astronautics to relocate to the United States",
-      "summary": "专注于超导磁体用于航天器姿态控制的新西兰初创公司Zenno Astronautics计划将总部迁至美国。",
-      "keyFacts": [
-        "专注于超导磁体用于航天器姿态控制的新西兰初创公司Zenno Astronautics计划将总部迁至美国。"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-07-21T22:11:49Z",
-      "url": "https://spacenews.com/zenno-astronautics-to-relocate-to-the-united-states",
-      "score": 62,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 5.6 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "航天",
-        "初创公司",
-        "迁址"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/zenno-astronautics-to-relocate-to-the-united-states",
-          "publishedAt": "2026-07-21T22:11:49Z",
-          "evidenceGroup": "outlet:spacenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 41
+      "streamRank": 42
     },
     {
       "id": "fb52f6d8fe0791",
@@ -2651,13 +2714,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T21:26:50Z",
       "url": "https://spacenews.com/spacex-launches-northrop-mission-to-extend-the-life-of-aging-satellites",
-      "score": 62,
+      "score": 59,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 17,
+        "时效": 14,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2668,7 +2731,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.4 小时",
+        "发布约 11.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2696,7 +2759,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 42
+      "streamRank": 43
     },
     {
       "id": "3fdc40a5e56bd5",
@@ -2713,13 +2776,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T20:56:55Z",
       "url": "https://techcrunch.com/2026/07/21/openai-says-hugging-face-was-breached-by-its-pre-release-models",
-      "score": 62,
+      "score": 59,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 14,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2730,7 +2793,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 6.9 小时",
+        "发布约 11.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2758,7 +2821,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 43
+      "streamRank": 44
     },
     {
       "id": "e827a8f2eba27a",
@@ -2775,13 +2838,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T20:53:25Z",
       "url": "https://www.defenseone.com/business/2026/07/boeing-adjusts-approach-court-more-european-business/414916",
-      "score": 62,
+      "score": 59,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 17,
+        "时效": 14,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2792,7 +2855,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.9 小时",
+        "发布约 11.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2820,131 +2883,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 44
-    },
-    {
-      "id": "2d296644797850",
-      "contentType": "news",
-      "title": "伊朗警告保加利亚不要协助美军行动",
-      "originalTitle": "Iran warns Bulgaria against aiding US military operations",
-      "summary": "伊朗外交部发言人周二警告保加利亚，不要允许美国利用其领土对伊朗采取军事行动。",
-      "keyFacts": [
-        "伊朗外交部发言人周二警告保加利亚，不要允许美国利用其领土对伊朗采取军事行动。"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Defense News",
-      "country": "国际",
-      "publishedAt": "2026-07-21T16:43:44Z",
-      "url": "https://www.defensenews.com/news/pentagon-congress/2026/07/21/iran-warns-bulgaria-against-aiding-us-military-operations",
-      "score": 62,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 14,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 11.1 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "伊朗",
-        "保加利亚",
-        "美军"
-      ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/AZJOHAVA5RE27NNMZGPGJ334BI.JPG",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/news/pentagon-congress/2026/07/21/iran-warns-bulgaria-against-aiding-us-military-operations",
-          "publishedAt": "2026-07-21T16:43:44Z",
-          "evidenceGroup": "outlet:defensenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
       "streamRank": 45
-    },
-    {
-      "id": "ac2b6180e0ba6b",
-      "contentType": "news",
-      "title": "德国组件供应商deltaVision融资1020万欧元",
-      "originalTitle": "German component supplier deltaVision raises 10.2 million euros",
-      "summary": "德国航天器组件开发商deltaVision融资1020万欧元（约1160万美元），用于扩大阀门及相关设备生产，重点支持太空在轨加油。",
-      "keyFacts": [
-        "德国航天器组件开发商deltaVision融资1020万欧元（约1160万美元），用于扩大阀门及相关设备生产，重点支持太空在轨加油。"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-07-21T11:57:21Z",
-      "url": "https://spacenews.com/german-component-supplier-deltavision-raises-10-2-million-euros",
-      "score": 62,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 12,
-        "影响信号": 5,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 15.9 小时",
-        "命中 1 个主题信号",
-        "影响信号：production"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "融资",
-        "太空"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/german-component-supplier-deltavision-raises-10-2-million-euros",
-          "publishedAt": "2026-07-21T11:57:21Z",
-          "evidenceGroup": "outlet:spacenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 46
     },
     {
       "id": "472b47c7447ff0",
@@ -2961,13 +2900,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T10:56:33Z",
       "url": "https://www.defensenews.com/industry/techwatch/2026/07/21/x-bow-out-to-tackle-cost-quandary-with-sub-100000-drone-interceptor",
-      "score": 62,
+      "score": 59,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 12,
+        "时效": 9,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2978,7 +2917,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 16.9 小时",
+        "发布约 21.8 小时",
         "命中 1 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -3021,131 +2960,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 47
-    },
-    {
-      "id": "c3d93656097cb8",
-      "contentType": "news",
-      "title": "诺格增加对火神固体火箭发动机项目的减记",
-      "originalTitle": "Northrop adds to charges on Vulcan solid rocket motor program",
-      "summary": "诺斯罗普·格鲁曼再次对火神火箭固体助推器项目进行减记，并暗示新型发动机可能要到年底才能准备就绪。",
-      "keyFacts": [
-        "诺斯罗普·格鲁曼再次对火神火箭固体助推器项目进行减记，并暗示新型发动机可能要到年底才能准备就绪。"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-07-21T19:40:51Z",
-      "url": "https://spacenews.com/northrop-adds-to-charges-on-vulcan-solid-rocket-motor-program",
-      "score": 61,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 16,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 8.1 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "诺格",
-        "火神火箭",
-        "固体火箭"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/northrop-adds-to-charges-on-vulcan-solid-rocket-motor-program",
-          "publishedAt": "2026-07-21T19:40:51Z",
-          "evidenceGroup": "outlet:spacenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 48
-    },
-    {
-      "id": "d299f4599f1f84",
-      "contentType": "news",
-      "title": "美国对伊朗发动新打击，特朗普警告将为士兵死亡复仇",
-      "originalTitle": "US launches fresh strikes on Iran, as Trump warns of retaliation for deaths of soldiers",
-      "summary": "伊朗声称击中霍尔木兹海峡两艘船只以及巴林和约旦境内目标。",
-      "keyFacts": [
-        "伊朗声称击中霍尔木兹海峡两艘船只以及巴林和约旦境内目标。"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-07-21T16:10:56Z",
-      "url": "https://www.bbc.co.uk/news/articles/cx25wg2x26do?at_medium=RSS&at_campaign=rss",
-      "score": 61,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 14,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 11.6 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美国",
-        "伊朗",
-        "军事打击"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/ae7d/live/d48c2a30-84c7-11f1-b976-0b9c15b0ccfc.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cx25wg2x26do?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-07-21T16:10:56Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 49
+      "streamRank": 46
     },
     {
       "id": "61eab7a36d3208",
@@ -3162,13 +2977,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T20:25:05Z",
       "url": "https://breakingdefense.com/2026/07/the-sights-of-the-farnborough-airshow-day-2",
-      "score": 60,
+      "score": 58,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 16,
+        "时效": 14,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 2,
@@ -3179,7 +2994,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 7.4 小时",
+        "发布约 12.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3213,7 +3028,69 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 50
+      "streamRank": 47
+    },
+    {
+      "id": "c3d93656097cb8",
+      "contentType": "news",
+      "title": "诺格增加对火神固体火箭发动机项目的减记",
+      "originalTitle": "Northrop adds to charges on Vulcan solid rocket motor program",
+      "summary": "诺斯罗普·格鲁曼再次对火神火箭固体助推器项目进行减记，并暗示新型发动机可能要到年底才能准备就绪。",
+      "keyFacts": [
+        "诺斯罗普·格鲁曼再次对火神火箭固体助推器项目进行减记，并暗示新型发动机可能要到年底才能准备就绪。"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
+      "country": "国际",
+      "publishedAt": "2026-07-21T19:40:51Z",
+      "url": "https://spacenews.com/northrop-adds-to-charges-on-vulcan-solid-rocket-motor-program",
+      "score": 58,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 13,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 13.1 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "诺格",
+        "火神火箭",
+        "固体火箭"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/northrop-adds-to-charges-on-vulcan-solid-rocket-motor-program",
+          "publishedAt": "2026-07-21T19:40:51Z",
+          "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 48
     },
     {
       "id": "99e33116e90407",
@@ -3230,13 +3107,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T18:35:48Z",
       "url": "https://www.twz.com/air/fury-loyal-wingman-arrives-at-creech-afb-for-agile-combat-deployment-trials",
-      "score": 60,
+      "score": 58,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
-        "时效": 15,
+        "时效": 13,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -3247,7 +3124,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 9.2 小时",
+        "发布约 14.2 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -3275,69 +3152,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 51
-    },
-    {
-      "id": "26f1cf4e909522",
-      "contentType": "news",
-      "title": "欧洲最大航展上美议员对五角大楼预算僵局发出警告",
-      "originalTitle": "At Europe’s largest airshow, US lawmakers sound alarm over Pentagon-budget gridlock",
-      "summary": "参议员表示，金穹计划的资金今年可能不足。",
-      "keyFacts": [
-        "参议员表示，金穹计划的资金今年可能不足。"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Defense One",
-      "country": "国际",
-      "publishedAt": "2026-07-21T17:33:55Z",
-      "url": "https://www.defenseone.com/policy/2026/07/airshow-lawmakers-alarm-pentagon-budget/414911",
-      "score": 60,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 2,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 10.2 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "航展",
-        "五角大楼",
-        "预算"
-      ],
-      "image": "https://cdn.defenseone.com/media/img/cd/2026/07/21/GettyImages_2286452781/thumb.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Defense One",
-          "domain": "defenseone.com",
-          "url": "https://www.defenseone.com/policy/2026/07/airshow-lawmakers-alarm-pentagon-budget/414911",
-          "publishedAt": "2026-07-21T17:33:55Z",
-          "evidenceGroup": "outlet:defenseone.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 52
+      "streamRank": 49
     },
     {
       "id": "1ad16c6820491f",
@@ -3354,13 +3169,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T16:07:00Z",
       "url": "https://www.defensenews.com/air/2026/07/21/boeing-on-track-for-2028-air-force-one-delivery-costs-rise",
-      "score": 60,
+      "score": 58,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 14,
+        "时效": 12,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -3371,7 +3186,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 11.7 小时",
+        "发布约 16.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3399,7 +3214,69 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 53
+      "streamRank": 50
+    },
+    {
+      "id": "26f1cf4e909522",
+      "contentType": "news",
+      "title": "欧洲最大航展上美议员对五角大楼预算僵局发出警告",
+      "originalTitle": "At Europe’s largest airshow, US lawmakers sound alarm over Pentagon-budget gridlock",
+      "summary": "参议员表示，金穹计划的资金今年可能不足。",
+      "keyFacts": [
+        "参议员表示，金穹计划的资金今年可能不足。"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Defense One",
+      "country": "国际",
+      "publishedAt": "2026-07-21T17:33:55Z",
+      "url": "https://www.defenseone.com/policy/2026/07/airshow-lawmakers-alarm-pentagon-budget/414911",
+      "score": 57,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 12,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 2,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 15.2 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "航展",
+        "五角大楼",
+        "预算"
+      ],
+      "image": "https://cdn.defenseone.com/media/img/cd/2026/07/21/GettyImages_2286452781/thumb.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense One",
+          "domain": "defenseone.com",
+          "url": "https://www.defenseone.com/policy/2026/07/airshow-lawmakers-alarm-pentagon-budget/414911",
+          "publishedAt": "2026-07-21T17:33:55Z",
+          "evidenceGroup": "outlet:defenseone.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 51
     },
     {
       "id": "3a2611ad586012",
@@ -3416,13 +3293,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T15:42:49Z",
       "url": "https://breakingdefense.com/2026/07/the-us-military-campaign-to-stop-drug-trafficking-has-failed-its-time-to-move-on",
-      "score": 60,
+      "score": 57,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 14,
+        "时效": 11,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -3433,7 +3310,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 12.1 小时",
+        "发布约 17.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3461,7 +3338,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 54
+      "streamRank": 52
     },
     {
       "id": "e687a69759acae",
@@ -3478,13 +3355,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T13:39:49Z",
       "url": "https://breakingdefense.com/2026/07/general-atomics-ceo-throws-shade-at-cost-target-for-new-drone",
-      "score": 59,
+      "score": 56,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 13,
+        "时效": 10,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -3495,7 +3372,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 14.2 小时",
+        "发布约 19.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3523,6 +3400,129 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
+      "streamRank": 53
+    },
+    {
+      "id": "e6f97166928cc7",
+      "contentType": "news",
+      "title": "以材料科学创新推动下一代AI发展",
+      "originalTitle": "Advancing next-gen AI with materials science innovation",
+      "summary": "AI讨论往往聚焦算法、算力或芯片投资，但先进材料是每一代AI技术的基础。新一代AI要求更高处理能力、更强存储及能效。",
+      "keyFacts": [
+        "AI讨论往往聚焦算法、算力或芯片投资，但先进材料是每一代AI技术的基础。新一代AI要求更高处理能力、更强存储及能效。"
+      ],
+      "why": "该进展可能缩短技术工程化周期，并改变关键产业与供应链竞争。",
+      "category": "前沿技术",
+      "source": "MIT Technology Review",
+      "country": "国际",
+      "publishedAt": "2026-07-21T10:37:34Z",
+      "url": "https://www.technologyreview.com/2026/07/21/1140602/advancing-next-gen-ai-with-materials-science-innovation",
+      "score": 56,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 8,
+        "时效": 9,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 22.1 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "材料科学",
+        "AI"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "MIT Technology Review",
+          "domain": "technologyreview.com",
+          "url": "https://www.technologyreview.com/2026/07/21/1140602/advancing-next-gen-ai-with-materials-science-innovation",
+          "publishedAt": "2026-07-21T10:37:34Z",
+          "evidenceGroup": "outlet:technologyreview.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 54
+    },
+    {
+      "id": "778625e08e8e86",
+      "contentType": "news",
+      "title": "英国与佛罗里达承诺40万美元支持联合太空项目",
+      "originalTitle": "UK and Florida commit $400,000 to joint space projects",
+      "summary": "英国政府和佛罗里达航天金融与发展机构各承诺20万美元，支持联合研究、创新和商业化项目。",
+      "keyFacts": [
+        "英国政府和佛罗里达航天金融与发展机构各承诺20万美元，支持联合研究、创新和商业化项目。"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
+      "country": "国际",
+      "publishedAt": "2026-07-21T12:00:00Z",
+      "url": "https://spacenews.com/uk-and-florida-commit-400000-to-joint-space-projects",
+      "score": 55,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 10,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 20.8 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "英国",
+        "佛罗里达",
+        "太空合作"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/uk-and-florida-commit-400000-to-joint-space-projects",
+          "publishedAt": "2026-07-21T12:00:00Z",
+          "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
       "streamRank": 55
     },
     {
@@ -3540,13 +3540,13 @@
       "country": "国际",
       "publishedAt": "2026-07-21T11:29:38Z",
       "url": "https://breakingdefense.com/2026/07/exclusive-air-force-halts-f-16-ejection-seat-competition",
-      "score": 58,
+      "score": 55,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 12,
+        "时效": 9,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -3557,7 +3557,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 16.3 小时",
+        "发布约 21.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3586,129 +3586,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 56
-    },
-    {
-      "id": "e6f97166928cc7",
-      "contentType": "news",
-      "title": "以材料科学创新推动下一代AI发展",
-      "originalTitle": "Advancing next-gen AI with materials science innovation",
-      "summary": "AI讨论往往聚焦算法、算力或芯片投资，但先进材料是每一代AI技术的基础。新一代AI要求更高处理能力、更强存储及能效。",
-      "keyFacts": [
-        "AI讨论往往聚焦算法、算力或芯片投资，但先进材料是每一代AI技术的基础。新一代AI要求更高处理能力、更强存储及能效。"
-      ],
-      "why": "该进展可能缩短技术工程化周期，并改变关键产业与供应链竞争。",
-      "category": "前沿技术",
-      "source": "MIT Technology Review",
-      "country": "国际",
-      "publishedAt": "2026-07-21T10:37:34Z",
-      "url": "https://www.technologyreview.com/2026/07/21/1140602/advancing-next-gen-ai-with-materials-science-innovation",
-      "score": 58,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 8,
-        "时效": 11,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 17.2 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "材料科学",
-        "AI"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "MIT Technology Review",
-          "domain": "technologyreview.com",
-          "url": "https://www.technologyreview.com/2026/07/21/1140602/advancing-next-gen-ai-with-materials-science-innovation",
-          "publishedAt": "2026-07-21T10:37:34Z",
-          "evidenceGroup": "outlet:technologyreview.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 57
-    },
-    {
-      "id": "778625e08e8e86",
-      "contentType": "news",
-      "title": "英国与佛罗里达承诺40万美元支持联合太空项目",
-      "originalTitle": "UK and Florida commit $400,000 to joint space projects",
-      "summary": "英国政府和佛罗里达航天金融与发展机构各承诺20万美元，支持联合研究、创新和商业化项目。",
-      "keyFacts": [
-        "英国政府和佛罗里达航天金融与发展机构各承诺20万美元，支持联合研究、创新和商业化项目。"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-07-21T12:00:00Z",
-      "url": "https://spacenews.com/uk-and-florida-commit-400000-to-joint-space-projects",
-      "score": 57,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 12,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 15.8 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "英国",
-        "佛罗里达",
-        "太空合作"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/uk-and-florida-commit-400000-to-joint-space-projects",
-          "publishedAt": "2026-07-21T12:00:00Z",
-          "evidenceGroup": "outlet:spacenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 58
     }
   ]
 }
