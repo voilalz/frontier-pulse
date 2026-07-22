@@ -137,11 +137,11 @@ Actions Variables：
 - `Only N eligible candidates`：有效候选不足 10 条，脚本会拒绝覆盖上一期；稍后手动重试或维护 `config/news_config.json` 中的信源。
 - RSS/GDELT 出现 `403`、`429` 或超时：其他信源仍会继续；持续失败时替换该信源。
 - DeepSeek/OpenAI 调用失败：Top 10 自动降级到规则筛选；论文和动态保留成功翻译批次及原始元数据，不阻断发布。
-- 页面显示“翻译不完整”：查看 `stream-status.json.translationWarnings` 或 `status.json.researchWarnings`；通常是单批 API 超时、限流或 JSON 不完整，可稍后重跑对应工作流。
+- 页面显示“翻译不完整”：查看 `stream-status.json.translationDiagnostics` 或 `status.json.researchEditorialDiagnostics`；其中记录缺失 ID、逐项原因、拆分重试次数和最终完成原因。成功条目会被缓存，稍后重跑只补缺失项。
 - 页面显示“数据过期”：`generatedAt` 已超过 36 小时；检查日报工作流、信源和 Cloudflare 最新部署。
 - 页面显示“最近一次自动更新失败”：打开 `public/data/status.json` 或 Actions 日志查看已公开的简短原因；上一期数据不会被覆盖。
 - 邮件未发送：先确认工作流中 `Send administrator email digest` 步骤是否显示跳过配置；再核对 SMTP 端口、SSL/STARTTLS 和授权码。
-- `git push` 被拒绝：检查 Actions 的 `Read and write permissions` 和 `main` 分支保护规则。
+- `git push` 被拒绝：两个数据工作流共用 `frontier-data-main` 并发锁，并会执行最多三次冲突安全的 rebase/push；若仍失败，再检查 Actions 的 `Read and write permissions` 和 `main` 分支保护规则。
 - Pages 没有更新：确认项目连接的是 `voilalz/frontier-pulse` 的 `main`，输出目录为 `public`。
 - 自定义域名证书未签发：检查 DNS 是否存在冲突记录，并确认该域名确实属于当前 Cloudflare Zone。
 

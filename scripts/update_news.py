@@ -30,11 +30,11 @@ from datetime import datetime, timedelta, timezone
 from difflib import SequenceMatcher
 from email.utils import parsedate_to_datetime
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Callable, Iterable
 from zoneinfo import ZoneInfo
 
 LOGGER = logging.getLogger("frontier-pulse")
-USER_AGENT = "FrontierPulseBot/1.6 (+https://github.com/voilalz/frontier-pulse; public-interest news and research index)"
+USER_AGENT = "FrontierPulseBot/1.7 (+https://github.com/voilalz/frontier-pulse; public-interest news and research index)"
 CATEGORIES = ("AI", "航空航天", "军事动态", "局部冲突", "前沿技术", "无人系统")
 
 
@@ -97,6 +97,19 @@ def clean_text(value: Any, limit: int = 0) -> str:
     if limit and len(text) > limit:
         return text[: limit - 1].rstrip(" ,.;，。；") + "…"
     return text
+
+
+def sequence_index(value: Any, upper_bound: int) -> int:
+    """Return a validated one-based model-facing index, or zero when invalid."""
+    if isinstance(value, bool):
+        return 0
+    if isinstance(value, float) and not value.is_integer():
+        return 0
+    try:
+        index = int(value)
+    except (TypeError, ValueError):
+        return 0
+    return index if 1 <= index <= upper_bound else 0
 
 
 def parse_datetime_checked(value: Any, fallback: datetime) -> tuple[datetime, bool]:
@@ -1283,10 +1296,11 @@ def request_structured_json(
 
 def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[str, str]) -> dict[str, Any]:
     category_enum = list(CATEGORIES)
+    index_to_article = {index: article for index, article in enumerate(candidates, 1)}
     item_schema = {
         "type": "object",
         "properties": {
-            "id": {"type": "string"},
+            "index": {"type": "integer", "minimum": 1, "maximum": len(candidates)},
             "titleZh": {"type": "string"},
             "category": {"type": "string", "enum": category_enum},
             "score": {"type": "integer", "minimum": 0, "maximum": 100},
@@ -1295,7 +1309,7 @@ def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[s
             "why": {"type": "string"},
             "tags": {"type": "array", "items": {"type": "string"}, "maxItems": 3},
         },
-        "required": ["id", "titleZh", "category", "score", "summary", "keyFacts", "why", "tags"],
+        "required": ["index", "titleZh", "category", "score", "summary", "keyFacts", "why", "tags"],
         "additionalProperties": False,
     }
     schema = {
@@ -1318,7 +1332,7 @@ def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[s
     }
     evidence = [
         {
-            "id": article.id,
+            "index": index,
             "title": article.title,
             "description": clean_text(article.description, 650),
             "source": article.source,
@@ -1329,7 +1343,7 @@ def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[s
             "corroboration": article.corroboration,
             "sources": article.evidence_sources,
         }
-        for article in candidates
+        for index, article in index_to_article.items()
     ]
     instructions = (
         "你是国际科技与安全新闻编辑。只能依据提供的标题、描述、来源和时间工作，不得补写候选材料中没有的事实。"
@@ -1339,7 +1353,7 @@ def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[s
         "军事与冲突新闻保持中性、事实与判断分离；信息不足时明确使用‘据公开信息’等保守表达。"
     )
     example_item = {
-        "id": candidates[0].id,
+        "index": 1,
         "titleZh": "忠实的中文标题",
         "category": candidates[0].category,
         "score": 80,
@@ -1367,15 +1381,14 @@ def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[s
             items = result.get("items", [])
             if not isinstance(items, list) or len(items) != 10:
                 raise ValueError("structured response did not contain exactly 10 items")
-            allowed_ids = {article.id for article in candidates}
-            seen_ids: set[str] = set()
+            seen_indices: set[int] = set()
             for item in items:
                 if not isinstance(item, dict):
                     raise ValueError("daily editorial item must be an object")
-                item_id = clean_text(item.get("id"))
-                if item_id not in allowed_ids or item_id in seen_ids:
-                    raise ValueError(f"daily editorial response contained invalid or duplicate id: {item_id}")
-                seen_ids.add(item_id)
+                item_index = sequence_index(item.get("index"), len(candidates))
+                if not item_index or item_index in seen_indices:
+                    raise ValueError(f"daily editorial response contained invalid or duplicate index: {item.get('index')}")
+                seen_indices.add(item_index)
                 if item.get("category") not in CATEGORIES:
                     raise ValueError(f"daily editorial response contained invalid category: {item.get('category')}")
                 try:
@@ -1393,6 +1406,8 @@ def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[s
                 if not isinstance(tags, list):
                     raise ValueError("daily editorial tags must be an array")
                 item["score"] = score
+                item["id"] = index_to_article[item_index].id
+                item.pop("index", None)
             return result
         except (ValueError, TypeError, json.JSONDecodeError) as exc:
             error = exc
@@ -1448,89 +1463,212 @@ def item_from_article(article: Article, config: dict[str, Any], editorial: dict[
     }
 
 
+def run_resilient_ai_batches(
+    items: list[Any],
+    *,
+    initial_batch_size: int,
+    retry_rounds: int,
+    request_batch: Callable[[list[Any]], dict[str, dict[str, Any]]],
+    label: str,
+) -> tuple[dict[str, dict[str, Any]], list[str], dict[str, Any]]:
+    """Run bounded AI batches and recursively retry only unresolved records."""
+    completed: dict[str, dict[str, Any]] = {}
+    missing_reasons: dict[str, str] = {}
+    request_count = 0
+    retry_request_count = 0
+    provider_failure_count = 0
+    structural_failure_count = 0
+    consecutive_failures = 0
+    circuit_open = False
+    last_provider_error = ""
+
+    def process(batch: list[Any], depth: int) -> None:
+        nonlocal request_count, retry_request_count, provider_failure_count
+        nonlocal structural_failure_count, consecutive_failures, circuit_open, last_provider_error
+        if not batch:
+            return
+        if circuit_open:
+            for entry in batch:
+                missing_reasons.setdefault(entry.id, "not_attempted_after_circuit_breaker")
+            return
+
+        request_count += 1
+        if depth:
+            retry_request_count += 1
+        try:
+            resolved = request_batch(batch)
+        except Exception as exc:
+            provider_failure_count += 1
+            consecutive_failures += 1
+            last_provider_error = clean_text(str(exc), 180) or exc.__class__.__name__
+            LOGGER.warning("%s batch failed: %s", label, last_provider_error)
+            resolved = {}
+            failure_reason = f"provider_error: {last_provider_error}"
+        else:
+            resolved = {
+                entry_id: value for entry_id, value in resolved.items()
+                if entry_id in {entry.id for entry in batch}
+            }
+            if resolved:
+                consecutive_failures = 0
+                failure_reason = "missing_or_invalid_response_item"
+            else:
+                structural_failure_count += 1
+                consecutive_failures += 1
+                failure_reason = "empty_or_invalid_response"
+
+        completed.update(resolved)
+        unresolved = [entry for entry in batch if entry.id not in resolved]
+        for entry in unresolved:
+            missing_reasons[entry.id] = failure_reason
+        for entry_id in resolved:
+            missing_reasons.pop(entry_id, None)
+
+        if consecutive_failures >= 2:
+            circuit_open = True
+        if not unresolved or circuit_open or depth >= retry_rounds:
+            return
+        if len(unresolved) == 1:
+            retry_batches = [unresolved]
+        else:
+            midpoint = (len(unresolved) + 1) // 2
+            retry_batches = [unresolved[:midpoint], unresolved[midpoint:]]
+        for retry_batch in retry_batches:
+            process(retry_batch, depth + 1)
+
+    batch_size = max(1, initial_batch_size)
+    for start in range(0, len(items), batch_size):
+        process(items[start:start + batch_size], 0)
+    missing_ids = [entry.id for entry in items if entry.id not in completed]
+    if not items:
+        completion_reason = "not_needed"
+        completion_message = "没有需要翻译的新条目"
+    elif not missing_ids and retry_request_count:
+        completion_reason = "complete_after_retry"
+        completion_message = "缺失条目经拆分重试后已全部完成"
+    elif not missing_ids:
+        completion_reason = "complete_first_pass"
+        completion_message = "全部条目首轮完成"
+    elif circuit_open:
+        completion_reason = "provider_circuit_breaker"
+        completion_message = "连续两次无有效结果，已停止后续调用"
+    else:
+        completion_reason = "partial_after_retry"
+        completion_message = "拆分重试后仍有条目缺失"
+    diagnostics = {
+        "requestedItemCount": len(items),
+        "completedItemCount": len(completed),
+        "missingItemCount": len(missing_ids),
+        "missingItemIds": missing_ids,
+        "missingItems": [
+            {"id": entry_id, "reason": missing_reasons.get(entry_id, "not_completed")}
+            for entry_id in missing_ids
+        ],
+        "initialBatchSize": batch_size,
+        "initialBatchCount": (len(items) + batch_size - 1) // batch_size if items else 0,
+        "requestCount": request_count,
+        "retryRequestCount": retry_request_count,
+        "providerFailureCount": provider_failure_count,
+        "structuralFailureCount": structural_failure_count,
+        "completionReason": completion_reason,
+        "completionMessage": completion_message,
+        "lastProviderError": last_provider_error,
+    }
+    warnings = []
+    if missing_ids:
+        warnings.append(
+            f"{label}在拆分重试后仍缺失 {len(missing_ids)}/{len(items)} 条：{completion_message}"
+        )
+    return completed, warnings, diagnostics
+
+
+def request_stream_translation_batch(
+    batch: list[Article], config: dict[str, Any], runtime: dict[str, str]
+) -> dict[str, dict[str, Any]]:
+    index_to_article = {index: article for index, article in enumerate(batch, 1)}
+    indexes = list(index_to_article)
+    item_schema = {
+        "type": "object",
+        "properties": {
+            "index": {"type": "integer", "enum": indexes},
+            "titleZh": {"type": "string"},
+            "summary": {"type": "string"},
+            "tags": {"type": "array", "items": {"type": "string"}, "maxItems": 3},
+        },
+        "required": ["index", "titleZh", "summary", "tags"],
+        "additionalProperties": False,
+    }
+    schema = {
+        "type": "object",
+        "properties": {
+            "items": {"type": "array", "items": item_schema, "minItems": len(batch), "maxItems": len(batch)},
+        },
+        "required": ["items"],
+        "additionalProperties": False,
+    }
+    evidence = [{
+        "index": index,
+        "title": article.title,
+        "description": clean_text(article.description, 900),
+        "source": article.source,
+        "publishedAt": article.published_at.isoformat().replace("+00:00", "Z"),
+    } for index, article in index_to_article.items()]
+    example = {"items": [{
+        "index": index,
+        "titleZh": f"第{index}条新闻的忠实中文标题",
+        "summary": "不超过120字的中文摘要",
+        "tags": ["标签"],
+    } for index in indexes]}
+    result = request_structured_json(
+        runtime,
+        instructions=(
+            "你是科技新闻翻译编辑。逐条把标题和已有描述忠实翻译、压缩为自然中文，保留机构、型号、数值和不确定性。"
+            "不得补充输入中不存在的事实，不得改变立场；描述为空时明确写‘现有元数据未提供摘要’。"
+            f"本批共有{len(batch)}条，items必须恰好输出{len(batch)}条且每个index只出现一次。"
+            "每条输出中文标题、不超过120字的中文摘要和最多3个短标签。"
+        ),
+        input_text="待翻译新闻元数据：\n" + json.dumps(evidence, ensure_ascii=False),
+        schema_name="frontier_stream_translation",
+        schema=schema,
+        example=example,
+        max_tokens=int(config.get("stream_translation_max_tokens", 10000)),
+    )
+    translated: dict[str, dict[str, Any]] = {}
+    for item in result.get("items", []):
+        if not isinstance(item, dict):
+            continue
+        item_index = sequence_index(item.get("index"), len(batch))
+        article = index_to_article.get(item_index)
+        if (
+            article
+            and article.id not in translated
+            and clean_text(item.get("titleZh"))
+            and clean_text(item.get("summary"))
+            and isinstance(item.get("tags"), list)
+        ):
+            translated[article.id] = {
+                "titleZh": item["titleZh"],
+                "summary": item["summary"],
+                "tags": item["tags"],
+                "_translationOnly": True,
+                "_provider": runtime["provider"],
+            }
+    return translated
+
+
 def ai_translate_articles(
     articles: list[Article], config: dict[str, Any], runtime: dict[str, str]
-) -> tuple[dict[str, dict[str, Any]], list[str]]:
-    """Translate full-stream metadata in bounded batches without changing ranking."""
-    translations: dict[str, dict[str, Any]] = {}
-    warnings: list[str] = []
-    batch_size = max(1, min(20, int(config.get("stream_translation_batch_size", 12))))
-    consecutive_failures = 0
-    for start in range(0, len(articles), batch_size):
-        batch = articles[start:start + batch_size]
-        allowed_ids = [article.id for article in batch]
-        item_schema = {
-            "type": "object",
-            "properties": {
-                "id": {"type": "string", "enum": allowed_ids},
-                "titleZh": {"type": "string"},
-                "summary": {"type": "string"},
-                "tags": {"type": "array", "items": {"type": "string"}, "maxItems": 3},
-            },
-            "required": ["id", "titleZh", "summary", "tags"],
-            "additionalProperties": False,
-        }
-        schema = {
-            "type": "object",
-            "properties": {
-                "items": {"type": "array", "items": item_schema, "minItems": len(batch), "maxItems": len(batch)},
-            },
-            "required": ["items"],
-            "additionalProperties": False,
-        }
-        evidence = [{
-            "id": article.id,
-            "title": article.title,
-            "description": clean_text(article.description, 900),
-            "source": article.source,
-            "publishedAt": article.published_at.isoformat().replace("+00:00", "Z"),
-        } for article in batch]
-        example = {"items": [{
-            "id": allowed_ids[0], "titleZh": "忠实的中文标题",
-            "summary": "不超过120字的中文摘要", "tags": ["标签"],
-        }]}
-        try:
-            result = request_structured_json(
-                runtime,
-                instructions=(
-                    "你是科技新闻翻译编辑。逐条把标题和已有描述忠实翻译、压缩为自然中文，保留机构、型号、数值和不确定性。"
-                    "不得补充输入中不存在的事实，不得改变立场；描述为空时明确写‘现有元数据未提供摘要’。"
-                    "每条输出中文标题、不超过120字的中文摘要和最多3个短标签。"
-                ),
-                input_text="待翻译新闻元数据：\n" + json.dumps(evidence, ensure_ascii=False),
-                schema_name="frontier_stream_translation",
-                schema=schema,
-                example=example,
-                max_tokens=int(config.get("stream_translation_max_tokens", 10000)),
-            )
-            batch_items: dict[str, dict[str, Any]] = {}
-            for item in result.get("items", []):
-                item_id = clean_text(item.get("id")) if isinstance(item, dict) else ""
-                if (
-                    item_id in allowed_ids
-                    and item_id not in batch_items
-                    and clean_text(item.get("titleZh"))
-                    and clean_text(item.get("summary"))
-                ):
-                    batch_items[item_id] = {
-                        **item,
-                        "tags": item.get("tags", []) if isinstance(item.get("tags", []), list) else [],
-                        "_translationOnly": True,
-                        "_provider": runtime["provider"],
-                    }
-            translations.update(batch_items)
-            consecutive_failures = 0
-            if len(batch_items) != len(batch):
-                warnings.append(f"新闻中文翻译批次不完整：{len(batch_items)}/{len(batch)}")
-        except Exception as exc:
-            reason = clean_text(str(exc), 160) or exc.__class__.__name__
-            warnings.append(f"新闻中文翻译批次失败：{reason}")
-            LOGGER.warning("Stream translation batch failed: %s", reason)
-            consecutive_failures += 1
-            if consecutive_failures >= 2 and start + batch_size < len(articles):
-                warnings.append("新闻中文翻译连续失败 2 个批次，已停止后续调用并保留原始元数据")
-                break
-    return translations, warnings
+) -> tuple[dict[str, dict[str, Any]], list[str], dict[str, Any]]:
+    """Translate stream metadata in small batches, retrying only missing records."""
+    batch_size = max(1, min(6, int(config.get("stream_translation_batch_size", 6))))
+    retry_rounds = max(0, min(3, int(config.get("stream_translation_retry_rounds", 2))))
+    return run_resilient_ai_batches(
+        articles,
+        initial_batch_size=batch_size,
+        retry_rounds=retry_rounds,
+        request_batch=lambda batch: request_stream_translation_batch(batch, config, runtime),
+        label="新闻中文翻译",
+    )
 
 
 def build_stream_report(
@@ -1541,6 +1679,7 @@ def build_stream_report(
     translations: dict[str, dict[str, Any]] | None = None,
     translation_runtime: dict[str, str] | None = None,
     translation_warnings: list[str] | None = None,
+    translation_diagnostics: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Publish the complete qualified 24-hour candidate stream, capped for payload safety."""
     limit = max(1, int(config.get("stream_limit", 300)))
@@ -1571,7 +1710,7 @@ def build_stream_report(
         category_counts[category] = category_counts.get(category, 0) + 1
         source_counts[source] = source_counts.get(source, 0) + 1
     return {
-        "schemaVersion": 2,
+        "schemaVersion": 3,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "timezone": config.get("timezone", "Asia/Tokyo"),
         "rangeHours": int(config.get("lookback_hours", 24)),
@@ -1584,18 +1723,20 @@ def build_stream_report(
         "translationModel": translation_runtime.get("model") if translation_runtime else "",
         "translatedItemCount": sum(bool(item.get("translationProvider")) for item in items),
         "translationWarnings": list(translation_warnings or []),
+        "translationDiagnostics": dict(translation_diagnostics or {}),
         "items": items,
     }
 
 
-def ai_edit_research(
+def request_research_editorial_batch(
     papers: list[ResearchPaper], config: dict[str, Any], runtime: dict[str, str]
 ) -> dict[str, dict[str, Any]]:
-    allowed_ids = [paper.id for paper in papers]
+    index_to_paper = {index: paper for index, paper in enumerate(papers, 1)}
+    indexes = list(index_to_paper)
     item_schema = {
         "type": "object",
         "properties": {
-            "id": {"type": "string", "enum": allowed_ids},
+            "index": {"type": "integer", "enum": indexes},
             "titleZh": {"type": "string"},
             "summaryZh": {"type": "string"},
             "question": {"type": "string"},
@@ -1604,7 +1745,7 @@ def ai_edit_research(
             "limitations": {"type": "string"},
             "tags": {"type": "array", "items": {"type": "string"}, "maxItems": 4},
         },
-        "required": ["id", "titleZh", "summaryZh", "question", "method", "findings", "limitations", "tags"],
+        "required": ["index", "titleZh", "summaryZh", "question", "method", "findings", "limitations", "tags"],
         "additionalProperties": False,
     }
     schema = {
@@ -1621,28 +1762,29 @@ def ai_edit_research(
         "additionalProperties": False,
     }
     evidence = [{
-        "id": paper.id,
+        "index": index,
         "title": paper.title,
         "abstract": clean_text(paper.abstract, 1800),
         "authors": paper.authors[:8],
         "categories": paper.categories,
         "publishedAt": paper.published_at.isoformat().replace("+00:00", "Z"),
-    } for paper in papers]
+    } for index, paper in index_to_paper.items()]
     example = {"items": [{
-        "id": allowed_ids[0],
-        "titleZh": "忠实的中文论文标题",
+        "index": index,
+        "titleZh": f"第{index}篇论文的忠实中文标题",
         "summaryZh": "不超过140字的中文摘要",
         "question": "研究问题",
         "method": "论文摘要明确说明的方法",
         "findings": "论文摘要明确说明的发现",
         "limitations": "摘要未说明",
         "tags": ["研究标签"],
-    }]}
+    } for index in indexes]}
     result = request_structured_json(
         runtime,
         instructions=(
             "你是前沿研究编辑。只能依据论文标题和摘要，不得补充摘要中不存在的实验结果。"
             "为每篇论文生成忠实的中文标题、不超过140字的中文摘要，并分别提炼研究问题、方法、主要发现和局限性。"
+            f"本批共有{len(papers)}篇，items必须恰好输出{len(papers)}条且每个index只出现一次。"
             "摘要未明确局限时写‘摘要未说明’，预印本不得描述为已经同行评审。专有名词、模型名和数值必须保真。"
         ),
         input_text="研究论文元数据：\n" + json.dumps(evidence, ensure_ascii=False),
@@ -1652,22 +1794,37 @@ def ai_edit_research(
         max_tokens=int(config.get("research_ai_max_output_tokens", config.get("research_openai_max_output_tokens", 10000))),
     )
     edited: dict[str, dict[str, Any]] = {}
-    allowed = set(allowed_ids)
     for item in result.get("items", []):
-        item_id = clean_text(item.get("id")) if isinstance(item, dict) else ""
+        if not isinstance(item, dict):
+            continue
+        item_index = sequence_index(item.get("index"), len(papers))
+        paper = index_to_paper.get(item_index)
         required_text = ("titleZh", "summaryZh", "question", "method", "findings", "limitations")
         if (
-            item_id in allowed
-            and item_id not in edited
+            paper
+            and paper.id not in edited
             and all(clean_text(item.get(field_name)) for field_name in required_text)
             and isinstance(item.get("tags"), list)
         ):
-            edited[item_id] = item
-    if len(edited) != len(papers):
-        raise ValueError(f"research editorial response contained {len(edited)} valid papers; expected {len(papers)}")
+            edited[paper.id] = {key: value for key, value in item.items() if key != "index"}
     for item in edited.values():
         item["_provider"] = runtime["provider"]
     return edited
+
+
+def ai_edit_research(
+    papers: list[ResearchPaper], config: dict[str, Any], runtime: dict[str, str]
+) -> tuple[dict[str, dict[str, Any]], list[str], dict[str, Any]]:
+    research = config.get("research", {})
+    batch_size = max(1, min(6, int(research.get("ai_batch_size", 5))))
+    retry_rounds = max(0, min(3, int(research.get("ai_retry_rounds", 2))))
+    return run_resilient_ai_batches(
+        papers,
+        initial_batch_size=batch_size,
+        retry_rounds=retry_rounds,
+        request_batch=lambda batch: request_research_editorial_batch(batch, config, runtime),
+        label="论文中文编辑",
+    )
 
 
 def research_item_from_paper(
@@ -1743,6 +1900,7 @@ def build_research_report(
     selected = choose_research_diverse(papers, config)
     editorial: dict[str, dict[str, Any]] = {}
     warnings: list[str] = []
+    editorial_diagnostics: dict[str, Any] = {}
     method = "metadata"
     editorial_status = "disabled" if skip_ai else "not-configured"
     runtime = resolve_ai_runtime(config) if not skip_ai else None
@@ -1750,21 +1908,9 @@ def build_research_report(
     if selected and runtime:
         default_limit = research.get("deepseek_ai_limit", len(selected)) if runtime["provider"] == "deepseek" else research.get("ai_limit", 20)
         target_count = max(1, min(len(selected), int(default_limit)))
-        batch_size = max(1, min(20, int(research.get("ai_batch_size", 10))))
-        consecutive_failures = 0
-        for start in range(0, target_count, batch_size):
-            batch = selected[start:min(target_count, start + batch_size)]
-            try:
-                editorial.update(ai_edit_research(batch, config, runtime))
-                consecutive_failures = 0
-            except Exception as exc:
-                reason = clean_text(str(exc), 180) or exc.__class__.__name__
-                warnings.append(f"论文中文编辑批次失败（{start + 1}-{start + len(batch)}）：{reason}")
-                LOGGER.warning("Research editorial batch failed: %s", reason)
-                consecutive_failures += 1
-                if consecutive_failures >= 2 and start + batch_size < target_count:
-                    warnings.append("论文中文编辑连续失败 2 个批次，已停止后续调用并保留原始摘要")
-                    break
+        editorial, warnings, editorial_diagnostics = ai_edit_research(
+            selected[:target_count], config, runtime
+        )
         if editorial:
             method = runtime["provider"]
         editorial_status = "ok" if len(editorial) == target_count else "partial" if editorial else "fallback"
@@ -1776,7 +1922,7 @@ def build_research_report(
         area = str(item.get("researchArea", "前沿研究"))
         area_counts[area] = area_counts.get(area, 0) + 1
     return {
-        "schemaVersion": 2,
+        "schemaVersion": 3,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "timezone": config.get("timezone", "Asia/Tokyo"),
         "rangeDays": int(research.get("lookback_days", 7)),
@@ -1786,6 +1932,7 @@ def build_research_report(
         "editorialModel": runtime.get("model") if runtime else "",
         "translatedItemCount": len(editorial),
         "warnings": warnings,
+        "editorialDiagnostics": editorial_diagnostics,
         "itemCount": len(items),
         "areaCounts": area_counts,
         "collectionKeywords": [
@@ -1874,7 +2021,7 @@ def build_report(candidates: list[Article], config: dict[str, Any], now: datetim
         signals = fallback_brief(items, source_count)["signals"]
     local_time = now.astimezone(ZoneInfo(config.get("timezone", "Asia/Tokyo")))
     return {
-        "schemaVersion": 4,
+        "schemaVersion": 5,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "editionDate": local_time.strftime("%Y-%m-%d"),
         "timezone": config.get("timezone", "Asia/Tokyo"),
@@ -1936,6 +2083,23 @@ def validate_report(report: dict[str, Any], expected_count: int) -> None:
         raise ValueError("daily translatedItemCount does not match items")
 
 
+def validate_ai_batch_diagnostics(value: Any, label: str) -> None:
+    if not value:
+        return
+    if not isinstance(value, dict):
+        raise ValueError(f"{label} diagnostics must be an object")
+    requested = int(value.get("requestedItemCount", -1))
+    completed = int(value.get("completedItemCount", -1))
+    missing = int(value.get("missingItemCount", -1))
+    missing_ids = value.get("missingItemIds", [])
+    if min(requested, completed, missing) < 0 or completed + missing != requested:
+        raise ValueError(f"{label} diagnostics counts are inconsistent")
+    if not isinstance(missing_ids, list) or len(missing_ids) != missing or len(set(missing_ids)) != missing:
+        raise ValueError(f"{label} diagnostics missing ids are inconsistent")
+    if not clean_text(value.get("completionReason")) or not clean_text(value.get("completionMessage")):
+        raise ValueError(f"{label} diagnostics must explain completion")
+
+
 def validate_stream_report(report: dict[str, Any]) -> None:
     items = report.get("items")
     if not isinstance(items, list) or not items:
@@ -1950,6 +2114,7 @@ def validate_stream_report(report: dict[str, Any]) -> None:
     translated = sum(bool(item.get("translationProvider")) for item in items)
     if int(report.get("translatedItemCount", translated)) != translated:
         raise ValueError("stream translatedItemCount does not match items")
+    validate_ai_batch_diagnostics(report.get("translationDiagnostics"), "stream translation")
 
 
 def validate_research_report(report: dict[str, Any], *, allow_empty: bool = True) -> None:
@@ -1971,6 +2136,7 @@ def validate_research_report(report: dict[str, Any], *, allow_empty: bool = True
     translated = sum(bool(item.get("translationProvider")) for item in items)
     if int(report.get("translatedItemCount", translated)) != translated:
         raise ValueError("research translatedItemCount does not match items")
+    validate_ai_batch_diagnostics(report.get("editorialDiagnostics"), "research editorial")
 
 
 def write_json_atomic(path: Path, payload: Any) -> None:
@@ -2190,7 +2356,7 @@ def write_pipeline_status(
     previous = previous if isinstance(previous, dict) else {}
     success = state == "ok" and report is not None
     payload = {
-        "schemaVersion": 4,
+        "schemaVersion": 5,
         "state": state,
         "lastAttemptAt": now.isoformat().replace("+00:00", "Z"),
         "lastSuccessAt": now.isoformat().replace("+00:00", "Z") if success else previous.get("lastSuccessAt"),
@@ -2212,12 +2378,14 @@ def write_pipeline_status(
         "streamTranslationModel": stream_report.get("translationModel") if success and stream_report else previous.get("streamTranslationModel"),
         "streamTranslatedItemCount": int(stream_report.get("translatedItemCount", 0)) if success and stream_report else previous.get("streamTranslatedItemCount", 0),
         "streamTranslationWarnings": stream_report.get("translationWarnings", []) if success and stream_report else previous.get("streamTranslationWarnings", []),
+        "streamTranslationDiagnostics": stream_report.get("translationDiagnostics", {}) if success and stream_report else previous.get("streamTranslationDiagnostics", {}),
         "researchItemCount": int(research_report.get("itemCount", 0)) if success and research_report else previous.get("researchItemCount", 0),
         "researchEditorialStatus": research_report.get("editorialStatus") if success and research_report else previous.get("researchEditorialStatus"),
         "researchEditorialProvider": research_report.get("editorialProvider") if success and research_report else previous.get("researchEditorialProvider"),
         "researchEditorialModel": research_report.get("editorialModel") if success and research_report else previous.get("researchEditorialModel"),
         "researchTranslatedItemCount": int(research_report.get("translatedItemCount", 0)) if success and research_report else previous.get("researchTranslatedItemCount", 0),
         "researchWarnings": research_report.get("warnings", []) if success and research_report else previous.get("researchWarnings", []),
+        "researchEditorialDiagnostics": research_report.get("editorialDiagnostics", {}) if success and research_report else previous.get("researchEditorialDiagnostics", {}),
     }
     write_json_atomic(path, payload)
 
@@ -2234,7 +2402,7 @@ def write_stream_status(
     previous = previous if isinstance(previous, dict) else {}
     success = state == "ok" and stream_report is not None
     write_json_atomic(path, {
-        "schemaVersion": 2,
+        "schemaVersion": 3,
         "state": state,
         "lastAttemptAt": now.isoformat().replace("+00:00", "Z"),
         "lastSuccessAt": now.isoformat().replace("+00:00", "Z") if success else previous.get("lastSuccessAt"),
@@ -2243,6 +2411,7 @@ def write_stream_status(
         "translationModel": stream_report.get("translationModel") if success else previous.get("translationModel"),
         "translatedItemCount": int(stream_report.get("translatedItemCount", 0)) if success else previous.get("translatedItemCount", 0),
         "translationWarnings": stream_report.get("translationWarnings", []) if success else previous.get("translationWarnings", []),
+        "translationDiagnostics": stream_report.get("translationDiagnostics", {}) if success else previous.get("translationDiagnostics", {}),
         "message": clean_text(message, 300),
     })
 
@@ -2371,6 +2540,7 @@ def main(argv: list[str] | None = None) -> int:
         stream_runtime = resolve_ai_runtime(config) if not args.skip_ai else None
         stream_translations: dict[str, dict[str, Any]] = {}
         stream_translation_warnings: list[str] = []
+        stream_translation_diagnostics: dict[str, Any] = {}
         if (
             stream_runtime
             and stream_runtime["provider"] == "deepseek"
@@ -2401,6 +2571,7 @@ def main(argv: list[str] | None = None) -> int:
                         "_translationOnly": True,
                         "_provider": stream_runtime["provider"],
                     }
+            reused_translation_count = len(stream_translations)
             translation_limit = max(0, min(
                 int(config.get("stream_limit", 300)),
                 int(config.get("stream_translation_limit", 120)),
@@ -2413,8 +2584,13 @@ def main(argv: list[str] | None = None) -> int:
                 article for article in stream_candidates[:translation_limit]
                 if article.id not in already_translated
             ]
-            new_translations, stream_translation_warnings = ai_translate_articles(
+            new_translations, stream_translation_warnings, stream_translation_diagnostics = ai_translate_articles(
                 translation_candidates, config, stream_runtime
+            )
+            stream_translation_diagnostics["reusedItemCount"] = reused_translation_count
+            stream_translation_diagnostics["featuredTranslatedItemCount"] = sum(
+                isinstance(item, dict) and bool(clean_text(item.get("translationProvider")))
+                for item in top_stories.values()
             )
             stream_translations.update(new_translations)
         stream_report = build_stream_report(
@@ -2425,6 +2601,7 @@ def main(argv: list[str] | None = None) -> int:
             stream_translations,
             stream_runtime if stream_translations else None,
             stream_translation_warnings,
+            stream_translation_diagnostics,
         )
         validate_stream_report(stream_report)
 

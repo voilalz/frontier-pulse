@@ -69,7 +69,7 @@ class UpdateNewsTests(unittest.TestCase):
         self.assertTrue(all("预印本" in item["peerReviewStatus"] for item in report["items"]))
         swarm = next(item for item in report["items"] if item["id"] == "arxiv:2607.14093")
         self.assertIn("蜂群机器人", swarm["collectionKeywords"])
-        self.assertEqual(report["schemaVersion"], 2)
+        self.assertEqual(report["schemaVersion"], 3)
         self.assertEqual(len(report["collectionKeywords"]), 3)
 
     def test_research_selection_prevents_one_area_from_crowding_out_others(self):
@@ -162,33 +162,84 @@ class UpdateNewsTests(unittest.TestCase):
                 MODULE.ai_select(candidates[:12], self.config, runtime)
         self.assertEqual(request.call_count, 2)
 
-    def test_stream_translation_keeps_partial_results_and_warning(self):
+    def test_daily_editorial_uses_sequence_indices_and_restores_stable_ids(self):
+        candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:12]
+        runtime = {
+            "provider": "deepseek", "api_key": "secret", "model": "deepseek-v4-flash",
+            "endpoint": "https://api.deepseek.com/chat/completions",
+        }
+        response = {
+            "brief": {"headline": "今日", "summary": "摘要", "signals": ["一", "二", "三"]},
+            "items": [{
+                "index": index,
+                "titleZh": f"标题{index}",
+                "category": candidates[index - 1].category,
+                "score": 80,
+                "summary": "中文摘要",
+                "keyFacts": ["事实一", "事实二"],
+                "why": "重要性",
+                "tags": ["测试"],
+            } for index in range(1, 11)],
+        }
+        with mock.patch.object(MODULE, "request_structured_json", return_value=response) as request:
+            result = MODULE.ai_select(candidates, self.config, runtime)
+        self.assertEqual([item["id"] for item in result["items"]], [item.id for item in candidates[:10]])
+        self.assertTrue(all("index" not in item for item in result["items"]))
+        payload = request.call_args.kwargs["input_text"]
+        self.assertIn('"index": 1', payload)
+        self.assertNotIn(candidates[0].id, payload)
+
+    def test_stream_translation_splits_and_retries_only_missing_sequence_indices(self):
+        candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:4]
+        runtime = {
+            "provider": "deepseek", "api_key": "secret", "model": "deepseek-v4-flash",
+            "endpoint": "https://api.deepseek.com/chat/completions",
+        }
+        def translated(index):
+            return {"index": index, "titleZh": f"中文标题{index}", "summary": "中文摘要", "tags": ["测试"]}
+        responses = [
+            {"items": [translated(1), translated(2)]},
+            {"items": [translated(1)]},
+            {"items": [translated(1)]},
+        ]
+        config = {**self.config, "stream_translation_batch_size": 6, "stream_translation_retry_rounds": 2}
+        with mock.patch.object(MODULE, "request_structured_json", side_effect=responses) as request:
+            translations, warnings, diagnostics = MODULE.ai_translate_articles(candidates, config, runtime)
+        self.assertEqual(set(translations), {item.id for item in candidates})
+        self.assertTrue(translations[candidates[0].id]["_translationOnly"])
+        self.assertEqual(translations[candidates[0].id]["_provider"], "deepseek")
+        self.assertEqual(warnings, [])
+        self.assertEqual(diagnostics["completionReason"], "complete_after_retry")
+        self.assertEqual(diagnostics["retryRequestCount"], 2)
+        self.assertEqual(diagnostics["missingItemIds"], [])
+        self.assertEqual(request.call_count, 3)
+        self.assertNotIn(candidates[0].id, request.call_args_list[0].kwargs["input_text"])
+        stream = MODULE.build_stream_report(
+            candidates, self.config, self.now, translations=translations,
+            translation_runtime=runtime, translation_warnings=warnings,
+            translation_diagnostics=diagnostics,
+        )
+        self.assertEqual(stream["translatedItemCount"], 4)
+        self.assertEqual(stream["translationProvider"], "deepseek")
+        self.assertEqual(stream["items"][0]["scoreBasis"], "AI翻译 · 规则评分")
+        MODULE.validate_stream_report(stream)
+
+    def test_stream_translation_records_missing_ids_and_completion_reason(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:2]
         runtime = {
             "provider": "deepseek", "api_key": "secret", "model": "deepseek-v4-flash",
             "endpoint": "https://api.deepseek.com/chat/completions",
         }
-        translated = {
-            "items": [{
-                "id": candidates[0].id,
-                "titleZh": "中文标题",
-                "summary": "中文摘要",
-                "tags": ["测试"],
-            }],
-        }
-        with mock.patch.object(MODULE, "request_structured_json", return_value=translated):
-            translations, warnings = MODULE.ai_translate_articles(candidates, self.config, runtime)
+        partial = {"items": [{
+            "index": 1, "titleZh": "中文标题", "summary": "中文摘要", "tags": ["测试"],
+        }]}
+        with mock.patch.object(MODULE, "request_structured_json", side_effect=[partial, {"items": []}, {"items": []}]):
+            translations, warnings, diagnostics = MODULE.ai_translate_articles(candidates, self.config, runtime)
         self.assertEqual(list(translations), [candidates[0].id])
-        self.assertTrue(translations[candidates[0].id]["_translationOnly"])
-        self.assertEqual(translations[candidates[0].id]["_provider"], "deepseek")
+        self.assertEqual(diagnostics["missingItemIds"], [candidates[1].id])
+        self.assertEqual(diagnostics["missingItems"][0]["reason"], "empty_or_invalid_response")
+        self.assertEqual(diagnostics["completionReason"], "provider_circuit_breaker")
         self.assertEqual(len(warnings), 1)
-        stream = MODULE.build_stream_report(
-            candidates, self.config, self.now, translations=translations,
-            translation_runtime=runtime, translation_warnings=warnings,
-        )
-        self.assertEqual(stream["translatedItemCount"], 1)
-        self.assertEqual(stream["translationProvider"], "deepseek")
-        self.assertEqual(stream["items"][0]["scoreBasis"], "AI翻译 · 规则评分")
 
     def test_stream_translation_stops_after_two_consecutive_batch_failures(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:3]
@@ -200,10 +251,36 @@ class UpdateNewsTests(unittest.TestCase):
         with mock.patch.object(
             MODULE, "request_structured_json", side_effect=RuntimeError("temporary provider outage")
         ) as request:
-            translations, warnings = MODULE.ai_translate_articles(candidates, config, runtime)
+            translations, warnings, diagnostics = MODULE.ai_translate_articles(candidates, config, runtime)
         self.assertEqual(translations, {})
         self.assertEqual(request.call_count, 2)
-        self.assertTrue(any("连续失败 2 个批次" in warning for warning in warnings))
+        self.assertEqual(diagnostics["completionReason"], "provider_circuit_breaker")
+        self.assertEqual(diagnostics["missingItemIds"], [item.id for item in candidates])
+        self.assertTrue(warnings)
+
+    def test_research_editorial_retries_missing_papers_with_sequence_indices(self):
+        papers = MODULE.score_research_papers(self.papers, self.config, self.now)[:3]
+        runtime = {
+            "provider": "deepseek", "api_key": "secret", "model": "deepseek-v4-flash",
+            "endpoint": "https://api.deepseek.com/chat/completions",
+        }
+        def edited(index):
+            return {
+                "index": index, "titleZh": "中文论文", "summaryZh": "中文摘要",
+                "question": "问题", "method": "方法", "findings": "发现",
+                "limitations": "摘要未说明", "tags": ["研究"],
+            }
+        responses = [
+            {"items": [edited(1)]},
+            {"items": [edited(1)]},
+            {"items": [edited(1)]},
+        ]
+        with mock.patch.object(MODULE, "request_structured_json", side_effect=responses) as request:
+            editorial, warnings, diagnostics = MODULE.ai_edit_research(papers, self.config, runtime)
+        self.assertEqual(set(editorial), {paper.id for paper in papers})
+        self.assertEqual(warnings, [])
+        self.assertEqual(diagnostics["completionReason"], "complete_after_retry")
+        self.assertNotIn(papers[0].id, request.call_args_list[0].kwargs["input_text"])
 
     def test_deduplicate_merges_tracking_urls(self):
         first = self.articles[0]
@@ -298,7 +375,7 @@ class UpdateNewsTests(unittest.TestCase):
             ])
             self.assertEqual(status, 0)
             payload = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(payload["schemaVersion"], 4)
+            self.assertEqual(payload["schemaVersion"], 5)
             self.assertEqual(payload["editionDate"], "2026-07-16")
             self.assertEqual(payload["timezone"], "Asia/Tokyo")
             self.assertEqual(payload["method"], "rules")
@@ -316,19 +393,19 @@ class UpdateNewsTests(unittest.TestCase):
             atom = ET.parse(feed_output).getroot()
             self.assertEqual(len(atom.findall("{http://www.w3.org/2005/Atom}entry")), 10)
             pipeline_status = json.loads(status_output.read_text(encoding="utf-8"))
-            self.assertEqual(pipeline_status["schemaVersion"], 4)
+            self.assertEqual(pipeline_status["schemaVersion"], 5)
             self.assertEqual(pipeline_status["state"], "ok")
             self.assertEqual(pipeline_status["editorialStatus"], "disabled")
             stream = json.loads(stream_output.read_text(encoding="utf-8"))
             research = json.loads(research_output.read_text(encoding="utf-8"))
-            self.assertEqual(stream["schemaVersion"], 2)
-            self.assertEqual(research["schemaVersion"], 2)
+            self.assertEqual(stream["schemaVersion"], 3)
+            self.assertEqual(research["schemaVersion"], 3)
             self.assertEqual(pipeline_status["streamItemCount"], stream["itemCount"])
             self.assertEqual(pipeline_status["researchItemCount"], 6)
             self.assertGreater(stream["itemCount"], 10)
             self.assertEqual(research["itemCount"], 6)
             stream_status = json.loads(stream_status_output.read_text(encoding="utf-8"))
-            self.assertEqual(stream_status["schemaVersion"], 2)
+            self.assertEqual(stream_status["schemaVersion"], 3)
             self.assertEqual(stream_status["state"], "ok")
 
     def test_irrecoverable_shortfall_writes_status_without_overwriting_latest(self):
