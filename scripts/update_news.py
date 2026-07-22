@@ -34,7 +34,7 @@ from typing import Any, Callable, Iterable
 from zoneinfo import ZoneInfo
 
 LOGGER = logging.getLogger("frontier-pulse")
-USER_AGENT = "FrontierPulseBot/1.7 (+https://github.com/voilalz/frontier-pulse; public-interest news and research index)"
+USER_AGENT = "FrontierPulseBot/1.8 (+https://github.com/voilalz/frontier-pulse; public-interest news and research index)"
 CATEGORIES = ("AI", "航空航天", "军事动态", "局部冲突", "前沿技术", "无人系统")
 
 
@@ -262,6 +262,16 @@ def resolve_ai_runtime(config: dict[str, Any]) -> dict[str, str] | None:
             "endpoint": "https://api.openai.com/v1/responses",
         }
     return None
+
+
+def provider_display_name(provider: str) -> str:
+    """Return a safe, human-readable provider name for public diagnostics."""
+    normalized = clean_text(provider).lower()
+    if normalized == "deepseek":
+        return "DeepSeek"
+    if normalized == "openai":
+        return "OpenAI"
+    return clean_text(provider, 40) or "AI"
 
 
 def collect_gdelt(
@@ -1166,17 +1176,16 @@ def choose_diverse(candidates: list[Article], config: dict[str, Any], count: int
 
 def validate_ai_diversity(
     selected: list[Article],
-    editorial_by_id: dict[str, dict[str, Any]],
     config: dict[str, Any],
+    provider: str = "AI",
 ) -> None:
-    """Apply the same hard diversity limits after the AI editorial pass."""
+    """Apply the same hard diversity limits after the AI selection pass."""
     category_limit = int(config["per_category_limit"])
     domain_limit = int(config["per_domain_limit"])
     categories: dict[str, int] = {}
     domains: dict[str, int] = {}
     for article in selected:
-        editorial = editorial_by_id.get(article.id, {})
-        category = editorial.get("category") if editorial.get("category") in CATEGORIES else article.category
+        category = article.category
         domain = article.domain or article.source
         categories[category] = categories.get(category, 0) + 1
         domains[domain] = domains.get(domain, 0) + 1
@@ -1184,7 +1193,7 @@ def validate_ai_diversity(
     crowded_domains = {name: count for name, count in domains.items() if count > domain_limit}
     if crowded_categories or crowded_domains:
         raise ValueError(
-            "OpenAI 选稿未通过多样性校验："
+            f"{provider_display_name(provider)} 选稿未通过多样性校验："
             f"类别超限={crowded_categories or '无'}，域名超限={crowded_domains or '无'}"
         )
 
@@ -1295,39 +1304,24 @@ def request_structured_json(
 
 
 def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[str, str]) -> dict[str, Any]:
-    category_enum = list(CATEGORIES)
+    """Select Top N only; Chinese translation is handled by a separate pass."""
+    top_n = int(config["top_n"])
     index_to_article = {index: article for index, article in enumerate(candidates, 1)}
     item_schema = {
         "type": "object",
         "properties": {
             "index": {"type": "integer", "minimum": 1, "maximum": len(candidates)},
-            "titleZh": {"type": "string"},
-            "category": {"type": "string", "enum": category_enum},
             "score": {"type": "integer", "minimum": 0, "maximum": 100},
-            "summary": {"type": "string"},
-            "keyFacts": {"type": "array", "items": {"type": "string"}, "minItems": 2, "maxItems": 3},
-            "why": {"type": "string"},
-            "tags": {"type": "array", "items": {"type": "string"}, "maxItems": 3},
         },
-        "required": ["index", "titleZh", "category", "score", "summary", "keyFacts", "why", "tags"],
+        "required": ["index", "score"],
         "additionalProperties": False,
     }
     schema = {
         "type": "object",
         "properties": {
-            "brief": {
-                "type": "object",
-                "properties": {
-                    "headline": {"type": "string"},
-                    "summary": {"type": "string"},
-                    "signals": {"type": "array", "items": {"type": "string"}, "minItems": 3, "maxItems": 3},
-                },
-                "required": ["headline", "summary", "signals"],
-                "additionalProperties": False,
-            },
-            "items": {"type": "array", "items": item_schema, "minItems": 10, "maxItems": 10},
+            "items": {"type": "array", "items": item_schema, "minItems": top_n, "maxItems": top_n},
         },
-        "required": ["brief", "items"],
+        "required": ["items"],
         "additionalProperties": False,
     }
     evidence = [
@@ -1336,6 +1330,7 @@ def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[s
             "title": article.title,
             "description": clean_text(article.description, 650),
             "source": article.source,
+            "domain": article.domain,
             "country": article.country,
             "publishedAt": article.published_at.isoformat().replace("+00:00", "Z"),
             "ruleCategory": article.category,
@@ -1346,26 +1341,12 @@ def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[s
         for index, article in index_to_article.items()
     ]
     instructions = (
-        "你是国际科技与安全新闻编辑。只能依据提供的标题、描述、来源和时间工作，不得补写候选材料中没有的事实。"
-        "从候选中选择恰好10条最重要且类别尽量多样的新闻，优先考虑全球影响、技术/政策拐点、可信来源、时效与多源印证。"
-        "为每条生成忠实、自然的中文标题（保留机构、型号和专有名词），并输出不超过90字的中文摘要、2至3条可由候选材料直接支持的关键事实、"
-        "不超过70字的为什么重要、0-100重要度和最多3个短标签。关键事实不得把推断写成事实。"
-        "军事与冲突新闻保持中性、事实与判断分离；信息不足时明确使用‘据公开信息’等保守表达。"
+        "你是国际科技与安全新闻选稿编辑。本步骤只决定入选项，不写标题、摘要、翻译或关键事实。"
+        f"从候选中选择恰好{top_n}条最重要的新闻，优先考虑全球影响、技术或政策拐点、来源可信度、时效与多源印证。"
+        f"硬性约束：每个主题最多{int(config['per_category_limit'])}条，每个来源域名最多{int(config['per_domain_limit'])}条。"
+        "每条只输出候选序号 index 和 0-100 重要度 score，不要输出其他字段。"
     )
-    example_item = {
-        "index": 1,
-        "titleZh": "忠实的中文标题",
-        "category": candidates[0].category,
-        "score": 80,
-        "summary": "不超过90字的中文摘要",
-        "keyFacts": ["可核验事实一", "可核验事实二"],
-        "why": "为什么重要",
-        "tags": ["标签"],
-    }
-    example = {
-        "brief": {"headline": "今日态势标题", "summary": "总体摘要", "signals": ["信号一", "信号二", "信号三"]},
-        "items": [example_item],
-    }
+    example = {"items": [{"index": index, "score": 80} for index in range(1, top_n + 1)]}
     error: Exception | None = None
     for attempt in range(2):
         try:
@@ -1373,38 +1354,28 @@ def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[s
                 runtime,
                 instructions=instructions,
                 input_text="候选新闻证据：\n" + json.dumps(evidence, ensure_ascii=False),
-                schema_name="frontier_daily",
+                schema_name="frontier_daily_selection",
                 schema=schema,
                 example=example,
-                max_tokens=int(config.get("ai_max_output_tokens", config.get("openai_max_output_tokens", 8000))),
+                max_tokens=int(config.get("selection_max_output_tokens", 2500)),
             )
             items = result.get("items", [])
-            if not isinstance(items, list) or len(items) != 10:
-                raise ValueError("structured response did not contain exactly 10 items")
+            if not isinstance(items, list) or len(items) != top_n:
+                raise ValueError(f"structured response did not contain exactly {top_n} selection items")
             seen_indices: set[int] = set()
             for item in items:
                 if not isinstance(item, dict):
-                    raise ValueError("daily editorial item must be an object")
+                    raise ValueError("daily selection item must be an object")
                 item_index = sequence_index(item.get("index"), len(candidates))
                 if not item_index or item_index in seen_indices:
-                    raise ValueError(f"daily editorial response contained invalid or duplicate index: {item.get('index')}")
+                    raise ValueError(f"daily selection response contained invalid or duplicate index: {item.get('index')}")
                 seen_indices.add(item_index)
-                if item.get("category") not in CATEGORIES:
-                    raise ValueError(f"daily editorial response contained invalid category: {item.get('category')}")
                 try:
                     score = int(item.get("score"))
                 except (TypeError, ValueError):
-                    raise ValueError("daily editorial score must be an integer") from None
+                    raise ValueError("daily selection score must be an integer") from None
                 if not 0 <= score <= 100:
-                    raise ValueError("daily editorial score must be between 0 and 100")
-                if not all(clean_text(item.get(field_name)) for field_name in ("titleZh", "summary", "why")):
-                    raise ValueError("daily editorial item is missing title, summary or importance")
-                facts = item.get("keyFacts")
-                tags = item.get("tags")
-                if not isinstance(facts, list) or not 2 <= len([fact for fact in facts if clean_text(fact)]) <= 3:
-                    raise ValueError("daily editorial item must contain 2-3 key facts")
-                if not isinstance(tags, list):
-                    raise ValueError("daily editorial tags must be an array")
+                    raise ValueError("daily selection score must be between 0 and 100")
                 item["score"] = score
                 item["id"] = index_to_article[item_index].id
                 item.pop("index", None)
@@ -1416,11 +1387,16 @@ def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[s
     raise RuntimeError(f"{runtime['provider']} structured output could not be parsed after one retry: {error}")
 
 
-def item_from_article(article: Article, config: dict[str, Any], editorial: dict[str, Any] | None = None) -> dict[str, Any]:
+def item_from_article(
+    article: Article,
+    config: dict[str, Any],
+    editorial: dict[str, Any] | None = None,
+    selection: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     editorial = editorial or {}
-    translation_only = bool(editorial.get("_translationOnly"))
-    score = int(editorial.get("score", round(article.raw_score)))
-    category = editorial.get("category") if editorial.get("category") in CATEGORIES else article.category
+    selection = selection or {}
+    score = int(selection.get("score", round(article.raw_score)))
+    category = article.category
     tags = [clean_text(tag, 24) for tag in editorial.get("tags", article.tags) if clean_text(tag)][:3]
     summary = clean_text(editorial.get("summary") or fallback_summary(article), 220)
     key_facts = [clean_text(fact, 140) for fact in editorial.get("keyFacts", []) if clean_text(fact)][:3]
@@ -1429,9 +1405,14 @@ def item_from_article(article: Article, config: dict[str, Any], editorial: dict[
     ensure_evidence_sources(article)
     confidence, confidence_reason = confidence_assessment(article, config)
     score_reasons = list(article.score_reasons)
-    score_basis = "AI翻译 · 规则评分" if translation_only else "AI编辑评分" if editorial else "规则评分"
-    if editorial and not translation_only:
-        score_reasons = [f"AI 编辑重要度 {score}/100", f"规则参考分 {round(article.raw_score)}/100", *score_reasons]
+    selection_provider = clean_text(selection.get("_provider"))
+    score_basis = "AI选稿 · 规则校验" if selection_provider else "规则评分"
+    if selection_provider:
+        score_reasons = [
+            f"{provider_display_name(selection_provider)} 选稿重要度 {score}/100",
+            f"规则参考分 {round(article.raw_score)}/100",
+            *score_reasons,
+        ]
     return {
         "id": article.id,
         "contentType": "news",
@@ -1455,6 +1436,7 @@ def item_from_article(article: Article, config: dict[str, Any], editorial: dict[
         "image": article.image,
         "corroboration": article.corroboration,
         "sources": article.evidence_sources,
+        "selectionProvider": selection_provider,
         "translationProvider": clean_text(editorial.get("_provider")),
         "isSupplemental": article.is_supplemental,
         "selectionWindowHours": article.selection_window_hours,
@@ -1582,6 +1564,111 @@ def run_resilient_ai_batches(
     return completed, warnings, diagnostics
 
 
+def request_daily_translation_batch(
+    batch: list[Article], config: dict[str, Any], runtime: dict[str, str]
+) -> dict[str, dict[str, Any]]:
+    """Translate and edit already-selected daily stories without changing selection."""
+    index_to_article = {index: article for index, article in enumerate(batch, 1)}
+    indexes = list(index_to_article)
+    item_schema = {
+        "type": "object",
+        "properties": {
+            "index": {"type": "integer", "enum": indexes},
+            "titleZh": {"type": "string"},
+            "summary": {"type": "string"},
+            "keyFacts": {"type": "array", "items": {"type": "string"}, "minItems": 2, "maxItems": 3},
+            "why": {"type": "string"},
+            "tags": {"type": "array", "items": {"type": "string"}, "maxItems": 3},
+        },
+        "required": ["index", "titleZh", "summary", "keyFacts", "why", "tags"],
+        "additionalProperties": False,
+    }
+    schema = {
+        "type": "object",
+        "properties": {
+            "items": {"type": "array", "items": item_schema, "minItems": len(batch), "maxItems": len(batch)},
+        },
+        "required": ["items"],
+        "additionalProperties": False,
+    }
+    evidence = [{
+        "index": index,
+        "title": article.title,
+        "description": clean_text(article.description, 900),
+        "source": article.source,
+        "publishedAt": article.published_at.isoformat().replace("+00:00", "Z"),
+        "category": article.category,
+        "corroboration": article.corroboration,
+    } for index, article in index_to_article.items()]
+    example = {"items": [{
+        "index": index,
+        "titleZh": f"第{index}条新闻的忠实中文标题",
+        "summary": "不超过90字的中文摘要",
+        "keyFacts": ["可由输入支持的事实一", "可由输入支持的事实二"],
+        "why": "不超过70字的为什么重要",
+        "tags": ["标签"],
+    } for index in indexes]}
+    result = request_structured_json(
+        runtime,
+        instructions=(
+            "你是国际科技与安全新闻中文编辑。这些新闻已经入选，不得改变顺序、取舍或重要度。"
+            "只能依据标题、描述、来源和时间工作，不得补写输入中没有的事实。"
+            f"本批共有{len(batch)}条，items必须恰好输出{len(batch)}条且每个index只出现一次。"
+            "每条生成忠实的中文标题、不超过90字的中文摘要、2至3条可由输入直接支持的关键事实、"
+            "不超过70字的为什么重要和最多3个短标签。保留机构、型号、数值和不确定性；军事与冲突新闻保持中性。"
+        ),
+        input_text="已入选新闻证据：\n" + json.dumps(evidence, ensure_ascii=False),
+        schema_name="frontier_daily_translation",
+        schema=schema,
+        example=example,
+        max_tokens=int(config.get("daily_translation_max_tokens", 7000)),
+    )
+    translated: dict[str, dict[str, Any]] = {}
+    for item in result.get("items", []):
+        if not isinstance(item, dict):
+            continue
+        item_index = sequence_index(item.get("index"), len(batch))
+        article = index_to_article.get(item_index)
+        facts = (
+            [clean_text(fact) for fact in item.get("keyFacts", []) if clean_text(fact)]
+            if isinstance(item.get("keyFacts"), list) else []
+        )
+        if (
+            article
+            and article.id not in translated
+            and clean_text(item.get("titleZh"))
+            and clean_text(item.get("summary"))
+            and 2 <= len(facts) <= 3
+            and clean_text(item.get("why"))
+            and isinstance(item.get("tags"), list)
+        ):
+            translated[article.id] = {
+                "titleZh": item["titleZh"],
+                "summary": item["summary"],
+                "keyFacts": facts,
+                "why": item["why"],
+                "tags": item["tags"],
+                "_translationOnly": True,
+                "_provider": runtime["provider"],
+            }
+    return translated
+
+
+def ai_translate_daily_articles(
+    articles: list[Article], config: dict[str, Any], runtime: dict[str, str]
+) -> tuple[dict[str, dict[str, Any]], list[str], dict[str, Any]]:
+    """Translate final Top N independently from whichever selector produced it."""
+    batch_size = max(1, min(6, int(config.get("daily_translation_batch_size", 5))))
+    retry_rounds = max(0, min(3, int(config.get("daily_translation_retry_rounds", 2))))
+    return run_resilient_ai_batches(
+        articles,
+        initial_batch_size=batch_size,
+        retry_rounds=retry_rounds,
+        request_batch=lambda batch: request_daily_translation_batch(batch, config, runtime),
+        label="日报中文翻译",
+    )
+
+
 def request_stream_translation_batch(
     batch: list[Article], config: dict[str, Any], runtime: dict[str, str]
 ) -> dict[str, dict[str, Any]]:
@@ -1671,6 +1758,68 @@ def ai_translate_articles(
     )
 
 
+def reusable_stream_translations(
+    previous_stream: Any,
+    candidates: list[Article],
+    runtime: dict[str, str] | None,
+) -> dict[str, dict[str, Any]]:
+    """Recover trustworthy translations for unchanged article IDs from the stream cache."""
+    if not runtime or not isinstance(previous_stream, dict):
+        return {}
+    if (
+        clean_text(previous_stream.get("translationProvider")) != runtime["provider"]
+        or clean_text(previous_stream.get("translationModel")) != runtime["model"]
+    ):
+        return {}
+    current_by_id = {article.id: article for article in candidates}
+    reusable: dict[str, dict[str, Any]] = {}
+    items = previous_stream.get("items", [])
+    for item in items if isinstance(items, list) else []:
+        item_id = clean_text(item.get("id")) if isinstance(item, dict) else ""
+        article = current_by_id.get(item_id)
+        if (
+            not article
+            or clean_text(item.get("translationProvider")) != runtime["provider"]
+            or clean_text(item.get("originalTitle")) != clean_text(article.title)
+            or not clean_text(item.get("title"))
+            or not clean_text(item.get("summary"))
+        ):
+            continue
+        key_facts = [
+            clean_text(fact, 140) for fact in item.get("keyFacts", [])
+            if clean_text(fact)
+        ] if isinstance(item.get("keyFacts"), list) else []
+        reusable[item_id] = {
+            "titleZh": item["title"],
+            "summary": item["summary"],
+            "keyFacts": key_facts or [clean_text(item["summary"], 140)],
+            "why": clean_text(item.get("why")) or WHY_TEMPLATES[article.category],
+            "tags": item.get("tags", []),
+            "_translationOnly": True,
+            "_provider": runtime["provider"],
+            "_reuseSource": "stream",
+        }
+    return reusable
+
+
+def merge_featured_stream_item(item: dict[str, Any], daily_item: dict[str, Any]) -> None:
+    """Merge Top N metadata while never replacing Chinese text with rule English text."""
+    for field_name in (
+        "originalTitle", "category", "score", "scoreBasis", "scoreComponents", "scoreReasons",
+        "confidence", "confidenceReason", "sources", "corroboration", "selectionProvider",
+        "isSupplemental", "selectionWindowHours", "selectionNote", "diversityRelaxed",
+    ):
+        if field_name in daily_item:
+            item[field_name] = daily_item[field_name]
+
+    stream_is_translated = bool(clean_text(item.get("translationProvider")))
+    daily_is_translated = bool(clean_text(daily_item.get("translationProvider")))
+    if daily_is_translated or not stream_is_translated:
+        for field_name in ("title", "summary", "keyFacts", "why", "tags", "translationProvider"):
+            if field_name in daily_item:
+                item[field_name] = daily_item[field_name]
+
+
 def build_stream_report(
     candidates: list[Article],
     config: dict[str, Any],
@@ -1692,13 +1841,7 @@ def build_stream_report(
         item = item_from_article(article, config, translations.get(article.id))
         daily_item = featured_items.get(article.id)
         if isinstance(daily_item, dict):
-            for field_name in (
-                "title", "originalTitle", "summary", "keyFacts", "why", "category", "score",
-                "scoreBasis", "scoreComponents", "scoreReasons", "confidence", "confidenceReason",
-                "tags", "sources", "corroboration", "translationProvider",
-            ):
-                if field_name in daily_item:
-                    item[field_name] = daily_item[field_name]
+            merge_featured_stream_item(item, daily_item)
         item["isTopStory"] = article.id in featured
         item["streamRank"] = len(items) + 1
         items.append(item)
@@ -1709,8 +1852,12 @@ def build_stream_report(
         source = str(item.get("source", "未知来源"))
         category_counts[category] = category_counts.get(category, 0) + 1
         source_counts[source] = source_counts.get(source, 0) + 1
+    inferred_provider = next(
+        (clean_text(item.get("translationProvider")) for item in items if clean_text(item.get("translationProvider"))),
+        "",
+    )
     return {
-        "schemaVersion": 3,
+        "schemaVersion": 4,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "timezone": config.get("timezone", "Asia/Tokyo"),
         "rangeHours": int(config.get("lookback_hours", 24)),
@@ -1719,7 +1866,7 @@ def build_stream_report(
         "truncated": len(candidates) > limit,
         "categoryCounts": category_counts,
         "sourceCounts": dict(sorted(source_counts.items(), key=lambda pair: (-pair[1], pair[0]))),
-        "translationProvider": translation_runtime.get("provider") if translation_runtime else "",
+        "translationProvider": translation_runtime.get("provider") if translation_runtime else inferred_provider,
         "translationModel": translation_runtime.get("model") if translation_runtime else "",
         "translatedItemCount": sum(bool(item.get("translationProvider")) for item in items),
         "translationWarnings": list(translation_warnings or []),
@@ -1952,18 +2099,38 @@ def fallback_brief(items: list[dict[str, Any]], source_count: int) -> dict[str, 
     }
 
 
-def build_report(candidates: list[Article], config: dict[str, Any], now: datetime, skip_ai: bool) -> dict[str, Any]:
+def build_report(
+    candidates: list[Article],
+    config: dict[str, Any],
+    now: datetime,
+    skip_ai: bool,
+    reusable_translations: dict[str, dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     top_n = int(config["top_n"])
     shortlist = candidates[: int(config["candidate_limit"])]
     selected = choose_diverse(shortlist, config, top_n)
+    selection_by_id: dict[str, dict[str, Any]] = {}
     editorial_by_id: dict[str, dict[str, Any]] = {}
-    ai_brief: dict[str, Any] | None = None
-    method = "rules"
-    editorial_status = "disabled" if skip_ai else "not-configured"
-    pipeline_warnings: list[str] = []
+    selection_method = "rules"
+    selection_warnings: list[str] = []
+    translation_warnings: list[str] = []
+    translation_diagnostics: dict[str, Any] = {}
     runtime = resolve_ai_runtime(config) if not skip_ai else None
+    selection_diagnostics: dict[str, Any] = {
+        "attempted": False,
+        "status": "disabled" if skip_ai else "not_configured",
+        "failureReason": "",
+    }
+
+    # Stage 1: select stories only. A rejected AI result never controls the
+    # independent translation stage below.
     if runtime:
-        editorial_status = "running"
+        selection_diagnostics.update({
+            "attempted": True,
+            "status": "running",
+            "provider": runtime["provider"],
+            "model": runtime["model"],
+        })
         try:
             ai_result = ai_select(shortlist, config, runtime)
             allowed = {article.id: article for article in shortlist}
@@ -1972,42 +2139,111 @@ def build_report(candidates: list[Article], config: dict[str, Any], now: datetim
                 candidate = allowed.get(str(item.get("id")))
                 if candidate and candidate not in ai_order:
                     ai_order.append(candidate)
-                    item["_provider"] = runtime["provider"]
-                    editorial_by_id[candidate.id] = item
             if len(ai_order) != top_n:
-                raise ValueError(f"AI editorial pass returned {len(ai_order)} unique valid items; expected {top_n}")
-            validate_ai_diversity(ai_order, editorial_by_id, config)
+                raise ValueError(f"AI selection returned {len(ai_order)} unique valid items; expected {top_n}")
+            validate_ai_diversity(ai_order, config, runtime["provider"])
             selected = ai_order
-            ai_brief = ai_result.get("brief")
-            method = runtime["provider"]
-            editorial_status = "ok"
+            selection_by_id = {
+                str(item["id"]): {"score": int(item["score"]), "_provider": runtime["provider"]}
+                for item in ai_result["items"]
+            }
+            selection_method = runtime["provider"]
+            selection_diagnostics["status"] = "ok"
         except Exception as exc:
             reason = clean_text(str(exc), 220) or exc.__class__.__name__
-            editorial_status = "fallback"
-            pipeline_warnings.append(f"AI 编辑失败，已使用规则选稿：{reason}")
-            editorial_by_id.clear()
-            LOGGER.warning("AI editorial pass failed; using deterministic fallback: %s", reason)
-    if method in {"openai", "deepseek"}:
-        # The AI result has already passed the strict category/domain check, so
-        # discard any relaxation flags left by the deterministic preview pass.
+            selection_diagnostics.update({"status": "rejected", "failureReason": reason})
+            selection_warnings.append(
+                f"{provider_display_name(runtime['provider'])} 选稿未采用，已使用规则 Top {top_n}：{reason}"
+            )
+            LOGGER.warning("%s selection failed; using deterministic selection: %s", runtime["provider"], reason)
+
+    if selection_method in {"openai", "deepseek"}:
+        # The selected set passed the strict category/domain check. Clear any
+        # relaxation flags left on overlapping items by the rule preview.
         for article in selected:
             article.diversity_relaxed = False
             article.selection_note = (
                 f"24 小时候选不足，作为 {article.selection_window_hours} 小时窗口补充观察"
                 if article.is_supplemental else ""
             )
+
+    # Stage 2: translate the final selected set, regardless of how it was
+    # selected. Reuse unchanged full-stream translations before making calls.
+    translation_status = "disabled" if skip_ai else "not-configured"
+    if runtime:
+        reusable_translations = reusable_translations or {}
+        for article in selected:
+            reusable = reusable_translations.get(article.id, {})
+            if (
+                clean_text(reusable.get("_provider")) == runtime["provider"]
+                and clean_text(reusable.get("titleZh"))
+                and clean_text(reusable.get("summary"))
+            ):
+                editorial_by_id[article.id] = dict(reusable)
+        reused_count = len(editorial_by_id)
+        pending = [article for article in selected if article.id not in editorial_by_id]
+        try:
+            translated, translation_warnings, translation_diagnostics = ai_translate_daily_articles(
+                pending, config, runtime
+            )
+            editorial_by_id.update(translated)
+        except Exception as exc:
+            reason = clean_text(str(exc), 220) or exc.__class__.__name__
+            translation_warnings.append(
+                f"{provider_display_name(runtime['provider'])} 日报中文翻译未完成：{reason}"
+            )
+            translation_diagnostics = {
+                "requestedItemCount": len(pending),
+                "completedItemCount": 0,
+                "missingItemCount": len(pending),
+                "missingItemIds": [article.id for article in pending],
+                "missingItems": [{"id": article.id, "reason": reason} for article in pending],
+                "initialBatchSize": int(config.get("daily_translation_batch_size", 5)),
+                "initialBatchCount": 0,
+                "requestCount": 0,
+                "retryRequestCount": 0,
+                "providerFailureCount": 1,
+                "structuralFailureCount": 0,
+                "completionReason": "translation_stage_error",
+                "completionMessage": reason,
+                "lastProviderError": reason,
+            }
+        translated_count = sum(article.id in editorial_by_id for article in selected)
+        translation_status = (
+            "ok" if translated_count == len(selected)
+            else "partial" if translated_count
+            else "failed"
+        )
+        translation_diagnostics.update({
+            "targetItemCount": len(selected),
+            "reusedItemCount": reused_count,
+            "newlyTranslatedItemCount": max(0, translated_count - reused_count),
+            "totalTranslatedItemCount": translated_count,
+            "totalMissingItemCount": len(selected) - translated_count,
+        })
+        if translation_status != "ok" and not any("日报中文翻译不完整" in warning for warning in translation_warnings):
+            translation_warnings.append(f"日报中文翻译不完整：{translated_count}/{len(selected)}")
+
     supplemental_count = sum(article.is_supplemental for article in selected)
     diversity_relaxed_count = sum(article.diversity_relaxed for article in selected)
     if supplemental_count:
         oldest_window = max(article.selection_window_hours for article in selected)
-        pipeline_warnings.append(
+        selection_warnings.append(
             f"24 小时内合格候选不足，Top 10 中有 {supplemental_count} 条来自最多 {oldest_window} 小时补充窗口，卡片已明确标注"
         )
     if diversity_relaxed_count:
-        pipeline_warnings.append(
+        selection_warnings.append(
             f"候选主题或来源分布不均，已分级放宽配额补足 Top 10（{diversity_relaxed_count} 条已标注）"
         )
-    items = [item_from_article(article, config, editorial_by_id.get(article.id)) for article in selected]
+    items = [
+        item_from_article(
+            article,
+            config,
+            editorial_by_id.get(article.id),
+            selection_by_id.get(article.id),
+        )
+        for article in selected
+    ]
     items.sort(key=lambda item: (item["score"], item["publishedAt"]), reverse=True)
     source_count = len({
         (evidence.get("evidenceGroup") or evidence.get("domain") or evidence.get("name") or "").lower()
@@ -2015,22 +2251,29 @@ def build_report(candidates: list[Article], config: dict[str, Any], now: datetim
         for evidence in (article.evidence_sources or [source_evidence(article)])
         if evidence.get("evidenceGroup") or evidence.get("domain") or evidence.get("name")
     })
-    brief = ai_brief if isinstance(ai_brief, dict) else fallback_brief(items, source_count)
+    brief = fallback_brief(items, source_count)
     signals = [clean_text(signal, 180) for signal in brief.get("signals", []) if clean_text(signal)][:3]
     if len(signals) < 3:
         signals = fallback_brief(items, source_count)["signals"]
     local_time = now.astimezone(ZoneInfo(config.get("timezone", "Asia/Tokyo")))
     return {
-        "schemaVersion": 5,
+        "schemaVersion": 6,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "editionDate": local_time.strftime("%Y-%m-%d"),
         "timezone": config.get("timezone", "Asia/Tokyo"),
-        "method": method,
-        "editorialStatus": editorial_status,
-        "editorialProvider": runtime.get("provider") if runtime else "",
-        "editorialModel": runtime.get("model") if runtime else "",
-        "translatedItemCount": len(editorial_by_id),
-        "warnings": pipeline_warnings,
+        "method": selection_method,
+        "selectionMethod": selection_method,
+        "selectionProvider": runtime.get("provider") if runtime else "",
+        "selectionModel": runtime.get("model") if runtime else "",
+        "selectionWarnings": selection_warnings,
+        "selectionDiagnostics": selection_diagnostics,
+        "translationStatus": translation_status,
+        "translationProvider": runtime.get("provider") if runtime else "",
+        "translationModel": runtime.get("model") if runtime else "",
+        "translatedItemCount": sum(bool(item.get("translationProvider")) for item in items),
+        "translationWarnings": translation_warnings,
+        "translationDiagnostics": translation_diagnostics,
+        "warnings": [*selection_warnings, *translation_warnings],
         "candidateCount": len(candidates),
         "freshCandidateCount": sum(not article.is_supplemental for article in candidates),
         "supplementalCandidateCount": sum(article.is_supplemental for article in candidates),
@@ -2081,6 +2324,20 @@ def validate_report(report: dict[str, Any], expected_count: int) -> None:
     translated = sum(bool(item.get("translationProvider")) for item in items)
     if int(report.get("translatedItemCount", translated)) != translated:
         raise ValueError("daily translatedItemCount does not match items")
+    if clean_text(report.get("selectionMethod")) not in {"rules", "deepseek", "openai"}:
+        raise ValueError(f"invalid daily selectionMethod: {report.get('selectionMethod')}")
+    translation_status = clean_text(report.get("translationStatus"))
+    if translation_status not in {"ok", "partial", "failed", "disabled", "not-configured"}:
+        raise ValueError(f"invalid daily translationStatus: {translation_status}")
+    if translation_status == "ok" and translated != expected_count:
+        raise ValueError("daily translationStatus is ok but some items are untranslated")
+    if translation_status == "failed" and translated:
+        raise ValueError("daily translationStatus is failed but translated items exist")
+    if translation_status == "partial" and not 0 < translated < expected_count:
+        raise ValueError("daily translationStatus is partial but translated count is not partial")
+    if translation_status in {"disabled", "not-configured"} and translated:
+        raise ValueError("daily translation is disabled or unconfigured but translated items exist")
+    validate_ai_batch_diagnostics(report.get("translationDiagnostics"), "daily translation")
 
 
 def validate_ai_batch_diagnostics(value: Any, label: str) -> None:
@@ -2355,19 +2612,40 @@ def write_pipeline_status(
     previous = read_json_safe(path, {})
     previous = previous if isinstance(previous, dict) else {}
     success = state == "ok" and report is not None
+    previous_translation_status = clean_text(previous.get("translationStatus"))
+    if previous_translation_status not in {"ok", "partial", "failed", "disabled", "not-configured"}:
+        previous_translated = int(previous.get("translatedItemCount", 0) or 0)
+        previous_item_count = int(previous.get("itemCount", 0) or 0)
+        if previous_item_count and previous_translated >= previous_item_count:
+            previous_translation_status = "ok"
+        elif previous_translated:
+            previous_translation_status = "partial"
+        elif clean_text(previous.get("editorialStatus")) in {"disabled", "not-configured"}:
+            previous_translation_status = clean_text(previous.get("editorialStatus"))
+        elif previous:
+            previous_translation_status = "failed"
+        else:
+            previous_translation_status = "unknown"
     payload = {
-        "schemaVersion": 5,
+        "schemaVersion": 6,
         "state": state,
         "lastAttemptAt": now.isoformat().replace("+00:00", "Z"),
         "lastSuccessAt": now.isoformat().replace("+00:00", "Z") if success else previous.get("lastSuccessAt"),
         "editionDate": report.get("editionDate") if success else previous.get("editionDate"),
         "itemCount": len(report.get("items", [])) if success else previous.get("itemCount", 0),
         "message": clean_text(message, 300),
-        "method": report.get("method") if success else previous.get("method"),
-        "editorialStatus": report.get("editorialStatus") if success else previous.get("editorialStatus"),
-        "editorialProvider": report.get("editorialProvider") if success else previous.get("editorialProvider"),
-        "editorialModel": report.get("editorialModel") if success else previous.get("editorialModel"),
+        "method": report.get("selectionMethod", report.get("method")) if success else previous.get("method"),
+        "selectionMethod": report.get("selectionMethod") if success else previous.get("selectionMethod", previous.get("method")),
+        "selectionProvider": report.get("selectionProvider") if success else previous.get("selectionProvider", previous.get("editorialProvider")),
+        "selectionModel": report.get("selectionModel") if success else previous.get("selectionModel", previous.get("editorialModel")),
+        "selectionWarnings": report.get("selectionWarnings", []) if success else previous.get("selectionWarnings", []),
+        "selectionDiagnostics": report.get("selectionDiagnostics", {}) if success else previous.get("selectionDiagnostics", {}),
+        "translationStatus": report.get("translationStatus") if success else previous_translation_status,
+        "translationProvider": report.get("translationProvider") if success else previous.get("translationProvider", previous.get("editorialProvider")),
+        "translationModel": report.get("translationModel") if success else previous.get("translationModel", previous.get("editorialModel")),
         "translatedItemCount": int(report.get("translatedItemCount", 0)) if success else previous.get("translatedItemCount", 0),
+        "translationWarnings": report.get("translationWarnings", []) if success else previous.get("translationWarnings", []),
+        "translationDiagnostics": report.get("translationDiagnostics", {}) if success else previous.get("translationDiagnostics", {}),
         "warnings": report.get("warnings", []) if success else previous.get("warnings", []),
         "coverageStatus": report.get("coverageStatus") if success else previous.get("coverageStatus"),
         "freshItemCount": int(report.get("freshItemCount", 0)) if success else previous.get("freshItemCount", 0),
@@ -2482,6 +2760,12 @@ def main(argv: list[str] | None = None) -> int:
         if not stream_candidates:
             raise RuntimeError("没有合格的 24 小时候选；已保留上一版全量动态与日报")
 
+        stream_runtime = resolve_ai_runtime(config) if not args.skip_ai else None
+        previous_stream = read_json_safe(args.stream_output, {})
+        stream_translations = reusable_stream_translations(
+            previous_stream, stream_candidates, stream_runtime
+        )
+
         report: dict[str, Any] | None = None
         if not args.stream_only:
             top_n = int(config["top_n"])
@@ -2525,7 +2809,13 @@ def main(argv: list[str] | None = None) -> int:
                 raise RuntimeError(
                     f"分层补采后仍只有 {len(candidates)} 条可验证候选；需要 {top_n} 条，已保留上一期内容"
                 )
-            report = build_report(candidates, config, now, args.skip_ai)
+            report = build_report(
+                candidates,
+                config,
+                now,
+                args.skip_ai,
+                reusable_translations=stream_translations,
+            )
             validate_report(report, int(config["top_n"]))
 
         if report:
@@ -2537,40 +2827,12 @@ def main(argv: list[str] | None = None) -> int:
                 str(item["id"]): item for item in previous_items
                 if isinstance(item, dict) and clean_text(item.get("id"))
             }
-        stream_runtime = resolve_ai_runtime(config) if not args.skip_ai else None
-        stream_translations: dict[str, dict[str, Any]] = {}
         stream_translation_warnings: list[str] = []
         stream_translation_diagnostics: dict[str, Any] = {}
         if (
             stream_runtime
-            and stream_runtime["provider"] == "deepseek"
             and bool(config.get("stream_translation_enabled", True))
         ):
-            previous_stream = read_json_safe(args.stream_output, {})
-            current_by_id = {article.id: article for article in stream_candidates}
-            can_reuse_translations = (
-                isinstance(previous_stream, dict)
-                and clean_text(previous_stream.get("translationProvider")) == stream_runtime["provider"]
-                and clean_text(previous_stream.get("translationModel")) == stream_runtime["model"]
-            )
-            previous_stream_items = previous_stream.get("items", []) if can_reuse_translations else []
-            for item in previous_stream_items if isinstance(previous_stream_items, list) else []:
-                item_id = clean_text(item.get("id")) if isinstance(item, dict) else ""
-                article = current_by_id.get(item_id)
-                if (
-                    article
-                    and clean_text(item.get("translationProvider")) == stream_runtime["provider"]
-                    and clean_text(item.get("originalTitle")) == clean_text(article.title)
-                    and clean_text(item.get("title"))
-                    and clean_text(item.get("summary"))
-                ):
-                    stream_translations[item_id] = {
-                        "titleZh": item["title"],
-                        "summary": item["summary"],
-                        "tags": item.get("tags", []),
-                        "_translationOnly": True,
-                        "_provider": stream_runtime["provider"],
-                    }
             reused_translation_count = len(stream_translations)
             translation_limit = max(0, min(
                 int(config.get("stream_limit", 300)),
@@ -2593,13 +2855,17 @@ def main(argv: list[str] | None = None) -> int:
                 for item in top_stories.values()
             )
             stream_translations.update(new_translations)
+        has_translated_top_story = any(
+            isinstance(item, dict) and bool(clean_text(item.get("translationProvider")))
+            for item in top_stories.values()
+        )
         stream_report = build_stream_report(
             stream_candidates,
             config,
             now,
             top_stories,
             stream_translations,
-            stream_runtime if stream_translations else None,
+            stream_runtime if stream_translations or has_translated_top_story else None,
             stream_translation_warnings,
             stream_translation_diagnostics,
         )

@@ -74,8 +74,8 @@ Actions Variables：
 
 依次手动运行 `Daily news update` 和 `Full stream update`，再检查：
 
-- `public/data/news.json.method` 应为 `deepseek`；
-- `public/data/news.json.editorialModel` 应为 `deepseek-v4-flash`；
+- `public/data/news.json.selectionMethod` 应为 `deepseek` 或在 AI 选稿未通过校验时为 `rules`；
+- `public/data/news.json.translationStatus` 应为 `ok`，`translationModel` 应为 `deepseek-v4-flash`，`translatedItemCount` 应为 `10`；
 - 每条应有 `title`、`originalTitle`、`summary` 和非空 `keyFacts`；
 - `sources`、`scoreReasons` 和 `confidenceReason` 应非空。
 - `public/data/research.json.translatedItemCount` 和 `public/data/stream.json.translatedItemCount` 应大于 0。
@@ -136,8 +136,8 @@ Actions Variables：
 
 - `Only N eligible candidates`：有效候选不足 10 条，脚本会拒绝覆盖上一期；稍后手动重试或维护 `config/news_config.json` 中的信源。
 - RSS/GDELT 出现 `403`、`429` 或超时：其他信源仍会继续；持续失败时替换该信源。
-- DeepSeek/OpenAI 调用失败：Top 10 自动降级到规则筛选；论文和动态保留成功翻译批次及原始元数据，不阻断发布。
-- 页面显示“翻译不完整”：查看 `stream-status.json.translationDiagnostics` 或 `status.json.researchEditorialDiagnostics`；其中记录缺失 ID、逐项原因、拆分重试次数和最终完成原因。成功条目会被缓存，稍后重跑只补缺失项。
+- DeepSeek/OpenAI 选稿调用或多样性校验失败：仅 `selectionMethod` 切换为 `rules`；最终的规则 Top 10 仍会进入独立中文翻译阶段，不会被选稿失败连带降级。
+- 页面显示“翻译不完整”：日报查看 `status.json.translationDiagnostics`，全量动态查看 `stream-status.json.translationDiagnostics`，论文查看 `status.json.researchEditorialDiagnostics`；其中记录缺失 ID、逐项原因、拆分重试次数和最终完成原因。成功条目会被缓存，稍后重跑只补缺失项。
 - 页面显示“数据过期”：`generatedAt` 已超过 36 小时；检查日报工作流、信源和 Cloudflare 最新部署。
 - 页面显示“最近一次自动更新失败”：打开 `public/data/status.json` 或 Actions 日志查看已公开的简短原因；上一期数据不会被覆盖。
 - 邮件未发送：先确认工作流中 `Send administrator email digest` 步骤是否显示跳过配置；再核对 SMTP 端口、SSL/STARTTLS 和授权码。

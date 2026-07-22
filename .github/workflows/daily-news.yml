@@ -55,8 +55,12 @@ jobs:
           python -c "import json; p=json.load(open('public/data/news.json', encoding='utf-8'));
           s=json.load(open('public/data/stream.json', encoding='utf-8'));
           r=json.load(open('public/data/research.json', encoding='utf-8'));
+          assert p.get('schemaVersion') == 6, p.get('schemaVersion');
           assert p.get('timezone') == 'Asia/Tokyo', p.get('timezone');
+          assert p.get('selectionMethod') in ('rules', 'deepseek', 'openai'), p.get('selectionMethod');
+          assert p.get('translationStatus') in ('ok', 'partial', 'failed', 'disabled', 'not-configured'), p.get('translationStatus');
           assert len(p.get('items', [])) == 10, len(p.get('items', []));
+          assert p.get('translatedItemCount') == sum(bool(x.get('translationProvider')) for x in p['items']);
           assert all(x.get('keyFacts') and x.get('sources') for x in p['items']);
           assert s.get('itemCount') == len(s.get('items', [])) and s.get('itemCount', 0) > 0;
           assert r.get('itemCount') == len(r.get('items', []));
