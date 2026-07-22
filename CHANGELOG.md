@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.7.0 — Resilient AI batches and conflict-safe publishing
+
+- Reduced DeepSeek stream batches from 12 to 6 items and research batches from 10 to 5 items.
+- Replaced model-facing article and paper IDs with one-based sequence indexes, then restored stable IDs after local validation.
+- Added recursive split retries for only the missing records, while retaining a two-failure circuit breaker for provider outages or empty responses.
+- Added structured translation diagnostics with requested/completed/missing counts, missing IDs, per-item reasons, retry counts and a machine-readable completion reason.
+- Surfaced concise retry diagnostics in the stream and research health banners without exposing API keys or raw prompts.
+- Kept both data workflows under one concurrency lock and added three conflict-safe fetch/rebase/push attempts when `main` changes during a long collection run.
+
 ## 1.6.0 — Personal research signals and DeepSeek translation
 
 ### Research discovery

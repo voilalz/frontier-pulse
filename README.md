@@ -14,7 +14,7 @@
 - 独立“全量动态”视图保留最多 300 条通过时间窗、相关性、去重与商业内容过滤的候选，可按 6/12/24 小时、来源、主题和关键词筛选；每日 Top 10 在流中明确标记。
 - 独立“论文雷达”读取 arXiv 官方 Atom API，覆盖 AI、机器学习、机器人、无人与控制系统、空间科学、量子和先进材料；除分类采集外，系统采集词会直接查询论文标题和摘要。
 - “我的论文关键词”可在浏览器保存最多 20 个中英文词，自动筛选、命中高亮并生成专属论文流；个人词不上传，系统实际采集词则公开显示在页面上。
-- 配置 DeepSeek 时，论文雷达可分批为最多 60 篇生成中文标题、摘要、研究问题、方法、主要发现与局限；全量动态最多翻译 120 条，并复用未变化条目的既有翻译以控制成本。单个批次失败不会删除原始内容。
+- 配置 DeepSeek 时，论文雷达可分批为最多 60 篇生成中文标题、摘要、研究问题、方法、主要发现与局限；全量动态最多翻译 120 条，并复用未变化条目的既有翻译以控制成本。新闻每批 6 条、论文每批 5 篇，缺失项会自动拆分重试，单个批次失败不会删除原始内容。
 - 首页重构为“今日必读 Top 3 → 执行摘要 → 完整 Top 10”，减少首屏信息拥挤，同时保留全部证据详情。
 - 展示一个事件的全部来源、独立来源数量、来源置信度和可展开的评分分项。
 - 按日归档、日期前后切换，以及按月分片的轻量跨日期搜索；完整评分与来源在展开时按需读取当期归档。
@@ -32,7 +32,7 @@
 1. 并行读取配置中的公开 RSS/Atom 与 GDELT，清洗元数据，将同一事件的独立来源合并到 `sources[]`。
 2. 按来源、时效、主题、影响信号、证据完整度和多源印证进行规则评分，并把全部合格候选写入 `stream.json`。
 3. 若 24 小时合格候选不足 10 条，先合并最近一次已验证的三小时动态缓存，再按 36/48/72 小时逐级补充并施加时效降权；若只是候选分布过度集中，则分级放宽主题/来源配额，而不是让整期刷新失败。
-4. 配置 `DEEPSEEK_API_KEY` 时，调用 DeepSeek Chat Completions（JSON 输出、关闭思考模式）完成 Top 10 中文编辑，并分批翻译动态流；也保留 OpenAI Responses 作为可选后备。网络/结构化输出允许一次退避重试，选稿结果仍须通过类别与来源多样性校验。
+4. 配置 `DEEPSEEK_API_KEY` 时，调用 DeepSeek Chat Completions（JSON 输出、关闭思考模式）完成 Top 10 中文编辑，并用短序号、小批次和缺失项拆分重试翻译动态流；也保留 OpenAI Responses 作为可选后备。选稿结果仍须通过类别与来源多样性校验。
 5. 独立按 arXiv 分类与 `research.collection_keywords` 查询标题/摘要，合并去重后按主题相关性、摘要完整度与新鲜度排序；可选 AI 中文编辑不会改变原始论文元数据。
 6. 校验日报恰好 10 条后，写入最新一期、按日归档、月度搜索分片、Atom Feed 和健康状态；全量动态保持严格 24 小时语义，允许低流量日少于 10 条。
 7. 只有在 72 小时内仍无法找到 10 条可验证候选，或完全没有 24 小时候选时，才保留上一版真实日报并记录失败，绝不生成虚构新闻。
@@ -119,11 +119,11 @@ python scripts/update_news.py
 - `public/data/news.json`：`method: deepseek`、`editorialModel: deepseek-v4-flash`，条目含中文 `title`、`summary` 与 `keyFacts`。
 - `public/data/research.json`：`editorialProvider: deepseek`、`translatedItemCount > 0`。
 - `public/data/stream.json`：`translationProvider: deepseek`、`translatedItemCount > 0`。
-- `public/data/status.json` 和 `stream-status.json`：记录模型、翻译数量及公开的批次警告，但绝不包含密钥。
+- `public/data/status.json` 和 `stream-status.json`：记录模型、翻译数量、缺失 ID、重试次数、逐项失败原因和完成原因，但绝不包含密钥或原始提示词。
 
 本地运行可复制 `.env.example` 中的变量到当前终端环境，再执行 `python scripts/update_news.py`。不要提交真实 `.env`。系统使用官方兼容地址 `https://api.deepseek.com/chat/completions`；模型与 JSON 输出参数以 [DeepSeek 官方 API 文档](https://api-docs.deepseek.com/) 为准。
 
-若 DeepSeek 调用、解析或多样性校验失败，Top 10 自动回退规则版；论文与动态只保留成功批次，并显示翻译不完整警告。原始标题、摘要和链接不会因翻译失败而丢失。`AI_PROVIDER=auto` 时优先选择已配置的 DeepSeek；仅在没有 DeepSeek 密钥时选择 OpenAI，不会在一次失败调用中跨供应商自动重试。若要继续使用 OpenAI，则设置 `AI_PROVIDER=openai`、Secret `OPENAI_API_KEY` 和 Variable `OPENAI_MODEL`。
+若 DeepSeek 调用、解析或多样性校验失败，Top 10 自动回退规则版；论文与动态保留成功条目，只对缺失项按更小批次继续重试，并在连续两次无有效结果时熔断。原始标题、摘要和链接不会因翻译失败而丢失。`AI_PROVIDER=auto` 时优先选择已配置的 DeepSeek；仅在没有 DeepSeek 密钥时选择 OpenAI，不会在一次失败调用中跨供应商自动重试。若要继续使用 OpenAI，则设置 `AI_PROVIDER=openai`、Secret `OPENAI_API_KEY` 和 Variable `OPENAI_MODEL`。
 
 ## 论文关键词：个人筛选与服务器采集
 

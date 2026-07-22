@@ -73,9 +73,22 @@ jobs:
           git config user.name "frontier-pulse-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "chore(data): refresh daily frontier brief and archive"
-          git fetch origin main --depth=20
-          git rebase origin/main
-          git push origin HEAD:main
+          for attempt in 1 2 3; do
+            git fetch origin main --depth=20
+            # During a rebase, "theirs" is this workflow's generated-data commit.
+            if ! git rebase -X theirs origin/main; then
+              git rebase --abort || true
+              echo "Unable to replay generated data onto the latest main"
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "main changed during push; retrying publication ($attempt/3)"
+            sleep "$((attempt * 2))"
+          done
+          echo "Unable to publish generated data after 3 attempts"
+          exit 1
       - name: Send administrator email digest
         if: steps.collect.outcome == 'success'
         env:

@@ -319,9 +319,11 @@
         showAlert("warning", "全量动态可能已经过期", `当前动态生成于 ${formatDate(state.streamReport?.generatedAt)}，已超过 7 小时。请检查三小时更新工作流。`);
         return;
       }
+      const streamDiagnostics = state.streamReport?.translationDiagnostics || state.streamStatus?.translationDiagnostics;
       const translationWarnings = [
         ...(Array.isArray(state.streamReport?.translationWarnings) ? state.streamReport.translationWarnings : []),
         ...(Array.isArray(state.streamStatus?.translationWarnings) ? state.streamStatus.translationWarnings : []),
+        batchDiagnosticWarning(streamDiagnostics, "新闻"),
       ].filter(Boolean);
       if (translationWarnings.length) {
         badge.textContent = "翻译不完整";
@@ -357,9 +359,11 @@
         showAlert("warning", "论文雷达可能已经过期", `当前论文数据生成于 ${formatDate(state.researchReport?.generatedAt)}，已超过 36 小时。`);
         return;
       }
+      const researchDiagnostics = state.researchReport?.editorialDiagnostics || state.pipelineStatus?.researchEditorialDiagnostics;
       const warnings = [
         ...(Array.isArray(state.researchReport?.warnings) ? state.researchReport.warnings : []),
         ...(Array.isArray(state.pipelineStatus?.researchWarnings) ? state.pipelineStatus.researchWarnings : []),
+        batchDiagnosticWarning(researchDiagnostics, "论文"),
       ].filter(Boolean);
       const researchEditorialStatus = state.pipelineStatus?.researchEditorialStatus || state.researchReport?.editorialStatus;
       if (["partial", "fallback", "stale"].includes(researchEditorialStatus) || warnings.length) {
@@ -639,6 +643,15 @@
     if (provider === "deepseek") return "DeepSeek V4 Flash";
     if (provider === "openai") return "OpenAI";
     return "";
+  }
+
+  function batchDiagnosticWarning(diagnostics, contentLabel) {
+    const missing = Number(diagnostics?.missingItemCount) || 0;
+    if (!missing) return "";
+    const requested = Number(diagnostics?.requestedItemCount) || 0;
+    const completed = Number(diagnostics?.completedItemCount) || 0;
+    const reason = clean(diagnostics?.completionMessage, "拆分重试后仍有条目缺失");
+    return `${contentLabel}翻译完成 ${completed}/${requested}，仍缺失 ${missing} 条：${reason}；缺失 ID 与原因已写入公开状态数据`;
   }
 
   function renderBrief() {

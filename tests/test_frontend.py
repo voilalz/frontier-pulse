@@ -50,12 +50,12 @@ class FrontendTests(unittest.TestCase):
         app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
         worker = (ROOT / "public" / "sw.js").read_text(encoding="utf-8")
         headers = (ROOT / "public" / "_headers").read_text(encoding="utf-8")
-        self.assertIn("./assets/app.js?v=1.6.0", index)
-        self.assertIn("./assets/styles.css?v=1.6.0", index)
+        self.assertIn("./assets/app.js?v=1.7.0", index)
+        self.assertIn("./assets/styles.css?v=1.7.0", index)
         self.assertIn('event.preventDefault();\n      await switchView(viewButton.dataset.view);', app)
         self.assertIn('request.mode === "navigate"', worker)
         self.assertIn("frontier-pulse-", worker)
-        self.assertIn("v1.6.0", worker)
+        self.assertIn("v1.7.0", worker)
         self.assertIn("/assets/*\n  Cache-Control: public, max-age=0, must-revalidate", headers)
 
     def test_cache_is_bypassed_only_for_manual_refresh(self):
@@ -104,8 +104,22 @@ class FrontendTests(unittest.TestCase):
         self.assertIn("data-research-scope", index + app)
         self.assertIn("collectionKeywords", app)
         self.assertIn("DeepSeek 中文", app)
+        self.assertIn("translationDiagnostics", app)
+        self.assertIn("缺失 ID 与原因已写入公开状态数据", app)
         self.assertIn(".research-keyword-panel", styles)
         self.assertNotIn("DEEPSEEK_API_KEY", index + app + styles)
+
+    def test_data_workflows_share_lock_and_retry_conflict_safe_rebase(self):
+        workflows = [
+            (ROOT / ".github" / "workflows" / name).read_text(encoding="utf-8")
+            for name in ("daily-news.yml", "stream-update.yml")
+        ]
+        for workflow in workflows:
+            self.assertIn("group: frontier-data-main", workflow)
+            self.assertIn("cancel-in-progress: false", workflow)
+            self.assertIn("for attempt in 1 2 3; do", workflow)
+            self.assertIn("git rebase -X theirs origin/main", workflow)
+            self.assertIn("main changed during push; retrying publication", workflow)
 
 
 if __name__ == "__main__":
