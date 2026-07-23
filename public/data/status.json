@@ -1,18 +1,53 @@
 {
-  "schemaVersion": 4,
+  "schemaVersion": 6,
   "state": "ok",
-  "lastAttemptAt": "2026-07-21T23:59:11Z",
-  "lastSuccessAt": "2026-07-21T23:59:11Z",
-  "editionDate": "2026-07-22",
+  "lastAttemptAt": "2026-07-23T00:06:35Z",
+  "lastSuccessAt": "2026-07-23T00:06:35Z",
+  "editionDate": "2026-07-23",
   "itemCount": 10,
-  "message": "日报更新成功；AI 编辑失败，已使用规则选稿：OpenAI 选稿未通过多样性校验：类别超限=无，域名超限={'defensenews.com': 3}；论文中文编辑批次失败（1-10）：research editorial response contained 1 valid papers; expected 10；论文中文编辑批次失败（21-24）：research editorial response contained 1 valid papers; expected 4",
+  "message": "日报更新成功；DeepSeek 选稿未采用，已使用规则 Top 10：DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 4}，域名超限={'aljazeera.com': 4}；论文中文编辑批次失败（1-10）：research editorial response contained 1 valid papers; expected 10；论文中文编辑批次失败（21-24）：research editorial response contained 1 valid papers; expected 4；论文抓取未返回合格条目，已保留上一版论文雷达",
   "method": "rules",
-  "editorialStatus": "fallback",
-  "editorialProvider": "deepseek",
-  "editorialModel": "deepseek-v4-flash",
-  "translatedItemCount": 0,
+  "selectionMethod": "rules",
+  "selectionProvider": "deepseek",
+  "selectionModel": "deepseek-v4-flash",
+  "selectionWarnings": [
+    "DeepSeek 选稿未采用，已使用规则 Top 10：DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 4}，域名超限={'aljazeera.com': 4}"
+  ],
+  "selectionDiagnostics": {
+    "attempted": true,
+    "status": "rejected",
+    "failureReason": "DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 4}，域名超限={'aljazeera.com': 4}",
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash"
+  },
+  "translationStatus": "ok",
+  "translationProvider": "deepseek",
+  "translationModel": "deepseek-v4-flash",
+  "translatedItemCount": 10,
+  "translationWarnings": [],
+  "translationDiagnostics": {
+    "requestedItemCount": 1,
+    "completedItemCount": 1,
+    "missingItemCount": 0,
+    "missingItemIds": [],
+    "missingItems": [],
+    "initialBatchSize": 5,
+    "initialBatchCount": 1,
+    "requestCount": 1,
+    "retryRequestCount": 0,
+    "providerFailureCount": 0,
+    "structuralFailureCount": 0,
+    "completionReason": "complete_first_pass",
+    "completionMessage": "全部条目首轮完成",
+    "lastProviderError": "",
+    "targetItemCount": 10,
+    "reusedItemCount": 9,
+    "newlyTranslatedItemCount": 1,
+    "totalTranslatedItemCount": 10,
+    "totalMissingItemCount": 0
+  },
   "warnings": [
-    "AI 编辑失败，已使用规则选稿：OpenAI 选稿未通过多样性校验：类别超限=无，域名超限={'defensenews.com': 3}"
+    "DeepSeek 选稿未采用，已使用规则 Top 10：DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 4}，域名超限={'aljazeera.com': 4}"
   ],
   "coverageStatus": "complete",
   "freshItemCount": 10,
@@ -21,15 +56,35 @@
   "streamItemCount": 57,
   "streamTranslationProvider": "deepseek",
   "streamTranslationModel": "deepseek-v4-flash",
-  "streamTranslatedItemCount": 47,
+  "streamTranslatedItemCount": 57,
   "streamTranslationWarnings": [],
+  "streamTranslationDiagnostics": {
+    "requestedItemCount": 5,
+    "completedItemCount": 5,
+    "missingItemCount": 0,
+    "missingItemIds": [],
+    "missingItems": [],
+    "initialBatchSize": 6,
+    "initialBatchCount": 1,
+    "requestCount": 1,
+    "retryRequestCount": 0,
+    "providerFailureCount": 0,
+    "structuralFailureCount": 0,
+    "completionReason": "complete_first_pass",
+    "completionMessage": "全部条目首轮完成",
+    "lastProviderError": "",
+    "reusedItemCount": 51,
+    "featuredTranslatedItemCount": 10
+  },
   "researchItemCount": 24,
-  "researchEditorialStatus": "partial",
+  "researchEditorialStatus": "stale",
   "researchEditorialProvider": "deepseek",
   "researchEditorialModel": "deepseek-v4-flash",
   "researchTranslatedItemCount": 10,
   "researchWarnings": [
     "论文中文编辑批次失败（1-10）：research editorial response contained 1 valid papers; expected 10",
-    "论文中文编辑批次失败（21-24）：research editorial response contained 1 valid papers; expected 4"
-  ]
+    "论文中文编辑批次失败（21-24）：research editorial response contained 1 valid papers; expected 4",
+    "论文抓取未返回合格条目，已保留上一版论文雷达"
+  ],
+  "researchEditorialDiagnostics": {}
 }
