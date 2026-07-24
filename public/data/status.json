@@ -1,22 +1,22 @@
 {
   "schemaVersion": 6,
   "state": "ok",
-  "lastAttemptAt": "2026-07-23T00:06:35Z",
-  "lastSuccessAt": "2026-07-23T00:06:35Z",
-  "editionDate": "2026-07-23",
+  "lastAttemptAt": "2026-07-24T00:05:21Z",
+  "lastSuccessAt": "2026-07-24T00:05:21Z",
+  "editionDate": "2026-07-24",
   "itemCount": 10,
-  "message": "日报更新成功；DeepSeek 选稿未采用，已使用规则 Top 10：DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 4}，域名超限={'aljazeera.com': 4}；论文中文编辑批次失败（1-10）：research editorial response contained 1 valid papers; expected 10；论文中文编辑批次失败（21-24）：research editorial response contained 1 valid papers; expected 4；论文抓取未返回合格条目，已保留上一版论文雷达",
+  "message": "日报更新成功；DeepSeek 选稿未采用，已使用规则 Top 10：DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 6}，域名超限={'aljazeera.com': 3}",
   "method": "rules",
   "selectionMethod": "rules",
   "selectionProvider": "deepseek",
   "selectionModel": "deepseek-v4-flash",
   "selectionWarnings": [
-    "DeepSeek 选稿未采用，已使用规则 Top 10：DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 4}，域名超限={'aljazeera.com': 4}"
+    "DeepSeek 选稿未采用，已使用规则 Top 10：DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 6}，域名超限={'aljazeera.com': 3}"
   ],
   "selectionDiagnostics": {
     "attempted": true,
     "status": "rejected",
-    "failureReason": "DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 4}，域名超限={'aljazeera.com': 4}",
+    "failureReason": "DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 6}，域名超限={'aljazeera.com': 3}",
     "provider": "deepseek",
     "model": "deepseek-v4-flash"
   },
@@ -26,8 +26,8 @@
   "translatedItemCount": 10,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 1,
-    "completedItemCount": 1,
+    "requestedItemCount": 2,
+    "completedItemCount": 2,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
@@ -41,26 +41,26 @@
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
     "targetItemCount": 10,
-    "reusedItemCount": 9,
-    "newlyTranslatedItemCount": 1,
+    "reusedItemCount": 8,
+    "newlyTranslatedItemCount": 2,
     "totalTranslatedItemCount": 10,
     "totalMissingItemCount": 0
   },
   "warnings": [
-    "DeepSeek 选稿未采用，已使用规则 Top 10：DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 4}，域名超限={'aljazeera.com': 4}"
+    "DeepSeek 选稿未采用，已使用规则 Top 10：DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 6}，域名超限={'aljazeera.com': 3}"
   ],
   "coverageStatus": "complete",
   "freshItemCount": 10,
   "supplementalItemCount": 0,
   "effectiveLookbackHours": 24,
-  "streamItemCount": 57,
+  "streamItemCount": 39,
   "streamTranslationProvider": "deepseek",
   "streamTranslationModel": "deepseek-v4-flash",
-  "streamTranslatedItemCount": 57,
+  "streamTranslatedItemCount": 39,
   "streamTranslationWarnings": [],
   "streamTranslationDiagnostics": {
-    "requestedItemCount": 5,
-    "completedItemCount": 5,
+    "requestedItemCount": 2,
+    "completedItemCount": 2,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
@@ -73,18 +73,29 @@
     "completionReason": "complete_first_pass",
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
-    "reusedItemCount": 51,
+    "reusedItemCount": 35,
     "featuredTranslatedItemCount": 10
   },
-  "researchItemCount": 24,
-  "researchEditorialStatus": "stale",
+  "researchItemCount": 60,
+  "researchEditorialStatus": "ok",
   "researchEditorialProvider": "deepseek",
   "researchEditorialModel": "deepseek-v4-flash",
-  "researchTranslatedItemCount": 10,
-  "researchWarnings": [
-    "论文中文编辑批次失败（1-10）：research editorial response contained 1 valid papers; expected 10",
-    "论文中文编辑批次失败（21-24）：research editorial response contained 1 valid papers; expected 4",
-    "论文抓取未返回合格条目，已保留上一版论文雷达"
-  ],
-  "researchEditorialDiagnostics": {}
+  "researchTranslatedItemCount": 60,
+  "researchWarnings": [],
+  "researchEditorialDiagnostics": {
+    "requestedItemCount": 60,
+    "completedItemCount": 60,
+    "missingItemCount": 0,
+    "missingItemIds": [],
+    "missingItems": [],
+    "initialBatchSize": 5,
+    "initialBatchCount": 12,
+    "requestCount": 19,
+    "retryRequestCount": 7,
+    "providerFailureCount": 0,
+    "structuralFailureCount": 0,
+    "completionReason": "complete_after_retry",
+    "completionMessage": "缺失条目经拆分重试后已全部完成",
+    "lastProviderError": ""
+  }
 }
