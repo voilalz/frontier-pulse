@@ -74,7 +74,8 @@ Actions Variables：
 
 依次手动运行 `Daily news update` 和 `Full stream update`，再检查：
 
-- `public/data/news.json.selectionMethod` 应为 `deepseek` 或在 AI 选稿未通过校验时为 `rules`；
+- `public/data/news.json.selectionMethod` 应为 `deepseek`，`selectionStrategy` 应为 `ai-ranked-rule-constrained`；只有 AI 评分调用或解析失败时才为 `rules` / `rules-diverse`；
+- `selectionStatus=adjusted` 是程序按主题/来源配额进行的正常校正，不是降级；真正的 AI 评分回退为 `fallback`；
 - `public/data/news.json.translationStatus` 应为 `ok`，`translationModel` 应为 `deepseek-v4-flash`，`translatedItemCount` 应为 `10`；
 - 每条应有 `title`、`originalTitle`、`summary` 和非空 `keyFacts`；
 - `sources`、`scoreReasons` 和 `confidenceReason` 应非空。
@@ -136,7 +137,7 @@ Actions Variables：
 
 - `Only N eligible candidates`：有效候选不足 10 条，脚本会拒绝覆盖上一期；稍后手动重试或维护 `config/news_config.json` 中的信源。
 - RSS/GDELT 出现 `403`、`429` 或超时：其他信源仍会继续；持续失败时替换该信源。
-- DeepSeek/OpenAI 选稿调用或多样性校验失败：仅 `selectionMethod` 切换为 `rules`；最终的规则 Top 10 仍会进入独立中文翻译阶段，不会被选稿失败连带降级。
+- DeepSeek/OpenAI 候选评分调用或结构化输出解析失败：`selectionMethod` 切换为 `rules`、`selectionStatus` 为 `fallback`；最终规则 Top 10 仍会进入独立中文翻译阶段。类别/来源集中则由程序正常校正为 `adjusted`，不会再误报为 AI 失败。
 - 页面显示“翻译不完整”：日报查看 `status.json.translationDiagnostics`，全量动态查看 `stream-status.json.translationDiagnostics`，论文查看 `status.json.researchEditorialDiagnostics`；其中记录缺失 ID、逐项原因、拆分重试次数和最终完成原因。成功条目会被缓存，稍后重跑只补缺失项。
 - 页面显示“数据过期”：`generatedAt` 已超过 36 小时；检查日报工作流、信源和 Cloudflare 最新部署。
 - 页面显示“最近一次自动更新失败”：打开 `public/data/status.json` 或 Actions 日志查看已公开的简短原因；上一期数据不会被覆盖。

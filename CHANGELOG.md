@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.9.0 — AI ranking with deterministic diversity
+
+- Changed the daily model task from directly choosing ten stories to independently scoring candidate importance; the program now blends AI and rule scores and always applies topic/domain quotas itself.
+- Added `selectionStrategy`, `selectionStatus`, `selectionNotices` and before/after diversity diagnostics, including adjusted IDs, quota counts, scored coverage and blend weights.
+- Treats normal quota-driven replacements as a neutral “diversity adjusted” state instead of reporting an AI failure; genuine provider or structured-output failures still fall back to the rule Top 10.
+- Preserved independent Chinese translation after either constrained AI ranking or rule fallback.
+- Stopped stale research retention from carrying old batch-failure warnings forever; only the current “collection empty, previous papers retained” state remains public.
+- Bumped the daily/status schema and Service Worker cache boundary to v1.9.
+
 ## 1.8.0 — Independent selection and Chinese translation
 
 - Split the daily pipeline into two independent stages: Top 10 selection first, then Chinese translation/editing of the final selected set.

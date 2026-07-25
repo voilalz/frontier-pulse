@@ -10,7 +10,7 @@
 - DeepSeek V4 Flash 或 OpenAI 可生成中文标题、摘要、2–3 条关键事实和“为什么重要”；没有 API Key 时保留证据型规则摘要，不伪装为已翻译。
 - 18 个国际 RSS/Atom 信源 + GDELT 并行采集，覆盖官方机构、航空航天、AI、科技、军情与全球冲突媒体，并执行 24 小时时间窗、链接清洗、同事件去重和来源合并。
 - Reuters/AP 等通稿转载会按证据网络折算，不会因多个转载域名虚增“独立来源”；无效日期按时间窗边缘处理并降权。
-- 每日 Top 10、多主题与来源限额，过滤 Sponsored / Advertorial 等商业样稿。
+- 每日 Top 10 采用“AI 逐条重要度评分 + 规则分融合 + 程序多样性约束”；主题与来源配额由确定性代码执行，正常换位不会再被误报为 AI 故障，并继续过滤 Sponsored / Advertorial 等商业样稿。
 - 独立“全量动态”视图保留最多 300 条通过时间窗、相关性、去重与商业内容过滤的候选，可按 6/12/24 小时、来源、主题和关键词筛选；每日 Top 10 在流中明确标记。
 - 独立“论文雷达”读取 arXiv 官方 Atom API，覆盖 AI、机器学习、机器人、无人与控制系统、空间科学、量子和先进材料；除分类采集外，系统采集词会直接查询论文标题和摘要。
 - “我的论文关键词”可在浏览器保存最多 20 个中英文词，自动筛选、命中高亮并生成专属论文流；个人词不上传，系统实际采集词则公开显示在页面上。
@@ -32,7 +32,7 @@
 1. 并行读取配置中的公开 RSS/Atom 与 GDELT，清洗元数据，将同一事件的独立来源合并到 `sources[]`。
 2. 按来源、时效、主题、影响信号、证据完整度和多源印证进行规则评分，并把全部合格候选写入 `stream.json`。
 3. 若 24 小时合格候选不足 10 条，先合并最近一次已验证的三小时动态缓存，再按 36/48/72 小时逐级补充并施加时效降权；若只是候选分布过度集中，则分级放宽主题/来源配额，而不是让整期刷新失败。
-4. 配置 `DEEPSEEK_API_KEY` 时，调用 DeepSeek Chat Completions（JSON 输出、关闭思考模式）完成 Top 10 中文编辑，并用短序号、小批次和缺失项拆分重试翻译动态流；也保留 OpenAI Responses 作为可选后备。选稿结果仍须通过类别与来源多样性校验。
+4. 配置 `DEEPSEEK_API_KEY` 时，调用 DeepSeek Chat Completions（JSON 输出、关闭思考模式）逐条评估候选重要度；程序按默认 `AI 65% + 规则 35%` 合成排序，再确定性执行类别与来源配额。最终 Top 10 随后独立进入中文编辑；动态流翻译使用短序号、小批次和缺失项拆分重试。OpenAI Responses 仍可作为可选提供方。
 5. 独立按 arXiv 分类与 `research.collection_keywords` 查询标题/摘要，合并去重后按主题相关性、摘要完整度与新鲜度排序；可选 AI 中文编辑不会改变原始论文元数据。
 6. 校验日报恰好 10 条后，写入最新一期、按日归档、月度搜索分片、Atom Feed 和健康状态；全量动态保持严格 24 小时语义，允许低流量日少于 10 条。
 7. 只有在 72 小时内仍无法找到 10 条可验证候选，或完全没有 24 小时候选时，才保留上一版真实日报并记录失败，绝不生成虚构新闻。
@@ -116,14 +116,16 @@ python scripts/update_news.py
 
 成功后可检查：
 
-- `public/data/news.json`：`selectionMethod` 记录选稿方式，`translationStatus: ok`、`translationModel: deepseek-v4-flash`、`translatedItemCount: 10`，条目含中文 `title`、`summary` 与 `keyFacts`。
+- `public/data/news.json`：`selectionMethod` 记录评分提供方，`selectionStrategy: ai-ranked-rule-constrained` 表示 AI 排序后由程序约束，`selectionStatus` 区分 `ok`、`adjusted`、`relaxed` 与 `fallback`；`translationStatus: ok`、`translationModel: deepseek-v4-flash`、`translatedItemCount: 10` 表示中文编辑完整。
 - `public/data/research.json`：`editorialProvider: deepseek`、`translatedItemCount > 0`。
 - `public/data/stream.json`：`translationProvider: deepseek`、`translatedItemCount > 0`。
 - `public/data/status.json` 和 `stream-status.json`：记录模型、翻译数量、缺失 ID、重试次数、逐项失败原因和完成原因，但绝不包含密钥或原始提示词。
 
 本地运行可复制 `.env.example` 中的变量到当前终端环境，再执行 `python scripts/update_news.py`。不要提交真实 `.env`。系统使用官方兼容地址 `https://api.deepseek.com/chat/completions`；模型与 JSON 输出参数以 [DeepSeek 官方 API 文档](https://api-docs.deepseek.com/) 为准。
 
-选稿与中文编辑从 v1.8 起是两个独立阶段。若 DeepSeek/OpenAI 选稿调用、解析或多样性校验失败，系统使用规则 Top 10，但仍会对这 10 条单独执行中文翻译。日报翻译每批默认 5 条，保留成功条目并只对缺失 ID 拆分重试；同一 ID 在全量动态中已有同提供方、同模型且原始标题未变的翻译会直接复用。原始标题、摘要和链接不会因翻译失败而丢失。`AI_PROVIDER=auto` 时优先选择已配置的 DeepSeek；仅在没有 DeepSeek 密钥时选择 OpenAI，不会在一次失败调用中跨供应商自动重试。若要继续使用 OpenAI，则设置 `AI_PROVIDER=openai`、Secret `OPENAI_API_KEY` 和 Variable `OPENAI_MODEL`。
+选稿与中文编辑从 v1.8 起是两个独立阶段；v1.9 进一步把“模型评估重要度”和“程序组合 Top 10”拆开。模型不再承担跨条目的硬配额，而是尽量为全部候选评分；程序融合 AI 分与规则分，再执行每主题、每来源域名上限。若无约束的前十名过度集中，系统会正常换入下一条合格候选，并以中性 `adjusted` 状态解释调整；只有评分调用或解析真正失败才使用规则 Top 10。无论哪种选取路径，最终十条仍独立执行中文翻译。日报翻译每批默认 5 条，保留成功条目并只对缺失 ID 拆分重试；同一 ID 在全量动态中已有同提供方、同模型且原始标题未变的翻译会直接复用。原始标题、摘要和链接不会因翻译失败而丢失。`AI_PROVIDER=auto` 时优先选择已配置的 DeepSeek；仅在没有 DeepSeek 密钥时选择 OpenAI，不会在一次失败调用中跨供应商自动重试。
+
+评分融合权重由 `config/news_config.json` 的 `ai_selection_weight` 控制，默认 `0.65`。`selectionDiagnostics.unconstrainedTop` 与 `finalTop` 公开约束前后的类别/域名计数；`adjustedInIds`、`adjustedOutIds` 记录实际换位。论文当次抓取为空而保留旧数据时，只发布当前 stale 原因，不再继承旧版批次失败告警。
 
 ## 论文关键词：个人筛选与服务器采集
 
