@@ -34,7 +34,7 @@ from typing import Any, Callable, Iterable
 from zoneinfo import ZoneInfo
 
 LOGGER = logging.getLogger("frontier-pulse")
-USER_AGENT = "FrontierPulseBot/1.8 (+https://github.com/voilalz/frontier-pulse; public-interest news and research index)"
+USER_AGENT = "FrontierPulseBot/1.9 (+https://github.com/voilalz/frontier-pulse; public-interest news and research index)"
 CATEGORIES = ("AI", "航空航天", "军事动态", "局部冲突", "前沿技术", "无人系统")
 
 
@@ -1198,6 +1198,38 @@ def validate_ai_diversity(
         )
 
 
+def reset_selection_annotations(articles: list[Article]) -> None:
+    """Remove a previous selection pass while preserving freshness disclosure."""
+    for article in articles:
+        article.diversity_relaxed = False
+        article.selection_note = (
+            f"24 小时候选不足，作为 {article.selection_window_hours} 小时窗口补充观察"
+            if article.is_supplemental else ""
+        )
+
+
+def diversity_profile(items: list[Article], config: dict[str, Any]) -> dict[str, Any]:
+    """Return public, deterministic diversity counts and quota violations."""
+    category_counts: dict[str, int] = {}
+    domain_counts: dict[str, int] = {}
+    for article in items:
+        category_counts[article.category] = category_counts.get(article.category, 0) + 1
+        domain = article.domain or article.source
+        domain_counts[domain] = domain_counts.get(domain, 0) + 1
+    category_limit = int(config["per_category_limit"])
+    domain_limit = int(config["per_domain_limit"])
+    return {
+        "categoryCounts": category_counts,
+        "domainCounts": domain_counts,
+        "categoryViolations": {
+            name: count for name, count in category_counts.items() if count > category_limit
+        },
+        "domainViolations": {
+            name: count for name, count in domain_counts.items() if count > domain_limit
+        },
+    }
+
+
 WHY_TEMPLATES = {
     "AI": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
     "航空航天": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
@@ -1304,7 +1336,7 @@ def request_structured_json(
 
 
 def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[str, str]) -> dict[str, Any]:
-    """Select Top N only; Chinese translation is handled by a separate pass."""
+    """Score candidate importance; deterministic code chooses the final diverse set."""
     top_n = int(config["top_n"])
     index_to_article = {index: article for index, article in enumerate(candidates, 1)}
     item_schema = {
@@ -1319,7 +1351,12 @@ def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[s
     schema = {
         "type": "object",
         "properties": {
-            "items": {"type": "array", "items": item_schema, "minItems": top_n, "maxItems": top_n},
+            "items": {
+                "type": "array",
+                "items": item_schema,
+                "minItems": top_n,
+                "maxItems": len(candidates),
+            },
         },
         "required": ["items"],
         "additionalProperties": False,
@@ -1341,10 +1378,11 @@ def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[s
         for index, article in index_to_article.items()
     ]
     instructions = (
-        "你是国际科技与安全新闻选稿编辑。本步骤只决定入选项，不写标题、摘要、翻译或关键事实。"
-        f"从候选中选择恰好{top_n}条最重要的新闻，优先考虑全球影响、技术或政策拐点、来源可信度、时效与多源印证。"
-        f"硬性约束：每个主题最多{int(config['per_category_limit'])}条，每个来源域名最多{int(config['per_domain_limit'])}条。"
-        "每条只输出候选序号 index 和 0-100 重要度 score，不要输出其他字段。"
+        "你是国际科技与安全新闻的重要度评估编辑。本步骤只对候选逐条评分，不直接决定 Top 10，"
+        "不写标题、摘要、翻译或关键事实。依据全球影响、技术或政策拐点、来源可信度、时效与多源印证，"
+        "为每个候选给出 0-100 重要度分。不同条目可以同分，不要为了主题或来源配额修改分数；"
+        f"最终多样性约束由程序执行。应尽量返回全部 {len(candidates)} 个候选，至少返回 {top_n} 个不重复候选。"
+        "每条只输出候选序号 index 和 score，不要输出其他字段。"
     )
     example = {"items": [{"index": index, "score": 80} for index in range(1, top_n + 1)]}
     error: Exception | None = None
@@ -1360,8 +1398,11 @@ def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[s
                 max_tokens=int(config.get("selection_max_output_tokens", 2500)),
             )
             items = result.get("items", [])
-            if not isinstance(items, list) or len(items) != top_n:
-                raise ValueError(f"structured response did not contain exactly {top_n} selection items")
+            if not isinstance(items, list) or not top_n <= len(items) <= len(candidates):
+                raise ValueError(
+                    f"structured response contained {len(items) if isinstance(items, list) else 0} "
+                    f"candidate scores; expected between {top_n} and {len(candidates)}"
+                )
             seen_indices: set[int] = set()
             for item in items:
                 if not isinstance(item, dict):
@@ -1406,11 +1447,15 @@ def item_from_article(
     confidence, confidence_reason = confidence_assessment(article, config)
     score_reasons = list(article.score_reasons)
     selection_provider = clean_text(selection.get("_provider"))
-    score_basis = "AI选稿 · 规则校验" if selection_provider else "规则评分"
+    score_basis = "AI重要度 · 规则约束" if selection_provider else "规则评分"
     if selection_provider:
+        ai_score = int(selection.get("_aiScore", score))
+        rule_score = int(selection.get("_ruleScore", round(article.raw_score)))
+        ai_weight = int(round(float(selection.get("_aiWeight", 0.65)) * 100))
         score_reasons = [
-            f"{provider_display_name(selection_provider)} 选稿重要度 {score}/100",
-            f"规则参考分 {round(article.raw_score)}/100",
+            f"{provider_display_name(selection_provider)} 候选重要度 {ai_score}/100",
+            f"综合排序分 {score}/100（AI {ai_weight}% + 规则 {100 - ai_weight}%）",
+            f"规则参考分 {rule_score}/100",
             *score_reasons,
         ]
     return {
@@ -2090,6 +2135,40 @@ def build_research_report(
     }
 
 
+def retain_stale_research_report(
+    previous: dict[str, Any],
+    warning: str,
+    now: datetime,
+) -> dict[str, Any]:
+    """Keep the last real paper set without carrying historical batch failures."""
+    retained = dict(previous)
+    retained["editorialStatus"] = "stale"
+    retained["warnings"] = [warning]
+    retained["staleReason"] = warning
+    retained["staleAt"] = now.isoformat().replace("+00:00", "Z")
+    retained["retainedGeneratedAt"] = clean_text(previous.get("generatedAt"))
+    retained["editorialDiagnostics"] = {
+        "requestedItemCount": 0,
+        "completedItemCount": 0,
+        "missingItemCount": 0,
+        "missingItemIds": [],
+        "missingItems": [],
+        "initialBatchSize": 0,
+        "initialBatchCount": 0,
+        "requestCount": 0,
+        "retryRequestCount": 0,
+        "providerFailureCount": 0,
+        "structuralFailureCount": 0,
+        "completionReason": "collection_empty_reused_previous",
+        "completionMessage": warning,
+        "lastProviderError": "",
+        "previousEditorialStatus": clean_text(previous.get("editorialStatus")),
+        "discardedHistoricalWarningCount": len(previous.get("warnings", []))
+        if isinstance(previous.get("warnings"), list) else 0,
+    }
+    return retained
+
+
 def fallback_brief(items: list[dict[str, Any]], source_count: int) -> dict[str, Any]:
     leader = items[0]
     return {
@@ -2108,22 +2187,27 @@ def build_report(
 ) -> dict[str, Any]:
     top_n = int(config["top_n"])
     shortlist = candidates[: int(config["candidate_limit"])]
+    reset_selection_annotations(shortlist)
     selected = choose_diverse(shortlist, config, top_n)
     selection_by_id: dict[str, dict[str, Any]] = {}
     editorial_by_id: dict[str, dict[str, Any]] = {}
     selection_method = "rules"
+    selection_strategy = "rules-diverse"
+    selection_status = "disabled" if skip_ai else "not-configured"
+    selection_notices: list[str] = []
     selection_warnings: list[str] = []
     translation_warnings: list[str] = []
     translation_diagnostics: dict[str, Any] = {}
     runtime = resolve_ai_runtime(config) if not skip_ai else None
     selection_diagnostics: dict[str, Any] = {
         "attempted": False,
-        "status": "disabled" if skip_ai else "not_configured",
+        "status": selection_status,
         "failureReason": "",
+        "candidateCount": len(shortlist),
     }
 
-    # Stage 1: select stories only. A rejected AI result never controls the
-    # independent translation stage below.
+    # Stage 1: AI scores candidates independently. Code then blends those
+    # scores with the rule score and applies the hard cross-item quotas.
     if runtime:
         selection_diagnostics.update({
             "attempted": True,
@@ -2133,39 +2217,110 @@ def build_report(
         })
         try:
             ai_result = ai_select(shortlist, config, runtime)
-            allowed = {article.id: article for article in shortlist}
-            ai_order: list[Article] = []
+            allowed_ids = {article.id for article in shortlist}
+            ai_scores: dict[str, int] = {}
             for item in ai_result.get("items", []):
-                candidate = allowed.get(str(item.get("id")))
-                if candidate and candidate not in ai_order:
-                    ai_order.append(candidate)
-            if len(ai_order) != top_n:
-                raise ValueError(f"AI selection returned {len(ai_order)} unique valid items; expected {top_n}")
-            validate_ai_diversity(ai_order, config, runtime["provider"])
-            selected = ai_order
-            selection_by_id = {
-                str(item["id"]): {"score": int(item["score"]), "_provider": runtime["provider"]}
-                for item in ai_result["items"]
-            }
+                item_id = str(item.get("id"))
+                if item_id in allowed_ids:
+                    ai_scores[item_id] = int(item["score"])
+            if len(ai_scores) < top_n:
+                raise ValueError(
+                    f"AI importance scoring returned {len(ai_scores)} unique valid items; expected at least {top_n}"
+                )
+
+            ai_weight = max(0.0, min(1.0, float(config.get("ai_selection_weight", 0.65))))
+            ranking_by_id: dict[str, dict[str, Any]] = {}
+            for article in shortlist:
+                rule_score = int(round(article.raw_score))
+                ai_score = ai_scores.get(article.id)
+                combined_score = (
+                    int(round(ai_weight * ai_score + (1.0 - ai_weight) * rule_score))
+                    if ai_score is not None else rule_score
+                )
+                ranking_by_id[article.id] = {
+                    "score": combined_score,
+                    "_aiScore": ai_score,
+                    "_ruleScore": rule_score,
+                    "_aiWeight": ai_weight,
+                    "_provider": runtime["provider"] if ai_score is not None else "",
+                }
+            ranked = sorted(
+                shortlist,
+                key=lambda article: (
+                    int(ranking_by_id[article.id]["score"]),
+                    -1 if ranking_by_id[article.id]["_aiScore"] is None
+                    else int(ranking_by_id[article.id]["_aiScore"]),
+                    article.raw_score,
+                    article.published_at,
+                    article.id,
+                ),
+                reverse=True,
+            )
+            unconstrained_top = ranked[:top_n]
+            unconstrained_profile = diversity_profile(unconstrained_top, config)
+            reset_selection_annotations(shortlist)
+            selected = choose_diverse(ranked, config, top_n)
+            final_profile = diversity_profile(selected, config)
+
+            unconstrained_ids = {article.id for article in unconstrained_top}
+            selected_ids = {article.id for article in selected}
+            adjusted_out_ids = [
+                article.id for article in unconstrained_top if article.id not in selected_ids
+            ]
+            adjusted_in_ids = [
+                article.id for article in selected if article.id not in unconstrained_ids
+            ]
+            adjusted_count = len(adjusted_in_ids)
+            unscored_count = len(shortlist) - len(ai_scores)
+            relaxed_count = sum(article.diversity_relaxed for article in selected)
+
+            selection_by_id = ranking_by_id
             selection_method = runtime["provider"]
-            selection_diagnostics["status"] = "ok"
+            selection_strategy = "ai-ranked-rule-constrained"
+            selection_status = (
+                "relaxed" if relaxed_count
+                else "adjusted" if adjusted_count or unscored_count
+                else "ok"
+            )
+            selection_diagnostics.update({
+                "status": selection_status,
+                "aiWeight": ai_weight,
+                "ruleWeight": round(1.0 - ai_weight, 4),
+                "aiScoredItemCount": len(ai_scores),
+                "aiUnscoredItemCount": unscored_count,
+                "unconstrainedTop": unconstrained_profile,
+                "finalTop": final_profile,
+                "adjustedItemCount": adjusted_count,
+                "adjustedOutIds": adjusted_out_ids,
+                "adjustedInIds": adjusted_in_ids,
+                "relaxedItemCount": relaxed_count,
+                "failureReason": "",
+            })
+            if adjusted_count:
+                selection_notices.append(
+                    f"{provider_display_name(runtime['provider'])} 已完成候选重要度排序；"
+                    f"程序为满足每主题最多 {int(config['per_category_limit'])} 条、"
+                    f"每来源域名最多 {int(config['per_domain_limit'])} 条的约束，"
+                    f"校正了 {adjusted_count} 个 Top {top_n} 入选位"
+                )
+            if unscored_count:
+                selection_notices.append(
+                    f"{provider_display_name(runtime['provider'])} 返回了 {len(ai_scores)}/{len(shortlist)} 个候选评分；"
+                    f"其余 {unscored_count} 个候选沿用规则分参与排序"
+                )
         except Exception as exc:
             reason = clean_text(str(exc), 220) or exc.__class__.__name__
-            selection_diagnostics.update({"status": "rejected", "failureReason": reason})
+            reset_selection_annotations(shortlist)
+            selected = choose_diverse(shortlist, config, top_n)
+            selection_by_id = {}
+            selection_status = "fallback"
+            selection_strategy = "rules-diverse"
+            selection_diagnostics.update({"status": selection_status, "failureReason": reason})
             selection_warnings.append(
-                f"{provider_display_name(runtime['provider'])} 选稿未采用，已使用规则 Top {top_n}：{reason}"
+                f"{provider_display_name(runtime['provider'])} 候选重要度评分不可用，"
+                f"已使用规则 Top {top_n}：{reason}"
             )
-            LOGGER.warning("%s selection failed; using deterministic selection: %s", runtime["provider"], reason)
-
-    if selection_method in {"openai", "deepseek"}:
-        # The selected set passed the strict category/domain check. Clear any
-        # relaxation flags left on overlapping items by the rule preview.
-        for article in selected:
-            article.diversity_relaxed = False
-            article.selection_note = (
-                f"24 小时候选不足，作为 {article.selection_window_hours} 小时窗口补充观察"
-                if article.is_supplemental else ""
-            )
+            LOGGER.warning("%s scoring failed; using deterministic selection: %s", runtime["provider"], reason)
 
     # Stage 2: translate the final selected set, regardless of how it was
     # selected. Reuse unchanged full-stream translations before making calls.
@@ -2257,14 +2412,17 @@ def build_report(
         signals = fallback_brief(items, source_count)["signals"]
     local_time = now.astimezone(ZoneInfo(config.get("timezone", "Asia/Tokyo")))
     return {
-        "schemaVersion": 6,
+        "schemaVersion": 7,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "editionDate": local_time.strftime("%Y-%m-%d"),
         "timezone": config.get("timezone", "Asia/Tokyo"),
         "method": selection_method,
         "selectionMethod": selection_method,
+        "selectionStrategy": selection_strategy,
+        "selectionStatus": selection_status,
         "selectionProvider": runtime.get("provider") if runtime else "",
         "selectionModel": runtime.get("model") if runtime else "",
+        "selectionNotices": selection_notices,
         "selectionWarnings": selection_warnings,
         "selectionDiagnostics": selection_diagnostics,
         "translationStatus": translation_status,
@@ -2326,6 +2484,19 @@ def validate_report(report: dict[str, Any], expected_count: int) -> None:
         raise ValueError("daily translatedItemCount does not match items")
     if clean_text(report.get("selectionMethod")) not in {"rules", "deepseek", "openai"}:
         raise ValueError(f"invalid daily selectionMethod: {report.get('selectionMethod')}")
+    selection_status = clean_text(report.get("selectionStatus"))
+    if selection_status not in {
+        "ok", "adjusted", "relaxed", "fallback", "disabled", "not-configured",
+    }:
+        raise ValueError(f"invalid daily selectionStatus: {selection_status}")
+    selection_strategy = clean_text(report.get("selectionStrategy"))
+    if selection_strategy not in {"rules-diverse", "ai-ranked-rule-constrained"}:
+        raise ValueError(f"invalid daily selectionStrategy: {selection_strategy}")
+    if (
+        selection_strategy == "ai-ranked-rule-constrained"
+        and clean_text(report.get("selectionMethod")) == "rules"
+    ):
+        raise ValueError("AI-ranked selection strategy must identify its provider")
     translation_status = clean_text(report.get("translationStatus"))
     if translation_status not in {"ok", "partial", "failed", "disabled", "not-configured"}:
         raise ValueError(f"invalid daily translationStatus: {translation_status}")
@@ -2627,7 +2798,7 @@ def write_pipeline_status(
         else:
             previous_translation_status = "unknown"
     payload = {
-        "schemaVersion": 6,
+        "schemaVersion": 7,
         "state": state,
         "lastAttemptAt": now.isoformat().replace("+00:00", "Z"),
         "lastSuccessAt": now.isoformat().replace("+00:00", "Z") if success else previous.get("lastSuccessAt"),
@@ -2636,8 +2807,11 @@ def write_pipeline_status(
         "message": clean_text(message, 300),
         "method": report.get("selectionMethod", report.get("method")) if success else previous.get("method"),
         "selectionMethod": report.get("selectionMethod") if success else previous.get("selectionMethod", previous.get("method")),
+        "selectionStrategy": report.get("selectionStrategy") if success else previous.get("selectionStrategy", "rules-diverse"),
+        "selectionStatus": report.get("selectionStatus") if success else previous.get("selectionStatus"),
         "selectionProvider": report.get("selectionProvider") if success else previous.get("selectionProvider", previous.get("editorialProvider")),
         "selectionModel": report.get("selectionModel") if success else previous.get("selectionModel", previous.get("editorialModel")),
+        "selectionNotices": report.get("selectionNotices", []) if success else previous.get("selectionNotices", []),
         "selectionWarnings": report.get("selectionWarnings", []) if success else previous.get("selectionWarnings", []),
         "selectionDiagnostics": report.get("selectionDiagnostics", {}) if success else previous.get("selectionDiagnostics", {}),
         "translationStatus": report.get("translationStatus") if success else previous_translation_status,
@@ -2890,9 +3064,13 @@ def main(argv: list[str] | None = None) -> int:
                 previous_research = read_json_safe(args.research_output, {})
                 if isinstance(previous_research, dict) and isinstance(previous_research.get("items"), list) and previous_research["items"]:
                     research_collection_warning = "论文抓取未返回合格条目，已保留上一版论文雷达"
-                    research_report = dict(previous_research)
-                    research_report["editorialStatus"] = "stale"
-                    research_report["warnings"] = list(previous_research.get("warnings", [])) + [research_collection_warning]
+                    research_report = retain_stale_research_report(
+                        previous_research,
+                        research_collection_warning,
+                        now,
+                    )
+                    validate_research_report(research_report, allow_empty=False)
+                    research_should_write = True
                     LOGGER.warning(research_collection_warning)
                 else:
                     research_report = build_research_report([], config, now, args.skip_ai)
