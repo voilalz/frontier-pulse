@@ -224,7 +224,11 @@
 
   function showAlert(kind, title, detail) {
     const alert = $("systemAlert");
-    alert.className = `shell alert ${kind === "failed" ? "failed" : ""}`;
+    const alertKind = ["failed", "warning", "notice"].includes(kind) ? kind : "warning";
+    alert.className = `shell alert ${alertKind}`;
+    alert.setAttribute("role", alertKind === "notice" ? "status" : "alert");
+    const icon = alert.querySelector(".alert-icon");
+    if (icon) icon.textContent = alertKind === "notice" ? "i" : "!";
     $("alertTitle").textContent = title;
     $("alertDetail").textContent = detail;
     alert.hidden = false;
@@ -301,21 +305,34 @@
       return;
     }
     const selectionMethod = clean(state.pipelineStatus?.selectionMethod || report?.selectionMethod || report?.method);
-    const selectionRejected = (state.pipelineStatus?.selectionDiagnostics || report?.selectionDiagnostics)?.status === "rejected";
-    if (selectionMethod === "rules" && selectionRejected) {
+    const selectionDiagnostics = state.pipelineStatus?.selectionDiagnostics || report?.selectionDiagnostics || {};
+    const selectionStatus = clean(
+      state.pipelineStatus?.selectionStatus || report?.selectionStatus || selectionDiagnostics.status,
+    );
+    const selectionFallback = selectionMethod === "rules" && ["fallback", "rejected"].includes(selectionStatus);
+    if (selectionFallback) {
       badge.textContent = translationStatus === "ok" ? "规则选稿 · 中文" : "规则选稿";
       badge.classList.add("warning");
       showAlert(
         "warning",
-        translationStatus === "ok" ? "AI 选稿未采用，中文翻译已独立完成" : "AI 选稿未采用",
+        translationStatus === "ok" ? "AI 评分不可用，中文翻译已独立完成" : "AI 评分不可用",
         [...new Set(selectionWarnings)].join("；") || "本期使用经多样性校验的规则 Top 10。",
       );
+      return;
+    }
+    const selectionNotices = [
+      ...(Array.isArray(state.pipelineStatus?.selectionNotices) ? state.pipelineStatus.selectionNotices : []),
+      ...(Array.isArray(report?.selectionNotices) ? report.selectionNotices : []),
+    ].filter(Boolean);
+    if (selectionStatus === "adjusted" && selectionNotices.length) {
+      badge.textContent = "AI 排序 · 已校正";
+      showAlert("notice", "本期已完成多样性校正", [...new Set(selectionNotices)].join("；"));
       return;
     }
     if (!translationStatus && state.pipelineStatus?.editorialStatus === "fallback") {
       badge.textContent = "旧版回退";
       badge.classList.add("warning");
-      showAlert("warning", "日报已更新，但当时使用旧版 AI 回退流程", warnings.join("；") || state.pipelineStatus.message || "请等待 v1.8 数据管道下一次更新。");
+      showAlert("warning", "日报已更新，但当时使用旧版 AI 回退流程", warnings.join("；") || state.pipelineStatus.message || "请等待 v1.9 数据管道下一次更新。");
       return;
     }
     if (warnings.length) {
@@ -678,8 +695,9 @@
 
   function selectionLabel(report) {
     const method = clean(report?.selectionMethod || report?.method).toLocaleLowerCase();
-    if (method === "deepseek") return "DeepSeek";
-    if (method === "openai") return "OpenAI";
+    const constrained = report?.selectionStrategy === "ai-ranked-rule-constrained";
+    if (method === "deepseek") return constrained ? "DeepSeek 排序 · 规则约束" : "DeepSeek";
+    if (method === "openai") return constrained ? "OpenAI 排序 · 规则约束" : "OpenAI";
     return method === "rules" ? "规则 Top 10" : "规则";
   }
 
