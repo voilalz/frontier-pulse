@@ -162,7 +162,7 @@ class UpdateNewsTests(unittest.TestCase):
                 MODULE.ai_select(candidates[:12], self.config, runtime)
         self.assertEqual(request.call_count, 2)
 
-    def test_daily_selection_uses_sequence_indices_and_restores_stable_ids(self):
+    def test_daily_candidate_scoring_uses_sequence_indices_and_restores_stable_ids(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:12]
         runtime = {
             "provider": "deepseek", "api_key": "secret", "model": "deepseek-v4-flash",
@@ -177,6 +177,11 @@ class UpdateNewsTests(unittest.TestCase):
         self.assertIn('"index": 1', payload)
         self.assertNotIn(candidates[0].id, payload)
         self.assertNotIn("titleZh", request.call_args.kwargs["schema"]["properties"]["items"]["items"]["properties"])
+        self.assertEqual(
+            request.call_args.kwargs["schema"]["properties"]["items"]["maxItems"],
+            len(candidates),
+        )
+        self.assertIn("不直接决定 Top 10", request.call_args.kwargs["instructions"])
 
     def test_daily_translation_is_a_separate_resilient_batch(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:2]
@@ -426,7 +431,7 @@ class UpdateNewsTests(unittest.TestCase):
             ])
             self.assertEqual(status, 0)
             payload = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(payload["schemaVersion"], 6)
+            self.assertEqual(payload["schemaVersion"], 7)
             self.assertEqual(payload["editionDate"], "2026-07-16")
             self.assertEqual(payload["timezone"], "Asia/Tokyo")
             self.assertEqual(payload["method"], "rules")
@@ -444,7 +449,7 @@ class UpdateNewsTests(unittest.TestCase):
             atom = ET.parse(feed_output).getroot()
             self.assertEqual(len(atom.findall("{http://www.w3.org/2005/Atom}entry")), 10)
             pipeline_status = json.loads(status_output.read_text(encoding="utf-8"))
-            self.assertEqual(pipeline_status["schemaVersion"], 6)
+            self.assertEqual(pipeline_status["schemaVersion"], 7)
             self.assertEqual(pipeline_status["state"], "ok")
             self.assertEqual(pipeline_status["selectionMethod"], "rules")
             self.assertEqual(pipeline_status["translationStatus"], "disabled")
@@ -655,7 +660,9 @@ class UpdateNewsTests(unittest.TestCase):
             report = MODULE.build_report(candidates, self.config, self.now, skip_ai=False)
         self.assertEqual(report["method"], "rules")
         self.assertEqual(report["selectionMethod"], "rules")
-        self.assertEqual(report["selectionDiagnostics"]["status"], "rejected")
+        self.assertEqual(report["selectionDiagnostics"]["status"], "fallback")
+        self.assertEqual(report["selectionStatus"], "fallback")
+        self.assertEqual(report["selectionStrategy"], "rules-diverse")
         self.assertEqual(report["translationStatus"], "ok")
         self.assertEqual(report["translatedItemCount"], 10)
         self.assertIn("OpenAI", report["selectionWarnings"][0])
@@ -728,7 +735,7 @@ class UpdateNewsTests(unittest.TestCase):
         self.assertEqual(report["translationDiagnostics"]["missingItemIds"], missing_ids)
         MODULE.validate_report(report, 10)
 
-    def test_diversity_rejection_uses_rules_but_still_translates(self):
+    def test_ai_ranking_is_deterministically_adjusted_for_diversity_and_still_translates(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
         for article in candidates[:3]:
             article.domain = "crowded.example"
@@ -756,10 +763,16 @@ class UpdateNewsTests(unittest.TestCase):
             MODULE, "ai_translate_daily_articles", side_effect=translate
         ):
             report = MODULE.build_report(candidates, self.config, self.now, skip_ai=False)
-        self.assertEqual(report["selectionMethod"], "rules")
+        self.assertEqual(report["selectionMethod"], "deepseek")
+        self.assertEqual(report["selectionStrategy"], "ai-ranked-rule-constrained")
+        self.assertEqual(report["selectionStatus"], "adjusted")
         self.assertEqual(report["translationStatus"], "ok")
         self.assertEqual(len(translated_ids), 10)
-        self.assertIn("DeepSeek 选稿未通过多样性校验", report["selectionWarnings"][0])
+        self.assertEqual(report["selectionWarnings"], [])
+        self.assertTrue(report["selectionNotices"])
+        self.assertGreaterEqual(report["selectionDiagnostics"]["adjustedItemCount"], 1)
+        final_domains = report["selectionDiagnostics"]["finalTop"]["domainCounts"]
+        self.assertLessEqual(final_domains["crowded.example"], self.config["per_domain_limit"])
 
     def test_daily_reuses_existing_stream_translations_by_news_id(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
@@ -786,15 +799,14 @@ class UpdateNewsTests(unittest.TestCase):
 
     def test_successful_ai_selection_and_translation_keep_separate_provenance(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
-        selected = MODULE.choose_diverse(candidates[:self.config["candidate_limit"]], self.config, 10)
         ai_result = {"items": [
             {"id": article.id, "score": 95 - index}
-            for index, article in enumerate(selected)
+            for index, article in enumerate(candidates[:self.config["candidate_limit"]])
         ]}
         reusable = {article.id: {
             "titleZh": f"中文：{article.title}", "summary": "中文摘要",
             "tags": ["复用"], "_translationOnly": True, "_provider": "deepseek",
-        } for article in selected}
+        } for article in candidates[:self.config["candidate_limit"]]}
         with mock.patch.dict(os.environ, {
             "AI_PROVIDER": "deepseek", "DEEPSEEK_API_KEY": "test-key", "OPENAI_API_KEY": "",
         }), mock.patch.object(MODULE, "ai_select", return_value=ai_result):
@@ -807,7 +819,70 @@ class UpdateNewsTests(unittest.TestCase):
         self.assertEqual(report["translatedItemCount"], 10)
         self.assertTrue(all(item["selectionProvider"] == "deepseek" for item in report["items"]))
         self.assertTrue(all(item["translationProvider"] == "deepseek" for item in report["items"]))
-        self.assertTrue(all(item["scoreBasis"] == "AI选稿 · 规则校验" for item in report["items"]))
+        self.assertTrue(all(item["scoreBasis"] == "AI重要度 · 规则约束" for item in report["items"]))
+        self.assertEqual(report["selectionStrategy"], "ai-ranked-rule-constrained")
+
+    def test_stale_research_retention_discards_historical_batch_warnings(self):
+        papers = MODULE.score_research_papers(self.papers, self.config, self.now)
+        previous = MODULE.build_research_report(papers, self.config, self.now, skip_ai=True)
+        previous["editorialStatus"] = "partial"
+        previous["warnings"] = [
+            "论文中文编辑 1-10 批次失败",
+            "论文中文编辑不完整：1/10",
+        ]
+        warning = "论文抓取未返回合格条目，已保留上一版论文雷达"
+        retained = MODULE.retain_stale_research_report(
+            previous,
+            warning,
+            self.now + timedelta(days=1),
+        )
+        MODULE.validate_research_report(retained, allow_empty=False)
+        self.assertEqual(retained["editorialStatus"], "stale")
+        self.assertEqual(retained["warnings"], [warning])
+        self.assertEqual(
+            retained["editorialDiagnostics"]["completionReason"],
+            "collection_empty_reused_previous",
+        )
+        self.assertEqual(
+            retained["editorialDiagnostics"]["discardedHistoricalWarningCount"],
+            2,
+        )
+
+    def test_daily_run_rewrites_stale_research_status_without_old_warnings(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            papers = MODULE.score_research_papers(self.papers, self.config, self.now)
+            previous = MODULE.build_research_report(papers, self.config, self.now, skip_ai=True)
+            previous["editorialStatus"] = "partial"
+            previous["warnings"] = ["旧的论文批次失败", "旧的缺失条目告警"]
+            research_output = root / "research.json"
+            research_output.write_text(
+                json.dumps(previous, ensure_ascii=False),
+                encoding="utf-8",
+            )
+            result = MODULE.main([
+                "--config", str(ROOT / "config" / "news_config.json"),
+                "--fixture", str(ROOT / "tests" / "fixtures" / "articles.json"),
+                "--output", str(root / "news.json"),
+                "--archive-dir", str(root / "archive"),
+                "--archive-index", str(root / "archive" / "index.json"),
+                "--search-index", str(root / "archive" / "search-index.json"),
+                "--status-output", str(root / "status.json"),
+                "--stream-output", str(root / "stream.json"),
+                "--stream-status-output", str(root / "stream-status.json"),
+                "--research-output", str(research_output),
+                "--feed-output", str(root / "feed.xml"),
+                "--skip-ai",
+                "--now", "2026-07-16T00:00:00Z",
+            ])
+            self.assertEqual(result, 0)
+            current = json.loads(research_output.read_text(encoding="utf-8"))
+            status = json.loads((root / "status.json").read_text(encoding="utf-8"))
+        warning = "论文抓取未返回合格条目，已保留上一版论文雷达"
+        self.assertEqual(current["editorialStatus"], "stale")
+        self.assertEqual(current["warnings"], [warning])
+        self.assertEqual(current["generatedAt"], previous["generatedAt"])
+        self.assertEqual(status["researchWarnings"], [warning])
 
     def test_openai_http_post_retries_one_transient_failure(self):
         class Response:
