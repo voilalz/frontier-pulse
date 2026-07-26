@@ -1,24 +1,79 @@
 {
-  "schemaVersion": 6,
+  "schemaVersion": 7,
   "state": "ok",
-  "lastAttemptAt": "2026-07-25T00:10:09Z",
-  "lastSuccessAt": "2026-07-25T00:10:09Z",
-  "editionDate": "2026-07-25",
+  "lastAttemptAt": "2026-07-26T00:05:27Z",
+  "lastSuccessAt": "2026-07-26T00:05:27Z",
+  "editionDate": "2026-07-26",
   "itemCount": 10,
-  "message": "日报更新成功；DeepSeek 选稿未采用，已使用规则 Top 10：DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 7}，域名超限={'aljazeera.com': 3, 'bbc.co.uk': 4}",
-  "method": "rules",
-  "selectionMethod": "rules",
+  "message": "日报更新成功；候选主题或来源分布不均，已分级放宽配额补足 Top 10（5 条已标注）",
+  "method": "deepseek",
+  "selectionMethod": "deepseek",
+  "selectionStrategy": "ai-ranked-rule-constrained",
+  "selectionStatus": "relaxed",
   "selectionProvider": "deepseek",
   "selectionModel": "deepseek-v4-flash",
+  "selectionNotices": [
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 2 个 Top 10 入选位"
+  ],
   "selectionWarnings": [
-    "DeepSeek 选稿未采用，已使用规则 Top 10：DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 7}，域名超限={'aljazeera.com': 3, 'bbc.co.uk': 4}"
+    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（5 条已标注）"
   ],
   "selectionDiagnostics": {
     "attempted": true,
-    "status": "rejected",
-    "failureReason": "DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 7}，域名超限={'aljazeera.com': 3, 'bbc.co.uk': 4}",
+    "status": "relaxed",
+    "failureReason": "",
+    "candidateCount": 14,
     "provider": "deepseek",
-    "model": "deepseek-v4-flash"
+    "model": "deepseek-v4-flash",
+    "aiWeight": 0.65,
+    "ruleWeight": 0.35,
+    "aiScoredItemCount": 14,
+    "aiUnscoredItemCount": 0,
+    "unconstrainedTop": {
+      "categoryCounts": {
+        "局部冲突": 10
+      },
+      "domainCounts": {
+        "aljazeera.com": 7,
+        "bbc.co.uk": 2,
+        "defenseone.com": 1
+      },
+      "categoryViolations": {
+        "局部冲突": 10
+      },
+      "domainViolations": {
+        "aljazeera.com": 7
+      }
+    },
+    "finalTop": {
+      "categoryCounts": {
+        "局部冲突": 8,
+        "AI": 2
+      },
+      "domainCounts": {
+        "aljazeera.com": 5,
+        "bbc.co.uk": 3,
+        "techcrunch.com": 1,
+        "defenseone.com": 1
+      },
+      "categoryViolations": {
+        "局部冲突": 8
+      },
+      "domainViolations": {
+        "aljazeera.com": 5,
+        "bbc.co.uk": 3
+      }
+    },
+    "adjustedItemCount": 2,
+    "adjustedOutIds": [
+      "06a4562bf235f0",
+      "61a9022643ce36"
+    ],
+    "adjustedInIds": [
+      "27ed257558a266",
+      "68eaa3a9fab147"
+    ],
+    "relaxedItemCount": 5
   },
   "translationStatus": "ok",
   "translationProvider": "deepseek",
@@ -26,72 +81,72 @@
   "translatedItemCount": 10,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 1,
-    "completedItemCount": 1,
+    "requestedItemCount": 3,
+    "completedItemCount": 3,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 5,
     "initialBatchCount": 1,
-    "requestCount": 1,
-    "retryRequestCount": 0,
+    "requestCount": 3,
+    "retryRequestCount": 2,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "completionReason": "complete_after_retry",
+    "completionMessage": "缺失条目经拆分重试后已全部完成",
     "lastProviderError": "",
     "targetItemCount": 10,
-    "reusedItemCount": 9,
-    "newlyTranslatedItemCount": 1,
+    "reusedItemCount": 7,
+    "newlyTranslatedItemCount": 3,
     "totalTranslatedItemCount": 10,
     "totalMissingItemCount": 0
   },
   "warnings": [
-    "DeepSeek 选稿未采用，已使用规则 Top 10：DeepSeek 选稿未通过多样性校验：类别超限={'局部冲突': 7}，域名超限={'aljazeera.com': 3, 'bbc.co.uk': 4}"
+    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（5 条已标注）"
   ],
-  "coverageStatus": "complete",
+  "coverageStatus": "supplemented",
   "freshItemCount": 10,
   "supplementalItemCount": 0,
   "effectiveLookbackHours": 24,
-  "streamItemCount": 45,
+  "streamItemCount": 14,
   "streamTranslationProvider": "deepseek",
   "streamTranslationModel": "deepseek-v4-flash",
-  "streamTranslatedItemCount": 45,
+  "streamTranslatedItemCount": 14,
   "streamTranslationWarnings": [],
   "streamTranslationDiagnostics": {
-    "requestedItemCount": 4,
-    "completedItemCount": 4,
+    "requestedItemCount": 0,
+    "completedItemCount": 0,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 1,
-    "requestCount": 1,
+    "initialBatchCount": 0,
+    "requestCount": 0,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "completionReason": "not_needed",
+    "completionMessage": "没有需要翻译的新条目",
     "lastProviderError": "",
-    "reusedItemCount": 40,
+    "reusedItemCount": 11,
     "featuredTranslatedItemCount": 10
   },
-  "researchItemCount": 60,
+  "researchItemCount": 53,
   "researchEditorialStatus": "ok",
   "researchEditorialProvider": "deepseek",
   "researchEditorialModel": "deepseek-v4-flash",
-  "researchTranslatedItemCount": 60,
+  "researchTranslatedItemCount": 53,
   "researchWarnings": [],
   "researchEditorialDiagnostics": {
-    "requestedItemCount": 60,
-    "completedItemCount": 60,
+    "requestedItemCount": 53,
+    "completedItemCount": 53,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 5,
-    "initialBatchCount": 12,
-    "requestCount": 19,
-    "retryRequestCount": 7,
+    "initialBatchCount": 11,
+    "requestCount": 16,
+    "retryRequestCount": 5,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
     "completionReason": "complete_after_retry",
