@@ -1,11 +1,11 @@
 {
   "schemaVersion": 7,
   "state": "ok",
-  "lastAttemptAt": "2026-07-26T00:05:27Z",
-  "lastSuccessAt": "2026-07-26T00:05:27Z",
-  "editionDate": "2026-07-26",
+  "lastAttemptAt": "2026-07-27T00:06:08Z",
+  "lastSuccessAt": "2026-07-27T00:06:08Z",
+  "editionDate": "2026-07-27",
   "itemCount": 10,
-  "message": "日报更新成功；候选主题或来源分布不均，已分级放宽配额补足 Top 10（5 条已标注）",
+  "message": "日报更新成功；候选主题或来源分布不均，已分级放宽配额补足 Top 10（4 条已标注）；论文抓取未返回合格条目，已保留上一版论文雷达",
   "method": "deepseek",
   "selectionMethod": "deepseek",
   "selectionStrategy": "ai-ranked-rule-constrained",
@@ -13,67 +13,74 @@
   "selectionProvider": "deepseek",
   "selectionModel": "deepseek-v4-flash",
   "selectionNotices": [
-    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 2 个 Top 10 入选位"
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 2 个 Top 10 入选位",
+    "DeepSeek 返回了 15/21 个候选评分；其余 6 个候选沿用规则分参与排序"
   ],
   "selectionWarnings": [
-    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（5 条已标注）"
+    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（4 条已标注）"
   ],
   "selectionDiagnostics": {
     "attempted": true,
     "status": "relaxed",
     "failureReason": "",
-    "candidateCount": 14,
+    "candidateCount": 21,
     "provider": "deepseek",
     "model": "deepseek-v4-flash",
     "aiWeight": 0.65,
     "ruleWeight": 0.35,
-    "aiScoredItemCount": 14,
-    "aiUnscoredItemCount": 0,
+    "aiScoredItemCount": 15,
+    "aiUnscoredItemCount": 6,
     "unconstrainedTop": {
       "categoryCounts": {
-        "局部冲突": 10
+        "局部冲突": 9,
+        "AI": 1
       },
       "domainCounts": {
-        "aljazeera.com": 7,
-        "bbc.co.uk": 2,
-        "defenseone.com": 1
+        "bbc.co.uk": 3,
+        "techcrunch.com": 1,
+        "defensenews.com": 1,
+        "aljazeera.com": 5
       },
       "categoryViolations": {
-        "局部冲突": 10
+        "局部冲突": 9
       },
       "domainViolations": {
-        "aljazeera.com": 7
+        "bbc.co.uk": 3,
+        "aljazeera.com": 5
       }
     },
     "finalTop": {
       "categoryCounts": {
-        "局部冲突": 8,
-        "AI": 2
+        "局部冲突": 7,
+        "AI": 1,
+        "航空航天": 1,
+        "军事动态": 1
       },
       "domainCounts": {
-        "aljazeera.com": 5,
         "bbc.co.uk": 3,
         "techcrunch.com": 1,
-        "defenseone.com": 1
+        "defensenews.com": 1,
+        "nasa.gov": 1,
+        "aljazeera.com": 4
       },
       "categoryViolations": {
-        "局部冲突": 8
+        "局部冲突": 7
       },
       "domainViolations": {
-        "aljazeera.com": 5,
-        "bbc.co.uk": 3
+        "bbc.co.uk": 3,
+        "aljazeera.com": 4
       }
     },
     "adjustedItemCount": 2,
     "adjustedOutIds": [
-      "06a4562bf235f0",
-      "61a9022643ce36"
+      "60ae41e4837df6",
+      "676918e558ca4f"
     ],
     "adjustedInIds": [
-      "27ed257558a266",
-      "68eaa3a9fab147"
+      "e255e5112dc54a",
+      "9c3a1f784d9623"
     ],
-    "relaxedItemCount": 5
+    "relaxedItemCount": 4
   },
   "translationStatus": "ok",
   "translationProvider": "deepseek",
@@ -81,45 +88,12 @@
   "translatedItemCount": 10,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 3,
-    "completedItemCount": 3,
-    "missingItemCount": 0,
-    "missingItemIds": [],
-    "missingItems": [],
-    "initialBatchSize": 5,
-    "initialBatchCount": 1,
-    "requestCount": 3,
-    "retryRequestCount": 2,
-    "providerFailureCount": 0,
-    "structuralFailureCount": 0,
-    "completionReason": "complete_after_retry",
-    "completionMessage": "缺失条目经拆分重试后已全部完成",
-    "lastProviderError": "",
-    "targetItemCount": 10,
-    "reusedItemCount": 7,
-    "newlyTranslatedItemCount": 3,
-    "totalTranslatedItemCount": 10,
-    "totalMissingItemCount": 0
-  },
-  "warnings": [
-    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（5 条已标注）"
-  ],
-  "coverageStatus": "supplemented",
-  "freshItemCount": 10,
-  "supplementalItemCount": 0,
-  "effectiveLookbackHours": 24,
-  "streamItemCount": 14,
-  "streamTranslationProvider": "deepseek",
-  "streamTranslationModel": "deepseek-v4-flash",
-  "streamTranslatedItemCount": 14,
-  "streamTranslationWarnings": [],
-  "streamTranslationDiagnostics": {
     "requestedItemCount": 0,
     "completedItemCount": 0,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
-    "initialBatchSize": 6,
+    "initialBatchSize": 5,
     "initialBatchCount": 0,
     "requestCount": 0,
     "retryRequestCount": 0,
@@ -128,29 +102,66 @@
     "completionReason": "not_needed",
     "completionMessage": "没有需要翻译的新条目",
     "lastProviderError": "",
-    "reusedItemCount": 11,
-    "featuredTranslatedItemCount": 10
+    "targetItemCount": 10,
+    "reusedItemCount": 10,
+    "newlyTranslatedItemCount": 0,
+    "totalTranslatedItemCount": 10,
+    "totalMissingItemCount": 0
   },
-  "researchItemCount": 53,
-  "researchEditorialStatus": "ok",
-  "researchEditorialProvider": "deepseek",
-  "researchEditorialModel": "deepseek-v4-flash",
-  "researchTranslatedItemCount": 53,
-  "researchWarnings": [],
-  "researchEditorialDiagnostics": {
-    "requestedItemCount": 53,
-    "completedItemCount": 53,
+  "warnings": [
+    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（4 条已标注）"
+  ],
+  "coverageStatus": "supplemented",
+  "freshItemCount": 10,
+  "supplementalItemCount": 0,
+  "effectiveLookbackHours": 24,
+  "streamItemCount": 21,
+  "streamTranslationProvider": "deepseek",
+  "streamTranslationModel": "deepseek-v4-flash",
+  "streamTranslatedItemCount": 21,
+  "streamTranslationWarnings": [],
+  "streamTranslationDiagnostics": {
+    "requestedItemCount": 1,
+    "completedItemCount": 1,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
-    "initialBatchSize": 5,
-    "initialBatchCount": 11,
-    "requestCount": 16,
-    "retryRequestCount": 5,
+    "initialBatchSize": 6,
+    "initialBatchCount": 1,
+    "requestCount": 1,
+    "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_after_retry",
-    "completionMessage": "缺失条目经拆分重试后已全部完成",
-    "lastProviderError": ""
+    "completionReason": "complete_first_pass",
+    "completionMessage": "全部条目首轮完成",
+    "lastProviderError": "",
+    "reusedItemCount": 20,
+    "featuredTranslatedItemCount": 10
+  },
+  "researchItemCount": 53,
+  "researchEditorialStatus": "stale",
+  "researchEditorialProvider": "deepseek",
+  "researchEditorialModel": "deepseek-v4-flash",
+  "researchTranslatedItemCount": 53,
+  "researchWarnings": [
+    "论文抓取未返回合格条目，已保留上一版论文雷达"
+  ],
+  "researchEditorialDiagnostics": {
+    "requestedItemCount": 0,
+    "completedItemCount": 0,
+    "missingItemCount": 0,
+    "missingItemIds": [],
+    "missingItems": [],
+    "initialBatchSize": 0,
+    "initialBatchCount": 0,
+    "requestCount": 0,
+    "retryRequestCount": 0,
+    "providerFailureCount": 0,
+    "structuralFailureCount": 0,
+    "completionReason": "collection_empty_reused_previous",
+    "completionMessage": "论文抓取未返回合格条目，已保留上一版论文雷达",
+    "lastProviderError": "",
+    "previousEditorialStatus": "ok",
+    "discardedHistoricalWarningCount": 0
   }
 }
