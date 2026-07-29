@@ -4,26 +4,30 @@
   "timezone": "Asia/Tokyo",
   "rangeDays": 7,
   "method": "deepseek",
-  "editorialStatus": "ok",
+  "editorialStatus": "stale",
   "editorialProvider": "deepseek",
   "editorialModel": "deepseek-v4-flash",
   "translatedItemCount": 60,
-  "warnings": [],
+  "warnings": [
+    "论文抓取未返回合格条目，已保留上一版论文雷达"
+  ],
   "editorialDiagnostics": {
-    "requestedItemCount": 60,
-    "completedItemCount": 60,
+    "requestedItemCount": 0,
+    "completedItemCount": 0,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
-    "initialBatchSize": 5,
-    "initialBatchCount": 12,
-    "requestCount": 17,
-    "retryRequestCount": 5,
+    "initialBatchSize": 0,
+    "initialBatchCount": 0,
+    "requestCount": 0,
+    "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_after_retry",
-    "completionMessage": "缺失条目经拆分重试后已全部完成",
-    "lastProviderError": ""
+    "completionReason": "collection_empty_reused_previous",
+    "completionMessage": "论文抓取未返回合格条目，已保留上一版论文雷达",
+    "lastProviderError": "",
+    "previousEditorialStatus": "ok",
+    "discardedHistoricalWarningCount": 0
   },
   "itemCount": 60,
   "areaCounts": {
@@ -4067,5 +4071,8 @@
         }
       ]
     }
-  ]
+  ],
+  "staleReason": "论文抓取未返回合格条目，已保留上一版论文雷达",
+  "staleAt": "2026-07-29T00:03:03Z",
+  "retainedGeneratedAt": "2026-07-28T00:07:00Z"
 }
