@@ -1,9 +1,9 @@
 {
   "schemaVersion": 7,
   "state": "ok",
-  "lastAttemptAt": "2026-07-30T00:04:29Z",
-  "lastSuccessAt": "2026-07-30T00:04:29Z",
-  "editionDate": "2026-07-30",
+  "lastAttemptAt": "2026-07-31T00:09:02Z",
+  "lastSuccessAt": "2026-07-31T00:09:02Z",
+  "editionDate": "2026-07-31",
   "itemCount": 10,
   "message": "日报更新成功",
   "method": "deepseek",
@@ -13,7 +13,8 @@
   "selectionProvider": "deepseek",
   "selectionModel": "deepseek-v4-flash",
   "selectionNotices": [
-    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 1 个 Top 10 入选位"
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 2 个 Top 10 入选位",
+    "DeepSeek 返回了 17/36 个候选评分；其余 19 个候选沿用规则分参与排序"
   ],
   "selectionWarnings": [],
   "selectionDiagnostics": {
@@ -25,27 +26,30 @@
     "model": "deepseek-v4-flash",
     "aiWeight": 0.65,
     "ruleWeight": 0.35,
-    "aiScoredItemCount": 36,
-    "aiUnscoredItemCount": 0,
+    "aiScoredItemCount": 17,
+    "aiUnscoredItemCount": 19,
     "unconstrainedTop": {
       "categoryCounts": {
-        "军事动态": 2,
+        "军事动态": 4,
         "局部冲突": 4,
-        "航空航天": 3,
+        "航空航天": 1,
         "AI": 1
       },
       "domainCounts": {
-        "defensenews.com": 2,
-        "twz.com": 1,
-        "aljazeera.com": 2,
-        "spacenews.com": 2,
-        "breakingdefense.com": 2,
-        "spectrum.ieee.org": 1
+        "aljazeera.com": 1,
+        "bbc.co.uk": 2,
+        "twz.com": 2,
+        "nasa.gov": 1,
+        "technologyreview.com": 1,
+        "defensenews.com": 3
       },
       "categoryViolations": {
+        "军事动态": 4,
         "局部冲突": 4
       },
-      "domainViolations": {}
+      "domainViolations": {
+        "defensenews.com": 3
+      }
     },
     "finalTop": {
       "categoryCounts": {
@@ -55,22 +59,25 @@
         "AI": 1
       },
       "domainCounts": {
-        "defensenews.com": 2,
-        "twz.com": 2,
         "aljazeera.com": 1,
-        "spacenews.com": 2,
-        "breakingdefense.com": 2,
-        "spectrum.ieee.org": 1
+        "bbc.co.uk": 1,
+        "twz.com": 2,
+        "nasa.gov": 1,
+        "technologyreview.com": 1,
+        "defensenews.com": 2,
+        "spacenews.com": 2
       },
       "categoryViolations": {},
       "domainViolations": {}
     },
-    "adjustedItemCount": 1,
+    "adjustedItemCount": 2,
     "adjustedOutIds": [
-      "8ef4ef49c49104"
+      "5fadac2f75094b",
+      "0e0252d43d00f7"
     ],
     "adjustedInIds": [
-      "86413d39497520"
+      "03833aa5f7fa48",
+      "01119d9f921857"
     ],
     "relaxedItemCount": 0
   },
@@ -105,27 +112,27 @@
   "freshItemCount": 10,
   "supplementalItemCount": 0,
   "effectiveLookbackHours": 24,
-  "streamItemCount": 54,
+  "streamItemCount": 45,
   "streamTranslationProvider": "deepseek",
   "streamTranslationModel": "deepseek-v4-flash",
-  "streamTranslatedItemCount": 54,
+  "streamTranslatedItemCount": 45,
   "streamTranslationWarnings": [],
   "streamTranslationDiagnostics": {
-    "requestedItemCount": 11,
-    "completedItemCount": 11,
+    "requestedItemCount": 4,
+    "completedItemCount": 4,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 2,
-    "requestCount": 6,
-    "retryRequestCount": 4,
+    "initialBatchCount": 1,
+    "requestCount": 1,
+    "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_after_retry",
-    "completionMessage": "缺失条目经拆分重试后已全部完成",
+    "completionReason": "complete_first_pass",
+    "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
-    "reusedItemCount": 43,
+    "reusedItemCount": 41,
     "featuredTranslatedItemCount": 10
   },
   "researchItemCount": 60,
@@ -142,8 +149,8 @@
     "missingItems": [],
     "initialBatchSize": 5,
     "initialBatchCount": 12,
-    "requestCount": 18,
-    "retryRequestCount": 6,
+    "requestCount": 17,
+    "retryRequestCount": 5,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
     "completionReason": "complete_after_retry",
