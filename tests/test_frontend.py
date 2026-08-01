@@ -50,12 +50,12 @@ class FrontendTests(unittest.TestCase):
         app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
         worker = (ROOT / "public" / "sw.js").read_text(encoding="utf-8")
         headers = (ROOT / "public" / "_headers").read_text(encoding="utf-8")
-        self.assertIn("./assets/app.js?v=1.9.0", index)
-        self.assertIn("./assets/styles.css?v=1.9.0", index)
+        self.assertIn("./assets/app.js?v=2.0.0", index)
+        self.assertIn("./assets/styles.css?v=2.0.0", index)
         self.assertIn('event.preventDefault();\n      await switchView(viewButton.dataset.view);', app)
         self.assertIn('request.mode === "navigate"', worker)
         self.assertIn("frontier-pulse-", worker)
-        self.assertIn("v1.9.0", worker)
+        self.assertIn("v2.0.0", worker)
         self.assertIn("/assets/*\n  Cache-Control: public, max-age=0, must-revalidate", headers)
 
     def test_cache_is_bypassed_only_for_manual_refresh(self):
@@ -119,6 +119,20 @@ class FrontendTests(unittest.TestCase):
         self.assertIn("AI 评分不可用，中文翻译已独立完成", app)
         self.assertIn("本期已完成多样性校正", app)
         self.assertIn("日报已更新，但部分中文翻译失败", app)
+
+    def test_compact_homepage_and_historical_context_are_wired(self):
+        index = (ROOT / "public" / "index.html").read_text(encoding="utf-8")
+        app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
+        styles = (ROOT / "public" / "assets" / "styles.css").read_text(encoding="utf-8")
+        self.assertNotIn("全球前沿情报，先看最重要的", index + app)
+        self.assertNotIn("每日十条重点事件，先呈现必读内容", index + app)
+        self.assertIn("今日前沿态势", index + app)
+        self.assertIn("normalizeHistoryContext", app)
+        self.assertIn("renderHistoryContext", app)
+        self.assertIn("查看事件脉络与证据", app)
+        self.assertIn("spotlight-backdrop", app + styles)
+        self.assertIn("history-timeline", app + styles)
+        self.assertIn("历史关联", app)
 
     def test_data_workflows_share_lock_and_retry_conflict_safe_rebase(self):
         workflows = [
