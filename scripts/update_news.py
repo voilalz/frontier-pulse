@@ -34,7 +34,7 @@ from typing import Any, Callable, Iterable
 from zoneinfo import ZoneInfo
 
 LOGGER = logging.getLogger("frontier-pulse")
-USER_AGENT = "FrontierPulseBot/1.9 (+https://github.com/voilalz/frontier-pulse; public-interest news and research index)"
+USER_AGENT = "FrontierPulseBot/2.0 (+https://github.com/voilalz/frontier-pulse; public-interest news and research index)"
 CATEGORIES = ("AI", "航空航天", "军事动态", "局部冲突", "前沿技术", "无人系统")
 
 
@@ -878,6 +878,182 @@ def same_event_title(first: str, second: str) -> bool:
     return len(shared) >= 3 and overlap >= 0.35 and bool(shared.intersection(first_acronyms, second_acronyms))
 
 
+HISTORY_STOPWORDS = TITLE_STOPWORDS | {
+    "about", "amid", "could", "latest", "more", "report", "reports", "update",
+    "前沿", "技术", "动态", "消息", "最新", "相关", "表示", "宣布", "报道",
+}
+
+
+def history_tokens(value: Any) -> set[str]:
+    """Tokenize mixed Chinese/English archive text without external dependencies."""
+    text = clean_text(value).lower()
+    tokens = {
+        token for token in re.findall(r"[a-z][a-z0-9-]{2,}|\d+(?:\.\d+)?", text)
+        if token not in HISTORY_STOPWORDS
+    }
+    for run in re.findall(r"[\u3400-\u9fff]{2,}", text):
+        if run in HISTORY_STOPWORDS:
+            continue
+        if len(run) <= 4:
+            tokens.add(run)
+        tokens.update(run[index:index + 2] for index in range(len(run) - 1))
+    return tokens
+
+
+def overlap_coefficient(first: set[str], second: set[str]) -> float:
+    if not first or not second:
+        return 0.0
+    return len(first.intersection(second)) / min(len(first), len(second))
+
+
+def history_association_score(current: dict[str, Any], previous: dict[str, Any]) -> tuple[int, list[str]]:
+    """Return an explainable topical association score, not a truth probability."""
+    current_title = history_tokens(f"{current.get('title', '')} {current.get('originalTitle', '')}")
+    previous_title = history_tokens(f"{previous.get('title', '')} {previous.get('originalTitle', '')}")
+    current_body = history_tokens(" ".join([
+        clean_text(current.get("summary")),
+        " ".join(clean_text(value) for value in current.get("keyFacts", []) if clean_text(value)),
+    ]))
+    previous_body = history_tokens(" ".join([
+        clean_text(previous.get("summary")),
+        " ".join(clean_text(value) for value in previous.get("keyFacts", []) if clean_text(value)),
+    ]))
+    current_tags = {clean_text(tag).lower() for tag in current.get("tags", []) if clean_text(tag)}
+    previous_tags = {clean_text(tag).lower() for tag in previous.get("tags", []) if clean_text(tag)}
+    shared_title = current_title.intersection(previous_title)
+    shared_body = (current_title | current_body).intersection(previous_title | previous_body)
+    title_overlap = overlap_coefficient(current_title, previous_title)
+    body_overlap = overlap_coefficient(current_title | current_body, previous_title | previous_body)
+    tag_overlap = overlap_coefficient(current_tags, previous_tags)
+    reasons: list[str] = []
+    if shared_title:
+        reasons.append("标题共享关键词：" + "、".join(sorted(shared_title)[:4]))
+    if current_tags.intersection(previous_tags):
+        reasons.append("共同标签：" + "、".join(sorted(current_tags.intersection(previous_tags))[:3]))
+    if clean_text(current.get("category")) == clean_text(previous.get("category")):
+        reasons.append("同属" + (clean_text(current.get("category")) or "同一主题"))
+    direct = same_event_title(
+        clean_text(current.get("originalTitle") or current.get("title")),
+        clean_text(previous.get("originalTitle") or previous.get("title")),
+    )
+    if direct:
+        reasons.insert(0, "标题结构显示为同一事件的后续报道")
+    # Category alone can never create a link. Require lexical evidence first.
+    lexical_evidence = len(shared_title) >= 2 or len(shared_body) >= 3 or title_overlap >= 0.28 or body_overlap >= 0.2
+    if not lexical_evidence and not direct:
+        return 0, []
+    score = round(
+        55 * title_overlap
+        + 27 * body_overlap
+        + 10 * tag_overlap
+        + (5 if clean_text(current.get("category")) == clean_text(previous.get("category")) else 0)
+        + (18 if direct else 0)
+    )
+    return max(0, min(100, score)), reasons[:3]
+
+
+def fallback_history_context(
+    item: dict[str, Any], related: list[dict[str, Any]], lookback_days: int
+) -> dict[str, Any]:
+    if not related:
+        return {
+            "status": "no-match",
+            "lookbackDays": lookback_days,
+            "relatedCount": 0,
+            "relatedStories": [],
+            "timelineSummary": f"在近 {lookback_days} 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+            "outlook": [{
+                "horizon": "观察",
+                "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+                "confidence": "低",
+            }],
+            "analysisProvider": "rules",
+        }
+    ordered = sorted(related, key=lambda story: str(story.get("editionDate", "")))
+    first_date = clean_text(ordered[0].get("editionDate"))
+    last_date = clean_text(ordered[-1].get("editionDate"))
+    topic = "、".join(clean_text(tag) for tag in item.get("tags", [])[:2] if clean_text(tag))
+    topic = topic or clean_text(item.get("category")) or "该主题"
+    return {
+        "status": "linked",
+        "lookbackDays": lookback_days,
+        "relatedCount": len(related),
+        "relatedStories": ordered,
+        "timelineSummary": (
+            f"当前事件与 {first_date} 至 {last_date} 的 {len(related)} 条归档记录形成连续脉络，"
+            f"共同涉及{topic}；关联度表示主题与事件线索重合，不代表因果关系已经证实。"
+        ),
+        "outlook": [
+            {
+                "horizon": "短期",
+                "text": "关注相关机构的正式文件、时间表变化以及是否出现新的独立来源印证。",
+                "confidence": "中",
+            },
+            {
+                "horizon": "中期",
+                "text": "关注该事件是否从单次动态演变为持续的政策、部署、采购或技术验证信号。",
+                "confidence": "低",
+            },
+        ],
+        "analysisProvider": "rules",
+    }
+
+
+def build_history_contexts(
+    items: list[dict[str, Any]],
+    history_items: list[dict[str, Any]],
+    config: dict[str, Any],
+    now: datetime,
+) -> dict[str, dict[str, Any]]:
+    """Link the final Top 10 to bounded, compact historical archive records."""
+    lookback_days = max(7, min(730, int(config.get("history_lookback_days", 365))))
+    max_links = max(1, min(5, int(config.get("history_max_links", 3))))
+    threshold = max(10, min(90, int(config.get("history_min_association_score", 30))))
+    current_local_date = now.astimezone(ZoneInfo(config.get("timezone", "Asia/Tokyo"))).date()
+    cutoff = (current_local_date - timedelta(days=lookback_days)).isoformat()
+    current_edition = current_local_date.isoformat()
+    eligible = [
+        previous for previous in history_items
+        if isinstance(previous, dict)
+        and clean_text(previous.get("id"))
+        and re.fullmatch(r"\d{4}-\d{2}-\d{2}", clean_text(previous.get("editionDate")))
+        and clean_text(previous.get("editionDate")) >= cutoff
+        and clean_text(previous.get("editionDate")) < current_edition
+    ]
+    contexts: dict[str, dict[str, Any]] = {}
+    for item in items:
+        ranked: list[dict[str, Any]] = []
+        for previous in eligible:
+            if clean_text(previous.get("id")) == clean_text(item.get("id")):
+                continue
+            score, reasons = history_association_score(item, previous)
+            if score < threshold:
+                continue
+            ranked.append({
+                "id": clean_text(previous.get("id")),
+                "editionDate": clean_text(previous.get("editionDate")),
+                "title": clean_text(previous.get("title")) or clean_text(previous.get("originalTitle")) or "历史事件",
+                "originalTitle": clean_text(previous.get("originalTitle")),
+                "summary": (clean_text(previous.get("summary")) or "历史摘要未提供。")[:220],
+                "category": clean_text(previous.get("category")) or "前沿技术",
+                "source": clean_text(previous.get("source")) or "历史归档",
+                "publishedAt": clean_text(previous.get("publishedAt")),
+                "associationScore": score,
+                "relationLabel": "同一事件后续" if same_event_title(
+                    clean_text(item.get("originalTitle") or item.get("title")),
+                    clean_text(previous.get("originalTitle") or previous.get("title")),
+                ) else "相关主题演进",
+                "associationReasons": reasons,
+            })
+        ranked.sort(key=lambda story: (
+            int(story["associationScore"]), str(story.get("editionDate", ""))
+        ), reverse=True)
+        contexts[clean_text(item.get("id"))] = fallback_history_context(
+            item, ranked[:max_links], lookback_days
+        )
+    return contexts
+
+
 def wire_family(article: Article) -> str:
     """Identify explicit wire-service provenance without treating republishers as independent."""
     domain = article.domain.lower()
@@ -1499,6 +1675,12 @@ def run_resilient_ai_batches(
     label: str,
 ) -> tuple[dict[str, dict[str, Any]], list[str], dict[str, Any]]:
     """Run bounded AI batches and recursively retry only unresolved records."""
+    def get_entry_id(entry: Any) -> str:
+        return clean_text(entry.get("id")) if isinstance(entry, dict) else clean_text(getattr(entry, "id", ""))
+
+    item_ids = [get_entry_id(entry) for entry in items]
+    if any(not value for value in item_ids) or len(set(item_ids)) != len(item_ids):
+        raise ValueError(f"{label} requires unique non-empty item IDs")
     completed: dict[str, dict[str, Any]] = {}
     missing_reasons: dict[str, str] = {}
     request_count = 0
@@ -1516,7 +1698,7 @@ def run_resilient_ai_batches(
             return
         if circuit_open:
             for entry in batch:
-                missing_reasons.setdefault(entry.id, "not_attempted_after_circuit_breaker")
+                missing_reasons.setdefault(get_entry_id(entry), "not_attempted_after_circuit_breaker")
             return
 
         request_count += 1
@@ -1534,7 +1716,7 @@ def run_resilient_ai_batches(
         else:
             resolved = {
                 entry_id: value for entry_id, value in resolved.items()
-                if entry_id in {entry.id for entry in batch}
+                if entry_id in {get_entry_id(entry) for entry in batch}
             }
             if resolved:
                 consecutive_failures = 0
@@ -1545,11 +1727,11 @@ def run_resilient_ai_batches(
                 failure_reason = "empty_or_invalid_response"
 
         completed.update(resolved)
-        unresolved = [entry for entry in batch if entry.id not in resolved]
+        unresolved = [entry for entry in batch if get_entry_id(entry) not in resolved]
         for entry in unresolved:
-            missing_reasons[entry.id] = failure_reason
-        for entry_id in resolved:
-            missing_reasons.pop(entry_id, None)
+            missing_reasons[get_entry_id(entry)] = failure_reason
+        for resolved_id in resolved:
+            missing_reasons.pop(resolved_id, None)
 
         if consecutive_failures >= 2:
             circuit_open = True
@@ -1566,7 +1748,7 @@ def run_resilient_ai_batches(
     batch_size = max(1, initial_batch_size)
     for start in range(0, len(items), batch_size):
         process(items[start:start + batch_size], 0)
-    missing_ids = [entry.id for entry in items if entry.id not in completed]
+    missing_ids = [get_entry_id(entry) for entry in items if get_entry_id(entry) not in completed]
     if not items:
         completion_reason = "not_needed"
         completion_message = "没有需要翻译的新条目"
@@ -1711,6 +1893,133 @@ def ai_translate_daily_articles(
         retry_rounds=retry_rounds,
         request_batch=lambda batch: request_daily_translation_batch(batch, config, runtime),
         label="日报中文翻译",
+    )
+
+
+def request_history_analysis_batch(
+    batch: list[dict[str, Any]], config: dict[str, Any], runtime: dict[str, str]
+) -> dict[str, dict[str, Any]]:
+    """Summarize only the deterministic historical links supplied by code."""
+    index_to_item = {index: item for index, item in enumerate(batch, 1)}
+    indexes = list(index_to_item)
+    outlook_schema = {
+        "type": "object",
+        "properties": {
+            "horizon": {"type": "string"},
+            "text": {"type": "string"},
+            "confidence": {"type": "string", "enum": ["低", "中", "高"]},
+        },
+        "required": ["horizon", "text", "confidence"],
+        "additionalProperties": False,
+    }
+    item_schema = {
+        "type": "object",
+        "properties": {
+            "index": {"type": "integer", "enum": indexes},
+            "timelineSummary": {"type": "string"},
+            "outlook": {"type": "array", "items": outlook_schema, "minItems": 1, "maxItems": 2},
+        },
+        "required": ["index", "timelineSummary", "outlook"],
+        "additionalProperties": False,
+    }
+    schema = {
+        "type": "object",
+        "properties": {
+            "items": {"type": "array", "items": item_schema, "minItems": len(batch), "maxItems": len(batch)},
+        },
+        "required": ["items"],
+        "additionalProperties": False,
+    }
+    evidence = []
+    for index, item in index_to_item.items():
+        context = item.get("historyContext", {})
+        evidence.append({
+            "index": index,
+            "current": {
+                "title": item.get("title"),
+                "summary": item.get("summary"),
+                "keyFacts": item.get("keyFacts", []),
+                "category": item.get("category"),
+                "publishedAt": item.get("publishedAt"),
+                "sources": item.get("sources", [])[:3],
+            },
+            "relatedArchiveStories": context.get("relatedStories", []),
+        })
+    example = {"items": [{
+        "index": index,
+        "timelineSummary": "不超过160字、严格依据当前事件与给定历史记录的时间演化总结。",
+        "outlook": [
+            {"horizon": "短期", "text": "不超过90字的可验证后续观察点。", "confidence": "中"},
+            {"horizon": "中期", "text": "不超过90字的条件性情景判断。", "confidence": "低"},
+        ],
+    } for index in indexes]}
+    result = request_structured_json(
+        runtime,
+        instructions=(
+            "你是国际科技与安全事件脉络编辑。程序已经完成历史候选匹配，你不得新增、删除或替换历史记录，"
+            "也不得声称主题相关性已经证明因果关系。只依据 current 与 relatedArchiveStories，按日期总结已发生的演化，"
+            "再给出1至2个条件性后续观察点。预判必须使用‘若…则需关注…’或‘后续可观察…’等审慎表达，"
+            "不得编造日期、数量、机构行为或确定性结论。军事与冲突信息保持中性。"
+            f"本批共有{len(batch)}条，items必须恰好输出{len(batch)}条且每个index只出现一次。"
+        ),
+        input_text="当前事件与程序匹配的历史证据：\n" + json.dumps(evidence, ensure_ascii=False),
+        schema_name="frontier_history_analysis",
+        schema=schema,
+        example=example,
+        max_tokens=int(config.get("history_analysis_max_tokens", 5000)),
+    )
+    completed: dict[str, dict[str, Any]] = {}
+    for value in result.get("items", []):
+        if not isinstance(value, dict):
+            continue
+        index = sequence_index(value.get("index"), len(batch))
+        item = index_to_item.get(index)
+        outlook = []
+        for observation in value.get("outlook", []) if isinstance(value.get("outlook"), list) else []:
+            if not isinstance(observation, dict):
+                continue
+            text = clean_text(observation.get("text"), 120)
+            confidence = clean_text(observation.get("confidence"))
+            if text and confidence in {"低", "中", "高"}:
+                outlook.append({
+                    "horizon": clean_text(observation.get("horizon"), 20) or "观察",
+                    "text": text,
+                    "confidence": confidence,
+                })
+        timeline = clean_text(value.get("timelineSummary"), 220)
+        if item and timeline and outlook:
+            completed[clean_text(item.get("id"))] = {
+                "timelineSummary": timeline,
+                "outlook": outlook[:2],
+                "analysisProvider": runtime["provider"],
+            }
+    return completed
+
+
+def ai_analyze_history(
+    items: list[dict[str, Any]], config: dict[str, Any], runtime: dict[str, str]
+) -> tuple[dict[str, dict[str, Any]], list[str], dict[str, Any]]:
+    linked = [
+        item for item in items
+        if item.get("historyContext", {}).get("status") == "linked"
+    ]
+    if not linked:
+        return {}, [], {
+            "requestedItemCount": 0,
+            "completedItemCount": 0,
+            "missingItemCount": 0,
+            "missingItemIds": [],
+            "completionReason": "no_linked_history",
+            "completionMessage": "本期没有达到阈值的历史关联记录",
+        }
+    batch_size = max(1, min(5, int(config.get("history_analysis_batch_size", 5))))
+    retry_rounds = max(0, min(2, int(config.get("history_analysis_retry_rounds", 1))))
+    return run_resilient_ai_batches(
+        linked,
+        initial_batch_size=batch_size,
+        retry_rounds=retry_rounds,
+        request_batch=lambda batch: request_history_analysis_batch(batch, config, runtime),
+        label="历史脉络分析",
     )
 
 
@@ -2184,6 +2493,7 @@ def build_report(
     now: datetime,
     skip_ai: bool,
     reusable_translations: dict[str, dict[str, Any]] | None = None,
+    history_items: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     top_n = int(config["top_n"])
     shortlist = candidates[: int(config["candidate_limit"])]
@@ -2400,6 +2710,59 @@ def build_report(
         for article in selected
     ]
     items.sort(key=lambda item: (item["score"], item["publishedAt"]), reverse=True)
+    history_contexts = build_history_contexts(items, history_items or [], config, now)
+    for item in items:
+        item["historyContext"] = history_contexts.get(
+            clean_text(item.get("id")),
+            fallback_history_context(item, [], int(config.get("history_lookback_days", 365))),
+        )
+    history_analysis_status = "disabled" if skip_ai else "rules"
+    history_analysis_warnings: list[str] = []
+    history_analysis_diagnostics: dict[str, Any] = {
+        "requestedItemCount": 0,
+        "completedItemCount": 0,
+        "missingItemCount": 0,
+        "missingItemIds": [],
+        "completionReason": "rules_only" if not runtime else "not_started",
+        "completionMessage": "已生成确定性历史关联，未调用模型分析" if not runtime else "等待历史脉络分析",
+    }
+    if runtime and bool(config.get("history_analysis_enabled", True)):
+        try:
+            analyses, history_analysis_warnings, history_analysis_diagnostics = ai_analyze_history(
+                items, config, runtime
+            )
+            for item in items:
+                analysis = analyses.get(clean_text(item.get("id")))
+                if analysis:
+                    item["historyContext"].update(analysis)
+            linked_count = sum(item["historyContext"].get("status") == "linked" for item in items)
+            analyzed_count = sum(
+                item["historyContext"].get("analysisProvider") == runtime["provider"] for item in items
+            )
+            history_analysis_status = (
+                "not-needed" if not linked_count
+                else "ok" if analyzed_count == linked_count
+                else "partial" if analyzed_count
+                else "rules"
+            )
+        except Exception as exc:
+            reason = clean_text(str(exc), 220) or exc.__class__.__name__
+            history_analysis_status = "rules"
+            history_analysis_warnings.append(
+                f"{provider_display_name(runtime['provider'])} 历史脉络分析不可用，已保留规则关联：{reason}"
+            )
+            history_analysis_diagnostics = {
+                "requestedItemCount": sum(item["historyContext"].get("status") == "linked" for item in items),
+                "completedItemCount": 0,
+                "missingItemCount": sum(item["historyContext"].get("status") == "linked" for item in items),
+                "missingItemIds": [
+                    item["id"] for item in items if item["historyContext"].get("status") == "linked"
+                ],
+                "completionReason": "history_analysis_stage_error",
+                "completionMessage": reason,
+            }
+    elif runtime:
+        history_analysis_status = "disabled"
     source_count = len({
         (evidence.get("evidenceGroup") or evidence.get("domain") or evidence.get("name") or "").lower()
         for article in candidates
@@ -2412,7 +2775,7 @@ def build_report(
         signals = fallback_brief(items, source_count)["signals"]
     local_time = now.astimezone(ZoneInfo(config.get("timezone", "Asia/Tokyo")))
     return {
-        "schemaVersion": 7,
+        "schemaVersion": 8,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "editionDate": local_time.strftime("%Y-%m-%d"),
         "timezone": config.get("timezone", "Asia/Tokyo"),
@@ -2431,6 +2794,12 @@ def build_report(
         "translatedItemCount": sum(bool(item.get("translationProvider")) for item in items),
         "translationWarnings": translation_warnings,
         "translationDiagnostics": translation_diagnostics,
+        "historyAnalysisStatus": history_analysis_status,
+        "historyAnalysisProvider": runtime.get("provider") if runtime and bool(config.get("history_analysis_enabled", True)) else "",
+        "historyLinkedItemCount": sum(item["historyContext"].get("status") == "linked" for item in items),
+        "historyAnalyzedItemCount": sum(item["historyContext"].get("analysisProvider") not in {"", "rules"} for item in items),
+        "historyAnalysisWarnings": history_analysis_warnings,
+        "historyAnalysisDiagnostics": history_analysis_diagnostics,
         "warnings": [*selection_warnings, *translation_warnings],
         "candidateCount": len(candidates),
         "freshCandidateCount": sum(not article.is_supplemental for article in candidates),
@@ -2462,7 +2831,7 @@ def validate_report(report: dict[str, Any], expected_count: int) -> None:
     required = {
         "id", "title", "originalTitle", "summary", "keyFacts", "why", "category", "source",
         "publishedAt", "url", "score", "scoreBasis", "scoreComponents", "scoreReasons",
-        "confidence", "confidenceReason", "tags", "sources",
+        "confidence", "confidenceReason", "tags", "sources", "historyContext",
     }
     for index, item in enumerate(items, 1):
         missing = required.difference(item)
@@ -2473,6 +2842,13 @@ def validate_report(report: dict[str, Any], expected_count: int) -> None:
         ids.add(item["id"])
         if item["category"] not in CATEGORIES:
             raise ValueError(f"invalid category: {item['category']}")
+        context = item.get("historyContext")
+        if not isinstance(context, dict) or context.get("status") not in {"linked", "no-match"}:
+            raise ValueError(f"item {index} has invalid historyContext")
+        related = context.get("relatedStories")
+        outlook = context.get("outlook")
+        if not isinstance(related, list) or not isinstance(outlook, list) or not outlook:
+            raise ValueError(f"item {index} has incomplete historyContext")
         if not str(item["url"]).startswith(("http://", "https://")):
             raise ValueError(f"invalid URL in item {index}")
         if not isinstance(item["keyFacts"], list) or not item["keyFacts"]:
@@ -2798,7 +3174,7 @@ def write_pipeline_status(
         else:
             previous_translation_status = "unknown"
     payload = {
-        "schemaVersion": 7,
+        "schemaVersion": 8,
         "state": state,
         "lastAttemptAt": now.isoformat().replace("+00:00", "Z"),
         "lastSuccessAt": now.isoformat().replace("+00:00", "Z") if success else previous.get("lastSuccessAt"),
@@ -2820,6 +3196,12 @@ def write_pipeline_status(
         "translatedItemCount": int(report.get("translatedItemCount", 0)) if success else previous.get("translatedItemCount", 0),
         "translationWarnings": report.get("translationWarnings", []) if success else previous.get("translationWarnings", []),
         "translationDiagnostics": report.get("translationDiagnostics", {}) if success else previous.get("translationDiagnostics", {}),
+        "historyAnalysisStatus": report.get("historyAnalysisStatus") if success else previous.get("historyAnalysisStatus"),
+        "historyAnalysisProvider": report.get("historyAnalysisProvider") if success else previous.get("historyAnalysisProvider"),
+        "historyLinkedItemCount": int(report.get("historyLinkedItemCount", 0)) if success else previous.get("historyLinkedItemCount", 0),
+        "historyAnalyzedItemCount": int(report.get("historyAnalyzedItemCount", 0)) if success else previous.get("historyAnalyzedItemCount", 0),
+        "historyAnalysisWarnings": report.get("historyAnalysisWarnings", []) if success else previous.get("historyAnalysisWarnings", []),
+        "historyAnalysisDiagnostics": report.get("historyAnalysisDiagnostics", {}) if success else previous.get("historyAnalysisDiagnostics", {}),
         "warnings": report.get("warnings", []) if success else previous.get("warnings", []),
         "coverageStatus": report.get("coverageStatus") if success else previous.get("coverageStatus"),
         "freshItemCount": int(report.get("freshItemCount", 0)) if success else previous.get("freshItemCount", 0),
@@ -2989,6 +3371,7 @@ def main(argv: list[str] | None = None) -> int:
                 now,
                 args.skip_ai,
                 reusable_translations=stream_translations,
+                history_items=read_existing_search_items(args.search_index),
             )
             validate_report(report, int(config["top_n"]))
 
