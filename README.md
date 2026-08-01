@@ -15,7 +15,8 @@
 - 独立“论文雷达”读取 arXiv 官方 Atom API，覆盖 AI、机器学习、机器人、无人与控制系统、空间科学、量子和先进材料；除分类采集外，系统采集词会直接查询论文标题和摘要。
 - “我的论文关键词”可在浏览器保存最多 20 个中英文词，自动筛选、命中高亮并生成专属论文流；个人词不上传，系统实际采集词则公开显示在页面上。
 - 配置 DeepSeek 时，论文雷达可分批为最多 60 篇生成中文标题、摘要、研究问题、方法、主要发现与局限；全量动态最多翻译 120 条，并复用未变化条目的既有翻译以控制成本。新闻每批 6 条、论文每批 5 篇，缺失项会自动拆分重试，单个批次失败不会删除原始内容。
-- 首页重构为“今日必读 Top 3 → 执行摘要 → 完整 Top 10”，减少首屏信息拥挤，同时保留全部证据详情。
+- 首页采用更短的栏目文案和“今日必读 Top 3 → 执行摘要 → 完整 Top 10”层级；头条有图片时自动作为带渐变遮罩的背景过渡，无图片时保持纯色版式，不依赖第三方每日壁纸接口。
+- 每条 Top 10 自动回看近 365 日归档，通过标题、摘要、关键事实和标签计算可解释的关联度，展示关联事件时间线、阶段演化总结与条件性后续观察；规则先锁定历史证据，AI 只能总结给定候选，不能新增或替换历史记录。
 - 展示一个事件的全部来源、独立来源数量、来源置信度和可展开的评分分项。
 - 按日归档、日期前后切换，以及按月分片的轻量跨日期搜索；完整评分与来源在展开时按需读取当期归档。
 - 独立收藏页和关注词情报流；数据只保存在当前浏览器 `localStorage`。
@@ -34,9 +35,10 @@
 3. 若 24 小时合格候选不足 10 条，先合并最近一次已验证的三小时动态缓存，再按 36/48/72 小时逐级补充并施加时效降权；若只是候选分布过度集中，则分级放宽主题/来源配额，而不是让整期刷新失败。
 4. 配置 `DEEPSEEK_API_KEY` 时，调用 DeepSeek Chat Completions（JSON 输出、关闭思考模式）逐条评估候选重要度；程序按默认 `AI 65% + 规则 35%` 合成排序，再确定性执行类别与来源配额。最终 Top 10 随后独立进入中文编辑；动态流翻译使用短序号、小批次和缺失项拆分重试。OpenAI Responses 仍可作为可选提供方。
 5. 独立按 arXiv 分类与 `research.collection_keywords` 查询标题/摘要，合并去重后按主题相关性、摘要完整度与新鲜度排序；可选 AI 中文编辑不会改变原始论文元数据。
-6. 校验日报恰好 10 条后，写入最新一期、按日归档、月度搜索分片、Atom Feed 和健康状态；全量动态保持严格 24 小时语义，允许低流量日少于 10 条。
-7. 只有在 72 小时内仍无法找到 10 条可验证候选，或完全没有 24 小时候选时，才保留上一版真实日报并记录失败，绝不生成虚构新闻。
-8. GitHub Actions 提交数据，Cloudflare 自动发布；配置 SMTP 时再发送邮件。
+6. 最终 Top 10 与旧归档做有界关联检索；只把达到阈值且早于当前版次的记录交给可选 AI，总结时间演化和可验证的后续观察点。模型失败时保留规则时间线，不影响日报发布。
+7. 校验日报恰好 10 条后，写入最新一期、按日归档、月度搜索分片、Atom Feed 和健康状态；全量动态保持严格 24 小时语义，允许低流量日少于 10 条。
+8. 只有在 72 小时内仍无法找到 10 条可验证候选，或完全没有 24 小时候选时，才保留上一版真实日报并记录失败，绝不生成虚构新闻。
+9. GitHub Actions 提交数据，Cloudflare 自动发布；配置 SMTP 时再发送邮件。
 
 ## 目录
 
@@ -57,7 +59,7 @@ public/
   data/archive/index.json           可用日期与期刊元数据
   data/archive/search-index.json    月度搜索分片清单
   data/archive/search-YYYY-MM.json  仅含可检索字段的月度分片
-scripts/update_news.py              采集、去重、评分、AI 编辑、归档与状态
+scripts/update_news.py              采集、去重、评分、AI 编辑、历史关联、归档与状态
 scripts/send_digest.py              SMTP 邮件摘要
 scripts/check_production.py         线上安全头与缓存头验收
 config/news_config.json             主题、信源、权重、时区、模型和归档期限
@@ -120,6 +122,7 @@ python scripts/update_news.py
 - `public/data/research.json`：`editorialProvider: deepseek`、`translatedItemCount > 0`。
 - `public/data/stream.json`：`translationProvider: deepseek`、`translatedItemCount > 0`。
 - `public/data/status.json` 和 `stream-status.json`：记录模型、翻译数量、缺失 ID、重试次数、逐项失败原因和完成原因，但绝不包含密钥或原始提示词。
+- `public/data/news.json` 的每条 `historyContext`：保存程序匹配的历史记录、关联分、理由、时间线总结和后续观察；顶层 `historyAnalysisStatus`、`historyLinkedItemCount`、`historyAnalyzedItemCount` 用于区分规则关联与 AI 总结完成度。
 
 本地运行可复制 `.env.example` 中的变量到当前终端环境，再执行 `python scripts/update_news.py`。不要提交真实 `.env`。系统使用官方兼容地址 `https://api.deepseek.com/chat/completions`；模型与 JSON 输出参数以 [DeepSeek 官方 API 文档](https://api-docs.deepseek.com/) 为准。
 
@@ -202,6 +205,7 @@ python scripts/check_production.py --site-url https://frontier-pulse.jiumi674.wo
 - 论文窗口、上限、研究方向与采集词：`research.lookback_days`、`research.limit`、`research.arxiv_categories`、`research.collection_keywords`
 - 每日条数：`top_n`，当前前端和校验固定为 10
 - 搜索索引保留期：`archive_retention_days`，默认 730 期
+- 历史关联：`history_lookback_days` 默认 365 日、`history_max_links` 默认 3 条、`history_min_association_score` 默认 30；`history_analysis_enabled` 控制是否用当前 AI 提供方总结已匹配的证据。
 - 前端过期阈值：`public/assets/app.js` 中的 36 小时判断
 
 每日工作流使用浅克隆，搜索数据按月分片并只保存可检索字段，降低 Git checkout 和浏览器解析成本。完整归档仍会随 Git 历史增长；运行多年后应把旧归档迁移到 R2 或独立数据分支，但先保留 `index.json`、搜索清单和日期详情 URL 的兼容层。
@@ -211,5 +215,6 @@ python scripts/check_production.py --site-url https://frontier-pulse.jiumi674.wo
 - 只保存标题、短摘要、关键事实、来源元数据和原文链接，不镜像新闻全文。
 - AI 只能依据候选标题、RSS 描述、来源和时间生成编辑稿，提示词禁止补写无证据事实。
 - “重要度”是编辑排序分，“置信度”是来源证据提示，均不代表事实真伪概率。
+- “历史关联度”只表示公开文本线索的重合，不是因果关系或事实真伪概率；后续观察是条件性情景，不是确定预测。
 - 军事与冲突内容使用中性表述；关键结论应回到一手文件并进行跨来源核验。
 - API Key、SMTP 密码和收件人只能放在 GitHub Secrets 或本地环境变量中。

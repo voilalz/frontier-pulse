@@ -44,6 +44,7 @@ class UpdateNewsTests(unittest.TestCase):
         self.assertTrue(all(item["scoreReasons"] and item["confidenceReason"] for item in report["items"]))
         self.assertTrue(all(item["sources"] for item in report["items"]))
         self.assertTrue(all(item["contentType"] == "news" for item in report["items"]))
+        self.assertTrue(all(item["historyContext"]["outlook"] for item in report["items"]))
 
     def test_full_stream_preserves_all_qualified_candidates_and_top_flags(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
@@ -401,6 +402,72 @@ class UpdateNewsTests(unittest.TestCase):
         self.assertTrue(MODULE.same_event_title(first, second))
         self.assertFalse(MODULE.same_event_title(first, "Navy plans long-range carrier drone fleets"))
 
+    def test_history_context_links_only_prior_lexically_related_events(self):
+        current = {
+            "id": "starship-current",
+            "title": "SpaceX 星舰完成新一轮飞行测试",
+            "originalTitle": "SpaceX completes another Starship flight test",
+            "summary": "星舰完成飞行测试，任务继续验证再入与回收能力。",
+            "keyFacts": ["SpaceX 继续验证 Starship 再入和回收能力"],
+            "category": "航空航天",
+            "tags": ["SpaceX", "Starship", "飞行测试"],
+        }
+        related = {
+            "id": "starship-prior",
+            "editionDate": "2026-07-10",
+            "title": "监管机构批准 SpaceX 星舰下一次飞行测试",
+            "originalTitle": "Regulator clears SpaceX Starship for next flight test",
+            "summary": "监管许可为 Starship 下一轮飞行测试设定条件。",
+            "keyFacts": ["许可涉及 Starship 飞行与回收计划"],
+            "category": "航空航天",
+            "source": "Example Space Source",
+            "tags": ["SpaceX", "Starship", "飞行测试"],
+        }
+        unrelated = {
+            "id": "unrelated",
+            "editionDate": "2026-07-09",
+            "title": "航空公司更新远程客机客舱",
+            "originalTitle": "Airline updates long-haul aircraft cabin",
+            "summary": "该航空公司公布新的客舱座椅。",
+            "category": "航空航天",
+            "source": "Example Aviation Source",
+            "tags": ["民航"],
+        }
+        same_day = {**related, "id": "same-day", "editionDate": "2026-07-16"}
+        contexts = MODULE.build_history_contexts(
+            [current], [related, unrelated, same_day], self.config, self.now
+        )
+        context = contexts[current["id"]]
+        self.assertEqual(context["status"], "linked")
+        self.assertEqual(context["relatedCount"], 1)
+        self.assertEqual(context["relatedStories"][0]["id"], related["id"])
+        self.assertGreaterEqual(context["relatedStories"][0]["associationScore"], 30)
+        self.assertIn("关联度表示", context["timelineSummary"])
+
+    def test_history_ai_analysis_accepts_daily_dict_items_and_preserves_links(self):
+        item = {
+            "id": "current-event",
+            "historyContext": {
+                "status": "linked",
+                "relatedStories": [{"id": "prior-event", "editionDate": "2026-07-10"}],
+            },
+        }
+        model_result = {
+            item["id"]: {
+                "timelineSummary": "历史记录显示该事件从许可阶段进入验证阶段。",
+                "outlook": [{"horizon": "短期", "text": "若测试继续，需关注正式结果。", "confidence": "中"}],
+                "analysisProvider": "deepseek",
+            }
+        }
+        with mock.patch.object(MODULE, "request_history_analysis_batch", return_value=model_result):
+            analyses, warnings, diagnostics = MODULE.ai_analyze_history(
+                [item], self.config, {"provider": "deepseek", "model": "test-model"}
+            )
+        self.assertEqual(analyses[item["id"]]["analysisProvider"], "deepseek")
+        self.assertEqual(item["historyContext"]["relatedStories"][0]["id"], "prior-event")
+        self.assertFalse(warnings)
+        self.assertEqual(diagnostics["completionReason"], "complete_first_pass")
+
     def test_cli_writes_atomic_json(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -431,7 +498,7 @@ class UpdateNewsTests(unittest.TestCase):
             ])
             self.assertEqual(status, 0)
             payload = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(payload["schemaVersion"], 7)
+            self.assertEqual(payload["schemaVersion"], 8)
             self.assertEqual(payload["editionDate"], "2026-07-16")
             self.assertEqual(payload["timezone"], "Asia/Tokyo")
             self.assertEqual(payload["method"], "rules")
@@ -449,7 +516,7 @@ class UpdateNewsTests(unittest.TestCase):
             atom = ET.parse(feed_output).getroot()
             self.assertEqual(len(atom.findall("{http://www.w3.org/2005/Atom}entry")), 10)
             pipeline_status = json.loads(status_output.read_text(encoding="utf-8"))
-            self.assertEqual(pipeline_status["schemaVersion"], 7)
+            self.assertEqual(pipeline_status["schemaVersion"], 8)
             self.assertEqual(pipeline_status["state"], "ok")
             self.assertEqual(pipeline_status["selectionMethod"], "rules")
             self.assertEqual(pipeline_status["translationStatus"], "disabled")

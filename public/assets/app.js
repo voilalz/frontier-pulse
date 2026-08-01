@@ -120,6 +120,38 @@
     };
   }
 
+  function normalizeHistoryContext(raw) {
+    if (!raw || typeof raw !== "object") return null;
+    const relatedStories = (Array.isArray(raw.relatedStories) ? raw.relatedStories : []).map((story) => ({
+      id: clean(story?.id),
+      editionDate: /^\d{4}-\d{2}-\d{2}$/.test(clean(story?.editionDate)) ? clean(story.editionDate) : "",
+      title: clean(story?.title || story?.originalTitle, "历史事件"),
+      originalTitle: clean(story?.originalTitle),
+      summary: clean(story?.summary),
+      category: clean(story?.category, "前沿技术"),
+      source: clean(story?.source, "历史归档"),
+      publishedAt: clean(story?.publishedAt),
+      associationScore: Math.max(0, Math.min(100, Number(story?.associationScore) || 0)),
+      relationLabel: clean(story?.relationLabel, "相关主题演进"),
+      associationReasons: (Array.isArray(story?.associationReasons) ? story.associationReasons : [])
+        .map((reason) => clean(reason)).filter(Boolean).slice(0, 3),
+    })).filter((story) => story.id && story.editionDate && story.title).slice(0, 5);
+    const outlook = (Array.isArray(raw.outlook) ? raw.outlook : []).map((item) => ({
+      horizon: clean(item?.horizon, "观察"),
+      text: clean(item?.text),
+      confidence: ["低", "中", "高"].includes(clean(item?.confidence)) ? clean(item.confidence) : "低",
+    })).filter((item) => item.text).slice(0, 2);
+    return {
+      status: raw.status === "linked" && relatedStories.length ? "linked" : "no-match",
+      lookbackDays: Math.max(7, Number(raw.lookbackDays) || 365),
+      relatedCount: relatedStories.length,
+      relatedStories,
+      timelineSummary: clean(raw.timelineSummary),
+      outlook,
+      analysisProvider: clean(raw.analysisProvider, "rules"),
+    };
+  }
+
   function normalizeItem(raw, index, editionDate = "") {
     if (!raw || typeof raw !== "object" || !clean(raw.title)) throw new Error(`第 ${index + 1} 条新闻缺少标题`);
     const sources = (Array.isArray(raw.sources) ? raw.sources : [])
@@ -173,6 +205,7 @@
       selectionNote: clean(raw.selectionNote),
       diversityRelaxed: Boolean(raw.diversityRelaxed),
       translationProvider: clean(raw.translationProvider),
+      historyContext: normalizeHistoryContext(raw.historyContext),
       editionDate: clean(raw.editionDate || editionDate),
       _compact: Boolean(raw._compact),
     };
@@ -332,7 +365,7 @@
     if (!translationStatus && state.pipelineStatus?.editorialStatus === "fallback") {
       badge.textContent = "旧版回退";
       badge.classList.add("warning");
-      showAlert("warning", "日报已更新，但当时使用旧版 AI 回退流程", warnings.join("；") || state.pipelineStatus.message || "请等待 v1.9 数据管道下一次更新。");
+      showAlert("warning", "日报已更新，但当时使用旧版 AI 回退流程", warnings.join("；") || state.pipelineStatus.message || "请等待新版数据管道下一次更新。");
       return;
     }
     if (warnings.length) {
@@ -624,16 +657,17 @@
 
   function renderViewCopy() {
     const copy = {
-      latest: ["DAILY INTELLIGENCE BRIEF", "全球前沿情报，先看最重要的", "每日十条重点事件，先呈现必读内容，再提供证据、来源与评分解释。", "TOP 10 BRIEF", "今日完整 Top 10"],
-      stream: ["QUALIFIED FULL STREAM", `过去 ${state.rangeHours} 小时全量动态`, "展示所有通过主题相关性、时间窗、去重和商业内容过滤的合格候选。", "FULL STREAM", "全部合格动态"],
-      research: ["RESEARCH RADAR", "前沿论文雷达", "聚合 AI、机器人、无人系统、空间科学、量子与先进材料研究，预印本状态始终明确标注。", "PAPERS & PREPRINTS", "最新研究论文"],
-      history: ["ARCHIVE & DISCOVERY", "历史归档与跨日检索", "按日期回看每日版；输入搜索词后，将自动切换为跨日期检索。", "ARCHIVE", state.query ? "跨日期搜索" : "历史要闻"],
-      bookmarks: ["PERSONAL COLLECTION", "我的收藏", "收藏内容完整保存在当前浏览器，不会上传服务器。", "SAVED STORIES", "收藏新闻"],
-      watchlist: ["PERSONAL WATCHLIST", "关注词情报流", "用本机关注词扫描已有归档，快速追踪技术、机构、地区与装备型号。", "WATCHED SIGNALS", "关注词命中"],
+      latest: ["DAILY BRIEF", "今日前沿态势", "科技 · AI · 航空航天 · 安全 · 前沿研究", "TOP 10", "今日 Top 10"],
+      stream: ["FULL STREAM", `过去 ${state.rangeHours} 小时`, "全量合格动态", "STREAM", "全量动态"],
+      research: ["RESEARCH RADAR", "论文雷达", "前沿研究与预印本", "PAPERS", "最新论文"],
+      history: ["ARCHIVE", "历史脉络", state.query ? "跨日期检索" : "按日期回看", "ARCHIVE", state.query ? "跨日期搜索" : "历史要闻"],
+      bookmarks: ["COLLECTION", "我的收藏", "仅保存在当前浏览器", "SAVED", "收藏新闻"],
+      watchlist: ["WATCHLIST", "关注词", "从历史索引中追踪持续信号", "SIGNALS", "关注词命中"],
     }[state.view];
     $("viewEyebrow").textContent = copy[0];
     $("viewTitle").textContent = copy[1];
     $("viewDescription").textContent = copy[2];
+    $("viewDescription").hidden = !copy[2];
     $("feedEyebrow").textContent = copy[3];
     $("feedTitle").textContent = copy[4];
     $("watchPanel").hidden = state.view !== "watchlist";
@@ -775,12 +809,21 @@
     if (state.view !== "latest") return;
     const items = (state.latestReport?.items || []).slice(0, 3);
     $("spotlightStories").innerHTML = items.length ? items.map((item, index) => `
-      <article class="spotlight-card">
-        <div class="spotlight-meta"><b>0${index + 1}</b><span>${esc(item.category)}</span><span>${esc(item.source)}</span>${item.isSupplemental ? `<span class="supplemental-badge">补充观察 · ${item.selectionWindowHours}h</span>` : ""}</div>
-        <h3>${highlightText(item.title)}</h3>
-        <p>${highlightText(item.summary)}</p>
-        <a href="#${esc(anchorId(item))}">查看关键事实与来源 <span aria-hidden="true">↓</span></a>
+      <article class="spotlight-card${index === 0 && item.image ? " has-backdrop" : ""}">
+        ${index === 0 && item.image ? `<img class="spotlight-backdrop" src="${esc(item.image)}" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer">` : ""}
+        <div class="spotlight-content">
+          <div class="spotlight-meta"><b>0${index + 1}</b><span>${esc(item.category)}</span><span>${esc(item.source)}</span>${item.isSupplemental ? `<span class="supplemental-badge">补充观察 · ${item.selectionWindowHours}h</span>` : ""}</div>
+          <h3>${highlightText(item.title)}</h3>
+          <p>${highlightText(item.summary)}</p>
+          <a href="#${esc(anchorId(item))}">查看事件脉络与证据 <span aria-hidden="true">↓</span></a>
+        </div>
       </article>`).join("") : '<div class="empty"><b>今日必读暂不可用</b>请检查日报更新状态。</div>';
+    document.querySelectorAll(".spotlight-backdrop").forEach((image) => {
+      image.addEventListener("error", () => {
+        image.closest(".spotlight-card")?.classList.remove("has-backdrop");
+        image.remove();
+      }, { once: true });
+    });
   }
 
   function searchableText(item) {
@@ -789,6 +832,8 @@
       item.researchArea, item.primaryCategory, item.question, item.method, item.findings, item.limitations,
       ...item.authors, ...item.arxivCategories, ...item.collectionKeywords, ...item.keyFacts, ...item.tags,
       ...item.sources.map((source) => source.name),
+      item.historyContext?.timelineSummary,
+      ...(item.historyContext?.relatedStories || []).flatMap((story) => [story.title, story.originalTitle, story.summary]),
     ].join(" ").toLocaleLowerCase();
   }
 
@@ -823,6 +868,42 @@
   function anchorId(item) {
     const safe = clean(item.id).replace(/[^a-zA-Z0-9_-]+/g, "-").replace(/^-+|-+$/g, "") || "story";
     return `item-${safe}`;
+  }
+
+  function historyHref(story) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(clean(story?.editionDate)) || !clean(story?.id)) return "";
+    const query = new URLSearchParams({ view: "history", date: story.editionDate });
+    return `${location.pathname}?${query.toString()}#${anchorId(story)}`;
+  }
+
+  function renderHistoryContext(item) {
+    const context = item.historyContext;
+    if (!context) {
+      return `<section class="history-context"><h4>事件脉络</h4><p>该归档版本尚未包含历史关联分析。</p></section>`;
+    }
+    const related = context.relatedStories.map((story) => {
+      const href = historyHref(story);
+      const reasons = story.associationReasons.length
+        ? `<small>${esc(story.associationReasons.join(" · "))}</small>` : "";
+      return `<li>
+        <time datetime="${esc(story.editionDate)}">${esc(story.editionDate)}</time>
+        <div class="history-event"><div>${href ? `<a href="${esc(href)}">${highlightText(story.title)}</a>` : `<b>${highlightText(story.title)}</b>`}
+          <b>${story.associationScore}/100</b></div>
+          <p>${esc(story.relationLabel)} · 关联线索 ${story.associationScore}/100 · ${esc(story.source)}</p>${reasons}
+        </div>
+      </li>`;
+    }).join("");
+    const outlook = context.outlook.map((observation) => `
+      <li><b>${esc(observation.horizon)}</b><span>${highlightText(observation.text)}</span><em>置信 ${esc(observation.confidence)}</em></li>`).join("");
+    const provider = context.analysisProvider === "deepseek" ? "DeepSeek 分析"
+      : context.analysisProvider === "openai" ? "OpenAI 分析" : "规则关联";
+    return `<section class="history-context">
+      <div class="history-heading"><h4>事件脉络</h4><span>${esc(provider)} · 回看 ${context.lookbackDays} 日</span></div>
+      <p class="timeline-summary">${highlightText(context.timelineSummary || "暂无历史脉络总结。")}</p>
+      ${related ? `<ol class="history-timeline">${related}</ol>` : '<p class="history-empty">尚未发现达到阈值的历史关联事件。</p>'}
+      ${outlook ? `<h4>后续观察</h4><ul class="history-outlook">${outlook}</ul>` : ""}
+      <p class="history-disclaimer">关联度反映公开文本中的线索重合，不是因果或事实真伪概率；预判是条件性观察，不构成确定结论。</p>
+    </section>`;
   }
 
   function captureViewportAnchor() {
@@ -983,6 +1064,7 @@
           <section><h4>关键事实</h4><ul>${item.keyFacts.map((fact) => `<li>${highlightText(fact)}</li>`).join("")}</ul><h4>为什么重要</h4><p>${esc(item.why)}</p></section>
           <section><h4>来源与置信度</h4><p>${esc(item.confidenceReason)}</p><ul class="source-list">${sources || "<li>没有可用来源链接</li>"}</ul></section>
           <section><h4>重要度为什么是 ${item.score}</h4><ul>${scoreReasons}</ul>${components ? `<ul class="score-components">${components}</ul>` : ""}${item.selectionNote ? `<p class="selection-note">${esc(item.selectionNote)}</p>` : ""}<p>重要度用于排序，不是对报道真伪的概率判断。</p></section>
+          ${renderHistoryContext(item)}
         </div>`;
     return `<article class="story" id="${esc(anchorId(item))}" data-key="${esc(key)}">
       <span class="rank">${String(index + 1).padStart(2, "0")}</span>
@@ -995,6 +1077,7 @@
           <b>${esc(item.source)}</b><span>${esc(item.country)}</span><span>${esc(formatDate(item.publishedAt))}</span>
           ${item.editionDate ? `<span>${esc(item.editionDate)} 版</span>` : ""}
           <span class="confidence" data-confidence="${esc(item.confidence)}">置信度 ${esc(item.confidence)}</span>
+          ${item.historyContext?.relatedCount ? `<span class="history-badge">历史关联 ${item.historyContext.relatedCount}</span>` : ""}
           ${item.translationProvider ? `<span class="translation-badge">${esc(item.translationProvider === "deepseek" ? "DeepSeek 中文" : "AI 中文")}</span>` : ""}
         </div>
         <h3>${highlightText(item.title)}</h3>${original}<p class="summary">${highlightText(item.summary)}</p>
@@ -1009,7 +1092,7 @@
         </div>
       </div>
       <details class="details" id="${detailsId}" data-details-key="${esc(key)}"${opened}>
-        <summary>${item._compact ? "加载完整详情" : "展开关键事实、来源与评分解释"}</summary>
+        <summary>${item._compact ? "加载完整详情" : "展开事件脉络、关键事实与来源"}</summary>
         ${detailContent}
       </details>
     </article>`;

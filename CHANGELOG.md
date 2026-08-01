@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.0.0 — Historical context and quieter information hierarchy
+
+- Shortened the homepage hero and view descriptions so the feed, evidence and navigation carry the information hierarchy instead of explanatory copy.
+- Added an optional lead-story backdrop using the article's own image with a responsive contrast overlay and a deterministic no-image fallback; no unstable wallpaper endpoint is required.
+- Added explainable historical association across the bounded archive using mixed Chinese/English token overlap, tags and same-event title signals; category alone cannot create a link and current/future editions are excluded.
+- Added per-story timelines, association reasons and scores, cautious near-/mid-term observation points, archive deep links and a clear non-causality disclaimer.
+- Constrained the optional model stage to summarize only program-selected historical evidence. Structured batching, split retries and dedicated diagnostics are independent of selection and translation, while rule summaries remain available on provider failure.
+- Added dark/mobile styles, search integration, daily/status schema v8, workflow contract checks and a v2.0 Service Worker cache boundary.
+
 ## 1.9.0 — AI ranking with deterministic diversity
 
 - Changed the daily model task from directly choosing ten stories to independently scoring candidate importance; the program now blends AI and rule scores and always applies topic/domain quotas itself.
