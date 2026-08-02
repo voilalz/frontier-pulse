@@ -3,7 +3,7 @@
 面向全球科技、AI、航空航天、军事动态、局部冲突、前沿技术、无人系统与前沿研究的情报聚合平台。Cloudflare 托管静态网站；GitHub Actions 每 3 小时更新 24 小时全量动态，每天 `Asia/Tokyo 08:00` 生成 Top 10 中文简报、论文雷达、历史归档、Atom 订阅，并可发送管理员邮件摘要。
 
 仓库：<https://github.com/voilalz/frontier-pulse>
-当前站点：<https://frontier-pulse.jiumi674.workers.dev>
+正式站点：<https://newsfrontier.top>
 
 ## 已实现功能
 
@@ -161,7 +161,7 @@ python scripts/update_news.py
 - `.github/workflows/production-smoke.yml` 每日检查线上 CSP、`nosniff`、ETag/缓存头与 Feed。也可本地运行：
 
 ```bash
-python scripts/check_production.py --site-url https://frontier-pulse.jiumi674.workers.dev/
+python scripts/check_production.py --site-url https://newsfrontier.top/
 ```
 
 ## 启用邮件推送
@@ -182,7 +182,7 @@ python scripts/check_production.py --site-url https://frontier-pulse.jiumi674.wo
 - `SMTP_PORT`：默认 `587`
 - `SMTP_USE_SSL`：端口 465 时设为 `true`
 - `SMTP_STARTTLS`：端口 587 通常设为 `true`
-- `SITE_URL`：例如 `https://frontier-pulse.jiumi674.workers.dev`
+- `SITE_URL`：正式环境设置为 `https://newsfrontier.top/`
 
 未配置 `SMTP_HOST`、`EMAIL_FROM` 或 `EMAIL_TO` 时，脚本会显示 `Email push not configured; skipping` 并安全跳过，不影响网站更新。建议先在本地或 Actions 使用 `--dry-run` 验证模板，再手动运行一次日报工作流验证真实投递。
 

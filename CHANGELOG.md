@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.1 — Production custom domain
+
+- Switched canonical, Open Graph and Twitter sharing metadata to `https://newsfrontier.top/`.
+- Updated feed/email generation defaults, production checks and operator documentation to use the public custom domain.
+- Added a regression test that prevents the former `workers.dev` hostname from returning to production metadata or configuration.
+
 ## 2.0.0 — Historical context and quieter information hierarchy
 
 - Shortened the homepage hero and view descriptions so the feed, evidence and navigation carry the information hierarchy instead of explanatory copy.

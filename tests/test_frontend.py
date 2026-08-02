@@ -80,6 +80,19 @@ class FrontendTests(unittest.TestCase):
         self.assertTrue((ROOT / "public" / "sw.js").exists())
         self.assertTrue((ROOT / "public" / "og-card.png").exists())
 
+    def test_public_metadata_and_generation_config_use_custom_domain(self):
+        index = (ROOT / "public" / "index.html").read_text(encoding="utf-8")
+        config = (ROOT / "config" / "news_config.json").read_text(encoding="utf-8")
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        official_url = "https://newsfrontier.top/"
+        self.assertIn(f'property="og:url" content="{official_url}"', index)
+        self.assertIn(f'property="og:image" content="{official_url}og-card.png"', index)
+        self.assertIn(f'name="twitter:image" content="{official_url}og-card.png"', index)
+        self.assertIn(f'rel="canonical" href="{official_url}"', index)
+        self.assertIn(f'"site_url": "{official_url}"', config)
+        self.assertIn("<https://newsfrontier.top>", readme)
+        self.assertNotIn("frontier-pulse.jiumi674.workers.dev", index + config + readme)
+
     def test_security_headers_include_csp(self):
         headers = (ROOT / "public" / "_headers").read_text(encoding="utf-8")
         self.assertIn("Content-Security-Policy:", headers)
