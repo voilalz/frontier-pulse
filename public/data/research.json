@@ -1,23 +1,23 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-08-02T00:02:11Z",
+  "generatedAt": "2026-08-03T00:03:16Z",
   "timezone": "Asia/Tokyo",
   "rangeDays": 7,
   "method": "deepseek",
   "editorialStatus": "ok",
   "editorialProvider": "deepseek",
   "editorialModel": "deepseek-v4-flash",
-  "translatedItemCount": 60,
+  "translatedItemCount": 55,
   "warnings": [],
   "editorialDiagnostics": {
-    "requestedItemCount": 60,
-    "completedItemCount": 60,
+    "requestedItemCount": 55,
+    "completedItemCount": 55,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 5,
-    "initialBatchCount": 12,
-    "requestCount": 12,
+    "initialBatchCount": 11,
+    "requestCount": 11,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
@@ -25,18 +25,16 @@
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": ""
   },
-  "itemCount": 60,
+  "itemCount": 55,
   "areaCounts": {
     "机器学习": 2,
     "多模态智能体": 1,
     "人工智能": 3,
-    "天文与空间科学": 14,
-    "量子技术": 23,
-    "先进材料": 12,
+    "量子技术": 25,
+    "先进材料": 21,
     "自主与控制系统": 1,
     "计算机视觉": 1,
-    "蜂群机器人": 1,
-    "空间物理": 2
+    "蜂群机器人": 1
   },
   "collectionKeywords": [
     {
@@ -56,14 +54,14 @@
     {
       "id": "arxiv:2607.28374",
       "contentType": "paper",
-      "title": "LEDGERMIND: 基于结构化证据账本、受溯源约束的多模态智能体推理",
+      "title": "LEDGERMIND：具有结构化证据账本的本源约束多模态代理推理",
       "originalTitle": "LEDGERMIND: Provenance-Constrained Multimodal Agentic Reasoning with a Structured Evidence Ledger",
-      "summary": "多模态智能体在视觉问答中的多步轨迹常以最终答案准确率评估，但该指标无法反映推理是否基于证据。我们提出将智能体轨迹视为受溯源约束的状态机，将工具输出规范化为结构化证据账本，推理可引用且检查实体及数值级接地，修复为受限状态转换。方法包括三层接地协议、自适应双路径调度器和事件触发验证修复机制，并给出无放大保证。实验表明，LedgerMind在多个基准上提升答案准确率和轨迹级忠实度。",
+      "summary": "多模态代理在视觉问答中常产生多步轨迹，但评估常仅依赖最终答案准确率，无法判断推理是否基于证据。本文提出将轨迹视为本源约束状态机，工具输出规范化为结构化证据账本，推理仅能引用账本条目，并在实体和数值层面检查接地，修复通过类型化状态转换实现，保证不引入无来源内容。实验表明，LedgerMind提升了答案准确性和轨迹忠实度。",
       "abstract": "Multimodal agents for visual question answering increasingly operate as multi-step trajectories that interleave perception, retrieval, and reasoning, yet evaluation still largely reduces to final-answer accuracy. This aggregate signal cannot tell whether a correct answer was reached through grounded evidence, language priors, or accidental error cancellation. We propose to treat a multimodal agent trajectory as a provenance-constrained state machine: tool outputs are normalized into a Structured Evidence Ledger th…",
       "keyFacts": [
-        "如何确保多模态智能体在长轨迹推理中基于真实证据而非语言先验或偶然错误？",
-        "提出LedgerMind框架，将轨迹视为受溯源约束的状态机，工具输出规范化为结构化证据账本，采用三层接地协议、自适应双路径调度器、事件触发验证修复机制，并提供形式化无放大保证。",
-        "LedgerMind在多个多模态基准和骨干模型上同时提升了答案准确率和轨迹级忠实度。"
+        "如何确保多模态代理在复杂推理中保持基于证据的接地，同时提升最终答案的准确性？",
+        "提出LedgerMind框架，包括结构化证据账本、三层接地协议、自适应双路径调度器、事件触发验证与修复引擎，并使用多个多模态推理基准和骨干MLLM进行评估。",
+        "LedgerMind在多个多模态推理基准上提高了答案准确性和轨迹级忠实度。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -91,11 +89,11 @@
         "多模态智能体"
       ],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何确保多模态智能体在长轨迹推理中基于真实证据而非语言先验或偶然错误？",
-      "method": "提出LedgerMind框架，将轨迹视为受溯源约束的状态机，工具输出规范化为结构化证据账本，采用三层接地协议、自适应双路径调度器、事件触发验证修复机制，并提供形式化无放大保证。",
-      "findings": "LedgerMind在多个多模态基准和骨干模型上同时提升了答案准确率和轨迹级忠实度。",
+      "question": "如何确保多模态代理在复杂推理中保持基于证据的接地，同时提升最终答案的准确性？",
+      "method": "提出LedgerMind框架，包括结构化证据账本、三层接地协议、自适应双路径调度器、事件触发验证与修复引擎，并使用多个多模态推理基准和骨干MLLM进行评估。",
+      "findings": "LedgerMind在多个多模态推理基准上提高了答案准确性和轨迹级忠实度。",
       "limitations": "摘要未说明",
-      "score": 87,
+      "score": 83,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -106,10 +104,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "多模态智能体",
-        "证据账本",
-        "接地验证",
-        "推理忠实度"
+        "多模态代理",
+        "推理",
+        "接地",
+        "证据账本"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -127,14 +125,14 @@
     {
       "id": "arxiv:2607.28165",
       "contentType": "paper",
-      "title": "搭便车感知：针对多模态大语言模型智能体的隐蔽并发音频提示注入攻击",
+      "title": "搭便车于感知：针对多模态大语言模型代理的隐蔽并发音频提示注入",
       "originalTitle": "Piggybacking on Perception: Stealthy Concurrent Audio Prompt Injections against Multimodal LLM Agents",
-      "summary": "音频交互中环境噪声不可控，为攻击提供新面。我们研究并发音频提示注入，提出指令增强和场景隐藏技术，使恶意指令“搭便车”到用户语音上。构建首个基准AudioAgentSecurity，含8个真实场景和10种攻击模式。评估11个先进智能体，对Gemini 3 Pro平均成功率69.10%。提出级联音频解耦与验证（CADV）防御，检测成功率超90%，在真实实验中证实攻击隐蔽性和防御有效性。",
+      "summary": "本文研究针对多模态代理的并发音频提示注入攻击，提出指令增强和场景隐藏技术，使恶意指令“搭便车”到用户语音中。构建了首个音频指令注入综合基准AudioAgentSecurity，涵盖8个真实任务场景和10种攻击模式，评估11个先进代理。攻击平均成功率对Gemini 3 Pro达69.10%，并引入级联音频解耦与验证防御，检测成功率超90%。",
       "abstract": "Large Language Model (LLM)-driven multimodal agents are increasingly deployed to execute autonomous tasks via continuous audio interaction. While this paradigm enhances interaction naturalness, it introduces a critical yet under-explored attack surface, as audio inputs inevitably contain environmental noise beyond user control. In this paper, we investigate concurrent audio prompt injection attacks targeting multimodal agents. Distinct from traditional acoustic attacks on voice devices, we propose novel techniques…",
       "keyFacts": [
-        "多模态智能体在音频交互中如何遭受并发音频提示注入攻击，以及如何防御？",
-        "提出指令增强和场景隐藏的并发音频注入技术，构建基准AudioAgentSecurity，并设计基于源分离和一致性分析的级联音频解耦与验证（CADV）防御机制。",
-        "攻击在Gemini 3 Pro上平均成功率69.10%；CADV防御检测成功率超90%，真实实验证实高隐蔽性和缓解效果。"
+        "多模态代理在连续音频交互中面临哪些隐蔽音频提示注入攻击，以及如何防御？",
+        "提出指令增强和场景隐藏技术，构建AudioAgentSecurity基准，评估多个代理，并引入级联音频解耦与验证防御方法。",
+        "提出的攻击方法对先进代理成功率较高，防御方法检测成功率超过90%。"
       ],
       "why": "该研究与多模态智能体相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -164,11 +162,11 @@
         "多模态智能体"
       ],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "多模态智能体在音频交互中如何遭受并发音频提示注入攻击，以及如何防御？",
-      "method": "提出指令增强和场景隐藏的并发音频注入技术，构建基准AudioAgentSecurity，并设计基于源分离和一致性分析的级联音频解耦与验证（CADV）防御机制。",
-      "findings": "攻击在Gemini 3 Pro上平均成功率69.10%；CADV防御检测成功率超90%，真实实验证实高隐蔽性和缓解效果。",
+      "question": "多模态代理在连续音频交互中面临哪些隐蔽音频提示注入攻击，以及如何防御？",
+      "method": "提出指令增强和场景隐藏技术，构建AudioAgentSecurity基准，评估多个代理，并引入级联音频解耦与验证防御方法。",
+      "findings": "提出的攻击方法对先进代理成功率较高，防御方法检测成功率超过90%。",
       "limitations": "摘要未说明",
-      "score": 86,
+      "score": 82,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -179,10 +177,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "音频注入攻击",
-        "多模态智能体",
-        "防御机制",
-        "安全性"
+        "多模态代理",
+        "音频注入",
+        "安全",
+        "防御"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -200,14 +198,14 @@
     {
       "id": "arxiv:2607.28200",
       "contentType": "paper",
-      "title": "Vibe-FDTR: 面向智能体的可复现频域热反射数据分析框架",
+      "title": "Vibe-FDTR：面向代理的可复现频域热反射数据分析框架",
       "originalTitle": "Vibe-FDTR: An agent-oriented framework for reproducible frequency-domain thermoreflectance data analysis",
-      "summary": "频域热反射法（FDTR）分析复杂且易错。我们提出面向智能体的Vibe-FDTR框架，让大语言模型智能体直接从自然语言请求执行分析。框架耦合配置驱动的FDTR代码包和程序化技能，保证物理和参数一致性。基准测试中，合成单步成功率100%，真实数据多步98.9%；去除技能和代码后性能大幅下降。同时计算成本降低87.7%，执行时间缩短超60%。专家模式支持实验规划。",
+      "summary": "频域热反射（FDTR）测量热属性需要复杂分析，易出错。本文提出Vibe-FDTR，一个面向代理的框架，使大语言模型代理能从自然语言请求进行可靠可复现的FDTR分析。配置驱动代码包保证物理一致性，程序化技能将意图转化为可验证步骤。基准测试中，代理成功率分别达100%和98.9%，相比消融变体显著提升，并降低计算成本87.7%。",
       "abstract": "Frequency-domain thermoreflectance (FDTR) is a laser pump-probe technique widely used to measure thermal properties at the micro- and nanoscale; however, it relies on a complex data analysis procedure that demands substantial domain expertise and is susceptible to subtle human errors. Here, we present Vibe-FDTR, an agent-oriented framework that enables large language model (LLM) agents to perform reliable and reproducible FDTR analyses directly from natural language requests. This framework couples a configuration…",
       "keyFacts": [
-        "如何利用大语言模型智能体实现可靠、可复现的FDTR数据分析？",
-        "开发Vibe-FDTR框架，结合配置驱动代码包和程序化智能体技能，实现从自然语言到验证分析步骤的转换。",
-        "在两级基准上成功率分别达100%和98.9%；相比无技能版本计算成本降低87.7%，执行时间减少超60%。"
+        "如何利用大语言模型代理实现可靠可复现的频域热反射数据分析？",
+        "集成配置驱动的FDTR代码包和程序化代理技能，通过分层基准评估，包括合成单步和真实多步任务。",
+        "使用Vibe-FDTR的代理在两层基准上成功率分别达到100%和98.9%，计算成本降低87.7%，执行时间减少超60%。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -231,11 +229,11 @@
       "primaryCategory": "physics.app-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何利用大语言模型智能体实现可靠、可复现的FDTR数据分析？",
-      "method": "开发Vibe-FDTR框架，结合配置驱动代码包和程序化智能体技能，实现从自然语言到验证分析步骤的转换。",
-      "findings": "在两级基准上成功率分别达100%和98.9%；相比无技能版本计算成本降低87.7%，执行时间减少超60%。",
+      "question": "如何利用大语言模型代理实现可靠可复现的频域热反射数据分析？",
+      "method": "集成配置驱动的FDTR代码包和程序化代理技能，通过分层基准评估，包括合成单步和真实多步任务。",
+      "findings": "使用Vibe-FDTR的代理在两层基准上成功率分别达到100%和98.9%，计算成本降低87.7%，执行时间减少超60%。",
       "limitations": "摘要未说明",
-      "score": 85,
+      "score": 81,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -245,10 +243,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "FDTR",
-        "智能体",
-        "可复现分析",
-        "热测量"
+        "热反射",
+        "大语言模型",
+        "代理",
+        "可复现性"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -268,12 +266,12 @@
       "contentType": "paper",
       "title": "深度学习加速高熵合金多组分多相微观结构演化的长时程预测",
       "originalTitle": "Deep Learning for Accelerated Long-Horizon Forecasting of Multicomponent Multiphase Microstructure Evolution in High-Entropy Alloys",
-      "summary": "相场模拟在多组分多相系统中计算代价高。我们提出AE-GCN-LSTM替代框架，用于AlCrFeNi高熵合金中BCC和FCC共存体系的微观结构演化预测。多头自编码器压缩浓度场和序参量为图表示学习时空演化。框架准确预测到3,000,000时间步，且在未见条件下表现稳健，并成功迁移至更大尺寸和新成分。加速比约7200至62300。",
+      "summary": "相场建模预测微观结构演化但计算成本高。本文提出AE-GCN-LSTM代理框架，用于AlCrFeNi高熵合金中BCC和FCC相共存系统的长时程预测。多头部自编码器压缩浓度场和相场序参数为图潜表示，预测长达3,000,000时间步，且对未见条件鲁棒，可迁移至更大系统和新成分，计算加速比约7200至62300。",
       "abstract": "Phase-field modeling provides a powerful approach for predicting microstructure evolution but becomes computationally prohibitive for multicomponent and multiphase systems over large spatial and temporal scales. This work presents an AE-GCN-LSTM surrogate framework for long-horizon forecasting of microstructure evolution in the multicomponent AlCrFeNi high-entropy alloy system containing coexisting BCC and FCC phases. A multi-head autoencoder compresses the four elemental concentration fields and phase-field order…",
       "keyFacts": [
-        "如何用深度学习替代相场模拟实现多组分多相微观结构的长时程快速预测？",
-        "构建AE-GCN-LSTM框架，以多头自编码器压缩场变量为图，学习时空演化并预测长期行为。",
-        "准确预测至3,000,000时间步，在未见条件（如不同沉淀尺寸、位置、数量）下稳健，成功迁移至256x256和512x512系统及新成分，加速比约7200-62300。"
+        "如何加速高熵合金中多组分多相微观结构演化的长时程模拟？",
+        "基于潜图表示，利用多头部自编码器、图卷积网络和长短期记忆网络构建AE-GCN-LSTM代理模型。",
+        "模型能准确预测长时程演化，对未见条件鲁棒，计算加速比达7200-62300倍。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -296,11 +294,11 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何用深度学习替代相场模拟实现多组分多相微观结构的长时程快速预测？",
-      "method": "构建AE-GCN-LSTM框架，以多头自编码器压缩场变量为图，学习时空演化并预测长期行为。",
-      "findings": "准确预测至3,000,000时间步，在未见条件（如不同沉淀尺寸、位置、数量）下稳健，成功迁移至256x256和512x512系统及新成分，加速比约7200-62300。",
+      "question": "如何加速高熵合金中多组分多相微观结构演化的长时程模拟？",
+      "method": "基于潜图表示，利用多头部自编码器、图卷积网络和长短期记忆网络构建AE-GCN-LSTM代理模型。",
+      "findings": "模型能准确预测长时程演化，对未见条件鲁棒，计算加速比达7200-62300倍。",
       "limitations": "摘要未说明",
-      "score": 82,
+      "score": 78,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -311,9 +309,9 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "高熵合金",
-        "微观结构预测",
-        "图神经网络",
-        "替代模型"
+        "相场",
+        "深度学习",
+        "代理模型"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -329,94 +327,16 @@
       ]
     },
     {
-      "id": "arxiv:2607.28594",
-      "contentType": "paper",
-      "title": "刻画Böotes III的瓦解：银河系晕中缺失的一环？",
-      "originalTitle": "Characterizing the disruption of Böotes III: a missing link in the Galactic halo?",
-      "summary": "Boo3矮星系被认为是恒星流Styx的可能前身，但关联未证实。我们结合Gaia成员、CFHT新CaHK窄带成像、蓝水平分支和红巨星等示踪天体，并用匹配滤波在SDSS DR17和DELVE DR2中搜索。尽管广泛搜索，未找到直接关联证据；结果提示Boo3的延展子结构可能过于弥散，或轨道抹去了潮汐特征。Boo3仍神秘，需光谱后续观测。",
-      "abstract": "The Böotes III (Boo3) dwarf galaxy has long been suspected of being the progenitor of Styx, a ~50°-long stellar stream that was simultaneously discovered in the same region of sky. Boo3's diffuse morphology, large velocity dispersion, small pericenter, and excess of candidate stars at large radii suggest it is undergoing active tidal disruption. A link to Styx is therefore logical; however, a clear connection between these structures has not yet been clearly demonstrated. Here, we re-examine the Boo3-Styx associat…",
-      "keyFacts": [
-        "Boo3矮星系是否与恒星流Styx有直接关联，其潮汐瓦解特征如何？",
-        "使用Gaia成员、CFHT/MegaCam窄带成像、蓝水平分支和红巨星示踪目录，并采用匹配滤波技术搜索可能的星流。",
-        "未找到Boo3与Styx直接关联的观测证据；Boo3的扩展子结构可能太弥散或轨道效应抹去了潮汐踪迹。"
-      ],
-      "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "天文与空间科学",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-30T17:46:16Z",
-      "updatedAt": "2026-07-30T17:46:16Z",
-      "url": "https://arxiv.org/abs/2607.28594v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.28594v1",
-      "authors": [
-        "Jaclyn Jensen",
-        "Daniel A. Boyea",
-        "Alan W. McConnachie",
-        "Raphaël Errani",
-        "Akshara Viswanathan",
-        "Nicolas Martin",
-        "Zhen Yuan",
-        "Guillaume F. Thomas",
-        "Julio F. Navarro",
-        "Kim A. Venn",
-        "Pascale Jablonka",
-        "Khyati Malhan",
-        "Anya Dovgal",
-        "Simon E. T. Smith",
-        "Gustavo E. Medina",
-        "Thomas de Boer",
-        "Gregory S. H. Paek"
-      ],
-      "arxivCategories": [
-        "astro-ph.GA"
-      ],
-      "primaryCategory": "astro-ph.GA",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "Boo3矮星系是否与恒星流Styx有直接关联，其潮汐瓦解特征如何？",
-      "method": "使用Gaia成员、CFHT/MegaCam窄带成像、蓝水平分支和红巨星示踪目录，并采用匹配滤波技术搜索可能的星流。",
-      "findings": "未找到Boo3与Styx直接关联的观测证据；Boo3的扩展子结构可能太弥散或轨道效应抹去了潮汐踪迹。",
-      "limitations": "摘要未说明",
-      "score": 82,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：天文与空间科学",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "矮星系",
-        "潮汐瓦解",
-        "恒星流",
-        "银河系晕"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.28594v1",
-          "publishedAt": "2026-07-30T17:46:16Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
       "id": "arxiv:2607.28570",
       "contentType": "paper",
-      "title": "使用大规模张量网络对Lipkin-Meshkov-Glick模型的量子模拟进行基准测试",
+      "title": "使用大规模张量网络对Lipkin-Meshkov-Glick模型量子模拟的基准测试",
       "originalTitle": "Benchmarking Quantum Simulations of the Lipkin-Meshkov-Glick Model Using Large Tensor Networks",
-      "summary": "本文使用DMRG算法在NERSC Perlmutter超级计算机上计算LMG模型的基态能量，提供高达1400粒子的精确基态能量数据集，并与IBM Eagle量子计算机上的VQE和SQD实现比较。VQE对6粒子误差在1%内，SQD扩展至17粒子，表明含噪中等规模量子时代子空间方法平衡精度、电路深度和噪声鲁棒性。",
+      "summary": "本文使用DMRG算法计算LMG模型基态能量，与VQE和SQD等NISQ算法比较。在Perlmutter超级计算机上运行DMRG，提供了最大数据集之一，包含系统大小至1400个粒子的准确能量。与IBM Eagle量子计算机上的VQE和SQD相比，VQE在6粒子内误差小于1%，SQD扩展至17粒子，表明子空间方法在噪声中间量子时代可能达到最佳平衡。",
       "abstract": "As quantum computing matures, it is critical to benchmark its real-world problem solving performance against competitive classical methods, such as tensor networks. In this work, we leverage the Density Matrix Renormalization Group (DMRG) algorithm to compute ground state energies of the Lipkin Meshkov Glick (LMG) model as a comparative benchmark against popular noisy intermediate-scale (NISQ) algorithms like the Variational Quantum Eigensolver (VQE) and Sample-Based Quantum Diagonalization (SQD) method. By runnin…",
       "keyFacts": [
-        "量子计算成熟时，如何与经典张量网络方法进行基准比较？",
-        "使用DMRG算法在超级计算机上计算基态能量，并与NISQ算法VQE和SQD在IBM Eagle量子计算机上的实现进行比较。",
-        "DMRG提供了高达1400粒子的精确基态能量数据集；VQE对6粒子误差在1%内，SQD扩展至17粒子，表明子空间方法在精度、电路深度和噪声鲁棒性之间取得最佳平衡。"
+        "在噪声中间量子时代，量子算法与经典张量网络方法相比，解决LMG模型的性能如何？",
+        "使用DMRG算法在超级计算机上计算LMG模型基态能量，并与量子计算机上的VQE和SQD实现比较。",
+        "VQE在6粒子内误差小于1%，SQD扩展至17粒子，DMRG提供了至1400粒子的准确数据集。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -442,11 +362,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "量子计算成熟时，如何与经典张量网络方法进行基准比较？",
-      "method": "使用DMRG算法在超级计算机上计算基态能量，并与NISQ算法VQE和SQD在IBM Eagle量子计算机上的实现进行比较。",
-      "findings": "DMRG提供了高达1400粒子的精确基态能量数据集；VQE对6粒子误差在1%内，SQD扩展至17粒子，表明子空间方法在精度、电路深度和噪声鲁棒性之间取得最佳平衡。",
+      "question": "在噪声中间量子时代，量子算法与经典张量网络方法相比，解决LMG模型的性能如何？",
+      "method": "使用DMRG算法在超级计算机上计算LMG模型基态能量，并与量子计算机上的VQE和SQD实现比较。",
+      "findings": "VQE在6粒子内误差小于1%，SQD扩展至17粒子，DMRG提供了至1400粒子的准确数据集。",
       "limitations": "摘要未说明",
-      "score": 82,
+      "score": 78,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -456,10 +376,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子计算",
-        "张量网络",
+        "量子模拟",
         "LMG模型",
-        "NISQ"
+        "DMRG",
+        "VQE"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -475,232 +395,16 @@
       ]
     },
     {
-      "id": "arxiv:2607.28562",
-      "contentType": "paper",
-      "title": "升级LBTI/NOMIC配备四环形相位掩模和GeoSnap探测器以成像邻近宜居带系外行星",
-      "originalTitle": "Upgrading LBTI/NOMIC with a quadruple annular groove phase mask and GeoSnap detector for imaging nearby, habitable-zone exoplanets",
-      "summary": "本文描述LBTI/NOMIC的两项升级：四环形相位掩模日冕仪和13微米截止GeoSnap阵列。Q-AGPM是NOMIC首个日冕仪，优化于N波段观测，通过Chopping提高效率。GeoSnap阵列替代AQUARIUS，提高量子效率、井深和读出速度。这些升级提高了小角分离下的对比度和灵敏度。FFTCam条纹跟踪器测试证实干涉增益。",
-      "abstract": "The Large Binocular Telescope Interferometer (LBTI)'s Nulling-Optimized Mid-Infrared Camera (NOMIC) is among the most capable thermal-infrared imaging systems available for high-contrast, high-angular-resolution astronomical observations. Here we describe two in-progress upgrades to LBTI/NOMIC: (1) the design, fabrication, and installation of a quadruple annular groove phase mask (Q-AGPM) coronagraph, and (2) the installation of a 13 micron-cutoff Teledyne GeoSnap array. The Q-AGPM is the first coronagraph to be i…",
-      "keyFacts": [
-        "如何升级LBTI/NOMIC以提高热红外高对比度成像能力？",
-        "设计并安装Q-AGPM日冕仪和GeoSnap探测器，并通过FFTCam进行高对比度Fizeau成像序列测试。",
-        "Q-AGPM是NOMIC首个日冕仪，GeoSnap阵列提供更高效率；在0.2-1角秒范围内，S/N=3对比度比单孔径深约2-4倍。"
-      ],
-      "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "天文与空间科学",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-30T17:27:41Z",
-      "updatedAt": "2026-07-30T17:27:41Z",
-      "url": "https://arxiv.org/abs/2607.28562v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.28562v1",
-      "authors": [
-        "Kevin Wagner",
-        "Manny Montoya",
-        "Steve Ertel",
-        "Jarron Leisenring",
-        "Pontus Forsberg",
-        "Samuel Ronayette",
-        "Andre Wong",
-        "Mikael Karlsson",
-        "Olivier Absil",
-        "Denis Defrère",
-        "Markus Kasper",
-        "Jordan Stone",
-        "Dániel Apai",
-        "Laird Close",
-        "Jamie Dietrich",
-        "Ewan Douglas",
-        "Jamie Drew",
-        "Olivier Durney",
-        "Marina Fetisova",
-        "Kyran Grattan"
-      ],
-      "arxivCategories": [
-        "astro-ph.IM",
-        "astro-ph.EP"
-      ],
-      "primaryCategory": "astro-ph.IM",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何升级LBTI/NOMIC以提高热红外高对比度成像能力？",
-      "method": "设计并安装Q-AGPM日冕仪和GeoSnap探测器，并通过FFTCam进行高对比度Fizeau成像序列测试。",
-      "findings": "Q-AGPM是NOMIC首个日冕仪，GeoSnap阵列提供更高效率；在0.2-1角秒范围内，S/N=3对比度比单孔径深约2-4倍。",
-      "limitations": "摘要未说明",
-      "score": 82,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：天文与空间科学",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "天文仪器",
-        "系外行星",
-        "日冕仪",
-        "红外探测"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.28562v1",
-          "publishedAt": "2026-07-30T17:27:41Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
-      "id": "arxiv:2607.28512",
-      "contentType": "paper",
-      "title": "光的速度：罗默发现350年后",
-      "originalTitle": "De mora luminis: Roemer's discovery 350 years later",
-      "summary": "在罗默发现光速有限350年后，作者使用与17世纪后期分辨率相似的望远镜进行观测，确认罗默方法有效，即使使用均匀圆周运动的最简单模型，光速测量值在现代值10%以内。使用现代星历表得到c=(298200±1900) km/s。增加模型复杂度不一定改善结果。还发现罗默在1677年通过观测木星大红斑的经线凌日寻找独立确认。",
-      "abstract": "350 years from the 1676 announcement of the Roemer's discovery that light propagates with finite speed, we present our observations using eyes with telescopes having similar resolution compared to those in the late 17th century. We confirmed that Roemer's method is valid and gives reasonable values for the speed of light c, within about 10 per cent of the modern value for our measurements, even with the simplest modelling technique, using uniform circular motions. We found that increasing the complexity of the mod…",
-      "keyFacts": [
-        "罗默发现光速有限350年后，用类似分辨率的望远镜验证其方法是否仍有效？",
-        "使用与17世纪后期分辨率相似的望远镜观测木星卫星食，并采用不同建模技术（均匀圆周运动、考虑椭圆轨道、现代星历表）计算光速。",
-        "罗默方法有效，简单模型给出光速在现代值10%以内；增加模型复杂度不一定更接近；现代星历表给出c=(298200±1900) km/s；发现罗默在1677年用木星大红斑系列观测寻求独立确认。"
-      ],
-      "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "天文与空间科学",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-30T16:50:35Z",
-      "updatedAt": "2026-07-30T16:50:35Z",
-      "url": "https://arxiv.org/abs/2607.28512v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.28512v1",
-      "authors": [
-        "Fabio Falchi",
-        "Riccardo Furgoni",
-        "Paolo Gattillo",
-        "Maurizio Francesio"
-      ],
-      "arxivCategories": [
-        "physics.hist-ph",
-        "astro-ph.IM",
-        "physics.class-ph",
-        "physics.ed-ph"
-      ],
-      "primaryCategory": "physics.hist-ph",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "罗默发现光速有限350年后，用类似分辨率的望远镜验证其方法是否仍有效？",
-      "method": "使用与17世纪后期分辨率相似的望远镜观测木星卫星食，并采用不同建模技术（均匀圆周运动、考虑椭圆轨道、现代星历表）计算光速。",
-      "findings": "罗默方法有效，简单模型给出光速在现代值10%以内；增加模型复杂度不一定更接近；现代星历表给出c=(298200±1900) km/s；发现罗默在1677年用木星大红斑系列观测寻求独立确认。",
-      "limitations": "摘要未说明",
-      "score": 82,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：天文与空间科学",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "光速",
-        "科学史",
-        "罗默",
-        "木星卫星"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.28512v1",
-          "publishedAt": "2026-07-30T16:50:35Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
-      "id": "arxiv:2607.28510",
-      "contentType": "paper",
-      "title": "不确定性感知的潮汐瓦解事件分类：一种与宿主无关的概率随机森林方法",
-      "originalTitle": "Uncertainty-Aware Tidal Disruption Event Classification : A Host-Agnostic Probabilistic Random Forest Approach",
-      "summary": "针对大规模测光调查中潮汐瓦解事件分类的挑战，本文提出一种基于概率随机森林的主机无关分类框架。该方法从ZTF警报流中提取11个特征，包括上升和衰减时标、黑体温度演化等，仅使用测光数据。与XGBoost相比，PRF对模糊候选体更稳定鲁棒。在应用中识别出11个新TDE候选体和3个被误分类的潜在TDE。研究表明不确定性感知的概率分类器对TDE识别至关重要。",
-      "abstract": "The classification of Tidal Disruption Events in large-scale photometric surveys is challenging because deterministic machine learning models produce overconfident misclassifications under varying data quality and low signal-to-noise conditions. Existing lightcurve-based approaches fail to incorporate measurement uncertainties, consequently generating brittle outputs. We present a host-agnostic, uncertainty-aware classification framework using a Probabilistic Random Forest (PRF). Our pipeline extracts 11 character…",
-      "keyFacts": [
-        "如何在大规模测光调查中实现不确定性感知的潮汐瓦解事件分类？",
-        "使用概率随机森林，提取11个光变特征，通过留一法交叉验证与XGBoost比较。",
-        "PRF比XGBoost更稳定鲁棒；XGBoost在平衡和高精度场景下召回率更高，PRF通过惩罚大特征不确定性减少假阳性；识别出11个新候选和3个潜在TDE。"
-      ],
-      "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "天文与空间科学",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-30T16:49:06Z",
-      "updatedAt": "2026-07-30T16:49:06Z",
-      "url": "https://arxiv.org/abs/2607.28510v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.28510v1",
-      "authors": [
-        "Vysakh Anilkumar",
-        "Sjoert van Velzen",
-        "Marek Kowalski",
-        "Simeon Reusch"
-      ],
-      "arxivCategories": [
-        "astro-ph.HE",
-        "astro-ph.IM"
-      ],
-      "primaryCategory": "astro-ph.HE",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何在大规模测光调查中实现不确定性感知的潮汐瓦解事件分类？",
-      "method": "使用概率随机森林，提取11个光变特征，通过留一法交叉验证与XGBoost比较。",
-      "findings": "PRF比XGBoost更稳定鲁棒；XGBoost在平衡和高精度场景下召回率更高，PRF通过惩罚大特征不确定性减少假阳性；识别出11个新候选和3个潜在TDE。",
-      "limitations": "摘要未说明",
-      "score": 82,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：天文与空间科学",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "潮汐瓦解事件",
-        "机器学习",
-        "概率分类",
-        "光度调查"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.28510v1",
-          "publishedAt": "2026-07-30T16:49:06Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
       "id": "arxiv:2607.28504",
       "contentType": "paper",
       "title": "颜色码的时空布局与逻辑编译",
       "originalTitle": "Spacetime Layout and Logical Compilation of Color Code",
-      "summary": "本文为颜色码建立了逻辑编译框架，基于拓扑结构和任意子凝聚与畴壁结构，引入时空块图表示捕捉逻辑补丁和操作，并推导块组装规则。与ZX图的对应识别逻辑语义并实现保计算变换。开发了从ZX表示到有效颜色码时空布局的编译策略，边缘装饰ZX图定制表示，融合区域感知路由利用语义等价。自动化编译过程并成功编译多种算法。",
+      "summary": "容错量子计算需要系统级协调逻辑原语。我们建立了基于拓扑结构的颜色码逻辑编译框架，支持通用逻辑操作。基于任意子凝聚和畴壁结构，引入时空块图表示，建立块组装规则，与ZX图对应，开发了将逻辑计算的ZX表示转换为有效颜色码时空布局的编译策略，并自动化完整逻辑编译过程，在多种算法上演示成功编译。",
       "abstract": "Fault-tolerant quantum computing requires system-level coordination of logical primitives. Here, we establish a logical compilation framework for the color code, grounded in its topological structure and supporting universal logical operations. Based on its anyon-condensation and domain-wall structure, we introduce a spacetime block-diagram representation capturing logical patches and operations and derive the rules governing block assembly. A correspondence with ZX diagrams further identifies the logical semantic…",
       "keyFacts": [
-        "如何为颜色码建立系统级的逻辑编译框架以支持通用逻辑运算？",
-        "基于任意子凝聚和畴壁结构引入时空块图，建立与ZX图的对应，开发编译策略并自动化。",
-        "建立了颜色码的时空块图表示和块组装规则；开发了从ZX到颜色码布局的编译策略；自动编译过程成功应用于多种算法。"
+        "如何为颜色码建立系统级的逻辑编译框架，实现从逻辑原语到自动化逻辑计算合成的全栈量子计算？",
+        "基于颜色码的任意子凝聚和畴壁结构，引入时空块图表示，建立块组装规则，利用ZX图对应关系，开发代码派生编译策略，包括边修饰ZX图和融合区域感知路由，并自动化编译过程。",
+        "建立的颜色码逻辑编译框架支持自动化逻辑编译，并在多种算法上成功编译，推进了颜色码架构从个体原语到自动化逻辑计算合成的发展。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -721,11 +425,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何为颜色码建立系统级的逻辑编译框架以支持通用逻辑运算？",
-      "method": "基于任意子凝聚和畴壁结构引入时空块图，建立与ZX图的对应，开发编译策略并自动化。",
-      "findings": "建立了颜色码的时空块图表示和块组装规则；开发了从ZX到颜色码布局的编译策略；自动编译过程成功应用于多种算法。",
+      "question": "如何为颜色码建立系统级的逻辑编译框架，实现从逻辑原语到自动化逻辑计算合成的全栈量子计算？",
+      "method": "基于颜色码的任意子凝聚和畴壁结构，引入时空块图表示，建立块组装规则，利用ZX图对应关系，开发代码派生编译策略，包括边修饰ZX图和融合区域感知路由，并自动化编译过程。",
+      "findings": "建立的颜色码逻辑编译框架支持自动化逻辑编译，并在多种算法上成功编译，推进了颜色码架构从个体原语到自动化逻辑计算合成的发展。",
       "limitations": "摘要未说明",
-      "score": 82,
+      "score": 78,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -735,10 +439,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子纠错",
+        "量子计算",
         "颜色码",
         "逻辑编译",
-        "ZX演算"
+        "ZX图"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -756,14 +460,14 @@
     {
       "id": "arxiv:2607.28491",
       "contentType": "paper",
-      "title": "近理想量子几何条件下的菱方石墨鼓面表面态",
+      "title": "具有近理想量子几何条件的菱方石墨鼓面表面态",
       "originalTitle": "Drumhead Surface States of Rhombohedral Graphite with Near Ideal Quantum Geometry Condition",
-      "summary": "利用密度泛函理论和Wannier函数，研究了体相菱方石墨的对称性保护拓扑、半无限表面的鼓面表面态及厚菱方石墨板的理想量子几何条件。发现体相RG在自旋轨道耦合下是弱拓扑绝缘体，无SOC时是手性节线半金属。DSS平带有明显凸曲率，深度与实验吻合。IQG呈凸形，中心K点|Ω|/TrG≈1，但DSS内边缘满足严格IQG条件。",
+      "summary": "理想量子几何条件（|Ω|/TrG=1）与少层菱方石墨烯的分数陈绝缘体有关，也被提出用于厚RG层的超导。利用密度泛函理论和Wannier函数，我们研究了体RG的对称保护拓扑、半无限RG表面的鼓面表面态以及厚RG板的IQG条件。发现体RG是弱拓扑绝缘体，DSS平带有凸曲率，DSS区域内部边缘满足严格IQG条件。",
       "abstract": "The ideal quantum geometry (IQG) condition of equal magnitude between quantum metric ($G(k)$) and Berry curvature ($Ω(k)$) as in $|Ω|$/Tr$G$=1 has been associated with realizing fractional Chern insulators for the flat band in few layers of rhombohedral graphene (RG). More recently the IQG condition has also been proposed for superconductivity in the flat band for thick RG layers. Using density functional theory and Wannier functions, we study the symmetry-protected topology of bulk RG, drumhead surface state (DSS…",
       "keyFacts": [
-        "菱方石墨体相和表面态在理想量子几何条件下的拓扑性质和电子结构如何？",
-        "密度泛函理论和Wannier函数计算",
-        "体相RG为弱拓扑绝缘体（有SOC）和手性节线半金属（无SOC）；DSS平带有明显凸曲率，深度与角分辨光电子能谱实验一致；IQG呈凸形，中心K点|Ω|/TrG≈1，DSS内边缘满足严格IQG条件。"
+        "菱方石墨的鼓面表面态是否满足理想量子几何条件，其拓扑性质如何？",
+        "使用密度泛函理论和Wannier函数，研究体RG的拓扑、半无限和厚RG板的鼓面表面态，计算IQG条件。",
+        "体RG是弱拓扑绝缘体，DSS平带具有凸曲率，且DSS区域内部边缘满足严格IQG条件（|Ω|/TrG=1）。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -783,11 +487,11 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "菱方石墨体相和表面态在理想量子几何条件下的拓扑性质和电子结构如何？",
-      "method": "密度泛函理论和Wannier函数计算",
-      "findings": "体相RG为弱拓扑绝缘体（有SOC）和手性节线半金属（无SOC）；DSS平带有明显凸曲率，深度与角分辨光电子能谱实验一致；IQG呈凸形，中心K点|Ω|/TrG≈1，DSS内边缘满足严格IQG条件。",
+      "question": "菱方石墨的鼓面表面态是否满足理想量子几何条件，其拓扑性质如何？",
+      "method": "使用密度泛函理论和Wannier函数，研究体RG的拓扑、半无限和厚RG板的鼓面表面态，计算IQG条件。",
+      "findings": "体RG是弱拓扑绝缘体，DSS平带具有凸曲率，且DSS区域内部边缘满足严格IQG条件（|Ω|/TrG=1）。",
       "limitations": "摘要未说明",
-      "score": 82,
+      "score": 78,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -799,8 +503,8 @@
       "tags": [
         "菱方石墨",
         "拓扑绝缘体",
-        "鼓面表面态",
-        "理想量子几何"
+        "量子几何",
+        "密度泛函理论"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -820,12 +524,12 @@
       "contentType": "paper",
       "title": "Rashba自旋轨道相互作用下非相互作用离域电子之间的量子导引和非局域关联",
       "originalTitle": "Quantum Steering and Nonlocal Correlations Between Non-Interacting Delocalized Electrons Under Rashba Spin-Orbit Interaction",
-      "summary": "研究了二维电子气中两个电子在Rashba自旋轨道相互作用和电子间距影响下的量子导引和非局域关联，特别关注Bi/Ag(111)系统。发现增加α_R初始抑制量子关联，但所有三个度量随α_R非单调恢复，在α_R=4.32×10^-11 eV·m附近达到峰值。这确立了RSOI作为稳定二维电子气量子特性的关键控制参数。",
+      "summary": "我们研究了二维电子气中两个电子在Rashba自旋轨道相互作用下的量子导引和非局域关联，特别关注具有强RSOI的Bi/Ag(111)系统。发现虽然增加α_R最初抑制量子关联，但所有三个度量在α_R = 4.32×10^-11 eV·m附近出现非单调恢复，确立RSOI作为稳定量子性质的关键控制参数。",
       "abstract": "We investigate quantum steering and nonlocal correlations between two electrons in a two-dimensional electron gas (2DEG) as functions of Rashba spin-orbit interaction (RSOI) strength and inter-electron separation. We focus particularly on the Bi/Ag(111) system characterized by its strong RSOI ($α_0 = 3.05\\times10^{-11}$ eV~m), and we explore the influence of tuning intensity of RSOI and inter-electron distance on the dynamics of Bell nonlocality, uncertainty-induced nonlocality and steering. We find that, although…",
       "keyFacts": [
-        "Rashba自旋轨道相互作用和电子间距如何影响二维电子气中电子对的量子导引和非局域关联？",
-        "理论分析Bi/Ag(111)系统的Bell非局域性、不确定性诱导非局域性和导引作为RSOI强度和电子间距的函数",
-        "增加α_R初始抑制量子关联，但所有三个度量随α_R非单调恢复，在α_R=4.32×10^-11 eV·m附近达到峰值。"
+        "在Rashba自旋轨道相互作用下，非相互作用离域电子之间的量子导引和非局域关联如何随RSOI强度和电子间距变化？",
+        "研究Bi/Ag(111)系统中RSOI强度和电子间距对Bell非局域性、不确定性诱导非局域性和导引动力学的影响。",
+        "增加α_R最初抑制量子关联，但三个度量在α_R = 4.32×10^-11 eV·m附近非单调恢复，RSOI可作为控制参数稳定量子性质。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -846,11 +550,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "Rashba自旋轨道相互作用和电子间距如何影响二维电子气中电子对的量子导引和非局域关联？",
-      "method": "理论分析Bi/Ag(111)系统的Bell非局域性、不确定性诱导非局域性和导引作为RSOI强度和电子间距的函数",
-      "findings": "增加α_R初始抑制量子关联，但所有三个度量随α_R非单调恢复，在α_R=4.32×10^-11 eV·m附近达到峰值。",
+      "question": "在Rashba自旋轨道相互作用下，非相互作用离域电子之间的量子导引和非局域关联如何随RSOI强度和电子间距变化？",
+      "method": "研究Bi/Ag(111)系统中RSOI强度和电子间距对Bell非局域性、不确定性诱导非局域性和导引动力学的影响。",
+      "findings": "增加α_R最初抑制量子关联，但三个度量在α_R = 4.32×10^-11 eV·m附近非单调恢复，RSOI可作为控制参数稳定量子性质。",
       "limitations": "摘要未说明",
-      "score": 82,
+      "score": 78,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -861,8 +565,8 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "量子导引",
+        "非局域关联",
         "Rashba自旋轨道相互作用",
-        "Bell非局域性",
         "二维电子气"
       ],
       "translationProvider": "deepseek",
@@ -881,14 +585,14 @@
     {
       "id": "arxiv:2607.26679",
       "contentType": "paper",
-      "title": "基于跨区域协作的无人机集群空地一体化传感与通信",
+      "title": "基于跨区域协作的无人机集群空-地ISAC",
       "originalTitle": "UAV Swarming for Air-Ground ISAC via Cross-Region Cooperation",
-      "summary": "针对无人机集群用于空地一体化传感与通信面临的动态不平衡地面通信需求和传感观测多样性有限的问题，设计了跨区域协作框架。提出服务驱动的区域划分方案和自适应握手机制，并开发了区域级MAPPO框架。仿真结果显示，该方法实现了约90%的通信服务质量，并将Cramér-Rao界降低了约45%。",
+      "summary": "为了服务体积空-地空间，无人机集群用于集成感知和通信面临动态需求和不平衡通信及感知观测多样性有限的问题。设计了跨区域协作框架，提出服务驱动区域划分方案，引入自适应握手机制，并开发区域级MAPPO框架。仿真表明该方法实现约90%的通信服务质量，并将Cramér-Rao界降低约45%。",
       "abstract": "To serve the volumetric air-ground space, uncrewed aerial vehicles (UAVs) are urgently needed. Yet, relying on them for integrated sensing and communication (ISAC) introduces two key challenges: 1) dynamic and imbalanced ground communication demand, and 2) limited observation diversity for sensing. To address these issues, a cross-region cooperative framework is designed to coordinate UAV swarms. Specifically, a service-driven regional partitioning scheme is proposed to support traffic-aware UAV communication, and…",
       "keyFacts": [
-        "如何通过跨区域协作协调无人机集群以应对空地一体化传感与通信中的动态需求和不平衡？",
-        "提出跨区域协作框架，包括服务驱动的区域划分和自适应握手机制，并采用区域级多智能体近端策略优化（MAPPO）框架进行决策",
-        "所提方法实现约90%的通信QoS，并将CRB降低约45%。"
+        "如何设计跨区域协作框架以协调无人机集群，解决空-地ISAC中的通信需求动态和不平衡以及感知观测多样性有限的问题？",
+        "设计跨区域协作框架，包括服务驱动的区域划分方案和自适应握手机制，并开发区域级多智能体近端策略优化框架，采用集中训练和分散执行。",
+        "所提方法实现了约90%的通信服务质量，并将Cramér-Rao界降低约45%，优于传统基线。"
       ],
       "why": "该研究与自主与控制系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -911,11 +615,11 @@
         "蜂群机器人"
       ],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何通过跨区域协作协调无人机集群以应对空地一体化传感与通信中的动态需求和不平衡？",
-      "method": "提出跨区域协作框架，包括服务驱动的区域划分和自适应握手机制，并采用区域级多智能体近端策略优化（MAPPO）框架进行决策",
-      "findings": "所提方法实现约90%的通信QoS，并将CRB降低约45%。",
+      "question": "如何设计跨区域协作框架以协调无人机集群，解决空-地ISAC中的通信需求动态和不平衡以及感知观测多样性有限的问题？",
+      "method": "设计跨区域协作框架，包括服务驱动的区域划分方案和自适应握手机制，并开发区域级多智能体近端策略优化框架，采用集中训练和分散执行。",
+      "findings": "所提方法实现了约90%的通信服务质量，并将Cramér-Rao界降低约45%，优于传统基线。",
       "limitations": "摘要未说明",
-      "score": 82,
+      "score": 78,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -927,9 +631,9 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "无人机集群",
-        "ISAC",
-        "跨区域合作",
-        "MAPPO"
+        "集成感知与通信",
+        "跨区域协作",
+        "多智能体强化学习"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -945,82 +649,16 @@
       ]
     },
     {
-      "id": "arxiv:2607.27866",
-      "contentType": "paper",
-      "title": "金星弓形激波和离子成分边界位置驱动因素排序",
-      "originalTitle": "Ranking the drivers of the Venusian bow shock and ion composition boundary locations",
-      "summary": "分析了金星弓形激波和离子成分边界位置的主要驱动因素并排序。基于金星快车数据，结合Akaike信息准则、LASSO回归和偏相关方法，重新审视Signoles等人的结果。发现弓形激波主要由IMF强度或马赫数、IMF θ_bn角、太阳极紫外通量和太阳风动压驱动（对流电场影响小）。离子成分边界主要由极紫外通量驱动。",
-      "abstract": "The Venusian interaction with the solar wind leads to the formation of an induced magnetosphere structured by plasma boundaries. Their dynamics is complex, due to the combined influence of external (solar photons, solar wind plasma and interplanetary magnetic field (IMF)) and internal (ionized atmosphere) drivers. Studying these drivers helps understanding the transfer of energy and momentum throughout the Venusian system, and has thus implications for the erosion of the atmosphere through its coupling with the so…",
-      "keyFacts": [
-        "金星弓形激波和离子成分边界位置的主要驱动因素是什么？如何排序？",
-        "使用Akaike信息准则、最小绝对收缩和选择算子回归及偏相关方法分析金星快车数据",
-        "弓形激波主要由IMF强度或马赫数、IMF θ_bn角、太阳极紫外通量和太阳风动压驱动；离子成分边界主要由极紫外通量驱动。"
-      ],
-      "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "天文与空间科学",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-30T08:41:37Z",
-      "updatedAt": "2026-07-30T08:41:37Z",
-      "url": "https://arxiv.org/abs/2607.27866v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.27866v1",
-      "authors": [
-        "Philippe Garnier",
-        "Moa Persson",
-        "Sofia Bergman",
-        "Yoshifumi Futaana"
-      ],
-      "arxivCategories": [
-        "physics.space-ph",
-        "astro-ph.EP"
-      ],
-      "primaryCategory": "physics.space-ph",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "金星弓形激波和离子成分边界位置的主要驱动因素是什么？如何排序？",
-      "method": "使用Akaike信息准则、最小绝对收缩和选择算子回归及偏相关方法分析金星快车数据",
-      "findings": "弓形激波主要由IMF强度或马赫数、IMF θ_bn角、太阳极紫外通量和太阳风动压驱动；离子成分边界主要由极紫外通量驱动。",
-      "limitations": "摘要未说明",
-      "score": 80,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：天文与空间科学",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "金星",
-        "弓形激波",
-        "离子成分边界",
-        "驱动因素"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.27866v1",
-          "publishedAt": "2026-07-30T08:41:37Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
       "id": "arxiv:2607.27862",
       "contentType": "paper",
-      "title": "6H-SiC中N/Be中心的高场EPR/ENDOR研究用于缺陷工程",
+      "title": "用于6H-SiC缺陷工程的N/Be中心的高场EPR/ENDOR研究",
       "originalTitle": "High-Field EPR/ENDOR of N/Be Centers for Defect Engineering in 6H-SiC",
-      "summary": "研究了共掺杂氮和铍（浓度1018 cm^-3）的6H-SiC单晶，使用连续波和脉冲EPR及ENDOR，在W波段（94 GHz，3.4 T）进行实验。脉冲EPR识别了不同晶格位置的氮施主和铍受主，并确定了它们的相位相干和自旋-晶格弛豫时间。ENDOR测量揭示了与局部硅和碳环境的电子-核相互作用，包括远配位层。观察到的超精细结构表明超胞内自旋密度高度离域。TRIPLE谱证实了来自不同配位层的耦合核自旋子空间。",
+      "summary": "碳化硅在功率电子和量子技术中有广泛应用。我们研究了共掺杂氮和铍（浓度10^18 cm^-3）的6H-SiC单晶，使用连续波和脉冲EPR及ENDOR，在W波段（94 GHz；B=3.4 T）进行。脉冲EPR识别了氮施主和铍受主，测定了相干时间和自旋-晶格弛豫时间。ENDOR揭示了与硅和碳环境的电子-核相互作用，观察到超精细结构表明自旋密度在超胞内高度离域。",
       "abstract": "Silicon carbide (SiC) in its various structural modifications is widely used in power semiconductor electronics, operating under extreme conditions of high temperature, high voltage, and intense radiation. The discovery of spin defects (S>0) with unique optical and coherent properties has further positioned SiC as a promising platform for quantum technologies. Here, we investigate a 6H-SiC single crystal co-doped with nitrogen and beryllium at concentrations of 1018 cm-3, using continuous-wave and pulsed electron…",
       "keyFacts": [
-        "在6H-SiC中共掺杂氮和铍的缺陷中心的电子和核自旋性质如何？",
-        "使用连续波和脉冲EPR及ENDOR在W波段对6H-SiC单晶进行表征",
-        "识别了氮施主和铍受主，确定了相位相干和弛豫时间，揭示了与局部环境的电子-核相互作用，并观察到高度离域的自旋密度和耦合核自旋子空间。"
+        "在6H-SiC中，氮和铍共掺杂中心的结构和电子性质如何，是否适合缺陷工程？",
+        "使用W波段连续波和脉冲EPR/ENDOR，对共掺杂氮和铍的6H-SiC单晶进行研究，包括TRIPLE共振谱。",
+        "脉冲EPR识别了氮施主和铍受主，测定了弛豫时间；ENDOR揭示了电子-核相互作用，观察到高度离域的自旋密度，TRIPLE谱验证了耦合核自旋子空间，表明双杂质共掺杂可行。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1048,11 +686,11 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "在6H-SiC中共掺杂氮和铍的缺陷中心的电子和核自旋性质如何？",
-      "method": "使用连续波和脉冲EPR及ENDOR在W波段对6H-SiC单晶进行表征",
-      "findings": "识别了氮施主和铍受主，确定了相位相干和弛豫时间，揭示了与局部环境的电子-核相互作用，并观察到高度离域的自旋密度和耦合核自旋子空间。",
+      "question": "在6H-SiC中，氮和铍共掺杂中心的结构和电子性质如何，是否适合缺陷工程？",
+      "method": "使用W波段连续波和脉冲EPR/ENDOR，对共掺杂氮和铍的6H-SiC单晶进行研究，包括TRIPLE共振谱。",
+      "findings": "脉冲EPR识别了氮施主和铍受主，测定了弛豫时间；ENDOR揭示了电子-核相互作用，观察到高度离域的自旋密度，TRIPLE谱验证了耦合核自旋子空间，表明双杂质共掺杂可行。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1062,7 +700,7 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "碳化硅",
+        "6H-SiC",
         "EPR",
         "ENDOR",
         "缺陷工程"
@@ -1083,14 +721,14 @@
     {
       "id": "arxiv:2607.26393",
       "contentType": "paper",
-      "title": "CaM-Wolf：用于社交推理游戏的因果感知多模态智能体",
+      "title": "CaM-Wolf：用于社交推理游戏的多智能体因果感知模型",
       "originalTitle": "CaM-Wolf: Causal-Aware Multimodal Agents for Social Deduction Games",
-      "summary": "社交推理游戏如狼人杀对AI智能体构成挑战，需要推理、欺骗和协作等复杂社交技能。现有方法多基于文本，忽视多模态特性。本文提出CaM-Wolf，首个集成多模态感知与生成的SDG智能体，处理玩家视频输入，采用强化学习训练因果感知推理器建立可观察行为与隐藏角色间的逻辑链，并通过动画化身呈现。实验和用户研究显示其游戏性能优越并提升人机交互质量。",
+      "summary": "CaM-Wolf是首个集成多模态感知与生成的社会推理游戏AI智能体，处理视频输入，使用强化学习训练因果感知推理器，并通过动画头像展示。实验和用户研究表明，CaM-Wolf在游戏性能和人类-AI交互质量上均有提升。",
       "abstract": "Social deduction games (SDGs) such as Werewolf have become challenging testbeds for AI agents. These games require complex social skills such as reasoning, deception, and collaboration. While recent advances in large language models (LLMs) have driven significant progress in SDG agents, current approaches are predominantly text-based, overlooking the multimodal nature that is fundamental to human social interaction. To bridge this gap, we introduce CaM-Wolf, the first SDG agent that integrates multimodal perceptio…",
       "keyFacts": [
-        "如何将多模态感知和生成集成到社交推理游戏智能体中以提升性能和人机交互质量？",
-        "论文提出了CaM-Wolf，集成多模态感知和生成，使用强化学习训练的因果感知推理器处理视频输入，并通过动画化身进行呈现。",
-        "实验和用户研究表明CaM-Wolf在游戏性能和人机交互质量上表现优越。"
+        "如何将多模态感知与生成引入社交推理游戏智能体以提升其性能与人类互动质量？",
+        "提出CaM-Wolf智能体，集成视频输入处理、强化学习训练的因果感知推理器，以及动画头像呈现。",
+        "CaM-Wolf在游戏性能和人类-AI交互质量上优于现有方法。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1117,11 +755,11 @@
         "多模态智能体"
       ],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何将多模态感知和生成集成到社交推理游戏智能体中以提升性能和人机交互质量？",
-      "method": "论文提出了CaM-Wolf，集成多模态感知和生成，使用强化学习训练的因果感知推理器处理视频输入，并通过动画化身进行呈现。",
-      "findings": "实验和用户研究表明CaM-Wolf在游戏性能和人机交互质量上表现优越。",
+      "question": "如何将多模态感知与生成引入社交推理游戏智能体以提升其性能与人类互动质量？",
+      "method": "提出CaM-Wolf智能体，集成视频输入处理、强化学习训练的因果感知推理器，以及动画头像呈现。",
+      "findings": "CaM-Wolf在游戏性能和人类-AI交互质量上优于现有方法。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1135,7 +773,7 @@
         "多模态智能体",
         "社交推理游戏",
         "强化学习",
-        "大语言模型"
+        "因果推理"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1151,80 +789,16 @@
       ]
     },
     {
-      "id": "arxiv:2607.28622",
-      "contentType": "paper",
-      "title": "四维模型无关探测双黑洞子群体的天体物理起源",
-      "originalTitle": "A Four-dimensional Model-agnostic Probe into the Astrophysical Origins of Binary Black Hole Subpopulations",
-      "summary": "引力波目录显示双黑洞存在多个子群体，可能源于不同演化通道。由于理论不确定性，强模型分析常导致先验驱动结论，而灵活替代方法难以扩展至高维。本文首次数据驱动重建双黑洞主质量、质量比、有效旋进和有效进动自旋参数的四维联合分布，提供模型无关约束，刻画四个不同子群体，并报告新相关性，揭示隔离双星演化、动力学组装和层级并合等通道的丰度。",
-      "abstract": "There is strong evidence of multiple binary black hole~(BBH) subpopulations in the cumulative gravitational wave catalog by the LIGO-Virgo-KAGRA collaboration that likely originate through distinct evolutionary channels. The astrophysical interpretation of this complex underlying population is subject to theoretical uncertainties in treatments of binary stellar evolution, core collapse, and host environments. Due to a lack of robust predictions and the sheer diversity of plausible features, strongly modelled popul…",
-      "keyFacts": [
-        "如何通过数据驱动方式模型无关地重建双黑洞参数的四维分布，以揭示其子群体的起源？",
-        "采用数据驱动重建方法，联合分布四维参数（主质量、质量比、有效旋进和进动自旋），并通过聚类刻画子群体。",
-        "识别出四个不同子群体，发现新的质量相关相关性，为天体物理起源提供约束。"
-      ],
-      "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "天文与空间科学",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-30T17:59:19Z",
-      "updatedAt": "2026-07-30T17:59:19Z",
-      "url": "https://arxiv.org/abs/2607.28622v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.28622v1",
-      "authors": [
-        "Anarya Ray",
-        "Vicky Kalogera"
-      ],
-      "arxivCategories": [
-        "astro-ph.HE",
-        "gr-qc"
-      ],
-      "primaryCategory": "astro-ph.HE",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何通过数据驱动方式模型无关地重建双黑洞参数的四维分布，以揭示其子群体的起源？",
-      "method": "采用数据驱动重建方法，联合分布四维参数（主质量、质量比、有效旋进和进动自旋），并通过聚类刻画子群体。",
-      "findings": "识别出四个不同子群体，发现新的质量相关相关性，为天体物理起源提供约束。",
-      "limitations": "摘要未说明",
-      "score": 80,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：天文与空间科学",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "双黑洞",
-        "引力波",
-        "模型无关",
-        "子群体"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.28622v1",
-          "publishedAt": "2026-07-30T17:59:19Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
       "id": "arxiv:2607.28621",
       "contentType": "paper",
-      "title": "提升乘积码的提升",
+      "title": "提升提升乘积码",
       "originalTitle": "Lifting Lifted Product Codes",
-      "summary": "乘积码是一类重要量子纠错码。本文提出基于群扩展和图提升的LP码族系统构造，增加码大小同时保持Tanner图局部结构，并通过链和上链映射关联参数和逻辑操作。应用获得参数更优的LP码，展示手术工具可跨有限提升转移并降低空间开销，还开发了并行乘积手术。最后提出将提升作为无Euclidean格子的代数qLDPC码热力学族定义的系统步骤。",
+      "summary": "提出了基于群扩展和图提升的提升乘积（LP）码系统构造，增加码大小同时保持Tanner图局部结构，通过链和上链映射关联码参数、逻辑算子和容错逻辑操作。首次应用获得更优参数码，展示手术工具可跨有限提升转移并降低空间开销，还开发并行乘积手术，并建议将提升作为定义热力学族的第一步。",
       "abstract": "Lifted product (LP) codes form an important class of quantum error correcting codes with favorable code parameters. We introduce a systematic construction of LP code families based on group extensions and graph lifts. The construction increases the code size while preserving the local structure of the Tanner graph, and relates code parameters, logical operators, and fault-tolerant logical-operation gadgets within the families through chain and cochain maps. As a first application, we obtain LP codes with better co…",
       "keyFacts": [
-        "如何系统构造具有良好参数且可转移逻辑操作的提升乘积码族？",
-        "基于群扩展和图提升的构造，通过链和上链映射关联参数和逻辑操作。",
-        "获得参数更优的LP码；手术工具可转移且空间开销更低；并行乘积手术用于提升聚类循环码；热力学族跨有限尺寸交叉。"
+        "如何系统构造提升乘积码以改善码参数并支持容错操作？",
+        "基于群扩展和图提升的构造方法，使用链和上链映射关联性质，并开发并行乘积手术。",
+        "获得了比现有LP码参数更好的码；手术工具可转移且空间开销更低；提升可作为热力学族定义步骤。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1246,11 +820,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何系统构造具有良好参数且可转移逻辑操作的提升乘积码族？",
-      "method": "基于群扩展和图提升的构造，通过链和上链映射关联参数和逻辑操作。",
-      "findings": "获得参数更优的LP码；手术工具可转移且空间开销更低；并行乘积手术用于提升聚类循环码；热力学族跨有限尺寸交叉。",
+      "question": "如何系统构造提升乘积码以改善码参数并支持容错操作？",
+      "method": "基于群扩展和图提升的构造方法，使用链和上链映射关联性质，并开发并行乘积手术。",
+      "findings": "获得了比现有LP码参数更好的码；手术工具可转移且空间开销更低；提升可作为热力学族定义步骤。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1281,14 +855,14 @@
     {
       "id": "arxiv:2607.28620",
       "contentType": "paper",
-      "title": "通过压缩椭圆几何输运实现最优测量态制备",
+      "title": "关于通过压缩椭圆几何传输实现最优测量态制备",
       "originalTitle": "On Optimal Measurement-State Preparation via Geometric Transport of the Squeezing Ellipse",
-      "summary": "利用压缩态进行量子计量需制备最优测量态。本文讨论在SU(2)对称系统中将初始错位压缩输入转化为测量最优态的几何框架，压缩椭圆方向作为额外几何自由度，路径几何决定旋转并与立体角相关，建立与几何相位联系。适用于不同物理平台，以偏振压缩光为例，提出利用连续变化双折射元件的实现方案。",
+      "summary": "讨论了在SU(2)对称系统中将初始错位压缩输入变换为测量最优态的几何框架，压缩椭圆取向构成额外几何自由度，其旋转由路径几何决定并与几何相位关联。该框架适用于不同物理平台，以偏振压缩光为例演示实现。",
       "abstract": "Preparation of optimal measurement states is a key requirement in quantum metrology utilizing squeezed states. We discuss a geometric framework that transforms an initially misaligned squeezed input into a measurement-optimal state in SU(2)-symmetric systems. Within this framework, the orientation of the squeezing ellipse constitutes an additional geometric degree of freedom and evolves as the mean state follows a controlled trajectory on the unit sphere. The resulting rotation of the ellipse is determined by the…",
       "keyFacts": [
-        "如何在SU(2)对称系统中通过几何输运制备最优测量态？",
-        "提出几何框架，利用压缩椭圆作为自由度，通过轨迹路径几何控制旋转，并与几何相位关联。",
-        "椭圆旋转由路径几何决定，依赖于轨迹围成的立体角；适用于多个平台，并给出偏振压缩光的实现建议。"
+        "如何通过几何传输压缩椭圆制备量子计量中的最优测量态？",
+        "提出几何框架，将压缩椭圆视为几何自由度，控制均值态轨迹并利用几何相位。",
+        "椭圆旋转由路径几何决定并依赖于轨迹所包围的立体角，建立了几何相位联系。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1311,11 +885,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何在SU(2)对称系统中通过几何输运制备最优测量态？",
-      "method": "提出几何框架，利用压缩椭圆作为自由度，通过轨迹路径几何控制旋转，并与几何相位关联。",
-      "findings": "椭圆旋转由路径几何决定，依赖于轨迹围成的立体角；适用于多个平台，并给出偏振压缩光的实现建议。",
+      "question": "如何通过几何传输压缩椭圆制备量子计量中的最优测量态？",
+      "method": "提出几何框架，将压缩椭圆视为几何自由度，控制均值态轨迹并利用几何相位。",
+      "findings": "椭圆旋转由路径几何决定并依赖于轨迹所包围的立体角，建立了几何相位联系。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1328,7 +902,7 @@
         "量子计量",
         "压缩态",
         "几何相位",
-        "测量态制备"
+        "SU(2)对称"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1346,14 +920,14 @@
     {
       "id": "arxiv:2607.28605",
       "contentType": "paper",
-      "title": "规范提升乘积码的逻辑计算",
+      "title": "用典型提升乘积码进行逻辑计算",
       "originalTitle": "Logical computation with canonical lifted product codes",
-      "summary": "高码率量子LDPC码以低物理开销编码多逻辑量子比特，但实现高效容错计算仍具挑战。本文通过协同设计规范提升乘积码的码和逻辑指令集，利用循环对称性，展示规范逻辑基、常数深度自同构和折叠横截Clifford门、模块化图手术、并行逻辑泡利测量及并行魔法态注入。例如[[1122,148,≤20]]码仅需两个种子手术工具，任意高权重逻辑测量可用小于数据块一半的提取器实现。",
+      "summary": "针对具有循环对称性的典型提升乘积（LP）码，设计了码与其逻辑指令集。这些码拥有经典逻辑基础，使得逻辑算子按循环轨道组织，支持恒定深度自同构门、模块化图码手术、并行泡利测量和并行魔术态注入。例如，[[1122,148,≤20]]码仅需两个种子手术工具。",
       "abstract": "High-rate quantum low-density parity-check (qLDPC) codes encode many logical qubits with low physical-qubit overhead, but realizing efficient fault-tolerant computation on such dense encodings remains a major challenge. Generic, code-agnostic techniques such as code surgery and gate teleportation apply broadly, but are difficult to make modular, low-overhead, and fully certifiable on complex high-rate codes whose structure is left unexploited. Here we overcome these obstacles by co-designing the code together with…",
       "keyFacts": [
-        "如何利用循环对称性协同设计高码率提升乘积码及其逻辑指令集，以实现高效容错计算？",
-        "协同设计规范提升乘积码和逻辑指令集，利用循环对称性组织逻辑基，并开发多种逻辑操作技术。",
-        "实现了完整逻辑指令集，包括常数深度门、模块化手术、并行测量和魔法态注入，且所需种子手术工具数量少。"
+        "如何对高码率qLDPC码实现高效容错逻辑计算，特别是典型提升乘积码？",
+        "共同设计码与其逻辑指令集，利用循环对称性构建经典逻辑基础，并开发模块化手术和并行测量等技术。",
+        "典型LP码支持完整逻辑指令集，低开销手术和并行操作，如两个种子手术工具即可实现特定码。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1376,11 +950,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何利用循环对称性协同设计高码率提升乘积码及其逻辑指令集，以实现高效容错计算？",
-      "method": "协同设计规范提升乘积码和逻辑指令集，利用循环对称性组织逻辑基，并开发多种逻辑操作技术。",
-      "findings": "实现了完整逻辑指令集，包括常数深度门、模块化手术、并行测量和魔法态注入，且所需种子手术工具数量少。",
+      "question": "如何对高码率qLDPC码实现高效容错逻辑计算，特别是典型提升乘积码？",
+      "method": "共同设计码与其逻辑指令集，利用循环对称性构建经典逻辑基础，并开发模块化手术和并行测量等技术。",
+      "findings": "典型LP码支持完整逻辑指令集，低开销手术和并行操作，如两个种子手术工具即可实现特定码。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1390,9 +964,9 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子计算",
+        "量子低密度奇偶校验码",
         "提升乘积码",
-        "容错",
+        "容错计算",
         "逻辑指令集"
       ],
       "translationProvider": "deepseek",
@@ -1409,149 +983,16 @@
       ]
     },
     {
-      "id": "arxiv:2607.28604",
-      "contentType": "paper",
-      "title": "Cosmo-SPINN：基于物理信息生成网络的模糊暗物质模拟",
-      "originalTitle": "Cosmo-SPINN: Fuzzy Dark Matter Simulations with Physics-Informed Generative Networks",
-      "summary": "我们提出一个物理信息生成U-Net框架，用于模糊暗物质模拟，包括从初始条件演化到任意尺度因子和特定尺度因子的超分辨率。物理损失函数显式强制执行薛定谔-泊松动力学。仅用20%训练数据即可在1 h^-1 Mpc盒中准确再现目标模拟，并泛化至未见初始条件。对于超分辨率，首次训练了基于完整SP方程的生成超分辨率模型。",
-      "abstract": "Generative machine learning models have recently emerged as powerful tools for producing cosmological simulations. However, many existing emulators do not explicitly enforce the underlying physical dynamics governing cosmological evolution, often leading to artifacts and poor adherence to the evolution equations. In this work, we present a physics-informed generative U-Net framework for fuzzy dark matter (FDM) that addresses two complementary tasks: (i) the evolution of cosmological fields from initial conditions…",
-      "keyFacts": [
-        "如何将物理信息生成模型用于模糊暗物质模拟，并同时处理演化与超分辨率任务？",
-        "采用物理信息生成U-Net框架，损失函数包含薛定谔-泊松动力学约束，分别训练演化模型和超分辨率模型。",
-        "物理损失显著提升演化质量，仅用20%数据即可重现目标模拟；框架能泛化到新初始条件；超分辨率模型首次基于完整SP方程训练。"
-      ],
-      "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "天文与空间科学",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-30T17:54:43Z",
-      "updatedAt": "2026-07-30T17:54:43Z",
-      "url": "https://arxiv.org/abs/2607.28604v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.28604v1",
-      "authors": [
-        "Ashutosh Kumar Mishra",
-        "Emma Tolley",
-        "Nicolas Cerardi"
-      ],
-      "arxivCategories": [
-        "astro-ph.CO"
-      ],
-      "primaryCategory": "astro-ph.CO",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何将物理信息生成模型用于模糊暗物质模拟，并同时处理演化与超分辨率任务？",
-      "method": "采用物理信息生成U-Net框架，损失函数包含薛定谔-泊松动力学约束，分别训练演化模型和超分辨率模型。",
-      "findings": "物理损失显著提升演化质量，仅用20%数据即可重现目标模拟；框架能泛化到新初始条件；超分辨率模型首次基于完整SP方程训练。",
-      "limitations": "摘要未说明",
-      "score": 80,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：天文与空间科学",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "模糊暗物质",
-        "生成模型",
-        "物理信息",
-        "宇宙学模拟"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.28604v1",
-          "publishedAt": "2026-07-30T17:54:43Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
-      "id": "arxiv:2607.28603",
-      "contentType": "paper",
-      "title": "利用涡旋日冕仪反射光进行低阶波前控制的实验室演示",
-      "originalTitle": "Laboratory demonstration of low order wavefront control using light reflected off the vortex coronagraph",
-      "summary": "我们首次在加州理工学院高对比度光谱测试平台演示基于涡旋日冕仪反射光的低阶波前传感与控制倾斜循环。相位恢复将科学相机波前误差从71.6 nm降至7.9 nm RMS。闭合倾斜环在12小时内将漂移抑制两个数量级以上，指向精度<0.005λ/D。与电场共轭并行时，暗孔对比度保持约5×10^-8。",
-      "abstract": "The Astro2020 Decadal Survey identified exoplanet imaging as a high priority for the Habitable Worlds Observatory (HWO), which must image and characterize exo-Earths at contrasts of $1\\times10^{-10}$. The vector vortex coronagraph (VVC) is a leading architecture for this task owing to its small inner working angle and high throughput. Using light reflected from the VVC for wavefront sensing and control provides a potential path to improving robustness to residual wavefront errors and minimizing contrast degradatio…",
-      "keyFacts": [
-        "能否利用涡旋日冕仪反射光进行波前传感与控制，以改善高对比度成像？",
-        "在HCST测试平台上升级CATKit2，实现相位恢复、电场共轭和低阶波前传感控制循环，并测量波前误差和对比度。",
-        "相位恢复将波前误差从71.6降至7.9 nm RMS；倾斜环抑制漂移两个数量级，保持对比度约5×10^-8。"
-      ],
-      "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "天文与空间科学",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-30T17:54:12Z",
-      "updatedAt": "2026-07-30T17:54:12Z",
-      "url": "https://arxiv.org/abs/2607.28603v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.28603v1",
-      "authors": [
-        "Clarissa R. Do Ó",
-        "Kane Sjoberg",
-        "Luke Lamitina",
-        "Susan Redmond",
-        "Dimitri Mawet",
-        "Jorge Llop-Sayson",
-        "Siria Alicata"
-      ],
-      "arxivCategories": [
-        "astro-ph.IM",
-        "astro-ph.EP"
-      ],
-      "primaryCategory": "astro-ph.IM",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "能否利用涡旋日冕仪反射光进行波前传感与控制，以改善高对比度成像？",
-      "method": "在HCST测试平台上升级CATKit2，实现相位恢复、电场共轭和低阶波前传感控制循环，并测量波前误差和对比度。",
-      "findings": "相位恢复将波前误差从71.6降至7.9 nm RMS；倾斜环抑制漂移两个数量级，保持对比度约5×10^-8。",
-      "limitations": "摘要未说明",
-      "score": 80,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：天文与空间科学",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "系外行星成像",
-        "涡旋日冕仪",
-        "波前控制",
-        "实验室演示"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.28603v1",
-          "publishedAt": "2026-07-30T17:54:12Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
       "id": "arxiv:2607.28602",
       "contentType": "paper",
       "title": "泡利编码与不可克隆加密",
       "originalTitle": "Pauli Encodings & Unclonable Encryption",
-      "summary": "我们引入并研究泡利编码，一种简单的一位加密方案，其密文是泡利字符串的归一化本征空间投影。对含K个泡利字符串的编码，我们证明了最优纠缠单配性胜率的普适下界1/2+1/(2√K)，并为几个结构族给出更紧的界。我们证明若仅用X和Z字符串则不安全，并指出基于成对猜测边际无法建立不可克隆不可区分安全。对全反对易情形，求解SDP松弛得到渐近上界约0.5556，并证明强不可克隆不可区分安全。",
+      "summary": "引入并研究泡利编码，一类基于泡利串归一化本征空间投影的单比特加密方案。证明对含K个泡利串的编码，最优单配纠缠胜率下界为1/2+1/(2√K)，并针对结构化族给出更紧的界。限制自然方法：X/Z串不安全，配对猜测边际无法建立不可克隆不可区分安全。对抗特定协议，求解NPA第三级得渐近上界约0.5556，并证明对受限维对手的强不可克隆不可区分安全。",
       "abstract": "The unclonable bit question asks whether quantum encryption can prevent an adversary from producing two systems that both reveal the plaintext once the key is disclosed. We introduce and study Pauli Encodings, a simple class of one-bit encryption schemes whose ciphertexts are normalized eigenspace projectors of Pauli strings. For every Pauli Encoding with K Pauli strings, we prove a universal lower bound $1/2+1/(2\\sqrt{K})$ on the optimal monogamy-of-entanglement winning probability, together with sharper bounds f…",
       "keyFacts": [
-        "泡利编码能否实现不可克隆加密，其安全性界限如何？",
-        "定义泡利编码类，证明下界，分析受限情况，使用半定规划松弛求解全反对易情形。",
-        "对K个泡利字符串有下界1/2+1/(2√K)；仅用X和Z不安全；全反对易时胜率上界约0.5556；证明强不可克隆不可区分安全。"
+        "泡利编码能否实现不可克隆加密，其安全性边界如何？",
+        "引入泡利编码，证明单配下界，建立限制结果，使用NPA松弛求解上界，并证明安全属性。",
+        "普适下界为1/2+1/(2√K)；X/Z限制不安全；配对猜测边际存在3/4障碍；特殊协议渐近上界约0.5556；对受限维对手有强安全性。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1573,11 +1014,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "泡利编码能否实现不可克隆加密，其安全性界限如何？",
-      "method": "定义泡利编码类，证明下界，分析受限情况，使用半定规划松弛求解全反对易情形。",
-      "findings": "对K个泡利字符串有下界1/2+1/(2√K)；仅用X和Z不安全；全反对易时胜率上界约0.5556；证明强不可克隆不可区分安全。",
+      "question": "泡利编码能否实现不可克隆加密，其安全性边界如何？",
+      "method": "引入泡利编码，证明单配下界，建立限制结果，使用NPA松弛求解上界，并证明安全属性。",
+      "findings": "普适下界为1/2+1/(2√K)；X/Z限制不安全；配对猜测边际存在3/4障碍；特殊协议渐近上界约0.5556；对受限维对手有强安全性。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1588,9 +1029,9 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "量子加密",
-        "不可克隆",
-        "泡利编码",
-        "纠缠单配性"
+        "不可克隆性",
+        "泡利串",
+        "单配纠缠"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1608,14 +1049,14 @@
     {
       "id": "arxiv:2607.28600",
       "contentType": "paper",
-      "title": "SymFT：通过符号Clifford-Pauli框架和稳定子坐标的通用容错量子电路模拟",
+      "title": "SymFT：通过符号Clifford-Pauli框架和稳定子坐标实现通用容错量子电路模拟",
       "originalTitle": "SymFT: Universal Fault-Tolerant Quantum Circuit Simulation via Symbolic Clifford--Pauli Frames and Stabilizer Coordinates",
-      "summary": "我们提出SymFT，一种用于Clifford主导电路的高吞吐量模拟器，支持泡利旋转、随机泡利噪声、中间电路测量和反馈。它结合符号Clifford-Pauli框架分解和自适应稳定子坐标规划。在单CPU核心上，对表面码电路比Stim快2.51-2.56倍，对魔法态培养和蒸馏电路比Clifft快1.86-3.51倍，且比先前模拟器SOFT快两个数量级以上。",
+      "summary": "SymFT是一种用于Clifford主导电路的高吞吐量模拟器，支持Pauli旋转、随机Pauli噪声、电路中间Pauli测量和测量记录控制的Pauli反馈。它结合了符号Clifford-Pauli框架分解和自适应稳定子坐标规划，避免了逐次射击的表格更新。在单CPU核心上，对于表面码电路比Stim快2.51-2.56倍，对于魔法态培育和蒸馏电路比Clifft快1.86-3.51倍，吞吐量比SOFT高两个数量级以上。",
       "abstract": "Fault-tolerant protocols often consist largely of stabilizer subcircuits, yet the non-Clifford operations required for universality make exact sampling costly. We present SymFT, a high-throughput simulator for Clifford-dominated circuits with Pauli rotations, stochastic Pauli noise, mid-circuit Pauli measurements, and measurement-record-controlled Pauli feedback. It combines two ideas. First, symbolic Clifford--Pauli frame factorization reduces branch-probability sampling to Pauli rotations and measurement project…",
       "keyFacts": [
-        "如何高效模拟含非Clifford操作的容错量子电路？",
-        "提出符号Clifford-Pauli帧分解和自适应稳定子坐标规划，避免每样本更新表格和局部变换。",
-        "单核上比Stim快2.51-2.56倍，比Clifft快1.86-3.51倍，比SOFT快两个数量级以上。"
+        "如何高效模拟以Clifford子电路为主、包含非Clifford操作的容错量子电路？",
+        "结合符号Clifford-Pauli框架分解和自适应稳定子坐标规划，使用共享的稳定子-去稳定子表格定义基，仅存储活跃的非稳定子自由度，并一次性解析基变换，发出多坐标采样指令。",
+        "在测试的纯Clifford和近Clifford电路中，SymFT达到了最先进的采样性能：单CPU核心上比Stim快2.51-2.56倍（表面码电路），比Clifft快1.86-3.51倍（魔法态培育和蒸馏电路），吞吐量比SOFT高两个数量级以上。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1637,11 +1078,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何高效模拟含非Clifford操作的容错量子电路？",
-      "method": "提出符号Clifford-Pauli帧分解和自适应稳定子坐标规划，避免每样本更新表格和局部变换。",
-      "findings": "单核上比Stim快2.51-2.56倍，比Clifft快1.86-3.51倍，比SOFT快两个数量级以上。",
+      "question": "如何高效模拟以Clifford子电路为主、包含非Clifford操作的容错量子电路？",
+      "method": "结合符号Clifford-Pauli框架分解和自适应稳定子坐标规划，使用共享的稳定子-去稳定子表格定义基，仅存储活跃的非稳定子自由度，并一次性解析基变换，发出多坐标采样指令。",
+      "findings": "在测试的纯Clifford和近Clifford电路中，SymFT达到了最先进的采样性能：单CPU核心上比Stim快2.51-2.56倍（表面码电路），比Clifft快1.86-3.51倍（魔法态培育和蒸馏电路），吞吐量比SOFT高两个数量级以上。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1653,8 +1094,8 @@
       "tags": [
         "量子电路模拟",
         "容错",
-        "Clifford",
-        "稳定子"
+        "Clifford电路",
+        "Pauli旋转"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1672,14 +1113,14 @@
     {
       "id": "arxiv:2607.28598",
       "contentType": "paper",
-      "title": "Z2上CNOT和行复杂度4n-o(n)的显式矩阵与局部逻辑门",
+      "title": "Z2上CNOT和行复杂度为4n-o(n)的显式矩阵及局部逻辑门",
       "originalTitle": "Explicit Matrices over $\\mathbb Z_2$ with CNOT and Row Complexity $4n-\\mathrm{o}(n)$ and Local Logic Gates",
-      "summary": "我们给出Z2上可逆n×n矩阵的显式族，其CNOT和行复杂度至少4n−o(n)，即使将CNOT替换为任意局部线性逻辑门也成立。我们证明局部逻辑门生成的群G_n自然同构于Z_2^n上所有可逆仿射变换群，从而将量子复杂度问题归约为行简化复杂度。作为应用，相关排列的量子复杂度至少4n−o(n)。",
+      "summary": "本文构造了一个显式的n×n可逆矩阵族，其CNOT和行复杂度至少为4n-o(n)，即使在将CNOT门替换为任意局部线性逻辑门（作用于坐标对的任意可逆线性变换）的情况下，下界依然成立。证明了由局部逻辑门生成的置换群G_n与Z_2^n上所有可逆仿射变换群自然同构，从而将估计G_n中置换的量子复杂度归约为可逆矩阵的行简化复杂度。作为应用，相应置换的量子复杂度至少为4n-o(n)。",
       "abstract": "In this article, we present an explicit family of invertible $n\\times n$ matrices over $\\mathbb Z_2$ whose CNOT and row complexity is at least $4n-\\text{o}(n)$; equivalently, reducing these matrices to the identity requires at least $4n-\\text{o}(n)$ elementary row operations. Moreover, the same complexity lower bound holds in the stronger computational model where the CNOT gates are replaced by arbitrary local linear logic gates, namely arbitrary invertible linear transformations acting on pairs of coordinates. Le…",
       "keyFacts": [
-        "能否构造具有高CNOT复杂度的显式矩阵，并证明其量子复杂度下界？",
-        "构造Z2上显式矩阵族，证明行复杂度下界，并建立G_n与仿射变换群的同构。",
-        "显式矩阵的CNOT和行复杂度至少4n−o(n)，在局部逻辑门模型下也成立；相关排列的量子复杂度至少4n−o(n)。"
+        "如何构造显式的矩阵族，使其在更强大的局部逻辑门模型下仍具有接近4n的CNOT和行复杂度下界？",
+        "构造显式的n×n可逆矩阵族，并通过证明局部逻辑门生成的群与仿射变换群同构，将量子复杂度下界简化为行简化复杂度。",
+        "存在显式矩阵族，其CNOT和行复杂度至少为4n-o(n)，即使在局部线性逻辑门模型下也成立；且相应置换的量子复杂度至少为4n-o(n)。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1701,11 +1142,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "能否构造具有高CNOT复杂度的显式矩阵，并证明其量子复杂度下界？",
-      "method": "构造Z2上显式矩阵族，证明行复杂度下界，并建立G_n与仿射变换群的同构。",
-      "findings": "显式矩阵的CNOT和行复杂度至少4n−o(n)，在局部逻辑门模型下也成立；相关排列的量子复杂度至少4n−o(n)。",
+      "question": "如何构造显式的矩阵族，使其在更强大的局部逻辑门模型下仍具有接近4n的CNOT和行复杂度下界？",
+      "method": "构造显式的n×n可逆矩阵族，并通过证明局部逻辑门生成的群与仿射变换群同构，将量子复杂度下界简化为行简化复杂度。",
+      "findings": "存在显式矩阵族，其CNOT和行复杂度至少为4n-o(n)，即使在局部线性逻辑门模型下也成立；且相应置换的量子复杂度至少为4n-o(n)。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1716,8 +1157,8 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "量子复杂度",
-        "CNOT",
-        "矩阵",
+        "CNOT门",
+        "行复杂度",
         "局部逻辑门"
       ],
       "translationProvider": "deepseek",
@@ -1736,14 +1177,14 @@
     {
       "id": "arxiv:2607.28579",
       "contentType": "paper",
-      "title": "几何随机性引发的量子混沌与扩散输运",
+      "title": "几何随机性产生的量子混沌和扩散输运",
       "originalTitle": "Quantum Chaos and Diffusive Transport from Geometric Randomness",
-      "summary": "研究表明，量子混沌和扩散输运可纯粹由几何随机性产生。在具有均匀耦合的随机局部树状分层图上，几何随机性和有效图维度决定了混沌动力学的存在与否。广泛层尺寸产生鲁棒量子混沌、能级排斥和扩散输运；准一维极限下，局部态和扩展态共存，抑制能级排斥并驱动弹道输运。",
+      "summary": "研究表明量子混沌和扩散输运可以仅由几何随机性产生。通过在具有均匀耦合的随机局部树状分层图上研究非相互作用量子粒子，发现几何随机性和有效图维度决定了混沌动力学的存在与否。广泛的层尺寸产生稳健的量子混沌、能级排斥和扩散输运；而在准一维极限下，存在扩展的局域态和离域态共存，导致能级排斥被抑制同时离域态驱动弹道输运。这些结果确立了几何随机性作为产生和调控量子混沌的基本独立机制。",
       "abstract": "The physics of quantum chaos and diffusive transport is typically studied in settings with microscopic disorder or many-body interactions. In this Letter, we demonstrate that these phenomena can arise purely from geometric randomness. By studying non-interacting quantum particles on random locally tree-like layered graphs with uniform couplings, we show that the geometric randomness and effective graph dimensionality dictates the presence of chaotic dynamics or lack thereof. These graphs can be considered as struc…",
       "keyFacts": [
-        "几何随机性本身能否独立产生量子混沌和扩散输运？",
-        "研究非相互作用量子粒子在具有均匀耦合的随机局部树状分层图上的行为，分析几何随机性及有效图维度的影响。",
-        "广泛层尺寸产生鲁棒量子混沌、能级排斥和扩散输运；准一维极限下，大量局域态与扩展态共存，抑制能级排斥并驱动弹道输运。"
+        "量子混沌和扩散输运能否仅由几何随机性产生，而无需微观无序或多体相互作用？",
+        "研究非相互作用量子粒子在随机局部树状分层图上的行为，改变层尺寸和准一维极限。",
+        "广泛的层尺寸产生稳健的量子混沌、能级排斥和扩散输运；准一维极限下局域态和离域态共存，抑制能级排斥并导致弹道输运。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1768,11 +1209,11 @@
       "primaryCategory": "cond-mat.stat-mech",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "几何随机性本身能否独立产生量子混沌和扩散输运？",
-      "method": "研究非相互作用量子粒子在具有均匀耦合的随机局部树状分层图上的行为，分析几何随机性及有效图维度的影响。",
-      "findings": "广泛层尺寸产生鲁棒量子混沌、能级排斥和扩散输运；准一维极限下，大量局域态与扩展态共存，抑制能级排斥并驱动弹道输运。",
+      "question": "量子混沌和扩散输运能否仅由几何随机性产生，而无需微观无序或多体相互作用？",
+      "method": "研究非相互作用量子粒子在随机局部树状分层图上的行为，改变层尺寸和准一维极限。",
+      "findings": "广泛的层尺寸产生稳健的量子混沌、能级排斥和扩散输运；准一维极限下局域态和离域态共存，抑制能级排斥并导致弹道输运。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1783,8 +1224,9 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "量子混沌",
+        "扩散输运",
         "几何随机性",
-        "扩散输运"
+        "局域化"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1802,14 +1244,14 @@
     {
       "id": "arxiv:2607.28572",
       "contentType": "paper",
-      "title": "每成本量子保真度：一种评估量子计算系统的指标",
+      "title": "量子保真度-成本比：一种量子计算系统的评估指标",
       "originalTitle": "Quantum Fidelity-per-Cost: A Metric for Evaluation of Quantum Computing Systems",
-      "summary": "本文提出并分析了一种成本感知指标——量子保真度每成本（QFC），结合KL散度、射击次数和货币成本。通过跨四家云提供商、14个云QPU访问路径的测量研究，发现成本感知排名可能不同于纯保真度评估，且用户考虑价格时会选择不同后端。QFC值随新机器上线或价格修订而变化。",
+      "summary": "云访问量子计算使硬件比较成为实际购买决策。本文提出跨提供商的测量研究，覆盖14个云QPU访问路径条目（12个不同物理QPU）在四个云访问路径（AWS、IBM、IQM、OQC）上的电路执行保真度。并提出成本感知分数QFC，结合KL散度、射击次数和货币成本。经验发现：成本感知排名可能与纯保真度排名不同，用户考虑价格时会选择不同的后端；排名在指标重新加权下稳定，设备的计费模式而非硬件决定其分数如何随射击次数缩放。",
       "abstract": "Cloud-accessible quantum computing has made hardware comparison not only a physics benchmark but also a practical purchasing decision. Cost-aware comparison of quantum computers remains underexplored and is difficult to do under the heterogeneous billing models offered by various cloud-based quantum computing providers. This paper makes two main contributions to enable price-aware comparison of quantum computers. First, this work presents a cross-provider measurement study of quantum circuit execution fidelity spa…",
       "keyFacts": [
         "如何在异构计费模型下实现量子计算机的成本感知比较？",
-        "跨提供商测量研究，涵盖14个云QPU访问路径、12个物理QPU，提出QFC指标结合KL散度、射击次数和成本，并分析其稳定性。",
-        "成本感知排名可能不同于纯保真度评估；设备计费模型而非硬件决定分数随射击次数的缩放；排名在指标重新加权下稳定。"
+        "跨四个云访问路径测量量子电路执行保真度，提出结合KL散度、射击次数和货币成本的QFC指标，并分析其稳定性。",
+        "成本感知排名可能与纯保真度排名不同；排名在重新加权下稳定；设备的计费模式决定分数随射击次数的缩放。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1833,10 +1275,10 @@
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
       "question": "如何在异构计费模型下实现量子计算机的成本感知比较？",
-      "method": "跨提供商测量研究，涵盖14个云QPU访问路径、12个物理QPU，提出QFC指标结合KL散度、射击次数和成本，并分析其稳定性。",
-      "findings": "成本感知排名可能不同于纯保真度评估；设备计费模型而非硬件决定分数随射击次数的缩放；排名在指标重新加权下稳定。",
-      "limitations": "摘要未说明",
-      "score": 80,
+      "method": "跨四个云访问路径测量量子电路执行保真度，提出结合KL散度、射击次数和货币成本的QFC指标，并分析其稳定性。",
+      "findings": "成本感知排名可能与纯保真度排名不同；排名在重新加权下稳定；设备的计费模式决定分数随射击次数的缩放。",
+      "limitations": "报告的QFC值随新机器上线或价格修改而变化。",
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1847,9 +1289,9 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "量子计算",
+        "性能评估",
         "成本感知",
-        "保真度",
-        "云服务"
+        "云量子"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1865,79 +1307,16 @@
       ]
     },
     {
-      "id": "arxiv:2607.28556",
-      "contentType": "paper",
-      "title": "利用Tayler-Spruit发电机减缓中子星合并残骸的自转：全球模拟揭示大质量盘和富中子喷出物的形成",
-      "originalTitle": "Spinning down neutron-star merger remnants with the Tayler-Spruit dynamo: Global simulations reveal the formation of massive disks and neutron-rich ejecta",
-      "summary": "我们首次对中子星合并残骸进行全球长期广义相对论中微子辐射磁流体动力学模拟，纳入未解析的Tayler-Spruit发电机通过新的平均场发电机亚网格方案。结果显示发电机主要活跃于残骸核心高纬度区域，麦克斯韦应力在数百毫秒时间尺度上重新分配角动量，使核心旋转剖面变平，形成更庞大、延展且强磁化的盘，产生更多富中子喷出物。",
-      "abstract": "Magnetic-field amplification and angular momentum (AM) transport critically shape the secular evolution, lifetime, and electromagnetic signatures of binary neutron-star merger remnants. While the magnetorotational instability can operate in the outer negative-shear regions of the neutron-star remnant and accretion disk, the positive-shear, stably stratified core may instead be susceptible to the Tayler-Spruit dynamo. We present the first global, long-term general-relativistic neutrino-radiation magnetohydrodynamic…",
-      "keyFacts": [
-        "Tayler-Spruit发电机如何影响中子星合并残骸的旋转演化、盘形成和喷出物？",
-        "进行第一个全球长期广义相对论中微子辐射磁流体动力学模拟，通过新的平均场发电机亚网格方案纳入未解析的Tayler-Spruit发电机。",
-        "发电机主要活跃于高纬度区域，导致自转减缓、核心旋转剖面变平，形成更庞大、延展且强磁化的盘，产生更多富中子喷出物。"
-      ],
-      "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "天文与空间科学",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-30T17:22:50Z",
-      "updatedAt": "2026-07-30T17:22:50Z",
-      "url": "https://arxiv.org/abs/2607.28556v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.28556v1",
-      "authors": [
-        "Harry Ho-Yin Ng",
-        "Elias R. Most"
-      ],
-      "arxivCategories": [
-        "astro-ph.HE"
-      ],
-      "primaryCategory": "astro-ph.HE",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "Tayler-Spruit发电机如何影响中子星合并残骸的旋转演化、盘形成和喷出物？",
-      "method": "进行第一个全球长期广义相对论中微子辐射磁流体动力学模拟，通过新的平均场发电机亚网格方案纳入未解析的Tayler-Spruit发电机。",
-      "findings": "发电机主要活跃于高纬度区域，导致自转减缓、核心旋转剖面变平，形成更庞大、延展且强磁化的盘，产生更多富中子喷出物。",
-      "limitations": "摘要未说明",
-      "score": 80,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：天文与空间科学",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "中子星合并",
-        "Tayler-Spruit发电机",
-        "磁流体动力学",
-        "富中子喷出物"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.28556v1",
-          "publishedAt": "2026-07-30T17:22:50Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
       "id": "arxiv:2607.28554",
       "contentType": "paper",
       "title": "基于波函数的周期量子化学",
       "originalTitle": "Wavefunction-based periodic quantum chemistry",
-      "summary": "本文提供了周期量子化学计算的全面教学教程，涵盖平均场和相关理论。详细讨论周期库仑相互作用，重点介绍Ewald求和。描述平面波和周期性原子轨道线性组合两种基函数，给出所有哈密顿积分。解释k点采样、密度拟合等近似，提供Hartree-Fock、微扰理论和耦合簇理论的示例，并讨论有限尺寸误差和热力学极限收敛。",
+      "summary": "本文为周期量子化学计算提供了全面、教学式的教程，涵盖平均场和相关理论。详细讨论了周期库仑相互作用的微妙之处，重点介绍Ewald求和。描述了两种最流行的周期单电子基函数：平面波和周期线性组合原子轨道，并给出了所有哈密顿积分的公式。解释了k点采样作为超胞基函数对称性适配及其计算成本节省，以及密度拟合等近似。给出了几个示例方法的方程，包括Hartree-Fock、微扰理论和耦合簇理论，并讨论了有限尺寸误差和热力学极限收敛。最后简要讨论了局部关联和量子嵌入理论。",
       "abstract": "High-accuracy molecular quantum chemistry offers a promising toolbox for applications to condensed-phase systems, but this field is difficult to enter due to its combination of topics from molecular quantum chemistry, solid-state physics, and numerical methods. Aiming to ease this transition, we present a comprehensive, pedagogical tutorial on periodic quantum chemistry calculations, using both mean-field and correlated theories. The subtleties of periodic Coulomb interactions are discussed in detail, focusing on…",
       "keyFacts": [
-        "如何教学性地介绍基于波函数的周期量子化学方法及其数值实现？",
-        "教程式综述，涵盖平均场和相关理论，详细讨论Ewald求和、基函数、k点采样、密度拟合，并给出多种方法的工作方程。",
-        "提供了周期量子化学计算的完整教学框架，包括两种基函数、哈密顿积分、k点采样节省计算成本，以及有限尺寸误差讨论。"
+        "如何为物理学家和化学家提供周期量子化学计算的全面教学指南？",
+        "以教学方式介绍周期量子化学计算，包括库仑相互作用处理、基函数、k点采样、密度拟合、示例方法方程以及相关理论。",
+        "提供了周期超胞哈密顿积分的完整公式，Hartree-Fock、微扰和耦合簇方法的方程，并讨论了有限尺寸误差和收敛。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1959,11 +1338,11 @@
       "primaryCategory": "physics.chem-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何教学性地介绍基于波函数的周期量子化学方法及其数值实现？",
-      "method": "教程式综述，涵盖平均场和相关理论，详细讨论Ewald求和、基函数、k点采样、密度拟合，并给出多种方法的工作方程。",
-      "findings": "提供了周期量子化学计算的完整教学框架，包括两种基函数、哈密顿积分、k点采样节省计算成本，以及有限尺寸误差讨论。",
+      "question": "如何为物理学家和化学家提供周期量子化学计算的全面教学指南？",
+      "method": "以教学方式介绍周期量子化学计算，包括库仑相互作用处理、基函数、k点采样、密度拟合、示例方法方程以及相关理论。",
+      "findings": "提供了周期超胞哈密顿积分的完整公式，Hartree-Fock、微扰和耦合簇方法的方程，并讨论了有限尺寸误差和收敛。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1975,9 +1354,8 @@
       "tags": [
         "周期量子化学",
         "波函数方法",
-        "Ewald求和",
-        "Hartree-Fock",
-        "耦合簇"
+        "耦合簇",
+        "教程"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1995,14 +1373,14 @@
     {
       "id": "arxiv:2607.28548",
       "contentType": "paper",
-      "title": "量子计算实现的从头分子动力学模拟",
+      "title": "量子计算支持的从头分子动力学模拟",
       "originalTitle": "Quantum Computing Enabled ab initio Molecular Dynamics Simulations",
-      "summary": "我们展示了量子-经典工作流程，其中来自LUCJ拟设的量子测量通过样本量子对角化（SQD）后处理，恢复行列式子空间，提供能量和解析核梯度用于动力学。以STO-3G基组中的完全组态相互作用（FCI）为基准，SQD在气相和显式溶剂QM/MM模拟中再现FCI能量和梯度，误差在1 kcal/mol内，并保持稳定轨迹和溶剂结构。",
+      "summary": "我们展示了一种量子-经典工作流程，用于从头分子动力学（AIMD），其中化学启发的LUCJ试探波函数的量子测量通过基于样本的量子对角化（SQD）进行后处理，以恢复行列式子空间并提供用于动力学的能量和分析核梯度。在STO-3G基组中，SQD在1 kcal/mol内再现FCI能量和梯度，并产生稳定的AIMD轨迹。在显式溶剂QM/MM模拟中，SQD保持一致性，匹配FCI能量波动和RMS梯度分布，并再现径向分布函数。总体而言，这些基准确立了LUCJ+SQD作为将当前量子硬件集成到QM/MM分子动力学中的实用途径。",
       "abstract": "We demonstrate a quantum-classical workflow for ab initio molecular dynamics (AIMD) in which quantum measurements from a chemistry-inspired LUCJ ansatz are post-processed using Sample-based Quantum Diagonalization (SQD) to recover determinant subspaces and deliver energies and analytical nuclear gradients for dynamics. As an exact benchmark, we use full configuration interaction (FCI) in the STO-3G basis, enabling a direct assessment of the accuracy of SQD. In gas-phase benchmarks, SQD reproduces FCI energies and…",
       "keyFacts": [
-        "量子计算能否通过LUCJ+SQD方法实现精确的从头分子动力学模拟？",
-        "采用量子-经典工作流程，将LUCJ拟设的量子测量通过SQD后处理，获得能量和梯度用于动力学，以FCI为基准。",
-        "SQD在气相和QM/MM模拟中均复现FCI能量和梯度至1 kcal/mol内，轨迹稳定，并匹配径向分布函数。"
+        "如何利用当前量子硬件实现QM/MM分子动力学模拟中的量子电子结构计算？",
+        "采用量子-经典混合工作流程，使用LUCJ试探波函数和基于样本的量子对角化（SQD）后处理，并与全组态相互作用（FCI）基准比较。",
+        "SQD在STO-3G基组下能量和梯度误差均在1 kcal/mol以内，稳定AIMD轨迹；在QM/MM模拟中匹配FCI能量波动和RMS梯度，再现径向分布函数。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2029,11 +1407,11 @@
       "primaryCategory": "physics.chem-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "量子计算能否通过LUCJ+SQD方法实现精确的从头分子动力学模拟？",
-      "method": "采用量子-经典工作流程，将LUCJ拟设的量子测量通过SQD后处理，获得能量和梯度用于动力学，以FCI为基准。",
-      "findings": "SQD在气相和QM/MM模拟中均复现FCI能量和梯度至1 kcal/mol内，轨迹稳定，并匹配径向分布函数。",
+      "question": "如何利用当前量子硬件实现QM/MM分子动力学模拟中的量子电子结构计算？",
+      "method": "采用量子-经典混合工作流程，使用LUCJ试探波函数和基于样本的量子对角化（SQD）后处理，并与全组态相互作用（FCI）基准比较。",
+      "findings": "SQD在STO-3G基组下能量和梯度误差均在1 kcal/mol以内，稳定AIMD轨迹；在QM/MM模拟中匹配FCI能量波动和RMS梯度，再现径向分布函数。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2045,8 +1423,7 @@
       "tags": [
         "量子计算",
         "分子动力学",
-        "SQD",
-        "LUCJ"
+        "QM/MM"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2064,14 +1441,14 @@
     {
       "id": "arxiv:2607.28541",
       "contentType": "paper",
-      "title": "混合振荡器-量子比特处理器上非线性动力学的可证明无预言机量子算法",
+      "title": "混合振子-量子比特处理器上非线性动力学的可证明无神谕量子算法",
       "originalTitle": "A Provable Oracle-Free Quantum Algorithm for Nonlinear Dynamics on Hybrid Oscillator-Qubit Processors",
-      "summary": "我们提出一种混合量子比特-量子模式算法，用于求解具有L次多项式漂移的非线性常微分方程。通过Fokker-Planck途径和扭曲相位变换，将离散生成元转化为参数化的薛定谔方程族，并将傅里叶模式参数置于单个连续变量量子模式上。结构上，生成元的厄米部分允许双粒子泡利分解，排序为O(log N)个相互对易族，每族可分解为低度对角与固定秩二键算符的张量积，从而实现无Trotter误差的精确指数运算。电路成本为O(d^(L+1)n^(L+2))每Trotter步，无需稀疏访问预言机或块编码。我们还证明了数值横坐标的界，并通过两个非线性基准的经典模拟验证了结构定理和连续变量耦合的优势。",
+      "summary": "我们开发了一种混合量子比特-量子模算法，用于多项式漂移非线性常微分方程组。算法传播态密度，并在小噪声极限下返回确定性轨迹。离散生成器通过扭曲相位变换转化为参数化薛定谔方程族，其傅里叶模参数放置在连续变量量子模上。我们证明了哈密顿量H1和H2的双粒子泡利分解排序非零泡利串，并将每个族分解为可精确指数化的乘积。电路成本为O(d^{L+1}n^{L+2})每Trotter步，无需稀疏访问神谕或块编码。经典模拟证实了结构定理和性能优势。",
       "abstract": "We develop a hybrid qubit--qumode algorithm for nonlinear ordinary differential equations of the form $\\dot{\\mathbf{x}}=\\mathbf{f}(\\mathbf{x})$ with drift of polynomial degree~$L$. Following the Fokker--Planck route of Tennie and Magri, the algorithm propagates the state density and returns the deterministic trajectory as the peak of that density in the small-noise limit. The discretised generator is carried into a parametrised family of Schrödinger equations by the warped-phase transformation of Jin, Liu, and Yu…",
       "keyFacts": [
-        "如何在混合量子比特-量子模式处理器上高效模拟非线性动力学，避免预言机依赖？",
-        "采用Fokker-Planck途径和扭曲相位变换，将离散生成元映射为薛定谔方程族；利用泡利分解和对易族分解，实现精确的门分解。",
-        "证明生成元的厄米部分可分解为O(log N)个对易族，每族指数可精确实现为门序列；电路规模为O(d^(L+1)n^(L+2))每Trotter步；模拟验证了理论。"
+        "如何在混合振子-量子比特处理器上高效模拟非线性常微分方程，无需神谕？",
+        "采用Fokker-Planck路线、扭曲相位变换和连续变量量子模，通过Pauli分解和因子化实现无Trotter误差的指数形式。",
+        "实现了无Trotter误差的精确指数化，电路成本为O(d^{L+1}n^{L+2})，并在两个非线性基准上验证了结构定理和精度优势。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2093,11 +1470,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何在混合量子比特-量子模式处理器上高效模拟非线性动力学，避免预言机依赖？",
-      "method": "采用Fokker-Planck途径和扭曲相位变换，将离散生成元映射为薛定谔方程族；利用泡利分解和对易族分解，实现精确的门分解。",
-      "findings": "证明生成元的厄米部分可分解为O(log N)个对易族，每族指数可精确实现为门序列；电路规模为O(d^(L+1)n^(L+2))每Trotter步；模拟验证了理论。",
+      "question": "如何在混合振子-量子比特处理器上高效模拟非线性常微分方程，无需神谕？",
+      "method": "采用Fokker-Planck路线、扭曲相位变换和连续变量量子模，通过Pauli分解和因子化实现无Trotter误差的指数形式。",
+      "findings": "实现了无Trotter误差的精确指数化，电路成本为O(d^{L+1}n^{L+2})，并在两个非线性基准上验证了结构定理和精度优势。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2109,7 +1486,7 @@
       "tags": [
         "量子算法",
         "非线性动力学",
-        "混合计算"
+        "连续变量"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2125,83 +1502,16 @@
       ]
     },
     {
-      "id": "arxiv:2607.28539",
-      "contentType": "paper",
-      "title": "在LIGO-Virgo第三次观测运行期间搜索与IceCube探测到的高能中微子相关的引力波",
-      "originalTitle": "Search for gravitational waves associated with high-energy neutrinos detected by IceCube during the third observing run of LIGO-Virgo",
-      "summary": "我们搜索与IceCube中微子天文台在第三次观测运行（O3）期间探测到的高能中微子相关的引力波瞬变。我们采用非模型定向搜索，对弱于实时或目录中报告的引力波信号敏感，可发现典型中微子后续搜索遗漏的巧合。未发现统计显著的引力波信号，并为不同发射模型下的可能引力波源距离设定了下界。",
-      "abstract": "We search for generic gravitational-wave transients associated with high-energy neutrinos detected by the IceCube Neutrino Observatory during the third Observing Run (O3) of Advanced LIGO, Advanced Virgo, and KAGRA. We perform an unmodeled, targeted search, which is sensitive to gravitational-wave signals weaker than those reported in real time or in the gravitional-wave transient catalog, and can thus uncover coincidences missed by typical neutrino follow-up searches. We find no statistically significant gravitat…",
-      "keyFacts": [
-        "在LIGO-Virgo第三次观测运行期间，是否存在与IceCube探测到的高能中微子相关的引力波瞬变？",
-        "使用非模型定向搜索，寻找与中微子事件在时间和空间上一致的引力波瞬变。",
-        "未发现统计显著的引力波信号，并给出了可能的引力波源距离的下限。"
-      ],
-      "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "天文与空间科学",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-30T17:05:45Z",
-      "updatedAt": "2026-07-30T17:05:45Z",
-      "url": "https://arxiv.org/abs/2607.28539v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.28539v1",
-      "authors": [
-        "Matthias Vereecken",
-        "Matteo Pracchia",
-        "Kara Merfeld",
-        "Iara Tosta e Melo",
-        "Wasim Javed",
-        "Patrick Sutton"
-      ],
-      "arxivCategories": [
-        "astro-ph.HE",
-        "gr-qc"
-      ],
-      "primaryCategory": "astro-ph.HE",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "在LIGO-Virgo第三次观测运行期间，是否存在与IceCube探测到的高能中微子相关的引力波瞬变？",
-      "method": "使用非模型定向搜索，寻找与中微子事件在时间和空间上一致的引力波瞬变。",
-      "findings": "未发现统计显著的引力波信号，并给出了可能的引力波源距离的下限。",
-      "limitations": "摘要未说明",
-      "score": 80,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：天文与空间科学",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "引力波",
-        "中微子",
-        "多信使天文学"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.28539v1",
-          "publishedAt": "2026-07-30T17:05:45Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
       "id": "arxiv:2607.28536",
       "contentType": "paper",
-      "title": "当量子热态看起来经典时",
+      "title": "当量子热态看似经典时",
       "originalTitle": "When quantum thermal states look classical",
-      "summary": "在高温下，量子吉布斯态保留最大混合态的经典特征：无纠缠、无魔性、配分函数解析性、关联衰减和算法可操作性。我们证明了新的尖锐界，表明这些特征在独立于系统尺寸的有限温度下持续存在，但在不同的逆温度尺度下失效，形成经典到量子转变的层级。结果适用于长程泡利相互作用。我们解决了Rouze等人的开放问题，给出多项式时间经典算法制备吉布斯态直至纠缠死亡转变。此外，我们改进了分离温度界限，并解决了关联衰减猜想。",
+      "summary": "高温下量子吉布斯态保留经典特征：无纠缠、无魔法、配分函数解析、关联衰减和算法可处理性。我们证明了这些特征持续到与系统大小无关的有限温度，但在不同的逆温度尺度失效，形成经典到量子跃迁的层级。对于长程泡利相互作用，纠缠死亡发生在常数温度，解决了Rouze等人的开放问题。我们给出了多项式时间经典算法来制备吉布斯态直至纠缠死亡转变。在更冷温度，吉布斯态仍处于热力学无限温相，导致多项式经典估计算法和关联衰减猜想的解决。",
       "abstract": "At high temperature, quantum Gibbs states retain several classical features of the maximally mixed state: the absence of entanglement, the absence of magic, analyticity of the partition function, correlation decay, and algorithmic tractability. We prove new and sharp bounds showing that these features persist down to finite temperatures independent of system size, but fail at distinct inverse-temperature scales, forming a hierarchy of classical-to-quantum transitions. Our results hold for long-range Pauli interact…",
       "keyFacts": [
-        "量子热态在什么温度下失去经典特征？这些特征失效的温度尺度是否存在层级？",
-        "通过解析和数值方法研究长时间泡利相互作用的吉布斯态，建立各种经典特征的失效温度。",
-        "证明纠缠死亡发生在常数温度，经典算法可制备吉布斯态直至该转变；改进分离温度至紧致；解决关联衰减猜想。"
+        "量子吉布斯态的经典特征在什么温度下失效？如何有效制备和估计？",
+        "理论分析长程泡利相互作用下的吉布斯态，证明经典特征的温度尺度，并给出多项式时间经典算法。",
+        "纠缠死亡发生在常数温度，改进分离温度至紧，解决开放问题和关联衰减猜想，给出多项式时间经典算法。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2223,11 +1533,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "量子热态在什么温度下失去经典特征？这些特征失效的温度尺度是否存在层级？",
-      "method": "通过解析和数值方法研究长时间泡利相互作用的吉布斯态，建立各种经典特征的失效温度。",
-      "findings": "证明纠缠死亡发生在常数温度，经典算法可制备吉布斯态直至该转变；改进分离温度至紧致；解决关联衰减猜想。",
+      "question": "量子吉布斯态的经典特征在什么温度下失效？如何有效制备和估计？",
+      "method": "理论分析长程泡利相互作用下的吉布斯态，证明经典特征的温度尺度，并给出多项式时间经典算法。",
+      "findings": "纠缠死亡发生在常数温度，改进分离温度至紧，解决开放问题和关联衰减猜想，给出多项式时间经典算法。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2239,7 +1549,7 @@
       "tags": [
         "量子热态",
         "纠缠",
-        "经典模拟"
+        "经典算法"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2257,14 +1567,14 @@
     {
       "id": "arxiv:2607.28524",
       "contentType": "paper",
-      "title": "用量子信号处理实现精确手征对称性",
+      "title": "利用量子信号处理实现精确手征对称性",
       "originalTitle": "Exact chiral symmetry with quantum signal processing",
-      "summary": "我们给出一种量子信号处理（QSP）算法，用于重叠费米子哈密顿量，保持Ginsparg-Wilson关系至可控误差ε_e。因此，具有精确手征对称性的狄拉克费米子的量子模拟几乎免费：应用重叠哈密顿量的成本仅为Wilson-Dirac哈密顿量的对数因子。与域壁费米子相比，电路复杂度略有增加，但减少了量子比特成本。我们展示了QSP如何有效构建模拟重叠算符时的额外维度，反映了重叠费米子在域壁费米子边界出现的深层物理。",
+      "summary": "我们给出了重叠费米子哈密顿量的量子信号处理（QSP）算法，保持Ginsparg-Wilson关系到可控误差ε_e。量子模拟狄拉克费米子具有精确手征对称性几乎免费：应用重叠哈密顿量成本仅比Wilson-Dirac哈密顿量多对数因子ε_e。与畴壁费米子相比，电路复杂度有适度开销，但减少量子比特成本。我们展示了QSP如何有效地构造额外维度，说明量子算法的缩放反映重叠费米子在畴壁边界处的深层物理。",
       "abstract": "We give a quantum signal processing (QSP) algorithm for the overlap fermion Hamiltonian which preserves the Ginsparg-Wilson relation up to a controllable error $ε_e$. Quantum simulations of Dirac fermions with exact chiral symmetry are thus nearly free: applying the overlap Hamiltonian costs only a factor logarithmic in $ε_e$ more than the Wilson-Dirac Hamiltonian. Comparing to domain-wall fermions, a mild overhead is found in circuit complexity while reducing qubit costs. We show how QSP effectively constructs an…",
       "keyFacts": [
-        "如何在量子模拟中实现精确的手征对称性，且开销较小？",
-        "使用量子信号处理（QSP）构造重叠费米子哈密顿量，控制Ginsparg-Wilson关系的误差。",
-        "重叠哈密顿量的成本仅为Wilson-Dirac的log(1/ε_e)倍；与域壁费米子相比，量子比特成本更低，电路复杂度略高。"
+        "如何利用量子信号处理实现重叠费米子的精确手征对称性，同时降低量子资源成本？",
+        "使用量子信号处理算法构造重叠哈密顿量，控制Ginsparg-Wilson关系误差。",
+        "重叠哈密顿量应用成本仅多对数因子，减少量子比特成本，电路复杂度比畴壁费米子略高。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2289,11 +1599,11 @@
       "primaryCategory": "hep-lat",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何在量子模拟中实现精确的手征对称性，且开销较小？",
-      "method": "使用量子信号处理（QSP）构造重叠费米子哈密顿量，控制Ginsparg-Wilson关系的误差。",
-      "findings": "重叠哈密顿量的成本仅为Wilson-Dirac的log(1/ε_e)倍；与域壁费米子相比，量子比特成本更低，电路复杂度略高。",
+      "question": "如何利用量子信号处理实现重叠费米子的精确手征对称性，同时降低量子资源成本？",
+      "method": "使用量子信号处理算法构造重叠哈密顿量，控制Ginsparg-Wilson关系误差。",
+      "findings": "重叠哈密顿量应用成本仅多对数因子，减少量子比特成本，电路复杂度比畴壁费米子略高。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2303,9 +1613,9 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子模拟",
         "手征对称性",
-        "QSP"
+        "量子信号处理",
+        "格点场论"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2321,82 +1631,16 @@
       ]
     },
     {
-      "id": "arxiv:2607.28519",
-      "contentType": "paper",
-      "title": "同一次爆发，多种面孔：数值模拟揭示视角作为双星系统中核坍缩超新星多样性的驱动因素",
-      "originalTitle": "Same explosion, many faces: numerical modeling reveals viewing angle as a driver of diversity for core-collapse SNe in binary systems",
-      "summary": "核坍缩超新星（CCSNe）的可观测性质敏感依赖于前身星质量损失形成的星周物质（CSM）。由于大部分CCSNe前身星位于双星系统中，双星相互作用显著影响前身星结构和CSM。我们构建了稳定的Roche瓣溢流双星演化模型，初始主星质量固定为16M⊙，次星质量范围12-15M⊙，轨道周期大于500天。生成三维CSM结构，提取三视线方向的角依赖密度轮廓，并用辐射流体动力学代码计算多波段光变曲线。我们发现双星驱动的CSM高度非球形，导致光变曲线强烈依赖视角，峰值光度差异可达5倍，晚期B-V颜色变化约1.5星等。用一维框架解释会引入50%的爆炸性质偏差和200%以上的质量损失率偏差。",
-      "abstract": "Observable properties of core-collapse supernovae (CCSNe) depend sensitively on the circumstellar material (CSM) formed by pre-explosion mass loss from the progenitor star. Since a large fraction of CCSN progenitors reside in binaries, both the progenitor structure and surrounding CSM can be significantly impacted by binary interaction. Yet, its impact on the observed CCSN landscape remains poorly constrained. In this work, we investigate CCSNe from binary systems undergoing stable Roche lobe overflow. We construc…",
-      "keyFacts": [
-        "双星系统中的核坍缩超新星，其观测多样性是否受视角影响？",
-        "使用MESA构建双星演化模型，生成三维CSM结构，用Stella计算多波段光变曲线，并比较不同视角的观测性质。",
-        "双星驱动的CSM高度非球形，光变曲线峰值光度因视角不同差异5倍，颜色变化1.5星等；一维解释会引入显著偏差。"
-      ],
-      "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "天文与空间科学",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-30T16:57:33Z",
-      "updatedAt": "2026-07-30T16:57:33Z",
-      "url": "https://arxiv.org/abs/2607.28519v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.28519v1",
-      "authors": [
-        "Soham Mandal",
-        "Raphael Baer-way",
-        "Shazrene Mohamed",
-        "Irene Salmaso",
-        "Poonam Chandra",
-        "Maryam Modjaz"
-      ],
-      "arxivCategories": [
-        "astro-ph.HE"
-      ],
-      "primaryCategory": "astro-ph.HE",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "双星系统中的核坍缩超新星，其观测多样性是否受视角影响？",
-      "method": "使用MESA构建双星演化模型，生成三维CSM结构，用Stella计算多波段光变曲线，并比较不同视角的观测性质。",
-      "findings": "双星驱动的CSM高度非球形，光变曲线峰值光度因视角不同差异5倍，颜色变化1.5星等；一维解释会引入显著偏差。",
-      "limitations": "摘要未说明",
-      "score": 80,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：天文与空间科学",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "超新星",
-        "双星",
-        "数值模拟"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.28519v1",
-          "publishedAt": "2026-07-30T16:57:33Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
       "id": "arxiv:2607.28499",
       "contentType": "paper",
-      "title": "在离子阱处理器上保持结构的波动方程量子模拟",
+      "title": "在囚禁离子处理器上保结构量子模拟波动方程",
       "originalTitle": "Structure-Preserving Quantum Simulation of Wave Equations on a Trapped-Ion Processor",
-      "summary": "本研究在Quantinuum H2-2离子阱处理器上，开发并基准测试了基于傅里叶的保持结构的量子电路，用于一维和二维声学波动方程及变质量狄拉克动力学。实验涵盖多达1024点的一维网格和32x32的二维网格。通过直接估计子域动能，H2-2结果与经典动能动力学的平均绝对误差在5.9e-3到2.4e-2之间。编译门数随网格量子比特近似二次增长，声学电路大小基本独立于演化时间。",
+      "summary": "我们在Quantinuum H2-2囚禁离子处理器上开发和基准测试了基于傅里叶的保结构量子电路，用于一维和二维声波方程及变质量狄拉克动力学。实验包括至多1024点和32x32网格，编码态空间维度达4096。我们直接估计子域动能。所有测试中，H2-2结果跟踪经典动能动力学，平均绝对误差在5.9e-3和2.4e-2之间。编译门数随网格量子比特数近似二次增长；声学电路大小几乎与演化时间无关，而成本随乘积公式步骤增加。这些结果提供了当前器件上可解析数千编码自由度的证据。",
       "abstract": "Wave equations provide a natural testbed for near-term quantum simulation of partial differential equations, but hardware demonstrations have remained limited in spatial dimension, equation class, system size, and physically meaningful output. We develop and benchmark structure-preserving, Fourier-based quantum circuits for the one- and two dimensional acoustic wave equations and Dirac dynamics with variable mass on the Quantinuum H2-2 trapped-ion processor. The experiments include one-dimensional grids with up to…",
       "keyFacts": [
-        "在近期的离子阱处理器上，能否对大规模波动方程进行结构保持的量子模拟，并准确估计子域动能？",
-        "开发了保持结构、基于傅里叶的量子电路，用于一维和二维声学波动方程及变质量狄拉克动力学，并在Quantinuum H2-2处理器上运行，通过测量样本直接估计子域动能。",
-        "H2-2结果与经典动能动力学的平均绝对误差在5.9e-3至2.4e-2之间；编译门数随网格量子比特近似二次增长；声学电路大小几乎独立于演化时间，但狄拉克电路成本随乘积公式步数增加。"
+        "在囚禁离子处理器上如何保结构地模拟波动方程，并有效估计物理量？",
+        "使用基于傅里叶的保结构量子电路，在H2-2处理器上模拟声波和狄拉克动力学，直接估计动能。",
+        "H2-2结果跟踪经典动能，误差在5.9e-3至2.4e-2，门数随量子比特数二次增长。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2420,11 +1664,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "在近期的离子阱处理器上，能否对大规模波动方程进行结构保持的量子模拟，并准确估计子域动能？",
-      "method": "开发了保持结构、基于傅里叶的量子电路，用于一维和二维声学波动方程及变质量狄拉克动力学，并在Quantinuum H2-2处理器上运行，通过测量样本直接估计子域动能。",
-      "findings": "H2-2结果与经典动能动力学的平均绝对误差在5.9e-3至2.4e-2之间；编译门数随网格量子比特近似二次增长；声学电路大小几乎独立于演化时间，但狄拉克电路成本随乘积公式步数增加。",
+      "question": "在囚禁离子处理器上如何保结构地模拟波动方程，并有效估计物理量？",
+      "method": "使用基于傅里叶的保结构量子电路，在H2-2处理器上模拟声波和狄拉克动力学，直接估计动能。",
+      "findings": "H2-2结果跟踪经典动能，误差在5.9e-3至2.4e-2，门数随量子比特数二次增长。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2435,8 +1679,8 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "量子模拟",
-        "离子阱",
-        "波动方程"
+        "波动方程",
+        "囚禁离子"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2454,14 +1698,14 @@
     {
       "id": "arxiv:2607.28493",
       "contentType": "paper",
-      "title": "通过级联微环谐振器产生宽带光学压缩",
+      "title": "基于级联微环谐振器的宽带光学压缩产生",
       "originalTitle": "Generating broadband optical squeezing via Cascaded Micro-Ring Resonators",
-      "summary": "我们提出一种可扩展方案，利用耦合到公共总线波导的级联参量微环谐振器产生宽带压缩真空。在真实腔内泵浦衰减下，我们分析了输出并确定产生宽平坦压缩谱的条件。该架构对制造缺陷具有鲁棒性。平坦谱收敛到马尔可夫极限的速度远快于单腔洛伦兹型。仅5个耦合谐振器、内在损耗比0.1时，所需带宽仅为单腔的四分之一，从而放松了低Q值和高增益约束。",
+      "summary": "提出一种可扩展方案，通过耦合到公共总线波导的参量微环谐振器级联产生宽带压缩真空。分析输出，确定产生平坦压缩谱的条件，并证明架构对制造缺陷具有鲁棒性。平坦谱比单腔洛伦兹谱更快收敛到马尔可夫极限，N=5个谐振器即可将所需带宽减至四分之一。",
       "abstract": "Broadband squeezed light functioning as a Markovian reservoir can exponentially enhance light-matter interactions, benefiting quantum technologies. However, conventional single-cavity sources face a trade-off between squeezing depth and spectral bandwidth. We propose a scalable scheme for generating broadband squeezed vacuum using a cascade of parametric microring resonators coupled to a common bus waveguide. By analyzing the output, we identify the specific conditions that yield a broad, flat-topped squeezing spe…",
       "keyFacts": [
-        "如何利用级联微环谐振器产生宽带平坦的光学压缩光谱，并克服单腔源在压缩深度和带宽之间的权衡？",
-        "提出级联参量微环谐振器耦合到公共总线波导的方案，通过分析输出确定产生宽平坦压缩谱的条件，并模拟了真实损耗和制造缺陷的影响。",
-        "级联架构在真实条件下可产生宽带平坦压缩谱，对制造缺陷鲁棒；平坦谱收敛到马尔可夫极限速度远快于单腔；N=5且κ_I/κ=0.1时，所需带宽仅为单腔的四分之一。"
+        "如何克服传统单腔压缩源在压缩深度和频谱带宽之间的权衡？",
+        "提出一种级联参量微环谐振器耦合到公共总线波导的可扩展方案，分析输出并确定平坦压缩谱的条件，并进行数值模拟。",
+        "该架构对制造缺陷具有鲁棒性；平坦谱收敛到马尔可夫极限比单腔洛伦兹谱快得多；N=5个谐振器且固有损耗比κ_I/κ=0.1时，所需带宽仅为单腔的四分之一。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2482,11 +1726,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何利用级联微环谐振器产生宽带平坦的光学压缩光谱，并克服单腔源在压缩深度和带宽之间的权衡？",
-      "method": "提出级联参量微环谐振器耦合到公共总线波导的方案，通过分析输出确定产生宽平坦压缩谱的条件，并模拟了真实损耗和制造缺陷的影响。",
-      "findings": "级联架构在真实条件下可产生宽带平坦压缩谱，对制造缺陷鲁棒；平坦谱收敛到马尔可夫极限速度远快于单腔；N=5且κ_I/κ=0.1时，所需带宽仅为单腔的四分之一。",
+      "question": "如何克服传统单腔压缩源在压缩深度和频谱带宽之间的权衡？",
+      "method": "提出一种级联参量微环谐振器耦合到公共总线波导的可扩展方案，分析输出并确定平坦压缩谱的条件，并进行数值模拟。",
+      "findings": "该架构对制造缺陷具有鲁棒性；平坦谱收敛到马尔可夫极限比单腔洛伦兹谱快得多；N=5个谐振器且固有损耗比κ_I/κ=0.1时，所需带宽仅为单腔的四分之一。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2498,7 +1742,8 @@
       "tags": [
         "量子光学",
         "压缩光",
-        "微环谐振器"
+        "微环谐振器",
+        "集成光子学"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2516,14 +1761,14 @@
     {
       "id": "arxiv:2607.28486",
       "contentType": "paper",
-      "title": "量子处理器上有限温度下的Hayden-Preskill恢复：来自SYK模型的动力学和初态",
+      "title": "Hayden--Preskill恢复在量子处理器上的有限温度动力学：来自SYK模型的动力学和初态",
       "originalTitle": "Hayden--Preskill recovery at finite temperature on a quantum processor: dynamics and initial state from the SYK model",
-      "summary": "我们扩展Hayden-Preskill恢复协议，使用SWAP门使 scrambler 和初态相关，并考虑有限温度恢复。我们证明在该修改协议下，信息成功恢复，后选择概率和条件保真度都与温度成正比。我们还推导了在均匀算子扩散假设下的晚期时间解析估计，与数值结果吻合。在IBM超导处理器上使用N=8 Majorana二元稀疏SYK哈密顿量实现，观察到数据保留定性恢复动力学，SWAP基错误缓解方案改善了结果。",
+      "summary": "通过使用SWAP门使加扰器和初态相关，并考虑有限温度，扩展了Hayden-Preskill恢复协议。证明信息可成功恢复，后选择概率和条件保真度都随温度成正比。推导了晚时解析估计，并在IBM超导处理器上用N=8马约拉纳的稀疏SYK哈密顿量实现，SWAP误差缓解改善了恢复。",
       "abstract": "In the original Hayden--Preskill recovery, the post-injection scrambler and initial state are {\\it not related}. We extend this setup in two ways: by using a SWAP gate so that the scrambler and initial state are {\\it related}, and by considering recovery at {\\it finite} temperature. For this modified protocol, we show that the information is successfully recovered in the sense that the postselection probability is non-negligible and the conditional fidelity is large. We find that both the postselection probability…",
       "keyFacts": [
-        "在有限温度下，通过SWAP门关联 scrambler 和初态，Hayden-Preskill恢复协议的性能如何？",
-        "修改原始协议，使用SWAP门关联 scrambler 和初态，并考虑有限温度，推导后选择概率和条件保真度的解析估计，并在IBM处理器上实现。",
-        "信息成功恢复，后选择概率和条件保真度与温度成正比；晚期时间解析估计与数值吻合；SWAP基错误缓解改善了后选择概率和条件保真度。"
+        "在有限温度下，当加扰器和初态相关时，信息能否成功恢复？",
+        "修改协议使用SWAP门使加扰器和初态相关，并考虑有限温度，推导后选择概率和条件保真度的解析估计，并在IBM超导处理器上实现。",
+        "信息恢复成功，后选择概率和条件保真度与温度成正比；解析估计与数值结果一致；实验数据保留定性恢复动力学，SWAP误差缓解改进性能。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2548,11 +1793,11 @@
       "primaryCategory": "hep-th",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "在有限温度下，通过SWAP门关联 scrambler 和初态，Hayden-Preskill恢复协议的性能如何？",
-      "method": "修改原始协议，使用SWAP门关联 scrambler 和初态，并考虑有限温度，推导后选择概率和条件保真度的解析估计，并在IBM处理器上实现。",
-      "findings": "信息成功恢复，后选择概率和条件保真度与温度成正比；晚期时间解析估计与数值吻合；SWAP基错误缓解改善了后选择概率和条件保真度。",
+      "question": "在有限温度下，当加扰器和初态相关时，信息能否成功恢复？",
+      "method": "修改协议使用SWAP门使加扰器和初态相关，并考虑有限温度，推导后选择概率和条件保真度的解析估计，并在IBM超导处理器上实现。",
+      "findings": "信息恢复成功，后选择概率和条件保真度与温度成正比；解析估计与数值结果一致；实验数据保留定性恢复动力学，SWAP误差缓解改进性能。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2563,6 +1808,7 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "量子信息",
+        "Hayden-Preskill",
         "SYK模型",
         "量子处理器"
       ],
@@ -2584,12 +1830,12 @@
       "contentType": "paper",
       "title": "器件耦合单T中心的光学线宽窄化",
       "originalTitle": "Optical linewidth narrowing for device-coupled single T centers",
-      "summary": "单T中心在硅中作为有前景的光学活性自旋，但其宽光学线宽阻碍了进步。我们利用激光扫描显微镜通过带隙以上光学激发，实现了器件耦合单T中心高达70%的线宽窄化，归因于光生自由载流子填充附近电荷陷阱。我们分析了电荷稳定动力学，发展了速率方程模型。这项工作为控制和减少单T中心光学线宽提供了有效途径。",
+      "summary": "利用激光扫描显微镜的带隙以上光激发器件耦合的单T中心，实现高达70%的光学线宽窄化。将窄化效应归因于光生自由载流子填充附近电荷陷阱。通过脉冲带隙以上激发分析电荷稳定动力学，并建立速率方程模型。",
       "abstract": "Single T centers in silicon have emerged as promising optically active spins for quantum networking applications. One of the major obstacles to advancing the system is their broad optical linewidth due to spectral diffusion, which is two orders of magnitude larger than their cavity-enhanced radiative linewidth. We tackle this issue by utilizing above-band optical excitation delivered via a laser scanning microscope to device-coupled single T centers, achieving up to 70% optical linewidth reduction. We attribute th…",
       "keyFacts": [
-        "如何减少硅中器件耦合单T中心的光学线宽，克服光谱扩散问题？",
-        "使用激光扫描显微镜进行带隙以上光学激发，分析线宽窄化效应，并利用脉冲激发和速率方程模型研究电荷稳定动力学。",
-        "实现了高达70%的光学线宽窄化，归因于光生载流子填充电荷陷阱；速率方程模型解释了线宽窄化和中心偏移。"
+        "如何减少硅中单T中心因光谱扩散导致的光学线宽？",
+        "使用激光扫描显微镜提供带隙以上光激发，结合脉冲激发和速率方程模型分析电荷稳定动力学。",
+        "带隙以上光激发实现高达70%的线宽窄化，窄化归因于光生自由载流子填充电荷陷阱。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2613,11 +1859,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何减少硅中器件耦合单T中心的光学线宽，克服光谱扩散问题？",
-      "method": "使用激光扫描显微镜进行带隙以上光学激发，分析线宽窄化效应，并利用脉冲激发和速率方程模型研究电荷稳定动力学。",
-      "findings": "实现了高达70%的光学线宽窄化，归因于光生载流子填充电荷陷阱；速率方程模型解释了线宽窄化和中心偏移。",
+      "question": "如何减少硅中单T中心因光谱扩散导致的光学线宽？",
+      "method": "使用激光扫描显微镜提供带隙以上光激发，结合脉冲激发和速率方程模型分析电荷稳定动力学。",
+      "findings": "带隙以上光激发实现高达70%的线宽窄化，窄化归因于光生自由载流子填充电荷陷阱。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2627,9 +1873,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子点",
-        "硅",
-        "光学线宽"
+        "T中心",
+        "光学线宽",
+        "电荷陷阱",
+        "量子网络"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2649,12 +1896,12 @@
       "contentType": "paper",
       "title": "通过全局最优控制减轻量子退相干",
       "originalTitle": "Mitigating quantum decoherence via global optimal control",
-      "summary": "我们表明，全局最优控制能显著抑制全局驱动的超导量子计算架构中退相干的影响，以准二维梯子几何为原型。使用基于张量网络的方法，我们量化了振幅阻尼和退相干通道对量子信息流和门保真度的退化。我们证明，塑形全局驱动可将门序列压缩一个数量级，恢复高保真度。这种缓解并非微不足道，因为耗散作用于所有物理量子比特，只能通过全局驱动的时间塑形来克服。",
+      "summary": "证明全局最优控制可以显著抑制全局驱动超导量子计算架构中退相干的影响，以准二维梯形几何为原型。使用张量网络方法量化振幅阻尼和退相通道对信息流和门保真度的影响，并表明整形全局驱动可将门序列时间压缩一个数量级，恢复高保真度。",
       "abstract": "We show that global optimal control can drastically suppress the impact of decoherence in globally driven superconducting quantum computing architectures, taking as a prototype a recently proposed quasi-two-dimensional ladder geometry. Using a tensor-network-based approach, we quantify how amplitude-damping and dephasing channels degrade the flow of quantum information along the ladder and the fidelity of one- and two-qubit gate operations. We then demonstrate that shaping the global drive compresses the gate sequ…",
       "keyFacts": [
-        "全局最优控制能否有效抑制全局驱动的超导量子处理器中的退相干效应？",
-        "采用张量网络方法模拟量子信息流和门操作，量化退相干影响，并通过全局驱动的时间塑形来压缩门序列。",
-        "全局驱动塑形将门序列压缩一个数量级，恢复高门保真度，证明时间塑形能克服全局耗散的影响。"
+        "全局最优控制能否抑制全局驱动的超导量子计算架构中的退相干影响？",
+        "使用张量网络方法量化退相干影响，并整形全局驱动以压缩门序列。",
+        "全局最优控制将门序列压缩一个数量级，恢复高门保真度，纯通过全局驱动的时间整形实现。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2680,11 +1927,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "全局最优控制能否有效抑制全局驱动的超导量子处理器中的退相干效应？",
-      "method": "采用张量网络方法模拟量子信息流和门操作，量化退相干影响，并通过全局驱动的时间塑形来压缩门序列。",
-      "findings": "全局驱动塑形将门序列压缩一个数量级，恢复高门保真度，证明时间塑形能克服全局耗散的影响。",
+      "question": "全局最优控制能否抑制全局驱动的超导量子计算架构中的退相干影响？",
+      "method": "使用张量网络方法量化退相干影响，并整形全局驱动以压缩门序列。",
+      "findings": "全局最优控制将门序列压缩一个数量级，恢复高门保真度，纯通过全局驱动的时间整形实现。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2696,7 +1943,8 @@
       "tags": [
         "量子控制",
         "退相干",
-        "超导量子计算"
+        "超导量子计算",
+        "张量网络"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2712,220 +1960,16 @@
       ]
     },
     {
-      "id": "arxiv:2607.28475",
-      "contentType": "paper",
-      "title": "DB-Bench：利用混合工具包对LSST DESC的去混合器进行基准测试",
-      "originalTitle": "DB-Bench: Benchmarking Deblenders for LSST DESC Using the Blending ToolKit",
-      "summary": "混合是LSST数据下游科学分析中系统不确定性的主要来源。我们利用混合工具包（BTK）对几种去混合器进行严格的端到端测试，包括SourceExtractor、SCARLET和DeepDISC。重点表征未识别混合（多个星系被误认为单一物体）的性能，因为这些情况会引入系统偏差。我们发现SCARLET在分割和重构方面表现优异，DeepDISC对微弱和低信噪比源的检测召回率强，而SourceExtractor峰值查找准确但分割和重构性能低。",
-      "abstract": "Blending will be a major source of systematic uncertainty in downstream science analyses of LSST data. We benchmark the performance of several deblenders, leveraging the Blending ToolKit (BTK) to perform rigorous, end-to-end testing. This benchmark incorporates key deblending algorithms, including SourceExtractor, SCARLET, and DeepDISC, with the goal of comparing their effectiveness in handling blended galaxy images from LSST/Rubin simulations. A key focus is characterizing algorithm performance in the regime of u…",
-      "keyFacts": [
-        "在LSST/Rubin模拟中，不同去混合器（SourceExtractor、SCARLET、DeepDISC）在处理混合星系图像时的性能如何，特别是在未识别混合的机制下？",
-        "利用混合工具包（BTK）创建可定制的混合，系统测试不同混合条件（如源分离度和亮度），使用标准化评估指标（检测精度、分割精度、源重构）比较算法性能。",
-        "SCARLET具有高分割和重构性能；DeepDISC对微弱和低信噪比源有强检测召回率；SourceExtractor峰值查找准确但分割和重构性能低。"
-      ],
-      "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "天文与空间科学",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-30T16:28:19Z",
-      "updatedAt": "2026-07-30T16:28:19Z",
-      "url": "https://arxiv.org/abs/2607.28475v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.28475v1",
-      "authors": [
-        "Aidan Berres",
-        "Grant Merz",
-        "Xin Liu",
-        "the LSST Dark Energy Science Collaboration"
-      ],
-      "arxivCategories": [
-        "astro-ph.IM"
-      ],
-      "primaryCategory": "astro-ph.IM",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "在LSST/Rubin模拟中，不同去混合器（SourceExtractor、SCARLET、DeepDISC）在处理混合星系图像时的性能如何，特别是在未识别混合的机制下？",
-      "method": "利用混合工具包（BTK）创建可定制的混合，系统测试不同混合条件（如源分离度和亮度），使用标准化评估指标（检测精度、分割精度、源重构）比较算法性能。",
-      "findings": "SCARLET具有高分割和重构性能；DeepDISC对微弱和低信噪比源有强检测召回率；SourceExtractor峰值查找准确但分割和重构性能低。",
-      "limitations": "摘要未说明",
-      "score": 80,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：天文与空间科学",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "去混合",
-        "LSST",
-        "基准测试",
-        "星系混合"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.28475v1",
-          "publishedAt": "2026-07-30T16:28:19Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
-      "id": "arxiv:2607.28473",
-      "contentType": "paper",
-      "title": "位置不确定天体物理源对应体搜索的统计处理：从流量上限到探测",
-      "originalTitle": "Statistical treatment of searches for counterparts of positionally-uncertain astrophysical sources: from flux upper limits to detection",
-      "summary": "多信使和多波长天体物理学的快速增长导致使用不同点扩展函数的仪器对同一事件进行观测。当没有明确探测到源对应体时，解释结果需要统计分析。我们研究了两种使用警报概率密度函数的方法（频率论和贝叶斯）以及不使用此信息的不可知方法。我们讨论了所有方法的优点和问题，并比较了可靠性和性能。考虑了一维玩具模拟和引力波事件跟进的完整模拟。弱信号下频率论和贝叶斯方法性能相当且优于不可知方法。",
-      "abstract": "Rapid growth of the multimessenger and multiwavelength astrophysics had led to an increasing number of observations of the same events with instruments with different point spread functions. In particular pointing instruments with good angular resolution are used to pin-point the source of poorly-localized alert. In case no clear detection of the source counterpart is reached, the interpretation of the results requires statistical analysis. We investigate two approaches using the probability density function of th…",
-      "keyFacts": [
-        "在搜索位置不确定天体物理源的对应体时，频率论、贝叶斯和不可知统计方法在可靠性和性能方面的比较如何？",
-        "使用警报概率密度函数进行频率论和贝叶斯分析，并与不使用该信息的不可知方法比较；通过一维玩具模拟和引力波事件跟进的全模拟评估。",
-        "对于弱信号，频率论和贝叶斯方法的性能相当，且优于不可知方法。"
-      ],
-      "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "天文与空间科学",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-30T16:26:53Z",
-      "updatedAt": "2026-07-30T16:26:53Z",
-      "url": "https://arxiv.org/abs/2607.28473v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.28473v1",
-      "authors": [
-        "Julian Sitarek",
-        "Abelardo Moralejo",
-        "Juan Jiménez Quiles",
-        "Giacomo D'Amico",
-        "Andrea Simongini",
-        "Antonio Stamerra"
-      ],
-      "arxivCategories": [
-        "astro-ph.IM"
-      ],
-      "primaryCategory": "astro-ph.IM",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "在搜索位置不确定天体物理源的对应体时，频率论、贝叶斯和不可知统计方法在可靠性和性能方面的比较如何？",
-      "method": "使用警报概率密度函数进行频率论和贝叶斯分析，并与不使用该信息的不可知方法比较；通过一维玩具模拟和引力波事件跟进的全模拟评估。",
-      "findings": "对于弱信号，频率论和贝叶斯方法的性能相当，且优于不可知方法。",
-      "limitations": "摘要未说明",
-      "score": 80,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：天文与空间科学",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "统计方法",
-        "多信使",
-        "对应体搜索",
-        "频率论",
-        "贝叶斯"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.28473v1",
-          "publishedAt": "2026-07-30T16:26:53Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
-      "id": "arxiv:2607.28445",
-      "contentType": "paper",
-      "title": "暴胀、开放宇宙与暗能量",
-      "originalTitle": "Inflation, Open Universes, and Dark Energy",
-      "summary": "我们利用CMB数据集（Planck、SPT、ACT）和DESI光谱星系样本（包括BAO和全形状聚类）研究空间曲率（Ω_k）和动态暗能量（w0, wa）对谱指数n_s的影响。我们发现小的负曲率Ω_k≈3×10^-3降低n_s，使其更接近Starobinsky、Higgs和最简单α吸引子模型的预测。结合DESI数据得到n_s=0.9667±0.0041，加入ACT和SPT得到0.9692±0.0035。允许随时间演化的暗能量也降低谱指数。结果表明当前数据与这些暴胀模型的张力仅在ΛCDM中成立，可在扩展宇宙学模型中缓解。",
-      "abstract": "We study the impact of spatial curvature ($Ω_k$) and dynamical dark energy (parametrized by $w_0$ and $w_a$) on the spectral index $n_s$ using a combination of cosmic microwave background datasets (Planck, SPT, and ACT), and spectroscopic galaxy samples from DESI, including both BAO and full-shape clustering measurements. We show that a small negative curvature, $Ω_k\\simeq 3\\times 10^{-3}$, lowers the value of $n_s$, bringing it closer to predictions of the Starobinsky, Higgs, and simplest $α$-attractor inflationa…",
-      "keyFacts": [
-        "空间曲率和动态暗能量如何影响谱指数n_s，以及它们能否缓解当前观测数据与Starobinsky、Higgs和α吸引子暴胀模型之间的张力？",
-        "使用CMB数据集（Planck、SPT、ACT）和DESI星系样本（BAO和全形状聚类）进行宇宙学参数估计，考虑曲率和动态暗能量参数化。",
-        "小的负曲率或动态暗能量降低n_s，使其更接近暴胀模型预测，缓解了张力。具体数值：n_s=0.9667±0.0041（Planck+DESI），0.9692±0.0035（加ACT和SPT），动态暗能量下0.9716±0.0032，组合曲率下0.9694±0.0035。"
-      ],
-      "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "天文与空间科学",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-30T16:16:22Z",
-      "updatedAt": "2026-07-30T16:16:22Z",
-      "url": "https://arxiv.org/abs/2607.28445v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.28445v1",
-      "authors": [
-        "Anton Chudaykin",
-        "Mikhail M. Ivanov",
-        "Renata Kallosh",
-        "Andrei Linde",
-        "Oliver H. E. Philcox",
-        "Yusuke Yamada"
-      ],
-      "arxivCategories": [
-        "astro-ph.CO",
-        "gr-qc",
-        "hep-ph",
-        "hep-th"
-      ],
-      "primaryCategory": "astro-ph.CO",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "空间曲率和动态暗能量如何影响谱指数n_s，以及它们能否缓解当前观测数据与Starobinsky、Higgs和α吸引子暴胀模型之间的张力？",
-      "method": "使用CMB数据集（Planck、SPT、ACT）和DESI星系样本（BAO和全形状聚类）进行宇宙学参数估计，考虑曲率和动态暗能量参数化。",
-      "findings": "小的负曲率或动态暗能量降低n_s，使其更接近暴胀模型预测，缓解了张力。具体数值：n_s=0.9667±0.0041（Planck+DESI），0.9692±0.0035（加ACT和SPT），动态暗能量下0.9716±0.0032，组合曲率下0.9694±0.0035。",
-      "limitations": "摘要未说明",
-      "score": 80,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：天文与空间科学",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "暴胀",
-        "暗能量",
-        "曲率",
-        "谱指数",
-        "宇宙学"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.28445v1",
-          "publishedAt": "2026-07-30T16:16:22Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
       "id": "arxiv:2607.28435",
       "contentType": "paper",
-      "title": "经典张量网络与量子傅里叶变换方法用于大规模Carr-Madan期权定价",
+      "title": "经典张量网络和量子傅里叶变换在大规模Carr-Madan期权定价中的应用",
       "originalTitle": "Classical Tensor Network and Quantum Fourier Transform Approaches for Large-Scale Carr-Madan Option Pricing",
-      "summary": "傅里叶方法是欧式期权定价的广泛技术，但经典傅里叶变换的内存需求随离散化增长迅速成为瓶颈。我们通过张量网络重新表述Carr-Madan定价框架，使用超快速傅里叶变换（SFFT）——量子傅里叶变换（QFT）的压缩张量列表示，直接应用于张量化期权定价，避免显式构造指数级向量。数值实验表明SFFT保持定价精度，同时大幅降低内存需求，实现亚指数计算扩展。量子模拟和硬件执行展示了经典张量网络与QFT量子方法的互补性，两者都避免指数扩展。",
+      "summary": "利用张量网络改革Carr-Madan定价框架，使用超快傅里叶变换（SFFT，即量子傅里叶变换的压缩张量训练表示）直接应用于张量化期权定价，避免构造指数大小的向量。数值实验表明SFFT保持定价精度，显著减少内存需求并实现亚指数计算缩放。量子模拟和硬件执行比较了经典和量子方法。",
       "abstract": "Fourier-based methods are among the most widely used techniques for pricing European options when the characteristic function of the underlying asset process is available. Their applicability to increasingly fine discretizations, however, is limited by the rapidly growing memory requirements of classical Fourier transforms, which become a computational bottleneck for large-scale pricing problems. In this work, we overcome this limitation by reformulating the Carr-Madan pricing framework using tensor networks. Spec…",
       "keyFacts": [
-        "如何利用张量网络和量子傅里叶变换克服大规模Carr-Madan期权定价中经典傅里叶变换的内存瓶颈，并实现亚指数计算复杂度？",
-        "使用张量列表示的超级快速傅里叶变换（SFFT）直接应用于张量化期权定价，并与量子傅里叶变换（QFT）在量子模拟器和硬件上进行比较。",
-        "SFFT方法在保持定价精度的同时大幅减少内存需求，实现亚指数计算缩放；经典和量子方法均避免指数扩展，提供了互补视角。"
+        "如何克服经典傅里叶变换在大规模期权定价中的内存和计算瓶颈？",
+        "使用张量网络中的超快傅里叶变换（SFFT）直接将QFT的压缩张量训练表示应用于Carr-Madan框架。",
+        "SFFT保持定价精度，显著减少内存需求，实现亚指数计算缩放；经典和量子方法均避免指数缩放。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2946,11 +1990,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何利用张量网络和量子傅里叶变换克服大规模Carr-Madan期权定价中经典傅里叶变换的内存瓶颈，并实现亚指数计算复杂度？",
-      "method": "使用张量列表示的超级快速傅里叶变换（SFFT）直接应用于张量化期权定价，并与量子傅里叶变换（QFT）在量子模拟器和硬件上进行比较。",
-      "findings": "SFFT方法在保持定价精度的同时大幅减少内存需求，实现亚指数计算缩放；经典和量子方法均避免指数扩展，提供了互补视角。",
+      "question": "如何克服经典傅里叶变换在大规模期权定价中的内存和计算瓶颈？",
+      "method": "使用张量网络中的超快傅里叶变换（SFFT）直接将QFT的压缩张量训练表示应用于Carr-Madan框架。",
+      "findings": "SFFT保持定价精度，显著减少内存需求，实现亚指数计算缩放；经典和量子方法均避免指数缩放。",
       "limitations": "摘要未说明",
-      "score": 80,
+      "score": 76,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2963,7 +2007,7 @@
         "期权定价",
         "张量网络",
         "量子傅里叶变换",
-        "Carr-Madan"
+        "超快傅里叶变换"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2983,12 +2027,12 @@
       "contentType": "paper",
       "title": "外延和多晶Bi及Bi/Ag层中的电荷-自旋转换",
       "originalTitle": "Charge-to-spin conversion in epitaxial and polycrystalline Bi and Bi/Ag layers",
-      "summary": "铋（Bi）被预测为自旋轨道力矩（SOT）的高效产生器，但实验报道的转换效率分散，Bi/Ag双层中巨大转换信号的起源仍有争议。我们通过磁光克尔效应磁强计测量阻尼类SOT，结合结构和光谱分析以及谐波霍尔电阻测量，研究外延和多晶Bi基磁性异质结构中的电荷-自旋转换。我们发现Bi(001)与金属铁磁体（FeCo或Ni）之间插入Ag间隔层可将SOT效率提高一个数量级以上，有效自旋霍耳电导率约2×10^5 (ħ/2e) S/m，与块体Bi理论预期一致。这种增强可归因于保持Bi的结构和化学完整性，而非界面Rashba效应。比较外延、多晶和表面氧化Bi薄膜表明结构无序对SOT效率有负面影响，表明块体贡献主导。有效Bi自旋霍尔角约1。该研究提供了改进Bi基SOT器件可靠性的设计原则。",
+      "summary": "研究了外延和多晶Bi基磁性异质结构中的电荷-自旋转换。发现插入Ag间隔层可显著增强自旋轨道转矩效率，有效自旋霍尔电导率约为2×10^5 (ℏ/2e) S/m，与体Bi理论预期一致。对比研究表明，结构无序对转换效率有负面影响，表明体贡献占主导，有效自旋霍尔角约为1。",
       "abstract": "Bi is predicted to be an efficient generator of spin-orbit torques (SOTs), with charge-to-spin conversion efficiency comparable to those of prototypical heavy metals, such as Ta, W, and Pt. However, experimental reports provide widely scattered interconversion efficiencies, while the origin of the large conversion signal in Bi/Ag bilayers remains controversial. Here, we investigate charge-to-spin conversion in epitaxial and polycrystalline Bi-based magnetic heterostructures by measuring the damping-like SOT using…",
       "keyFacts": [
-        "在Bi基磁性异质结构中，Bi/Ag层如何实现高电荷-自旋转换效率，其物理机制是什么？",
-        "通过磁光克尔效应磁强计测量阻尼类SOT，结合结构、光谱分析和谐波霍尔电阻测量，比较外延、多晶和表面氧化Bi薄膜。",
-        "Ag间隔层将SOT效率提高一个数量级以上，有效自旋霍耳电导率约2×10^5 (ħ/2e) S/m，归因于保持Bi的完整性而非界面Rashba效应；结构无序降低SOT效率，表明块体贡献主导，有效Bi自旋霍尔角约1。"
+        "Bi/Ag双层中电荷-自旋转换效率的起源及其与结构完整性的关系是什么？",
+        "通过磁光克尔效应磁力测量阻尼类自旋轨道转矩，辅以结构和光谱分析及谐波霍尔电阻测量。",
+        "Ag间隔层将SOT效率提高一个多数量级，有效自旋霍尔电导率约2×10^5 (ℏ/2e) S/m，结构无序降低效率，体贡献主导。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3020,11 +2064,11 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "在Bi基磁性异质结构中，Bi/Ag层如何实现高电荷-自旋转换效率，其物理机制是什么？",
-      "method": "通过磁光克尔效应磁强计测量阻尼类SOT，结合结构、光谱分析和谐波霍尔电阻测量，比较外延、多晶和表面氧化Bi薄膜。",
-      "findings": "Ag间隔层将SOT效率提高一个数量级以上，有效自旋霍耳电导率约2×10^5 (ħ/2e) S/m，归因于保持Bi的完整性而非界面Rashba效应；结构无序降低SOT效率，表明块体贡献主导，有效Bi自旋霍尔角约1。",
+      "question": "Bi/Ag双层中电荷-自旋转换效率的起源及其与结构完整性的关系是什么？",
+      "method": "通过磁光克尔效应磁力测量阻尼类自旋轨道转矩，辅以结构和光谱分析及谐波霍尔电阻测量。",
+      "findings": "Ag间隔层将SOT效率提高一个多数量级，有效自旋霍尔电导率约2×10^5 (ℏ/2e) S/m，结构无序降低效率，体贡献主导。",
       "limitations": "摘要未说明",
-      "score": 79,
+      "score": 75,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3034,10 +2078,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "自旋电子学",
+        "自旋轨道转矩",
         "电荷-自旋转换",
         "铋",
-        "自旋轨道力矩"
+        "磁异质结构"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3057,12 +2101,12 @@
       "contentType": "paper",
       "title": "立方冰中的负热膨胀：氢键网络的集体量子效应",
       "originalTitle": "Negative Thermal Expansion in Cubic Ice: A Collective Quantum Effect of the hydrogen-bond network",
-      "summary": "通过中子粉末衍射和路径积分分子动力学模拟，研究了无堆垛层错立方冰I_c在低温范围内的密度异常，发现其在约70K出现密度最大值，与六方冰I_h相近。负热膨胀源于共享的开放四面体氢键网络，且模拟表明核量子效应至关重要。",
+      "summary": "报道了无堆垛层错立方冰Ic的中子粉末衍射和路径积分分子动力学模拟。冰Ic在约70 K存在密度最大值，与六方冰Ih接近。负热膨胀源于四面体氢键网络。MB-pol势模拟只有在包含核量子效应时才定量重现实验异常。声子计算识别低频横模具有最负的Grüneisen参数。",
       "abstract": "We report neutron powder diffraction measurements and path-integral molecular dynamics simulations of stacking-disorder-free cubic ice I$_c$, produced by topotactic degassing of C2 hydrogen hydrate. Across the cryogenic stability range, ice I$_c$ exhibits a density maximum near 70 K, closely matching that of hexagonal ice I$_h$ despite their different long-range stacking sequences. Negative thermal expansion in ice I is therefore not specific to hexagonal stacking, but arises from the shared open tetrahedral hydro…",
       "keyFacts": [
-        "立方冰I_c是否表现出负热膨胀，其机制是否与六方冰相同？",
-        "利用C2氢水合物拓扑脱气制备无堆垛层错立方冰I_c，进行中子粉末衍射测量和路径积分分子动力学模拟（MB-pol势），并结合声子计算。",
-        "立方冰I_c在约70K出现密度最大值，与六方冰I_h一致；负热膨胀源于氢键网络，且核量子效应是定量重现异常所必需的；质子的横向位移增强是相关因素。"
+        "立方冰中的负热膨胀是否源于氢键网络的集体量子效应？",
+        "中子粉末衍射测量和路径积分分子动力学模拟，采用MB-pol势。",
+        "冰Ic在约70 K存在密度最大值，负热膨胀是共享氢键网络的集体量子效应，质子横向位移增强，低频横模Grüneisen参数最负。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3087,11 +2131,11 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "立方冰I_c是否表现出负热膨胀，其机制是否与六方冰相同？",
-      "method": "利用C2氢水合物拓扑脱气制备无堆垛层错立方冰I_c，进行中子粉末衍射测量和路径积分分子动力学模拟（MB-pol势），并结合声子计算。",
-      "findings": "立方冰I_c在约70K出现密度最大值，与六方冰I_h一致；负热膨胀源于氢键网络，且核量子效应是定量重现异常所必需的；质子的横向位移增强是相关因素。",
+      "question": "立方冰中的负热膨胀是否源于氢键网络的集体量子效应？",
+      "method": "中子粉末衍射测量和路径积分分子动力学模拟，采用MB-pol势。",
+      "findings": "冰Ic在约70 K存在密度最大值，负热膨胀是共享氢键网络的集体量子效应，质子横向位移增强，低频横模Grüneisen参数最负。",
       "limitations": "摘要未说明",
-      "score": 79,
+      "score": 75,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3122,14 +2166,14 @@
     {
       "id": "arxiv:2607.28000",
       "contentType": "paper",
-      "title": "PASS：用于可迁移Fe-O机器学习原子间势的微扰增强空间群结构采样",
+      "title": "PASS：用于可迁移Fe-O机器学习原子间势的扰动增强空间群结构采样",
       "originalTitle": "PASS: Perturbation augmented space group structure sampling for transferable Fe-O machine learning interatomic potential",
-      "summary": "提出微扰增强空间群结构采样（PASS）方法，用于生成包含少于10个原子的小型结构的广泛且代表性数据集，并基于原子簇展开（ACE）框架开发了首个用于Fe-O系统的可迁移机器学习原子间势（MLIP）。该MLIP在纯Fe和Fe-O系统中通过体、表面和界面性质得到验证，并能模拟FeO-like结构的形成。",
+      "summary": "提出了扰动增强空间群结构采样（PASS）方法，生成包含少于10个原子的小晶胞结构的广泛数据集。基于该方法开发了首个基于原子簇展开（ACE）框架的Fe-O系统可迁移机器学习原子间势。通过体、表面和界面性质验证精度，并展示了在大规模Fe氧化模拟中形成FeO样结构。",
       "abstract": "Accurate atomistic modelling of iron (Fe) oxidation requires a reliable interatomic potential, which necessitates an extensive and representative first-principles dataset for training the interatomic potential. However, Fe-oxygen (O) system is known for its structural and magnetic complexity, rendering the generation of high-quality dataset challenging. In this work, we propose the Perturbation Augmented Space group structure Sampling (PASS) method to generate extensive and representative dataset consisting of sma…",
       "keyFacts": [
-        "如何生成高质量数据集并开发可迁移的Fe-O机器学习原子间势？",
-        "提出PASS方法生成小单元结构数据集，基于ACE框架训练MLIP，并验证其在不同系统上的准确性。",
-        "PASS方法生成的MLIP准确且可迁移，能够捕捉氧化生长的反应复杂性，并在大尺度Fe氧化模拟中展示FeO-like结构的形成。"
+        "如何生成高质量数据集以构建可迁移的Fe-O机器学习原子间势？",
+        "PASS方法生成小晶胞结构数据集，结合ACE框架构建机器学习原子间势。",
+        "PASS方法生成的ACE势能准确捕获氧化生长的反应复杂性，同时保持计算可行性。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3152,11 +2196,11 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何生成高质量数据集并开发可迁移的Fe-O机器学习原子间势？",
-      "method": "提出PASS方法生成小单元结构数据集，基于ACE框架训练MLIP，并验证其在不同系统上的准确性。",
-      "findings": "PASS方法生成的MLIP准确且可迁移，能够捕捉氧化生长的反应复杂性，并在大尺度Fe氧化模拟中展示FeO-like结构的形成。",
+      "question": "如何生成高质量数据集以构建可迁移的Fe-O机器学习原子间势？",
+      "method": "PASS方法生成小晶胞结构数据集，结合ACE框架构建机器学习原子间势。",
+      "findings": "PASS方法生成的ACE势能准确捕获氧化生长的反应复杂性，同时保持计算可行性。",
       "limitations": "摘要未说明",
-      "score": 79,
+      "score": 75,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3166,10 +2210,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "机器学习原子间势",
-        "Fe-O系统",
-        "数据集生成",
-        "原子簇扩展"
+        "机器学习势",
+        "铁氧化",
+        "原子簇展开",
+        "结构采样"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3187,14 +2231,14 @@
     {
       "id": "arxiv:2607.28610",
       "contentType": "paper",
-      "title": "从时间演化学习任意Lindblad算子",
+      "title": "从时间演化学习任意Lindbladian",
       "originalTitle": "Learning Arbitrary Lindbladians from Time Evolution",
-      "summary": "研究从物理时间演化学习未知马尔可夫开放系统生成元（Lindblad算子）的问题，提出高效算法，能在最小假设下学习任意Lindblad算子。算法包含支持学习和系数学习两个阶段，实验次数和总演化时间达到最优（至对数因子），几乎最优。",
+      "summary": "研究了从物理时间演化学习未知马尔可夫开放系统生成器（Lindbladian）的问题。提出了一个高效算法，在最小假设下学习任意Lindbladian。对于动力学强度至多Λ的Lindbladian，算法以Õ(Λ^2/ε^2)次实验和Õ(Λ/ε^2)总演化时间估计每个系数至误差ε，多项式经典运行时间。算法由两阶段组成，实验次数和总演化时间匹配下界，近最优。",
       "abstract": "We study the problem of learning an unknown Markovian open-system generator from access to its physical time evolution. This generator, called a Lindbladian, contains Hamiltonian and dissipative coefficients indexed by an exponentially large family of possible Pauli terms. We propose an efficient algorithm that learns arbitrary Lindbladians from time evolution under minimal assumptions. For a Lindbladian of dynamical strength at most $Λ$, the algorithm estimates every coefficient to error $ε$ using $\\widetilde O(Λ…",
       "keyFacts": [
-        "如何从时间演化数据高效学习任意Lindblad算子？",
-        "提出两阶段非自适应、无辅助、无控制算法：支持学习阶段使用乘积Pauli本征态制备和单比特Pauli测量；系数学习阶段使用随机稳定子态和随机Clifford基测量。",
-        "算法在多项式时间内识别并估计任意Lindblad算子的所有系数，实验次数和总演化时间接近下界（至对数因子），几乎最优。"
+        "如何从时间演化高效学习任意Lindbladian？",
+        "两阶段非自适应、无辅助比特和控制自由的算法：支持学习阶段和系数学习阶段。",
+        "算法以近最优的实验次数和总演化时间估计所有系数，匹配下界。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3216,11 +2260,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何从时间演化数据高效学习任意Lindblad算子？",
-      "method": "提出两阶段非自适应、无辅助、无控制算法：支持学习阶段使用乘积Pauli本征态制备和单比特Pauli测量；系数学习阶段使用随机稳定子态和随机Clifford基测量。",
-      "findings": "算法在多项式时间内识别并估计任意Lindblad算子的所有系数，实验次数和总演化时间接近下界（至对数因子），几乎最优。",
+      "question": "如何从时间演化高效学习任意Lindbladian？",
+      "method": "两阶段非自适应、无辅助比特和控制自由的算法：支持学习阶段和系数学习阶段。",
+      "findings": "算法以近最优的实验次数和总演化时间估计所有系数，匹配下界。",
       "limitations": "摘要未说明",
-      "score": 78,
+      "score": 74,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3230,10 +2274,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子开放系统",
-        "Lindblad算子",
-        "量子动力学",
-        "算法"
+        "Lindbladian",
+        "量子过程层析",
+        "哈密顿量学习",
+        "量子算法"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3249,16 +2293,145 @@
       ]
     },
     {
+      "id": "arxiv:2607.28561",
+      "contentType": "paper",
+      "title": "任意消息的统计安全不可克隆加密",
+      "originalTitle": "Statistically secure uncloneable encryption of arbitrary messages",
+      "summary": "利用单比特方案中编码基为Clifford酉子集的事实，证明该方案可升级为对任意长度消息实现无条件不可克隆加密，编码时间关于消息长度和安全参数多项式。这确立了一次性任意消息不可克隆加密享有统计安全性。",
+      "abstract": "Unconditional uncloneable encryption of a single bit with efficient encryption and decryption is now possible. However, whether the extension to messages of arbitrary length achieves statistical security remains to be known. Using the fact that the encoding bases for the single-bit scheme known to be secure consist of a subset of the Clifford unitaries, we show that this scheme can be upgraded to achieve unconditional uncloneable encryption for messages of arbitrary length, with encoding time polynomial in the mes…",
+      "keyFacts": [
+        "单比特不可克隆加密方案能否扩展到任意长度消息并保持统计安全性？",
+        "利用单比特方案中编码基为Clifford酉子集的性质，进行方案升级。",
+        "方案实现了任意长度消息的无条件不可克隆加密，编码时间多项式。"
+      ],
+      "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "量子技术",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-07-30T17:27:40Z",
+      "updatedAt": "2026-07-30T17:27:40Z",
+      "url": "https://arxiv.org/abs/2607.28561v1",
+      "pdfUrl": "https://arxiv.org/pdf/2607.28561v1",
+      "authors": [
+        "Archishna Bhattacharyya",
+        "Anne Broadbent",
+        "Eric Culf"
+      ],
+      "arxivCategories": [
+        "quant-ph"
+      ],
+      "primaryCategory": "quant-ph",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "单比特不可克隆加密方案能否扩展到任意长度消息并保持统计安全性？",
+      "method": "利用单比特方案中编码基为Clifford酉子集的性质，进行方案升级。",
+      "findings": "方案实现了任意长度消息的无条件不可克隆加密，编码时间多项式。",
+      "limitations": "摘要未说明",
+      "score": 74,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：量子技术",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "不可克隆加密",
+        "统计安全",
+        "量子密码",
+        "Clifford群"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2607.28561v1",
+          "publishedAt": "2026-07-30T17:27:40Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ]
+    },
+    {
+      "id": "arxiv:2607.28521",
+      "contentType": "paper",
+      "title": "熨平双量子比特门匹配iSWAP间隙的谱间隙",
+      "originalTitle": "Spectral gaps of ironed two-qubit gadgets matching the iSWAP gap",
+      "summary": "我们证明了在完全图K_n（n≥5）上，每个KAK导出参数满足a=5/9的熨平双量子比特门具有与iSWAP门相同的二阶矩谱间隙。核心步骤是表示论局域化定理相关的S_n不变算子的最大严格负特征值总出现在最高自旋SU(2)分量中。局域正半定分解分离除两个最高自旋扇区外的所有自旋扇区，解决了Kong、Li和Liu的猜想。",
+      "abstract": "We prove that every ironed two-qubit gadget whose KAK-derived parameter satisfies $a=5/9$ has, on the complete graph $K_n$ with $n\\geqslant 5$, the same second-moment spectral gap as the iSWAP gadget. The central step is a representation-theoretic localisation theorem: the largest strictly negative eigenvalue of the associated $\\mathfrak S_n$-invariant operator always occurs in the highest-spin $\\mathrm{SU}(2)$ summand. A local positive-semidefinite decomposition separates every spin sector except the two highest…",
+      "keyFacts": [
+        "熨平双量子比特门在什么条件下与iSWAP门具有相同的谱间隙？",
+        "表示论局域化定理和局域正半定分解",
+        "当a=5/9时，所有熨平双量子比特门在K_n上具有与iSWAP相同的二阶矩谱间隙，且最大负特征值在最高自旋SU(2)分量中。"
+      ],
+      "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "量子技术",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-07-30T16:59:10Z",
+      "updatedAt": "2026-07-30T16:59:10Z",
+      "url": "https://arxiv.org/abs/2607.28521v1",
+      "pdfUrl": "https://arxiv.org/pdf/2607.28521v1",
+      "authors": [
+        "Yanying Liang",
+        "Haoran Zhu"
+      ],
+      "arxivCategories": [
+        "quant-ph",
+        "math-ph",
+        "math.SP"
+      ],
+      "primaryCategory": "quant-ph",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "熨平双量子比特门在什么条件下与iSWAP门具有相同的谱间隙？",
+      "method": "表示论局域化定理和局域正半定分解",
+      "findings": "当a=5/9时，所有熨平双量子比特门在K_n上具有与iSWAP相同的二阶矩谱间隙，且最大负特征值在最高自旋SU(2)分量中。",
+      "limitations": "摘要未说明",
+      "score": 74,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：量子技术",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "量子计算",
+        "谱间隙",
+        "熨平门",
+        "表示论"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2607.28521v1",
+          "publishedAt": "2026-07-30T16:59:10Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ]
+    },
+    {
       "id": "arxiv:2607.28461",
       "contentType": "paper",
-      "title": "快速准确的等变机器学习原子间势基础模型",
+      "title": "用于等变机器学习原子间势的快速准确基础模型",
       "originalTitle": "Fast and Accurate Foundation Models for Equivariant Machine-Learned Interatomic Potentials",
-      "summary": "研究等变机器学习原子间势（MLIP）在速度和准确性上的权衡，特别是在大数据集下。通过NequIP和Allegro架构，实现了领先的推理速度、可扩展性和高精度，并加速了超大数据集上的训练。结果表明，提高材料发现准确性应关注数据集多样性和过渡金属化合物能量表面的改进描述。",
+      "summary": "我们研究了等变MLIP在大型数据集上实现高推理和训练速度以及高准确性的能力。我们展示了如何解决这一权衡，并提出了NequIP和Allegro架构中的一系列基础势，在材料发现、热导率预测和近平衡力学热力学性质等社区基准上实现了领先的推理速度和强可扩展性以及优异的准确性。NequIP基础设施中的加速允许在超大数据集上以大幅降低的计算成本训练高精度基础势。我们还表明，提高材料发现模型准确性的努力应侧重于数据集多样性和改进的过渡金属化合物能量表面描述。",
       "abstract": "Machine-learned interatomic potentials (MLIPs) have emerged as a transformative tool for computational materials science and chemistry, with universal potentials trained on large and diverse datasets now routinely deployed as 'foundation models' for downstream fine-tuning in targeted chemical spaces. Many scientific applications of the resulting models, such as molecular dynamics (MD), require high inference and training speeds as well as accuracy. In this work, we examine the limits of equivariant MLIPs, which di…",
       "keyFacts": [
-        "如何平衡等变机器学习原子间势的推理速度、训练速度与准确性？",
-        "在NequIP和Allegro架构中实现加速，并在多种社区基准上测试，包括材料发现、热导率预测和力学热力学性质。",
-        "加速后的模型达到领先推理速度和强可扩展性，同时保持高精度；大数据集下训练成本大幅降低，但材料发现改进主要依靠数据集多样性和能量表面描述。"
+        "如何使等变机器学习原子间势在大型数据集上同时实现高速度和高准确性？",
+        "在NequIP和Allegro架构中实现加速和优化，评估数据集多样性对准确性的影响",
+        "等变MLIP可以实现领先的推理速度和强可扩展性，同时保持高准确性；加速允许训练大型基础势；数据集多样性和改善过渡金属化合物能量描述是关键。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3295,11 +2468,11 @@
       "primaryCategory": "physics.comp-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何平衡等变机器学习原子间势的推理速度、训练速度与准确性？",
-      "method": "在NequIP和Allegro架构中实现加速，并在多种社区基准上测试，包括材料发现、热导率预测和力学热力学性质。",
-      "findings": "加速后的模型达到领先推理速度和强可扩展性，同时保持高精度；大数据集下训练成本大幅降低，但材料发现改进主要依靠数据集多样性和能量表面描述。",
+      "question": "如何使等变机器学习原子间势在大型数据集上同时实现高速度和高准确性？",
+      "method": "在NequIP和Allegro架构中实现加速和优化，评估数据集多样性对准确性的影响",
+      "findings": "等变MLIP可以实现领先的推理速度和强可扩展性，同时保持高准确性；加速允许训练大型基础势；数据集多样性和改善过渡金属化合物能量描述是关键。",
       "limitations": "摘要未说明",
-      "score": 78,
+      "score": 74,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3309,10 +2482,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "机器学习原子间势",
-        "等变架构",
-        "基础模型",
-        "计算效率"
+        "机器学习",
+        "原子间势",
+        "等变模型",
+        "材料科学"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3330,14 +2503,14 @@
     {
       "id": "arxiv:2607.28458",
       "contentType": "paper",
-      "title": "无序斯格明子晶体中的磁场选择拓扑缓冲",
+      "title": "无序斯格明子晶体中磁场选择的拓扑缓冲",
       "originalTitle": "Field-Selected Topological Buffering in a Disordered Skyrmion Crystal",
-      "summary": "通过大尺度模拟，研究三角晶格手性磁体中随机DM相互作用导致的无序效应，发现磁场选择两种无序化路径：高场下，平移相干先在弱无序尺度消失，而六重键取向序保持到更大无序强度，总拓扑电荷在更大尺度上几乎不变，形成包含布拉格玻璃态和斯格明子玻璃态的拓扑缓冲区间；低场下缓冲区间收缩。",
+      "summary": "淬火无序可破坏晶体序而不立即破坏其拓扑纹理，但这两过程在斯格明子晶体中的关系尚不清楚。利用随机DM相互作用的三角晶格手性磁体的大规模模拟，我们表明磁场在两种失序路径中选择。在高场下，全局平移相干性在弱无序尺度下丢失，而六重键取向序存活至更大无序强度，总拓扑电荷在更大尺度上几乎锁定。此区间定义包含类布拉格玻璃斯格明子态和斯格明子玻璃态的拓扑缓冲。在低场下，键取向无序与拓扑重建几乎重合，消除斯格明子玻璃窗口并收缩缓冲。这些结果确定磁场为控制旋钮，将晶体无序与拓扑电荷损失分离，并确立拓扑缓冲作为拓扑纹理在结构无序介质中保持鲁棒性的机制。",
       "abstract": "Quenched disorder can disrupt crystalline order without immediately destroying the topology of its constituent textures, but the relation between these processes in skyrmion crystals remains unclear. Using large-scale simulations of a triangular-lattice chiral magnet with random DM interactions, we show that the magnetic field selects between two disordering routes. At high fields, global translational coherence is lost at a weak-disorder scale, while sixfold bond-orientational order survives to a larger disorder…",
       "keyFacts": [
-        "无序斯格明子晶体中，磁场如何影响晶体无序化与拓扑电荷损失之间的关系？",
-        "使用大尺度模拟，考虑三角晶格手性磁体中的随机DM相互作用，分析有限尺寸标度、空间关联、缺陷统计和自旋自关联。",
-        "高场下存在拓扑缓冲区间，包含布拉格玻璃态和斯格明子玻璃态；低场下缓冲区间缩短，键取向无序与拓扑重构几乎同时发生。"
+        "磁场如何影响无序斯格明子晶体的失序路径和拓扑鲁棒性？",
+        "大规模模拟三角晶格手性磁体，分析有限尺寸标度、空间相关性、缺陷统计和自旋自相关",
+        "磁场选择两种失序路径：高场下存在包含布拉格玻璃和斯格明子玻璃的拓扑缓冲，低场下缓冲收缩；拓扑缓冲机制使拓扑纹理在无序中保持鲁棒。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3361,11 +2534,11 @@
       "primaryCategory": "cond-mat.str-el",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "无序斯格明子晶体中，磁场如何影响晶体无序化与拓扑电荷损失之间的关系？",
-      "method": "使用大尺度模拟，考虑三角晶格手性磁体中的随机DM相互作用，分析有限尺寸标度、空间关联、缺陷统计和自旋自关联。",
-      "findings": "高场下存在拓扑缓冲区间，包含布拉格玻璃态和斯格明子玻璃态；低场下缓冲区间缩短，键取向无序与拓扑重构几乎同时发生。",
+      "question": "磁场如何影响无序斯格明子晶体的失序路径和拓扑鲁棒性？",
+      "method": "大规模模拟三角晶格手性磁体，分析有限尺寸标度、空间相关性、缺陷统计和自旋自相关",
+      "findings": "磁场选择两种失序路径：高场下存在包含布拉格玻璃和斯格明子玻璃的拓扑缓冲，低场下缓冲收缩；拓扑缓冲机制使拓扑纹理在无序中保持鲁棒。",
       "limitations": "摘要未说明",
-      "score": 78,
+      "score": 74,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3375,10 +2548,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "斯格明子晶体",
-        "无序",
+        "斯格明子",
         "拓扑缓冲",
-        "磁场控制"
+        "无序",
+        "磁性"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3396,14 +2569,14 @@
     {
       "id": "arxiv:2607.28441",
       "contentType": "paper",
-      "title": "反铁磁候选材料MnTe中磁极化的输运证据",
+      "title": "交替磁候选材料MnTe中磁极化的输运证据",
       "originalTitle": "Transport Evidence of Magnetic Polarization in the Altermagnetic Candidate MnTe",
-      "summary": "利用分子束外延在InP(111)衬底上生长α-MnTe薄膜。低温磁输运测量显示磁滞蝴蝶形纵向磁阻和非线性横向磁阻，表明存在有限净磁极化。DFT计算提出薄膜中有限磁化产生的多种途径，包括界面诱导对称破缺和点缺陷。",
+      "summary": "我们报道了利用分子束外延在InP(111)衬底上成功生长外延α-MnTe薄膜。低温磁输运测量揭示了明显的迟滞蝴蝶型纵向磁阻以及非线性横向磁阻响应，表明薄膜中存在有限的净磁极化。密度泛函理论计算表明，虽然原始块体MnTe是补偿反铁磁体，但薄膜几何中的界面诱导对称破缺和点缺陷等途径可产生有限磁化。这些发现展示了工程化薄膜磁响应的外延途径。",
       "abstract": "The ability to precisely control magnetic properties is central to the development of future spin-based electronics. In this work, we report the successful growth of epitaxial α-MnTe thin films on InP(111) substrates using molecular beam epitaxy. Magneto-transport measurements at low temperatures reveal a distinct, hysteretic butterfly longitudinal magnetoresistance alongside a nonlinear transverse magneto-resistance response, suggesting the presence of a finite net magnetic polarization in the films. To understan…",
       "keyFacts": [
-        "α-MnTe薄膜中是否存在有限净磁极化及其起源？",
-        "分子束外延生长、磁输运测量、密度泛函理论计算",
-        "观察到磁滞蝴蝶形纵向磁阻和非线性横向磁阻，DFT提出界面诱导对称破缺和点缺陷可导致有限磁化。"
+        "α-MnTe薄膜中是否存在磁极化？其来源是什么？",
+        "分子束外延生长，磁输运测量，密度泛函理论计算",
+        "磁输运显示迟滞和横向量子振荡，DFT提出界面对称破缺和点缺陷可导致有限磁化。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3433,11 +2606,11 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "α-MnTe薄膜中是否存在有限净磁极化及其起源？",
-      "method": "分子束外延生长、磁输运测量、密度泛函理论计算",
-      "findings": "观察到磁滞蝴蝶形纵向磁阻和非线性横向磁阻，DFT提出界面诱导对称破缺和点缺陷可导致有限磁化。",
+      "question": "α-MnTe薄膜中是否存在磁极化？其来源是什么？",
+      "method": "分子束外延生长，磁输运测量，密度泛函理论计算",
+      "findings": "磁输运显示迟滞和横向量子振荡，DFT提出界面对称破缺和点缺陷可导致有限磁化。",
       "limitations": "摘要未说明",
-      "score": 78,
+      "score": 74,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3447,10 +2620,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
+        "交替磁",
         "MnTe",
-        "磁极化",
-        "分子束外延",
-        "密度泛函理论"
+        "输运",
+        "DFT"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3468,14 +2641,14 @@
     {
       "id": "arxiv:2607.28427",
       "contentType": "paper",
-      "title": "(NH3)2Cu5(SeO3)2(OH)6(H2O)2+x（x=0,1,3）中水合控制的层堆叠",
+      "title": "水合控制堆叠在(NH$_3$)$_2$Cu$_5$(SeO$_3$)$_2$(OH)$_6$(H$_2$O)$_{2+x}$（x=0,1和3）中的实现",
       "originalTitle": "Hydration-Controlled Layer Stacking in (NH$_3$)$_2$Cu$_5$(SeO$_3$)$_2$(OH)$_6$(H$_2$O)$_{2+x}$ ($x$ = 0, 1, and 3)",
-      "summary": "通过回流法合成了新的水合层状铜亚硒酸盐家族。晶体结构显示所有化合物具有相同的由Cu(OH)4正方形和Cu中心方锥体构成的扭曲kagomé-like Cu2+网络，但层间距离和堆叠顺序由水合程度控制。这些相可作为合成Cu2OSeO3的前体。",
+      "summary": "水合/脱水是控制层状无机材料结构的强大但未充分探索的变量。我们报道了新水合层状铜亚硒酸盐家族(NH$_3$)$_2$Cu$_5$(SeO$_3$)$_2$(OH)$_6$(H$_2$O)$_{2+x}$（x=0,1和3）的回流合成。晶体结构显示所有化合物共享由Cu(OH)$_4$正方形和Cu中心方锥体构成的扭曲kagomé状Cu$^{2+}$网络。水合程度控制层间距和堆叠序列。这些化合物为设计水合响应材料提供了平台，并作为Cu$_2$OSeO$_3$形成的反应中间体。",
       "abstract": "Hydration and dehydration are powerful yet underexplored variables for controlling the architecture of layered inorganic materials, because intercalated water can modify interlayer separation, hydrogen-bonding networks, and layer stacking. Here, we report the reflux synthesis of a new family of hydrated layered copper selenites, (NH$_3$)$_2$Cu$_5$(SeO$_3$)$_2$(OH)$_6$(H$_2$O)$_{2+x}$ ($x$ = 0, 1, and 3). From the crystal structures determined using electron diffraction and single crystal X-ray diffraction, we dedu…",
       "keyFacts": [
-        "水合程度如何影响层状铜亚硒酸盐的层堆叠和性质？",
-        "回流合成、电子衍射、单晶X射线衍射",
-        "三个化合物共享相同层内结构，水合程度控制层间距和堆叠序列，并可作为Cu2OSeO3形成的反应中间体。"
+        "水合程度如何控制层状铜亚硒酸盐的层间距和堆叠序列？",
+        "回流合成，电子衍射和单晶X射线衍射确定结构",
+        "三种化合物具有相同层状结构，水合程度影响层间距和堆叠序列，可作为Cu₂OSeO₃前驱体。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3500,11 +2673,11 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "水合程度如何影响层状铜亚硒酸盐的层堆叠和性质？",
-      "method": "回流合成、电子衍射、单晶X射线衍射",
-      "findings": "三个化合物共享相同层内结构，水合程度控制层间距和堆叠序列，并可作为Cu2OSeO3形成的反应中间体。",
+      "question": "水合程度如何控制层状铜亚硒酸盐的层间距和堆叠序列？",
+      "method": "回流合成，电子衍射和单晶X射线衍射确定结构",
+      "findings": "三种化合物具有相同层状结构，水合程度影响层间距和堆叠序列，可作为Cu₂OSeO₃前驱体。",
       "limitations": "摘要未说明",
-      "score": 78,
+      "score": 74,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3514,10 +2687,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "水合控制",
         "层状材料",
+        "水合控制",
         "铜亚硒酸盐",
-        "kagomé网络"
+        "晶体结构"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3537,12 +2710,12 @@
       "contentType": "paper",
       "title": "准粒子声子转换：拍摄载流子合并成激子",
       "originalTitle": "Quasiparticle phono-conversion: filming carriers coalescing into excitons",
-      "summary": "通过结合超快时间分辨和动量分辨光电子能谱与第一性原理激子布洛赫方程，在单层WSe2中解析了自由电子和空穴转化为束缚激子的过程。观察到自由载流子和激子带的瞬态共存，建立了激子形成的声子起源，其效率受谷多重性和自旋翻转过程控制。",
+      "summary": "通过结合超快时间分辨和动量分辨光发射光谱与第一性原理激子Bloch方程，我们解决了单层WSe2中带边自由电子和空穴转化为束缚激子的过程。观察到自由载流子和激子带的瞬态共存，并确定声子在激子形成中的关键作用。",
       "abstract": "Condensed matter physics is replete with phenomena involving high-energy free particles coalescing into low-energy bound few-particle states. While the cooling of the individual particles is well understood, the crucial step by which cold free carriers form a bound state remains elusive, involving complex energy and momentum relaxation pathways. Here, by combining ultrafast time- and momentum-resolved photoemission spectroscopy on a monolayer WSe$_2$ with the first-principles excitonic-Bloch equations, we resolve…",
       "keyFacts": [
-        "自由载流子如何通过声子作用形成束缚激子？",
-        "超快时间-动量分辨光电子能谱、第一性原理激子布洛赫方程",
-        "观察到自由载流子和激子带的瞬态共存，激子形成源于声子发射级联，效率受谷多重性和自旋翻转影响。"
+        "冷自由载流子如何形成束缚态？",
+        "结合超快时间分辨和动量分辨光发射光谱与第一性原理激子Bloch方程",
+        "观察到自由载流子与激子带的瞬态共存，伴随谱权重转移；激子形成源于声子，通过顺序弛豫级联过程，效率受能谷多重性、大动量声子发射和自旋翻转过程控制。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3576,11 +2749,11 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "自由载流子如何通过声子作用形成束缚激子？",
-      "method": "超快时间-动量分辨光电子能谱、第一性原理激子布洛赫方程",
-      "findings": "观察到自由载流子和激子带的瞬态共存，激子形成源于声子发射级联，效率受谷多重性和自旋翻转影响。",
+      "question": "冷自由载流子如何形成束缚态？",
+      "method": "结合超快时间分辨和动量分辨光发射光谱与第一性原理激子Bloch方程",
+      "findings": "观察到自由载流子与激子带的瞬态共存，伴随谱权重转移；激子形成源于声子，通过顺序弛豫级联过程，效率受能谷多重性、大动量声子发射和自旋翻转过程控制。",
       "limitations": "摘要未说明",
-      "score": 78,
+      "score": 74,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3590,10 +2763,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
+        "超快光谱",
         "激子形成",
-        "WSe2",
-        "光电子能谱",
-        "声子"
+        "单层WSe2",
+        "第一性原理"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3611,14 +2784,14 @@
     {
       "id": "arxiv:2607.28297",
       "contentType": "paper",
-      "title": "石墨烯中金簇插层的影响：驻波和修正的QPI特征",
+      "title": "石墨烯中金簇插层效应：驻波和修正的QPI特征",
       "originalTitle": "Effects of gold cluster intercalation in graphene: stationary waves and modified QPI features",
-      "summary": "外延石墨烯下的金插层产生簇相，表现出异常驻波和准粒子干涉特征集中在M点附近。通过T矩阵处理，环状散射体产生中心在M点的椭圆QPI结构，与实验FT-STS一致，并解释驻波模式。计算局域态密度对比，显示能量依赖。",
+      "summary": "研究了SiC上外延石墨烯下金插层产生的簇相，其驻波和准粒子干涉特征集中在石墨烯M点附近。通过T矩阵处理，环状散射体产生以M为中心的椭圆QPI结构，与实验符合，并解释驻波模式。",
       "abstract": "Gold intercalation beneath epitaxial graphene on SiC produces a cluster phase with unusual standing waves and quasiparticle-interference (QPI) features concentrated near the graphene M points. We show that this can be explained by Au intercalation below graphene hollow sites, which induces a local scattering potential on the six surrounding carbon atoms. Within a T-matrix treatment, this ring-like scatterer produces elliptical QPI structures centered near M, in agreement with the experimental FT-STS measurements…",
       "keyFacts": [
-        "金插层如何影响石墨烯的准粒子干涉和驻波？",
-        "T矩阵处理、FT-STS实验、局域态密度计算",
-        "环状散射体产生椭圆QPI结构，与实验一致，并产生驻波模式；局域态密度对比能量依赖。"
+        "金插层如何导致石墨烯中异常的驻波和QPI特征？",
+        "T矩阵处理结合实验FT-STS测量",
+        "金插层在石墨烯空心位下方诱导局部散射势，环状散射体产生椭圆QPI结构，与实验吻合；这些特征自然产生近驻波图案；LDOS对比的符号和大小强依赖能量。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3643,11 +2816,11 @@
       "primaryCategory": "cond-mat.mes-hall",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "金插层如何影响石墨烯的准粒子干涉和驻波？",
-      "method": "T矩阵处理、FT-STS实验、局域态密度计算",
-      "findings": "环状散射体产生椭圆QPI结构，与实验一致，并产生驻波模式；局域态密度对比能量依赖。",
+      "question": "金插层如何导致石墨烯中异常的驻波和QPI特征？",
+      "method": "T矩阵处理结合实验FT-STS测量",
+      "findings": "金插层在石墨烯空心位下方诱导局部散射势，环状散射体产生椭圆QPI结构，与实验吻合；这些特征自然产生近驻波图案；LDOS对比的符号和大小强依赖能量。",
       "limitations": "摘要未说明",
-      "score": 77,
+      "score": 73,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3678,14 +2851,14 @@
     {
       "id": "arxiv:2607.28296",
       "contentType": "paper",
-      "title": "一种连接DFT、无序平均和实验的迭代方法：应用于Au插层石墨烯",
+      "title": "一种桥梁DFT、无序平均和实验的迭代方法：应用于Au插层石墨烯",
       "originalTitle": "An iterative method bridging DFT, disorder averaging, and experiment in intercalated materials: application to Au-intercalated graphene",
-      "summary": "开发了一种迭代方法，结合密度泛函理论、紧束缚、自洽T矩阵近似和实验，构建插层体系的有效模型。应用于Au簇插层石墨烯，重现了主要ARPES特征，包括Van Hove奇异点的展宽和色散中拐点特征。关键微观因素是插层轨道与石墨烯态的杂化和局部散射势。",
+      "summary": "开发了一种结合DFT、紧束缚、自洽T矩阵近似和实验的通用迭代方法，构建插层系统的有效模型。应用于Au簇插层石墨烯，重现了主要ARPES特征，包括范霍夫奇点的展宽和色散中kink特征的出现。",
       "abstract": "Intercalation can strongly modify the electronic dispersion of a host material, as directly revealed by angle-resolved photoemission spectroscopy (ARPES). We develop a general iterative method combining density functional theory (DFT), tight-binding (TB), disorder averaging within the self-consistent T-matrix approximation (SCTMA), and experiment, to construct an effective model of the intercalated system. DFT identifies the relevant microscopic degrees of freedom and constrains selected model parameters, while co…",
       "keyFacts": [
-        "如何构建Au插层石墨烯的有效模型以重现ARPES特征？",
-        "迭代方法：DFT+TB+SCTMA+实验",
-        "重现了Au簇相的主要ARPES特征，包括Van Hove奇异点展宽和kink特征；关键因素是杂化和局部散射势。"
+        "如何构建插层材料的有效模型？",
+        "迭代方法结合DFT、紧束缚、自洽T矩阵近似和实验",
+        "该方法重现了Au簇相的主要ARPES特征，包括范霍夫奇点展宽和kink特征；关键微观要素是插层轨道与石墨烯态的杂化及插层诱导的局部散射势。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3711,11 +2884,11 @@
       "primaryCategory": "cond-mat.mes-hall",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何构建Au插层石墨烯的有效模型以重现ARPES特征？",
-      "method": "迭代方法：DFT+TB+SCTMA+实验",
-      "findings": "重现了Au簇相的主要ARPES特征，包括Van Hove奇异点展宽和kink特征；关键因素是杂化和局部散射势。",
+      "question": "如何构建插层材料的有效模型？",
+      "method": "迭代方法结合DFT、紧束缚、自洽T矩阵近似和实验",
+      "findings": "该方法重现了Au簇相的主要ARPES特征，包括范霍夫奇点展宽和kink特征；关键微观要素是插层轨道与石墨烯态的杂化及插层诱导的局部散射势。",
       "limitations": "摘要未说明",
-      "score": 77,
+      "score": 73,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3725,9 +2898,9 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "插层",
-        "石墨烯",
+        "插层材料",
         "DFT",
+        "自洽T矩阵",
         "ARPES"
       ],
       "translationProvider": "deepseek",
@@ -3744,16 +2917,630 @@
       ]
     },
     {
+      "id": "arxiv:2607.28283",
+      "contentType": "paper",
+      "title": "非共面磁性Weyl半金属DyB4中磁电阻与霍尔多功能性的交织",
+      "originalTitle": "Intertwined magnetoresistance and Hall multifunctionality in a non-coplanar magnetic Weyl semimetal DyB4",
+      "summary": "DyB4是一种磁性Weyl半金属候选材料，具有场可调的非共面磁序和拓扑性。输运测量显示超大磁电阻、手征异常负磁电阻、大反常霍尔电导和拓扑霍尔响应，源于巡游载流子与局域4f电子协同作用。",
+      "abstract": "Anomalous magneto-transport responses provide complementary probes of orbital motion, momentum-space topology, and real-space spin chirality, yet their integration into a single material remains rare because their underlying requirements often compete. A promising materials-design strategy is to realize a magnetic Weyl semimetal that combines linearly dispersive high-mobility bands with tunable non-coplanar magnetism while limiting spin-dependent scattering. Here we identify DyB4, a frustrated rare-earth tetrabori…",
+      "keyFacts": [
+        "如何在单一材料中实现整合多个磁输运响应？",
+        "中子衍射、第一性原理计算和磁输运测量",
+        "DyB4表现出极大磁电阻、手征异常负磁电阻、大反常霍尔电导（由本征Berry曲率和斜散射共同贡献）和标量自旋手性驱动的拓扑霍尔响应的四重组合，源于巡游载流子和局域4f矩的角色分工。"
+      ],
+      "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "先进材料",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-07-30T14:31:52Z",
+      "updatedAt": "2026-07-30T14:31:52Z",
+      "url": "https://arxiv.org/abs/2607.28283v1",
+      "pdfUrl": "https://arxiv.org/pdf/2607.28283v1",
+      "authors": [
+        "Long Chen",
+        "Yulin Shen",
+        "Songxue Chi",
+        "Seunghoon Song",
+        "Yang Zhang",
+        "Jian Liu",
+        "Haidong Zhou"
+      ],
+      "arxivCategories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.str-el"
+      ],
+      "primaryCategory": "cond-mat.mtrl-sci",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "如何在单一材料中实现整合多个磁输运响应？",
+      "method": "中子衍射、第一性原理计算和磁输运测量",
+      "findings": "DyB4表现出极大磁电阻、手征异常负磁电阻、大反常霍尔电导（由本征Berry曲率和斜散射共同贡献）和标量自旋手性驱动的拓扑霍尔响应的四重组合，源于巡游载流子和局域4f矩的角色分工。",
+      "limitations": "摘要未说明",
+      "score": 73,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：先进材料",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "Weyl半金属",
+        "非共面磁性",
+        "磁输运",
+        "拓扑霍尔效应"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2607.28283v1",
+          "publishedAt": "2026-07-30T14:31:52Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ]
+    },
+    {
+      "id": "arxiv:2607.28258",
+      "contentType": "paper",
+      "title": "超高熔点氧化物中的“异常固溶体”：开发超高温热防护涂层的新策略",
+      "originalTitle": "\"Anomalous Solid Solution\" in Ultra-High Melting Point Oxides: A New Strategy for Developing Ultra-High Temperature Thermal Protection Coatings",
+      "summary": "通过大气等离子喷涂制备YbSZ涂层，将ZrO2熔点提高至约2850°C，抗等离子体和氧乙炔烧蚀温度分别达近2780°C和3200°C。机理涉及增强的离子-共价混合键合和氧空位稳定性。首次提出“异常固溶体”概念。",
+      "abstract": "The high-temperature performance of ultra-high temperature ceramics (UHTCs) in atmospheric environment is fundamentally governed by their melting points of oxidation products. Typical high-melting-point oxides, such as ZrO2, undergo phase transformations at elevated temperatures, leading to structural instability. Although doping with rare-earth or transition-metal cations can suppress these transformations, it often results in a reduction in melting point, thereby limiting practical service temperature. Here, ytt…",
+      "keyFacts": [
+        "如何提高ZrO2的熔点并保持结构稳定性？",
+        "大气等离子喷涂制备YbSZ涂层，并进行实验表征",
+        "YbSZ涂层使ZrO2熔点提高至约2850°C，抗烧蚀温度显著提升；机理为增强的离子-共价混合键合和氧空位稳定性。首次提出“异常固溶体”概念。"
+      ],
+      "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "先进材料",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-07-30T14:17:34Z",
+      "updatedAt": "2026-07-30T14:17:34Z",
+      "url": "https://arxiv.org/abs/2607.28258v1",
+      "pdfUrl": "https://arxiv.org/pdf/2607.28258v1",
+      "authors": [
+        "Yubo Wang",
+        "Hong Meng",
+        "Pengfei He",
+        "Shujun Hu",
+        "Chuan Sun",
+        "Ximing Duan",
+        "Xiaopeng Lu",
+        "Dingwang Yuan",
+        "Wangyu Hu",
+        "Xiubing Liang"
+      ],
+      "arxivCategories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "primaryCategory": "cond-mat.mtrl-sci",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "如何提高ZrO2的熔点并保持结构稳定性？",
+      "method": "大气等离子喷涂制备YbSZ涂层，并进行实验表征",
+      "findings": "YbSZ涂层使ZrO2熔点提高至约2850°C，抗烧蚀温度显著提升；机理为增强的离子-共价混合键合和氧空位稳定性。首次提出“异常固溶体”概念。",
+      "limitations": "摘要未说明",
+      "score": 73,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：先进材料",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "氧化锆",
+        "热防护涂层",
+        "异常固溶体",
+        "超高熔点"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2607.28258v1",
+          "publishedAt": "2026-07-30T14:17:34Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ]
+    },
+    {
+      "id": "arxiv:2607.28067",
+      "contentType": "paper",
+      "title": "二维铁环中自旋倾斜诱导的巨非线性光学磁手性",
+      "originalTitle": "Spin-canting-induced Giant Nonlinear Optical Magnetochirality in a 2D Ferrotoroid",
+      "summary": "二维铁环材料CrSBr双层在中心对称下，场致自旋倾斜破坏PT对称，激活自旋手性驱动的i型电极化率，其与固有c型电极化率干涉产生圆偏振二次谐波，且手性可磁切换。该机制还揭示了场饱和后的剩余磁态，并用于磁光存储和逻辑运算。",
+      "abstract": "Achieving magnetically switchable chiral light emission is an important goal for 2D opto-spintronics. However, conventional strategies face a fundamental trade-off between dynamic tunability and polarization contrast. Nonlinear optics, particularly the emerging mechanism of chiral second-harmonic generation (SHG), offers a distinct strategy to bypass this restriction, yet its experimental realization remains elusive due to stringent symmetry requirements. Here, we report giant nonlinear optical magnetochirality in…",
+      "keyFacts": [
+        "如何在二维材料中实现磁可切换的手性光发射，同时避免传统方法的动态可调性与偏振对比度之间的权衡？",
+        "利用非线性光学中的手性二次谐波产生机制，在中心对称二维铁环双层CrSBr中，通过场致自旋倾斜破坏PT对称性，激活自旋手性驱动的i型电极化率，并与固有c型电极化率干涉产生圆偏振SHG信号。",
+        "观测到巨非线性光学磁手性，实现了SHG信号的手性磁切换，并发现了规避线性探针的剩余磁态，演示了磁光存储和逻辑操作。"
+      ],
+      "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "先进材料",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-07-30T11:44:31Z",
+      "updatedAt": "2026-07-30T11:44:31Z",
+      "url": "https://arxiv.org/abs/2607.28067v1",
+      "pdfUrl": "https://arxiv.org/pdf/2607.28067v1",
+      "authors": [
+        "Shian Xia",
+        "Sheng Liu",
+        "Wenhe Jia",
+        "Fanglu Qin",
+        "Xuanji Wang",
+        "Haixiang Luo",
+        "Yue Sun",
+        "Vanessa Li Zhang",
+        "Wenduo Chen",
+        "Jiazheng Qin",
+        "Cheng-Wei Qiu",
+        "Ting Yu"
+      ],
+      "arxivCategories": [
+        "physics.optics",
+        "cond-mat.mtrl-sci"
+      ],
+      "primaryCategory": "physics.optics",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "如何在二维材料中实现磁可切换的手性光发射，同时避免传统方法的动态可调性与偏振对比度之间的权衡？",
+      "method": "利用非线性光学中的手性二次谐波产生机制，在中心对称二维铁环双层CrSBr中，通过场致自旋倾斜破坏PT对称性，激活自旋手性驱动的i型电极化率，并与固有c型电极化率干涉产生圆偏振SHG信号。",
+      "findings": "观测到巨非线性光学磁手性，实现了SHG信号的手性磁切换，并发现了规避线性探针的剩余磁态，演示了磁光存储和逻辑操作。",
+      "limitations": "摘要未说明",
+      "score": 73,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：先进材料",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "非线性光学",
+        "磁手性",
+        "二维材料",
+        "CrSBr"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2607.28067v1",
+          "publishedAt": "2026-07-30T11:44:31Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ]
+    },
+    {
+      "id": "arxiv:2607.28029",
+      "contentType": "paper",
+      "title": "交变磁体CsCr2S2O中的轨道选择莫特转变与关联增强的电荷有序",
+      "originalTitle": "Orbital-Selective Mott Transition and Correlation-Amplified Charge Ordering in the Altermagnet CsCr$_2$S$_2$O",
+      "summary": "交变磁体CsCr2S2O发生Verwey型金属-绝缘体转变，伴随晶格畸变和Cr亚晶格上的条纹电荷有序。DFT+DMFT计算表明，轨道选择莫特转变使d_yz轨道主导低能物理。S位畸变通过杂化引发Cr位间微小电荷不对称，并被动态电子关联显著放大，导致电荷和自旋极化差异，最终驱动MIT。预测Te替代S会减弱此效应并抑制MIT。",
+      "abstract": "Altermagnet CsCr$_2$S$_2$O undergoes a Verwey-type metal-to-insulator transition (MIT) driven by lattice distortion and a stripe charge order on the Cr sublattice, reminiscent of the physics in Fe$_3$O$_4$. However, atomic distortions occur exclusively at the ligand sites rather than the Cr sites. What drives such a pronounced charge imbalance between Cr sites thus remains a mystery. Utilizing DFT+DMFT calculations, we identify an orbital-selective Mott transition, which leaves the correlated metallic $d_{yz}$ orb…",
+      "keyFacts": [
+        "CsCr2S2O中由配位体畸变驱动的显著电荷不平衡和金属-绝缘体转变的微观机制是什么？",
+        "利用DFT+DMFT计算，研究轨道选择莫特转变和电子关联对电荷有序及MIT的影响，并比较S与Te替代的效应。",
+        "发现轨道选择莫特转变使d_yz轨道金属性，S位畸变引发微小电荷不对称，被电子关联放大，导致Cr位间电荷和相关性的显著差异，进而驱动MIT。"
+      ],
+      "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "先进材料",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-07-30T11:14:59Z",
+      "updatedAt": "2026-07-30T11:14:59Z",
+      "url": "https://arxiv.org/abs/2607.28029v1",
+      "pdfUrl": "https://arxiv.org/pdf/2607.28029v1",
+      "authors": [
+        "Xiuhua Chen",
+        "Yilin Wang"
+      ],
+      "arxivCategories": [
+        "cond-mat.str-el",
+        "cond-mat.mtrl-sci"
+      ],
+      "primaryCategory": "cond-mat.str-el",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "CsCr2S2O中由配位体畸变驱动的显著电荷不平衡和金属-绝缘体转变的微观机制是什么？",
+      "method": "利用DFT+DMFT计算，研究轨道选择莫特转变和电子关联对电荷有序及MIT的影响，并比较S与Te替代的效应。",
+      "findings": "发现轨道选择莫特转变使d_yz轨道金属性，S位畸变引发微小电荷不对称，被电子关联放大，导致Cr位间电荷和相关性的显著差异，进而驱动MIT。",
+      "limitations": "摘要未说明",
+      "score": 73,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：先进材料",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "交变磁体",
+        "莫特转变",
+        "电荷有序",
+        "DFT+DMFT"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2607.28029v1",
+          "publishedAt": "2026-07-30T11:14:59Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ]
+    },
+    {
+      "id": "arxiv:2607.28025",
+      "contentType": "paper",
+      "title": "绘制ABO3钙钛矿结构与性能关系中对称破缺的影响",
+      "originalTitle": "Mapping the influence of symmetry breaking in structure-property relationships of ABO$_3$ perovskites",
+      "summary": "钙钛矿氧化物因组成和结构灵活性而具有广泛应用，但低对称相的畸变建模困难。本研究开发了高效计算框架，利用对称约束模板和非约束超胞模板，系统研究15种代表性组成，揭示组成、超胞大小和形状与畸变模式的关系，提出快速结构探索协议并评估不同畸变模式对关键物理性质的影响。",
+      "abstract": "Perovskite oxides have emerged as an important class of material with promising energy applications owing to their compositional and structural flexibility, which enables stabilization of both low- and high-symmetry phases and gives rise to diverse physical properties. Under ambient conditions, most perovskites adopt low-symmetry structures characterized by octahedral tilting and B-site displacements. Despite their importance, computational studies have largely focused on the ideal cubic phase as modeling these di…",
+      "keyFacts": [
+        "低对称钙钛矿的结构畸变如何影响其稳定性和物理性质，以及如何高效建模这些畸变？",
+        "开发了结合对称约束模板和非约束超胞模板的计算框架，用于快速构建和探索不同对称性相的结构模型，并系统研究了15种代表性钙钛矿组成。",
+        "建立了组成、超胞大小和形状与畸变模式之间的关系，提出了快速结构探索的协议，并评估了不同畸变模式对物理性质的影响。"
+      ],
+      "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "先进材料",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-07-30T11:13:42Z",
+      "updatedAt": "2026-07-30T11:13:42Z",
+      "url": "https://arxiv.org/abs/2607.28025v1",
+      "pdfUrl": "https://arxiv.org/pdf/2607.28025v1",
+      "authors": [
+        "Panupol Untarabut",
+        "Sylvian Cadars",
+        "Fabien Pascale",
+        "Sébastien Lebègue",
+        "Olivier Masson",
+        "Samuel Bernard",
+        "Assil Bouzid",
+        "Santanu Saha"
+      ],
+      "arxivCategories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "primaryCategory": "cond-mat.mtrl-sci",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "低对称钙钛矿的结构畸变如何影响其稳定性和物理性质，以及如何高效建模这些畸变？",
+      "method": "开发了结合对称约束模板和非约束超胞模板的计算框架，用于快速构建和探索不同对称性相的结构模型，并系统研究了15种代表性钙钛矿组成。",
+      "findings": "建立了组成、超胞大小和形状与畸变模式之间的关系，提出了快速结构探索的协议，并评估了不同畸变模式对物理性质的影响。",
+      "limitations": "摘要未说明",
+      "score": 73,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：先进材料",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "钙钛矿",
+        "对称破缺",
+        "结构畸变",
+        "理论计算"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2607.28025v1",
+          "publishedAt": "2026-07-30T11:13:42Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ]
+    },
+    {
+      "id": "arxiv:2607.27980",
+      "contentType": "paper",
+      "title": "氧化物纳米管支架上的可调谐保形石墨烯生长：面向超润湿层级2D-3D结构",
+      "originalTitle": "Tunable Conformal Graphene Growth on Oxide Nanotube scaffolds: Towards Superwettable Hierarchical 2D-3D Architectures",
+      "summary": "提出快速干燥的等离子体辅助制备路线，在金属氧化物纳米森林上直接保形生长石墨烯纳米墙（GNWs），形成2D-3D层级结构。该方法结合单晶有机纳米线模板和顺序等离子体沉积，在温和条件下实现厚度可调的MeOx纳米管均匀装饰径向取向石墨烯纳米片。所得表面具有氟无、长期全疏性，接触角超过170度，且对不同氧化物底材均有效。",
+      "abstract": "Hierarchical hybrid nanoarchitectures that integrate vertically oriented graphene nanowalls, GNWs, with metal oxide, MeOx, nanotube scaffolds offer versatile platform for smart surfaces, nanoelectronics, and electrochemical technologies. Herein we present rapid, dry, plasma-assisted fabrication route that enables direct and conformal growth of GNWs on mechanically robust MeOx nanoforests. The method combines supported single-crystalline organic nanowires as a 1D soft template with sequential plasma-enabled oxide d…",
+      "keyFacts": [
+        "如何通过等离子体辅助方法在氧化物纳米管支架上实现石墨烯纳米墙的保形生长，并构建超润湿层级结构？",
+        "使用单晶有机纳米线作为1D软模板，结合顺序等离子体氧化物沉积和GNW生长，在温和条件下制备2D-3D层级结构。",
+        "实现了GNWs在TiO2、Al2O3和SiO2纳米管支架上的保形生长，所得表面具有超疏水性（接触角>170°），且湿性响应由GNWs主导，与氧化物化学性质无关，并保持稳健的排斥性能。"
+      ],
+      "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "先进材料",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-07-30T10:24:43Z",
+      "updatedAt": "2026-07-30T10:24:43Z",
+      "url": "https://arxiv.org/abs/2607.27980v1",
+      "pdfUrl": "https://arxiv.org/pdf/2607.27980v1",
+      "authors": [
+        "Fernando Nunez Galvez",
+        "Muhammad Hamza",
+        "Johannes Berndt",
+        "Thomas Strunskus",
+        "Franziska Traeger",
+        "Nicolo di Novo",
+        "Juan R. Sanchez-Valencia",
+        "Carmen Lopez-Santos",
+        "Ana Borras",
+        "Eva Kovacevic"
+      ],
+      "arxivCategories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "primaryCategory": "cond-mat.mtrl-sci",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "如何通过等离子体辅助方法在氧化物纳米管支架上实现石墨烯纳米墙的保形生长，并构建超润湿层级结构？",
+      "method": "使用单晶有机纳米线作为1D软模板，结合顺序等离子体氧化物沉积和GNW生长，在温和条件下制备2D-3D层级结构。",
+      "findings": "实现了GNWs在TiO2、Al2O3和SiO2纳米管支架上的保形生长，所得表面具有超疏水性（接触角>170°），且湿性响应由GNWs主导，与氧化物化学性质无关，并保持稳健的排斥性能。",
+      "limitations": "摘要未说明",
+      "score": 73,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：先进材料",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "石墨烯纳米墙",
+        "氧化物纳米管",
+        "超疏水",
+        "等离子体"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2607.27980v1",
+          "publishedAt": "2026-07-30T10:24:43Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ]
+    },
+    {
+      "id": "arxiv:2607.27939",
+      "contentType": "paper",
+      "title": "PBr3在Si(100)上加热实现单磷原子掺入的STM研究",
+      "originalTitle": "STM study of single phosphorus incorporation into silicon by heating PBr3 on Si(100)",
+      "summary": "结合扫描隧道显微镜（STM）和密度泛函理论（DFT），研究PBr3分子在Si(100)表面的单磷原子掺入过程。室温下PBr3完全解离，原位退火后跟踪同一磷原子，发现P原子与邻近Si原子交换形成稳定的P-Si-Br复合物。DFT计算的激活势垒与175°C开始掺杂的观察一致。为原子级精准掺杂提供了见解。",
+      "abstract": "The objective of miniaturizing doped areas in silicon, with the ultimate goal of achieving atomic-precision doping, requires a fundamental understanding of the dopant incorporation process at the atomic level. We present a combined scanning tunneling microscopy (STM) and density functional theory (DFT) investigation of single phosphorus atom incorporation into the Si(100) surface. Phosphorus was supplied via PBr3 molecules, which completely dissociate on Si(100) at room temperature. By performing in situ annealing…",
+      "keyFacts": [
+        "磷原子如何通过PBr3分子在Si(100)表面实现原子级掺入，其具体路径和能量势垒是什么？",
+        "使用STM原位观察单个磷原子在退火前后的位置变化，并结合DFT计算激活势垒和结构稳定性。",
+        "退火后P原子与附近Si原子交换，形成P-Si-Br复合物，DFT计算的激活势垒与低温175°C开始掺杂的实验观察相符。"
+      ],
+      "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "先进材料",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-07-30T09:48:24Z",
+      "updatedAt": "2026-07-30T09:48:24Z",
+      "url": "https://arxiv.org/abs/2607.27939v1",
+      "pdfUrl": "https://arxiv.org/pdf/2607.27939v1",
+      "authors": [
+        "Tatiana V. Pavlova",
+        "Vladimir M. Shevlyuga"
+      ],
+      "arxivCategories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.mes-hall"
+      ],
+      "primaryCategory": "cond-mat.mtrl-sci",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "磷原子如何通过PBr3分子在Si(100)表面实现原子级掺入，其具体路径和能量势垒是什么？",
+      "method": "使用STM原位观察单个磷原子在退火前后的位置变化，并结合DFT计算激活势垒和结构稳定性。",
+      "findings": "退火后P原子与附近Si原子交换，形成P-Si-Br复合物，DFT计算的激活势垒与低温175°C开始掺杂的实验观察相符。",
+      "limitations": "摘要未说明",
+      "score": 73,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：先进材料",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "硅掺杂",
+        "STM",
+        "DFT",
+        "原子精度"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2607.27939v1",
+          "publishedAt": "2026-07-30T09:48:24Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ]
+    },
+    {
+      "id": "arxiv:2607.27885",
+      "contentType": "paper",
+      "title": "无有机分子的氧传感：混合相TiO2作为经济高效的超灵敏光学传感器",
+      "originalTitle": "Oxygen Sensing Without Organic Molecules: Mixed-phase TiO2 as Cost-effective Ultrasensitive Optical Sensors",
+      "summary": "本研究展示使用二氧化钛（TiO2）混合相纳米颗粒作为光学传感器，在室温下检测低至几十ppm的氧气浓度。通过同时测量金红石和锐钛矿相的光致发光，在30-500 ppm范围内实现氧检测，响应曲线可用Langmuir函数校准。该方法具有成本低、材料稳定及室温低浓度检测效率高等优势。",
+      "abstract": "Oxygen (O2) detection is commonly carried out via either fluorescence-based optical sensors or chemoresistive sensors. Each approach has its own limitations. Optical sensors require the molecular design and synthesis of specific organic fluorescent species which can be costly and less stable. Chemoresistive sensors, despite presenting advantages in using more cost-effective inorganic materials, are often limited by low sensitivities to O2 at ppm concentrations and by their inability to operate at room temperature…",
+      "keyFacts": [
+        "如何利用无有机分子的无机材料实现室温下低浓度氧气的高灵敏光学检测？",
+        "使用TiO2混合相纳米颗粒作为光学传感器，同时测量金红石和锐钛矿相的光致发光（photoluminescence），响应曲线用Langmuir函数校准。",
+        "在30-500 ppm浓度范围内实现氧气检测，响应曲线良好校准，响应迅速且重复性好；相比荧光光学传感器和化学电阻传感器，该方法成本低、材料稳定，且室温低浓度检测效率更高。"
+      ],
+      "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "先进材料",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-07-30T09:01:03Z",
+      "updatedAt": "2026-07-30T09:01:03Z",
+      "url": "https://arxiv.org/abs/2607.27885v1",
+      "pdfUrl": "https://arxiv.org/pdf/2607.27885v1",
+      "authors": [
+        "R. Rega",
+        "A. Fioravanti",
+        "F. Borbone",
+        "M. Mazzocchi",
+        "S. Lettieri"
+      ],
+      "arxivCategories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "primaryCategory": "cond-mat.mtrl-sci",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "如何利用无有机分子的无机材料实现室温下低浓度氧气的高灵敏光学检测？",
+      "method": "使用TiO2混合相纳米颗粒作为光学传感器，同时测量金红石和锐钛矿相的光致发光（photoluminescence），响应曲线用Langmuir函数校准。",
+      "findings": "在30-500 ppm浓度范围内实现氧气检测，响应曲线良好校准，响应迅速且重复性好；相比荧光光学传感器和化学电阻传感器，该方法成本低、材料稳定，且室温低浓度检测效率更高。",
+      "limitations": "摘要未说明",
+      "score": 72,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：先进材料",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "氧气传感",
+        "光学传感",
+        "TiO2",
+        "室温检测"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2607.27885v1",
+          "publishedAt": "2026-07-30T09:01:03Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ]
+    },
+    {
+      "id": "arxiv:2607.27848",
+      "contentType": "paper",
+      "title": "Pt/亚铁磁绝缘体双层中Zeeman-交换挫败诱导的巨非线性霍尔效应",
+      "originalTitle": "Giant nonlinear Hall effect in a Pt/ferrimagnetic insulator bilayer under Zeeman-exchange frustration",
+      "summary": "在具有组分梯度的铝取代铽铁石榴石中，Zeeman-交换挫败导致相邻Pt层产生巨大非线性霍尔响应。在磁补偿点附近，场致自旋翻转跃迁伴随异常大的高次奇次谐波电压，第三、五、七次谐波幅度接近基波。场、温度和电流依赖表明焦耳热驱动谐波响应。宏观自旋链模拟重现了观测信号。",
+      "abstract": "Competing magnetic interactions can create metastable or unstable states and render magnetic systems highly susceptible to external perturbations. Here we show that Zeeman-exchange frustration in an Al-substituted terbium iron garnet with a compositional gradient across its thickness gives rise to a giant nonlinear Hall response in an adjacent Pt layer. Near magnetic compensation, a field-induced spin-flip transition is accompanied by unusually large higher-order odd harmonic voltages, with the third, fifth, and s…",
+      "keyFacts": [
+        "在磁性材料中，Zeeman-交换挫败如何产生巨大的非线性霍尔效应？",
+        "实验测量Pt/亚铁磁绝缘体双层中的非线性霍尔效应，结合宏观自旋链模拟（macrospin-chain simulations）分析。",
+        "在磁补偿点附近，场致自旋翻转伴随巨大高次谐波电压，第三、五、七次谐波幅度接近基波；焦耳热是谐波响应的参数驱动；模拟显示热调制周期性切换界面Fe磁化状态，重现谐波信号。"
+      ],
+      "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "先进材料",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-07-30T08:26:22Z",
+      "updatedAt": "2026-07-30T08:26:22Z",
+      "url": "https://arxiv.org/abs/2607.27848v1",
+      "pdfUrl": "https://arxiv.org/pdf/2607.27848v1",
+      "authors": [
+        "Takayuki Shiino",
+        "Matteo Fettizio",
+        "Weronika Janus",
+        "Can Onur Avci"
+      ],
+      "arxivCategories": [
+        "cond-mat.mes-hall",
+        "cond-mat.mtrl-sci"
+      ],
+      "primaryCategory": "cond-mat.mes-hall",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "在磁性材料中，Zeeman-交换挫败如何产生巨大的非线性霍尔效应？",
+      "method": "实验测量Pt/亚铁磁绝缘体双层中的非线性霍尔效应，结合宏观自旋链模拟（macrospin-chain simulations）分析。",
+      "findings": "在磁补偿点附近，场致自旋翻转伴随巨大高次谐波电压，第三、五、七次谐波幅度接近基波；焦耳热是谐波响应的参数驱动；模拟显示热调制周期性切换界面Fe磁化状态，重现谐波信号。",
+      "limitations": "摘要未说明",
+      "score": 72,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：先进材料",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "非线性霍尔效应",
+        "亚铁磁",
+        "磁补偿",
+        "谐波"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2607.27848v1",
+          "publishedAt": "2026-07-30T08:26:22Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ]
+    },
+    {
       "id": "arxiv:2607.25489",
       "contentType": "paper",
-      "title": "医学中的智能体人工智能：架构、应用、评估及临床转化的挑战",
+      "title": "医学中的智能体AI：架构、应用、评估与临床转化的挑战",
       "originalTitle": "Agentic AI in medicine: architectures, applications, evaluation, and challenges for clinical translation",
-      "summary": "大型语言模型和多模态基础模型推动医学AI系统从孤立预测迈向多步骤临床任务。本综述通过系统证据图谱，筛查1649条记录并纳入557项研究，分析了单智能体、检索增强、多模态及多智能体系统在医学问答、图像解读等领域的应用。现有评价以公共基准和回顾性数据为主，过程可靠性、证据可追溯性等评估不足。临床转化需明确界定、可复现评价、可审计监督及前瞻性验证。",
+      "summary": "大型语言模型和多模态基础模型使医学AI能够执行多步骤临床任务。我们进行范围综述，筛选1649条记录，纳入557项研究。这些研究描述了使用外部工具的单智能体、基于检索的工作流、多模态智能体及多智能体系统，应用于医学问答、图像解读、电子病历分析等。证据基础以公共基准和模拟为主。临床转化需更清晰定义、可重复评估和前瞻性验证。",
       "abstract": "Large language models and multimodal foundation models are enabling medical artificial intelligence (AI) systems to move beyond isolated prediction and undertake multistep clinical tasks that require planning, tool use, memory, iterative correction, and coordination among specialized agents. However, the scope of agentic AI in medicine remains unsettled, and current evaluation practices are not yet aligned with the requirements of clinical use. We conducted a scoping review with systematic evidence mapping across…",
       "keyFacts": [
-        "医学中智能体AI的架构、应用、评估和临床转化挑战是什么？",
-        "采用范围综述，对五个电子来源进行系统证据图谱，筛选1649条记录，纳入符合预定义标准的557项研究。",
-        "现有研究包括单智能体使用外部工具、检索增强工作流、多模态智能体及多智能体系统，应用于医学问答、影像解读等。但评价以公共基准、模拟和回顾性数据为主，过程可靠性等评估不足。"
+        "医学中智能体AI的范围和当前评估实践是什么？",
+        "范围综述（scoping review）与系统性证据映射，筛选五个电子来源中的1649条记录，纳入557项研究。",
+        "研究描述单智能体、多模态智能体及多智能体系统；应用领域包括医学问答、图像解读等；证据多基于公共基准、模拟和回顾性数据，过程可靠性、证据可追溯性等评估不足。"
       ],
       "why": "该研究与计算机视觉相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3783,11 +3570,11 @@
         "多模态智能体"
       ],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "医学中智能体AI的架构、应用、评估和临床转化挑战是什么？",
-      "method": "采用范围综述，对五个电子来源进行系统证据图谱，筛选1649条记录，纳入符合预定义标准的557项研究。",
-      "findings": "现有研究包括单智能体使用外部工具、检索增强工作流、多模态智能体及多智能体系统，应用于医学问答、影像解读等。但评价以公共基准、模拟和回顾性数据为主，过程可靠性等评估不足。",
+      "question": "医学中智能体AI的范围和当前评估实践是什么？",
+      "method": "范围综述（scoping review）与系统性证据映射，筛选五个电子来源中的1649条记录，纳入557项研究。",
+      "findings": "研究描述单智能体、多模态智能体及多智能体系统；应用领域包括医学问答、图像解读等；证据多基于公共基准、模拟和回顾性数据，过程可靠性、证据可追溯性等评估不足。",
       "limitations": "摘要未说明",
-      "score": 76,
+      "score": 72,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3799,8 +3586,8 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "智能体AI",
-        "医学",
-        "评估",
+        "医学AI",
+        "多模态",
         "临床转化"
       ],
       "translationProvider": "deepseek",
@@ -3819,14 +3606,14 @@
     {
       "id": "arxiv:2607.26042",
       "contentType": "paper",
-      "title": "VetClaw：用于兽医疾病筛查的边缘-云多模态智能体系统",
+      "title": "VetClaw：用于兽医疾病筛查的边云多模态智能体系统",
       "originalTitle": "VetClaw: An Edge-Cloud Multimodal Agentic System for Veterinary Disease Screening",
-      "summary": "VetClaw是用于早期兽医疾病筛查的边缘-云多模态智能体系统。它使用摄像头模块作为边缘传感设备，将图像和可选症状描述发送到服务器端视觉语言模型进行零样本分类。系统将智能体交互与工作流编排分离，OpenClaw在边缘提供调度和通知，LangGraph管理有状态筛查流程。结果表明纯图像预测有限，症状引导和多模态输入改善分类性能，使系统能协调工具、管理流程并处理不确定性。",
+      "summary": "VetClaw使用摄像头作为边缘传感设备，将捕获图像和可选症状描述发送至服务器托管的视觉语言模型进行零样本疾病分类。系统分离智能体交互和工作流编排：OpenClaw提供边缘设备上的调度和通知，LangGraph管理状态化筛查工作流。结果显示，仅图像预测有限，而症状引导和多模态输入可提高零样本分类性能。系统将静态预测模型转化为协调、安全感知的系统。",
       "abstract": "We present VetClaw, an edge-cloud multimodal agentic system for early veterinary disease screening. VetClaw uses a camera module as an edge sensing device and sends captured images, together with optional symptom descriptions, to a server-hosted vision-language model for zero-shot disease classification. The system separates agent interaction from workflow orchestration: OpenClaw provides scheduling, tool access, user interaction, and notification services on the edge device, while LangGraph manages the stateful s…",
       "keyFacts": [
-        "如何将智能体架构用于兽医疾病筛查，并改善零样本分类性能？",
-        "提出VetClaw系统，组合OpenClaw和LangGraph，实现边缘-云协作，使用视觉语言模型进行零样本分类。",
-        "图像仅VLM预测有限，症状引导和多模态输入改善零样本分类性能；系统可协调工具、管理流程并升级不确定病例。"
+        "如何构建一个边缘-云多模态智能体系统用于兽医疾病筛查？",
+        "使用摄像头模块作为边缘设备，结合OpenClaw和LangGraph，将图像和症状描述发送至视觉语言模型进行零样本分类。",
+        "系统实现工具使用、工作流管理、失败处理和不确定案例升级；症状引导和多模态输入比仅图像预测有更高的零样本分类性能。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3850,11 +3637,11 @@
       "primaryCategory": "cs.CV",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何将智能体架构用于兽医疾病筛查，并改善零样本分类性能？",
-      "method": "提出VetClaw系统，组合OpenClaw和LangGraph，实现边缘-云协作，使用视觉语言模型进行零样本分类。",
-      "findings": "图像仅VLM预测有限，症状引导和多模态输入改善零样本分类性能；系统可协调工具、管理流程并升级不确定病例。",
+      "question": "如何构建一个边缘-云多模态智能体系统用于兽医疾病筛查？",
+      "method": "使用摄像头模块作为边缘设备，结合OpenClaw和LangGraph，将图像和症状描述发送至视觉语言模型进行零样本分类。",
+      "findings": "系统实现工具使用、工作流管理、失败处理和不确定案例升级；症状引导和多模态输入比仅图像预测有更高的零样本分类性能。",
       "limitations": "摘要未说明",
-      "score": 74,
+      "score": 70,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3866,8 +3653,8 @@
       "tags": [
         "兽医",
         "多模态",
-        "智能体",
-        "边缘计算"
+        "智能体系统",
+        "边云协同"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3885,14 +3672,14 @@
     {
       "id": "arxiv:2607.24895",
       "contentType": "paper",
-      "title": "边缘计算系统功能稳定性的形式化与定量指标",
+      "title": "边缘计算系统功能稳定性的形式化与定量度量",
       "originalTitle": "Formalization and quantitative metrics for functional stability of edge computing systems",
-      "summary": "边缘计算系统在组件故障、间歇回传等条件下运行，经典可靠性模型无法满足差异化质量需求。本文提出功能稳定性形式框架，将分析单元从系统转向单个功能，定义强、弱稳定性，通过连续质量函数和阈值。引入基础参数和聚合指标，用九条定理连接形式定义。通过UAV集群和边缘AI推理案例说明，该指标能区分经典可用性无法区分的架构，并揭示架构排序对扰动类的依赖。",
+      "summary": "本文提出功能稳定性的形式框架，将分析单位从系统转向个体功能。定义了强和弱稳定性形式，通过连续质量函数和功能质量阈值。引入基础参数（扰动容限、恢复时间、退化深度、允许退化）和聚合度量（累积质量、功能可用性、积分稳定性），并通过九个定理连接。框架在UAV集群和边缘AI推理服务案例中展示，可区分架构选择。",
       "abstract": "Edge computing systems operate in conditions where component failures, intermittent backhaul connectivity, resource exhaustion and adversarial disturbances are part of the normal operating envelope rather than rare events. Classical reliability and fault-tolerance models, oriented toward monolithic systems and binary working/failed states, do not capture the differentiated quality requirements of services co-located on a resource-constrained edge node. This article proposes a formal framework of functional stabili…",
       "keyFacts": [
-        "如何形式化边缘计算系统的功能稳定性并定义定量指标？",
-        "提出形式化框架，定义强/弱稳定性和聚合指标，并推导九个定理，通过两个分析案例说明。",
-        "所提指标能区分经典可用性无法区分的架构，并暴露架构排序对扰动类集合的依赖。"
+        "如何形式化和量化边缘计算系统的功能稳定性？",
+        "提出功能稳定性的形式框架，定义强/弱稳定性、基础参数和聚合度量，并通过九个定理连接，用UAV集群和边缘AI推理服务案例说明。",
+        "框架能区分经典可用性无法区分的架构选择，并揭示架构排名依赖扰动类别集的选择。"
       ],
       "why": "该研究与蜂群机器人相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3914,11 +3701,11 @@
         "蜂群机器人"
       ],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何形式化边缘计算系统的功能稳定性并定义定量指标？",
-      "method": "提出形式化框架，定义强/弱稳定性和聚合指标，并推导九个定理，通过两个分析案例说明。",
-      "findings": "所提指标能区分经典可用性无法区分的架构，并暴露架构排序对扰动类集合的依赖。",
+      "question": "如何形式化和量化边缘计算系统的功能稳定性？",
+      "method": "提出功能稳定性的形式框架，定义强/弱稳定性、基础参数和聚合度量，并通过九个定理连接，用UAV集群和边缘AI推理服务案例说明。",
+      "findings": "框架能区分经典可用性无法区分的架构选择，并揭示架构排名依赖扰动类别集的选择。",
       "limitations": "摘要未说明",
-      "score": 71,
+      "score": 67,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3930,9 +3717,9 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "边缘计算",
-        "稳定性",
+        "功能稳定性",
         "形式化",
-        "指标"
+        "度量"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3943,139 +3730,6 @@
           "domain": "arxiv.org",
           "url": "https://arxiv.org/abs/2607.24895v1",
           "publishedAt": "2026-07-27T15:23:41Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
-      "id": "arxiv:2607.25158",
-      "contentType": "paper",
-      "title": "具有剪切流的正则动力学平衡的统计结构",
-      "originalTitle": "Statistical structure of canonical kinetic equilibrium with sheared flow",
-      "summary": "在等温剪切流等离子体动力学平衡中，静电势是速度分布的累积量生成函数，编码非麦克斯韦统计。因此，多项式型通量函数平衡流中仅线性流可容许，其他剪切流具有非零累积量。该恒等式在剪切流螺旋箍缩中证明并特化到Z箍缩、θ箍缩和Harris片层。简单剪切流Bennett箍缩表明更弱磁化产生更多非麦克斯韦特征，且共、反向流剪切统计不同。该恒等式也提供初始化动力学模拟的方法。",
-      "abstract": "In isothermal kinetic equilibrium of a plasma with sheared flow, the electrostatic potential is the cumulant generating function of the velocity distribution, encoding all non-Maxwellian statistics. Consequently, of the polynomial-form flux-function equilibrium flows, only the linear one is admissible, and every other equilibrium sheared flow has non-zero cumulants to all orders. The identity is shown for a sheared-flow screw pinch and specialized to the Z pinch, theta pinch, and Harris sheet. A simple sheared-flo…",
-      "keyFacts": [
-        "剪切流等离子体等温动力学平衡的统计结构如何？",
-        "利用静电势作为累积量生成函数的恒等式，证明多项式型通量平衡流仅线性可容许，并特化到具体箍缩构型。",
-        "更弱磁化产生更多非麦克斯韦特征，共流和反流剪切具有不同统计。"
-      ],
-      "why": "该研究与空间物理相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "空间物理",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-28T00:07:54Z",
-      "updatedAt": "2026-07-28T00:07:54Z",
-      "url": "https://arxiv.org/abs/2607.25158v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.25158v1",
-      "authors": [
-        "Daniel W Crews"
-      ],
-      "arxivCategories": [
-        "physics.plasm-ph",
-        "physics.space-ph"
-      ],
-      "primaryCategory": "physics.plasm-ph",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "剪切流等离子体等温动力学平衡的统计结构如何？",
-      "method": "利用静电势作为累积量生成函数的恒等式，证明多项式型通量平衡流仅线性可容许，并特化到具体箍缩构型。",
-      "findings": "更弱磁化产生更多非麦克斯韦特征，共流和反流剪切具有不同统计。",
-      "limitations": "摘要未说明",
-      "score": 69,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：空间物理",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "等离子体",
-        "动力学平衡",
-        "剪切流",
-        "统计"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.25158v1",
-          "publishedAt": "2026-07-28T00:07:54Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ]
-    },
-    {
-      "id": "arxiv:2607.24085",
-      "contentType": "paper",
-      "title": "通过相关原位EBSD和TEM加热揭示超细晶Al-Mg-Si合金的再结晶现象",
-      "originalTitle": "Recrystallisation phenomena in an ultrafine-grained Al-Mg-Si alloy revealed by correlative in situ EBSD and TEM heating",
-      "summary": "超细晶（UFG）铝合金在空间应用中前景广阔，但其热稳定性受限。本研究用高压扭转制备的UFG AA6061合金，直接比较原位TEM加热与原位EBSD加热，结合DSC、STEM-EDX和显微硬度。原位EBSD采样约1000个晶粒，解析了恢复、再结晶和晶粒生长过程，将不稳定起始点定在约198°C。量热和元素映射显示晶粒细化抑制GP区形成并降低析出温度，析出不延缓再结晶。用Brailsford-Bullough-Hayns理论解释晶界阱强度随恢复和再结晶而崩溃。",
-      "abstract": "Ultrafine-grained (UFG) aluminium alloys are promising lightweight structural materials for space applications, where a high grain-boundary density can act as sinks for irradiation-induced defects. Their deployment, however, is contingent on thermal stability: aluminium components in low-Earth orbit can reach $\\sim$200 $^\\circ$C under solar irradiation, close to where severely deformed aluminium alloys recrystallise. Accurate, bulk-representative determination of recrystallisation onset is therefore essential, yet…",
-      "keyFacts": [
-        "UFG Al-Mg-Si合金再结晶起始温度和机制是什么？",
-        "原位EBSD加热与TEM加热直接对比，并结合DSC、STEM-EDX和显微硬度，以及Brailsford-Bullough-Hayns理论。",
-        "再结晶起始约198°C，晶粒细化抑制GP区形成并降低析出温度，析出不延缓再结晶，晶界阱强度随恢复和再结晶崩溃。"
-      ],
-      "why": "该研究与空间物理相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "空间物理",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-07-27T07:26:25Z",
-      "updatedAt": "2026-07-27T07:26:25Z",
-      "url": "https://arxiv.org/abs/2607.24085v1",
-      "pdfUrl": "https://arxiv.org/pdf/2607.24085v1",
-      "authors": [
-        "Moritz Theissing",
-        "Sandra Gonzaga",
-        "Patrick Willenshofer",
-        "Thomas M. Kremmer",
-        "Stefan Pogatscher",
-        "Stefan Mitsche",
-        "Frank F. Sene",
-        "Matheus A. Tunes"
-      ],
-      "arxivCategories": [
-        "cond-mat.mtrl-sci",
-        "physics.space-ph"
-      ],
-      "primaryCategory": "cond-mat.mtrl-sci",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "UFG Al-Mg-Si合金再结晶起始温度和机制是什么？",
-      "method": "原位EBSD加热与TEM加热直接对比，并结合DSC、STEM-EDX和显微硬度，以及Brailsford-Bullough-Hayns理论。",
-      "findings": "再结晶起始约198°C，晶粒细化抑制GP区形成并降低析出温度，析出不延缓再结晶，晶界阱强度随恢复和再结晶崩溃。",
-      "limitations": "摘要未说明",
-      "score": 68,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：空间物理",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "铝合金",
-        "再结晶",
-        "原位EBSD",
-        "TEM"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2607.24085v1",
-          "publishedAt": "2026-07-27T07:26:25Z",
           "evidenceGroup": "repository:arxiv"
         }
       ]
