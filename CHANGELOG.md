@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.2 — Readability, accessibility and China timezone
+
+- Replaced the sub-11px-heavy type scale with explicit tokens: article and detail copy is at least 14px, supporting copy is 12–13px, and metadata is 11px. Only two Latin uppercase micro-labels remain at 8px.
+- Darkened the light-theme muted text token to `#4f5c63` (6.21:1 against the paper background) and raised contrast for brief text, metadata, category labels and dark-theme secondary text.
+- Put the system UI font stack first so Chinese and Latin glyphs use the platform's matched type family without an unserved Inter dependency.
+- Reduced Chinese heading tracking to `-0.01em` or zero, and limited wide uppercase tracking to the remaining editorial labels.
+- Added a guaranteed dark safety layer and stronger text contrast over unpredictable lead-story images.
+- Added explicit mobile heading and body sizing, a v2.0.2 asset/Service Worker cache boundary and typography regression coverage.
+- Switched edition dates and both scheduled workflows to `Asia/Shanghai`; the daily brief now runs at 08:00 China Standard Time, while archived reports keep and display their original timezone metadata.
+
 ## 2.0.1 — Production custom domain
 
 - Switched canonical, Open Graph and Twitter sharing metadata to `https://newsfrontier.top/`.

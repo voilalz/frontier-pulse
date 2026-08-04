@@ -104,6 +104,13 @@
     return new Intl.DateTimeFormat("zh-CN", options).format(date);
   }
 
+  function editionTimezoneLabel(value) {
+    const zone = clean(value, "Asia/Shanghai");
+    if (zone === "Asia/Shanghai") return "版本日期 · 中国标准时间（UTC+8）";
+    if (zone === "Asia/Tokyo") return "版本日期 · 东京时间（UTC+9）";
+    return `版本日期 · ${zone}`;
+  }
+
   function itemKey(item) {
     return clean(item._bookmarkKey) || `${clean(item.editionDate, "unknown")}::${clean(item.id)}`;
   }
@@ -222,6 +229,7 @@
       ...payload,
       editionDate,
       generatedAt: clean(payload.generatedAt),
+      timezone: clean(payload.timezone, "Asia/Shanghai"),
       method: clean(payload.method, "rules"),
       items: payload.items.slice(0, 100).map((item, index) => normalizeItem(item, index, editionDate)),
     };
@@ -693,6 +701,8 @@
     if (control.hidden) return;
     const dates = availableDates();
     const current = state.editionDate || state.latestReport?.editionDate || dates[0] || "";
+    const report = state.currentReport || state.latestReport;
+    $("editionTimezone").textContent = editionTimezoneLabel(report?.timezone || state.archiveIndex?.timezone);
     const input = $("editionPicker");
     input.value = current;
     if (dates.length) {

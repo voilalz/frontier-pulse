@@ -3,7 +3,7 @@ name: Daily news update
 on:
   schedule:
     - cron: "0 8 * * *"
-      timezone: "Asia/Tokyo"
+      timezone: "Asia/Shanghai"
   workflow_dispatch:
 
 permissions:
@@ -56,7 +56,7 @@ jobs:
           s=json.load(open('public/data/stream.json', encoding='utf-8'));
           r=json.load(open('public/data/research.json', encoding='utf-8'));
           assert p.get('schemaVersion') == 8, p.get('schemaVersion');
-          assert p.get('timezone') == 'Asia/Tokyo', p.get('timezone');
+          assert p.get('timezone') == 'Asia/Shanghai', p.get('timezone');
           assert p.get('selectionMethod') in ('rules', 'deepseek', 'openai'), p.get('selectionMethod');
           assert p.get('selectionStrategy') in ('rules-diverse', 'ai-ranked-rule-constrained'), p.get('selectionStrategy');
           assert p.get('selectionStatus') in ('ok', 'adjusted', 'relaxed', 'fallback', 'disabled', 'not-configured'), p.get('selectionStatus');

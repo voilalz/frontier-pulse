@@ -500,7 +500,7 @@ class UpdateNewsTests(unittest.TestCase):
             payload = json.loads(output.read_text(encoding="utf-8"))
             self.assertEqual(payload["schemaVersion"], 8)
             self.assertEqual(payload["editionDate"], "2026-07-16")
-            self.assertEqual(payload["timezone"], "Asia/Tokyo")
+            self.assertEqual(payload["timezone"], "Asia/Shanghai")
             self.assertEqual(payload["method"], "rules")
             self.assertEqual(len(payload["items"]), 10)
             self.assertTrue((archive / "2026-07-16.json").exists())
@@ -674,12 +674,23 @@ class UpdateNewsTests(unittest.TestCase):
         scored = MODULE.score_articles(MODULE.deduplicate([sponsored]), self.config, self.now)
         self.assertEqual(scored, [])
 
-    def test_edition_uses_tokyo_calendar_date(self):
-        now = datetime(2026, 7, 16, 23, 30, tzinfo=timezone.utc)
+    def test_edition_uses_shanghai_calendar_date(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
-        report = MODULE.build_report(candidates, self.config, now, skip_ai=True)
-        self.assertEqual(report["editionDate"], "2026-07-17")
-        self.assertEqual(report["timezone"], "Asia/Tokyo")
+        before_midnight = MODULE.build_report(
+            candidates,
+            self.config,
+            datetime(2026, 7, 16, 15, 30, tzinfo=timezone.utc),
+            skip_ai=True,
+        )
+        after_midnight = MODULE.build_report(
+            candidates,
+            self.config,
+            datetime(2026, 7, 16, 16, 30, tzinfo=timezone.utc),
+            skip_ai=True,
+        )
+        self.assertEqual(before_midnight["editionDate"], "2026-07-16")
+        self.assertEqual(after_midnight["editionDate"], "2026-07-17")
+        self.assertEqual(after_midnight["timezone"], "Asia/Shanghai")
 
     def test_invalid_date_uses_window_edge_and_is_penalized(self):
         fallback = self.now - timedelta(hours=24)
