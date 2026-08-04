@@ -36,6 +36,7 @@ from zoneinfo import ZoneInfo
 LOGGER = logging.getLogger("frontier-pulse")
 USER_AGENT = "FrontierPulseBot/2.0 (+https://github.com/voilalz/frontier-pulse; public-interest news and research index)"
 CATEGORIES = ("AI", "航空航天", "军事动态", "局部冲突", "前沿技术", "无人系统")
+DEFAULT_TIMEZONE = "Asia/Shanghai"
 
 
 @dataclass
@@ -1009,7 +1010,7 @@ def build_history_contexts(
     lookback_days = max(7, min(730, int(config.get("history_lookback_days", 365))))
     max_links = max(1, min(5, int(config.get("history_max_links", 3))))
     threshold = max(10, min(90, int(config.get("history_min_association_score", 30))))
-    current_local_date = now.astimezone(ZoneInfo(config.get("timezone", "Asia/Tokyo"))).date()
+    current_local_date = now.astimezone(ZoneInfo(config.get("timezone", DEFAULT_TIMEZONE))).date()
     cutoff = (current_local_date - timedelta(days=lookback_days)).isoformat()
     current_edition = current_local_date.isoformat()
     eligible = [
@@ -2213,7 +2214,7 @@ def build_stream_report(
     return {
         "schemaVersion": 4,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
-        "timezone": config.get("timezone", "Asia/Tokyo"),
+        "timezone": config.get("timezone", DEFAULT_TIMEZONE),
         "rangeHours": int(config.get("lookback_hours", 24)),
         "itemCount": len(items),
         "totalCandidateCount": len(candidates),
@@ -2425,7 +2426,7 @@ def build_research_report(
     return {
         "schemaVersion": 3,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
-        "timezone": config.get("timezone", "Asia/Tokyo"),
+        "timezone": config.get("timezone", DEFAULT_TIMEZONE),
         "rangeDays": int(research.get("lookback_days", 7)),
         "method": method,
         "editorialStatus": editorial_status,
@@ -2773,12 +2774,12 @@ def build_report(
     signals = [clean_text(signal, 180) for signal in brief.get("signals", []) if clean_text(signal)][:3]
     if len(signals) < 3:
         signals = fallback_brief(items, source_count)["signals"]
-    local_time = now.astimezone(ZoneInfo(config.get("timezone", "Asia/Tokyo")))
+    local_time = now.astimezone(ZoneInfo(config.get("timezone", DEFAULT_TIMEZONE)))
     return {
         "schemaVersion": 8,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "editionDate": local_time.strftime("%Y-%m-%d"),
-        "timezone": config.get("timezone", "Asia/Tokyo"),
+        "timezone": config.get("timezone", DEFAULT_TIMEZONE),
         "method": selection_method,
         "selectionMethod": selection_method,
         "selectionStrategy": selection_strategy,
@@ -3075,7 +3076,7 @@ def archive_report(
     write_json_atomic(index_output, {
         "schemaVersion": 1,
         "generatedAt": report["generatedAt"],
-        "timezone": report.get("timezone", "Asia/Tokyo"),
+        "timezone": report.get("timezone", DEFAULT_TIMEZONE),
         "editions": editions,
     })
 
@@ -3116,7 +3117,7 @@ def archive_report(
         write_json_atomic(shard_path, {
             "schemaVersion": 2,
             "generatedAt": shard_generated_at,
-            "timezone": report.get("timezone", "Asia/Tokyo"),
+            "timezone": report.get("timezone", DEFAULT_TIMEZONE),
             "month": month,
             "itemCount": len(items),
             "items": items,
@@ -3138,7 +3139,7 @@ def archive_report(
     write_json_atomic(search_output, {
         "schemaVersion": 2,
         "generatedAt": report["generatedAt"],
-        "timezone": report.get("timezone", "Asia/Tokyo"),
+        "timezone": report.get("timezone", DEFAULT_TIMEZONE),
         "editionCount": len(editions),
         "itemCount": sum(len(items) for items in monthly.values()),
         "searchableFields": list(SEARCHABLE_FIELDS),
