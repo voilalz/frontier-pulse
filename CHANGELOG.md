@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.0.3 — Reliable daily scheduling and same-day health warning
+
+- Replaced the top-of-hour daily schedule with a 07:07 China Standard Time primary run and an 08:37 recovery run to reduce GitHub Actions queue loss and delay.
+- Added an idempotent preflight gate: scheduled recovery runs skip a healthy 10-item edition for the current Shanghai date, while manual forced runs remain available.
+- Added a narrow, idempotent `main` push trigger for changes to `daily-news.yml`, allowing this reliability release to regenerate a missing current edition without duplicating an edition that finished while the release was in progress or creating a data-commit loop.
+- Added unit coverage for stale, healthy, short, failed, manual and workflow-change refresh decisions.
+- The frontend now raises a clear “今日日报尚未生成” warning after 08:15 China Standard Time when the newest edition is still older than the current Shanghai date.
+- Bumped the application shell and Service Worker cache boundary to v2.0.3.
+
 ## 2.0.2 — Readability, accessibility and China timezone
 
 - Replaced the sub-11px-heavy type scale with explicit tokens: article and detail copy is at least 14px, supporting copy is 12–13px, and metadata is 11px. Only two Latin uppercase micro-labels remain at 8px.
