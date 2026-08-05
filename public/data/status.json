@@ -1,24 +1,26 @@
 {
   "schemaVersion": 8,
   "state": "ok",
-  "lastAttemptAt": "2026-08-04T00:12:38Z",
-  "lastSuccessAt": "2026-08-04T00:12:38Z",
-  "editionDate": "2026-08-04",
+  "lastAttemptAt": "2026-08-05T01:35:55Z",
+  "lastSuccessAt": "2026-08-05T01:35:55Z",
+  "editionDate": "2026-08-05",
   "itemCount": 10,
-  "message": "日报更新成功",
+  "message": "日报更新成功；候选主题或来源分布不均，已分级放宽配额补足 Top 10（1 条已标注）",
   "method": "deepseek",
   "selectionMethod": "deepseek",
   "selectionStrategy": "ai-ranked-rule-constrained",
-  "selectionStatus": "adjusted",
+  "selectionStatus": "relaxed",
   "selectionProvider": "deepseek",
   "selectionModel": "deepseek-v4-flash",
   "selectionNotices": [
-    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 4 个 Top 10 入选位"
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 3 个 Top 10 入选位"
   ],
-  "selectionWarnings": [],
+  "selectionWarnings": [
+    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（1 条已标注）"
+  ],
   "selectionDiagnostics": {
     "attempted": true,
-    "status": "adjusted",
+    "status": "relaxed",
     "failureReason": "",
     "candidateCount": 36,
     "provider": "deepseek",
@@ -29,57 +31,53 @@
     "aiUnscoredItemCount": 0,
     "unconstrainedTop": {
       "categoryCounts": {
-        "军事动态": 5,
-        "局部冲突": 5
+        "局部冲突": 7,
+        "军事动态": 3
       },
       "domainCounts": {
+        "aljazeera.com": 5,
+        "twz.com": 2,
         "defensenews.com": 2,
-        "twz.com": 1,
-        "breakingdefense.com": 2,
-        "bbc.co.uk": 2,
-        "aljazeera.com": 3
+        "bbc.co.uk": 1
       },
       "categoryViolations": {
-        "军事动态": 5,
-        "局部冲突": 5
+        "局部冲突": 7
       },
       "domainViolations": {
-        "aljazeera.com": 3
+        "aljazeera.com": 5
       }
     },
     "finalTop": {
       "categoryCounts": {
+        "局部冲突": 4,
         "军事动态": 3,
-        "局部冲突": 3,
-        "航空航天": 3,
-        "AI": 1
+        "航空航天": 3
       },
       "domainCounts": {
-        "defensenews.com": 1,
-        "twz.com": 2,
-        "breakingdefense.com": 2,
-        "bbc.co.uk": 1,
         "aljazeera.com": 2,
-        "nasa.gov": 1,
-        "techcrunch.com": 1
+        "twz.com": 2,
+        "defensenews.com": 2,
+        "spacenews.com": 1,
+        "nasa.gov": 2,
+        "bbc.co.uk": 1
       },
-      "categoryViolations": {},
+      "categoryViolations": {
+        "局部冲突": 4
+      },
       "domainViolations": {}
     },
-    "adjustedItemCount": 4,
+    "adjustedItemCount": 3,
     "adjustedOutIds": [
-      "50f43ae35e65ec",
-      "57b1ff7bea6738",
-      "809db88b56ff62",
-      "0cbc71249489ee"
+      "f62663f0eaf58e",
+      "455254c54dfed2",
+      "e2ef1ce31194c4"
     ],
     "adjustedInIds": [
-      "8d30e8277dea78",
-      "6494bb4c4a551a",
-      "512172001c1f3d",
-      "16bd0e2adad945"
+      "ccac1e3bbca2b8",
+      "c3b540dd2851b1",
+      "6f1d574186b742"
     ],
-    "relaxedItemCount": 0
+    "relaxedItemCount": 1
   },
   "translationStatus": "ok",
   "translationProvider": "deepseek",
@@ -87,8 +85,8 @@
   "translatedItemCount": 10,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 3,
-    "completedItemCount": 3,
+    "requestedItemCount": 1,
+    "completedItemCount": 1,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
@@ -102,8 +100,8 @@
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
     "targetItemCount": 10,
-    "reusedItemCount": 7,
-    "newlyTranslatedItemCount": 3,
+    "reusedItemCount": 9,
+    "newlyTranslatedItemCount": 1,
     "totalTranslatedItemCount": 10,
     "totalMissingItemCount": 0
   },
@@ -128,8 +126,10 @@
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": ""
   },
-  "warnings": [],
-  "coverageStatus": "complete",
+  "warnings": [
+    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（1 条已标注）"
+  ],
+  "coverageStatus": "supplemented",
   "freshItemCount": 10,
   "supplementalItemCount": 0,
   "effectiveLookbackHours": 24,
@@ -139,8 +139,8 @@
   "streamTranslatedItemCount": 43,
   "streamTranslationWarnings": [],
   "streamTranslationDiagnostics": {
-    "requestedItemCount": 1,
-    "completedItemCount": 1,
+    "requestedItemCount": 3,
+    "completedItemCount": 3,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
