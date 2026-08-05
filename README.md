@@ -1,6 +1,6 @@
 # 智域前沿 / Frontier Pulse
 
-面向全球科技、AI、航空航天、军事动态、局部冲突、前沿技术、无人系统与前沿研究的情报聚合平台。Cloudflare 托管静态网站；GitHub Actions 按 `Asia/Shanghai` 每 3 小时更新 24 小时全量动态，每天中国标准时间 08:00 生成 Top 10 中文简报、论文雷达、历史归档、Atom 订阅，并可发送管理员邮件摘要。
+面向全球科技、AI、航空航天、军事动态、局部冲突、前沿技术、无人系统与前沿研究的情报聚合平台。Cloudflare 托管静态网站；GitHub Actions 按 `Asia/Shanghai` 每 3 小时更新 24 小时全量动态。日报采用北京时间 07:07 主任务与 08:37 恢复任务，目标是在每日 08:00 前后稳定提供 Top 10 中文简报、论文雷达、历史归档、Atom 订阅，并可发送管理员邮件摘要。
 
 仓库：<https://github.com/voilalz/frontier-pulse>
 正式站点：<https://newsfrontier.top>
@@ -65,7 +65,7 @@ scripts/send_digest.py              SMTP 邮件摘要
 scripts/check_production.py         线上安全头与缓存头验收
 config/news_config.json             主题、信源、权重、时区、模型和归档期限
 tests/                              完全离线测试与固定样例
-.github/workflows/daily-news.yml     每天中国标准时间 08:00 更新、提交与发信
+.github/workflows/daily-news.yml     北京时间 07:07 主更新、08:37 幂等恢复、提交与发信
 .github/workflows/stream-update.yml  按中国标准时间每 3 小时更新全量动态流
 ```
 
