@@ -131,6 +131,7 @@
     if (!raw || typeof raw !== "object") return null;
     const relatedStories = (Array.isArray(raw.relatedStories) ? raw.relatedStories : []).map((story) => ({
       id: clean(story?.id),
+      eventId: clean(story?.eventId),
       editionDate: /^\d{4}-\d{2}-\d{2}$/.test(clean(story?.editionDate)) ? clean(story.editionDate) : "",
       title: clean(story?.title || story?.originalTitle, "历史事件"),
       originalTitle: clean(story?.originalTitle),
@@ -159,6 +160,89 @@
     };
   }
 
+  function normalizeEvidenceMatrix(raw) {
+    if (!raw || typeof raw !== "object") return null;
+    const claims = (Array.isArray(raw.claims) ? raw.claims : []).map((claim) => ({
+      text: clean(claim?.text),
+      status: clean(claim?.status, "single-source"),
+      statusLabel: clean(claim?.statusLabel, "仍需核验"),
+      sourceGroups: (Array.isArray(claim?.sourceGroups) ? claim.sourceGroups : []).map((value) => clean(value)).filter(Boolean).slice(0, 8),
+    })).filter((claim) => claim.text).slice(0, 4);
+    const disputes = (Array.isArray(raw.disputes) ? raw.disputes : []).map((dispute) => ({
+      label: clean(dispute?.label, "公开说法存在差异"),
+      current: clean(dispute?.current),
+      historical: clean(dispute?.historical),
+      editionDate: clean(dispute?.editionDate),
+      note: clean(dispute?.note),
+    })).filter((dispute) => dispute.current || dispute.historical).slice(0, 3);
+    return {
+      overallStatus: clean(raw.overallStatus, "single-source"),
+      independentSourceCount: Math.max(1, Number(raw.independentSourceCount) || 1),
+      sourceGroups: (Array.isArray(raw.sourceGroups) ? raw.sourceGroups : []).map((value) => clean(value)).filter(Boolean).slice(0, 12),
+      claims,
+      disputes,
+      explanation: clean(raw.explanation),
+    };
+  }
+
+  function normalizeForecastLedger(raw) {
+    return (Array.isArray(raw) ? raw : []).map((entry) => ({
+      predictionId: clean(entry?.predictionId),
+      eventId: clean(entry?.eventId),
+      statement: clean(entry?.statement),
+      horizon: clean(entry?.horizon, "观察"),
+      confidence: clean(entry?.confidence, "低"),
+      status: clean(entry?.status, "open"),
+      statusLabel: clean(entry?.statusLabel, "待验证"),
+      createdAt: clean(entry?.createdAt),
+      dueAfter: clean(entry?.dueAfter),
+      verificationSignals: (Array.isArray(entry?.verificationSignals) ? entry.verificationSignals : []).map((value) => clean(value)).filter(Boolean).slice(0, 4),
+    })).filter((entry) => entry.predictionId && entry.statement).slice(0, 12);
+  }
+
+  function normalizeEventDossier(raw, eventId = "") {
+    if (!raw || typeof raw !== "object") return null;
+    const timeline = (Array.isArray(raw.timeline) ? raw.timeline : []).map((entry) => ({
+      editionDate: clean(entry?.editionDate),
+      newsId: clean(entry?.newsId),
+      title: clean(entry?.title, "事件更新"),
+      source: clean(entry?.source, "公开来源"),
+      publishedAt: clean(entry?.publishedAt),
+      score: Number(entry?.score) || null,
+      relationLabel: clean(entry?.relationLabel),
+      associationScore: Number(entry?.associationScore) || null,
+    })).filter((entry) => entry.editionDate && entry.newsId).slice(-12);
+    return {
+      eventId: clean(raw.eventId || eventId),
+      status: clean(raw.status, "new"),
+      statusLabel: clean(raw.statusLabel, raw.status === "tracking" ? "持续跟踪" : "新事件"),
+      firstSeen: clean(raw.firstSeen),
+      lastSeen: clean(raw.lastSeen),
+      updateCount: Math.max(timeline.length, Number(raw.updateCount) || 0),
+      independentSourceCount: Math.max(1, Number(raw.independentSourceCount) || 1),
+      paperCount: Math.max(0, Number(raw.paperCount) || 0),
+      timeline,
+    };
+  }
+
+  function normalizeRelatedRecords(raw, type) {
+    return (Array.isArray(raw) ? raw : []).map((record) => ({
+      id: clean(record?.id),
+      eventId: clean(record?.eventId),
+      title: clean(record?.title || record?.originalTitle, type === "paper" ? "相关论文" : "相关新闻"),
+      originalTitle: clean(record?.originalTitle),
+      category: clean(record?.category),
+      researchArea: clean(record?.researchArea),
+      editionDate: clean(record?.editionDate),
+      publishedAt: clean(record?.publishedAt),
+      url: safeUrl(record?.url),
+      pdfUrl: safeUrl(record?.pdfUrl),
+      associationScore: Math.max(0, Math.min(100, Number(record?.associationScore) || 0)),
+      relationType: clean(record?.relationType, "同主题关联"),
+      associationReasons: (Array.isArray(record?.associationReasons) ? record.associationReasons : []).map((value) => clean(value)).filter(Boolean).slice(0, 3),
+    })).filter((record) => record.id && record.title).slice(0, 6);
+  }
+
   function normalizeItem(raw, index, editionDate = "") {
     if (!raw || typeof raw !== "object" || !clean(raw.title)) throw new Error(`第 ${index + 1} 条新闻缺少标题`);
     const sources = (Array.isArray(raw.sources) ? raw.sources : [])
@@ -171,11 +255,12 @@
     const summary = clean(raw.summary, "暂无摘要，请阅读原文核验。");
     const item = {
       id: clean(raw.id, `item-${index}`),
+      eventId: clean(raw.eventId),
       contentType: clean(raw.contentType, "news"),
       title: clean(raw.title),
       originalTitle: clean(raw.originalTitle || raw.title),
       summary,
-      keyFacts: (Array.isArray(raw.keyFacts) ? raw.keyFacts : [summary]).map((fact) => clean(fact)).filter(Boolean).slice(0, 4),
+      keyFacts: (Array.isArray(raw.keyFacts) ? raw.keyFacts : []).map((fact) => clean(fact)).filter(Boolean).slice(0, 4),
       why: clean(raw.why, "该事件的重要性需要结合后续公开信息继续判断。"),
       category: clean(raw.category, "前沿技术"),
       researchArea: clean(raw.researchArea),
@@ -213,6 +298,11 @@
       diversityRelaxed: Boolean(raw.diversityRelaxed),
       translationProvider: clean(raw.translationProvider),
       historyContext: normalizeHistoryContext(raw.historyContext),
+      evidenceMatrix: normalizeEvidenceMatrix(raw.evidenceMatrix),
+      forecastLedger: normalizeForecastLedger(raw.forecastLedger),
+      eventDossier: normalizeEventDossier(raw.eventDossier, clean(raw.eventId)),
+      relatedPapers: normalizeRelatedRecords(raw.relatedPapers, "paper"),
+      relatedNews: normalizeRelatedRecords(raw.relatedNews, "news"),
       editionDate: clean(raw.editionDate || editionDate),
       _compact: Boolean(raw._compact),
     };
@@ -846,23 +936,82 @@
 
   function renderSpotlight() {
     if (state.view !== "latest") return;
-    const items = (state.latestReport?.items || []).slice(0, 3);
+    const reportItems = state.latestReport?.items || [];
+    const requested = Array.isArray(state.latestReport?.spotlightIds) ? state.latestReport.spotlightIds : [];
+    const requestedItems = requested.map((id) => reportItems.find((item) => item.id === id)).filter(Boolean);
+    const items = requestedItems.length === 3 ? requestedItems : diverseSpotlightItems(reportItems);
     $("spotlightStories").innerHTML = items.length ? items.map((item, index) => `
-      <article class="spotlight-card${index === 0 && item.image ? " has-backdrop" : ""}">
-        ${index === 0 && item.image ? `<img class="spotlight-backdrop" src="${esc(item.image)}" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer">` : ""}
+      <article class="spotlight-card tone-${esc(categoryTone(item.category))}${index === 0 && item.image ? " has-backdrop" : ""}${index > 0 && item.image ? " has-thumb" : ""}">
+        ${index === 0 && item.image ? `<img class="spotlight-image spotlight-backdrop" src="${esc(item.image)}" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer">` : ""}
+        ${index > 0 && item.image ? `<img class="spotlight-image spotlight-thumb" src="${esc(item.image)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : ""}
         <div class="spotlight-content">
-          <div class="spotlight-meta"><b>0${index + 1}</b><span>${esc(item.category)}</span><span>${esc(item.source)}</span>${item.isSupplemental ? `<span class="supplemental-badge">补充观察 · ${item.selectionWindowHours}h</span>` : ""}</div>
+          <div class="spotlight-meta"><b>0${index + 1}</b><span>${esc(item.category)}</span><span>${esc(item.source)}</span>${item.eventDossier?.status === "tracking" ? '<span class="event-status-badge">持续事件</span>' : ""}${item.isSupplemental ? `<span class="supplemental-badge">补充观察 · ${item.selectionWindowHours}h</span>` : ""}</div>
           <h3>${highlightText(item.title)}</h3>
           <p>${highlightText(item.summary)}</p>
           <a href="#${esc(anchorId(item))}">查看事件脉络与证据 <span aria-hidden="true">↓</span></a>
         </div>
       </article>`).join("") : '<div class="empty"><b>今日必读暂不可用</b>请检查日报更新状态。</div>';
-    document.querySelectorAll(".spotlight-backdrop").forEach((image) => {
+    document.querySelectorAll(".spotlight-image").forEach((image) => {
       image.addEventListener("error", () => {
         image.closest(".spotlight-card")?.classList.remove("has-backdrop");
+        image.closest(".spotlight-card")?.classList.remove("has-thumb");
         image.remove();
       }, { once: true });
     });
+  }
+
+  function categoryTone(category) {
+    return ({
+      "AI": "ai", "航空航天": "space", "军事动态": "defense",
+      "局部冲突": "conflict", "前沿技术": "frontier", "无人系统": "unmanned",
+    })[category] || "frontier";
+  }
+
+  function diverseSpotlightItems(items) {
+    if (!items.length) return [];
+    const selected = [items[0]];
+    const remaining = items.slice(1);
+    while (remaining.length && selected.length < 3) {
+      const events = new Set(selected.map((item) => item.eventId || item.id));
+      const categories = new Set(selected.map((item) => item.category));
+      const sources = new Set(selected.map((item) => item.source));
+      remaining.sort((a, b) => {
+        const diversity = (item) => (events.has(item.eventId || item.id) ? 0 : 40)
+          + (categories.has(item.category) ? 0 : 24) + (sources.has(item.source) ? 0 : 14)
+          + Number(item.score || 0) / 100;
+        return diversity(b) - diversity(a);
+      });
+      selected.push(remaining.shift());
+    }
+    return selected;
+  }
+
+  function renderIntelligence() {
+    const section = $("intelligenceSection");
+    if (!section) return;
+    section.hidden = state.view !== "latest";
+    if (section.hidden) return;
+    const weekly = state.latestReport?.weeklyDigest || {};
+    const weeklyEvents = Array.isArray(weekly.events) ? weekly.events.slice(0, 4) : [];
+    $("weeklyRange").textContent = weekly.fromDate && weekly.toDate ? `${weekly.fromDate} — ${weekly.toDate}` : "本周";
+    $("weeklySummary").textContent = clean(weekly.summary, "事件档案将在每日更新后自动收敛为周度脉络。");
+    $("weeklyEvents").innerHTML = weeklyEvents.length ? weeklyEvents.map((event) => {
+      const current = reportItemForEvent(event.eventId);
+      const title = current ? `<a href="#${esc(anchorId(current))}">${esc(event.title)}</a>` : esc(event.title);
+      return `<li><span>${esc(event.trend || "持续观察")}</span><div><b>${title}</b><small>${esc(event.category)} · ${Number(event.updateCount) || 1} 次更新 · ${Number(event.independentSourceCount) || 1} 个独立来源组${Number(event.paperCount) ? ` · ${Number(event.paperCount)} 篇关联论文` : ""}</small></div></li>`;
+    }).join("") : '<li class="intelligence-empty">本周事件线正在积累。</li>';
+
+    const anomaly = state.latestReport?.anomalySignals || {};
+    const signals = Array.isArray(anomaly.signals) ? anomaly.signals.slice(0, 4) : [];
+    $("signalBaseline").textContent = `${Number(anomaly.observationDays) || 0} / ${Number(anomaly.baselineDays) || 30} 日基线`;
+    $("signalSummary").textContent = clean(anomaly.summary, "历史样本积累后将自动识别跨日热度异常。");
+    $("anomalySignals").innerHTML = signals.length ? signals.map((signal) => `
+      <li class="signal-${esc(signal.severity || "elevated")}"><b>${esc(signal.name)}</b><span>${esc(signal.explanation)}</span><em>${Number(signal.ratio) || 0}× 基线</em></li>`).join("")
+      : `<li class="signal-stable"><b>${anomaly.status === "stable" ? "未见显著异常" : "基线积累中"}</b><span>${esc(anomaly.summary || "至少积累七个归档日后启用异常判定。")}</span></li>`;
+  }
+
+  function reportItemForEvent(eventId) {
+    return (state.latestReport?.items || []).find((item) => clean(item.eventId) === clean(eventId));
   }
 
   function searchableText(item) {
@@ -873,6 +1022,10 @@
       ...item.sources.map((source) => source.name),
       item.historyContext?.timelineSummary,
       ...(item.historyContext?.relatedStories || []).flatMap((story) => [story.title, story.originalTitle, story.summary]),
+      ...(item.eventDossier?.timeline || []).flatMap((entry) => [entry.title, entry.source]),
+      ...(item.forecastLedger || []).flatMap((entry) => [entry.statement, ...entry.verificationSignals]),
+      ...(item.relatedPapers || []).flatMap((paper) => [paper.title, paper.originalTitle, paper.researchArea]),
+      ...(item.relatedNews || []).flatMap((news) => [news.title, news.originalTitle, news.category]),
     ].join(" ").toLocaleLowerCase();
   }
 
@@ -943,6 +1096,72 @@
       ${outlook ? `<h4>后续观察</h4><ul class="history-outlook">${outlook}</ul>` : ""}
       <p class="history-disclaimer">关联度反映公开文本中的线索重合，不是因果或事实真伪概率；预判是条件性观察，不构成确定结论。</p>
     </section>`;
+  }
+
+  function renderEventDossier(item) {
+    const dossier = item.eventDossier;
+    if (!dossier?.eventId) return "";
+    return `<section class="event-dossier">
+      <div class="history-heading"><h4>事件档案</h4><span>${esc(dossier.eventId)}</span></div>
+      <div class="dossier-metrics">
+        <span><b>${esc(dossier.statusLabel)}</b><small>当前状态</small></span>
+        <span><b>${esc(dossier.firstSeen || "—")}</b><small>首次进入档案</small></span>
+        <span><b>${dossier.updateCount || 1}</b><small>时间线更新</small></span>
+        <span><b>${dossier.independentSourceCount || 1}</b><small>独立来源组</small></span>
+        <span><b>${dossier.paperCount || 0}</b><small>关联论文</small></span>
+      </div>
+    </section>`;
+  }
+
+  function renderEvidenceMatrix(item) {
+    const matrix = item.evidenceMatrix;
+    if (!matrix) return "";
+    const statusLabel = matrix.overallStatus === "contested" ? "存在争议线索"
+      : matrix.overallStatus === "multi-source" ? "多源事件背景" : "单一来源待核验";
+    const claims = matrix.claims.length ? matrix.claims.map((claim) => `
+      <li><span>${highlightText(claim.text)}</span><em data-evidence-status="${esc(claim.status)}">${esc(claim.statusLabel)}</em></li>`).join("")
+      : '<li class="evidence-empty"><span>当前元数据不足，未用摘要重复填充关键事实。</span><em>保持空缺</em></li>';
+    const disputes = matrix.disputes.length ? `<div class="dispute-block"><h5>争议线索</h5>${matrix.disputes.map((dispute) => `
+      <p><b>${esc(dispute.label)}</b><span>${highlightText(dispute.current)} ↔ ${highlightText(dispute.historical)}</span><small>${esc(dispute.note)}</small></p>`).join("")}</div>`
+      : '<p class="no-dispute">未在已收录元数据中发现可明确判定的直接冲突；这不代表外部不存在争议。</p>';
+    return `<section class="evidence-matrix">
+      <div class="history-heading"><h4>证据与争议矩阵</h4><span>${esc(statusLabel)}</span></div>
+      <p>${esc(matrix.explanation)}</p><ul>${claims}</ul>${disputes}
+    </section>`;
+  }
+
+  function renderForecastLedger(item) {
+    if (!item.forecastLedger.length) return "";
+    const dueCount = item.forecastLedger.filter((entry) => entry.status === "due").length;
+    const ledgerSummary = dueCount
+      ? `${dueCount} 条到期待复核 · ${item.forecastLedger.length - dueCount} 条开放`
+      : `${item.forecastLedger.length} 条开放观察`;
+    return `<section class="forecast-ledger">
+      <div class="history-heading"><h4>可验证预判台账</h4><span>${ledgerSummary}</span></div>
+      <ol>${item.forecastLedger.slice(0, 4).map((entry) => `<li class="forecast-${esc(entry.status)}">
+        <div><b>${esc(entry.horizon)} · ${esc(entry.statusLabel)}</b><em>置信 ${esc(entry.confidence)}</em></div>
+        <p>${highlightText(entry.statement)}</p>
+        <small>建立 ${esc(entry.createdAt || "—")}${entry.dueAfter ? ` · 建议复核 ${esc(entry.dueAfter)} 后` : ""} · 观察：${esc(entry.verificationSignals.join("、") || "新的独立证据")}</small>
+      </li>`).join("")}</ol>
+      <p class="history-disclaimer">预判只会按日期进入“到期待复核”，不会因模型后续自述而自动判定成功。</p>
+    </section>`;
+  }
+
+  function renderRelatedPapers(item) {
+    if (!item.relatedPapers.length) return "";
+    return `<section class="cross-links"><div class="history-heading"><h4>关联研究</h4><span>新闻 ↔ 论文</span></div><ul>${item.relatedPapers.map((paper) => `
+      <li><div><b>${esc(paper.relationType)}</b><em>${paper.associationScore}/100</em></div>
+        <a href="${esc(paper.url || paper.pdfUrl)}" target="_blank" rel="noopener noreferrer">${highlightText(paper.title)}</a>
+        <small>${esc(paper.researchArea)}${paper.associationReasons.length ? ` · ${esc(paper.associationReasons.join(" · "))}` : ""}</small></li>`).join("")}</ul>
+      <p class="history-disclaimer">关联分反映主题和技术线索重合，不表示论文直接验证了新闻中的现实事件。</p></section>`;
+  }
+
+  function renderRelatedNews(item) {
+    if (!item.relatedNews.length) return "";
+    return `<section class="cross-links paper-news-links"><div class="history-heading"><h4>近期现实动态</h4><span>论文 ↔ 新闻</span></div><ul>${item.relatedNews.map((news) => `
+      <li><div><b>${esc(news.relationType)}</b><em>${news.associationScore}/100</em></div>
+        <a href="${esc(news.url)}" target="_blank" rel="noopener noreferrer">${highlightText(news.title)}</a>
+        <small>${esc(news.category)} · ${esc(news.editionDate || formatDate(news.publishedAt, false))}${news.associationReasons.length ? ` · ${esc(news.associationReasons.join(" · "))}` : ""}</small></li>`).join("")}</ul></section>`;
   }
 
   function captureViewportAnchor() {
@@ -1077,6 +1296,7 @@
         <summary>展开研究问题、方法、发现与局限</summary>
         <div class="detail-grid paper-detail">${structured}
           <section><h4>论文元数据</h4><p>${esc(authors)}</p><p>${esc(item.arxivCategories.join(" · ") || item.primaryCategory)}</p><p>${esc(item.confidenceReason)}</p></section>
+          ${renderRelatedNews(item)}
         </div>
       </details>
     </article>`;
@@ -1097,13 +1317,20 @@
     const key = itemKey(item);
     const opened = state.expandedKeys.has(key) ? " open" : "";
     const visual = item.image ? `<figure class="story-visual"><img src="${esc(item.image)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"></figure>` : "";
+    const keyFacts = item.keyFacts.length
+      ? `<h4>关键事实</h4><ul>${item.keyFacts.map((fact) => `<li>${highlightText(fact)}</li>`).join("")}</ul>`
+      : '<h4>关键事实</h4><p class="detail-muted">当前元数据不足，系统没有用摘要重复填充关键事实。</p>';
     const detailContent = item._compact
       ? '<div class="detail-loading">展开后将按需读取当期归档中的完整来源、关键事实与评分解释。</div>'
       : `<div class="detail-grid">
-          <section><h4>关键事实</h4><ul>${item.keyFacts.map((fact) => `<li>${highlightText(fact)}</li>`).join("")}</ul><h4>为什么重要</h4><p>${esc(item.why)}</p></section>
+          <section>${keyFacts}<h4>为什么重要</h4><p>${esc(item.why)}</p></section>
           <section><h4>来源与置信度</h4><p>${esc(item.confidenceReason)}</p><ul class="source-list">${sources || "<li>没有可用来源链接</li>"}</ul></section>
           <section><h4>重要度为什么是 ${item.score}</h4><ul>${scoreReasons}</ul>${components ? `<ul class="score-components">${components}</ul>` : ""}${item.selectionNote ? `<p class="selection-note">${esc(item.selectionNote)}</p>` : ""}<p>重要度用于排序，不是对报道真伪的概率判断。</p></section>
+          ${renderEventDossier(item)}
+          ${renderEvidenceMatrix(item)}
           ${renderHistoryContext(item)}
+          ${renderForecastLedger(item)}
+          ${renderRelatedPapers(item)}
         </div>`;
     return `<article class="story" id="${esc(anchorId(item))}" data-key="${esc(key)}">
       <span class="rank">${String(index + 1).padStart(2, "0")}</span>
@@ -1117,6 +1344,8 @@
           ${item.editionDate ? `<span>${esc(item.editionDate)} 版</span>` : ""}
           <span class="confidence" data-confidence="${esc(item.confidence)}">置信度 ${esc(item.confidence)}</span>
           ${item.historyContext?.relatedCount ? `<span class="history-badge">历史关联 ${item.historyContext.relatedCount}</span>` : ""}
+          ${item.eventDossier?.status === "tracking" ? `<span class="event-status-badge">事件档案 ${item.eventDossier.updateCount}</span>` : ""}
+          ${item.relatedPapers.length ? `<span class="research-link-badge">关联论文 ${item.relatedPapers.length}</span>` : ""}
           ${item.translationProvider ? `<span class="translation-badge">${esc(item.translationProvider === "deepseek" ? "DeepSeek 中文" : "AI 中文")}</span>` : ""}
         </div>
         <h3>${highlightText(item.title)}</h3>${original}<p class="summary">${highlightText(item.summary)}</p>
@@ -1216,6 +1445,7 @@
     renderViewCopy();
     renderDateControl();
     renderSpotlight();
+    renderIntelligence();
     renderWatchwords();
     renderResearchKeywords();
     renderSourceFilter();

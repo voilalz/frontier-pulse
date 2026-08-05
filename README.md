@@ -16,13 +16,18 @@
 - “我的论文关键词”可在浏览器保存最多 20 个中英文词，自动筛选、命中高亮并生成专属论文流；个人词不上传，系统实际采集词则公开显示在页面上。
 - 配置 DeepSeek 时，论文雷达可分批为最多 60 篇生成中文标题、摘要、研究问题、方法、主要发现与局限；全量动态最多翻译 120 条，并复用未变化条目的既有翻译以控制成本。新闻每批 6 条、论文每批 5 篇，缺失项会自动拆分重试，单个批次失败不会删除原始内容。
 - 首页采用更短的栏目文案和“今日必读 Top 3 → 执行摘要 → 完整 Top 10”层级；头条有图片时自动作为带渐变遮罩的背景过渡，无图片时保持纯色版式，不依赖第三方每日壁纸接口。
+- 今日必读 Top 3 同时按 `eventId`、主题和来源做二次去重，避免首屏被同一事件或同类新闻占满。首条使用新闻配图与按类别变化的安全渐变，其余两条在有图时显示懒加载缩略图。
 - 全站采用面向中文阅读的 14px 正文、12–13px 辅助信息和 11px 元信息阶梯；浅色次要文本满足 WCAG AA 对比度，系统字体优先，头条图片另有不依赖图片亮度的保底暗层。
 - 每条 Top 10 自动回看近 365 日归档，通过标题、摘要、关键事实和标签计算可解释的关联度，展示关联事件时间线、阶段演化总结与条件性后续观察；规则先锁定历史证据，AI 只能总结给定候选，不能新增或替换历史记录。
+- 统一 `eventId` 把跨日后续报道收敛到可持续的事件档案，保留首次/最近观测、阶段、时间线、来源网络、关联论文和未结预判。
+- 每周把高关联报道收敛为 5–8 条事件线；异常信号以近 30 个有归档日的中位数与 MAD 为基线，只在报道量并获得至少两个独立来源支持时标记主题/实体升温。
+- 新闻与论文使用标题、摘要、关键词和领域进行双向关联；新闻卡可回溯相关研究，论文卡可查看近期现实动态。
+- 每个事件附带“证据/争议矩阵”与可验证的预判台账：记录独立来源组、否认/争议线索、到期日、验证信号和开放/到期状态，不把条件性判断伪装成确定结论。
 - 展示一个事件的全部来源、独立来源数量、来源置信度和可展开的评分分项。
 - 按日归档、日期前后切换，以及按月分片的轻量跨日期搜索；完整评分与来源在展开时按需读取当期归档。
 - 独立收藏页和关注词情报流；数据只保存在当前浏览器 `localStorage`。
 - 懒加载新闻缩略图、单条永久锚点与复制链接、OG/Twitter 分享卡片、本地时区标识、搜索高亮和跨日期分组。
-- 自动/手动深色主题和 Service Worker 离线回退；常规请求复用 ETag/CDN 缓存，仅手动刷新绕过缓存。
+- 自动/手动深色主题和 Service Worker 离线回退；常规请求使用干净 URL 和网络优先再验证，只在断网时回退最后成功缓存，无需在 HTML、CSS、JS 和 Service Worker 四处手工同步版本号。
 - 公开 `feed.xml` Atom 订阅，不需要收集访客邮箱。
 - 生产环境不含硬编码样例。远程读取失败时，只能使用明确标警的“上次成功真实缓存”；没有缓存则展示空状态。
 - `status.json` 记录最后尝试、最后成功与失败原因；页面对更新失败、超过 36 小时和条目不足 10 条发出醒目警告。
@@ -37,9 +42,11 @@
 4. 配置 `DEEPSEEK_API_KEY` 时，调用 DeepSeek Chat Completions（JSON 输出、关闭思考模式）逐条评估候选重要度；程序按默认 `AI 65% + 规则 35%` 合成排序，再确定性执行类别与来源配额。最终 Top 10 随后独立进入中文编辑；动态流翻译使用短序号、小批次和缺失项拆分重试。OpenAI Responses 仍可作为可选提供方。
 5. 独立按 arXiv 分类与 `research.collection_keywords` 查询标题/摘要，合并去重后按主题相关性、摘要完整度与新鲜度排序；可选 AI 中文编辑不会改变原始论文元数据。
 6. 最终 Top 10 与旧归档做有界关联检索；只把达到阈值且早于当前版次的记录交给可选 AI，总结时间演化和可验证的后续观察点。模型失败时保留规则时间线，不影响日报发布。
-7. 校验日报恰好 10 条后，写入最新一期、按日归档、月度搜索分片、Atom Feed 和健康状态；全量动态保持严格 24 小时语义，允许低流量日少于 10 条。
-8. 只有在 72 小时内仍无法找到 10 条可验证候选，或完全没有 24 小时候选时，才保留上一版真实日报并记录失败，绝不生成虚构新闻。
-9. GitHub Actions 提交数据，Cloudflare 自动发布；配置 SMTP 时再发送邮件。
+7. 将强同事件线索映射到持久 `eventId`，更新事件档案、证据/争议矩阵和预判台账；再由事件档案静态生成当周收敛与跨日异常信号。
+8. 将当日论文与新闻做双向语义词汇关联，关联分、类型和理由同时写回两条流，不让模型凭空创建关系。
+9. 校验日报恰好 10 条后，写入最新一期、按日归档、月度搜索分片、事件档案、周报、异常信号、Atom Feed 和健康状态；全量动态保持严格 24 小时语义。
+10. 只有在 72 小时内仍无法找到 10 条可验证候选，或完全没有 24 小时候选时，才保留上一版真实日报并记录失败，绝不生成虚构新闻。
+11. GitHub Actions 提交数据，Cloudflare 自动发布；配置 SMTP 时再发送邮件。
 
 ## 目录
 
@@ -56,6 +63,10 @@ public/
   data/stream.json                  最近 24 小时合格动态流（最多 300 条）
   data/stream-status.json           动态流健康状态
   data/research.json                最近 7 天前沿论文雷达
+  data/events.json                  持久跨日事件档案与预判台账
+  data/weekly.json                  当周 5–8 条收敛事件线
+  data/weekly/YYYY-Www.json         按 ISO 周归档的周报
+  data/signals.json                 30 日稳健基线异常信号
   data/archive/YYYY-MM-DD.json      完整每日版
   data/archive/index.json           可用日期与期刊元数据
   data/archive/search-index.json    月度搜索分片清单
@@ -88,6 +99,10 @@ python scripts/update_news.py \
   --stream-output /tmp/frontier-stream.json \
   --stream-status-output /tmp/frontier-stream-status.json \
   --research-output /tmp/frontier-research.json \
+  --events-output /tmp/frontier-events.json \
+  --weekly-output /tmp/frontier-weekly.json \
+  --weekly-dir /tmp/frontier-weekly \
+  --signals-output /tmp/frontier-signals.json \
   --research-fixture tests/fixtures/papers.json \
   --feed-output /tmp/frontier-feed.xml \
   --skip-ai \
@@ -155,6 +170,7 @@ python scripts/update_news.py
 
 - 常规页面加载使用不带时间戳的干净 URL，让浏览器、Cloudflare、ETag 和 `_headers` 中的 `max-age` 生效。
 - 只有点击页面刷新按钮时才追加 `t=...` 并使用 `cache: no-store`。
+- App Shell 采用网络优先、离线回退策略；HTML/CSS/JS 不再携带手工发布号，Service Worker 也不再需要每版修改缓存名。
 - `search-index.json` 只列出月度分片；分片不保存 `scoreComponents`、`scoreReasons`、`confidenceReason` 等详情字段。用户展开搜索结果时再读取 `YYYY-MM-DD.json`。
 - `stream.json` 缓存 5 分钟并由三小时工作流更新；`research.json` 缓存 30 分钟并由每日工作流更新。两者都采用分页渲染，避免一次创建数百个 DOM 节点。
 - 论文查询按研究方向合并分类，并为每个系统采集词查询标题与摘要；所有查询单连接顺序执行，请求间等待 3.1 秒，同一批任务每天运行一次，符合 [arXiv API 限速与缓存建议](https://info.arxiv.org/help/api/tou.html)。
@@ -207,6 +223,9 @@ python scripts/check_production.py --site-url https://newsfrontier.top/
 - 每日条数：`top_n`，当前前端和校验固定为 10
 - 搜索索引保留期：`archive_retention_days`，默认 730 期
 - 历史关联：`history_lookback_days` 默认 365 日、`history_max_links` 默认 3 条、`history_min_association_score` 默认 30；`history_analysis_enabled` 控制是否用当前 AI 提供方总结已匹配的证据。
+- 事件档案：`event_retention_days` 默认 365 日，`event_same_story_score` 默认 45；只有强同事件关联才能沿用旧 `eventId`。
+- 周报与异常：`weekly_event_limit` 默认 8；`signal_baseline_days` 默认 30，并可设置最少基线天数、当日计数和独立来源门槛。
+- 论文—新闻关联：`paper_news_link_limit` 默认 3，`paper_news_min_score` 默认 24。
 - 前端过期阈值：`public/assets/app.js` 中的 36 小时判断
 
 每日工作流使用浅克隆，搜索数据按月分片并只保存可检索字段，降低 Git checkout 和浏览器解析成本。完整归档仍会随 Git 历史增长；运行多年后应把旧归档迁移到 R2 或独立数据分支，但先保留 `index.json`、搜索清单和日期详情 URL 的兼容层。

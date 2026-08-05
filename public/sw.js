@@ -1,12 +1,12 @@
 "use strict";
 
 const CACHE_PREFIX = "frontier-pulse-";
-const CACHE_NAME = `${CACHE_PREFIX}v2.0.3`;
+const CACHE_NAME = `${CACHE_PREFIX}runtime`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./assets/styles.css?v=2.0.3",
-  "./assets/app.js?v=2.0.3",
+  "./assets/styles.css",
+  "./assets/app.js",
   "./favicon.svg",
   "./og-card.png",
 ];
@@ -38,16 +38,6 @@ async function networkFirst(request) {
   }
 }
 
-async function staleWhileRevalidate(request) {
-  const cache = await caches.open(CACHE_NAME);
-  const cached = await cache.match(request, { ignoreSearch: false });
-  const update = fetch(request).then(async (response) => {
-    if (response.ok) await cache.put(request, response.clone());
-    return response;
-  });
-  return cached || update;
-}
-
 self.addEventListener("fetch", (event) => {
   const request = event.request;
   if (request.method !== "GET") return;
@@ -57,7 +47,8 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(fetch(request));
     return;
   }
-  const isData = url.pathname.includes("/data/") || url.pathname.endsWith("/feed.xml");
-  const isNavigation = request.mode === "navigate" || request.destination === "document";
-  event.respondWith(isData || isNavigation ? networkFirst(request) : staleWhileRevalidate(request));
+  // Every same-origin resource revalidates through the network and falls back
+  // to the last successful response only when offline. This removes all manual
+  // release-number synchronization between HTML, CSS, JS and the worker cache.
+  event.respondWith(networkFirst(request));
 });

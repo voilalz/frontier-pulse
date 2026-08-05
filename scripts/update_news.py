@@ -18,6 +18,7 @@ import json
 import logging
 import os
 import re
+import statistics
 import sys
 import tempfile
 import time
@@ -1032,6 +1033,7 @@ def build_history_contexts(
                 continue
             ranked.append({
                 "id": clean_text(previous.get("id")),
+                "eventId": clean_text(previous.get("eventId")),
                 "editionDate": clean_text(previous.get("editionDate")),
                 "title": clean_text(previous.get("title")) or clean_text(previous.get("originalTitle")) or "历史事件",
                 "originalTitle": clean_text(previous.get("originalTitle")),
@@ -1053,6 +1055,238 @@ def build_history_contexts(
             item, ranked[:max_links], lookback_days
         )
     return contexts
+
+
+def stable_event_id(seed: Any) -> str:
+    """Create an opaque event identifier that is independent of display text."""
+    material = clean_text(seed).lower() or "unknown-event"
+    return "evt-" + hashlib.sha1(material.encode("utf-8")).hexdigest()[:12]
+
+
+def event_records(value: Any) -> list[dict[str, Any]]:
+    if not isinstance(value, dict) or not isinstance(value.get("items"), list):
+        return []
+    return [record for record in value["items"] if isinstance(record, dict) and clean_text(record.get("eventId"))]
+
+
+def assign_event_ids(
+    items: list[dict[str, Any]],
+    previous_registry: Any,
+    config: dict[str, Any],
+) -> None:
+    """Reuse an event ID only for strong same-event evidence, never category alone."""
+    records = event_records(previous_registry)
+    news_to_event = {
+        clean_text(news_id): clean_text(record.get("eventId"))
+        for record in records
+        for news_id in record.get("newsIds", []) if clean_text(news_id)
+    }
+    threshold = max(30, min(90, int(config.get("event_same_story_score", 45))))
+    for item in items:
+        current_news_id = clean_text(item.get("id"))
+        candidates: list[tuple[int, str]] = []
+        direct_event = news_to_event.get(current_news_id)
+        if direct_event:
+            candidates.append((100, direct_event))
+        context = item.get("historyContext", {})
+        related = context.get("relatedStories", []) if isinstance(context, dict) else []
+        for story in related if isinstance(related, list) else []:
+            if not isinstance(story, dict):
+                continue
+            association = int(story.get("associationScore", 0) or 0)
+            same_story = clean_text(story.get("relationLabel")) == "同一事件后续"
+            if not same_story and association < threshold:
+                continue
+            event_id = clean_text(story.get("eventId")) or news_to_event.get(clean_text(story.get("id")), "")
+            if event_id:
+                candidates.append((association + (20 if same_story else 0), event_id))
+        if candidates:
+            candidates.sort(reverse=True)
+            item["eventId"] = candidates[0][1]
+            continue
+        # Older compact archives do not contain eventId. A direct predecessor's
+        # immutable news ID becomes the seed, allowing all subsequent editions
+        # to converge on the same event record.
+        direct_predecessors = [
+            story for story in related if isinstance(story, dict)
+            and clean_text(story.get("relationLabel")) == "同一事件后续"
+            and clean_text(story.get("id"))
+        ]
+        if direct_predecessors:
+            direct_predecessors.sort(key=lambda story: clean_text(story.get("editionDate")))
+            item["eventId"] = stable_event_id(direct_predecessors[0]["id"])
+        else:
+            item["eventId"] = stable_event_id(current_news_id)
+
+
+DENIAL_MARKERS = (
+    "deny", "denies", "denied", "refute", "refutes", "false claim", "dispute",
+    "否认", "驳斥", "不实", "有争议", "未证实",
+)
+
+
+def contains_denial_marker(value: Any) -> bool:
+    text = clean_text(value).lower()
+    return any(marker in text for marker in DENIAL_MARKERS)
+
+
+def build_evidence_matrix(item: dict[str, Any]) -> dict[str, Any]:
+    sources = item.get("sources", []) if isinstance(item.get("sources"), list) else []
+    source_groups = list(dict.fromkeys(
+        clean_text(source.get("evidenceGroup") or source.get("domain") or source.get("name"))
+        for source in sources if isinstance(source, dict)
+        and clean_text(source.get("evidenceGroup") or source.get("domain") or source.get("name"))
+    ))
+    corroboration = max(1, int(item.get("corroboration", 1) or 1))
+    claim_status = "multi-source-context" if corroboration >= 2 else "single-source"
+    claims = [{
+        "text": clean_text(fact, 160),
+        "status": claim_status,
+        "statusLabel": "事件获多源报道，单项事实仍需核验" if corroboration >= 2 else "当前仅见单一独立来源",
+        "sourceGroups": source_groups[:6],
+    } for fact in item.get("keyFacts", []) if clean_text(fact)][:3]
+
+    context = item.get("historyContext", {}) if isinstance(item.get("historyContext"), dict) else {}
+    current_text = " ".join((clean_text(item.get("title")), clean_text(item.get("summary"))))
+    current_denial = contains_denial_marker(current_text)
+    disputes: list[dict[str, Any]] = []
+    for story in context.get("relatedStories", []) if isinstance(context.get("relatedStories"), list) else []:
+        story_text = " ".join((clean_text(story.get("title")), clean_text(story.get("summary"))))
+        if current_denial == contains_denial_marker(story_text):
+            continue
+        if len(history_tokens(current_text).intersection(history_tokens(story_text))) < 2:
+            continue
+        disputes.append({
+            "label": "公开措辞存在否认或未证实差异",
+            "current": clean_text(item.get("title"), 140),
+            "historical": clean_text(story.get("title"), 140),
+            "editionDate": clean_text(story.get("editionDate")),
+            "note": "该标记只提示措辞差异，需要打开原始来源核验具体主张。",
+        })
+        if len(disputes) == 2:
+            break
+    if disputes:
+        overall = "contested"
+        explanation = "归档文本中出现否认、驳斥或未证实措辞差异，已列入争议观察。"
+    elif corroboration >= 2:
+        overall = "multi-source"
+        explanation = f"当前事件由 {corroboration} 个独立来源组报道；这不等同于每项细节均被独立证实。"
+    else:
+        overall = "single-source"
+        explanation = "当前仅有一个独立来源组，关键事实保持待核验状态。"
+    return {
+        "overallStatus": overall,
+        "independentSourceCount": corroboration,
+        "sourceGroups": source_groups[:8],
+        "claims": claims,
+        "disputes": disputes,
+        "explanation": explanation,
+    }
+
+
+FORECAST_SIGNALS = {
+    "AI": ["正式模型卡或评测结果", "监管、部署或算力计划变化"],
+    "航空航天": ["正式任务时间表或许可", "后续试验、发射或在轨结果"],
+    "军事动态": ["正式合同、预算或部署文件", "后续演训、交付或作战序列变化"],
+    "局部冲突": ["至少两个独立来源确认", "官方声明、停火执行或兵力态势变化"],
+    "前沿技术": ["可复现实验或第三方验证", "工程化、量产或监管节点"],
+    "无人系统": ["后续试验与任务数据", "规模化部署、采购或反制变化"],
+}
+
+
+def forecast_due_date(edition: str, horizon: str) -> str:
+    try:
+        base = datetime.strptime(edition, "%Y-%m-%d").date()
+    except ValueError:
+        return ""
+    days = 90 if horizon == "中期" else 30
+    return (base + timedelta(days=days)).isoformat()
+
+
+def build_forecast_entries(item: dict[str, Any], edition: str) -> list[dict[str, Any]]:
+    context = item.get("historyContext", {}) if isinstance(item.get("historyContext"), dict) else {}
+    signals = FORECAST_SIGNALS.get(clean_text(item.get("category")), ["新的独立来源", "正式文件或可验证结果"])
+    entries: list[dict[str, Any]] = []
+    for observation in context.get("outlook", []) if isinstance(context.get("outlook"), list) else []:
+        statement = clean_text(observation.get("text"), 240)
+        if not statement:
+            continue
+        horizon = clean_text(observation.get("horizon")) or "观察"
+        event_id = clean_text(item.get("eventId"))
+        prediction_id = "pred-" + hashlib.sha1(
+            f"{event_id}|{horizon}|{normalized_title(statement)}".encode("utf-8")
+        ).hexdigest()[:12]
+        entries.append({
+            "predictionId": prediction_id,
+            "eventId": event_id,
+            "statement": statement,
+            "horizon": horizon,
+            "confidence": clean_text(observation.get("confidence")) or "低",
+            "status": "open",
+            "statusLabel": "待验证",
+            "createdAt": edition,
+            "dueAfter": forecast_due_date(edition, horizon),
+            "verificationSignals": signals,
+            "evidenceIds": [clean_text(item.get("id"))],
+            "lastReviewedAt": edition,
+        })
+    return entries[:2]
+
+
+def attach_item_intelligence(items: list[dict[str, Any]], edition: str) -> None:
+    for item in items:
+        context = item.get("historyContext", {}) if isinstance(item.get("historyContext"), dict) else {}
+        timeline = [{
+            "editionDate": clean_text(story.get("editionDate")),
+            "newsId": clean_text(story.get("id")),
+            "title": clean_text(story.get("title"), 180),
+            "source": clean_text(story.get("source")),
+            "relationLabel": clean_text(story.get("relationLabel")),
+            "associationScore": int(story.get("associationScore", 0) or 0),
+        } for story in context.get("relatedStories", []) if isinstance(story, dict)]
+        timeline.append({
+            "editionDate": edition,
+            "newsId": clean_text(item.get("id")),
+            "title": clean_text(item.get("title"), 180),
+            "source": clean_text(item.get("source")),
+            "relationLabel": "本期更新",
+            "associationScore": 100,
+        })
+        item["evidenceMatrix"] = build_evidence_matrix(item)
+        item["forecastLedger"] = build_forecast_entries(item, edition)
+        item["eventDossier"] = {
+            "eventId": clean_text(item.get("eventId")),
+            "status": "tracking" if len(timeline) > 1 else "new",
+            "statusLabel": "持续跟踪" if len(timeline) > 1 else "新事件",
+            "firstSeen": min((entry["editionDate"] for entry in timeline if entry["editionDate"]), default=edition),
+            "lastSeen": edition,
+            "updateCount": len(timeline),
+            "timeline": timeline[-8:],
+            "independentSourceCount": item["evidenceMatrix"]["independentSourceCount"],
+            "paperCount": 0,
+        }
+
+
+def choose_spotlight_items(items: list[dict[str, Any]], count: int = 3) -> list[dict[str, Any]]:
+    """Keep the leader, then maximize event/category/source diversity."""
+    if not items or count <= 0:
+        return []
+    selected = [items[0]]
+    remaining = list(items[1:])
+    while remaining and len(selected) < count:
+        selected_events = {clean_text(item.get("eventId") or item.get("id")) for item in selected}
+        selected_categories = {clean_text(item.get("category")) for item in selected}
+        selected_sources = {clean_text(item.get("source")) for item in selected}
+        best = max(remaining, key=lambda item: (
+            40 if clean_text(item.get("eventId") or item.get("id")) not in selected_events else 0,
+            24 if clean_text(item.get("category")) not in selected_categories else 0,
+            14 if clean_text(item.get("source")) not in selected_sources else 0,
+            int(item.get("score", 0) or 0),
+            clean_text(item.get("publishedAt")),
+        ))
+        selected.append(best)
+        remaining.remove(best)
+    return selected
 
 
 def wire_family(article: Article) -> str:
@@ -1423,6 +1657,41 @@ def fallback_summary(article: Article) -> str:
     return f"据{article.source}公开信息，{article.title}。现有元数据有限，详情应以原始报道为准。"
 
 
+def fallback_key_facts(article: Article, summary: str) -> list[str]:
+    """Extract supported clauses without copying the fallback summary verbatim.
+
+    A short RSS description often is the complete rule summary. Repeating that
+    sentence under ``keyFacts`` creates the illusion of extra evidence. Split
+    only genuinely compound descriptions and otherwise leave the list empty so
+    the frontend can omit the section.
+    """
+    description = clean_text(article.description, 700)
+    if not description:
+        return []
+    clauses = re.split(
+        r"(?<=[。！？.!?])\s+|[；;]\s*|,\s+|\s+(?:and|while|whereas|after|but)\s+",
+        description,
+        flags=re.I,
+    )
+    facts: list[str] = []
+    summary_normalized = normalized_title(summary)
+    for clause in clauses:
+        fact = clean_text(clause, 140).strip(" ,.;，。；")
+        if len(fact) < 12:
+            continue
+        normalized = normalized_title(fact)
+        if not normalized or normalized == summary_normalized:
+            continue
+        if summary_normalized and SequenceMatcher(None, normalized, summary_normalized).ratio() >= 0.9:
+            continue
+        if any(SequenceMatcher(None, normalized, normalized_title(existing)).ratio() >= 0.86 for existing in facts):
+            continue
+        facts.append(fact)
+        if len(facts) == 3:
+            break
+    return facts
+
+
 def confidence_assessment(article: Article, config: dict[str, Any]) -> tuple[str, str]:
     """Explain source confidence without pretending to verify the underlying claim."""
     weight = source_weight(article, config)
@@ -1619,7 +1888,7 @@ def item_from_article(
     summary = clean_text(editorial.get("summary") or fallback_summary(article), 220)
     key_facts = [clean_text(fact, 140) for fact in editorial.get("keyFacts", []) if clean_text(fact)][:3]
     if not key_facts:
-        key_facts = [summary]
+        key_facts = fallback_key_facts(article, summary)
     ensure_evidence_sources(article)
     confidence, confidence_reason = confidence_assessment(article, config)
     score_reasons = list(article.score_reasons)
@@ -1637,6 +1906,7 @@ def item_from_article(
         ]
     return {
         "id": article.id,
+        "eventId": "evt-" + hashlib.sha1(article.id.encode("utf-8")).hexdigest()[:12],
         "contentType": "news",
         "title": clean_text(editorial.get("titleZh") or article.title, 180),
         "originalTitle": article.title,
@@ -2147,7 +2417,7 @@ def reusable_stream_translations(
         reusable[item_id] = {
             "titleZh": item["title"],
             "summary": item["summary"],
-            "keyFacts": key_facts or [clean_text(item["summary"], 140)],
+            "keyFacts": key_facts,
             "why": clean_text(item.get("why")) or WHY_TEMPLATES[article.category],
             "tags": item.get("tags", []),
             "_translationOnly": True,
@@ -2163,6 +2433,7 @@ def merge_featured_stream_item(item: dict[str, Any], daily_item: dict[str, Any])
         "originalTitle", "category", "score", "scoreBasis", "scoreComponents", "scoreReasons",
         "confidence", "confidenceReason", "sources", "corroboration", "selectionProvider",
         "isSupplemental", "selectionWindowHours", "selectionNote", "diversityRelaxed",
+        "eventId", "eventDossier", "evidenceMatrix", "forecastLedger", "relatedPapers",
     ):
         if field_name in daily_item:
             item[field_name] = daily_item[field_name]
@@ -2212,7 +2483,7 @@ def build_stream_report(
         "",
     )
     return {
-        "schemaVersion": 4,
+        "schemaVersion": 5,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "timezone": config.get("timezone", DEFAULT_TIMEZONE),
         "rangeHours": int(config.get("lookback_hours", 24)),
@@ -2341,8 +2612,6 @@ def research_item_from_paper(
         clean_text(editorial.get("method"), 260),
         findings,
     ) if value]
-    if not key_facts and summary:
-        key_facts = [summary]
     source = {
         "name": paper.source,
         "domain": "arxiv.org" if paper.source.lower() == "arxiv" else domain_from_url(paper.url),
@@ -2424,7 +2693,7 @@ def build_research_report(
         area = str(item.get("researchArea", "前沿研究"))
         area_counts[area] = area_counts.get(area, 0) + 1
     return {
-        "schemaVersion": 3,
+        "schemaVersion": 4,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "timezone": config.get("timezone", DEFAULT_TIMEZONE),
         "rangeDays": int(research.get("lookback_days", 7)),
@@ -2479,6 +2748,405 @@ def retain_stale_research_report(
     return retained
 
 
+NEWS_RESEARCH_AREAS = {
+    "AI": {"人工智能", "机器学习", "计算机视觉", "机器人与无人系统"},
+    "航空航天": {"天文与空间科学", "空间物理", "自主与控制系统"},
+    "军事动态": {"自主与控制系统", "机器人与无人系统", "人工智能"},
+    "局部冲突": {"机器人与无人系统", "自主与控制系统", "人工智能"},
+    "前沿技术": {"量子技术", "先进材料", "空间物理", "机器学习"},
+    "无人系统": {"机器人与无人系统", "自主与控制系统", "计算机视觉", "人工智能"},
+}
+
+
+def paper_news_association_score(news: dict[str, Any], paper: dict[str, Any]) -> tuple[int, str, list[str]]:
+    news_title = history_tokens(f"{news.get('title', '')} {news.get('originalTitle', '')}")
+    paper_title = history_tokens(f"{paper.get('title', '')} {paper.get('originalTitle', '')}")
+    news_body = history_tokens(" ".join([
+        clean_text(news.get("summary")),
+        " ".join(clean_text(value) for value in news.get("keyFacts", []) if clean_text(value)),
+        " ".join(clean_text(value) for value in news.get("tags", []) if clean_text(value)),
+    ]))
+    paper_body = history_tokens(" ".join([
+        clean_text(paper.get("summary")), clean_text(paper.get("abstract")),
+        " ".join(clean_text(value) for value in paper.get("tags", []) if clean_text(value)),
+        " ".join(clean_text(value) for value in paper.get("collectionKeywords", []) if clean_text(value)),
+    ]))
+    shared_title = news_title.intersection(paper_title)
+    shared_all = (news_title | news_body).intersection(paper_title | paper_body)
+    area = clean_text(paper.get("researchArea"))
+    area_match = area in NEWS_RESEARCH_AREAS.get(clean_text(news.get("category")), set())
+    collection_hits = {
+        clean_text(value).lower() for value in paper.get("collectionKeywords", []) if clean_text(value)
+    }.intersection({clean_text(value).lower() for value in news.get("tags", []) if clean_text(value)})
+    lexical = len(shared_title) >= 1 or len(shared_all) >= 2 or bool(collection_hits)
+    if not lexical:
+        return 0, "", []
+    score = round(
+        48 * overlap_coefficient(news_title, paper_title)
+        + 28 * overlap_coefficient(news_title | news_body, paper_title | paper_body)
+        + (14 if area_match else 0)
+        + min(12, len(collection_hits) * 6)
+    )
+    reasons: list[str] = []
+    if shared_title:
+        reasons.append("标题共同线索：" + "、".join(sorted(shared_title)[:4]))
+    elif shared_all:
+        reasons.append("摘要共同线索：" + "、".join(sorted(shared_all)[:4]))
+    if area_match:
+        reasons.append(f"新闻主题与{area}研究方向对应")
+    category = clean_text(news.get("category"))
+    if category in {"无人系统", "AI", "军事动态"} and area in {"机器人与无人系统", "自主与控制系统", "人工智能", "机器学习"}:
+        relation = "潜在使能技术"
+    elif category == "航空航天" and area in {"天文与空间科学", "空间物理"}:
+        relation = "科学与任务背景"
+    else:
+        relation = "同主题研究"
+    return max(0, min(100, score)), relation, reasons[:3]
+
+
+def link_news_and_research(
+    report: dict[str, Any], research_report: dict[str, Any], config: dict[str, Any]
+) -> None:
+    """Attach typed, explainable links in both directions."""
+    limit = max(1, min(6, int(config.get("paper_news_link_limit", 3))))
+    threshold = max(10, min(90, int(config.get("paper_news_min_score", 24))))
+    news_items = report.get("items", []) if isinstance(report, dict) else []
+    papers = research_report.get("items", []) if isinstance(research_report, dict) else []
+    reverse: dict[str, list[dict[str, Any]]] = {clean_text(paper.get("id")): [] for paper in papers}
+    for news in news_items:
+        ranked: list[tuple[int, dict[str, Any], str, list[str]]] = []
+        for paper in papers:
+            score, relation, reasons = paper_news_association_score(news, paper)
+            if score >= threshold:
+                ranked.append((score, paper, relation, reasons))
+        ranked.sort(key=lambda value: (value[0], int(value[1].get("score", 0) or 0)), reverse=True)
+        news_links: list[dict[str, Any]] = []
+        for score, paper, relation, reasons in ranked[:limit]:
+            paper_link = {
+                "id": clean_text(paper.get("id")),
+                "title": clean_text(paper.get("title"), 200),
+                "originalTitle": clean_text(paper.get("originalTitle"), 220),
+                "researchArea": clean_text(paper.get("researchArea")) or "前沿研究",
+                "publishedAt": clean_text(paper.get("publishedAt")),
+                "url": clean_text(paper.get("url")),
+                "pdfUrl": clean_text(paper.get("pdfUrl")),
+                "associationScore": score,
+                "relationType": relation,
+                "associationReasons": reasons,
+            }
+            news_links.append(paper_link)
+            reverse.setdefault(clean_text(paper.get("id")), []).append({
+                "id": clean_text(news.get("id")),
+                "eventId": clean_text(news.get("eventId")),
+                "title": clean_text(news.get("title"), 200),
+                "originalTitle": clean_text(news.get("originalTitle"), 220),
+                "category": clean_text(news.get("category")),
+                "publishedAt": clean_text(news.get("publishedAt")),
+                "editionDate": clean_text(report.get("editionDate")),
+                "url": clean_text(news.get("url")),
+                "associationScore": score,
+                "relationType": relation,
+                "associationReasons": reasons,
+            })
+        news["relatedPapers"] = news_links
+    for paper in papers:
+        links = reverse.get(clean_text(paper.get("id")), [])
+        links.sort(key=lambda item: (int(item.get("associationScore", 0)), clean_text(item.get("publishedAt"))), reverse=True)
+        paper["relatedNews"] = links[:limit]
+    report["paperLinkedItemCount"] = sum(bool(item.get("relatedPapers")) for item in news_items)
+    research_report["newsLinkedPaperCount"] = sum(bool(item.get("relatedNews")) for item in papers)
+
+
+def merge_forecast_ledgers(existing: Any, incoming: Any, edition: str) -> list[dict[str, Any]]:
+    merged: dict[str, dict[str, Any]] = {}
+    for entry in [*(existing if isinstance(existing, list) else []), *(incoming if isinstance(incoming, list) else [])]:
+        if not isinstance(entry, dict) or not clean_text(entry.get("predictionId")):
+            continue
+        prediction_id = clean_text(entry.get("predictionId"))
+        current = merged.get(prediction_id, {})
+        evidence_ids = list(dict.fromkeys([
+            *(current.get("evidenceIds", []) if isinstance(current.get("evidenceIds"), list) else []),
+            *(entry.get("evidenceIds", []) if isinstance(entry.get("evidenceIds"), list) else []),
+        ]))
+        merged[prediction_id] = {
+            **current,
+            **entry,
+            "evidenceIds": evidence_ids[-12:],
+            "lastReviewedAt": edition,
+        }
+    for record in merged.values():
+        status = clean_text(record.get("status")) or "open"
+        due_after = clean_text(record.get("dueAfter"))
+        # A generated forecast is never silently marked true or false. Once its
+        # review date arrives it moves to an explicit due queue until a later
+        # human or evidence-based process resolves it.
+        if status in {"open", "due"}:
+            status = "due" if due_after and due_after <= edition else "open"
+            record["status"] = status
+            record["statusLabel"] = "已到期，等待证据复核" if status == "due" else "待验证"
+    return sorted(merged.values(), key=lambda entry: clean_text(entry.get("createdAt")), reverse=True)[:12]
+
+
+def build_event_registry(
+    report: dict[str, Any], previous_registry: Any, config: dict[str, Any], now: datetime
+) -> dict[str, Any]:
+    retention_days = max(30, min(730, int(config.get("event_retention_days", 365))))
+    local_date = now.astimezone(ZoneInfo(config.get("timezone", DEFAULT_TIMEZONE))).date()
+    cutoff = (local_date - timedelta(days=retention_days)).isoformat()
+    records = {
+        clean_text(record.get("eventId")): dict(record)
+        for record in event_records(previous_registry)
+        if clean_text(record.get("lastSeen")) >= cutoff
+    }
+    edition = clean_text(report.get("editionDate"))
+    for item in report.get("items", []):
+        event_id = clean_text(item.get("eventId")) or stable_event_id(item.get("id"))
+        record = records.get(event_id, {})
+        timeline = [entry for entry in record.get("timeline", []) if isinstance(entry, dict)]
+        timeline.append({
+            "editionDate": edition,
+            "newsId": clean_text(item.get("id")),
+            "title": clean_text(item.get("title"), 200),
+            "source": clean_text(item.get("source")),
+            "publishedAt": clean_text(item.get("publishedAt")),
+            "score": int(item.get("score", 0) or 0),
+        })
+        timeline_by_key = {
+            f"{clean_text(entry.get('editionDate'))}:{clean_text(entry.get('newsId'))}": entry
+            for entry in timeline if clean_text(entry.get("newsId"))
+        }
+        timeline = sorted(
+            timeline_by_key.values(),
+            key=lambda entry: (clean_text(entry.get("editionDate")), clean_text(entry.get("publishedAt"))),
+        )[-24:]
+        source_groups = list(dict.fromkeys([
+            *(record.get("sourceGroups", []) if isinstance(record.get("sourceGroups"), list) else []),
+            *(item.get("evidenceMatrix", {}).get("sourceGroups", []) if isinstance(item.get("evidenceMatrix"), dict) else []),
+        ]))[-16:]
+        news_ids = list(dict.fromkeys([
+            *(record.get("newsIds", []) if isinstance(record.get("newsIds"), list) else []),
+            clean_text(item.get("id")),
+        ]))[-120:]
+        editions = list(dict.fromkeys([
+            *(record.get("editions", []) if isinstance(record.get("editions"), list) else []),
+            edition,
+        ]))[-retention_days:]
+        related_papers = item.get("relatedPapers", []) if isinstance(item.get("relatedPapers"), list) else []
+        paper_links = {
+            clean_text(link.get("id")): link
+            for link in [
+                *(record.get("paperLinks", []) if isinstance(record.get("paperLinks"), list) else []),
+                *related_papers,
+            ] if isinstance(link, dict) and clean_text(link.get("id"))
+        }
+        first_seen = min(
+            [clean_text(record.get("firstSeen")) or edition, edition]
+            + [clean_text(entry.get("editionDate")) for entry in timeline if clean_text(entry.get("editionDate"))]
+        )
+        forecasts = merge_forecast_ledgers(record.get("forecastLedger"), item.get("forecastLedger"), edition)
+        records[event_id] = {
+            "eventId": event_id,
+            "title": clean_text(item.get("title"), 200),
+            "category": clean_text(item.get("category")),
+            "latestSummary": clean_text(item.get("summary"), 260),
+            "firstSeen": first_seen,
+            "lastSeen": edition,
+            "status": "tracking" if first_seen < edition or len(timeline) > 1 else "new",
+            "newsIds": news_ids,
+            "editions": editions,
+            "timeline": timeline,
+            "sourceGroups": source_groups,
+            "independentSourceCount": len(source_groups) or int(item.get("corroboration", 1) or 1),
+            "latestScore": int(item.get("score", 0) or 0),
+            "keyFacts": [clean_text(value, 160) for value in item.get("keyFacts", []) if clean_text(value)][:3],
+            "evidenceStatus": clean_text(item.get("evidenceMatrix", {}).get("overallStatus")),
+            "disputes": item.get("evidenceMatrix", {}).get("disputes", [])[:2],
+            "forecastLedger": forecasts,
+            "paperLinks": sorted(
+                paper_links.values(), key=lambda link: int(link.get("associationScore", 0) or 0), reverse=True
+            )[:8],
+        }
+    items = sorted(records.values(), key=lambda record: (clean_text(record.get("lastSeen")), int(record.get("latestScore", 0))), reverse=True)
+    return {
+        "schemaVersion": 1,
+        "generatedAt": clean_text(report.get("generatedAt")),
+        "timezone": report.get("timezone", DEFAULT_TIMEZONE),
+        "retentionDays": retention_days,
+        "eventCount": len(items),
+        "items": items,
+    }
+
+
+def attach_registry_dossiers(report: dict[str, Any], registry: dict[str, Any]) -> None:
+    by_id = {clean_text(record.get("eventId")): record for record in event_records(registry)}
+    for item in report.get("items", []):
+        record = by_id.get(clean_text(item.get("eventId")))
+        if not record:
+            continue
+        item["forecastLedger"] = record.get("forecastLedger", [])
+        item["eventDossier"] = {
+            "eventId": record["eventId"],
+            "status": record.get("status", "new"),
+            "statusLabel": "持续跟踪" if record.get("status") == "tracking" else "新事件",
+            "firstSeen": record.get("firstSeen"),
+            "lastSeen": record.get("lastSeen"),
+            "updateCount": len(record.get("timeline", [])),
+            "timeline": record.get("timeline", [])[-8:],
+            "independentSourceCount": record.get("independentSourceCount", 1),
+            "paperCount": len(record.get("paperLinks", [])),
+        }
+
+
+def build_weekly_digest(registry: dict[str, Any], config: dict[str, Any], now: datetime) -> dict[str, Any]:
+    local_date = now.astimezone(ZoneInfo(config.get("timezone", DEFAULT_TIMEZONE))).date()
+    week_start = local_date - timedelta(days=local_date.weekday())
+    week_end = week_start + timedelta(days=6)
+    limit = max(3, min(12, int(config.get("weekly_event_limit", 8))))
+    candidates = [
+        record for record in event_records(registry)
+        if week_start.isoformat() <= clean_text(record.get("lastSeen")) <= week_end.isoformat()
+    ]
+    candidates.sort(key=lambda record: (
+        int(record.get("latestScore", 0) or 0)
+        + min(12, len(record.get("timeline", [])) * 2)
+        + min(10, int(record.get("independentSourceCount", 1) or 1) * 2)
+        + min(8, len(record.get("paperLinks", [])) * 2),
+        clean_text(record.get("lastSeen")),
+    ), reverse=True)
+    events = []
+    for record in candidates[:limit]:
+        first_seen = clean_text(record.get("firstSeen"))
+        last_seen = clean_text(record.get("lastSeen"))
+        if first_seen >= week_start.isoformat():
+            trend = "本周新出现"
+        elif len(record.get("timeline", [])) >= 3:
+            trend = "持续演化"
+        else:
+            trend = "继续发展"
+        open_forecasts = [entry for entry in record.get("forecastLedger", []) if entry.get("status") == "open"]
+        events.append({
+            "eventId": clean_text(record.get("eventId")),
+            "title": clean_text(record.get("title"), 200),
+            "category": clean_text(record.get("category")),
+            "summary": clean_text(record.get("latestSummary"), 260),
+            "firstSeen": first_seen,
+            "lastSeen": last_seen,
+            "trend": trend,
+            "updateCount": len(record.get("timeline", [])),
+            "independentSourceCount": int(record.get("independentSourceCount", 1) or 1),
+            "paperCount": len(record.get("paperLinks", [])),
+            "outlook": clean_text(open_forecasts[0].get("statement")) if open_forecasts else "继续观察新的独立来源与正式信息。",
+        })
+    iso_year, iso_week, _ = local_date.isocalendar()
+    return {
+        "schemaVersion": 1,
+        "generatedAt": now.isoformat().replace("+00:00", "Z"),
+        "timezone": config.get("timezone", DEFAULT_TIMEZONE),
+        "weekId": f"{iso_year}-W{iso_week:02d}",
+        "fromDate": week_start.isoformat(),
+        "toDate": week_end.isoformat(),
+        "eventCount": len(events),
+        "headline": events[0]["title"] if events else "本周事件线正在积累",
+        "summary": f"本周已收敛 {len(events)} 条主要事件线；按最新重要度、独立来源、更新次数与研究关联综合排序。",
+        "events": events,
+    }
+
+
+def robust_baseline(values: list[float]) -> tuple[float, float]:
+    if not values:
+        return 0.0, 0.0
+    median = float(statistics.median(values))
+    mad = float(statistics.median(abs(value - median) for value in values))
+    return median, mad
+
+
+def build_anomaly_signals(
+    current_items: list[dict[str, Any]], history_items: list[dict[str, Any]], config: dict[str, Any], now: datetime
+) -> dict[str, Any]:
+    baseline_days = max(7, min(90, int(config.get("signal_baseline_days", 30))))
+    min_days = max(3, min(baseline_days, int(config.get("signal_min_observation_days", 7))))
+    min_count = max(2, int(config.get("signal_min_current_count", 2)))
+    min_sources = max(1, int(config.get("signal_min_independent_sources", 2)))
+    current_date = now.astimezone(ZoneInfo(config.get("timezone", DEFAULT_TIMEZONE))).date()
+    cutoff = (current_date - timedelta(days=baseline_days)).isoformat()
+    by_date: dict[str, list[dict[str, Any]]] = {}
+    for item in history_items:
+        edition = clean_text(item.get("editionDate")) if isinstance(item, dict) else ""
+        if cutoff <= edition < current_date.isoformat():
+            by_date.setdefault(edition, []).append(item)
+    dates = sorted(by_date)
+    dimensions: list[tuple[str, str]] = [("category", category) for category in CATEGORIES]
+    current_tags = {
+        clean_text(tag) for item in current_items for tag in item.get("tags", []) if clean_text(tag)
+    }
+    dimensions.extend(("entity", tag) for tag in sorted(current_tags)[:40])
+    signals: list[dict[str, Any]] = []
+    for dimension, name in dimensions:
+        if dimension == "category":
+            current_matches = [item for item in current_items if clean_text(item.get("category")) == name]
+            historical_counts = [
+                sum(clean_text(item.get("category")) == name for item in by_date[edition]) for edition in dates
+            ]
+        else:
+            needle = name.lower()
+            current_matches = [item for item in current_items if needle in {
+                clean_text(tag).lower() for tag in item.get("tags", []) if clean_text(tag)
+            }]
+            historical_counts = [sum(
+                needle in {clean_text(tag).lower() for tag in item.get("tags", []) if clean_text(tag)}
+                for item in by_date[edition]
+            ) for edition in dates]
+        current_count = len(current_matches)
+        if len(dates) < min_days or current_count < min_count:
+            continue
+        source_groups = {
+            clean_text(source.get("evidenceGroup") or source.get("domain") or source.get("name"))
+            for item in current_matches for source in item.get("sources", []) if isinstance(source, dict)
+            and clean_text(source.get("evidenceGroup") or source.get("domain") or source.get("name"))
+        }
+        if len(source_groups) < min_sources:
+            continue
+        median, mad = robust_baseline([float(value) for value in historical_counts])
+        ratio = current_count / max(0.5, median)
+        robust_deviation = (current_count - median) / max(1.0, 1.4826 * mad)
+        if ratio < 1.8 or current_count - median < 1.5 or robust_deviation < 1.5:
+            continue
+        signals.append({
+            "signalId": stable_event_id(f"signal:{dimension}:{name}:{current_date.isoformat()}").replace("evt-", "sig-"),
+            "dimension": dimension,
+            "name": name,
+            "currentCount": current_count,
+            "baselineMedian": round(median, 1),
+            "ratio": round(ratio, 1),
+            "robustDeviation": round(robust_deviation, 1),
+            "independentSourceCount": len(source_groups),
+            "severity": "high" if ratio >= 3 and robust_deviation >= 3 else "elevated",
+            "explanation": (
+                f"{name}今日进入 Top 10 的相关事件为 {current_count} 条，"
+                f"过去 {len(dates)} 个有归档日的中位数为 {median:.1f} 条，"
+                f"来自 {len(source_groups)} 个独立来源组。"
+            ),
+        })
+    signals.sort(key=lambda signal: (
+        signal["severity"] == "high", float(signal["robustDeviation"]), float(signal["ratio"])
+    ), reverse=True)
+    status = "insufficient-baseline" if len(dates) < min_days else "alert" if signals else "stable"
+    return {
+        "schemaVersion": 1,
+        "generatedAt": now.isoformat().replace("+00:00", "Z"),
+        "timezone": config.get("timezone", DEFAULT_TIMEZONE),
+        "status": status,
+        "baselineDays": baseline_days,
+        "observationDays": len(dates),
+        "signalCount": len(signals),
+        "summary": (
+            f"基于过去 {len(dates)} 个有归档日建立稳健基线，检测到 {len(signals)} 个升温信号。"
+            if len(dates) >= min_days else f"当前只有 {len(dates)} 个历史观察日，至少需要 {min_days} 日后启用异常判定。"
+        ),
+        "signals": signals[:8],
+    }
+
+
 def fallback_brief(items: list[dict[str, Any]], source_count: int) -> dict[str, Any]:
     leader = items[0]
     return {
@@ -2495,6 +3163,7 @@ def build_report(
     skip_ai: bool,
     reusable_translations: dict[str, dict[str, Any]] | None = None,
     history_items: list[dict[str, Any]] | None = None,
+    previous_event_registry: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     top_n = int(config["top_n"])
     shortlist = candidates[: int(config["candidate_limit"])]
@@ -2764,6 +3433,11 @@ def build_report(
             }
     elif runtime:
         history_analysis_status = "disabled"
+    local_time = now.astimezone(ZoneInfo(config.get("timezone", DEFAULT_TIMEZONE)))
+    edition = local_time.strftime("%Y-%m-%d")
+    assign_event_ids(items, previous_event_registry or {}, config)
+    attach_item_intelligence(items, edition)
+    spotlight_ids = [item["id"] for item in choose_spotlight_items(items)]
     source_count = len({
         (evidence.get("evidenceGroup") or evidence.get("domain") or evidence.get("name") or "").lower()
         for article in candidates
@@ -2774,11 +3448,10 @@ def build_report(
     signals = [clean_text(signal, 180) for signal in brief.get("signals", []) if clean_text(signal)][:3]
     if len(signals) < 3:
         signals = fallback_brief(items, source_count)["signals"]
-    local_time = now.astimezone(ZoneInfo(config.get("timezone", DEFAULT_TIMEZONE)))
     return {
-        "schemaVersion": 8,
+        "schemaVersion": 9,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
-        "editionDate": local_time.strftime("%Y-%m-%d"),
+        "editionDate": edition,
         "timezone": config.get("timezone", DEFAULT_TIMEZONE),
         "method": selection_method,
         "selectionMethod": selection_method,
@@ -2801,6 +3474,7 @@ def build_report(
         "historyAnalyzedItemCount": sum(item["historyContext"].get("analysisProvider") not in {"", "rules"} for item in items),
         "historyAnalysisWarnings": history_analysis_warnings,
         "historyAnalysisDiagnostics": history_analysis_diagnostics,
+        "spotlightIds": spotlight_ids,
         "warnings": [*selection_warnings, *translation_warnings],
         "candidateCount": len(candidates),
         "freshCandidateCount": sum(not article.is_supplemental for article in candidates),
@@ -2830,9 +3504,10 @@ def validate_report(report: dict[str, Any], expected_count: int) -> None:
         raise ValueError(f"report must contain exactly {expected_count} items")
     ids: set[str] = set()
     required = {
-        "id", "title", "originalTitle", "summary", "keyFacts", "why", "category", "source",
+        "id", "eventId", "title", "originalTitle", "summary", "keyFacts", "why", "category", "source",
         "publishedAt", "url", "score", "scoreBasis", "scoreComponents", "scoreReasons",
-        "confidence", "confidenceReason", "tags", "sources", "historyContext",
+        "confidence", "confidenceReason", "tags", "sources", "historyContext", "eventDossier",
+        "forecastLedger", "evidenceMatrix",
     }
     for index, item in enumerate(items, 1):
         missing = required.difference(item)
@@ -2852,10 +3527,21 @@ def validate_report(report: dict[str, Any], expected_count: int) -> None:
             raise ValueError(f"item {index} has incomplete historyContext")
         if not str(item["url"]).startswith(("http://", "https://")):
             raise ValueError(f"invalid URL in item {index}")
-        if not isinstance(item["keyFacts"], list) or not item["keyFacts"]:
-            raise ValueError(f"item {index} must include at least one key fact")
+        if not isinstance(item["keyFacts"], list):
+            raise ValueError(f"item {index} keyFacts must be a list")
+        if item["keyFacts"] and any(
+            normalized_title(fact) == normalized_title(item["summary"]) for fact in item["keyFacts"]
+        ):
+            raise ValueError(f"item {index} repeats its summary as a key fact")
         if not isinstance(item["sources"], list) or not item["sources"]:
             raise ValueError(f"item {index} must include at least one source")
+        if not re.fullmatch(r"evt-[0-9a-f]{12}", clean_text(item.get("eventId"))):
+            raise ValueError(f"item {index} has invalid eventId")
+    spotlight_ids = report.get("spotlightIds")
+    if not isinstance(spotlight_ids, list) or len(spotlight_ids) != min(3, expected_count):
+        raise ValueError("daily spotlightIds must identify three stories")
+    if len(set(spotlight_ids)) != len(spotlight_ids) or not set(spotlight_ids).issubset(ids):
+        raise ValueError("daily spotlightIds contain invalid or duplicate ids")
     translated = sum(bool(item.get("translationProvider")) for item in items)
     if int(report.get("translatedItemCount", translated)) != translated:
         raise ValueError("daily translatedItemCount does not match items")
@@ -3010,9 +3696,9 @@ def read_json_safe(path: Path, fallback: Any) -> Any:
 
 
 SEARCHABLE_FIELDS = (
-    "id", "title", "originalTitle", "summary", "keyFacts", "category", "source",
+    "id", "eventId", "title", "originalTitle", "summary", "keyFacts", "category", "source",
     "country", "publishedAt", "tags", "isSupplemental", "selectionWindowHours",
-    "selectionNote", "diversityRelaxed",
+    "selectionNote", "diversityRelaxed", "score",
 )
 
 
@@ -3175,7 +3861,7 @@ def write_pipeline_status(
         else:
             previous_translation_status = "unknown"
     payload = {
-        "schemaVersion": 8,
+        "schemaVersion": 9,
         "state": state,
         "lastAttemptAt": now.isoformat().replace("+00:00", "Z"),
         "lastSuccessAt": now.isoformat().replace("+00:00", "Z") if success else previous.get("lastSuccessAt"),
@@ -3203,6 +3889,10 @@ def write_pipeline_status(
         "historyAnalyzedItemCount": int(report.get("historyAnalyzedItemCount", 0)) if success else previous.get("historyAnalyzedItemCount", 0),
         "historyAnalysisWarnings": report.get("historyAnalysisWarnings", []) if success else previous.get("historyAnalysisWarnings", []),
         "historyAnalysisDiagnostics": report.get("historyAnalysisDiagnostics", {}) if success else previous.get("historyAnalysisDiagnostics", {}),
+        "eventCount": int(report.get("eventCount", 0)) if success else previous.get("eventCount", 0),
+        "weeklyEventCount": int(report.get("weeklyDigest", {}).get("eventCount", 0)) if success else previous.get("weeklyEventCount", 0),
+        "anomalySignalCount": int(report.get("anomalySignals", {}).get("signalCount", 0)) if success else previous.get("anomalySignalCount", 0),
+        "paperLinkedItemCount": int(report.get("paperLinkedItemCount", 0)) if success else previous.get("paperLinkedItemCount", 0),
         "warnings": report.get("warnings", []) if success else previous.get("warnings", []),
         "coverageStatus": report.get("coverageStatus") if success else previous.get("coverageStatus"),
         "freshItemCount": int(report.get("freshItemCount", 0)) if success else previous.get("freshItemCount", 0),
@@ -3261,6 +3951,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--archive-dir", type=Path, default=Path("public/data/archive"))
     parser.add_argument("--archive-index", type=Path, default=Path("public/data/archive/index.json"))
     parser.add_argument("--search-index", type=Path, default=Path("public/data/archive/search-index.json"))
+    parser.add_argument("--events-output", type=Path)
+    parser.add_argument("--weekly-output", type=Path)
+    parser.add_argument("--weekly-dir", type=Path)
+    parser.add_argument("--signals-output", type=Path)
     parser.add_argument("--status-output", type=Path, default=Path("public/data/status.json"))
     parser.add_argument("--feed-output", type=Path, default=Path("public/feed.xml"))
     parser.add_argument("--fixture", type=Path, help="Use a local fixture instead of live sources")
@@ -3274,10 +3968,16 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
+    args.events_output = args.events_output or args.output.parent / "events.json"
+    args.weekly_output = args.weekly_output or args.output.parent / "weekly.json"
+    args.weekly_dir = args.weekly_dir or args.output.parent / "weekly"
+    args.signals_output = args.signals_output or args.output.parent / "signals.json"
     logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"), format="%(levelname)s %(message)s")
     now = parse_datetime(args.now, utc_now()) if args.now else utc_now()
     try:
         config = load_config(args.config)
+        history_items = read_existing_search_items(args.search_index) if not args.stream_only else []
+        previous_event_registry = read_json_safe(args.events_output, {}) if not args.stream_only else {}
         if args.fixture:
             raw = collect_fixture(args.fixture, now)
         else:
@@ -3372,7 +4072,8 @@ def main(argv: list[str] | None = None) -> int:
                 now,
                 args.skip_ai,
                 reusable_translations=stream_translations,
-                history_items=read_existing_search_items(args.search_index),
+                history_items=history_items,
+                previous_event_registry=previous_event_registry,
             )
             validate_report(report, int(config["top_n"]))
 
@@ -3461,6 +4162,47 @@ def main(argv: list[str] | None = None) -> int:
                     validate_research_report(research_report)
                     research_should_write = True
 
+        event_registry: dict[str, Any] | None = None
+        weekly_digest: dict[str, Any] | None = None
+        anomaly_report: dict[str, Any] | None = None
+        if report:
+            research_for_linking = research_report
+            if research_for_linking is None:
+                previous_research = read_json_safe(args.research_output, {})
+                if isinstance(previous_research, dict) and isinstance(previous_research.get("items"), list):
+                    research_for_linking = previous_research
+            if isinstance(research_for_linking, dict):
+                link_news_and_research(report, research_for_linking, config)
+            else:
+                for item in report["items"]:
+                    item["relatedPapers"] = []
+                report["paperLinkedItemCount"] = 0
+
+            event_registry = build_event_registry(report, previous_event_registry, config, now)
+            attach_registry_dossiers(report, event_registry)
+            weekly_digest = build_weekly_digest(event_registry, config, now)
+            anomaly_report = build_anomaly_signals(report["items"], history_items, config, now)
+            report["eventCount"] = len({clean_text(item.get("eventId")) for item in report["items"]})
+            report["weeklyDigest"] = weekly_digest
+            report["anomalySignals"] = anomaly_report
+            report["spotlightIds"] = [item["id"] for item in choose_spotlight_items(report["items"])]
+            if anomaly_report.get("signals"):
+                report["brief"]["signals"] = [
+                    clean_text(signal.get("explanation"), 180)
+                    for signal in anomaly_report["signals"][:3]
+                ]
+
+            # stream_report was already translated and built. Enrich its Top 10
+            # copies now without touching their independently successful Chinese text.
+            for stream_item in stream_report.get("items", []):
+                daily_item = top_stories.get(clean_text(stream_item.get("id")))
+                if isinstance(daily_item, dict):
+                    merge_featured_stream_item(stream_item, daily_item)
+            validate_report(report, int(config["top_n"]))
+            validate_stream_report(stream_report)
+            if research_report is not None:
+                validate_research_report(research_report, allow_empty=not bool(research_report.get("items")))
+
         if args.stream_only:
             write_json_atomic(args.stream_output, stream_report)
             if research_report is not None and research_should_write:
@@ -3485,6 +4227,11 @@ def main(argv: list[str] | None = None) -> int:
         )
         write_json_atomic(args.output, report)
         write_json_atomic(args.stream_output, stream_report)
+        assert event_registry is not None and weekly_digest is not None and anomaly_report is not None
+        write_json_atomic(args.events_output, event_registry)
+        write_json_atomic(args.weekly_output, weekly_digest)
+        write_json_atomic(args.weekly_dir / f"{weekly_digest['weekId']}.json", weekly_digest)
+        write_json_atomic(args.signals_output, anomaly_report)
         if research_report is not None and research_should_write:
             write_json_atomic(args.research_output, research_report)
         write_atom_feed(
