@@ -19,7 +19,7 @@
   <link rel="canonical" href="https://newsfrontier.top/">
   <link rel="alternate" type="application/atom+xml" title="智域前沿每日版" href="./feed.xml">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./assets/styles.css?v=2.0.3">
+  <link rel="stylesheet" href="./assets/styles.css">
   <title>智域前沿 · 全球科技、安全与研究情报</title>
 </head>
 <body>
@@ -82,6 +82,19 @@
         <div><p class="eyebrow">TODAY'S MUST READ</p><h2 id="spotlightTitle">今日必读</h2></div>
       </div>
       <div class="spotlight-grid" id="spotlightStories" aria-live="polite"></div>
+    </section>
+
+    <section class="shell intelligence-strip" id="intelligenceSection" aria-label="本周事件与异常信号">
+      <article class="intelligence-card weekly-card">
+        <div class="intelligence-heading"><div><p class="eyebrow">WEEKLY CONVERGENCE</p><h2>本周事件线</h2></div><span id="weeklyRange">—</span></div>
+        <p class="intelligence-summary" id="weeklySummary">正在收敛跨日期事件…</p>
+        <ol class="intelligence-list" id="weeklyEvents"></ol>
+      </article>
+      <article class="intelligence-card signal-card">
+        <div class="intelligence-heading"><div><p class="eyebrow">SIGNAL ANOMALY</p><h2>异常信号</h2></div><span id="signalBaseline">30 日基线</span></div>
+        <p class="intelligence-summary" id="signalSummary">正在比较历史基线…</p>
+        <ul class="signal-list" id="anomalySignals"></ul>
+      </article>
     </section>
 
     <section class="shell brief" id="briefSection" aria-labelledby="briefHeadline">
@@ -181,6 +194,6 @@
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
   <noscript><div class="noscript">此页面需要 JavaScript 才能读取和筛选日报数据。</div></noscript>
-  <script src="./assets/app.js?v=2.0.3" defer></script>
+  <script src="./assets/app.js" defer></script>
 </body>
 </html>

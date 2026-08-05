@@ -45,17 +45,20 @@ class FrontendTests(unittest.TestCase):
         self.assertIn(".spotlight-grid", styles)
         self.assertIn(".paper-detail", styles)
 
-    def test_view_navigation_survives_stale_scripts_and_assets_revalidate(self):
+    def test_view_navigation_and_asset_cache_have_no_manual_release_number(self):
         index = (ROOT / "public" / "index.html").read_text(encoding="utf-8")
         app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
         worker = (ROOT / "public" / "sw.js").read_text(encoding="utf-8")
         headers = (ROOT / "public" / "_headers").read_text(encoding="utf-8")
-        self.assertIn("./assets/app.js?v=2.0.3", index)
-        self.assertIn("./assets/styles.css?v=2.0.3", index)
+        self.assertIn('src="./assets/app.js"', index)
+        self.assertIn('href="./assets/styles.css"', index)
+        self.assertNotIn("?v=", index)
         self.assertIn('event.preventDefault();\n      await switchView(viewButton.dataset.view);', app)
-        self.assertIn('request.mode === "navigate"', worker)
         self.assertIn("frontier-pulse-", worker)
-        self.assertIn("v2.0.3", worker)
+        self.assertIn('const CACHE_NAME = `${CACHE_PREFIX}runtime`', worker)
+        self.assertIn("event.respondWith(networkFirst(request))", worker)
+        self.assertNotIn("staleWhileRevalidate", worker)
+        self.assertNotIn("v2.0.3", worker + index)
         self.assertIn("/assets/*\n  Cache-Control: public, max-age=0, must-revalidate", headers)
 
     def test_cache_is_bypassed_only_for_manual_refresh(self):
@@ -95,7 +98,8 @@ class FrontendTests(unittest.TestCase):
         self.assertIn(".summary { margin: 0; color: #4f5d64; font-size: var(--text-body)", styles)
         self.assertIn(".alert p { margin: 3px 0 0; font-size: var(--text-body)", styles)
         self.assertIn(".spotlight-card p { margin: 0; color: var(--muted); font-size: var(--text-body)", styles)
-        self.assertIn("linear-gradient(rgba(4,15,22,.5), rgba(4,15,22,.5))", styles)
+        self.assertIn("linear-gradient(rgba(4,15,22,.58), rgba(4,15,22,.58))", styles)
+        self.assertIn("rgba(var(--tone-rgb),.96)", styles)
         self.assertNotIn("letter-spacing: -.05em", styles)
 
     def test_china_timezone_is_consistent_and_legacy_editions_keep_their_label(self):
@@ -185,6 +189,25 @@ class FrontendTests(unittest.TestCase):
         self.assertIn("spotlight-backdrop", app + styles)
         self.assertIn("history-timeline", app + styles)
         self.assertIn("历史关联", app)
+
+    def test_event_intelligence_weekly_signals_and_cross_links_are_wired(self):
+        index = (ROOT / "public" / "index.html").read_text(encoding="utf-8")
+        app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
+        styles = (ROOT / "public" / "assets" / "styles.css").read_text(encoding="utf-8")
+        for element_id in ("intelligenceSection", "weeklyEvents", "anomalySignals"):
+            self.assertIn(f'id="{element_id}"', index)
+        for function in (
+            "diverseSpotlightItems", "renderIntelligence", "renderEventDossier",
+            "renderEvidenceMatrix", "renderForecastLedger", "renderRelatedPapers", "renderRelatedNews",
+        ):
+            self.assertIn(f"function {function}", app)
+        self.assertIn("spotlightIds", app)
+        self.assertIn("当前元数据不足，系统没有用摘要重复填充关键事实", app)
+        self.assertIn("tone-${esc(categoryTone(item.category))}", app)
+        self.assertIn('class="forecast-${esc(entry.status)}"', app)
+        self.assertIn(".forecast-ledger > ol > li.forecast-due", styles)
+        for selector in (".intelligence-strip", ".event-dossier", ".evidence-matrix", ".forecast-ledger", ".cross-links"):
+            self.assertIn(selector, styles)
 
     def test_data_workflows_share_lock_and_retry_conflict_safe_rebase(self):
         workflows = [

@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased — Event intelligence layer
+
+- Fixed the three highest-value product debts: Top 3 now performs event/category/source diversity selection, rule-mode key facts never repeat the summary, and the application shell no longer needs a manually synchronized release number across HTML, assets and Service Worker caches.
+- Added persistent `eventId` assignment and a 365-day event registry with cross-edition timelines, source networks, stage metadata and related research.
+- Added a static weekly convergence report and robust 30-day anomaly detection for category/entity reporting volume, including minimum independent-source safeguards.
+- Added typed, scored news–paper links in both directions using only collected titles, abstracts, summaries, tags and research areas.
+- Added evidence/dispute matrices and a persistent, verifiable forecast ledger with due dates, validation signals and open/due status.
+- Rebuilt the homepage intelligence layer around weekly event lines and anomaly signals; the lead story now uses a category-aware gradient and a brightness-safe image overlay, while secondary spotlights may show lazy-loaded thumbnails.
+- Bumped public data contracts to daily/status schema 9, stream schema 5 and research schema 4; added `events.json`, `weekly.json`, weekly archives and `signals.json` to the daily workflow contract.
+
 ## 2.0.3 — Reliable daily scheduling and same-day health warning
 
 - Replaced the top-of-hour daily schedule with a 07:07 China Standard Time primary run and an 08:37 recovery run to reduce GitHub Actions queue loss and delay.

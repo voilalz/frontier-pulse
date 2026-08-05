@@ -40,7 +40,8 @@ class UpdateNewsTests(unittest.TestCase):
         self.assertEqual(len({item["id"] for item in report["items"]}), 10)
         self.assertGreaterEqual(len({item["category"] for item in report["items"]}), 4)
         self.assertTrue(all(item["summary"] and item["why"] for item in report["items"]))
-        self.assertTrue(all(item["originalTitle"] and item["keyFacts"] for item in report["items"]))
+        self.assertTrue(all(item["originalTitle"] and isinstance(item["keyFacts"], list) for item in report["items"]))
+        self.assertTrue(all(item["summary"] not in item["keyFacts"] for item in report["items"]))
         self.assertTrue(all(item["scoreReasons"] and item["confidenceReason"] for item in report["items"]))
         self.assertTrue(all(item["sources"] for item in report["items"]))
         self.assertTrue(all(item["contentType"] == "news" for item in report["items"]))
@@ -70,7 +71,7 @@ class UpdateNewsTests(unittest.TestCase):
         self.assertTrue(all("预印本" in item["peerReviewStatus"] for item in report["items"]))
         swarm = next(item for item in report["items"] if item["id"] == "arxiv:2607.14093")
         self.assertIn("蜂群机器人", swarm["collectionKeywords"])
-        self.assertEqual(report["schemaVersion"], 3)
+        self.assertEqual(report["schemaVersion"], 4)
         self.assertEqual(len(report["collectionKeywords"]), 3)
 
     def test_research_selection_prevents_one_area_from_crowding_out_others(self):
@@ -468,6 +469,83 @@ class UpdateNewsTests(unittest.TestCase):
         self.assertFalse(warnings)
         self.assertEqual(diagnostics["completionReason"], "complete_first_pass")
 
+    def test_spotlight_selection_preserves_leader_and_diversifies_event_category_source(self):
+        items = [
+            {"id": "1", "eventId": "evt-1", "category": "AI", "source": "A", "score": 100, "publishedAt": "2026-07-16T00:00:00Z"},
+            {"id": "2", "eventId": "evt-2", "category": "AI", "source": "A", "score": 99, "publishedAt": "2026-07-16T00:00:00Z"},
+            {"id": "3", "eventId": "evt-3", "category": "航空航天", "source": "B", "score": 90, "publishedAt": "2026-07-16T00:00:00Z"},
+            {"id": "4", "eventId": "evt-4", "category": "无人系统", "source": "C", "score": 89, "publishedAt": "2026-07-16T00:00:00Z"},
+        ]
+        selected = MODULE.choose_spotlight_items(items)
+        self.assertEqual(selected[0]["id"], "1")
+        self.assertEqual({item["category"] for item in selected}, {"AI", "航空航天", "无人系统"})
+        self.assertEqual(len({item["source"] for item in selected}), 3)
+
+    def test_event_id_registry_forecasts_and_evidence_matrix_are_persistent(self):
+        candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
+        report = MODULE.build_report(candidates, self.config, self.now, skip_ai=True)
+        registry = MODULE.build_event_registry(report, {}, self.config, self.now)
+        MODULE.attach_registry_dossiers(report, registry)
+        first = report["items"][0]
+        self.assertRegex(first["eventId"], r"^evt-[0-9a-f]{12}$")
+        self.assertTrue(first["eventDossier"]["timeline"])
+        self.assertTrue(first["forecastLedger"])
+        self.assertIn(first["evidenceMatrix"]["overallStatus"], {"single-source", "multi-source", "contested"})
+        successor = {
+            "id": "successor",
+            "historyContext": {"relatedStories": [{
+                "id": first["id"], "eventId": first["eventId"],
+                "associationScore": 80, "relationLabel": "同一事件后续",
+            }]},
+        }
+        MODULE.assign_event_ids([successor], registry, self.config)
+        self.assertEqual(successor["eventId"], first["eventId"])
+        reviewed = MODULE.merge_forecast_ledgers(
+            [{
+                "predictionId": "pred-due",
+                "statement": "等待正式结果",
+                "status": "open",
+                "createdAt": "2026-06-01",
+                "dueAfter": "2026-07-01",
+                "evidenceIds": [first["id"]],
+            }],
+            [],
+            "2026-07-16",
+        )
+        self.assertEqual(reviewed[0]["status"], "due")
+        self.assertIn("等待证据复核", reviewed[0]["statusLabel"])
+
+    def test_weekly_digest_anomaly_detection_and_paper_news_links(self):
+        candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
+        report = MODULE.build_report(candidates, self.config, self.now, skip_ai=True)
+        papers = MODULE.score_research_papers(self.papers, self.config, self.now)
+        research = MODULE.build_research_report(papers, self.config, self.now, skip_ai=True)
+        MODULE.link_news_and_research(report, research, self.config)
+        quantum_news = next(item for item in report["items"] if "Quantum" in item["originalTitle"])
+        quantum_paper = next(item for item in research["items"] if "Quantum" in item["originalTitle"])
+        self.assertTrue(quantum_news["relatedPapers"])
+        self.assertTrue(quantum_paper["relatedNews"])
+        registry = MODULE.build_event_registry(report, {}, self.config, self.now)
+        weekly = MODULE.build_weekly_digest(registry, self.config, self.now)
+        self.assertEqual(weekly["weekId"], "2026-W29")
+        self.assertGreaterEqual(weekly["eventCount"], 3)
+
+        history = []
+        for day in range(1, 8):
+            edition = (self.now.date() - timedelta(days=day)).isoformat()
+            history.extend([
+                {"editionDate": edition, "category": "AI", "tags": []},
+                *[{"editionDate": edition, "category": "航空航天", "tags": []} for _ in range(9)],
+            ])
+        current = [{
+            "category": "AI", "tags": [],
+            "sources": [{"evidenceGroup": f"source:{index}"}],
+        } for index in range(3)]
+        anomaly = MODULE.build_anomaly_signals(current, history, self.config, self.now)
+        self.assertEqual(anomaly["status"], "alert")
+        self.assertEqual(anomaly["signals"][0]["name"], "AI")
+        self.assertGreaterEqual(anomaly["signals"][0]["ratio"], 3)
+
     def test_cli_writes_atomic_json(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -479,6 +557,10 @@ class UpdateNewsTests(unittest.TestCase):
             stream_output = root / "stream.json"
             stream_status_output = root / "stream-status.json"
             research_output = root / "research.json"
+            events_output = root / "events.json"
+            weekly_output = root / "weekly.json"
+            weekly_dir = root / "weekly"
+            signals_output = root / "signals.json"
             feed_output = root / "feed.xml"
             status = MODULE.main([
                 "--config", str(ROOT / "config" / "news_config.json"),
@@ -491,6 +573,10 @@ class UpdateNewsTests(unittest.TestCase):
                 "--stream-output", str(stream_output),
                 "--stream-status-output", str(stream_status_output),
                 "--research-output", str(research_output),
+                "--events-output", str(events_output),
+                "--weekly-output", str(weekly_output),
+                "--weekly-dir", str(weekly_dir),
+                "--signals-output", str(signals_output),
                 "--research-fixture", str(ROOT / "tests" / "fixtures" / "papers.json"),
                 "--feed-output", str(feed_output),
                 "--skip-ai",
@@ -498,7 +584,7 @@ class UpdateNewsTests(unittest.TestCase):
             ])
             self.assertEqual(status, 0)
             payload = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(payload["schemaVersion"], 8)
+            self.assertEqual(payload["schemaVersion"], 9)
             self.assertEqual(payload["editionDate"], "2026-07-16")
             self.assertEqual(payload["timezone"], "Asia/Shanghai")
             self.assertEqual(payload["method"], "rules")
@@ -516,15 +602,15 @@ class UpdateNewsTests(unittest.TestCase):
             atom = ET.parse(feed_output).getroot()
             self.assertEqual(len(atom.findall("{http://www.w3.org/2005/Atom}entry")), 10)
             pipeline_status = json.loads(status_output.read_text(encoding="utf-8"))
-            self.assertEqual(pipeline_status["schemaVersion"], 8)
+            self.assertEqual(pipeline_status["schemaVersion"], 9)
             self.assertEqual(pipeline_status["state"], "ok")
             self.assertEqual(pipeline_status["selectionMethod"], "rules")
             self.assertEqual(pipeline_status["translationStatus"], "disabled")
             self.assertNotIn("editorialStatus", pipeline_status)
             stream = json.loads(stream_output.read_text(encoding="utf-8"))
             research = json.loads(research_output.read_text(encoding="utf-8"))
-            self.assertEqual(stream["schemaVersion"], 4)
-            self.assertEqual(research["schemaVersion"], 3)
+            self.assertEqual(stream["schemaVersion"], 5)
+            self.assertEqual(research["schemaVersion"], 4)
             self.assertEqual(pipeline_status["streamItemCount"], stream["itemCount"])
             self.assertEqual(pipeline_status["researchItemCount"], 6)
             self.assertGreater(stream["itemCount"], 10)
@@ -532,6 +618,15 @@ class UpdateNewsTests(unittest.TestCase):
             stream_status = json.loads(stream_status_output.read_text(encoding="utf-8"))
             self.assertEqual(stream_status["schemaVersion"], 3)
             self.assertEqual(stream_status["state"], "ok")
+            events = json.loads(events_output.read_text(encoding="utf-8"))
+            weekly = json.loads(weekly_output.read_text(encoding="utf-8"))
+            signals = json.loads(signals_output.read_text(encoding="utf-8"))
+            self.assertEqual(events["eventCount"], len(events["items"]))
+            self.assertEqual(weekly["eventCount"], len(weekly["events"]))
+            self.assertTrue((weekly_dir / f"{weekly['weekId']}.json").exists())
+            self.assertEqual(signals["signalCount"], len(signals["signals"]))
+            self.assertTrue(all(item["eventId"] and item["eventDossier"] for item in payload["items"]))
+            self.assertEqual(len(payload["spotlightIds"]), 3)
 
     def test_irrecoverable_shortfall_writes_status_without_overwriting_latest(self):
         with tempfile.TemporaryDirectory() as directory:
