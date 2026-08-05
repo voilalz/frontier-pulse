@@ -1,10 +1,23 @@
 name: Daily news update
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/daily-news.yml"
   schedule:
-    - cron: "0 8 * * *"
+    - cron: "7 7 * * *"
+      timezone: "Asia/Shanghai"
+    - cron: "37 8 * * *"
       timezone: "Asia/Shanghai"
   workflow_dispatch:
+    inputs:
+      force_refresh:
+        description: "即使当天日报已经健康，也强制重新生成"
+        required: false
+        default: true
+        type: boolean
 
 permissions:
   contents: write
@@ -26,9 +39,23 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+      - name: Decide whether today's edition needs refresh
+        id: refresh_gate
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          FORCE_REFRESH: ${{ github.event.inputs.force_refresh || 'false' }}
+        run: >-
+          python scripts/check_daily_refresh.py
+          --status public/data/status.json
+          --timezone Asia/Shanghai
+          --event-name "$EVENT_NAME"
+          --force "$FORCE_REFRESH"
+          --github-output "$GITHUB_OUTPUT"
       - name: Run unit tests
+        if: steps.refresh_gate.outputs.should_run == 'true'
         run: python -m unittest discover -s tests -v
       - name: Collect, rank and summarize the latest 24 hours
+        if: steps.refresh_gate.outputs.should_run == 'true'
         id: collect
         continue-on-error: true
         env:
@@ -50,7 +77,7 @@ jobs:
           --research-output public/data/research.json
           --feed-output public/feed.xml
       - name: Verify daily brief, full stream and research radar
-        if: steps.collect.outcome == 'success'
+        if: steps.refresh_gate.outputs.should_run == 'true' && steps.collect.outcome == 'success'
         run: >-
           python -c "import json; p=json.load(open('public/data/news.json', encoding='utf-8'));
           s=json.load(open('public/data/stream.json', encoding='utf-8'));
@@ -72,7 +99,7 @@ jobs:
           assert __import__('pathlib').Path('public/feed.xml').exists();
           print('Validated edition', p.get('editionDate'), 'with 10 stories,', s['itemCount'], 'stream items and', r['itemCount'], 'papers')"
       - name: Commit edition, archive and public status
-        if: always()
+        if: always() && steps.refresh_gate.outputs.should_run == 'true'
         run: |
           git add -A -- public/data/news.json public/data/status.json public/data/stream.json public/data/stream-status.json public/data/research.json public/data/archive public/feed.xml
           if git diff --cached --quiet; then
@@ -99,7 +126,7 @@ jobs:
           echo "Unable to publish generated data after 3 attempts"
           exit 1
       - name: Send administrator email digest
-        if: steps.collect.outcome == 'success'
+        if: steps.refresh_gate.outputs.should_run == 'true' && steps.collect.outcome == 'success'
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ vars.SMTP_PORT }}
@@ -113,7 +140,10 @@ jobs:
           SITE_URL: ${{ vars.SITE_URL }}
         run: python scripts/send_digest.py --input public/data/news.json
       - name: Mark failed collection
-        if: steps.collect.outcome == 'failure'
+        if: steps.refresh_gate.outputs.should_run == 'true' && steps.collect.outcome == 'failure'
         run: |
           echo "The previous edition was retained and public/data/status.json records the failure."
           exit 1
+      - name: Report healthy edition skip
+        if: steps.refresh_gate.outputs.should_run != 'true'
+        run: echo "Today's healthy 10-item edition already exists; scheduled recovery run skipped."
