@@ -115,6 +115,7 @@ class FrontendTests(unittest.TestCase):
         self.assertIn('cron: "37 8 * * *"', daily)
         self.assertIn('paths:\n      - ".github/workflows/daily-news.yml"', daily)
         self.assertIn("python scripts/check_daily_refresh.py", daily)
+        self.assertIn("--required-schema 9", daily)
         self.assertIn("steps.refresh_gate.outputs.should_run", daily)
         self.assertIn('id="editionTimezone">版本日期 · 中国标准时间（UTC+8）', index)
         self.assertIn('if (zone === "Asia/Shanghai") return "版本日期 · 中国标准时间（UTC+8）"', app)

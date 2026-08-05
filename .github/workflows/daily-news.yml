@@ -50,6 +50,7 @@ jobs:
           --timezone Asia/Shanghai
           --event-name "$EVENT_NAME"
           --force "$FORCE_REFRESH"
+          --required-schema 9
           --github-output "$GITHUB_OUTPUT"
       - name: Run unit tests
         if: steps.refresh_gate.outputs.should_run == 'true'

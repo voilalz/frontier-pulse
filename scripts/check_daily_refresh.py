@@ -2,8 +2,9 @@
 """Decide whether a scheduled daily edition should run.
 
 Scheduled primary/recovery events and workflow-definition pushes are
-idempotent: a healthy 10-item edition for the current publication date is
-retained. Only a manual forced run intentionally bypasses that guard.
+idempotent: a healthy 10-item edition for the current publication date and
+current data contract is retained. Manual force or a schema upgrade bypasses
+that guard.
 """
 
 from __future__ import annotations
@@ -39,6 +40,7 @@ def decide_refresh(
     today: str,
     event_name: str,
     force_refresh: bool,
+    required_schema: int = 0,
 ) -> tuple[bool, str]:
     event = str(event_name or "").strip()
     if event == "workflow_dispatch" and force_refresh:
@@ -49,6 +51,12 @@ def decide_refresh(
         and status.get("editionDate") == today
         and status.get("itemCount") == 10
     )
+    try:
+        current_schema = int(status.get("schemaVersion", 0) or 0)
+    except (TypeError, ValueError):
+        current_schema = 0
+    if healthy_today and required_schema > 0 and current_schema < required_schema:
+        return True, "schema_upgrade_required"
     if healthy_today:
         return False, "healthy_edition_exists"
     return True, "edition_missing_or_unhealthy"
@@ -66,6 +74,7 @@ def main() -> int:
     parser.add_argument("--timezone", default="Asia/Shanghai")
     parser.add_argument("--event-name", default="schedule")
     parser.add_argument("--force", default="false")
+    parser.add_argument("--required-schema", type=int, default=0)
     parser.add_argument("--github-output", type=Path)
     args = parser.parse_args()
 
@@ -75,6 +84,7 @@ def main() -> int:
         today=today,
         event_name=args.event_name,
         force_refresh=parse_bool(args.force),
+        required_schema=max(0, args.required_schema),
     )
     values = {
         "should_run": "true" if should_run else "false",
