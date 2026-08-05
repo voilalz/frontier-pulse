@@ -282,6 +282,22 @@
     return Number.isFinite(generated) ? (Date.now() - generated) / 3_600_000 : Infinity;
   }
 
+  function chinaEditionClock(value = new Date()) {
+    const parts = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Shanghai",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hourCycle: "h23",
+    }).formatToParts(value).filter((part) => part.type !== "literal").map((part) => [part.type, part.value]));
+    return {
+      date: `${parts.year}-${parts.month}-${parts.day}`,
+      minutes: Number(parts.hour) * 60 + Number(parts.minute),
+    };
+  }
+
   function updateHealth(report) {
     const badge = $("dataState");
     badge.className = "state-badge";
@@ -298,6 +314,19 @@
       badge.classList.add("failed");
       const lastSuccess = state.pipelineStatus.lastSuccessAt ? formatDate(state.pipelineStatus.lastSuccessAt) : "未知";
       showAlert("failed", "最近一次自动更新失败", `${state.pipelineStatus.message || "采集流程未成功完成"}；最后成功时间：${lastSuccess}。页面继续保留上一期真实数据。`);
+      return;
+    }
+    const chinaNow = chinaEditionClock();
+    const editionDate = clean(report?.editionDate);
+    const editionIsOlder = !/^\d{4}-\d{2}-\d{2}$/.test(editionDate) || editionDate < chinaNow.date;
+    if (chinaNow.minutes >= 8 * 60 + 15 && editionIsOlder) {
+      badge.textContent = "今日未更新";
+      badge.classList.add("warning");
+      showAlert(
+        "warning",
+        "今日日报尚未生成",
+        `北京时间已过 08:15，当前最新版本仍为 ${editionDate || "日期未知"}。自动任务可能延迟或未触发；全量动态仍可继续使用。`,
+      );
       return;
     }
     const age = reportAgeHours(report);
