@@ -67,6 +67,32 @@ class DailyRefreshGateTests(unittest.TestCase):
             force_refresh=False,
         )[0])
 
+    def test_schema_upgrade_rebuilds_an_otherwise_healthy_edition(self):
+        healthy_old_contract = {
+            "schemaVersion": 8,
+            "state": "ok",
+            "editionDate": TODAY,
+            "itemCount": 10,
+        }
+        should_run, reason = decide_refresh(
+            healthy_old_contract,
+            today=TODAY,
+            event_name="push",
+            force_refresh=False,
+            required_schema=9,
+        )
+        self.assertTrue(should_run)
+        self.assertEqual(reason, "schema_upgrade_required")
+
+        healthy_current_contract = {**healthy_old_contract, "schemaVersion": 9}
+        self.assertFalse(decide_refresh(
+            healthy_current_contract,
+            today=TODAY,
+            event_name="push",
+            force_refresh=False,
+            required_schema=9,
+        )[0])
+
     def test_manual_non_forced_run_is_idempotent(self):
         healthy = {"state": "ok", "editionDate": TODAY, "itemCount": 10}
         self.assertFalse(decide_refresh(

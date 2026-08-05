@@ -9,6 +9,7 @@
 - Added evidence/dispute matrices and a persistent, verifiable forecast ledger with due dates, validation signals and open/due status.
 - Rebuilt the homepage intelligence layer around weekly event lines and anomaly signals; the lead story now uses a category-aware gradient and a brightness-safe image overlay, while secondary spotlights may show lazy-loaded thumbnails.
 - Bumped public data contracts to daily/status schema 9, stream schema 5 and research schema 4; added `events.json`, `weekly.json`, weekly archives and `signals.json` to the daily workflow contract.
+- The daily refresh gate now treats an older public schema as an upgrade requirement, so a same-day release regenerates data instead of incorrectly skipping because ten older-contract items already exist.
 
 ## 2.0.3 — Reliable daily scheduling and same-day health warning
 
