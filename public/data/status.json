@@ -1,26 +1,24 @@
 {
-  "schemaVersion": 8,
+  "schemaVersion": 9,
   "state": "ok",
-  "lastAttemptAt": "2026-08-05T01:35:55Z",
-  "lastSuccessAt": "2026-08-05T01:35:55Z",
-  "editionDate": "2026-08-05",
+  "lastAttemptAt": "2026-08-06T00:08:42Z",
+  "lastSuccessAt": "2026-08-06T00:08:42Z",
+  "editionDate": "2026-08-06",
   "itemCount": 10,
-  "message": "日报更新成功；候选主题或来源分布不均，已分级放宽配额补足 Top 10（1 条已标注）",
+  "message": "日报更新成功",
   "method": "deepseek",
   "selectionMethod": "deepseek",
   "selectionStrategy": "ai-ranked-rule-constrained",
-  "selectionStatus": "relaxed",
+  "selectionStatus": "adjusted",
   "selectionProvider": "deepseek",
   "selectionModel": "deepseek-v4-flash",
   "selectionNotices": [
     "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 3 个 Top 10 入选位"
   ],
-  "selectionWarnings": [
-    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（1 条已标注）"
-  ],
+  "selectionWarnings": [],
   "selectionDiagnostics": {
     "attempted": true,
-    "status": "relaxed",
+    "status": "adjusted",
     "failureReason": "",
     "candidateCount": 36,
     "provider": "deepseek",
@@ -31,53 +29,55 @@
     "aiUnscoredItemCount": 0,
     "unconstrainedTop": {
       "categoryCounts": {
-        "局部冲突": 7,
-        "军事动态": 3
+        "局部冲突": 6,
+        "军事动态": 3,
+        "航空航天": 1
       },
       "domainCounts": {
-        "aljazeera.com": 5,
-        "twz.com": 2,
+        "bbc.co.uk": 3,
+        "aljazeera.com": 2,
         "defensenews.com": 2,
-        "bbc.co.uk": 1
+        "twz.com": 2,
+        "techcrunch.com": 1
       },
       "categoryViolations": {
-        "局部冲突": 7
+        "局部冲突": 6
       },
       "domainViolations": {
-        "aljazeera.com": 5
+        "bbc.co.uk": 3
       }
     },
     "finalTop": {
       "categoryCounts": {
-        "局部冲突": 4,
+        "局部冲突": 3,
         "军事动态": 3,
-        "航空航天": 3
+        "航空航天": 3,
+        "无人系统": 1
       },
       "domainCounts": {
-        "aljazeera.com": 2,
-        "twz.com": 2,
+        "bbc.co.uk": 2,
+        "aljazeera.com": 1,
         "defensenews.com": 2,
-        "spacenews.com": 1,
-        "nasa.gov": 2,
-        "bbc.co.uk": 1
+        "techcrunch.com": 1,
+        "twz.com": 2,
+        "defenseone.com": 1,
+        "spacenews.com": 1
       },
-      "categoryViolations": {
-        "局部冲突": 4
-      },
+      "categoryViolations": {},
       "domainViolations": {}
     },
     "adjustedItemCount": 3,
     "adjustedOutIds": [
-      "f62663f0eaf58e",
-      "455254c54dfed2",
-      "e2ef1ce31194c4"
+      "09dbd2bada0f2c",
+      "627a7acabc60b0",
+      "ad9700aa6cd9f0"
     ],
     "adjustedInIds": [
-      "ccac1e3bbca2b8",
-      "c3b540dd2851b1",
-      "6f1d574186b742"
+      "04274b9c9b8cab",
+      "ac12c493217c37",
+      "607e7ebbc265cb"
     ],
-    "relaxedItemCount": 1
+    "relaxedItemCount": 0
   },
   "translationStatus": "ok",
   "translationProvider": "deepseek",
@@ -107,12 +107,12 @@
   },
   "historyAnalysisStatus": "ok",
   "historyAnalysisProvider": "deepseek",
-  "historyLinkedItemCount": 2,
-  "historyAnalyzedItemCount": 2,
+  "historyLinkedItemCount": 4,
+  "historyAnalyzedItemCount": 4,
   "historyAnalysisWarnings": [],
   "historyAnalysisDiagnostics": {
-    "requestedItemCount": 2,
-    "completedItemCount": 2,
+    "requestedItemCount": 4,
+    "completedItemCount": 4,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
@@ -126,51 +126,53 @@
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": ""
   },
-  "warnings": [
-    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（1 条已标注）"
-  ],
-  "coverageStatus": "supplemented",
+  "eventCount": 10,
+  "weeklyEventCount": 8,
+  "anomalySignalCount": 0,
+  "paperLinkedItemCount": 0,
+  "warnings": [],
+  "coverageStatus": "complete",
   "freshItemCount": 10,
   "supplementalItemCount": 0,
   "effectiveLookbackHours": 24,
-  "streamItemCount": 43,
+  "streamItemCount": 39,
   "streamTranslationProvider": "deepseek",
   "streamTranslationModel": "deepseek-v4-flash",
-  "streamTranslatedItemCount": 43,
+  "streamTranslatedItemCount": 39,
   "streamTranslationWarnings": [],
   "streamTranslationDiagnostics": {
-    "requestedItemCount": 3,
-    "completedItemCount": 3,
+    "requestedItemCount": 0,
+    "completedItemCount": 0,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 1,
-    "requestCount": 1,
+    "initialBatchCount": 0,
+    "requestCount": 0,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "completionReason": "not_needed",
+    "completionMessage": "没有需要翻译的新条目",
     "lastProviderError": "",
-    "reusedItemCount": 39,
+    "reusedItemCount": 38,
     "featuredTranslatedItemCount": 10
   },
-  "researchItemCount": 60,
+  "researchItemCount": 37,
   "researchEditorialStatus": "ok",
   "researchEditorialProvider": "deepseek",
   "researchEditorialModel": "deepseek-v4-flash",
-  "researchTranslatedItemCount": 60,
+  "researchTranslatedItemCount": 37,
   "researchWarnings": [],
   "researchEditorialDiagnostics": {
-    "requestedItemCount": 60,
-    "completedItemCount": 60,
+    "requestedItemCount": 37,
+    "completedItemCount": 37,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 5,
-    "initialBatchCount": 12,
-    "requestCount": 12,
+    "initialBatchCount": 8,
+    "requestCount": 8,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,

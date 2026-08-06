@@ -1,16 +1,16 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-08-05T23:18:29Z",
+  "generatedAt": "2026-08-06T00:08:42Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
-  "itemCount": 38,
-  "totalCandidateCount": 38,
+  "itemCount": 39,
+  "totalCandidateCount": 39,
   "truncated": false,
   "categoryCounts": {
     "局部冲突": 13,
+    "军事动态": 12,
     "无人系统": 1,
     "航空航天": 12,
-    "军事动态": 11,
     "前沿技术": 1
   },
   "sourceCounts": {
@@ -18,8 +18,8 @@
     "Al Jazeera": 6,
     "Breaking Defense": 5,
     "SpaceNews": 5,
+    "Defense News": 4,
     "The War Zone": 4,
-    "Defense News": 3,
     "Defense One": 2,
     "NASA": 2,
     "TechCrunch AI": 2,
@@ -27,24 +27,24 @@
   },
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
-  "translatedItemCount": 38,
+  "translatedItemCount": 39,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 7,
-    "completedItemCount": 7,
+    "requestedItemCount": 0,
+    "completedItemCount": 0,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 2,
-    "requestCount": 2,
+    "initialBatchCount": 0,
+    "requestCount": 0,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "completionReason": "not_needed",
+    "completionMessage": "没有需要翻译的新条目",
     "lastProviderError": "",
-    "reusedItemCount": 31,
+    "reusedItemCount": 38,
     "featuredTranslatedItemCount": 10
   },
   "items": [
@@ -66,13 +66,13 @@
       "country": "国际",
       "publishedAt": "2026-08-05T18:19:51Z",
       "url": "https://www.bbc.co.uk/news/articles/cyvlgq2gp2eo?at_medium=RSS&at_campaign=rss",
-      "score": 82,
-      "scoreBasis": "规则评分",
+      "score": 84,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 11,
         "主题相关性": 8,
         "证据完整度": 3,
@@ -82,8 +82,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 85/100",
+        "综合排序分 84/100（AI 65% + 规则 35%）",
+        "规则参考分 81/100",
         "来源权重 17/20",
-        "发布约 5.0 小时",
+        "发布约 5.8 小时",
         "命中 4 个主题信号",
         "影响信号：strike、missile"
       ],
@@ -105,14 +108,91 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-90851c283b01",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-06",
+        "lastSeen": "2026-08-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-06",
+            "newsId": "987439c2ef993a",
+            "title": "基辅遭致命打击后，乌克兰警告拦截弹短缺正在付出生命代价",
+            "source": "BBC World",
+            "publishedAt": "2026-08-05T18:19:51Z",
+            "score": 84
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "Without Patriot interceptors",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "Ukraine's skies are wide open",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "people are fully exposed to Russia's missile barrages",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-21694c6ff120",
+          "eventId": "evt-90851c283b01",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-06",
+          "dueAfter": "2026-09-05",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "987439c2ef993a"
+          ],
+          "lastReviewedAt": "2026-08-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
     },
     {
       "id": "c837ad8e9a6c30",
@@ -131,8 +211,8 @@
       "country": "国际",
       "publishedAt": "2026-08-05T20:03:36Z",
       "url": "https://www.bbc.co.uk/news/articles/c998711dyjvo?at_medium=RSS&at_campaign=rss",
-      "score": 80,
-      "scoreBasis": "规则评分",
+      "score": 79,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -147,8 +227,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 79/100（AI 65% + 规则 35%）",
+        "规则参考分 80/100",
         "来源权重 17/20",
-        "发布约 3.2 小时",
+        "发布约 4.1 小时",
         "命中 3 个主题信号",
         "影响信号：first、ceasefire"
       ],
@@ -170,14 +253,102 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 2
+      "eventDossier": {
+        "eventId": "evt-ed9538483fc2",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-06",
+        "lastSeen": "2026-08-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-06",
+            "newsId": "c837ad8e9a6c30",
+            "title": "以色列在数周来首次发出撤离警告后打击黎巴嫩南部",
+            "source": "BBC World",
+            "publishedAt": "2026-08-05T20:03:36Z",
+            "score": 79
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "Lebanon's health ministry says one person was killed in the strikes",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "which the Israeli military says were a response to a Hezbollah ceasefire violation",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-69a8c6da7b57",
+          "eventId": "evt-ed9538483fc2",
+          "statement": "若以色列继续对黎南部实施空袭，则需关注黎真主党是否作出军事回应及伤亡情况。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-06",
+          "dueAfter": "2026-09-05",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "c837ad8e9a6c30"
+          ],
+          "lastReviewedAt": "2026-08-06"
+        },
+        {
+          "predictionId": "pred-bdde1b79307f",
+          "eventId": "evt-ed9538483fc2",
+          "statement": "后续可观察停火协议能否维持，以及国际社会是否介入调解。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-06",
+          "dueAfter": "2026-11-04",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "c837ad8e9a6c30"
+          ],
+          "lastReviewedAt": "2026-08-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 2,
+      "relatedPapers": []
     },
     {
       "id": "493c6bfb91355b",
@@ -197,26 +368,29 @@
       "country": "国际",
       "publishedAt": "2026-08-05T16:42:24Z",
       "url": "https://www.aljazeera.com/video/newsfeed/2026/8/5/5-8-sv-russia-attacks-kyiv-ua?traffic_source=rss",
-      "score": 80,
-      "scoreBasis": "规则评分",
+      "score": 83,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 11,
-        "主题相关性": 8,
-        "证据完整度": 3,
+        "主题相关性": 10,
+        "证据完整度": 2,
         "多源印证": 0,
         "编辑降权": 0,
         "日期异常降权": 0,
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 84/100",
+        "综合排序分 83/100（AI 65% + 规则 35%）",
+        "规则参考分 80/100",
         "来源权重 16/20",
-        "发布约 6.6 小时",
-        "命中 4 个主题信号",
-        "影响信号：attack、missile"
+        "发布约 7.4 小时",
+        "命中 5 个主题信号",
+        "影响信号：missile、袭击"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
@@ -236,14 +410,268 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 3
+      "eventDossier": {
+        "eventId": "evt-a029703d9cf4",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-06",
+        "lastSeen": "2026-08-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-06",
+            "newsId": "493c6bfb91355b",
+            "title": "俄罗斯对基辅周边发动弹道导弹袭击致17人死亡",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-05T16:42:24Z",
+            "score": 83
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "At least 17 people were killed",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "Russia launched an overnight ballistic missile",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "drone attack on Kyiv",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-2da5fb47d60c",
+          "eventId": "evt-a029703d9cf4",
+          "statement": "若俄军继续对基辅实施打击，则需关注伤亡人数是否进一步上升及乌方防空拦截成效。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-06",
+          "dueAfter": "2026-09-05",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "493c6bfb91355b"
+          ],
+          "lastReviewedAt": "2026-08-06"
+        },
+        {
+          "predictionId": "pred-9dde11d4edd1",
+          "eventId": "evt-a029703d9cf4",
+          "statement": "后续可观察俄乌双方是否升级报复行动，如乌方对俄海上目标的袭击是否增多。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-06",
+          "dueAfter": "2026-11-04",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "493c6bfb91355b"
+          ],
+          "lastReviewedAt": "2026-08-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 3,
+      "relatedPapers": []
+    },
+    {
+      "id": "2c070405cd14a9",
+      "eventId": "evt-dbddf83624e1",
+      "contentType": "news",
+      "title": "特朗普级战列舰计划成本2750亿美元，国会预算办公室报告称",
+      "originalTitle": "Trump-class battleship program will cost $275 billion, CBO report says",
+      "summary": "国会预算办公室估计，海军新的特朗普级战列舰计划将耗资2750亿美元，其中首舰成本为234亿美元。",
+      "keyFacts": [
+        "国会预算办公室估计该计划总成本为2750亿美元",
+        "首舰成本为234亿美元",
+        "来源为Defense News，发布于2026年8月5日"
+      ],
+      "why": "评估巨额国防开支对预算的影响及可能引发的财政争议。",
+      "category": "军事动态",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-08-05T23:17:27Z",
+      "url": "https://www.defensenews.com/news/your-military/2026/08/05/trump-class-battleship-program-will-cost-275-billion-cbo-report-says",
+      "score": 80,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 5,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 4,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 82/100",
+        "综合排序分 80/100（AI 65% + 规则 35%）",
+        "规则参考分 75/100",
+        "来源权重 16/20",
+        "发布约 0.9 小时",
+        "命中 1 个主题信号",
+        "影响信号：first",
+        "2 个独立来源相互印证"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 2 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "军事预算",
+        "国会预算办公室",
+        "特朗普级战列舰"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/QU6SMXWWWBAH5NDPT2DV7ISSUE.jpg",
+      "corroboration": 2,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/news/your-military/2026/08/05/trump-class-battleship-program-will-cost-275-billion-cbo-report-says",
+          "publishedAt": "2026-08-05T23:17:27Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        },
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/first-battleship-could-cost-more-than-23-billion-cbo-says",
+          "publishedAt": "2026-08-05T21:21:41Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-dbddf83624e1",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-06",
+        "lastSeen": "2026-08-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-06",
+            "newsId": "2c070405cd14a9",
+            "title": "特朗普级战列舰计划成本2750亿美元，国会预算办公室报告称",
+            "source": "Defense News",
+            "publishedAt": "2026-08-05T23:17:27Z",
+            "score": 80
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:defensenews.com",
+          "outlet:breakingdefense.com"
+        ],
+        "claims": [
+          {
+            "text": "国会预算办公室估计该计划总成本为2750亿美元",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:defensenews.com",
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "首舰成本为234亿美元",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:defensenews.com",
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "来源为Defense News，发布于2026年8月5日",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:defensenews.com",
+              "outlet:breakingdefense.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-0741e0e3e374",
+          "eventId": "evt-dbddf83624e1",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-06",
+          "dueAfter": "2026-09-05",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "2c070405cd14a9"
+          ],
+          "lastReviewedAt": "2026-08-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 4,
+      "relatedPapers": []
     },
     {
       "id": "09dbd2bada0f2c",
@@ -278,7 +706,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 1.8 小时",
+        "发布约 2.6 小时",
         "命中 3 个主题信号",
         "影响信号：missile"
       ],
@@ -307,7 +735,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 4
+      "streamRank": 5
     },
     {
       "id": "04274b9c9b8cab",
@@ -327,8 +755,8 @@
       "country": "国际",
       "publishedAt": "2026-08-05T21:28:58Z",
       "url": "https://www.twz.com/news-features/xq-58-valkyrie-drone-crashes-at-dugway-proving-ground-in-utah",
-      "score": 73,
-      "scoreBasis": "规则评分",
+      "score": 72,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
@@ -343,8 +771,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 72/100",
+        "综合排序分 72/100（AI 65% + 规则 35%）",
+        "规则参考分 73/100",
         "来源权重 15/20",
-        "发布约 1.8 小时",
+        "发布约 2.7 小时",
         "命中 1 个主题信号",
         "影响信号：test、autonomous"
       ],
@@ -366,14 +797,219 @@
           "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 5
+      "eventDossier": {
+        "eventId": "evt-629b8cf76282",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-06",
+        "lastSeen": "2026-08-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-06",
+            "newsId": "04274b9c9b8cab",
+            "title": "XQ-58“女武神”在犹他州达格韦试验场坠毁（更新）",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-05T21:28:58Z",
+            "score": 72
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "The stealthy autonomous drone's manufacturer",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "said it went down upon takeoff",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "in a \"test configuration.\"",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-f79dcc1adcb1",
+          "eventId": "evt-629b8cf76282",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-06",
+          "dueAfter": "2026-09-05",
+          "verificationSignals": [
+            "后续试验与任务数据",
+            "规模化部署、采购或反制变化"
+          ],
+          "evidenceIds": [
+            "04274b9c9b8cab"
+          ],
+          "lastReviewedAt": "2026-08-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 6,
+      "relatedPapers": []
+    },
+    {
+      "id": "ac12c493217c37",
+      "eventId": "evt-40be45691dc6",
+      "contentType": "news",
+      "title": "阿拉斯加航天港能否缓解五角大楼的发射瓶颈？",
+      "originalTitle": "Can an Alaskan spaceport ease Pentagon’s launch bottleneck?",
+      "summary": "火箭实验室表示，其在阿拉斯加太平洋航天港综合体的亚轨道发射可能引领国家安全发射任务。",
+      "keyFacts": [
+        "Rocket Lab says its suborbital launches at Pacific Spaceport Complex-Alaska could lead to national-security ones"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "Defense One",
+      "country": "国际",
+      "publishedAt": "2026-08-05T21:30:13Z",
+      "url": "https://www.defenseone.com/technology/2026/08/can-alaskan-spaceport-ease-pentagons-launch-bottleneck/415238",
+      "score": 71,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 19,
+        "影响信号": 4,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 70/100",
+        "综合排序分 71/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
+        "来源权重 16/20",
+        "发布约 2.6 小时",
+        "命中 3 个主题信号",
+        "影响信号：launch"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "航天港",
+        "发射",
+        "国家安全"
+      ],
+      "image": "https://cdn.defenseone.com/media/img/cd/2026/08/05/Launch_Complex_4_Render_lowres_1_v2-1/thumb.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense One",
+          "domain": "defenseone.com",
+          "url": "https://www.defenseone.com/technology/2026/08/can-alaskan-spaceport-ease-pentagons-launch-bottleneck/415238",
+          "publishedAt": "2026-08-05T21:30:13Z",
+          "evidenceGroup": "outlet:defenseone.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-40be45691dc6",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-06",
+        "lastSeen": "2026-08-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-06",
+            "newsId": "ac12c493217c37",
+            "title": "阿拉斯加航天港能否缓解五角大楼的发射瓶颈？",
+            "source": "Defense One",
+            "publishedAt": "2026-08-05T21:30:13Z",
+            "score": 71
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defenseone.com"
+        ],
+        "claims": [
+          {
+            "text": "Rocket Lab says its suborbital launches at Pacific Spaceport Complex-Alaska could lead to national-security ones",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defenseone.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-f15dd84b1073",
+          "eventId": "evt-40be45691dc6",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-06",
+          "dueAfter": "2026-09-05",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "ac12c493217c37"
+          ],
+          "lastReviewedAt": "2026-08-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 7,
+      "relatedPapers": []
     },
     {
       "id": "da87ac79b71faa",
@@ -391,13 +1027,13 @@
       "country": "国际",
       "publishedAt": "2026-08-05T19:00:32Z",
       "url": "https://www.bbc.co.uk/news/videos/clyxdgx7m8no?at_medium=RSS&at_campaign=rss",
-      "score": 73,
+      "score": 72,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 6,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -408,7 +1044,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 4.3 小时",
+        "发布约 5.1 小时",
         "命中 2 个主题信号",
         "影响信号：attack"
       ],
@@ -437,71 +1073,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 6
-    },
-    {
-      "id": "ac12c493217c37",
-      "eventId": "evt-40be45691dc6",
-      "contentType": "news",
-      "title": "阿拉斯加航天港能否缓解五角大楼的发射瓶颈？",
-      "originalTitle": "Can an Alaskan spaceport ease Pentagon’s launch bottleneck?",
-      "summary": "火箭实验室表示，其在阿拉斯加太平洋航天港综合体的亚轨道发射可能引领国家安全发射任务。",
-      "keyFacts": [
-        "Rocket Lab says its suborbital launches at Pacific Spaceport Complex-Alaska could lead to national-security ones"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "Defense One",
-      "country": "国际",
-      "publishedAt": "2026-08-05T21:30:13Z",
-      "url": "https://www.defenseone.com/technology/2026/08/can-alaskan-spaceport-ease-pentagons-launch-bottleneck/415238",
-      "score": 72,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 19,
-        "影响信号": 4,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 1.8 小时",
-        "命中 3 个主题信号",
-        "影响信号：launch"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "航天港",
-        "发射",
-        "国家安全"
-      ],
-      "image": "https://cdn.defenseone.com/media/img/cd/2026/08/05/Launch_Complex_4_Render_lowres_1_v2-1/thumb.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Defense One",
-          "domain": "defenseone.com",
-          "url": "https://www.defenseone.com/technology/2026/08/can-alaskan-spaceport-ease-pentagons-launch-bottleneck/415238",
-          "publishedAt": "2026-08-05T21:30:13Z",
-          "evidenceGroup": "outlet:defenseone.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 7
+      "streamRank": 8
     },
     {
       "id": "66196ff899bf4b",
@@ -538,7 +1110,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.7 小时",
+        "发布约 6.5 小时",
         "命中 3 个主题信号",
         "影响信号：missile"
       ],
@@ -567,7 +1139,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 8
+      "streamRank": 9
     },
     {
       "id": "98974a9004d3bd",
@@ -586,8 +1158,8 @@
       "country": "国际",
       "publishedAt": "2026-08-05T13:09:54Z",
       "url": "https://www.defensenews.com/global/asia-pacific/2026/08/05/taiwan-launches-major-war-games-to-test-command-flexibility",
-      "score": 72,
-      "scoreBasis": "规则评分",
+      "score": 75,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -602,8 +1174,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 76/100",
+        "综合排序分 75/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
         "来源权重 16/20",
-        "发布约 10.1 小时",
+        "发布约 11.0 小时",
         "命中 2 个主题信号",
         "影响信号：first、test"
       ],
@@ -625,78 +1200,83 @@
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 9
-    },
-    {
-      "id": "ad9700aa6cd9f0",
-      "eventId": "evt-23a2e6f20a67",
-      "contentType": "news",
-      "title": "印度绝食抗议活动人士告诉BBC：青年抗议已削弱莫迪",
-      "originalTitle": "Youth protests have weakened Modi, Indian activist who went on hunger strike tells BBC",
-      "summary": "“蟑螂”运动是近年来针对印度总理最大规模的公开抗议之一。",
-      "keyFacts": [
-        "The \"cockroach\" movement was one of the biggest public displays of dissent against India's prime minister in years"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-05T18:38:46Z",
-      "url": "https://www.bbc.co.uk/news/articles/cn7nkyr1j7ro?at_medium=RSS&at_campaign=rss",
-      "score": 71,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 6,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
+      "eventDossier": {
+        "eventId": "evt-2cbaa76f06b5",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-06",
+        "lastSeen": "2026-08-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-06",
+            "newsId": "98974a9004d3bd",
+            "title": "台湾启动大规模军事演习以测试指挥灵活性",
+            "source": "Defense News",
+            "publishedAt": "2026-08-05T13:09:54Z",
+            "score": 75
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
       },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 4.7 小时",
-        "命中 1 个主题信号",
-        "影响信号：strike"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "印度",
-        "莫迪",
-        "抗议"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/c9ca/live/056db5d0-909c-11f1-b8ee-9b3c26ad07bb.jpg",
-      "corroboration": 1,
-      "sources": [
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "Taiwan began major military drills to test commanders’ ability to fight on the fly",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          },
+          {
+            "text": "temporarily limiting internet access for the first time",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
         {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cn7nkyr1j7ro?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-05T18:38:46Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
+          "predictionId": "pred-7becfd2f0631",
+          "eventId": "evt-2cbaa76f06b5",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-06",
+          "dueAfter": "2026-09-05",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "98974a9004d3bd"
+          ],
+          "lastReviewedAt": "2026-08-06"
         }
       ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 10
+      "isTopStory": true,
+      "streamRank": 10,
+      "relatedPapers": []
     },
     {
       "id": "906ccad4e68317",
@@ -732,7 +1312,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 1.9 小时",
+        "发布约 2.8 小时",
         "命中 1 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -771,29 +1351,29 @@
       "streamRank": 11
     },
     {
-      "id": "607e7ebbc265cb",
-      "eventId": "evt-42aad5e4e5aa",
+      "id": "ad9700aa6cd9f0",
+      "eventId": "evt-23a2e6f20a67",
       "contentType": "news",
-      "title": "新格伦火箭爆炸与发动机阀门有关",
-      "originalTitle": "New Glenn explosion linked to rocket engine valve",
-      "summary": "蓝色起源已将5月静态点火测试中新格伦火箭的爆炸追溯到BE-4发动机中的一个阀门。",
+      "title": "印度绝食抗议活动人士告诉BBC：青年抗议已削弱莫迪",
+      "originalTitle": "Youth protests have weakened Modi, Indian activist who went on hunger strike tells BBC",
+      "summary": "“蟑螂”运动是近年来针对印度总理最大规模的公开抗议之一。",
       "keyFacts": [
-        "Blue Origin has traced the explosion of its New Glenn rocket during a static-fire test in May to a valve in the rocket’s BE-4 engine"
+        "The \"cockroach\" movement was one of the biggest public displays of dissent against India's prime minister in years"
       ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
       "country": "国际",
-      "publishedAt": "2026-08-05T22:30:16Z",
-      "url": "https://spacenews.com/new-glenn-explosion-linked-to-rocket-engine-valve",
-      "score": 69,
+      "publishedAt": "2026-08-05T18:38:46Z",
+      "url": "https://www.bbc.co.uk/news/articles/cn7nkyr1j7ro?at_medium=RSS&at_campaign=rss",
+      "score": 70,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 20,
-        "影响信号": 4,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 6,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
@@ -802,27 +1382,27 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 0.8 小时",
+        "来源权重 17/20",
+        "发布约 5.5 小时",
         "命中 1 个主题信号",
-        "影响信号：test"
+        "影响信号：strike"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "蓝色起源",
-        "新格伦",
-        "爆炸"
+        "印度",
+        "莫迪",
+        "抗议"
       ],
-      "image": "",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/c9ca/live/056db5d0-909c-11f1-b8ee-9b3c26ad07bb.jpg",
       "corroboration": 1,
       "sources": [
         {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/new-glenn-explosion-linked-to-rocket-engine-valve",
-          "publishedAt": "2026-08-05T22:30:16Z",
-          "evidenceGroup": "outlet:spacenews.com"
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cn7nkyr1j7ro?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-05T18:38:46Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
       "selectionProvider": "",
@@ -833,71 +1413,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 12
-    },
-    {
-      "id": "8a715d8ea8752b",
-      "eventId": "evt-a1983d16fb52",
-      "contentType": "news",
-      "title": "中国不断增长的地区弹道导弹武库：指南",
-      "originalTitle": "China’s Growing Regional Ballistic Missile Arsenal: A Guide",
-      "summary": "从威胁台湾的短程导弹到可打击关岛的双能力武器，这些多样系统是中国反介入战略的关键组成部分。",
-      "keyFacts": [
-        "From short-range missiles that threaten Taiwan to dual-capable weapons that can reach Guam",
-        "these varied systems are a key component of China’s anti-access strategy"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "The War Zone",
-      "country": "国际",
-      "publishedAt": "2026-08-05T16:50:12Z",
-      "url": "https://www.twz.com/land/chinas-growing-regional-ballistic-missile-arsenal-a-guide",
-      "score": 69,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 5,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 6.5 小时",
-        "命中 2 个主题信号",
-        "影响信号：missile"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "中国",
-        "弹道导弹",
-        "反介入"
-      ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/08/DF-26_469f5b.jpg?quality=85",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/land/chinas-growing-regional-ballistic-missile-arsenal-a-guide",
-          "publishedAt": "2026-08-05T16:50:12Z",
-          "evidenceGroup": "outlet:twz.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 13
     },
     {
       "id": "0e88d5b37f2dad",
@@ -934,7 +1449,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 7.8 小时",
+        "发布约 8.7 小时",
         "命中 1 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -970,31 +1485,179 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 14
+      "streamRank": 13
     },
     {
-      "id": "9d844f3a9a3356",
-      "eventId": "evt-c64f873cbad7",
+      "id": "607e7ebbc265cb",
+      "eventId": "evt-42aad5e4e5aa",
       "contentType": "news",
-      "title": "法国无人机生产从政策愿景转向工厂落地",
-      "originalTitle": "France’s drone production shifts from policy ambition to factory floor",
-      "summary": "法国推动汽车行业生产军用无人机的计划正进入工业实施阶段。",
+      "title": "新格伦火箭爆炸与发动机阀门有关",
+      "originalTitle": "New Glenn explosion linked to rocket engine valve",
+      "summary": "蓝色起源已将5月静态点火测试中新格伦火箭的爆炸追溯到BE-4发动机中的一个阀门。",
       "keyFacts": [
-        "France’s push to enlist its car industry to produce military drones is moving to industrial implementation"
+        "Blue Origin has traced the explosion of its New Glenn rocket during a static-fire test in May to a valve in the rocket’s BE-4 engine"
       ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Defense News",
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
       "country": "国际",
-      "publishedAt": "2026-08-05T12:48:10Z",
-      "url": "https://www.defensenews.com/industry/techwatch/2026/08/05/frances-drone-production-shifts-from-policy-ambition-to-factory-floor",
-      "score": 68,
-      "scoreBasis": "规则评分",
+      "publishedAt": "2026-08-05T22:30:16Z",
+      "url": "https://spacenews.com/new-glenn-explosion-linked-to-rocket-engine-valve",
+      "score": 70,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
+        "主题优先级": 9,
+        "时效": 19,
+        "影响信号": 4,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 71/100",
+        "综合排序分 70/100（AI 65% + 规则 35%）",
+        "规则参考分 68/100",
+        "来源权重 16/20",
+        "发布约 1.6 小时",
+        "命中 1 个主题信号",
+        "影响信号：test"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "蓝色起源",
+        "新格伦",
+        "爆炸"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/new-glenn-explosion-linked-to-rocket-engine-valve",
+          "publishedAt": "2026-08-05T22:30:16Z",
+          "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-42aad5e4e5aa",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-06",
+        "lastSeen": "2026-08-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-06",
+            "newsId": "607e7ebbc265cb",
+            "title": "新格伦火箭爆炸与发动机阀门有关",
+            "source": "SpaceNews",
+            "publishedAt": "2026-08-05T22:30:16Z",
+            "score": 70
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:spacenews.com"
+        ],
+        "claims": [
+          {
+            "text": "Blue Origin has traced the explosion of its New Glenn rocket during a static-fire test in May to a valve in the rocket’s BE-4 engine",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-f880cdb1ba2b",
+          "eventId": "evt-42aad5e4e5aa",
+          "statement": "后续可观察蓝色起源是否公布阀门问题的修复方案及对测试时间表的影响。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-06",
+          "dueAfter": "2026-09-05",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "607e7ebbc265cb"
+          ],
+          "lastReviewedAt": "2026-08-06"
+        },
+        {
+          "predictionId": "pred-b79357af2676",
+          "eventId": "evt-42aad5e4e5aa",
+          "statement": "若阀门问题导致贝-4发动机设计调整，则需关注对NASA阿尔忒弥斯任务合作进度的影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-06",
+          "dueAfter": "2026-11-04",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "607e7ebbc265cb"
+          ],
+          "lastReviewedAt": "2026-08-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 14,
+      "relatedPapers": []
+    },
+    {
+      "id": "8a715d8ea8752b",
+      "eventId": "evt-6c8bf93d8696",
+      "contentType": "news",
+      "title": "中国不断增长的地区弹道导弹武库：指南",
+      "originalTitle": "China’s Growing Regional Ballistic Missile Arsenal: A Guide",
+      "summary": "从威胁台湾的短程导弹到可打击关岛的双能力武器，这些多样系统是中国反介入战略的关键组成部分。",
+      "keyFacts": [
+        "From short-range missiles that threaten Taiwan to dual-capable weapons that can reach Guam",
+        "these varied systems are a key component of China’s anti-access strategy"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-08-05T16:50:12Z",
+      "url": "https://www.twz.com/land/chinas-growing-regional-ballistic-missile-arsenal-a-guide",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
         "主题优先级": 10,
-        "时效": 15,
+        "时效": 16,
         "影响信号": 5,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -1004,37 +1667,128 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 10.5 小时",
+        "DeepSeek 候选重要度 75/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 68/100",
+        "来源权重 15/20",
+        "发布约 7.3 小时",
         "命中 2 个主题信号",
-        "影响信号：production"
+        "影响信号：missile"
       ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
       "tags": [
-        "法国",
-        "无人机",
-        "国防工业"
+        "中国",
+        "弹道导弹",
+        "反介入"
       ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/DH7N6R7VLRCRPLRJZM6QIBGDVE.JPG",
+      "image": "https://www.twz.com/wp-content/uploads/2026/08/DF-26_469f5b.jpg?quality=85",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/industry/techwatch/2026/08/05/frances-drone-production-shifts-from-policy-ambition-to-factory-floor",
-          "publishedAt": "2026-08-05T12:48:10Z",
-          "evidenceGroup": "outlet:defensenews.com"
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/land/chinas-growing-regional-ballistic-missile-arsenal-a-guide",
+          "publishedAt": "2026-08-05T16:50:12Z",
+          "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 15
+      "eventDossier": {
+        "eventId": "evt-6c8bf93d8696",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-06",
+        "lastSeen": "2026-08-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-06",
+            "newsId": "8a715d8ea8752b",
+            "title": "中国不断增长的地区弹道导弹武库：指南",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-05T16:50:12Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "From short-range missiles that threaten Taiwan to dual-capable weapons that can reach Guam",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "these varied systems are a key component of China’s anti-access strategy",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-ecf3d51c3b39",
+          "eventId": "evt-6c8bf93d8696",
+          "statement": "后续可观察该媒体是否继续发布中国导弹体系的后续分析，如导弹防御或指挥控制。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-06",
+          "dueAfter": "2026-09-05",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "8a715d8ea8752b"
+          ],
+          "lastReviewedAt": "2026-08-06"
+        },
+        {
+          "predictionId": "pred-3c9ee1f7ea41",
+          "eventId": "evt-6c8bf93d8696",
+          "statement": "若地区安全形势变化，则需关注中国是否调整导弹部署及对其反介入战略的影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-06",
+          "dueAfter": "2026-11-04",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "8a715d8ea8752b"
+          ],
+          "lastReviewedAt": "2026-08-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 15,
+      "relatedPapers": []
     },
     {
       "id": "627a7acabc60b0",
@@ -1069,7 +1823,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.3 小时",
+        "发布约 2.1 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1100,6 +1854,70 @@
       "streamRank": 16
     },
     {
+      "id": "9d844f3a9a3356",
+      "eventId": "evt-c64f873cbad7",
+      "contentType": "news",
+      "title": "法国无人机生产从政策愿景转向工厂落地",
+      "originalTitle": "France’s drone production shifts from policy ambition to factory floor",
+      "summary": "法国推动汽车行业生产军用无人机的计划正进入工业实施阶段。",
+      "keyFacts": [
+        "France’s push to enlist its car industry to produce military drones is moving to industrial implementation"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-08-05T12:48:10Z",
+      "url": "https://www.defensenews.com/industry/techwatch/2026/08/05/frances-drone-production-shifts-from-policy-ambition-to-factory-floor",
+      "score": 67,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 14,
+        "影响信号": 5,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 11.3 小时",
+        "命中 2 个主题信号",
+        "影响信号：production"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "法国",
+        "无人机",
+        "国防工业"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/DH7N6R7VLRCRPLRJZM6QIBGDVE.JPG",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/industry/techwatch/2026/08/05/frances-drone-production-shifts-from-policy-ambition-to-factory-floor",
+          "publishedAt": "2026-08-05T12:48:10Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 17
+    },
+    {
       "id": "22ab578c37a781",
       "eventId": "evt-3000dd625782",
       "contentType": "news",
@@ -1116,13 +1934,13 @@
       "country": "国际",
       "publishedAt": "2026-08-05T20:28:00Z",
       "url": "https://breakingdefense.com/2026/08/nro-issues-3-sar-satellite-data-providers-rigorous-new-contracts",
-      "score": 67,
+      "score": 66,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 18,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -1133,7 +1951,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 2.8 小时",
+        "发布约 3.7 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1161,7 +1979,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 17
+      "streamRank": 18
     },
     {
       "id": "71ff3008af4639",
@@ -1196,7 +2014,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 3.3 小时",
+        "发布约 4.1 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1224,7 +2042,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 18
+      "streamRank": 19
     },
     {
       "id": "1979ddc0566e38",
@@ -1242,8 +2060,8 @@
       "country": "国际",
       "publishedAt": "2026-08-05T19:30:19Z",
       "url": "https://techcrunch.com/2026/08/05/jeff-dean-and-other-top-ai-researchers-are-leaving-google-to-launch-their-own-startup",
-      "score": 66,
-      "scoreBasis": "规则评分",
+      "score": 74,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
@@ -1258,8 +2076,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 74/100（AI 65% + 规则 35%）",
+        "规则参考分 66/100",
         "来源权重 15/20",
-        "发布约 3.8 小时",
+        "发布约 4.6 小时",
         "命中 1 个主题信号",
         "影响信号：launch"
       ],
@@ -1281,78 +2102,75 @@
           "evidenceGroup": "outlet:techcrunch.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 19
-    },
-    {
-      "id": "7353d1ede608b4",
-      "eventId": "evt-1d7e2ea6844f",
-      "contentType": "news",
-      "title": "负责中东地区空军行动指挥权换帅，正值伊朗战争时期",
-      "originalTitle": "Command overseeing Air Force operations in Middle East gets new boss amid Iran war",
-      "summary": "在计划中的指挥权交接中，中将丹尼尔·拉西卡将领导美国中央司令部空军，这对美在中东部队是关键时期。",
-      "keyFacts": [
-        "In what was a scheduled change-of-command",
-        "Daniel Lasica will now lead US Air Forces Central at a consequential time for American forces in the Middle East"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-08-05T18:30:00Z",
-      "url": "https://breakingdefense.com/2026/08/command-overseeing-air-force-operations-in-middle-east-gets-new-boss-amid-iran-war",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
+      "eventDossier": {
+        "eventId": "evt-4e1644bfa96d",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-06",
+        "lastSeen": "2026-08-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-06",
+            "newsId": "1979ddc0566e38",
+            "title": "杰夫·迪恩等顶尖AI研究人员离开谷歌创立新公司",
+            "source": "TechCrunch AI",
+            "publishedAt": "2026-08-05T19:30:19Z",
+            "score": 74
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
       },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.8 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美国空军",
-        "中东",
-        "伊朗"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:techcrunch.com"
+        ],
+        "claims": [
+          {
+            "text": "The legendary Google executive is joined by other outgoing Google execs in a joint mission to use AI to push forward the process of scienti…",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
         {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/command-overseeing-air-force-operations-in-middle-east-gets-new-boss-amid-iran-war",
-          "publishedAt": "2026-08-05T18:30:00Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
+          "predictionId": "pred-b3aa8d4ff268",
+          "eventId": "evt-4e1644bfa96d",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-06",
+          "dueAfter": "2026-09-05",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "1979ddc0566e38"
+          ],
+          "lastReviewedAt": "2026-08-06"
         }
       ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 20
+      "isTopStory": true,
+      "streamRank": 20,
+      "relatedPapers": []
     },
     {
       "id": "78fe8367f51b0a",
@@ -1387,7 +2205,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.0 小时",
+        "发布约 5.9 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "中",
@@ -1449,7 +2267,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.8 小时",
+        "发布约 2.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1487,22 +2305,22 @@
       "streamRank": 22
     },
     {
-      "id": "bfc7e61a8b9cd6",
-      "eventId": "evt-1dc5a4e7e7fa",
+      "id": "7353d1ede608b4",
+      "eventId": "evt-1d7e2ea6844f",
       "contentType": "news",
-      "title": "每个人都在从乌克兰无人机战争中吸取错误的教训",
-      "originalTitle": "Everyone is learning the wrong lessons from Ukraine’s drone war",
-      "summary": "每个人都关注乌克兰的无人机，但他们应该关注的是乌克兰的适应能力。",
+      "title": "负责中东地区空军行动指挥权换帅，正值伊朗战争时期",
+      "originalTitle": "Command overseeing Air Force operations in Middle East gets new boss amid Iran war",
+      "summary": "在计划中的指挥权交接中，中将丹尼尔·拉西卡将领导美国中央司令部空军，这对美在中东部队是关键时期。",
       "keyFacts": [
-        "Everyone is focused on Ukraine’s drones",
-        "They should be focused on Ukraine’s ability to adapt"
+        "In what was a scheduled change-of-command",
+        "Daniel Lasica will now lead US Air Forces Central at a consequential time for American forces in the Middle East"
       ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
       "source": "Breaking Defense",
       "country": "国际",
-      "publishedAt": "2026-08-05T16:27:37Z",
-      "url": "https://breakingdefense.com/2026/08/everyone-is-learning-the-wrong-lessons-from-ukraines-drone-war",
+      "publishedAt": "2026-08-05T18:30:00Z",
+      "url": "https://breakingdefense.com/2026/08/command-overseeing-air-force-operations-in-middle-east-gets-new-boss-amid-iran-war",
       "score": 65,
       "scoreBasis": "规则评分",
       "scoreComponents": {
@@ -1520,7 +2338,71 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.8 小时",
+        "发布约 5.6 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国空军",
+        "中东",
+        "伊朗"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/command-overseeing-air-force-operations-in-middle-east-gets-new-boss-amid-iran-war",
+          "publishedAt": "2026-08-05T18:30:00Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 23
+    },
+    {
+      "id": "bfc7e61a8b9cd6",
+      "eventId": "evt-1dc5a4e7e7fa",
+      "contentType": "news",
+      "title": "每个人都在从乌克兰无人机战争中吸取错误的教训",
+      "originalTitle": "Everyone is learning the wrong lessons from Ukraine’s drone war",
+      "summary": "每个人都关注乌克兰的无人机，但他们应该关注的是乌克兰的适应能力。",
+      "keyFacts": [
+        "Everyone is focused on Ukraine’s drones",
+        "They should be focused on Ukraine’s ability to adapt"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-08-05T16:27:37Z",
+      "url": "https://breakingdefense.com/2026/08/everyone-is-learning-the-wrong-lessons-from-ukraines-drone-war",
+      "score": 64,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.7 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1539,69 +2421,6 @@
           "url": "https://breakingdefense.com/2026/08/everyone-is-learning-the-wrong-lessons-from-ukraines-drone-war",
           "publishedAt": "2026-08-05T16:27:37Z",
           "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 23
-    },
-    {
-      "id": "d7f027f331f66d",
-      "eventId": "evt-b8715e151e25",
-      "contentType": "news",
-      "title": "美国海军与Saildrone扩大使用无人系统执行缉毒任务",
-      "originalTitle": "US Navy, Saildrone to use unmanned systems in expanded counternarcotics role",
-      "summary": "美国海军扩大使用Saildrone无人水面艇，用于更广泛的缉毒任务。",
-      "keyFacts": [
-        "Navy is extending its use of Saildrone unmanned surface vehicles for an expanded counternarcotics mission"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Defense News",
-      "country": "国际",
-      "publishedAt": "2026-08-05T14:37:54Z",
-      "url": "https://www.defensenews.com/industry/techwatch/2026/08/05/us-navy-saildrone-to-use-unmanned-systems-in-expanded-counternarcotics-role",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 8.7 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美国海军",
-        "Saildrone",
-        "缉毒"
-      ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/VGS3R4DE3FBTDGA3UU5LI4DZ2Q.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/industry/techwatch/2026/08/05/us-navy-saildrone-to-use-unmanned-systems-in-expanded-counternarcotics-role",
-          "publishedAt": "2026-08-05T14:37:54Z",
-          "evidenceGroup": "outlet:defensenews.com"
         }
       ],
       "selectionProvider": "",
@@ -1648,7 +2467,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 9.3 小时",
+        "发布约 10.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1711,7 +2530,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.5 小时",
+        "发布约 4.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1740,70 +2559,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 26
-    },
-    {
-      "id": "8afdd0704e226b",
-      "eventId": "evt-270401b0c0f8",
-      "contentType": "news",
-      "title": "胡塞武装将扩大航运袭击至红海北部",
-      "originalTitle": "Houthis To Expand Shipping Attacks To Northern Red Sea",
-      "summary": "若胡塞武装开始袭击驶往苏伊士运河的船只，可能对世界能源供应造成又一次灾难性打击。",
-      "keyFacts": [
-        "If the Houthis start hitting ships heading toward the Suez Canal",
-        "it could be another catastrophic blow to world energy supplies"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "The War Zone",
-      "country": "国际",
-      "publishedAt": "2026-08-05T18:19:03Z",
-      "url": "https://www.twz.com/news-features/houthis-to-expand-shipping-attacks-to-northern-red-sea",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 5.0 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "胡塞武装",
-        "红海",
-        "能源"
-      ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/08/REd-sea-saudi-houthi-oil.jpg?quality=85",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/news-features/houthis-to-expand-shipping-attacks-to-northern-red-sea",
-          "publishedAt": "2026-08-05T18:19:03Z",
-          "evidenceGroup": "outlet:twz.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 27
     },
     {
       "id": "18f1ce55e04cff",
@@ -1839,7 +2594,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.1 小时",
+        "发布约 6.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1867,7 +2622,134 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
+      "streamRank": 27
+    },
+    {
+      "id": "d7f027f331f66d",
+      "eventId": "evt-b8715e151e25",
+      "contentType": "news",
+      "title": "美国海军与Saildrone扩大使用无人系统执行缉毒任务",
+      "originalTitle": "US Navy, Saildrone to use unmanned systems in expanded counternarcotics role",
+      "summary": "美国海军扩大使用Saildrone无人水面艇，用于更广泛的缉毒任务。",
+      "keyFacts": [
+        "Navy is extending its use of Saildrone unmanned surface vehicles for an expanded counternarcotics mission"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-08-05T14:37:54Z",
+      "url": "https://www.defensenews.com/industry/techwatch/2026/08/05/us-navy-saildrone-to-use-unmanned-systems-in-expanded-counternarcotics-role",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 9.5 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国海军",
+        "Saildrone",
+        "缉毒"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/VGS3R4DE3FBTDGA3UU5LI4DZ2Q.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/industry/techwatch/2026/08/05/us-navy-saildrone-to-use-unmanned-systems-in-expanded-counternarcotics-role",
+          "publishedAt": "2026-08-05T14:37:54Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
       "streamRank": 28
+    },
+    {
+      "id": "8afdd0704e226b",
+      "eventId": "evt-270401b0c0f8",
+      "contentType": "news",
+      "title": "胡塞武装将扩大航运袭击至红海北部",
+      "originalTitle": "Houthis To Expand Shipping Attacks To Northern Red Sea",
+      "summary": "若胡塞武装开始袭击驶往苏伊士运河的船只，可能对世界能源供应造成又一次灾难性打击。",
+      "keyFacts": [
+        "If the Houthis start hitting ships heading toward the Suez Canal",
+        "it could be another catastrophic blow to world energy supplies"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-08-05T18:19:03Z",
+      "url": "https://www.twz.com/news-features/houthis-to-expand-shipping-attacks-to-northern-red-sea",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 5.8 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "胡塞武装",
+        "红海",
+        "能源"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/08/REd-sea-saudi-houthi-oil.jpg?quality=85",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/news-features/houthis-to-expand-shipping-attacks-to-northern-red-sea",
+          "publishedAt": "2026-08-05T18:19:03Z",
+          "evidenceGroup": "outlet:twz.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 29
     },
     {
       "id": "02b0764eea65f1",
@@ -1887,13 +2769,13 @@
       "country": "国际",
       "publishedAt": "2026-08-05T17:05:00Z",
       "url": "https://spacenews.com/capella-iceye-and-umbra-win-nro-radar-data-contracts",
-      "score": 63,
+      "score": 62,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1904,7 +2786,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.2 小时",
+        "发布约 7.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1932,7 +2814,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 29
+      "streamRank": 30
     },
     {
       "id": "cdcd85159305a8",
@@ -1968,7 +2850,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 9.2 小时",
+        "发布约 10.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1987,71 +2869,6 @@
           "url": "https://www.bbc.co.uk/news/articles/c75gvzxrz49o?at_medium=RSS&at_campaign=rss",
           "publishedAt": "2026-08-05T14:04:09Z",
           "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 30
-    },
-    {
-      "id": "a0f9214fd76b9d",
-      "eventId": "evt-3fc5e09102b9",
-      "contentType": "news",
-      "title": "在星链阴影下寻找空间",
-      "originalTitle": "Finding room in Starlink’s shadow",
-      "summary": "新一轮星座计划已在非地球静止轨道（NGSO）申请通信卫星频率，但新入局者在行业根深蒂固的垂直整合巨头面前还有多少希望？",
-      "keyFacts": [
-        "Another wave of constellations has staked claims for communications satellites in non-geostationary orbit (NGSO)",
-        "but what hope do newcomers have alongside the industry’s entrenched",
-        "vertically integrated giants?"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-08-05T15:00:00Z",
-      "url": "https://spacenews.com/finding-room-in-starlinks-shadow",
-      "score": 61,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 16,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 8.3 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "卫星",
-        "星链",
-        "NGSO"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/finding-room-in-starlinks-shadow",
-          "publishedAt": "2026-08-05T15:00:00Z",
-          "evidenceGroup": "outlet:spacenews.com"
         }
       ],
       "selectionProvider": "",
@@ -2096,7 +2913,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.6 小时",
+        "发布约 10.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2161,7 +2978,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 11.3 小时",
+        "发布约 12.1 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -2190,6 +3007,71 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 33
+    },
+    {
+      "id": "a0f9214fd76b9d",
+      "eventId": "evt-3fc5e09102b9",
+      "contentType": "news",
+      "title": "在星链阴影下寻找空间",
+      "originalTitle": "Finding room in Starlink’s shadow",
+      "summary": "新一轮星座计划已在非地球静止轨道（NGSO）申请通信卫星频率，但新入局者在行业根深蒂固的垂直整合巨头面前还有多少希望？",
+      "keyFacts": [
+        "Another wave of constellations has staked claims for communications satellites in non-geostationary orbit (NGSO)",
+        "but what hope do newcomers have alongside the industry’s entrenched",
+        "vertically integrated giants?"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
+      "country": "国际",
+      "publishedAt": "2026-08-05T15:00:00Z",
+      "url": "https://spacenews.com/finding-room-in-starlinks-shadow",
+      "score": 60,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 15,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 9.1 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "卫星",
+        "星链",
+        "NGSO"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/finding-room-in-starlinks-shadow",
+          "publishedAt": "2026-08-05T15:00:00Z",
+          "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 34
     },
     {
       "id": "fcbeeaa2a9f934",
@@ -2225,7 +3107,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 12.0 小时",
+        "发布约 12.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2253,7 +3135,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 34
+      "streamRank": 35
     },
     {
       "id": "6716d33c74e96f",
@@ -2290,7 +3172,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 9.1 小时",
+        "发布约 9.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2318,7 +3200,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 35
+      "streamRank": 36
     },
     {
       "id": "0f0dc381bbc1ae",
@@ -2353,7 +3235,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 21.0 小时",
+        "发布约 21.8 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -2381,7 +3263,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 36
+      "streamRank": 37
     },
     {
       "id": "53fce802839272",
@@ -2399,13 +3281,13 @@
       "country": "国际",
       "publishedAt": "2026-08-05T03:01:23Z",
       "url": "https://spacenews.com/voyager-seeks-relaxed-requirements-in-nasa-commercial-space-station-rfp",
-      "score": 55,
+      "score": 54,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 10,
+        "时效": 9,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2416,7 +3298,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 20.3 小时",
+        "发布约 21.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2444,7 +3326,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 37
+      "streamRank": 38
     },
     {
       "id": "af8e817898425b",
@@ -2481,7 +3363,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 11.1 小时",
+        "发布约 12.0 小时",
         "命中 1 个主题信号",
         "影响信号：launch",
         "编辑质量降权 -12"
@@ -2518,7 +3400,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 38
+      "streamRank": 39
     }
   ]
 }
