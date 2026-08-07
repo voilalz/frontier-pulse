@@ -1,15 +1,16 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-08-07T00:44:47Z",
+  "generatedAt": "2026-08-07T01:43:05Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
-  "itemCount": 44,
-  "totalCandidateCount": 44,
+  "itemCount": 43,
+  "totalCandidateCount": 43,
   "truncated": false,
   "categoryCounts": {
-    "局部冲突": 20,
+    "局部冲突": 18,
     "军事动态": 6,
     "航空航天": 13,
+    "前沿技术": 1,
     "AI": 5
   },
   "sourceCounts": {
@@ -18,8 +19,8 @@
     "Breaking Defense": 5,
     "SpaceNews": 4,
     "TechCrunch AI": 4,
-    "Defense One": 3,
     "NASA": 3,
+    "Defense One": 2,
     "The War Zone": 2,
     "Defense News": 1,
     "European Space Agency": 1,
@@ -27,24 +28,24 @@
   },
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
-  "translatedItemCount": 44,
+  "translatedItemCount": 43,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 26,
-    "completedItemCount": 26,
+    "requestedItemCount": 1,
+    "completedItemCount": 1,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 5,
-    "requestCount": 5,
+    "initialBatchCount": 1,
+    "requestCount": 1,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
     "completionReason": "complete_first_pass",
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
-    "reusedItemCount": 18,
+    "reusedItemCount": 41,
     "featuredTranslatedItemCount": 10
   },
   "items": [
@@ -65,13 +66,13 @@
       "country": "国际",
       "publishedAt": "2026-08-06T20:38:29Z",
       "url": "https://www.aljazeera.com/video/inside-story/2026/8/6/how-fragile-is-lebanons-uneasy?traffic_source=rss",
-      "score": 85,
-      "scoreBasis": "规则评分",
+      "score": 84,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 17,
         "主题相关性": 6,
         "证据完整度": 3,
@@ -81,8 +82,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 84/100",
+        "综合排序分 84/100（AI 65% + 规则 35%）",
+        "规则参考分 84/100",
         "来源权重 16/20",
-        "发布约 4.1 小时",
+        "发布约 5.1 小时",
         "命中 3 个主题信号",
         "影响信号：first、ceasefire、attack"
       ],
@@ -104,14 +108,83 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-598ea8917645",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-07",
+        "lastSeen": "2026-08-07",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-07",
+            "newsId": "0fb4f590b27d8a",
+            "title": "黎巴嫩脆弱的和平有多脆弱？",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-06T20:38:29Z",
+            "score": 84
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Israel goes on the attack",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "the first soldiers are killed since ceasefire began two months ago",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-d0cfb26383a5",
+          "eventId": "evt-598ea8917645",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-09-06",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "0fb4f590b27d8a"
+          ],
+          "lastReviewedAt": "2026-08-07"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
     },
     {
       "id": "2829e071e0ad57",
@@ -129,13 +202,13 @@
       "country": "国际",
       "publishedAt": "2026-08-06T20:42:40Z",
       "url": "https://www.twz.com/news-features/houthis-stage-large-scale-attack-on-saudi-aligned-forces-in-yemen",
-      "score": 80,
-      "scoreBasis": "规则评分",
+      "score": 79,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 13,
         "主题相关性": 6,
         "证据完整度": 3,
@@ -145,8 +218,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 79/100",
+        "综合排序分 79/100（AI 65% + 规则 35%）",
+        "规则参考分 79/100",
         "来源权重 15/20",
-        "发布约 4.0 小时",
+        "发布约 5.0 小时",
         "命中 3 个主题信号",
         "影响信号：escalation、attack"
       ],
@@ -168,18 +244,98 @@
           "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 2
+      "eventDossier": {
+        "eventId": "evt-5da88a645f46",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-07",
+        "lastSeen": "2026-08-07",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-07",
+            "newsId": "2829e071e0ad57",
+            "title": "胡塞武装对也门沙特联军发动大规模攻击",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-06T20:42:40Z",
+            "score": 79
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "The strikes are yet another escalation in Houthi-Saudi hostilities roiling the Red Sea region",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-4fcd645ccd57",
+          "eventId": "evt-5da88a645f46",
+          "statement": "若胡塞武装继续袭击红海航运，则需关注沙特联军是否加强海上拦截或发起报复行动。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-09-06",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2829e071e0ad57"
+          ],
+          "lastReviewedAt": "2026-08-07"
+        },
+        {
+          "predictionId": "pred-501059f3e7ab",
+          "eventId": "evt-5da88a645f46",
+          "statement": "后续可观察冲突是否外溢至红海国际航运，以及国际社会是否介入斡旋。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2829e071e0ad57"
+          ],
+          "lastReviewedAt": "2026-08-07"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 2,
+      "relatedPapers": []
     },
     {
       "id": "4bffb08221f045",
-      "eventId": "evt-4524bb97215f",
+      "eventId": "evt-f03682858d2a",
       "contentType": "news",
       "title": "喷气动力JDAM投产，美国海军将获得新式低成本防区外弹药",
       "originalTitle": "Jet-Powered JDAM Production Is A Go For The U.S. Navy",
@@ -194,7 +350,7 @@
       "publishedAt": "2026-08-06T23:15:24Z",
       "url": "https://www.twz.com/air/jet-powered-jdam-production-is-a-go-for-the-u-s-navy",
       "score": 74,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -209,8 +365,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 74/100",
+        "综合排序分 74/100（AI 65% + 规则 35%）",
+        "规则参考分 74/100",
         "来源权重 16/20",
-        "发布约 1.5 小时",
+        "发布约 2.5 小时",
         "命中 1 个主题信号",
         "影响信号：production",
         "2 个独立来源相互印证"
@@ -240,14 +399,96 @@
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 3
+      "eventDossier": {
+        "eventId": "evt-f03682858d2a",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-07",
+        "lastSeen": "2026-08-07",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-07",
+            "newsId": "4bffb08221f045",
+            "title": "喷气动力JDAM投产，美国海军将获得新式低成本防区外弹药",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-06T23:15:24Z",
+            "score": 74
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:twz.com",
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "Putting JDAM-LR into production will give the Navy an important new stream of lower-cost standoff munitions for its carrier air wings",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:twz.com",
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-768a63224337",
+          "eventId": "evt-f03682858d2a",
+          "statement": "后续可观察美海军为何时列装JDAM-LR，以及潜射防空导弹项目是否进入实质开发阶段。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-09-06",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "4bffb08221f045"
+          ],
+          "lastReviewedAt": "2026-08-07"
+        },
+        {
+          "predictionId": "pred-32c2c8132d6f",
+          "eventId": "evt-f03682858d2a",
+          "statement": "若两种武器均按计划推进，则需关注其是否改变海军航空联队及潜艇部队的作战样式。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "4bffb08221f045"
+          ],
+          "lastReviewedAt": "2026-08-07"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 3,
+      "relatedPapers": []
     },
     {
       "id": "7897611bc6c11a",
@@ -265,13 +506,13 @@
       "country": "国际",
       "publishedAt": "2026-08-06T16:37:57Z",
       "url": "https://breakingdefense.com/2026/08/australian-commits-to-buying-secretive-aim-260-jatm-missiles-first-non-us-user",
-      "score": 74,
-      "scoreBasis": "规则评分",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 9,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -281,8 +522,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 73/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 73/100",
         "来源权重 16/20",
-        "发布约 8.1 小时",
+        "发布约 9.1 小时",
         "命中 1 个主题信号",
         "影响信号：first、test",
         "2 个独立来源相互印证"
@@ -312,14 +556,77 @@
           "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 4
+      "eventDossier": {
+        "eventId": "evt-03b3b2716262",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-07",
+        "lastSeen": "2026-08-07",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-07",
+            "newsId": "7897611bc6c11a",
+            "title": "澳大利亚承诺购买神秘AIM-260 JATM导弹，成为首个非美国用户",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-08-06T16:37:57Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:breakingdefense.com",
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "Canberra separately announced the successfully test of an indigenous solid fuel rocket motor for guided munitions",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:breakingdefense.com",
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-23256c2cfe29",
+          "eventId": "evt-03b3b2716262",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-09-06",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "7897611bc6c11a"
+          ],
+          "lastReviewedAt": "2026-08-07"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 4,
+      "relatedPapers": []
     },
     {
       "id": "53c504da470337",
@@ -338,13 +645,13 @@
       "country": "国际",
       "publishedAt": "2026-08-06T15:45:39Z",
       "url": "https://breakingdefense.com/2026/08/air-force-signs-off-on-production-of-long-range-jdam",
-      "score": 74,
-      "scoreBasis": "规则评分",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 10,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -354,8 +661,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 73/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 73/100",
         "来源权重 16/20",
-        "发布约 9.0 小时",
+        "发布约 10.0 小时",
         "命中 2 个主题信号",
         "影响信号：first、production"
       ],
@@ -377,14 +687,229 @@
           "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 5
+      "eventDossier": {
+        "eventId": "evt-fa109d75b677",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-07",
+        "lastSeen": "2026-08-07",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-07",
+            "newsId": "53c504da470337",
+            "title": "美国空军批准远程JDAM生产",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-08-06T15:45:39Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:breakingdefense.com"
+        ],
+        "claims": [
+          {
+            "text": "The first kits of the JDAM LR will go to the US Navy",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "according to manufacturer Boeing",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-7195a6f50045",
+          "eventId": "evt-fa109d75b677",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-09-06",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "53c504da470337"
+          ],
+          "lastReviewedAt": "2026-08-07"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 5,
+      "relatedPapers": []
+    },
+    {
+      "id": "ca547e54870465",
+      "eventId": "evt-ed8ac3816258",
+      "contentType": "news",
+      "title": "特朗普对关键芯片材料征收15%关税以反制中国",
+      "originalTitle": "Trump imposes 15% tariff on key chip material to counter China",
+      "summary": "特朗普政府对关键芯片材料征收15%关税，旨在反制在全球多晶硅生产中占据垄断地位的中国生产商。",
+      "keyFacts": [
+        "特朗普实施15%关税，针对关键芯片材料",
+        "该举措旨在反制中国，中国在全球多晶硅生产中占垄断地位",
+        "来源：BBC World，发布于2026年8月7日"
+      ],
+      "why": "此举针对中国在多晶硅领域的垄断，影响全球芯片供应链，凸显科技竞争中的贸易措施。",
+      "category": "前沿技术",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-07T01:03:35Z",
+      "url": "https://www.bbc.co.uk/news/articles/cdrvn686dljo?at_medium=RSS&at_campaign=rss",
+      "score": 70,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 8,
+        "时效": 20,
+        "影响信号": 5,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 70/100",
+        "综合排序分 70/100（AI 65% + 规则 35%）",
+        "规则参考分 70/100",
+        "来源权重 17/20",
+        "发布约 0.7 小时",
+        "命中 1 个主题信号",
+        "影响信号：production"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "贸易关税",
+        "芯片材料",
+        "中美竞争"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/60dd/live/9a103bd0-91fb-11f1-952a-e58ebd1358f8.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cdrvn686dljo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-07T01:03:35Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-ed8ac3816258",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-07",
+        "lastSeen": "2026-08-07",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-07",
+            "newsId": "ca547e54870465",
+            "title": "特朗普对关键芯片材料征收15%关税以反制中国",
+            "source": "BBC World",
+            "publishedAt": "2026-08-07T01:03:35Z",
+            "score": 70
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "特朗普实施15%关税，针对关键芯片材料",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "该举措旨在反制中国，中国在全球多晶硅生产中占垄断地位",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "来源：BBC World，发布于2026年8月7日",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-5de8f8968d52",
+          "eventId": "evt-ed8ac3816258",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-09-06",
+          "verificationSignals": [
+            "可复现实验或第三方验证",
+            "工程化、量产或监管节点"
+          ],
+          "evidenceIds": [
+            "ca547e54870465"
+          ],
+          "lastReviewedAt": "2026-08-07"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 6,
+      "relatedPapers": []
     },
     {
       "id": "33250dd0151f10",
@@ -404,13 +929,13 @@
       "country": "国际",
       "publishedAt": "2026-08-06T18:30:00Z",
       "url": "https://breakingdefense.com/2026/08/army-awards-contracts-to-four-companies-to-boost-hydra-70-rocket-production",
-      "score": 70,
+      "score": 69,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 5,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -421,7 +946,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.2 小时",
+        "发布约 7.2 小时",
         "命中 2 个主题信号",
         "影响信号：production"
       ],
@@ -450,7 +975,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 6
+      "streamRank": 7
     },
     {
       "id": "925d5e2d67d150",
@@ -470,13 +995,13 @@
       "country": "国际",
       "publishedAt": "2026-08-06T14:20:15Z",
       "url": "https://www.bbc.co.uk/news/articles/cx2md67y3nlo?at_medium=RSS&at_campaign=rss",
-      "score": 70,
-      "scoreBasis": "规则评分",
+      "score": 69,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 15,
+        "时效": 14,
         "影响信号": 6,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -486,8 +1011,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 69/100",
+        "综合排序分 69/100（AI 65% + 规则 35%）",
+        "规则参考分 69/100",
         "来源权重 17/20",
-        "发布约 10.4 小时",
+        "发布约 11.4 小时",
         "命中 2 个主题信号",
         "影响信号：attack"
       ],
@@ -509,14 +1037,438 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 7
+      "eventDossier": {
+        "eventId": "evt-7c25424a2946",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-07",
+        "lastSeen": "2026-08-07",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-07",
+            "newsId": "925d5e2d67d150",
+            "title": "人权组织称以色列袭击致黎巴嫩记者身亡似构成战争罪",
+            "source": "BBC World",
+            "publishedAt": "2026-08-06T14:20:15Z",
+            "score": 69
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "Amal Khalil was killed",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "her colleague Zeinab Faraj wounded in an Israeli attack in April",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "Israel denied targeting the journalists",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-c15a9063776a",
+          "eventId": "evt-7c25424a2946",
+          "statement": "若国际调查启动，则需关注人权组织是否公布更多证据及以色列回应。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-09-06",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "925d5e2d67d150"
+          ],
+          "lastReviewedAt": "2026-08-07"
+        },
+        {
+          "predictionId": "pred-d2ce383eedbe",
+          "eventId": "evt-7c25424a2946",
+          "statement": "后续可观察此类指控是否影响国际社会对以色列军事行动的态度或政策。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "925d5e2d67d150"
+          ],
+          "lastReviewedAt": "2026-08-07"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 8,
+      "relatedPapers": []
+    },
+    {
+      "id": "f5f908b6ffe4ea",
+      "eventId": "evt-89e516456d9d",
+      "contentType": "news",
+      "title": "WeatherNext：AI模型在气旋预报中取得突破",
+      "originalTitle": "WeatherNext: AI model achieves breakthrough in forecasting cyclones",
+      "summary": "现有元数据未提供摘要。",
+      "keyFacts": [],
+      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
+      "category": "AI",
+      "source": "Google DeepMind",
+      "country": "国际",
+      "publishedAt": "2026-08-06T15:06:15Z",
+      "url": "https://deepmind.google/blog/weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones",
+      "score": 68,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 18,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 6,
+        "主题相关性": 2,
+        "证据完整度": 2,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 68/100",
+        "综合排序分 68/100（AI 65% + 规则 35%）",
+        "规则参考分 68/100",
+        "来源权重 18/20",
+        "发布约 10.6 小时",
+        "命中 1 个主题信号",
+        "影响信号：breakthrough"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 18/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "AI",
+        "天气预报",
+        "气旋"
+      ],
+      "image": "https://lh3.googleusercontent.com/Mj8GyJnsjROScr1hYl7PL_QCAaLGukliPCTMUlpKiQtZuVkmh2ouydYh80ibejg9vWgKkg2dYPx2jCJOOohKid5P-dLzwvIyB4-fZjWXYIx0ImZd=w528-h297-n-nu-rw-lo",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Google DeepMind",
+          "domain": "deepmind.google",
+          "url": "https://deepmind.google/blog/weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones",
+          "publishedAt": "2026-08-06T15:06:15Z",
+          "evidenceGroup": "outlet:deepmind.google"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-89e516456d9d",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-07",
+        "lastSeen": "2026-08-07",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-07",
+            "newsId": "f5f908b6ffe4ea",
+            "title": "WeatherNext：AI模型在气旋预报中取得突破",
+            "source": "Google DeepMind",
+            "publishedAt": "2026-08-06T15:06:15Z",
+            "score": 68
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 3
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:deepmind.google"
+        ],
+        "claims": [],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-654028fb803a",
+          "eventId": "evt-89e516456d9d",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-09-06",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "f5f908b6ffe4ea"
+          ],
+          "lastReviewedAt": "2026-08-07"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 9,
+      "relatedPapers": [
+        {
+          "id": "arxiv:2608.06241",
+          "title": "用于全球天气预报的时间步长条件变换器",
+          "originalTitle": "Timestep-Conditioned Transformers for Global Weather Forecasting",
+          "researchArea": "机器学习",
+          "publishedAt": "2026-08-06T16:27:54Z",
+          "url": "https://arxiv.org/abs/2608.06241v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.06241v1",
+          "associationScore": 26,
+          "relationType": "潜在使能技术",
+          "associationReasons": [
+            "标题共同线索：forecasting、预报",
+            "新闻主题与机器学习研究方向对应"
+          ]
+        },
+        {
+          "id": "arxiv:2608.06253",
+          "title": "MetaboLLM：代谢组学专用大语言模型，用于生化知识整合和预测性代谢物图构建",
+          "originalTitle": "MetaboLLM: a metabolomics-specialized large language model for biochemical knowledge integration and predictive metabolite graph construction",
+          "researchArea": "机器学习",
+          "publishedAt": "2026-08-06T16:42:34Z",
+          "url": "https://arxiv.org/abs/2608.06253v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.06253v1",
+          "associationScore": 24,
+          "relationType": "潜在使能技术",
+          "associationReasons": [
+            "标题共同线索：model、模型",
+            "新闻主题与机器学习研究方向对应"
+          ]
+        },
+        {
+          "id": "arxiv:2608.06259",
+          "title": "RxnCLF：用于改进反应性预测的对比变换感知反应基础模型",
+          "originalTitle": "RxnCLF: Contrastive Transformation-Aware Reaction Foundation Model for Improved Reactivity Prediction",
+          "researchArea": "机器学习",
+          "publishedAt": "2026-08-06T16:51:23Z",
+          "url": "https://arxiv.org/abs/2608.06259v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.06259v1",
+          "associationScore": 24,
+          "relationType": "潜在使能技术",
+          "associationReasons": [
+            "标题共同线索：model、模型",
+            "新闻主题与机器学习研究方向对应"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "daece7b103ad04",
+      "eventId": "evt-f0010d5be34a",
+      "contentType": "news",
+      "title": "火箭实验室发射第八颗iQPS卫星",
+      "originalTitle": "Rocket Lab launches 8th iQPS satellite",
+      "summary": "火箭实验室于8月6日发射了一颗日本雷达成像卫星，距离上次发射尝试中止已超过一个月。",
+      "keyFacts": [
+        "Rocket Lab launched a Japanese radar-imaging satellite Aug",
+        "more than a month",
+        "the previous launch attempt was aborted"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
+      "country": "国际",
+      "publishedAt": "2026-08-06T11:17:27Z",
+      "url": "https://spacenews.com/rocket-lab-launches-8th-iqps-satellite",
+      "score": 68,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 13,
+        "影响信号": 4,
+        "主题相关性": 8,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 68/100",
+        "综合排序分 68/100（AI 65% + 规则 35%）",
+        "规则参考分 68/100",
+        "来源权重 16/20",
+        "发布约 14.4 小时",
+        "命中 4 个主题信号",
+        "影响信号：launch"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "火箭实验室",
+        "iQPS",
+        "卫星发射"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/rocket-lab-launches-8th-iqps-satellite",
+          "publishedAt": "2026-08-06T11:17:27Z",
+          "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-f0010d5be34a",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-07",
+        "lastSeen": "2026-08-07",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-07",
+            "newsId": "daece7b103ad04",
+            "title": "火箭实验室发射第八颗iQPS卫星",
+            "source": "SpaceNews",
+            "publishedAt": "2026-08-06T11:17:27Z",
+            "score": 68
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:spacenews.com"
+        ],
+        "claims": [
+          {
+            "text": "Rocket Lab launched a Japanese radar-imaging satellite Aug",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          },
+          {
+            "text": "more than a month",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          },
+          {
+            "text": "the previous launch attempt was aborted",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-047494638c0f",
+          "eventId": "evt-f0010d5be34a",
+          "statement": "后续可观察此次发射是否成功部署卫星，以及火箭实验室是否会宣布下一次iQPS任务时间表。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-09-06",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "daece7b103ad04"
+          ],
+          "lastReviewedAt": "2026-08-07"
+        },
+        {
+          "predictionId": "pred-8d41da59a2ad",
+          "eventId": "evt-f0010d5be34a",
+          "statement": "若合同执行顺利，则需关注火箭实验室在小型雷达卫星发射市场的份额是否扩大。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "daece7b103ad04"
+          ],
+          "lastReviewedAt": "2026-08-07"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 10,
+      "relatedPapers": []
     },
     {
       "id": "1afc6306df02ec",
@@ -534,13 +1486,13 @@
       "country": "国际",
       "publishedAt": "2026-08-06T23:49:21Z",
       "url": "https://www.aljazeera.com/features/2026/8/6/travel-restrictions-from-israel-and-europe-trap-students-in-gaza?traffic_source=rss",
-      "score": 68,
+      "score": 67,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 20,
+        "时效": 19,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -551,7 +1503,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 0.9 小时",
+        "发布约 1.9 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -579,7 +1531,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 8
+      "streamRank": 11
     },
     {
       "id": "3093cad47a247f",
@@ -599,13 +1551,13 @@
       "country": "国际",
       "publishedAt": "2026-08-06T18:06:07Z",
       "url": "https://science.nasa.gov/photojournal/nasas-skyfall-helicopters-at-work-artists-concept",
-      "score": 68,
-      "scoreBasis": "规则评分",
+      "score": 67,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 20,
         "主题优先级": 9,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -615,8 +1567,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 67/100",
+        "综合排序分 67/100（AI 65% + 规则 35%）",
+        "规则参考分 67/100",
         "来源权重 20/20",
-        "发布约 6.6 小时",
+        "发布约 7.6 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -644,14 +1599,91 @@
           "evidenceGroup": "outlet:science.nasa.gov"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 9
+      "eventDossier": {
+        "eventId": "evt-f2f01af8ea6b",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-07",
+        "lastSeen": "2026-08-07",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-07",
+            "newsId": "3093cad47a247f",
+            "title": "NASA的SkyFall直升机在工作中（艺术家概念图）",
+            "source": "NASA",
+            "publishedAt": "2026-08-06T18:06:07Z",
+            "score": 67
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:science.nasa.gov"
+        ],
+        "claims": [
+          {
+            "text": "Description This artist’s concept depicts NASA’s three SkyFall Mars helicopters collecting data",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          },
+          {
+            "text": "flying over the surface of the Red Planet",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          },
+          {
+            "text": "The green frequency waves emanating from the helicopters’ large antennas depict collection of subsurface radar data",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-eb091161e7e4",
+          "eventId": "evt-f2f01af8ea6b",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-09-06",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "3093cad47a247f"
+          ],
+          "lastReviewedAt": "2026-08-07"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 12,
+      "relatedPapers": []
     },
     {
       "id": "52b7270a043f02",
@@ -670,13 +1702,13 @@
       "country": "国际",
       "publishedAt": "2026-08-06T17:51:11Z",
       "url": "https://www.bbc.co.uk/news/videos/ce8l6x3r9gjo?at_medium=RSS&at_campaign=rss",
-      "score": 68,
+      "score": 67,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 0,
         "主题相关性": 6,
         "证据完整度": 3,
@@ -687,7 +1719,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 6.9 小时",
+        "发布约 7.9 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "中",
@@ -706,198 +1738,6 @@
           "url": "https://www.bbc.co.uk/news/videos/ce8l6x3r9gjo?at_medium=RSS&at_campaign=rss",
           "publishedAt": "2026-08-06T17:51:11Z",
           "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 10
-    },
-    {
-      "id": "f5f908b6ffe4ea",
-      "eventId": "evt-89e516456d9d",
-      "contentType": "news",
-      "title": "WeatherNext：AI模型在气旋预报中取得突破",
-      "originalTitle": "WeatherNext: AI model achieves breakthrough in forecasting cyclones",
-      "summary": "现有元数据未提供摘要。",
-      "keyFacts": [],
-      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
-      "category": "AI",
-      "source": "Google DeepMind",
-      "country": "国际",
-      "publishedAt": "2026-08-06T15:06:15Z",
-      "url": "https://deepmind.google/blog/weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones",
-      "score": 68,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 18,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 6,
-        "主题相关性": 2,
-        "证据完整度": 2,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 18/20",
-        "发布约 9.6 小时",
-        "命中 1 个主题信号",
-        "影响信号：breakthrough"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 18/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "AI",
-        "天气预报",
-        "气旋"
-      ],
-      "image": "https://lh3.googleusercontent.com/Mj8GyJnsjROScr1hYl7PL_QCAaLGukliPCTMUlpKiQtZuVkmh2ouydYh80ibejg9vWgKkg2dYPx2jCJOOohKid5P-dLzwvIyB4-fZjWXYIx0ImZd=w528-h297-n-nu-rw-lo",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Google DeepMind",
-          "domain": "deepmind.google",
-          "url": "https://deepmind.google/blog/weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones",
-          "publishedAt": "2026-08-06T15:06:15Z",
-          "evidenceGroup": "outlet:deepmind.google"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 11
-    },
-    {
-      "id": "b391f830fbc254",
-      "eventId": "evt-7c930facabdf",
-      "contentType": "news",
-      "title": "主播谋杀案引发对墨西哥创作者与卡特尔关系的质疑",
-      "originalTitle": "Livestreamer's murder raises questions over relations between Mexico's creators and cartels",
-      "summary": "周二内容创作者塞萨尔·加斯特卢姆被杀，引发关于为何有影响力的人士成为攻击目标的疑问。",
-      "keyFacts": [
-        "The murder of content creator César Gastélum on Tuesday raises questions about why influencers are coming under attack"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-06T13:46:27Z",
-      "url": "https://www.bbc.co.uk/news/articles/ckg9dwz8p30o?at_medium=RSS&at_campaign=rss",
-      "score": 68,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 6,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 11.0 小时",
-        "命中 1 个主题信号",
-        "影响信号：attack"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "墨西哥",
-        "谋杀",
-        "社交媒体验证"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/a54c/live/0dc4fc60-91ce-11f1-b2ab-0dd01740f9f6.png",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/ckg9dwz8p30o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-06T13:46:27Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 12
-    },
-    {
-      "id": "daece7b103ad04",
-      "eventId": "evt-f0010d5be34a",
-      "contentType": "news",
-      "title": "火箭实验室发射第八颗iQPS卫星",
-      "originalTitle": "Rocket Lab launches 8th iQPS satellite",
-      "summary": "火箭实验室于8月6日发射了一颗日本雷达成像卫星，距离上次发射尝试中止已超过一个月。",
-      "keyFacts": [
-        "Rocket Lab launched a Japanese radar-imaging satellite Aug",
-        "more than a month",
-        "the previous launch attempt was aborted"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-08-06T11:17:27Z",
-      "url": "https://spacenews.com/rocket-lab-launches-8th-iqps-satellite",
-      "score": 68,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 13,
-        "影响信号": 4,
-        "主题相关性": 8,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 13.5 小时",
-        "命中 4 个主题信号",
-        "影响信号：launch"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "火箭实验室",
-        "iQPS",
-        "卫星发射"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/rocket-lab-launches-8th-iqps-satellite",
-          "publishedAt": "2026-08-06T11:17:27Z",
-          "evidenceGroup": "outlet:spacenews.com"
         }
       ],
       "selectionProvider": "",
@@ -942,7 +1782,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.2 小时",
+        "发布约 10.2 小时",
         "命中 2 个主题信号",
         "影响信号：contract"
       ],
@@ -1007,7 +1847,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.7 小时",
+        "发布约 10.7 小时",
         "命中 2 个主题信号",
         "影响信号：first"
       ],
@@ -1039,157 +1879,29 @@
       "streamRank": 15
     },
     {
-      "id": "7ece7c89dc944a",
-      "eventId": "evt-d28d2e37988d",
+      "id": "b391f830fbc254",
+      "eventId": "evt-7c930facabdf",
       "contentType": "news",
-      "title": "特朗普称战争不能再持续“太久”，霍尔木兹协议接近达成",
-      "originalTitle": "Trump says war can’t ‘go much longer’, Hormuz deal close",
-      "summary": "美国、伊朗和阿曼接近达成临时协议，以重新开放霍尔木兹海峡。",
+      "title": "主播谋杀案引发对墨西哥创作者与卡特尔关系的质疑",
+      "originalTitle": "Livestreamer's murder raises questions over relations between Mexico's creators and cartels",
+      "summary": "周二内容创作者塞萨尔·加斯特卢姆被杀，引发关于为何有影响力的人士成为攻击目标的疑问。",
       "keyFacts": [
-        "and Oman are close to a temporary deal to reopen the Strait of Hormuz"
+        "The murder of content creator César Gastélum on Tuesday raises questions about why influencers are coming under attack"
       ],
       "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
       "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-07T00:00:00Z",
-      "url": "https://www.aljazeera.com/news/liveblog/2026/8/7/trump-says-war-cant-go-much-longer-hormuz-deal-close?traffic_source=rss",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 20,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 0.7 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "霍尔木兹海峡",
-        "美国",
-        "伊朗"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/liveblog/2026/8/7/trump-says-war-cant-go-much-longer-hormuz-deal-close?traffic_source=rss",
-          "publishedAt": "2026-08-07T00:00:00Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 16
-    },
-    {
-      "id": "52e0ec73d1ba37",
-      "eventId": "evt-7b918fb7c780",
-      "contentType": "news",
-      "title": "南黎巴嫩居民愤慨以色列恢复空袭：'没有红线'",
-      "originalTitle": "‘No red line’: South Lebanon residents outraged as Israel resumes strikes",
-      "summary": "以色列发动更多袭击和驱逐令，南黎巴嫩民众质疑政府应对方式，表达强烈不满。",
-      "keyFacts": [
-        "People in South Lebanon question their government's approach as Israel launches more attacks",
-        "displacement orders"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-06T23:46:37Z",
-      "url": "https://www.aljazeera.com/news/2026/8/6/south-lebanon-people-speak-out-as-israel-launches-attacks-ceasefire?traffic_source=rss",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 20,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 1.0 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "以色列",
-        "黎巴嫩",
-        "冲突"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/8/6/south-lebanon-people-speak-out-as-israel-launches-attacks-ceasefire?traffic_source=rss",
-          "publishedAt": "2026-08-06T23:46:37Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 17
-    },
-    {
-      "id": "3ab3d5e995b6bd",
-      "eventId": "evt-6b23aedc4d72",
-      "contentType": "news",
-      "title": "胡塞武装袭击据报造成至少30名也门政府军死亡",
-      "originalTitle": "Houthi attacks reportedly kill at least 30 Yemeni government forces",
-      "summary": "胡塞武装称他们对马里卜和哈德拉毛省的“沙特军事集结”发射了导弹和无人机。",
-      "keyFacts": [
-        "The Houthis say they launched missiles",
-        "drones at \"Saudi military build-ups\" in the central provinces of Marib"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
       "source": "BBC World",
       "country": "国际",
-      "publishedAt": "2026-08-06T22:41:09Z",
-      "url": "https://www.bbc.co.uk/news/articles/ckgdmdr0lmgo?at_medium=RSS&at_campaign=rss",
-      "score": 66,
+      "publishedAt": "2026-08-06T13:46:27Z",
+      "url": "https://www.bbc.co.uk/news/articles/ckg9dwz8p30o?at_medium=RSS&at_campaign=rss",
+      "score": 67,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
+        "时效": 14,
+        "影响信号": 6,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
@@ -1199,24 +1911,25 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 2.1 小时",
-        "命中 1 个主题信号"
+        "发布约 11.9 小时",
+        "命中 1 个主题信号",
+        "影响信号：attack"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "也门",
-        "胡塞武装",
-        "袭击"
+        "墨西哥",
+        "谋杀",
+        "社交媒体验证"
       ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/13bf/live/fd004bd0-91b1-11f1-a7ab-8b30adf0800a.jpg",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/a54c/live/0dc4fc60-91ce-11f1-b2ab-0dd01740f9f6.png",
       "corroboration": 1,
       "sources": [
         {
           "name": "BBC World",
           "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/ckgdmdr0lmgo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-06T22:41:09Z",
+          "url": "https://www.bbc.co.uk/news/articles/ckg9dwz8p30o?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-06T13:46:27Z",
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
@@ -1227,7 +1940,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 18
+      "streamRank": 16
     },
     {
       "id": "2ca8bf1e370b7e",
@@ -1263,7 +1976,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.8 小时",
+        "发布约 4.7 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1291,7 +2004,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 19
+      "streamRank": 17
     },
     {
       "id": "c43261a8c9e968",
@@ -1328,7 +2041,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 9.5 小时",
+        "发布约 10.5 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1347,6 +2060,133 @@
           "url": "https://www.nasa.gov/image-article/taking-flight-to-prepare-for-space",
           "publishedAt": "2026-08-06T15:15:37Z",
           "evidenceGroup": "outlet:nasa.gov"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 18
+    },
+    {
+      "id": "7ece7c89dc944a",
+      "eventId": "evt-d28d2e37988d",
+      "contentType": "news",
+      "title": "伊朗战争直播：特朗普称战争不能‘持续太久’；霍尔木兹协议接近达成",
+      "originalTitle": "Iran war live: Trump says war can’t ‘go much longer’; Hormuz deal close",
+      "summary": "美国、伊朗和阿曼接近达成临时协议，重新开放霍尔木兹海峡。",
+      "keyFacts": [
+        "and Oman are close to a temporary deal to reopen the Strait of Hormuz"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-07T00:00:00Z",
+      "url": "https://www.aljazeera.com/news/liveblog/2026/8/7/trump-says-war-cant-go-much-longer-hormuz-deal-close?traffic_source=rss",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 1.7 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "霍尔木兹海峡",
+        "特朗普"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/liveblog/2026/8/7/trump-says-war-cant-go-much-longer-hormuz-deal-close?traffic_source=rss",
+          "publishedAt": "2026-08-07T00:00:00Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 19
+    },
+    {
+      "id": "52e0ec73d1ba37",
+      "eventId": "evt-7b918fb7c780",
+      "contentType": "news",
+      "title": "南黎巴嫩居民愤慨以色列恢复空袭：'没有红线'",
+      "originalTitle": "‘No red line’: South Lebanon residents outraged as Israel resumes strikes",
+      "summary": "以色列发动更多袭击和驱逐令，南黎巴嫩民众质疑政府应对方式，表达强烈不满。",
+      "keyFacts": [
+        "People in South Lebanon question their government's approach as Israel launches more attacks",
+        "displacement orders"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-06T23:46:37Z",
+      "url": "https://www.aljazeera.com/news/2026/8/6/south-lebanon-people-speak-out-as-israel-launches-attacks-ceasefire?traffic_source=rss",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 1.9 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "以色列",
+        "黎巴嫩",
+        "冲突"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/8/6/south-lebanon-people-speak-out-as-israel-launches-attacks-ceasefire?traffic_source=rss",
+          "publishedAt": "2026-08-06T23:46:37Z",
+          "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
       "selectionProvider": "",
@@ -1393,7 +2233,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.2 小时",
+        "发布约 2.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1457,7 +2297,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.8 小时",
+        "发布约 2.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1488,30 +2328,29 @@
       "streamRank": 22
     },
     {
-      "id": "42b0540a976ea9",
-      "eventId": "evt-6d887abff9ee",
+      "id": "3ab3d5e995b6bd",
+      "eventId": "evt-6b23aedc4d72",
       "contentType": "news",
-      "title": "我是阿尔忒弥斯：汤姆·珀西",
-      "originalTitle": "I Am Artemis: Tom Percy",
-      "summary": "NASA着眼长期探索月球和火星，增加阿尔忒弥斯任务频率。汤姆·珀西是载人着陆系统项目系统工程与集成经理，与SpaceX等供应商合作。",
+      "title": "胡塞武装袭击据报造成至少30名也门政府军死亡",
+      "originalTitle": "Houthi attacks reportedly kill at least 30 Yemeni government forces",
+      "summary": "胡塞武装称他们对马里卜和哈德拉毛省的“沙特军事集结”发射了导弹和无人机。",
       "keyFacts": [
-        "As NASA sets its sights on long-term exploration of the Moon",
-        "the agency is increasing the cadence of its Artemis missions",
-        "Helping bring these plans to fruition is Tom Percy"
+        "The Houthis say they launched missiles",
+        "drones at \"Saudi military build-ups\" in the central provinces of Marib"
       ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "NASA",
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "BBC World",
       "country": "国际",
-      "publishedAt": "2026-08-06T16:35:51Z",
-      "url": "https://www.nasa.gov/missions/artemis/i-am-artemis/i-am-artemis-tom-percy",
+      "publishedAt": "2026-08-06T22:41:09Z",
+      "url": "https://www.bbc.co.uk/news/articles/ckgdmdr0lmgo?at_medium=RSS&at_campaign=rss",
       "score": 65,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 20,
-        "主题优先级": 9,
-        "时效": 16,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 18,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1521,26 +2360,26 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 20/20",
-        "发布约 8.1 小时",
+        "来源权重 17/20",
+        "发布约 3.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "NASA",
-        "阿尔忒弥斯",
-        "月球"
+        "也门",
+        "胡塞武装",
+        "袭击"
       ],
-      "image": "",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/13bf/live/fd004bd0-91b1-11f1-a7ab-8b30adf0800a.jpg",
       "corroboration": 1,
       "sources": [
         {
-          "name": "NASA",
-          "domain": "nasa.gov",
-          "url": "https://www.nasa.gov/missions/artemis/i-am-artemis/i-am-artemis-tom-percy",
-          "publishedAt": "2026-08-06T16:35:51Z",
-          "evidenceGroup": "outlet:nasa.gov"
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/ckgdmdr0lmgo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-06T22:41:09Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
       "selectionProvider": "",
@@ -1551,134 +2390,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 23
-    },
-    {
-      "id": "86b476bce9fdfb",
-      "eventId": "evt-f1d57bf7d0e9",
-      "contentType": "news",
-      "title": "官员通过三项较小公司合同对冲SpaceX飞机跟踪卫星押注",
-      "originalTitle": "Officials hedge SpaceX aircraft-tracking satellite bet with three smaller company contracts",
-      "summary": "Rocket Labs、STR和一家神秘公司是太空AMTI的最新获奖者。",
-      "keyFacts": [
-        "and one mystery company are the latest space-based AMTI awardees"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "Defense One",
-      "country": "国际",
-      "publishedAt": "2026-08-06T16:00:18Z",
-      "url": "https://www.defenseone.com/defense-systems/2026/08/officials-hedge-spacex-aircraft-tracking-satellite-bet-three-smaller-company-contracts/415252",
-      "score": 65,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 16,
-        "影响信号": 0,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 8.7 小时",
-        "命中 3 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "太空",
-        "卫星",
-        "合同"
-      ],
-      "image": "https://cdn.defenseone.com/media/img/cd/2026/08/06/sat_GettyImages_165773692/thumb.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Defense One",
-          "domain": "defenseone.com",
-          "url": "https://www.defenseone.com/defense-systems/2026/08/officials-hedge-spacex-aircraft-tracking-satellite-bet-three-smaller-company-contracts/415252",
-          "publishedAt": "2026-08-06T16:00:18Z",
-          "evidenceGroup": "outlet:defenseone.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 24
-    },
-    {
-      "id": "953ba07871ba18",
-      "eventId": "evt-c157f05d1556",
-      "contentType": "news",
-      "title": "海军设立新的机器人与自主系统DRPM",
-      "originalTitle": "Navy creates new robotic and autonomous systems DRPM",
-      "summary": "海军宣布设立新的机器人与自主系统（RAS）的DRPM职位，由Chris Miller担任代理DRPM RAS和PAE RAS。",
-      "keyFacts": [
-        "Chris Miller will serve as acting DRPM RAS",
-        "PAE RAS the service announced"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-08-06T14:35:21Z",
-      "url": "https://breakingdefense.com/2026/08/navy-creates-new-robotic-and-autonomous-systems-drpm",
-      "score": 65,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 5,
-        "主题相关性": 2,
-        "证据完整度": 2,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 10.2 小时",
-        "命中 1 个主题信号",
-        "影响信号：autonomous"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "海军",
-        "机器人",
-        "自主系统"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/navy-creates-new-robotic-and-autonomous-systems-drpm",
-          "publishedAt": "2026-08-06T14:35:21Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 25
     },
     {
       "id": "a64b97947ab5a2",
@@ -1713,7 +2424,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 2.0 小时",
+        "发布约 3.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -1741,133 +2452,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 26
-    },
-    {
-      "id": "185c8eaf2345a3",
-      "eventId": "evt-17cc72831110",
-      "contentType": "news",
-      "title": "以色列指控定居者杀害巴勒斯坦人，该人曾参与奥斯卡获奖西岸电影",
-      "originalTitle": "Israel charges settler over killing of Palestinian involved in Oscar-winning West Bank film",
-      "summary": "Yinon Levy被控过失杀人罪，涉及2025年7月枪杀Odeh Hathaleen事件。",
-      "keyFacts": [
-        "Yinon Levy is charged with reckless manslaughter over the July 2025 shooting of Odeh Hathaleen"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-06T18:37:12Z",
-      "url": "https://www.bbc.co.uk/news/articles/cn4n1e8159yo?at_medium=RSS&at_campaign=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 6.1 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "以色列",
-        "定居者",
-        "过失杀人"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/189f/live/7dfa7080-91bc-11f1-bab9-173de0e7d358.png",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cn4n1e8159yo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-06T18:37:12Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 27
-    },
-    {
-      "id": "f7db58b2d18e62",
-      "eventId": "evt-5e25bdd7cff2",
-      "contentType": "news",
-      "title": "人工智能用于设计全新病毒",
-      "originalTitle": "Artificial Intelligence used to design brand new viruses",
-      "summary": "科学家成功制造出16种由AI设计基因组的病毒。",
-      "keyFacts": [
-        "Scientists made 16 successful viruses that had their genetic code designed by artificial intelligence"
-      ],
-      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
-      "category": "AI",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-06T18:01:52Z",
-      "url": "https://www.bbc.co.uk/news/articles/c5y3j3ngevmo?at_medium=RSS&at_campaign=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 6.7 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "AI",
-        "病毒",
-        "基因设计"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/e150/live/81e84950-91b8-11f1-bab9-173de0e7d358.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/c5y3j3ngevmo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-06T18:01:52Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 28
+      "streamRank": 24
     },
     {
       "id": "f6ba7df2ee8ccf",
@@ -1903,7 +2488,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 7.1 小时",
+        "发布约 8.1 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1931,7 +2516,135 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 29
+      "streamRank": 25
+    },
+    {
+      "id": "42b0540a976ea9",
+      "eventId": "evt-6d887abff9ee",
+      "contentType": "news",
+      "title": "我是阿尔忒弥斯：汤姆·珀西",
+      "originalTitle": "I Am Artemis: Tom Percy",
+      "summary": "NASA着眼长期探索月球和火星，增加阿尔忒弥斯任务频率。汤姆·珀西是载人着陆系统项目系统工程与集成经理，与SpaceX等供应商合作。",
+      "keyFacts": [
+        "As NASA sets its sights on long-term exploration of the Moon",
+        "the agency is increasing the cadence of its Artemis missions",
+        "Helping bring these plans to fruition is Tom Percy"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
+      "country": "国际",
+      "publishedAt": "2026-08-06T16:35:51Z",
+      "url": "https://www.nasa.gov/missions/artemis/i-am-artemis/i-am-artemis-tom-percy",
+      "score": 64,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 15,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 20/20",
+        "发布约 9.1 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "NASA",
+        "阿尔忒弥斯",
+        "月球"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "NASA",
+          "domain": "nasa.gov",
+          "url": "https://www.nasa.gov/missions/artemis/i-am-artemis/i-am-artemis-tom-percy",
+          "publishedAt": "2026-08-06T16:35:51Z",
+          "evidenceGroup": "outlet:nasa.gov"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 26
+    },
+    {
+      "id": "86b476bce9fdfb",
+      "eventId": "evt-f1d57bf7d0e9",
+      "contentType": "news",
+      "title": "官员通过三项较小公司合同对冲SpaceX飞机跟踪卫星押注",
+      "originalTitle": "Officials hedge SpaceX aircraft-tracking satellite bet with three smaller company contracts",
+      "summary": "Rocket Labs、STR和一家神秘公司是太空AMTI的最新获奖者。",
+      "keyFacts": [
+        "and one mystery company are the latest space-based AMTI awardees"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "Defense One",
+      "country": "国际",
+      "publishedAt": "2026-08-06T16:00:18Z",
+      "url": "https://www.defenseone.com/defense-systems/2026/08/officials-hedge-spacex-aircraft-tracking-satellite-bet-three-smaller-company-contracts/415252",
+      "score": 64,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 15,
+        "影响信号": 0,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 9.7 小时",
+        "命中 3 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "太空",
+        "卫星",
+        "合同"
+      ],
+      "image": "https://cdn.defenseone.com/media/img/cd/2026/08/06/sat_GettyImages_165773692/thumb.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense One",
+          "domain": "defenseone.com",
+          "url": "https://www.defenseone.com/defense-systems/2026/08/officials-hedge-spacex-aircraft-tracking-satellite-bet-three-smaller-company-contracts/415252",
+          "publishedAt": "2026-08-06T16:00:18Z",
+          "evidenceGroup": "outlet:defenseone.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 27
     },
     {
       "id": "f6a41a9f528e84",
@@ -1966,7 +2679,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 9.1 小时",
+        "发布约 10.0 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1994,7 +2707,72 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 30
+      "streamRank": 28
+    },
+    {
+      "id": "953ba07871ba18",
+      "eventId": "evt-c157f05d1556",
+      "contentType": "news",
+      "title": "海军设立新的机器人与自主系统DRPM",
+      "originalTitle": "Navy creates new robotic and autonomous systems DRPM",
+      "summary": "海军宣布设立新的机器人与自主系统（RAS）的DRPM职位，由Chris Miller担任代理DRPM RAS和PAE RAS。",
+      "keyFacts": [
+        "Chris Miller will serve as acting DRPM RAS",
+        "PAE RAS the service announced"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-08-06T14:35:21Z",
+      "url": "https://breakingdefense.com/2026/08/navy-creates-new-robotic-and-autonomous-systems-drpm",
+      "score": 64,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 14,
+        "影响信号": 5,
+        "主题相关性": 2,
+        "证据完整度": 2,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 11.1 小时",
+        "命中 1 个主题信号",
+        "影响信号：autonomous"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "海军",
+        "机器人",
+        "自主系统"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/navy-creates-new-robotic-and-autonomous-systems-drpm",
+          "publishedAt": "2026-08-06T14:35:21Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 29
     },
     {
       "id": "a2e434dc6dcd76",
@@ -2031,7 +2809,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 13.9 小时",
+        "发布约 14.9 小时",
         "命中 2 个主题信号",
         "影响信号：launch"
       ],
@@ -2060,72 +2838,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 31
-    },
-    {
-      "id": "90789267aae5ef",
-      "eventId": "evt-a15c25e57407",
-      "contentType": "news",
-      "title": "乌干达足球队长街头遭团伙袭击致死引发愤怒",
-      "originalTitle": "Outrage as Ugandan football captain beaten to death in street gang attack",
-      "summary": "警方称，这名27岁的球员在抵抗抢劫时遭疑似劫匪杀害。",
-      "keyFacts": [
-        "The 27-year-old was killed by suspected robbers",
-        "resisting an attempt to rob him"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-06T06:04:28Z",
-      "url": "https://www.bbc.co.uk/news/articles/cm2g0038yr8o?at_medium=RSS&at_campaign=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 11,
-        "影响信号": 6,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 18.7 小时",
-        "命中 1 个主题信号",
-        "影响信号：attack"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "乌干达",
-        "足球",
-        "暴力事件"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/bbf5/live/ace34820-9155-11f1-a649-9747aa0331f7.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cm2g0038yr8o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-06T06:04:28Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 32
+      "streamRank": 30
     },
     {
       "id": "5bff3211808009",
@@ -2160,7 +2873,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.4 小时",
+        "发布约 6.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2188,32 +2901,32 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 33
+      "streamRank": 31
     },
     {
-      "id": "c4ac702750d6ac",
-      "eventId": "evt-4963d724bfc5",
+      "id": "185c8eaf2345a3",
+      "eventId": "evt-17cc72831110",
       "contentType": "news",
-      "title": "Google Maps新增智能体功能，包括订餐和酒店预订",
-      "originalTitle": "Google Maps adds agentic features, including food ordering and hotel bookings",
-      "summary": "这些新功能的推出反映了谷歌将Google Maps从导航工具转变为能够帮助用户完成现实世界任务的助手的雄心。",
+      "title": "以色列指控定居者杀害巴勒斯坦人，该人曾参与奥斯卡获奖西岸电影",
+      "originalTitle": "Israel charges settler over killing of Palestinian involved in Oscar-winning West Bank film",
+      "summary": "Yinon Levy被控过失杀人罪，涉及2025年7月枪杀Odeh Hathaleen事件。",
       "keyFacts": [
-        "The launch of these new features reflects Google’s ambitions to transform Google Maps from a navigation tool into an assistant that's capab…"
+        "Yinon Levy is charged with reckless manslaughter over the July 2025 shooting of Odeh Hathaleen"
       ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "TechCrunch AI",
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
       "country": "国际",
-      "publishedAt": "2026-08-06T12:30:00Z",
-      "url": "https://techcrunch.com/2026/08/06/google-maps-adds-agentic-features-including-food-ordering-and-hotel-bookings",
-      "score": 62,
+      "publishedAt": "2026-08-06T18:37:12Z",
+      "url": "https://www.bbc.co.uk/news/articles/cn4n1e8159yo?at_medium=RSS&at_campaign=rss",
+      "score": 63,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 15,
-        "主题优先级": 9,
-        "时效": 14,
-        "影响信号": 4,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
@@ -2222,27 +2935,154 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 12.2 小时",
-        "命中 1 个主题信号",
-        "影响信号：launch"
+        "来源权重 17/20",
+        "发布约 7.1 小时",
+        "命中 1 个主题信号"
       ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "谷歌地图",
-        "智能体",
-        "订餐"
+        "以色列",
+        "定居者",
+        "过失杀人"
       ],
-      "image": "",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/189f/live/7dfa7080-91bc-11f1-bab9-173de0e7d358.png",
       "corroboration": 1,
       "sources": [
         {
-          "name": "TechCrunch AI",
-          "domain": "techcrunch.com",
-          "url": "https://techcrunch.com/2026/08/06/google-maps-adds-agentic-features-including-food-ordering-and-hotel-bookings",
-          "publishedAt": "2026-08-06T12:30:00Z",
-          "evidenceGroup": "outlet:techcrunch.com"
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cn4n1e8159yo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-06T18:37:12Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 32
+    },
+    {
+      "id": "f7db58b2d18e62",
+      "eventId": "evt-5e25bdd7cff2",
+      "contentType": "news",
+      "title": "人工智能用于设计全新病毒",
+      "originalTitle": "Artificial Intelligence used to design brand new viruses",
+      "summary": "科学家成功制造出16种由AI设计基因组的病毒。",
+      "keyFacts": [
+        "Scientists made 16 successful viruses that had their genetic code designed by artificial intelligence"
+      ],
+      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
+      "category": "AI",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-06T18:01:52Z",
+      "url": "https://www.bbc.co.uk/news/articles/c5y3j3ngevmo?at_medium=RSS&at_campaign=rss",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 7.7 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "AI",
+        "病毒",
+        "基因设计"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/e150/live/81e84950-91b8-11f1-bab9-173de0e7d358.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c5y3j3ngevmo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-06T18:01:52Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 33
+    },
+    {
+      "id": "90789267aae5ef",
+      "eventId": "evt-a15c25e57407",
+      "contentType": "news",
+      "title": "乌干达足球队长街头遭团伙袭击致死引发愤怒",
+      "originalTitle": "Outrage as Ugandan football captain beaten to death in street gang attack",
+      "summary": "警方称，这名27岁的球员在抵抗抢劫时遭疑似劫匪杀害。",
+      "keyFacts": [
+        "The 27-year-old was killed by suspected robbers",
+        "resisting an attempt to rob him"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-06T06:04:28Z",
+      "url": "https://www.bbc.co.uk/news/articles/cm2g0038yr8o?at_medium=RSS&at_campaign=rss",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 10,
+        "影响信号": 6,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 19.6 小时",
+        "命中 1 个主题信号",
+        "影响信号：attack"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "乌干达",
+        "足球",
+        "暴力事件"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/bbf5/live/ace34820-9155-11f1-a649-9747aa0331f7.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cm2g0038yr8o?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-06T06:04:28Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
       "selectionProvider": "",
@@ -2289,7 +3129,7 @@
       },
       "scoreReasons": [
         "来源权重 19/20",
-        "发布约 15.7 小时",
+        "发布约 16.7 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -2353,7 +3193,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 7.2 小时",
+        "发布约 8.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2418,7 +3258,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.3 小时",
+        "发布约 10.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2449,32 +3289,30 @@
       "streamRank": 37
     },
     {
-      "id": "94ab2f1cf41cb3",
-      "eventId": "evt-a5a7bba57db0",
+      "id": "c4ac702750d6ac",
+      "eventId": "evt-4963d724bfc5",
       "contentType": "news",
-      "title": "乌克兰如何更有效且更经济地拦截俄罗斯无人机",
-      "originalTitle": "How Ukraine tries to intercept Russian drones more effectively — and affordably",
-      "summary": "自去年起，基辅转向使用西方战斗机来击落空中威胁，同时也依赖分散的防空小组和其他改装飞机。",
+      "title": "Google Maps新增智能体功能，包括订餐和酒店预订",
+      "originalTitle": "Google Maps adds agentic features, including food ordering and hotel bookings",
+      "summary": "这些新功能的推出反映了谷歌将Google Maps从导航工具转变为能够帮助用户完成现实世界任务的助手的雄心。",
       "keyFacts": [
-        "Since last year",
-        "Kyiv has turned to Western fighter jets to shoot down aerial threats",
-        "but also rely on dispersed air defense teams"
+        "The launch of these new features reflects Google’s ambitions to transform Google Maps from a navigation tool into an assistant that's capab…"
       ],
       "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
       "category": "航空航天",
-      "source": "Breaking Defense",
+      "source": "TechCrunch AI",
       "country": "国际",
-      "publishedAt": "2026-08-06T12:37:45Z",
-      "url": "https://breakingdefense.com/2026/08/how-ukraine-tries-to-intercept-russian-drones-more-effectively-and-affordably",
+      "publishedAt": "2026-08-06T12:30:00Z",
+      "url": "https://techcrunch.com/2026/08/06/google-maps-adds-agentic-features-including-food-ordering-and-hotel-bookings",
       "score": 61,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 16,
+        "来源": 15,
         "主题优先级": 9,
-        "时效": 14,
-        "影响信号": 0,
-        "主题相关性": 4,
+        "时效": 13,
+        "影响信号": 4,
+        "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -2482,26 +3320,27 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 12.1 小时",
-        "命中 2 个主题信号"
+        "来源权重 15/20",
+        "发布约 13.2 小时",
+        "命中 1 个主题信号",
+        "影响信号：launch"
       ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
       "tags": [
-        "乌克兰",
-        "无人机",
-        "防空"
+        "谷歌地图",
+        "智能体",
+        "订餐"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/how-ukraine-tries-to-intercept-russian-drones-more-effectively-and-affordably",
-          "publishedAt": "2026-08-06T12:37:45Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
+          "name": "TechCrunch AI",
+          "domain": "techcrunch.com",
+          "url": "https://techcrunch.com/2026/08/06/google-maps-adds-agentic-features-including-food-ordering-and-hotel-bookings",
+          "publishedAt": "2026-08-06T12:30:00Z",
+          "evidenceGroup": "outlet:techcrunch.com"
         }
       ],
       "selectionProvider": "",
@@ -2548,7 +3387,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 9.6 小时",
+        "发布约 10.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2577,6 +3416,71 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 39
+    },
+    {
+      "id": "94ab2f1cf41cb3",
+      "eventId": "evt-a5a7bba57db0",
+      "contentType": "news",
+      "title": "乌克兰如何更有效且更经济地拦截俄罗斯无人机",
+      "originalTitle": "How Ukraine tries to intercept Russian drones more effectively — and affordably",
+      "summary": "自去年起，基辅转向使用西方战斗机来击落空中威胁，同时也依赖分散的防空小组和其他改装飞机。",
+      "keyFacts": [
+        "Since last year",
+        "Kyiv has turned to Western fighter jets to shoot down aerial threats",
+        "but also rely on dispersed air defense teams"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-08-06T12:37:45Z",
+      "url": "https://breakingdefense.com/2026/08/how-ukraine-tries-to-intercept-russian-drones-more-effectively-and-affordably",
+      "score": 60,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 13,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 13.1 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "乌克兰",
+        "无人机",
+        "防空"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/how-ukraine-tries-to-intercept-russian-drones-more-effectively-and-affordably",
+          "publishedAt": "2026-08-06T12:37:45Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 40
     },
     {
       "id": "541cca2f4a6cd1",
@@ -2613,7 +3517,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 15.7 小时",
+        "发布约 16.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2641,7 +3545,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 40
+      "streamRank": 41
     },
     {
       "id": "38e4ab2524b58f",
@@ -2677,7 +3581,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 19.7 小时",
+        "发布约 20.7 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -2695,69 +3599,6 @@
           "domain": "bbc.co.uk",
           "url": "https://www.bbc.co.uk/news/articles/cy8ev4y172yo?at_medium=RSS&at_campaign=rss",
           "publishedAt": "2026-08-06T05:00:54Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 41
-    },
-    {
-      "id": "906ccad4e68317",
-      "eventId": "evt-0d67e83979fb",
-      "contentType": "news",
-      "title": "伊朗称与阿曼就霍尔木兹海峡的协议已进入最后阶段",
-      "originalTitle": "Iran says deal with Oman on Strait of Hormuz is in final stages",
-      "summary": "关于这一关键水道的拟议协议，美国和阿曼均未发表评论。",
-      "keyFacts": [
-        "Neither the US or Oman have commented on the proposed agreement on the vital waterway"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-06T01:19:59Z",
-      "url": "https://www.bbc.co.uk/news/articles/ckg9d3eyeggo?at_medium=RSS&at_campaign=rss",
-      "score": 55,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 8,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 23.4 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "伊朗",
-        "阿曼",
-        "霍尔木兹海峡"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/d689/live/d1fc7070-9171-11f1-b2ab-0dd01740f9f6.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/ckg9d3eyeggo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-06T01:19:59Z",
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
@@ -2788,13 +3629,13 @@
       "country": "国际",
       "publishedAt": "2026-08-06T02:23:47Z",
       "url": "https://spacenews.com/nasa-and-roscosmos-continue-seat-barter-agreement",
-      "score": 54,
+      "score": 53,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 9,
+        "时效": 8,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2805,7 +3646,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 22.4 小时",
+        "发布约 23.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2834,69 +3675,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 43
-    },
-    {
-      "id": "19e93e09acf7fa",
-      "eventId": "evt-32056cd8b579",
-      "contentType": "news",
-      "title": "专家称美国拦截器不足难以威慑对华战争",
-      "originalTitle": "US has too few interceptors to deter war with China, experts say",
-      "summary": "传统基金会的一份新报告是最新警告特朗普伊朗战争中弹药消耗的声音之一。",
-      "keyFacts": [
-        "A new report from Heritage is the latest to sound alarms over the expenditure of munitions in Trump's Iran war"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Defense One",
-      "country": "国际",
-      "publishedAt": "2026-08-06T01:33:31Z",
-      "url": "https://www.defenseone.com/threats/2026/08/interceptors-war-china-heritage/415241",
-      "score": 54,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 8,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 23.2 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美国",
-        "军事威慑",
-        "传统基金会"
-      ],
-      "image": "https://cdn.defenseone.com/media/img/cd/2026/08/05/GettyImages_2279853774/thumb.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Defense One",
-          "domain": "defenseone.com",
-          "url": "https://www.defenseone.com/threats/2026/08/interceptors-war-china-heritage/415241",
-          "publishedAt": "2026-08-06T01:33:31Z",
-          "evidenceGroup": "outlet:defenseone.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 44
     }
   ]
 }
