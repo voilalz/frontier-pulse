@@ -1,19 +1,19 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-08-08T22:48:31Z",
+  "generatedAt": "2026-08-08T23:40:15Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
-  "itemCount": 20,
-  "totalCandidateCount": 20,
+  "itemCount": 22,
+  "totalCandidateCount": 22,
   "truncated": false,
   "categoryCounts": {
-    "局部冲突": 14,
+    "局部冲突": 16,
     "军事动态": 3,
     "航空航天": 2,
     "AI": 1
   },
   "sourceCounts": {
-    "Al Jazeera": 13,
+    "Al Jazeera": 15,
     "BBC World": 4,
     "SpaceNews": 1,
     "TechCrunch AI": 1,
@@ -21,11 +21,11 @@
   },
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
-  "translatedItemCount": 20,
+  "translatedItemCount": 22,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 3,
-    "completedItemCount": 3,
+    "requestedItemCount": 1,
+    "completedItemCount": 1,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
@@ -38,7 +38,7 @@
     "completionReason": "complete_first_pass",
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
-    "reusedItemCount": 17,
+    "reusedItemCount": 20,
     "featuredTranslatedItemCount": 10
   },
   "items": [
@@ -58,8 +58,8 @@
       "country": "国际",
       "publishedAt": "2026-08-08T15:01:29Z",
       "url": "https://www.aljazeera.com/news/2026/8/8/uae-says-iran-targeted-adnoc-tanker-in-hormuz-no-casualties-2?traffic_source=rss",
-      "score": 76,
-      "scoreBasis": "规则评分",
+      "score": 77,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -74,8 +74,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 77/100（AI 65% + 规则 35%）",
+        "规则参考分 76/100",
         "来源权重 16/20",
-        "发布约 7.8 小时",
+        "发布约 8.6 小时",
         "命中 3 个主题信号",
         "影响信号：strike、missile"
       ],
@@ -97,14 +100,212 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-d1d951a8c24b",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-09",
+        "lastSeen": "2026-08-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-09",
+            "newsId": "f73277ac6f51b0",
+            "title": "阿联酋称伊朗在霍尔木兹海峡袭击阿布扎比国家石油公司油轮，无人员伤亡",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-08T15:01:29Z",
+            "score": 77
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Arab governments condemn Iran over missile strike on Emirati tanker",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-1e4866d38a84",
+          "eventId": "evt-d1d951a8c24b",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-09-08",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "f73277ac6f51b0"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
+    },
+    {
+      "id": "6b46721b139772",
+      "eventId": "evt-385107bec2c0",
+      "contentType": "news",
+      "title": "万斯称美国已“摧毁”伊朗核计划",
+      "originalTitle": "Vance says US ‘destroyed’ Iran’s nuclear programme",
+      "summary": "美国副总统JD·万斯声称华盛顿已“摧毁”伊朗核计划，并削弱其军事力量。",
+      "keyFacts": [
+        "美国副总统JD·万斯声称华盛顿已“摧毁”伊朗核计划",
+        "万斯表示伊朗军事力量已被削弱"
+      ],
+      "why": "此言论反映美国对伊政策的高调宣称，可能影响中东局势与国际核谈判走向。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-08T23:27:55Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/8/vance-says-us-destroyed-irans-nuclear-programme?traffic_source=rss",
+      "score": 78,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 7,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 80/100",
+        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "规则参考分 75/100",
+        "来源权重 16/20",
+        "发布约 0.2 小时",
+        "命中 2 个主题信号",
+        "影响信号：nuclear"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国",
+        "伊朗",
+        "核计划"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/8/vance-says-us-destroyed-irans-nuclear-programme?traffic_source=rss",
+          "publishedAt": "2026-08-08T23:27:55Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-385107bec2c0",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-09",
+        "lastSeen": "2026-08-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-09",
+            "newsId": "6b46721b139772",
+            "title": "万斯称美国已“摧毁”伊朗核计划",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-08T23:27:55Z",
+            "score": 78
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "美国副总统JD·万斯声称华盛顿已“摧毁”伊朗核计划",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "万斯表示伊朗军事力量已被削弱",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-1fb2790378d1",
+          "eventId": "evt-385107bec2c0",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-09-08",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "6b46721b139772"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 2,
+      "relatedPapers": []
     },
     {
       "id": "6494953af1da88",
@@ -122,8 +323,8 @@
       "country": "国际",
       "publishedAt": "2026-08-08T18:50:43Z",
       "url": "https://www.twz.com/news-features/russian-nuclear-ballistic-missile-submarines-are-now-cocooned-in-nets",
-      "score": 75,
-      "scoreBasis": "规则评分",
+      "score": 70,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
@@ -138,8 +339,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 68/100",
+        "综合排序分 70/100（AI 65% + 规则 35%）",
+        "规则参考分 75/100",
         "来源权重 15/20",
-        "发布约 4.0 小时",
+        "发布约 4.8 小时",
         "命中 1 个主题信号",
         "影响信号：missile、nuclear"
       ],
@@ -161,18 +365,79 @@
           "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 2
+      "eventDossier": {
+        "eventId": "evt-129f38e44fac",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-09",
+        "lastSeen": "2026-08-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-09",
+            "newsId": "6494953af1da88",
+            "title": "俄罗斯核弹道导弹潜艇现被网罩保护",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-08T18:50:43Z",
+            "score": 70
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "Growing uncrewed threats look to be prompting various new defensive measures Russian naval bases far",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-8281737c9455",
+          "eventId": "evt-129f38e44fac",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-09-08",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "6494953af1da88"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 3,
+      "relatedPapers": []
     },
     {
       "id": "49ff6f49f334bc",
-      "eventId": "evt-416cc37262be",
+      "eventId": "evt-5da88a645f46",
       "contentType": "news",
       "title": "也门政府军攻击胡塞武装，马里卜再遭炮击",
       "originalTitle": "Yemen’s government forces attack Houthis amid renewed shelling of Marib",
@@ -187,8 +452,8 @@
       "country": "国际",
       "publishedAt": "2026-08-08T18:43:20Z",
       "url": "https://www.aljazeera.com/news/2026/8/8/yemens-government-forces-attack-houthis-amid-renewed-shelling-of-marib?traffic_source=rss",
-      "score": 74,
-      "scoreBasis": "规则评分",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -203,8 +468,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 72/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 74/100",
         "来源权重 16/20",
-        "发布约 4.1 小时",
+        "发布约 4.9 小时",
         "命中 3 个主题信号",
         "影响信号：attack"
       ],
@@ -226,18 +494,152 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 3
+      "selectionNote": "为补足 Top 10 放宽来源配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-5da88a645f46",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-07",
+        "lastSeen": "2026-08-09",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-08-07",
+            "newsId": "2829e071e0ad57",
+            "title": "胡塞武装对也门沙特联军发动大规模攻击",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-06T20:42:40Z",
+            "score": 87
+          },
+          {
+            "editionDate": "2026-08-09",
+            "newsId": "49ff6f49f334bc",
+            "title": "也门政府军攻击胡塞武装，马里卜再遭炮击",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-08T18:43:20Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Fears of a wider conflict grow as Yemen’s army counterattacks",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "expert warns ‘all the warning signs are there’",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-895888123f6a",
+          "eventId": "evt-5da88a645f46",
+          "statement": "后续可观察马里卜地区交火是否持续，双方伤亡是否增加。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-09-08",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "49ff6f49f334bc"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        },
+        {
+          "predictionId": "pred-6df903d091b4",
+          "eventId": "evt-5da88a645f46",
+          "statement": "若政府军反击升级，则需关注胡塞武装对沙特境内目标的报复性攻击。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-11-07",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "49ff6f49f334bc"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        },
+        {
+          "predictionId": "pred-a7477fc0ff74",
+          "eventId": "evt-5da88a645f46",
+          "statement": "后续可观察胡塞武装是否发布袭击具体目标或战果声明，以及沙特联军是否采取报复性军事行动。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-09-06",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2829e071e0ad57"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        },
+        {
+          "predictionId": "pred-18b0c8afee77",
+          "eventId": "evt-5da88a645f46",
+          "statement": "若红海航运安全持续受威胁，则需关注国际航运组织或域外国家是否加强该区域护航或外交斡旋。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-07",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2829e071e0ad57"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 4,
+      "relatedPapers": []
     },
     {
       "id": "d56edb34497508",
-      "eventId": "evt-6864b9ea80ad",
+      "eventId": "evt-bc0fa72bc62d",
       "contentType": "news",
       "title": "俄导弹袭击基辅附近致三人死亡含一名儿童",
       "originalTitle": "Child among three killed in Russian missile attacks near Kyiv",
@@ -253,12 +655,12 @@
       "publishedAt": "2026-08-08T18:06:25Z",
       "url": "https://www.bbc.co.uk/news/articles/cz7dy8gq99eo?at_medium=RSS&at_campaign=rss",
       "score": 74,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 5,
         "主题相关性": 6,
         "证据完整度": 3,
@@ -268,8 +670,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 75/100",
+        "综合排序分 74/100（AI 65% + 规则 35%）",
+        "规则参考分 73/100",
         "来源权重 17/20",
-        "发布约 4.7 小时",
+        "发布约 5.6 小时",
         "命中 3 个主题信号",
         "影响信号：missile"
       ],
@@ -291,14 +696,102 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 4
+      "selectionNote": "为补足 Top 10 放宽来源配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-bc0fa72bc62d",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-09",
+        "lastSeen": "2026-08-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-09",
+            "newsId": "d56edb34497508",
+            "title": "俄导弹袭击基辅附近致三人死亡含一名儿童",
+            "source": "BBC World",
+            "publishedAt": "2026-08-08T18:06:25Z",
+            "score": 74
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "Russia continued its overnight attacks",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "President Volodymyr Zelensky warned of Ukraine's dwindling supplies of missile interceptors",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-dec7383b6727",
+          "eventId": "evt-bc0fa72bc62d",
+          "statement": "后续可观察俄军是否继续对基辅及周边发动类似袭击。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-09-08",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d56edb34497508"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        },
+        {
+          "predictionId": "pred-13371d995c52",
+          "eventId": "evt-bc0fa72bc62d",
+          "statement": "若拦截器持续短缺，则需关注乌克兰防空能力下降对袭击烈度的影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-11-07",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d56edb34497508"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 5,
+      "relatedPapers": []
     },
     {
       "id": "7706eec6fb2210",
@@ -316,13 +809,13 @@
       "country": "国际",
       "publishedAt": "2026-08-08T22:22:36Z",
       "url": "https://www.aljazeera.com/news/2026/8/8/car-bomb-attack-rattles-colombia-after-inauguration-of-hardline-president?traffic_source=rss",
-      "score": 72,
+      "score": 71,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 20,
+        "时效": 19,
         "影响信号": 6,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -333,7 +826,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 0.4 小时",
+        "发布约 1.3 小时",
         "命中 1 个主题信号",
         "影响信号：attack"
       ],
@@ -362,11 +855,11 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 5
+      "streamRank": 6
     },
     {
       "id": "639e1a78a5718d",
-      "eventId": "evt-8decf9e7fb19",
+      "eventId": "evt-e9864f36b469",
       "contentType": "news",
       "title": "阿曼称霍尔木兹谈判积极，伊朗警告协议不会开放海峡",
       "originalTitle": "Hormuz talks positive, Oman says, as Iran warns deal would not open strait",
@@ -381,8 +874,8 @@
       "country": "国际",
       "publishedAt": "2026-08-08T19:18:57Z",
       "url": "https://www.bbc.co.uk/news/articles/c934j5y2lq9o?at_medium=RSS&at_campaign=rss",
-      "score": 71,
-      "scoreBasis": "规则评分",
+      "score": 74,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -397,8 +890,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 76/100",
+        "综合排序分 74/100（AI 65% + 规则 35%）",
+        "规则参考分 71/100",
         "来源权重 17/20",
-        "发布约 3.5 小时",
+        "发布约 4.4 小时",
         "命中 1 个主题信号",
         "影响信号：breakthrough"
       ],
@@ -420,6 +916,158 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-e9864f36b469",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-09",
+        "lastSeen": "2026-08-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-09",
+            "newsId": "639e1a78a5718d",
+            "title": "阿曼称霍尔木兹谈判积极，伊朗警告协议不会开放海峡",
+            "source": "BBC World",
+            "publishedAt": "2026-08-08T19:18:57Z",
+            "score": 74
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "Both sides suggest progress in talks to agree a new shipping route through the strait",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "but a breakthrough remains unclear",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-ed87fa634fdf",
+          "eventId": "evt-e9864f36b469",
+          "statement": "后续可观察伊朗与阿曼是否公布新航线具体安排或协议文本。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-09-08",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "639e1a78a5718d"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        },
+        {
+          "predictionId": "pred-d9bdf944eb7e",
+          "eventId": "evt-e9864f36b469",
+          "statement": "若谈判破裂，则需关注海峡军事对峙是否升级，影响全球油运。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-11-07",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "639e1a78a5718d"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 7,
+      "relatedPapers": []
+    },
+    {
+      "id": "e7a108f7d1702d",
+      "eventId": "evt-d927be61752f",
+      "contentType": "news",
+      "title": "救援队从被毁加沙建筑废墟中找回19具遗体",
+      "originalTitle": "Crews recover 19 bodies from rubble of destroyed Gaza building",
+      "summary": "加沙仍有8000多人失踪于废墟中，由于缺乏重型机械，救援工作受阻。",
+      "keyFacts": [
+        "More than 8,000 people remain missing amid rubble in Gaza",
+        "with recovery efforts hindered by lack of heavy machinery"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-08T23:09:30Z",
+      "url": "https://www.aljazeera.com/news/2026/8/8/crews-recover-19-bodies-from-rubble-of-destroyed-gaza-building?traffic_source=rss",
+      "score": 66,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 0.5 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "加沙",
+        "废墟",
+        "失踪"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/8/8/crews-recover-19-bodies-from-rubble-of-destroyed-gaza-building?traffic_source=rss",
+          "publishedAt": "2026-08-08T23:09:30Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
       "selectionProvider": "",
       "translationProvider": "deepseek",
       "isSupplemental": false,
@@ -427,7 +1075,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 6
+      "streamRank": 8
     },
     {
       "id": "5370d24cdf69a9",
@@ -463,7 +1111,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.3 小时",
+        "发布约 2.2 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -491,72 +1139,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 7
-    },
-    {
-      "id": "9ffdb1437e2d77",
-      "eventId": "evt-537124a57e9f",
-      "contentType": "news",
-      "title": "麦加协议面临哪些挑战？",
-      "originalTitle": "What are the challenges facing the Mecca agreement?",
-      "summary": "沙特转向土耳其和巴基斯坦寻求防务关系，引发对美国依赖的质疑。",
-      "keyFacts": [
-        "Saudi Arabia turns to Turkiye",
-        "Pakistan for defence ties",
-        "raising questions overreliance on the US"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-08T20:25:43Z",
-      "url": "https://www.aljazeera.com/video/inside-story/2026/8/8/challenges-facing-mecca-agreement?traffic_source=rss",
-      "score": 65,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 2.4 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "麦加协议",
-        "沙特",
-        "防务"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/inside-story/2026/8/8/challenges-facing-mecca-agreement?traffic_source=rss",
-          "publishedAt": "2026-08-08T20:25:43Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 8
+      "streamRank": 9
     },
     {
       "id": "e4c57953287c46",
@@ -592,7 +1175,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.4 小时",
+        "发布约 6.2 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -620,7 +1203,72 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 9
+      "streamRank": 10
+    },
+    {
+      "id": "9ffdb1437e2d77",
+      "eventId": "evt-537124a57e9f",
+      "contentType": "news",
+      "title": "麦加协议面临哪些挑战？",
+      "originalTitle": "What are the challenges facing the Mecca agreement?",
+      "summary": "沙特转向土耳其和巴基斯坦寻求防务关系，引发对美国依赖的质疑。",
+      "keyFacts": [
+        "Saudi Arabia turns to Turkiye",
+        "Pakistan for defence ties",
+        "raising questions overreliance on the US"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-08T20:25:43Z",
+      "url": "https://www.aljazeera.com/video/inside-story/2026/8/8/challenges-facing-mecca-agreement?traffic_source=rss",
+      "score": 64,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 3.2 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "麦加协议",
+        "沙特",
+        "防务"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/inside-story/2026/8/8/challenges-facing-mecca-agreement?traffic_source=rss",
+          "publishedAt": "2026-08-08T20:25:43Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 11
     },
     {
       "id": "1b281c3cc5bacb",
@@ -640,8 +1288,8 @@
       "country": "国际",
       "publishedAt": "2026-08-08T17:23:31Z",
       "url": "https://www.bbc.co.uk/news/articles/cewr8wel4z8o?at_medium=RSS&at_campaign=rss",
-      "score": 63,
-      "scoreBasis": "规则评分",
+      "score": 38,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -656,8 +1304,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 25/100",
+        "综合排序分 38/100（AI 65% + 规则 35%）",
+        "规则参考分 63/100",
         "来源权重 17/20",
-        "发布约 5.4 小时",
+        "发布约 6.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -678,14 +1329,91 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 10
+      "eventDossier": {
+        "eventId": "evt-04a323d6f5b5",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-09",
+        "lastSeen": "2026-08-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-09",
+            "newsId": "1b281c3cc5bacb",
+            "title": "麦当娜致敬'天才、超凡'的制作人威廉·奥比特",
+            "source": "BBC World",
+            "publishedAt": "2026-08-08T17:23:31Z",
+            "score": 38
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "The Queen of Pop worked with Orbit several times over the years",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "most notably on her genre-bending",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "Grammy Award-winning album Ray of Light",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-4a26a2065c13",
+          "eventId": "evt-04a323d6f5b5",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-09-08",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "1b281c3cc5bacb"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 12,
+      "relatedPapers": []
     },
     {
       "id": "d12b18a3f096ff",
@@ -721,7 +1449,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.7 小时",
+        "发布约 6.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -749,7 +1477,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 11
+      "streamRank": 13
     },
     {
       "id": "fbb6a1218f39e2",
@@ -786,7 +1514,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.9 小时",
+        "发布约 6.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -804,135 +1532,6 @@
           "domain": "aljazeera.com",
           "url": "https://www.aljazeera.com/news/2026/8/8/saudi-pakistan-turkiye-pact-a-new-shield-or-strategic-signal?traffic_source=rss",
           "publishedAt": "2026-08-08T16:52:11Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 12
-    },
-    {
-      "id": "644ddc240ea5b1",
-      "eventId": "evt-e82f6e8ec963",
-      "contentType": "news",
-      "title": "近东救济工程处自出生以来一直陪伴我，我无法想象没有它的未来",
-      "originalTitle": "UNRWA has been with me since birth, I cannot imagine a future without it",
-      "summary": "该联合国机构参与数百万巴勒斯坦难民的生活。后种族灭绝的加沙无法在没有它的情况下应对。",
-      "keyFacts": [
-        "The UN body has been part of the lives of millions of Palestinian refugees",
-        "Post-genocide Gaza cannot cope without it"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-08T15:52:49Z",
-      "url": "https://www.aljazeera.com/features/2026/8/8/unrwa-has-been-with-me-since-birth-i-cannot-imagine-a-future-without-it?traffic_source=rss",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.9 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "近东救济工程处",
-        "巴勒斯坦",
-        "难民"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/features/2026/8/8/unrwa-has-been-with-me-since-birth-i-cannot-imagine-a-future-without-it?traffic_source=rss",
-          "publishedAt": "2026-08-08T15:52:49Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 13
-    },
-    {
-      "id": "fe68f6b82817f4",
-      "eventId": "evt-b37d59480f4b",
-      "contentType": "news",
-      "title": "以色列考虑沙特、土耳其和巴基斯坦的协议，选举临近",
-      "originalTitle": "Israel mulls Saudi, Turkiye, Pakistan pact as elections loom",
-      "summary": "沙特、土耳其和巴基斯坦达成新防务协议，以色列的回应及其影响存在不确定性。",
-      "keyFacts": [
-        "Saudi Arabia",
-        "and Pakistan form a new defence pact",
-        "leaving Israel’s response"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-08T13:42:06Z",
-      "url": "https://www.aljazeera.com/news/2026/8/8/netanyahu-mulls-saudi-turkiye-pakistan-pact-as-israeli-elections-loom?traffic_source=rss",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 9.1 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "以色列",
-        "防务协议",
-        "选举"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/8/8/netanyahu-mulls-saudi-turkiye-pakistan-pact-as-israeli-elections-loom?traffic_source=rss",
-          "publishedAt": "2026-08-08T13:42:06Z",
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
@@ -962,7 +1561,7 @@
       "publishedAt": "2026-08-08T19:41:13Z",
       "url": "https://techcrunch.com/2026/08/08/openai-acquires-presentation-startup-nextslide",
       "score": 62,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
@@ -977,8 +1576,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 62/100",
+        "综合排序分 62/100（AI 65% + 规则 35%）",
+        "规则参考分 62/100",
         "来源权重 15/20",
-        "发布约 3.1 小时",
+        "发布约 4.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -999,14 +1601,75 @@
           "evidenceGroup": "outlet:techcrunch.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 15
+      "eventDossier": {
+        "eventId": "evt-179a386237d5",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-09",
+        "lastSeen": "2026-08-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-09",
+            "newsId": "8bf73f3956e4de",
+            "title": "OpenAI收购演示文稿初创公司NextSlide",
+            "source": "TechCrunch AI",
+            "publishedAt": "2026-08-08T19:41:13Z",
+            "score": 62
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:techcrunch.com"
+        ],
+        "claims": [
+          {
+            "text": "NextSlide says its team members are now working on ChatGPT",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-0274266c10f3",
+          "eventId": "evt-179a386237d5",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-09-08",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "8bf73f3956e4de"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 15,
+      "relatedPapers": []
     },
     {
       "id": "65e4a4bb31e1c6",
@@ -1026,8 +1689,8 @@
       "country": "国际",
       "publishedAt": "2026-08-08T17:45:40Z",
       "url": "https://spacenews.com/northrop-grumman-canadian-space-agency-repurpose-their-gateway-projects",
-      "score": 62,
-      "scoreBasis": "规则评分",
+      "score": 63,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -1042,8 +1705,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 64/100",
+        "综合排序分 63/100（AI 65% + 规则 35%）",
+        "规则参考分 62/100",
         "来源权重 16/20",
-        "发布约 5.0 小时",
+        "发布约 5.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1064,6 +1730,147 @@
           "evidenceGroup": "outlet:spacenews.com"
         }
       ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-25c518168e46",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-09",
+        "lastSeen": "2026-08-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-09",
+            "newsId": "65e4a4bb31e1c6",
+            "title": "诺斯罗普·格鲁曼与加拿大航天局调整门户项目用途",
+            "source": "SpaceNews",
+            "publishedAt": "2026-08-08T17:45:40Z",
+            "score": 63
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:spacenews.com"
+        ],
+        "claims": [
+          {
+            "text": "Northrop Grumman",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          },
+          {
+            "text": "the Canadian Space Agency will adapt what they had been working on for NASA’s lunar Gateway into applications for a planned lunar base",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          },
+          {
+            "text": "albeit with few specifics",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-011f5e0ae1d3",
+          "eventId": "evt-25c518168e46",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-09-08",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "65e4a4bb31e1c6"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 16,
+      "relatedPapers": []
+    },
+    {
+      "id": "644ddc240ea5b1",
+      "eventId": "evt-e82f6e8ec963",
+      "contentType": "news",
+      "title": "近东救济工程处自出生以来一直陪伴我，我无法想象没有它的未来",
+      "originalTitle": "UNRWA has been with me since birth, I cannot imagine a future without it",
+      "summary": "该联合国机构参与数百万巴勒斯坦难民的生活。后种族灭绝的加沙无法在没有它的情况下应对。",
+      "keyFacts": [
+        "The UN body has been part of the lives of millions of Palestinian refugees",
+        "Post-genocide Gaza cannot cope without it"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-08T15:52:49Z",
+      "url": "https://www.aljazeera.com/features/2026/8/8/unrwa-has-been-with-me-since-birth-i-cannot-imagine-a-future-without-it?traffic_source=rss",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.8 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "近东救济工程处",
+        "巴勒斯坦",
+        "难民"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/features/2026/8/8/unrwa-has-been-with-me-since-birth-i-cannot-imagine-a-future-without-it?traffic_source=rss",
+          "publishedAt": "2026-08-08T15:52:49Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
       "selectionProvider": "",
       "translationProvider": "deepseek",
       "isSupplemental": false,
@@ -1071,7 +1878,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 16
+      "streamRank": 17
     },
     {
       "id": "53dd52a5b44291",
@@ -1107,7 +1914,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 7.8 小时",
+        "发布约 8.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1135,7 +1942,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 17
+      "streamRank": 18
     },
     {
       "id": "985a742aad8e74",
@@ -1154,13 +1961,13 @@
       "country": "国际",
       "publishedAt": "2026-08-08T14:09:02Z",
       "url": "https://www.aljazeera.com/video/newsfeed/2026/8/8/war-on-iran-phase-ii-day-28?traffic_source=rss",
-      "score": 62,
-      "scoreBasis": "规则评分",
+      "score": 68,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1170,8 +1977,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 72/100",
+        "综合排序分 68/100（AI 65% + 规则 35%）",
+        "规则参考分 61/100",
         "来源权重 16/20",
-        "发布约 8.7 小时",
+        "发布约 9.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1192,14 +2002,102 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 18
+      "selectionNote": "为补足 Top 10 放宽来源配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-1399f08142fa",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-09",
+        "lastSeen": "2026-08-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-09",
+            "newsId": "985a742aad8e74",
+            "title": "对伊朗战争：第二阶段：第28天",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-08T14:09:02Z",
+            "score": 68
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Saudi-Pakistan-Turkiye pact draws mixed reactions",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "Oman agree a Hormuz security framework",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-16fcfea662d2",
+          "eventId": "evt-1399f08142fa",
+          "statement": "后续可观察霍尔木兹安全框架的具体内容及各方执行情况。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-09-08",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "985a742aad8e74"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        },
+        {
+          "predictionId": "pred-14ea17f138b5",
+          "eventId": "evt-1399f08142fa",
+          "statement": "若框架未能稳定局势，则需关注美伊军事对抗风险是否重新上升。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-11-07",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "985a742aad8e74"
+          ],
+          "lastReviewedAt": "2026-08-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 19,
+      "relatedPapers": []
     },
     {
       "id": "8fa1bde758f491",
@@ -1217,16 +2115,16 @@
       "country": "国际",
       "publishedAt": "2026-08-08T13:52:40Z",
       "url": "https://www.aljazeera.com/news/2026/8/8/iran-deliberates-hormuz-arrangement-amid-uncertain-prospects-with-us?traffic_source=rss",
-      "score": 62,
+      "score": 60,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 0,
         "主题相关性": 2,
-        "证据完整度": 3,
+        "证据完整度": 2,
         "多源印证": 0,
         "编辑降权": 0,
         "日期异常降权": 0,
@@ -1234,7 +2132,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 8.9 小时",
+        "发布约 9.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1262,7 +2160,72 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 19
+      "streamRank": 20
+    },
+    {
+      "id": "fe68f6b82817f4",
+      "eventId": "evt-b37d59480f4b",
+      "contentType": "news",
+      "title": "以色列考虑沙特、土耳其和巴基斯坦的协议，选举临近",
+      "originalTitle": "Israel mulls Saudi, Turkiye, Pakistan pact as elections loom",
+      "summary": "沙特、土耳其和巴基斯坦达成新防务协议，以色列的回应及其影响存在不确定性。",
+      "keyFacts": [
+        "Saudi Arabia",
+        "and Pakistan form a new defence pact",
+        "leaving Israel’s response"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-08T13:42:06Z",
+      "url": "https://www.aljazeera.com/news/2026/8/8/netanyahu-mulls-saudi-turkiye-pakistan-pact-as-israeli-elections-loom?traffic_source=rss",
+      "score": 60,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 2,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 10.0 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "以色列",
+        "防务协议",
+        "选举"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/8/8/netanyahu-mulls-saudi-turkiye-pakistan-pact-as-israeli-elections-loom?traffic_source=rss",
+          "publishedAt": "2026-08-08T13:42:06Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 21
     },
     {
       "id": "8c0d4f65df2c80",
@@ -1280,13 +2243,13 @@
       "country": "国际",
       "publishedAt": "2026-08-08T00:02:49Z",
       "url": "https://www.bbc.co.uk/news/articles/c3r073eqvrjo?at_medium=RSS&at_campaign=rss",
-      "score": 56,
+      "score": 55,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 9,
+        "时效": 8,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1297,7 +2260,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 22.8 小时",
+        "发布约 23.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1325,7 +2288,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 20
+      "streamRank": 22
     }
   ]
 }
