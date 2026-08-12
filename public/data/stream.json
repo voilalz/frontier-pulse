@@ -1,6 +1,6 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-08-12T23:03:17Z",
+  "generatedAt": "2026-08-12T23:55:08Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
   "itemCount": 39,
@@ -30,27 +30,27 @@
   "translatedItemCount": 39,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 16,
-    "completedItemCount": 16,
+    "requestedItemCount": 0,
+    "completedItemCount": 0,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 3,
-    "requestCount": 3,
+    "initialBatchCount": 0,
+    "requestCount": 0,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "completionReason": "not_needed",
+    "completionMessage": "没有需要翻译的新条目",
     "lastProviderError": "",
-    "reusedItemCount": 23,
+    "reusedItemCount": 39,
     "featuredTranslatedItemCount": 10
   },
   "items": [
     {
       "id": "ef9cb9f1871a75",
-      "eventId": "evt-5a7de46e7f47",
+      "eventId": "evt-ead585df0e7d",
       "contentType": "news",
       "title": "以色列空袭加沙北部致一人死亡",
       "originalTitle": "Israeli air strike kills one in northern Gaza",
@@ -66,7 +66,7 @@
       "publishedAt": "2026-08-12T20:58:42Z",
       "url": "https://www.aljazeera.com/news/2026/8/12/israeli-air-strike-kills-one-in-northern-gaza?traffic_source=rss",
       "score": 78,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -81,8 +81,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "规则参考分 78/100",
         "来源权重 16/20",
-        "发布约 2.1 小时",
+        "发布约 2.9 小时",
         "命中 2 个主题信号",
         "影响信号：first、strike"
       ],
@@ -104,14 +107,102 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-ead585df0e7d",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-13",
+        "lastSeen": "2026-08-13",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-13",
+            "newsId": "ef9cb9f1871a75",
+            "title": "以色列空袭加沙北部致一人死亡",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-12T20:58:42Z",
+            "score": 78
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Strike on a tuk-tuk in Beit Lahiya kills one",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "wounds five in first Israeli aerial bombardment in a week",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-911b8f140cfb",
+          "eventId": "evt-ead585df0e7d",
+          "statement": "后续可观察以军空袭频率是否回升，以及加沙伤亡人数是否上升，以验证冲突是否升级。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-09-12",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "ef9cb9f1871a75"
+          ],
+          "lastReviewedAt": "2026-08-13"
+        },
+        {
+          "predictionId": "pred-756554b917ab",
+          "eventId": "evt-ead585df0e7d",
+          "statement": "若解除武装协议后续推进受阻，则需关注双方冲突是否进一步加剧，或国际调停是否介入。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-11-11",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "ef9cb9f1871a75"
+          ],
+          "lastReviewedAt": "2026-08-13"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
     },
     {
       "id": "d0d31ce57dc35b",
@@ -131,7 +222,7 @@
       "publishedAt": "2026-08-12T23:00:00Z",
       "url": "https://spacenews.com/pentagon-missile-buildup-changing-the-factory-floor",
       "score": 75,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -146,8 +237,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 75/100",
+        "综合排序分 75/100（AI 65% + 规则 35%）",
+        "规则参考分 75/100",
         "来源权重 16/20",
-        "发布约 0.1 小时",
+        "发布约 0.9 小时",
         "命中 3 个主题信号",
         "影响信号：missile"
       ],
@@ -169,14 +263,83 @@
           "evidenceGroup": "outlet:spacenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 2
+      "eventDossier": {
+        "eventId": "evt-a0bb5338d07a",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-13",
+        "lastSeen": "2026-08-13",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-13",
+            "newsId": "d0d31ce57dc35b",
+            "title": "五角大楼导弹集结改变工厂车间",
+            "source": "SpaceNews",
+            "publishedAt": "2026-08-12T23:00:00Z",
+            "score": 75
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:spacenews.com"
+        ],
+        "claims": [
+          {
+            "text": "Startups are bringing software",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          },
+          {
+            "text": "manufacturing methods developed around commercial space into a defense industry under pressure to produce weapons faster",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-8392c2e029d8",
+          "eventId": "evt-a0bb5338d07a",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-09-12",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "d0d31ce57dc35b"
+          ],
+          "lastReviewedAt": "2026-08-13"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 2,
+      "relatedPapers": []
     },
     {
       "id": "e8201d357c5f29",
@@ -195,8 +358,8 @@
       "country": "国际",
       "publishedAt": "2026-08-12T17:47:01Z",
       "url": "https://www.bbc.co.uk/news/articles/c5y49xp2wrno?at_medium=RSS&at_campaign=rss",
-      "score": 74,
-      "scoreBasis": "规则评分",
+      "score": 77,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -211,8 +374,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 77/100（AI 65% + 规则 35%）",
+        "规则参考分 74/100",
         "来源权重 17/20",
-        "发布约 5.3 小时",
+        "发布约 6.1 小时",
         "命中 3 个主题信号",
         "影响信号：attack"
       ],
@@ -234,87 +400,83 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 3
-    },
-    {
-      "id": "128fb0f9f9e91f",
-      "eventId": "evt-76993d0c3e6e",
-      "contentType": "news",
-      "title": "2026年西班牙日全食",
-      "originalTitle": "2026 Total Solar Eclipse in Spain",
-      "summary": "2026年8月12日，日全食在西班牙圣米良德洛斯卡瓦列罗斯观测到。月球完全遮挡太阳，横扫格陵兰、冰岛、俄罗斯北部、大西洋、西班牙等地。",
-      "keyFacts": [
-        "A total solar eclipse is seen from San Millán de los Caballeros",
-        "A total solar eclipse – the Moon passing between the Sun",
-        "completely blocking the face of the Sun – swept across parts of Greenland"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "NASA",
-      "country": "国际",
-      "publishedAt": "2026-08-12T20:08:28Z",
-      "url": "https://www.nasa.gov/image-article/2026-total-solar-eclipse-in-spain",
-      "score": 73,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 20,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 4,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
+      "eventDossier": {
+        "eventId": "evt-ae8305b26bbc",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-13",
+        "lastSeen": "2026-08-13",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-13",
+            "newsId": "e8201d357c5f29",
+            "title": "乌克兰黑海港口袭击重创俄罗斯主要粮食出口码头",
+            "source": "BBC World",
+            "publishedAt": "2026-08-12T17:47:01Z",
+            "score": 77
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
       },
-      "scoreReasons": [
-        "来源权重 20/20",
-        "发布约 2.9 小时",
-        "命中 1 个主题信号",
-        "2 个独立来源相互印证"
-      ],
-      "confidence": "高",
-      "confidenceReason": "主来源权重 20/20，且有 2 个独立来源报道；仍应以原文和一手材料为准。",
-      "tags": [
-        "日全食",
-        "西班牙",
-        "NASA"
-      ],
-      "image": "",
-      "corroboration": 2,
-      "sources": [
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "Grain exports from both Russia",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "Ukraine are falling as both countries attack each other's shipping facilities",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
         {
-          "name": "NASA",
-          "domain": "nasa.gov",
-          "url": "https://www.nasa.gov/image-article/2026-total-solar-eclipse-in-spain",
-          "publishedAt": "2026-08-12T20:08:28Z",
-          "evidenceGroup": "outlet:nasa.gov"
-        },
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/12/iceland-and-spain-plunged-into-darkness-during-total-solar-eclipse?traffic_source=rss",
-          "publishedAt": "2026-08-12T19:29:15Z",
-          "evidenceGroup": "outlet:aljazeera.com"
+          "predictionId": "pred-11f04884e923",
+          "eventId": "evt-ae8305b26bbc",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-09-12",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "e8201d357c5f29"
+          ],
+          "lastReviewedAt": "2026-08-13"
         }
       ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 4
+      "isTopStory": true,
+      "streamRank": 3,
+      "relatedPapers": []
     },
     {
       "id": "b26fa41c958e2d",
@@ -351,7 +513,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 7.4 小时",
+        "发布约 8.3 小时",
         "命中 1 个主题信号",
         "影响信号：launch、test"
       ],
@@ -380,11 +542,168 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 5
+      "streamRank": 4
+    },
+    {
+      "id": "128fb0f9f9e91f",
+      "eventId": "evt-76993d0c3e6e",
+      "contentType": "news",
+      "title": "2026年西班牙日全食",
+      "originalTitle": "2026 Total Solar Eclipse in Spain",
+      "summary": "2026年8月12日，日全食在西班牙圣米良德洛斯卡瓦列罗斯观测到。月球完全遮挡太阳，横扫格陵兰、冰岛、俄罗斯北部、大西洋、西班牙等地。",
+      "keyFacts": [
+        "A total solar eclipse is seen from San Millán de los Caballeros",
+        "A total solar eclipse – the Moon passing between the Sun",
+        "completely blocking the face of the Sun – swept across parts of Greenland"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "NASA",
+      "country": "国际",
+      "publishedAt": "2026-08-12T20:08:28Z",
+      "url": "https://www.nasa.gov/image-article/2026-total-solar-eclipse-in-spain",
+      "score": 74,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 20,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 4,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 75/100",
+        "综合排序分 74/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
+        "来源权重 20/20",
+        "发布约 3.8 小时",
+        "命中 1 个主题信号",
+        "2 个独立来源相互印证"
+      ],
+      "confidence": "高",
+      "confidenceReason": "主来源权重 20/20，且有 2 个独立来源报道；仍应以原文和一手材料为准。",
+      "tags": [
+        "日全食",
+        "西班牙",
+        "NASA"
+      ],
+      "image": "",
+      "corroboration": 2,
+      "sources": [
+        {
+          "name": "NASA",
+          "domain": "nasa.gov",
+          "url": "https://www.nasa.gov/image-article/2026-total-solar-eclipse-in-spain",
+          "publishedAt": "2026-08-12T20:08:28Z",
+          "evidenceGroup": "outlet:nasa.gov"
+        },
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/12/iceland-and-spain-plunged-into-darkness-during-total-solar-eclipse?traffic_source=rss",
+          "publishedAt": "2026-08-12T19:29:15Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-76993d0c3e6e",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-13",
+        "lastSeen": "2026-08-13",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-13",
+            "newsId": "128fb0f9f9e91f",
+            "title": "2026年西班牙日全食",
+            "source": "NASA",
+            "publishedAt": "2026-08-12T20:08:28Z",
+            "score": 74
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:nasa.gov",
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "A total solar eclipse is seen from San Millán de los Caballeros",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:nasa.gov",
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "A total solar eclipse – the Moon passing between the Sun",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:nasa.gov",
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "completely blocking the face of the Sun – swept across parts of Greenland",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:nasa.gov",
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-180ba32f739e",
+          "eventId": "evt-76993d0c3e6e",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-09-12",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "128fb0f9f9e91f"
+          ],
+          "lastReviewedAt": "2026-08-13"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 5,
+      "relatedPapers": []
     },
     {
       "id": "187b266db9d0cd",
-      "eventId": "evt-f919adcb10cc",
+      "eventId": "evt-8a7bf61e1c33",
       "contentType": "news",
       "title": "DARPA寻求下一代高超音速巡航导弹的“不受约束、激进”概念",
       "originalTitle": "DARPA seeks ‘unconstrained, radical’ concepts for next-gen hypersonic cruise missile",
@@ -399,8 +718,8 @@
       "country": "国际",
       "publishedAt": "2026-08-12T17:16:23Z",
       "url": "https://breakingdefense.com/2026/08/darpa-seeks-unconstrained-radical-concepts-for-next-gen-hypersonic-cruise-missile",
-      "score": 72,
-      "scoreBasis": "规则评分",
+      "score": 75,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -415,8 +734,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 76/100",
+        "综合排序分 75/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
         "来源权重 16/20",
-        "发布约 5.8 小时",
+        "发布约 6.6 小时",
         "命中 3 个主题信号",
         "影响信号：missile"
       ],
@@ -438,14 +760,129 @@
           "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 6
+      "eventDossier": {
+        "eventId": "evt-8a7bf61e1c33",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-11",
+        "lastSeen": "2026-08-13",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-08-11",
+            "newsId": "7a0edcc13c63f6",
+            "title": "DARPA研制高超音速巡航导弹以规避敌方防空系统",
+            "source": "Defense News",
+            "publishedAt": "2026-08-10T20:54:38Z",
+            "score": 81
+          },
+          {
+            "editionDate": "2026-08-13",
+            "newsId": "187b266db9d0cd",
+            "title": "DARPA寻求下一代高超音速巡航导弹的“不受约束、激进”概念",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-08-12T17:16:23Z",
+            "score": 75
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:breakingdefense.com"
+        ],
+        "claims": [
+          {
+            "text": "The Pentagon’s secretive research agency says new advances are needed to counter adversary air defenses",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "along with innovative manufacturing techniques that can produce hypersonic weapons affordably",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-8b2f055ff2f9",
+          "eventId": "evt-8a7bf61e1c33",
+          "statement": "后续可观察DARPA是否发布具体提案征集或公布入选概念，以反映研发进展。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-09-12",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "187b266db9d0cd"
+          ],
+          "lastReviewedAt": "2026-08-13"
+        },
+        {
+          "predictionId": "pred-9c6c08810cde",
+          "eventId": "evt-8a7bf61e1c33",
+          "statement": "若概念研发推进顺利，则需关注美国高超音速武器项目预算与测试计划是否相应调整。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-11-11",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "187b266db9d0cd"
+          ],
+          "lastReviewedAt": "2026-08-13"
+        },
+        {
+          "predictionId": "pred-2794262e4ba7",
+          "eventId": "evt-8a7bf61e1c33",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-11",
+          "dueAfter": "2026-09-10",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "7a0edcc13c63f6"
+          ],
+          "lastReviewedAt": "2026-08-13"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 6,
+      "relatedPapers": []
     },
     {
       "id": "aefb80d9ece586",
@@ -482,7 +919,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 2.1 小时",
+        "发布约 2.9 小时",
         "命中 2 个主题信号",
         "影响信号：test"
       ],
@@ -531,8 +968,8 @@
       "country": "国际",
       "publishedAt": "2026-08-12T22:01:31Z",
       "url": "https://breakingdefense.com/2026/08/space-based-interceptor-contractors-passed-first-golden-dome-milestone-guetlein",
-      "score": 70,
-      "scoreBasis": "规则评分",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -547,8 +984,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 74/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 70/100",
         "来源权重 16/20",
-        "发布约 1.0 小时",
+        "发布约 1.9 小时",
         "命中 1 个主题信号",
         "影响信号：first"
       ],
@@ -570,14 +1010,91 @@
           "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 8
+      "eventDossier": {
+        "eventId": "evt-9ab792d39daa",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-13",
+        "lastSeen": "2026-08-13",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-13",
+            "newsId": "81f2ca59cb00c9",
+            "title": "天基拦截器承包商通过首个金穹里程碑",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-08-12T22:01:31Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:breakingdefense.com"
+        ],
+        "claims": [
+          {
+            "text": "The Defense Department will not decide whether to produce operational space-based interceptors until",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "industry demonstrates their feasibility",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "Michael Guetlein said",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-8b5f253216e1",
+          "eventId": "evt-9ab792d39daa",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-09-12",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "81f2ca59cb00c9"
+          ],
+          "lastReviewedAt": "2026-08-13"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 8,
+      "relatedPapers": []
     },
     {
       "id": "916c4f909f5430",
@@ -613,7 +1130,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 1.3 小时",
+        "发布约 2.2 小时",
         "命中 1 个主题信号",
         "影响信号：attack"
       ],
@@ -679,7 +1196,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 3.2 小时",
+        "发布约 4.1 小时",
         "命中 2 个主题信号",
         "影响信号：missile"
       ],
@@ -709,6 +1226,69 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 10
+    },
+    {
+      "id": "5853ee8f18367c",
+      "eventId": "evt-4685f0d5b651",
+      "contentType": "news",
+      "title": "特朗普内阁成员留在诱饵飞机上，总统悄然离开",
+      "originalTitle": "Members of Trump's cabinet remained on decoy plane, after president's quiet exit",
+      "summary": "在北约峰会期间，因涉及伊朗的安全原因，特朗普在土耳其登上了另一架飞机。",
+      "keyFacts": [
+        "Trump boarded a different plane in Turkey during a Nato summit for security reasons involving Iran"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-12T23:19:57Z",
+      "url": "https://www.bbc.co.uk/news/articles/c4g306eln8wo?at_medium=RSS&at_campaign=rss",
+      "score": 69,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 0.6 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "特朗普",
+        "北约峰会",
+        "安全"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/69ce/live/3ac23d60-9659-11f1-b2ab-0dd01740f9f6.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c4g306eln8wo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-12T23:19:57Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 11
     },
     {
       "id": "82d0d9600b61e7",
@@ -743,7 +1323,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.4 小时",
+        "发布约 2.3 小时",
         "命中 1 个主题信号",
         "影响信号：missile"
       ],
@@ -772,202 +1352,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 11
-    },
-    {
-      "id": "761676d48bc244",
-      "eventId": "evt-592a350f1cb1",
-      "contentType": "news",
-      "title": "陆军选择防空部队准备执行金穹任务",
-      "originalTitle": "Army selects air defense unit to prepare for Golden Dome mission",
-      "summary": "陆军中将约翰·拉弗蒂表示，在2028年前，将与该部队进行大量实验和测试，以确保交付时能投入使用。",
-      "keyFacts": [
-        "“Leading up to [2028]",
-        "we’re going to do a lot of experimentation",
-        "test with this unit to make sure that we’re ready to fight with it when it’s delivered,” said Lt"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-08-12T20:35:00Z",
-      "url": "https://breakingdefense.com/2026/08/army-selects-air-defense-unit-to-prepare-for-golden-dome-mission",
-      "score": 69,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 4,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 2.5 小时",
-        "命中 1 个主题信号",
-        "影响信号：test"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "陆军",
-        "防空",
-        "金穹"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/army-selects-air-defense-unit-to-prepare-for-golden-dome-mission",
-          "publishedAt": "2026-08-12T20:35:00Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
       "streamRank": 12
-    },
-    {
-      "id": "fe3cb8fc52020c",
-      "eventId": "evt-1c366058be04",
-      "contentType": "news",
-      "title": "以色列誓言在黎巴嫩、加沙和叙利亚保留军队",
-      "originalTitle": "Israel vows to keep troops in Lebanon, Gaza and Syria",
-      "summary": "以色列国防部长伊斯雷尔·卡茨表示，以色列“在任何情况下”都不会撤军。",
-      "keyFacts": [
-        "Israeli defence minister Israel Katz has said that Israel “will under no circumstances” withdraw its troops"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-12T20:26:07Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/12/israel-vows-to-keep-troops-in-lebanon-gaza-and-syria?traffic_source=rss",
-      "score": 69,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 2.6 小时",
-        "命中 3 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "以色列",
-        "撤军",
-        "中东"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/12/israel-vows-to-keep-troops-in-lebanon-gaza-and-syria?traffic_source=rss",
-          "publishedAt": "2026-08-12T20:26:07Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 13
-    },
-    {
-      "id": "8d8a77dd45a7e9",
-      "eventId": "evt-453957dccd3b",
-      "contentType": "news",
-      "title": "中国星际荣耀完成E轮首批融资，用于可重复使用火箭研发",
-      "originalTitle": "China’s iSpace raises first batch of series E funding for reusable rocketry",
-      "summary": "赫尔辛基——中国可重复使用运载火箭制造商在完成巨额D++轮融资数月后，又获得E轮首批资金，融资仍在进行中。",
-      "keyFacts": [
-        "HELSINKI — Chinese reusable launch vehicle maker has secured a first batch of series E funding",
-        "a huge D++ round",
-        "with fundraising still ongoing"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-08-12T12:48:16Z",
-      "url": "https://spacenews.com/chinas-ispace-raises-first-batch-of-series-e-funding-for-reusable-rocketry",
-      "score": 69,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 15,
-        "影响信号": 9,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 10.3 小时",
-        "命中 1 个主题信号",
-        "影响信号：first、launch"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "星际荣耀",
-        "融资",
-        "可重复使用火箭"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/chinas-ispace-raises-first-batch-of-series-e-funding-for-reusable-rocketry",
-          "publishedAt": "2026-08-12T12:48:16Z",
-          "evidenceGroup": "outlet:spacenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 14
     },
     {
       "id": "c059bda3e12614",
@@ -986,8 +1371,8 @@
       "country": "国际",
       "publishedAt": "2026-08-12T22:00:00Z",
       "url": "https://spacenews.com/space-command-identifies-capabilities-it-needs-for-the-next-space-war",
-      "score": 68,
-      "scoreBasis": "规则评分",
+      "score": 72,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -1002,8 +1387,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 74/100",
+        "综合排序分 72/100（AI 65% + 规则 35%）",
+        "规则参考分 68/100",
         "来源权重 16/20",
-        "发布约 1.1 小时",
+        "发布约 1.9 小时",
         "命中 1 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -1032,6 +1420,207 @@
           "evidenceGroup": "outlet:defenseone.com"
         }
       ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-a8703ae672b6",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-13",
+        "lastSeen": "2026-08-13",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-13",
+            "newsId": "c059bda3e12614",
+            "title": "太空司令部确定下一场太空战争所需能力",
+            "source": "SpaceNews",
+            "publishedAt": "2026-08-12T22:00:00Z",
+            "score": 72
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:spacenews.com",
+          "outlet:defenseone.com"
+        ],
+        "claims": [
+          {
+            "text": "Stephen Whiting said there is a demand for offensive capabilities",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:spacenews.com",
+              "outlet:defenseone.com"
+            ]
+          },
+          {
+            "text": "called on the industry to develop ways to disable the critical nodes of large satellite constellations",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:spacenews.com",
+              "outlet:defenseone.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-c1d80c2dbc25",
+          "eventId": "evt-a8703ae672b6",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-09-12",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "c059bda3e12614"
+          ],
+          "lastReviewedAt": "2026-08-13"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 13,
+      "relatedPapers": []
+    },
+    {
+      "id": "761676d48bc244",
+      "eventId": "evt-592a350f1cb1",
+      "contentType": "news",
+      "title": "陆军选择防空部队准备执行金穹任务",
+      "originalTitle": "Army selects air defense unit to prepare for Golden Dome mission",
+      "summary": "陆军中将约翰·拉弗蒂表示，在2028年前，将与该部队进行大量实验和测试，以确保交付时能投入使用。",
+      "keyFacts": [
+        "“Leading up to [2028]",
+        "we’re going to do a lot of experimentation",
+        "test with this unit to make sure that we’re ready to fight with it when it’s delivered,” said Lt"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-08-12T20:35:00Z",
+      "url": "https://breakingdefense.com/2026/08/army-selects-air-defense-unit-to-prepare-for-golden-dome-mission",
+      "score": 68,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 4,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 3.3 小时",
+        "命中 1 个主题信号",
+        "影响信号：test"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "陆军",
+        "防空",
+        "金穹"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/army-selects-air-defense-unit-to-prepare-for-golden-dome-mission",
+          "publishedAt": "2026-08-12T20:35:00Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 14
+    },
+    {
+      "id": "fe3cb8fc52020c",
+      "eventId": "evt-1c366058be04",
+      "contentType": "news",
+      "title": "以色列誓言在黎巴嫩、加沙和叙利亚保留军队",
+      "originalTitle": "Israel vows to keep troops in Lebanon, Gaza and Syria",
+      "summary": "以色列国防部长伊斯雷尔·卡茨表示，以色列“在任何情况下”都不会撤军。",
+      "keyFacts": [
+        "Israeli defence minister Israel Katz has said that Israel “will under no circumstances” withdraw its troops"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-12T20:26:07Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/12/israel-vows-to-keep-troops-in-lebanon-gaza-and-syria?traffic_source=rss",
+      "score": 68,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 0,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 3.5 小时",
+        "命中 3 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "以色列",
+        "撤军",
+        "中东"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/12/israel-vows-to-keep-troops-in-lebanon-gaza-and-syria?traffic_source=rss",
+          "publishedAt": "2026-08-12T20:26:07Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
       "selectionProvider": "",
       "translationProvider": "deepseek",
       "isSupplemental": false,
@@ -1042,30 +1631,32 @@
       "streamRank": 15
     },
     {
-      "id": "5853ee8f18367c",
-      "eventId": "evt-4685f0d5b651",
+      "id": "8d8a77dd45a7e9",
+      "eventId": "evt-453957dccd3b",
       "contentType": "news",
-      "title": "特朗普内阁成员留在诱饵飞机上，总统悄然离开",
-      "originalTitle": "Members of Trump's cabinet remained on decoy plane, after president's quiet exit",
-      "summary": "在北约峰会期间，因涉及伊朗的安全原因，特朗普在土耳其登上了另一架飞机。",
+      "title": "中国星际荣耀完成E轮首批融资，用于可重复使用火箭研发",
+      "originalTitle": "China’s iSpace raises first batch of series E funding for reusable rocketry",
+      "summary": "赫尔辛基——中国可重复使用运载火箭制造商在完成巨额D++轮融资数月后，又获得E轮首批资金，融资仍在进行中。",
       "keyFacts": [
-        "Trump boarded a different plane in Turkey during a Nato summit for security reasons involving Iran"
+        "HELSINKI — Chinese reusable launch vehicle maker has secured a first batch of series E funding",
+        "a huge D++ round",
+        "with fundraising still ongoing"
       ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
       "country": "国际",
-      "publishedAt": "2026-08-12T20:58:39Z",
-      "url": "https://www.bbc.co.uk/news/articles/c4g306eln8wo?at_medium=RSS&at_campaign=rss",
+      "publishedAt": "2026-08-12T12:48:16Z",
+      "url": "https://spacenews.com/chinas-ispace-raises-first-batch-of-series-e-funding-for-reusable-rocketry",
       "score": 68,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 4,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 14,
+        "影响信号": 9,
+        "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -1073,26 +1664,27 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 2.1 小时",
-        "命中 2 个主题信号"
+        "来源权重 16/20",
+        "发布约 11.1 小时",
+        "命中 1 个主题信号",
+        "影响信号：first、launch"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "特朗普",
-        "北约峰会",
-        "安全"
+        "星际荣耀",
+        "融资",
+        "可重复使用火箭"
       ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/69ce/live/3ac23d60-9659-11f1-b2ab-0dd01740f9f6.jpg",
+      "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/c4g306eln8wo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-12T20:58:39Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/chinas-ispace-raises-first-batch-of-series-e-funding-for-reusable-rocketry",
+          "publishedAt": "2026-08-12T12:48:16Z",
+          "evidenceGroup": "outlet:spacenews.com"
         }
       ],
       "selectionProvider": "",
@@ -1103,71 +1695,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 16
-    },
-    {
-      "id": "b451884feb71e2",
-      "eventId": "evt-d261cf47563d",
-      "contentType": "news",
-      "title": "NASA数据助力商业太空规划在月球生存",
-      "originalTitle": "NASA Data Helps Commercial Space Plan Living Off Our Moon",
-      "summary": "荒凉的月球表面拥有水、铁和钛等重要资源，但提取和处理需要特殊设备。月球站公司正利用NASA的大量数据来确定资源位置，以指导着陆和采矿。",
-      "keyFacts": [
-        "The barren lunar landscape has some important resources",
-        "such as water",
-        "minerals like iron"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "NASA",
-      "country": "国际",
-      "publishedAt": "2026-08-12T20:40:27Z",
-      "url": "https://www.nasa.gov/technology/tech-transfer-spinoffs/nasa-data-helps-commercial-space-plan-living-off-our-moon",
-      "score": 68,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 20,
-        "主题优先级": 9,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 20/20",
-        "发布约 2.4 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "月球",
-        "资源",
-        "商业"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "NASA",
-          "domain": "nasa.gov",
-          "url": "https://www.nasa.gov/technology/tech-transfer-spinoffs/nasa-data-helps-commercial-space-plan-living-off-our-moon",
-          "publishedAt": "2026-08-12T20:40:27Z",
-          "evidenceGroup": "outlet:nasa.gov"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 17
     },
     {
       "id": "d4c0cc23dbb827",
@@ -1203,7 +1730,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.2 小时",
+        "发布约 2.0 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1231,33 +1758,34 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 18
+      "streamRank": 17
     },
     {
-      "id": "17410a6982e1e3",
-      "eventId": "evt-dc409ed9f908",
+      "id": "b451884feb71e2",
+      "eventId": "evt-d261cf47563d",
       "contentType": "news",
-      "title": "美国必须融合导弹预警与防御以应对未来威胁：太空司令部副司令",
-      "originalTitle": "U.S. Must Fuse Missile Warning And Defense To Defeat Future Threats: SPACECOM Deputy Commander",
-      "summary": "太空司令部正在努力打破传统的行动和思维孤岛，以加快应对日益复杂的导弹威胁。",
+      "title": "NASA数据助力商业太空规划在月球生存",
+      "originalTitle": "NASA Data Helps Commercial Space Plan Living Off Our Moon",
+      "summary": "荒凉的月球表面拥有水、铁和钛等重要资源，但提取和处理需要特殊设备。月球站公司正利用NASA的大量数据来确定资源位置，以指导着陆和采矿。",
       "keyFacts": [
-        "SPACECOM is working to dissolve traditional silos of operations",
-        "thinking in order to speed-up swatting-down increasingly complex missile threats"
+        "The barren lunar landscape has some important resources",
+        "such as water",
+        "minerals like iron"
       ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "The War Zone",
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
       "country": "国际",
-      "publishedAt": "2026-08-12T16:37:35Z",
-      "url": "https://www.twz.com/space/u-s-must-fuse-missile-warning-and-defense-to-defeat-future-threats-spacecom-deputy-commander",
-      "score": 67,
-      "scoreBasis": "规则评分",
+      "publishedAt": "2026-08-12T20:40:27Z",
+      "url": "https://www.nasa.gov/technology/tech-transfer-spinoffs/nasa-data-helps-commercial-space-plan-living-off-our-moon",
+      "score": 68,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 5,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 18,
+        "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
@@ -1266,37 +1794,116 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 6.4 小时",
-        "命中 1 个主题信号",
-        "影响信号：missile"
+        "DeepSeek 候选重要度 68/100",
+        "综合排序分 68/100（AI 65% + 规则 35%）",
+        "规则参考分 67/100",
+        "来源权重 20/20",
+        "发布约 3.2 小时",
+        "命中 1 个主题信号"
       ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "confidence": "中",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "太空司令部",
-        "导弹防御",
-        "威胁应对"
+        "月球",
+        "资源",
+        "商业"
       ],
-      "image": "https://www.twz.com/wp-content/uploads/images-by-url-twz/content/2021/09/space-bacn-artwork-darpa.jpg?quality=85",
+      "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/space/u-s-must-fuse-missile-warning-and-defense-to-defeat-future-threats-spacecom-deputy-commander",
-          "publishedAt": "2026-08-12T16:37:35Z",
-          "evidenceGroup": "outlet:twz.com"
+          "name": "NASA",
+          "domain": "nasa.gov",
+          "url": "https://www.nasa.gov/technology/tech-transfer-spinoffs/nasa-data-helps-commercial-space-plan-living-off-our-moon",
+          "publishedAt": "2026-08-12T20:40:27Z",
+          "evidenceGroup": "outlet:nasa.gov"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 19
+      "eventDossier": {
+        "eventId": "evt-d261cf47563d",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-13",
+        "lastSeen": "2026-08-13",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-13",
+            "newsId": "b451884feb71e2",
+            "title": "NASA数据助力商业太空规划在月球生存",
+            "source": "NASA",
+            "publishedAt": "2026-08-12T20:40:27Z",
+            "score": 68
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:nasa.gov"
+        ],
+        "claims": [
+          {
+            "text": "The barren lunar landscape has some important resources",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          },
+          {
+            "text": "such as water",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          },
+          {
+            "text": "minerals like iron",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-7b8006d1f8f2",
+          "eventId": "evt-d261cf47563d",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-09-12",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "b451884feb71e2"
+          ],
+          "lastReviewedAt": "2026-08-13"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 18,
+      "relatedPapers": []
     },
     {
       "id": "8dab6fc3fa101c",
@@ -1333,7 +1940,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 21.5 小时",
+        "发布约 22.4 小时",
         "命中 2 个主题信号",
         "影响信号：production、missile"
       ],
@@ -1362,7 +1969,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 20
+      "streamRank": 19
     },
     {
       "id": "a2780e1c840c6b",
@@ -1398,7 +2005,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 1.6 小时",
+        "发布约 2.5 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "待核验",
@@ -1426,7 +2033,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 21
+      "streamRank": 20
     },
     {
       "id": "9d3806e5a6963c",
@@ -1463,7 +2070,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 5.1 小时",
+        "发布约 6.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1482,6 +2089,71 @@
           "url": "https://www.nasa.gov/centers-and-facilities/ames/nasa-upgrades-vertical-motion-simulator-for-modern-mission-needs",
           "publishedAt": "2026-08-12T17:55:36Z",
           "evidenceGroup": "outlet:nasa.gov"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 21
+    },
+    {
+      "id": "17410a6982e1e3",
+      "eventId": "evt-dc409ed9f908",
+      "contentType": "news",
+      "title": "美国必须融合导弹预警与防御以应对未来威胁：太空司令部副司令",
+      "originalTitle": "U.S. Must Fuse Missile Warning And Defense To Defeat Future Threats: SPACECOM Deputy Commander",
+      "summary": "太空司令部正在努力打破传统的行动和思维孤岛，以加快应对日益复杂的导弹威胁。",
+      "keyFacts": [
+        "SPACECOM is working to dissolve traditional silos of operations",
+        "thinking in order to speed-up swatting-down increasingly complex missile threats"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-08-12T16:37:35Z",
+      "url": "https://www.twz.com/space/u-s-must-fuse-missile-warning-and-defense-to-defeat-future-threats-spacecom-deputy-commander",
+      "score": 66,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 5,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 7.3 小时",
+        "命中 1 个主题信号",
+        "影响信号：missile"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "太空司令部",
+        "导弹防御",
+        "威胁应对"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/images-by-url-twz/content/2021/09/space-bacn-artwork-darpa.jpg?quality=85",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/space/u-s-must-fuse-missile-warning-and-defense-to-defeat-future-threats-spacecom-deputy-commander",
+          "publishedAt": "2026-08-12T16:37:35Z",
+          "evidenceGroup": "outlet:twz.com"
         }
       ],
       "selectionProvider": "",
@@ -1526,7 +2198,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 7.8 小时",
+        "发布约 8.7 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "中",
@@ -1555,72 +2227,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 23
-    },
-    {
-      "id": "4684b61237329d",
-      "eventId": "evt-d4b27a60013e",
-      "contentType": "news",
-      "title": "萤火虫公司增加运载火箭生产，尽管发射次数滞后",
-      "originalTitle": "Firefly increases vehicle production even as launches lag",
-      "summary": "萤火虫航空航天公司表示对其运载火箭有浓厚兴趣，并正在提高产量，但这些努力尚未转化为更高的发射频率。",
-      "keyFacts": [
-        "Firefly Aerospace says it is seeing strong interest in its launch vehicles",
-        "is ramping up production",
-        "but those efforts have yet to translate into an increased launch rate"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-08-12T02:06:13Z",
-      "url": "https://spacenews.com/firefly-increases-vehicle-production-even-as-launches-lag",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 10,
-        "影响信号": 9,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 21.0 小时",
-        "命中 2 个主题信号",
-        "影响信号：launch、production"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "萤火虫公司",
-        "运载火箭",
-        "生产"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/firefly-increases-vehicle-production-even-as-launches-lag",
-          "publishedAt": "2026-08-12T02:06:13Z",
-          "evidenceGroup": "outlet:spacenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 24
     },
     {
       "id": "475d90ffc163b3",
@@ -1655,7 +2261,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.2 小时",
+        "发布约 2.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1683,7 +2289,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 25
+      "streamRank": 24
     },
     {
       "id": "e321218188715b",
@@ -1719,7 +2325,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 2.0 小时",
+        "发布约 2.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1747,7 +2353,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 26
+      "streamRank": 25
     },
     {
       "id": "19bdffd8ed6153",
@@ -1783,7 +2389,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 2.1 小时",
+        "发布约 2.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1811,7 +2417,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 27
+      "streamRank": 26
     },
     {
       "id": "b7c955f6382e5d",
@@ -1848,7 +2454,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 7.0 小时",
+        "发布约 7.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1876,34 +2482,35 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 28
+      "streamRank": 27
     },
     {
-      "id": "69d01c0fecb974",
-      "eventId": "evt-c58413307aa6",
+      "id": "4684b61237329d",
+      "eventId": "evt-d4b27a60013e",
       "contentType": "news",
-      "title": "金穹计划资金会耗尽吗？",
-      "originalTitle": "Will money run out for Golden Dome?",
-      "summary": "2026年航天与导弹防御研讨会首日主要新闻摘要，重点关注金穹计划可能面临的资金问题。",
+      "title": "萤火虫公司增加运载火箭生产，尽管发射次数滞后",
+      "originalTitle": "Firefly increases vehicle production even as launches lag",
+      "summary": "萤火虫航空航天公司表示对其运载火箭有浓厚兴趣，并正在提高产量，但这些努力尚未转化为更高的发射频率。",
       "keyFacts": [
-        "A recap of leading news from the first day of the 2026 Space",
-        "Missile Defense Symposium"
+        "Firefly Aerospace says it is seeing strong interest in its launch vehicles",
+        "is ramping up production",
+        "but those efforts have yet to translate into an increased launch rate"
       ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
       "country": "国际",
-      "publishedAt": "2026-08-12T00:36:30Z",
-      "url": "https://breakingdefense.com/2026/08/will-money-run-out-for-golden-dome",
+      "publishedAt": "2026-08-12T02:06:13Z",
+      "url": "https://spacenews.com/firefly-increases-vehicle-production-even-as-launches-lag",
       "score": 65,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
-        "主题优先级": 10,
+        "主题优先级": 9,
         "时效": 9,
-        "影响信号": 10,
-        "主题相关性": 2,
+        "影响信号": 9,
+        "主题相关性": 4,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -1912,26 +2519,26 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 22.4 小时",
-        "命中 1 个主题信号",
-        "影响信号：first、missile"
+        "发布约 21.8 小时",
+        "命中 2 个主题信号",
+        "影响信号：launch、production"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "金穹计划",
-        "资金",
-        "导弹防御"
+        "萤火虫公司",
+        "运载火箭",
+        "生产"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/will-money-run-out-for-golden-dome",
-          "publishedAt": "2026-08-12T00:36:30Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/firefly-increases-vehicle-production-even-as-launches-lag",
+          "publishedAt": "2026-08-12T02:06:13Z",
+          "evidenceGroup": "outlet:spacenews.com"
         }
       ],
       "selectionProvider": "",
@@ -1941,70 +2548,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 29
-    },
-    {
-      "id": "3c4e25d3e03762",
-      "eventId": "evt-eaa40c6655d5",
-      "contentType": "news",
-      "title": "黎巴嫩家庭要求以色列释放被拘留者",
-      "originalTitle": "Lebanese families demand release of detainees held by Israel",
-      "summary": "黎巴嫩家庭在贝鲁特集会，要求了解被以色列拘留的亲属的情况。",
-      "keyFacts": [
-        "Lebanese families rallied in Beirut demanding answers about relatives detained by Israel"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-12T18:15:03Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/12/lebanese-families-demand-release-of-detainees-held-by-israel?traffic_source=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.8 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "黎巴嫩",
-        "以色列",
-        "被拘留者"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/12/lebanese-families-demand-release-of-detainees-held-by-israel?traffic_source=rss",
-          "publishedAt": "2026-08-12T18:15:03Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 30
+      "streamRank": 28
     },
     {
       "id": "c16803da93ba47",
@@ -2041,7 +2585,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 11.1 小时",
+        "发布约 11.9 小时",
         "命中 1 个主题信号",
         "影响信号：first"
       ],
@@ -2070,24 +2614,89 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 31
+      "streamRank": 29
     },
     {
-      "id": "7b1ada4c8b25ce",
-      "eventId": "evt-8ddce5b22bbd",
+      "id": "69d01c0fecb974",
+      "eventId": "evt-c58413307aa6",
       "contentType": "news",
-      "title": "陆军调整自主战略，更多依赖“优秀供应商”",
-      "originalTitle": "Army shifts autonomy strategy to lean more on ‘awesome vendors’",
-      "summary": "一位陆军官员告诉《防务突破》，鉴于业界在该能力上已有真实投资，陆军最初自行构建软件主干的计划已不再合理。",
+      "title": "金穹计划资金会耗尽吗？",
+      "originalTitle": "Will money run out for Golden Dome?",
+      "summary": "2026年航天与导弹防御研讨会首日主要新闻摘要，重点关注金穹计划可能面临的资金问题。",
       "keyFacts": [
-        "An Army official told Breaking Defense the service’s original plan to build a software backbone itself makes less sense now that there’s re…"
+        "A recap of leading news from the first day of the 2026 Space",
+        "Missile Defense Symposium"
       ],
       "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
       "category": "军事动态",
       "source": "Breaking Defense",
       "country": "国际",
-      "publishedAt": "2026-08-12T16:39:00Z",
-      "url": "https://breakingdefense.com/2026/08/army-shifts-autonomy-strategy-to-lean-more-on-awesome-vendors",
+      "publishedAt": "2026-08-12T00:36:30Z",
+      "url": "https://breakingdefense.com/2026/08/will-money-run-out-for-golden-dome",
+      "score": 64,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 8,
+        "影响信号": 10,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 23.3 小时",
+        "命中 1 个主题信号",
+        "影响信号：first、missile"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "金穹计划",
+        "资金",
+        "导弹防御"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/will-money-run-out-for-golden-dome",
+          "publishedAt": "2026-08-12T00:36:30Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 30
+    },
+    {
+      "id": "3c4e25d3e03762",
+      "eventId": "evt-eaa40c6655d5",
+      "contentType": "news",
+      "title": "黎巴嫩家庭要求以色列释放被拘留者",
+      "originalTitle": "Lebanese families demand release of detainees held by Israel",
+      "summary": "黎巴嫩家庭在贝鲁特集会，要求了解被以色列拘留的亲属的情况。",
+      "keyFacts": [
+        "Lebanese families rallied in Beirut demanding answers about relatives detained by Israel"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-12T18:15:03Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/12/lebanese-families-demand-release-of-detainees-held-by-israel?traffic_source=rss",
       "score": 63,
       "scoreBasis": "规则评分",
       "scoreComponents": {
@@ -2105,25 +2714,25 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.4 小时",
+        "发布约 5.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "美国陆军",
-        "自主系统",
-        "国防工业"
+        "黎巴嫩",
+        "以色列",
+        "被拘留者"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/army-shifts-autonomy-strategy-to-lean-more-on-awesome-vendors",
-          "publishedAt": "2026-08-12T16:39:00Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/12/lebanese-families-demand-release-of-detainees-held-by-israel?traffic_source=rss",
+          "publishedAt": "2026-08-12T18:15:03Z",
+          "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
       "selectionProvider": "",
@@ -2133,7 +2742,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 32
+      "streamRank": 31
     },
     {
       "id": "5e396f86f43f3c",
@@ -2153,8 +2762,8 @@
       "country": "国际",
       "publishedAt": "2026-08-12T17:51:00Z",
       "url": "https://techcrunch.com/2026/08/12/as-ai-safety-concerns-mount-three-pioneers-make-the-case-for-staying-open",
-      "score": 62,
-      "scoreBasis": "规则评分",
+      "score": 66,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
@@ -2169,8 +2778,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 68/100",
+        "综合排序分 66/100（AI 65% + 规则 35%）",
+        "规则参考分 62/100",
         "来源权重 15/20",
-        "发布约 5.2 小时",
+        "发布约 6.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2191,14 +2803,91 @@
           "evidenceGroup": "outlet:techcrunch.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 33
+      "eventDossier": {
+        "eventId": "evt-c98264fe9be4",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-13",
+        "lastSeen": "2026-08-13",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-13",
+            "newsId": "5e396f86f43f3c",
+            "title": "随着AI安全担忧加剧，三位先驱主张保持开放",
+            "source": "TechCrunch AI",
+            "publishedAt": "2026-08-12T17:51:00Z",
+            "score": 66
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:techcrunch.com"
+        ],
+        "claims": [
+          {
+            "text": "three of the world's most respected AI experts—Geoffrey Hinton",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          },
+          {
+            "text": "and Andrew Ng—debated regulation",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          },
+          {
+            "text": "open-source access",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-94b9543b66de",
+          "eventId": "evt-c98264fe9be4",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-09-12",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "5e396f86f43f3c"
+          ],
+          "lastReviewedAt": "2026-08-13"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 32,
+      "relatedPapers": []
     },
     {
       "id": "6585ea3c34af1d",
@@ -2218,8 +2907,8 @@
       "country": "国际",
       "publishedAt": "2026-08-12T17:41:29Z",
       "url": "https://techcrunch.com/2026/08/12/openai-backed-thrive-holdings-raises-2b-to-bring-ai-to-the-enterprise",
-      "score": 62,
-      "scoreBasis": "规则评分",
+      "score": 65,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
@@ -2234,8 +2923,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 66/100",
+        "综合排序分 65/100（AI 65% + 规则 35%）",
+        "规则参考分 62/100",
         "来源权重 15/20",
-        "发布约 5.4 小时",
+        "发布约 6.2 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2254,6 +2946,146 @@
           "url": "https://techcrunch.com/2026/08/12/openai-backed-thrive-holdings-raises-2b-to-bring-ai-to-the-enterprise",
           "publishedAt": "2026-08-12T17:41:29Z",
           "evidenceGroup": "outlet:techcrunch.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-c6c3c3e523d0",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-13",
+        "lastSeen": "2026-08-13",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-13",
+            "newsId": "6585ea3c34af1d",
+            "title": "OpenAI支持的Thrive Holdings融资20亿美元，将AI引入企业",
+            "source": "TechCrunch AI",
+            "publishedAt": "2026-08-12T17:41:29Z",
+            "score": 65
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:techcrunch.com"
+        ],
+        "claims": [
+          {
+            "text": "Thrive Holdings has raised $2 billion in new funding at a $12 billion valuation from investors like SoftBank",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          },
+          {
+            "text": "D1 Capital Partners",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          },
+          {
+            "text": "and Altimeter Capital",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-dcee655b2a81",
+          "eventId": "evt-c6c3c3e523d0",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-09-12",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "6585ea3c34af1d"
+          ],
+          "lastReviewedAt": "2026-08-13"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 33,
+      "relatedPapers": []
+    },
+    {
+      "id": "7b1ada4c8b25ce",
+      "eventId": "evt-8ddce5b22bbd",
+      "contentType": "news",
+      "title": "陆军调整自主战略，更多依赖“优秀供应商”",
+      "originalTitle": "Army shifts autonomy strategy to lean more on ‘awesome vendors’",
+      "summary": "一位陆军官员告诉《防务突破》，鉴于业界在该能力上已有真实投资，陆军最初自行构建软件主干的计划已不再合理。",
+      "keyFacts": [
+        "An Army official told Breaking Defense the service’s original plan to build a software backbone itself makes less sense now that there’s re…"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-08-12T16:39:00Z",
+      "url": "https://breakingdefense.com/2026/08/army-shifts-autonomy-strategy-to-lean-more-on-awesome-vendors",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.3 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国陆军",
+        "自主系统",
+        "国防工业"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/army-shifts-autonomy-strategy-to-lean-more-on-awesome-vendors",
+          "publishedAt": "2026-08-12T16:39:00Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
       "selectionProvider": "",
@@ -2300,7 +3132,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 7.1 小时",
+        "发布约 8.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2363,7 +3195,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 21.8 小时",
+        "发布约 22.7 小时",
         "命中 2 个主题信号",
         "影响信号：missile"
       ],
@@ -2429,7 +3261,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.2 小时",
+        "发布约 10.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2476,13 +3308,13 @@
       "country": "国际",
       "publishedAt": "2026-08-12T00:26:46Z",
       "url": "https://www.twz.com/space/golden-dome-missile-defense-shield-at-risk-of-grinding-to-a-halt-due-to-budget-impasse",
-      "score": 59,
+      "score": 58,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
-        "时效": 9,
+        "时效": 8,
         "影响信号": 5,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2493,7 +3325,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 22.6 小时",
+        "发布约 23.5 小时",
         "命中 1 个主题信号",
         "影响信号：missile"
       ],
@@ -2541,13 +3373,13 @@
       "country": "国际",
       "publishedAt": "2026-08-12T00:08:40Z",
       "url": "https://arstechnica.com/information-technology/2026/08/def-con-crowd-suspected-in-fake-hotspot-attack-on-delta-flight",
-      "score": 59,
+      "score": 58,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
-        "时效": 9,
+        "时效": 8,
         "影响信号": 6,
         "主题相关性": 2,
         "证据完整度": 2,
@@ -2558,7 +3390,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 22.9 小时",
+        "发布约 23.8 小时",
         "命中 1 个主题信号",
         "影响信号：attack"
       ],
