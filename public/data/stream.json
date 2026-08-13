@@ -1,23 +1,23 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-08-13T23:04:11Z",
+  "generatedAt": "2026-08-13T23:54:31Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
-  "itemCount": 44,
-  "totalCandidateCount": 44,
+  "itemCount": 43,
+  "totalCandidateCount": 43,
   "truncated": false,
   "categoryCounts": {
     "航空航天": 9,
     "前沿技术": 1,
     "军事动态": 15,
-    "局部冲突": 12,
+    "局部冲突": 11,
     "无人系统": 1,
     "AI": 6
   },
   "sourceCounts": {
     "Breaking Defense": 9,
     "Al Jazeera": 8,
-    "BBC World": 6,
+    "BBC World": 5,
     "The War Zone": 5,
     "SpaceNews": 4,
     "TechCrunch AI": 4,
@@ -29,24 +29,24 @@
   },
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
-  "translatedItemCount": 44,
+  "translatedItemCount": 43,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 9,
-    "completedItemCount": 9,
+    "requestedItemCount": 0,
+    "completedItemCount": 0,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 2,
-    "requestCount": 2,
+    "initialBatchCount": 0,
+    "requestCount": 0,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "completionReason": "not_needed",
+    "completionMessage": "没有需要翻译的新条目",
     "lastProviderError": "",
-    "reusedItemCount": 34,
+    "reusedItemCount": 41,
     "featuredTranslatedItemCount": 10
   },
   "items": [
@@ -85,7 +85,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 3.4 小时",
+        "发布约 4.2 小时",
         "命中 3 个主题信号",
         "影响信号：test"
       ],
@@ -134,13 +134,13 @@
       "country": "国际",
       "publishedAt": "2026-08-13T18:11:42Z",
       "url": "https://www.technologyreview.com/2026/08/13/1141041/building-a-practical-path-to-post-quantum-cryptography",
-      "score": 74,
-      "scoreBasis": "规则评分",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 8,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 11,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -150,8 +150,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 73/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 73/100",
         "来源权重 17/20",
-        "发布约 4.9 小时",
+        "发布约 5.7 小时",
         "命中 1 个主题信号",
         "影响信号：breakthrough、quantum"
       ],
@@ -173,14 +176,91 @@
           "evidenceGroup": "outlet:technologyreview.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 2
+      "eventDossier": {
+        "eventId": "evt-d6c632456144",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-14",
+        "lastSeen": "2026-08-14",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-14",
+            "newsId": "a84065598fb548",
+            "title": "为后量子密码学构建实用路径",
+            "source": "MIT Technology Review",
+            "publishedAt": "2026-08-13T18:11:42Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:technologyreview.com"
+        ],
+        "claims": [
+          {
+            "text": "Quantum computing has alternated between breakthrough darling",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:technologyreview.com"
+            ]
+          },
+          {
+            "text": "overhyped promise in technology circles",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:technologyreview.com"
+            ]
+          },
+          {
+            "text": "Its powerful new capabilities come with a threat to break current cryptography",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:technologyreview.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-2bf79bb04432",
+          "eventId": "evt-d6c632456144",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-14",
+          "dueAfter": "2026-09-13",
+          "verificationSignals": [
+            "可复现实验或第三方验证",
+            "工程化、量产或监管节点"
+          ],
+          "evidenceIds": [
+            "a84065598fb548"
+          ],
+          "lastReviewedAt": "2026-08-14"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 2,
+      "relatedPapers": []
     },
     {
       "id": "47f23316c1da3d",
@@ -200,7 +280,7 @@
       "publishedAt": "2026-08-13T21:48:40Z",
       "url": "https://breakingdefense.com/2026/08/priorities-for-army-fires-top-off-smd-day-3",
       "score": 71,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -215,8 +295,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 71/100",
+        "综合排序分 71/100（AI 65% + 规则 35%）",
+        "规则参考分 71/100",
         "来源权重 16/20",
-        "发布约 1.3 小时",
+        "发布约 2.1 小时",
         "命中 2 个主题信号",
         "影响信号：missile"
       ],
@@ -238,35 +321,104 @@
           "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 3
+      "eventDossier": {
+        "eventId": "evt-16e6e0a03461",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-14",
+        "lastSeen": "2026-08-14",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-14",
+            "newsId": "47f23316c1da3d",
+            "title": "SMD第三天：陆军火力优先事项成为头条",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-08-13T21:48:40Z",
+            "score": 71
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:breakingdefense.com"
+        ],
+        "claims": [
+          {
+            "text": "Top news from the final day of the 2026 Space",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "Missile Defense Symposium",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-53985dc83495",
+          "eventId": "evt-16e6e0a03461",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-14",
+          "dueAfter": "2026-09-13",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "47f23316c1da3d"
+          ],
+          "lastReviewedAt": "2026-08-14"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 3,
+      "relatedPapers": []
     },
     {
       "id": "b3f84ea9334ab4",
       "eventId": "evt-0c1abcbc24c9",
       "contentType": "news",
-      "title": "NORAD将军：美国未准备好应对本土无人机袭击",
-      "originalTitle": "U.S. Not Prepared To Handle Drone Attack From Inside Homeland: NORAD General",
-      "summary": "负责保护美国的高级将领对美国无人机防御给出了坦率但令人不安的评估。",
+      "title": "美北方司令部副司令：美国尚未准备好应对本土无人机攻击",
+      "originalTitle": "U.S. Not Prepared To Handle Drone Attack From Inside Homeland: NORTHCOM Deputy Commander",
+      "summary": "负责保护美国本土的高级将领对美国无人机防御能力给出了坦率但令人不安的评估。",
       "keyFacts": [
-        "A top general in charge of protecting the U.S",
-        "gave a refreshingly frank",
-        "also troubling assessment of America's drone defenses"
+        "美国北方司令部副司令承认美国尚未准备好应对来自本土内部的无人机攻击。",
+        "该评估由负责保护美国的高级将领在2026年8月13日作出。",
+        "报道来源为《战区》（The War Zone）。"
       ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "why": "凸显美国在国土安全方面对无人机威胁的潜在漏洞，可能影响国防政策。",
       "category": "局部冲突",
       "source": "The War Zone",
       "country": "国际",
       "publishedAt": "2026-08-13T19:39:54Z",
       "url": "https://www.twz.com/air/u-s-not-prepared-to-handle-drone-attack-from-inside-homeland-deputy-norad-commander",
       "score": 71,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
@@ -281,17 +433,20 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 71/100",
+        "综合排序分 71/100（AI 65% + 规则 35%）",
+        "规则参考分 71/100",
         "来源权重 15/20",
-        "发布约 3.4 小时",
+        "发布约 4.2 小时",
         "命中 2 个主题信号",
         "影响信号：attack"
       ],
       "confidence": "待核验",
       "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
       "tags": [
+        "美国",
         "无人机",
-        "NORAD",
-        "美国"
+        "国土安全"
       ],
       "image": "https://www.twz.com/wp-content/uploads/2026/08/Aircraft-on-fligth-line-drone-threat.jpg?quality=85",
       "corroboration": 1,
@@ -304,18 +459,95 @@
           "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 4
+      "eventDossier": {
+        "eventId": "evt-0c1abcbc24c9",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-14",
+        "lastSeen": "2026-08-14",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-14",
+            "newsId": "b3f84ea9334ab4",
+            "title": "美北方司令部副司令：美国尚未准备好应对本土无人机攻击",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-13T19:39:54Z",
+            "score": 71
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "美国北方司令部副司令承认美国尚未准备好应对来自本土内部的无人机攻击。",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "该评估由负责保护美国的高级将领在2026年8月13日作出。",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "报道来源为《战区》（The War Zone）。",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-907362967bc3",
+          "eventId": "evt-0c1abcbc24c9",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-14",
+          "dueAfter": "2026-09-13",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "b3f84ea9334ab4"
+          ],
+          "lastReviewedAt": "2026-08-14"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 4,
+      "relatedPapers": []
     },
     {
       "id": "d3cc89a5e7de7f",
-      "eventId": "evt-a0256f42335b",
+      "eventId": "evt-f03818037ad3",
       "contentType": "news",
       "title": "太空军向五家公司授予6000万美元用于多供应商卫星网络测试",
       "originalTitle": "Space Force awards five companies $60 million for multi-vendor satellite network tests",
@@ -332,7 +564,7 @@
       "publishedAt": "2026-08-13T22:00:00Z",
       "url": "https://spacenews.com/space-force-awards-five-companies-60-million-for-multi-vendor-satellite-network-tests",
       "score": 70,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -347,8 +579,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 70/100",
+        "综合排序分 70/100（AI 65% + 规则 35%）",
+        "规则参考分 70/100",
         "来源权重 16/20",
-        "发布约 1.1 小时",
+        "发布约 1.9 小时",
         "命中 2 个主题信号",
         "影响信号：test"
       ],
@@ -370,14 +605,110 @@
           "evidenceGroup": "outlet:spacenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 5
+      "eventDossier": {
+        "eventId": "evt-f03818037ad3",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-14",
+        "lastSeen": "2026-08-14",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-14",
+            "newsId": "d3cc89a5e7de7f",
+            "title": "太空军向五家公司授予6000万美元用于多供应商卫星网络测试",
+            "source": "SpaceNews",
+            "publishedAt": "2026-08-13T22:00:00Z",
+            "score": 70
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:spacenews.com"
+        ],
+        "claims": [
+          {
+            "text": "Lockheed Martin",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          },
+          {
+            "text": "Northrop Grumman",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          },
+          {
+            "text": "York Space will prototype",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-c179441cb88d",
+          "eventId": "evt-f03818037ad3",
+          "statement": "后续可观察五家公司是否按期公布原型测试计划，以及是否出现更多类似合同授予。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-14",
+          "dueAfter": "2026-09-13",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "d3cc89a5e7de7f"
+          ],
+          "lastReviewedAt": "2026-08-14"
+        },
+        {
+          "predictionId": "pred-fd500935b51d",
+          "eventId": "evt-f03818037ad3",
+          "statement": "若测试顺利，则需关注太空军是否扩大多供应商网络规模并整合进现有架构。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-14",
+          "dueAfter": "2026-11-12",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "d3cc89a5e7de7f"
+          ],
+          "lastReviewedAt": "2026-08-14"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 5,
+      "relatedPapers": []
     },
     {
       "id": "42eef062a03587",
@@ -396,7 +727,7 @@
       "publishedAt": "2026-08-13T20:58:24Z",
       "url": "https://www.twz.com/air/australias-mc-55-electronic-warfare-jet-has-entered-the-south-china-sea",
       "score": 69,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
@@ -411,8 +742,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 69/100",
+        "综合排序分 69/100（AI 65% + 规则 35%）",
+        "规则参考分 69/100",
         "来源权重 15/20",
-        "发布约 2.1 小时",
+        "发布约 2.9 小时",
         "命中 1 个主题信号",
         "影响信号：first"
       ],
@@ -434,41 +768,103 @@
           "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 6
+      "eventDossier": {
+        "eventId": "evt-6c3c0e3b8c95",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-14",
+        "lastSeen": "2026-08-14",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-14",
+            "newsId": "42eef062a03587",
+            "title": "澳大利亚MC-55电子战飞机进入南海",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-13T20:58:24Z",
+            "score": 69
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "The Peregrine’s first overseas deployment gives Canberra an extremely powerful new intelligence-gathering capability right in China’s backy…",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-dc2d5d866404",
+          "eventId": "evt-6c3c0e3b8c95",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-14",
+          "dueAfter": "2026-09-13",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "42eef062a03587"
+          ],
+          "lastReviewedAt": "2026-08-14"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 6,
+      "relatedPapers": []
     },
     {
-      "id": "76e1a4ed94f1b4",
-      "eventId": "evt-79b1ae7a465d",
+      "id": "ee08bc4dc8532a",
+      "eventId": "evt-f27e0e4df42d",
       "contentType": "news",
-      "title": "波兰海军在重大现代化计划下首艘护卫舰下水",
-      "originalTitle": "Polish Navy floats first frigate under major modernization program",
-      "summary": "该护卫舰计划于2029年交付波兰海军。第二艘Miecznik级护卫舰的工作正在进行中。",
+      "title": "以色列持续打击致加沙市警察局长丧生",
+      "originalTitle": "Gaza City police chief killed as Israel pushes on with deadly strikes",
+      "summary": "以色列最新袭击在加沙市打死警察官员贾迈勒·阿布·卡米尔，另在汗尤尼斯打死一人。",
       "keyFacts": [
-        "The frigate is scheduled to be delivered to the Polish Navy in 2029",
-        "Work on the second Miecznik-class frigate is ongoing"
+        "以色列最新袭击在加沙市打死警察官员贾迈勒·阿布·卡米尔",
+        "另有一人在汗尤尼斯被打死",
+        "事件发生于2026年8月13日"
       ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
+      "why": "显示以色列在加沙的军事行动持续造成高级官员伤亡，冲突升级风险加剧。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
       "country": "国际",
-      "publishedAt": "2026-08-13T18:47:29Z",
-      "url": "https://breakingdefense.com/2026/08/polish-navy-floats-first-frigate-under-major-modernization-program",
-      "score": 69,
-      "scoreBasis": "规则评分",
+      "publishedAt": "2026-08-13T23:09:15Z",
+      "url": "https://www.aljazeera.com/news/2026/8/13/gaza-city-police-chief-killed-as-israel-pushes-on-with-deadly-strikes?traffic_source=rss",
+      "score": 68,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 5,
-        "主题相关性": 2,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 4,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -476,37 +872,142 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 68/100",
+        "综合排序分 68/100（AI 65% + 规则 35%）",
+        "规则参考分 68/100",
         "来源权重 16/20",
-        "发布约 4.3 小时",
-        "命中 1 个主题信号",
-        "影响信号：first"
+        "发布约 0.8 小时",
+        "命中 2 个主题信号"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "波兰海军",
-        "护卫舰",
-        "现代化"
+        "以色列",
+        "加沙",
+        "冲突"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/polish-navy-floats-first-frigate-under-major-modernization-program",
-          "publishedAt": "2026-08-13T18:47:29Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/8/13/gaza-city-police-chief-killed-as-israel-pushes-on-with-deadly-strikes?traffic_source=rss",
+          "publishedAt": "2026-08-13T23:09:15Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        },
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/13/israeli-strikes-in-gaza-kill-two-including-police-chief?traffic_source=rss",
+          "publishedAt": "2026-08-13T21:10:47Z",
+          "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 7
+      "eventDossier": {
+        "eventId": "evt-f27e0e4df42d",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-14",
+        "lastSeen": "2026-08-14",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-14",
+            "newsId": "ee08bc4dc8532a",
+            "title": "以色列持续打击致加沙市警察局长丧生",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-13T23:09:15Z",
+            "score": 68
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "以色列最新袭击在加沙市打死警察官员贾迈勒·阿布·卡米尔",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "另有一人在汗尤尼斯被打死",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "事件发生于2026年8月13日",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-df82f58aa943",
+          "eventId": "evt-f27e0e4df42d",
+          "statement": "后续可观察以色列是否继续对加沙高级官员实施定点打击，以及伤亡人数变化。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-14",
+          "dueAfter": "2026-09-13",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "ee08bc4dc8532a"
+          ],
+          "lastReviewedAt": "2026-08-14"
+        },
+        {
+          "predictionId": "pred-3f51f2e333f9",
+          "eventId": "evt-f27e0e4df42d",
+          "statement": "若此类打击持续，则需关注国际社会反应及停火谈判是否重启。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-14",
+          "dueAfter": "2026-11-12",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "ee08bc4dc8532a"
+          ],
+          "lastReviewedAt": "2026-08-14"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 7,
+      "relatedPapers": []
     },
     {
       "id": "cdf28401226993",
@@ -542,7 +1043,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 1.4 小时",
+        "发布约 2.2 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "待核验",
@@ -589,7 +1090,7 @@
       "publishedAt": "2026-08-13T19:14:33Z",
       "url": "https://breakingdefense.com/2026/08/day-3-of-the-2026-space-and-missile-defense-symposium",
       "score": 68,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -604,8 +1105,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 68/100",
+        "综合排序分 68/100（AI 65% + 规则 35%）",
+        "规则参考分 68/100",
         "来源权重 16/20",
-        "发布约 3.8 小时",
+        "发布约 4.7 小时",
         "命中 1 个主题信号",
         "影响信号：missile"
       ],
@@ -634,42 +1138,102 @@
           "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 9
+      "eventDossier": {
+        "eventId": "evt-7bc9d75a3be5",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-14",
+        "lastSeen": "2026-08-14",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-14",
+            "newsId": "f08813e3527f5c",
+            "title": "2026太空与导弹防御研讨会第三天",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-08-13T19:14:33Z",
+            "score": 68
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:breakingdefense.com"
+        ],
+        "claims": [
+          {
+            "text": "A final round of photos from around the show floor in Huntsville",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-77f238f303a7",
+          "eventId": "evt-7bc9d75a3be5",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-14",
+          "dueAfter": "2026-09-13",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "f08813e3527f5c"
+          ],
+          "lastReviewedAt": "2026-08-14"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 9,
+      "relatedPapers": []
     },
     {
-      "id": "5f198ff1a72d09",
-      "eventId": "evt-27e49e258c97",
+      "id": "76e1a4ed94f1b4",
+      "eventId": "evt-79b1ae7a465d",
       "contentType": "news",
-      "title": "MTG-I1捕捉欧洲日全食路径",
-      "originalTitle": "MTG-I1 captures eclipse path of totality over Europe",
-      "summary": "昨日20:26至20:34（中欧夏令时），伊比利亚半岛部分地区经历日全食。由Meteosat第三代成像卫星（MTG-I1）图像组成的动画捕捉到月球阴影掠过地球表面，与欧洲黄昏渐临的暮光交汇。MTG-I1位于地球上空36000公里的对地静止轨道，持续聚焦欧洲和北非，从而追踪月影（全食路径）先后掠过格陵兰、冰岛、葡萄牙东北部及西班牙。欧洲大陆全食仅持续数分钟，但偏食覆盖更广区域。",
+      "title": "波兰海军在重大现代化计划下首艘护卫舰下水",
+      "originalTitle": "Polish Navy floats first frigate under major modernization program",
+      "summary": "该护卫舰计划于2029年交付波兰海军。第二艘Miecznik级护卫舰的工作正在进行中。",
       "keyFacts": [
-        "Video: 00:00:04 Yesterday between 20:26",
-        "parts of the Iberian peninsula experienced a total solar eclipse",
-        "This animation"
+        "The frigate is scheduled to be delivered to the Polish Navy in 2029",
+        "Work on the second Miecznik-class frigate is ongoing"
       ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "European Space Agency",
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
       "country": "国际",
-      "publishedAt": "2026-08-13T08:30:00Z",
-      "url": "https://www.esa.int/ESA_Multimedia/Videos/2026/08/MTG-I1_captures_eclipse_path_of_totality_over_Europe",
+      "publishedAt": "2026-08-13T18:47:29Z",
+      "url": "https://breakingdefense.com/2026/08/polish-navy-floats-first-frigate-under-major-modernization-program",
       "score": 68,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 19,
-        "主题优先级": 9,
-        "时效": 13,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
         "影响信号": 5,
-        "主题相关性": 4,
+        "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -677,27 +1241,27 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 19/20",
-        "发布约 14.6 小时",
-        "命中 2 个主题信号",
+        "来源权重 16/20",
+        "发布约 5.1 小时",
+        "命中 1 个主题信号",
         "影响信号：first"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 19/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "日全食",
-        "MTG-I1",
-        "欧洲太空总署"
+        "波兰海军",
+        "护卫舰",
+        "现代化"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "European Space Agency",
-          "domain": "esa.int",
-          "url": "https://www.esa.int/ESA_Multimedia/Videos/2026/08/MTG-I1_captures_eclipse_path_of_totality_over_Europe",
-          "publishedAt": "2026-08-13T08:30:00Z",
-          "evidenceGroup": "outlet:esa.int"
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/polish-navy-floats-first-frigate-under-major-modernization-program",
+          "publishedAt": "2026-08-13T18:47:29Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
       "selectionProvider": "",
@@ -708,70 +1272,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 10
-    },
-    {
-      "id": "39fe3a5856fbfd",
-      "eventId": "evt-b2415db2b1ed",
-      "contentType": "news",
-      "title": "以色列在加沙的袭击致两人死亡，包括警察局长",
-      "originalTitle": "Israeli strikes in Gaza kill two, including police chief",
-      "summary": "周四以色列无人机袭击在加沙造成至少两人死亡，多人受伤。",
-      "keyFacts": [
-        "Israeli drone strikes killed at least 2 people",
-        "wounded several others in Gaza on Thursday"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-13T21:10:47Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/13/israeli-strikes-in-gaza-kill-two-including-police-chief?traffic_source=rss",
-      "score": 67,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 1.9 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "以色列",
-        "加沙",
-        "无人机"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/13/israeli-strikes-in-gaza-kill-two-including-police-chief?traffic_source=rss",
-          "publishedAt": "2026-08-13T21:10:47Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 11
     },
     {
       "id": "ef0642a197528c",
@@ -808,7 +1308,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.2 小时",
+        "发布约 6.1 小时",
         "命中 1 个主题信号",
         "影响信号：test"
       ],
@@ -837,7 +1337,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 12
+      "streamRank": 11
     },
     {
       "id": "bdb01b19f567be",
@@ -873,7 +1373,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 8.1 小时",
+        "发布约 8.9 小时",
         "命中 1 个主题信号",
         "影响信号：autonomous"
       ],
@@ -902,7 +1402,153 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 13
+      "streamRank": 12
+    },
+    {
+      "id": "5f198ff1a72d09",
+      "eventId": "evt-27e49e258c97",
+      "contentType": "news",
+      "title": "MTG-I1捕捉欧洲日全食路径",
+      "originalTitle": "MTG-I1 captures eclipse path of totality over Europe",
+      "summary": "昨日20:26至20:34（中欧夏令时），伊比利亚半岛部分地区经历日全食。由Meteosat第三代成像卫星（MTG-I1）图像组成的动画捕捉到月球阴影掠过地球表面，与欧洲黄昏渐临的暮光交汇。MTG-I1位于地球上空36000公里的对地静止轨道，持续聚焦欧洲和北非，从而追踪月影（全食路径）先后掠过格陵兰、冰岛、葡萄牙东北部及西班牙。欧洲大陆全食仅持续数分钟，但偏食覆盖更广区域。",
+      "keyFacts": [
+        "Video: 00:00:04 Yesterday between 20:26",
+        "parts of the Iberian peninsula experienced a total solar eclipse",
+        "This animation"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "European Space Agency",
+      "country": "国际",
+      "publishedAt": "2026-08-13T08:30:00Z",
+      "url": "https://www.esa.int/ESA_Multimedia/Videos/2026/08/MTG-I1_captures_eclipse_path_of_totality_over_Europe",
+      "score": 67,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 19,
+        "主题优先级": 9,
+        "时效": 12,
+        "影响信号": 5,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 67/100",
+        "综合排序分 67/100（AI 65% + 规则 35%）",
+        "规则参考分 67/100",
+        "来源权重 19/20",
+        "发布约 15.4 小时",
+        "命中 2 个主题信号",
+        "影响信号：first"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 19/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "日全食",
+        "MTG-I1",
+        "欧洲太空总署"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "European Space Agency",
+          "domain": "esa.int",
+          "url": "https://www.esa.int/ESA_Multimedia/Videos/2026/08/MTG-I1_captures_eclipse_path_of_totality_over_Europe",
+          "publishedAt": "2026-08-13T08:30:00Z",
+          "evidenceGroup": "outlet:esa.int"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-27e49e258c97",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-14",
+        "lastSeen": "2026-08-14",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-14",
+            "newsId": "5f198ff1a72d09",
+            "title": "MTG-I1捕捉欧洲日全食路径",
+            "source": "European Space Agency",
+            "publishedAt": "2026-08-13T08:30:00Z",
+            "score": 67
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:esa.int"
+        ],
+        "claims": [
+          {
+            "text": "Video: 00:00:04 Yesterday between 20:26",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:esa.int"
+            ]
+          },
+          {
+            "text": "parts of the Iberian peninsula experienced a total solar eclipse",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:esa.int"
+            ]
+          },
+          {
+            "text": "This animation",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:esa.int"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-da5da1feb5f1",
+          "eventId": "evt-27e49e258c97",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-14",
+          "dueAfter": "2026-09-13",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "5f198ff1a72d09"
+          ],
+          "lastReviewedAt": "2026-08-14"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 13,
+      "relatedPapers": []
     },
     {
       "id": "e8201d357c5f29",
@@ -921,13 +1567,13 @@
       "country": "国际",
       "publishedAt": "2026-08-13T03:28:56Z",
       "url": "https://www.bbc.co.uk/news/articles/c5y49xp2wrno?at_medium=RSS&at_campaign=rss",
-      "score": 77,
+      "score": 67,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 10,
         "影响信号": 6,
         "主题相关性": 6,
         "证据完整度": 3,
@@ -937,11 +1583,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 78/100",
-        "综合排序分 77/100（AI 65% + 规则 35%）",
-        "规则参考分 74/100",
+        "DeepSeek 候选重要度 67/100",
+        "综合排序分 67/100（AI 65% + 规则 35%）",
+        "规则参考分 67/100",
         "来源权重 17/20",
-        "发布约 6.1 小时",
+        "发布约 20.4 小时",
         "命中 3 个主题信号",
         "影响信号：attack"
       ],
@@ -959,7 +1605,7 @@
           "name": "BBC World",
           "domain": "bbc.co.uk",
           "url": "https://www.bbc.co.uk/news/articles/c5y49xp2wrno?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-12T17:47:01Z",
+          "publishedAt": "2026-08-13T03:28:56Z",
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
@@ -971,11 +1617,11 @@
       "diversityRelaxed": false,
       "eventDossier": {
         "eventId": "evt-ae8305b26bbc",
-        "status": "new",
-        "statusLabel": "新事件",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
         "firstSeen": "2026-08-13",
-        "lastSeen": "2026-08-13",
-        "updateCount": 1,
+        "lastSeen": "2026-08-14",
+        "updateCount": 2,
         "timeline": [
           {
             "editionDate": "2026-08-13",
@@ -984,6 +1630,14 @@
             "source": "BBC World",
             "publishedAt": "2026-08-12T17:47:01Z",
             "score": 77
+          },
+          {
+            "editionDate": "2026-08-14",
+            "newsId": "e8201d357c5f29",
+            "title": "乌克兰黑海港口袭击重创俄罗斯主要粮食出口码头",
+            "source": "BBC World",
+            "publishedAt": "2026-08-13T03:28:56Z",
+            "score": 67
           }
         ],
         "independentSourceCount": 1,
@@ -1025,8 +1679,8 @@
           "confidence": "低",
           "status": "open",
           "statusLabel": "待验证",
-          "createdAt": "2026-08-13",
-          "dueAfter": "2026-09-12",
+          "createdAt": "2026-08-14",
+          "dueAfter": "2026-09-13",
           "verificationSignals": [
             "至少两个独立来源确认",
             "官方声明、停火执行或兵力态势变化"
@@ -1034,12 +1688,157 @@
           "evidenceIds": [
             "e8201d357c5f29"
           ],
-          "lastReviewedAt": "2026-08-13"
+          "lastReviewedAt": "2026-08-14"
         }
       ],
-      "relatedPapers": [],
       "isTopStory": true,
-      "streamRank": 14
+      "streamRank": 14,
+      "relatedPapers": []
+    },
+    {
+      "id": "89555754a07f77",
+      "eventId": "evt-be56629e9cbc",
+      "contentType": "news",
+      "title": "美国航母海上航行超250天引发警报",
+      "originalTitle": "Conditions on US aircraft carrier at sea for more than 250 days raise alarms",
+      "summary": "有报道称，自11月以来一直在海上航行的“亚伯拉罕·林肯”号航母上存在食物短缺、管道破裂等潜在危害。",
+      "keyFacts": [
+        "There are reports of food shortages",
+        "broken plumbing",
+        "other potential harms aboard the USS Abraham Lincoln"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-13T23:06:23Z",
+      "url": "https://www.bbc.co.uk/news/articles/cyvl2d5j52lo?at_medium=RSS&at_campaign=rss",
+      "score": 66,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 9,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 66/100",
+        "综合排序分 66/100（AI 65% + 规则 35%）",
+        "规则参考分 66/100",
+        "来源权重 17/20",
+        "发布约 0.8 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国航母",
+        "海上航行",
+        "条件警报"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/20ef/live/60e60690-9733-11f1-bdbf-1b7b2a4a87a1.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cyvl2d5j52lo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-13T23:06:23Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-be56629e9cbc",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-14",
+        "lastSeen": "2026-08-14",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-14",
+            "newsId": "89555754a07f77",
+            "title": "美国航母海上航行超250天引发警报",
+            "source": "BBC World",
+            "publishedAt": "2026-08-13T23:06:23Z",
+            "score": 66
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "There are reports of food shortages",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "broken plumbing",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "other potential harms aboard the USS Abraham Lincoln",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-716f218cdf72",
+          "eventId": "evt-be56629e9cbc",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-14",
+          "dueAfter": "2026-09-13",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "89555754a07f77"
+          ],
+          "lastReviewedAt": "2026-08-14"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 15,
+      "relatedPapers": []
     },
     {
       "id": "bc5dc43dae399f",
@@ -1075,7 +1874,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.2 小时",
+        "发布约 4.0 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1094,71 +1893,6 @@
           "url": "https://www.aljazeera.com/news/2026/8/13/sudan-army-says-rsf-advance-on-key-town-bordering-ethiopia?traffic_source=rss",
           "publishedAt": "2026-08-13T19:53:21Z",
           "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 15
-    },
-    {
-      "id": "89555754a07f77",
-      "eventId": "evt-be56629e9cbc",
-      "contentType": "news",
-      "title": "美国航母海上航行超250天引发警报",
-      "originalTitle": "Conditions on US aircraft carrier at sea for more than 250 days raise alarms",
-      "summary": "有报道称，自11月以来一直在海上航行的“亚伯拉罕·林肯”号航母上存在食物短缺、管道破裂等潜在危害。",
-      "keyFacts": [
-        "There are reports of food shortages",
-        "broken plumbing",
-        "other potential harms aboard the USS Abraham Lincoln"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-13T22:02:54Z",
-      "url": "https://www.bbc.co.uk/news/articles/cyvl2d5j52lo?at_medium=RSS&at_campaign=rss",
-      "score": 65,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 9,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 1.0 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美国航母",
-        "海上航行",
-        "条件警报"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/20ef/live/60e60690-9733-11f1-bdbf-1b7b2a4a87a1.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cyvl2d5j52lo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-13T22:02:54Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
       "selectionProvider": "",
@@ -1204,7 +1938,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 2.0 小时",
+        "发布约 2.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1233,136 +1967,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 17
-    },
-    {
-      "id": "1bd05edcdfd875",
-      "eventId": "evt-00168266cdb6",
-      "contentType": "news",
-      "title": "陆军备战“应对”敌方侦察卫星",
-      "originalTitle": "Army gears up to ‘engage’ enemy surveillance satellites",
-      "summary": "陆军上校乔·姆罗西奇克对Breaking Defense表示，太空优势努力聚焦于反制敌方情报、监视与侦察卫星，并开展“平流层作战”。",
-      "keyFacts": [
-        "The Army’s space superiority efforts are focused on countering adversary ISR satellites",
-        "as well as conducting “stratospheric warfare,” Col",
-        "Joe Mroszcyck told Breaking Defense"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-08-13T20:32:07Z",
-      "url": "https://breakingdefense.com/2026/08/army-gears-up-to-engage-enemy-surveillance-satellites",
-      "score": 65,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 2.5 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "陆军",
-        "卫星",
-        "太空战"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/army-gears-up-to-engage-enemy-surveillance-satellites",
-          "publishedAt": "2026-08-13T20:32:07Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 18
-    },
-    {
-      "id": "8e081e77d82960",
-      "eventId": "evt-90701fc32acf",
-      "contentType": "news",
-      "title": "尽管伊朗战争带来意外之财，俄罗斯经济是否在崩溃？",
-      "originalTitle": "Is Russia’s economy cracking despite the Iran war windfall?",
-      "summary": "不断扩大的赤字和乌克兰的打击正在考验俄罗斯经济，即便中东战争推高了石油收入。",
-      "keyFacts": [
-        "A widening deficit",
-        "Ukrainian strikes are testing Russia's economy",
-        "even as war in the Middle East lifts oil revenue"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-13T16:40:42Z",
-      "url": "https://www.aljazeera.com/video/counting-the-cost/2026/8/13/is-russias-economy-cracking-despite-the-iran-war-windfall?traffic_source=rss",
-      "score": 65,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.4 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "俄罗斯经济",
-        "赤字",
-        "乌克兰打击"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/counting-the-cost/2026/8/13/is-russias-economy-cracking-despite-the-iran-war-windfall?traffic_source=rss",
-          "publishedAt": "2026-08-13T16:40:42Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 19
     },
     {
       "id": "db3e778cea5d66",
@@ -1398,7 +2002,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 1.8 小时",
+        "发布约 2.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -1426,7 +2030,72 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 20
+      "streamRank": 18
+    },
+    {
+      "id": "1bd05edcdfd875",
+      "eventId": "evt-00168266cdb6",
+      "contentType": "news",
+      "title": "陆军备战“应对”敌方侦察卫星",
+      "originalTitle": "Army gears up to ‘engage’ enemy surveillance satellites",
+      "summary": "陆军上校乔·姆罗西奇克对Breaking Defense表示，太空优势努力聚焦于反制敌方情报、监视与侦察卫星，并开展“平流层作战”。",
+      "keyFacts": [
+        "The Army’s space superiority efforts are focused on countering adversary ISR satellites",
+        "as well as conducting “stratospheric warfare,” Col",
+        "Joe Mroszcyck told Breaking Defense"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-08-13T20:32:07Z",
+      "url": "https://breakingdefense.com/2026/08/army-gears-up-to-engage-enemy-surveillance-satellites",
+      "score": 64,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 3.4 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "陆军",
+        "卫星",
+        "太空战"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/army-gears-up-to-engage-enemy-surveillance-satellites",
+          "publishedAt": "2026-08-13T20:32:07Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 19
     },
     {
       "id": "135198f22ca819",
@@ -1463,7 +2132,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.5 小时",
+        "发布约 4.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1491,33 +2160,35 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 21
+      "streamRank": 20
     },
     {
-      "id": "76248665be06be",
-      "eventId": "evt-32157a112097",
+      "id": "8e081e77d82960",
+      "eventId": "evt-90701fc32acf",
       "contentType": "news",
-      "title": "法官驳回特朗普诉讼，称哈佛未保护犹太学生",
-      "originalTitle": "Judge nixes Trump lawsuit alleging Harvard did not protect Jewish students",
-      "summary": "该裁决是特朗普政府对席卷大学校园的加沙战争抗议活动的最新挫折。",
+      "title": "尽管伊朗战争带来意外之财，俄罗斯经济是否在崩溃？",
+      "originalTitle": "Is Russia’s economy cracking despite the Iran war windfall?",
+      "summary": "不断扩大的赤字和乌克兰的打击正在考验俄罗斯经济，即便中东战争推高了石油收入。",
       "keyFacts": [
-        "Ruling latest setback in Trump administration response to Gaza war protests that swept college campuses"
+        "A widening deficit",
+        "Ukrainian strikes are testing Russia's economy",
+        "even as war in the Middle East lifts oil revenue"
       ],
       "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
       "category": "局部冲突",
       "source": "Al Jazeera",
       "country": "国际",
-      "publishedAt": "2026-08-13T18:28:14Z",
-      "url": "https://www.aljazeera.com/news/2026/8/13/judge-nixes-trump-lawsuit-alleging-harvard-did-not-protect-jewish-students?traffic_source=rss",
+      "publishedAt": "2026-08-13T16:40:42Z",
+      "url": "https://www.aljazeera.com/video/counting-the-cost/2026/8/13/is-russias-economy-cracking-despite-the-iran-war-windfall?traffic_source=rss",
       "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 16,
         "影响信号": 0,
-        "主题相关性": 2,
+        "主题相关性": 4,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -1526,15 +2197,15 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 4.6 小时",
-        "命中 1 个主题信号"
+        "发布约 7.2 小时",
+        "命中 2 个主题信号"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "特朗普",
-        "哈佛",
-        "诉讼"
+        "俄罗斯经济",
+        "赤字",
+        "乌克兰打击"
       ],
       "image": "",
       "corroboration": 1,
@@ -1542,8 +2213,8 @@
         {
           "name": "Al Jazeera",
           "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/8/13/judge-nixes-trump-lawsuit-alleging-harvard-did-not-protect-jewish-students?traffic_source=rss",
-          "publishedAt": "2026-08-13T18:28:14Z",
+          "url": "https://www.aljazeera.com/video/counting-the-cost/2026/8/13/is-russias-economy-cracking-despite-the-iran-war-windfall?traffic_source=rss",
+          "publishedAt": "2026-08-13T16:40:42Z",
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
@@ -1554,7 +2225,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 22
+      "streamRank": 21
     },
     {
       "id": "3eaa330150609b",
@@ -1591,7 +2262,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 9.7 小时",
+        "发布约 10.6 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1619,7 +2290,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 23
+      "streamRank": 22
     },
     {
       "id": "71f28f1b3fcc8f",
@@ -1656,7 +2327,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 3.7 小时",
+        "发布约 4.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -1684,7 +2355,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 24
+      "streamRank": 23
     },
     {
       "id": "a4456a2f31b555",
@@ -1720,7 +2391,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 3.7 小时",
+        "发布约 4.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -1739,6 +2410,69 @@
           "url": "https://techcrunch.com/2026/08/13/ibm-partners-with-openai-to-bolster-enterprise-ai-push",
           "publishedAt": "2026-08-13T19:19:49Z",
           "evidenceGroup": "outlet:techcrunch.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 24
+    },
+    {
+      "id": "76248665be06be",
+      "eventId": "evt-32157a112097",
+      "contentType": "news",
+      "title": "法官驳回特朗普诉讼，称哈佛未保护犹太学生",
+      "originalTitle": "Judge nixes Trump lawsuit alleging Harvard did not protect Jewish students",
+      "summary": "该裁决是特朗普政府对席卷大学校园的加沙战争抗议活动的最新挫折。",
+      "keyFacts": [
+        "Ruling latest setback in Trump administration response to Gaza war protests that swept college campuses"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-13T18:28:14Z",
+      "url": "https://www.aljazeera.com/news/2026/8/13/judge-nixes-trump-lawsuit-alleging-harvard-did-not-protect-jewish-students?traffic_source=rss",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 5.4 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "特朗普",
+        "哈佛",
+        "诉讼"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/8/13/judge-nixes-trump-lawsuit-alleging-harvard-did-not-protect-jewish-students?traffic_source=rss",
+          "publishedAt": "2026-08-13T18:28:14Z",
+          "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
       "selectionProvider": "",
@@ -1783,7 +2517,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.1 小时",
+        "发布约 6.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1812,132 +2546,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 26
-    },
-    {
-      "id": "4dae051090c5c0",
-      "eventId": "evt-e56127642476",
-      "contentType": "news",
-      "title": "中国与印尼联合海军演习激怒台湾",
-      "originalTitle": "China and Indonesia’s joint naval drills anger Taiwan",
-      "summary": "中国官方媒体发布了在台湾东部海域与印尼进行联合海军演习的片段。",
-      "keyFacts": [
-        "Chinese state media have released footage of a joint naval drill with Indonesia in waters east of Taiwan"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-13T16:44:27Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/13/china-and-indonesias-joint-naval-drills-anger-taiwan?traffic_source=rss",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.3 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "中国",
-        "印尼",
-        "军演"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/13/china-and-indonesias-joint-naval-drills-anger-taiwan?traffic_source=rss",
-          "publishedAt": "2026-08-13T16:44:27Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 27
-    },
-    {
-      "id": "e58a4f1c680ee5",
-      "eventId": "evt-3cb43d1a3f5f",
-      "contentType": "news",
-      "title": "美军水手中东试图弃船引强烈反响",
-      "originalTitle": "Reports of US sailors in Middle East trying to jump ship spark outcry",
-      "summary": "美国参议员呼吁调查，因“林肯”号航母在伊朗战争中创下无靠港停靠的最长纪录。",
-      "keyFacts": [
-        "US senators call for inquiry as USS Lincoln has record-long period without port stop amid war on Iran"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-13T16:44:15Z",
-      "url": "https://www.aljazeera.com/news/2026/8/13/reports-of-us-sailors-in-middle-east-trying-to-jump-ship-spark-outcry?traffic_source=rss",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.3 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美国海军",
-        "航母",
-        "中东"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/8/13/reports-of-us-sailors-in-middle-east-trying-to-jump-ship-spark-outcry?traffic_source=rss",
-          "publishedAt": "2026-08-13T16:44:15Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 28
     },
     {
       "id": "bf3281290239bd",
@@ -1972,7 +2580,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 5.9 小时",
+        "发布约 6.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2000,32 +2608,31 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 29
+      "streamRank": 27
     },
     {
-      "id": "2f9f9cfa76afba",
-      "eventId": "evt-678bf2eecc61",
+      "id": "4dae051090c5c0",
+      "eventId": "evt-e56127642476",
       "contentType": "news",
-      "title": "波兰新型强大护卫舰标志海军重大转变",
-      "originalTitle": "Poland’s Powerful New Frigate Marks Major Shift For Its Navy",
-      "summary": "7700吨的“维切尔”号表明华沙在波罗的海打造更大、更强大舰队的努力。",
+      "title": "中国与印尼联合海军演习激怒台湾",
+      "originalTitle": "China and Indonesia’s joint naval drills anger Taiwan",
+      "summary": "中国官方媒体发布了在台湾东部海域与印尼进行联合海军演习的片段。",
       "keyFacts": [
-        "The 7,700-ton Wicher signals Warsaw’s push to build a larger",
-        "much more capable fleet in the Baltic"
+        "Chinese state media have released footage of a joint naval drill with Indonesia in waters east of Taiwan"
       ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "The War Zone",
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
       "country": "国际",
-      "publishedAt": "2026-08-13T16:27:10Z",
-      "url": "https://www.twz.com/sea/polands-powerful-new-frigate-marks-major-shift-for-its-navy",
+      "publishedAt": "2026-08-13T16:44:27Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/13/china-and-indonesias-joint-naval-drills-anger-taiwan?traffic_source=rss",
       "score": 62,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 15,
+        "来源": 16,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2035,26 +2642,26 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 6.6 小时",
+        "来源权重 16/20",
+        "发布约 7.2 小时",
         "命中 1 个主题信号"
       ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "波兰",
-        "护卫舰",
-        "海军"
+        "中国",
+        "印尼",
+        "军演"
       ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/08/FFG_2_launch.jpg?quality=85",
+      "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/sea/polands-powerful-new-frigate-marks-major-shift-for-its-navy",
-          "publishedAt": "2026-08-13T16:27:10Z",
-          "evidenceGroup": "outlet:twz.com"
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/13/china-and-indonesias-joint-naval-drills-anger-taiwan?traffic_source=rss",
+          "publishedAt": "2026-08-13T16:44:27Z",
+          "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
       "selectionProvider": "",
@@ -2064,7 +2671,70 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 30
+      "streamRank": 28
+    },
+    {
+      "id": "e58a4f1c680ee5",
+      "eventId": "evt-3cb43d1a3f5f",
+      "contentType": "news",
+      "title": "美军水手中东试图弃船引强烈反响",
+      "originalTitle": "Reports of US sailors in Middle East trying to jump ship spark outcry",
+      "summary": "美国参议员呼吁调查，因“林肯”号航母在伊朗战争中创下无靠港停靠的最长纪录。",
+      "keyFacts": [
+        "US senators call for inquiry as USS Lincoln has record-long period without port stop amid war on Iran"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-13T16:44:15Z",
+      "url": "https://www.aljazeera.com/news/2026/8/13/reports-of-us-sailors-in-middle-east-trying-to-jump-ship-spark-outcry?traffic_source=rss",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.2 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国海军",
+        "航母",
+        "中东"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/8/13/reports-of-us-sailors-in-middle-east-trying-to-jump-ship-spark-outcry?traffic_source=rss",
+          "publishedAt": "2026-08-13T16:44:15Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 29
     },
     {
       "id": "ecde8940d7b98d",
@@ -2099,7 +2769,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 7.9 小时",
+        "发布约 8.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2127,71 +2797,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 31
-    },
-    {
-      "id": "e4ebb744bab185",
-      "eventId": "evt-732b673e5e99",
-      "contentType": "news",
-      "title": "AEVEX将以最高6.5亿美元收购BlackSea Technologies",
-      "originalTitle": "AEVEX to acquire BlackSea Technologies for up to $650M",
-      "summary": "该收购预计于9月完成，旨在让AEVEX更直接地接触军事用户，扩大客户渠道。",
-      "keyFacts": [
-        "The acquisition is slated to close in September",
-        "aims to provide AEVEX greater “customer access” to military users"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-08-13T14:09:08Z",
-      "url": "https://breakingdefense.com/2026/08/aevex-to-acquire-blacksea-technologies-for-up-to-650m",
-      "score": 62,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 8.9 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "收购",
-        "国防",
-        "军事"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/aevex-to-acquire-blacksea-technologies-for-up-to-650m",
-          "publishedAt": "2026-08-13T14:09:08Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 32
+      "streamRank": 30
     },
     {
       "id": "05b25a2da4adc5",
@@ -2227,7 +2833,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 13.6 小时",
+        "发布约 14.4 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "中",
@@ -2246,6 +2852,134 @@
           "url": "https://spacenews.com/astranis-unveils-geostationary-surveillance-satellite",
           "publishedAt": "2026-08-13T09:30:00Z",
           "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 31
+    },
+    {
+      "id": "2f9f9cfa76afba",
+      "eventId": "evt-678bf2eecc61",
+      "contentType": "news",
+      "title": "波兰新型强大护卫舰标志海军重大转变",
+      "originalTitle": "Poland’s Powerful New Frigate Marks Major Shift For Its Navy",
+      "summary": "7700吨的“维切尔”号表明华沙在波罗的海打造更大、更强大舰队的努力。",
+      "keyFacts": [
+        "The 7,700-ton Wicher signals Warsaw’s push to build a larger",
+        "much more capable fleet in the Baltic"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-08-13T16:27:10Z",
+      "url": "https://www.twz.com/sea/polands-powerful-new-frigate-marks-major-shift-for-its-navy",
+      "score": 61,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 7.5 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "波兰",
+        "护卫舰",
+        "海军"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/08/FFG_2_launch.jpg?quality=85",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/sea/polands-powerful-new-frigate-marks-major-shift-for-its-navy",
+          "publishedAt": "2026-08-13T16:27:10Z",
+          "evidenceGroup": "outlet:twz.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 32
+    },
+    {
+      "id": "e4ebb744bab185",
+      "eventId": "evt-732b673e5e99",
+      "contentType": "news",
+      "title": "AEVEX将以最高6.5亿美元收购BlackSea Technologies",
+      "originalTitle": "AEVEX to acquire BlackSea Technologies for up to $650M",
+      "summary": "该收购预计于9月完成，旨在让AEVEX更直接地接触军事用户，扩大客户渠道。",
+      "keyFacts": [
+        "The acquisition is slated to close in September",
+        "aims to provide AEVEX greater “customer access” to military users"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-08-13T14:09:08Z",
+      "url": "https://breakingdefense.com/2026/08/aevex-to-acquire-blacksea-technologies-for-up-to-650m",
+      "score": 61,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 9.8 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "收购",
+        "国防",
+        "军事"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/aevex-to-acquire-blacksea-technologies-for-up-to-650m",
+          "publishedAt": "2026-08-13T14:09:08Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
       "selectionProvider": "",
@@ -2275,13 +3009,13 @@
       "country": "国际",
       "publishedAt": "2026-08-13T16:10:52Z",
       "url": "https://www.twz.com/space/new-anti-satellite-weapons-now-officially-a-top-u-s-priority",
-      "score": 61,
+      "score": 60,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 9,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2292,7 +3026,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 6.9 小时",
+        "发布约 7.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2339,13 +3073,13 @@
       "country": "国际",
       "publishedAt": "2026-08-13T14:27:27Z",
       "url": "https://spacenews.com/maritime-satellite-service-revenues-to-reach-3-79-billion-by-2035-as-ngso-reshapes-maritime-connectivity",
-      "score": 61,
+      "score": 60,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2356,7 +3090,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 8.6 小时",
+        "发布约 9.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2420,7 +3154,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 11.1 小时",
+        "发布约 11.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2485,7 +3219,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 14.1 小时",
+        "发布约 14.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2549,7 +3283,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 22.1 小时",
+        "发布约 23.0 小时",
         "命中 1 个主题信号",
         "影响信号：missile"
       ],
@@ -2579,70 +3313,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 38
-    },
-    {
-      "id": "5c25e5393153e8",
-      "eventId": "evt-b43feb23b744",
-      "contentType": "news",
-      "title": "Gateway 任务取消后，Paragon 裁员",
-      "originalTitle": "Paragon lays off staff after Gateway cancellation",
-      "summary": "为 NASA 月球门户开发的模块分包商在 NASA 停止该项目后裁减了 70 名员工。",
-      "keyFacts": [
-        "A subcontractor for a module that was being developed for NASA’s lunar Gateway has laid off 70 people",
-        "NASA halted work on the program"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-08-13T10:13:56Z",
-      "url": "https://spacenews.com/paragon-lays-off-staff-after-gateway-cancellation",
-      "score": 59,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 14,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 12.8 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "Paragon",
-        "NASA",
-        "裁员"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/paragon-lays-off-staff-after-gateway-cancellation",
-          "publishedAt": "2026-08-13T10:13:56Z",
-          "evidenceGroup": "outlet:spacenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 39
     },
     {
       "id": "cbde20fb06bbe6",
@@ -2679,7 +3349,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 19.1 小时",
+        "发布约 19.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2707,34 +3377,34 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 40
+      "streamRank": 39
     },
     {
-      "id": "267befcf0e605a",
-      "eventId": "evt-838083522b2d",
+      "id": "5c25e5393153e8",
+      "eventId": "evt-b43feb23b744",
       "contentType": "news",
-      "title": "澳大利亚军队泄密者入狱两年多后获假释",
-      "originalTitle": "Australian army whistleblower released on parole after more than two years in jail",
-      "summary": "戴维·麦克布莱德因承认泄露有关阿富汗的军事机密而入狱，现已被假释。",
+      "title": "Gateway 任务取消后，Paragon 裁员",
+      "originalTitle": "Paragon lays off staff after Gateway cancellation",
+      "summary": "为 NASA 月球门户开发的模块分包商在 NASA 停止该项目后裁减了 70 名员工。",
       "keyFacts": [
-        "David McBride was jailed",
-        "pleading guilty to leaking military secrets about Afghanistan"
+        "A subcontractor for a module that was being developed for NASA’s lunar Gateway has laid off 70 people",
+        "NASA halted work on the program"
       ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "BBC World",
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
       "country": "国际",
-      "publishedAt": "2026-08-13T02:23:39Z",
-      "url": "https://www.bbc.co.uk/news/articles/c5yw7vdwjxyo?at_medium=RSS&at_campaign=rss",
-      "score": 59,
+      "publishedAt": "2026-08-13T10:13:56Z",
+      "url": "https://spacenews.com/paragon-lays-off-staff-after-gateway-cancellation",
+      "score": 58,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 10,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 13,
         "影响信号": 0,
-        "主题相关性": 4,
+        "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -2742,26 +3412,26 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 20.7 小时",
-        "命中 2 个主题信号"
+        "来源权重 16/20",
+        "发布约 13.7 小时",
+        "命中 1 个主题信号"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "澳大利亚",
-        "泄密",
-        "假释"
+        "Paragon",
+        "NASA",
+        "裁员"
       ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/605d/live/71de6600-96ba-11f1-977f-49a574135f6a.jpg",
+      "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/c5yw7vdwjxyo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-13T02:23:39Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/paragon-lays-off-staff-after-gateway-cancellation",
+          "publishedAt": "2026-08-13T10:13:56Z",
+          "evidenceGroup": "outlet:spacenews.com"
         }
       ],
       "selectionProvider": "",
@@ -2771,7 +3441,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 41
+      "streamRank": 40
     },
     {
       "id": "3742c192c5e393",
@@ -2808,7 +3478,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 18.1 小时",
+        "发布约 19.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2826,6 +3496,70 @@
           "domain": "bbc.co.uk",
           "url": "https://www.bbc.co.uk/news/articles/c74grmy2v7ko?at_medium=RSS&at_campaign=rss",
           "publishedAt": "2026-08-13T04:55:58Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 41
+    },
+    {
+      "id": "267befcf0e605a",
+      "eventId": "evt-838083522b2d",
+      "contentType": "news",
+      "title": "澳大利亚军队泄密者入狱两年多后获假释",
+      "originalTitle": "Australian army whistleblower released on parole after more than two years in jail",
+      "summary": "戴维·麦克布莱德因承认泄露有关阿富汗的军事机密而入狱，现已被假释。",
+      "keyFacts": [
+        "David McBride was jailed",
+        "pleading guilty to leaking military secrets about Afghanistan"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-13T02:23:39Z",
+      "url": "https://www.bbc.co.uk/news/articles/c5yw7vdwjxyo?at_medium=RSS&at_campaign=rss",
+      "score": 58,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 9,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 21.5 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "澳大利亚",
+        "泄密",
+        "假释"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/605d/live/71de6600-96ba-11f1-977f-49a574135f6a.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c5yw7vdwjxyo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-13T02:23:39Z",
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
@@ -2872,7 +3606,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 19.5 小时",
+        "发布约 20.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2901,70 +3635,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 43
-    },
-    {
-      "id": "78ff4fec13014d",
-      "eventId": "evt-388aee7ea935",
-      "contentType": "news",
-      "title": "伊朗冲击特朗普支持率——铁杆选民是否仍坚持支持？",
-      "originalTitle": "Iran has shaken Trump's support - is his loyal base sticking with him?",
-      "summary": "战争弹药产自田纳西州金斯波特，当地一些总统最忠实的支持者正为物价上涨而烦恼。",
-      "keyFacts": [
-        "Munitions for the war are made in Kingsport",
-        "where some of the president's most loyal supporters are wrestling with higher prices"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-12T23:26:21Z",
-      "url": "https://www.bbc.co.uk/news/articles/cn0n8nd6645o?at_medium=RSS&at_campaign=rss",
-      "score": 55,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 8,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 23.6 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "特朗普",
-        "支持率",
-        "物价"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/0efd/live/f0862c10-970d-11f1-b2ab-0dd01740f9f6.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cn0n8nd6645o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-12T23:26:21Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 44
     }
   ]
 }
