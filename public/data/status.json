@@ -1,33 +1,33 @@
 {
   "schemaVersion": 9,
   "state": "ok",
-  "lastAttemptAt": "2026-08-15T23:31:43Z",
-  "lastSuccessAt": "2026-08-15T23:31:43Z",
-  "editionDate": "2026-08-16",
+  "lastAttemptAt": "2026-08-16T23:31:34Z",
+  "lastSuccessAt": "2026-08-16T23:31:34Z",
+  "editionDate": "2026-08-17",
   "itemCount": 10,
-  "message": "日报更新成功；24 小时内合格候选不足，Top 10 中有 7 条来自最多 36 小时补充窗口，卡片已明确标注",
+  "message": "日报更新成功；候选主题或来源分布不均，已分级放宽配额补足 Top 10（3 条已标注）",
   "method": "deepseek",
   "selectionMethod": "deepseek",
   "selectionStrategy": "ai-ranked-rule-constrained",
-  "selectionStatus": "adjusted",
+  "selectionStatus": "relaxed",
   "selectionProvider": "deepseek",
   "selectionModel": "deepseek-v4-flash",
   "selectionNotices": [
-    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 6 个 Top 10 入选位"
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 4 个 Top 10 入选位"
   ],
   "selectionWarnings": [
-    "24 小时内合格候选不足，Top 10 中有 7 条来自最多 36 小时补充窗口，卡片已明确标注"
+    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（3 条已标注）"
   ],
   "selectionDiagnostics": {
     "attempted": true,
-    "status": "adjusted",
+    "status": "relaxed",
     "failureReason": "",
-    "candidateCount": 31,
+    "candidateCount": 18,
     "provider": "deepseek",
     "model": "deepseek-v4-flash",
     "aiWeight": 0.65,
     "ruleWeight": 0.35,
-    "aiScoredItemCount": 31,
+    "aiScoredItemCount": 18,
     "aiUnscoredItemCount": 0,
     "unconstrainedTop": {
       "categoryCounts": {
@@ -35,55 +35,50 @@
         "军事动态": 1
       },
       "domainCounts": {
-        "defensenews.com": 2,
-        "bbc.co.uk": 4,
-        "aljazeera.com": 4
+        "bbc.co.uk": 7,
+        "aljazeera.com": 3
       },
       "categoryViolations": {
         "局部冲突": 9
       },
       "domainViolations": {
-        "bbc.co.uk": 4,
-        "aljazeera.com": 4
+        "bbc.co.uk": 7,
+        "aljazeera.com": 3
       }
     },
     "finalTop": {
       "categoryCounts": {
-        "局部冲突": 3,
-        "军事动态": 3,
+        "局部冲突": 5,
         "航空航天": 3,
-        "AI": 1
+        "军事动态": 2
       },
       "domainCounts": {
-        "defensenews.com": 2,
-        "bbc.co.uk": 2,
-        "aljazeera.com": 1,
-        "twz.com": 2,
-        "spacenews.com": 1,
-        "nasa.gov": 1,
-        "arstechnica.com": 1
+        "bbc.co.uk": 5,
+        "aljazeera.com": 2,
+        "spacenews.com": 2,
+        "defenseone.com": 1
       },
-      "categoryViolations": {},
-      "domainViolations": {}
+      "categoryViolations": {
+        "局部冲突": 5
+      },
+      "domainViolations": {
+        "bbc.co.uk": 5
+      }
     },
-    "adjustedItemCount": 6,
+    "adjustedItemCount": 4,
     "adjustedOutIds": [
-      "20472af8545b85",
-      "0ec939dc547b43",
-      "8890d3817dfdc2",
-      "f48d2ac25c14da",
-      "18edbed8ff030b",
-      "3f236f90761015"
+      "ca01092fef56ed",
+      "d171bf4352d988",
+      "0029529c74e3d5",
+      "966b5f565a2644"
     ],
     "adjustedInIds": [
-      "b2f1a0ee07e183",
-      "3e6f2fb5821105",
-      "fdc283b7048a76",
-      "2e4ce036e58739",
-      "1c4f69cf8d3777",
-      "6c975d4feeb5c0"
+      "8b8242f2c6b30f",
+      "fed4ee3055ddf4",
+      "acae2468ac50c7",
+      "99a4e54b923352"
     ],
-    "relaxedItemCount": 0
+    "relaxedItemCount": 3
   },
   "translationStatus": "ok",
   "translationProvider": "deepseek",
@@ -91,14 +86,14 @@
   "translatedItemCount": 10,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 7,
-    "completedItemCount": 7,
+    "requestedItemCount": 1,
+    "completedItemCount": 1,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 5,
-    "initialBatchCount": 2,
-    "requestCount": 2,
+    "initialBatchCount": 1,
+    "requestCount": 1,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
@@ -106,8 +101,8 @@
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
     "targetItemCount": 10,
-    "reusedItemCount": 3,
-    "newlyTranslatedItemCount": 7,
+    "reusedItemCount": 9,
+    "newlyTranslatedItemCount": 1,
     "totalTranslatedItemCount": 10,
     "totalMissingItemCount": 0
   },
@@ -134,36 +129,36 @@
   },
   "eventCount": 10,
   "weeklyEventCount": 8,
-  "anomalySignalCount": 0,
+  "anomalySignalCount": 2,
   "paperLinkedItemCount": 0,
   "warnings": [
-    "24 小时内合格候选不足，Top 10 中有 7 条来自最多 36 小时补充窗口，卡片已明确标注"
+    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（3 条已标注）"
   ],
   "coverageStatus": "supplemented",
-  "freshItemCount": 3,
-  "supplementalItemCount": 7,
-  "effectiveLookbackHours": 36,
-  "streamItemCount": 8,
+  "freshItemCount": 10,
+  "supplementalItemCount": 0,
+  "effectiveLookbackHours": 24,
+  "streamItemCount": 18,
   "streamTranslationProvider": "deepseek",
   "streamTranslationModel": "deepseek-v4-flash",
-  "streamTranslatedItemCount": 8,
+  "streamTranslatedItemCount": 18,
   "streamTranslationWarnings": [],
   "streamTranslationDiagnostics": {
-    "requestedItemCount": 1,
-    "completedItemCount": 1,
+    "requestedItemCount": 0,
+    "completedItemCount": 0,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 1,
-    "requestCount": 1,
+    "initialBatchCount": 0,
+    "requestCount": 0,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "completionReason": "not_needed",
+    "completionMessage": "没有需要翻译的新条目",
     "lastProviderError": "",
-    "reusedItemCount": 7,
+    "reusedItemCount": 17,
     "featuredTranslatedItemCount": 10
   },
   "researchItemCount": 60,
@@ -180,12 +175,12 @@
     "missingItems": [],
     "initialBatchSize": 5,
     "initialBatchCount": 12,
-    "requestCount": 12,
-    "retryRequestCount": 0,
+    "requestCount": 14,
+    "retryRequestCount": 2,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "completionReason": "complete_after_retry",
+    "completionMessage": "缺失条目经拆分重试后已全部完成",
     "lastProviderError": ""
   }
 }

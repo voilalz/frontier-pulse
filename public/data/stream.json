@@ -1,49 +1,49 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-08-16T22:38:23Z",
+  "generatedAt": "2026-08-16T23:31:34Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
-  "itemCount": 17,
-  "totalCandidateCount": 17,
+  "itemCount": 18,
+  "totalCandidateCount": 18,
   "truncated": false,
   "categoryCounts": {
     "局部冲突": 10,
     "军事动态": 3,
-    "航空航天": 3,
+    "航空航天": 4,
     "AI": 1
   },
   "sourceCounts": {
     "Al Jazeera": 7,
     "BBC World": 7,
-    "SpaceNews": 2,
+    "SpaceNews": 3,
     "Defense One": 1
   },
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
-  "translatedItemCount": 17,
+  "translatedItemCount": 18,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 7,
-    "completedItemCount": 7,
+    "requestedItemCount": 0,
+    "completedItemCount": 0,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 2,
-    "requestCount": 2,
+    "initialBatchCount": 0,
+    "requestCount": 0,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "completionReason": "not_needed",
+    "completionMessage": "没有需要翻译的新条目",
     "lastProviderError": "",
-    "reusedItemCount": 10,
+    "reusedItemCount": 17,
     "featuredTranslatedItemCount": 10
   },
   "items": [
     {
       "id": "20cfa26d02e62a",
-      "eventId": "evt-f8a07751acd9",
+      "eventId": "evt-d427713914eb",
       "contentType": "news",
       "title": "俄罗斯称2026年最大规模乌克兰袭击致至少7人死亡",
       "originalTitle": "Russia says at least seven killed in largest Ukrainian attack of 2026",
@@ -58,8 +58,8 @@
       "country": "国际",
       "publishedAt": "2026-08-16T19:03:04Z",
       "url": "https://www.bbc.co.uk/news/articles/c1411pgje8xo?at_medium=RSS&at_campaign=rss",
-      "score": 79,
-      "scoreBasis": "规则评分",
+      "score": 83,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -74,8 +74,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 85/100",
+        "综合排序分 83/100（AI 65% + 规则 35%）",
+        "规则参考分 79/100",
         "来源权重 17/20",
-        "发布约 3.6 小时",
+        "发布约 4.5 小时",
         "命中 3 个主题信号",
         "影响信号：attack",
         "2 个独立来源相互印证"
@@ -105,14 +108,151 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-d427713914eb",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-11",
+        "lastSeen": "2026-08-17",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-08-11",
+            "newsId": "91024385e6ab15",
+            "title": "乌克兰无人机深入俄境内袭击致至少13人死亡",
+            "source": "BBC World",
+            "publishedAt": "2026-08-10T14:34:25Z",
+            "score": 86
+          },
+          {
+            "editionDate": "2026-08-17",
+            "newsId": "20cfa26d02e62a",
+            "title": "俄罗斯称2026年最大规模乌克兰袭击致至少7人死亡",
+            "source": "BBC World",
+            "publishedAt": "2026-08-16T19:03:04Z",
+            "score": 83
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:bbc.co.uk",
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Moscow also launched deadly strikes against Ukraine overnight",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:bbc.co.uk",
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "sparking fires across the capital Kyiv",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:bbc.co.uk",
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-05056abe3488",
+          "eventId": "evt-d427713914eb",
+          "statement": "若俄乌双方继续以远程打击回应，则需关注基辅及俄境内关键地区伤亡人数是否进一步上升。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-09-16",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "20cfa26d02e62a"
+          ],
+          "lastReviewedAt": "2026-08-17"
+        },
+        {
+          "predictionId": "pred-0c66de2f6237",
+          "eventId": "evt-d427713914eb",
+          "statement": "后续可观察双方是否通过外交渠道寻求降级，或袭击范围是否扩大至其他城市。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-11-15",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "20cfa26d02e62a"
+          ],
+          "lastReviewedAt": "2026-08-17"
+        },
+        {
+          "predictionId": "pred-e2adf4df3ef7",
+          "eventId": "evt-d427713914eb",
+          "statement": "若俄方公布具体伤亡或报复行动，需关注其是否再次对乌克兰城市发动大规模导弹袭击。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-11",
+          "dueAfter": "2026-09-10",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "91024385e6ab15"
+          ],
+          "lastReviewedAt": "2026-08-17"
+        },
+        {
+          "predictionId": "pred-e4053a5cc7bb",
+          "eventId": "evt-d427713914eb",
+          "statement": "后续可观察双方是否进一步扩大无人机与导弹互相打击的规模和范围。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-11",
+          "dueAfter": "2026-11-09",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "91024385e6ab15"
+          ],
+          "lastReviewedAt": "2026-08-17"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
     },
     {
       "id": "4559c202444f9a",
@@ -131,8 +271,8 @@
       "country": "国际",
       "publishedAt": "2026-08-16T21:04:27Z",
       "url": "https://www.bbc.co.uk/news/articles/ceqeeendz42o?at_medium=RSS&at_campaign=rss",
-      "score": 72,
-      "scoreBasis": "规则评分",
+      "score": 71,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -147,8 +287,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 70/100",
+        "综合排序分 71/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
         "来源权重 17/20",
-        "发布约 1.6 小时",
+        "发布约 2.5 小时",
         "命中 2 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -177,14 +320,223 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "为补足 Top 10 放宽来源配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-6a42b8035381",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-17",
+        "lastSeen": "2026-08-17",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-17",
+            "newsId": "4559c202444f9a",
+            "title": "美指挥官称林肯号上心理健康是‘优先事项’",
+            "source": "BBC World",
+            "publishedAt": "2026-08-16T21:04:27Z",
+            "score": 71
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:bbc.co.uk",
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Adm Brad Cooper acknowledged that navy service at sea for long periods is \"uniquely challenging",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:bbc.co.uk",
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "following a visit to the warship",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:bbc.co.uk",
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-f6d01b5da026",
+          "eventId": "evt-6a42b8035381",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-09-16",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "4559c202444f9a"
+          ],
+          "lastReviewedAt": "2026-08-17"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 2,
+      "relatedPapers": []
+    },
+    {
+      "id": "8b8242f2c6b30f",
+      "eventId": "evt-618b3b6ac1fa",
+      "contentType": "news",
+      "title": "卫星运营商强调在受限市场中锁定发射交易",
+      "originalTitle": "Satellite operators emphasize launch deals in a constrained market",
+      "summary": "在发射市场受限的情况下，卫星运营商向投资者和客户强调，他们已安排好发射能力，即使这些能力何时可用尚不确定。",
+      "keyFacts": [
+        "发射市场受限，卫星运营商强调已锁定发射能力。",
+        "运营商向投资者和客户强调发射安排，尽管可用时间不确定。"
+      ],
+      "why": "在发射能力紧张的时期，明确发射计划对保障卫星部署和投资者信心至关重要。",
+      "category": "航空航天",
+      "source": "SpaceNews",
+      "country": "国际",
+      "publishedAt": "2026-08-16T23:05:35Z",
+      "url": "https://spacenews.com/satellite-operators-emphasize-launch-deals-in-a-constrained-market",
+      "score": 69,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 20,
+        "影响信号": 4,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 68/100",
+        "综合排序分 69/100（AI 65% + 规则 35%）",
+        "规则参考分 71/100",
+        "来源权重 16/20",
+        "发布约 0.4 小时",
+        "命中 2 个主题信号",
+        "影响信号：launch"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "卫星",
+        "发射市场",
+        "航天"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/satellite-operators-emphasize-launch-deals-in-a-constrained-market",
+          "publishedAt": "2026-08-16T23:05:35Z",
+          "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 2
+      "eventDossier": {
+        "eventId": "evt-618b3b6ac1fa",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-17",
+        "lastSeen": "2026-08-17",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-17",
+            "newsId": "8b8242f2c6b30f",
+            "title": "卫星运营商强调在受限市场中锁定发射交易",
+            "source": "SpaceNews",
+            "publishedAt": "2026-08-16T23:05:35Z",
+            "score": 69
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:spacenews.com"
+        ],
+        "claims": [
+          {
+            "text": "发射市场受限，卫星运营商强调已锁定发射能力。",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          },
+          {
+            "text": "运营商向投资者和客户强调发射安排，尽管可用时间不确定。",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-ba8d9f1f68e1",
+          "eventId": "evt-618b3b6ac1fa",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-09-16",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "8b8242f2c6b30f"
+          ],
+          "lastReviewedAt": "2026-08-17"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 3,
+      "relatedPapers": []
     },
     {
       "id": "2d4b21839f92bc",
@@ -203,13 +555,13 @@
       "country": "国际",
       "publishedAt": "2026-08-16T19:58:14Z",
       "url": "https://www.bbc.co.uk/news/articles/c77gg5vn44yo?at_medium=RSS&at_campaign=rss",
-      "score": 72,
-      "scoreBasis": "规则评分",
+      "score": 78,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 18,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -219,8 +571,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 82/100",
+        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "规则参考分 71/100",
         "来源权重 17/20",
-        "发布约 2.7 小时",
+        "发布约 3.6 小时",
         "命中 2 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -249,14 +604,105 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 3
+      "eventDossier": {
+        "eventId": "evt-84eebadb8d60",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-17",
+        "lastSeen": "2026-08-17",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-17",
+            "newsId": "2d4b21839f92bc",
+            "title": "特朗普特使库什纳会见哈马斯领导人推动加沙和平计划",
+            "source": "BBC World",
+            "publishedAt": "2026-08-16T19:58:14Z",
+            "score": 78
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:bbc.co.uk",
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "The rare meeting comes a week",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:bbc.co.uk",
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "Israel rejected Donald Trump's peace plan for Gaza",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:bbc.co.uk",
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-0b324f746e70",
+          "eventId": "evt-84eebadb8d60",
+          "statement": "若库什纳与哈马斯会晤有实质性进展，则需关注以色列方面的回应及是否重启停火谈判。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-09-16",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2d4b21839f92bc"
+          ],
+          "lastReviewedAt": "2026-08-17"
+        },
+        {
+          "predictionId": "pred-603f4634fc9a",
+          "eventId": "evt-84eebadb8d60",
+          "statement": "后续可观察加沙地带冲突频率是否因外交接触而出现波动。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-11-15",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2d4b21839f92bc"
+          ],
+          "lastReviewedAt": "2026-08-17"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 4,
+      "relatedPapers": []
     },
     {
       "id": "a596e2302c0c57",
@@ -275,8 +721,8 @@
       "country": "国际",
       "publishedAt": "2026-08-16T19:00:23Z",
       "url": "https://www.bbc.co.uk/news/articles/c0l5583903yo?at_medium=RSS&at_campaign=rss",
-      "score": 71,
-      "scoreBasis": "规则评分",
+      "score": 74,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -291,8 +737,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 75/100",
+        "综合排序分 74/100（AI 65% + 规则 35%）",
+        "规则参考分 71/100",
         "来源权重 17/20",
-        "发布约 3.6 小时",
+        "发布约 4.5 小时",
         "命中 1 个主题信号",
         "影响信号：attack"
       ],
@@ -314,14 +763,83 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 4
+      "selectionNote": "为补足 Top 10 放宽来源配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-e075b6791789",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-17",
+        "lastSeen": "2026-08-17",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-17",
+            "newsId": "a596e2302c0c57",
+            "title": "弗吉尼亚校园枪击案青少年嫌疑人被发现藏身衣橱",
+            "source": "BBC World",
+            "publishedAt": "2026-08-16T19:00:23Z",
+            "score": 74
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "The attack left five injured outside a halls of residence",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "and the suspect was not a student there",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-4e7d345a9acb",
+          "eventId": "evt-e075b6791789",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-09-16",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "a596e2302c0c57"
+          ],
+          "lastReviewedAt": "2026-08-17"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 5,
+      "relatedPapers": []
     },
     {
       "id": "d39bc91ddc0ae4",
@@ -338,10 +856,10 @@
       "category": "局部冲突",
       "source": "BBC World",
       "country": "国际",
-      "publishedAt": "2026-08-16T22:34:10Z",
+      "publishedAt": "2026-08-16T23:28:14Z",
       "url": "https://www.bbc.co.uk/news/articles/cx2lll7zvn0o?at_medium=RSS&at_campaign=rss",
-      "score": 69,
-      "scoreBasis": "规则评分",
+      "score": 75,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -356,6 +874,9 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 75/100（AI 65% + 规则 35%）",
+        "规则参考分 69/100",
         "来源权重 17/20",
         "发布约 0.1 小时",
         "命中 2 个主题信号"
@@ -367,25 +888,113 @@
         "韩国",
         "军事演习"
       ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/43fc/live/4a1c1570-99b9-11f1-870d-5d08c49babb2.jpg",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/8304/live/fde5dbb0-99c6-11f1-b604-2bfb19ba7385.jpg",
       "corroboration": 1,
       "sources": [
         {
           "name": "BBC World",
           "domain": "bbc.co.uk",
           "url": "https://www.bbc.co.uk/news/articles/cx2lll7zvn0o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-16T22:34:10Z",
+          "publishedAt": "2026-08-16T23:28:14Z",
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 5
+      "selectionNote": "为补足 Top 10 放宽来源配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-2a8960495669",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-17",
+        "lastSeen": "2026-08-17",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-17",
+            "newsId": "d39bc91ddc0ae4",
+            "title": "特朗普称美国将缩减与韩国的军事演习，因韩国未参与伊朗战争",
+            "source": "BBC World",
+            "publishedAt": "2026-08-16T23:28:14Z",
+            "score": 75
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "His decision to reduce the partnership came",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "South Korea recently declined to aid his war effort in Iran",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-b53c2699fafc",
+          "eventId": "evt-2a8960495669",
+          "statement": "若美国正式缩减美韩军演，则需关注韩国外交部及国防部的官方回应及后续行动。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-09-16",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d39bc91ddc0ae4"
+          ],
+          "lastReviewedAt": "2026-08-17"
+        },
+        {
+          "predictionId": "pred-eb0084329c48",
+          "eventId": "evt-2a8960495669",
+          "statement": "后续可观察美韩同盟在其他领域（如情报共享、经济合作）是否受此影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-11-15",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d39bc91ddc0ae4"
+          ],
+          "lastReviewedAt": "2026-08-17"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 6,
+      "relatedPapers": []
     },
     {
       "id": "fed4ee3055ddf4",
@@ -404,8 +1013,8 @@
       "country": "国际",
       "publishedAt": "2026-08-16T20:36:32Z",
       "url": "https://www.aljazeera.com/news/2026/8/16/brazil-lula-bolsonaro-return-to-strongholds-to-launch-runs-for-president?traffic_source=rss",
-      "score": 68,
-      "scoreBasis": "规则评分",
+      "score": 67,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -420,8 +1029,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 66/100",
+        "综合排序分 67/100（AI 65% + 规则 35%）",
+        "规则参考分 68/100",
         "来源权重 16/20",
-        "发布约 2.0 小时",
+        "发布约 2.9 小时",
         "命中 1 个主题信号",
         "影响信号：launch"
       ],
@@ -443,78 +1055,83 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 6
-    },
-    {
-      "id": "966b5f565a2644",
-      "eventId": "evt-73f93784d354",
-      "contentType": "news",
-      "title": "BBC探访俄袭击后仍在冒烟的基辅市场",
-      "originalTitle": "BBC visits smouldering Kyiv market after Russian strikes",
-      "summary": "袭击导致六人受伤，该市场出售二手唱片、海报、玩具和工具。",
-      "keyFacts": [
-        "Six people were injured in the strike on the market selling second-hand records"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-16T12:18:09Z",
-      "url": "https://www.bbc.co.uk/news/videos/c8dnn05e90lo?at_medium=RSS&at_campaign=rss",
-      "score": 68,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 6,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
+      "eventDossier": {
+        "eventId": "evt-19424fcd9e90",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-17",
+        "lastSeen": "2026-08-17",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-17",
+            "newsId": "fed4ee3055ddf4",
+            "title": "巴西：卢拉和博索纳罗重返据点启动总统竞选",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-16T20:36:32Z",
+            "score": 67
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
       },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 10.3 小时",
-        "命中 1 个主题信号",
-        "影响信号：strike"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "俄乌冲突",
-        "基辅",
-        "市场袭击"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/3ef6/live/8e3c33a0-9966-11f1-a7ab-8b30adf0800a.jpg",
-      "corroboration": 1,
-      "sources": [
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Bolsonaro appeal to Brazil’s women voters with promises to combat rising femicide",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "gender violence",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
         {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/videos/c8dnn05e90lo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-16T12:18:09Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
+          "predictionId": "pred-966087511cc8",
+          "eventId": "evt-19424fcd9e90",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-09-16",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "fed4ee3055ddf4"
+          ],
+          "lastReviewedAt": "2026-08-17"
         }
       ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 7
+      "isTopStory": true,
+      "streamRank": 7,
+      "relatedPapers": []
     },
     {
       "id": "0029529c74e3d5",
@@ -550,7 +1167,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.7 小时",
+        "发布约 2.6 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -581,6 +1198,70 @@
       "streamRank": 8
     },
     {
+      "id": "966b5f565a2644",
+      "eventId": "evt-73f93784d354",
+      "contentType": "news",
+      "title": "BBC探访俄袭击后仍在冒烟的基辅市场",
+      "originalTitle": "BBC visits smouldering Kyiv market after Russian strikes",
+      "summary": "袭击导致六人受伤，该市场出售二手唱片、海报、玩具和工具。",
+      "keyFacts": [
+        "Six people were injured in the strike on the market selling second-hand records"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-16T12:18:09Z",
+      "url": "https://www.bbc.co.uk/news/videos/c8dnn05e90lo?at_medium=RSS&at_campaign=rss",
+      "score": 67,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 14,
+        "影响信号": 6,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 11.2 小时",
+        "命中 1 个主题信号",
+        "影响信号：strike"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "俄乌冲突",
+        "基辅",
+        "市场袭击"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/3ef6/live/8e3c33a0-9966-11f1-a7ab-8b30adf0800a.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/videos/c8dnn05e90lo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-16T12:18:09Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 9
+    },
+    {
       "id": "7186d622ef95dc",
       "eventId": "evt-301f44a708b0",
       "contentType": "news",
@@ -596,13 +1277,13 @@
       "country": "国际",
       "publishedAt": "2026-08-16T21:54:58Z",
       "url": "https://www.aljazeera.com/video/inside-story/2026/8/16/what-could-stop-israeli-settler-attacks-on-palestinians?traffic_source=rss",
-      "score": 66,
+      "score": 65,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 20,
+        "时效": 19,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -613,7 +1294,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 0.7 小时",
+        "发布约 1.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -641,7 +1322,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 9
+      "streamRank": 10
     },
     {
       "id": "e13435a95ffd7c",
@@ -660,13 +1341,13 @@
       "country": "国际",
       "publishedAt": "2026-08-16T20:28:21Z",
       "url": "https://www.aljazeera.com/news/2026/8/16/us-iran-mou-is-set-to-expire-what-to-know?traffic_source=rss",
-      "score": 65,
-      "scoreBasis": "规则评分",
+      "score": 72,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 18,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -676,8 +1357,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 76/100",
+        "综合排序分 72/100（AI 65% + 规则 35%）",
+        "规则参考分 64/100",
         "来源权重 16/20",
-        "发布约 2.2 小时",
+        "发布约 3.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -698,79 +1382,83 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 10
-    },
-    {
-      "id": "7977962b972d1b",
-      "eventId": "evt-4851fe3713fb",
-      "contentType": "news",
-      "title": "以军围困约旦河西岸被占巴勒斯坦民居",
-      "originalTitle": "Israeli army besieges Palestinian homes in occupied West Bank",
-      "summary": "以色列军队突袭了约旦河西岸纳布卢斯以南的库斯拉村。",
-      "keyFacts": [
-        "Israeli troops have raided the village of Qusra",
-        "south of Nablus",
-        "in the occupied West Bank"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-16T17:45:52Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/16/israeli-army-besieges-palestinian-homes-in-occupied-west-bank?traffic_source=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
+      "eventDossier": {
+        "eventId": "evt-8e7a39862ee2",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-17",
+        "lastSeen": "2026-08-17",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-17",
+            "newsId": "e13435a95ffd7c",
+            "title": "美伊谅解备忘录即将到期：须知事项",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-16T20:28:21Z",
+            "score": 72
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
       },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.9 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "以色列",
-        "巴勒斯坦",
-        "约旦河西岸"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Both sides accused the other of violating the June agreement shortly",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "it was signed",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
         {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/16/israeli-army-besieges-palestinian-homes-in-occupied-west-bank?traffic_source=rss",
-          "publishedAt": "2026-08-16T17:45:52Z",
-          "evidenceGroup": "outlet:aljazeera.com"
+          "predictionId": "pred-0c13a3589800",
+          "eventId": "evt-8e7a39862ee2",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-09-16",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "e13435a95ffd7c"
+          ],
+          "lastReviewedAt": "2026-08-17"
         }
       ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 11
+      "isTopStory": true,
+      "streamRank": 11,
+      "relatedPapers": []
     },
     {
       "id": "d171bf4352d988",
@@ -805,7 +1493,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 8.1 小时",
+        "发布约 8.9 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -834,6 +1522,71 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 12
+    },
+    {
+      "id": "7977962b972d1b",
+      "eventId": "evt-4851fe3713fb",
+      "contentType": "news",
+      "title": "以军围困约旦河西岸被占巴勒斯坦民居",
+      "originalTitle": "Israeli army besieges Palestinian homes in occupied West Bank",
+      "summary": "以色列军队突袭了约旦河西岸纳布卢斯以南的库斯拉村。",
+      "keyFacts": [
+        "Israeli troops have raided the village of Qusra",
+        "south of Nablus",
+        "in the occupied West Bank"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-16T17:45:52Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/16/israeli-army-besieges-palestinian-homes-in-occupied-west-bank?traffic_source=rss",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 5.8 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "以色列",
+        "巴勒斯坦",
+        "约旦河西岸"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/16/israeli-army-besieges-palestinian-homes-in-occupied-west-bank?traffic_source=rss",
+          "publishedAt": "2026-08-16T17:45:52Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 13
     },
     {
       "id": "4da7b339b919dc",
@@ -868,7 +1621,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.0 小时",
+        "发布约 5.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -896,7 +1649,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 13
+      "streamRank": 14
     },
     {
       "id": "acae2468ac50c7",
@@ -916,7 +1669,7 @@
       "publishedAt": "2026-08-16T10:50:00Z",
       "url": "https://spacenews.com/u-s-defense-agencies-tap-three-companies-for-satellite-disposal-study",
       "score": 63,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -931,8 +1684,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 63/100",
+        "综合排序分 63/100（AI 65% + 规则 35%）",
+        "规则参考分 63/100",
         "来源权重 16/20",
-        "发布约 11.8 小时",
+        "发布约 12.7 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "中",
@@ -953,14 +1709,83 @@
           "evidenceGroup": "outlet:spacenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 14
+      "eventDossier": {
+        "eventId": "evt-d134a5a3f399",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-17",
+        "lastSeen": "2026-08-17",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-17",
+            "newsId": "acae2468ac50c7",
+            "title": "美国国防机构选定三家公司在卫星处置研究中竞争",
+            "source": "SpaceNews",
+            "publishedAt": "2026-08-16T10:50:00Z",
+            "score": 63
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:spacenews.com"
+        ],
+        "claims": [
+          {
+            "text": "Katalyst will compete to show how commercial operators could capture",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          },
+          {
+            "text": "remove aging spacecraft",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-e54fbeead13c",
+          "eventId": "evt-d134a5a3f399",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-09-16",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "acae2468ac50c7"
+          ],
+          "lastReviewedAt": "2026-08-17"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 15,
+      "relatedPapers": []
     },
     {
       "id": "ca01092fef56ed",
@@ -978,13 +1803,13 @@
       "country": "国际",
       "publishedAt": "2026-08-16T09:27:58Z",
       "url": "https://www.bbc.co.uk/news/articles/cj4kk8kz271o?at_medium=RSS&at_campaign=rss",
-      "score": 73,
-      "scoreBasis": "AI重要度 · 规则约束",
+      "score": 64,
+      "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 13,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -994,11 +1819,8 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 75/100",
-        "综合排序分 73/100（AI 65% + 规则 35%）",
-        "规则参考分 70/100",
         "来源权重 17/20",
-        "发布约 2.5 小时",
+        "发布约 14.1 小时",
         "命中 1 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -1016,7 +1838,7 @@
           "name": "BBC World",
           "domain": "bbc.co.uk",
           "url": "https://www.bbc.co.uk/news/articles/cj4kk8kz271o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-15T21:03:57Z",
+          "publishedAt": "2026-08-16T09:27:58Z",
           "evidenceGroup": "outlet:bbc.co.uk"
         },
         {
@@ -1027,77 +1849,14 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "deepseek",
+      "selectionProvider": "",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "eventDossier": {
-        "eventId": "evt-baf78b015354",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-08-16",
-        "lastSeen": "2026-08-16",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-08-16",
-            "newsId": "ca01092fef56ed",
-            "title": "卡塔尔否认在击落战斗机后扣押三名伊朗飞行员",
-            "source": "BBC World",
-            "publishedAt": "2026-08-15T21:03:57Z",
-            "score": 73
-          }
-        ],
-        "independentSourceCount": 2,
-        "paperCount": 0
-      },
-      "evidenceMatrix": {
-        "overallStatus": "multi-source",
-        "independentSourceCount": 2,
-        "sourceGroups": [
-          "outlet:bbc.co.uk",
-          "outlet:aljazeera.com"
-        ],
-        "claims": [
-          {
-            "text": "Iran claims they have been held since Qatar downed two fighter jets at the start of the US-Iran war",
-            "status": "multi-source-context",
-            "statusLabel": "事件获多源报道，单项事实仍需核验",
-            "sourceGroups": [
-              "outlet:bbc.co.uk",
-              "outlet:aljazeera.com"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-10cd1d29a0fa",
-          "eventId": "evt-baf78b015354",
-          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-          "horizon": "观察",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-08-16",
-          "dueAfter": "2026-09-15",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "ca01092fef56ed"
-          ],
-          "lastReviewedAt": "2026-08-16"
-        }
-      ],
-      "relatedPapers": [],
-      "isTopStory": true,
-      "streamRank": 15
+      "isTopStory": false,
+      "streamRank": 16
     },
     {
       "id": "99a4e54b923352",
@@ -1116,13 +1875,13 @@
       "country": "国际",
       "publishedAt": "2026-08-16T00:27:52Z",
       "url": "https://www.defenseone.com/business/2026/08/artillery-plant-made-nothing/415443",
-      "score": 55,
-      "scoreBasis": "规则评分",
+      "score": 58,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 9,
+        "时效": 8,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1132,8 +1891,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 60/100",
+        "综合排序分 58/100（AI 65% + 规则 35%）",
+        "规则参考分 54/100",
         "来源权重 16/20",
-        "发布约 22.2 小时",
+        "发布约 23.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1154,14 +1916,83 @@
           "evidenceGroup": "outlet:defenseone.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 16
+      "eventDossier": {
+        "eventId": "evt-48d33a928806",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-17",
+        "lastSeen": "2026-08-17",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-17",
+            "newsId": "99a4e54b923352",
+            "title": "陆军向通用动力支付5.33亿美元建造炮弹工厂，却一无所获",
+            "source": "Defense One",
+            "publishedAt": "2026-08-16T00:27:52Z",
+            "score": 58
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defenseone.com"
+        ],
+        "claims": [
+          {
+            "text": "Instead of making shells",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defenseone.com"
+            ]
+          },
+          {
+            "text": "the assembly robots kept failing in bizarre ways—and that's just for starters",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defenseone.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-1992cc2cfdd3",
+          "eventId": "evt-48d33a928806",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-09-16",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "99a4e54b923352"
+          ],
+          "lastReviewedAt": "2026-08-17"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 17,
+      "relatedPapers": []
     },
     {
       "id": "7f4e25c5f87079",
@@ -1180,13 +2011,13 @@
       "country": "国际",
       "publishedAt": "2026-08-15T23:49:58Z",
       "url": "https://spacenews.com/lunar-orbiter-among-upcoming-nasa-clps-task-orders",
-      "score": 54,
+      "score": 53,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 9,
+        "时效": 8,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1197,7 +2028,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 22.8 小时",
+        "发布约 23.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1225,7 +2056,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 17
+      "streamRank": 18
     }
   ]
 }
