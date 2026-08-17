@@ -1,6 +1,6 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-08-17T22:43:09Z",
+  "generatedAt": "2026-08-17T23:33:47Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
   "itemCount": 43,
@@ -8,18 +8,18 @@
   "truncated": false,
   "categoryCounts": {
     "局部冲突": 15,
-    "军事动态": 14,
-    "航空航天": 13,
+    "军事动态": 15,
+    "航空航天": 12,
     "AI": 1
   },
   "sourceCounts": {
-    "Al Jazeera": 11,
-    "SpaceNews": 8,
-    "BBC World": 6,
+    "Al Jazeera": 12,
+    "SpaceNews": 7,
     "Defense News": 6,
+    "BBC World": 5,
     "Breaking Defense": 5,
     "NASA": 3,
-    "The War Zone": 2,
+    "The War Zone": 3,
     "Defense One": 1,
     "TechCrunch AI": 1
   },
@@ -28,21 +28,21 @@
   "translatedItemCount": 43,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 7,
-    "completedItemCount": 7,
+    "requestedItemCount": 0,
+    "completedItemCount": 0,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 2,
-    "requestCount": 2,
+    "initialBatchCount": 0,
+    "requestCount": 0,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "completionReason": "not_needed",
+    "completionMessage": "没有需要翻译的新条目",
     "lastProviderError": "",
-    "reusedItemCount": 34,
+    "reusedItemCount": 40,
     "featuredTranslatedItemCount": 10
   },
   "items": [
@@ -64,8 +64,8 @@
       "country": "国际",
       "publishedAt": "2026-08-17T19:03:08Z",
       "url": "https://www.twz.com/news-features/russia-is-expanding-its-long-range-strike-drone-network",
-      "score": 89,
-      "scoreBasis": "规则评分",
+      "score": 86,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
@@ -80,8 +80,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 85/100",
+        "综合排序分 86/100（AI 65% + 规则 35%）",
+        "规则参考分 89/100",
         "来源权重 15/20",
-        "发布约 3.7 小时",
+        "发布约 4.5 小时",
         "命中 6 个主题信号",
         "影响信号：launch、attack、strike"
       ],
@@ -103,14 +106,91 @@
           "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-08c373dec43e",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-18",
+        "lastSeen": "2026-08-18",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-18",
+            "newsId": "bc747ed68fbf14",
+            "title": "俄罗斯扩大远程打击无人机网络",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-17T19:03:08Z",
+            "score": 86
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "Satellite imagery reveals growing launch infrastructure for Geran-family one-way attack drones",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "including the capability of launching heavier",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "higher-performing types",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-aae4db38d4ea",
+          "eventId": "evt-08c373dec43e",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-09-17",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "bc747ed68fbf14"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
     },
     {
       "id": "df526097e2a5b7",
@@ -147,7 +227,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.4 小时",
+        "发布约 6.2 小时",
         "命中 4 个主题信号",
         "影响信号：missile"
       ],
@@ -179,70 +259,272 @@
       "streamRank": 2
     },
     {
-      "id": "06c088e311a632",
-      "eventId": "evt-ab55e8caff0b",
+      "id": "b9a493e7a59e67",
+      "eventId": "evt-2a8960495669",
       "contentType": "news",
-      "title": "NASA选择公司提供有效载荷处理服务",
-      "originalTitle": "NASA Selects Companies to Provide Payload Processing Services",
-      "summary": "NASA根据航天器处理运营合同的上车条款，选择了四家公司提供有效载荷处理设施。该条款允许合格的提供商为从多个地点发射的机构任务提供商业有效载荷处理服务，这些地点在初始合同授予时不具备能力。",
+      "title": "美韩军事训练因伊朗战争冷落而缩减",
+      "originalTitle": "U.S. Military Training With South Korea Reduced Over Iran War Snub",
+      "summary": "特朗普决定缩减与韩国的军事训练，此举正值人们日益担忧美国对亚洲盟友承诺之际，尤其是在与伊朗的对峙持续进行之时。",
       "keyFacts": [
-        "NASA has selected four companies to provide payload processing facilities under the Spacecraft Processing Operations Contract on‑ramp provi…",
-        "The provision enables qualified providers to offer commercial payload processing services for agency missions launching from multiple locat…",
-        "Contract awardees are: Through the contract"
+        "美国决定缩减与韩国的军事训练",
+        "该决定是在对伊朗对峙持续的情况下做出的",
+        "此举引发对美国对亚洲盟友承诺的担忧"
       ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "NASA",
+      "why": "此事件反映美国在亚洲安全承诺上的变化，可能影响地区稳定与盟友信任。",
+      "category": "军事动态",
+      "source": "The War Zone",
       "country": "国际",
-      "publishedAt": "2026-08-17T20:17:20Z",
-      "url": "https://www.nasa.gov/news-release/nasa-selects-companies-to-provide-payload-processing-services",
-      "score": 72,
-      "scoreBasis": "规则评分",
+      "publishedAt": "2026-08-17T23:13:20Z",
+      "url": "https://www.twz.com/news-features/u-s-military-training-with-south-korea-reduced-over-iran-war-snub",
+      "score": 79,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 20,
-        "主题优先级": 9,
-        "时效": 19,
-        "影响信号": 4,
-        "主题相关性": 2,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 4,
         "证据完整度": 3,
-        "多源印证": 0,
+        "多源印证": 4,
         "编辑降权": 0,
         "日期异常降权": 0,
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 20/20",
-        "发布约 2.4 小时",
-        "命中 1 个主题信号",
-        "影响信号：contract"
+        "DeepSeek 候选重要度 82/100",
+        "综合排序分 79/100（AI 65% + 规则 35%）",
+        "规则参考分 73/100",
+        "来源权重 17/20",
+        "发布约 0.3 小时",
+        "命中 2 个主题信号",
+        "2 个独立来源相互印证"
       ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidence": "高",
+      "confidenceReason": "主来源权重 17/20，且有 2 个独立来源报道；仍应以原文和一手材料为准。",
       "tags": [
-        "NASA",
-        "有效载荷",
-        "合同"
+        "美韩关系",
+        "伊朗",
+        "军事训练"
       ],
-      "image": "",
-      "corroboration": 1,
+      "image": "https://www.twz.com/wp-content/uploads/2026/08/South-Korea-US-Exercise-trump.jpg?quality=85",
+      "corroboration": 2,
       "sources": [
         {
-          "name": "NASA",
-          "domain": "nasa.gov",
-          "url": "https://www.nasa.gov/news-release/nasa-selects-companies-to-provide-payload-processing-services",
-          "publishedAt": "2026-08-17T20:17:20Z",
-          "evidenceGroup": "outlet:nasa.gov"
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/news-features/u-s-military-training-with-south-korea-reduced-over-iran-war-snub",
+          "publishedAt": "2026-08-17T23:13:20Z",
+          "evidenceGroup": "outlet:twz.com"
+        },
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cx2lll7zvn0o?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-17T18:39:39Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 3
+      "eventDossier": {
+        "eventId": "evt-2a8960495669",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-17",
+        "lastSeen": "2026-08-18",
+        "updateCount": 3,
+        "timeline": [
+          {
+            "editionDate": "2026-08-17",
+            "newsId": "d39bc91ddc0ae4",
+            "title": "特朗普称美国将缩减与韩国的军事演习，因韩国未参与伊朗战争",
+            "source": "BBC World",
+            "publishedAt": "2026-08-16T23:28:14Z",
+            "score": 75
+          },
+          {
+            "editionDate": "2026-08-18",
+            "newsId": "a7f9f22c8a701d",
+            "title": "特朗普命令五角大楼削减与韩国的军事演习",
+            "source": "Defense News",
+            "publishedAt": "2026-08-17T15:14:07Z",
+            "score": 73
+          },
+          {
+            "editionDate": "2026-08-18",
+            "newsId": "b9a493e7a59e67",
+            "title": "美韩军事训练因伊朗战争冷落而缩减",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-17T23:13:20Z",
+            "score": 79
+          }
+        ],
+        "independentSourceCount": 3,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:twz.com",
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "美国决定缩减与韩国的军事训练",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:twz.com",
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "该决定是在对伊朗对峙持续的情况下做出的",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:twz.com",
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "此举引发对美国对亚洲盟友承诺的担忧",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:twz.com",
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-76250a8d93d9",
+          "eventId": "evt-2a8960495669",
+          "statement": "后续可观察韩国官方对美方缩减军演决定的正式回应及美韩联合声明的具体内容。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-09-17",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "b9a493e7a59e67"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        },
+        {
+          "predictionId": "pred-6b82516b24bc",
+          "eventId": "evt-2a8960495669",
+          "statement": "若美方持续缩减军演，则需关注韩美同盟其他合作机制（如情报共享、联合指挥）是否出现进一步弱化。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-11-16",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "b9a493e7a59e67"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        },
+        {
+          "predictionId": "pred-0e9a21293fee",
+          "eventId": "evt-2a8960495669",
+          "statement": "后续可观察五角大楼具体实施削减军演的细节及韩国国防部的评估回应。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-09-17",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "a7f9f22c8a701d"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        },
+        {
+          "predictionId": "pred-1a4fd8df41f8",
+          "eventId": "evt-2a8960495669",
+          "statement": "若军演持续缩减，则需关注美韩对朝鲜威慑态势的调整及地区安全平衡是否受影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-11-16",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "a7f9f22c8a701d"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        },
+        {
+          "predictionId": "pred-b53c2699fafc",
+          "eventId": "evt-2a8960495669",
+          "statement": "若美国正式缩减美韩军演，则需关注韩国外交部及国防部的官方回应及后续行动。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-09-16",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d39bc91ddc0ae4"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        },
+        {
+          "predictionId": "pred-eb0084329c48",
+          "eventId": "evt-2a8960495669",
+          "statement": "后续可观察美韩同盟在其他领域（如情报共享、经济合作）是否受此影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-11-15",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d39bc91ddc0ae4"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 3,
+      "relatedPapers": []
     },
     {
       "id": "cbf8abaecd0b07",
@@ -262,8 +544,8 @@
       "country": "国际",
       "publishedAt": "2026-08-17T17:41:45Z",
       "url": "https://breakingdefense.com/2026/08/raytheon-gets-massive-23b-contract-to-boost-tomahawk-production",
-      "score": 72,
-      "scoreBasis": "规则评分",
+      "score": 76,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -278,8 +560,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 76/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
         "来源权重 16/20",
-        "发布约 5.0 小时",
+        "发布约 5.9 小时",
         "命中 1 个主题信号",
         "影响信号：contract、production"
       ],
@@ -301,14 +586,91 @@
           "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 4
+      "eventDossier": {
+        "eventId": "evt-bb5a298ee02d",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-18",
+        "lastSeen": "2026-08-18",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-18",
+            "newsId": "cbf8abaecd0b07",
+            "title": "雷神获230亿美元巨额合同增产战斧导弹",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-08-17T17:41:45Z",
+            "score": 76
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:breakingdefense.com"
+        ],
+        "claims": [
+          {
+            "text": "Over the past year",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "Pentagon leaders have leveraged multiyear contracts for critical munitions as an incentive to get defense primes to make larger investments…",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "supply chain",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-0dced7f4ab03",
+          "eventId": "evt-bb5a298ee02d",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-09-17",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "cbf8abaecd0b07"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 4,
+      "relatedPapers": []
     },
     {
       "id": "224263910e5981",
@@ -344,7 +706,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.6 小时",
+        "发布约 2.5 小时",
         "命中 4 个主题信号"
       ],
       "confidence": "中",
@@ -375,31 +737,32 @@
       "streamRank": 5
     },
     {
-      "id": "d39bc91ddc0ae4",
-      "eventId": "evt-2a8960495669",
+      "id": "06c088e311a632",
+      "eventId": "evt-ab55e8caff0b",
       "contentType": "news",
-      "title": "特朗普称美国将缩减与韩国的军事演习，因韩国未参与伊朗战争",
-      "originalTitle": "Trump says US to scale back military drills with South Korea after it stayed out of Iran war",
-      "summary": "在韩国最近拒绝援助其伊朗战争行动后，他决定减少伙伴关系。",
+      "title": "NASA选择公司提供有效载荷处理服务",
+      "originalTitle": "NASA Selects Companies to Provide Payload Processing Services",
+      "summary": "NASA根据航天器处理运营合同的上车条款，选择了四家公司提供有效载荷处理设施。该条款允许合格的提供商为从多个地点发射的机构任务提供商业有效载荷处理服务，这些地点在初始合同授予时不具备能力。",
       "keyFacts": [
-        "His decision to reduce the partnership came",
-        "South Korea recently declined to aid his war effort in Iran"
+        "NASA has selected four companies to provide payload processing facilities under the Spacecraft Processing Operations Contract on‑ramp provi…",
+        "The provision enables qualified providers to offer commercial payload processing services for agency missions launching from multiple locat…",
+        "Contract awardees are: Through the contract"
       ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
       "country": "国际",
-      "publishedAt": "2026-08-17T18:39:39Z",
-      "url": "https://www.bbc.co.uk/news/articles/cx2lll7zvn0o?at_medium=RSS&at_campaign=rss",
-      "score": 75,
+      "publishedAt": "2026-08-17T20:17:20Z",
+      "url": "https://www.nasa.gov/news-release/nasa-selects-companies-to-provide-payload-processing-services",
+      "score": 67,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 20,
-        "影响信号": 0,
-        "主题相关性": 4,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 18,
+        "影响信号": 4,
+        "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -407,52 +770,53 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 78/100",
-        "综合排序分 75/100（AI 65% + 规则 35%）",
-        "规则参考分 69/100",
-        "来源权重 17/20",
-        "发布约 0.1 小时",
-        "命中 2 个主题信号"
+        "DeepSeek 候选重要度 65/100",
+        "综合排序分 67/100（AI 65% + 规则 35%）",
+        "规则参考分 71/100",
+        "来源权重 20/20",
+        "发布约 3.3 小时",
+        "命中 1 个主题信号",
+        "影响信号：contract"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "特朗普",
-        "韩国",
-        "军事演习"
+        "NASA",
+        "有效载荷",
+        "合同"
       ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/8304/live/fde5dbb0-99c6-11f1-b604-2bfb19ba7385.jpg",
+      "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cx2lll7zvn0o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-16T23:28:14Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
+          "name": "NASA",
+          "domain": "nasa.gov",
+          "url": "https://www.nasa.gov/news-release/nasa-selects-companies-to-provide-payload-processing-services",
+          "publishedAt": "2026-08-17T20:17:20Z",
+          "evidenceGroup": "outlet:nasa.gov"
         }
       ],
       "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
-      "selectionNote": "为补足 Top 10 放宽来源配额",
-      "diversityRelaxed": true,
+      "selectionNote": "",
+      "diversityRelaxed": false,
       "eventDossier": {
-        "eventId": "evt-2a8960495669",
+        "eventId": "evt-ab55e8caff0b",
         "status": "new",
         "statusLabel": "新事件",
-        "firstSeen": "2026-08-17",
-        "lastSeen": "2026-08-17",
+        "firstSeen": "2026-08-18",
+        "lastSeen": "2026-08-18",
         "updateCount": 1,
         "timeline": [
           {
-            "editionDate": "2026-08-17",
-            "newsId": "d39bc91ddc0ae4",
-            "title": "特朗普称美国将缩减与韩国的军事演习，因韩国未参与伊朗战争",
-            "source": "BBC World",
-            "publishedAt": "2026-08-16T23:28:14Z",
-            "score": 75
+            "editionDate": "2026-08-18",
+            "newsId": "06c088e311a632",
+            "title": "NASA选择公司提供有效载荷处理服务",
+            "source": "NASA",
+            "publishedAt": "2026-08-17T20:17:20Z",
+            "score": 67
           }
         ],
         "independentSourceCount": 1,
@@ -462,23 +826,31 @@
         "overallStatus": "single-source",
         "independentSourceCount": 1,
         "sourceGroups": [
-          "outlet:bbc.co.uk"
+          "outlet:nasa.gov"
         ],
         "claims": [
           {
-            "text": "His decision to reduce the partnership came",
+            "text": "NASA has selected four companies to provide payload processing facilities under the Spacecraft Processing Operations Contract on‑ramp provi…",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
-              "outlet:bbc.co.uk"
+              "outlet:nasa.gov"
             ]
           },
           {
-            "text": "South Korea recently declined to aid his war effort in Iran",
+            "text": "The provision enables qualified providers to offer commercial payload processing services for agency missions launching from multiple locat…",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
-              "outlet:bbc.co.uk"
+              "outlet:nasa.gov"
+            ]
+          },
+          {
+            "text": "Contract awardees are: Through the contract",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
             ]
           }
         ],
@@ -487,47 +859,28 @@
       },
       "forecastLedger": [
         {
-          "predictionId": "pred-b53c2699fafc",
-          "eventId": "evt-2a8960495669",
-          "statement": "若美国正式缩减美韩军演，则需关注韩国外交部及国防部的官方回应及后续行动。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-08-17",
-          "dueAfter": "2026-09-16",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "d39bc91ddc0ae4"
-          ],
-          "lastReviewedAt": "2026-08-17"
-        },
-        {
-          "predictionId": "pred-eb0084329c48",
-          "eventId": "evt-2a8960495669",
-          "statement": "后续可观察美韩同盟在其他领域（如情报共享、经济合作）是否受此影响。",
-          "horizon": "中期",
+          "predictionId": "pred-c3261229a879",
+          "eventId": "evt-ab55e8caff0b",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
           "confidence": "低",
           "status": "open",
           "statusLabel": "待验证",
-          "createdAt": "2026-08-17",
-          "dueAfter": "2026-11-15",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-09-17",
           "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
           ],
           "evidenceIds": [
-            "d39bc91ddc0ae4"
+            "06c088e311a632"
           ],
-          "lastReviewedAt": "2026-08-17"
+          "lastReviewedAt": "2026-08-18"
         }
       ],
-      "relatedPapers": [],
       "isTopStory": true,
-      "streamRank": 6
+      "streamRank": 6,
+      "relatedPapers": []
     },
     {
       "id": "24412d57047d3e",
@@ -546,13 +899,13 @@
       "country": "国际",
       "publishedAt": "2026-08-17T18:16:02Z",
       "url": "https://www.defensenews.com/industry/techwatch/2026/08/17/german-drone-maker-helsing-enlists-rakuten-to-broker-japan-military-deal",
-      "score": 70,
+      "score": 69,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 0,
         "主题相关性": 8,
         "证据完整度": 3,
@@ -563,7 +916,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 4.5 小时",
+        "发布约 5.3 小时",
         "命中 4 个主题信号"
       ],
       "confidence": "中",
@@ -610,13 +963,13 @@
       "country": "国际",
       "publishedAt": "2026-08-17T17:55:15Z",
       "url": "https://www.twz.com/land/new-patriot-battalion-to-bolster-guams-defenses-within-months",
-      "score": 70,
+      "score": 69,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 5,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -627,7 +980,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 4.8 小时",
+        "发布约 5.6 小时",
         "命中 2 个主题信号",
         "影响信号：missile"
       ],
@@ -659,6 +1012,170 @@
       "streamRank": 8
     },
     {
+      "id": "554d4db04a2cf5",
+      "eventId": "evt-8be7ed736e7b",
+      "contentType": "news",
+      "title": "库什纳称在哈马斯解除武装前'我们不会允许加沙重建'",
+      "originalTitle": "‘We will not allow Gaza to be rebuilt’ until Hamas disarms, Kushner says",
+      "summary": "特朗普的女婿兼特使库什纳表示，在哈马斯解除武装之前，美国将不会允许加沙重建，并称美国不会'限制以色列自卫的权利'，同时以色列对加沙的打击仍在继续。",
+      "keyFacts": [
+        "库什纳表示在哈马斯解除武装前不会允许加沙重建",
+        "美国不会'限制以色列的自卫权'",
+        "目前以色列对加沙的打击仍在继续"
+      ],
+      "why": "此表态显示美国在加沙重建问题上的立场，可能影响冲突后的重建进程及地区局势。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-17T23:25:17Z",
+      "url": "https://www.aljazeera.com/news/2026/8/17/we-will-not-allow-gaza-to-be-rebuilt-until-hamas-disarms-kushner-says?traffic_source=rss",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 75/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 68/100",
+        "来源权重 16/20",
+        "发布约 0.1 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "库什纳",
+        "加沙",
+        "哈马斯"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/8/17/we-will-not-allow-gaza-to-be-rebuilt-until-hamas-disarms-kushner-says?traffic_source=rss",
+          "publishedAt": "2026-08-17T23:25:17Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "为补足 Top 10 放宽主题配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-8be7ed736e7b",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-18",
+        "lastSeen": "2026-08-18",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-18",
+            "newsId": "554d4db04a2cf5",
+            "title": "库什纳称在哈马斯解除武装前'我们不会允许加沙重建'",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-17T23:25:17Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "库什纳表示在哈马斯解除武装前不会允许加沙重建",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "美国不会'限制以色列的自卫权'",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "目前以色列对加沙的打击仍在继续",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-c131456a8163",
+          "eventId": "evt-8be7ed736e7b",
+          "statement": "后续可观察哈马斯对解除武装要求的官方回应，以及加沙重建相关国际会议或声明的动态。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-09-17",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "554d4db04a2cf5"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        },
+        {
+          "predictionId": "pred-ed77178e694b",
+          "eventId": "evt-8be7ed736e7b",
+          "statement": "若以色列持续打击加沙且重建受阻，则需关注人道主义局势升级及国际调停努力是否重新启动。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-11-16",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "554d4db04a2cf5"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 9,
+      "relatedPapers": []
+    },
+    {
       "id": "6ef458f848122c",
       "eventId": "evt-51cc05a10c7f",
       "contentType": "news",
@@ -675,8 +1192,8 @@
       "country": "国际",
       "publishedAt": "2026-08-17T15:06:00Z",
       "url": "https://www.defensenews.com/industry/techwatch/2026/08/17/us-space-force-japan-launch-sensor-to-bolster-space-surveillance-above-indo-pacific",
-      "score": 67,
-      "scoreBasis": "规则评分",
+      "score": 72,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -691,8 +1208,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 74/100",
+        "综合排序分 72/100（AI 65% + 规则 35%）",
+        "规则参考分 67/100",
         "来源权重 16/20",
-        "发布约 7.6 小时",
+        "发布约 8.5 小时",
         "命中 2 个主题信号",
         "影响信号：launch"
       ],
@@ -714,14 +1234,102 @@
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 9
+      "eventDossier": {
+        "eventId": "evt-51cc05a10c7f",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-18",
+        "lastSeen": "2026-08-18",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-18",
+            "newsId": "6ef458f848122c",
+            "title": "美国太空军与日本发射传感器增强印太上空太空监视",
+            "source": "Defense News",
+            "publishedAt": "2026-08-17T15:06:00Z",
+            "score": 72
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "In a bilateral space effort",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          },
+          {
+            "text": "Space Force successfully launched a Space Domain Awareness payload aboard Japan’s Quasi-Zenith Satellite 7",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-869943030c0a",
+          "eventId": "evt-51cc05a10c7f",
+          "statement": "后续可观察该传感器在轨运行情况，以及美日是否宣布下一阶段太空合作任务。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-09-17",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "6ef458f848122c"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        },
+        {
+          "predictionId": "pred-e62ce7aa362c",
+          "eventId": "evt-51cc05a10c7f",
+          "statement": "若传感器正常运作，则需关注美日在印太太空监视数据共享机制是否进一步拓展。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-11-16",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "6ef458f848122c"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 10,
+      "relatedPapers": []
     },
     {
       "id": "eb2e18a9db73cb",
@@ -757,7 +1365,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 8.1 小时",
+        "发布约 9.0 小时",
         "命中 1 个主题信号",
         "影响信号：production"
       ],
@@ -786,7 +1394,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 10
+      "streamRank": 11
     },
     {
       "id": "6404f8f7976906",
@@ -822,7 +1430,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.2 小时",
+        "发布约 4.0 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -841,70 +1449,6 @@
           "url": "https://www.aljazeera.com/video/newsfeed/2026/8/17/gaza-flotilla-sets-sail-from-the-uk-in-bid-to-break-israeli-siege?traffic_source=rss",
           "publishedAt": "2026-08-17T19:32:06Z",
           "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 11
-    },
-    {
-      "id": "a9db290a354640",
-      "eventId": "evt-ab691aa59d54",
-      "contentType": "news",
-      "title": "美国空军寻求获取可模拟隐形战机的靶机",
-      "originalTitle": "US Air Force looks to acquire target drones that can mimic stealth jets",
-      "summary": "美国空军希望获得能够模拟从隐形战斗机到小型无人机等多种飞机性能的靶机。",
-      "keyFacts": [
-        "Air Force wants to acquire target drones that can mimic the performance of a variety of aircraft",
-        "from stealth fighters to small UAVs"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Defense News",
-      "country": "国际",
-      "publishedAt": "2026-08-17T18:19:24Z",
-      "url": "https://www.defensenews.com/industry/techwatch/2026/08/17/us-air-force-looks-to-acquire-target-drones-that-can-mimic-stealth-jets",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.4 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美军",
-        "靶机",
-        "隐形"
-      ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/HALSUURXHBCAZM7PHKIDQ4RLSQ.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/industry/techwatch/2026/08/17/us-air-force-looks-to-acquire-target-drones-that-can-mimic-stealth-jets",
-          "publishedAt": "2026-08-17T18:19:24Z",
-          "evidenceGroup": "outlet:defensenews.com"
         }
       ],
       "selectionProvider": "",
@@ -951,7 +1495,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.0 小时",
+        "发布约 6.8 小时",
         "命中 1 个主题信号",
         "影响信号：launch"
       ],
@@ -981,133 +1525,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 13
-    },
-    {
-      "id": "b09712b568b116",
-      "eventId": "evt-4c46142de140",
-      "contentType": "news",
-      "title": "俄罗斯著名反战政治家被判处11年监禁",
-      "originalTitle": "Russia's prominent anti-war politician jailed for 11 years",
-      "summary": "列夫·施洛斯伯格因“诋毁”俄罗斯军队被判有罪，他谴责这一判决是对其政治立场的惩罚。",
-      "keyFacts": [
-        "Lev Schlosberg is found guilty of \"discrediting\" Russia's army - a verdict he condemns as punishment for his political position"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-17T16:17:34Z",
-      "url": "https://www.bbc.co.uk/news/articles/cj4kjnle2neo?at_medium=RSS&at_campaign=rss",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 6.4 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "俄罗斯",
-        "政治",
-        "判决"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/6484/live/398ad2e0-9a4b-11f1-aed2-8d6da8d75094.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cj4kjnle2neo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-17T16:17:34Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 14
-    },
-    {
-      "id": "ec5410f2ec973d",
-      "eventId": "evt-4c3af60c41ba",
-      "contentType": "news",
-      "title": "HEO将使用Planet卫星进行非地球成像",
-      "originalTitle": "HEO to use Planet satellites for non-Earth imaging",
-      "summary": "澳大利亚公司HEO使用地球观测卫星拍摄其他航天器图像，已与Planet公司签署协议，以使用该公司的卫星。",
-      "keyFacts": [
-        "the Australian company that uses Earth observation satellites to take images of other spacecraft",
-        "has signed an agreement with Planet to access that company’s satellites"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-08-17T22:00:00Z",
-      "url": "https://spacenews.com/heo-to-use-planet-satellites-for-non-earth-imaging",
-      "score": 65,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 20,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 0.7 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "HEO",
-        "Planet",
-        "非地球成像"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/heo-to-use-planet-satellites-for-non-earth-imaging",
-          "publishedAt": "2026-08-17T22:00:00Z",
-          "evidenceGroup": "outlet:spacenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 15
     },
     {
       "id": "e84bd51cd76b26",
@@ -1142,7 +1559,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.8 小时",
+        "发布约 2.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1170,7 +1587,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 16
+      "streamRank": 14
     },
     {
       "id": "fddaa90f876f20",
@@ -1189,8 +1606,8 @@
       "country": "国际",
       "publishedAt": "2026-08-17T19:25:05Z",
       "url": "https://www.bbc.co.uk/news/articles/cy5dzk0ryzdo?at_medium=RSS&at_campaign=rss",
-      "score": 65,
-      "scoreBasis": "规则评分",
+      "score": 75,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -1205,8 +1622,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 80/100",
+        "综合排序分 75/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
         "来源权重 17/20",
-        "发布约 3.3 小时",
+        "发布约 4.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1224,6 +1644,202 @@
           "domain": "bbc.co.uk",
           "url": "https://www.bbc.co.uk/news/articles/cy5dzk0ryzdo?at_medium=RSS&at_campaign=rss",
           "publishedAt": "2026-08-17T19:25:05Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-c57b943eebcf",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-18",
+        "lastSeen": "2026-08-18",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-18",
+            "newsId": "fddaa90f876f20",
+            "title": "特朗普威胁轰炸美国盟友阿曼，若其在伊朗协议问题上碍事",
+            "source": "BBC World",
+            "publishedAt": "2026-08-17T19:25:05Z",
+            "score": 75
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "Oman have been working separately to reopen the Strait of Hormuz",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "one of the world's busiest oil shipping routes",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-24e9f6b09fd5",
+          "eventId": "evt-c57b943eebcf",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-09-17",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "fddaa90f876f20"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 15,
+      "relatedPapers": []
+    },
+    {
+      "id": "a9db290a354640",
+      "eventId": "evt-ab691aa59d54",
+      "contentType": "news",
+      "title": "美国空军寻求获取可模拟隐形战机的靶机",
+      "originalTitle": "US Air Force looks to acquire target drones that can mimic stealth jets",
+      "summary": "美国空军希望获得能够模拟从隐形战斗机到小型无人机等多种飞机性能的靶机。",
+      "keyFacts": [
+        "Air Force wants to acquire target drones that can mimic the performance of a variety of aircraft",
+        "from stealth fighters to small UAVs"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-08-17T18:19:24Z",
+      "url": "https://www.defensenews.com/industry/techwatch/2026/08/17/us-air-force-looks-to-acquire-target-drones-that-can-mimic-stealth-jets",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 5.2 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美军",
+        "靶机",
+        "隐形"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/HALSUURXHBCAZM7PHKIDQ4RLSQ.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/industry/techwatch/2026/08/17/us-air-force-looks-to-acquire-target-drones-that-can-mimic-stealth-jets",
+          "publishedAt": "2026-08-17T18:19:24Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 16
+    },
+    {
+      "id": "b09712b568b116",
+      "eventId": "evt-4c46142de140",
+      "contentType": "news",
+      "title": "俄罗斯著名反战政治家被判处11年监禁",
+      "originalTitle": "Russia's prominent anti-war politician jailed for 11 years",
+      "summary": "列夫·施洛斯伯格因“诋毁”俄罗斯军队被判有罪，他谴责这一判决是对其政治立场的惩罚。",
+      "keyFacts": [
+        "Lev Schlosberg is found guilty of \"discrediting\" Russia's army - a verdict he condemns as punishment for his political position"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-17T16:17:34Z",
+      "url": "https://www.bbc.co.uk/news/articles/cj4kjnle2neo?at_medium=RSS&at_campaign=rss",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 7.3 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "俄罗斯",
+        "政治",
+        "判决"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/6484/live/398ad2e0-9a4b-11f1-aed2-8d6da8d75094.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cj4kjnle2neo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-17T16:17:34Z",
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
@@ -1271,7 +1887,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 7.6 小时",
+        "发布约 8.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1302,32 +1918,31 @@
       "streamRank": 18
     },
     {
-      "id": "b3aad514897579",
-      "eventId": "evt-0c01f95125fd",
+      "id": "ec5410f2ec973d",
+      "eventId": "evt-4c3af60c41ba",
       "contentType": "news",
-      "title": "长征十二号在长征七A失败后成功发射，长征二号丙为阿联酋发射卫星",
-      "originalTitle": "Long March 12 launches despite recent 7A failure, Long March 2C launches satellite for UAE",
-      "summary": "赫尔辛基——中国上周末发射了新一批国网巨型星座卫星，随后又为阿联酋发射了一颗开发卫星。",
+      "title": "HEO将使用Planet卫星进行非地球成像",
+      "originalTitle": "HEO to use Planet satellites for non-Earth imaging",
+      "summary": "澳大利亚公司HEO使用地球观测卫星拍摄其他航天器图像，已与Planet公司签署协议，以使用该公司的卫星。",
       "keyFacts": [
-        "HELSINKI — China launched a new batch of Guowang megaconstellation satellites over the weekend",
-        "following up with a separate launch of a developmental satellite for the UAE",
-        "The launch of […]"
+        "the Australian company that uses Earth observation satellites to take images of other spacecraft",
+        "has signed an agreement with Planet to access that company’s satellites"
       ],
       "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
       "category": "航空航天",
       "source": "SpaceNews",
       "country": "国际",
-      "publishedAt": "2026-08-17T09:56:15Z",
-      "url": "https://spacenews.com/long-march-12-launches-despite-recent-7a-failure-long-march-2c-launches-satellite-for-uae",
-      "score": 65,
+      "publishedAt": "2026-08-17T22:00:00Z",
+      "url": "https://spacenews.com/heo-to-use-planet-satellites-for-non-earth-imaging",
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 14,
-        "影响信号": 4,
-        "主题相关性": 4,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -1336,16 +1951,15 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 12.8 小时",
-        "命中 2 个主题信号",
-        "影响信号：launch"
+        "发布约 1.6 小时",
+        "命中 1 个主题信号"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "航天",
-        "长征火箭",
-        "卫星发射"
+        "HEO",
+        "Planet",
+        "非地球成像"
       ],
       "image": "",
       "corroboration": 1,
@@ -1353,8 +1967,8 @@
         {
           "name": "SpaceNews",
           "domain": "spacenews.com",
-          "url": "https://spacenews.com/long-march-12-launches-despite-recent-7a-failure-long-march-2c-launches-satellite-for-uae",
-          "publishedAt": "2026-08-17T09:56:15Z",
+          "url": "https://spacenews.com/heo-to-use-planet-satellites-for-non-earth-imaging",
+          "publishedAt": "2026-08-17T22:00:00Z",
           "evidenceGroup": "outlet:spacenews.com"
         }
       ],
@@ -1366,70 +1980,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 19
-    },
-    {
-      "id": "a20f9c474ff40c",
-      "eventId": "evt-85a3726d34b2",
-      "contentType": "news",
-      "title": "法拉利首款电动汽车以4000万美元创纪录价格售出",
-      "originalTitle": "Ferrari's first ever electric car sold for record $40m",
-      "summary": "法拉利首款电动汽车Luce以4000万美元售出，创纪录。其发布引发一些评论家批评，称其背离了品牌标志性的张扬设计风格。",
-      "keyFacts": [
-        "The Luce's launch drew backlash from some commentators who said it broke from the brand's signature dramatic styling"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-17T02:22:04Z",
-      "url": "https://www.bbc.co.uk/news/articles/c77ggpgrp2do?at_medium=RSS&at_campaign=rss",
-      "score": 65,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 9,
-        "时效": 10,
-        "影响信号": 9,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 20.4 小时",
-        "命中 1 个主题信号",
-        "影响信号：first、launch"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "法拉利",
-        "电动汽车",
-        "创纪录"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/e2f6/live/27d57b00-99d2-11f1-8bfd-8bbe460b94a0.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/c77ggpgrp2do?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-17T02:22:04Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 20
     },
     {
       "id": "21b0262faf118f",
@@ -1464,7 +2014,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.9 小时",
+        "发布约 2.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1492,7 +2042,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 21
+      "streamRank": 20
     },
     {
       "id": "645c02e66c7df6",
@@ -1527,7 +2077,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 2.0 小时",
+        "发布约 2.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1555,7 +2105,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 22
+      "streamRank": 21
     },
     {
       "id": "175ce6da05ac19",
@@ -1592,7 +2142,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.5 小时",
+        "发布约 4.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1620,7 +2170,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 23
+      "streamRank": 22
     },
     {
       "id": "bfccb54c82d294",
@@ -1656,7 +2206,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.8 小时",
+        "发布约 4.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1684,7 +2234,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 24
+      "streamRank": 23
     },
     {
       "id": "a528eff4cadee3",
@@ -1721,7 +2271,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.8 小时",
+        "发布约 4.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1749,7 +2299,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 25
+      "streamRank": 24
     },
     {
       "id": "f4ae8cc92b8cc6",
@@ -1784,7 +2334,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.9 小时",
+        "发布约 4.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1812,177 +2362,11 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 26
-    },
-    {
-      "id": "2d4b21839f92bc",
-      "eventId": "evt-84eebadb8d60",
-      "contentType": "news",
-      "title": "特朗普特使库什纳会见哈马斯领导人推动加沙和平计划",
-      "originalTitle": "Trump envoy Kushner meets Hamas leader to push Gaza peace plan",
-      "summary": "这次罕见的会晤发生在以色列拒绝特朗普的加沙和平计划一周后。",
-      "keyFacts": [
-        "The rare meeting comes a week",
-        "Israel rejected Donald Trump's peace plan for Gaza"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-17T16:02:58Z",
-      "url": "https://www.bbc.co.uk/news/articles/c77gg5vn44yo?at_medium=RSS&at_campaign=rss",
-      "score": 78,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 4,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 82/100",
-        "综合排序分 78/100（AI 65% + 规则 35%）",
-        "规则参考分 71/100",
-        "来源权重 17/20",
-        "发布约 3.6 小时",
-        "命中 2 个主题信号",
-        "2 个独立来源相互印证"
-      ],
-      "confidence": "高",
-      "confidenceReason": "主来源权重 17/20，且有 2 个独立来源报道；仍应以原文和一手材料为准。",
-      "tags": [
-        "特朗普",
-        "库什纳",
-        "哈马斯"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/1476/live/b59ea940-9a3e-11f1-a291-b542ee92de7c.jpg",
-      "corroboration": 2,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/c77gg5vn44yo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-16T19:58:14Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        },
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/8/16/kushner-meets-hamas-in-egypt-to-push-trumps-gaza-plan?traffic_source=rss",
-          "publishedAt": "2026-08-16T19:23:28Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "eventDossier": {
-        "eventId": "evt-84eebadb8d60",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-08-17",
-        "lastSeen": "2026-08-17",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-08-17",
-            "newsId": "2d4b21839f92bc",
-            "title": "特朗普特使库什纳会见哈马斯领导人推动加沙和平计划",
-            "source": "BBC World",
-            "publishedAt": "2026-08-16T19:58:14Z",
-            "score": 78
-          }
-        ],
-        "independentSourceCount": 2,
-        "paperCount": 0
-      },
-      "evidenceMatrix": {
-        "overallStatus": "multi-source",
-        "independentSourceCount": 2,
-        "sourceGroups": [
-          "outlet:bbc.co.uk",
-          "outlet:aljazeera.com"
-        ],
-        "claims": [
-          {
-            "text": "The rare meeting comes a week",
-            "status": "multi-source-context",
-            "statusLabel": "事件获多源报道，单项事实仍需核验",
-            "sourceGroups": [
-              "outlet:bbc.co.uk",
-              "outlet:aljazeera.com"
-            ]
-          },
-          {
-            "text": "Israel rejected Donald Trump's peace plan for Gaza",
-            "status": "multi-source-context",
-            "statusLabel": "事件获多源报道，单项事实仍需核验",
-            "sourceGroups": [
-              "outlet:bbc.co.uk",
-              "outlet:aljazeera.com"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-0b324f746e70",
-          "eventId": "evt-84eebadb8d60",
-          "statement": "若库什纳与哈马斯会晤有实质性进展，则需关注以色列方面的回应及是否重启停火谈判。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-08-17",
-          "dueAfter": "2026-09-16",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "2d4b21839f92bc"
-          ],
-          "lastReviewedAt": "2026-08-17"
-        },
-        {
-          "predictionId": "pred-603f4634fc9a",
-          "eventId": "evt-84eebadb8d60",
-          "statement": "后续可观察加沙地带冲突频率是否因外交接触而出现波动。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-08-17",
-          "dueAfter": "2026-11-15",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "2d4b21839f92bc"
-          ],
-          "lastReviewedAt": "2026-08-17"
-        }
-      ],
-      "relatedPapers": [],
-      "isTopStory": true,
-      "streamRank": 27
+      "streamRank": 25
     },
     {
       "id": "a7f9f22c8a701d",
-      "eventId": "evt-0624529f59fb",
+      "eventId": "evt-2a8960495669",
       "contentType": "news",
       "title": "特朗普命令五角大楼削减与韩国的军事演习",
       "originalTitle": "Trump orders Pentagon to cut back military exercises with South Korea",
@@ -1996,8 +2380,8 @@
       "country": "国际",
       "publishedAt": "2026-08-17T15:14:07Z",
       "url": "https://www.defensenews.com/news/your-military/2026/08/17/trump-orders-pentagon-to-cut-back-military-exercises-with-south-korea",
-      "score": 64,
-      "scoreBasis": "规则评分",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -2012,8 +2396,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 64/100",
         "来源权重 16/20",
-        "发布约 7.5 小时",
+        "发布约 8.3 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -2034,78 +2421,186 @@
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 28
-    },
-    {
-      "id": "bb2ac03f2376c2",
-      "eventId": "evt-39d3fd644c0f",
-      "contentType": "news",
-      "title": "'人人都爱赢家'：随着基辅取得胜利，美乌情报共享激增",
-      "originalTitle": "‘Everybody loves a winner’: US-Ukraine intel sharing surges as Kyiv racks up wins",
-      "summary": "美国与乌克兰的情报共享已恢复至全面水平，因为基辅的中远程打击继续打击俄罗斯的石油工业。",
-      "keyFacts": [
-        "intelligence sharing with Ukraine has rebounded to full strength as Kyiv’s mid-",
-        "deep-range strikes continue to hammer Russia’s oil industry"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Defense News",
-      "country": "国际",
-      "publishedAt": "2026-08-17T14:00:00Z",
-      "url": "https://www.defensenews.com/global/europe/2026/08/17/everybody-loves-a-winner-us-ukraine-intel-sharing-surges-as-kyiv-racks-up-wins",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
+      "eventDossier": {
+        "eventId": "evt-2a8960495669",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-17",
+        "lastSeen": "2026-08-18",
+        "updateCount": 3,
+        "timeline": [
+          {
+            "editionDate": "2026-08-17",
+            "newsId": "d39bc91ddc0ae4",
+            "title": "特朗普称美国将缩减与韩国的军事演习，因韩国未参与伊朗战争",
+            "source": "BBC World",
+            "publishedAt": "2026-08-16T23:28:14Z",
+            "score": 75
+          },
+          {
+            "editionDate": "2026-08-18",
+            "newsId": "a7f9f22c8a701d",
+            "title": "特朗普命令五角大楼削减与韩国的军事演习",
+            "source": "Defense News",
+            "publishedAt": "2026-08-17T15:14:07Z",
+            "score": 73
+          },
+          {
+            "editionDate": "2026-08-18",
+            "newsId": "b9a493e7a59e67",
+            "title": "美韩军事训练因伊朗战争冷落而缩减",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-17T23:13:20Z",
+            "score": 79
+          }
+        ],
+        "independentSourceCount": 3,
+        "paperCount": 0
       },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 8.7 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美乌情报共享",
-        "俄乌冲突",
-        "石油工业"
-      ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/LDUUB6ICKFB2JCCCL6WXO5L4PU.JPG",
-      "corroboration": 1,
-      "sources": [
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "President Trump instructed the Pentagon to “substantially reduce” joint military exercises with long-term Asian ally South Korea",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
         {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/global/europe/2026/08/17/everybody-loves-a-winner-us-ukraine-intel-sharing-surges-as-kyiv-racks-up-wins",
-          "publishedAt": "2026-08-17T14:00:00Z",
-          "evidenceGroup": "outlet:defensenews.com"
+          "predictionId": "pred-76250a8d93d9",
+          "eventId": "evt-2a8960495669",
+          "statement": "后续可观察韩国官方对美方缩减军演决定的正式回应及美韩联合声明的具体内容。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-09-17",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "b9a493e7a59e67"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        },
+        {
+          "predictionId": "pred-6b82516b24bc",
+          "eventId": "evt-2a8960495669",
+          "statement": "若美方持续缩减军演，则需关注韩美同盟其他合作机制（如情报共享、联合指挥）是否出现进一步弱化。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-11-16",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "b9a493e7a59e67"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        },
+        {
+          "predictionId": "pred-0e9a21293fee",
+          "eventId": "evt-2a8960495669",
+          "statement": "后续可观察五角大楼具体实施削减军演的细节及韩国国防部的评估回应。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-09-17",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "a7f9f22c8a701d"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        },
+        {
+          "predictionId": "pred-1a4fd8df41f8",
+          "eventId": "evt-2a8960495669",
+          "statement": "若军演持续缩减，则需关注美韩对朝鲜威慑态势的调整及地区安全平衡是否受影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-11-16",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "a7f9f22c8a701d"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        },
+        {
+          "predictionId": "pred-b53c2699fafc",
+          "eventId": "evt-2a8960495669",
+          "statement": "若美国正式缩减美韩军演，则需关注韩国外交部及国防部的官方回应及后续行动。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-09-16",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d39bc91ddc0ae4"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        },
+        {
+          "predictionId": "pred-eb0084329c48",
+          "eventId": "evt-2a8960495669",
+          "statement": "后续可观察美韩同盟在其他领域（如情报共享、经济合作）是否受此影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-11-15",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d39bc91ddc0ae4"
+          ],
+          "lastReviewedAt": "2026-08-18"
         }
       ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 29
+      "isTopStory": true,
+      "streamRank": 26,
+      "relatedPapers": []
     },
     {
       "id": "5875d121b93584",
@@ -2141,7 +2636,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 9.4 小时",
+        "发布约 10.3 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -2169,33 +2664,178 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 30
+      "streamRank": 27
     },
     {
-      "id": "fdc5a8db84bae9",
-      "eventId": "evt-c1ba768295ad",
+      "id": "b3aad514897579",
+      "eventId": "evt-0c01f95125fd",
       "contentType": "news",
-      "title": "SEOPS新增第二次Waymaker拼车任务",
-      "originalTitle": "SEOPS adds second Waymaker rideshare mission",
-      "summary": "发射服务提供商SEOPS在不到三个月前宣布的一次专用拼车任务需求旺盛后，又增加了第二次专用拼车任务。",
+      "title": "长征十二号在长征七A失败后成功发射，长征二号丙为阿联酋发射卫星",
+      "originalTitle": "Long March 12 launches despite recent 7A failure, Long March 2C launches satellite for UAE",
+      "summary": "赫尔辛基——中国上周末发射了新一批国网巨型星座卫星，随后又为阿联酋发射了一颗开发卫星。",
       "keyFacts": [
-        "Launch services provider SEOPS has added a second dedicated rideshare mission",
-        "seeing high demand for one announced less than three months ago"
+        "HELSINKI — China launched a new batch of Guowang megaconstellation satellites over the weekend",
+        "following up with a separate launch of a developmental satellite for the UAE",
+        "The launch of […]"
       ],
       "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
       "category": "航空航天",
       "source": "SpaceNews",
       "country": "国际",
-      "publishedAt": "2026-08-17T12:00:00Z",
-      "url": "https://spacenews.com/seops-adds-second-waymaker-rideshare-mission",
-      "score": 64,
-      "scoreBasis": "规则评分",
+      "publishedAt": "2026-08-17T09:56:15Z",
+      "url": "https://spacenews.com/long-march-12-launches-despite-recent-7a-failure-long-march-2c-launches-satellite-for-uae",
+      "score": 67,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 15,
+        "时效": 13,
         "影响信号": 4,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 68/100",
+        "综合排序分 67/100（AI 65% + 规则 35%）",
+        "规则参考分 64/100",
+        "来源权重 16/20",
+        "发布约 13.6 小时",
+        "命中 2 个主题信号",
+        "影响信号：launch"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "航天",
+        "长征火箭",
+        "卫星发射"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/long-march-12-launches-despite-recent-7a-failure-long-march-2c-launches-satellite-for-uae",
+          "publishedAt": "2026-08-17T09:56:15Z",
+          "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-0c01f95125fd",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-18",
+        "lastSeen": "2026-08-18",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-18",
+            "newsId": "b3aad514897579",
+            "title": "长征十二号在长征七A失败后成功发射，长征二号丙为阿联酋发射卫星",
+            "source": "SpaceNews",
+            "publishedAt": "2026-08-17T09:56:15Z",
+            "score": 67
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:spacenews.com"
+        ],
+        "claims": [
+          {
+            "text": "HELSINKI — China launched a new batch of Guowang megaconstellation satellites over the weekend",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          },
+          {
+            "text": "following up with a separate launch of a developmental satellite for the UAE",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          },
+          {
+            "text": "The launch of […]",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-5210cafffeb4",
+          "eventId": "evt-0c01f95125fd",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-09-17",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "b3aad514897579"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 28,
+      "relatedPapers": []
+    },
+    {
+      "id": "a20f9c474ff40c",
+      "eventId": "evt-85a3726d34b2",
+      "contentType": "news",
+      "title": "法拉利首款电动汽车以4000万美元创纪录价格售出",
+      "originalTitle": "Ferrari's first ever electric car sold for record $40m",
+      "summary": "法拉利首款电动汽车Luce以4000万美元售出，创纪录。其发布引发一些评论家批评，称其背离了品牌标志性的张扬设计风格。",
+      "keyFacts": [
+        "The Luce's launch drew backlash from some commentators who said it broke from the brand's signature dramatic styling"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-17T02:22:04Z",
+      "url": "https://www.bbc.co.uk/news/articles/c77ggpgrp2do?at_medium=RSS&at_campaign=rss",
+      "score": 64,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 9,
+        "时效": 9,
+        "影响信号": 9,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
@@ -2204,27 +2844,27 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 10.7 小时",
+        "来源权重 17/20",
+        "发布约 21.2 小时",
         "命中 1 个主题信号",
-        "影响信号：launch"
+        "影响信号：first、launch"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "SEOPS",
-        "Waymaker",
-        "拼车任务"
+        "法拉利",
+        "电动汽车",
+        "创纪录"
       ],
-      "image": "",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/e2f6/live/27d57b00-99d2-11f1-8bfd-8bbe460b94a0.jpg",
       "corroboration": 1,
       "sources": [
         {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/seops-adds-second-waymaker-rideshare-mission",
-          "publishedAt": "2026-08-17T12:00:00Z",
-          "evidenceGroup": "outlet:spacenews.com"
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c77ggpgrp2do?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-17T02:22:04Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
       "selectionProvider": "",
@@ -2234,7 +2874,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 31
+      "streamRank": 29
     },
     {
       "id": "7ae78eb54aea1e",
@@ -2269,7 +2909,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.6 小时",
+        "发布约 6.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2297,7 +2937,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 32
+      "streamRank": 30
     },
     {
       "id": "2f81eb1a956f87",
@@ -2333,7 +2973,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.9 小时",
+        "发布约 6.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2361,33 +3001,319 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 33
+      "streamRank": 31
     },
     {
-      "id": "8b2173ce7000e3",
-      "eventId": "evt-ab410e53588b",
+      "id": "2d4b21839f92bc",
+      "eventId": "evt-84eebadb8d60",
       "contentType": "news",
-      "title": "对伊朗战争：第二阶段第37天",
-      "originalTitle": "War on Iran: Phase II, Day 37",
-      "summary": "伊朗悬赏3万美元捉拿或击杀美军士兵。特朗普缩减韩国军演。",
+      "title": "库什纳在与哈马斯就加沙和平计划会谈后称赞与内塔尼亚胡的会晤'非常好'",
+      "originalTitle": "Kushner hails 'very good' meeting with Netanyahu after Hamas talks on Gaza peace plan",
+      "summary": "特朗普的中东特使兼女婿贾里德·库什纳正在寻求以色列对美方支持的加沙和平计划的支持，他在与以色列总理内塔尼亚胡会晤后称赞会谈'非常好'。",
       "keyFacts": [
-        "Iran is offering $30,000 for captured or killed US soldiers",
-        "Trump cuts back South Korea drills"
+        "库什纳与内塔尼亚胡会晤后称赞会谈'非常好'",
+        "库什纳正寻求以色列支持美方支持的加沙和平计划",
+        "此前与哈马斯就加沙和平计划进行了会谈"
+      ],
+      "why": "库什纳此行旨在推动加沙和平计划，其进展可能影响中东和平进程及巴以冲突走向。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-17T16:02:58Z",
+      "url": "https://www.bbc.co.uk/news/articles/c77gg5vn44yo?at_medium=RSS&at_campaign=rss",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 4,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 76/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 67/100",
+        "来源权重 17/20",
+        "发布约 7.5 小时",
+        "命中 1 个主题信号",
+        "2 个独立来源相互印证"
+      ],
+      "confidence": "高",
+      "confidenceReason": "主来源权重 17/20，且有 2 个独立来源报道；仍应以原文和一手材料为准。",
+      "tags": [
+        "库什纳",
+        "加沙",
+        "和平计划"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/1476/live/b59ea940-9a3e-11f1-a291-b542ee92de7c.jpg",
+      "corroboration": 2,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c77gg5vn44yo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-17T16:02:58Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        },
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/8/16/kushner-meets-hamas-in-egypt-to-push-trumps-gaza-plan?traffic_source=rss",
+          "publishedAt": "2026-08-16T19:23:28Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-84eebadb8d60",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-17",
+        "lastSeen": "2026-08-18",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-08-17",
+            "newsId": "2d4b21839f92bc",
+            "title": "特朗普特使库什纳会见哈马斯领导人推动加沙和平计划",
+            "source": "BBC World",
+            "publishedAt": "2026-08-16T19:58:14Z",
+            "score": 78
+          },
+          {
+            "editionDate": "2026-08-18",
+            "newsId": "2d4b21839f92bc",
+            "title": "库什纳在与哈马斯就加沙和平计划会谈后称赞与内塔尼亚胡的会晤'非常好'",
+            "source": "BBC World",
+            "publishedAt": "2026-08-17T16:02:58Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:bbc.co.uk",
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "库什纳与内塔尼亚胡会晤后称赞会谈'非常好'",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:bbc.co.uk",
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "库什纳正寻求以色列支持美方支持的加沙和平计划",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:bbc.co.uk",
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "此前与哈马斯就加沙和平计划进行了会谈",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:bbc.co.uk",
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-dae2494e3083",
+          "eventId": "evt-84eebadb8d60",
+          "statement": "后续可观察以色列对加沙和平计划的正式立场是否有变，以及库什纳是否公布会谈具体成果。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-09-17",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2d4b21839f92bc"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        },
+        {
+          "predictionId": "pred-0063f52484ac",
+          "eventId": "evt-84eebadb8d60",
+          "statement": "若美方持续推动和平计划且哈马斯未解除武装，则需关注美以关系协调机制与加沙停火进程是否现转机。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-18",
+          "dueAfter": "2026-11-16",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2d4b21839f92bc"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        },
+        {
+          "predictionId": "pred-0b324f746e70",
+          "eventId": "evt-84eebadb8d60",
+          "statement": "若库什纳与哈马斯会晤有实质性进展，则需关注以色列方面的回应及是否重启停火谈判。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-09-16",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2d4b21839f92bc"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        },
+        {
+          "predictionId": "pred-603f4634fc9a",
+          "eventId": "evt-84eebadb8d60",
+          "statement": "后续可观察加沙地带冲突频率是否因外交接触而出现波动。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-11-15",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2d4b21839f92bc"
+          ],
+          "lastReviewedAt": "2026-08-18"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 32,
+      "relatedPapers": []
+    },
+    {
+      "id": "bb2ac03f2376c2",
+      "eventId": "evt-39d3fd644c0f",
+      "contentType": "news",
+      "title": "'人人都爱赢家'：随着基辅取得胜利，美乌情报共享激增",
+      "originalTitle": "‘Everybody loves a winner’: US-Ukraine intel sharing surges as Kyiv racks up wins",
+      "summary": "美国与乌克兰的情报共享已恢复至全面水平，因为基辅的中远程打击继续打击俄罗斯的石油工业。",
+      "keyFacts": [
+        "intelligence sharing with Ukraine has rebounded to full strength as Kyiv’s mid-",
+        "deep-range strikes continue to hammer Russia’s oil industry"
       ],
       "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
       "category": "局部冲突",
-      "source": "Al Jazeera",
+      "source": "Defense News",
       "country": "国际",
-      "publishedAt": "2026-08-17T16:27:48Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/17/war-on-iran-phase-ii-day-37?traffic_source=rss",
+      "publishedAt": "2026-08-17T14:00:00Z",
+      "url": "https://www.defensenews.com/global/europe/2026/08/17/everybody-loves-a-winner-us-ukraine-intel-sharing-surges-as-kyiv-racks-up-wins",
       "score": 63,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 15,
         "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 9.6 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美乌情报共享",
+        "俄乌冲突",
+        "石油工业"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/LDUUB6ICKFB2JCCCL6WXO5L4PU.JPG",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/global/europe/2026/08/17/everybody-loves-a-winner-us-ukraine-intel-sharing-surges-as-kyiv-racks-up-wins",
+          "publishedAt": "2026-08-17T14:00:00Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 33
+    },
+    {
+      "id": "fdc5a8db84bae9",
+      "eventId": "evt-c1ba768295ad",
+      "contentType": "news",
+      "title": "SEOPS新增第二次Waymaker拼车任务",
+      "originalTitle": "SEOPS adds second Waymaker rideshare mission",
+      "summary": "发射服务提供商SEOPS在不到三个月前宣布的一次专用拼车任务需求旺盛后，又增加了第二次专用拼车任务。",
+      "keyFacts": [
+        "Launch services provider SEOPS has added a second dedicated rideshare mission",
+        "seeing high demand for one announced less than three months ago"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
+      "country": "国际",
+      "publishedAt": "2026-08-17T12:00:00Z",
+      "url": "https://spacenews.com/seops-adds-second-waymaker-rideshare-mission",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 14,
+        "影响信号": 4,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
@@ -2397,25 +3323,26 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.3 小时",
-        "命中 1 个主题信号"
+        "发布约 11.6 小时",
+        "命中 1 个主题信号",
+        "影响信号：launch"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "伊朗",
-        "军事",
-        "悬赏"
+        "SEOPS",
+        "Waymaker",
+        "拼车任务"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/17/war-on-iran-phase-ii-day-37?traffic_source=rss",
-          "publishedAt": "2026-08-17T16:27:48Z",
-          "evidenceGroup": "outlet:aljazeera.com"
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/seops-adds-second-waymaker-rideshare-mission",
+          "publishedAt": "2026-08-17T12:00:00Z",
+          "evidenceGroup": "outlet:spacenews.com"
         }
       ],
       "selectionProvider": "",
@@ -2426,136 +3353,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 34
-    },
-    {
-      "id": "c28d65c76c7ab4",
-      "eventId": "evt-75739bd693f8",
-      "contentType": "news",
-      "title": "索马里军队与叛军争夺关键城市拜多阿的控制权",
-      "originalTitle": "Somali army clashes with rebel forces for control of key city Baidoa",
-      "summary": "索马里军队在拜多阿击退叛军，此前发生激烈战斗，涉及爆炸物并造成数十人伤亡。",
-      "keyFacts": [
-        "Somali forces repel rebel fighters in Baidoa",
-        "intense fighting involving explosives",
-        "dozens of casualties"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-17T16:24:43Z",
-      "url": "https://www.aljazeera.com/news/2026/8/17/somali-army-clashes-with-rebel-forces-for-control-of-key-city-baidoa?traffic_source=rss",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.3 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "索马里",
-        "冲突",
-        "拜多阿"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/8/17/somali-army-clashes-with-rebel-forces-for-control-of-key-city-baidoa?traffic_source=rss",
-          "publishedAt": "2026-08-17T16:24:43Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 35
-    },
-    {
-      "id": "16296e6a6f0de0",
-      "eventId": "evt-15a34b96b121",
-      "contentType": "news",
-      "title": "特朗普缩减与韩国的军事演习，称其‘昂贵’且对朝‘敌对’",
-      "originalTitle": "Trump scales back military exercise with S Korea, calling it ‘costly’ and ‘hostile’ to the North",
-      "summary": "特朗普在社交媒体上写道：‘这些演习不仅昂贵……而且传递的信号完全不合适且敌对。’",
-      "keyFacts": [
-        "“These exercises are not only costly […]",
-        "send a signal that is completely inappropriate",
-        "hostile,” Trump wrote in a social media post"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-08-17T16:14:35Z",
-      "url": "https://breakingdefense.com/2026/08/trump-scales-back-military-exercise-with-s-korea-calling-it-costly-and-hostile-to-the-north",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.5 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "特朗普",
-        "韩国",
-        "军事"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/trump-scales-back-military-exercise-with-s-korea-calling-it-costly-and-hostile-to-the-north",
-          "publishedAt": "2026-08-17T16:14:35Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 36
     },
     {
       "id": "ab18700e22db6e",
@@ -2590,7 +3387,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.3 小时",
+        "发布约 6.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2618,7 +3415,201 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
+      "streamRank": 35
+    },
+    {
+      "id": "8b2173ce7000e3",
+      "eventId": "evt-ab410e53588b",
+      "contentType": "news",
+      "title": "对伊朗战争：第二阶段第37天",
+      "originalTitle": "War on Iran: Phase II, Day 37",
+      "summary": "伊朗悬赏3万美元捉拿或击杀美军士兵。特朗普缩减韩国军演。",
+      "keyFacts": [
+        "Iran is offering $30,000 for captured or killed US soldiers",
+        "Trump cuts back South Korea drills"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-17T16:27:48Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/17/war-on-iran-phase-ii-day-37?traffic_source=rss",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.1 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "军事",
+        "悬赏"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/17/war-on-iran-phase-ii-day-37?traffic_source=rss",
+          "publishedAt": "2026-08-17T16:27:48Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 36
+    },
+    {
+      "id": "c28d65c76c7ab4",
+      "eventId": "evt-75739bd693f8",
+      "contentType": "news",
+      "title": "索马里军队与叛军争夺关键城市拜多阿的控制权",
+      "originalTitle": "Somali army clashes with rebel forces for control of key city Baidoa",
+      "summary": "索马里军队在拜多阿击退叛军，此前发生激烈战斗，涉及爆炸物并造成数十人伤亡。",
+      "keyFacts": [
+        "Somali forces repel rebel fighters in Baidoa",
+        "intense fighting involving explosives",
+        "dozens of casualties"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-17T16:24:43Z",
+      "url": "https://www.aljazeera.com/news/2026/8/17/somali-army-clashes-with-rebel-forces-for-control-of-key-city-baidoa?traffic_source=rss",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.2 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "索马里",
+        "冲突",
+        "拜多阿"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/8/17/somali-army-clashes-with-rebel-forces-for-control-of-key-city-baidoa?traffic_source=rss",
+          "publishedAt": "2026-08-17T16:24:43Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
       "streamRank": 37
+    },
+    {
+      "id": "16296e6a6f0de0",
+      "eventId": "evt-15a34b96b121",
+      "contentType": "news",
+      "title": "特朗普缩减与韩国的军事演习，称其‘昂贵’且对朝‘敌对’",
+      "originalTitle": "Trump scales back military exercise with S Korea, calling it ‘costly’ and ‘hostile’ to the North",
+      "summary": "特朗普在社交媒体上写道：‘这些演习不仅昂贵……而且传递的信号完全不合适且敌对。’",
+      "keyFacts": [
+        "“These exercises are not only costly […]",
+        "send a signal that is completely inappropriate",
+        "hostile,” Trump wrote in a social media post"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-08-17T16:14:35Z",
+      "url": "https://breakingdefense.com/2026/08/trump-scales-back-military-exercise-with-s-korea-calling-it-costly-and-hostile-to-the-north",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.3 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "特朗普",
+        "韩国",
+        "军事"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/trump-scales-back-military-exercise-with-s-korea-calling-it-costly-and-hostile-to-the-north",
+          "publishedAt": "2026-08-17T16:14:35Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 38
     },
     {
       "id": "9ff0e06f273d7e",
@@ -2653,7 +3644,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 7.4 小时",
+        "发布约 8.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2681,7 +3672,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 38
+      "streamRank": 39
     },
     {
       "id": "a4353d7652d1df",
@@ -2718,7 +3709,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 11.7 小时",
+        "发布约 12.6 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -2746,7 +3737,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 39
+      "streamRank": 40
     },
     {
       "id": "2cc0c4475a0a44",
@@ -2781,7 +3772,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.4 小时",
+        "发布约 10.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2809,7 +3800,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 40
+      "streamRank": 41
     },
     {
       "id": "29162aa85d1399",
@@ -2828,13 +3819,13 @@
       "country": "国际",
       "publishedAt": "2026-08-17T04:01:00Z",
       "url": "https://science.nasa.gov/earth/earth-observatory/chasing-fire-clouds-in-utah",
-      "score": 60,
+      "score": 59,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 20,
         "主题优先级": 9,
-        "时效": 11,
+        "时效": 10,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2845,7 +3836,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 18.7 小时",
+        "发布约 19.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2873,143 +3864,6 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 41
-    },
-    {
-      "id": "8b8242f2c6b30f",
-      "eventId": "evt-618b3b6ac1fa",
-      "contentType": "news",
-      "title": "卫星运营商强调在受限市场中锁定发射交易",
-      "originalTitle": "Satellite operators emphasize launch deals in a constrained market",
-      "summary": "在发射市场受限的情况下，卫星运营商向投资者和客户强调，他们已安排好发射能力，即使这些能力何时可用尚不确定。",
-      "keyFacts": [
-        "发射市场受限，卫星运营商强调已锁定发射能力。",
-        "运营商向投资者和客户强调发射安排，尽管可用时间不确定。"
-      ],
-      "why": "在发射能力紧张的时期，明确发射计划对保障卫星部署和投资者信心至关重要。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-08-16T23:05:35Z",
-      "url": "https://spacenews.com/satellite-operators-emphasize-launch-deals-in-a-constrained-market",
-      "score": 69,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 20,
-        "影响信号": 4,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 68/100",
-        "综合排序分 69/100（AI 65% + 规则 35%）",
-        "规则参考分 71/100",
-        "来源权重 16/20",
-        "发布约 0.4 小时",
-        "命中 2 个主题信号",
-        "影响信号：launch"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "卫星",
-        "发射市场",
-        "航天"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/satellite-operators-emphasize-launch-deals-in-a-constrained-market",
-          "publishedAt": "2026-08-16T23:05:35Z",
-          "evidenceGroup": "outlet:spacenews.com"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "eventDossier": {
-        "eventId": "evt-618b3b6ac1fa",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-08-17",
-        "lastSeen": "2026-08-17",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-08-17",
-            "newsId": "8b8242f2c6b30f",
-            "title": "卫星运营商强调在受限市场中锁定发射交易",
-            "source": "SpaceNews",
-            "publishedAt": "2026-08-16T23:05:35Z",
-            "score": 69
-          }
-        ],
-        "independentSourceCount": 1,
-        "paperCount": 0
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:spacenews.com"
-        ],
-        "claims": [
-          {
-            "text": "发射市场受限，卫星运营商强调已锁定发射能力。",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:spacenews.com"
-            ]
-          },
-          {
-            "text": "运营商向投资者和客户强调发射安排，尽管可用时间不确定。",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:spacenews.com"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-ba8d9f1f68e1",
-          "eventId": "evt-618b3b6ac1fa",
-          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-          "horizon": "观察",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-08-17",
-          "dueAfter": "2026-09-16",
-          "verificationSignals": [
-            "正式任务时间表或许可",
-            "后续试验、发射或在轨结果"
-          ],
-          "evidenceIds": [
-            "8b8242f2c6b30f"
-          ],
-          "lastReviewedAt": "2026-08-17"
-        }
-      ],
-      "relatedPapers": [],
-      "isTopStory": true,
       "streamRank": 42
     },
     {
@@ -3030,13 +3884,13 @@
       "country": "国际",
       "publishedAt": "2026-08-17T04:30:00Z",
       "url": "https://spacenews.com/lynk-and-omnispace-form-elveo-mobile-to-advance-d2d-services",
-      "score": 56,
+      "score": 55,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 11,
+        "时效": 10,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -3047,7 +3901,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 18.2 小时",
+        "发布约 19.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
