@@ -1,26 +1,26 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-08-20T22:46:44Z",
+  "generatedAt": "2026-08-20T23:35:52Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
-  "itemCount": 48,
-  "totalCandidateCount": 48,
+  "itemCount": 52,
+  "totalCandidateCount": 52,
   "truncated": false,
   "categoryCounts": {
-    "局部冲突": 12,
-    "军事动态": 15,
-    "航空航天": 17,
+    "局部冲突": 14,
+    "军事动态": 18,
+    "航空航天": 16,
     "AI": 3,
     "前沿技术": 1
   },
   "sourceCounts": {
     "SpaceNews": 10,
     "Breaking Defense": 9,
+    "Al Jazeera": 7,
     "BBC World": 6,
-    "Al Jazeera": 5,
-    "Defense News": 4,
+    "Defense News": 5,
+    "The War Zone": 5,
     "TechCrunch AI": 4,
-    "The War Zone": 4,
     "NASA": 3,
     "Ars Technica": 1,
     "Defense One": 1,
@@ -28,24 +28,24 @@
   },
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
-  "translatedItemCount": 48,
+  "translatedItemCount": 52,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 11,
-    "completedItemCount": 11,
+    "requestedItemCount": 4,
+    "completedItemCount": 4,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 2,
-    "requestCount": 2,
+    "initialBatchCount": 1,
+    "requestCount": 1,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
     "completionReason": "complete_first_pass",
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
-    "reusedItemCount": 37,
+    "reusedItemCount": 46,
     "featuredTranslatedItemCount": 10
   },
   "items": [
@@ -65,13 +65,13 @@
       "country": "国际",
       "publishedAt": "2026-08-20T20:09:46Z",
       "url": "https://www.defensenews.com/global/europe/2026/08/20/ukraine-braces-for-combined-salvos-of-up-to-200-missiles-as-overnight-attack-kills-15-in-kyiv",
-      "score": 87,
-      "scoreBasis": "规则评分",
+      "score": 86,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 18,
         "影响信号": 16,
         "主题相关性": 8,
         "证据完整度": 3,
@@ -81,8 +81,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 86/100",
+        "综合排序分 86/100（AI 65% + 规则 35%）",
+        "规则参考分 86/100",
         "来源权重 16/20",
-        "发布约 2.6 小时",
+        "发布约 3.4 小时",
         "命中 4 个主题信号",
         "影响信号：production、attack、missile"
       ],
@@ -104,14 +107,94 @@
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-4f9cdd293a90",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-21",
+        "lastSeen": "2026-08-21",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-21",
+            "newsId": "913b14b39f09ed",
+            "title": "乌克兰面临多达200枚导弹的联合齐射，基辅夜间袭击致15人死亡",
+            "source": "Defense News",
+            "publishedAt": "2026-08-20T20:09:46Z",
+            "score": 86
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "Russia ramps up missile production as Ukraine's ballistic missile interceptors hit their lowest levels in years",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-1f1039522e9c",
+          "eventId": "evt-4f9cdd293a90",
+          "statement": "若俄继续扩大导弹生产，后续可观察乌方是否获得更多防空支援或改变防御策略。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-21",
+          "dueAfter": "2026-09-20",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "913b14b39f09ed"
+          ],
+          "lastReviewedAt": "2026-08-21"
+        },
+        {
+          "predictionId": "pred-b7795f276042",
+          "eventId": "evt-4f9cdd293a90",
+          "statement": "若乌拦截器持续短缺，则需关注俄是否加大联合齐射频率，导致基础设施损毁加剧。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-21",
+          "dueAfter": "2026-11-19",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "913b14b39f09ed"
+          ],
+          "lastReviewedAt": "2026-08-21"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
     },
     {
       "id": "cedf7f5c014222",
@@ -131,7 +214,7 @@
       "publishedAt": "2026-08-20T17:14:55Z",
       "url": "https://www.bbc.co.uk/news/articles/c98vzmden5yo?at_medium=RSS&at_campaign=rss",
       "score": 74,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -146,8 +229,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 74/100",
+        "综合排序分 74/100（AI 65% + 规则 35%）",
+        "规则参考分 74/100",
         "来源权重 17/20",
-        "发布约 5.5 小时",
+        "发布约 6.3 小时",
         "命中 3 个主题信号",
         "影响信号：attack"
       ],
@@ -169,42 +255,130 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 2
+      "eventDossier": {
+        "eventId": "evt-49220965aaaa",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-21",
+        "lastSeen": "2026-08-21",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-21",
+            "newsId": "cedf7f5c014222",
+            "title": "基辅市长称俄罗斯在最新袭击中“蓄意”打击关键基础设施",
+            "source": "BBC World",
+            "publishedAt": "2026-08-20T17:14:55Z",
+            "score": 74
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "At least 17 people were killed in the \"massive attack\" overnight on Ukraine's capital",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "as mayor Vitali Klitschko warns hot water supply has been disrupted",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-50e3dda269b9",
+          "eventId": "evt-49220965aaaa",
+          "statement": "若热水供应中断持续，后续可观察基辅民生状况及国际人道援助响应。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-21",
+          "dueAfter": "2026-09-20",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "cedf7f5c014222"
+          ],
+          "lastReviewedAt": "2026-08-21"
+        },
+        {
+          "predictionId": "pred-5dec7652f966",
+          "eventId": "evt-49220965aaaa",
+          "statement": "若俄持续打击基础设施，则需关注乌克兰电网修复能力及冬季供暖风险。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-21",
+          "dueAfter": "2026-11-19",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "cedf7f5c014222"
+          ],
+          "lastReviewedAt": "2026-08-21"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 2,
+      "relatedPapers": []
     },
     {
-      "id": "1661df3a4e0cee",
-      "eventId": "evt-9b21fd9eb887",
+      "id": "1ff5b7219ce27c",
+      "eventId": "evt-4512134f89a7",
       "contentType": "news",
-      "title": "“野火”成为通用原子能公司MQ-9收割者无人机的继任者",
-      "originalTitle": "Wildfire Is General Atomics’ Successor To The MQ-9 Reaper",
-      "summary": "“野火”概念已进入五角大楼的新竞赛，以寻找下一代中空长航时情报、监视、侦察和打击无人机。",
+      "title": "美国指控一名女子涉嫌策划袭击纽约州议会大厦",
+      "originalTitle": "US charges woman for allegedly plotting attack on New York State Capitol",
+      "summary": "一名35岁的女性杰西卡·鲍伊因涉嫌为“恐怖主义”提供物质支持而被捕，并被指控策划袭击纽约州议会大厦。",
       "keyFacts": [
-        "The Wildfire concept has been entered into a new Pentagon competition to find a next generation of medium-altitude",
-        "long-endurance ISR",
-        "strike drone"
+        "嫌疑人名为杰西卡·鲍伊，35岁",
+        "她被控为“恐怖主义”提供物质支持",
+        "袭击目标是纽约州议会大厦"
       ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "The War Zone",
+      "why": "此案凸显美国国内安全威胁，引发对恐怖主义防范的关注。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
       "country": "国际",
-      "publishedAt": "2026-08-20T18:11:01Z",
-      "url": "https://www.twz.com/air/wildfire-is-general-atomics-successor-to-the-mq-9-reaper",
-      "score": 73,
-      "scoreBasis": "规则评分",
+      "publishedAt": "2026-08-20T23:01:15Z",
+      "url": "https://www.aljazeera.com/news/2026/8/20/us-charges-woman-for-allegedly-plotting-attack-on-new-york-state-capitol?traffic_source=rss",
+      "score": 66,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 15,
+        "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 20,
         "影响信号": 6,
-        "主题相关性": 6,
+        "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -212,37 +386,117 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 4.6 小时",
-        "命中 3 个主题信号",
-        "影响信号：strike"
+        "DeepSeek 候选重要度 62/100",
+        "综合排序分 66/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
+        "来源权重 16/20",
+        "发布约 0.6 小时",
+        "命中 1 个主题信号",
+        "影响信号：attack"
       ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "无人机",
         "美国",
-        "MQ-9"
+        "恐怖主义",
+        "袭击"
       ],
-      "image": "https://www.twz.com/wp-content/uploads/2025/04/mq-9-stock.jpg?quality=85",
+      "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/air/wildfire-is-general-atomics-successor-to-the-mq-9-reaper",
-          "publishedAt": "2026-08-20T18:11:01Z",
-          "evidenceGroup": "outlet:twz.com"
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/8/20/us-charges-woman-for-allegedly-plotting-attack-on-new-york-state-capitol?traffic_source=rss",
+          "publishedAt": "2026-08-20T23:01:15Z",
+          "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 3
+      "eventDossier": {
+        "eventId": "evt-4512134f89a7",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-21",
+        "lastSeen": "2026-08-21",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-21",
+            "newsId": "1ff5b7219ce27c",
+            "title": "美国指控一名女子涉嫌策划袭击纽约州议会大厦",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-20T23:01:15Z",
+            "score": 66
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "嫌疑人名为杰西卡·鲍伊，35岁",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "她被控为“恐怖主义”提供物质支持",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "袭击目标是纽约州议会大厦",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-8ae6443d0935",
+          "eventId": "evt-4512134f89a7",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-21",
+          "dueAfter": "2026-09-20",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "1ff5b7219ce27c"
+          ],
+          "lastReviewedAt": "2026-08-21"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 3,
+      "relatedPapers": []
     },
     {
       "id": "159904cc7459a5",
@@ -279,7 +533,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.0 小时",
+        "发布约 1.9 小时",
         "命中 1 个主题信号",
         "影响信号：nuclear"
       ],
@@ -311,6 +565,216 @@
       "streamRank": 4
     },
     {
+      "id": "1661df3a4e0cee",
+      "eventId": "evt-9b21fd9eb887",
+      "contentType": "news",
+      "title": "“野火”成为通用原子能公司MQ-9收割者无人机的继任者",
+      "originalTitle": "Wildfire Is General Atomics’ Successor To The MQ-9 Reaper",
+      "summary": "“野火”概念已进入五角大楼的新竞赛，以寻找下一代中空长航时情报、监视、侦察和打击无人机。",
+      "keyFacts": [
+        "The Wildfire concept has been entered into a new Pentagon competition to find a next generation of medium-altitude",
+        "long-endurance ISR",
+        "strike drone"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-08-20T18:11:01Z",
+      "url": "https://www.twz.com/air/wildfire-is-general-atomics-successor-to-the-mq-9-reaper",
+      "score": 72,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 6,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 72/100",
+        "综合排序分 72/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
+        "来源权重 15/20",
+        "发布约 5.4 小时",
+        "命中 3 个主题信号",
+        "影响信号：strike"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "无人机",
+        "美国",
+        "MQ-9"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2025/04/mq-9-stock.jpg?quality=85",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/air/wildfire-is-general-atomics-successor-to-the-mq-9-reaper",
+          "publishedAt": "2026-08-20T18:11:01Z",
+          "evidenceGroup": "outlet:twz.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-9b21fd9eb887",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-21",
+        "lastSeen": "2026-08-21",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-21",
+            "newsId": "1661df3a4e0cee",
+            "title": "“野火”成为通用原子能公司MQ-9收割者无人机的继任者",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-20T18:11:01Z",
+            "score": 72
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "The Wildfire concept has been entered into a new Pentagon competition to find a next generation of medium-altitude",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "long-endurance ISR",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "strike drone",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-57c0ca635d62",
+          "eventId": "evt-9b21fd9eb887",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-21",
+          "dueAfter": "2026-09-20",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "1661df3a4e0cee"
+          ],
+          "lastReviewedAt": "2026-08-21"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 5,
+      "relatedPapers": []
+    },
+    {
+      "id": "666d2bb6d3f54c",
+      "eventId": "evt-9a38540d3c53",
+      "contentType": "news",
+      "title": "金穹负责人称进展显著，资金问题迫在眉睫",
+      "originalTitle": "Golden Dome chief touts progress as funding questions loom",
+      "summary": "导弹防御项目负责人古特莱因与北达科他州参议员共同为该计划辩护，强调其进展，但资金问题依然悬而未决。",
+      "keyFacts": [
+        "Guetlein joins North Dakota senators in making the case for the missile defense program"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "SpaceNews",
+      "country": "国际",
+      "publishedAt": "2026-08-20T23:02:34Z",
+      "url": "https://spacenews.com/golden-dome-chief-touts-progress-as-funding-questions-loom",
+      "score": 71,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 5,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 0.6 小时",
+        "命中 1 个主题信号",
+        "影响信号：missile"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "导弹防御",
+        "资金",
+        "SpaceNews"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/golden-dome-chief-touts-progress-as-funding-questions-loom",
+          "publishedAt": "2026-08-20T23:02:34Z",
+          "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 6
+    },
+    {
       "id": "bdb68560826a82",
       "eventId": "evt-6238f6bb2f89",
       "contentType": "news",
@@ -326,13 +790,13 @@
       "country": "国际",
       "publishedAt": "2026-08-20T20:23:22Z",
       "url": "https://www.defensenews.com/air-warfare/2026/08/20/us-navy-leads-multinational-effort-for-next-gen-seasparrow-missile",
-      "score": 72,
-      "scoreBasis": "规则评分",
+      "score": 71,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 18,
         "影响信号": 5,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -342,8 +806,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 71/100",
+        "综合排序分 71/100（AI 65% + 规则 35%）",
+        "规则参考分 71/100",
         "来源权重 16/20",
-        "发布约 2.4 小时",
+        "发布约 3.2 小时",
         "命中 2 个主题信号",
         "影响信号：missile"
       ],
@@ -365,14 +832,94 @@
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 5
+      "eventDossier": {
+        "eventId": "evt-6238f6bb2f89",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-21",
+        "lastSeen": "2026-08-21",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-21",
+            "newsId": "bdb68560826a82",
+            "title": "美国海军领导多国开发下一代海麻雀导弹",
+            "source": "Defense News",
+            "publishedAt": "2026-08-20T20:23:22Z",
+            "score": 71
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "Navy is leading a multinational effort to develop a new version of the Evolved SeaSparrow air defense missile",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-3f0eb95969b6",
+          "eventId": "evt-6238f6bb2f89",
+          "statement": "若多国合作启动，后续可观察参与国名单及项目时间表公布。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-21",
+          "dueAfter": "2026-09-20",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "bdb68560826a82"
+          ],
+          "lastReviewedAt": "2026-08-21"
+        },
+        {
+          "predictionId": "pred-6b545979e057",
+          "eventId": "evt-6238f6bb2f89",
+          "statement": "若海麻雀导弹研发推进，则需关注其是否与潜射导弹计划整合，影响海军防空体系。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-21",
+          "dueAfter": "2026-11-19",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "bdb68560826a82"
+          ],
+          "lastReviewedAt": "2026-08-21"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 7,
+      "relatedPapers": []
     },
     {
       "id": "24184e4db1ebf1",
@@ -390,13 +937,13 @@
       "country": "国际",
       "publishedAt": "2026-08-20T19:55:04Z",
       "url": "https://www.defenseone.com/defense-systems/2026/08/golden-dome-caucus-chair-says-building-support-funding-missile-shield-tough-slog/415546",
-      "score": 72,
+      "score": 71,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 18,
         "影响信号": 5,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -407,7 +954,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 2.9 小时",
+        "发布约 3.7 小时",
         "命中 2 个主题信号",
         "影响信号：missile"
       ],
@@ -436,72 +983,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 6
-    },
-    {
-      "id": "82a57b79229f78",
-      "eventId": "evt-5472239614e1",
-      "contentType": "news",
-      "title": "无人机公司和政府领导出席白宫首次“无人机主导”会议",
-      "originalTitle": "Drone companies, admin leaders meet for first White House ‘Drone Dominance’ meeting",
-      "summary": "五角大楼研究与工程主管埃米尔·迈克尔斯称：“骑兵部队到达这里与私营行业的你们会面，确保我们不仅仅是在无人机方面自给自足或持平，而是占据主导地位。”",
-      "keyFacts": [
-        "“The cavalry arrived here to meet your cavalry in private industry to make sure that we are not drone sufficient",
-        "but drone dominant,” Pentagon R&E chief Emil Michaels said"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-08-20T18:24:00Z",
-      "url": "https://breakingdefense.com/2026/08/drone-companies-trump-admin-leaders-meet-for-first-white-house-done-dominance-meeting",
-      "score": 71,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 5,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.4 小时",
-        "命中 2 个主题信号",
-        "影响信号：first"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "无人机",
-        "白宫",
-        "美国"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/drone-companies-trump-admin-leaders-meet-for-first-white-house-done-dominance-meeting",
-          "publishedAt": "2026-08-20T18:24:00Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 7
+      "streamRank": 8
     },
     {
       "id": "1f4c812941f9c0",
@@ -537,7 +1019,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.8 小时",
+        "发布约 10.6 小时",
         "命中 2 个主题信号",
         "影响信号：first、launch"
       ],
@@ -566,7 +1048,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 8
+      "streamRank": 9
     },
     {
       "id": "51885e5d019647",
@@ -602,7 +1084,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.8 小时",
+        "发布约 4.6 小时",
         "命中 1 个主题信号",
         "影响信号：attack"
       ],
@@ -631,32 +1113,31 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 9
+      "streamRank": 10
     },
     {
-      "id": "59f3ac25506006",
-      "eventId": "evt-b1952fea5468",
+      "id": "82a57b79229f78",
+      "eventId": "evt-5472239614e1",
       "contentType": "news",
-      "title": "Moog在太空与导弹防御研讨会上突出亨茨维尔扩建和新的硬件在环实验室",
-      "originalTitle": "Moog Highlights Huntsville Expansion and New Hardware-in-the-Loop Lab During Space and Missile Defense Symposium",
-      "summary": "Moog公司扩建阿拉巴马州亨茨维尔设施，新增安全的高超音速/拦截器硬件在环实验室。",
+      "title": "无人机公司和政府领导出席白宫首次“无人机主导”会议",
+      "originalTitle": "Drone companies, admin leaders meet for first White House ‘Drone Dominance’ meeting",
+      "summary": "五角大楼研究与工程主管埃米尔·迈克尔斯称：“骑兵部队到达这里与私营行业的你们会面，确保我们不仅仅是在无人机方面自给自足或持平，而是占据主导地位。”",
       "keyFacts": [
-        "AL — Moog Inc",
-        "(NYSE: MOG.A",
-        "MOG.B) announces a significant expansion at its Huntsville"
+        "“The cavalry arrived here to meet your cavalry in private industry to make sure that we are not drone sufficient",
+        "but drone dominant,” Pentagon R&E chief Emil Michaels said"
       ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
       "country": "国际",
-      "publishedAt": "2026-08-20T16:00:00Z",
-      "url": "https://spacenews.com/moog-highlights-huntsville-expansion-and-new-hardware-in-the-loop-lab-during-space-and-missile-defense-symposium",
-      "score": 69,
+      "publishedAt": "2026-08-20T18:24:00Z",
+      "url": "https://breakingdefense.com/2026/08/drone-companies-trump-admin-leaders-meet-for-first-white-house-done-dominance-meeting",
+      "score": 70,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
-        "主题优先级": 9,
+        "主题优先级": 10,
         "时效": 17,
         "影响信号": 5,
         "主题相关性": 4,
@@ -668,26 +1149,26 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.8 小时",
+        "发布约 5.2 小时",
         "命中 2 个主题信号",
-        "影响信号：missile"
+        "影响信号：first"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "Moog",
-        "亨茨维尔",
-        "硬件在环"
+        "无人机",
+        "白宫",
+        "美国"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/moog-highlights-huntsville-expansion-and-new-hardware-in-the-loop-lab-during-space-and-missile-defense-symposium",
-          "publishedAt": "2026-08-20T16:00:00Z",
-          "evidenceGroup": "outlet:spacenews.com"
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/drone-companies-trump-admin-leaders-meet-for-first-white-house-done-dominance-meeting",
+          "publishedAt": "2026-08-20T18:24:00Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
       "selectionProvider": "",
@@ -697,7 +1178,153 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 10
+      "streamRank": 11
+    },
+    {
+      "id": "6929491607819a",
+      "eventId": "evt-c182979e1735",
+      "contentType": "news",
+      "title": "白宫发布新太空运输政策，强调提高发射与再入次数",
+      "originalTitle": "New space transportation policy focuses on increased launch rates",
+      "summary": "白宫于8月20日发布新太空运输政策，重点在于大幅增加发射和再入任务的数量。",
+      "keyFacts": [
+        "政策于2026年8月20日发布",
+        "重点是大幅增加发射和再入次数",
+        "由白宫发布"
+      ],
+      "why": "该政策可能影响未来太空运输的监管和商业发射活动。",
+      "category": "航空航天",
+      "source": "SpaceNews",
+      "country": "国际",
+      "publishedAt": "2026-08-20T23:30:13Z",
+      "url": "https://spacenews.com/new-space-transportation-policy-focuses-on-increased-launch-rates",
+      "score": 76,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 20,
+        "影响信号": 4,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 79/100",
+        "综合排序分 76/100（AI 65% + 规则 35%）",
+        "规则参考分 69/100",
+        "来源权重 16/20",
+        "发布约 0.1 小时",
+        "命中 1 个主题信号",
+        "影响信号：launch"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "太空政策",
+        "发射",
+        "白宫"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/new-space-transportation-policy-focuses-on-increased-launch-rates",
+          "publishedAt": "2026-08-20T23:30:13Z",
+          "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-c182979e1735",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-21",
+        "lastSeen": "2026-08-21",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-21",
+            "newsId": "6929491607819a",
+            "title": "白宫发布新太空运输政策，强调提高发射与再入次数",
+            "source": "SpaceNews",
+            "publishedAt": "2026-08-20T23:30:13Z",
+            "score": 76
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:spacenews.com"
+        ],
+        "claims": [
+          {
+            "text": "政策于2026年8月20日发布",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          },
+          {
+            "text": "重点是大幅增加发射和再入次数",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          },
+          {
+            "text": "由白宫发布",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-3d227fa60209",
+          "eventId": "evt-c182979e1735",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-21",
+          "dueAfter": "2026-09-20",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "6929491607819a"
+          ],
+          "lastReviewedAt": "2026-08-21"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 12,
+      "relatedPapers": []
     },
     {
       "id": "663c3aa92116ce",
@@ -734,7 +1361,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 7.5 小时",
+        "发布约 8.4 小时",
         "命中 1 个主题信号",
         "影响信号：launch"
       ],
@@ -763,7 +1390,137 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 11
+      "streamRank": 13
+    },
+    {
+      "id": "8789622d8f2824",
+      "eventId": "evt-2212dff585f9",
+      "contentType": "news",
+      "title": "美海军多年应对作战节奏问题，伊朗战争暴露短板",
+      "originalTitle": "The US Navy has battled operational tempo ordeals for years. The Iran war exposed the flaws.",
+      "summary": "航母可用性及伊朗战争期间的决策加剧了美海军在高速作战节奏下的长期斗争，问题凸显。",
+      "keyFacts": [
+        "Carrier availability",
+        "decisions made during the Iran war have exacerbated the US Navy's longstanding struggles with a frenzied operational tempo"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-08-20T23:20:57Z",
+      "url": "https://www.defensenews.com/news/your-navy/2026/08/20/the-us-navy-has-battled-operational-tempo-ordeals-for-years-the-iran-war-exposed-the-flaws",
+      "score": 68,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 0.2 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美海军",
+        "作战节奏",
+        "伊朗战争"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/NMKT3HEOLRHJTPQEYG4UWW7EMQ.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/news/your-navy/2026/08/20/the-us-navy-has-battled-operational-tempo-ordeals-for-years-the-iran-war-exposed-the-flaws",
+          "publishedAt": "2026-08-20T23:20:57Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 14
+    },
+    {
+      "id": "59f3ac25506006",
+      "eventId": "evt-b1952fea5468",
+      "contentType": "news",
+      "title": "Moog在太空与导弹防御研讨会上突出亨茨维尔扩建和新的硬件在环实验室",
+      "originalTitle": "Moog Highlights Huntsville Expansion and New Hardware-in-the-Loop Lab During Space and Missile Defense Symposium",
+      "summary": "Moog公司扩建阿拉巴马州亨茨维尔设施，新增安全的高超音速/拦截器硬件在环实验室。",
+      "keyFacts": [
+        "AL — Moog Inc",
+        "(NYSE: MOG.A",
+        "MOG.B) announces a significant expansion at its Huntsville"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
+      "country": "国际",
+      "publishedAt": "2026-08-20T16:00:00Z",
+      "url": "https://spacenews.com/moog-highlights-huntsville-expansion-and-new-hardware-in-the-loop-lab-during-space-and-missile-defense-symposium",
+      "score": 68,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 16,
+        "影响信号": 5,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.6 小时",
+        "命中 2 个主题信号",
+        "影响信号：missile"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "Moog",
+        "亨茨维尔",
+        "硬件在环"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/moog-highlights-huntsville-expansion-and-new-hardware-in-the-loop-lab-during-space-and-missile-defense-symposium",
+          "publishedAt": "2026-08-20T16:00:00Z",
+          "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 15
     },
     {
       "id": "190a91b8e898f5",
@@ -783,8 +1540,8 @@
       "country": "国际",
       "publishedAt": "2026-08-20T12:48:21Z",
       "url": "https://spacenews.com/chinas-change-7-lunar-ice-hunting-mission-set-for-sunday-launch",
-      "score": 68,
-      "scoreBasis": "规则评分",
+      "score": 74,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -799,8 +1556,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 74/100（AI 65% + 规则 35%）",
+        "规则参考分 68/100",
         "来源权重 16/20",
-        "发布约 10.0 小时",
+        "发布约 10.8 小时",
         "命中 3 个主题信号",
         "影响信号：launch"
       ],
@@ -822,79 +1582,91 @@
           "evidenceGroup": "outlet:spacenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 12
-    },
-    {
-      "id": "8516ff44a301ef",
-      "eventId": "evt-6738310877eb",
-      "contentType": "news",
-      "title": "白宫新战略明确军事技术优先：水下、太空和人工智能",
-      "originalTitle": "New White House strategy clarifies military tech priorities: undersea, outer space and AI",
-      "summary": "《国家安全科学与技术战略》（NSSTS）还概述了一系列二级或长期值得关注的技术，尤其是量子技术和生物技术。",
-      "keyFacts": [
-        "The National Security Science & Technology Strategy (NSSTS) also outlines an array of second-tier or longer-term technologies to watch",
-        "notably quantum"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-08-20T11:55:00Z",
-      "url": "https://breakingdefense.com/2026/08/new-white-house-strategy-clarifies-military-tech-priorities-undersea-outer-space-and-ai",
-      "score": 68,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 5,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
+      "eventDossier": {
+        "eventId": "evt-1112f0f1a84c",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-21",
+        "lastSeen": "2026-08-21",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-21",
+            "newsId": "190a91b8e898f5",
+            "title": "中国嫦娥七号月球探冰任务定于周日发射",
+            "source": "SpaceNews",
+            "publishedAt": "2026-08-20T12:48:21Z",
+            "score": 74
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
       },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 10.9 小时",
-        "命中 2 个主题信号",
-        "影响信号：quantum"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "白宫",
-        "军事技术",
-        "战略"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:spacenews.com"
+        ],
+        "claims": [
+          {
+            "text": "HELSINKI — China will launch a complex",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          },
+          {
+            "text": "multi-spacecraft mission late Sunday to study",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          },
+          {
+            "text": "land near the lunar south pole",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spacenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
         {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/new-white-house-strategy-clarifies-military-tech-priorities-undersea-outer-space-and-ai",
-          "publishedAt": "2026-08-20T11:55:00Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
+          "predictionId": "pred-570fe3f8115d",
+          "eventId": "evt-1112f0f1a84c",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-21",
+          "dueAfter": "2026-09-20",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "190a91b8e898f5"
+          ],
+          "lastReviewedAt": "2026-08-21"
         }
       ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 13
+      "isTopStory": true,
+      "streamRank": 16,
+      "relatedPapers": []
     },
     {
       "id": "1de0c0f96583ea",
@@ -929,7 +1701,7 @@
       },
       "scoreReasons": [
         "来源权重 19/20",
-        "发布约 15.8 小时",
+        "发布约 16.6 小时",
         "命中 3 个主题信号",
         "影响信号：launch"
       ],
@@ -958,216 +1730,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 14
-    },
-    {
-      "id": "d710eb763a78d4",
-      "eventId": "evt-53650a1a0526",
-      "contentType": "news",
-      "title": "高超音速导弹初创公司Castelion融资10亿美元",
-      "originalTitle": "Hypersonic missile startup Castelion raises $1 billion",
-      "summary": "由前SpaceX高管创立的Castelion公司融资10亿美元，旨在生产低成本高超音速武器以及更广泛的远程打击和导弹防御武器组合。",
-      "keyFacts": [
-        "Castelion由前SpaceX高管创立",
-        "融资额为10亿美元",
-        "目标是生产低成本高超音速武器及远程打击和导弹防御武器组合"
-      ],
-      "why": "该融资显示私营企业正大举进入高超音速武器领域，或加速低成本高超音速打击能力的开发与部署。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-08-19T23:12:41Z",
-      "url": "https://spacenews.com/hypersonic-missile-startup-castelion-raises-1-billion",
-      "score": 83,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 20,
-        "影响信号": 11,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 85/100",
-        "综合排序分 83/100（AI 65% + 规则 35%）",
-        "规则参考分 80/100",
-        "来源权重 16/20",
-        "发布约 0.3 小时",
-        "命中 3 个主题信号",
-        "影响信号：strike、missile"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "高超音速",
-        "国防",
-        "融资"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/hypersonic-missile-startup-castelion-raises-1-billion",
-          "publishedAt": "2026-08-19T23:12:41Z",
-          "evidenceGroup": "outlet:spacenews.com"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "eventDossier": {
-        "eventId": "evt-53650a1a0526",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-08-20",
-        "lastSeen": "2026-08-20",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-08-20",
-            "newsId": "d710eb763a78d4",
-            "title": "高超音速导弹初创公司Castelion融资10亿美元",
-            "source": "SpaceNews",
-            "publishedAt": "2026-08-19T23:12:41Z",
-            "score": 83
-          }
-        ],
-        "independentSourceCount": 1,
-        "paperCount": 0
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:spacenews.com"
-        ],
-        "claims": [
-          {
-            "text": "Castelion由前SpaceX高管创立",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:spacenews.com"
-            ]
-          },
-          {
-            "text": "融资额为10亿美元",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:spacenews.com"
-            ]
-          },
-          {
-            "text": "目标是生产低成本高超音速武器及远程打击和导弹防御武器组合",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:spacenews.com"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-d1c0d6b1e26c",
-          "eventId": "evt-53650a1a0526",
-          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-          "horizon": "观察",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-08-20",
-          "dueAfter": "2026-09-19",
-          "verificationSignals": [
-            "正式任务时间表或许可",
-            "后续试验、发射或在轨结果"
-          ],
-          "evidenceIds": [
-            "d710eb763a78d4"
-          ],
-          "lastReviewedAt": "2026-08-20"
-        }
-      ],
-      "relatedPapers": [],
-      "isTopStory": true,
-      "streamRank": 15
-    },
-    {
-      "id": "575453b2dbea38",
-      "eventId": "evt-9370230f79ec",
-      "contentType": "news",
-      "title": "在以色列对加沙战争中失去肢体的截肢儿童学习游泳",
-      "originalTitle": "Amputee children learn to swim after losing limbs in Israel’s war on Gaza",
-      "summary": "加沙的截肢儿童正在学习游泳，这是帮助他们重建信心和活动能力的项目的一部分。",
-      "keyFacts": [
-        "Amputee children in Gaza are learning to swim as part of a programme helping them rebuild confidence"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-20T20:05:53Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/20/amputee-children-learn-to-swim-after-losing-limbs-in-israels-war-on-gaza?traffic_source=rss",
-      "score": 67,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 2.7 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "加沙",
-        "截肢儿童",
-        "游泳"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/20/amputee-children-learn-to-swim-after-losing-limbs-in-israels-war-on-gaza?traffic_source=rss",
-          "publishedAt": "2026-08-20T20:05:53Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 16
+      "streamRank": 17
     },
     {
       "id": "e6132df9600885",
@@ -1204,7 +1767,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 7.8 小时",
+        "发布约 8.6 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1232,31 +1795,169 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 17
+      "streamRank": 18
     },
     {
-      "id": "910d737212cb19",
-      "eventId": "evt-d897b88b049c",
+      "id": "8516ff44a301ef",
+      "eventId": "evt-6738310877eb",
       "contentType": "news",
-      "title": "美国称制裁将“压垮”伊朗经济并“颠覆”其政权",
-      "originalTitle": "US says sanctions will 'squash' Iran's economy and 'collapse' its regime",
-      "summary": "美国财政部长表示，盟友需要决定他们是“与我们在一起还是反对我们”。",
+      "title": "白宫新战略明确军事技术优先：水下、太空和人工智能",
+      "originalTitle": "New White House strategy clarifies military tech priorities: undersea, outer space and AI",
+      "summary": "《国家安全科学与技术战略》（NSSTS）还概述了一系列二级或长期值得关注的技术，尤其是量子技术和生物技术。",
       "keyFacts": [
-        "The US treasury secretary says allies will need to decide whether they \"are with us or against us\""
+        "The National Security Science & Technology Strategy (NSSTS) also outlines an array of second-tier or longer-term technologies to watch",
+        "notably quantum"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-08-20T11:55:00Z",
+      "url": "https://breakingdefense.com/2026/08/new-white-house-strategy-clarifies-military-tech-priorities-undersea-outer-space-and-ai",
+      "score": 74,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 14,
+        "影响信号": 5,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 77/100",
+        "综合排序分 74/100（AI 65% + 规则 35%）",
+        "规则参考分 67/100",
+        "来源权重 16/20",
+        "发布约 11.7 小时",
+        "命中 2 个主题信号",
+        "影响信号：quantum"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "白宫",
+        "军事技术",
+        "战略"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/new-white-house-strategy-clarifies-military-tech-priorities-undersea-outer-space-and-ai",
+          "publishedAt": "2026-08-20T11:55:00Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-6738310877eb",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-21",
+        "lastSeen": "2026-08-21",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-21",
+            "newsId": "8516ff44a301ef",
+            "title": "白宫新战略明确军事技术优先：水下、太空和人工智能",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-08-20T11:55:00Z",
+            "score": 74
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:breakingdefense.com"
+        ],
+        "claims": [
+          {
+            "text": "The National Security Science & Technology Strategy (NSSTS) also outlines an array of second-tier or longer-term technologies to watch",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "notably quantum",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-54e82ef0dd02",
+          "eventId": "evt-6738310877eb",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-21",
+          "dueAfter": "2026-09-20",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "8516ff44a301ef"
+          ],
+          "lastReviewedAt": "2026-08-21"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 19,
+      "relatedPapers": []
+    },
+    {
+      "id": "b64d8aa1832230",
+      "eventId": "evt-30183fed9c10",
+      "contentType": "news",
+      "title": "纽约市长马姆达尼起诉阻止1万美元助教奖金",
+      "originalTitle": "New York mayor Mamdani sues to block $10,000 teaching aide bonuses",
+      "summary": "纽约市长起诉挑战1万美元奖金法律，认为其与集体谈判规则相冲突。",
+      "keyFacts": [
+        "New York mayor challenges $10,000 bonus law",
+        "citing conflict with collective bargaining rules"
       ],
       "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
       "category": "局部冲突",
-      "source": "BBC World",
+      "source": "Al Jazeera",
       "country": "国际",
-      "publishedAt": "2026-08-20T19:52:48Z",
-      "url": "https://www.bbc.co.uk/news/articles/c87n90eg0p2o?at_medium=RSS&at_campaign=rss",
+      "publishedAt": "2026-08-20T22:45:40Z",
+      "url": "https://www.aljazeera.com/economy/2026/8/20/new-york-mayor-mamdani-sues-to-block-10000-teaching-aide-bonuses?traffic_source=rss",
       "score": 66,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 17,
+        "来源": 16,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 20,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1266,26 +1967,26 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 2.9 小时",
+        "来源权重 16/20",
+        "发布约 0.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "美国",
-        "伊朗",
-        "制裁"
+        "诉讼",
+        "教育",
+        "纽约"
       ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/f685/live/690551d0-9cc6-11f1-a5cd-a14170183a2c.png",
+      "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/c87n90eg0p2o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-20T19:52:48Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/economy/2026/8/20/new-york-mayor-mamdani-sues-to-block-10000-teaching-aide-bonuses?traffic_source=rss",
+          "publishedAt": "2026-08-20T22:45:40Z",
+          "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
       "selectionProvider": "",
@@ -1295,7 +1996,70 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 18
+      "streamRank": 20
+    },
+    {
+      "id": "575453b2dbea38",
+      "eventId": "evt-9370230f79ec",
+      "contentType": "news",
+      "title": "在以色列对加沙战争中失去肢体的截肢儿童学习游泳",
+      "originalTitle": "Amputee children learn to swim after losing limbs in Israel’s war on Gaza",
+      "summary": "加沙的截肢儿童正在学习游泳，这是帮助他们重建信心和活动能力的项目的一部分。",
+      "keyFacts": [
+        "Amputee children in Gaza are learning to swim as part of a programme helping them rebuild confidence"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-20T20:05:53Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/20/amputee-children-learn-to-swim-after-losing-limbs-in-israels-war-on-gaza?traffic_source=rss",
+      "score": 66,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 3.5 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "加沙",
+        "截肢儿童",
+        "游泳"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/20/amputee-children-learn-to-swim-after-losing-limbs-in-israels-war-on-gaza?traffic_source=rss",
+          "publishedAt": "2026-08-20T20:05:53Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 21
     },
     {
       "id": "b6693dfbe717eb",
@@ -1330,7 +2094,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.1 小时",
+        "发布约 7.0 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "中",
@@ -1349,201 +2113,6 @@
           "url": "https://spacenews.com/rocket-lab-launches-9th-satellite-for-iqps",
           "publishedAt": "2026-08-20T16:38:31Z",
           "evidenceGroup": "outlet:spacenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 19
-    },
-    {
-      "id": "c05f69bd98376b",
-      "eventId": "evt-6d801ed90352",
-      "contentType": "news",
-      "title": "这是新黑胡子“廉价”高超音速武器",
-      "originalTitle": "This Is The New Blackbeard ‘Cheap’ Hypersonic Weapon",
-      "summary": "Castelion公司旨在制造更经济实用、可高生产率生产的高超音速武器。",
-      "keyFacts": [
-        "Castelion aims at building more affordable",
-        "usable hypersonic weapons that can be churned out at high production rates"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "The War Zone",
-      "country": "国际",
-      "publishedAt": "2026-08-20T16:09:39Z",
-      "url": "https://www.twz.com/air/this-is-the-new-blackbeard-cheap-hypersonic-weapon",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 9,
-        "时效": 17,
-        "影响信号": 5,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 6.6 小时",
-        "命中 1 个主题信号",
-        "影响信号：production"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "Castelion",
-        "高超音速武器",
-        "廉价"
-      ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/08/Caselion-missile.jpg?quality=85",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/air/this-is-the-new-blackbeard-cheap-hypersonic-weapon",
-          "publishedAt": "2026-08-20T16:09:39Z",
-          "evidenceGroup": "outlet:twz.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 20
-    },
-    {
-      "id": "65342b8b7cf6db",
-      "eventId": "evt-14619ec5351c",
-      "contentType": "news",
-      "title": "土耳其航空工业计划推出Hürjet海军型，寻求扩大北约出口",
-      "originalTitle": "Turkish Aerospace plans naval version of Hurjet as it eyes expanded NATO exports",
-      "summary": "土耳其航空工业CEO穆罕默德·德米罗格卢表示，HÜRJET不仅可能成为土耳其和西班牙的教练机，也可能成为北约的培训平台。公司正计划开发海军型，以扩大出口市场。",
-      "keyFacts": [
-        "“We believe HÜRJET has the potential to become not only the trainer aircraft of Türkiye",
-        "but also a training platform for NATO,” CEO Mehmet Demiroglu said"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-08-20T15:55:13Z",
-      "url": "https://breakingdefense.com/2026/08/turkish-aerospace-plans-naval-version-of-hurjet-as-it-eyes-expanded-nato-exports",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.9 小时",
-        "命中 3 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "土耳其",
-        "HÜRJET",
-        "北约"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/turkish-aerospace-plans-naval-version-of-hurjet-as-it-eyes-expanded-nato-exports",
-          "publishedAt": "2026-08-20T15:55:13Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 21
-    },
-    {
-      "id": "4e71f1efeb041e",
-      "eventId": "evt-e24961a520f6",
-      "contentType": "news",
-      "title": "爱沙尼亚议员称美国对北约的问卷是‘不必要的压力测试’",
-      "originalTitle": "Estonian lawmaker calls US questionnaire to NATO ‘unnecessary stress test’",
-      "summary": "爱沙尼亚议员马科·米克尔森表示，在当前非和平时期，重要的是言行上不要制造可能让莫斯科或北京认为北约不团结或未聚焦于威慑边境威胁的印象。他称美国的问卷是‘不必要的压力测试’。",
-      "keyFacts": [
-        "“It is critically important for us in this time",
-        "a time of not living in peace time … that both in words",
-        "deeds to not make any steps to create an image that would indicate to Moscow or Beijing that NATO is not united or focused on deterring thr…"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-08-20T14:24:00Z",
-      "url": "https://breakingdefense.com/2026/08/estonian-lawmaker-calls-us-questionnaire-to-nato-unnecessary-stress-test",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 4,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 8.4 小时",
-        "命中 1 个主题信号",
-        "影响信号：test"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "爱沙尼亚",
-        "北约",
-        "美国"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/estonian-lawmaker-calls-us-questionnaire-to-nato-unnecessary-stress-test",
-          "publishedAt": "2026-08-20T14:24:00Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
       "selectionProvider": "",
@@ -1590,7 +2159,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 11.8 小时",
+        "发布约 12.6 小时",
         "命中 2 个主题信号",
         "影响信号：production"
       ],
@@ -1622,32 +2191,31 @@
       "streamRank": 23
     },
     {
-      "id": "f0db32b6db4334",
-      "eventId": "evt-4ac7273e9ac2",
+      "id": "a9cd3d0bb70b18",
+      "eventId": "evt-7f64e442e18a",
       "contentType": "news",
-      "title": "以色列确认士兵向希德·拉贾卜乘坐的汽车开火并展开刑事调查",
-      "originalTitle": "Israel confirms soldiers fired at car in which Hind Rajab was killed and opens criminal investigation",
-      "summary": "以色列承认士兵向加沙女孩希德·拉贾卜乘坐的汽车开火，并展开刑事调查。该5岁女孩最初幸存并求救，但后来与6名亲属的遗体一同被找到。",
+      "title": "华盛顿号航母抵达中东，凸显航母部队压力",
+      "originalTitle": "USS George Washington’s Mideast Arrival Highlights Strain On Carrier Force",
+      "summary": "华盛顿号替换林肯号后，西太平洋无航母部署，海军满足需求的能力或进一步恶化。",
       "keyFacts": [
-        "The five-year old Gaza girl initially survived the attack",
-        "pleaded for help",
-        "her body was recovered later with those of six of her relatives"
+        "The Washington's replacement of the Lincoln leaves no carrier in the Western Pacific",
+        "the Navy's struggle to meet demand may get far worse before it gets better"
       ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "The War Zone",
       "country": "国际",
-      "publishedAt": "2026-08-20T04:17:53Z",
-      "url": "https://www.bbc.co.uk/news/articles/crl7yjlpx2po?at_medium=RSS&at_campaign=rss",
-      "score": 78,
-      "scoreBasis": "AI重要度 · 规则约束",
+      "publishedAt": "2026-08-20T23:10:13Z",
+      "url": "https://www.twz.com/sea/uss-george-washingtons-mideast-arrival-highlights-strain-on-carrier-force",
+      "score": 65,
+      "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 17,
+        "来源": 15,
         "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 6,
-        "主题相关性": 4,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -1655,116 +2223,35 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 82/100",
-        "综合排序分 78/100（AI 65% + 规则 35%）",
-        "规则参考分 71/100",
-        "来源权重 17/20",
-        "发布约 8.0 小时",
-        "命中 2 个主题信号",
-        "影响信号：attack"
+        "来源权重 15/20",
+        "发布约 0.4 小时",
+        "命中 1 个主题信号"
       ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
       "tags": [
-        "以色列",
-        "加沙",
-        "调查"
+        "航母",
+        "中东",
+        "海军压力"
       ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/a318/live/339ec150-9bc9-11f1-98c6-93bfcdb08681.jpg",
+      "image": "https://www.twz.com/wp-content/uploads/2026/08/GW-CENTCOM1.jpg?quality=85",
       "corroboration": 1,
       "sources": [
         {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/crl7yjlpx2po?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-19T15:33:32Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/sea/uss-george-washingtons-mideast-arrival-highlights-strain-on-carrier-force",
+          "publishedAt": "2026-08-20T23:10:13Z",
+          "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "deepseek",
+      "selectionProvider": "",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "eventDossier": {
-        "eventId": "evt-4ac7273e9ac2",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-08-20",
-        "lastSeen": "2026-08-20",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-08-20",
-            "newsId": "f0db32b6db4334",
-            "title": "以色列确认士兵向希德·拉贾卜乘坐的汽车开火并展开刑事调查",
-            "source": "BBC World",
-            "publishedAt": "2026-08-19T15:33:32Z",
-            "score": 78
-          }
-        ],
-        "independentSourceCount": 1,
-        "paperCount": 0
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:bbc.co.uk"
-        ],
-        "claims": [
-          {
-            "text": "The five-year old Gaza girl initially survived the attack",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:bbc.co.uk"
-            ]
-          },
-          {
-            "text": "pleaded for help",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:bbc.co.uk"
-            ]
-          },
-          {
-            "text": "her body was recovered later with those of six of her relatives",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:bbc.co.uk"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-5e1c90605a35",
-          "eventId": "evt-4ac7273e9ac2",
-          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-          "horizon": "观察",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-08-20",
-          "dueAfter": "2026-09-19",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "f0db32b6db4334"
-          ],
-          "lastReviewedAt": "2026-08-20"
-        }
-      ],
-      "relatedPapers": [],
-      "isTopStory": true,
+      "isTopStory": false,
       "streamRank": 24
     },
     {
@@ -1785,8 +2272,8 @@
       "country": "国际",
       "publishedAt": "2026-08-20T22:36:37Z",
       "url": "https://techcrunch.com/2026/08/20/openai-is-gaining-on-anthropic-with-business-users-new-data-indicates",
-      "score": 65,
-      "scoreBasis": "规则评分",
+      "score": 72,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
@@ -1801,8 +2288,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 75/100",
+        "综合排序分 72/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
         "来源权重 15/20",
-        "发布约 0.2 小时",
+        "发布约 1.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -1823,40 +2313,115 @@
           "evidenceGroup": "outlet:techcrunch.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 25
+      "eventDossier": {
+        "eventId": "evt-b0afd05d6a44",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-21",
+        "lastSeen": "2026-08-21",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-21",
+            "newsId": "093a040722715e",
+            "title": "新数据显示OpenAI在企业用户上正追赶Anthropic",
+            "source": "TechCrunch AI",
+            "publishedAt": "2026-08-20T22:36:37Z",
+            "score": 72
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:techcrunch.com"
+        ],
+        "claims": [
+          {
+            "text": "Businesses are willing to flop back",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          },
+          {
+            "text": "forth as each lab releases new models",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          },
+          {
+            "text": "volatility that should give both companies' investors pause about how \"sticky\" enterprise AI spending really is",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-397bc4163491",
+          "eventId": "evt-b0afd05d6a44",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-21",
+          "dueAfter": "2026-09-20",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "093a040722715e"
+          ],
+          "lastReviewedAt": "2026-08-21"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 25,
+      "relatedPapers": []
     },
     {
-      "id": "602bb1cc2996f8",
-      "eventId": "evt-ab25850bb230",
+      "id": "910d737212cb19",
+      "eventId": "evt-d897b88b049c",
       "contentType": "news",
-      "title": "陆军网络需要数字孪生用于训练、测试和网络安全：网络司令部司令",
-      "originalTitle": "Army network needs digital twin for training, testing, cybersecurity: NETCOM chief",
-      "summary": "陆军网络司令部司令承认“要求很高”，但数字孪生可让NETCOM‘利用AI模型了解我们的漏洞和差距’。",
+      "title": "美国称制裁将“压垮”伊朗经济并“颠覆”其政权",
+      "originalTitle": "US says sanctions will 'squash' Iran's economy and 'collapse' its regime",
+      "summary": "美国财政部长表示，盟友需要决定他们是“与我们在一起还是反对我们”。",
       "keyFacts": [
-        "“It’s a big ask,” acknowledged Maj",
-        "Denise McPhail",
-        "chief of Army Network Command"
+        "The US treasury secretary says allies will need to decide whether they \"are with us or against us\""
       ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
       "country": "国际",
-      "publishedAt": "2026-08-20T19:55:53Z",
-      "url": "https://breakingdefense.com/2026/08/army-network-needs-digital-twin-for-training-testing-cybersecurity-netcom-chief",
+      "publishedAt": "2026-08-20T19:52:48Z",
+      "url": "https://www.bbc.co.uk/news/articles/c87n90eg0p2o?at_medium=RSS&at_campaign=rss",
       "score": 65,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 16,
+        "来源": 17,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 18,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1866,26 +2431,26 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 2.8 小时",
+        "来源权重 17/20",
+        "发布约 3.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "数字孪生",
-        "网络安全",
-        "陆军"
+        "美国",
+        "伊朗",
+        "制裁"
       ],
-      "image": "",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/f685/live/690551d0-9cc6-11f1-a5cd-a14170183a2c.png",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/army-network-needs-digital-twin-for-training-testing-cybersecurity-netcom-chief",
-          "publishedAt": "2026-08-20T19:55:53Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c87n90eg0p2o?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-20T19:52:48Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
       "selectionProvider": "",
@@ -1931,7 +2496,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 3.9 小时",
+        "发布约 4.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1962,31 +2527,30 @@
       "streamRank": 27
     },
     {
-      "id": "1591b97d67916f",
-      "eventId": "evt-15c27fd8804f",
+      "id": "c05f69bd98376b",
+      "eventId": "evt-6d801ed90352",
       "contentType": "news",
-      "title": "从上方视角：双子座视觉敏锐度实验",
-      "originalTitle": "The View from Above: The Gemini Visual Acuity Experiments",
-      "summary": "NASA宇航员L.戈登·库珀在1963年5月的水星-阿特拉斯9号任务中，用70毫米相机拍摄了29张地球彩色照片。他从“信仰7号”飞船窗口的视野壮观，并报告能看到土路上的车辆、冒烟火车等。",
+      "title": "这是新黑胡子“廉价”高超音速武器",
+      "originalTitle": "This Is The New Blackbeard ‘Cheap’ Hypersonic Weapon",
+      "summary": "Castelion公司旨在制造更经济实用、可高生产率生产的高超音速武器。",
       "keyFacts": [
-        "NASA astronaut L",
-        "Gordon Cooper",
-        "took 29 color photographs of the Earth with a 70mm camera as he orbited our planet during the Mercury-Atlas 9 mission in May 1963"
+        "Castelion aims at building more affordable",
+        "usable hypersonic weapons that can be churned out at high production rates"
       ],
       "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
       "category": "航空航天",
-      "source": "NASA",
+      "source": "The War Zone",
       "country": "国际",
-      "publishedAt": "2026-08-20T14:30:00Z",
-      "url": "https://www.nasa.gov/history/the-view-from-above-the-gemini-visual-acuity-experiments",
+      "publishedAt": "2026-08-20T16:09:39Z",
+      "url": "https://www.twz.com/air/this-is-the-new-blackbeard-cheap-hypersonic-weapon",
       "score": 65,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 20,
+        "来源": 15,
         "主题优先级": 9,
         "时效": 16,
-        "影响信号": 0,
+        "影响信号": 5,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
@@ -1995,26 +2559,163 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 20/20",
-        "发布约 8.3 小时",
-        "命中 1 个主题信号"
+        "DeepSeek 候选重要度 65/100",
+        "综合排序分 65/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
+        "来源权重 15/20",
+        "发布约 7.4 小时",
+        "命中 1 个主题信号",
+        "影响信号：production"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "Castelion",
+        "高超音速武器",
+        "廉价"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/08/Caselion-missile.jpg?quality=85",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/air/this-is-the-new-blackbeard-cheap-hypersonic-weapon",
+          "publishedAt": "2026-08-20T16:09:39Z",
+          "evidenceGroup": "outlet:twz.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-6d801ed90352",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-21",
+        "lastSeen": "2026-08-21",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-21",
+            "newsId": "c05f69bd98376b",
+            "title": "这是新黑胡子“廉价”高超音速武器",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-20T16:09:39Z",
+            "score": 65
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "Castelion aims at building more affordable",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "usable hypersonic weapons that can be churned out at high production rates",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-893d437371a0",
+          "eventId": "evt-6d801ed90352",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-21",
+          "dueAfter": "2026-09-20",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "c05f69bd98376b"
+          ],
+          "lastReviewedAt": "2026-08-21"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 28,
+      "relatedPapers": []
+    },
+    {
+      "id": "65342b8b7cf6db",
+      "eventId": "evt-14619ec5351c",
+      "contentType": "news",
+      "title": "土耳其航空工业计划推出Hürjet海军型，寻求扩大北约出口",
+      "originalTitle": "Turkish Aerospace plans naval version of Hurjet as it eyes expanded NATO exports",
+      "summary": "土耳其航空工业CEO穆罕默德·德米罗格卢表示，HÜRJET不仅可能成为土耳其和西班牙的教练机，也可能成为北约的培训平台。公司正计划开发海军型，以扩大出口市场。",
+      "keyFacts": [
+        "“We believe HÜRJET has the potential to become not only the trainer aircraft of Türkiye",
+        "but also a training platform for NATO,” CEO Mehmet Demiroglu said"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-08-20T15:55:13Z",
+      "url": "https://breakingdefense.com/2026/08/turkish-aerospace-plans-naval-version-of-hurjet-as-it-eyes-expanded-nato-exports",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.7 小时",
+        "命中 3 个主题信号"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "NASA",
-        "双子座",
-        "视觉"
+        "土耳其",
+        "HÜRJET",
+        "北约"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "NASA",
-          "domain": "nasa.gov",
-          "url": "https://www.nasa.gov/history/the-view-from-above-the-gemini-visual-acuity-experiments",
-          "publishedAt": "2026-08-20T14:30:00Z",
-          "evidenceGroup": "outlet:nasa.gov"
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/turkish-aerospace-plans-naval-version-of-hurjet-as-it-eyes-expanded-nato-exports",
+          "publishedAt": "2026-08-20T15:55:13Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
       "selectionProvider": "",
@@ -2024,7 +2725,204 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 28
+      "streamRank": 29
+    },
+    {
+      "id": "4e71f1efeb041e",
+      "eventId": "evt-e24961a520f6",
+      "contentType": "news",
+      "title": "爱沙尼亚议员称美国对北约的问卷是‘不必要的压力测试’",
+      "originalTitle": "Estonian lawmaker calls US questionnaire to NATO ‘unnecessary stress test’",
+      "summary": "爱沙尼亚议员马科·米克尔森表示，在当前非和平时期，重要的是言行上不要制造可能让莫斯科或北京认为北约不团结或未聚焦于威慑边境威胁的印象。他称美国的问卷是‘不必要的压力测试’。",
+      "keyFacts": [
+        "“It is critically important for us in this time",
+        "a time of not living in peace time … that both in words",
+        "deeds to not make any steps to create an image that would indicate to Moscow or Beijing that NATO is not united or focused on deterring thr…"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-08-20T14:24:00Z",
+      "url": "https://breakingdefense.com/2026/08/estonian-lawmaker-calls-us-questionnaire-to-nato-unnecessary-stress-test",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 4,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 9.2 小时",
+        "命中 1 个主题信号",
+        "影响信号：test"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "爱沙尼亚",
+        "北约",
+        "美国"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/estonian-lawmaker-calls-us-questionnaire-to-nato-unnecessary-stress-test",
+          "publishedAt": "2026-08-20T14:24:00Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 30
+    },
+    {
+      "id": "f0db32b6db4334",
+      "eventId": "evt-4ac7273e9ac2",
+      "contentType": "news",
+      "title": "以色列确认士兵向希德·拉贾卜乘坐的汽车开火并展开刑事调查",
+      "originalTitle": "Israel confirms soldiers fired at car in which Hind Rajab was killed and opens criminal investigation",
+      "summary": "以色列承认士兵向加沙女孩希德·拉贾卜乘坐的汽车开火，并展开刑事调查。该5岁女孩最初幸存并求救，但后来与6名亲属的遗体一同被找到。",
+      "keyFacts": [
+        "The five-year old Gaza girl initially survived the attack",
+        "pleaded for help",
+        "her body was recovered later with those of six of her relatives"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-20T04:17:53Z",
+      "url": "https://www.bbc.co.uk/news/articles/crl7yjlpx2po?at_medium=RSS&at_campaign=rss",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 10,
+        "影响信号": 6,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 19.3 小时",
+        "命中 2 个主题信号",
+        "影响信号：attack"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "以色列",
+        "加沙",
+        "调查"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/a318/live/339ec150-9bc9-11f1-98c6-93bfcdb08681.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/crl7yjlpx2po?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-20T04:17:53Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 31
+    },
+    {
+      "id": "602bb1cc2996f8",
+      "eventId": "evt-ab25850bb230",
+      "contentType": "news",
+      "title": "陆军网络需要数字孪生用于训练、测试和网络安全：网络司令部司令",
+      "originalTitle": "Army network needs digital twin for training, testing, cybersecurity: NETCOM chief",
+      "summary": "陆军网络司令部司令承认“要求很高”，但数字孪生可让NETCOM‘利用AI模型了解我们的漏洞和差距’。",
+      "keyFacts": [
+        "“It’s a big ask,” acknowledged Maj",
+        "Denise McPhail",
+        "chief of Army Network Command"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-08-20T19:55:53Z",
+      "url": "https://breakingdefense.com/2026/08/army-network-needs-digital-twin-for-training-testing-cybersecurity-netcom-chief",
+      "score": 64,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 3.7 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "数字孪生",
+        "网络安全",
+        "陆军"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/army-network-needs-digital-twin-for-training-testing-cybersecurity-netcom-chief",
+          "publishedAt": "2026-08-20T19:55:53Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 32
     },
     {
       "id": "cdb0c042c3af10",
@@ -2060,7 +2958,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.1 小时",
+        "发布约 4.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2088,7 +2986,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 29
+      "streamRank": 33
     },
     {
       "id": "08fce72eee6492",
@@ -2123,7 +3021,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.6 小时",
+        "发布约 4.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2151,7 +3049,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 30
+      "streamRank": 34
     },
     {
       "id": "bbfdbe0bc4b8b9",
@@ -2187,7 +3085,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.6 小时",
+        "发布约 4.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2215,7 +3113,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 31
+      "streamRank": 35
     },
     {
       "id": "73e84fe90c06ed",
@@ -2250,7 +3148,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.6 小时",
+        "发布约 4.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2278,7 +3176,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 32
+      "streamRank": 36
     },
     {
       "id": "81d194be8e0a17",
@@ -2314,7 +3212,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 5.5 小时",
+        "发布约 6.3 小时",
         "命中 1 个主题信号",
         "影响信号：launch"
       ],
@@ -2343,94 +3241,33 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 33
+      "streamRank": 37
     },
     {
-      "id": "933c47ab01d3ea",
-      "eventId": "evt-3c5cf0d52c74",
+      "id": "1591b97d67916f",
+      "eventId": "evt-15c27fd8804f",
       "contentType": "news",
-      "title": "无需新项目启动：陆军计划快速为士兵提供新电子战能力",
-      "originalTitle": "No new starts, no problem: Army’s plan to get new EW capability in the hands of soldiers",
-      "summary": "陆军希望快速将商用电子战系统部署到部队中，以增强作战能力。",
+      "title": "从上方视角：双子座视觉敏锐度实验",
+      "originalTitle": "The View from Above: The Gemini Visual Acuity Experiments",
+      "summary": "NASA宇航员L.戈登·库珀在1963年5月的水星-阿特拉斯9号任务中，用70毫米相机拍摄了29张地球彩色照片。他从“信仰7号”飞船窗口的视野壮观，并报告能看到土路上的车辆、冒烟火车等。",
       "keyFacts": [
-        "Army wants to field commercial EW systems to forces fast"
+        "NASA astronaut L",
+        "Gordon Cooper",
+        "took 29 color photographs of the Earth with a 70mm camera as he orbited our planet during the Mercury-Atlas 9 mission in May 1963"
       ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
       "country": "国际",
-      "publishedAt": "2026-08-20T18:14:53Z",
-      "url": "https://breakingdefense.com/2026/08/no-new-starts-no-problem-armys-plan-to-get-new-ew-capability-in-the-hands-of-soldiers",
-      "score": 63,
+      "publishedAt": "2026-08-20T14:30:00Z",
+      "url": "https://www.nasa.gov/history/the-view-from-above-the-gemini-visual-acuity-experiments",
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 2,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.5 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "电子战",
-        "陆军",
-        "快速部署"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/no-new-starts-no-problem-armys-plan-to-get-new-ew-capability-in-the-hands-of-soldiers",
-          "publishedAt": "2026-08-20T18:14:53Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 34
-    },
-    {
-      "id": "0a348ab55630a6",
-      "eventId": "evt-6a7ea1bedd49",
-      "contentType": "news",
-      "title": "中国新Y-15涡桨运输机的最佳视角",
-      "originalTitle": "Our Best Look At China’s New Y-15 Turboprop Airlifter",
-      "summary": "这款四引擎涡桨运输机预计将构成中国现代化军用运输机队的关键新成员。",
-      "keyFacts": [
-        "The four-engine turboprop is expected to form a key new piece of China’s modernizing military transport fleet"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "The War Zone",
-      "country": "国际",
-      "publishedAt": "2026-08-20T18:13:10Z",
-      "url": "https://www.twz.com/air/our-best-look-at-chinas-new-y-15-turboprop-airlifter",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 18,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 15,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2440,26 +3277,26 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 4.6 小时",
+        "来源权重 20/20",
+        "发布约 9.1 小时",
         "命中 1 个主题信号"
       ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "confidence": "中",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "中国",
-        "Y-15",
-        "运输机"
+        "NASA",
+        "双子座",
+        "视觉"
       ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/08/China-Aircraft-transport-new.jpg?quality=85",
+      "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/air/our-best-look-at-chinas-new-y-15-turboprop-airlifter",
-          "publishedAt": "2026-08-20T18:13:10Z",
-          "evidenceGroup": "outlet:twz.com"
+          "name": "NASA",
+          "domain": "nasa.gov",
+          "url": "https://www.nasa.gov/history/the-view-from-above-the-gemini-visual-acuity-experiments",
+          "publishedAt": "2026-08-20T14:30:00Z",
+          "evidenceGroup": "outlet:nasa.gov"
         }
       ],
       "selectionProvider": "",
@@ -2469,7 +3306,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 35
+      "streamRank": 38
     },
     {
       "id": "b0aae9077b32a0",
@@ -2505,7 +3342,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.2 小时",
+        "发布约 7.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2533,31 +3370,92 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 36
+      "streamRank": 39
     },
     {
-      "id": "41a19b507b6d6b",
-      "eventId": "evt-a00a7b3283cf",
+      "id": "933c47ab01d3ea",
+      "eventId": "evt-3c5cf0d52c74",
       "contentType": "news",
-      "title": "五角大楼备忘录推动更多承包商定价信息，可能直接连接软件",
-      "originalTitle": "DoD memo pushes for more contractor pricing info, potential direct software link",
-      "summary": "美国国防部副部长史蒂夫·范伯格签署的新指令旨在“重置”五角大楼对供应商成本和定价信息的期望。",
+      "title": "无需新项目启动：陆军计划快速为士兵提供新电子战能力",
+      "originalTitle": "No new starts, no problem: Army’s plan to get new EW capability in the hands of soldiers",
+      "summary": "陆军希望快速将商用电子战系统部署到部队中，以增强作战能力。",
       "keyFacts": [
-        "The new directive",
-        "signed off by Deputy Defense Secretary Steve Feinberg",
-        "is meant to “reset” the Pentagon’s expectations for supplier cost"
+        "Army wants to field commercial EW systems to forces fast"
       ],
       "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
       "category": "军事动态",
       "source": "Breaking Defense",
       "country": "国际",
-      "publishedAt": "2026-08-20T16:19:50Z",
-      "url": "https://breakingdefense.com/2026/08/dod-memo-pushes-for-more-contractor-pricing-info-potential-direct-software-link",
-      "score": 63,
+      "publishedAt": "2026-08-20T18:14:53Z",
+      "url": "https://breakingdefense.com/2026/08/no-new-starts-no-problem-armys-plan-to-get-new-ew-capability-in-the-hands-of-soldiers",
+      "score": 62,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 2,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 5.3 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "电子战",
+        "陆军",
+        "快速部署"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/no-new-starts-no-problem-armys-plan-to-get-new-ew-capability-in-the-hands-of-soldiers",
+          "publishedAt": "2026-08-20T18:14:53Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 40
+    },
+    {
+      "id": "0a348ab55630a6",
+      "eventId": "evt-6a7ea1bedd49",
+      "contentType": "news",
+      "title": "中国新Y-15涡桨运输机的最佳视角",
+      "originalTitle": "Our Best Look At China’s New Y-15 Turboprop Airlifter",
+      "summary": "这款四引擎涡桨运输机预计将构成中国现代化军用运输机队的关键新成员。",
+      "keyFacts": [
+        "The four-engine turboprop is expected to form a key new piece of China’s modernizing military transport fleet"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-08-20T18:13:10Z",
+      "url": "https://www.twz.com/air/our-best-look-at-chinas-new-y-15-turboprop-airlifter",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
         "主题优先级": 10,
         "时效": 17,
         "影响信号": 0,
@@ -2569,26 +3467,26 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.4 小时",
+        "来源权重 15/20",
+        "发布约 5.4 小时",
         "命中 1 个主题信号"
       ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
       "tags": [
-        "美国国防",
-        "承包商",
-        "定价"
+        "中国",
+        "Y-15",
+        "运输机"
       ],
-      "image": "",
+      "image": "https://www.twz.com/wp-content/uploads/2026/08/China-Aircraft-transport-new.jpg?quality=85",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/dod-memo-pushes-for-more-contractor-pricing-info-potential-direct-software-link",
-          "publishedAt": "2026-08-20T16:19:50Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/air/our-best-look-at-chinas-new-y-15-turboprop-airlifter",
+          "publishedAt": "2026-08-20T18:13:10Z",
+          "evidenceGroup": "outlet:twz.com"
         }
       ],
       "selectionProvider": "",
@@ -2598,7 +3496,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 37
+      "streamRank": 41
     },
     {
       "id": "5318774e5732cd",
@@ -2634,7 +3532,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.9 小时",
+        "发布约 6.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2662,7 +3560,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 38
+      "streamRank": 42
     },
     {
       "id": "83bdb87ab15bc4",
@@ -2699,7 +3597,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 6.0 小时",
+        "发布约 6.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2727,7 +3625,72 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 39
+      "streamRank": 43
+    },
+    {
+      "id": "41a19b507b6d6b",
+      "eventId": "evt-a00a7b3283cf",
+      "contentType": "news",
+      "title": "五角大楼备忘录推动更多承包商定价信息，可能直接连接软件",
+      "originalTitle": "DoD memo pushes for more contractor pricing info, potential direct software link",
+      "summary": "美国国防部副部长史蒂夫·范伯格签署的新指令旨在“重置”五角大楼对供应商成本和定价信息的期望。",
+      "keyFacts": [
+        "The new directive",
+        "signed off by Deputy Defense Secretary Steve Feinberg",
+        "is meant to “reset” the Pentagon’s expectations for supplier cost"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-08-20T16:19:50Z",
+      "url": "https://breakingdefense.com/2026/08/dod-memo-pushes-for-more-contractor-pricing-info-potential-direct-software-link",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.3 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国国防",
+        "承包商",
+        "定价"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/dod-memo-pushes-for-more-contractor-pricing-info-potential-direct-software-link",
+          "publishedAt": "2026-08-20T16:19:50Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 44
     },
     {
       "id": "92a8a2ccbbcacc",
@@ -2746,13 +3709,13 @@
       "country": "国际",
       "publishedAt": "2026-08-20T13:57:40Z",
       "url": "https://breakingdefense.com/2026/08/army-cyber-training-ai-agents-in-cyber-work-roles-alongside-human-counterparts",
-      "score": 62,
+      "score": 61,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2763,7 +3726,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 8.8 小时",
+        "发布约 9.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2791,72 +3754,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 40
-    },
-    {
-      "id": "2c879dffc2de71",
-      "eventId": "evt-78142215f9cc",
-      "contentType": "news",
-      "title": "Draper选择Proteus Space执行先进在轨任务",
-      "originalTitle": "Draper Selects Proteus Space for Advanced On-Orbit Mission",
-      "summary": "2026年9月8日，加州洛杉矶——提供快速端到端太空访问能力的双用途航空航天公司Proteus Space宣布，已被查尔斯·斯塔克·德拉珀实验室选中。",
-      "keyFacts": [
-        "September 8th",
-        "Proteus Space",
-        "a dual-use aerospace company delivering rapid"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-08-20T10:00:00Z",
-      "url": "https://spacenews.com/draper-selects-proteus-space-for-advanced-on-orbit-mission",
-      "score": 61,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 14,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 12.8 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "Proteus Space",
-        "德拉珀实验室",
-        "在轨任务"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/draper-selects-proteus-space-for-advanced-on-orbit-mission",
-          "publishedAt": "2026-08-20T10:00:00Z",
-          "evidenceGroup": "outlet:spacenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 41
+      "streamRank": 45
     },
     {
       "id": "088e31d8fd42bb",
@@ -2891,7 +3789,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 15.2 小时",
+        "发布约 16.0 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -2919,71 +3817,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 42
-    },
-    {
-      "id": "9d164193b43ad8",
-      "eventId": "evt-427b26582d9c",
-      "contentType": "news",
-      "title": "Inertia Enterprises找到快速制造聚变燃料的方法",
-      "originalTitle": "Inertia Enterprises finds a way to make its fusion fuel fast",
-      "summary": "聚变能初创公司Inertia Enterprises将燃料填充过程从一周缩短至几小时，这是其盈利电厂需克服的10个障碍之一。",
-      "keyFacts": [
-        "Fusion power startup Inertia Enterprises reduced the fuel filling process from a week to just a few hours",
-        "It's one of 10 hurdles the company must overcome to make a profitable power plant"
-      ],
-      "why": "该进展可能缩短技术工程化周期，并改变关键产业与供应链竞争。",
-      "category": "前沿技术",
-      "source": "TechCrunch AI",
-      "country": "国际",
-      "publishedAt": "2026-08-20T16:00:00Z",
-      "url": "https://techcrunch.com/2026/08/20/inertia-enterprises-finds-a-way-to-make-its-fusion-fuel-fast",
-      "score": 60,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 8,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 6.8 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "聚变能",
-        "燃料",
-        "初创公司"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "TechCrunch AI",
-          "domain": "techcrunch.com",
-          "url": "https://techcrunch.com/2026/08/20/inertia-enterprises-finds-a-way-to-make-its-fusion-fuel-fast",
-          "publishedAt": "2026-08-20T16:00:00Z",
-          "evidenceGroup": "outlet:techcrunch.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 43
+      "streamRank": 46
     },
     {
       "id": "2bfd09fe03ca10",
@@ -3018,7 +3852,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 9.8 小时",
+        "发布约 10.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -3046,7 +3880,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 44
+      "streamRank": 47
     },
     {
       "id": "1e45073eeef011",
@@ -3081,7 +3915,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.8 小时",
+        "发布约 10.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3109,7 +3943,72 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 45
+      "streamRank": 48
+    },
+    {
+      "id": "2c879dffc2de71",
+      "eventId": "evt-78142215f9cc",
+      "contentType": "news",
+      "title": "Draper选择Proteus Space执行先进在轨任务",
+      "originalTitle": "Draper Selects Proteus Space for Advanced On-Orbit Mission",
+      "summary": "2026年9月8日，加州洛杉矶——提供快速端到端太空访问能力的双用途航空航天公司Proteus Space宣布，已被查尔斯·斯塔克·德拉珀实验室选中。",
+      "keyFacts": [
+        "September 8th",
+        "Proteus Space",
+        "a dual-use aerospace company delivering rapid"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
+      "country": "国际",
+      "publishedAt": "2026-08-20T10:00:00Z",
+      "url": "https://spacenews.com/draper-selects-proteus-space-for-advanced-on-orbit-mission",
+      "score": 60,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 13,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 13.6 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "Proteus Space",
+        "德拉珀实验室",
+        "在轨任务"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/draper-selects-proteus-space-for-advanced-on-orbit-mission",
+          "publishedAt": "2026-08-20T10:00:00Z",
+          "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 49
     },
     {
       "id": "9c263f36442bdc",
@@ -3146,7 +4045,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 17.8 小时",
+        "发布约 18.6 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -3174,7 +4073,71 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 46
+      "streamRank": 50
+    },
+    {
+      "id": "9d164193b43ad8",
+      "eventId": "evt-427b26582d9c",
+      "contentType": "news",
+      "title": "Inertia Enterprises找到快速制造聚变燃料的方法",
+      "originalTitle": "Inertia Enterprises finds a way to make its fusion fuel fast",
+      "summary": "聚变能初创公司Inertia Enterprises将燃料填充过程从一周缩短至几小时，这是其盈利电厂需克服的10个障碍之一。",
+      "keyFacts": [
+        "Fusion power startup Inertia Enterprises reduced the fuel filling process from a week to just a few hours",
+        "It's one of 10 hurdles the company must overcome to make a profitable power plant"
+      ],
+      "why": "该进展可能缩短技术工程化周期，并改变关键产业与供应链竞争。",
+      "category": "前沿技术",
+      "source": "TechCrunch AI",
+      "country": "国际",
+      "publishedAt": "2026-08-20T16:00:00Z",
+      "url": "https://techcrunch.com/2026/08/20/inertia-enterprises-finds-a-way-to-make-its-fusion-fuel-fast",
+      "score": 59,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 8,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 7.6 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "聚变能",
+        "燃料",
+        "初创公司"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "TechCrunch AI",
+          "domain": "techcrunch.com",
+          "url": "https://techcrunch.com/2026/08/20/inertia-enterprises-finds-a-way-to-make-its-fusion-fuel-fast",
+          "publishedAt": "2026-08-20T16:00:00Z",
+          "evidenceGroup": "outlet:techcrunch.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 51
     },
     {
       "id": "d7ff0765926bbd",
@@ -3210,7 +4173,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 23.1 小时",
+        "发布约 23.9 小时",
         "命中 2 个主题信号",
         "影响信号：launch"
       ],
@@ -3239,72 +4202,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 47
-    },
-    {
-      "id": "48df3c2d7dd988",
-      "eventId": "evt-8603e3513dd8",
-      "contentType": "news",
-      "title": "Eartheye Space与IN2建立战略合作伙伴关系",
-      "originalTitle": "Eartheye Space forges strategic partnership with IN2",
-      "summary": "旧金山——风险管理公司IN2将通过8月19日签署的谅解备忘录获得Eartheye Space多传感器卫星任务分配和分析服务。IN2将把Eartheye卫星纳入其服务。",
-      "keyFacts": [
-        "SAN FRANCISCO – Risk-management firm IN2 will have access to Eartheye Space multi-sensor satellite tasking",
-        "analytics through a memorandum of understanding signed Aug",
-        "IN2 will include Eartheye satellite […]"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-08-19T23:07:16Z",
-      "url": "https://spacenews.com/eartheye-space-forges-strategic-partnership-with-in2",
-      "score": 53,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 8,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 23.7 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "卫星",
-        "合作",
-        "风险管理"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/eartheye-space-forges-strategic-partnership-with-in2",
-          "publishedAt": "2026-08-19T23:07:16Z",
-          "evidenceGroup": "outlet:spacenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 48
+      "streamRank": 52
     }
   ]
 }
