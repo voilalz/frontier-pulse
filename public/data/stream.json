@@ -1,6 +1,6 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-08-25T22:46:54Z",
+  "generatedAt": "2026-08-25T23:34:33Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
   "itemCount": 40,
@@ -10,8 +10,8 @@
     "军事动态": 12,
     "局部冲突": 13,
     "航空航天": 12,
-    "AI": 2,
-    "无人系统": 1
+    "无人系统": 1,
+    "AI": 2
   },
   "sourceCounts": {
     "Al Jazeera": 8,
@@ -31,21 +31,21 @@
   "translatedItemCount": 40,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 14,
-    "completedItemCount": 14,
+    "requestedItemCount": 0,
+    "completedItemCount": 0,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 3,
-    "requestCount": 3,
+    "initialBatchCount": 0,
+    "requestCount": 0,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "completionReason": "not_needed",
+    "completionMessage": "没有需要翻译的新条目",
     "lastProviderError": "",
-    "reusedItemCount": 26,
+    "reusedItemCount": 40,
     "featuredTranslatedItemCount": 10
   },
   "items": [
@@ -68,12 +68,12 @@
       "publishedAt": "2026-08-25T18:25:36Z",
       "url": "https://breakingdefense.com/2026/08/us-flexes-new-ship-sinking-weapons-at-summer-naval-exercises",
       "score": 81,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 11,
         "主题相关性": 8,
         "证据完整度": 3,
@@ -83,8 +83,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 82/100",
+        "综合排序分 81/100（AI 65% + 规则 35%）",
+        "规则参考分 80/100",
         "来源权重 16/20",
-        "发布约 4.4 小时",
+        "发布约 5.1 小时",
         "命中 4 个主题信号",
         "影响信号：strike、missile"
       ],
@@ -106,18 +109,95 @@
           "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-e406c59b9890",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-26",
+        "lastSeen": "2026-08-26",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-26",
+            "newsId": "afc0ad8d76605f",
+            "title": "美国夏季海军演习展示新型沉船武器",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-08-25T18:25:36Z",
+            "score": 81
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:breakingdefense.com"
+        ],
+        "claims": [
+          {
+            "text": "A B-2 bomber used a precision-guided",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "stealth air-launched anti-ship cruise missile against a decommissioned vessel",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "and the US Navy also rolled out unmanned boats to survey",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-8bfa3fcda15d",
+          "eventId": "evt-e406c59b9890",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-09-25",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "afc0ad8d76605f"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
     },
     {
       "id": "37bac3615edb50",
-      "eventId": "evt-91a2143a32d0",
+      "eventId": "evt-ead585df0e7d",
       "contentType": "news",
       "title": "以色列空袭“摧毁”援助物资仓库，加沙七人丧生",
       "originalTitle": "Seven killed in Gaza as Israeli strike ‘destroys’ aid supply warehouse",
@@ -131,8 +211,8 @@
       "country": "国际",
       "publishedAt": "2026-08-25T21:26:25Z",
       "url": "https://www.aljazeera.com/news/2026/8/25/seven-killed-in-gaza-as-israeli-strike-destroys-aid-supply-warehouse?traffic_source=rss",
-      "score": 75,
-      "scoreBasis": "规则评分",
+      "score": 83,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -147,8 +227,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 88/100",
+        "综合排序分 83/100（AI 65% + 规则 35%）",
+        "规则参考分 75/100",
         "来源权重 16/20",
-        "发布约 1.3 小时",
+        "发布约 2.1 小时",
         "命中 3 个主题信号",
         "影响信号：strike"
       ],
@@ -170,18 +253,144 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 2
+      "eventDossier": {
+        "eventId": "evt-ead585df0e7d",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-13",
+        "lastSeen": "2026-08-26",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-08-13",
+            "newsId": "ef9cb9f1871a75",
+            "title": "以色列空袭加沙北部致一人死亡",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-12T20:58:42Z",
+            "score": 78
+          },
+          {
+            "editionDate": "2026-08-26",
+            "newsId": "37bac3615edb50",
+            "title": "以色列空袭“摧毁”援助物资仓库，加沙七人丧生",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-25T21:26:25Z",
+            "score": 83
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Health Ministry warns of 'complete collapse of the basic necessities of life' in Gaza as Israel's attacks continue",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-6a689472f5ab",
+          "eventId": "evt-ead585df0e7d",
+          "statement": "后续可观察以色列空袭是否继续针对加沙关键基础设施，以及加沙卫生部是否发布更严峻的人道主义警告。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-09-25",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "37bac3615edb50"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        },
+        {
+          "predictionId": "pred-5057f7c6df82",
+          "eventId": "evt-ead585df0e7d",
+          "statement": "若冲突持续，则需关注国际社会是否加大调停力度，以及加沙人道主义状况是否触发更广泛的国际干预。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-11-24",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "37bac3615edb50"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        },
+        {
+          "predictionId": "pred-911b8f140cfb",
+          "eventId": "evt-ead585df0e7d",
+          "statement": "后续可观察以军空袭频率是否回升，以及加沙伤亡人数是否上升，以验证冲突是否升级。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-09-12",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "ef9cb9f1871a75"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        },
+        {
+          "predictionId": "pred-756554b917ab",
+          "eventId": "evt-ead585df0e7d",
+          "statement": "若解除武装协议后续推进受阻，则需关注双方冲突是否进一步加剧，或国际调停是否介入。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-11-11",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "ef9cb9f1871a75"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 2,
+      "relatedPapers": []
     },
     {
       "id": "e36594626c0cfd",
-      "eventId": "evt-d1d96e477e0e",
+      "eventId": "evt-0f5d7f2d8051",
       "contentType": "news",
       "title": "NASA艾姆斯研究中心对罗曼任务的贡献",
       "originalTitle": "NASA Ames’ Contributions to Roman’s Mission",
@@ -197,8 +406,8 @@
       "country": "国际",
       "publishedAt": "2026-08-25T19:44:55Z",
       "url": "https://www.nasa.gov/general/nasa-ames-contributions-to-romans-mission",
-      "score": 75,
-      "scoreBasis": "规则评分",
+      "score": 78,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 20,
@@ -213,8 +422,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 80/100",
+        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "规则参考分 75/100",
         "来源权重 20/20",
-        "发布约 3.0 小时",
+        "发布约 3.8 小时",
         "命中 1 个主题信号",
         "影响信号：launch",
         "2 个独立来源相互印证"
@@ -251,14 +463,160 @@
           "evidenceGroup": "outlet:science.nasa.gov"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 3
+      "eventDossier": {
+        "eventId": "evt-0f5d7f2d8051",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-12",
+        "lastSeen": "2026-08-26",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-08-12",
+            "newsId": "fb0750a4d7712e",
+            "title": "国家实验室访问增强NASA对空间核推进任务的信心",
+            "source": "SpaceNews",
+            "publishedAt": "2026-08-11T21:01:02Z",
+            "score": 75
+          },
+          {
+            "editionDate": "2026-08-26",
+            "newsId": "e36594626c0cfd",
+            "title": "NASA艾姆斯研究中心对罗曼任务的贡献",
+            "source": "NASA",
+            "publishedAt": "2026-08-25T19:44:55Z",
+            "score": 78
+          }
+        ],
+        "independentSourceCount": 3,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:nasa.gov",
+          "outlet:science.nasa.gov"
+        ],
+        "claims": [
+          {
+            "text": "Set to launch on Sunday",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:nasa.gov",
+              "outlet:science.nasa.gov"
+            ]
+          },
+          {
+            "text": "NASA’s Nancy Grace Roman Space Telescope will empower astronomers to explore vast regions of the cosmos",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:nasa.gov",
+              "outlet:science.nasa.gov"
+            ]
+          },
+          {
+            "text": "settle essential questions in the areas of dark energy",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:nasa.gov",
+              "outlet:science.nasa.gov"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-3b0d1950486e",
+          "eventId": "evt-0f5d7f2d8051",
+          "statement": "后续可观察罗曼望远镜是否如期发射，以及发射后首批科学数据发布情况。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-09-25",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "e36594626c0cfd"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        },
+        {
+          "predictionId": "pred-bff784020073",
+          "eventId": "evt-0f5d7f2d8051",
+          "statement": "若罗曼任务成功运行，则需关注其是否增强NASA对类似深空任务的信心，如核推进任务的推进。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-11-24",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "e36594626c0cfd"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        },
+        {
+          "predictionId": "pred-5ffd28068f7b",
+          "eventId": "evt-0f5d7f2d8051",
+          "statement": "后续可观察NASA是否公布该任务的明确时间表或关键里程碑节点。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-12",
+          "dueAfter": "2026-09-11",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "fb0750a4d7712e"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        },
+        {
+          "predictionId": "pred-2b45508bf547",
+          "eventId": "evt-0f5d7f2d8051",
+          "statement": "若反应堆地面测试按期完成，则需关注2027年是否启动任务集成与发射准备。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-12",
+          "dueAfter": "2026-11-10",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "fb0750a4d7712e"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 3,
+      "relatedPapers": []
     },
     {
       "id": "0621445a82b3ea",
@@ -294,7 +652,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 2.2 小时",
+        "发布约 3.0 小时",
         "命中 2 个主题信号",
         "影响信号：escalation"
       ],
@@ -342,13 +700,13 @@
       "country": "国际",
       "publishedAt": "2026-08-25T19:50:57Z",
       "url": "https://www.bbc.co.uk/news/articles/c3v4xg5klx7o?at_medium=RSS&at_campaign=rss",
-      "score": 73,
-      "scoreBasis": "规则评分",
+      "score": 76,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 18,
         "影响信号": 7,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -358,8 +716,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 76/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
         "来源权重 17/20",
-        "发布约 2.9 小时",
+        "发布约 3.7 小时",
         "命中 1 个主题信号",
         "影响信号：escalation"
       ],
@@ -381,18 +742,106 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 5
+      "eventDossier": {
+        "eventId": "evt-1534330cab57",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-26",
+        "lastSeen": "2026-08-26",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-26",
+            "newsId": "94a6ef56b551fe",
+            "title": "加拿大宣布对美国商品征收最高50%的对等报复性关税",
+            "source": "BBC World",
+            "publishedAt": "2026-08-25T19:50:57Z",
+            "score": 76
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "The latest escalation in an ongoing trade war between the US",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "Canada will see new levies on goods from steel to furniture",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-d787e58b9599",
+          "eventId": "evt-1534330cab57",
+          "statement": "后续可观察加拿大对等关税的具体生效日期，以及美国是否宣布新一轮反制措施。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-09-25",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "94a6ef56b551fe"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        },
+        {
+          "predictionId": "pred-c546c6834ded",
+          "eventId": "evt-1534330cab57",
+          "statement": "若贸易战持续，则需关注两国是否重返谈判桌，以及相关关税对北美供应链的长期影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-11-24",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "94a6ef56b551fe"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 5,
+      "relatedPapers": []
     },
     {
       "id": "a725b828633758",
-      "eventId": "evt-bd37796fce90",
+      "eventId": "evt-5cc120d32460",
       "contentType": "news",
       "title": "英国向乌克兰提供机密远程SCALP导弹蓝图",
       "originalTitle": "UK provides Ukraine classified long-range SCALP missile blueprints",
@@ -407,8 +856,8 @@
       "country": "国际",
       "publishedAt": "2026-08-25T13:20:41Z",
       "url": "https://breakingdefense.com/2026/08/uk-provides-ukraine-classified-long-range-scalp-missile-blueprints",
-      "score": 72,
-      "scoreBasis": "规则评分",
+      "score": 80,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -423,8 +872,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 85/100",
+        "综合排序分 80/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
         "来源权重 16/20",
-        "发布约 9.4 小时",
+        "发布约 10.2 小时",
         "命中 2 个主题信号",
         "影响信号：missile",
         "2 个独立来源相互印证"
@@ -454,14 +906,132 @@
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 6
+      "eventDossier": {
+        "eventId": "evt-5cc120d32460",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-25",
+        "lastSeen": "2026-08-26",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-08-25",
+            "newsId": "19acd11609c1ef",
+            "title": "英国伯纳姆将访乌克兰，提出支持远程导弹生产计划",
+            "source": "Defense News",
+            "publishedAt": "2026-08-24T13:46:49Z",
+            "score": 78
+          },
+          {
+            "editionDate": "2026-08-26",
+            "newsId": "a725b828633758",
+            "title": "英国向乌克兰提供机密远程SCALP导弹蓝图",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-08-25T13:20:41Z",
+            "score": 80
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:breakingdefense.com",
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "The provision to Kyiv comes alongside increased tensions between Moscow",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:breakingdefense.com",
+              "outlet:defensenews.com"
+            ]
+          },
+          {
+            "text": "London over the UK’s support for Ukraine",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:breakingdefense.com",
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-7825dae3bf40",
+          "eventId": "evt-5cc120d32460",
+          "statement": "后续可观察英国政府对SCALP蓝图提供的正式声明，以及乌克兰是否宣布使用蓝图的具体计划。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-09-25",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "a725b828633758"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        },
+        {
+          "predictionId": "pred-89dd8755d859",
+          "eventId": "evt-5cc120d32460",
+          "statement": "若俄罗斯回应升级，则需关注俄英外交对抗是否影响更广泛的欧洲安全格局。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-11-24",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "a725b828633758"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        },
+        {
+          "predictionId": "pred-4e47e1dddf9e",
+          "eventId": "evt-5cc120d32460",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-25",
+          "dueAfter": "2026-09-24",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "19acd11609c1ef"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 6,
+      "relatedPapers": []
     },
     {
       "id": "cc574d6ca9bf9f",
@@ -498,7 +1068,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 9.8 小时",
+        "发布约 10.6 小时",
         "命中 1 个主题信号",
         "影响信号：first、missile"
       ],
@@ -562,7 +1132,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 7.1 小时",
+        "发布约 7.9 小时",
         "命中 1 个主题信号",
         "影响信号：first",
         "2 个独立来源相互印证"
@@ -602,134 +1172,6 @@
       "streamRank": 8
     },
     {
-      "id": "89c4e17188b20c",
-      "eventId": "evt-79fb1a2fe77b",
-      "contentType": "news",
-      "title": "美媒报道：CIA局长未事先宣布访问莫斯科",
-      "originalTitle": "CIA chief travels to Moscow for unannounced talks, US media reports",
-      "summary": "航班跟踪数据证实，周二一架美国军用飞机从美国经拉脱维亚飞往俄罗斯。",
-      "keyFacts": [
-        "Flight tracking data confirms an American military aircraft travelled to Russia from the US via Latvia on Tuesday"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-25T19:48:14Z",
-      "url": "https://www.bbc.co.uk/news/articles/c87vg9x5d7do?at_medium=RSS&at_campaign=rss",
-      "score": 70,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 3.0 小时",
-        "命中 3 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "CIA",
-        "莫斯科",
-        "访问"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/32e3/live/0854ea30-a095-11f1-91dc-4919512f173f.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/c87vg9x5d7do?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-25T19:48:14Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 9
-    },
-    {
-      "id": "69698c73a46d4c",
-      "eventId": "evt-be9074647109",
-      "contentType": "news",
-      "title": "新型下一代天线增强NASA深空网络",
-      "originalTitle": "New Next-Gen Dish Adds Muscle to NASA’s Deep Space Network",
-      "summary": "NASA加州深空网络设施新增一面34米宽（114英尺）射频天线，用于支持超过40个探索太阳系和星际空间的航天器。",
-      "keyFacts": [
-        "NASA’s Deep Space Network facility in California is marking the addition of a brand new 34-meter-wide (114-foot-wide) radio frequency anten…",
-        "navigation system",
-        "The network uses giant dish antennas located at three global facilities to support more than 40 spacecraft exploring the solar system"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "NASA",
-      "country": "国际",
-      "publishedAt": "2026-08-25T22:28:34Z",
-      "url": "https://www.nasa.gov/technology/space-comms/deep-space-network/new-next-gen-dish-adds-muscle-to-nasas-deep-space-network",
-      "score": 69,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 20,
-        "主题优先级": 9,
-        "时效": 20,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 20/20",
-        "发布约 0.3 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "NASA",
-        "深空网络",
-        "天线"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "NASA",
-          "domain": "nasa.gov",
-          "url": "https://www.nasa.gov/technology/space-comms/deep-space-network/new-next-gen-dish-adds-muscle-to-nasas-deep-space-network",
-          "publishedAt": "2026-08-25T22:28:34Z",
-          "evidenceGroup": "outlet:nasa.gov"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 10
-    },
-    {
       "id": "0957471d262f2b",
       "eventId": "evt-8dfb719c1b1f",
       "contentType": "news",
@@ -764,7 +1206,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 1.8 小时",
+        "发布约 2.6 小时",
         "命中 1 个主题信号",
         "影响信号：launch"
       ],
@@ -793,7 +1235,279 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 11
+      "streamRank": 9
+    },
+    {
+      "id": "89c4e17188b20c",
+      "eventId": "evt-79fb1a2fe77b",
+      "contentType": "news",
+      "title": "美媒报道：CIA局长未事先宣布访问莫斯科",
+      "originalTitle": "CIA chief travels to Moscow for unannounced talks, US media reports",
+      "summary": "航班跟踪数据证实，周二一架美国军用飞机从美国经拉脱维亚飞往俄罗斯。",
+      "keyFacts": [
+        "Flight tracking data confirms an American military aircraft travelled to Russia from the US via Latvia on Tuesday"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-25T19:48:14Z",
+      "url": "https://www.bbc.co.uk/news/articles/c87vg9x5d7do?at_medium=RSS&at_campaign=rss",
+      "score": 83,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 0,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 90/100",
+        "综合排序分 83/100（AI 65% + 规则 35%）",
+        "规则参考分 69/100",
+        "来源权重 17/20",
+        "发布约 3.8 小时",
+        "命中 3 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "CIA",
+        "莫斯科",
+        "访问"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/32e3/live/0854ea30-a095-11f1-91dc-4919512f173f.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c87vg9x5d7do?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-25T19:48:14Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-79fb1a2fe77b",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-26",
+        "lastSeen": "2026-08-26",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-26",
+            "newsId": "89c4e17188b20c",
+            "title": "美媒报道：CIA局长未事先宣布访问莫斯科",
+            "source": "BBC World",
+            "publishedAt": "2026-08-25T19:48:14Z",
+            "score": 83
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "Flight tracking data confirms an American military aircraft travelled to Russia from the US via Latvia on Tuesday",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-4b9759806d17",
+          "eventId": "evt-79fb1a2fe77b",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-09-25",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "89c4e17188b20c"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 10,
+      "relatedPapers": []
+    },
+    {
+      "id": "69698c73a46d4c",
+      "eventId": "evt-be9074647109",
+      "contentType": "news",
+      "title": "新型下一代天线增强NASA深空网络",
+      "originalTitle": "New Next-Gen Dish Adds Muscle to NASA’s Deep Space Network",
+      "summary": "NASA加州深空网络设施新增一面34米宽（114英尺）射频天线，用于支持超过40个探索太阳系和星际空间的航天器。",
+      "keyFacts": [
+        "NASA’s Deep Space Network facility in California is marking the addition of a brand new 34-meter-wide (114-foot-wide) radio frequency anten…",
+        "navigation system",
+        "The network uses giant dish antennas located at three global facilities to support more than 40 spacecraft exploring the solar system"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
+      "country": "国际",
+      "publishedAt": "2026-08-25T22:28:34Z",
+      "url": "https://www.nasa.gov/technology/space-comms/deep-space-network/new-next-gen-dish-adds-muscle-to-nasas-deep-space-network",
+      "score": 71,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 72/100",
+        "综合排序分 71/100（AI 65% + 规则 35%）",
+        "规则参考分 68/100",
+        "来源权重 20/20",
+        "发布约 1.1 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "NASA",
+        "深空网络",
+        "天线"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "NASA",
+          "domain": "nasa.gov",
+          "url": "https://www.nasa.gov/technology/space-comms/deep-space-network/new-next-gen-dish-adds-muscle-to-nasas-deep-space-network",
+          "publishedAt": "2026-08-25T22:28:34Z",
+          "evidenceGroup": "outlet:nasa.gov"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-be9074647109",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-26",
+        "lastSeen": "2026-08-26",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-26",
+            "newsId": "69698c73a46d4c",
+            "title": "新型下一代天线增强NASA深空网络",
+            "source": "NASA",
+            "publishedAt": "2026-08-25T22:28:34Z",
+            "score": 71
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:nasa.gov"
+        ],
+        "claims": [
+          {
+            "text": "NASA’s Deep Space Network facility in California is marking the addition of a brand new 34-meter-wide (114-foot-wide) radio frequency anten…",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          },
+          {
+            "text": "navigation system",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          },
+          {
+            "text": "The network uses giant dish antennas located at three global facilities to support more than 40 spacecraft exploring the solar system",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-19dd9184f4c4",
+          "eventId": "evt-be9074647109",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-09-25",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "69698c73a46d4c"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 11,
+      "relatedPapers": []
     },
     {
       "id": "bb3c314705da6f",
@@ -812,13 +1526,13 @@
       "country": "国际",
       "publishedAt": "2026-08-25T22:10:54Z",
       "url": "https://www.defensenews.com/global/europe/2026/08/25/ukraine-needs-changes-to-avoid-losing-war-ousted-defense-minister-says",
-      "score": 68,
+      "score": 67,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 20,
+        "时效": 19,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -829,7 +1543,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 0.6 小时",
+        "发布约 1.4 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -877,13 +1591,13 @@
       "country": "国际",
       "publishedAt": "2026-08-25T20:20:58Z",
       "url": "https://www.nasa.gov/news-release/nasa-invites-media-to-lunarecycle-challenge-finale-event-in-alabama",
-      "score": 68,
+      "score": 67,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 20,
         "主题优先级": 9,
-        "时效": 19,
+        "时效": 18,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -894,7 +1608,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 2.4 小时",
+        "发布约 3.2 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -957,7 +1671,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.5 小时",
+        "发布约 2.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1020,7 +1734,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.6 小时",
+        "发布约 2.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1066,8 +1780,8 @@
       "country": "国际",
       "publishedAt": "2026-08-25T21:09:05Z",
       "url": "https://www.aljazeera.com/video/newsfeed/2026/8/25/syrian-democratic-forces-announce-their-dissolution?traffic_source=rss",
-      "score": 65,
-      "scoreBasis": "规则评分",
+      "score": 77,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -1082,8 +1796,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 84/100",
+        "综合排序分 77/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
         "来源权重 16/20",
-        "发布约 1.6 小时",
+        "发布约 2.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1104,14 +1821,75 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 16
+      "eventDossier": {
+        "eventId": "evt-409add57b0c9",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-26",
+        "lastSeen": "2026-08-26",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-26",
+            "newsId": "556741ad4090aa",
+            "title": "叙利亚民主力量宣布解散",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-25T21:09:05Z",
+            "score": 77
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "The Kurdish-led Syrian Democratic Forces will dissolve as an independent military force under an agreement with Damascus",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-f5ac6e82b480",
+          "eventId": "evt-409add57b0c9",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-09-25",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "556741ad4090aa"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 16,
+      "relatedPapers": []
     },
     {
       "id": "f0c9f73ad1b01a",
@@ -1131,8 +1909,8 @@
       "country": "国际",
       "publishedAt": "2026-08-25T21:00:00Z",
       "url": "https://www.technologyreview.com/2026/08/25/1140961/mit-tech-powered-the-artemis-ii-livestreams",
-      "score": 65,
-      "scoreBasis": "规则评分",
+      "score": 66,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -1147,8 +1925,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 66/100",
+        "综合排序分 66/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
         "来源权重 17/20",
-        "发布约 1.8 小时",
+        "发布约 2.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1169,77 +1950,91 @@
           "evidenceGroup": "outlet:technologyreview.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 17
-    },
-    {
-      "id": "dcd1aff95af655",
-      "eventId": "evt-0cc4a6065374",
-      "contentType": "news",
-      "title": "伊朗和阿曼讨论霍尔木兹海峡临时航运通道",
-      "originalTitle": "Iran, Oman discuss temporary shipping lane through Strait of Hormuz",
-      "summary": "阿曼外交大臣希望两国能'很快宣布'在霍尔木兹海峡建立联合临时过境走廊。",
-      "keyFacts": [
-        "Omani FM hopes the two countries will 'soon announce' a joint temporary transit corridor through the Strait of Hormuz"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-25T19:47:51Z",
-      "url": "https://www.aljazeera.com/news/2026/8/25/iran-oman-discuss-temporary-shipping-lane-through-strait-of-hormuz?traffic_source=rss",
-      "score": 65,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
+      "eventDossier": {
+        "eventId": "evt-671d5addc5a6",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-26",
+        "lastSeen": "2026-08-26",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-26",
+            "newsId": "f0c9f73ad1b01a",
+            "title": "MIT技术为Artemis II直播提供动力",
+            "source": "MIT Technology Review",
+            "publishedAt": "2026-08-25T21:00:00Z",
+            "score": 66
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
       },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 3.0 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "伊朗",
-        "阿曼",
-        "霍尔木兹海峡"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:technologyreview.com"
+        ],
+        "claims": [
+          {
+            "text": "During the original US missions to the moon in the 1960s",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:technologyreview.com"
+            ]
+          },
+          {
+            "text": "astronauts relied on radio-­frequency systems to communicate",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:technologyreview.com"
+            ]
+          },
+          {
+            "text": "sending grainy",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:technologyreview.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
         {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/8/25/iran-oman-discuss-temporary-shipping-lane-through-strait-of-hormuz?traffic_source=rss",
-          "publishedAt": "2026-08-25T19:47:51Z",
-          "evidenceGroup": "outlet:aljazeera.com"
+          "predictionId": "pred-75a3bac3bb46",
+          "eventId": "evt-671d5addc5a6",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-09-25",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "f0c9f73ad1b01a"
+          ],
+          "lastReviewedAt": "2026-08-26"
         }
       ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 18
+      "isTopStory": true,
+      "streamRank": 17,
+      "relatedPapers": []
     },
     {
       "id": "2c93bed44b5546",
@@ -1275,7 +2070,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 3.1 小时",
+        "发布约 3.9 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "待核验",
@@ -1303,7 +2098,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 19
+      "streamRank": 18
     },
     {
       "id": "9fa5caa2d153e6",
@@ -1338,7 +2133,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 7.5 小时",
+        "发布约 8.3 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1366,7 +2161,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 20
+      "streamRank": 19
     },
     {
       "id": "3b3e93923b2045",
@@ -1403,7 +2198,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 7.8 小时",
+        "发布约 8.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1431,7 +2226,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 21
+      "streamRank": 20
     },
     {
       "id": "e798072a6eb383",
@@ -1466,7 +2261,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.3 小时",
+        "发布约 10.1 小时",
         "命中 1 个主题信号",
         "影响信号：production"
       ],
@@ -1495,33 +2290,31 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 22
+      "streamRank": 21
     },
     {
-      "id": "fa62807cdaf1bd",
-      "eventId": "evt-42f3748b8f6b",
+      "id": "dcd1aff95af655",
+      "eventId": "evt-0cc4a6065374",
       "contentType": "news",
-      "title": "推进系统正迎来高光时刻",
-      "originalTitle": "Propulsion is having a moment",
-      "summary": "本期节目中，SpaceNews的Mike Gruss在2026年犹他州盐湖城小卫星会议上采访了Morpheus Space CEO Kevin Lausten，探讨了推进系统为何至关重要。",
+      "title": "伊朗和阿曼讨论霍尔木兹海峡临时航运通道",
+      "originalTitle": "Iran, Oman discuss temporary shipping lane through Strait of Hormuz",
+      "summary": "阿曼外交大臣希望两国能'很快宣布'在霍尔木兹海峡建立联合临时过境走廊。",
       "keyFacts": [
-        "In this episode",
-        "SpaceNews Mike Gruss interviews Kevin Lausten",
-        "CEO of Morpheus Space"
+        "Omani FM hopes the two countries will 'soon announce' a joint temporary transit corridor through the Strait of Hormuz"
       ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
       "country": "国际",
-      "publishedAt": "2026-08-25T19:59:37Z",
-      "url": "https://spacenews.com/propulsion-is-having-a-moment",
+      "publishedAt": "2026-08-25T19:47:51Z",
+      "url": "https://www.aljazeera.com/news/2026/8/25/iran-oman-discuss-temporary-shipping-lane-through-strait-of-hormuz?traffic_source=rss",
       "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
-        "主题优先级": 9,
-        "时效": 19,
+        "主题优先级": 10,
+        "时效": 18,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1532,25 +2325,25 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 2.8 小时",
+        "发布约 3.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "推进系统",
-        "小卫星",
-        "采访"
+        "伊朗",
+        "阿曼",
+        "霍尔木兹海峡"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/propulsion-is-having-a-moment",
-          "publishedAt": "2026-08-25T19:59:37Z",
-          "evidenceGroup": "outlet:spacenews.com"
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/8/25/iran-oman-discuss-temporary-shipping-lane-through-strait-of-hormuz?traffic_source=rss",
+          "publishedAt": "2026-08-25T19:47:51Z",
+          "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
       "selectionProvider": "",
@@ -1560,7 +2353,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 23
+      "streamRank": 22
     },
     {
       "id": "95d86a0102f441",
@@ -1596,7 +2389,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.3 小时",
+        "发布约 4.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1624,7 +2417,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 24
+      "streamRank": 23
     },
     {
       "id": "15dac1461f2b92",
@@ -1660,7 +2453,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.6 小时",
+        "发布约 4.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1688,7 +2481,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 25
+      "streamRank": 24
     },
     {
       "id": "44c98592843310",
@@ -1724,7 +2517,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 6.1 小时",
+        "发布约 6.9 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "待核验",
@@ -1743,6 +2536,71 @@
           "url": "https://www.twz.com/sea/ukraines-newest-usv-is-a-super-sized-mothership-packed-with-anti-drone-interceptors",
           "publishedAt": "2026-08-25T16:38:51Z",
           "evidenceGroup": "outlet:twz.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 25
+    },
+    {
+      "id": "fa62807cdaf1bd",
+      "eventId": "evt-42f3748b8f6b",
+      "contentType": "news",
+      "title": "推进系统正迎来高光时刻",
+      "originalTitle": "Propulsion is having a moment",
+      "summary": "本期节目中，SpaceNews的Mike Gruss在2026年犹他州盐湖城小卫星会议上采访了Morpheus Space CEO Kevin Lausten，探讨了推进系统为何至关重要。",
+      "keyFacts": [
+        "In this episode",
+        "SpaceNews Mike Gruss interviews Kevin Lausten",
+        "CEO of Morpheus Space"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
+      "country": "国际",
+      "publishedAt": "2026-08-25T19:59:37Z",
+      "url": "https://spacenews.com/propulsion-is-having-a-moment",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 18,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 3.6 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "推进系统",
+        "小卫星",
+        "采访"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/propulsion-is-having-a-moment",
+          "publishedAt": "2026-08-25T19:59:37Z",
+          "evidenceGroup": "outlet:spacenews.com"
         }
       ],
       "selectionProvider": "",
@@ -1787,7 +2645,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.7 小时",
+        "发布约 4.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1816,70 +2674,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 27
-    },
-    {
-      "id": "bdf4ae0fb86230",
-      "eventId": "evt-9c4ef057caaa",
-      "contentType": "news",
-      "title": "波兰名字出现在美国F-15EX交易中，华沙否认采购计划",
-      "originalTitle": "Poland’s Name Appears in U.S. F-15EX Deal, Warsaw Denies Procurement Plans",
-      "summary": "华沙表示目前没有F-15EX采购计划，但AH-64阿帕奇先例使事态发展引人关注。",
-      "keyFacts": [
-        "Warsaw says it doesn't have F-15EX procurement plans for now",
-        "but an AH-64 Apache precedent makes the development intriguing"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "The War Zone",
-      "country": "国际",
-      "publishedAt": "2026-08-25T17:53:10Z",
-      "url": "https://www.twz.com/air/polands-name-appears-in-u-s-f-15ex-deal-warsaw-denies-procurement-plans",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 4.9 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "波兰",
-        "F-15EX",
-        "军购"
-      ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/08/F-15EX-Eagle-II-flies-over-the-Gulf-of-America.jpg?quality=85",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/air/polands-name-appears-in-u-s-f-15ex-deal-warsaw-denies-procurement-plans",
-          "publishedAt": "2026-08-25T17:53:10Z",
-          "evidenceGroup": "outlet:twz.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 28
     },
     {
       "id": "b29b8beb979138",
@@ -1916,7 +2710,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.2 小时",
+        "发布约 7.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1944,72 +2738,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 29
-    },
-    {
-      "id": "d1df00f6f18c79",
-      "eventId": "evt-c84c90e47ccb",
-      "contentType": "news",
-      "title": "基准测试显示，OpenAI的Jalapeño芯片专为大规模快速推理而设计",
-      "originalTitle": "OpenAI’s Jalapeño chip is built for fast inference at scale, benchmarks show",
-      "summary": "在SemiAnalysis的InferenceX基准测试中，Jalapeño比当前最先进的芯片在每位用户令牌数和每千瓦吞吐量上均更优。",
-      "keyFacts": [
-        "Tested on SemiAnalysis’ InferenceX benchmark",
-        "Jalapeño registered both more tokens per user",
-        "more throughput per kilowatt than the currently available state-of-the art"
-      ],
-      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
-      "category": "AI",
-      "source": "TechCrunch AI",
-      "country": "国际",
-      "publishedAt": "2026-08-25T14:22:04Z",
-      "url": "https://techcrunch.com/2026/08/25/openais-jalapeno-chip-is-built-for-fast-inference-at-scale-benchmarks-show",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 8.4 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "OpenAI",
-        "芯片",
-        "推理"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "TechCrunch AI",
-          "domain": "techcrunch.com",
-          "url": "https://techcrunch.com/2026/08/25/openais-jalapeno-chip-is-built-for-fast-inference-at-scale-benchmarks-show",
-          "publishedAt": "2026-08-25T14:22:04Z",
-          "evidenceGroup": "outlet:techcrunch.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 30
+      "streamRank": 28
     },
     {
       "id": "f70da20f72a7ba",
@@ -2044,7 +2773,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 13.9 小时",
+        "发布约 14.7 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "中",
@@ -2079,7 +2808,216 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 31
+      "streamRank": 29
+    },
+    {
+      "id": "bdf4ae0fb86230",
+      "eventId": "evt-9c4ef057caaa",
+      "contentType": "news",
+      "title": "波兰名字出现在美国F-15EX交易中，华沙否认采购计划",
+      "originalTitle": "Poland’s Name Appears in U.S. F-15EX Deal, Warsaw Denies Procurement Plans",
+      "summary": "华沙表示目前没有F-15EX采购计划，但AH-64阿帕奇先例使事态发展引人关注。",
+      "keyFacts": [
+        "Warsaw says it doesn't have F-15EX procurement plans for now",
+        "but an AH-64 Apache precedent makes the development intriguing"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-08-25T17:53:10Z",
+      "url": "https://www.twz.com/air/polands-name-appears-in-u-s-f-15ex-deal-warsaw-denies-procurement-plans",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 5.7 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "波兰",
+        "F-15EX",
+        "军购"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/08/F-15EX-Eagle-II-flies-over-the-Gulf-of-America.jpg?quality=85",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/air/polands-name-appears-in-u-s-f-15ex-deal-warsaw-denies-procurement-plans",
+          "publishedAt": "2026-08-25T17:53:10Z",
+          "evidenceGroup": "outlet:twz.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 30
+    },
+    {
+      "id": "d1df00f6f18c79",
+      "eventId": "evt-c84c90e47ccb",
+      "contentType": "news",
+      "title": "基准测试显示，OpenAI的Jalapeño芯片专为大规模快速推理而设计",
+      "originalTitle": "OpenAI’s Jalapeño chip is built for fast inference at scale, benchmarks show",
+      "summary": "在SemiAnalysis的InferenceX基准测试中，Jalapeño比当前最先进的芯片在每位用户令牌数和每千瓦吞吐量上均更优。",
+      "keyFacts": [
+        "Tested on SemiAnalysis’ InferenceX benchmark",
+        "Jalapeño registered both more tokens per user",
+        "more throughput per kilowatt than the currently available state-of-the art"
+      ],
+      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
+      "category": "AI",
+      "source": "TechCrunch AI",
+      "country": "国际",
+      "publishedAt": "2026-08-25T14:22:04Z",
+      "url": "https://techcrunch.com/2026/08/25/openais-jalapeno-chip-is-built-for-fast-inference-at-scale-benchmarks-show",
+      "score": 71,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 76/100",
+        "综合排序分 71/100（AI 65% + 规则 35%）",
+        "规则参考分 62/100",
+        "来源权重 15/20",
+        "发布约 9.2 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "OpenAI",
+        "芯片",
+        "推理"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "TechCrunch AI",
+          "domain": "techcrunch.com",
+          "url": "https://techcrunch.com/2026/08/25/openais-jalapeno-chip-is-built-for-fast-inference-at-scale-benchmarks-show",
+          "publishedAt": "2026-08-25T14:22:04Z",
+          "evidenceGroup": "outlet:techcrunch.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-c84c90e47ccb",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-26",
+        "lastSeen": "2026-08-26",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-26",
+            "newsId": "d1df00f6f18c79",
+            "title": "基准测试显示，OpenAI的Jalapeño芯片专为大规模快速推理而设计",
+            "source": "TechCrunch AI",
+            "publishedAt": "2026-08-25T14:22:04Z",
+            "score": 71
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:techcrunch.com"
+        ],
+        "claims": [
+          {
+            "text": "Tested on SemiAnalysis’ InferenceX benchmark",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          },
+          {
+            "text": "Jalapeño registered both more tokens per user",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          },
+          {
+            "text": "more throughput per kilowatt than the currently available state-of-the art",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-b92761e9cc80",
+          "eventId": "evt-c84c90e47ccb",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-09-25",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "d1df00f6f18c79"
+          ],
+          "lastReviewedAt": "2026-08-26"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 31,
+      "relatedPapers": []
     },
     {
       "id": "cdbf981318a790",
@@ -2098,13 +3036,13 @@
       "country": "国际",
       "publishedAt": "2026-08-25T16:00:00Z",
       "url": "https://breakingdefense.com/2026/08/how-a-new-pentagon-memo-resets-industry-requirements-plus-highlights-from-technet",
-      "score": 62,
+      "score": 61,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 2,
@@ -2115,7 +3053,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.8 小时",
+        "发布约 7.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2162,13 +3100,13 @@
       "country": "国际",
       "publishedAt": "2026-08-25T15:59:15Z",
       "url": "https://www.defensenews.com/news/your-navy/2026/08/25/uss-abraham-lincoln-to-dock-in-thailand-next-week-thai-official-says",
-      "score": 62,
+      "score": 61,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2179,7 +3117,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.8 小时",
+        "发布约 7.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2208,136 +3146,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 33
-    },
-    {
-      "id": "62bd4787a0226a",
-      "eventId": "evt-0162ab8405f4",
-      "contentType": "news",
-      "title": "中国抨击美国对伊朗及贸易伙伴的新制裁“非法”",
-      "originalTitle": "China hits out at 'illegal' new US sanctions on Iran and trading partners",
-      "summary": "美国威胁要孤立继续与德黑兰做生意的国家，而伊朗大部分石油销往北京。",
-      "keyFacts": [
-        "The US has threatened to isolate nations that continue to do business with Tehran",
-        "which sells much of its oil to Beijing"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-25T11:53:36Z",
-      "url": "https://www.bbc.co.uk/news/articles/clyl8965j5go?at_medium=RSS&at_campaign=rss",
-      "score": 62,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 10.9 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "中国",
-        "美国",
-        "伊朗制裁"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/fc68/live/708dead0-a076-11f1-bf10-9547e884d7b7.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/clyl8965j5go?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-25T11:53:36Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 34
-    },
-    {
-      "id": "0d08893ec84693",
-      "eventId": "evt-58ab1d6fe358",
-      "contentType": "news",
-      "title": "特朗普宣布对伊朗“经济D日”后数小时，霍尔木兹海峡一艘船只遭袭",
-      "originalTitle": "Ship Struck In Strait Of Hormuz Hours After Trump’s “Economic D-Day” Campaign On Iran Unveiled",
-      "summary": "美国再次试图施压伊朗谈判，伊朗似乎以袭击海峡船只作为回应。",
-      "keyFacts": [
-        "attempts once again to pressure Iran into negotiating",
-        "it seems like Iran has given its answer to the U.S",
-        "in the form of another strike in the strait"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "The War Zone",
-      "country": "国际",
-      "publishedAt": "2026-08-25T00:25:25Z",
-      "url": "https://www.twz.com/news-features/ship-struck-in-strait-of-hormuz-hours-after-trumps-economic-d-day-campaign-on-iran-unveiled",
-      "score": 62,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 9,
-        "影响信号": 6,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 22.4 小时",
-        "命中 2 个主题信号",
-        "影响信号：strike"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "霍尔木兹海峡",
-        "伊朗",
-        "美国制裁"
-      ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/08/Bessent.jpg?quality=85",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/news-features/ship-struck-in-strait-of-hormuz-hours-after-trumps-economic-d-day-campaign-on-iran-unveiled",
-          "publishedAt": "2026-08-25T00:25:25Z",
-          "evidenceGroup": "outlet:twz.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 35
     },
     {
       "id": "6b50f9bbbe4ff9",
@@ -2372,7 +3180,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 7.5 小时",
+        "发布约 8.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2400,7 +3208,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 36
+      "streamRank": 34
     },
     {
       "id": "24a512a11c083a",
@@ -2436,7 +3244,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.1 小时",
+        "发布约 9.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2455,6 +3263,136 @@
           "url": "https://www.defensenews.com/global/europe/2026/08/25/ukraines-newest-ballistic-missiles-are-weeks-away-from-combat",
           "publishedAt": "2026-08-25T13:40:27Z",
           "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 35
+    },
+    {
+      "id": "62bd4787a0226a",
+      "eventId": "evt-0162ab8405f4",
+      "contentType": "news",
+      "title": "中国抨击美国对伊朗及贸易伙伴的新制裁“非法”",
+      "originalTitle": "China hits out at 'illegal' new US sanctions on Iran and trading partners",
+      "summary": "美国威胁要孤立继续与德黑兰做生意的国家，而伊朗大部分石油销往北京。",
+      "keyFacts": [
+        "The US has threatened to isolate nations that continue to do business with Tehran",
+        "which sells much of its oil to Beijing"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-25T11:53:36Z",
+      "url": "https://www.bbc.co.uk/news/articles/clyl8965j5go?at_medium=RSS&at_campaign=rss",
+      "score": 61,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 14,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 11.7 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "中国",
+        "美国",
+        "伊朗制裁"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/fc68/live/708dead0-a076-11f1-bf10-9547e884d7b7.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/clyl8965j5go?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-25T11:53:36Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 36
+    },
+    {
+      "id": "0d08893ec84693",
+      "eventId": "evt-58ab1d6fe358",
+      "contentType": "news",
+      "title": "特朗普宣布对伊朗“经济D日”后数小时，霍尔木兹海峡一艘船只遭袭",
+      "originalTitle": "Ship Struck In Strait Of Hormuz Hours After Trump’s “Economic D-Day” Campaign On Iran Unveiled",
+      "summary": "美国再次试图施压伊朗谈判，伊朗似乎以袭击海峡船只作为回应。",
+      "keyFacts": [
+        "attempts once again to pressure Iran into negotiating",
+        "it seems like Iran has given its answer to the U.S",
+        "in the form of another strike in the strait"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-08-25T00:25:25Z",
+      "url": "https://www.twz.com/news-features/ship-struck-in-strait-of-hormuz-hours-after-trumps-economic-d-day-campaign-on-iran-unveiled",
+      "score": 61,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 8,
+        "影响信号": 6,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 23.2 小时",
+        "命中 2 个主题信号",
+        "影响信号：strike"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "霍尔木兹海峡",
+        "伊朗",
+        "美国制裁"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/08/Bessent.jpg?quality=85",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/news-features/ship-struck-in-strait-of-hormuz-hours-after-trumps-economic-d-day-campaign-on-iran-unveiled",
+          "publishedAt": "2026-08-25T00:25:25Z",
+          "evidenceGroup": "outlet:twz.com"
         }
       ],
       "selectionProvider": "",
@@ -2501,7 +3439,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.8 小时",
+        "发布约 10.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2548,13 +3486,13 @@
       "country": "国际",
       "publishedAt": "2026-08-25T12:00:00Z",
       "url": "https://techcrunch.com/2026/08/25/the-world-seems-to-be-ready-an-interview-with-openai-head-of-product-thibault-sottiaux",
-      "score": 60,
+      "score": 59,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
-        "时效": 15,
+        "时效": 14,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2565,7 +3503,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 10.8 小时",
+        "发布约 11.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2613,13 +3551,13 @@
       "country": "国际",
       "publishedAt": "2026-08-25T00:24:41Z",
       "url": "https://www.twz.com/sea/where-are-the-aircraft-carriers-august-24-2026",
-      "score": 58,
+      "score": 57,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 9,
-        "时效": 9,
+        "时效": 8,
         "影响信号": 5,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2630,7 +3568,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 22.4 小时",
+        "发布约 23.2 小时",
         "命中 1 个主题信号",
         "影响信号：first"
       ],
