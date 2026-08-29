@@ -1,27 +1,27 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-08-28T23:03:39Z",
+  "generatedAt": "2026-08-29T01:48:02Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
   "itemCount": 36,
   "totalCandidateCount": 36,
   "truncated": false,
   "categoryCounts": {
-    "局部冲突": 13,
-    "军事动态": 13,
+    "局部冲突": 15,
+    "军事动态": 12,
     "航空航天": 7,
     "无人系统": 1,
-    "AI": 2
+    "AI": 1
   },
   "sourceCounts": {
+    "Al Jazeera": 8,
     "BBC World": 8,
-    "Al Jazeera": 7,
     "Breaking Defense": 5,
     "Defense News": 4,
     "Defense One": 3,
-    "TechCrunch AI": 3,
     "The War Zone": 3,
     "European Space Agency": 2,
+    "TechCrunch AI": 2,
     "Ars Technica": 1
   },
   "translationProvider": "deepseek",
@@ -29,21 +29,21 @@
   "translatedItemCount": 36,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 29,
-    "completedItemCount": 29,
+    "requestedItemCount": 1,
+    "completedItemCount": 1,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 5,
-    "requestCount": 5,
+    "initialBatchCount": 1,
+    "requestCount": 1,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
     "completionReason": "complete_first_pass",
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
-    "reusedItemCount": 7,
+    "reusedItemCount": 33,
     "featuredTranslatedItemCount": 10
   },
   "items": [
@@ -64,13 +64,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T22:11:36Z",
       "url": "https://www.aljazeera.com/video/newsfeed/2026/8/28/israeli-strike-kills-three-palestinians-in-jenin?traffic_source=rss",
-      "score": 87,
-      "scoreBasis": "规则评分",
+      "score": 80,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 20,
+        "时效": 18,
         "影响信号": 17,
         "主题相关性": 6,
         "证据完整度": 3,
@@ -80,8 +80,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 80/100（AI 65% + 规则 35%）",
+        "规则参考分 85/100",
         "来源权重 16/20",
-        "发布约 0.9 小时",
+        "发布约 3.6 小时",
         "命中 3 个主题信号",
         "影响信号：first、attack、strike"
       ],
@@ -110,14 +113,102 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-a1bae4284a19",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-29",
+        "lastSeen": "2026-08-29",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-29",
+            "newsId": "753d931a39134f",
+            "title": "以色列空袭杰宁致三名巴勒斯坦人死亡",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-28T22:11:36Z",
+            "score": 80
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "An Israeli drone strike killed three Palestinians in Jenin",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "the first such attack in the West Bank since February 2025",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-73821f52f791",
+          "eventId": "evt-a1bae4284a19",
+          "statement": "后续可观察以色列是否在约旦河西岸加大无人机袭击频率，以及巴勒斯坦方面的应对措施。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-09-28",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "753d931a39134f"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        },
+        {
+          "predictionId": "pred-1a8b67c07445",
+          "eventId": "evt-a1bae4284a19",
+          "statement": "若约旦河西岸冲突升级，则需关注国际社会反应及停火谈判进程是否受影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-11-27",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "753d931a39134f"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
     },
     {
       "id": "46cab11314fe21",
@@ -136,13 +227,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T21:29:01Z",
       "url": "https://www.bbc.co.uk/news/articles/cm2q7gv3l5qo?at_medium=RSS&at_campaign=rss",
-      "score": 72,
+      "score": 71,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 18,
         "影响信号": 6,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -153,7 +244,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 1.6 小时",
+        "发布约 4.3 小时",
         "命中 1 个主题信号",
         "影响信号：attack"
       ],
@@ -202,13 +293,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T19:11:37Z",
       "url": "https://www.defensenews.com/opinion/2026/08/28/the-devastation-of-nsa-bahrain-is-a-national-security-warning",
-      "score": 72,
-      "scoreBasis": "规则评分",
+      "score": 74,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 6,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -218,8 +309,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 75/100",
+        "综合排序分 74/100（AI 65% + 规则 35%）",
+        "规则参考分 71/100",
         "来源权重 16/20",
-        "发布约 3.9 小时",
+        "发布约 6.6 小时",
         "命中 2 个主题信号",
         "影响信号：attack"
       ],
@@ -241,14 +335,91 @@
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 3
+      "eventDossier": {
+        "eventId": "evt-4e117c8e94de",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-29",
+        "lastSeen": "2026-08-29",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-29",
+            "newsId": "3ab1903700ddd7",
+            "title": "巴林NSA基地的破坏是国家安全警示",
+            "source": "Defense News",
+            "publishedAt": "2026-08-28T19:11:37Z",
+            "score": 74
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "If NSA Bahrain is not reconstituted to pre-attack capabilities",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          },
+          {
+            "text": "it will fundamentally change how the U.S",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          },
+          {
+            "text": "Navy operates",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-57de975cbc47",
+          "eventId": "evt-4e117c8e94de",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-09-28",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "3ab1903700ddd7"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 3,
+      "relatedPapers": []
     },
     {
       "id": "5831bf69f9d6df",
@@ -267,13 +438,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T16:36:53Z",
       "url": "https://www.defensenews.com/news/your-military/2026/08/28/air-force-awards-boeing-131-billion-ceiling-contract-for-f-15-production-modernization",
-      "score": 72,
-      "scoreBasis": "规则评分",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 15,
         "影响信号": 9,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -283,8 +454,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 74/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 70/100",
         "来源权重 16/20",
-        "发布约 6.4 小时",
+        "发布约 9.2 小时",
         "命中 1 个主题信号",
         "影响信号：contract、production"
       ],
@@ -306,14 +480,102 @@
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 4
+      "eventDossier": {
+        "eventId": "evt-a7e98ac326f0",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-29",
+        "lastSeen": "2026-08-29",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-29",
+            "newsId": "5831bf69f9d6df",
+            "title": "美国空军授予波音F-15生产和现代化合同，上限1310亿美元",
+            "source": "Defense News",
+            "publishedAt": "2026-08-28T16:36:53Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "The Air Force has awarded Boeing a sole-source contract with a $131.23 billion ceiling to produce",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          },
+          {
+            "text": "sustain F-15 fighters",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-d78d05e2ed93",
+          "eventId": "evt-a7e98ac326f0",
+          "statement": "后续可观察波音公司是否公布合同具体交付时间表及首批订单数量。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-09-28",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "5831bf69f9d6df"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        },
+        {
+          "predictionId": "pred-cdb2ba8b9909",
+          "eventId": "evt-a7e98ac326f0",
+          "statement": "若F-15合同执行顺利，则需关注其对美国空军机队结构及预算分配的影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-11-27",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "5831bf69f9d6df"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 4,
+      "relatedPapers": []
     },
     {
       "id": "fa9b46bd6b88f9",
@@ -332,13 +594,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T14:14:15Z",
       "url": "https://www.defensenews.com/global/asia-pacific/2026/08/28/india-turns-to-private-sector-to-ramp-up-missile-production",
-      "score": 72,
+      "score": 70,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 14,
         "影响信号": 10,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -349,7 +611,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 8.8 小时",
+        "发布约 11.6 小时",
         "命中 1 个主题信号",
         "影响信号：production、missile"
       ],
@@ -381,73 +643,8 @@
       "streamRank": 5
     },
     {
-      "id": "1ef24caed72492",
-      "eventId": "evt-59815f6b179e",
-      "contentType": "news",
-      "title": "和平特使姆拉德诺夫警告加沙停火面临“崩溃”风险",
-      "originalTitle": "Board of Peace envoy Mladenov warns Gaza ceasefire risks ‘collapse’",
-      "summary": "在接受半岛电视台采访时，尼古拉·姆拉德诺夫表示，重返战争将是“毁灭性的”。",
-      "keyFacts": [
-        "In an interview with Al Jazeera",
-        "Nicolay Mladenov says that a return to war would be 'devastating'"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-28T16:44:45Z",
-      "url": "https://www.aljazeera.com/news/2026/8/28/board-of-peace-envoy-mladenov-warns-gaza-ceasefire-risks-collapse?traffic_source=rss",
-      "score": 71,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 6,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.3 小时",
-        "命中 2 个主题信号",
-        "影响信号：ceasefire"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "加沙",
-        "停火",
-        "姆拉德诺夫"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/8/28/board-of-peace-envoy-mladenov-warns-gaza-ceasefire-risks-collapse?traffic_source=rss",
-          "publishedAt": "2026-08-28T16:44:45Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 6
-    },
-    {
       "id": "84ae8bed5a2a50",
-      "eventId": "evt-e522efd9e868",
+      "eventId": "evt-fb2808a556ce",
       "contentType": "news",
       "title": "阿丽亚娜6号发射MTG-I2卫星——亮点",
       "originalTitle": "Ariane 6 launch with MTG-I2 – highlights",
@@ -463,13 +660,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T12:20:00Z",
       "url": "https://www.esa.int/ESA_Multimedia/Videos/2026/08/Ariane_6_launch_with_MTG-I2_highlights",
-      "score": 71,
-      "scoreBasis": "规则评分",
+      "score": 70,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 19,
         "主题优先级": 9,
-        "时效": 15,
+        "时效": 13,
         "影响信号": 4,
         "主题相关性": 6,
         "证据完整度": 3,
@@ -479,8 +676,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 70/100",
+        "综合排序分 70/100（AI 65% + 规则 35%）",
+        "规则参考分 69/100",
         "来源权重 19/20",
-        "发布约 10.7 小时",
+        "发布约 13.5 小时",
         "命中 3 个主题信号",
         "影响信号：launch"
       ],
@@ -502,14 +702,156 @@
           "evidenceGroup": "outlet:esa.int"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 7
+      "eventDossier": {
+        "eventId": "evt-fb2808a556ce",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-27",
+        "lastSeen": "2026-08-29",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-08-27",
+            "newsId": "d202b99d151144",
+            "title": "MTG-I2卫星准备发射",
+            "source": "European Space Agency",
+            "publishedAt": "2026-08-26T11:00:00Z",
+            "score": 67
+          },
+          {
+            "editionDate": "2026-08-29",
+            "newsId": "84ae8bed5a2a50",
+            "title": "阿丽亚娜6号发射MTG-I2卫星——亮点",
+            "source": "European Space Agency",
+            "publishedAt": "2026-08-28T12:20:00Z",
+            "score": 70
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:esa.int"
+        ],
+        "claims": [
+          {
+            "text": "Video: 00:04:28 The Meteosat Third Generation -Imager2 (MTG-I2) satellite",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:esa.int"
+            ]
+          },
+          {
+            "text": "has been launched on board an Ariane 6 launcher from Europe’s Spaceport in French Guiana",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:esa.int"
+            ]
+          },
+          {
+            "text": "Liftoff was on 27 August 2026 at 22:11 CEST (17:10 local time)",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:esa.int"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-078ab9d9d3bf",
+          "eventId": "evt-fb2808a556ce",
+          "statement": "后续可观察MTG-I2卫星进入预定轨道后传回首张图像及数据质量验证情况。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-09-28",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "84ae8bed5a2a50"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        },
+        {
+          "predictionId": "pred-4ad93fae3d36",
+          "eventId": "evt-fb2808a556ce",
+          "statement": "若卫星运行正常，则需关注其对欧洲天气预报时效和精度的实际提升效果。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-11-27",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "84ae8bed5a2a50"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        },
+        {
+          "predictionId": "pred-074a4c80e863",
+          "eventId": "evt-fb2808a556ce",
+          "statement": "若发射如期进行，需关注升空后火箭级分离及卫星入轨初期的遥测信号确认。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-27",
+          "dueAfter": "2026-09-26",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "d202b99d151144"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        },
+        {
+          "predictionId": "pred-76f69089b62c",
+          "eventId": "evt-fb2808a556ce",
+          "statement": "后续可观察卫星是否成功进入预定地球静止轨道，并开始传回首批测试图像。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-27",
+          "dueAfter": "2026-11-25",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "d202b99d151144"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 6,
+      "relatedPapers": []
     },
     {
       "id": "eb0b65e366420f",
@@ -528,13 +870,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T19:05:23Z",
       "url": "https://www.bbc.co.uk/news/articles/cz0zm2j7ld1o?at_medium=RSS&at_campaign=rss",
-      "score": 69,
-      "scoreBasis": "规则评分",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 0,
         "主题相关性": 6,
         "证据完整度": 3,
@@ -544,8 +886,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 76/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 68/100",
         "来源权重 17/20",
-        "发布约 4.0 小时",
+        "发布约 6.7 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "中",
@@ -566,6 +911,281 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-6d02f57f8e70",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-29",
+        "lastSeen": "2026-08-29",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-29",
+            "newsId": "eb0b65e366420f",
+            "title": "西方官员称俄罗斯加强言论但欲避免与北约开战",
+            "source": "BBC World",
+            "publishedAt": "2026-08-28T19:05:23Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "But they say Moscow will likely continue its \"hybrid activity\" against Nato members",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "short of direct military action",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-2e940915a218",
+          "eventId": "evt-6d02f57f8e70",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-09-28",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "eb0b65e366420f"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 7,
+      "relatedPapers": []
+    },
+    {
+      "id": "ac57fa72d76206",
+      "eventId": "evt-618953184c52",
+      "contentType": "news",
+      "title": "索马里海盗活动激增，受美伊战争外溢影响",
+      "originalTitle": "Somali piracy surges as the impact of the US-Iran war ripples outwards",
+      "summary": "上周四天内有两艘船只被劫持，使自1月以来遭袭船只总数至少达13艘。",
+      "keyFacts": [
+        "上周四天内两艘船只被劫持",
+        "自1月以来遭袭船只总数至少达13艘"
+      ],
+      "why": "海盗活动死灰复燃威胁国际航运安全，显示地区冲突的外溢效应。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-29T01:14:13Z",
+      "url": "https://www.bbc.co.uk/news/articles/cr4vx4pneydo?at_medium=RSS&at_campaign=rss",
+      "score": 74,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 77/100",
+        "综合排序分 74/100（AI 65% + 规则 35%）",
+        "规则参考分 67/100",
+        "来源权重 17/20",
+        "发布约 0.6 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "索马里",
+        "海盗",
+        "航运安全"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/0877/live/0f940730-a20d-11f1-9090-b51af3a01fc2.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cr4vx4pneydo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-29T01:14:13Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-618953184c52",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-29",
+        "lastSeen": "2026-08-29",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-29",
+            "newsId": "ac57fa72d76206",
+            "title": "索马里海盗活动激增，受美伊战争外溢影响",
+            "source": "BBC World",
+            "publishedAt": "2026-08-29T01:14:13Z",
+            "score": 74
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "上周四天内两艘船只被劫持",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "自1月以来遭袭船只总数至少达13艘",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-3e7f950725fb",
+          "eventId": "evt-618953184c52",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-09-28",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "ac57fa72d76206"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 8,
+      "relatedPapers": []
+    },
+    {
+      "id": "46a679e36bd067",
+      "eventId": "evt-05c32b65fc41",
+      "contentType": "news",
+      "title": "和平委员会姆拉德诺夫警告加沙可能‘永远消失’",
+      "originalTitle": "Board of Peace’s Mladenov warns Gaza could be ‘gone for good’",
+      "summary": "美国领导的和平委员会高级特使表示，若不进行重建，加沙面临‘永远消失’的风险。",
+      "keyFacts": [
+        "Top envoy for the US-led Board of Peace says Gaza is at risk of being ‘gone for good’ without reconstruction"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-29T00:53:56Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/29/board-of-peaces-mladenov-warns-gaza-could-be-gone-for?traffic_source=rss",
+      "score": 66,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 0.9 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "加沙",
+        "和平委员会",
+        "重建"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/29/board-of-peaces-mladenov-warns-gaza-could-be-gone-for?traffic_source=rss",
+          "publishedAt": "2026-08-29T00:53:56Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        },
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/8/28/board-of-peace-envoy-mladenov-warns-gaza-ceasefire-risks-collapse?traffic_source=rss",
+          "publishedAt": "2026-08-28T16:44:45Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
       "selectionProvider": "",
       "translationProvider": "deepseek",
       "isSupplemental": false,
@@ -573,7 +1193,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 8
+      "streamRank": 9
     },
     {
       "id": "5be3a3e9e2cafa",
@@ -591,13 +1211,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T19:45:39Z",
       "url": "https://www.bbc.co.uk/news/articles/cn74m8e5rleo?at_medium=RSS&at_campaign=rss",
-      "score": 67,
+      "score": 66,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -608,7 +1228,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 3.3 小时",
+        "发布约 6.0 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -636,7 +1256,162 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 9
+      "streamRank": 10
+    },
+    {
+      "id": "5417f3786fea03",
+      "eventId": "evt-11e158a8b49c",
+      "contentType": "news",
+      "title": "伊朗革命卫队宣称控制霍尔木兹海峡，美国维持海上封锁",
+      "originalTitle": "Iran war live: IRGC asserts strait control, US enforces blockade",
+      "summary": "伊朗伊斯兰革命卫队宣称对霍尔木兹海峡拥有决定性控制，而美国继续实施海上封锁。",
+      "keyFacts": [
+        "伊朗革命卫队宣称对霍尔木兹海峡有决定性控制",
+        "美国维持海上封锁"
+      ],
+      "why": "该海峡是全球石油运输关键通道，美伊对抗升级可能影响能源供应和地区稳定。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-29T00:00:00Z",
+      "url": "https://www.aljazeera.com/news/liveblog/2026/8/29/iran-war-live-irgc-asserts-strait-control-us-enforces-blockade?traffic_source=rss",
+      "score": 75,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 80/100",
+        "综合排序分 75/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
+        "来源权重 16/20",
+        "发布约 1.8 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "美国",
+        "霍尔木兹海峡"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/liveblog/2026/8/29/iran-war-live-irgc-asserts-strait-control-us-enforces-blockade?traffic_source=rss",
+          "publishedAt": "2026-08-29T00:00:00Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-11e158a8b49c",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-29",
+        "lastSeen": "2026-08-29",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-29",
+            "newsId": "5417f3786fea03",
+            "title": "伊朗革命卫队宣称控制霍尔木兹海峡，美国维持海上封锁",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-29T00:00:00Z",
+            "score": 75
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "伊朗革命卫队宣称对霍尔木兹海峡有决定性控制",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "美国维持海上封锁",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-b5741b540291",
+          "eventId": "evt-11e158a8b49c",
+          "statement": "后续可观察美伊是否发生直接军事接触，以及霍尔木兹海峡航运是否受实质影响。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-09-28",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "5417f3786fea03"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        },
+        {
+          "predictionId": "pred-2e57fd7b140b",
+          "eventId": "evt-11e158a8b49c",
+          "statement": "若双方继续强硬，则需关注停火协议是否破裂及地区能源供应风险。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-11-27",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "5417f3786fea03"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 11,
+      "relatedPapers": []
     },
     {
       "id": "a41a257a61420f",
@@ -655,13 +1430,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T19:03:02Z",
       "url": "https://www.aljazeera.com/news/2026/8/28/ukraines-zelenskyy-plans-to-hit-russia-with-1000-drones-a-day?traffic_source=rss",
-      "score": 66,
+      "score": 65,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -672,7 +1447,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 4.0 小时",
+        "发布约 6.8 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -700,76 +1475,11 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 10
-    },
-    {
-      "id": "2472480a60f47b",
-      "eventId": "evt-f3dcb61fff09",
-      "contentType": "news",
-      "title": "俄罗斯致命袭击击中乌克兰平民目标",
-      "originalTitle": "Deadly Russian strikes hit civilian targets in Ukraine",
-      "summary": "俄罗斯加强了对乌克兰的攻击，造成平民死亡，并损坏了基辅附近的房屋和仓库。",
-      "keyFacts": [
-        "Russia intensified attacks across Ukraine",
-        "killing civilians",
-        "damaging homes"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-08-28T18:37:17Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/28/deadly-russian-strikes-hit-civilian-targets-in-ukraine?traffic_source=rss",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.4 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "乌克兰",
-        "袭击",
-        "平民"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/28/deadly-russian-strikes-hit-civilian-targets-in-ukraine?traffic_source=rss",
-          "publishedAt": "2026-08-28T18:37:17Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 11
+      "streamRank": 12
     },
     {
       "id": "bb691a1ae3da17",
-      "eventId": "evt-03e142f7aab5",
+      "eventId": "evt-6cf6f150bc30",
       "contentType": "news",
       "title": "印尼首艘航空母舰正从意大利运来",
       "originalTitle": "Indonesia’s First Aircraft Carrier Is On Its Way From Italy",
@@ -784,13 +1494,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T17:06:17Z",
       "url": "https://www.twz.com/news-features/indonesias-first-aircraft-carrier-is-on-its-way-from-italy",
-      "score": 66,
-      "scoreBasis": "规则评分",
+      "score": 70,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 9,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 5,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -800,8 +1510,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 72/100",
+        "综合排序分 70/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
         "来源权重 15/20",
-        "发布约 6.0 小时",
+        "发布约 8.7 小时",
         "命中 1 个主题信号",
         "影响信号：first"
       ],
@@ -823,14 +1536,129 @@
           "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 12
+      "eventDossier": {
+        "eventId": "evt-6cf6f150bc30",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-23",
+        "lastSeen": "2026-08-29",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-08-23",
+            "newsId": "58673f007800c4",
+            "title": "中国下一艘航母初具雏形",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-22T17:29:15Z",
+            "score": 73
+          },
+          {
+            "editionDate": "2026-08-29",
+            "newsId": "bb691a1ae3da17",
+            "title": "印尼首艘航空母舰正从意大利运来",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-28T17:06:17Z",
+            "score": 70
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "Indonesia is about to join Southeast Asia’s small",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "unusual aircraft-carrier club",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-b96b861df0dd",
+          "eventId": "evt-6cf6f150bc30",
+          "statement": "后续可观察印尼航母抵港时间及其后续军事部署计划。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-09-28",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "bb691a1ae3da17"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        },
+        {
+          "predictionId": "pred-2ba0ffb7aa16",
+          "eventId": "evt-6cf6f150bc30",
+          "statement": "若印尼航母入列，则需关注其与周边国家海上力量平衡及地区安全态势变化。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-11-27",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "bb691a1ae3da17"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        },
+        {
+          "predictionId": "pred-a98a78e7800d",
+          "eventId": "evt-6cf6f150bc30",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-23",
+          "dueAfter": "2026-09-22",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "58673f007800c4"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 13,
+      "relatedPapers": []
     },
     {
       "id": "3e747a86ca871e",
@@ -849,13 +1677,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T15:54:53Z",
       "url": "https://breakingdefense.com/2026/08/military-uses-av-directed-energy-system-to-defeat-drones-at-the-border",
-      "score": 66,
+      "score": 65,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -866,7 +1694,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 7.1 小时",
+        "发布约 9.9 小时",
         "命中 1 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -902,7 +1730,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 13
+      "streamRank": 14
     },
     {
       "id": "d7ede4816e872b",
@@ -921,13 +1749,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T17:45:31Z",
       "url": "https://www.twz.com/news-features/chinas-area-51-is-undergoing-a-massive-expansion",
-      "score": 65,
-      "scoreBasis": "规则评分",
+      "score": 71,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 9,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 4,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -937,8 +1765,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 75/100",
+        "综合排序分 71/100（AI 65% + 规则 35%）",
+        "规则参考分 64/100",
         "来源权重 15/20",
-        "发布约 5.3 小时",
+        "发布约 8.0 小时",
         "命中 1 个主题信号",
         "影响信号：test"
       ],
@@ -960,14 +1791,83 @@
           "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 14
+      "eventDossier": {
+        "eventId": "evt-4998529c74cc",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-29",
+        "lastSeen": "2026-08-29",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-29",
+            "newsId": "d7ede4816e872b",
+            "title": "中国‘51区’大规模扩建",
+            "source": "The War Zone",
+            "publishedAt": "2026-08-28T17:45:31Z",
+            "score": 71
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "The buildout of the remote flight-test base has accelerated sharply",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "and large new hangars suggest a specific type of aircraft may be arriving in the near future",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-b79c61fe5a17",
+          "eventId": "evt-4998529c74cc",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-09-28",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "d7ede4816e872b"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 15,
+      "relatedPapers": []
     },
     {
       "id": "827a56a3b86ae4",
@@ -986,16 +1886,16 @@
       "country": "国际",
       "publishedAt": "2026-08-28T16:42:31Z",
       "url": "https://www.aljazeera.com/news/2026/8/28/ukraine-reinforces-donetsk-as-it-seeks-to-disrupt-russias-weapons-flow?traffic_source=rss",
-      "score": 65,
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 15,
         "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
+        "主题相关性": 6,
+        "证据完整度": 2,
         "多源印证": 0,
         "编辑降权": 0,
         "日期异常降权": 0,
@@ -1003,8 +1903,8 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.4 小时",
-        "命中 2 个主题信号"
+        "发布约 9.1 小时",
+        "命中 3 个主题信号"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
@@ -1031,136 +1931,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 15
-    },
-    {
-      "id": "dda88bd91f0cf1",
-      "eventId": "evt-0fbeb1042f7d",
-      "contentType": "news",
-      "title": "苏丹首都解除两年宵禁",
-      "originalTitle": "Two-year curfew lifted in Sudan's capital",
-      "summary": "军方当局于18个月前重新控制该市，但冲突在其他地区仍在继续。",
-      "keyFacts": [
-        "The military authorities retook control of the city 18 months ago",
-        "but the conflict continues elsewhere"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-28T14:18:53Z",
-      "url": "https://www.bbc.co.uk/news/articles/c2076gxr0llo?at_medium=RSS&at_campaign=rss",
-      "score": 65,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 8.7 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "苏丹",
-        "宵禁",
-        "冲突"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/72f4/live/9745d500-a2c1-11f1-9024-715001d09aeb.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/c2076gxr0llo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-28T14:18:53Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
       "streamRank": 16
-    },
-    {
-      "id": "d62db5e9a1ea4a",
-      "eventId": "evt-1f79edab3412",
-      "contentType": "news",
-      "title": "Anthropic首次在五角大楼供应链风险标签诉讼中胜诉",
-      "originalTitle": "Anthropic gets its first court win over the Pentagon’s supply-chain risk label",
-      "summary": "联邦法官裁定特朗普政府将Anthropic标记为供应链风险不合法，这家AI公司在华盛顿的第二起诉讼中取得胜利。",
-      "keyFacts": [
-        "A federal judge ruled the Trump administration illegally labeled Anthropic a supply-chain risk",
-        "handing the AI company a victory as its second Pentagon lawsuit continues in Washington"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "TechCrunch AI",
-      "country": "国际",
-      "publishedAt": "2026-08-28T12:46:12Z",
-      "url": "https://techcrunch.com/2026/08/28/anthropic-gets-its-first-court-win-over-the-pentagons-supply-chain-risk-label",
-      "score": 65,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 5,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 10.3 小时",
-        "命中 1 个主题信号",
-        "影响信号：first"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "Anthropic",
-        "诉讼",
-        "供应链风险"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "TechCrunch AI",
-          "domain": "techcrunch.com",
-          "url": "https://techcrunch.com/2026/08/28/anthropic-gets-its-first-court-win-over-the-pentagons-supply-chain-risk-label",
-          "publishedAt": "2026-08-28T12:46:12Z",
-          "evidenceGroup": "outlet:techcrunch.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 17
     },
     {
       "id": "a3d034cf7b7fb4",
@@ -1178,13 +1949,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T11:15:05Z",
       "url": "https://arstechnica.com/security/2026/08/authorities-arrest-2-alleged-members-of-prolific-hacking-group-teampcp",
-      "score": 65,
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
-        "时效": 14,
+        "时效": 13,
         "影响信号": 6,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1195,7 +1966,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 11.8 小时",
+        "发布约 14.5 小时",
         "命中 1 个主题信号",
         "影响信号：attack"
       ],
@@ -1224,7 +1995,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 18
+      "streamRank": 17
     },
     {
       "id": "a6a1deff52d4ae",
@@ -1242,13 +2013,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T21:26:32Z",
       "url": "https://www.aljazeera.com/video/newsfeed/2026/8/28/08-28-26-nepal-b4-and-after-sv-mp4?traffic_source=rss",
-      "score": 64,
+      "score": 63,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 19,
+        "时效": 18,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1259,7 +2030,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.6 小时",
+        "发布约 4.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1287,7 +2058,201 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
+      "streamRank": 18
+    },
+    {
+      "id": "2472480a60f47b",
+      "eventId": "evt-f3dcb61fff09",
+      "contentType": "news",
+      "title": "俄罗斯致命袭击击中乌克兰平民目标",
+      "originalTitle": "Deadly Russian strikes hit civilian targets in Ukraine",
+      "summary": "俄罗斯加强了对乌克兰的攻击，造成平民死亡，并损坏了基辅附近的房屋和仓库。",
+      "keyFacts": [
+        "Russia intensified attacks across Ukraine",
+        "killing civilians",
+        "damaging homes"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-28T18:37:17Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/8/28/deadly-russian-strikes-hit-civilian-targets-in-ukraine?traffic_source=rss",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 2,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.2 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "乌克兰",
+        "袭击",
+        "平民"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/8/28/deadly-russian-strikes-hit-civilian-targets-in-ukraine?traffic_source=rss",
+          "publishedAt": "2026-08-28T18:37:17Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
       "streamRank": 19
+    },
+    {
+      "id": "dda88bd91f0cf1",
+      "eventId": "evt-0fbeb1042f7d",
+      "contentType": "news",
+      "title": "苏丹首都解除两年宵禁",
+      "originalTitle": "Two-year curfew lifted in Sudan's capital",
+      "summary": "军方当局于18个月前重新控制该市，但冲突在其他地区仍在继续。",
+      "keyFacts": [
+        "The military authorities retook control of the city 18 months ago",
+        "but the conflict continues elsewhere"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-28T14:18:53Z",
+      "url": "https://www.bbc.co.uk/news/articles/c2076gxr0llo?at_medium=RSS&at_campaign=rss",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 14,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 11.5 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "苏丹",
+        "宵禁",
+        "冲突"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/72f4/live/9745d500-a2c1-11f1-9024-715001d09aeb.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c2076gxr0llo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-28T14:18:53Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 20
+    },
+    {
+      "id": "d62db5e9a1ea4a",
+      "eventId": "evt-1f79edab3412",
+      "contentType": "news",
+      "title": "Anthropic首次在五角大楼供应链风险标签诉讼中胜诉",
+      "originalTitle": "Anthropic gets its first court win over the Pentagon’s supply-chain risk label",
+      "summary": "联邦法官裁定特朗普政府将Anthropic标记为供应链风险不合法，这家AI公司在华盛顿的第二起诉讼中取得胜利。",
+      "keyFacts": [
+        "A federal judge ruled the Trump administration illegally labeled Anthropic a supply-chain risk",
+        "handing the AI company a victory as its second Pentagon lawsuit continues in Washington"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "TechCrunch AI",
+      "country": "国际",
+      "publishedAt": "2026-08-28T12:46:12Z",
+      "url": "https://techcrunch.com/2026/08/28/anthropic-gets-its-first-court-win-over-the-pentagons-supply-chain-risk-label",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 13,
+        "影响信号": 5,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 13.0 小时",
+        "命中 1 个主题信号",
+        "影响信号：first"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "Anthropic",
+        "诉讼",
+        "供应链风险"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "TechCrunch AI",
+          "domain": "techcrunch.com",
+          "url": "https://techcrunch.com/2026/08/28/anthropic-gets-its-first-court-win-over-the-pentagons-supply-chain-risk-label",
+          "publishedAt": "2026-08-28T12:46:12Z",
+          "evidenceGroup": "outlet:techcrunch.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 21
     },
     {
       "id": "7e46218b1a4dd4",
@@ -1305,13 +2270,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T20:32:46Z",
       "url": "https://www.defenseone.com/policy/2026/08/heres-what-trumps-new-space-academy-could-mean-us-military/415712",
-      "score": 64,
+      "score": 62,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 17,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 2,
@@ -1322,7 +2287,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 2.5 小时",
+        "发布约 5.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1341,135 +2306,6 @@
           "url": "https://www.defenseone.com/policy/2026/08/heres-what-trumps-new-space-academy-could-mean-us-military/415712",
           "publishedAt": "2026-08-28T20:32:46Z",
           "evidenceGroup": "outlet:defenseone.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 20
-    },
-    {
-      "id": "d967cdbfed088b",
-      "eventId": "evt-ba93d2055c4e",
-      "contentType": "news",
-      "title": "休达爆发暴力事件，移民危机持续",
-      "originalTitle": "Violence breaks out in Ceuta as migrant crisis continues",
-      "summary": "一群移民被指控向军用车辆投掷石块，而一些当地居民放火烧毁了海滩上的营地。",
-      "keyFacts": [
-        "A group of migrants is accused of throwing stones at a military vehicle",
-        "while some locals set fire to their camps on the beach"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-28T16:30:59Z",
-      "url": "https://www.bbc.co.uk/news/articles/cy9zj11gwzxo?at_medium=RSS&at_campaign=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 6.5 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "休达",
-        "移民危机",
-        "暴力冲突"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/0b39/live/e5d60180-a2f9-11f1-8d5b-155abe464768.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cy9zj11gwzxo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-28T16:30:59Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 21
-    },
-    {
-      "id": "482b0076fa12e5",
-      "eventId": "evt-4b099a1225da",
-      "contentType": "news",
-      "title": "F-35全寿命价格跌破2万亿美元，尽管购置成本上升",
-      "originalTitle": "F-35 lifetime price tag dips beneath $2 trillion even as buying costs rise",
-      "summary": "国防部预计将额外花费510亿美元采购隐身战机，但修订后的估计使项目总成本降至2万亿美元以下，据五角大楼最新报告。",
-      "keyFacts": [
-        "The Defense Department anticipates it will spend an additional $51 billion to acquire the stealth fighter",
-        "though revised estimates have pulled the program’s total cost beneath $2 trillion",
-        "according to a recent Pentagon report"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-08-28T14:09:42Z",
-      "url": "https://breakingdefense.com/2026/08/f-35-lifetime-price-tag-dips-beneath-2-trillion-even-as-buying-costs-rise",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 8.9 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "F-35",
-        "成本",
-        "五角大楼"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/08/f-35-lifetime-price-tag-dips-beneath-2-trillion-even-as-buying-costs-rise",
-          "publishedAt": "2026-08-28T14:09:42Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
       "selectionProvider": "",
@@ -1498,13 +2334,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T19:01:51Z",
       "url": "https://www.defenseone.com/threats/2026/08/pacific-conflict-may-not-look-conventional-war-socpac-commander-says/415704",
-      "score": 63,
+      "score": 62,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 2,
@@ -1515,7 +2351,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 4.0 小时",
+        "发布约 6.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1562,13 +2398,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T17:36:54Z",
       "url": "https://www.bbc.co.uk/news/articles/cd68vpjv21do?at_medium=RSS&at_campaign=rss",
-      "score": 63,
+      "score": 62,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 9,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1579,7 +2415,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 5.4 小时",
+        "发布约 8.2 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1627,16 +2463,16 @@
       "country": "国际",
       "publishedAt": "2026-08-28T16:44:24Z",
       "url": "https://www.aljazeera.com/news/2026/8/28/gaza-forced-to-use-unreliable-online-payments-amid-cash-famine?traffic_source=rss",
-      "score": 63,
+      "score": 62,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 15,
         "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
+        "主题相关性": 4,
+        "证据完整度": 2,
         "多源印证": 0,
         "编辑降权": 0,
         "日期异常降权": 0,
@@ -1644,8 +2480,8 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.3 小时",
-        "命中 1 个主题信号"
+        "发布约 9.1 小时",
+        "命中 2 个主题信号"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
@@ -1675,6 +2511,135 @@
       "streamRank": 25
     },
     {
+      "id": "d967cdbfed088b",
+      "eventId": "evt-ba93d2055c4e",
+      "contentType": "news",
+      "title": "休达爆发暴力事件，移民危机持续",
+      "originalTitle": "Violence breaks out in Ceuta as migrant crisis continues",
+      "summary": "一群移民被指控向军用车辆投掷石块，而一些当地居民放火烧毁了海滩上的营地。",
+      "keyFacts": [
+        "A group of migrants is accused of throwing stones at a military vehicle",
+        "while some locals set fire to their camps on the beach"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-28T16:30:59Z",
+      "url": "https://www.bbc.co.uk/news/articles/cy9zj11gwzxo?at_medium=RSS&at_campaign=rss",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 9.3 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "休达",
+        "移民危机",
+        "暴力冲突"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/0b39/live/e5d60180-a2f9-11f1-8d5b-155abe464768.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cy9zj11gwzxo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-28T16:30:59Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 26
+    },
+    {
+      "id": "482b0076fa12e5",
+      "eventId": "evt-4b099a1225da",
+      "contentType": "news",
+      "title": "F-35全寿命价格跌破2万亿美元，尽管购置成本上升",
+      "originalTitle": "F-35 lifetime price tag dips beneath $2 trillion even as buying costs rise",
+      "summary": "国防部预计将额外花费510亿美元采购隐身战机，但修订后的估计使项目总成本降至2万亿美元以下，据五角大楼最新报告。",
+      "keyFacts": [
+        "The Defense Department anticipates it will spend an additional $51 billion to acquire the stealth fighter",
+        "though revised estimates have pulled the program’s total cost beneath $2 trillion",
+        "according to a recent Pentagon report"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-08-28T14:09:42Z",
+      "url": "https://breakingdefense.com/2026/08/f-35-lifetime-price-tag-dips-beneath-2-trillion-even-as-buying-costs-rise",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 14,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 11.6 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "F-35",
+        "成本",
+        "五角大楼"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/08/f-35-lifetime-price-tag-dips-beneath-2-trillion-even-as-buying-costs-rise",
+          "publishedAt": "2026-08-28T14:09:42Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 27
+    },
+    {
       "id": "f564b21fd4492e",
       "eventId": "evt-16325a7aee5d",
       "contentType": "news",
@@ -1692,13 +2657,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T17:14:20Z",
       "url": "https://www.twz.com/news-features/u-s-expanding-b-52-bomber-capacity-at-moron-air-base-in-spain",
-      "score": 62,
+      "score": 61,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1709,7 +2674,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 5.8 小时",
+        "发布约 8.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -1737,7 +2702,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 26
+      "streamRank": 28
     },
     {
       "id": "3feb9b9bd12f95",
@@ -1757,13 +2722,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T15:44:05Z",
       "url": "https://breakingdefense.com/2026/08/finland-and-sweden-team-up-to-boost-counter-drone-defenses",
-      "score": 62,
-      "scoreBasis": "规则评分",
+      "score": 66,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1773,8 +2738,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 68/100",
+        "综合排序分 66/100（AI 65% + 规则 35%）",
+        "规则参考分 61/100",
         "来源权重 16/20",
-        "发布约 7.3 小时",
+        "发布约 10.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1795,14 +2763,91 @@
           "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 27
+      "eventDossier": {
+        "eventId": "evt-50b1973884c1",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-29",
+        "lastSeen": "2026-08-29",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-29",
+            "newsId": "3feb9b9bd12f95",
+            "title": "芬兰和瑞典合作加强反无人机防御",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-08-28T15:44:05Z",
+            "score": 66
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:breakingdefense.com"
+        ],
+        "claims": [
+          {
+            "text": "“We trust one another",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "and together we are stronger,” said Finnish President Alexander Stubb on X",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "by way of welcoming the expanded",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-3e65a7cd1ec2",
+          "eventId": "evt-50b1973884c1",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-09-28",
+          "verificationSignals": [
+            "后续试验与任务数据",
+            "规模化部署、采购或反制变化"
+          ],
+          "evidenceIds": [
+            "3feb9b9bd12f95"
+          ],
+          "lastReviewedAt": "2026-08-29"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 29,
+      "relatedPapers": []
     },
     {
       "id": "a3e61e39e154b1",
@@ -1822,13 +2867,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T15:07:32Z",
       "url": "https://breakingdefense.com/2026/08/with-ai-hackers-in-mind-air-forces-cyber-develops-defensive-campaign-plan",
-      "score": 62,
+      "score": 61,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1839,7 +2884,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 7.9 小时",
+        "发布约 10.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1867,7 +2912,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 28
+      "streamRank": 30
     },
     {
       "id": "5e3fd136011a3a",
@@ -1887,13 +2932,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T11:44:36Z",
       "url": "https://www.defensenews.com/global/europe/2026/08/28/russia-is-running-out-of-cash-due-to-its-war-in-ukraine-report",
-      "score": 62,
+      "score": 61,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 14,
+        "时效": 13,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -1904,7 +2949,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 11.3 小时",
+        "发布约 14.1 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1932,7 +2977,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 29
+      "streamRank": 31
     },
     {
       "id": "bc1465ce750b13",
@@ -1952,13 +2997,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T13:38:24Z",
       "url": "https://breakingdefense.com/2026/08/the-president-doesnt-need-a-one-trick-army",
-      "score": 61,
+      "score": 60,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 15,
+        "时效": 14,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1969,7 +3014,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.4 小时",
+        "发布约 12.2 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1997,7 +3042,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 30
+      "streamRank": 32
     },
     {
       "id": "6555a4690c41d5",
@@ -2016,13 +3061,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T12:49:55Z",
       "url": "https://www.bbc.co.uk/news/videos/ce3rykzvevno?at_medium=RSS&at_campaign=rss",
-      "score": 61,
+      "score": 60,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 9,
-        "时效": 15,
+        "时效": 14,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2033,7 +3078,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 10.2 小时",
+        "发布约 13.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2061,7 +3106,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 31
+      "streamRank": 33
     },
     {
       "id": "36761a6f112bec",
@@ -2081,13 +3126,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T09:03:00Z",
       "url": "https://www.esa.int/Space_Safety/Space_Debris/Observing_Samba_and_Tango_s_reentries",
-      "score": 61,
+      "score": 60,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 19,
         "主题优先级": 9,
-        "时效": 13,
+        "时效": 12,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2098,7 +3143,7 @@
       },
       "scoreReasons": [
         "来源权重 19/20",
-        "发布约 14.0 小时",
+        "发布约 16.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2126,7 +3171,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 32
+      "streamRank": 34
     },
     {
       "id": "b8d3f0cb5de26b",
@@ -2145,13 +3190,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T12:21:06Z",
       "url": "https://techcrunch.com/2026/08/28/meta-executive-leaves-for-openai-as-the-social-media-giant-faces-growing-scrutiny-in-india",
-      "score": 60,
+      "score": 58,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
-        "时效": 15,
+        "时效": 13,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2162,7 +3207,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 10.7 小时",
+        "发布约 13.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2190,152 +3235,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 33
-    },
-    {
-      "id": "1f8849af215603",
-      "eventId": "evt-5d90c0eacaa4",
-      "contentType": "news",
-      "title": "法官裁定特朗普政府非法报复AI公司Anthropic",
-      "originalTitle": "Trump administration illegally retaliated against Anthropic, judge rules",
-      "summary": "一名法官裁定，特朗普政府对AI初创公司Anthropic的报复行为非法。Anthropic曾与美国国防部就美军使用AI问题产生分歧。",
-      "keyFacts": [
-        "美国一名法官裁定特朗普政府非法报复Anthropic。",
-        "Anthropic是一家AI初创公司。",
-        "该公司与五角大楼在美军使用AI问题上存在分歧。"
-      ],
-      "why": "此裁决凸显AI企业与政府间的紧张关系，可能影响AI军事应用的伦理审查和商业合作。",
-      "category": "军事动态",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-08-28T03:41:59Z",
-      "url": "https://www.bbc.co.uk/news/articles/cm2q7z5mlrmo?at_medium=RSS&at_campaign=rss",
-      "score": 68,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 68/100",
-        "综合排序分 68/100（AI 65% + 规则 35%）",
-        "规则参考分 68/100",
-        "来源权重 17/20",
-        "发布约 2.4 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "AI",
-        "政府",
-        "法律"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/8a72/live/1e9bf7b0-a299-11f1-b81f-99addc8c0403.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cm2q7z5mlrmo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-08-28T03:41:59Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "eventDossier": {
-        "eventId": "evt-5d90c0eacaa4",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-08-28",
-        "lastSeen": "2026-08-28",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-08-28",
-            "newsId": "1f8849af215603",
-            "title": "法官裁定特朗普政府非法报复AI公司Anthropic",
-            "source": "BBC World",
-            "publishedAt": "2026-08-28T03:41:59Z",
-            "score": 68
-          }
-        ],
-        "independentSourceCount": 1,
-        "paperCount": 0
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:bbc.co.uk"
-        ],
-        "claims": [
-          {
-            "text": "美国一名法官裁定特朗普政府非法报复Anthropic。",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:bbc.co.uk"
-            ]
-          },
-          {
-            "text": "Anthropic是一家AI初创公司。",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:bbc.co.uk"
-            ]
-          },
-          {
-            "text": "该公司与五角大楼在美军使用AI问题上存在分歧。",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:bbc.co.uk"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-e9270da0c722",
-          "eventId": "evt-5d90c0eacaa4",
-          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-          "horizon": "观察",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-08-28",
-          "dueAfter": "2026-09-27",
-          "verificationSignals": [
-            "正式合同、预算或部署文件",
-            "后续演训、交付或作战序列变化"
-          ],
-          "evidenceIds": [
-            "1f8849af215603"
-          ],
-          "lastReviewedAt": "2026-08-28"
-        }
-      ],
-      "relatedPapers": [],
-      "isTopStory": true,
-      "streamRank": 34
+      "streamRank": 35
     },
     {
       "id": "6bee9a0af70ee5",
@@ -2355,13 +3255,13 @@
       "country": "国际",
       "publishedAt": "2026-08-28T02:39:29Z",
       "url": "https://www.defenseone.com/technology/2026/08/privacy-focused-communication-app-aims-military-customers-and-beyond/415686",
-      "score": 56,
+      "score": 54,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 10,
+        "时效": 8,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2372,7 +3272,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 20.4 小时",
+        "发布约 23.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2391,71 +3291,6 @@
           "url": "https://www.defenseone.com/technology/2026/08/privacy-focused-communication-app-aims-military-customers-and-beyond/415686",
           "publishedAt": "2026-08-28T02:39:29Z",
           "evidenceGroup": "outlet:defenseone.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 35
-    },
-    {
-      "id": "7bf2f42fadc5c6",
-      "eventId": "evt-8cf8b45012da",
-      "contentType": "news",
-      "title": "Anthropic与OpenAI将亮相2026年TechCrunch Disrupt AI舞台",
-      "originalTitle": "Anthropic and OpenAI are joining the AI stage at TechCrunch Disrupt 2026",
-      "summary": "在2026年TechCrunch Disrupt大会上，AI舞台回归，探讨社区近年最热门话题，由Google for Startups呈现。",
-      "keyFacts": [
-        "At TechCrunch Disrupt 2026",
-        "the AI Stage is back to dig into the single hottest topic in the community for the past few years",
-        "presented by Google for Startups"
-      ],
-      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
-      "category": "AI",
-      "source": "TechCrunch AI",
-      "country": "国际",
-      "publishedAt": "2026-08-27T23:16:45Z",
-      "url": "https://techcrunch.com/2026/08/27/anthropic-and-openai-are-joining-the-ai-stage-at-techcrunch-disrupt-2026",
-      "score": 53,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 8,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 23.8 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "Anthropic",
-        "OpenAI",
-        "TechCrunch Disrupt"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "TechCrunch AI",
-          "domain": "techcrunch.com",
-          "url": "https://techcrunch.com/2026/08/27/anthropic-and-openai-are-joining-the-ai-stage-at-techcrunch-disrupt-2026",
-          "publishedAt": "2026-08-27T23:16:45Z",
-          "evidenceGroup": "outlet:techcrunch.com"
         }
       ],
       "selectionProvider": "",
