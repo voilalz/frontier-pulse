@@ -1,11 +1,36 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-29T01:48:02Z",
+  "generatedAt": "2026-08-30T01:13:20Z",
   "timezone": "Asia/Shanghai",
-  "status": "stable",
+  "status": "alert",
   "baselineDays": 30,
   "observationDays": 30,
-  "signalCount": 0,
-  "summary": "基于过去 30 个有归档日建立稳健基线，检测到 0 个升温信号。",
-  "signals": []
+  "signalCount": 2,
+  "summary": "基于过去 30 个有归档日建立稳健基线，检测到 2 个升温信号。",
+  "signals": [
+    {
+      "signalId": "sig-2377c61527b1",
+      "dimension": "entity",
+      "name": "乌克兰",
+      "currentCount": 3,
+      "baselineMedian": 0.0,
+      "ratio": 6.0,
+      "robustDeviation": 3.0,
+      "independentSourceCount": 3,
+      "severity": "high",
+      "explanation": "乌克兰今日进入 Top 10 的相关事件为 3 条，过去 30 个有归档日的中位数为 0.0 条，来自 3 个独立来源组。"
+    },
+    {
+      "signalId": "sig-334dd3fdf700",
+      "dimension": "category",
+      "name": "局部冲突",
+      "currentCount": 8,
+      "baselineMedian": 3.0,
+      "ratio": 2.7,
+      "robustDeviation": 5.0,
+      "independentSourceCount": 3,
+      "severity": "elevated",
+      "explanation": "局部冲突今日进入 Top 10 的相关事件为 8 条，过去 30 个有归档日的中位数为 3.0 条，来自 3 个独立来源组。"
+    }
+  ]
 }
