@@ -1,6 +1,6 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-08-31T00:38:17Z",
+  "generatedAt": "2026-08-31T01:21:10Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
   "itemCount": 10,
@@ -21,21 +21,21 @@
   "translatedItemCount": 10,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 2,
-    "completedItemCount": 2,
+    "requestedItemCount": 0,
+    "completedItemCount": 0,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 1,
-    "requestCount": 1,
+    "initialBatchCount": 0,
+    "requestCount": 0,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "completionReason": "not_needed",
+    "completionMessage": "没有需要翻译的新条目",
     "lastProviderError": "",
-    "reusedItemCount": 8,
+    "reusedItemCount": 10,
     "featuredTranslatedItemCount": 10
   },
   "items": [
@@ -56,13 +56,13 @@
       "country": "国际",
       "publishedAt": "2026-08-30T23:53:03Z",
       "url": "https://www.bbc.co.uk/news/articles/cx2z72x5z1po?at_medium=RSS&at_campaign=rss",
-      "score": 88,
-      "scoreBasis": "规则评分",
+      "score": 92,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 20,
+        "时效": 19,
         "影响信号": 17,
         "主题相关性": 6,
         "证据完整度": 3,
@@ -72,8 +72,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 95/100",
+        "综合排序分 92/100（AI 65% + 规则 35%）",
+        "规则参考分 87/100",
         "来源权重 17/20",
-        "发布约 0.8 小时",
+        "发布约 1.5 小时",
         "命中 3 个主题信号",
         "影响信号：first、attack、strike"
       ],
@@ -95,14 +98,83 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-e8b07fd25ec8",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-31",
+        "lastSeen": "2026-08-31",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-31",
+            "newsId": "77c755dad93a11",
+            "title": "美国袭击拉腊克岛伊朗发射装置，为数周来首次已知打击",
+            "source": "BBC World",
+            "publishedAt": "2026-08-30T23:53:03Z",
+            "score": 92
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "Iran says the attack killed some civilians",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "is the first known US strike on Iran since late July",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-76b13adb0a2a",
+          "eventId": "evt-e8b07fd25ec8",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-31",
+          "dueAfter": "2026-09-30",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "77c755dad93a11"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
     },
     {
       "id": "922bf447ed0389",
@@ -122,8 +194,8 @@
       "country": "国际",
       "publishedAt": "2026-08-30T16:33:17Z",
       "url": "https://www.bbc.co.uk/news/articles/c5ye8egg596o?at_medium=RSS&at_campaign=rss",
-      "score": 73,
-      "scoreBasis": "规则评分",
+      "score": 71,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -138,8 +210,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 70/100",
+        "综合排序分 71/100（AI 65% + 规则 35%）",
+        "规则参考分 73/100",
         "来源权重 17/20",
-        "发布约 8.1 小时",
+        "发布约 8.8 小时",
         "命中 3 个主题信号",
         "影响信号：attack"
       ],
@@ -161,18 +236,95 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 2
+      "eventDossier": {
+        "eventId": "evt-82e6ebf34bef",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-31",
+        "lastSeen": "2026-08-31",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-31",
+            "newsId": "922bf447ed0389",
+            "title": "俄罗斯称协助尼日尔挫败未遂政变",
+            "source": "BBC World",
+            "publishedAt": "2026-08-30T16:33:17Z",
+            "score": 71
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "Soldiers tried to attack a key military base early on Saturday morning",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "authorities say",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "but were thwarted",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-d74b0e21209b",
+          "eventId": "evt-82e6ebf34bef",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-31",
+          "dueAfter": "2026-09-30",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "922bf447ed0389"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 2,
+      "relatedPapers": []
     },
     {
       "id": "b8bd1139721a3e",
-      "eventId": "evt-f7bddd0da40d",
+      "eventId": "evt-ead585df0e7d",
       "contentType": "news",
       "title": "以色列空袭加沙致3岁儿童死亡",
       "originalTitle": "Israeli strike kills 3-year-old child in Gaza",
@@ -186,8 +338,8 @@
       "country": "国际",
       "publishedAt": "2026-08-30T21:02:45Z",
       "url": "https://www.aljazeera.com/video/newsfeed/2026/8/30/israeli-strike-kills-3-year-old-child-in-gaza?traffic_source=rss",
-      "score": 72,
-      "scoreBasis": "规则评分",
+      "score": 67,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -202,8 +354,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 65/100",
+        "综合排序分 67/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
         "来源权重 16/20",
-        "发布约 3.6 小时",
+        "发布约 4.3 小时",
         "命中 2 个主题信号",
         "影响信号：strike"
       ],
@@ -225,14 +380,186 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 3
+      "selectionNote": "为补足 Top 10 放宽来源配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-ead585df0e7d",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-13",
+        "lastSeen": "2026-08-31",
+        "updateCount": 3,
+        "timeline": [
+          {
+            "editionDate": "2026-08-13",
+            "newsId": "ef9cb9f1871a75",
+            "title": "以色列空袭加沙北部致一人死亡",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-12T20:58:42Z",
+            "score": 78
+          },
+          {
+            "editionDate": "2026-08-26",
+            "newsId": "37bac3615edb50",
+            "title": "以色列空袭“摧毁”援助物资仓库，加沙七人丧生",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-25T21:26:25Z",
+            "score": 83
+          },
+          {
+            "editionDate": "2026-08-31",
+            "newsId": "b8bd1139721a3e",
+            "title": "以色列空袭加沙致3岁儿童死亡",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-30T21:02:45Z",
+            "score": 67
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "A deadly Israeli strike on Deir el-Balah killed two Palestinians including a 3-year-old child",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-552fa62c722e",
+          "eventId": "evt-ead585df0e7d",
+          "statement": "后续可观察以军空袭频率是否增加，以及巴勒斯坦方面是否采取报复措施。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-31",
+          "dueAfter": "2026-09-30",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "b8bd1139721a3e"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        },
+        {
+          "predictionId": "pred-3606add82eba",
+          "eventId": "evt-ead585df0e7d",
+          "statement": "若空袭导致更多平民伤亡，则需关注国际社会反应及停火协议进展。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-31",
+          "dueAfter": "2026-11-29",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "b8bd1139721a3e"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        },
+        {
+          "predictionId": "pred-6a689472f5ab",
+          "eventId": "evt-ead585df0e7d",
+          "statement": "后续可观察以色列空袭是否继续针对加沙关键基础设施，以及加沙卫生部是否发布更严峻的人道主义警告。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-09-25",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "37bac3615edb50"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        },
+        {
+          "predictionId": "pred-5057f7c6df82",
+          "eventId": "evt-ead585df0e7d",
+          "statement": "若冲突持续，则需关注国际社会是否加大调停力度，以及加沙人道主义状况是否触发更广泛的国际干预。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-11-24",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "37bac3615edb50"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        },
+        {
+          "predictionId": "pred-911b8f140cfb",
+          "eventId": "evt-ead585df0e7d",
+          "statement": "后续可观察以军空袭频率是否回升，以及加沙伤亡人数是否上升，以验证冲突是否升级。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-09-12",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "ef9cb9f1871a75"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        },
+        {
+          "predictionId": "pred-756554b917ab",
+          "eventId": "evt-ead585df0e7d",
+          "statement": "若解除武装协议后续推进受阻，则需关注双方冲突是否进一步加剧，或国际调停是否介入。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-13",
+          "dueAfter": "2026-11-11",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "ef9cb9f1871a75"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 3,
+      "relatedPapers": []
     },
     {
       "id": "d6b3b714311f8d",
@@ -251,13 +578,13 @@
       "country": "国际",
       "publishedAt": "2026-08-30T18:19:03Z",
       "url": "https://www.aljazeera.com/news/2026/8/30/top-officials-from-turkiye-saudi-arabia-pakistan-to-meet-in-istanbul?traffic_source=rss",
-      "score": 70,
-      "scoreBasis": "规则评分",
+      "score": 60,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 5,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -267,8 +594,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 55/100",
+        "综合排序分 60/100（AI 65% + 规则 35%）",
+        "规则参考分 69/100",
         "来源权重 16/20",
-        "发布约 6.3 小时",
+        "发布约 7.0 小时",
         "命中 2 个主题信号",
         "影响信号：first"
       ],
@@ -290,18 +620,87 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 4
+      "eventDossier": {
+        "eventId": "evt-cd77d04628c1",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-31",
+        "lastSeen": "2026-08-31",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-31",
+            "newsId": "d6b3b714311f8d",
+            "title": "土耳其、沙特、巴基斯坦高级官员将在伊斯坦布尔会晤",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-30T18:19:03Z",
+            "score": 60
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "defence ministers",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "military chiefs from three countries to meet for first time since signing Mecca pact",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-c8fe36a7536f",
+          "eventId": "evt-cd77d04628c1",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-31",
+          "dueAfter": "2026-09-30",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "d6b3b714311f8d"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 4,
+      "relatedPapers": []
     },
     {
       "id": "208b0bbdff5957",
-      "eventId": "evt-2ebcc9036816",
+      "eventId": "evt-11e158a8b49c",
       "contentType": "news",
       "title": "伊朗战争直播：美国轰炸拉拉克岛后，伊斯兰革命卫队袭击约旦美军基地",
       "originalTitle": "Iran war live: IRGC attacks US bases in Jordan after US bombs Larak Island",
@@ -315,13 +714,13 @@
       "country": "国际",
       "publishedAt": "2026-08-31T00:00:00Z",
       "url": "https://www.aljazeera.com/news/liveblog/2026/8/31/iran-war-live-irgc-attacks-us-bases-in-jordan-after-us-bombs-larak-island?traffic_source=rss",
-      "score": 68,
-      "scoreBasis": "规则评分",
+      "score": 82,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 20,
+        "时效": 19,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -331,8 +730,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 90/100",
+        "综合排序分 82/100（AI 65% + 规则 35%）",
+        "规则参考分 67/100",
         "来源权重 16/20",
-        "发布约 0.6 小时",
+        "发布约 1.4 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -360,14 +762,140 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 5
+      "eventDossier": {
+        "eventId": "evt-11e158a8b49c",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-29",
+        "lastSeen": "2026-08-31",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-08-29",
+            "newsId": "5417f3786fea03",
+            "title": "伊朗革命卫队宣称控制霍尔木兹海峡，美国维持海上封锁",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-29T00:00:00Z",
+            "score": 75
+          },
+          {
+            "editionDate": "2026-08-31",
+            "newsId": "208b0bbdff5957",
+            "title": "伊朗战争直播：美国轰炸拉拉克岛后，伊斯兰革命卫队袭击约旦美军基地",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-31T00:00:00Z",
+            "score": 82
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "US Central Command says its forces bombed two rocket launchers of the IRGC on Larak Island",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-5314cac9c747",
+          "eventId": "evt-11e158a8b49c",
+          "statement": "后续可观察美国对约旦基地袭击的回应，以及是否对拉拉克岛发动进一步打击。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-31",
+          "dueAfter": "2026-09-30",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "208b0bbdff5957"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        },
+        {
+          "predictionId": "pred-2a201be169c4",
+          "eventId": "evt-11e158a8b49c",
+          "statement": "若伊朗继续袭击美军基地，则需关注美军是否扩大军事行动，以及霍尔木兹海峡局势是否进一步恶化。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-31",
+          "dueAfter": "2026-11-29",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "208b0bbdff5957"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        },
+        {
+          "predictionId": "pred-b5741b540291",
+          "eventId": "evt-11e158a8b49c",
+          "statement": "后续可观察美伊是否发生直接军事接触，以及霍尔木兹海峡航运是否受实质影响。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-09-28",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "5417f3786fea03"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        },
+        {
+          "predictionId": "pred-2e57fd7b140b",
+          "eventId": "evt-11e158a8b49c",
+          "statement": "若双方继续强硬，则需关注停火协议是否破裂及地区能源供应风险。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-29",
+          "dueAfter": "2026-11-27",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "5417f3786fea03"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 5,
+      "relatedPapers": []
     },
     {
       "id": "7f7ec0d1c5eedc",
@@ -385,8 +913,8 @@
       "country": "国际",
       "publishedAt": "2026-08-30T23:08:01Z",
       "url": "https://www.aljazeera.com/news/2026/8/30/vote-count-starts-in-guinea-bissau-referendum-on-strengthening-presidency?traffic_source=rss",
-      "score": 65,
-      "scoreBasis": "规则评分",
+      "score": 55,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -401,8 +929,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 50/100",
+        "综合排序分 55/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
         "来源权重 16/20",
-        "发布约 1.5 小时",
+        "发布约 2.2 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -423,14 +954,75 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 6
+      "selectionNote": "为补足 Top 10 放宽来源配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-c0859071497b",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-31",
+        "lastSeen": "2026-08-31",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-31",
+            "newsId": "7f7ec0d1c5eedc",
+            "title": "几内亚比绍加强总统权力公投开始计票",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-30T23:08:01Z",
+            "score": 55
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "military leaders say the referendum is designed to stabilise future civilian governments",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-3112762d7ace",
+          "eventId": "evt-c0859071497b",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-31",
+          "dueAfter": "2026-09-30",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "7f7ec0d1c5eedc"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 6,
+      "relatedPapers": []
     },
     {
       "id": "f50988e06aa07d",
@@ -448,8 +1040,8 @@
       "country": "国际",
       "publishedAt": "2026-08-30T20:50:04Z",
       "url": "https://www.aljazeera.com/video/newsfeed/2026/8/30/jose-andres-renews-call-for-investigation-into-wck-gaza-staff-killings?traffic_source=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
+      "score": 52,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -464,8 +1056,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 45/100",
+        "综合排序分 52/100（AI 65% + 规则 35%）",
+        "规则参考分 64/100",
         "来源权重 16/20",
-        "发布约 3.8 小时",
+        "发布约 4.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -486,18 +1081,79 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 7
+      "selectionNote": "为补足 Top 10 放宽来源配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-a31748d02b43",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-31",
+        "lastSeen": "2026-08-31",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-31",
+            "newsId": "f50988e06aa07d",
+            "title": "何塞·安德烈斯再次呼吁调查WCK加沙工作人员遇害事件",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-30T20:50:04Z",
+            "score": 52
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "World Central Kitchen founder José Andrés is renewing his call for an independent investigation into Israeli strikes",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-369af803da60",
+          "eventId": "evt-a31748d02b43",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-31",
+          "dueAfter": "2026-09-30",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "f50988e06aa07d"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 7,
+      "relatedPapers": []
     },
     {
       "id": "1a04ee90e73c8e",
-      "eventId": "evt-99c5c7397e5c",
+      "eventId": "evt-be9074647109",
       "contentType": "news",
       "title": "NASA深空网络深空站23号剪彩仪式",
       "originalTitle": "Ribbon-Cutting Event for NASA Deep Space Network’s Deep Space Station 23",
@@ -513,8 +1169,8 @@
       "country": "国际",
       "publishedAt": "2026-08-30T14:57:59Z",
       "url": "https://science.nasa.gov/photojournal/ribbon-cutting-event-for-nasa-deep-space-networks-deep-space-station-23",
-      "score": 64,
-      "scoreBasis": "规则评分",
+      "score": 61,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 20,
@@ -529,8 +1185,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 60/100",
+        "综合排序分 61/100（AI 65% + 规则 35%）",
+        "规则参考分 64/100",
         "来源权重 20/20",
-        "发布约 9.7 小时",
+        "发布约 10.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -558,14 +1217,137 @@
           "evidenceGroup": "outlet:science.nasa.gov"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 8
+      "eventDossier": {
+        "eventId": "evt-be9074647109",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-26",
+        "lastSeen": "2026-08-31",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-08-26",
+            "newsId": "69698c73a46d4c",
+            "title": "新型下一代天线增强NASA深空网络",
+            "source": "NASA",
+            "publishedAt": "2026-08-25T22:28:34Z",
+            "score": 71
+          },
+          {
+            "editionDate": "2026-08-31",
+            "newsId": "1a04ee90e73c8e",
+            "title": "NASA深空网络深空站23号剪彩仪式",
+            "source": "NASA",
+            "publishedAt": "2026-08-30T14:57:59Z",
+            "score": 61
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:science.nasa.gov"
+        ],
+        "claims": [
+          {
+            "text": "Description Leadership from NASA Headquarters",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          },
+          {
+            "text": "the Jet Propulsion Laboratory",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          },
+          {
+            "text": "and the Deep Space Network (DSN) stand in front of the recently completed Deep Space Station 23 antenna at the Deep Space Network’s Goldsto…",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-fb10666fcc20",
+          "eventId": "evt-be9074647109",
+          "statement": "后续可观察深空站23号天线投入运行后的性能表现，以及对现有任务的支持效果。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-31",
+          "dueAfter": "2026-09-30",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "1a04ee90e73c8e"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        },
+        {
+          "predictionId": "pred-499273cc3b04",
+          "eventId": "evt-be9074647109",
+          "statement": "若该天线运行稳定，则需关注后续是否有更多新天线计划，以进一步扩展深空网络能力。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-31",
+          "dueAfter": "2026-11-29",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "1a04ee90e73c8e"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        },
+        {
+          "predictionId": "pred-19dd9184f4c4",
+          "eventId": "evt-be9074647109",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-26",
+          "dueAfter": "2026-09-25",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "69698c73a46d4c"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 8,
+      "relatedPapers": []
     },
     {
       "id": "5fa58e0ec01583",
@@ -585,8 +1367,8 @@
       "country": "国际",
       "publishedAt": "2026-08-30T14:47:12Z",
       "url": "https://science.nasa.gov/photojournal/panorama-showcasing-the-34-meter-antennas-of-the-dsns-goldstone-complex",
-      "score": 64,
-      "scoreBasis": "规则评分",
+      "score": 48,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 20,
@@ -601,8 +1383,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 40/100",
+        "综合排序分 48/100（AI 65% + 规则 35%）",
+        "规则参考分 64/100",
         "来源权重 20/20",
-        "发布约 9.9 小时",
+        "发布约 10.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -623,18 +1408,95 @@
           "evidenceGroup": "outlet:science.nasa.gov"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 9
+      "eventDossier": {
+        "eventId": "evt-eae647743104",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-08-31",
+        "lastSeen": "2026-08-31",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-08-31",
+            "newsId": "5fa58e0ec01583",
+            "title": "深空网络戈尔兹敦综合设施的34米天线全景展示",
+            "source": "NASA",
+            "publishedAt": "2026-08-30T14:47:12Z",
+            "score": 48
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:science.nasa.gov"
+        ],
+        "claims": [
+          {
+            "text": "Description Five antennas soak in the summer sun at the Deep Space Network’s Goldstone complex near Barstow",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          },
+          {
+            "text": "in August 2026",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          },
+          {
+            "text": "The recently completed Deep Space Station 23",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-c89116a33a49",
+          "eventId": "evt-eae647743104",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-31",
+          "dueAfter": "2026-09-30",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "5fa58e0ec01583"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 9,
+      "relatedPapers": []
     },
     {
       "id": "267e524c862e87",
-      "eventId": "evt-93d116e6ae9b",
+      "eventId": "evt-a244a2a5c050",
       "contentType": "news",
       "title": "以色列定居者拉比称巴勒斯坦人应离开约旦河西岸",
       "originalTitle": "Israeli settler rabbi says Palestinians should leave the occupied West Bank",
@@ -648,8 +1510,8 @@
       "country": "国际",
       "publishedAt": "2026-08-30T19:33:18Z",
       "url": "https://www.aljazeera.com/video/newsfeed/2026/8/30/israeli-settler-rabbi-says-palestinians-should-leave-the-occupied-west-bank?traffic_source=rss",
-      "score": 63,
-      "scoreBasis": "规则评分",
+      "score": 45,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -664,8 +1526,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 35/100",
+        "综合排序分 45/100（AI 65% + 规则 35%）",
+        "规则参考分 63/100",
         "来源权重 16/20",
-        "发布约 5.1 小时",
+        "发布约 5.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -686,14 +1551,167 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 10
+      "selectionNote": "为补足 Top 10 放宽来源配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-a244a2a5c050",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-23",
+        "lastSeen": "2026-08-31",
+        "updateCount": 3,
+        "timeline": [
+          {
+            "editionDate": "2026-08-23",
+            "newsId": "3dd7db9ee90f32",
+            "title": "以色列军队和定居者在约旦河西岸打伤多名巴勒斯坦人",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-22T21:02:29Z",
+            "score": 68
+          },
+          {
+            "editionDate": "2026-08-30",
+            "newsId": "8db1f892d2a40c",
+            "title": "以色列军队在约旦河西岸定居者暴力事件后逮捕六名巴勒斯坦人",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-29T17:09:10Z",
+            "score": 69
+          },
+          {
+            "editionDate": "2026-08-31",
+            "newsId": "267e524c862e87",
+            "title": "以色列定居者拉比称巴勒斯坦人应离开约旦河西岸",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-30T19:33:18Z",
+            "score": 45
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Video shows an Israeli settler rabbi telling peace activists that non-Jews in Israel have no national rights",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-8fdebc7667d9",
+          "eventId": "evt-a244a2a5c050",
+          "statement": "后续可观察以色列政府对该拉比言论的回应，以及是否采取措施遏制定居者暴力。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-31",
+          "dueAfter": "2026-09-30",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "267e524c862e87"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        },
+        {
+          "predictionId": "pred-93e3742a04fe",
+          "eventId": "evt-a244a2a5c050",
+          "statement": "若定居者暴力持续，则需关注巴勒斯坦人反抗行动及国际社会对以色列施压。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-31",
+          "dueAfter": "2026-11-29",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "267e524c862e87"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        },
+        {
+          "predictionId": "pred-dccb01c4ad1d",
+          "eventId": "evt-a244a2a5c050",
+          "statement": "后续可观察以军逮捕行动是否引发进一步抗议，以及定居者暴力事件是否继续升级。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-30",
+          "dueAfter": "2026-09-29",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "8db1f892d2a40c"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        },
+        {
+          "predictionId": "pred-7542de67a577",
+          "eventId": "evt-a244a2a5c050",
+          "statement": "若定居者袭击与以军逮捕持续，则需关注约旦河西岸局势恶化及国际压力增加的可能性。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-30",
+          "dueAfter": "2026-11-28",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "8db1f892d2a40c"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        },
+        {
+          "predictionId": "pred-332fc2c2afa9",
+          "eventId": "evt-a244a2a5c050",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-23",
+          "dueAfter": "2026-09-22",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "3dd7db9ee90f32"
+          ],
+          "lastReviewedAt": "2026-08-31"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 10,
+      "relatedPapers": []
     }
   ]
 }
