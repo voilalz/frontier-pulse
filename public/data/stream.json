@@ -1,20 +1,20 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-09-04T00:07:59Z",
+  "generatedAt": "2026-09-04T00:56:43Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
-  "itemCount": 39,
-  "totalCandidateCount": 39,
+  "itemCount": 40,
+  "totalCandidateCount": 40,
   "truncated": false,
   "categoryCounts": {
-    "局部冲突": 12,
+    "局部冲突": 13,
     "军事动态": 14,
     "航空航天": 5,
     "无人系统": 4,
     "AI": 4
   },
   "sourceCounts": {
-    "Al Jazeera": 9,
+    "Al Jazeera": 10,
     "Breaking Defense": 8,
     "BBC World": 5,
     "Defense News": 5,
@@ -26,11 +26,11 @@
   },
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
-  "translatedItemCount": 39,
+  "translatedItemCount": 40,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 6,
-    "completedItemCount": 6,
+    "requestedItemCount": 1,
+    "completedItemCount": 1,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
@@ -43,7 +43,7 @@
     "completionReason": "complete_first_pass",
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
-    "reusedItemCount": 33,
+    "reusedItemCount": 39,
     "featuredTranslatedItemCount": 10
   },
   "items": [
@@ -64,7 +64,7 @@
       "publishedAt": "2026-09-03T18:31:04Z",
       "url": "https://www.twz.com/news-features/ukrainian-sea-drones-strike-russian-black-sea-resort-town-of-sochi-for-the-first-time",
       "score": 85,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
@@ -79,8 +79,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 85/100",
+        "综合排序分 85/100（AI 65% + 规则 35%）",
+        "规则参考分 85/100",
         "来源权重 15/20",
-        "发布约 5.6 小时",
+        "发布约 6.4 小时",
         "命中 4 个主题信号",
         "影响信号：first、attack、strike"
       ],
@@ -102,14 +105,94 @@
           "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-0372943c3bf1",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-04",
+        "lastSeen": "2026-09-04",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-04",
+            "newsId": "f20610e26b0840",
+            "title": "乌克兰海上无人机首次袭击俄罗斯黑海度假城市索契",
+            "source": "The War Zone",
+            "publishedAt": "2026-09-03T18:31:04Z",
+            "score": 85
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "Ukraine Situation Report: The strike on Sochi's port highlights the increasing reach of Kyiv's drone boat attack campaign",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-c9adf06424bf",
+          "eventId": "evt-0372943c3bf1",
+          "statement": "若索契袭击引发俄对乌港口或基础设施的报复性打击，需关注黑海航运及民用设施受损情况。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-10-04",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "f20610e26b0840"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        },
+        {
+          "predictionId": "pred-6bf256c1b68d",
+          "eventId": "evt-0372943c3bf1",
+          "statement": "后续可观察乌克兰海上无人机能否持续威胁俄黑海沿岸目标，影响后续冲突态势。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-12-03",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "f20610e26b0840"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
     },
     {
       "id": "6db36aeb254840",
@@ -130,7 +213,7 @@
       "publishedAt": "2026-09-03T20:31:08Z",
       "url": "https://www.aljazeera.com/news/2026/9/3/israel-kills-3-in-gaza-as-far-right-minister-plans-for-palestinian-removals?traffic_source=rss",
       "score": 84,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -145,8 +228,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 84/100",
+        "综合排序分 84/100（AI 65% + 规则 35%）",
+        "规则参考分 84/100",
         "来源权重 16/20",
-        "发布约 3.6 小时",
+        "发布约 4.4 小时",
         "命中 5 个主题信号",
         "影响信号：ceasefire、strike"
       ],
@@ -168,14 +254,110 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 2
+      "eventDossier": {
+        "eventId": "evt-07a51292c1e6",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-04",
+        "lastSeen": "2026-09-04",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-04",
+            "newsId": "6db36aeb254840",
+            "title": "以色列在加沙打死3人，极右翼部长计划驱逐巴勒斯坦人",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-03T20:31:08Z",
+            "score": 84
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Israeli drone strike",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "gunfire kills",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "injures people across the Gaza Strip despite 'ceasefire'",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-31d27e61cbec",
+          "eventId": "evt-07a51292c1e6",
+          "statement": "若停火协议无法落实，需关注加沙地带伤亡人数是否持续上升及国际社会反应。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-10-04",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "6db36aeb254840"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        },
+        {
+          "predictionId": "pred-13f0f8b094b4",
+          "eventId": "evt-07a51292c1e6",
+          "statement": "后续可观察以色列政府内部关于驱逐巴勒斯坦人的计划动向及其对局势的影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-12-03",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "6db36aeb254840"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 2,
+      "relatedPapers": []
     },
     {
       "id": "28b73f306d8d8e",
@@ -194,7 +376,7 @@
       "publishedAt": "2026-09-03T20:40:00Z",
       "url": "https://breakingdefense.com/2026/09/why-the-army-wants-to-deploy-nuclear-microreactors-on-us-bases",
       "score": 76,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -209,8 +391,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 76/100",
+        "综合排序分 76/100（AI 65% + 规则 35%）",
+        "规则参考分 76/100",
         "来源权重 16/20",
-        "发布约 3.5 小时",
+        "发布约 4.3 小时",
         "命中 1 个主题信号",
         "影响信号：deploy、nuclear"
       ],
@@ -232,14 +417,94 @@
           "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 3
+      "eventDossier": {
+        "eventId": "evt-5d516d7b1f0e",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-04",
+        "lastSeen": "2026-09-04",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-04",
+            "newsId": "28b73f306d8d8e",
+            "title": "为什么美国陆军想在美国基地部署核微反应堆",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-09-03T20:40:00Z",
+            "score": 76
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:breakingdefense.com"
+        ],
+        "claims": [
+          {
+            "text": "The ambitious energy plan raises several unanswered questions",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-27d4ab698f28",
+          "eventId": "evt-5d516d7b1f0e",
+          "statement": "若陆军公布解决关键问题的具体方案或时间表，需关注计划推进的实质进展。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-10-04",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "28b73f306d8d8e"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        },
+        {
+          "predictionId": "pred-557ced26a7da",
+          "eventId": "evt-5d516d7b1f0e",
+          "statement": "后续可观察该计划在监管、安全及预算方面能否获得国会支持，影响部署时间。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-12-03",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "28b73f306d8d8e"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 3,
+      "relatedPapers": []
     },
     {
       "id": "2f45761c5c5ccb",
@@ -259,7 +524,7 @@
       "publishedAt": "2026-09-03T22:19:59Z",
       "url": "https://www.bbc.co.uk/news/articles/cy4zvk3z2k1o?at_medium=RSS&at_campaign=rss",
       "score": 73,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -274,8 +539,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 73/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 73/100",
         "来源权重 17/20",
-        "发布约 1.8 小时",
+        "发布约 2.6 小时",
         "命中 2 个主题信号",
         "影响信号：missile"
       ],
@@ -297,79 +565,102 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 4
-    },
-    {
-      "id": "cbf0c0f930cc96",
-      "eventId": "evt-73c38d619429",
-      "contentType": "news",
-      "title": "美国陆军以4.65亿美元合同启动激光生产",
-      "originalTitle": "US Army launches laser production with $465M contract award",
-      "summary": "美国陆军本周授予AeroVironment公司一份4.648亿美元的生产合同，用于持久高能激光项目。",
-      "keyFacts": [
-        "Army awarded a $464.8 million production contract to AeroVironment",
-        "this week for the Enduring-High Energy Laser program"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Defense News",
-      "country": "国际",
-      "publishedAt": "2026-09-03T19:54:51Z",
-      "url": "https://www.defensenews.com/industry/techwatch/2026/09/03/us-army-launches-laser-production-with-465m-contract-award",
-      "score": 73,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 9,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
+      "eventDossier": {
+        "eventId": "evt-a4ea2a363a8c",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-04",
+        "lastSeen": "2026-09-04",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-04",
+            "newsId": "2f45761c5c5ccb",
+            "title": "美国调查导弹是否击中伊朗婚礼，万斯表示",
+            "source": "BBC World",
+            "publishedAt": "2026-09-03T22:19:59Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
       },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.2 小时",
-        "命中 1 个主题信号",
-        "影响信号：contract、production"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "激光",
-        "AeroVironment",
-        "美国陆军"
-      ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/UFIKCIJ4NZAOTLTBGRZHXW3YFQ.jpg",
-      "corroboration": 1,
-      "sources": [
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "The Iranian Red Crescent Society (IRCS) said shrapnel from a missile hit the ceremony",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "killed four people on Tuesday",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
         {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/industry/techwatch/2026/09/03/us-army-launches-laser-production-with-465m-contract-award",
-          "publishedAt": "2026-09-03T19:54:51Z",
-          "evidenceGroup": "outlet:defensenews.com"
+          "predictionId": "pred-0175f09e8a74",
+          "eventId": "evt-a4ea2a363a8c",
+          "statement": "若美国公布调查结果确认责任方，需关注伊朗反应及美伊紧张局势升级风险。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-10-04",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2f45761c5c5ccb"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        },
+        {
+          "predictionId": "pred-7bb3b16ce4cf",
+          "eventId": "evt-a4ea2a363a8c",
+          "statement": "后续可观察该事件是否影响美国对伊朗的既有军事态势或外交策略。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-12-03",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2f45761c5c5ccb"
+          ],
+          "lastReviewedAt": "2026-09-04"
         }
       ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 5
+      "isTopStory": true,
+      "streamRank": 4,
+      "relatedPapers": []
     },
     {
       "id": "391e334ba6665c",
@@ -390,7 +681,7 @@
       "publishedAt": "2026-09-03T17:06:00Z",
       "url": "https://www.nasa.gov/news-release/nasa-to-cover-progress-96-spacecraft-launch-docking",
       "score": 73,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 20,
@@ -405,8 +696,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 73/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 73/100",
         "来源权重 20/20",
-        "发布约 7.0 小时",
+        "发布约 7.8 小时",
         "命中 3 个主题信号",
         "影响信号：launch"
       ],
@@ -428,14 +722,293 @@
           "evidenceGroup": "outlet:nasa.gov"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 6
+      "eventDossier": {
+        "eventId": "evt-0fbca7aabb28",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-04",
+        "lastSeen": "2026-09-04",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-04",
+            "newsId": "391e334ba6665c",
+            "title": "NASA将对进步96号飞船发射和对接进行报道",
+            "source": "NASA",
+            "publishedAt": "2026-09-03T17:06:00Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:nasa.gov"
+        ],
+        "claims": [
+          {
+            "text": "NASA will provide live coverage of the launch",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          },
+          {
+            "text": "docking of a Roscosmos cargo spacecraft carrying about three tons of food",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          },
+          {
+            "text": "and supplies for the crew aboard the International Space Station",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-b7e0af0a8fa1",
+          "eventId": "evt-0fbca7aabb28",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-10-04",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "391e334ba6665c"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 5,
+      "relatedPapers": []
+    },
+    {
+      "id": "cbf0c0f930cc96",
+      "eventId": "evt-7d42ceff16b2",
+      "contentType": "news",
+      "title": "美国陆军以4.65亿美元合同启动激光生产",
+      "originalTitle": "US Army launches laser production with $465M contract award",
+      "summary": "美国陆军本周授予AeroVironment公司一份4.648亿美元的生产合同，用于持久高能激光项目。",
+      "keyFacts": [
+        "Army awarded a $464.8 million production contract to AeroVironment",
+        "this week for the Enduring-High Energy Laser program"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-09-03T19:54:51Z",
+      "url": "https://www.defensenews.com/industry/techwatch/2026/09/03/us-army-launches-laser-production-with-465m-contract-award",
+      "score": 72,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 9,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 72/100",
+        "综合排序分 72/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
+        "来源权重 16/20",
+        "发布约 5.0 小时",
+        "命中 1 个主题信号",
+        "影响信号：contract、production"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "激光",
+        "AeroVironment",
+        "美国陆军"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/UFIKCIJ4NZAOTLTBGRZHXW3YFQ.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/industry/techwatch/2026/09/03/us-army-launches-laser-production-with-465m-contract-award",
+          "publishedAt": "2026-09-03T19:54:51Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-7d42ceff16b2",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-09-03",
+        "lastSeen": "2026-09-04",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-09-03",
+            "newsId": "2642aae21d2ea7",
+            "title": "美国陆军向Palantir和Anduril授予1.92亿美元用于TITAN生产",
+            "source": "Defense News",
+            "publishedAt": "2026-09-02T21:43:17Z",
+            "score": 73
+          },
+          {
+            "editionDate": "2026-09-04",
+            "newsId": "cbf0c0f930cc96",
+            "title": "美国陆军以4.65亿美元合同启动激光生产",
+            "source": "Defense News",
+            "publishedAt": "2026-09-03T19:54:51Z",
+            "score": 72
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "Army awarded a $464.8 million production contract to AeroVironment",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          },
+          {
+            "text": "this week for the Enduring-High Energy Laser program",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-d9c22ec0acf0",
+          "eventId": "evt-7d42ceff16b2",
+          "statement": "若激光武器生产按计划启动，需关注是否按期交付及后续测试表现。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-10-04",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "cbf0c0f930cc96"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        },
+        {
+          "predictionId": "pred-27527d1a3736",
+          "eventId": "evt-7d42ceff16b2",
+          "statement": "后续可观察陆军在其他定向能项目上的资金分配，判断技术优先级是否持续。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-12-03",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "cbf0c0f930cc96"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        },
+        {
+          "predictionId": "pred-e657885e2716",
+          "eventId": "evt-7d42ceff16b2",
+          "statement": "后续可观察TITAN系统是否按计划进入生产，是否有追加订单或进度通报。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-03",
+          "dueAfter": "2026-10-03",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "2642aae21d2ea7"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        },
+        {
+          "predictionId": "pred-c70c9171d6ed",
+          "eventId": "evt-7d42ceff16b2",
+          "statement": "若两大项目顺利推进，则需关注美国国防预算对新兴技术企业的倾斜趋势。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-03",
+          "dueAfter": "2026-12-02",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "2642aae21d2ea7"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 6,
+      "relatedPapers": []
     },
     {
       "id": "f40b52be4e97e2",
@@ -456,7 +1029,7 @@
       "publishedAt": "2026-09-03T14:24:23Z",
       "url": "https://www.nasa.gov/image-article/igniting-romans-journey",
       "score": 72,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 20,
@@ -471,8 +1044,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 72/100",
+        "综合排序分 72/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
         "来源权重 20/20",
-        "发布约 9.7 小时",
+        "发布约 10.5 小时",
         "命中 3 个主题信号",
         "影响信号：launch"
       ],
@@ -494,6 +1070,167 @@
           "evidenceGroup": "outlet:nasa.gov"
         }
       ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-192450141373",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-04",
+        "lastSeen": "2026-09-04",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-04",
+            "newsId": "f40b52be4e97e2",
+            "title": "点燃罗曼的旅程",
+            "source": "NASA",
+            "publishedAt": "2026-09-03T14:24:23Z",
+            "score": 72
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:nasa.gov"
+        ],
+        "claims": [
+          {
+            "text": "Now on a three-month",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          },
+          {
+            "text": "million-mile journey to its final orbit",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          },
+          {
+            "text": "NASA’s Nancy Grace Roman Space Telescope will soon reveal the universe’s darkest secrets",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-febe742fe3a6",
+          "eventId": "evt-192450141373",
+          "statement": "若望远镜在轨途中完成各系统功能测试并按计划推进，则需要关注其抵达L2晕轨道和镜面调焦等里程碑的确认公告。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-10-04",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "f40b52be4e97e2"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        },
+        {
+          "predictionId": "pred-5a555f0e3203",
+          "eventId": "evt-192450141373",
+          "statement": "后续可观察首次科学图像或首批校准数据的发布时间，以验证其在轨性能是否支持后续巡天观测任务。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-12-03",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "f40b52be4e97e2"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 7,
+      "relatedPapers": []
+    },
+    {
+      "id": "a8f286ee4c1ebe",
+      "eventId": "evt-1fb13fc9c91b",
+      "contentType": "news",
+      "title": "伊朗战争实时：美国称伊朗停止袭击船只前不会与其谈判",
+      "originalTitle": "Iran war live: US rules out Iran talks until ship attacks stop",
+      "summary": "伊朗第一副总统穆罕默德·雷扎·阿雷夫誓言对美国袭击作出“不对称”和“多层次”的回应。",
+      "keyFacts": [
+        "Iran's First Vice President Mohammad Reza Aref vows “asymmetrical”",
+        "“multi-layered” response to US attacks"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-04T00:00:00Z",
+      "url": "https://www.aljazeera.com/news/liveblog/2026/9/4/iran-war-live-us-rules-out-iran-talks-until-ship-attacks-stop?traffic_source=rss",
+      "score": 71,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 5,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 0.9 小时",
+        "命中 1 个主题信号",
+        "影响信号：first"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "美国",
+        "谈判"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/liveblog/2026/9/4/iran-war-live-us-rules-out-iran-talks-until-ship-attacks-stop?traffic_source=rss",
+          "publishedAt": "2026-09-04T00:00:00Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
       "selectionProvider": "",
       "translationProvider": "deepseek",
       "isSupplemental": false,
@@ -501,7 +1238,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 7
+      "streamRank": 8
     },
     {
       "id": "99e85ec9d558e1",
@@ -537,7 +1274,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 4.1 小时",
+        "发布约 4.9 小时",
         "命中 1 个主题信号",
         "影响信号：strike"
       ],
@@ -566,7 +1303,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 8
+      "streamRank": 9
     },
     {
       "id": "4e4cfa70881f50",
@@ -602,7 +1339,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 9.0 小时",
+        "发布约 9.8 小时",
         "命中 2 个主题信号",
         "影响信号：attack"
       ],
@@ -631,134 +1368,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 9
-    },
-    {
-      "id": "634ed8bd1a93fd",
-      "eventId": "evt-ad45f457603e",
-      "contentType": "news",
-      "title": "特朗普提名亚当·特尔担任代理陆军部长",
-      "originalTitle": "Trump taps Adam Telle as acting Army secretary",
-      "summary": "特尔目前担任参议院确认的陆军民事工程助理部长。",
-      "keyFacts": [
-        "Telle is currently serving as the Senate-confirmed assistant secretary of the Army for Civil Works"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-09-03T23:41:03Z",
-      "url": "https://breakingdefense.com/2026/09/trump-taps-adam-telle-as-acting-army-secretary",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 20,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 0.4 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美国",
-        "人事任命",
-        "陆军"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/09/trump-taps-adam-telle-as-acting-army-secretary",
-          "publishedAt": "2026-09-03T23:41:03Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
       "streamRank": 10
-    },
-    {
-      "id": "7ea223d66def9e",
-      "eventId": "evt-dcb4241e8673",
-      "contentType": "news",
-      "title": "特朗普的AI视频是表情包还是心理战？",
-      "originalTitle": "Are Trump’s AI videos just memes or psychological warfare?",
-      "summary": "特朗普近几个月加大使用AI生成内容，发布虚假军事打击视频。",
-      "keyFacts": [
-        "Trump’s use of AI generated content has ramped up in recent months",
-        "posting videos of fake military strikes"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-03T23:36:20Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/9/3/are-trumps-ai-videos-just-memes-or-psychological-warfare?traffic_source=rss",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 20,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 0.5 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "特朗普",
-        "AI生成",
-        "心理战"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/9/3/are-trumps-ai-videos-just-memes-or-psychological-warfare?traffic_source=rss",
-          "publishedAt": "2026-09-03T23:36:20Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 11
     },
     {
       "id": "5c64f86a9ce576",
@@ -793,7 +1403,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.0 小时",
+        "发布约 3.8 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -821,7 +1431,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 12
+      "streamRank": 11
     },
     {
       "id": "e8171e1109c348",
@@ -858,7 +1468,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.4 小时",
+        "发布约 4.2 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -886,70 +1496,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 13
-    },
-    {
-      "id": "6c4195c73a5d35",
-      "eventId": "evt-de93fdb492db",
-      "contentType": "news",
-      "title": "无人机探测技术如何演变以应对更小、更快及蜂群威胁",
-      "originalTitle": "How Drone Detection Is Evolving To Counter Smaller, Faster, And Swarm Threats",
-      "summary": "品牌内容：莱昂纳多DRS解释战术雷达如何构成分层反无人机系统威胁检测的核心元素。来源：战区。",
-      "keyFacts": [
-        "Branded Content: Leonardo DRS explains how tactical radars form a central element of a layered counter-UAS threat detection system"
-      ],
-      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
-      "category": "无人系统",
-      "source": "The War Zone",
-      "country": "国际",
-      "publishedAt": "2026-09-03T17:46:47Z",
-      "url": "https://www.twz.com/sponsored-content/how-drone-detection-is-evolving-to-counter-smaller-faster-and-swarm-threats",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 6.4 小时",
-        "命中 3 个主题信号"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "无人机",
-        "反制系统",
-        "雷达"
-      ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/08/Leo-DRS-lead.jpg?quality=85&w=2048",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/sponsored-content/how-drone-detection-is-evolving-to-counter-smaller-faster-and-swarm-threats",
-          "publishedAt": "2026-09-03T17:46:47Z",
-          "evidenceGroup": "outlet:twz.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 14
+      "streamRank": 12
     },
     {
       "id": "07712acb1c3680",
@@ -969,7 +1516,7 @@
       "publishedAt": "2026-09-03T14:35:13Z",
       "url": "https://www.defensenews.com/industry/2026/09/03/defense-firms-soar-on-ample-military-spending-testing-manufacturing-schemes",
       "score": 66,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -984,8 +1531,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 66/100",
+        "综合排序分 66/100（AI 65% + 规则 35%）",
+        "规则参考分 66/100",
         "来源权重 16/20",
-        "发布约 9.5 小时",
+        "发布约 10.4 小时",
         "命中 1 个主题信号",
         "影响信号：production"
       ],
@@ -1005,6 +1555,202 @@
           "url": "https://www.defensenews.com/industry/2026/09/03/defense-firms-soar-on-ample-military-spending-testing-manufacturing-schemes",
           "publishedAt": "2026-09-03T14:35:13Z",
           "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-1988fbdc5a1f",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-04",
+        "lastSeen": "2026-09-04",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-04",
+            "newsId": "07712acb1c3680",
+            "title": "防务公司因充足军费而大涨，考验制造计划",
+            "source": "Defense News",
+            "publishedAt": "2026-09-03T14:35:13Z",
+            "score": 66
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "For the many billions of dollars governments spend on defense",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          },
+          {
+            "text": "companies are on the hook to get their production pipelines in place",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-de91551e4494",
+          "eventId": "evt-1988fbdc5a1f",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-10-04",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "07712acb1c3680"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 13,
+      "relatedPapers": []
+    },
+    {
+      "id": "634ed8bd1a93fd",
+      "eventId": "evt-ad45f457603e",
+      "contentType": "news",
+      "title": "特朗普提名亚当·特尔担任代理陆军部长",
+      "originalTitle": "Trump taps Adam Telle as acting Army secretary",
+      "summary": "特尔目前担任参议院确认的陆军民事工程助理部长。",
+      "keyFacts": [
+        "Telle is currently serving as the Senate-confirmed assistant secretary of the Army for Civil Works"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-09-03T23:41:03Z",
+      "url": "https://breakingdefense.com/2026/09/trump-taps-adam-telle-as-acting-army-secretary",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 1.3 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国",
+        "人事任命",
+        "陆军"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/09/trump-taps-adam-telle-as-acting-army-secretary",
+          "publishedAt": "2026-09-03T23:41:03Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 14
+    },
+    {
+      "id": "7ea223d66def9e",
+      "eventId": "evt-dcb4241e8673",
+      "contentType": "news",
+      "title": "特朗普的AI视频是表情包还是心理战？",
+      "originalTitle": "Are Trump’s AI videos just memes or psychological warfare?",
+      "summary": "特朗普近几个月加大使用AI生成内容，发布虚假军事打击视频。",
+      "keyFacts": [
+        "Trump’s use of AI generated content has ramped up in recent months",
+        "posting videos of fake military strikes"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-03T23:36:20Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/9/3/are-trumps-ai-videos-just-memes-or-psychological-warfare?traffic_source=rss",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 1.3 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "特朗普",
+        "AI生成",
+        "心理战"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/9/3/are-trumps-ai-videos-just-memes-or-psychological-warfare?traffic_source=rss",
+          "publishedAt": "2026-09-03T23:36:20Z",
+          "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
       "selectionProvider": "",
@@ -1049,7 +1795,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.0 小时",
+        "发布约 1.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1114,7 +1860,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.2 小时",
+        "发布约 2.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1145,6 +1891,297 @@
       "streamRank": 17
     },
     {
+      "id": "6c4195c73a5d35",
+      "eventId": "evt-de93fdb492db",
+      "contentType": "news",
+      "title": "无人机探测技术如何演变以应对更小、更快及蜂群威胁",
+      "originalTitle": "How Drone Detection Is Evolving To Counter Smaller, Faster, And Swarm Threats",
+      "summary": "品牌内容：莱昂纳多DRS解释战术雷达如何构成分层反无人机系统威胁检测的核心元素。来源：战区。",
+      "keyFacts": [
+        "Branded Content: Leonardo DRS explains how tactical radars form a central element of a layered counter-UAS threat detection system"
+      ],
+      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
+      "category": "无人系统",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-09-03T17:46:47Z",
+      "url": "https://www.twz.com/sponsored-content/how-drone-detection-is-evolving-to-counter-smaller-faster-and-swarm-threats",
+      "score": 65,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 65/100",
+        "综合排序分 65/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
+        "来源权重 15/20",
+        "发布约 7.2 小时",
+        "命中 3 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "无人机",
+        "反制系统",
+        "雷达"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/08/Leo-DRS-lead.jpg?quality=85&w=2048",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/sponsored-content/how-drone-detection-is-evolving-to-counter-smaller-faster-and-swarm-threats",
+          "publishedAt": "2026-09-03T17:46:47Z",
+          "evidenceGroup": "outlet:twz.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-de93fdb492db",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-04",
+        "lastSeen": "2026-09-04",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-04",
+            "newsId": "6c4195c73a5d35",
+            "title": "无人机探测技术如何演变以应对更小、更快及蜂群威胁",
+            "source": "The War Zone",
+            "publishedAt": "2026-09-03T17:46:47Z",
+            "score": 65
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "Branded Content: Leonardo DRS explains how tactical radars form a central element of a layered counter-UAS threat detection system",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-711088ed8eed",
+          "eventId": "evt-de93fdb492db",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-10-04",
+          "verificationSignals": [
+            "后续试验与任务数据",
+            "规模化部署、采购或反制变化"
+          ],
+          "evidenceIds": [
+            "6c4195c73a5d35"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 18,
+      "relatedPapers": []
+    },
+    {
+      "id": "2a08123ef4b7fc",
+      "eventId": "evt-87a3a20224eb",
+      "contentType": "news",
+      "title": "好奇号博客，Sols 4988-4994：老狗新把戏",
+      "originalTitle": "Curiosity Blog, Sols 4988-4994: More New Tricks for an Old Dog",
+      "summary": "火星车在火星表面运行14年后，本周两个工作区出现宽而浅的坑等前所未见特征，继续带来惊喜。",
+      "keyFacts": [
+        "Written by Michelle Minitti",
+        "MAHLI Deputy Principal Investigator Earth planning date: Friday",
+        "Curiosity’s 14 years on the surface"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
+      "country": "国际",
+      "publishedAt": "2026-09-03T15:59:48Z",
+      "url": "https://science.nasa.gov/blog/curiosity-blog-sols-4988-4994-more-new-tricks-for-an-old-dog",
+      "score": 65,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 65/100",
+        "综合排序分 65/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
+        "来源权重 20/20",
+        "发布约 8.9 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "好奇号",
+        "火星",
+        "探测"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "NASA",
+          "domain": "science.nasa.gov",
+          "url": "https://science.nasa.gov/blog/curiosity-blog-sols-4988-4994-more-new-tricks-for-an-old-dog",
+          "publishedAt": "2026-09-03T15:59:48Z",
+          "evidenceGroup": "outlet:science.nasa.gov"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-87a3a20224eb",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-04",
+        "lastSeen": "2026-09-04",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-04",
+            "newsId": "2a08123ef4b7fc",
+            "title": "好奇号博客，Sols 4988-4994：老狗新把戏",
+            "source": "NASA",
+            "publishedAt": "2026-09-03T15:59:48Z",
+            "score": 65
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:science.nasa.gov"
+        ],
+        "claims": [
+          {
+            "text": "Written by Michelle Minitti",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          },
+          {
+            "text": "MAHLI Deputy Principal Investigator Earth planning date: Friday",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          },
+          {
+            "text": "Curiosity’s 14 years on the surface",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-3a00cb72f8ab",
+          "eventId": "evt-87a3a20224eb",
+          "statement": "若火星车后续传回该工作区的地化或矿物学数据，可观察其是否有助于解释这些宽浅坑的成因。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-10-04",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "2a08123ef4b7fc"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        },
+        {
+          "predictionId": "pred-5b39785c929d",
+          "eventId": "evt-87a3a20224eb",
+          "statement": "后续可关注任务团队是否因这些特征调整行驶规划或增加额外观测，以评估其对夏普山路线的影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-04",
+          "dueAfter": "2026-12-03",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "2a08123ef4b7fc"
+          ],
+          "lastReviewedAt": "2026-09-04"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 19,
+      "relatedPapers": []
+    },
+    {
       "id": "eaa07ef31e32c1",
       "eventId": "evt-51016532facb",
       "contentType": "news",
@@ -1160,13 +2197,13 @@
       "country": "国际",
       "publishedAt": "2026-09-03T19:56:34Z",
       "url": "https://www.bbc.co.uk/news/videos/ckg0eerml02o?at_medium=RSS&at_campaign=rss",
-      "score": 65,
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1177,7 +2214,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 4.2 小时",
+        "发布约 5.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1205,198 +2242,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 18
-    },
-    {
-      "id": "2a08123ef4b7fc",
-      "eventId": "evt-87a3a20224eb",
-      "contentType": "news",
-      "title": "好奇号博客，Sols 4988-4994：老狗新把戏",
-      "originalTitle": "Curiosity Blog, Sols 4988-4994: More New Tricks for an Old Dog",
-      "summary": "火星车在火星表面运行14年后，本周两个工作区出现宽而浅的坑等前所未见特征，继续带来惊喜。",
-      "keyFacts": [
-        "Written by Michelle Minitti",
-        "MAHLI Deputy Principal Investigator Earth planning date: Friday",
-        "Curiosity’s 14 years on the surface"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "NASA",
-      "country": "国际",
-      "publishedAt": "2026-09-03T15:59:48Z",
-      "url": "https://science.nasa.gov/blog/curiosity-blog-sols-4988-4994-more-new-tricks-for-an-old-dog",
-      "score": 65,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 20,
-        "主题优先级": 9,
-        "时效": 16,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 20/20",
-        "发布约 8.1 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "好奇号",
-        "火星",
-        "探测"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "NASA",
-          "domain": "science.nasa.gov",
-          "url": "https://science.nasa.gov/blog/curiosity-blog-sols-4988-4994-more-new-tricks-for-an-old-dog",
-          "publishedAt": "2026-09-03T15:59:48Z",
-          "evidenceGroup": "outlet:science.nasa.gov"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 19
-    },
-    {
-      "id": "c31f05e4005dff",
-      "eventId": "evt-fe0d845f89a5",
-      "contentType": "news",
-      "title": "塞尔维亚以军礼迎接战犯姆拉迪奇遗体归国",
-      "originalTitle": "Serbia welcomes return of war criminal Mladic’s body with military honours",
-      "summary": "拉特科·姆拉迪奇因在1992-1995年波斯尼亚战争中犯下暴行而被联合国法庭判处终身监禁。",
-      "keyFacts": [
-        "Ratko Mladic received a life sentence from a UN court for committing atrocities during the 1992-1995 Bosnian War"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-03T19:27:34Z",
-      "url": "https://www.aljazeera.com/news/2026/9/3/serbia-welcomes-return-of-war-criminal-mladics-body-with-military-honours?traffic_source=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.7 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "姆拉迪奇",
-        "战争罪",
-        "塞尔维亚"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/9/3/serbia-welcomes-return-of-war-criminal-mladics-body-with-military-honours?traffic_source=rss",
-          "publishedAt": "2026-09-03T19:27:34Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
       "streamRank": 20
-    },
-    {
-      "id": "f972d91e1346b7",
-      "eventId": "evt-1e5e4b97fbf9",
-      "contentType": "news",
-      "title": "维权人士谴责美国众议院投票削减抵制以色列大学的资金",
-      "originalTitle": "Advocates decry US House vote to defund universities that boycott Israel",
-      "summary": "权利组织称该措施侵犯美国人的言论自由，以利外国。",
-      "keyFacts": [
-        "Rights groups say the measure infringes on the freedom of speech of Americans for the benefit of a foreign nation"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-03T19:14:05Z",
-      "url": "https://www.aljazeera.com/news/2026/9/3/advocates-decry-us-house-vote-to-defund-universities-that-boycott-israel?traffic_source=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.9 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美国政治",
-        "言论自由",
-        "以色列"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/9/3/advocates-decry-us-house-vote-to-defund-universities-that-boycott-israel?traffic_source=rss",
-          "publishedAt": "2026-09-03T19:14:05Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 21
     },
     {
       "id": "6a3c587a103a12",
@@ -1432,7 +2278,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 7.6 小时",
+        "发布约 8.4 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1460,7 +2306,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 22
+      "streamRank": 21
     },
     {
       "id": "33fe8cbd9dedea",
@@ -1497,7 +2343,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 21.4 小时",
+        "发布约 22.2 小时",
         "命中 2 个主题信号",
         "影响信号：escalation"
       ],
@@ -1526,7 +2372,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 23
+      "streamRank": 22
     },
     {
       "id": "1ababf71a51351",
@@ -1563,7 +2409,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 3.1 小时",
+        "发布约 3.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -1591,7 +2437,133 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
+      "streamRank": 23
+    },
+    {
+      "id": "c31f05e4005dff",
+      "eventId": "evt-fe0d845f89a5",
+      "contentType": "news",
+      "title": "塞尔维亚以军礼迎接战犯姆拉迪奇遗体归国",
+      "originalTitle": "Serbia welcomes return of war criminal Mladic’s body with military honours",
+      "summary": "拉特科·姆拉迪奇因在1992-1995年波斯尼亚战争中犯下暴行而被联合国法庭判处终身监禁。",
+      "keyFacts": [
+        "Ratko Mladic received a life sentence from a UN court for committing atrocities during the 1992-1995 Bosnian War"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-03T19:27:34Z",
+      "url": "https://www.aljazeera.com/news/2026/9/3/serbia-welcomes-return-of-war-criminal-mladics-body-with-military-honours?traffic_source=rss",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 5.5 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "姆拉迪奇",
+        "战争罪",
+        "塞尔维亚"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/9/3/serbia-welcomes-return-of-war-criminal-mladics-body-with-military-honours?traffic_source=rss",
+          "publishedAt": "2026-09-03T19:27:34Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
       "streamRank": 24
+    },
+    {
+      "id": "f972d91e1346b7",
+      "eventId": "evt-1e5e4b97fbf9",
+      "contentType": "news",
+      "title": "维权人士谴责美国众议院投票削减抵制以色列大学的资金",
+      "originalTitle": "Advocates decry US House vote to defund universities that boycott Israel",
+      "summary": "权利组织称该措施侵犯美国人的言论自由，以利外国。",
+      "keyFacts": [
+        "Rights groups say the measure infringes on the freedom of speech of Americans for the benefit of a foreign nation"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-03T19:14:05Z",
+      "url": "https://www.aljazeera.com/news/2026/9/3/advocates-decry-us-house-vote-to-defund-universities-that-boycott-israel?traffic_source=rss",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 5.7 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国政治",
+        "言论自由",
+        "以色列"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/9/3/advocates-decry-us-house-vote-to-defund-universities-that-boycott-israel?traffic_source=rss",
+          "publishedAt": "2026-09-03T19:14:05Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 25
     },
     {
       "id": "71935dc9b6fb86",
@@ -1627,7 +2599,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.4 小时",
+        "发布约 6.2 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1646,70 +2618,6 @@
           "url": "https://www.aljazeera.com/news/2026/9/3/foreign-fighters-and-external-support-fuel-sudans-war-un-backed-probe?traffic_source=rss",
           "publishedAt": "2026-09-03T18:45:37Z",
           "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 25
-    },
-    {
-      "id": "6d33889555afa0",
-      "eventId": "evt-ff53b12a5af4",
-      "contentType": "news",
-      "title": "为对抗中国，美国下一批CCA需承担不同使命",
-      "originalTitle": "To counter China, America’s next CCA needs a different mission",
-      "summary": "战略与预算评估中心学者格雷格·马兰德里诺在专栏中称，与中国的冲突将要求CCA同时承担防御和进攻任务。",
-      "keyFacts": [
-        "The Center for Strategic",
-        "Budgetary Assessments’ Greg Malandrino argues in this op-ed that a fight with China will require CCAs for defense as well as offense"
-      ],
-      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
-      "category": "无人系统",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-09-03T17:38:58Z",
-      "url": "https://breakingdefense.com/2026/09/to-counter-china-americas-next-cca-needs-a-different-mission",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.5 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "CCA",
-        "中国",
-        "国防"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/09/to-counter-china-americas-next-cca-needs-a-different-mission",
-          "publishedAt": "2026-09-03T17:38:58Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
       "selectionProvider": "",
@@ -1754,7 +2662,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 7.9 小时",
+        "发布约 8.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1819,7 +2727,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 5.8 小时",
+        "发布约 6.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -1884,7 +2792,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 6.1 小时",
+        "发布约 6.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -1913,6 +2821,70 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 29
+    },
+    {
+      "id": "6d33889555afa0",
+      "eventId": "evt-ff53b12a5af4",
+      "contentType": "news",
+      "title": "为对抗中国，美国下一批CCA需承担不同使命",
+      "originalTitle": "To counter China, America’s next CCA needs a different mission",
+      "summary": "战略与预算评估中心学者格雷格·马兰德里诺在专栏中称，与中国的冲突将要求CCA同时承担防御和进攻任务。",
+      "keyFacts": [
+        "The Center for Strategic",
+        "Budgetary Assessments’ Greg Malandrino argues in this op-ed that a fight with China will require CCAs for defense as well as offense"
+      ],
+      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
+      "category": "无人系统",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-09-03T17:38:58Z",
+      "url": "https://breakingdefense.com/2026/09/to-counter-china-americas-next-cca-needs-a-different-mission",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.3 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "CCA",
+        "中国",
+        "国防"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/09/to-counter-china-americas-next-cca-needs-a-different-mission",
+          "publishedAt": "2026-09-03T17:38:58Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 30
     },
     {
       "id": "d75554c78e0fe5",
@@ -1945,7 +2917,7 @@
       },
       "scoreReasons": [
         "来源权重 18/20",
-        "发布约 9.1 小时",
+        "发布约 9.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1973,7 +2945,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 30
+      "streamRank": 31
     },
     {
       "id": "58dc6e707ef464",
@@ -2010,7 +2982,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 14.1 小时",
+        "发布约 14.9 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -2038,7 +3010,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 31
+      "streamRank": 32
     },
     {
       "id": "34b15b9db167ff",
@@ -2073,7 +3045,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 7.6 小时",
+        "发布约 8.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2101,7 +3073,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 32
+      "streamRank": 33
     },
     {
       "id": "9d137e13f767cb",
@@ -2136,7 +3108,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 11.2 小时",
+        "发布约 12.0 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -2155,71 +3127,6 @@
           "url": "https://www.defensenews.com/opinion/2026/09/03/chinese-military-analysts-cant-wait-for-the-us-navys-battleship-era",
           "publishedAt": "2026-09-03T12:58:34Z",
           "evidenceGroup": "outlet:defensenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 33
-    },
-    {
-      "id": "154bcf84418717",
-      "eventId": "evt-e6618e5b03ae",
-      "contentType": "news",
-      "title": "美国水兵250天航行后登陆泰国，先购物再泡酒吧",
-      "originalTitle": "US sailors go shopping before hitting the bars in Thailand after 250-day voyage",
-      "summary": "美国水兵在结束250天航行后抵达泰国芭堤雅，他们独特的军人发型和胡子与当地游客形成鲜明对比，BBC记者乔纳森·海德报道。",
-      "keyFacts": [
-        "With military haircuts",
-        "the US sailors stood out against the flip-flops of the usual Pattaya crowd",
-        "writes the BBC's Jonathan Head"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-09-03T11:33:09Z",
-      "url": "https://www.bbc.co.uk/news/articles/cj9x2k8n3y1o?at_medium=RSS&at_campaign=rss",
-      "score": 61,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 14,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 12.6 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美国海军",
-        "泰国",
-        "航行"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/a1f2/live/315f2940-a748-11f1-a7f4-7146ff2fa146.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cj9x2k8n3y1o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-09-03T11:33:09Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
       "selectionProvider": "",
@@ -2265,7 +3172,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 9.1 小时",
+        "发布约 9.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2328,7 +3235,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.9 小时",
+        "发布约 10.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2392,7 +3299,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 11.1 小时",
+        "发布约 11.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2423,6 +3330,71 @@
       "streamRank": 37
     },
     {
+      "id": "154bcf84418717",
+      "eventId": "evt-e6618e5b03ae",
+      "contentType": "news",
+      "title": "美国水兵250天航行后登陆泰国，先购物再泡酒吧",
+      "originalTitle": "US sailors go shopping before hitting the bars in Thailand after 250-day voyage",
+      "summary": "美国水兵在结束250天航行后抵达泰国芭堤雅，他们独特的军人发型和胡子与当地游客形成鲜明对比，BBC记者乔纳森·海德报道。",
+      "keyFacts": [
+        "With military haircuts",
+        "the US sailors stood out against the flip-flops of the usual Pattaya crowd",
+        "writes the BBC's Jonathan Head"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-09-03T11:33:09Z",
+      "url": "https://www.bbc.co.uk/news/articles/cj9x2k8n3y1o?at_medium=RSS&at_campaign=rss",
+      "score": 60,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 13,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 13.4 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国海军",
+        "泰国",
+        "航行"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/a1f2/live/315f2940-a748-11f1-a7f4-7146ff2fa146.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cj9x2k8n3y1o?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-09-03T11:33:09Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 38
+    },
+    {
       "id": "19116b55e3ebe7",
       "eventId": "evt-46f622ed2891",
       "contentType": "news",
@@ -2440,13 +3412,13 @@
       "country": "国际",
       "publishedAt": "2026-09-03T11:55:37Z",
       "url": "https://breakingdefense.com/2026/09/estonian-defense-minister-resigns-following-ukrainian-ammunition-procurement-scandal",
-      "score": 60,
+      "score": 59,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 14,
+        "时效": 13,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2457,7 +3429,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 12.2 小时",
+        "发布约 13.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2485,7 +3457,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 38
+      "streamRank": 39
     },
     {
       "id": "0f4e24920c25ca",
@@ -2503,13 +3475,13 @@
       "country": "国际",
       "publishedAt": "2026-09-03T13:14:59Z",
       "url": "https://breakingdefense.com/2026/09/ge-aerospace-to-provide-marine-gas-turbine-engines-for-south-koreas-kddx-destroyers",
-      "score": 59,
+      "score": 58,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 15,
+        "时效": 14,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 2,
@@ -2520,7 +3492,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 10.9 小时",
+        "发布约 11.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2548,7 +3520,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 39
+      "streamRank": 40
     }
   ]
 }
