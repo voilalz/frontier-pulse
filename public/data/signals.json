@@ -1,24 +1,60 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-04T00:56:43Z",
+  "generatedAt": "2026-09-05T00:53:52Z",
   "timezone": "Asia/Shanghai",
   "status": "alert",
   "baselineDays": 30,
   "observationDays": 30,
-  "signalCount": 1,
-  "summary": "基于过去 30 个有归档日建立稳健基线，检测到 1 个升温信号。",
+  "signalCount": 4,
+  "summary": "基于过去 30 个有归档日建立稳健基线，检测到 4 个升温信号。",
   "signals": [
     {
-      "signalId": "sig-2c5899d07f09",
+      "signalId": "sig-59938a133915",
       "dimension": "entity",
-      "name": "美国陆军",
+      "name": "OpenAI",
+      "currentCount": 3,
+      "baselineMedian": 0.0,
+      "ratio": 6.0,
+      "robustDeviation": 3.0,
+      "independentSourceCount": 2,
+      "severity": "high",
+      "explanation": "OpenAI今日进入 Top 10 的相关事件为 3 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。"
+    },
+    {
+      "signalId": "sig-c0731a0a8bf2",
+      "dimension": "entity",
+      "name": "AI安全",
       "currentCount": 2,
       "baselineMedian": 0.0,
       "ratio": 4.0,
       "robustDeviation": 2.0,
       "independentSourceCount": 2,
       "severity": "elevated",
-      "explanation": "美国陆军今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。"
+      "explanation": "AI安全今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。"
+    },
+    {
+      "signalId": "sig-8b905e5c6dbf",
+      "dimension": "entity",
+      "name": "美国空军",
+      "currentCount": 2,
+      "baselineMedian": 0.0,
+      "ratio": 4.0,
+      "robustDeviation": 2.0,
+      "independentSourceCount": 3,
+      "severity": "elevated",
+      "explanation": "美国空军今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 3 个独立来源组。"
+    },
+    {
+      "signalId": "sig-faee60a08415",
+      "dimension": "category",
+      "name": "AI",
+      "currentCount": 3,
+      "baselineMedian": 1.0,
+      "ratio": 3.0,
+      "robustDeviation": 2.0,
+      "independentSourceCount": 2,
+      "severity": "elevated",
+      "explanation": "AI今日进入 Top 10 的相关事件为 3 条，过去 30 个有归档日的中位数为 1.0 条，来自 2 个独立来源组。"
     }
   ]
 }

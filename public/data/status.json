@@ -1,9 +1,9 @@
 {
   "schemaVersion": 9,
   "state": "ok",
-  "lastAttemptAt": "2026-09-04T00:56:43Z",
-  "lastSuccessAt": "2026-09-04T00:56:43Z",
-  "editionDate": "2026-09-04",
+  "lastAttemptAt": "2026-09-05T00:53:52Z",
+  "lastSuccessAt": "2026-09-05T00:53:52Z",
+  "editionDate": "2026-09-05",
   "itemCount": 10,
   "message": "日报更新成功",
   "method": "deepseek",
@@ -13,7 +13,8 @@
   "selectionProvider": "deepseek",
   "selectionModel": "deepseek-v4-flash",
   "selectionNotices": [
-    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 3 个 Top 10 入选位"
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 3 个 Top 10 入选位",
+    "DeepSeek 返回了 16/36 个候选评分；其余 20 个候选沿用规则分参与排序"
   ],
   "selectionWarnings": [],
   "selectionDiagnostics": {
@@ -25,58 +26,58 @@
     "model": "deepseek-v4-flash",
     "aiWeight": 0.65,
     "ruleWeight": 0.35,
-    "aiScoredItemCount": 36,
-    "aiUnscoredItemCount": 0,
+    "aiScoredItemCount": 16,
+    "aiUnscoredItemCount": 20,
     "unconstrainedTop": {
       "categoryCounts": {
-        "局部冲突": 6,
-        "军事动态": 2,
-        "航空航天": 2
+        "局部冲突": 5,
+        "AI": 4,
+        "军事动态": 1
       },
       "domainCounts": {
-        "twz.com": 1,
-        "aljazeera.com": 3,
-        "breakingdefense.com": 1,
+        "aljazeera.com": 2,
+        "arstechnica.com": 1,
         "bbc.co.uk": 2,
-        "nasa.gov": 2,
-        "defensenews.com": 1
+        "techcrunch.com": 2,
+        "defensenews.com": 1,
+        "defenseone.com": 1,
+        "twz.com": 1
       },
       "categoryViolations": {
-        "局部冲突": 6
+        "局部冲突": 5,
+        "AI": 4
       },
-      "domainViolations": {
-        "aljazeera.com": 3
-      }
+      "domainViolations": {}
     },
     "finalTop": {
       "categoryCounts": {
         "局部冲突": 3,
+        "AI": 3,
         "军事动态": 3,
-        "航空航天": 3,
-        "无人系统": 1
+        "航空航天": 1
       },
       "domainCounts": {
-        "twz.com": 2,
-        "aljazeera.com": 1,
-        "breakingdefense.com": 1,
+        "aljazeera.com": 2,
+        "arstechnica.com": 1,
         "bbc.co.uk": 1,
-        "nasa.gov": 2,
+        "techcrunch.com": 2,
+        "twz.com": 1,
         "defensenews.com": 2,
-        "science.nasa.gov": 1
+        "nasa.gov": 1
       },
       "categoryViolations": {},
       "domainViolations": {}
     },
     "adjustedItemCount": 3,
     "adjustedOutIds": [
-      "a8f286ee4c1ebe",
-      "99e85ec9d558e1",
-      "4e4cfa70881f50"
+      "4217cb2605bd0c",
+      "c4a2e49fa873c2",
+      "dff27152073405"
     ],
     "adjustedInIds": [
-      "07712acb1c3680",
-      "6c4195c73a5d35",
-      "2a08123ef4b7fc"
+      "ee32335833bd17",
+      "9aeba966d25198",
+      "82ec0869e4f799"
     ],
     "relaxedItemCount": 0
   },
@@ -86,40 +87,40 @@
   "translatedItemCount": 10,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 0,
-    "completedItemCount": 0,
+    "requestedItemCount": 1,
+    "completedItemCount": 1,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 5,
-    "initialBatchCount": 0,
-    "requestCount": 0,
+    "initialBatchCount": 1,
+    "requestCount": 1,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "not_needed",
-    "completionMessage": "没有需要翻译的新条目",
+    "completionReason": "complete_first_pass",
+    "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
     "targetItemCount": 10,
-    "reusedItemCount": 10,
-    "newlyTranslatedItemCount": 0,
+    "reusedItemCount": 9,
+    "newlyTranslatedItemCount": 1,
     "totalTranslatedItemCount": 10,
     "totalMissingItemCount": 0
   },
   "historyAnalysisStatus": "ok",
   "historyAnalysisProvider": "deepseek",
-  "historyLinkedItemCount": 7,
-  "historyAnalyzedItemCount": 7,
+  "historyLinkedItemCount": 5,
+  "historyAnalyzedItemCount": 5,
   "historyAnalysisWarnings": [],
   "historyAnalysisDiagnostics": {
-    "requestedItemCount": 7,
-    "completedItemCount": 7,
+    "requestedItemCount": 5,
+    "completedItemCount": 5,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 5,
-    "initialBatchCount": 2,
-    "requestCount": 2,
+    "initialBatchCount": 1,
+    "requestCount": 1,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
@@ -129,7 +130,7 @@
   },
   "eventCount": 10,
   "weeklyEventCount": 8,
-  "anomalySignalCount": 1,
+  "anomalySignalCount": 4,
   "paperLinkedItemCount": 0,
   "warnings": [],
   "coverageStatus": "complete",
@@ -156,7 +157,7 @@
     "completionReason": "complete_first_pass",
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
-    "reusedItemCount": 39,
+    "reusedItemCount": 38,
     "featuredTranslatedItemCount": 10
   },
   "researchItemCount": 60,
