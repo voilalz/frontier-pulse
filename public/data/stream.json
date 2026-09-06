@@ -1,31 +1,31 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-09-05T23:55:10Z",
+  "generatedAt": "2026-09-06T00:52:05Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
-  "itemCount": 19,
-  "totalCandidateCount": 19,
+  "itemCount": 20,
+  "totalCandidateCount": 20,
   "truncated": false,
   "categoryCounts": {
     "航空航天": 2,
-    "局部冲突": 11,
+    "局部冲突": 13,
     "AI": 2,
-    "军事动态": 4
+    "军事动态": 3
   },
   "sourceCounts": {
     "Al Jazeera": 10,
-    "BBC World": 5,
+    "BBC World": 6,
     "TechCrunch AI": 2,
     "Defense News": 1,
     "European Space Agency": 1
   },
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
-  "translatedItemCount": 19,
+  "translatedItemCount": 20,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 5,
-    "completedItemCount": 5,
+    "requestedItemCount": 2,
+    "completedItemCount": 2,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
@@ -38,13 +38,13 @@
     "completionReason": "complete_first_pass",
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
-    "reusedItemCount": 14,
+    "reusedItemCount": 18,
     "featuredTranslatedItemCount": 10
   },
   "items": [
     {
       "id": "c8c9fe37df838a",
-      "eventId": "evt-643174467429",
+      "eventId": "evt-67165198e522",
       "contentType": "news",
       "title": "伊萨尔航空航天实现欧洲大陆首次轨道发射",
       "originalTitle": "Isar Aerospace achieves first launch to orbit from continental Europe",
@@ -57,7 +57,7 @@
       "publishedAt": "2026-09-05T20:24:00Z",
       "url": "https://www.esa.int/Enabling_Support/Space_Transportation/Boost/Isar_Aerospace_achieves_first_launch_to_orbit_from_continental_Europe",
       "score": 78,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 19,
@@ -72,8 +72,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "规则参考分 78/100",
         "来源权重 19/20",
-        "发布约 3.5 小时",
+        "发布约 4.5 小时",
         "命中 3 个主题信号",
         "影响信号：first、launch"
       ],
@@ -94,14 +97,85 @@
           "evidenceGroup": "outlet:esa.int"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-67165198e522",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-06",
+        "lastSeen": "2026-09-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-06",
+            "newsId": "c8c9fe37df838a",
+            "title": "伊萨尔航空航天实现欧洲大陆首次轨道发射",
+            "source": "European Space Agency",
+            "publishedAt": "2026-09-05T20:24:00Z",
+            "score": 78
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:esa.int"
+        ],
+        "claims": [],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-7968eb2eb5b5",
+          "eventId": "evt-67165198e522",
+          "statement": "若Isar Aerospace后续发射任务按计划进行，则需关注其商业订单履行及与欧洲航天局合作动态。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-06",
+          "dueAfter": "2026-10-06",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "c8c9fe37df838a"
+          ],
+          "lastReviewedAt": "2026-09-06"
+        },
+        {
+          "predictionId": "pred-28f433ff4b31",
+          "eventId": "evt-67165198e522",
+          "statement": "后续可观察欧洲大陆轨道发射能力是否吸引更多商业客户，及对欧洲航天发射市场竞争格局的影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-06",
+          "dueAfter": "2026-12-05",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "c8c9fe37df838a"
+          ],
+          "lastReviewedAt": "2026-09-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
     },
     {
       "id": "f78a9a407ec467",
@@ -120,7 +194,7 @@
       "publishedAt": "2026-09-05T18:12:52Z",
       "url": "https://www.aljazeera.com/news/2026/9/5/russias-putin-meets-us-envoys-to-discuss-trump-proposal-to-end-ukraine-war?traffic_source=rss",
       "score": 73,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -135,8 +209,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 73/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 73/100",
         "来源权重 16/20",
-        "发布约 5.7 小时",
+        "发布约 6.7 小时",
         "命中 3 个主题信号",
         "影响信号：strike"
       ],
@@ -158,14 +235,75 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 2
+      "eventDossier": {
+        "eventId": "evt-b2fd912d4632",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-06",
+        "lastSeen": "2026-09-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-06",
+            "newsId": "f78a9a407ec467",
+            "title": "俄罗斯总统普京会见美国特使，讨论特朗普结束乌克兰战争的提议",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-05T18:12:52Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Ukraine vow not to strike each other's capitals for three days during talks in Moscow",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-8dacb8b839b7",
+          "eventId": "evt-b2fd912d4632",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-06",
+          "dueAfter": "2026-10-06",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "f78a9a407ec467"
+          ],
+          "lastReviewedAt": "2026-09-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 2,
+      "relatedPapers": []
     },
     {
       "id": "453189b55f330a",
@@ -184,7 +322,7 @@
       "publishedAt": "2026-09-05T20:03:29Z",
       "url": "https://www.aljazeera.com/news/2026/9/5/colombian-government-reports-three-killed-in-rebel-attack-on-military-post?traffic_source=rss",
       "score": 72,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -199,8 +337,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 72/100",
+        "综合排序分 72/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
         "来源权重 16/20",
-        "发布约 3.9 小时",
+        "发布约 4.8 小时",
         "命中 2 个主题信号",
         "影响信号：attack"
       ],
@@ -222,14 +363,75 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 3
+      "eventDossier": {
+        "eventId": "evt-ed0b135b2456",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-06",
+        "lastSeen": "2026-09-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-06",
+            "newsId": "453189b55f330a",
+            "title": "哥伦比亚政府报告叛军袭击军事哨所致三人死亡",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-05T20:03:29Z",
+            "score": 72
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Colombian authorities blame ELN rebel group for attack that reportedly included drones dropping explosives on compound",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-76d602066281",
+          "eventId": "evt-ed0b135b2456",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-06",
+          "dueAfter": "2026-10-06",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "453189b55f330a"
+          ],
+          "lastReviewedAt": "2026-09-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 3,
+      "relatedPapers": []
     },
     {
       "id": "2e8d18ba979925",
@@ -249,7 +451,7 @@
       "publishedAt": "2026-09-05T16:17:47Z",
       "url": "https://www.aljazeera.com/news/2026/9/5/gaza-teams-recover-remains-of-55-people-nearly-3-years-after-israeli-strike?traffic_source=rss",
       "score": 72,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -264,8 +466,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 72/100",
+        "综合排序分 72/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
         "来源权重 16/20",
-        "发布约 7.6 小时",
+        "发布约 8.6 小时",
         "命中 3 个主题信号",
         "影响信号：strike"
       ],
@@ -287,14 +492,102 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 4
+      "selectionNote": "为补足 Top 10 放宽来源配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-0ebfc1820365",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-06",
+        "lastSeen": "2026-09-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-06",
+            "newsId": "2e8d18ba979925",
+            "title": "加沙团队在以色列袭击近3年后找回55人遗体",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-05T16:17:47Z",
+            "score": 72
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "all from one Palestinian family",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "had been sheltering at their family home when Israel hit it",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-aaec691a49d4",
+          "eventId": "evt-0ebfc1820365",
+          "statement": "若相关方面未能达成停火，则需关注加沙平民伤亡数字及基础设施损毁是否继续上升。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-06",
+          "dueAfter": "2026-10-06",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2e8d18ba979925"
+          ],
+          "lastReviewedAt": "2026-09-06"
+        },
+        {
+          "predictionId": "pred-1ad72ef400b3",
+          "eventId": "evt-0ebfc1820365",
+          "statement": "后续可观察国际社会对以色列袭击加沙的回应，以及停火谈判能否取得突破。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-06",
+          "dueAfter": "2026-12-05",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2e8d18ba979925"
+          ],
+          "lastReviewedAt": "2026-09-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 4,
+      "relatedPapers": []
     },
     {
       "id": "83f9a270e22c04",
@@ -313,13 +606,13 @@
       "country": "国际",
       "publishedAt": "2026-09-05T21:39:02Z",
       "url": "https://www.bbc.co.uk/news/articles/cx2zqp46g8eo?at_medium=RSS&at_campaign=rss",
-      "score": 70,
-      "scoreBasis": "规则评分",
+      "score": 69,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 18,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -329,8 +622,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 69/100",
+        "综合排序分 69/100（AI 65% + 规则 35%）",
+        "规则参考分 69/100",
         "来源权重 17/20",
-        "发布约 2.3 小时",
+        "发布约 3.2 小时",
         "命中 1 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -359,14 +655,86 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 5
+      "eventDossier": {
+        "eventId": "evt-6977d0f36ec0",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-06",
+        "lastSeen": "2026-09-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-06",
+            "newsId": "83f9a270e22c04",
+            "title": "美国特使在莫斯科与普京会晤讨论乌克兰问题",
+            "source": "BBC World",
+            "publishedAt": "2026-09-05T21:39:02Z",
+            "score": 69
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:bbc.co.uk",
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "President Trump says his envoys Steve Witkoff",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:bbc.co.uk",
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "Jared Kushner are \"bringing with them a proposal to end the war\"",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:bbc.co.uk",
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-da1112e4c8f9",
+          "eventId": "evt-6977d0f36ec0",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-06",
+          "dueAfter": "2026-10-06",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "83f9a270e22c04"
+          ],
+          "lastReviewedAt": "2026-09-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 5,
+      "relatedPapers": []
     },
     {
       "id": "d8d7170d1f3cfd",
@@ -385,13 +753,13 @@
       "country": "国际",
       "publishedAt": "2026-09-05T19:37:10Z",
       "url": "https://www.aljazeera.com/video/newsfeed/2026/9/5/jerusalem-daily-raids-settlers-sieges?traffic_source=rss",
-      "score": 70,
-      "scoreBasis": "规则评分",
+      "score": 69,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 6,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -401,8 +769,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 69/100",
+        "综合排序分 69/100（AI 65% + 规则 35%）",
+        "规则参考分 69/100",
         "来源权重 16/20",
-        "发布约 4.3 小时",
+        "发布约 5.2 小时",
         "命中 1 个主题信号",
         "影响信号：attack"
       ],
@@ -424,6 +795,139 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "为补足 Top 10 放宽来源配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-20e626ed5472",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-06",
+        "lastSeen": "2026-09-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-06",
+            "newsId": "d8d7170d1f3cfd",
+            "title": "耶路撒冷日报：突袭、定居者与围困",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-05T19:37:10Z",
+            "score": 69
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Mike Huckabee visits as settlers attack Palestinians",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "Israeli forces carry out raids",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-9fc8dd2e559a",
+          "eventId": "evt-20e626ed5472",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-06",
+          "dueAfter": "2026-10-06",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d8d7170d1f3cfd"
+          ],
+          "lastReviewedAt": "2026-09-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 6,
+      "relatedPapers": []
+    },
+    {
+      "id": "47ae79f68b2d6d",
+      "eventId": "evt-ba2e0933e0d3",
+      "contentType": "news",
+      "title": "伊朗战争直播：革命卫队声称对美国军舰发动新袭击以回应海上封锁",
+      "originalTitle": "Iran war live: IRGC claims new attacks on US warships over naval blockade",
+      "summary": "革命卫队称在霍尔木兹海峡对峙加剧之际，向美国航空母舰和驱逐舰发射弹道导弹。",
+      "keyFacts": [
+        "IRGC says it fired ballistic missiles at US aircraft carrier",
+        "destroyer as standoff intensifies in Strait of Hormuz"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-06T00:00:00Z",
+      "url": "https://www.aljazeera.com/news/liveblog/2026/9/6/iran-war-live-irgc-claims-new-attacks-on-us-warships-over-naval-blockade?traffic_source=rss",
+      "score": 68,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 0.9 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "美国",
+        "霍尔木兹海峡"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/liveblog/2026/9/6/iran-war-live-irgc-claims-new-attacks-on-us-warships-over-naval-blockade?traffic_source=rss",
+          "publishedAt": "2026-09-06T00:00:00Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
       "selectionProvider": "",
       "translationProvider": "deepseek",
       "isSupplemental": false,
@@ -431,7 +935,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 6
+      "streamRank": 7
     },
     {
       "id": "84a48662e571df",
@@ -467,7 +971,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 1.2 小时",
+        "发布约 2.1 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -494,7 +998,71 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 7
+      "streamRank": 8
+    },
+    {
+      "id": "750a18cc30289b",
+      "eventId": "evt-33782c938909",
+      "contentType": "news",
+      "title": "乌克兰俄语占多数的城市考虑在艺术领域实施语言禁令",
+      "originalTitle": "Majority Russian-speaking city in Ukraine considers language ban in the arts",
+      "summary": "乌克兰第三大城市敖德萨本周将决定是否禁止公共场合音乐和文学中的俄语内容。",
+      "keyFacts": [
+        "Ukraine's third-biggest city Odesa decides this week whether to ban Russian-language content in music",
+        "literature in public"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-09-05T23:54:07Z",
+      "url": "https://www.bbc.co.uk/news/articles/c33kzvgn8pyo?at_medium=RSS&at_campaign=rss",
+      "score": 67,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 1.0 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "乌克兰",
+        "敖德萨",
+        "语言政策"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/5fec/live/5ccc6200-a87e-11f1-824a-0fc4c5d895ae.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c33kzvgn8pyo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-09-05T23:54:07Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 9
     },
     {
       "id": "4a2a5300545f78",
@@ -513,13 +1081,13 @@
       "country": "国际",
       "publishedAt": "2026-09-05T23:20:00Z",
       "url": "https://www.bbc.co.uk/news/articles/cm274p8m88lo?at_medium=RSS&at_campaign=rss",
-      "score": 66,
-      "scoreBasis": "规则评分",
+      "score": 65,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 9,
-        "时效": 20,
+        "时效": 19,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -529,8 +1097,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 65/100",
+        "综合排序分 65/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
         "来源权重 17/20",
-        "发布约 0.6 小时",
+        "发布约 1.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -550,14 +1121,83 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 8
+      "eventDossier": {
+        "eventId": "evt-915f13c45b53",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-06",
+        "lastSeen": "2026-09-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-06",
+            "newsId": "4a2a5300545f78",
+            "title": "航空面临更热更暴风雨的天空，乘客可能需接受更多干扰",
+            "source": "BBC World",
+            "publishedAt": "2026-09-05T23:20:00Z",
+            "score": 65
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "Are people going to have to increasingly accept more delays",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "diversions as the effects of climate change intensify?",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-5f463f3c5ae8",
+          "eventId": "evt-915f13c45b53",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-06",
+          "dueAfter": "2026-10-06",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "4a2a5300545f78"
+          ],
+          "lastReviewedAt": "2026-09-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 10,
+      "relatedPapers": []
     },
     {
       "id": "ade9335b716f5c",
@@ -576,13 +1216,13 @@
       "country": "国际",
       "publishedAt": "2026-09-05T23:07:48Z",
       "url": "https://www.aljazeera.com/news/2026/9/5/fuel-tanker-blast-in-western-iran-kills-at-least-10?traffic_source=rss",
-      "score": 66,
+      "score": 65,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 20,
+        "时效": 19,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -593,7 +1233,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 0.8 小时",
+        "发布约 1.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -620,7 +1260,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 9
+      "streamRank": 11
     },
     {
       "id": "1d3d4d76fcdcf8",
@@ -640,7 +1280,7 @@
       "publishedAt": "2026-09-05T22:49:55Z",
       "url": "https://techcrunch.com/2026/09/05/seattle-times-and-newsday-are-the-latest-publications-to-sue-openai-and-microsoft",
       "score": 64,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
@@ -655,8 +1295,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 64/100",
+        "综合排序分 64/100（AI 65% + 规则 35%）",
+        "规则参考分 64/100",
         "来源权重 15/20",
-        "发布约 1.1 小时",
+        "发布约 2.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -676,14 +1319,83 @@
           "evidenceGroup": "outlet:techcrunch.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 10
+      "eventDossier": {
+        "eventId": "evt-682707a6890b",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-06",
+        "lastSeen": "2026-09-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-06",
+            "newsId": "1d3d4d76fcdcf8",
+            "title": "《西雅图时报》和《新闻日报》起诉OpenAI和微软",
+            "source": "TechCrunch AI",
+            "publishedAt": "2026-09-05T22:49:55Z",
+            "score": 64
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:techcrunch.com"
+        ],
+        "claims": [
+          {
+            "text": "Two more news organizations are suing OpenAI",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          },
+          {
+            "text": "Microsoft over the supposed use of their journalism to train AI",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-1748ad8f7d6f",
+          "eventId": "evt-682707a6890b",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-06",
+          "dueAfter": "2026-10-06",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "1d3d4d76fcdcf8"
+          ],
+          "lastReviewedAt": "2026-09-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 12,
+      "relatedPapers": []
     },
     {
       "id": "d2320a3118d398",
@@ -719,7 +1431,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.9 小时",
+        "发布约 4.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -747,71 +1459,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 11
-    },
-    {
-      "id": "9ee691f5a75dab",
-      "eventId": "evt-4353624cbc2f",
-      "contentType": "news",
-      "title": "法国否认煽动尼日尔未遂兵变，称指控“纯属幻想”",
-      "originalTitle": "France denies inciting failed Niger mutiny, calls accusation ‘pure fantasy’",
-      "summary": "在军事基地遭袭击一周后，尼日尔政府将责任扩大至未具名的邻国。",
-      "keyFacts": [
-        "Niger's government has widened its blame to unnamed neighbours a week",
-        "the assault on a military base"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-05T19:45:39Z",
-      "url": "https://www.aljazeera.com/news/2026/9/5/france-denies-inciting-failed-niger-mutiny-calls-accusation-pure-fantasy?traffic_source=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.2 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "法国",
-        "尼日尔",
-        "兵变指控"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/9/5/france-denies-inciting-failed-niger-mutiny-calls-accusation-pure-fantasy?traffic_source=rss",
-          "publishedAt": "2026-09-05T19:45:39Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 12
+      "streamRank": 13
     },
     {
       "id": "df7da3bec6b6e2",
@@ -847,7 +1495,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 7.9 小时",
+        "发布约 8.8 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -875,7 +1523,71 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 13
+      "streamRank": 14
+    },
+    {
+      "id": "9ee691f5a75dab",
+      "eventId": "evt-4353624cbc2f",
+      "contentType": "news",
+      "title": "法国否认煽动尼日尔未遂兵变，称指控“纯属幻想”",
+      "originalTitle": "France denies inciting failed Niger mutiny, calls accusation ‘pure fantasy’",
+      "summary": "在军事基地遭袭击一周后，尼日尔政府将责任扩大至未具名的邻国。",
+      "keyFacts": [
+        "Niger's government has widened its blame to unnamed neighbours a week",
+        "the assault on a military base"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-05T19:45:39Z",
+      "url": "https://www.aljazeera.com/news/2026/9/5/france-denies-inciting-failed-niger-mutiny-calls-accusation-pure-fantasy?traffic_source=rss",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 5.1 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "法国",
+        "尼日尔",
+        "兵变指控"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/9/5/france-denies-inciting-failed-niger-mutiny-calls-accusation-pure-fantasy?traffic_source=rss",
+          "publishedAt": "2026-09-05T19:45:39Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 15
     },
     {
       "id": "0a9fb9ac9cddc5",
@@ -910,7 +1622,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.2 小时",
+        "发布约 6.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -938,7 +1650,134 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 14
+      "streamRank": 16
+    },
+    {
+      "id": "1cb48b3f415193",
+      "eventId": "evt-ec667288eee5",
+      "contentType": "news",
+      "title": "OpenAI证实“维基事件”，称正制定“框架”以增加披露",
+      "originalTitle": "OpenAI confirms ‘wiki incident,’ says it’s ‘working on a framework’ for more disclosure",
+      "summary": "OpenAI承认其AI代理在近期报道的接管德语维基论坛的事件中扮演了角色。",
+      "keyFacts": [
+        "OpenAI acknowledged its role in a recently reported incident where AI agents took over a German wiki forum"
+      ],
+      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
+      "category": "AI",
+      "source": "TechCrunch AI",
+      "country": "国际",
+      "publishedAt": "2026-09-05T18:05:27Z",
+      "url": "https://techcrunch.com/2026/09/05/openai-confirms-wiki-incident-says-its-working-on-a-framework-for-more-disclosure",
+      "score": 62,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 62/100",
+        "综合排序分 62/100（AI 65% + 规则 35%）",
+        "规则参考分 62/100",
+        "来源权重 15/20",
+        "发布约 6.8 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "OpenAI",
+        "AI",
+        "披露"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "TechCrunch AI",
+          "domain": "techcrunch.com",
+          "url": "https://techcrunch.com/2026/09/05/openai-confirms-wiki-incident-says-its-working-on-a-framework-for-more-disclosure",
+          "publishedAt": "2026-09-05T18:05:27Z",
+          "evidenceGroup": "outlet:techcrunch.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-ec667288eee5",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-06",
+        "lastSeen": "2026-09-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-06",
+            "newsId": "1cb48b3f415193",
+            "title": "OpenAI证实“维基事件”，称正制定“框架”以增加披露",
+            "source": "TechCrunch AI",
+            "publishedAt": "2026-09-05T18:05:27Z",
+            "score": 62
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:techcrunch.com"
+        ],
+        "claims": [
+          {
+            "text": "OpenAI acknowledged its role in a recently reported incident where AI agents took over a German wiki forum",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-5e6c8f5eae1f",
+          "eventId": "evt-ec667288eee5",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-06",
+          "dueAfter": "2026-10-06",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "1cb48b3f415193"
+          ],
+          "lastReviewedAt": "2026-09-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 17,
+      "relatedPapers": []
     },
     {
       "id": "07da5d49e7cbec",
@@ -957,13 +1796,13 @@
       "country": "国际",
       "publishedAt": "2026-09-05T15:22:41Z",
       "url": "https://www.bbc.co.uk/news/articles/c3v45xy67g5o?at_medium=RSS&at_campaign=rss",
-      "score": 63,
+      "score": 62,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -974,7 +1813,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 8.5 小时",
+        "发布约 9.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1002,134 +1841,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 15
-    },
-    {
-      "id": "1cb48b3f415193",
-      "eventId": "evt-ec667288eee5",
-      "contentType": "news",
-      "title": "OpenAI证实“维基事件”，称正制定“框架”以增加披露",
-      "originalTitle": "OpenAI confirms ‘wiki incident,’ says it’s ‘working on a framework’ for more disclosure",
-      "summary": "OpenAI承认其AI代理在近期报道的接管德语维基论坛的事件中扮演了角色。",
-      "keyFacts": [
-        "OpenAI acknowledged its role in a recently reported incident where AI agents took over a German wiki forum"
-      ],
-      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
-      "category": "AI",
-      "source": "TechCrunch AI",
-      "country": "国际",
-      "publishedAt": "2026-09-05T18:05:27Z",
-      "url": "https://techcrunch.com/2026/09/05/openai-confirms-wiki-incident-says-its-working-on-a-framework-for-more-disclosure",
-      "score": 62,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 5.8 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "OpenAI",
-        "AI",
-        "披露"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "TechCrunch AI",
-          "domain": "techcrunch.com",
-          "url": "https://techcrunch.com/2026/09/05/openai-confirms-wiki-incident-says-its-working-on-a-framework-for-more-disclosure",
-          "publishedAt": "2026-09-05T18:05:27Z",
-          "evidenceGroup": "outlet:techcrunch.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 16
-    },
-    {
-      "id": "c99542e714bd7c",
-      "eventId": "evt-5e5d82003420",
-      "contentType": "news",
-      "title": "多极化让中等强国选择更多，但保障更少",
-      "originalTitle": "Multipolarity gives middle powers more choices, but fewer guarantees",
-      "summary": "金砖国家、上合组织等可缓解大国压力，但不提供集体防御。",
-      "keyFacts": [
-        "other organisations can offer relief from great power pressure",
-        "do not provide collective defence"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-05T14:51:08Z",
-      "url": "https://www.aljazeera.com/opinions/2026/9/5/multipolarity-gives-middle-powers-more-choices-but-fewer-guarantees?traffic_source=rss",
-      "score": 61,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 9.1 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "多极化",
-        "金砖",
-        "上合"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/opinions/2026/9/5/multipolarity-gives-middle-powers-more-choices-but-fewer-guarantees?traffic_source=rss",
-          "publishedAt": "2026-09-05T14:51:08Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 17
+      "streamRank": 18
     },
     {
       "id": "0f0b3eb0d4b540",
@@ -1148,7 +1860,7 @@
       "publishedAt": "2026-09-05T04:34:28Z",
       "url": "https://www.defensenews.com/news/pentagon-congress/2026/09/05/ukraine-asks-eu-to-fund-first-pac-3-patriot-buy",
       "score": 61,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -1163,8 +1875,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 61/100",
+        "综合排序分 61/100（AI 65% + 规则 35%）",
+        "规则参考分 61/100",
         "来源权重 16/20",
-        "发布约 19.3 小时",
+        "发布约 20.3 小时",
         "命中 1 个主题信号",
         "影响信号：first"
       ],
@@ -1186,14 +1901,94 @@
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 18
+      "selectionNote": "为补足 Top 10 放宽主题配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-a74fd079ca1c",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-06",
+        "lastSeen": "2026-09-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-06",
+            "newsId": "0f0b3eb0d4b540",
+            "title": "乌克兰请求欧盟资助首次采购爱国者导弹",
+            "source": "Defense News",
+            "publishedAt": "2026-09-05T04:34:28Z",
+            "score": 61
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "Brussels is weighing a rare waiver that would let Kyiv tap its €90 billion loan for U.S.-made interceptors for the first time",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-0e70148a5aa7",
+          "eventId": "evt-a74fd079ca1c",
+          "statement": "若欧盟批准豁免，则需关注乌克兰能否在短期内获得PAC-3导弹并部署至防空系统。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-06",
+          "dueAfter": "2026-10-06",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "0f0b3eb0d4b540"
+          ],
+          "lastReviewedAt": "2026-09-06"
+        },
+        {
+          "predictionId": "pred-96467297f694",
+          "eventId": "evt-a74fd079ca1c",
+          "statement": "后续可观察此类豁免是否影响欧盟现有规则，以及美国爱国者导弹产能能否满足乌克兰及多国需求。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-06",
+          "dueAfter": "2026-12-05",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "0f0b3eb0d4b540"
+          ],
+          "lastReviewedAt": "2026-09-06"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 19,
+      "relatedPapers": []
     },
     {
       "id": "8e9bc2d2e64dbb",
@@ -1229,7 +2024,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 19.9 小时",
+        "发布约 20.8 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1257,7 +2052,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 19
+      "streamRank": 20
     }
   ]
 }
