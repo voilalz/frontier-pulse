@@ -1,6 +1,6 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-09-08T00:26:33Z",
+  "generatedAt": "2026-09-08T01:09:11Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
   "itemCount": 18,
@@ -26,27 +26,27 @@
   "translatedItemCount": 18,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 6,
-    "completedItemCount": 6,
+    "requestedItemCount": 0,
+    "completedItemCount": 0,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 1,
-    "requestCount": 1,
+    "initialBatchCount": 0,
+    "requestCount": 0,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "completionReason": "not_needed",
+    "completionMessage": "没有需要翻译的新条目",
     "lastProviderError": "",
-    "reusedItemCount": 12,
+    "reusedItemCount": 18,
     "featuredTranslatedItemCount": 10
   },
   "items": [
     {
       "id": "115206efe78357",
-      "eventId": "evt-b612284662d0",
+      "eventId": "evt-1058008391b4",
       "contentType": "news",
       "title": "以色列空袭黎巴嫩南部村庄致12人死亡",
       "originalTitle": "Israeli strikes in southern Lebanese village kill 12",
@@ -60,13 +60,13 @@
       "country": "国际",
       "publishedAt": "2026-09-07T13:39:23Z",
       "url": "https://www.bbc.co.uk/news/articles/c5yl96vz0edo?at_medium=RSS&at_campaign=rss",
-      "score": 81,
-      "scoreBasis": "规则评分",
+      "score": 90,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 15,
+        "时效": 14,
         "影响信号": 13,
         "主题相关性": 8,
         "证据完整度": 3,
@@ -76,8 +76,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 95/100",
+        "综合排序分 90/100（AI 65% + 规则 35%）",
+        "规则参考分 80/100",
         "来源权重 17/20",
-        "发布约 10.8 小时",
+        "发布约 11.5 小时",
         "命中 4 个主题信号",
         "影响信号：ceasefire、escalation"
       ],
@@ -99,14 +102,186 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-1058008391b4",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-28",
+        "lastSeen": "2026-09-08",
+        "updateCount": 3,
+        "timeline": [
+          {
+            "editionDate": "2026-08-28",
+            "newsId": "805e99c10191a8",
+            "title": "视频：以色列空袭致黎巴嫩南部新婚女子死亡",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-27T20:11:41Z",
+            "score": 74
+          },
+          {
+            "editionDate": "2026-09-05",
+            "newsId": "04120c415b9bbd",
+            "title": "以色列空袭黎巴嫩南部致两人死亡，局势持续升级",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-04T19:48:25Z",
+            "score": 79
+          },
+          {
+            "editionDate": "2026-09-08",
+            "newsId": "115206efe78357",
+            "title": "以色列空袭黎巴嫩南部村庄致12人死亡",
+            "source": "BBC World",
+            "publishedAt": "2026-09-07T13:39:23Z",
+            "score": 90
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "Lebanon says a recent Israeli escalation is jeopardising a US-brokered ceasefire meant to end the conflict between Israel",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-e27cc22fa265",
+          "eventId": "evt-1058008391b4",
+          "statement": "若停火协议持续受威胁，需关注以色列是否继续空袭及伤亡人数变化。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-08",
+          "dueAfter": "2026-10-08",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "115206efe78357"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        },
+        {
+          "predictionId": "pred-a642ab0e2083",
+          "eventId": "evt-1058008391b4",
+          "statement": "后续可观察美国或国际社会是否推进新停火方案，以缓解双方冲突。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-08",
+          "dueAfter": "2026-12-07",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "115206efe78357"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        },
+        {
+          "predictionId": "pred-e18f3bd4b353",
+          "eventId": "evt-1058008391b4",
+          "statement": "后续可观察以色列空袭频率是否在黎南部持续，以及黎真主党是否对以色列境内目标发射火箭弹回应。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-05",
+          "dueAfter": "2026-10-05",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "04120c415b9bbd"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        },
+        {
+          "predictionId": "pred-ec433f7110f4",
+          "eventId": "evt-1058008391b4",
+          "statement": "若袭击不停，停火协议可能进一步破裂，局势或向更广泛冲突演进，需关注外交调解动向。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-05",
+          "dueAfter": "2026-12-04",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "04120c415b9bbd"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        },
+        {
+          "predictionId": "pred-241224fc80c3",
+          "eventId": "evt-1058008391b4",
+          "statement": "后续可观察以色列是否对纳巴提耶事件发表官方声明或采取进一步军事行动，以及黎巴嫩真主党是否回应。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-28",
+          "dueAfter": "2026-09-27",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "805e99c10191a8"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        },
+        {
+          "predictionId": "pred-d51db3cabb2a",
+          "eventId": "evt-1058008391b4",
+          "statement": "若停火协议持续遭违反，则需关注冲突是否会扩大至更多地区，以及国际社会调停努力是否加强。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-28",
+          "dueAfter": "2026-11-26",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "805e99c10191a8"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
     },
     {
       "id": "00996ff3ff8156",
@@ -125,8 +300,8 @@
       "country": "国际",
       "publishedAt": "2026-09-07T18:27:39Z",
       "url": "https://www.aljazeera.com/news/2026/9/7/russia-shutters-german-consulate-as-diplomatic-freeze-deepens?traffic_source=rss",
-      "score": 73,
-      "scoreBasis": "规则评分",
+      "score": 81,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -141,8 +316,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 85/100",
+        "综合排序分 81/100（AI 65% + 规则 35%）",
+        "规则参考分 73/100",
         "来源权重 16/20",
-        "发布约 6.0 小时",
+        "发布约 6.7 小时",
         "命中 3 个主题信号",
         "影响信号：attack"
       ],
@@ -164,14 +342,83 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 2
+      "eventDossier": {
+        "eventId": "evt-56e155b146b8",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-08",
+        "lastSeen": "2026-09-08",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-08",
+            "newsId": "00996ff3ff8156",
+            "title": "俄罗斯关闭德国领事馆，外交冻结加深",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-07T18:27:39Z",
+            "score": 81
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Moscow retaliates",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "similar move from Berlin last week citing failed drone attack on airport",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-b8fb7ad0fdfd",
+          "eventId": "evt-56e155b146b8",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-08",
+          "dueAfter": "2026-10-08",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "00996ff3ff8156"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 2,
+      "relatedPapers": []
     },
     {
       "id": "310112ef296d57",
@@ -190,13 +437,13 @@
       "country": "国际",
       "publishedAt": "2026-09-07T23:50:53Z",
       "url": "https://www.aljazeera.com/news/2026/9/7/houthis-accuse-saudi-arabia-of-killing-seven-in-yemen-prison-attack?traffic_source=rss",
-      "score": 72,
+      "score": 71,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 20,
+        "时效": 19,
         "影响信号": 6,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -207,7 +454,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 0.6 小时",
+        "发布约 1.3 小时",
         "命中 1 个主题信号",
         "影响信号：strike"
       ],
@@ -254,8 +501,8 @@
       "country": "国际",
       "publishedAt": "2026-09-07T20:59:56Z",
       "url": "https://www.aljazeera.com/video/newsfeed/2026/9/7/yemen-fighting-escalates-as-forces-battle-for-bab-al-mandeb-strait?traffic_source=rss",
-      "score": 70,
-      "scoreBasis": "规则评分",
+      "score": 76,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -270,8 +517,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 80/100",
+        "综合排序分 76/100（AI 65% + 规则 35%）",
+        "规则参考分 70/100",
         "来源权重 16/20",
-        "发布约 3.4 小时",
+        "发布约 4.2 小时",
         "命中 2 个主题信号",
         "影响信号：launch"
       ],
@@ -293,14 +543,75 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 4
+      "selectionNote": "为补足 Top 10 放宽来源配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-63f5ecb6ea45",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-08",
+        "lastSeen": "2026-09-08",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-08",
+            "newsId": "1997efead42d49",
+            "title": "也门战事升级，各方争夺曼德海峡",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-07T20:59:56Z",
+            "score": 76
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Fighting is intensifying in Yemen as government-aligned forces launch counterattacks against the Iran-backed Houthis",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-2a42a378e558",
+          "eventId": "evt-63f5ecb6ea45",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-08",
+          "dueAfter": "2026-10-08",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "1997efead42d49"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 4,
+      "relatedPapers": []
     },
     {
       "id": "11c9e392085e30",
@@ -320,8 +631,8 @@
       "country": "国际",
       "publishedAt": "2026-09-07T08:25:00Z",
       "url": "https://www.esa.int/Enabling_Support/Operations/BepiColombo_begins_Mercury_arrival_with_MTM_separation_success",
-      "score": 67,
-      "scoreBasis": "规则评分",
+      "score": 82,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 19,
@@ -336,8 +647,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 90/100",
+        "综合排序分 82/100（AI 65% + 规则 35%）",
+        "规则参考分 67/100",
         "来源权重 19/20",
-        "发布约 16.0 小时",
+        "发布约 16.7 小时",
         "命中 2 个主题信号",
         "影响信号：first"
       ],
@@ -359,79 +673,91 @@
           "evidenceGroup": "outlet:esa.int"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 5
-    },
-    {
-      "id": "5d0a947902e970",
-      "eventId": "evt-4c54b64a371c",
-      "contentType": "news",
-      "title": "伊朗战争直播：卡塔尔警告危机持续将引发“工业灾难”",
-      "originalTitle": "Iran war live: Qatar warns of ‘industrial catastrophe’ if crisis continues",
-      "summary": "Kpler数据显示，过去10天日均通过霍尔木兹海峡的船只约10艘，为5月以来最低水平。",
-      "keyFacts": [
-        "An average of 10 ships transited Strait of Hormuz daily over past 10 days",
-        "the lowest level since May",
-        "Kpler data shows"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-08T00:00:00Z",
-      "url": "https://www.aljazeera.com/news/liveblog/2026/9/8/iran-war-live-qatar-warns-of-industrial-catastrophe-if-crisis-continues?traffic_source=rss",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 20,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
+      "eventDossier": {
+        "eventId": "evt-8e033eca98a2",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-08",
+        "lastSeen": "2026-09-08",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-08",
+            "newsId": "11c9e392085e30",
+            "title": "BepiColombo水星抵达任务以MTM分离成功开始",
+            "source": "European Space Agency",
+            "publishedAt": "2026-09-07T08:25:00Z",
+            "score": 82
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
       },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 0.4 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "伊朗",
-        "霍尔木兹海峡",
-        "卡塔尔"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:esa.int"
+        ],
+        "claims": [
+          {
+            "text": "On 3 September 2026 at 15:49 CEST",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:esa.int"
+            ]
+          },
+          {
+            "text": "the European Space Agency's BepiColombo Mission Control Team at the European Space Operations Centre (ESOC) received the signal they had be…",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:esa.int"
+            ]
+          },
+          {
+            "text": "This landmark achievement for the ESA",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:esa.int"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
         {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/liveblog/2026/9/8/iran-war-live-qatar-warns-of-industrial-catastrophe-if-crisis-continues?traffic_source=rss",
-          "publishedAt": "2026-09-08T00:00:00Z",
-          "evidenceGroup": "outlet:aljazeera.com"
+          "predictionId": "pred-3c0ede998ae9",
+          "eventId": "evt-8e033eca98a2",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-08",
+          "dueAfter": "2026-10-08",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "11c9e392085e30"
+          ],
+          "lastReviewedAt": "2026-09-08"
         }
       ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 6
+      "isTopStory": true,
+      "streamRank": 5,
+      "relatedPapers": []
     },
     {
       "id": "40d28b1ac9fe08",
@@ -449,8 +775,8 @@
       "country": "国际",
       "publishedAt": "2026-09-07T21:00:58Z",
       "url": "https://www.aljazeera.com/news/2026/9/7/israels-removal-of-gaza-rubble-risk-to-war-crimes-evidence-un?traffic_source=rss",
-      "score": 66,
-      "scoreBasis": "规则评分",
+      "score": 78,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -465,8 +791,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 85/100",
+        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "规则参考分 66/100",
         "来源权重 16/20",
-        "发布约 3.4 小时",
+        "发布约 4.1 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -487,14 +816,75 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 7
+      "selectionNote": "为补足 Top 10 放宽来源配额",
+      "diversityRelaxed": true,
+      "eventDossier": {
+        "eventId": "evt-854809f1d001",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-08",
+        "lastSeen": "2026-09-08",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-08",
+            "newsId": "40d28b1ac9fe08",
+            "title": "联合国：以色列清除加沙瓦砾可能破坏战争罪证据",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-07T21:00:58Z",
+            "score": 78
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "International Court of Justice ordered Israel in 2024 to prevent the destruction of evidence related to war crimes",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-ea269139b7d1",
+          "eventId": "evt-854809f1d001",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-08",
+          "dueAfter": "2026-10-08",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "40d28b1ac9fe08"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 6,
+      "relatedPapers": []
     },
     {
       "id": "74c0e4526951c6",
@@ -513,8 +903,8 @@
       "country": "国际",
       "publishedAt": "2026-09-07T19:08:52Z",
       "url": "https://breakingdefense.com/2026/09/sweden-signed-himars-deal-forges-rocket-artillery-pact-with-finland",
-      "score": 66,
-      "scoreBasis": "规则评分",
+      "score": 75,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -529,8 +919,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 80/100",
+        "综合排序分 75/100（AI 65% + 规则 35%）",
+        "规则参考分 66/100",
         "来源权重 16/20",
-        "发布约 5.3 小时",
+        "发布约 6.0 小时",
         "命中 1 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -559,14 +952,250 @@
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 8
+      "eventDossier": {
+        "eventId": "evt-3631956b7748",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-08",
+        "lastSeen": "2026-09-08",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-08",
+            "newsId": "74c0e4526951c6",
+            "title": "瑞典签署海马斯交易，与芬兰达成火箭炮协议",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-09-07T19:08:52Z",
+            "score": 75
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:breakingdefense.com",
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "The $732 million acquisition comprises “just over” ten launchers together with a “substantial quantity” of ammunition",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:breakingdefense.com",
+              "outlet:defensenews.com"
+            ]
+          },
+          {
+            "text": "Defense Minister Pål Jonson said",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:breakingdefense.com",
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-577f14fdc31d",
+          "eventId": "evt-3631956b7748",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-08",
+          "dueAfter": "2026-10-08",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "74c0e4526951c6"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 7,
+      "relatedPapers": []
+    },
+    {
+      "id": "5d0a947902e970",
+      "eventId": "evt-4c54b64a371c",
+      "contentType": "news",
+      "title": "伊朗战争直播：卡塔尔警告危机持续将引发“工业灾难”",
+      "originalTitle": "Iran war live: Qatar warns of ‘industrial catastrophe’ if crisis continues",
+      "summary": "Kpler数据显示，过去10天日均通过霍尔木兹海峡的船只约10艘，为5月以来最低水平。",
+      "keyFacts": [
+        "An average of 10 ships transited Strait of Hormuz daily over past 10 days",
+        "the lowest level since May",
+        "Kpler data shows"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-08T00:00:00Z",
+      "url": "https://www.aljazeera.com/news/liveblog/2026/9/8/iran-war-live-qatar-warns-of-industrial-catastrophe-if-crisis-continues?traffic_source=rss",
+      "score": 80,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 88/100",
+        "综合排序分 80/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
+        "来源权重 16/20",
+        "发布约 1.2 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "霍尔木兹海峡",
+        "卡塔尔"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/liveblog/2026/9/8/iran-war-live-qatar-warns-of-industrial-catastrophe-if-crisis-continues?traffic_source=rss",
+          "publishedAt": "2026-09-08T00:00:00Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-4c54b64a371c",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-08",
+        "lastSeen": "2026-09-08",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-08",
+            "newsId": "5d0a947902e970",
+            "title": "伊朗战争直播：卡塔尔警告危机持续将引发“工业灾难”",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-08T00:00:00Z",
+            "score": 80
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "An average of 10 ships transited Strait of Hormuz daily over past 10 days",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "the lowest level since May",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "Kpler data shows",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-f80b4199153a",
+          "eventId": "evt-4c54b64a371c",
+          "statement": "若伊朗宣布新航运路线，需关注是否实际运行及对海峡通行量的影响。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-08",
+          "dueAfter": "2026-10-08",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "5d0a947902e970"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        },
+        {
+          "predictionId": "pred-fa27421990cc",
+          "eventId": "evt-4c54b64a371c",
+          "statement": "后续可观察卡塔尔警告的工业灾难是否会因危机持续而显现。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-08",
+          "dueAfter": "2026-12-07",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "5d0a947902e970"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 8,
+      "relatedPapers": []
     },
     {
       "id": "5422e75d3f3d32",
@@ -585,8 +1214,8 @@
       "country": "国际",
       "publishedAt": "2026-09-07T23:05:12Z",
       "url": "https://www.bbc.co.uk/news/articles/c0m39g7xzevo?at_medium=RSS&at_campaign=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
+      "score": 69,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -601,8 +1230,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 72/100",
+        "综合排序分 69/100（AI 65% + 规则 35%）",
+        "规则参考分 64/100",
         "来源权重 17/20",
-        "发布约 1.4 小时",
+        "发布约 2.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -623,14 +1255,83 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 9
+      "eventDossier": {
+        "eventId": "evt-490f595137c0",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-08",
+        "lastSeen": "2026-09-08",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-08",
+            "newsId": "5422e75d3f3d32",
+            "title": "英国最大科技公司老板称人工智能癌症治疗因芯片短缺而放缓",
+            "source": "BBC World",
+            "publishedAt": "2026-09-07T23:05:12Z",
+            "score": 69
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "The head of chip designer Arm says modelling how a DNA marker is impacted by cancer cannot be done now",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "but computers are \"going to solve it\"",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-53e8a03bf9eb",
+          "eventId": "evt-490f595137c0",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-08",
+          "dueAfter": "2026-10-08",
+          "verificationSignals": [
+            "可复现实验或第三方验证",
+            "工程化、量产或监管节点"
+          ],
+          "evidenceIds": [
+            "5422e75d3f3d32"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 9,
+      "relatedPapers": []
     },
     {
       "id": "a7cddb680793c2",
@@ -665,7 +1366,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.2 小时",
+        "发布约 3.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -729,7 +1430,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.3 小时",
+        "发布约 6.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -758,70 +1459,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 11
-    },
-    {
-      "id": "32b7d0335594c7",
-      "eventId": "evt-50cb7a2d6bfc",
-      "contentType": "news",
-      "title": "玻利维亚爆炸死亡人数升至7人，救援人员搜寻失踪士兵",
-      "originalTitle": "Bolivian blast death toll rises to 7, rescuers search for missing soldiers",
-      "summary": "总统罗德里戈·帕斯宣布全国哀悼，并在拉巴斯附近致命军事基地爆炸后呼吁团结。",
-      "keyFacts": [
-        "President Rodrigo Paz declares national mourning",
-        "deadly military base explosions near La Paz"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-07T17:31:04Z",
-      "url": "https://www.aljazeera.com/news/2026/9/7/bolivian-military-base-blast-leaves-seven-dead-seven-missing?traffic_source=rss",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.9 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "玻利维亚",
-        "爆炸",
-        "救援"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/9/7/bolivian-military-base-blast-leaves-seven-dead-seven-missing?traffic_source=rss",
-          "publishedAt": "2026-09-07T17:31:04Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 12
     },
     {
       "id": "9dd39fc5d4c19d",
@@ -856,7 +1493,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.3 小时",
+        "发布约 7.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -874,6 +1511,70 @@
           "domain": "aljazeera.com",
           "url": "https://www.aljazeera.com/video/newsfeed/2026/9/7/israels-plan-to-split-the-west-bank?traffic_source=rss",
           "publishedAt": "2026-09-07T18:11:31Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 12
+    },
+    {
+      "id": "32b7d0335594c7",
+      "eventId": "evt-50cb7a2d6bfc",
+      "contentType": "news",
+      "title": "玻利维亚爆炸死亡人数升至7人，救援人员搜寻失踪士兵",
+      "originalTitle": "Bolivian blast death toll rises to 7, rescuers search for missing soldiers",
+      "summary": "总统罗德里戈·帕斯宣布全国哀悼，并在拉巴斯附近致命军事基地爆炸后呼吁团结。",
+      "keyFacts": [
+        "President Rodrigo Paz declares national mourning",
+        "deadly military base explosions near La Paz"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-07T17:31:04Z",
+      "url": "https://www.aljazeera.com/news/2026/9/7/bolivian-military-base-blast-leaves-seven-dead-seven-missing?traffic_source=rss",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.6 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "玻利维亚",
+        "爆炸",
+        "救援"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/9/7/bolivian-military-base-blast-leaves-seven-dead-seven-missing?traffic_source=rss",
+          "publishedAt": "2026-09-07T17:31:04Z",
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
@@ -921,7 +1622,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 7.1 小时",
+        "发布约 7.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -950,70 +1651,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 14
-    },
-    {
-      "id": "77a6396a2cecea",
-      "eventId": "evt-57645d365fb4",
-      "contentType": "news",
-      "title": "迈克尔山上的亮点",
-      "originalTitle": "A Bright Spot at Mount Michael",
-      "summary": "随着南极冬季接近尾声，云层散开，卫星得以观察偏远大西洋的火山活动。",
-      "keyFacts": [
-        "With austral winter nearing its end",
-        "clouds cleared for a satellite view of volcanic activity in the remote South Atlantic"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "NASA",
-      "country": "国际",
-      "publishedAt": "2026-09-07T04:01:00Z",
-      "url": "https://science.nasa.gov/earth/earth-observatory/a-bright-spot-at-mount-michael",
-      "score": 59,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 20,
-        "主题优先级": 9,
-        "时效": 10,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 20/20",
-        "发布约 20.4 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "卫星",
-        "火山",
-        "南极"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "NASA",
-          "domain": "science.nasa.gov",
-          "url": "https://science.nasa.gov/earth/earth-observatory/a-bright-spot-at-mount-michael",
-          "publishedAt": "2026-09-07T04:01:00Z",
-          "evidenceGroup": "outlet:science.nasa.gov"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 15
     },
     {
       "id": "a13a5e8a23f7a0",
@@ -1048,7 +1685,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 17.4 小时",
+        "发布约 18.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1076,7 +1713,143 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 16
+      "streamRank": 15
+    },
+    {
+      "id": "77a6396a2cecea",
+      "eventId": "evt-57645d365fb4",
+      "contentType": "news",
+      "title": "迈克尔山上的亮点",
+      "originalTitle": "A Bright Spot at Mount Michael",
+      "summary": "随着南极冬季接近尾声，云层散开，卫星得以观察偏远大西洋的火山活动。",
+      "keyFacts": [
+        "With austral winter nearing its end",
+        "clouds cleared for a satellite view of volcanic activity in the remote South Atlantic"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
+      "country": "国际",
+      "publishedAt": "2026-09-07T04:01:00Z",
+      "url": "https://science.nasa.gov/earth/earth-observatory/a-bright-spot-at-mount-michael",
+      "score": 59,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 9,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 60/100",
+        "综合排序分 59/100（AI 65% + 规则 35%）",
+        "规则参考分 58/100",
+        "来源权重 20/20",
+        "发布约 21.1 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "卫星",
+        "火山",
+        "南极"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "NASA",
+          "domain": "science.nasa.gov",
+          "url": "https://science.nasa.gov/earth/earth-observatory/a-bright-spot-at-mount-michael",
+          "publishedAt": "2026-09-07T04:01:00Z",
+          "evidenceGroup": "outlet:science.nasa.gov"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-57645d365fb4",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-08",
+        "lastSeen": "2026-09-08",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-08",
+            "newsId": "77a6396a2cecea",
+            "title": "迈克尔山上的亮点",
+            "source": "NASA",
+            "publishedAt": "2026-09-07T04:01:00Z",
+            "score": 59
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:science.nasa.gov"
+        ],
+        "claims": [
+          {
+            "text": "With austral winter nearing its end",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          },
+          {
+            "text": "clouds cleared for a satellite view of volcanic activity in the remote South Atlantic",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-64bbea80ef2f",
+          "eventId": "evt-57645d365fb4",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-08",
+          "dueAfter": "2026-10-08",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "77a6396a2cecea"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 16,
+      "relatedPapers": []
     },
     {
       "id": "1fbf3d1950ecb8",
@@ -1094,13 +1867,13 @@
       "country": "国际",
       "publishedAt": "2026-09-07T05:37:28Z",
       "url": "https://www.bbc.co.uk/news/videos/c4grd9mg3rvo?at_medium=RSS&at_campaign=rss",
-      "score": 56,
+      "score": 55,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 9,
-        "时效": 11,
+        "时效": 10,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 2,
@@ -1111,7 +1884,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 18.8 小时",
+        "发布约 19.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1159,8 +1932,8 @@
       "country": "国际",
       "publishedAt": "2026-09-07T12:10:00Z",
       "url": "https://www.technologyreview.com/2026/09/07/1143592/the-download-underground-hydrogen-search-rogue-openai-agents",
-      "score": 49,
-      "scoreBasis": "规则评分",
+      "score": 53,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -1175,8 +1948,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 55/100",
+        "综合排序分 53/100（AI 65% + 规则 35%）",
+        "规则参考分 49/100",
         "来源权重 17/20",
-        "发布约 12.3 小时",
+        "发布约 13.0 小时",
         "命中 1 个主题信号",
         "编辑质量降权 -12"
       ],
@@ -1198,14 +1974,126 @@
           "evidenceGroup": "outlet:technologyreview.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 18
+      "eventDossier": {
+        "eventId": "evt-ba6f72fb0e26",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-08",
+        "lastSeen": "2026-09-08",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-08",
+            "newsId": "8c259ce3645203",
+            "title": "下载：寻找地下氢能源与更多野性的OpenAI智能体",
+            "source": "MIT Technology Review",
+            "publishedAt": "2026-09-07T12:10:00Z",
+            "score": 53
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 1
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:technologyreview.com"
+        ],
+        "claims": [
+          {
+            "text": "This is today’s edition of The Download",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:technologyreview.com"
+            ]
+          },
+          {
+            "text": "our weekday newsletter that provides a daily dose of what’s going on in the world of technology",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:technologyreview.com"
+            ]
+          },
+          {
+            "text": "How much hydrogen awaits us underground?",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:technologyreview.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-a2467006b1ff",
+          "eventId": "evt-ba6f72fb0e26",
+          "statement": "若地下氢勘探有新进展，需关注相关公司或研究机构公布的结果。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-08",
+          "dueAfter": "2026-10-08",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "8c259ce3645203"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        },
+        {
+          "predictionId": "pred-38893199766e",
+          "eventId": "evt-ba6f72fb0e26",
+          "statement": "后续可观察OpenAI对野生智能体的监管或应对措施是否出台。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-08",
+          "dueAfter": "2026-12-07",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "8c259ce3645203"
+          ],
+          "lastReviewedAt": "2026-09-08"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 18,
+      "relatedPapers": [
+        {
+          "id": "arxiv:2609.05374",
+          "title": "CUA-Universe：混合GUI+CLI智能体的可扩展动态环境",
+          "originalTitle": "CUA-Universe: A Scalable and Dynamic Environment for Hybrid GUI+CLI Agents",
+          "researchArea": "人工智能",
+          "publishedAt": "2026-09-04T17:26:18Z",
+          "url": "https://arxiv.org/abs/2609.05374v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.05374v1",
+          "associationScore": 24,
+          "relationType": "潜在使能技术",
+          "associationReasons": [
+            "标题共同线索：agents、智能、能体",
+            "新闻主题与人工智能研究方向对应"
+          ]
+        }
+      ]
     }
   ]
 }
