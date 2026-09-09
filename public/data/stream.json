@@ -1,25 +1,25 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-09-09T00:17:04Z",
+  "generatedAt": "2026-09-09T01:12:58Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
   "itemCount": 36,
   "totalCandidateCount": 36,
   "truncated": false,
   "categoryCounts": {
-    "局部冲突": 14,
-    "军事动态": 12,
+    "局部冲突": 13,
+    "军事动态": 13,
     "航空航天": 6,
-    "AI": 1,
+    "AI": 2,
     "无人系统": 1,
-    "前沿技术": 2
+    "前沿技术": 1
   },
   "sourceCounts": {
     "BBC World": 10,
-    "Al Jazeera": 7,
+    "Al Jazeera": 6,
     "Breaking Defense": 5,
     "Defense News": 5,
-    "The War Zone": 4,
+    "The War Zone": 5,
     "NASA": 2,
     "Defense One": 1,
     "MIT Technology Review": 1,
@@ -30,21 +30,21 @@
   "translatedItemCount": 36,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 8,
-    "completedItemCount": 8,
+    "requestedItemCount": 2,
+    "completedItemCount": 2,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 2,
-    "requestCount": 2,
+    "initialBatchCount": 1,
+    "requestCount": 1,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
     "completionReason": "complete_first_pass",
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
-    "reusedItemCount": 27,
+    "reusedItemCount": 33,
     "featuredTranslatedItemCount": 10
   },
   "items": [
@@ -64,8 +64,8 @@
       "country": "国际",
       "publishedAt": "2026-09-08T20:43:52Z",
       "url": "https://www.aljazeera.com/video/newsfeed/2026/9/8/police-bodycam-captures-russian-missile-strike-on-kyiv?traffic_source=rss",
-      "score": 79,
-      "scoreBasis": "规则评分",
+      "score": 76,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -80,8 +80,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 75/100",
+        "综合排序分 76/100（AI 65% + 规则 35%）",
+        "规则参考分 79/100",
         "来源权重 16/20",
-        "发布约 3.6 小时",
+        "发布约 4.5 小时",
         "命中 3 个主题信号",
         "影响信号：strike、missile"
       ],
@@ -103,14 +106,94 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-e510d3bee7e1",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-09",
+        "lastSeen": "2026-09-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-09",
+            "newsId": "dc757b9ab7518e",
+            "title": "警方随身摄像头捕捉到俄罗斯导弹袭击基辅瞬间",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-08T20:43:52Z",
+            "score": 76
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Bodycam video has captured the moment a Russian missile struck near police in Ukraine’s capital Kiev",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-15119420a3c7",
+          "eventId": "evt-e510d3bee7e1",
+          "statement": "后续可观察乌方是否公布遇难警员人数及袭击具体时间，以进一步还原事件。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-09",
+          "dueAfter": "2026-10-09",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "dc757b9ab7518e"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        },
+        {
+          "predictionId": "pred-bbf17efdc5bc",
+          "eventId": "evt-e510d3bee7e1",
+          "statement": "若袭击趋于频繁，则需关注俄方是否调整打击策略，以及乌方防空与人员防护的应对。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-09",
+          "dueAfter": "2026-12-08",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "dc757b9ab7518e"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
     },
     {
       "id": "0e9b964933994d",
@@ -127,10 +210,10 @@
       "category": "局部冲突",
       "source": "BBC World",
       "country": "国际",
-      "publishedAt": "2026-09-09T00:01:53Z",
+      "publishedAt": "2026-09-09T01:09:15Z",
       "url": "https://www.bbc.co.uk/news/articles/c99dm1000p7o?at_medium=RSS&at_campaign=rss",
-      "score": 74,
-      "scoreBasis": "规则评分",
+      "score": 77,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -145,8 +228,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 77/100（AI 65% + 规则 35%）",
+        "规则参考分 74/100",
         "来源权重 17/20",
-        "发布约 0.3 小时",
+        "发布约 0.1 小时",
         "命中 1 个主题信号",
         "影响信号：escalation"
       ],
@@ -164,18 +250,87 @@
           "name": "BBC World",
           "domain": "bbc.co.uk",
           "url": "https://www.bbc.co.uk/news/articles/c99dm1000p7o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-09-09T00:01:53Z",
+          "publishedAt": "2026-09-09T01:09:15Z",
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 2
+      "eventDossier": {
+        "eventId": "evt-928eb554b480",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-09",
+        "lastSeen": "2026-09-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-09",
+            "newsId": "0e9b964933994d",
+            "title": "美国对加拿大酒精及其他商品实施进口禁令",
+            "source": "BBC World",
+            "publishedAt": "2026-09-09T01:09:15Z",
+            "score": 77
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "It is the latest escalation in a trade war between the two countries",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "and comes as Canadian retaliatory tariffs on US goods come into force",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-622b21ed72f0",
+          "eventId": "evt-928eb554b480",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-09",
+          "dueAfter": "2026-10-09",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "0e9b964933994d"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 2,
+      "relatedPapers": []
     },
     {
       "id": "7fa7c8fae40946",
@@ -212,7 +367,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 7.2 小时",
+        "发布约 8.1 小时",
         "命中 2 个主题信号",
         "影响信号：first、missile"
       ],
@@ -244,88 +399,8 @@
       "streamRank": 3
     },
     {
-      "id": "2a1e9e13916d20",
-      "eventId": "evt-fd064162ed40",
-      "contentType": "news",
-      "title": "这是波兰的新型重型步兵战车",
-      "originalTitle": "This Is Poland’s New Heavy Infantry Fighting Vehicle",
-      "summary": "即便重型装甲的效用正受到质疑，40吨重的Ratel仍旨在为快速现代化的波兰陆军带来更多防护与火力。",
-      "keyFacts": [
-        "Even as the utility of heavy armor is being questioned",
-        "the 40-ton Ratel aims to bring more protection",
-        "firepower to a rapidly modernizing Polish Army"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "The War Zone",
-      "country": "国际",
-      "publishedAt": "2026-09-08T21:20:47Z",
-      "url": "https://www.twz.com/uncategorized/this-is-polands-new-heavy-infantry-fighting-vehicle",
-      "score": 73,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 8,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 2.9 小时",
-        "命中 1 个主题信号",
-        "3 个独立来源相互印证"
-      ],
-      "confidence": "高",
-      "confidenceReason": "主来源权重 16/20，且有 3 个独立来源报道；仍应以原文和一手材料为准。",
-      "tags": [
-        "波兰",
-        "步兵战车",
-        "军事"
-      ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/09/CBWP-Ratel-copy.jpg?quality=85",
-      "corroboration": 3,
-      "sources": [
-        {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/uncategorized/this-is-polands-new-heavy-infantry-fighting-vehicle",
-          "publishedAt": "2026-09-08T21:20:47Z",
-          "evidenceGroup": "outlet:twz.com"
-        },
-        {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/global/europe/2026/09/08/polands-in-development-fighting-vehicle-carries-newfound-defense-export-drive",
-          "publishedAt": "2026-09-08T18:21:59Z",
-          "evidenceGroup": "outlet:defensenews.com"
-        },
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/09/polands-pgz-unveils-heavy-infantry-fighting-vehicle-tech-demonstrator",
-          "publishedAt": "2026-09-08T14:36:48Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 4
-    },
-    {
       "id": "5913c4a3264860",
-      "eventId": "evt-0308d0d0913f",
+      "eventId": "evt-bc0fa72bc62d",
       "contentType": "news",
       "title": "乌克兰电视台大楼遭俄无人机袭击，基辅五人死亡",
       "originalTitle": "Ukrainian TV channel building hit by Russian drone as five killed in Kyiv",
@@ -339,8 +414,8 @@
       "country": "国际",
       "publishedAt": "2026-09-08T17:10:54Z",
       "url": "https://www.bbc.co.uk/news/articles/cn8m1k7p3v7o?at_medium=RSS&at_campaign=rss",
-      "score": 73,
-      "scoreBasis": "规则评分",
+      "score": 75,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -355,8 +430,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 76/100",
+        "综合排序分 75/100（AI 65% + 规则 35%）",
+        "规则参考分 73/100",
         "来源权重 17/20",
-        "发布约 7.1 小时",
+        "发布约 8.0 小时",
         "命中 3 个主题信号",
         "影响信号：attack"
       ],
@@ -378,14 +456,140 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 5
+      "eventDossier": {
+        "eventId": "evt-bc0fa72bc62d",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-09",
+        "lastSeen": "2026-09-09",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-08-09",
+            "newsId": "d56edb34497508",
+            "title": "俄导弹袭击基辅附近致三人死亡含一名儿童",
+            "source": "BBC World",
+            "publishedAt": "2026-08-08T18:06:25Z",
+            "score": 74
+          },
+          {
+            "editionDate": "2026-09-09",
+            "newsId": "5913c4a3264860",
+            "title": "乌克兰电视台大楼遭俄无人机袭击，基辅五人死亡",
+            "source": "BBC World",
+            "publishedAt": "2026-09-08T17:10:54Z",
+            "score": 75
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "President Zelensky describes the daytime drone attack in Ukraine's capital as a \"new page in Russian degradation\"",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-6fc8dd229d0b",
+          "eventId": "evt-bc0fa72bc62d",
+          "statement": "后续可观察乌方是否公布电视台遭袭的具体损失及人员情况，以及国际舆论反应。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-09",
+          "dueAfter": "2026-10-09",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "5913c4a3264860"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        },
+        {
+          "predictionId": "pred-559ea1c6872e",
+          "eventId": "evt-bc0fa72bc62d",
+          "statement": "若袭击媒体设施成为模式，则需关注冲突中信息战与舆论战的升级风险。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-09",
+          "dueAfter": "2026-12-08",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "5913c4a3264860"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        },
+        {
+          "predictionId": "pred-dec7383b6727",
+          "eventId": "evt-bc0fa72bc62d",
+          "statement": "后续可观察俄军是否继续对基辅及周边发动类似袭击。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "due",
+          "statusLabel": "已到期，等待证据复核",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-09-08",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d56edb34497508"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        },
+        {
+          "predictionId": "pred-13371d995c52",
+          "eventId": "evt-bc0fa72bc62d",
+          "statement": "若拦截器持续短缺，则需关注乌克兰防空能力下降对袭击烈度的影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-09",
+          "dueAfter": "2026-11-07",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d56edb34497508"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 4,
+      "relatedPapers": []
     },
     {
       "id": "61d9c17f80cdb9",
@@ -421,7 +625,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 1.1 小时",
+        "发布约 2.0 小时",
         "命中 1 个主题信号",
         "影响信号：attack"
       ],
@@ -450,30 +654,198 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 6
+      "streamRank": 5
     },
     {
-      "id": "de502a0236c40e",
-      "eventId": "evt-d75718bc5a9c",
+      "id": "2a1e9e13916d20",
+      "eventId": "evt-fd064162ed40",
       "contentType": "news",
-      "title": "美国摧毁五艘伊朗油轮，伊朗以袭击约旦基地作为报复",
-      "originalTitle": "US destroys five Iranian tankers, Iran retaliates with attacks on Jordan base",
-      "summary": "美国军方称，在伊斯兰革命卫队两天内两次瞄准美国军舰后，美军摧毁了五艘伊朗油轮。",
+      "title": "这是波兰的新型重型步兵战车",
+      "originalTitle": "This Is Poland’s New Heavy Infantry Fighting Vehicle",
+      "summary": "即便重型装甲的效用正受到质疑，40吨重的Ratel仍旨在为快速现代化的波兰陆军带来更多防护与火力。",
       "keyFacts": [
-        "US military says it destroyed five Iranian tankers",
-        "IRGC targeted a US warship twice in two days"
+        "Even as the utility of heavy armor is being questioned",
+        "the 40-ton Ratel aims to bring more protection",
+        "firepower to a rapidly modernizing Polish Army"
       ],
       "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
       "category": "军事动态",
-      "source": "Al Jazeera",
+      "source": "The War Zone",
       "country": "国际",
-      "publishedAt": "2026-09-09T00:08:37Z",
-      "url": "https://www.aljazeera.com/news/2026/9/9/us-destroys-five-iranian-tankers-iran-retaliates-with-attacks-on-jordan-base?traffic_source=rss",
-      "score": 70,
-      "scoreBasis": "规则评分",
+      "publishedAt": "2026-09-08T21:20:47Z",
+      "url": "https://www.twz.com/uncategorized/this-is-polands-new-heavy-infantry-fighting-vehicle",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 8,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 74/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
+        "来源权重 16/20",
+        "发布约 3.9 小时",
+        "命中 1 个主题信号",
+        "3 个独立来源相互印证"
+      ],
+      "confidence": "高",
+      "confidenceReason": "主来源权重 16/20，且有 3 个独立来源报道；仍应以原文和一手材料为准。",
+      "tags": [
+        "波兰",
+        "步兵战车",
+        "军事"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/09/CBWP-Ratel-copy.jpg?quality=85",
+      "corroboration": 3,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/uncategorized/this-is-polands-new-heavy-infantry-fighting-vehicle",
+          "publishedAt": "2026-09-08T21:20:47Z",
+          "evidenceGroup": "outlet:twz.com"
+        },
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/global/europe/2026/09/08/polands-in-development-fighting-vehicle-carries-newfound-defense-export-drive",
+          "publishedAt": "2026-09-08T18:21:59Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        },
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/09/polands-pgz-unveils-heavy-infantry-fighting-vehicle-tech-demonstrator",
+          "publishedAt": "2026-09-08T14:36:48Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-fd064162ed40",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-09",
+        "lastSeen": "2026-09-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-09",
+            "newsId": "2a1e9e13916d20",
+            "title": "这是波兰的新型重型步兵战车",
+            "source": "The War Zone",
+            "publishedAt": "2026-09-08T21:20:47Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 3,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 3,
+        "sourceGroups": [
+          "outlet:twz.com",
+          "outlet:defensenews.com",
+          "outlet:breakingdefense.com"
+        ],
+        "claims": [
+          {
+            "text": "Even as the utility of heavy armor is being questioned",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:twz.com",
+              "outlet:defensenews.com",
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "the 40-ton Ratel aims to bring more protection",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:twz.com",
+              "outlet:defensenews.com",
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "firepower to a rapidly modernizing Polish Army",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:twz.com",
+              "outlet:defensenews.com",
+              "outlet:breakingdefense.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 3 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-bdf328c61d40",
+          "eventId": "evt-fd064162ed40",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-09",
+          "dueAfter": "2026-10-09",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "2a1e9e13916d20"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 6,
+      "relatedPapers": []
+    },
+    {
+      "id": "6b3f3aa75637ff",
+      "eventId": "evt-f89475dce97f",
+      "contentType": "news",
+      "title": "美国海军被伊朗捕获的潜航无人机：已知信息汇总",
+      "originalTitle": "Everything We Know About The U.S. Navy’s Submersible Drone Iran Just Captured",
+      "summary": "安杜里尔公司的Dive-LD无人潜航器落入伊朗手中意义重大，但该系统设计时即考虑到在争议水域中被风险承担。",
+      "keyFacts": [
+        "Anduril's Dive-LD uncrewed underwater vehicle falling into Iranian hands is significant",
+        "but the system was designed to be risked in contested waters"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-09-09T00:26:01Z",
+      "url": "https://www.twz.com/sea/everything-we-know-about-the-u-s-navys-submersible-drone-iran-just-captured",
+      "score": 69,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
         "主题优先级": 10,
         "时效": 20,
         "影响信号": 0,
@@ -485,16 +857,84 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 0.8 小时",
+        "命中 3 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "美国海军",
+        "伊朗",
+        "无人潜航器"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/09/anduril-dive-ld-iran-capture.jpg?quality=85",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/sea/everything-we-know-about-the-u-s-navys-submersible-drone-iran-just-captured",
+          "publishedAt": "2026-09-09T00:26:01Z",
+          "evidenceGroup": "outlet:twz.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 7
+    },
+    {
+      "id": "de502a0236c40e",
+      "eventId": "evt-d75718bc5a9c",
+      "contentType": "news",
+      "title": "美国袭击5艘伊朗油轮，伊朗对约旦发动报复性打击",
+      "originalTitle": "US attacks 5 Iranian oil tankers, Iran retaliates with strikes on Jordan",
+      "summary": "美国军方称在伊朗革命卫队两天内两次瞄准美国军舰后，袭击了5艘伊朗油轮。伊朗随后对约旦采取报复性打击。事件加剧中东紧张局势。",
+      "keyFacts": [
+        "美国军方表示袭击了5艘伊朗油轮",
+        "此前伊朗革命卫队两天内两次瞄准美国军舰",
+        "伊朗对约旦发动报复性打击"
+      ],
+      "why": "此次袭击标志美伊军事对峙显著升级，并波及第三方约旦，可能引发更广泛地区冲突。",
+      "category": "军事动态",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-09T00:08:37Z",
+      "url": "https://www.aljazeera.com/news/2026/9/9/us-destroys-five-iranian-tankers-iran-retaliates-with-attacks-on-jordan-base?traffic_source=rss",
+      "score": 77,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 82/100",
+        "综合排序分 77/100（AI 65% + 规则 35%）",
+        "规则参考分 69/100",
         "来源权重 16/20",
-        "发布约 0.1 小时",
+        "发布约 1.1 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "美国",
-        "伊朗",
-        "军事冲突"
+        "美伊冲突",
+        "军事打击",
+        "中东局势"
       ],
       "image": "",
       "corroboration": 1,
@@ -514,80 +954,91 @@
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 7
-    },
-    {
-      "id": "c72143066677e2",
-      "eventId": "evt-8fd9afea8578",
-      "contentType": "news",
-      "title": "沙特誓言回应胡塞武装袭击城市及能源设施",
-      "originalTitle": "Saudi Arabia vows to respond after Houthis attack cities and energy facilities",
-      "summary": "沙特当局称，伊朗支持的也门胡塞武装袭击造成73人受伤，并引发石油设施火灾。",
-      "keyFacts": [
-        "The Iran-backed Yemeni group's attacks have injured 73 people",
-        "caused fires at oil facilities",
-        "Saudi authorities say"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-09-08T13:58:32Z",
-      "url": "https://www.bbc.co.uk/news/articles/cp849n2nz01o?at_medium=RSS&at_campaign=rss",
-      "score": 70,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 6,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
+      "eventDossier": {
+        "eventId": "evt-d75718bc5a9c",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-09",
+        "lastSeen": "2026-09-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-09",
+            "newsId": "de502a0236c40e",
+            "title": "美国袭击5艘伊朗油轮，伊朗对约旦发动报复性打击",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-09T00:08:37Z",
+            "score": 77
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
       },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 10.3 小时",
-        "命中 2 个主题信号",
-        "影响信号：attack"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "沙特",
-        "胡塞武装",
-        "袭击"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/4aee/live/618dde40-ab8a-11f1-aa04-efbf6a882854.jpg",
-      "corroboration": 1,
-      "sources": [
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "美国军方表示袭击了5艘伊朗油轮",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "此前伊朗革命卫队两天内两次瞄准美国军舰",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "伊朗对约旦发动报复性打击",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
         {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cp849n2nz01o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-09-08T13:58:32Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
+          "predictionId": "pred-65658b32bec2",
+          "eventId": "evt-d75718bc5a9c",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-09",
+          "dueAfter": "2026-10-09",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "de502a0236c40e"
+          ],
+          "lastReviewedAt": "2026-09-09"
         }
       ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 8
+      "isTopStory": true,
+      "streamRank": 8,
+      "relatedPapers": []
     },
     {
       "id": "5bc55c779038d1",
@@ -622,7 +1073,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 9.0 小时",
+        "发布约 10.0 小时",
         "命中 1 个主题信号",
         "影响信号：first"
       ],
@@ -654,29 +1105,31 @@
       "streamRank": 9
     },
     {
-      "id": "12ae1c01e1822f",
-      "eventId": "evt-2b115c5a6034",
+      "id": "c72143066677e2",
+      "eventId": "evt-8fd9afea8578",
       "contentType": "news",
-      "title": "美国通过制裁航空业加强对伊朗施压",
-      "originalTitle": "US increases pressure on Iran with sanctions targeting aviation sector",
-      "summary": "特朗普政府试图通过一系列措施孤立德黑兰，以挤压其经济。",
+      "title": "沙特誓言回应胡塞武装袭击城市及能源设施",
+      "originalTitle": "Saudi Arabia vows to respond after Houthis attack cities and energy facilities",
+      "summary": "沙特当局称，伊朗支持的也门胡塞武装袭击造成73人受伤，并引发石油设施火灾。",
       "keyFacts": [
-        "Trump administration has sought to isolate Tehran through a raft of measures meant to squeeze the country's economy"
+        "The Iran-backed Yemeni group's attacks have injured 73 people",
+        "caused fires at oil facilities",
+        "Saudi authorities say"
       ],
       "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
       "category": "局部冲突",
-      "source": "Al Jazeera",
+      "source": "BBC World",
       "country": "国际",
-      "publishedAt": "2026-09-08T23:51:29Z",
-      "url": "https://www.aljazeera.com/news/2026/9/8/us-increases-pressure-on-iran-with-sanctions-targeting-aviation-sector?traffic_source=rss",
-      "score": 68,
+      "publishedAt": "2026-09-08T13:58:32Z",
+      "url": "https://www.bbc.co.uk/news/articles/cp849n2nz01o?at_medium=RSS&at_campaign=rss",
+      "score": 69,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 16,
+        "来源": 17,
         "主题优先级": 10,
-        "时效": 20,
-        "影响信号": 0,
+        "时效": 14,
+        "影响信号": 6,
         "主题相关性": 4,
         "证据完整度": 3,
         "多源印证": 0,
@@ -685,26 +1138,27 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 0.4 小时",
-        "命中 2 个主题信号"
+        "来源权重 17/20",
+        "发布约 11.2 小时",
+        "命中 2 个主题信号",
+        "影响信号：attack"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "美国",
-        "伊朗",
-        "制裁"
+        "沙特",
+        "胡塞武装",
+        "袭击"
       ],
-      "image": "",
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/4aee/live/618dde40-ab8a-11f1-aa04-efbf6a882854.jpg",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/9/8/us-increases-pressure-on-iran-with-sanctions-targeting-aviation-sector?traffic_source=rss",
-          "publishedAt": "2026-09-08T23:51:29Z",
-          "evidenceGroup": "outlet:aljazeera.com"
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cp849n2nz01o?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-09-08T13:58:32Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
       "selectionProvider": "",
@@ -715,69 +1169,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 10
-    },
-    {
-      "id": "318771cca91fba",
-      "eventId": "evt-53b2b4385753",
-      "contentType": "news",
-      "title": "美国海军遭袭后轰炸五艘伊朗油轮",
-      "originalTitle": "US bombs five Iranian oil tankers after its navy is attacked",
-      "summary": "美国军方发布了摧毁其所称的五艘伊朗原油油轮的视频。",
-      "keyFacts": [
-        "The US military has released video of its forces destroying what it says are five Iranian crude oil tankers"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-08T23:49:25Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/9/8/us-bombs-five-iranian-oil-tankers-after-its-navy-is-attacked?traffic_source=rss",
-      "score": 68,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 20,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 0.5 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美国",
-        "伊朗",
-        "油轮"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/9/8/us-bombs-five-iranian-oil-tankers-after-its-navy-is-attacked?traffic_source=rss",
-          "publishedAt": "2026-09-08T23:49:25Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 11
     },
     {
       "id": "5af94d8a6d96b9",
@@ -813,7 +1204,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 1.1 小时",
+        "发布约 2.0 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -841,24 +1232,24 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 12
+      "streamRank": 11
     },
     {
-      "id": "8c9018bc129dfc",
-      "eventId": "evt-e4ffe71828e2",
+      "id": "12ae1c01e1822f",
+      "eventId": "evt-2b115c5a6034",
       "contentType": "news",
-      "title": "乌国防部长称乌克兰正与盟友签约采购约1000枚爱国者导弹",
-      "originalTitle": "Ukraine contracting around 1,000 Patriot missiles from allies, defense chief says",
-      "summary": "乌克兰国防部长称，乌克兰正与盟友签约采购约1000枚美国设计的爱国者防空系统导弹。",
+      "title": "美国通过制裁航空业加强对伊朗施压",
+      "originalTitle": "US increases pressure on Iran with sanctions targeting aviation sector",
+      "summary": "特朗普政府试图通过一系列措施孤立德黑兰，以挤压其经济。",
       "keyFacts": [
-        "Ukraine is contracting a supply of around 1,000 missiles for U.S.-designed Patriot air-defence systems"
+        "Trump administration has sought to isolate Tehran through a raft of measures meant to squeeze the country's economy"
       ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Defense News",
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
       "country": "国际",
-      "publishedAt": "2026-09-08T21:29:19Z",
-      "url": "https://www.defensenews.com/flashpoints/ukraine/2026/09/08/ukraine-contracting-around-1000-patriot-missiles-from-allies-defense-chief-says",
+      "publishedAt": "2026-09-08T23:51:29Z",
+      "url": "https://www.aljazeera.com/news/2026/9/8/us-increases-pressure-on-iran-with-sanctions-targeting-aviation-sector?traffic_source=rss",
       "score": 67,
       "scoreBasis": "规则评分",
       "scoreComponents": {
@@ -876,7 +1267,327 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 2.8 小时",
+        "发布约 1.4 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国",
+        "伊朗",
+        "制裁"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/9/8/us-increases-pressure-on-iran-with-sanctions-targeting-aviation-sector?traffic_source=rss",
+          "publishedAt": "2026-09-08T23:51:29Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 12
+    },
+    {
+      "id": "318771cca91fba",
+      "eventId": "evt-53b2b4385753",
+      "contentType": "news",
+      "title": "美国海军遭袭后轰炸五艘伊朗油轮",
+      "originalTitle": "US bombs five Iranian oil tankers after its navy is attacked",
+      "summary": "美国军方发布了摧毁其所称的五艘伊朗原油油轮的视频。",
+      "keyFacts": [
+        "The US military has released video of its forces destroying what it says are five Iranian crude oil tankers"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-08T23:49:25Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/9/8/us-bombs-five-iranian-oil-tankers-after-its-navy-is-attacked?traffic_source=rss",
+      "score": 67,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 1.4 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国",
+        "伊朗",
+        "油轮"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/9/8/us-bombs-five-iranian-oil-tankers-after-its-navy-is-attacked?traffic_source=rss",
+          "publishedAt": "2026-09-08T23:49:25Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 13
+    },
+    {
+      "id": "4389fc9885328d",
+      "eventId": "evt-23d7e4c4a06d",
+      "contentType": "news",
+      "title": "NASA呼吁提案加速月球表面技术发展",
+      "originalTitle": "NASA Calls for Proposals to Accelerate Lunar Surface Technologies",
+      "summary": "NASA于9月8日宣布征集提案，以推进月球探测和建立月球南极基地所需的技术和基础设施。此次征集针对能力缺口，包括发电、氧气提取以及月球上所需建造和运营材料的制造。",
+      "keyFacts": [
+        "NASA is seeking proposals to advance the technology",
+        "infrastructure needed to explore the Moon",
+        "establish a Moon Base in the lunar South Pole region"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
+      "country": "国际",
+      "publishedAt": "2026-09-08T20:16:16Z",
+      "url": "https://www.nasa.gov/news-release/nasa-calls-for-proposals-to-accelerate-lunar-surface-technologies",
+      "score": 67,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 18,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 67/100",
+        "综合排序分 67/100（AI 65% + 规则 35%）",
+        "规则参考分 67/100",
+        "来源权重 20/20",
+        "发布约 4.9 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "NASA",
+        "月球基地",
+        "技术"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "NASA",
+          "domain": "nasa.gov",
+          "url": "https://www.nasa.gov/news-release/nasa-calls-for-proposals-to-accelerate-lunar-surface-technologies",
+          "publishedAt": "2026-09-08T20:16:16Z",
+          "evidenceGroup": "outlet:nasa.gov"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-23d7e4c4a06d",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-12",
+        "lastSeen": "2026-09-09",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-08-12",
+            "newsId": "f191bdf9ba862e",
+            "title": "NASA完成由宇航员部署的月球表面科学仪器",
+            "source": "NASA",
+            "publishedAt": "2026-08-11T19:41:34Z",
+            "score": 78
+          },
+          {
+            "editionDate": "2026-09-09",
+            "newsId": "4389fc9885328d",
+            "title": "NASA呼吁提案加速月球表面技术发展",
+            "source": "NASA",
+            "publishedAt": "2026-09-08T20:16:16Z",
+            "score": 67
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:nasa.gov"
+        ],
+        "claims": [
+          {
+            "text": "NASA is seeking proposals to advance the technology",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          },
+          {
+            "text": "infrastructure needed to explore the Moon",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          },
+          {
+            "text": "establish a Moon Base in the lunar South Pole region",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-4b0fb9e0c991",
+          "eventId": "evt-23d7e4c4a06d",
+          "statement": "后续可观察提案征集后受关注的方案领域及获选项目，以判断技术侧重。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-09",
+          "dueAfter": "2026-10-09",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "4389fc9885328d"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        },
+        {
+          "predictionId": "pred-3705096abd2f",
+          "eventId": "evt-23d7e4c4a06d",
+          "statement": "若相关技术研发进展顺利，则需关注Artemis任务月球南极部署是否按计划推进。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-09",
+          "dueAfter": "2026-12-08",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "4389fc9885328d"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        },
+        {
+          "predictionId": "pred-eae3bc294939",
+          "eventId": "evt-23d7e4c4a06d",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-12",
+          "dueAfter": "2026-09-11",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "f191bdf9ba862e"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 14,
+      "relatedPapers": []
+    },
+    {
+      "id": "8c9018bc129dfc",
+      "eventId": "evt-e4ffe71828e2",
+      "contentType": "news",
+      "title": "乌国防部长称乌克兰正与盟友签约采购约1000枚爱国者导弹",
+      "originalTitle": "Ukraine contracting around 1,000 Patriot missiles from allies, defense chief says",
+      "summary": "乌克兰国防部长称，乌克兰正与盟友签约采购约1000枚美国设计的爱国者防空系统导弹。",
+      "keyFacts": [
+        "Ukraine is contracting a supply of around 1,000 missiles for U.S.-designed Patriot air-defence systems"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-09-08T21:29:19Z",
+      "url": "https://www.defensenews.com/flashpoints/ukraine/2026/09/08/ukraine-contracting-around-1000-patriot-missiles-from-allies-defense-chief-says",
+      "score": 71,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 74/100",
+        "综合排序分 71/100（AI 65% + 规则 35%）",
+        "规则参考分 66/100",
+        "来源权重 16/20",
+        "发布约 3.7 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -897,14 +1608,94 @@
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 13
+      "eventDossier": {
+        "eventId": "evt-e4ffe71828e2",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-09",
+        "lastSeen": "2026-09-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-09",
+            "newsId": "8c9018bc129dfc",
+            "title": "乌国防部长称乌克兰正与盟友签约采购约1000枚爱国者导弹",
+            "source": "Defense News",
+            "publishedAt": "2026-09-08T21:29:19Z",
+            "score": 71
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "Ukraine is contracting a supply of around 1,000 missiles for U.S.-designed Patriot air-defence systems",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-9b1ff8effb88",
+          "eventId": "evt-e4ffe71828e2",
+          "statement": "后续可观察签约是否完成、导弹交付时间及盟友实际供货情况。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-09",
+          "dueAfter": "2026-10-09",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "8c9018bc129dfc"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        },
+        {
+          "predictionId": "pred-ac8c895f3d1f",
+          "eventId": "evt-e4ffe71828e2",
+          "statement": "若1000枚导弹陆续交付，则需关注其对乌防空拦截能力及俄空袭策略的影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-09",
+          "dueAfter": "2026-12-08",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "8c9018bc129dfc"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 15,
+      "relatedPapers": []
     },
     {
       "id": "20fa96bc48f426",
@@ -924,13 +1715,13 @@
       "country": "国际",
       "publishedAt": "2026-09-08T21:20:36Z",
       "url": "https://breakingdefense.com/2026/09/army-sets-new-biodefense-plan-to-counter-pandemic-adversary-threats",
-      "score": 67,
+      "score": 66,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 18,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -941,7 +1732,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 2.9 小时",
+        "发布约 3.9 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -969,72 +1760,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 14
-    },
-    {
-      "id": "4389fc9885328d",
-      "eventId": "evt-76f11f3dc6f1",
-      "contentType": "news",
-      "title": "NASA呼吁提案加速月球表面技术发展",
-      "originalTitle": "NASA Calls for Proposals to Accelerate Lunar Surface Technologies",
-      "summary": "NASA于9月8日宣布征集提案，以推进月球探测和建立月球南极基地所需的技术和基础设施。此次征集针对能力缺口，包括发电、氧气提取以及月球上所需建造和运营材料的制造。",
-      "keyFacts": [
-        "NASA is seeking proposals to advance the technology",
-        "infrastructure needed to explore the Moon",
-        "establish a Moon Base in the lunar South Pole region"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "NASA",
-      "country": "国际",
-      "publishedAt": "2026-09-08T20:16:16Z",
-      "url": "https://www.nasa.gov/news-release/nasa-calls-for-proposals-to-accelerate-lunar-surface-technologies",
-      "score": 67,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 20,
-        "主题优先级": 9,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 20/20",
-        "发布约 4.0 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "NASA",
-        "月球基地",
-        "技术"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "NASA",
-          "domain": "nasa.gov",
-          "url": "https://www.nasa.gov/news-release/nasa-calls-for-proposals-to-accelerate-lunar-surface-technologies",
-          "publishedAt": "2026-09-08T20:16:16Z",
-          "evidenceGroup": "outlet:nasa.gov"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 15
+      "streamRank": 16
     },
     {
       "id": "917b521aa1cbc6",
@@ -1053,13 +1779,13 @@
       "country": "国际",
       "publishedAt": "2026-09-08T17:32:15Z",
       "url": "https://techcrunch.com/2026/09/08/openai-fought-dirty-on-career-making-math-problem-says-nyu-mathematician",
-      "score": 67,
-      "scoreBasis": "规则评分",
+      "score": 69,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 5,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1069,8 +1795,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 70/100",
+        "综合排序分 69/100（AI 65% + 规则 35%）",
+        "规则参考分 66/100",
         "来源权重 15/20",
-        "发布约 6.7 小时",
+        "发布约 7.7 小时",
         "命中 1 个主题信号",
         "影响信号：first"
       ],
@@ -1092,14 +1821,83 @@
           "evidenceGroup": "outlet:techcrunch.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 16
+      "eventDossier": {
+        "eventId": "evt-ff197a906668",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-09",
+        "lastSeen": "2026-09-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-09",
+            "newsId": "917b521aa1cbc6",
+            "title": "NYU数学家称OpenAI在职业造星数学难题中‘耍脏手段’",
+            "source": "TechCrunch AI",
+            "publishedAt": "2026-09-08T17:32:15Z",
+            "score": 69
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:techcrunch.com"
+        ],
+        "claims": [
+          {
+            "text": "There is a $1 million bounty for the first person providing a solution to the Navier-Stokes existence",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          },
+          {
+            "text": "smoothness problem",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techcrunch.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-0384ce7da940",
+          "eventId": "evt-ff197a906668",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-09",
+          "dueAfter": "2026-10-09",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "917b521aa1cbc6"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 17,
+      "relatedPapers": []
     },
     {
       "id": "93750ee7c1a823",
@@ -1117,13 +1915,13 @@
       "country": "国际",
       "publishedAt": "2026-09-08T21:46:31Z",
       "url": "https://www.bbc.co.uk/news/articles/c5ydlex9yn3o?at_medium=RSS&at_campaign=rss",
-      "score": 66,
+      "score": 65,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 18,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1134,7 +1932,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 2.5 小时",
+        "发布约 3.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1153,70 +1951,6 @@
           "url": "https://www.bbc.co.uk/news/articles/c5ydlex9yn3o?at_medium=RSS&at_campaign=rss",
           "publishedAt": "2026-09-08T21:46:31Z",
           "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 17
-    },
-    {
-      "id": "9f895ca211466e",
-      "eventId": "evt-b04e57d03bff",
-      "contentType": "news",
-      "title": "英国禁止非法以色列定居点商品意味着什么？",
-      "originalTitle": "What the UK ban on goods from illegal Israeli settlements really means",
-      "summary": "在实施新的禁令后，以色列宣布关闭英国驻东耶路撒冷领事馆。英国此举旨在针对非法定居点经济活动，引发以色列强硬回应。",
-      "keyFacts": [
-        "Israel has announced that it’s shutting down the UK Consulate in occupied East Jerusalem",
-        "a new ban on its goods"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-08T21:35:36Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/9/8/what-the-uk-ban-on-goods-from-illegal-israeli-settlements-really-means?traffic_source=rss",
-      "score": 65,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 2.7 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "英国",
-        "以色列",
-        "制裁"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/9/8/what-the-uk-ban-on-goods-from-illegal-israeli-settlements-really-means?traffic_source=rss",
-          "publishedAt": "2026-09-08T21:35:36Z",
-          "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
       "selectionProvider": "",
@@ -1245,8 +1979,8 @@
       "country": "国际",
       "publishedAt": "2026-09-08T21:15:30Z",
       "url": "https://www.defenseone.com/technology/2026/09/after-heavy-reaper-drone-loses-iran-air-force-accelerates-affordable-future-replacement/415852",
-      "score": 65,
-      "scoreBasis": "规则评分",
+      "score": 68,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -1261,8 +1995,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 70/100",
+        "综合排序分 68/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
         "来源权重 16/20",
-        "发布约 3.0 小时",
+        "发布约 4.0 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1283,41 +2020,109 @@
           "evidenceGroup": "outlet:defenseone.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 19
+      "eventDossier": {
+        "eventId": "evt-0e2b0a8e5bab",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-09",
+        "lastSeen": "2026-09-09",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-09",
+            "newsId": "b5a2c16c274942",
+            "title": "美军在伊朗损失惨重后加速替换死神无人机",
+            "source": "Defense One",
+            "publishedAt": "2026-09-08T21:15:30Z",
+            "score": 68
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defenseone.com"
+        ],
+        "claims": [
+          {
+            "text": "The Massed Modular Aircraft program envisions a $10M airframe—plus sensor",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defenseone.com"
+            ]
+          },
+          {
+            "text": "system costs",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defenseone.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-e00bd2b5fbb2",
+          "eventId": "evt-0e2b0a8e5bab",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-09",
+          "dueAfter": "2026-10-09",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "b5a2c16c274942"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 19,
+      "relatedPapers": []
     },
     {
-      "id": "79dae0c7ad14ac",
-      "eventId": "evt-487c32394f42",
+      "id": "9f895ca211466e",
+      "eventId": "evt-b04e57d03bff",
       "contentType": "news",
-      "title": "白宫太空发射目标雄心勃勃，专家质疑成本高昂",
-      "originalTitle": "White House has lofty space launch ambitions, but experts question price tag",
-      "summary": "航天业称赞特朗普政府每年1000次发射的太空政策，但专家告诉Breaking Defense，现有太空基础设施容量不足，且需有人为此付出可能高昂的代价。",
+      "title": "英国禁止非法以色列定居点商品意味着什么？",
+      "originalTitle": "What the UK ban on goods from illegal Israeli settlements really means",
+      "summary": "在实施新的禁令后，以色列宣布关闭英国驻东耶路撒冷领事馆。英国此举旨在针对非法定居点经济活动，引发以色列强硬回应。",
       "keyFacts": [
-        "The space industry lauded a new Trump administration 1,000-launches-a-year space policy",
-        "but experts told Breaking Defense that the current space infrastructure doesn’t have enough capacity",
-        "someone’s going to have to pay"
+        "Israel has announced that it’s shutting down the UK Consulate in occupied East Jerusalem",
+        "a new ban on its goods"
       ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "Breaking Defense",
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
       "country": "国际",
-      "publishedAt": "2026-09-08T16:11:18Z",
-      "url": "https://breakingdefense.com/2026/09/white-house-has-lofty-space-launch-ambitions-but-experts-question-price-tag",
-      "score": 65,
+      "publishedAt": "2026-09-08T21:35:36Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/9/8/what-the-uk-ban-on-goods-from-illegal-israeli-settlements-really-means?traffic_source=rss",
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
-        "主题优先级": 9,
-        "时效": 16,
-        "影响信号": 4,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
@@ -1327,26 +2132,25 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 8.1 小时",
-        "命中 1 个主题信号",
-        "影响信号：launch"
+        "发布约 3.6 小时",
+        "命中 1 个主题信号"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "太空政策",
-        "特朗普政府",
-        "发射次数"
+        "英国",
+        "以色列",
+        "制裁"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/09/white-house-has-lofty-space-launch-ambitions-but-experts-question-price-tag",
-          "publishedAt": "2026-09-08T16:11:18Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/9/8/what-the-uk-ban-on-goods-from-illegal-israeli-settlements-really-means?traffic_source=rss",
+          "publishedAt": "2026-09-08T21:35:36Z",
+          "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
       "selectionProvider": "",
@@ -1357,70 +2161,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 20
-    },
-    {
-      "id": "fc6055dc9349ee",
-      "eventId": "evt-52df67be7e5a",
-      "contentType": "news",
-      "title": "沙特剩余能源生命线在胡塞成功打击后受威胁（更新）",
-      "originalTitle": "Saudi’s Remaining Energy Lifeline To The World Under Threat After Successful Houthi Strikes (Updated)",
-      "summary": "霍尔木兹海峡和红海能源出口同时中断一直是全球石油市场的最大担忧。",
-      "keyFacts": [
-        "Having the Strait of Hormuz",
-        "energy exports via the Red Sea shut down at the same time has long been a top fear for global oil markets"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "The War Zone",
-      "country": "国际",
-      "publishedAt": "2026-09-08T21:58:52Z",
-      "url": "https://www.twz.com/news-features/saudis-remaining-energy-lifeline-to-the-world-under-threat-after-successful-houthi-strikes",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 2.3 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "沙特",
-        "能源",
-        "地缘政治"
-      ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/09/aramcofire3.jpg?quality=85",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/news-features/saudis-remaining-energy-lifeline-to-the-world-under-threat-after-successful-houthi-strikes",
-          "publishedAt": "2026-09-08T21:58:52Z",
-          "evidenceGroup": "outlet:twz.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 21
     },
     {
       "id": "b351d0619afe48",
@@ -1456,7 +2196,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.2 小时",
+        "发布约 4.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1484,71 +2224,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 22
-    },
-    {
-      "id": "a2b398512c418b",
-      "eventId": "evt-34e26a08e54e",
-      "contentType": "news",
-      "title": "也门战争现状如何？",
-      "originalTitle": "What’s happening in the Yemen war?",
-      "summary": "政府军与伊朗支持胡塞武装之间的战斗引发担忧，也门可能重回全面战争状态。",
-      "keyFacts": [
-        "Fighting between government forces",
-        "Iran-backed Houthis is raising fears Yemen could return to full-scale war"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-08T20:13:23Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/9/8/09-08-hosted-yemen-explainer?traffic_source=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.1 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "也门",
-        "胡塞武装",
-        "战争风险"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/9/8/09-08-hosted-yemen-explainer?traffic_source=rss",
-          "publishedAt": "2026-09-08T20:13:23Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 23
+      "streamRank": 21
     },
     {
       "id": "832c384b67689e",
@@ -1584,7 +2260,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 5.1 小时",
+        "发布约 6.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1619,7 +2295,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 24
+      "streamRank": 22
     },
     {
       "id": "298f24f3ecd130",
@@ -1655,7 +2331,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 7.0 小时",
+        "发布约 8.0 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1683,32 +2359,34 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 25
+      "streamRank": 23
     },
     {
-      "id": "796049705af2b0",
-      "eventId": "evt-509e5f2d7b11",
+      "id": "79dae0c7ad14ac",
+      "eventId": "evt-487c32394f42",
       "contentType": "news",
-      "title": "韩华计划建造搭载反无人机激光的装甲车",
-      "originalTitle": "Hanwha plans to build armored vehicle carrying a counter-drone laser",
-      "summary": "韩华代表称，该车配备了更强大版本的固定式Cheongwang激光，该激光用于保护总统府。",
+      "title": "白宫太空发射目标雄心勃勃，专家质疑成本高昂",
+      "originalTitle": "White House has lofty space launch ambitions, but experts question price tag",
+      "summary": "航天业称赞特朗普政府每年1000次发射的太空政策，但专家告诉Breaking Defense，现有太空基础设施容量不足，且需有人为此付出可能高昂的代价。",
       "keyFacts": [
-        "Hanwha representatives said the vehicle is fitted with a more powerful version of the stationary Cheongwang laser that protects the preside…"
+        "The space industry lauded a new Trump administration 1,000-launches-a-year space policy",
+        "but experts told Breaking Defense that the current space infrastructure doesn’t have enough capacity",
+        "someone’s going to have to pay"
       ],
-      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
-      "category": "无人系统",
-      "source": "Defense News",
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "Breaking Defense",
       "country": "国际",
-      "publishedAt": "2026-09-08T17:21:49Z",
-      "url": "https://www.defensenews.com/global/europe/2026/09/08/hanwha-plans-to-build-armored-vehicle-carrying-a-counter-drone-laser",
-      "score": 63,
+      "publishedAt": "2026-09-08T16:11:18Z",
+      "url": "https://breakingdefense.com/2026/09/white-house-has-lofty-space-launch-ambitions-but-experts-question-price-tag",
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
+        "主题优先级": 9,
+        "时效": 15,
+        "影响信号": 4,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
@@ -1718,32 +2396,26 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.9 小时",
-        "命中 1 个主题信号"
+        "发布约 9.0 小时",
+        "命中 1 个主题信号",
+        "影响信号：launch"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "韩华",
-        "反无人机激光",
-        "装甲车"
+        "太空政策",
+        "特朗普政府",
+        "发射次数"
       ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/SCEQVG3IYRGCXG5IJE5PD7HPWM.jpeg",
+      "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/global/europe/2026/09/08/hanwha-plans-to-build-armored-vehicle-carrying-a-counter-drone-laser",
-          "publishedAt": "2026-09-08T17:21:49Z",
-          "evidenceGroup": "syndication:d99b1c0d8b71"
-        },
-        {
-          "name": "C4ISRNET",
-          "domain": "c4isrnet.com",
-          "url": "https://www.c4isrnet.com/global/europe/2026/09/08/hanwha-plans-to-build-armored-vehicle-carrying-a-counter-drone-laser",
-          "publishedAt": "2026-09-08T17:21:49Z",
-          "evidenceGroup": "syndication:d99b1c0d8b71"
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/09/white-house-has-lofty-space-launch-ambitions-but-experts-question-price-tag",
+          "publishedAt": "2026-09-08T16:11:18Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
       "selectionProvider": "",
@@ -1753,7 +2425,71 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 26
+      "streamRank": 24
+    },
+    {
+      "id": "fc6055dc9349ee",
+      "eventId": "evt-52df67be7e5a",
+      "contentType": "news",
+      "title": "沙特剩余能源生命线在胡塞成功打击后受威胁（更新）",
+      "originalTitle": "Saudi’s Remaining Energy Lifeline To The World Under Threat After Successful Houthi Strikes (Updated)",
+      "summary": "霍尔木兹海峡和红海能源出口同时中断一直是全球石油市场的最大担忧。",
+      "keyFacts": [
+        "Having the Strait of Hormuz",
+        "energy exports via the Red Sea shut down at the same time has long been a top fear for global oil markets"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-09-08T21:58:52Z",
+      "url": "https://www.twz.com/news-features/saudis-remaining-energy-lifeline-to-the-world-under-threat-after-successful-houthi-strikes",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 3.2 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "沙特",
+        "能源",
+        "地缘政治"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/09/aramcofire3.jpg?quality=85",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/news-features/saudis-remaining-energy-lifeline-to-the-world-under-threat-after-successful-houthi-strikes",
+          "publishedAt": "2026-09-08T21:58:52Z",
+          "evidenceGroup": "outlet:twz.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 25
     },
     {
       "id": "0a098c22936e74",
@@ -1788,7 +2524,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 7.5 小时",
+        "发布约 8.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1816,7 +2552,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 27
+      "streamRank": 26
     },
     {
       "id": "8ffd441e0b2294",
@@ -1853,7 +2589,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 5.8 小时",
+        "发布约 6.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -1872,6 +2608,76 @@
           "url": "https://www.twz.com/air/trump-threatens-canadian-jets-at-the-center-of-army-aerial-surveillance-plans",
           "publishedAt": "2026-09-08T18:29:08Z",
           "evidenceGroup": "outlet:twz.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 27
+    },
+    {
+      "id": "796049705af2b0",
+      "eventId": "evt-509e5f2d7b11",
+      "contentType": "news",
+      "title": "韩华计划建造搭载反无人机激光的装甲车",
+      "originalTitle": "Hanwha plans to build armored vehicle carrying a counter-drone laser",
+      "summary": "韩华代表称，该车配备了更强大版本的固定式Cheongwang激光，该激光用于保护总统府。",
+      "keyFacts": [
+        "Hanwha representatives said the vehicle is fitted with a more powerful version of the stationary Cheongwang laser that protects the preside…"
+      ],
+      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
+      "category": "无人系统",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-09-08T17:21:49Z",
+      "url": "https://www.defensenews.com/global/europe/2026/09/08/hanwha-plans-to-build-armored-vehicle-carrying-a-counter-drone-laser",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.9 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "韩华",
+        "反无人机激光",
+        "装甲车"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/SCEQVG3IYRGCXG5IJE5PD7HPWM.jpeg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/global/europe/2026/09/08/hanwha-plans-to-build-armored-vehicle-carrying-a-counter-drone-laser",
+          "publishedAt": "2026-09-08T17:21:49Z",
+          "evidenceGroup": "syndication:d99b1c0d8b71"
+        },
+        {
+          "name": "C4ISRNET",
+          "domain": "c4isrnet.com",
+          "url": "https://www.c4isrnet.com/global/europe/2026/09/08/hanwha-plans-to-build-armored-vehicle-carrying-a-counter-drone-laser",
+          "publishedAt": "2026-09-08T17:21:49Z",
+          "evidenceGroup": "syndication:d99b1c0d8b71"
         }
       ],
       "selectionProvider": "",
@@ -1917,7 +2723,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 9.6 小时",
+        "发布约 10.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1980,7 +2786,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 11.3 小时",
+        "发布约 12.2 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -2012,7 +2818,7 @@
     },
     {
       "id": "1051b6a2175cf2",
-      "eventId": "evt-e589dd9681fc",
+      "eventId": "evt-3631956b7748",
       "contentType": "news",
       "title": "瑞典将以约7.3亿美元购买HIMARS火箭炮",
       "originalTitle": "Sweden to buy HIMARS rocket artillery for around $730 million",
@@ -2027,8 +2833,8 @@
       "country": "国际",
       "publishedAt": "2026-09-08T10:47:22Z",
       "url": "https://www.defensenews.com/global/europe/2026/09/08/sweden-to-buy-himars-rocket-artillery-for-around-730-million",
-      "score": 62,
-      "scoreBasis": "规则评分",
+      "score": 67,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -2043,8 +2849,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 70/100",
+        "综合排序分 67/100（AI 65% + 规则 35%）",
+        "规则参考分 62/100",
         "来源权重 16/20",
-        "发布约 13.5 小时",
+        "发布约 14.4 小时",
         "命中 1 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -2080,137 +2889,6 @@
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 31
-    },
-    {
-      "id": "cf5bfa90fef5e4",
-      "eventId": "evt-25caff2b3ca5",
-      "contentType": "news",
-      "title": "欧盟在柏林、巴黎和罗马反对后突然搁置卡拉斯领导的防务小组",
-      "originalTitle": "EU abruptly shelves Kallas-led defense panel after pushback from Berlin, Paris, Rome",
-      "summary": "欧盟外交政策负责人卡娅·卡拉斯在预定揭幕前数小时取消了成立欧洲防务高级咨询小组的计划。",
-      "keyFacts": [
-        "EU foreign policy chief Kaja Kallas scrapped plans to launch a high-level advisory group on European defense just hours before its schedule…"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "Defense News",
-      "country": "国际",
-      "publishedAt": "2026-09-08T09:54:35Z",
-      "url": "https://www.defensenews.com/global/europe/2026/09/08/eu-abruptly-shelves-kallas-led-defense-panel-after-pushback-from-berlin-paris-rome",
-      "score": 62,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 13,
-        "影响信号": 4,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 14.4 小时",
-        "命中 1 个主题信号",
-        "影响信号：launch"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "欧盟",
-        "防务",
-        "卡拉斯"
-      ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/IVY7XTDCJRB5RJMC4H4VKLNA6I.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/global/europe/2026/09/08/eu-abruptly-shelves-kallas-led-defense-panel-after-pushback-from-berlin-paris-rome",
-          "publishedAt": "2026-09-08T09:54:35Z",
-          "evidenceGroup": "outlet:defensenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 32
-    },
-    {
-      "id": "5422e75d3f3d32",
-      "eventId": "evt-490f595137c0",
-      "contentType": "news",
-      "title": "英国最大科技公司老板称人工智能癌症治疗因芯片短缺而放缓",
-      "originalTitle": "AI cancer cures slowed by chip shortage, says UK's biggest tech boss",
-      "summary": "芯片设计公司Arm的首席执行官表示，目前无法模拟癌症对DNA标记的影响，但计算机“将解决这个问题”。",
-      "keyFacts": [
-        "The head of chip designer Arm says modelling how a DNA marker is impacted by cancer cannot be done now",
-        "but computers are \"going to solve it\""
-      ],
-      "why": "该进展可能缩短技术工程化周期，并改变关键产业与供应链竞争。",
-      "category": "前沿技术",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-09-08T09:17:48Z",
-      "url": "https://www.bbc.co.uk/news/articles/c0m39g7xzevo?at_medium=RSS&at_campaign=rss",
-      "score": 69,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 8,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 72/100",
-        "综合排序分 69/100（AI 65% + 规则 35%）",
-        "规则参考分 64/100",
-        "来源权重 17/20",
-        "发布约 2.1 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "AI",
-        "癌症",
-        "芯片短缺"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/503e/live/149a0c90-ab66-11f1-aed2-8d6da8d75094.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/c0m39g7xzevo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-09-07T23:05:12Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
       "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
@@ -2218,56 +2896,105 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "eventDossier": {
-        "eventId": "evt-490f595137c0",
-        "status": "new",
-        "statusLabel": "新事件",
+        "eventId": "evt-3631956b7748",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
         "firstSeen": "2026-09-08",
-        "lastSeen": "2026-09-08",
-        "updateCount": 1,
+        "lastSeen": "2026-09-09",
+        "updateCount": 2,
         "timeline": [
           {
             "editionDate": "2026-09-08",
-            "newsId": "5422e75d3f3d32",
-            "title": "英国最大科技公司老板称人工智能癌症治疗因芯片短缺而放缓",
-            "source": "BBC World",
-            "publishedAt": "2026-09-07T23:05:12Z",
-            "score": 69
+            "newsId": "74c0e4526951c6",
+            "title": "瑞典签署海马斯交易，与芬兰达成火箭炮协议",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-09-07T19:08:52Z",
+            "score": 75
+          },
+          {
+            "editionDate": "2026-09-09",
+            "newsId": "1051b6a2175cf2",
+            "title": "瑞典将以约7.3亿美元购买HIMARS火箭炮",
+            "source": "Defense News",
+            "publishedAt": "2026-09-08T10:47:22Z",
+            "score": 67
           }
         ],
-        "independentSourceCount": 1,
+        "independentSourceCount": 2,
         "paperCount": 0
       },
       "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
         "sourceGroups": [
-          "outlet:bbc.co.uk"
+          "outlet:defensenews.com",
+          "outlet:breakingdefense.com"
         ],
         "claims": [
           {
-            "text": "The head of chip designer Arm says modelling how a DNA marker is impacted by cancer cannot be done now",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
+            "text": "The Swedish government said it needs more rocket artillery fast",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
             "sourceGroups": [
-              "outlet:bbc.co.uk"
+              "outlet:defensenews.com",
+              "outlet:breakingdefense.com"
             ]
           },
           {
-            "text": "but computers are \"going to solve it\"",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
+            "text": "signing off on a $733 million purchase of HIMARS weapons from the United States",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
             "sourceGroups": [
-              "outlet:bbc.co.uk"
+              "outlet:defensenews.com",
+              "outlet:breakingdefense.com"
             ]
           }
         ],
         "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
       },
       "forecastLedger": [
         {
-          "predictionId": "pred-53e8a03bf9eb",
-          "eventId": "evt-490f595137c0",
+          "predictionId": "pred-bfa97089db11",
+          "eventId": "evt-3631956b7748",
+          "statement": "后续可观察HIMARS交付进度及瑞典是否公布与芬兰合作的细节（如联合演习）。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-09",
+          "dueAfter": "2026-10-09",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "1051b6a2175cf2"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        },
+        {
+          "predictionId": "pred-8e64e5fbe049",
+          "eventId": "evt-3631956b7748",
+          "statement": "若多国相继采购火箭炮，则需关注地区军备动态及安全格局演变。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-09",
+          "dueAfter": "2026-12-08",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "1051b6a2175cf2"
+          ],
+          "lastReviewedAt": "2026-09-09"
+        },
+        {
+          "predictionId": "pred-577f14fdc31d",
+          "eventId": "evt-3631956b7748",
           "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
           "horizon": "观察",
           "confidence": "低",
@@ -2276,18 +3003,18 @@
           "createdAt": "2026-09-08",
           "dueAfter": "2026-10-08",
           "verificationSignals": [
-            "可复现实验或第三方验证",
-            "工程化、量产或监管节点"
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
           ],
           "evidenceIds": [
-            "5422e75d3f3d32"
+            "74c0e4526951c6"
           ],
-          "lastReviewedAt": "2026-09-08"
+          "lastReviewedAt": "2026-09-09"
         }
       ],
-      "relatedPapers": [],
       "isTopStory": true,
-      "streamRank": 33
+      "streamRank": 31,
+      "relatedPapers": []
     },
     {
       "id": "f9dac6a62c7aa8",
@@ -2323,7 +3050,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 7.4 小时",
+        "发布约 8.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2351,7 +3078,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 34
+      "streamRank": 32
     },
     {
       "id": "a71546c95f922b",
@@ -2387,7 +3114,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.6 小时",
+        "发布约 10.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2406,6 +3133,133 @@
           "url": "https://breakingdefense.com/2026/09/air-force-braces-for-new-era-of-ai-powered-hacking-plus-unpacking-the-mecca-pact",
           "publishedAt": "2026-09-08T14:43:44Z",
           "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 33
+    },
+    {
+      "id": "cf5bfa90fef5e4",
+      "eventId": "evt-25caff2b3ca5",
+      "contentType": "news",
+      "title": "欧盟在柏林、巴黎和罗马反对后突然搁置卡拉斯领导的防务小组",
+      "originalTitle": "EU abruptly shelves Kallas-led defense panel after pushback from Berlin, Paris, Rome",
+      "summary": "欧盟外交政策负责人卡娅·卡拉斯在预定揭幕前数小时取消了成立欧洲防务高级咨询小组的计划。",
+      "keyFacts": [
+        "EU foreign policy chief Kaja Kallas scrapped plans to launch a high-level advisory group on European defense just hours before its schedule…"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-09-08T09:54:35Z",
+      "url": "https://www.defensenews.com/global/europe/2026/09/08/eu-abruptly-shelves-kallas-led-defense-panel-after-pushback-from-berlin-paris-rome",
+      "score": 61,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 12,
+        "影响信号": 4,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 15.3 小时",
+        "命中 1 个主题信号",
+        "影响信号：launch"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "欧盟",
+        "防务",
+        "卡拉斯"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/IVY7XTDCJRB5RJMC4H4VKLNA6I.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/global/europe/2026/09/08/eu-abruptly-shelves-kallas-led-defense-panel-after-pushback-from-berlin-paris-rome",
+          "publishedAt": "2026-09-08T09:54:35Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 34
+    },
+    {
+      "id": "5422e75d3f3d32",
+      "eventId": "evt-490f595137c0",
+      "contentType": "news",
+      "title": "英国芯片巨头CEO声称人工智能将在我们这一代治愈癌症",
+      "originalTitle": "AI will cure cancer in our lifetime, claims boss of UK chip giant",
+      "summary": "安谋控股首席执行官雷内·哈斯表示，人工智能将找到治愈癌症的方法。",
+      "keyFacts": [
+        "Arm Holding's chief executive Rene Haas says artificial intelligence will find a solution to the disease"
+      ],
+      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
+      "category": "AI",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-09-08T09:17:48Z",
+      "url": "https://www.bbc.co.uk/news/articles/c0m39g7xzevo?at_medium=RSS&at_campaign=rss",
+      "score": 61,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 12,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 15.9 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "人工智能",
+        "癌症",
+        "安谋"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/503e/live/149a0c90-ab66-11f1-aed2-8d6da8d75094.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c0m39g7xzevo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-09-08T09:17:48Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
       "selectionProvider": "",
@@ -2452,7 +3306,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 13.7 小时",
+        "发布约 14.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
