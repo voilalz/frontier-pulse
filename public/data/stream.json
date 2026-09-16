@@ -1,22 +1,22 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-09-16T00:28:28Z",
+  "generatedAt": "2026-09-16T01:22:20Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
-  "itemCount": 55,
-  "totalCandidateCount": 55,
+  "itemCount": 57,
+  "totalCandidateCount": 57,
   "truncated": false,
   "categoryCounts": {
-    "局部冲突": 19,
-    "军事动态": 19,
-    "无人系统": 2,
+    "局部冲突": 21,
+    "军事动态": 18,
+    "无人系统": 3,
     "前沿技术": 1,
     "航空航天": 9,
     "AI": 5
   },
   "sourceCounts": {
-    "Defense News": 11,
-    "Al Jazeera": 9,
+    "Al Jazeera": 12,
+    "Defense News": 10,
     "Breaking Defense": 8,
     "BBC World": 7,
     "The War Zone": 6,
@@ -30,11 +30,11 @@
   },
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
-  "translatedItemCount": 55,
+  "translatedItemCount": 57,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 5,
-    "completedItemCount": 5,
+    "requestedItemCount": 2,
+    "completedItemCount": 2,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
@@ -47,13 +47,13 @@
     "completionReason": "complete_first_pass",
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
-    "reusedItemCount": 50,
+    "reusedItemCount": 54,
     "featuredTranslatedItemCount": 10
   },
   "items": [
     {
       "id": "1f5e0e1b3a6419",
-      "eventId": "evt-a9e3f50f11d2",
+      "eventId": "evt-4482a891f320",
       "contentType": "news",
       "title": "北约战机在立陶宛击落疑似俄罗斯无人机",
       "originalTitle": "NATO jet shoots down suspected Russian drone over Lithuania",
@@ -67,13 +67,13 @@
       "country": "国际",
       "publishedAt": "2026-09-15T19:59:00Z",
       "url": "https://www.aljazeera.com/news/2026/9/15/nato-jet-shoots-down-suspected-russian-drone-over-lithuania?traffic_source=rss",
-      "score": 78,
-      "scoreBasis": "规则评分",
+      "score": 84,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 0,
         "主题相关性": 8,
         "证据完整度": 3,
@@ -83,8 +83,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 88/100",
+        "综合排序分 84/100（AI 65% + 规则 35%）",
+        "规则参考分 77/100",
         "来源权重 16/20",
-        "发布约 4.5 小时",
+        "发布约 5.4 小时",
         "命中 4 个主题信号",
         "3 个独立来源相互印证"
       ],
@@ -127,14 +130,98 @@
           "evidenceGroup": "outlet:c4isrnet.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-4482a891f320",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-16",
+        "lastSeen": "2026-09-16",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-16",
+            "newsId": "1f5e0e1b3a6419",
+            "title": "北约战机在立陶宛击落疑似俄罗斯无人机",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-15T19:59:00Z",
+            "score": 84
+          }
+        ],
+        "independentSourceCount": 3,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 3,
+        "sourceGroups": [
+          "outlet:aljazeera.com",
+          "outlet:defensenews.com",
+          "outlet:c4isrnet.com"
+        ],
+        "claims": [
+          {
+            "text": "EU chief warns of wider conflict as border incursions stoke fears that Ukraine war is spilling into neighbouring states",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:aljazeera.com",
+              "outlet:defensenews.com",
+              "outlet:c4isrnet.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 3 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-7899b84572e8",
+          "eventId": "evt-4482a891f320",
+          "statement": "后续可观察北约是否就立陶宛事件启动磋商机制，以及波罗的海国家是否报告更多类似入侵。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-16",
+          "dueAfter": "2026-10-16",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "1f5e0e1b3a6419"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        },
+        {
+          "predictionId": "pred-0c9c7c660570",
+          "eventId": "evt-4482a891f320",
+          "statement": "若此类越境事件持续增加，则需关注北约东翼防空部署与反无人机资助计划的调整。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-16",
+          "dueAfter": "2026-12-15",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "1f5e0e1b3a6419"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
     },
     {
       "id": "dc4dfb78dedd61",
@@ -153,13 +240,13 @@
       "country": "国际",
       "publishedAt": "2026-09-15T14:03:48Z",
       "url": "https://breakingdefense.com/2026/09/army-awards-lockheed-1-2b-contract-for-prsm-inc-2-system",
-      "score": 77,
-      "scoreBasis": "规则评分",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 15,
+        "时效": 14,
         "影响信号": 14,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -169,8 +256,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 72/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 76/100",
         "来源权重 16/20",
-        "发布约 10.4 小时",
+        "发布约 11.3 小时",
         "命中 2 个主题信号",
         "影响信号：first、contract、missile"
       ],
@@ -192,14 +282,83 @@
           "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 2
+      "eventDossier": {
+        "eventId": "evt-4cab7bd3a64e",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-16",
+        "lastSeen": "2026-09-16",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-16",
+            "newsId": "dc4dfb78dedd61",
+            "title": "美陆军授予洛克希德·马丁12亿美元PrSM Inc 2系统合同",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-09-15T14:03:48Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:breakingdefense.com"
+        ],
+        "claims": [
+          {
+            "text": "Monday’s announcement comes",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "Lockheed successfully launched its first PrSM Increment 2 missile in February",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:breakingdefense.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-0ba5c05e3b52",
+          "eventId": "evt-4cab7bd3a64e",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-16",
+          "dueAfter": "2026-10-16",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "dc4dfb78dedd61"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 2,
+      "relatedPapers": []
     },
     {
       "id": "cc7b7f8a913665",
@@ -236,7 +395,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.8 小时",
+        "发布约 4.7 小时",
         "命中 2 个主题信号",
         "影响信号：contract、production"
       ],
@@ -266,71 +425,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 3
-    },
-    {
-      "id": "bc14df7a2abb54",
-      "eventId": "evt-dee63f04a1d5",
-      "contentType": "news",
-      "title": "CBO称伊朗战争已耗资380亿美元，耗尽三分之二美国导弹拦截器",
-      "originalTitle": "Iran war has cost $38 billion, depleted two-thirds of US missile interceptors, CBO says",
-      "summary": "美国国会预算办公室新分析发现，美军针对伊朗的作战行动已产生约380亿美元成本。",
-      "keyFacts": [
-        "military has incurred about $38 billion in costs from combat operations against Iran",
-        "a new Congressional Budget Office analysis found"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Defense News",
-      "country": "国际",
-      "publishedAt": "2026-09-15T19:52:56Z",
-      "url": "https://www.defensenews.com/news/your-military/2026/09/15/iran-war-has-cost-38-billion-depleted-two-thirds-of-us-missile-interceptors-cbo-says",
-      "score": 73,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 5,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.6 小时",
-        "命中 3 个主题信号",
-        "影响信号：missile"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "伊朗战争",
-        "CBO",
-        "导弹拦截器"
-      ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/5KRTYBUZOFHULNBWWUKSEF4LI4.jpeg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/news/your-military/2026/09/15/iran-war-has-cost-38-billion-depleted-two-thirds-of-us-missile-interceptors-cbo-says",
-          "publishedAt": "2026-09-15T19:52:56Z",
-          "evidenceGroup": "outlet:defensenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 4
     },
     {
       "id": "366da2116fda5a",
@@ -366,7 +460,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 6.0 小时",
+        "发布约 6.9 小时",
         "命中 2 个主题信号",
         "影响信号：launch、missile"
       ],
@@ -395,7 +489,190 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 5
+      "streamRank": 4
+    },
+    {
+      "id": "bc14df7a2abb54",
+      "eventId": "evt-dbddf83624e1",
+      "contentType": "news",
+      "title": "CBO称伊朗战争已耗资380亿美元，耗尽三分之二美国导弹拦截器",
+      "originalTitle": "Iran war has cost $38 billion, depleted two-thirds of US missile interceptors, CBO says",
+      "summary": "美国国会预算办公室新分析发现，美军针对伊朗的作战行动已产生约380亿美元成本。",
+      "keyFacts": [
+        "military has incurred about $38 billion in costs from combat operations against Iran",
+        "a new Congressional Budget Office analysis found"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-09-15T19:52:56Z",
+      "url": "https://www.defensenews.com/news/your-military/2026/09/15/iran-war-has-cost-38-billion-depleted-two-thirds-of-us-missile-interceptors-cbo-says",
+      "score": 78,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 5,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 82/100",
+        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
+        "来源权重 16/20",
+        "发布约 5.5 小时",
+        "命中 3 个主题信号",
+        "影响信号：missile"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗战争",
+        "CBO",
+        "导弹拦截器"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/5KRTYBUZOFHULNBWWUKSEF4LI4.jpeg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/news/your-military/2026/09/15/iran-war-has-cost-38-billion-depleted-two-thirds-of-us-missile-interceptors-cbo-says",
+          "publishedAt": "2026-09-15T19:52:56Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-dbddf83624e1",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-06",
+        "lastSeen": "2026-09-16",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-08-06",
+            "newsId": "2c070405cd14a9",
+            "title": "特朗普级战列舰计划成本2750亿美元，国会预算办公室报告称",
+            "source": "Defense News",
+            "publishedAt": "2026-08-05T23:17:27Z",
+            "score": 80
+          },
+          {
+            "editionDate": "2026-09-16",
+            "newsId": "bc14df7a2abb54",
+            "title": "CBO称伊朗战争已耗资380亿美元，耗尽三分之二美国导弹拦截器",
+            "source": "Defense News",
+            "publishedAt": "2026-09-15T19:52:56Z",
+            "score": 78
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "military has incurred about $38 billion in costs from combat operations against Iran",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          },
+          {
+            "text": "a new Congressional Budget Office analysis found",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-da018d2c989e",
+          "eventId": "evt-dbddf83624e1",
+          "statement": "后续可观察美国国防部或国会是否就拦截弹库存与补充预算提出公开说明或听证。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-16",
+          "dueAfter": "2026-10-16",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "bc14df7a2abb54"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        },
+        {
+          "predictionId": "pred-493090245503",
+          "eventId": "evt-dbddf83624e1",
+          "statement": "若拦截弹库存持续处于低位，则需关注美军其他战区战备水平及军工产能扩充动向。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-16",
+          "dueAfter": "2026-12-15",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "bc14df7a2abb54"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        },
+        {
+          "predictionId": "pred-0741e0e3e374",
+          "eventId": "evt-dbddf83624e1",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "due",
+          "statusLabel": "已到期，等待证据复核",
+          "createdAt": "2026-08-06",
+          "dueAfter": "2026-09-05",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "2c070405cd14a9"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 5,
+      "relatedPapers": []
     },
     {
       "id": "5d7f3a2a29e458",
@@ -431,7 +708,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 7.9 小时",
+        "发布约 8.8 小时",
         "命中 1 个主题信号",
         "影响信号：production、strike"
       ],
@@ -470,136 +747,6 @@
       "streamRank": 6
     },
     {
-      "id": "2469d74a55e295",
-      "eventId": "evt-185c0d2dfbf6",
-      "contentType": "news",
-      "title": "阿曼称霍尔木兹海峡油轮遇袭后两名船员失踪",
-      "originalTitle": "Two sailors missing after tanker attacked in Strait of Hormuz, Oman says",
-      "summary": "伊朗称El Gaia触雷起火，美国则称该油轮遭导弹和无人机袭击。",
-      "keyFacts": [
-        "Iran says El Gaia caught fire",
-        "hitting mines",
-        "but the US says the oil tanker was struck by a missile"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-09-15T16:13:41Z",
-      "url": "https://www.bbc.co.uk/news/articles/c3n07ydqdzlvo?at_medium=RSS&at_campaign=rss",
-      "score": 72,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 5,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 8.2 小时",
-        "命中 3 个主题信号",
-        "影响信号：missile"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "霍尔木兹海峡",
-        "油轮遇袭",
-        "船员失踪"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/61f8/live/adf23e90-b0fb-11f1-a451-6b1ff10ed362.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/c3n07ydqdzlvo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-09-15T16:13:41Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 7
-    },
-    {
-      "id": "c0487bfe15b440",
-      "eventId": "evt-1b98b182ee8a",
-      "contentType": "news",
-      "title": "市场格局变动：LeoLabs转向直接向盟友出售新型移动太空雷达",
-      "originalTitle": "Shifting market sands: LeoLabs moves to sell new mobile space radar directly to allies",
-      "summary": "LeoLabs还计划部署多部Scout-S移动相控阵雷达，以填补其全球12座较大雷达设施现有网络的空白。",
-      "keyFacts": [
-        "LeoLabs also intends to deploy multiple Scout-S mobile phased array radars to fill gaps in its current network of 12 larger radar facilitie…"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-09-15T22:01:03Z",
-      "url": "https://breakingdefense.com/2026/09/shifting-market-sands-leolabs-moves-to-sell-new-mobile-space-radar-directly-to-allies",
-      "score": 71,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 6,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 2.5 小时",
-        "命中 1 个主题信号",
-        "影响信号：deploy"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "LeoLabs",
-        "太空雷达",
-        "盟友"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/09/shifting-market-sands-leolabs-moves-to-sell-new-mobile-space-radar-directly-to-allies",
-          "publishedAt": "2026-09-15T22:01:03Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 8
-    },
-    {
       "id": "f846701115d870",
       "eventId": "evt-b158faffbc85",
       "contentType": "news",
@@ -617,8 +764,8 @@
       "country": "国际",
       "publishedAt": "2026-09-15T19:06:38Z",
       "url": "https://www.defensenews.com/news/pentagon-congress/2026/09/15/iranian-strikes-damaged-hundreds-of-us-military-buildings-dozens-of-aircraft",
-      "score": 71,
-      "scoreBasis": "规则评分",
+      "score": 79,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -633,8 +780,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 83/100",
+        "综合排序分 79/100（AI 65% + 规则 35%）",
+        "规则参考分 71/100",
         "来源权重 16/20",
-        "发布约 5.4 小时",
+        "发布约 6.3 小时",
         "命中 3 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -663,6 +813,316 @@
           "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-b158faffbc85",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-16",
+        "lastSeen": "2026-09-16",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-16",
+            "newsId": "f846701115d870",
+            "title": "伊朗打击损坏数百座美国军事建筑和数十架飞机",
+            "source": "Defense News",
+            "publishedAt": "2026-09-15T19:06:38Z",
+            "score": 79
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:defensenews.com",
+          "outlet:breakingdefense.com"
+        ],
+        "claims": [
+          {
+            "text": "Iranian strikes have damaged hundreds of U.S",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:defensenews.com",
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "diplomatic buildings",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:defensenews.com",
+              "outlet:breakingdefense.com"
+            ]
+          },
+          {
+            "text": "as well as dozens of aircraft",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:defensenews.com",
+              "outlet:breakingdefense.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-8304f7979f22",
+          "eventId": "evt-b158faffbc85",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-16",
+          "dueAfter": "2026-10-16",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "f846701115d870"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 7,
+      "relatedPapers": []
+    },
+    {
+      "id": "2469d74a55e295",
+      "eventId": "evt-185c0d2dfbf6",
+      "contentType": "news",
+      "title": "阿曼称霍尔木兹海峡油轮遇袭后两名船员失踪",
+      "originalTitle": "Two sailors missing after tanker attacked in Strait of Hormuz, Oman says",
+      "summary": "伊朗称El Gaia触雷起火，美国则称该油轮遭导弹和无人机袭击。",
+      "keyFacts": [
+        "Iran says El Gaia caught fire",
+        "hitting mines",
+        "but the US says the oil tanker was struck by a missile"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-09-15T16:13:41Z",
+      "url": "https://www.bbc.co.uk/news/articles/c3n07ydqdzlvo?at_medium=RSS&at_campaign=rss",
+      "score": 76,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 5,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 76/100（AI 65% + 规则 35%）",
+        "规则参考分 71/100",
+        "来源权重 17/20",
+        "发布约 9.1 小时",
+        "命中 3 个主题信号",
+        "影响信号：missile"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "霍尔木兹海峡",
+        "油轮遇袭",
+        "船员失踪"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/61f8/live/adf23e90-b0fb-11f1-a451-6b1ff10ed362.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c3n07ydqdzlvo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-09-15T16:13:41Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-185c0d2dfbf6",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-16",
+        "lastSeen": "2026-09-16",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-16",
+            "newsId": "2469d74a55e295",
+            "title": "阿曼称霍尔木兹海峡油轮遇袭后两名船员失踪",
+            "source": "BBC World",
+            "publishedAt": "2026-09-15T16:13:41Z",
+            "score": 76
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "Iran says El Gaia caught fire",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "hitting mines",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "but the US says the oil tanker was struck by a missile",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-3c2d7f50f10e",
+          "eventId": "evt-185c0d2dfbf6",
+          "statement": "后续可观察对涉事油轮袭击原因的调查结论，以及各方对袭击方式的公开表述是否趋同。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-16",
+          "dueAfter": "2026-10-16",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2469d74a55e295"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        },
+        {
+          "predictionId": "pred-9b64869567d6",
+          "eventId": "evt-185c0d2dfbf6",
+          "statement": "若海峡袭击事件再度发生，则需关注伊朗与阿曼合作机制及地区停火的存续情况。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-16",
+          "dueAfter": "2026-12-15",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "2469d74a55e295"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 8,
+      "relatedPapers": []
+    },
+    {
+      "id": "c0487bfe15b440",
+      "eventId": "evt-1b98b182ee8a",
+      "contentType": "news",
+      "title": "市场格局变动：LeoLabs转向直接向盟友出售新型移动太空雷达",
+      "originalTitle": "Shifting market sands: LeoLabs moves to sell new mobile space radar directly to allies",
+      "summary": "LeoLabs还计划部署多部Scout-S移动相控阵雷达，以填补其全球12座较大雷达设施现有网络的空白。",
+      "keyFacts": [
+        "LeoLabs also intends to deploy multiple Scout-S mobile phased array radars to fill gaps in its current network of 12 larger radar facilitie…"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-09-15T22:01:03Z",
+      "url": "https://breakingdefense.com/2026/09/shifting-market-sands-leolabs-moves-to-sell-new-mobile-space-radar-directly-to-allies",
+      "score": 70,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 6,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 3.4 小时",
+        "命中 1 个主题信号",
+        "影响信号：deploy"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "LeoLabs",
+        "太空雷达",
+        "盟友"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/09/shifting-market-sands-leolabs-moves-to-sell-new-mobile-space-radar-directly-to-allies",
+          "publishedAt": "2026-09-15T22:01:03Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
       "selectionProvider": "",
       "translationProvider": "deepseek",
       "isSupplemental": false,
@@ -688,8 +1148,8 @@
       "country": "国际",
       "publishedAt": "2026-09-16T00:25:32Z",
       "url": "https://www.twz.com/air/usafs-fighter-drones-to-make-debut-in-a-large-scale-exercise",
-      "score": 69,
-      "scoreBasis": "规则评分",
+      "score": 64,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
@@ -704,8 +1164,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 62/100",
+        "综合排序分 64/100（AI 65% + 规则 35%）",
+        "规则参考分 69/100",
         "来源权重 15/20",
-        "发布约 0.0 小时",
+        "发布约 0.9 小时",
         "命中 1 个主题信号",
         "影响信号：test"
       ],
@@ -727,14 +1190,75 @@
           "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 10
+      "eventDossier": {
+        "eventId": "evt-371c1f7281a7",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-16",
+        "lastSeen": "2026-09-16",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-16",
+            "newsId": "6bc55c3a85fdcd",
+            "title": "美国空军战斗机无人机将在大规模演习中首次亮相",
+            "source": "The War Zone",
+            "publishedAt": "2026-09-16T00:25:32Z",
+            "score": 64
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "Exercise Emerald Flag will give the USAF a completely new opportunity to test how its CCA drones work together with crewed assets",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-15079d857a4c",
+          "eventId": "evt-371c1f7281a7",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-16",
+          "dueAfter": "2026-10-16",
+          "verificationSignals": [
+            "后续试验与任务数据",
+            "规模化部署、采购或反制变化"
+          ],
+          "evidenceIds": [
+            "6bc55c3a85fdcd"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 10,
+      "relatedPapers": []
     },
     {
       "id": "83a530a9db6b5b",
@@ -770,7 +1294,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.8 小时",
+        "发布约 2.7 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "中",
@@ -799,6 +1323,71 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 11
+    },
+    {
+      "id": "417e85f24fd185",
+      "eventId": "evt-40630768f861",
+      "contentType": "news",
+      "title": "伊朗外长赴北京，中国能否扮演和平调解者？",
+      "originalTitle": "Can China play peacemaker as Iran’s foreign minister heads to Beijing?",
+      "summary": "在伊朗与美国紧张升级之际，德黑兰与北京探索外交路径。",
+      "keyFacts": [
+        "Beijing explore diplomatic paths amid escalating tensions between Iran",
+        "the United States"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-15T16:15:13Z",
+      "url": "https://www.aljazeera.com/news/2026/9/15/can-china-play-peacemaker-as-irans-foreign-minister-heads-to-beijing?traffic_source=rss",
+      "score": 69,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 7,
+        "主题相关性": 4,
+        "证据完整度": 2,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 9.1 小时",
+        "命中 2 个主题信号",
+        "影响信号：升级"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "中国",
+        "外交"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/9/15/can-china-play-peacemaker-as-irans-foreign-minister-heads-to-beijing?traffic_source=rss",
+          "publishedAt": "2026-09-15T16:15:13Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 12
     },
     {
       "id": "82d9ac8d6e7046",
@@ -835,7 +1424,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 10.0 小时",
+        "发布约 10.9 小时",
         "命中 1 个主题信号",
         "影响信号：breakthrough、production"
       ],
@@ -864,7 +1453,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 12
+      "streamRank": 13
     },
     {
       "id": "4a1c4a275704d2",
@@ -884,8 +1473,8 @@
       "country": "国际",
       "publishedAt": "2026-09-15T07:00:00Z",
       "url": "https://www.esa.int/ESA_Multimedia/Videos/2026/09/FLEX_and_Sentinel-3C_launch_highlights",
-      "score": 69,
-      "scoreBasis": "规则评分",
+      "score": 63,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 19,
@@ -900,8 +1489,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 60/100",
+        "综合排序分 63/100（AI 65% + 规则 35%）",
+        "规则参考分 69/100",
         "来源权重 19/20",
-        "发布约 17.5 小时",
+        "发布约 18.4 小时",
         "命中 4 个主题信号",
         "影响信号：launch"
       ],
@@ -923,14 +1515,110 @@
           "evidenceGroup": "outlet:esa.int"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 13
+      "eventDossier": {
+        "eventId": "evt-98a40cdf1325",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-16",
+        "lastSeen": "2026-09-16",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-16",
+            "newsId": "4a1c4a275704d2",
+            "title": "FLEX和Sentinel-3C发射亮点",
+            "source": "European Space Agency",
+            "publishedAt": "2026-09-15T07:00:00Z",
+            "score": 63
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:esa.int"
+        ],
+        "claims": [
+          {
+            "text": "Video: 00:03:22 ESA’s state-of-the-art FLEX Earth Explorer satellite",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:esa.int"
+            ]
+          },
+          {
+            "text": "the Copernicus Sentinel-3C satellite have been launched together aboard a Vega-C rocket from Europe’s Spaceport in French Guiana",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:esa.int"
+            ]
+          },
+          {
+            "text": "marking a new milestone in Europe’s Earth Observation Programmes",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:esa.int"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-285eba12d3b7",
+          "eventId": "evt-98a40cdf1325",
+          "statement": "后续可观察FLEX与Sentinel-3C入轨后是否按计划完成在轨调试并传回首批数据。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-16",
+          "dueAfter": "2026-10-16",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "4a1c4a275704d2"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        },
+        {
+          "predictionId": "pred-dd77596efe00",
+          "eventId": "evt-98a40cdf1325",
+          "statement": "若两颗卫星运行正常，则需关注欧空局地球观测数据产品发布节奏及后续任务排期。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-16",
+          "dueAfter": "2026-12-15",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "4a1c4a275704d2"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 14,
+      "relatedPapers": []
     },
     {
       "id": "7376438c216dde",
@@ -966,7 +1654,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 5.5 小时",
+        "发布约 6.4 小时",
         "命中 2 个主题信号",
         "影响信号：launch"
       ],
@@ -986,71 +1674,6 @@
           "url": "https://techcrunch.com/2026/09/15/the-ai-graveyard-a-running-list-of-projects-and-startups-that-didnt-make-it",
           "publishedAt": "2026-09-15T19:00:00Z",
           "evidenceGroup": "outlet:techcrunch.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 14
-    },
-    {
-      "id": "b2704091b54ea1",
-      "eventId": "evt-c734fefb6040",
-      "contentType": "news",
-      "title": "土耳其认证军用教练机安全，首次由本国当局完成",
-      "originalTitle": "Turkey certifies military training aircraft as safe, a first for local authorities",
-      "summary": "土耳其完成了一款教练机军用适航认证的官僚流程，使整个认证过程处于本国掌控之下。",
-      "keyFacts": [
-        "Turkey has closed the bureaucratic loop on a military airworthiness certificate for a trainer aircraft",
-        "bringing the entire process under national control"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Defense News",
-      "country": "国际",
-      "publishedAt": "2026-09-15T14:02:13Z",
-      "url": "https://www.defensenews.com/global/europe/2026/09/15/turkey-certifies-military-training-aircraft-as-safe-a-first-for-local-authorities",
-      "score": 68,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 5,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 10.4 小时",
-        "命中 2 个主题信号",
-        "影响信号：first"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "土耳其",
-        "教练机",
-        "适航认证"
-      ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/PF45LLSTVRETFBDVBUT3QAAPEI.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/global/europe/2026/09/15/turkey-certifies-military-training-aircraft-as-safe-a-first-for-local-authorities",
-          "publishedAt": "2026-09-15T14:02:13Z",
-          "evidenceGroup": "outlet:defensenews.com"
         }
       ],
       "selectionProvider": "",
@@ -1095,7 +1718,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 13.5 小时",
+        "发布约 14.4 小时",
         "命中 3 个主题信号",
         "影响信号：attack"
       ],
@@ -1127,171 +1750,6 @@
       "streamRank": 16
     },
     {
-      "id": "374217c148cb8f",
-      "eventId": "evt-0e998cfa1ac6",
-      "contentType": "news",
-      "title": "美国海军与波音签署首份MQ-25A“黄貂鱼”生产合同",
-      "originalTitle": "US Navy, Boeing ink first MQ-25A Stingray production contract",
-      "summary": "美国海军周一向波音授予一份价值5.62亿美元的固定价格激励合同，启动MQ-25A“黄貂鱼”低速初始生产第一批次。",
-      "keyFacts": [
-        "美国海军向波音授予价值5.62亿美元的固定价格激励合同",
-        "合同用于启动MQ-25A“黄貂鱼”低速初始生产第一批次（Lot 1）",
-        "这是该型号的首份生产合同"
-      ],
-      "why": "首份生产合同落地，意味着MQ-25A舰载无人加油机由研制阶段转入批量生产阶段。",
-      "category": "军事动态",
-      "source": "Defense News",
-      "country": "国际",
-      "publishedAt": "2026-09-15T01:13:26Z",
-      "url": "https://www.defensenews.com/industry/techwatch/2026/09/15/us-navy-boeing-ink-first-mq-25a-stingray-production-contract",
-      "score": 74,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 20,
-        "影响信号": 14,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 70/100",
-        "综合排序分 74/100（AI 65% + 规则 35%）",
-        "规则参考分 80/100",
-        "来源权重 16/20",
-        "发布约 0.2 小时",
-        "命中 1 个主题信号",
-        "影响信号：first、contract、production"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美国海军",
-        "MQ-25A",
-        "波音"
-      ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/IG6VCDCMPZH4FA25RK5B2TZ3FE.jpeg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/industry/techwatch/2026/09/15/us-navy-boeing-ink-first-mq-25a-stingray-production-contract",
-          "publishedAt": "2026-09-15T01:13:26Z",
-          "evidenceGroup": "outlet:defensenews.com"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "eventDossier": {
-        "eventId": "evt-0e998cfa1ac6",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-09-15",
-        "lastSeen": "2026-09-15",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-09-15",
-            "newsId": "374217c148cb8f",
-            "title": "美国海军与波音签署首份MQ-25A“黄貂鱼”生产合同",
-            "source": "Defense News",
-            "publishedAt": "2026-09-15T01:13:26Z",
-            "score": 74
-          }
-        ],
-        "independentSourceCount": 1,
-        "paperCount": 0
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:defensenews.com"
-        ],
-        "claims": [
-          {
-            "text": "美国海军向波音授予价值5.62亿美元的固定价格激励合同",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:defensenews.com"
-            ]
-          },
-          {
-            "text": "合同用于启动MQ-25A“黄貂鱼”低速初始生产第一批次（Lot 1）",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:defensenews.com"
-            ]
-          },
-          {
-            "text": "这是该型号的首份生产合同",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:defensenews.com"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-06b0c16f5b94",
-          "eventId": "evt-0e998cfa1ac6",
-          "statement": "后续可观察波音是否公布MQ-25A首批次交付节点或测试安排，以及合同是否出现调整。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-15",
-          "dueAfter": "2026-10-15",
-          "verificationSignals": [
-            "正式合同、预算或部署文件",
-            "后续演训、交付或作战序列变化"
-          ],
-          "evidenceIds": [
-            "374217c148cb8f"
-          ],
-          "lastReviewedAt": "2026-09-15"
-        },
-        {
-          "predictionId": "pred-a686157e1645",
-          "eventId": "evt-0e998cfa1ac6",
-          "statement": "若MQ-25A生产按计划推进，则需关注其与航母舰载机体系整合的公开进展，不预设具体时间表。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-15",
-          "dueAfter": "2026-12-14",
-          "verificationSignals": [
-            "正式合同、预算或部署文件",
-            "后续演训、交付或作战序列变化"
-          ],
-          "evidenceIds": [
-            "374217c148cb8f"
-          ],
-          "lastReviewedAt": "2026-09-15"
-        }
-      ],
-      "relatedPapers": [],
-      "isTopStory": true,
-      "streamRank": 17
-    },
-    {
       "id": "83c9ff637cd4e7",
       "eventId": "evt-929872faba40",
       "contentType": "news",
@@ -1308,8 +1766,8 @@
       "country": "国际",
       "publishedAt": "2026-09-15T20:34:12Z",
       "url": "https://www.bbc.co.uk/news/articles/c9gk58xgng0vo?at_medium=RSS&at_campaign=rss",
-      "score": 67,
-      "scoreBasis": "规则评分",
+      "score": 75,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
@@ -1324,8 +1782,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 79/100",
+        "综合排序分 75/100（AI 65% + 规则 35%）",
+        "规则参考分 67/100",
         "来源权重 17/20",
-        "发布约 3.9 小时",
+        "发布约 4.8 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1346,97 +1807,101 @@
           "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 18
-    },
-    {
-      "id": "52df2c46716c26",
-      "eventId": "evt-ab08ffcf1284",
-      "contentType": "news",
-      "title": "俄伊在乌克兰和中东战争背景下深化武器合作",
-      "originalTitle": "Russia and Iran deepen weapons partnership amid wars in Ukraine, Middle East",
-      "summary": "俄罗斯已开始向伊朗提供升级弹药、卫星图像和瞄准数据，这些被用于针对中东美军的行动。",
-      "keyFacts": [
-        "Russia has begun sending Iran upgraded munitions",
-        "satellite imagery",
-        "targeting data used against American forces in the Middle East"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Defense News",
-      "country": "国际",
-      "publishedAt": "2026-09-15T13:42:46Z",
-      "url": "https://www.defensenews.com/news/your-military/2026/09/15/russia-and-iran-deepen-weapons-partnership-amid-wars-in-ukraine-middle-east",
-      "score": 67,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 0,
-        "主题相关性": 8,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
+      "eventDossier": {
+        "eventId": "evt-929872faba40",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-16",
+        "lastSeen": "2026-09-16",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-16",
+            "newsId": "83c9ff637cd4e7",
+            "title": "五角大楼监察长证实伊朗战争导致美国弹药短缺",
+            "source": "BBC World",
+            "publishedAt": "2026-09-15T20:34:12Z",
+            "score": 75
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
       },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 10.8 小时",
-        "命中 4 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "俄罗斯",
-        "伊朗",
-        "武器合作"
-      ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/I262YDCXRJEWVPCGPN53RWZRFY.jpg",
-      "corroboration": 1,
-      "sources": [
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "The inspector also found a bottleneck in resupply",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          },
+          {
+            "text": "despite President Donald Trump's claims that US supplies are \"virtually limitless\"",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
         {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/news/your-military/2026/09/15/russia-and-iran-deepen-weapons-partnership-amid-wars-in-ukraine-middle-east",
-          "publishedAt": "2026-09-15T13:42:46Z",
-          "evidenceGroup": "outlet:defensenews.com"
+          "predictionId": "pred-e78da8f9ba59",
+          "eventId": "evt-929872faba40",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-16",
+          "dueAfter": "2026-10-16",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "83c9ff637cd4e7"
+          ],
+          "lastReviewedAt": "2026-09-16"
         }
       ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 19
+      "isTopStory": true,
+      "streamRank": 17,
+      "relatedPapers": []
     },
     {
-      "id": "226a62a2bf678a",
-      "eventId": "evt-4c1b0378edd8",
+      "id": "b2704091b54ea1",
+      "eventId": "evt-c734fefb6040",
       "contentType": "news",
-      "title": "独家：普惠授权Hermeus制造F100战斗机发动机",
-      "originalTitle": "EXCLUSIVE: Pratt licenses Hermeus to build F100 fighter jet engine",
-      "summary": "Hermeus CEO扎克·肖尔告诉Breaking Defense，公司现可垂直整合其Quarterhorse无人机的生产，并成为普惠F100-PW-229发动机的第二来源。",
+      "title": "土耳其认证军用教练机安全，首次由本国当局完成",
+      "originalTitle": "Turkey certifies military training aircraft as safe, a first for local authorities",
+      "summary": "土耳其完成了一款教练机军用适航认证的官僚流程，使整个认证过程处于本国掌控之下。",
       "keyFacts": [
-        "Hermeus CEO Zach Shore told Breaking Defense the company can now vertically integrate production of its Quarterhorse drone",
-        "serve as a second source of engines for Pratt’s F100-PW-229 powerplant"
+        "Turkey has closed the bureaucratic loop on a military airworthiness certificate for a trainer aircraft",
+        "bringing the entire process under national control"
       ],
       "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
       "category": "军事动态",
-      "source": "Breaking Defense",
+      "source": "Defense News",
       "country": "国际",
-      "publishedAt": "2026-09-15T11:45:00Z",
-      "url": "https://breakingdefense.com/2026/09/exclusive-pratt-licenses-hermeus-to-build-f100-fighter-jet-engine",
+      "publishedAt": "2026-09-15T14:02:13Z",
+      "url": "https://www.defensenews.com/global/europe/2026/09/15/turkey-certifies-military-training-aircraft-as-safe-a-first-for-local-authorities",
       "score": 67,
       "scoreBasis": "规则评分",
       "scoreComponents": {
@@ -1454,26 +1919,26 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 12.7 小时",
+        "发布约 11.3 小时",
         "命中 2 个主题信号",
-        "影响信号：production"
+        "影响信号：first"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "普惠",
-        "Hermeus",
-        "航空发动机"
+        "土耳其",
+        "教练机",
+        "适航认证"
       ],
-      "image": "",
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/PF45LLSTVRETFBDVBUT3QAAPEI.jpg",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/09/exclusive-pratt-licenses-hermeus-to-build-f100-fighter-jet-engine",
-          "publishedAt": "2026-09-15T11:45:00Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/global/europe/2026/09/15/turkey-certifies-military-training-aircraft-as-safe-a-first-for-local-authorities",
+          "publishedAt": "2026-09-15T14:02:13Z",
+          "evidenceGroup": "outlet:defensenews.com"
         }
       ],
       "selectionProvider": "",
@@ -1483,25 +1948,169 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 20
+      "streamRank": 18
     },
     {
-      "id": "6c35c259c31bf0",
-      "eventId": "evt-e8a108e471ce",
+      "id": "95c187e2c0df00",
+      "eventId": "evt-a68bd7fb7f50",
       "contentType": "news",
-      "title": "伊朗客机剧烈摇晃撕裂客舱引发恐慌",
-      "originalTitle": "Panic on board Iranian plane as violent shaking rips cabin apart",
-      "summary": "Sepehran航空公司一架波音737在伊朗马什哈德紧急降落后客舱撕裂。",
+      "title": "沙特领导的联军拦截一架飞往麦加的无人机",
+      "originalTitle": "Saudi-led coalition intercepts drone headed for Mecca",
+      "summary": "沙特阿拉伯称，在无人机进入伊斯兰教最神圣城市前将其拦截，并称朝圣者安全是“红线”。",
       "keyFacts": [
-        "A Sepehran Airlines Boeing 737 cabin rips apart",
-        "an emergency landing in Mashhad"
+        "沙特领导的联军拦截了一架飞往麦加的无人机",
+        "沙特方面称朝圣者的安全是“红线”",
+        "消息来源为半岛电视台，发布时间为2026年9月16日"
+      ],
+      "why": "事件涉及伊斯兰教最神圣城市与朝圣者安全，可能加剧地区紧张并引发对无人机威胁的关注。",
+      "category": "无人系统",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-16T01:09:54Z",
+      "url": "https://www.aljazeera.com/news/2026/9/16/saudi-led-coalition-intercepts-drone-headed-for-mecca?traffic_source=rss",
+      "score": 69,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 70/100",
+        "综合排序分 69/100（AI 65% + 规则 35%）",
+        "规则参考分 66/100",
+        "来源权重 16/20",
+        "发布约 0.2 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "沙特",
+        "无人机",
+        "麦加"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/9/16/saudi-led-coalition-intercepts-drone-headed-for-mecca?traffic_source=rss",
+          "publishedAt": "2026-09-16T01:09:54Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-a68bd7fb7f50",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-16",
+        "lastSeen": "2026-09-16",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-16",
+            "newsId": "95c187e2c0df00",
+            "title": "沙特领导的联军拦截一架飞往麦加的无人机",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-16T01:09:54Z",
+            "score": 69
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "沙特领导的联军拦截了一架飞往麦加的无人机",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "沙特方面称朝圣者的安全是“红线”",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "消息来源为半岛电视台，发布时间为2026年9月16日",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-576cb64072a2",
+          "eventId": "evt-a68bd7fb7f50",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-16",
+          "dueAfter": "2026-10-16",
+          "verificationSignals": [
+            "后续试验与任务数据",
+            "规模化部署、采购或反制变化"
+          ],
+          "evidenceIds": [
+            "95c187e2c0df00"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 19,
+      "relatedPapers": []
+    },
+    {
+      "id": "6c01f5552ff082",
+      "eventId": "evt-dce75245cee3",
+      "contentType": "news",
+      "title": "国会报告：伊朗战争加剧通胀，美国弹药供应承压",
+      "originalTitle": "Iran war increasing inflation, straining US munitions: congressional report",
+      "summary": "无党派研究机构报告发现，补充已 depleted 的弹药库存可能需长达五年。",
+      "keyFacts": [
+        "Report by nonpartisan research body finds that replenishing depleted munitions stockpiles could take up to five years"
       ],
       "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
       "category": "局部冲突",
       "source": "Al Jazeera",
       "country": "国际",
-      "publishedAt": "2026-09-15T23:47:56Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/9/15/aje-onl-nf_iranian-plane-violent-shaking-rips-cabin-apart-150926?traffic_source=rss",
+      "publishedAt": "2026-09-16T00:38:12Z",
+      "url": "https://www.aljazeera.com/news/2026/9/16/iran-war-increasing-inflation-straining-us-munitions-congressional-report?traffic_source=rss",
       "score": 66,
       "scoreBasis": "规则评分",
       "scoreComponents": {
@@ -1525,9 +2134,9 @@
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "伊朗",
-        "波音737",
-        "紧急降落"
+        "伊朗战争",
+        "美国弹药",
+        "国会报告"
       ],
       "image": "",
       "corroboration": 1,
@@ -1535,8 +2144,8 @@
         {
           "name": "Al Jazeera",
           "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/9/15/aje-onl-nf_iranian-plane-violent-shaking-rips-cabin-apart-150926?traffic_source=rss",
-          "publishedAt": "2026-09-15T23:47:56Z",
+          "url": "https://www.aljazeera.com/news/2026/9/16/iran-war-increasing-inflation-straining-us-munitions-congressional-report?traffic_source=rss",
+          "publishedAt": "2026-09-16T00:38:12Z",
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
@@ -1547,7 +2156,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 21
+      "streamRank": 20
     },
     {
       "id": "ac6eeec71f7405",
@@ -1584,7 +2193,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 5.5 小时",
+        "发布约 6.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1619,79 +2228,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 22
-    },
-    {
-      "id": "53fa1ed4e2bad6",
-      "eventId": "evt-9722ed3ff827",
-      "contentType": "news",
-      "title": "太空军新领导人称承认美国在轨武器“是时候了”",
-      "originalTitle": "‘It was time’ to admit US has weapons in orbit, Space Force’s new leader says",
-      "summary": "道格拉斯·希斯将军在AFA表示，俄罗斯和中国的进展促成了这一披露。",
-      "keyFacts": [
-        "Chinese advances led to the revelation",
-        "Douglas Schiess says at AFA"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "Defense One",
-      "country": "国际",
-      "publishedAt": "2026-09-15T17:58:40Z",
-      "url": "https://www.defenseone.com/threats/2026/09/orbit-weapons-space-force-leader/415999",
-      "score": 66,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 4,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.5 小时",
-        "命中 1 个主题信号",
-        "2 个独立来源相互印证"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 2 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "太空军",
-        "在轨武器",
-        "美国"
-      ],
-      "image": "https://cdn.defenseone.com/media/img/cd/2026/09/15/Gen._Douglas_Schiess_9911333/thumb.jpg",
-      "corroboration": 2,
-      "sources": [
-        {
-          "name": "Defense One",
-          "domain": "defenseone.com",
-          "url": "https://www.defenseone.com/threats/2026/09/orbit-weapons-space-force-leader/415999",
-          "publishedAt": "2026-09-15T17:58:40Z",
-          "evidenceGroup": "outlet:defenseone.com"
-        },
-        {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/space/u-s-admits-it-has-weapons-in-orbit",
-          "publishedAt": "2026-09-14T23:40:40Z",
-          "evidenceGroup": "outlet:twz.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 23
+      "streamRank": 21
     },
     {
       "id": "1e615582c525fd",
@@ -1726,7 +2263,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 9.0 小时",
+        "发布约 9.9 小时",
         "命中 1 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -1762,7 +2299,264 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
+      "streamRank": 22
+    },
+    {
+      "id": "52df2c46716c26",
+      "eventId": "evt-ab08ffcf1284",
+      "contentType": "news",
+      "title": "俄伊在乌克兰和中东战争背景下深化武器合作",
+      "originalTitle": "Russia and Iran deepen weapons partnership amid wars in Ukraine, Middle East",
+      "summary": "俄罗斯已开始向伊朗提供升级弹药、卫星图像和瞄准数据，这些被用于针对中东美军的行动。",
+      "keyFacts": [
+        "Russia has begun sending Iran upgraded munitions",
+        "satellite imagery",
+        "targeting data used against American forces in the Middle East"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-09-15T13:42:46Z",
+      "url": "https://www.defensenews.com/news/your-military/2026/09/15/russia-and-iran-deepen-weapons-partnership-amid-wars-in-ukraine-middle-east",
+      "score": 66,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 14,
+        "影响信号": 0,
+        "主题相关性": 8,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 11.7 小时",
+        "命中 4 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "俄罗斯",
+        "伊朗",
+        "武器合作"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/I262YDCXRJEWVPCGPN53RWZRFY.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/news/your-military/2026/09/15/russia-and-iran-deepen-weapons-partnership-amid-wars-in-ukraine-middle-east",
+          "publishedAt": "2026-09-15T13:42:46Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 23
+    },
+    {
+      "id": "226a62a2bf678a",
+      "eventId": "evt-4c1b0378edd8",
+      "contentType": "news",
+      "title": "独家：普惠授权Hermeus制造F100战斗机发动机",
+      "originalTitle": "EXCLUSIVE: Pratt licenses Hermeus to build F100 fighter jet engine",
+      "summary": "Hermeus CEO扎克·肖尔告诉Breaking Defense，公司现可垂直整合其Quarterhorse无人机的生产，并成为普惠F100-PW-229发动机的第二来源。",
+      "keyFacts": [
+        "Hermeus CEO Zach Shore told Breaking Defense the company can now vertically integrate production of its Quarterhorse drone",
+        "serve as a second source of engines for Pratt’s F100-PW-229 powerplant"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-09-15T11:45:00Z",
+      "url": "https://breakingdefense.com/2026/09/exclusive-pratt-licenses-hermeus-to-build-f100-fighter-jet-engine",
+      "score": 66,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 13,
+        "影响信号": 5,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 13.6 小时",
+        "命中 2 个主题信号",
+        "影响信号：production"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "普惠",
+        "Hermeus",
+        "航空发动机"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/09/exclusive-pratt-licenses-hermeus-to-build-f100-fighter-jet-engine",
+          "publishedAt": "2026-09-15T11:45:00Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
       "streamRank": 24
+    },
+    {
+      "id": "5028a24ab768f6",
+      "eventId": "evt-757aa9ff98b2",
+      "contentType": "news",
+      "title": "伊朗战争直播：战事持续，伊朗最高外交官前往中国",
+      "originalTitle": "Iran war live: Iran’s top diplomat heads to China as war drags on",
+      "summary": "伊朗外长前往中国，北京寻求斡旋结束战争。",
+      "keyFacts": [
+        "Iranian foreign minister heads to China as Beijing seeks to mediate an end to the war"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-16T00:00:00Z",
+      "url": "https://www.aljazeera.com/news/liveblog/2026/9/16/iran-war-live-irans-top-diplomat-heads-to-china-as-war-drags-on?traffic_source=rss",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 1.4 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗战争",
+        "伊朗外长",
+        "中国斡旋"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/liveblog/2026/9/16/iran-war-live-irans-top-diplomat-heads-to-china-as-war-drags-on?traffic_source=rss",
+          "publishedAt": "2026-09-16T00:00:00Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 25
+    },
+    {
+      "id": "6c35c259c31bf0",
+      "eventId": "evt-e8a108e471ce",
+      "contentType": "news",
+      "title": "伊朗客机剧烈摇晃撕裂客舱引发恐慌",
+      "originalTitle": "Panic on board Iranian plane as violent shaking rips cabin apart",
+      "summary": "Sepehran航空公司一架波音737在伊朗马什哈德紧急降落后客舱撕裂。",
+      "keyFacts": [
+        "A Sepehran Airlines Boeing 737 cabin rips apart",
+        "an emergency landing in Mashhad"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-15T23:47:56Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/9/15/aje-onl-nf_iranian-plane-violent-shaking-rips-cabin-apart-150926?traffic_source=rss",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 1.6 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "波音737",
+        "紧急降落"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/9/15/aje-onl-nf_iranian-plane-violent-shaking-rips-cabin-apart-150926?traffic_source=rss",
+          "publishedAt": "2026-09-15T23:47:56Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 26
     },
     {
       "id": "21c47593c227eb",
@@ -1799,7 +2593,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 1.6 小时",
+        "发布约 2.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1827,72 +2621,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 25
-    },
-    {
-      "id": "7c0f690df2a868",
-      "eventId": "evt-54fa16a61652",
-      "contentType": "news",
-      "title": "普惠称F-35发动机升级通过关键设计评审",
-      "originalTitle": "F-35 engine upgrade clears key design review, Pratt says",
-      "summary": "普惠军用发动机业务总裁吉尔·阿尔贝泰利对《防务快讯》表示：“这意味着设计可靠，也意味着我们准备好从工业基础向前推进。”",
-      "keyFacts": [
-        "“It means that the design is solid",
-        "It means that we’re ready to move forward from an industrial base as well,” Jill Albertelli",
-        "the president of Pratt & Whitney’s military engines business"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-09-15T21:41:16Z",
-      "url": "https://breakingdefense.com/2026/09/f-35-engine-upgrade-clears-key-design-review-pratt-says",
-      "score": 65,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 2.8 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "F-35",
-        "普惠",
-        "发动机"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/09/f-35-engine-upgrade-clears-key-design-review-pratt-says",
-          "publishedAt": "2026-09-15T21:41:16Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 26
+      "streamRank": 27
     },
     {
       "id": "97b87da2d956b3",
@@ -1927,7 +2656,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.0 小时",
+        "发布约 5.9 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -1955,97 +2684,226 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 27
+      "streamRank": 28
     },
     {
-      "id": "1581102dd4e02f",
-      "eventId": "evt-df8e8870249e",
+      "id": "53fa1ed4e2bad6",
+      "eventId": "evt-1dc70e99839a",
       "contentType": "news",
-      "title": "美国证实地球轨道部署武器，引发太空军备竞赛警告",
-      "originalTitle": "Warning of space arms race as US confirms weapons in Earth's orbit",
-      "summary": "美国证实已在地球轨道部署太空武器，这是其首次承认此类进攻性能力。",
+      "title": "太空军新领导人称承认美国在轨武器“是时候了”",
+      "originalTitle": "‘It was time’ to admit US has weapons in orbit, Space Force’s new leader says",
+      "summary": "道格拉斯·希斯将军在AFA表示，俄罗斯和中国的进展促成了这一披露。",
       "keyFacts": [
-        "The US has confirmed it deployed a space weapon in Earth's orbit",
-        "the first time it has acknowledged such offensive capabilities"
+        "Chinese advances led to the revelation",
+        "Douglas Schiess says at AFA"
       ],
       "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
       "category": "航空航天",
-      "source": "BBC World",
+      "source": "Defense One",
       "country": "国际",
-      "publishedAt": "2026-09-15T17:35:02Z",
-      "url": "https://www.bbc.co.uk/news/videos/cmn07yjqg5rwo?at_medium=RSS&at_campaign=rss",
-      "score": 65,
-      "scoreBasis": "规则评分",
+      "publishedAt": "2026-09-15T17:58:40Z",
+      "url": "https://www.defenseone.com/threats/2026/09/orbit-weapons-space-force-leader/415999",
+      "score": 77,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 17,
+        "来源": 16,
         "主题优先级": 9,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 0,
-        "主题相关性": 4,
+        "主题相关性": 2,
         "证据完整度": 3,
-        "多源印证": 0,
+        "多源印证": 4,
         "编辑降权": 0,
         "日期异常降权": 0,
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 6.9 小时",
-        "命中 2 个主题信号"
+        "DeepSeek 候选重要度 84/100",
+        "综合排序分 77/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
+        "来源权重 16/20",
+        "发布约 7.4 小时",
+        "命中 1 个主题信号",
+        "2 个独立来源相互印证"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 16/20，共 2 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "太空武器",
-        "军备竞赛",
+        "太空军",
+        "在轨武器",
         "美国"
       ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/e727/live/b42a3d90-b13b-11f1-b1d1-571ed4d7ff2c.jpg",
-      "corroboration": 1,
+      "image": "https://cdn.defenseone.com/media/img/cd/2026/09/15/Gen._Douglas_Schiess_9911333/thumb.jpg",
+      "corroboration": 2,
       "sources": [
         {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/videos/cmn07yjqg5rwo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-09-15T17:35:02Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
+          "name": "Defense One",
+          "domain": "defenseone.com",
+          "url": "https://www.defenseone.com/threats/2026/09/orbit-weapons-space-force-leader/415999",
+          "publishedAt": "2026-09-15T17:58:40Z",
+          "evidenceGroup": "outlet:defenseone.com"
+        },
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/space/u-s-admits-it-has-weapons-in-orbit",
+          "publishedAt": "2026-09-14T23:40:40Z",
+          "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 28
+      "eventDossier": {
+        "eventId": "evt-1dc70e99839a",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-09-15",
+        "lastSeen": "2026-09-16",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-09-15",
+            "newsId": "448b0614842319",
+            "title": "美国承认其在轨部署有武器",
+            "source": "The War Zone",
+            "publishedAt": "2026-09-14T23:40:40Z",
+            "score": 68
+          },
+          {
+            "editionDate": "2026-09-16",
+            "newsId": "53fa1ed4e2bad6",
+            "title": "太空军新领导人称承认美国在轨武器“是时候了”",
+            "source": "Defense One",
+            "publishedAt": "2026-09-15T17:58:40Z",
+            "score": 77
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:defenseone.com",
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "Chinese advances led to the revelation",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:defenseone.com",
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "Douglas Schiess says at AFA",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:defenseone.com",
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-a5c93b36f0fd",
+          "eventId": "evt-1dc70e99839a",
+          "statement": "后续可观察美国太空军是否就所谓在轨武器任务集发布更多官方说明或政策文件。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-16",
+          "dueAfter": "2026-10-16",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "53fa1ed4e2bad6"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        },
+        {
+          "predictionId": "pred-8be86b2aec57",
+          "eventId": "evt-1dc70e99839a",
+          "statement": "若其他航天国家作出对等表态，则需关注外空武器化相关多边讨论的动向。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-16",
+          "dueAfter": "2026-12-15",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "53fa1ed4e2bad6"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        },
+        {
+          "predictionId": "pred-3c9f7ac62460",
+          "eventId": "evt-1dc70e99839a",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-15",
+          "dueAfter": "2026-10-15",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "448b0614842319"
+          ],
+          "lastReviewedAt": "2026-09-16"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 29,
+      "relatedPapers": []
     },
     {
-      "id": "fac0c278b3c319",
-      "eventId": "evt-b4bc5a570cb4",
+      "id": "7c0f690df2a868",
+      "eventId": "evt-54fa16a61652",
       "contentType": "news",
-      "title": "阿尔忒弥斯3号乘组参观NASA肯尼迪航天中心垂直装配大楼",
-      "originalTitle": "Artemis III Crew Visits NASA Kennedy’s Vehicle Assembly Building",
-      "summary": "NASA宇航员兰迪·布雷斯尼克与ESA宇航员卢卡·帕尔米塔诺于2026年9月2日星期三在佛罗里达州NASA肯尼迪航天中心垂直装配大楼3号高湾查看固体火箭助推器集成进展。布雷斯尼克、帕尔米塔诺与NASA宇航员安德烈·道格拉斯、弗兰克·鲁比奥和鲍勃·海因斯一同到访。",
+      "title": "普惠称F-35发动机升级通过关键设计评审",
+      "originalTitle": "F-35 engine upgrade clears key design review, Pratt says",
+      "summary": "普惠军用发动机业务总裁吉尔·阿尔贝泰利对《防务快讯》表示：“这意味着设计可靠，也意味着我们准备好从工业基础向前推进。”",
       "keyFacts": [
-        "NASA astronaut Randy Bresnik (left)",
-        "ESA (European Space Agency) astronaut Luca Parmitano view progress on the solid rocket booster integration in High Bay 3 inside the Vehicle…",
-        "and NASA astronauts Andre Douglas"
+        "“It means that the design is solid",
+        "It means that we’re ready to move forward from an industrial base as well,” Jill Albertelli",
+        "the president of Pratt & Whitney’s military engines business"
       ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "NASA",
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
       "country": "国际",
-      "publishedAt": "2026-09-15T16:14:24Z",
-      "url": "https://www.nasa.gov/image-article/artemis-iii-crew-visits-nasa-kennedys-vehicle-assembly-building",
-      "score": 65,
+      "publishedAt": "2026-09-15T21:41:16Z",
+      "url": "https://breakingdefense.com/2026/09/f-35-engine-upgrade-clears-key-design-review-pratt-says",
+      "score": 64,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 20,
-        "主题优先级": 9,
-        "时效": 16,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 18,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2055,26 +2913,26 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 20/20",
-        "发布约 8.2 小时",
+        "来源权重 16/20",
+        "发布约 3.7 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "NASA",
-        "阿尔忒弥斯3号",
-        "肯尼迪航天中心"
+        "F-35",
+        "普惠",
+        "发动机"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "NASA",
-          "domain": "nasa.gov",
-          "url": "https://www.nasa.gov/image-article/artemis-iii-crew-visits-nasa-kennedys-vehicle-assembly-building",
-          "publishedAt": "2026-09-15T16:14:24Z",
-          "evidenceGroup": "outlet:nasa.gov"
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/09/f-35-engine-upgrade-clears-key-design-review-pratt-says",
+          "publishedAt": "2026-09-15T21:41:16Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
         }
       ],
       "selectionProvider": "",
@@ -2084,7 +2942,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 29
+      "streamRank": 30
     },
     {
       "id": "28151eaaa7e1ba",
@@ -2120,7 +2978,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.5 小时",
+        "发布约 4.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2148,133 +3006,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 30
-    },
-    {
-      "id": "0d2145bc35434f",
-      "eventId": "evt-ae72df40126c",
-      "contentType": "news",
-      "title": "西方情报警告伊朗网络威胁针对异见人士",
-      "originalTitle": "Western intelligence warns of Iranian cyber threats targeting dissidents",
-      "summary": "西方情报机构指出，名为“CHOSEN BRICK”的间谍软件正针对海外伊朗政府批评者。",
-      "keyFacts": [
-        "Western intelligence agencies highlight 'CHOSEN BRICK' spyware targeting critics of Iran government abroad"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-15T20:16:35Z",
-      "url": "https://www.aljazeera.com/news/2026/9/15/western-intelligence-warns-of-iranian-cyber-threats-targeting-dissidents?traffic_source=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.2 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "伊朗",
-        "网络间谍",
-        "异见人士"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/9/15/western-intelligence-warns-of-iranian-cyber-threats-targeting-dissidents?traffic_source=rss",
-          "publishedAt": "2026-09-15T20:16:35Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
       "streamRank": 31
-    },
-    {
-      "id": "53c1b85fe2f8b2",
-      "eventId": "evt-be79e67cacc3",
-      "contentType": "news",
-      "title": "国会预算办公室：伊朗战争耗资380亿美元，未来每月再增20至30亿",
-      "originalTitle": "Iran war costs: $38B, plus $2-3B per month going forward, CBO says",
-      "summary": "国会预算办公室报告称，伊朗战争已耗资380亿美元，未来每月还将增加20至30亿美元，重建美国弹药库存“至少需要五年”。",
-      "keyFacts": [
-        "The Congressional Budget Office reported it would take “at least five years” to rebuild American munitions inventories"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-09-15T19:58:53Z",
-      "url": "https://breakingdefense.com/2026/09/iran-war-costs-38b-plus-2-3b-per-month-going-forward-cbo-says",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.5 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "国会预算办公室",
-        "伊朗战争",
-        "军费"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/09/iran-war-costs-38b-plus-2-3b-per-month-going-forward-cbo-says",
-          "publishedAt": "2026-09-15T19:58:53Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 32
     },
     {
       "id": "85582cf4ab3f66",
@@ -2310,7 +3042,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 5.2 小时",
+        "发布约 6.1 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "待核验",
@@ -2338,7 +3070,136 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
+      "streamRank": 32
+    },
+    {
+      "id": "1581102dd4e02f",
+      "eventId": "evt-df8e8870249e",
+      "contentType": "news",
+      "title": "美国证实地球轨道部署武器，引发太空军备竞赛警告",
+      "originalTitle": "Warning of space arms race as US confirms weapons in Earth's orbit",
+      "summary": "美国证实已在地球轨道部署太空武器，这是其首次承认此类进攻性能力。",
+      "keyFacts": [
+        "The US has confirmed it deployed a space weapon in Earth's orbit",
+        "the first time it has acknowledged such offensive capabilities"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-09-15T17:35:02Z",
+      "url": "https://www.bbc.co.uk/news/videos/cmn07yjqg5rwo?at_medium=RSS&at_campaign=rss",
+      "score": 64,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 9,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 7.8 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "太空武器",
+        "军备竞赛",
+        "美国"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/e727/live/b42a3d90-b13b-11f1-b1d1-571ed4d7ff2c.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/videos/cmn07yjqg5rwo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-09-15T17:35:02Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
       "streamRank": 33
+    },
+    {
+      "id": "fac0c278b3c319",
+      "eventId": "evt-b4bc5a570cb4",
+      "contentType": "news",
+      "title": "阿尔忒弥斯3号乘组参观NASA肯尼迪航天中心垂直装配大楼",
+      "originalTitle": "Artemis III Crew Visits NASA Kennedy’s Vehicle Assembly Building",
+      "summary": "NASA宇航员兰迪·布雷斯尼克与ESA宇航员卢卡·帕尔米塔诺于2026年9月2日星期三在佛罗里达州NASA肯尼迪航天中心垂直装配大楼3号高湾查看固体火箭助推器集成进展。布雷斯尼克、帕尔米塔诺与NASA宇航员安德烈·道格拉斯、弗兰克·鲁比奥和鲍勃·海因斯一同到访。",
+      "keyFacts": [
+        "NASA astronaut Randy Bresnik (left)",
+        "ESA (European Space Agency) astronaut Luca Parmitano view progress on the solid rocket booster integration in High Bay 3 inside the Vehicle…",
+        "and NASA astronauts Andre Douglas"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
+      "country": "国际",
+      "publishedAt": "2026-09-15T16:14:24Z",
+      "url": "https://www.nasa.gov/image-article/artemis-iii-crew-visits-nasa-kennedys-vehicle-assembly-building",
+      "score": 64,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 15,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 20/20",
+        "发布约 9.1 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "NASA",
+        "阿尔忒弥斯3号",
+        "肯尼迪航天中心"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "NASA",
+          "domain": "nasa.gov",
+          "url": "https://www.nasa.gov/image-article/artemis-iii-crew-visits-nasa-kennedys-vehicle-assembly-building",
+          "publishedAt": "2026-09-15T16:14:24Z",
+          "evidenceGroup": "outlet:nasa.gov"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 34
     },
     {
       "id": "9ea776ae7c5bc7",
@@ -2375,7 +3236,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 11.5 小时",
+        "发布约 12.4 小时",
         "命中 1 个主题信号",
         "影响信号：first"
       ],
@@ -2404,7 +3265,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 34
+      "streamRank": 35
     },
     {
       "id": "6f7a14252339b7",
@@ -2441,7 +3302,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 4.1 小时",
+        "发布约 5.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
@@ -2469,7 +3330,133 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 35
+      "streamRank": 36
+    },
+    {
+      "id": "0d2145bc35434f",
+      "eventId": "evt-ae72df40126c",
+      "contentType": "news",
+      "title": "西方情报警告伊朗网络威胁针对异见人士",
+      "originalTitle": "Western intelligence warns of Iranian cyber threats targeting dissidents",
+      "summary": "西方情报机构指出，名为“CHOSEN BRICK”的间谍软件正针对海外伊朗政府批评者。",
+      "keyFacts": [
+        "Western intelligence agencies highlight 'CHOSEN BRICK' spyware targeting critics of Iran government abroad"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-15T20:16:35Z",
+      "url": "https://www.aljazeera.com/news/2026/9/15/western-intelligence-warns-of-iranian-cyber-threats-targeting-dissidents?traffic_source=rss",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 5.1 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "网络间谍",
+        "异见人士"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/9/15/western-intelligence-warns-of-iranian-cyber-threats-targeting-dissidents?traffic_source=rss",
+          "publishedAt": "2026-09-15T20:16:35Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 37
+    },
+    {
+      "id": "53c1b85fe2f8b2",
+      "eventId": "evt-be79e67cacc3",
+      "contentType": "news",
+      "title": "国会预算办公室：伊朗战争耗资380亿美元，未来每月再增20至30亿",
+      "originalTitle": "Iran war costs: $38B, plus $2-3B per month going forward, CBO says",
+      "summary": "国会预算办公室报告称，伊朗战争已耗资380亿美元，未来每月还将增加20至30亿美元，重建美国弹药库存“至少需要五年”。",
+      "keyFacts": [
+        "The Congressional Budget Office reported it would take “at least five years” to rebuild American munitions inventories"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-09-15T19:58:53Z",
+      "url": "https://breakingdefense.com/2026/09/iran-war-costs-38b-plus-2-3b-per-month-going-forward-cbo-says",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 5.4 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "国会预算办公室",
+        "伊朗战争",
+        "军费"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/09/iran-war-costs-38b-plus-2-3b-per-month-going-forward-cbo-says",
+          "publishedAt": "2026-09-15T19:58:53Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 38
     },
     {
       "id": "a66c3cdfaa8302",
@@ -2504,7 +3491,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.4 小时",
+        "发布约 6.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2532,7 +3519,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 36
+      "streamRank": 39
     },
     {
       "id": "e2a9eff022491c",
@@ -2567,7 +3554,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.9 小时",
+        "发布约 6.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2595,391 +3582,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 37
-    },
-    {
-      "id": "abdc846e45f41a",
-      "eventId": "evt-6fdb0a3e6317",
-      "contentType": "news",
-      "title": "埃及总统塞西会见MBS，支持沙特呼吁红海安全航行",
-      "originalTitle": "Egypt’s el-Sisi meets MBS, backs Saudi call for secure Red Sea navigation",
-      "summary": "红海受扰影响埃及经济，两年内苏伊士运河收入减少70亿美元。",
-      "keyFacts": [
-        "Red Sea disruptions impact Egypt’s economy",
-        "with Suez Canal revenues dropping by $7bn in two years"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-15T18:05:24Z",
-      "url": "https://www.aljazeera.com/news/2026/9/15/egypts-sisi-meets-mbs-backs-saudi-call-for-secure-red-sea-navigation?traffic_source=rss",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.4 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "埃及",
-        "沙特",
-        "红海"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/9/15/egypts-sisi-meets-mbs-backs-saudi-call-for-secure-red-sea-navigation?traffic_source=rss",
-          "publishedAt": "2026-09-15T18:05:24Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 38
-    },
-    {
-      "id": "8fdcb6d9fa912c",
-      "eventId": "evt-9565e43c88dd",
-      "contentType": "news",
-      "title": "导弹、无人机与反无人机系统：AFA展会第二日看点",
-      "originalTitle": "Missiles, drones and counter-drone systems: A look at day 2 of AFA",
-      "summary": "从反无人机激光器到剖视发动机缸体，以下是展会现场的一些景象。",
-      "keyFacts": [
-        "From counter-drone lasers to cutaway engine blocks",
-        "here are some of the sights from around the trade show floor"
-      ],
-      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
-      "category": "无人系统",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-09-15T17:42:00Z",
-      "url": "https://breakingdefense.com/2026/09/missiles-drones-and-counter-drone-systems-a-look-at-day-2-of-afa",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.8 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "AFA",
-        "反无人机",
-        "展会"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/09/missiles-drones-and-counter-drone-systems-a-look-at-day-2-of-afa",
-          "publishedAt": "2026-09-15T17:42:00Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 39
-    },
-    {
-      "id": "8d61a3440c207e",
-      "eventId": "evt-bd0a053e7924",
-      "contentType": "news",
-      "title": "联合国：也门暴力致超10万人流离失所",
-      "originalTitle": "More than 100,000 displaced as they flee violence in Yemen: UN",
-      "summary": "也门政府与胡塞武装冲突加剧，数千人冒险渡海前往吉布提。",
-      "keyFacts": [
-        "Thousands making risky maritime journey to Djibouti as conflict between Yemen gov't",
-        "Houthis intensifies"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-15T17:39:58Z",
-      "url": "https://www.aljazeera.com/news/2026/9/15/more-than-100000-displaced-as-they-flee-violence-in-yemen-un?traffic_source=rss",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 6.8 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "也门",
-        "联合国",
-        "流离失所"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/9/15/more-than-100000-displaced-as-they-flee-violence-in-yemen-un?traffic_source=rss",
-          "publishedAt": "2026-09-15T17:39:58Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
       "streamRank": 40
-    },
-    {
-      "id": "8af4ddcdaaaa7b",
-      "eventId": "evt-7766ca5aab18",
-      "contentType": "news",
-      "title": "更多卫星监视战场，数据解读价值凸显",
-      "originalTitle": "More satellites watch the battlefield, putting a premium on making sense of the data",
-      "summary": "太空军项目正利用卫星数据和人工智能，加快向军事指挥官传递情报。",
-      "keyFacts": [
-        "Space Force programs are tapping satellite data",
-        "AI to get intelligence to military commanders faster"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "SpaceNews",
-      "country": "国际",
-      "publishedAt": "2026-09-15T15:49:31Z",
-      "url": "https://spacenews.com/more-satellites-watch-the-battlefield-putting-a-premium-on-making-sense-of-the-data",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 16,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 8.6 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "太空军",
-        "卫星数据",
-        "AI情报"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "SpaceNews",
-          "domain": "spacenews.com",
-          "url": "https://spacenews.com/more-satellites-watch-the-battlefield-putting-a-premium-on-making-sense-of-the-data",
-          "publishedAt": "2026-09-15T15:49:31Z",
-          "evidenceGroup": "outlet:spacenews.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 41
-    },
-    {
-      "id": "564ec8477305a6",
-      "eventId": "evt-2ccc95fae5da",
-      "contentType": "news",
-      "title": "OpenAI、Anthropic、谷歌就AI安全已商谈数周",
-      "originalTitle": "OpenAI, Anthropic, Google have been in talks on AI safety for weeks",
-      "summary": "OpenAI证实与Anthropic和谷歌DeepMind就AI安全进行了数周商谈；特朗普团队淡化安全担忧，并推动跟上中国。",
-      "keyFacts": [
-        "OpenAI confirms weeks of AI safety talks with Anthropic",
-        "Google DeepMind",
-        "as Trump's team dismisses safety concerns"
-      ],
-      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
-      "category": "AI",
-      "source": "TechCrunch AI",
-      "country": "国际",
-      "publishedAt": "2026-09-15T15:47:03Z",
-      "url": "https://techcrunch.com/2026/09/15/openai-anthropic-google-have-been-in-talks-on-ai-safety-for-weeks",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 8.7 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "AI安全",
-        "OpenAI",
-        "谷歌DeepMind"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "TechCrunch AI",
-          "domain": "techcrunch.com",
-          "url": "https://techcrunch.com/2026/09/15/openai-anthropic-google-have-been-in-talks-on-ai-safety-for-weeks",
-          "publishedAt": "2026-09-15T15:47:03Z",
-          "evidenceGroup": "outlet:techcrunch.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 42
-    },
-    {
-      "id": "378dfa146f2a56",
-      "eventId": "evt-e9ef03238903",
-      "contentType": "news",
-      "title": "意大利战机在立陶宛上空击落不明无人机",
-      "originalTitle": "Italian fighter jets shoot down unidentified drone over Lithuania",
-      "summary": "这是30天内意大利空军第二次应对领空入侵事件。",
-      "keyFacts": [
-        "The incident marks the second time in 30 days that the Italian Air Force has responded to airspace incursions"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Breaking Defense",
-      "country": "国际",
-      "publishedAt": "2026-09-15T13:50:45Z",
-      "url": "https://breakingdefense.com/2026/09/italian-fighter-jets-shoot-down-unidentified-drone-over-lithuania",
-      "score": 63,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 10.6 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "意大利空军",
-        "立陶宛",
-        "无人机"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Breaking Defense",
-          "domain": "breakingdefense.com",
-          "url": "https://breakingdefense.com/2026/09/italian-fighter-jets-shoot-down-unidentified-drone-over-lithuania",
-          "publishedAt": "2026-09-15T13:50:45Z",
-          "evidenceGroup": "outlet:breakingdefense.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 43
     },
     {
       "id": "7e51f55f4e55d8",
@@ -3016,7 +3619,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 15.3 小时",
+        "发布约 16.2 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "中",
@@ -3044,7 +3647,71 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 44
+      "streamRank": 41
+    },
+    {
+      "id": "8fdcb6d9fa912c",
+      "eventId": "evt-9565e43c88dd",
+      "contentType": "news",
+      "title": "导弹、无人机与反无人机系统：AFA展会第二日看点",
+      "originalTitle": "Missiles, drones and counter-drone systems: A look at day 2 of AFA",
+      "summary": "从反无人机激光器到剖视发动机缸体，以下是展会现场的一些景象。",
+      "keyFacts": [
+        "From counter-drone lasers to cutaway engine blocks",
+        "here are some of the sights from around the trade show floor"
+      ],
+      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
+      "category": "无人系统",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-09-15T17:42:00Z",
+      "url": "https://breakingdefense.com/2026/09/missiles-drones-and-counter-drone-systems-a-look-at-day-2-of-afa",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.7 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "AFA",
+        "反无人机",
+        "展会"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/09/missiles-drones-and-counter-drone-systems-a-look-at-day-2-of-afa",
+          "publishedAt": "2026-09-15T17:42:00Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 42
     },
     {
       "id": "5e72089582a57b",
@@ -3079,7 +3746,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 7.4 小时",
+        "发布约 8.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3107,7 +3774,327 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
+      "streamRank": 43
+    },
+    {
+      "id": "8af4ddcdaaaa7b",
+      "eventId": "evt-7766ca5aab18",
+      "contentType": "news",
+      "title": "更多卫星监视战场，数据解读价值凸显",
+      "originalTitle": "More satellites watch the battlefield, putting a premium on making sense of the data",
+      "summary": "太空军项目正利用卫星数据和人工智能，加快向军事指挥官传递情报。",
+      "keyFacts": [
+        "Space Force programs are tapping satellite data",
+        "AI to get intelligence to military commanders faster"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
+      "country": "国际",
+      "publishedAt": "2026-09-15T15:49:31Z",
+      "url": "https://spacenews.com/more-satellites-watch-the-battlefield-putting-a-premium-on-making-sense-of-the-data",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 15,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 9.5 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "太空军",
+        "卫星数据",
+        "AI情报"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/more-satellites-watch-the-battlefield-putting-a-premium-on-making-sense-of-the-data",
+          "publishedAt": "2026-09-15T15:49:31Z",
+          "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 44
+    },
+    {
+      "id": "564ec8477305a6",
+      "eventId": "evt-2ccc95fae5da",
+      "contentType": "news",
+      "title": "OpenAI、Anthropic、谷歌就AI安全已商谈数周",
+      "originalTitle": "OpenAI, Anthropic, Google have been in talks on AI safety for weeks",
+      "summary": "OpenAI证实与Anthropic和谷歌DeepMind就AI安全进行了数周商谈；特朗普团队淡化安全担忧，并推动跟上中国。",
+      "keyFacts": [
+        "OpenAI confirms weeks of AI safety talks with Anthropic",
+        "Google DeepMind",
+        "as Trump's team dismisses safety concerns"
+      ],
+      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
+      "category": "AI",
+      "source": "TechCrunch AI",
+      "country": "国际",
+      "publishedAt": "2026-09-15T15:47:03Z",
+      "url": "https://techcrunch.com/2026/09/15/openai-anthropic-google-have-been-in-talks-on-ai-safety-for-weeks",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 9.6 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "AI安全",
+        "OpenAI",
+        "谷歌DeepMind"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "TechCrunch AI",
+          "domain": "techcrunch.com",
+          "url": "https://techcrunch.com/2026/09/15/openai-anthropic-google-have-been-in-talks-on-ai-safety-for-weeks",
+          "publishedAt": "2026-09-15T15:47:03Z",
+          "evidenceGroup": "outlet:techcrunch.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
       "streamRank": 45
+    },
+    {
+      "id": "378dfa146f2a56",
+      "eventId": "evt-e9ef03238903",
+      "contentType": "news",
+      "title": "意大利战机在立陶宛上空击落不明无人机",
+      "originalTitle": "Italian fighter jets shoot down unidentified drone over Lithuania",
+      "summary": "这是30天内意大利空军第二次应对领空入侵事件。",
+      "keyFacts": [
+        "The incident marks the second time in 30 days that the Italian Air Force has responded to airspace incursions"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Breaking Defense",
+      "country": "国际",
+      "publishedAt": "2026-09-15T13:50:45Z",
+      "url": "https://breakingdefense.com/2026/09/italian-fighter-jets-shoot-down-unidentified-drone-over-lithuania",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 14,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 11.5 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "意大利空军",
+        "立陶宛",
+        "无人机"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Breaking Defense",
+          "domain": "breakingdefense.com",
+          "url": "https://breakingdefense.com/2026/09/italian-fighter-jets-shoot-down-unidentified-drone-over-lithuania",
+          "publishedAt": "2026-09-15T13:50:45Z",
+          "evidenceGroup": "outlet:breakingdefense.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 46
+    },
+    {
+      "id": "abdc846e45f41a",
+      "eventId": "evt-6fdb0a3e6317",
+      "contentType": "news",
+      "title": "埃及总统塞西会见MBS，支持沙特呼吁红海安全航行",
+      "originalTitle": "Egypt’s el-Sisi meets MBS, backs Saudi call for secure Red Sea navigation",
+      "summary": "红海受扰影响埃及经济，两年内苏伊士运河收入减少70亿美元。",
+      "keyFacts": [
+        "Red Sea disruptions impact Egypt’s economy",
+        "with Suez Canal revenues dropping by $7bn in two years"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-15T18:05:24Z",
+      "url": "https://www.aljazeera.com/news/2026/9/15/egypts-sisi-meets-mbs-backs-saudi-call-for-secure-red-sea-navigation?traffic_source=rss",
+      "score": 61,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 2,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.3 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "埃及",
+        "沙特",
+        "红海"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/9/15/egypts-sisi-meets-mbs-backs-saudi-call-for-secure-red-sea-navigation?traffic_source=rss",
+          "publishedAt": "2026-09-15T18:05:24Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 47
+    },
+    {
+      "id": "8d61a3440c207e",
+      "eventId": "evt-bd0a053e7924",
+      "contentType": "news",
+      "title": "联合国：也门暴力致超10万人流离失所",
+      "originalTitle": "More than 100,000 displaced as they flee violence in Yemen: UN",
+      "summary": "也门政府与胡塞武装冲突加剧，数千人冒险渡海前往吉布提。",
+      "keyFacts": [
+        "Thousands making risky maritime journey to Djibouti as conflict between Yemen gov't",
+        "Houthis intensifies"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-15T17:39:58Z",
+      "url": "https://www.aljazeera.com/news/2026/9/15/more-than-100000-displaced-as-they-flee-violence-in-yemen-un?traffic_source=rss",
+      "score": 61,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 2,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 7.7 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "也门",
+        "联合国",
+        "流离失所"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/9/15/more-than-100000-displaced-as-they-flee-violence-in-yemen-un?traffic_source=rss",
+          "publishedAt": "2026-09-15T17:39:58Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 48
     },
     {
       "id": "2e86a2acf84291",
@@ -3125,13 +4112,13 @@
       "country": "国际",
       "publishedAt": "2026-09-15T16:17:46Z",
       "url": "https://www.defensenews.com/global/europe/2026/09/15/ukraine-launches-offensive-push-in-north-of-donetsk-region-senior-commander-says",
-      "score": 62,
+      "score": 61,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -3142,7 +4129,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 8.2 小时",
+        "发布约 9.1 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3170,71 +4157,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 46
-    },
-    {
-      "id": "417e85f24fd185",
-      "eventId": "evt-40630768f861",
-      "contentType": "news",
-      "title": "伊朗外长赴北京，中国能否扮演和平调解者？",
-      "originalTitle": "Can China play peacemaker as Iran’s foreign minister heads to Beijing?",
-      "summary": "在伊朗与美国紧张升级之际，德黑兰与北京探索外交路径。",
-      "keyFacts": [
-        "Beijing explore diplomatic paths amid escalating tensions between Iran",
-        "the United States"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-15T16:15:13Z",
-      "url": "https://www.aljazeera.com/news/2026/9/15/can-china-play-peacemaker-as-irans-foreign-minister-heads-to-beijing?traffic_source=rss",
-      "score": 62,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 8.2 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "伊朗",
-        "中国",
-        "外交"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/9/15/can-china-play-peacemaker-as-irans-foreign-minister-heads-to-beijing?traffic_source=rss",
-          "publishedAt": "2026-09-15T16:15:13Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 47
+      "streamRank": 49
     },
     {
       "id": "1e5e15ecd6e26f",
@@ -3269,7 +4192,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 10.1 小时",
+        "发布约 11.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3297,70 +4220,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 48
-    },
-    {
-      "id": "53e6bbc1b890ec",
-      "eventId": "evt-7f8ccafc5c04",
-      "contentType": "news",
-      "title": "卫星图像揭示导致沙特关键输油管道关闭的重大损坏",
-      "originalTitle": "Satellite image reveals major damage that shut crucial Saudi oil pipeline",
-      "summary": "专家向BBC Verify表示，管道关闭可能使石油供应每日减少多达360万桶。",
-      "keyFacts": [
-        "Experts tell BBC Verify the pipeline's closure could cut oil supplies by as much as 3.6 million barrels per day"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-09-15T14:21:14Z",
-      "url": "https://www.bbc.co.uk/news/articles/c65yw2gq2nrno?at_medium=RSS&at_campaign=rss",
-      "score": 61,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 9,
-        "时效": 15,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 10.1 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "沙特",
-        "输油管道",
-        "卫星图像"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/6491/live/f14f3560-b10c-11f1-a540-61c3f7fc4e6c.png",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/c65yw2gq2nrno?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-09-15T14:21:14Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 49
+      "streamRank": 50
     },
     {
       "id": "f8ac31063bfdb0",
@@ -3397,7 +4257,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 11.5 小时",
+        "发布约 12.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3425,7 +4285,70 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 50
+      "streamRank": 51
+    },
+    {
+      "id": "53e6bbc1b890ec",
+      "eventId": "evt-7f8ccafc5c04",
+      "contentType": "news",
+      "title": "卫星图像揭示导致沙特关键输油管道关闭的重大损坏",
+      "originalTitle": "Satellite image reveals major damage that shut crucial Saudi oil pipeline",
+      "summary": "专家向BBC Verify表示，管道关闭可能使石油供应每日减少多达360万桶。",
+      "keyFacts": [
+        "Experts tell BBC Verify the pipeline's closure could cut oil supplies by as much as 3.6 million barrels per day"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-09-15T14:21:14Z",
+      "url": "https://www.bbc.co.uk/news/articles/c65yw2gq2nrno?at_medium=RSS&at_campaign=rss",
+      "score": 60,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 9,
+        "时效": 14,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 11.0 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "沙特",
+        "输油管道",
+        "卫星图像"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/6491/live/f14f3560-b10c-11f1-a540-61c3f7fc4e6c.png",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c65yw2gq2nrno?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-09-15T14:21:14Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 52
     },
     {
       "id": "f763038980f310",
@@ -3445,13 +4368,13 @@
       "country": "国际",
       "publishedAt": "2026-09-15T12:00:00Z",
       "url": "https://www.technologyreview.com/2026/09/15/1144129/ai-models-need-more-data-about-biology-and-openai-is-paying-to-create-it",
-      "score": 61,
+      "score": 60,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 14,
+        "时效": 13,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -3462,7 +4385,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 12.5 小时",
+        "发布约 13.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3490,7 +4413,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 51
+      "streamRank": 53
     },
     {
       "id": "b6830e464ee21c",
@@ -3526,7 +4449,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 15.1 小时",
+        "发布约 16.0 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -3554,7 +4477,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 52
+      "streamRank": 54
     },
     {
       "id": "670869cd8070cc",
@@ -3591,7 +4514,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 15.8 小时",
+        "发布约 16.7 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -3619,7 +4542,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 53
+      "streamRank": 55
     },
     {
       "id": "d6d870de6e86df",
@@ -3656,7 +4579,7 @@
       },
       "scoreReasons": [
         "来源权重 19/20",
-        "发布约 21.1 小时",
+        "发布约 22.0 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -3684,7 +4607,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 54
+      "streamRank": 56
     },
     {
       "id": "9e7024bf93e4a3",
@@ -3720,7 +4643,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 19.4 小时",
+        "发布约 20.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3748,7 +4671,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 55
+      "streamRank": 57
     }
   ]
 }
