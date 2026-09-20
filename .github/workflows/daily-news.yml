@@ -6,6 +6,10 @@ on:
       - main
     paths:
       - ".github/workflows/daily-news.yml"
+      - "scripts/update_news.py"
+      - "scripts/check_daily_refresh.py"
+      - "config/news_config.json"
+      - "public/assets/news-policy.json"
   schedule:
     - cron: "7 7 * * *"
       timezone: "Asia/Shanghai"

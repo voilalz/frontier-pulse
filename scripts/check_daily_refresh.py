@@ -51,6 +51,7 @@ def decide_refresh(
         status.get("state") == "ok"
         and status.get("editionDate") == today
         and status.get("itemCount") == 10
+        and status.get("translationStatus") not in {"partial", "failed"}
     )
     try:
         current_schema = int(status.get("schemaVersion", 0) or 0)
