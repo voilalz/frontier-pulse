@@ -1,12 +1,12 @@
 {
   "schemaVersion": 10,
   "state": "ok",
-  "lastAttemptAt": "2026-09-20T10:11:07Z",
+  "lastAttemptAt": "2026-09-20T14:53:12Z",
   "summaryRevision": 3,
-  "lastSuccessAt": "2026-09-20T10:11:07Z",
+  "lastSuccessAt": "2026-09-20T14:53:12Z",
   "editionDate": "2026-09-20",
   "itemCount": 10,
-  "message": "日报更新成功；日报中文翻译在拆分重试后仍缺失 5/10 条：连续两次无有效结果，已停止后续调用；日报中文翻译不完整：5/10；论文抓取未返回合格条目，已保留上一版论文雷达",
+  "message": "日报更新成功；论文抓取未返回合格条目，已保留上一版论文雷达",
   "method": "deepseek",
   "selectionMethod": "deepseek",
   "selectionStrategy": "ai-ranked-rule-constrained",
@@ -14,7 +14,7 @@
   "selectionProvider": "deepseek",
   "selectionModel": "deepseek-v4-flash",
   "selectionNotices": [
-    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 3 个 Top 10 入选位"
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 5 个 Top 10 入选位"
   ],
   "selectionWarnings": [],
   "selectionDiagnostics": {
@@ -30,111 +30,87 @@
     "aiUnscoredItemCount": 0,
     "unconstrainedTop": {
       "categoryCounts": {
-        "局部冲突": 5,
-        "军事动态": 2,
-        "AI": 3
+        "局部冲突": 8,
+        "军事动态": 2
       },
       "domainCounts": {
-        "bbc.co.uk": 4,
-        "aljazeera.com": 1,
-        "techcrunch.com": 1,
-        "theguardian.com": 2,
-        "france24.com": 2
+        "theguardian.com": 3,
+        "bbc.co.uk": 1,
+        "defenseone.com": 1,
+        "france24.com": 3,
+        "dw.com": 1,
+        "navalnews.com": 1
       },
       "categoryViolations": {
-        "局部冲突": 5
+        "局部冲突": 8
       },
       "domainViolations": {
-        "bbc.co.uk": 4
+        "theguardian.com": 3,
+        "france24.com": 3
       }
     },
     "finalTop": {
       "categoryCounts": {
         "局部冲突": 3,
         "军事动态": 3,
-        "AI": 3,
-        "无人系统": 1
+        "前沿技术": 2,
+        "AI": 2
       },
       "domainCounts": {
+        "theguardian.com": 1,
         "bbc.co.uk": 2,
-        "aljazeera.com": 1,
-        "techcrunch.com": 1,
-        "theguardian.com": 2,
+        "defenseone.com": 1,
         "france24.com": 2,
         "navalnews.com": 1,
-        "dw.com": 1
+        "therobotreport.com": 1,
+        "sciencedaily.com": 1,
+        "techcrunch.com": 1
       },
       "categoryViolations": {},
       "domainViolations": {}
     },
-    "adjustedItemCount": 3,
+    "adjustedItemCount": 5,
     "adjustedOutIds": [
+      "a6dcf8f0b5e78c",
+      "9e9d8d1bd79da9",
+      "d0c9dac4e7a1d4",
       "15fe55246a3a2a",
-      "dbf103d247c131",
-      "7ffe8b5c745471"
+      "fbea76a25d727a"
     ],
     "adjustedInIds": [
-      "ce08c0caede593",
-      "a183019f646621",
-      "f5de44bc58e268"
+      "3acf20d8bc231b",
+      "19ece4772e9e2f",
+      "f2c909c5378c71",
+      "f0c0ee6d395748",
+      "0080ce44a56c36"
     ],
     "relaxedItemCount": 0
   },
-  "translationStatus": "partial",
+  "translationStatus": "ok",
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
-  "translatedItemCount": 5,
-  "translationWarnings": [
-    "日报中文翻译在拆分重试后仍缺失 5/10 条：连续两次无有效结果，已停止后续调用",
-    "日报中文翻译不完整：5/10"
-  ],
+  "translatedItemCount": 10,
+  "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 10,
-    "completedItemCount": 5,
-    "missingItemCount": 5,
-    "missingItemIds": [
-      "f2c909c5378c71",
-      "76b6b88ea3061f",
-      "ce08c0caede593",
-      "a183019f646621",
-      "f5de44bc58e268"
-    ],
-    "missingItems": [
-      {
-        "id": "f2c909c5378c71",
-        "reason": "empty_or_invalid_response"
-      },
-      {
-        "id": "76b6b88ea3061f",
-        "reason": "empty_or_invalid_response"
-      },
-      {
-        "id": "ce08c0caede593",
-        "reason": "empty_or_invalid_response"
-      },
-      {
-        "id": "a183019f646621",
-        "reason": "empty_or_invalid_response"
-      },
-      {
-        "id": "f5de44bc58e268",
-        "reason": "empty_or_invalid_response"
-      }
-    ],
+    "requestedItemCount": 4,
+    "completedItemCount": 4,
+    "missingItemCount": 0,
+    "missingItemIds": [],
+    "missingItems": [],
     "initialBatchSize": 5,
-    "initialBatchCount": 2,
-    "requestCount": 5,
-    "retryRequestCount": 3,
+    "initialBatchCount": 1,
+    "requestCount": 1,
+    "retryRequestCount": 0,
     "providerFailureCount": 0,
-    "structuralFailureCount": 3,
-    "completionReason": "provider_circuit_breaker",
-    "completionMessage": "连续两次无有效结果，已停止后续调用",
+    "structuralFailureCount": 0,
+    "completionReason": "complete_first_pass",
+    "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
     "targetItemCount": 10,
-    "reusedItemCount": 0,
-    "newlyTranslatedItemCount": 5,
-    "totalTranslatedItemCount": 5,
-    "totalMissingItemCount": 5
+    "reusedItemCount": 6,
+    "newlyTranslatedItemCount": 4,
+    "totalTranslatedItemCount": 10,
+    "totalMissingItemCount": 0
   },
   "historyAnalysisStatus": "disabled",
   "historyAnalysisProvider": "",
@@ -152,37 +128,34 @@
   "eventCount": 10,
   "weeklyEventCount": 8,
   "anomalySignalCount": 4,
-  "paperLinkedItemCount": 0,
-  "warnings": [
-    "日报中文翻译在拆分重试后仍缺失 5/10 条：连续两次无有效结果，已停止后续调用",
-    "日报中文翻译不完整：5/10"
-  ],
+  "paperLinkedItemCount": 1,
+  "warnings": [],
   "coverageStatus": "complete",
   "freshItemCount": 10,
   "supplementalItemCount": 0,
   "effectiveLookbackHours": 24,
-  "streamItemCount": 37,
+  "streamItemCount": 45,
   "streamTranslationProvider": "deepseek",
   "streamTranslationModel": "deepseek-v4-flash",
-  "streamTranslatedItemCount": 37,
+  "streamTranslatedItemCount": 45,
   "streamTranslationWarnings": [],
   "streamTranslationDiagnostics": {
-    "requestedItemCount": 32,
-    "completedItemCount": 32,
+    "requestedItemCount": 19,
+    "completedItemCount": 19,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 6,
-    "requestCount": 8,
-    "retryRequestCount": 2,
+    "initialBatchCount": 4,
+    "requestCount": 5,
+    "retryRequestCount": 1,
     "providerFailureCount": 0,
     "structuralFailureCount": 1,
     "completionReason": "complete_after_retry",
     "completionMessage": "缺失条目经拆分重试后已全部完成",
     "lastProviderError": "",
-    "reusedItemCount": 0,
-    "featuredTranslatedItemCount": 5
+    "reusedItemCount": 22,
+    "featuredTranslatedItemCount": 10
   },
   "researchItemCount": 24,
   "researchEditorialStatus": "stale",
