@@ -1,77 +1,82 @@
 {
-  "schemaVersion": 9,
-  "generatedAt": "2026-09-20T01:02:51Z",
+  "schemaVersion": 10,
+  "generatedAt": "2026-09-20T09:57:55Z",
   "editionDate": "2026-09-20",
   "timezone": "Asia/Shanghai",
   "method": "deepseek",
   "selectionMethod": "deepseek",
   "selectionStrategy": "ai-ranked-rule-constrained",
-  "selectionStatus": "relaxed",
+  "selectionStatus": "adjusted",
   "selectionProvider": "deepseek",
   "selectionModel": "deepseek-v4-flash",
   "selectionNotices": [
-    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 1 个 Top 10 入选位"
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 3 个 Top 10 入选位"
   ],
-  "selectionWarnings": [
-    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（4 条已标注）"
-  ],
+  "selectionWarnings": [],
   "selectionDiagnostics": {
     "attempted": true,
-    "status": "relaxed",
+    "status": "adjusted",
     "failureReason": "",
-    "candidateCount": 19,
+    "candidateCount": 36,
     "provider": "deepseek",
     "model": "deepseek-v4-flash",
     "aiWeight": 0.65,
     "ruleWeight": 0.35,
-    "aiScoredItemCount": 19,
+    "aiScoredItemCount": 36,
     "aiUnscoredItemCount": 0,
     "unconstrainedTop": {
       "categoryCounts": {
-        "局部冲突": 7,
-        "军事动态": 1,
-        "AI": 2
+        "局部冲突": 5,
+        "军事动态": 4,
+        "AI": 1
       },
       "domainCounts": {
-        "aljazeera.com": 6,
         "bbc.co.uk": 3,
+        "france24.com": 3,
+        "aljazeera.com": 1,
+        "theguardian.com": 1,
+        "navalnews.com": 1,
         "techcrunch.com": 1
       },
       "categoryViolations": {
-        "局部冲突": 7
+        "局部冲突": 5,
+        "军事动态": 4
       },
       "domainViolations": {
-        "aljazeera.com": 6,
-        "bbc.co.uk": 3
+        "bbc.co.uk": 3,
+        "france24.com": 3
       }
     },
     "finalTop": {
       "categoryCounts": {
-        "局部冲突": 6,
-        "军事动态": 1,
-        "AI": 3
+        "局部冲突": 3,
+        "军事动态": 3,
+        "AI": 3,
+        "航空航天": 1
       },
       "domainCounts": {
-        "aljazeera.com": 5,
-        "bbc.co.uk": 3,
-        "techcrunch.com": 2
+        "bbc.co.uk": 2,
+        "france24.com": 2,
+        "aljazeera.com": 2,
+        "theguardian.com": 2,
+        "navalnews.com": 1,
+        "techcrunch.com": 1
       },
-      "categoryViolations": {
-        "局部冲突": 6
-      },
-      "domainViolations": {
-        "aljazeera.com": 5,
-        "bbc.co.uk": 3
-      }
+      "categoryViolations": {},
+      "domainViolations": {}
     },
-    "adjustedItemCount": 1,
+    "adjustedItemCount": 3,
     "adjustedOutIds": [
-      "4c4310903ab8eb"
+      "15fe55246a3a2a",
+      "7ffe8b5c745471",
+      "dbf103d247c131"
     ],
     "adjustedInIds": [
-      "760403627546a3"
+      "f2c909c5378c71",
+      "76b6b88ea3061f",
+      "b09dd547f98842"
     ],
-    "relaxedItemCount": 4
+    "relaxedItemCount": 0
   },
   "translationStatus": "ok",
   "translationProvider": "deepseek",
@@ -79,106 +84,97 @@
   "translatedItemCount": 10,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 0,
-    "completedItemCount": 0,
+    "requestedItemCount": 10,
+    "completedItemCount": 10,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 5,
-    "initialBatchCount": 0,
-    "requestCount": 0,
-    "retryRequestCount": 0,
-    "providerFailureCount": 0,
-    "structuralFailureCount": 0,
-    "completionReason": "not_needed",
-    "completionMessage": "没有需要翻译的新条目",
-    "lastProviderError": "",
-    "targetItemCount": 10,
-    "reusedItemCount": 10,
-    "newlyTranslatedItemCount": 0,
-    "totalTranslatedItemCount": 10,
-    "totalMissingItemCount": 0
-  },
-  "historyAnalysisStatus": "ok",
-  "historyAnalysisProvider": "deepseek",
-  "historyLinkedItemCount": 4,
-  "historyAnalyzedItemCount": 4,
-  "historyAnalysisWarnings": [],
-  "historyAnalysisDiagnostics": {
-    "requestedItemCount": 4,
-    "completedItemCount": 4,
-    "missingItemCount": 0,
-    "missingItemIds": [],
-    "missingItems": [],
-    "initialBatchSize": 5,
-    "initialBatchCount": 1,
-    "requestCount": 1,
+    "initialBatchCount": 2,
+    "requestCount": 2,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
     "completionReason": "complete_first_pass",
     "completionMessage": "全部条目首轮完成",
-    "lastProviderError": ""
+    "lastProviderError": "",
+    "targetItemCount": 10,
+    "reusedItemCount": 0,
+    "newlyTranslatedItemCount": 10,
+    "totalTranslatedItemCount": 10,
+    "totalMissingItemCount": 0
+  },
+  "historyAnalysisStatus": "disabled",
+  "historyAnalysisProvider": "",
+  "historyLinkedItemCount": 4,
+  "historyAnalyzedItemCount": 0,
+  "historyAnalysisWarnings": [],
+  "historyAnalysisDiagnostics": {
+    "requestedItemCount": 0,
+    "completedItemCount": 0,
+    "missingItemCount": 0,
+    "missingItemIds": [],
+    "completionReason": "not_started",
+    "completionMessage": "等待历史脉络分析"
   },
   "spotlightIds": [
+    "69290ccbb19147",
     "434963f0f47ef9",
-    "7ffe8b5c745471",
     "0080ce44a56c36"
   ],
-  "warnings": [
-    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（4 条已标注）"
-  ],
-  "candidateCount": 19,
-  "freshCandidateCount": 19,
+  "warnings": [],
+  "candidateCount": 36,
+  "freshCandidateCount": 36,
   "supplementalCandidateCount": 0,
   "freshItemCount": 10,
   "supplementalItemCount": 0,
-  "coverageStatus": "supplemented",
+  "coverageStatus": "complete",
   "effectiveLookbackHours": 24,
-  "sourceCount": 3,
+  "sourceCount": 12,
   "scoring": {
     "label": "重要度，不等同于事实真伪",
     "formula": "基础分 + 来源 + 主题优先级 + 时效 + 影响信号 + 相关性 + 证据完整度 + 多源印证 - 编辑降权",
     "confidenceNote": "置信度仅反映已收录来源的权重与独立来源数量，不替代事实核查。"
   },
   "brief": {
-    "headline": "沙特领导联盟称防御系统拦截了向利雅得发射的胡塞导弹",
-    "summary": "本期从 3 个公开信源筛选出 10 条重点事件，覆盖科技、AI、航空航天、安全动态与无人系统。",
+    "headline": "俄罗斯称莫斯科地区遭“大规模”乌克兰无人机袭击，两人死亡",
+    "summary": "本期从 12 个公开信源筛选出 10 条重点事件，覆盖科技、AI、航空航天、安全动态与无人系统。",
     "signals": [
-      "局部冲突今日进入 Top 10 的相关事件为 6 条，过去 30 个有归档日的中位数为 3.0 条，来自 2 个独立来源组。",
-      "AI安全今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。",
-      "沙特今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。"
+      "也门冲突今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 4 个独立来源组。",
+      "俄乌冲突今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 4 个独立来源组。",
+      "无人机袭击今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 4 个独立来源组。"
     ]
   },
   "items": [
     {
-      "id": "434963f0f47ef9",
-      "eventId": "evt-d2434e85200c",
+      "id": "69290ccbb19147",
+      "eventId": "evt-d427713914eb",
       "contentType": "news",
-      "title": "沙特领导联盟称防御系统拦截了向利雅得发射的胡塞导弹",
-      "originalTitle": "Saudi-led coalition says defences intercept Houthi missile fired at Riyadh",
-      "summary": "这是自也门胡塞武装与沙特冲突升级以来，利雅得首次发布空袭警报。来源：半岛电视台。",
+      "title": "俄罗斯称莫斯科地区遭“大规模”乌克兰无人机袭击，两人死亡",
+      "originalTitle": "Two killed in 'massive' Ukrainian drone attack on Moscow region, Russia says",
+      "summary": "据BBC World报道，俄罗斯方面称莫斯科地区遭到大规模乌克兰无人机袭击，造成两人死亡。莫斯科市长表示，在这起“前所未有的袭击”中共击落450架无人机。报道还提到，一座大型炼油厂也在此次袭击中被击中。俄方公布的死亡人数、击落无人机数量及炼油厂受损情况均来自俄方说法，具体损失细节尚待进一步核实。",
+      "summaryRevision": 2,
+      "summaryInputHash": "a894e725274ec546a35c775e",
       "keyFacts": [
-        "It was the first air raid alert in Riyadh since an escalation in fighting between the Houthis in Yemen",
-        "Saudi Arabia"
+        "A major oil refinery was also hit as Moscow's mayor says 450 drones were downed during the \"unprecedented attack\""
       ],
       "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
       "category": "局部冲突",
-      "source": "Al Jazeera",
+      "source": "BBC World",
       "country": "国际",
-      "publishedAt": "2026-09-19T22:03:05Z",
-      "url": "https://www.aljazeera.com/news/2026/9/19/saudi-led-coalition-says-defences-intercept-houthi-missile-fired-at-riyadh?traffic_source=rss",
+      "publishedAt": "2026-09-20T08:41:36Z",
+      "url": "https://www.bbc.co.uk/news/articles/c34gdjk1ne8yo?at_medium=RSS&at_campaign=rss",
       "score": 84,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 16,
+        "来源": 17,
         "主题优先级": 10,
         "时效": 19,
-        "影响信号": 17,
-        "主题相关性": 4,
+        "影响信号": 6,
+        "主题相关性": 6,
         "证据完整度": 3,
-        "多源印证": 0,
+        "多源印证": 8,
         "编辑降权": 0,
         "日期异常降权": 0,
         "补充窗口降权": 0
@@ -187,26 +183,41 @@
         "DeepSeek 候选重要度 84/100",
         "综合排序分 84/100（AI 65% + 规则 35%）",
         "规则参考分 84/100",
-        "来源权重 16/20",
-        "发布约 3.0 小时",
-        "命中 2 个主题信号",
-        "影响信号：first、escalation、missile"
+        "来源权重 17/20",
+        "发布约 1.3 小时",
+        "命中 3 个主题信号",
+        "影响信号：attack",
+        "3 个独立来源相互印证"
       ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidence": "高",
+      "confidenceReason": "主来源权重 17/20，且有 3 个独立来源报道；仍应以原文和一手材料为准。",
       "tags": [
-        "沙特",
-        "胡塞武装",
-        "导弹拦截"
+        "俄乌冲突",
+        "无人机袭击",
+        "莫斯科"
       ],
-      "image": "",
-      "corroboration": 1,
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/15c3/live/41153930-b4bb-11f1-b1d1-571ed4d7ff2c.jpg",
+      "corroboration": 3,
       "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c34gdjk1ne8yo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-09-20T08:41:36Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        },
+        {
+          "name": "Deutsche Welle",
+          "domain": "dw.com",
+          "url": "https://www.dw.com/en/russia-ukrainian-drone-strike-on-moscow-kills-2/a-79341964?maca=en-rss-en-all-1573-rdf",
+          "publishedAt": "2026-09-20T08:37:00Z",
+          "evidenceGroup": "outlet:dw.com"
+        },
         {
           "name": "Al Jazeera",
           "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/9/19/saudi-led-coalition-says-defences-intercept-houthi-missile-fired-at-riyadh?traffic_source=rss",
-          "publishedAt": "2026-09-19T22:03:05Z",
+          "url": "https://www.aljazeera.com/news/2026/9/20/mass-ukrainian-drone-attack-on-moscow-kills-two-russia-says?traffic_source=rss",
+          "publishedAt": "2026-09-20T06:57:05Z",
           "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
@@ -217,15 +228,441 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "historyContext": {
-        "status": "no-match",
+        "status": "linked",
         "lookbackDays": 365,
-        "relatedCount": 0,
-        "relatedStories": [],
-        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "relatedCount": 3,
+        "relatedStories": [
+          {
+            "id": "91024385e6ab15",
+            "eventId": "evt-d427713914eb",
+            "editionDate": "2026-08-11",
+            "title": "乌克兰无人机深入俄境内袭击致至少13人死亡",
+            "originalTitle": "At least 13 killed in Ukrainian drone strike deep into Russia",
+            "summary": "俄罗斯官员称，此次袭击还造成75人受伤，是莫斯科全面入侵以来乌克兰无人机最致命的袭击之一。",
+            "category": "局部冲突",
+            "source": "BBC World",
+            "publishedAt": "2026-08-10T14:34:25Z",
+            "associationScore": 57,
+            "relationLabel": "同一事件后续",
+            "associationReasons": [
+              "标题结构显示为同一事件的后续报道",
+              "标题共享关键词：drone、killed、russia、ukrainian",
+              "同属局部冲突"
+            ]
+          },
+          {
+            "id": "20cfa26d02e62a",
+            "eventId": "evt-d427713914eb",
+            "editionDate": "2026-08-17",
+            "title": "俄罗斯称2026年最大规模乌克兰袭击致至少7人死亡",
+            "originalTitle": "Russia says at least seven killed in largest Ukrainian attack of 2026",
+            "summary": "莫斯科称乌克兰发动2026年最大规模袭击，造成至少7人死亡。同时，俄军也对乌克兰发动致命打击，在首都基辅引发多处火灾。",
+            "category": "局部冲突",
+            "source": "BBC World",
+            "publishedAt": "2026-08-16T19:03:04Z",
+            "associationScore": 62,
+            "relationLabel": "同一事件后续",
+            "associationReasons": [
+              "标题结构显示为同一事件的后续报道",
+              "标题共享关键词：attack、killed、russia、ukrainian",
+              "共同标签：俄乌冲突"
+            ]
+          },
+          {
+            "id": "2812aaa9cbdb1d",
+            "eventId": "evt-ae82cd78389c",
+            "editionDate": "2026-09-05",
+            "title": "泽连斯基称俄罗斯无人机袭击乌克兰安全总部",
+            "originalTitle": "Russia hits Ukrainian security headquarters in drone attack, Zelensky says",
+            "summary": "乌克兰总统泽连斯基称，俄罗斯无人机袭击了乌克兰安全局总部，无人机在乌克兰首都中心毫无预警地发动打击。",
+            "category": "局部冲突",
+            "source": "BBC World",
+            "publishedAt": "2026-09-04T16:02:32Z",
+            "associationScore": 60,
+            "relationLabel": "同一事件后续",
+            "associationReasons": [
+              "标题结构显示为同一事件的后续报道",
+              "标题共享关键词：attack、drone、russia、ukrainian",
+              "共同标签：俄乌冲突、无人机袭击"
+            ]
+          }
+        ],
+        "timelineSummary": "当前事件与 2026-08-11 至 2026-09-05 的 3 条归档记录形成连续脉络，共同涉及俄乌冲突、无人机袭击；关联度表示主题与事件线索重合，不代表因果关系已经证实。",
         "outlook": [
           {
-            "horizon": "观察",
-            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "horizon": "短期",
+            "text": "关注相关机构的正式文件、时间表变化以及是否出现新的独立来源印证。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "关注该事件是否从单次动态演变为持续的政策、部署、采购或技术验证信号。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 3,
+        "sourceGroups": [
+          "outlet:bbc.co.uk",
+          "outlet:dw.com",
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "A major oil refinery was also hit as Moscow's mayor says 450 drones were downed during the \"unprecedented attack\"",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:bbc.co.uk",
+              "outlet:dw.com",
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 3 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-b546c243830f",
+          "eventId": "evt-d427713914eb",
+          "statement": "关注相关机构的正式文件、时间表变化以及是否出现新的独立来源印证。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-10-20",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "69290ccbb19147"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        },
+        {
+          "predictionId": "pred-1060fe7c4450",
+          "eventId": "evt-d427713914eb",
+          "statement": "关注该事件是否从单次动态演变为持续的政策、部署、采购或技术验证信号。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-12-19",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "69290ccbb19147"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        },
+        {
+          "predictionId": "pred-207d40874d31",
+          "eventId": "evt-d427713914eb",
+          "statement": "后续可观察国际原子能机构是否就扎波罗热核电站安全状况发布新声明或评估。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "due",
+          "statusLabel": "已到期，等待证据复核",
+          "createdAt": "2026-08-19",
+          "dueAfter": "2026-09-18",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "df1ec323be8035"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        },
+        {
+          "predictionId": "pred-da01965ecf14",
+          "eventId": "evt-d427713914eb",
+          "statement": "若袭击破坏核电站关键设施，则需关注是否引发核安全事件及国际社会应对。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-19",
+          "dueAfter": "2026-11-17",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "df1ec323be8035"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        },
+        {
+          "predictionId": "pred-05056abe3488",
+          "eventId": "evt-d427713914eb",
+          "statement": "若俄乌双方继续以远程打击回应，则需关注基辅及俄境内关键地区伤亡人数是否进一步上升。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "due",
+          "statusLabel": "已到期，等待证据复核",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-09-16",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "20cfa26d02e62a"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        },
+        {
+          "predictionId": "pred-0c66de2f6237",
+          "eventId": "evt-d427713914eb",
+          "statement": "后续可观察双方是否通过外交渠道寻求降级，或袭击范围是否扩大至其他城市。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-17",
+          "dueAfter": "2026-11-15",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "20cfa26d02e62a"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        },
+        {
+          "predictionId": "pred-e2adf4df3ef7",
+          "eventId": "evt-d427713914eb",
+          "statement": "若俄方公布具体伤亡或报复行动，需关注其是否再次对乌克兰城市发动大规模导弹袭击。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "due",
+          "statusLabel": "已到期，等待证据复核",
+          "createdAt": "2026-08-11",
+          "dueAfter": "2026-09-10",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "91024385e6ab15"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        },
+        {
+          "predictionId": "pred-e4053a5cc7bb",
+          "eventId": "evt-d427713914eb",
+          "statement": "后续可观察双方是否进一步扩大无人机与导弹互相打击的规模和范围。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-08-11",
+          "dueAfter": "2026-11-09",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "91024385e6ab15"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-d427713914eb",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-08-11",
+        "lastSeen": "2026-09-20",
+        "updateCount": 4,
+        "timeline": [
+          {
+            "editionDate": "2026-08-11",
+            "newsId": "91024385e6ab15",
+            "title": "乌克兰无人机深入俄境内袭击致至少13人死亡",
+            "source": "BBC World",
+            "publishedAt": "2026-08-10T14:34:25Z",
+            "score": 86
+          },
+          {
+            "editionDate": "2026-08-17",
+            "newsId": "20cfa26d02e62a",
+            "title": "俄罗斯称2026年最大规模乌克兰袭击致至少7人死亡",
+            "source": "BBC World",
+            "publishedAt": "2026-08-16T19:03:04Z",
+            "score": 83
+          },
+          {
+            "editionDate": "2026-08-19",
+            "newsId": "df1ec323be8035",
+            "title": "俄罗斯报告乌克兰无人机袭击扎波罗热核电站附近",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-18T20:45:42Z",
+            "score": 86
+          },
+          {
+            "editionDate": "2026-09-20",
+            "newsId": "69290ccbb19147",
+            "title": "俄罗斯称莫斯科地区遭“大规模”乌克兰无人机袭击，两人死亡",
+            "source": "BBC World",
+            "publishedAt": "2026-09-20T08:41:36Z",
+            "score": 84
+          }
+        ],
+        "independentSourceCount": 3,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "a86e42dab5c606",
+      "eventId": "evt-da896e6f1ee7",
+      "contentType": "news",
+      "title": "俄罗斯选举进入最后一天，此前莫斯科遭大规模乌克兰无人机袭击",
+      "originalTitle": "🔴 Russian election enters final day after major Ukrainian drone attack on Moscow",
+      "summary": "据France 24报道，乌克兰对俄罗斯首都发动了大规模无人机袭击。莫斯科市长索比亚宁称这是对俄首都“史上最大规模”的袭击，造成两人死亡，并损坏了一座炼油厂的一部分。此次袭击发生在俄罗斯首次战时议会选举投票的第三天、也是最后一天。报道未提供更多关于选举结果或袭击后续影响的细节。",
+      "summaryRevision": 2,
+      "summaryInputHash": "38a05abfe239e765575278b8",
+      "keyFacts": [
+        "Ukraine launched what Moscow’s Mayor Sergei Sobyanin described on Sunday as the “largest ever” attack on the Russian capital",
+        "killing two people",
+        "damaging part of an oil refinery"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "France 24",
+      "country": "国际",
+      "publishedAt": "2026-09-20T07:10:06Z",
+      "url": "https://www.france24.com/en/europe/20260920-live-russian-election-enters-final-day-in-shadow-of-war-in-ukraine",
+      "score": 81,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 11,
+        "主题相关性": 8,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 80/100",
+        "综合排序分 81/100（AI 65% + 规则 35%）",
+        "规则参考分 82/100",
+        "来源权重 16/20",
+        "发布约 2.8 小时",
+        "命中 4 个主题信号",
+        "影响信号：first、attack"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "俄乌冲突",
+        "俄罗斯选举",
+        "无人机袭击"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "France 24",
+          "domain": "france24.com",
+          "url": "https://www.france24.com/en/europe/20260920-live-russian-election-enters-final-day-in-shadow-of-war-in-ukraine",
+          "publishedAt": "2026-09-20T07:10:06Z",
+          "evidenceGroup": "syndication:edff844cd942"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 3,
+        "relatedStories": [
+          {
+            "id": "20cfa26d02e62a",
+            "eventId": "evt-d427713914eb",
+            "editionDate": "2026-08-17",
+            "title": "俄罗斯称2026年最大规模乌克兰袭击致至少7人死亡",
+            "originalTitle": "Russia says at least seven killed in largest Ukrainian attack of 2026",
+            "summary": "莫斯科称乌克兰发动2026年最大规模袭击，造成至少7人死亡。同时，俄军也对乌克兰发动致命打击，在首都基辅引发多处火灾。",
+            "category": "局部冲突",
+            "source": "BBC World",
+            "publishedAt": "2026-08-16T19:03:04Z",
+            "associationScore": 37,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：attack、ukrainian、乌克、俄罗",
+              "共同标签：俄乌冲突",
+              "同属局部冲突"
+            ]
+          },
+          {
+            "id": "2812aaa9cbdb1d",
+            "eventId": "evt-ae82cd78389c",
+            "editionDate": "2026-09-05",
+            "title": "泽连斯基称俄罗斯无人机袭击乌克兰安全总部",
+            "originalTitle": "Russia hits Ukrainian security headquarters in drone attack, Zelensky says",
+            "summary": "乌克兰总统泽连斯基称，俄罗斯无人机袭击了乌克兰安全局总部，无人机在乌克兰首都中心毫无预警地发动打击。",
+            "category": "局部冲突",
+            "source": "BBC World",
+            "publishedAt": "2026-09-04T16:02:32Z",
+            "associationScore": 41,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：attack、drone、ukrainian、乌克",
+              "共同标签：俄乌冲突、无人机袭击",
+              "同属局部冲突"
+            ]
+          },
+          {
+            "id": "5913c4a3264860",
+            "eventId": "evt-bc0fa72bc62d",
+            "editionDate": "2026-09-09",
+            "title": "乌克兰电视台大楼遭俄无人机袭击，基辅五人死亡",
+            "originalTitle": "Ukrainian TV channel building hit by Russian drone as five killed in Kyiv",
+            "summary": "泽连斯基总统称基辅白天的无人机袭击是俄罗斯堕落的‘新篇章’。",
+            "category": "局部冲突",
+            "source": "BBC World",
+            "publishedAt": "2026-09-08T17:10:54Z",
+            "associationScore": 37,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：drone、russian、ukrainian、乌克",
+              "共同标签：俄乌冲突、无人机袭击",
+              "同属局部冲突"
+            ]
+          }
+        ],
+        "timelineSummary": "当前事件与 2026-08-17 至 2026-09-09 的 3 条归档记录形成连续脉络，共同涉及俄乌冲突、俄罗斯选举；关联度表示主题与事件线索重合，不代表因果关系已经证实。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "关注相关机构的正式文件、时间表变化以及是否出现新的独立来源印证。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "关注该事件是否从单次动态演变为持续的政策、部署、采购或技术验证信号。",
             "confidence": "低"
           }
         ],
@@ -235,28 +672,241 @@
         "overallStatus": "single-source",
         "independentSourceCount": 1,
         "sourceGroups": [
-          "outlet:aljazeera.com"
+          "syndication:edff844cd942"
         ],
         "claims": [
           {
-            "text": "It was the first air raid alert in Riyadh since an escalation in fighting between the Houthis in Yemen",
+            "text": "Ukraine launched what Moscow’s Mayor Sergei Sobyanin described on Sunday as the “largest ever” attack on the Russian capital",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
-              "outlet:aljazeera.com"
+              "syndication:edff844cd942"
             ]
           },
           {
-            "text": "Saudi Arabia",
+            "text": "killing two people",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
-              "outlet:aljazeera.com"
+              "syndication:edff844cd942"
+            ]
+          },
+          {
+            "text": "damaging part of an oil refinery",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "syndication:edff844cd942"
             ]
           }
         ],
         "disputes": [],
         "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-7e7ea47d928d",
+          "eventId": "evt-da896e6f1ee7",
+          "statement": "关注相关机构的正式文件、时间表变化以及是否出现新的独立来源印证。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-10-20",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "a86e42dab5c606"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        },
+        {
+          "predictionId": "pred-e37f16f30265",
+          "eventId": "evt-da896e6f1ee7",
+          "statement": "关注该事件是否从单次动态演变为持续的政策、部署、采购或技术验证信号。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-12-19",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "a86e42dab5c606"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-da896e6f1ee7",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-20",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-20",
+            "newsId": "a86e42dab5c606",
+            "title": "俄罗斯选举进入最后一天，此前莫斯科遭大规模乌克兰无人机袭击",
+            "source": "France 24",
+            "publishedAt": "2026-09-20T07:10:06Z",
+            "score": 81
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "434963f0f47ef9",
+      "eventId": "evt-d2434e85200c",
+      "contentType": "news",
+      "title": "沙特领导的联军称防御系统拦截了胡塞武装射向利雅得的导弹",
+      "originalTitle": "Saudi-led coalition says defence intercepted Houthi missile fired at Riyadh",
+      "summary": "据半岛电视台报道，沙特领导的联军表示，其防御系统拦截了一枚胡塞武装射向利雅得的导弹。报道指出，这是自也门胡塞武装与沙特阿拉伯之间战斗升级以来，利雅得首次响起空袭警报。报道未说明导弹是否被完全摧毁、是否造成人员伤亡或财产损失，也未提及沙特方面的进一步应对措施。",
+      "summaryRevision": 2,
+      "summaryInputHash": "3202ddcf9739025d0eee9cfe",
+      "keyFacts": [
+        "It was the first air raid alert in Riyadh since an escalation in fighting between the Houthis in Yemen",
+        "Saudi Arabia"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-19T22:03:05Z",
+      "url": "https://www.aljazeera.com/news/2026/9/19/saudi-led-coalition-says-defences-intercept-houthi-missile-fired-at-riyadh?traffic_source=rss",
+      "score": 80,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 14,
+        "影响信号": 17,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 4,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 80/100（AI 65% + 规则 35%）",
+        "规则参考分 85/100",
+        "来源权重 16/20",
+        "发布约 11.9 小时",
+        "命中 3 个主题信号",
+        "影响信号：first、escalation、missile",
+        "2 个独立来源相互印证"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 2 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "也门冲突",
+        "胡塞武装",
+        "沙特"
+      ],
+      "image": "",
+      "corroboration": 2,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/9/19/saudi-led-coalition-says-defences-intercept-houthi-missile-fired-at-riyadh?traffic_source=rss",
+          "publishedAt": "2026-09-19T22:03:05Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        },
+        {
+          "name": "France 24",
+          "domain": "france24.com",
+          "url": "https://www.france24.com/en/middle-east/20260919-smoke-flames-seen-near-riyadh-airport-major-flight-disruptions-reported",
+          "publishedAt": "2026-09-19T12:53:19Z",
+          "evidenceGroup": "outlet:france24.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 1,
+        "relatedStories": [
+          {
+            "id": "95c187e2c0df00",
+            "eventId": "evt-a68bd7fb7f50",
+            "editionDate": "2026-09-16",
+            "title": "沙特领导的联军拦截一架飞往麦加的无人机",
+            "originalTitle": "Saudi-led coalition intercepts drone headed for Mecca",
+            "summary": "沙特阿拉伯称，在无人机进入伊斯兰教最神圣城市前将其拦截，并称朝圣者安全是“红线”。",
+            "category": "无人系统",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-16T01:09:54Z",
+            "associationScore": 31,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：coalition、saudi-led、导的、拦截",
+              "共同标签：沙特"
+            ]
+          }
+        ],
+        "timelineSummary": "当前事件与 2026-09-16 至 2026-09-16 的 1 条归档记录形成连续脉络，共同涉及也门冲突、胡塞武装；关联度表示主题与事件线索重合，不代表因果关系已经证实。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "关注相关机构的正式文件、时间表变化以及是否出现新的独立来源印证。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "关注该事件是否从单次动态演变为持续的政策、部署、采购或技术验证信号。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:aljazeera.com",
+          "outlet:france24.com"
+        ],
+        "claims": [
+          {
+            "text": "It was the first air raid alert in Riyadh since an escalation in fighting between the Houthis in Yemen",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:aljazeera.com",
+              "outlet:france24.com"
+            ]
+          },
+          {
+            "text": "Saudi Arabia",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:aljazeera.com",
+              "outlet:france24.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
       },
       "forecastLedger": [
         {
@@ -277,6 +927,44 @@
             "434963f0f47ef9"
           ],
           "lastReviewedAt": "2026-09-20"
+        },
+        {
+          "predictionId": "pred-f44bba3c8193",
+          "eventId": "evt-d2434e85200c",
+          "statement": "关注相关机构的正式文件、时间表变化以及是否出现新的独立来源印证。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-10-20",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "434963f0f47ef9"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        },
+        {
+          "predictionId": "pred-888e776f6e9a",
+          "eventId": "evt-d2434e85200c",
+          "statement": "关注该事件是否从单次动态演变为持续的政策、部署、采购或技术验证信号。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-12-19",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "434963f0f47ef9"
+          ],
+          "lastReviewedAt": "2026-09-20"
         }
       ],
       "eventDossier": {
@@ -290,693 +978,45 @@
           {
             "editionDate": "2026-09-20",
             "newsId": "434963f0f47ef9",
-            "title": "沙特领导联盟称防御系统拦截了向利雅得发射的胡塞导弹",
+            "title": "沙特领导的联军称防御系统拦截了胡塞武装射向利雅得的导弹",
             "source": "Al Jazeera",
             "publishedAt": "2026-09-19T22:03:05Z",
-            "score": 84
-          }
-        ],
-        "independentSourceCount": 1,
-        "paperCount": 0
-      },
-      "relatedPapers": []
-    },
-    {
-      "id": "dbf103d247c131",
-      "eventId": "evt-b33f757dd44f",
-      "contentType": "news",
-      "title": "胡塞武装称以弹道导弹袭击沙特首都",
-      "originalTitle": "Houthis say they targeted Saudi capital with ballistic missiles",
-      "summary": "据报道，利雅得机场一处燃料库遭袭，导致周六出现延误；沙特与也门胡塞武装的冲突仍在持续。",
-      "keyFacts": [
-        "A reported strike on a fuel depot at Riyadh airport caused delays on Saturday",
-        "as conflict between Saudi Arabia",
-        "the Yemen-based group continues"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-09-19T23:49:26Z",
-      "url": "https://www.bbc.co.uk/news/articles/cwly5d9v7r43o?at_medium=RSS&at_campaign=rss",
-      "score": 80,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 11,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 80/100",
-        "综合排序分 80/100（AI 65% + 规则 35%）",
-        "规则参考分 79/100",
-        "来源权重 17/20",
-        "发布约 1.2 小时",
-        "命中 2 个主题信号",
-        "影响信号：strike、missile"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "胡塞武装",
-        "沙特",
-        "导弹袭击"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/39c5/live/a0844fe0-b45d-11f1-b213-1db858c3e27c.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cwly5d9v7r43o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-09-19T23:49:26Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "historyContext": {
-        "status": "linked",
-        "lookbackDays": 365,
-        "relatedCount": 3,
-        "relatedStories": [
-          {
-            "id": "021589e228b8cb",
-            "eventId": "",
-            "editionDate": "2026-07-25",
-            "title": "沙特阿拉伯袭击胡塞武装控制的荷台达，也门组织称",
-            "originalTitle": "Saudi Arabia strikes Houthi-held Hodeidah, Yemeni group says",
-            "summary": "胡塞控制的外交部警告称，此次袭击将引发也门冲突进一步升级。",
-            "category": "局部冲突",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-07-24T20:27:16Z",
-            "associationScore": 32,
-            "relationLabel": "相关主题演进",
-            "associationReasons": [
-              "标题共享关键词：saudi、塞武、武装、沙特",
-              "共同标签：沙特、胡塞武装",
-              "同属局部冲突"
-            ]
-          },
-          {
-            "id": "4cd3f310472b92",
-            "eventId": "",
-            "editionDate": "2026-07-26",
-            "title": "伊朗支持的胡塞武装宣称对沙特发动导弹袭击",
-            "originalTitle": "Iran-backed Houthis claim missile attack on Saudi Arabia",
-            "summary": "美国军方称其拦截了一艘试图规避对伊朗港口封锁的油轮。",
-            "category": "局部冲突",
-            "source": "BBC World",
-            "publishedAt": "2026-07-25T06:34:40Z",
-            "associationScore": 42,
-            "relationLabel": "相关主题演进",
-            "associationReasons": [
-              "标题共享关键词：houthis、saudi、塞武、导弹",
-              "共同标签：导弹袭击、沙特、胡塞武装",
-              "同属局部冲突"
-            ]
-          },
-          {
-            "id": "3059cd96c63be1",
-            "eventId": "",
-            "editionDate": "2026-07-29",
-            "title": "也门胡塞武装声称对沙特阿拉伯油轮发动导弹袭击",
-            "originalTitle": "Yemen’s Houthis claim missile attack on Saudi Arabia oil tanker",
-            "summary": "胡塞武装宣布在红海对沙特实施海上封锁，并袭击了多艘油轮。",
-            "category": "局部冲突",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-07-28T23:16:44Z",
-            "associationScore": 40,
-            "relationLabel": "相关主题演进",
-            "associationReasons": [
-              "标题共享关键词：houthis、saudi、塞武、导弹",
-              "共同标签：沙特、胡塞武装",
-              "同属局部冲突"
-            ]
-          }
-        ],
-        "timelineSummary": "2026年7月，胡塞武装先后声称对沙特发动导弹袭击及对沙特油轮实施海上封锁。至9月19日，胡塞武装称以弹道导弹袭击沙特首都，利雅得机场燃料库遭袭导致周六延误，沙特与胡塞武装冲突仍在持续。",
-        "outlook": [
-          {
-            "horizon": "短期",
-            "text": "后续可观察沙特方面是否就利雅得机场燃料库遭袭发布确认或损失评估，以及胡塞武装是否宣称对更多目标负责。",
-            "confidence": "中"
-          },
-          {
-            "horizon": "中期",
-            "text": "若红海及沙特境内袭击频次继续上升，则需关注冲突是否进一步波及能源与航运基础设施。",
-            "confidence": "低"
-          }
-        ],
-        "analysisProvider": "deepseek"
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:bbc.co.uk"
-        ],
-        "claims": [
-          {
-            "text": "A reported strike on a fuel depot at Riyadh airport caused delays on Saturday",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:bbc.co.uk"
-            ]
-          },
-          {
-            "text": "as conflict between Saudi Arabia",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:bbc.co.uk"
-            ]
-          },
-          {
-            "text": "the Yemen-based group continues",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:bbc.co.uk"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-e69e8f3d0531",
-          "eventId": "evt-b33f757dd44f",
-          "statement": "后续可观察沙特方面是否就利雅得机场燃料库遭袭发布确认或损失评估，以及胡塞武装是否宣称对更多目标负责。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-20",
-          "dueAfter": "2026-10-20",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "dbf103d247c131"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-37a9ecec6199",
-          "eventId": "evt-b33f757dd44f",
-          "statement": "若红海及沙特境内袭击频次继续上升，则需关注冲突是否进一步波及能源与航运基础设施。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-20",
-          "dueAfter": "2026-12-19",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "dbf103d247c131"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        }
-      ],
-      "eventDossier": {
-        "eventId": "evt-b33f757dd44f",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-09-20",
-        "lastSeen": "2026-09-20",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-09-20",
-            "newsId": "dbf103d247c131",
-            "title": "胡塞武装称以弹道导弹袭击沙特首都",
-            "source": "BBC World",
-            "publishedAt": "2026-09-19T23:49:26Z",
             "score": 80
           }
         ],
-        "independentSourceCount": 1,
+        "independentSourceCount": 2,
         "paperCount": 0
       },
       "relatedPapers": []
     },
     {
-      "id": "97e39aa3ab0048",
-      "eventId": "evt-899de296a6d6",
+      "id": "ce08c0caede593",
+      "eventId": "evt-a3fbf53b0926",
       "contentType": "news",
-      "title": "伊朗战争直播：德黑兰提出和平条件；沙特部队挫败利雅得袭击",
-      "originalTitle": "Iran war live: Tehran sets terms for peace; Saudi forces foil Riyadh attack",
-      "summary": "伊朗安全负责人表示，德黑兰的要求包括停止所有战线的战争并解除美国的海上封锁。沙特部队挫败了针对利雅得的袭击。来源：半岛电视台。",
+      "title": "美国与丹麦就格陵兰安全达成协议",
+      "originalTitle": "US and Denmark reach Greenland security deal",
+      "summary": "据France 24报道，美国与丹麦宣布就格陵兰安全达成协议，解决了一场由美国总统特朗普威胁夺取这一半自治领土而引发的外交争端。报道称，协议具体条款仍不确定，但丹麦似乎将维持其主权，美国则能够在岛上发展重要军事存在，并禁止其对手在岛上建设基地。报道由Charlotte Hughes提供，未披露协议签署时间、地点或更多执行细节。",
+      "summaryRevision": 2,
+      "summaryInputHash": "d871275b7390623d01575653",
       "keyFacts": [
-        "Iran security chief says Tehran's demands include an end to war on all fronts",
-        "the lifting of US's naval blockade"
+        "Denmark have announced a deal on Greenland's security",
+        "resolving a diplomatic dispute sparked by President Donald Trump when he threatened to seize the semi-autonomous territory",
+        "The exact terms of the deal remain uncertain"
       ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "France 24",
       "country": "国际",
-      "publishedAt": "2026-09-20T00:00:00Z",
-      "url": "https://www.aljazeera.com/news/liveblog/2026/9/20/iran-war-live-tehran-calls-for-end-to-war-lifting-of-us-naval-blockade?traffic_source=rss",
-      "score": 74,
+      "publishedAt": "2026-09-20T09:40:12Z",
+      "url": "https://www.france24.com/en/us-and-denmark-reach-greenland-security-deal",
+      "score": 78,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 6,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 75/100",
-        "综合排序分 74/100（AI 65% + 规则 35%）",
-        "规则参考分 73/100",
-        "来源权重 16/20",
-        "发布约 1.0 小时",
-        "命中 2 个主题信号",
-        "影响信号：attack"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "伊朗",
-        "和平条件",
-        "利雅得袭击"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/liveblog/2026/9/20/iran-war-live-tehran-calls-for-end-to-war-lifting-of-us-naval-blockade?traffic_source=rss",
-          "publishedAt": "2026-09-20T00:00:00Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "historyContext": {
-        "status": "linked",
-        "lookbackDays": 365,
-        "relatedCount": 3,
-        "relatedStories": [
-          {
-            "id": "2f05378ce2ffac",
-            "eventId": "",
-            "editionDate": "2026-07-24",
-            "title": "伊朗战争实时：特朗普考虑对伊朗进行“大规模攻击”",
-            "originalTitle": "Iran war live: Trump weighs ‘massive attack’ on Iran",
-            "summary": "特朗普表示正考虑对伊朗实施‘大规模攻击’，伊朗阿拉格齐称‘无意义的侵略’无助于达成协议。",
-            "category": "局部冲突",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-07-24T00:00:00Z",
-            "associationScore": 43,
-            "relationLabel": "同一事件后续",
-            "associationReasons": [
-              "标题结构显示为同一事件的后续报道",
-              "标题共享关键词：attack、iran、live、war",
-              "同属局部冲突"
-            ]
-          },
-          {
-            "id": "985a742aad8e74",
-            "eventId": "evt-1399f08142fa",
-            "editionDate": "2026-08-09",
-            "title": "对伊朗战争：第二阶段：第28天",
-            "originalTitle": "War on Iran: Phase II: Day 28",
-            "summary": "沙特-巴基斯坦-土耳其协定引发不同反应，伊朗与阿曼达成霍尔木兹安全框架。",
-            "category": "局部冲突",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-08-08T14:09:02Z",
-            "associationScore": 34,
-            "relationLabel": "相关主题演进",
-            "associationReasons": [
-              "标题共享关键词：iran、war、伊朗、战争",
-              "共同标签：伊朗",
-              "同属局部冲突"
-            ]
-          },
-          {
-            "id": "f145a779a4b33b",
-            "eventId": "evt-1399f08142fa",
-            "editionDate": "2026-08-10",
-            "title": "对伊朗战争：第二阶段：第29天",
-            "originalTitle": "War on Iran: Phase II: Day 29",
-            "summary": "伊朗表示，除非美国满足一系列要求，否则霍尔木兹海峡将继续受到限制。",
-            "category": "局部冲突",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-08-09T15:46:09Z",
-            "associationScore": 34,
-            "relationLabel": "相关主题演进",
-            "associationReasons": [
-              "标题共享关键词：iran、war、伊朗、战争",
-              "共同标签：伊朗",
-              "同属局部冲突"
-            ]
-          }
-        ],
-        "timelineSummary": "2026年7月至8月，伊朗战争相关报道持续，涉及美方考虑大规模攻击、霍尔木兹海峡安全框架及海峡限制。至9月20日，伊朗安全负责人提出包括停止所有战线战争、解除美国海上封锁等和平条件，同时沙特部队在利雅得挫败袭击。",
-        "outlook": [
-          {
-            "horizon": "短期",
-            "text": "后续可观察美方是否对伊朗提出的条件作出公开回应，以及利雅得袭击事件后续是否披露更多细节。",
-            "confidence": "中"
-          },
-          {
-            "horizon": "中期",
-            "text": "若各方就停止战线战争与解除海上封锁展开接触，则需关注霍尔木兹海峡通行限制是否出现调整。",
-            "confidence": "低"
-          }
-        ],
-        "analysisProvider": "deepseek"
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:aljazeera.com"
-        ],
-        "claims": [
-          {
-            "text": "Iran security chief says Tehran's demands include an end to war on all fronts",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:aljazeera.com"
-            ]
-          },
-          {
-            "text": "the lifting of US's naval blockade",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:aljazeera.com"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-5e1b0290a262",
-          "eventId": "evt-899de296a6d6",
-          "statement": "后续可观察美方是否对伊朗提出的条件作出公开回应，以及利雅得袭击事件后续是否披露更多细节。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-20",
-          "dueAfter": "2026-10-20",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "97e39aa3ab0048"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-bd51102ed1b2",
-          "eventId": "evt-899de296a6d6",
-          "statement": "若各方就停止战线战争与解除海上封锁展开接触，则需关注霍尔木兹海峡通行限制是否出现调整。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-20",
-          "dueAfter": "2026-12-19",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "97e39aa3ab0048"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-781ca5f38c42",
-          "eventId": "evt-899de296a6d6",
-          "statement": "后续可观察美方是否就霍尔木兹油轮遭袭及对伊朗决策发布正式声明或行动信息。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-18",
-          "dueAfter": "2026-10-18",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "6503164308b7dd"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-40a301543f5a",
-          "eventId": "evt-899de296a6d6",
-          "statement": "若霍尔木兹安全局势持续紧张，则需关注伊朗与相关方是否重启或调整海峡安全框架谈判。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-18",
-          "dueAfter": "2026-12-17",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "6503164308b7dd"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-c2c8ac142537",
-          "eventId": "evt-899de296a6d6",
-          "statement": "后续可观察伊朗方面是否公开回应特朗普关于直接会谈与接近结束的说法，以及是否出现与镐山相关的新公开表态。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-17",
-          "dueAfter": "2026-10-17",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "7ad1c95a873891"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-89d3a2044b97",
-          "eventId": "evt-899de296a6d6",
-          "statement": "若双方公开表述持续不一致，则需关注会谈是否被第三方斡旋信息印证；若冲突降级表态未获对应行动，则需关注地区紧张是否再度回升。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-17",
-          "dueAfter": "2026-12-16",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "7ad1c95a873891"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-99edf3654249",
-          "eventId": "evt-899de296a6d6",
-          "statement": "若特朗普对镐山的攻击警告付诸实施，则需观察伊朗是否对美军基地或舰船进行报复性攻击。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-05",
-          "dueAfter": "2026-10-05",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "42c08e6b9e70e0"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-6ddd3226b01e",
-          "eventId": "evt-899de296a6d6",
-          "statement": "后续可观察美国打击规模及伊朗反应强度，是否触发进一步升级或促使外交谈判重启。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-05",
-          "dueAfter": "2026-12-04",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "42c08e6b9e70e0"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-bf6ff9c0eea9",
-          "eventId": "evt-899de296a6d6",
-          "statement": "后续可观察美国对伊朗的具体报复行动及伊朗的反应。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-01",
-          "dueAfter": "2026-10-01",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "4d6c783b648a04"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-8d20ec3a9ab7",
-          "eventId": "evt-899de296a6d6",
-          "statement": "若冲突扩大，则需关注霍尔木兹海峡封锁风险及国际油价走势。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-01",
-          "dueAfter": "2026-11-30",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "4d6c783b648a04"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        }
-      ],
-      "eventDossier": {
-        "eventId": "evt-899de296a6d6",
-        "status": "tracking",
-        "statusLabel": "持续跟踪",
-        "firstSeen": "2026-09-01",
-        "lastSeen": "2026-09-20",
-        "updateCount": 5,
-        "timeline": [
-          {
-            "editionDate": "2026-09-01",
-            "newsId": "4d6c783b648a04",
-            "title": "伊朗战争直播：特朗普誓言在首次冲突后‘狠狠’打击伊朗",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-09-01T00:00:00Z",
-            "score": 78
-          },
-          {
-            "editionDate": "2026-09-05",
-            "newsId": "42c08e6b9e70e0",
-            "title": "伊朗战争直播：特朗普称美国可能“很快”瞄准伊朗的镐山",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-09-05T00:00:00Z",
-            "score": 81
-          },
-          {
-            "editionDate": "2026-09-17",
-            "newsId": "7ad1c95a873891",
-            "title": "伊朗战争直播：特朗普称美国接近战争结束，声称与德黑兰直接会谈",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-09-17T00:00:00Z",
-            "score": 73
-          },
-          {
-            "editionDate": "2026-09-18",
-            "newsId": "6503164308b7dd",
-            "title": "伊朗战争直播：特朗普权衡对伊朗“重大决定”，油轮在霍尔木兹遭袭",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-09-18T00:00:00Z",
-            "score": 75
-          },
-          {
-            "editionDate": "2026-09-20",
-            "newsId": "97e39aa3ab0048",
-            "title": "伊朗战争直播：德黑兰提出和平条件；沙特部队挫败利雅得袭击",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-09-20T00:00:00Z",
-            "score": 74
-          }
-        ],
-        "independentSourceCount": 1,
-        "paperCount": 0
-      },
-      "relatedPapers": []
-    },
-    {
-      "id": "7ffe8b5c745471",
-      "eventId": "evt-6b0c4db2d535",
-      "contentType": "news",
-      "title": "北约欢迎格陵兰协议，特朗普称这将给美国“永久安全控制”",
-      "originalTitle": "Nato welcomes Greenland deal as Trump says it will give US 'permanent security control'",
-      "summary": "在特朗普数月威胁吞并该地区后，丹麦与美国达成协议，北约对此表示欢迎。",
-      "keyFacts": [
-        "the US have reached an agreement",
-        "months of threats from Donald Trump to annex the territory"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-09-19T23:00:27Z",
-      "url": "https://www.bbc.co.uk/news/articles/c63d7lexyym1o?at_medium=RSS&at_campaign=rss",
-      "score": 72,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 0,
+        "时效": 20,
+        "影响信号": 5,
         "主题相关性": 2,
         "证据完整度": 3,
         "多源印证": 0,
@@ -985,29 +1025,30 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 76/100",
-        "综合排序分 72/100（AI 65% + 规则 35%）",
-        "规则参考分 66/100",
-        "来源权重 17/20",
-        "发布约 2.0 小时",
-        "命中 1 个主题信号"
+        "DeepSeek 候选重要度 82/100",
+        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "规则参考分 71/100",
+        "来源权重 16/20",
+        "发布约 0.3 小时",
+        "命中 1 个主题信号",
+        "影响信号：autonomous"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "北约",
         "格陵兰",
-        "特朗普"
+        "美丹关系",
+        "军事存在"
       ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/f1ad/live/fd353880-b421-11f1-8a8e-d9778c1036bb.jpg",
+      "image": "https://s.france24.com/media/display/63667182-b4d6-11f1-8b04-ed3d9e22a40f/w:1024/p:16x9/EN-20260920-081031-081205-CS.jpg",
       "corroboration": 1,
       "sources": [
         {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/c63d7lexyym1o?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-09-19T23:00:27Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
+          "name": "France 24",
+          "domain": "france24.com",
+          "url": "https://www.france24.com/en/us-and-denmark-reach-greenland-security-deal",
+          "publishedAt": "2026-09-20T09:40:12Z",
+          "evidenceGroup": "outlet:france24.com"
         }
       ],
       "selectionProvider": "deepseek",
@@ -1035,23 +1076,31 @@
         "overallStatus": "single-source",
         "independentSourceCount": 1,
         "sourceGroups": [
-          "outlet:bbc.co.uk"
+          "outlet:france24.com"
         ],
         "claims": [
           {
-            "text": "the US have reached an agreement",
+            "text": "Denmark have announced a deal on Greenland's security",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
-              "outlet:bbc.co.uk"
+              "outlet:france24.com"
             ]
           },
           {
-            "text": "months of threats from Donald Trump to annex the territory",
+            "text": "resolving a diplomatic dispute sparked by President Donald Trump when he threatened to seize the semi-autonomous territory",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
-              "outlet:bbc.co.uk"
+              "outlet:france24.com"
+            ]
+          },
+          {
+            "text": "The exact terms of the deal remain uncertain",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:france24.com"
             ]
           }
         ],
@@ -1060,8 +1109,8 @@
       },
       "forecastLedger": [
         {
-          "predictionId": "pred-384e09497568",
-          "eventId": "evt-6b0c4db2d535",
+          "predictionId": "pred-d994f0303bb2",
+          "eventId": "evt-a3fbf53b0926",
           "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
           "horizon": "观察",
           "confidence": "低",
@@ -1074,13 +1123,13 @@
             "后续演训、交付或作战序列变化"
           ],
           "evidenceIds": [
-            "7ffe8b5c745471"
+            "ce08c0caede593"
           ],
           "lastReviewedAt": "2026-09-20"
         }
       ],
       "eventDossier": {
-        "eventId": "evt-6b0c4db2d535",
+        "eventId": "evt-a3fbf53b0926",
         "status": "new",
         "statusLabel": "新事件",
         "firstSeen": "2026-09-20",
@@ -1089,11 +1138,11 @@
         "timeline": [
           {
             "editionDate": "2026-09-20",
-            "newsId": "7ffe8b5c745471",
-            "title": "北约欢迎格陵兰协议，特朗普称这将给美国“永久安全控制”",
-            "source": "BBC World",
-            "publishedAt": "2026-09-19T23:00:27Z",
-            "score": 72
+            "newsId": "ce08c0caede593",
+            "title": "美国与丹麦就格陵兰安全达成协议",
+            "source": "France 24",
+            "publishedAt": "2026-09-20T09:40:12Z",
+            "score": 78
           }
         ],
         "independentSourceCount": 1,
@@ -1102,12 +1151,588 @@
       "relatedPapers": []
     },
     {
+      "id": "a183019f646621",
+      "eventId": "evt-059cc2429120",
+      "contentType": "news",
+      "title": "科钦造船厂为印度海军首艘下一代导弹舰铺设龙骨",
+      "originalTitle": "Cochin Shipyard Lays Keel for Indian Navy’s First NGMV",
+      "summary": "科钦造船厂有限公司（CSL）于2026年9月18日举行印度海军首艘下一代导弹舰（NGMV）龙骨铺设仪式，此前9月已为第二艘NGMV举行钢材切割仪式。CSL于2023年3月与印度国防部签署价值980.4亿卢比（逾10亿美元）合同，设计建造六艘NGMV；首舰钢材切割于2024年12月开始，此次龙骨铺设标志其在船台正式开始实体组装。CSL称NGMV主要用于对敌舰、商船和陆上目标实施攻击，可执行海上打击和反水面作战，并在咽喉要道实施海上拒止。该舰为喷水推进高速舰艇，装备布拉莫斯导弹、VLSRSAM防空系统和BEL多用途雷达，编制80人，最高航速33节。2026年4月康士伯海事签约供应18台喷水推进器，2024年10月签约的LM2500燃气轮机将由印度斯坦航空有限公司在印度组装。首舰交付原定于2027年初。",
+      "summaryRevision": 2,
+      "summaryInputHash": "53804c76a476927361a98610",
+      "keyFacts": [
+        "The keel laying ceremony of the first Next Generation Missile Vessel (NGMV) for the Indian Navy was held on September 18",
+        "The milestone follows the steel-cutting ceremony for the second NGMV held earlier in September",
+        "Cochin Shipyard Limited (CSL) originally signed a ₹9,804 crore (over $1 billion) contract with the Ministry of Defence in March 2023 for th…"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Naval News",
+      "country": "国际",
+      "publishedAt": "2026-09-20T08:05:27Z",
+      "url": "https://www.navalnews.com/naval-news/2026/09/cochin-shipyard-lays-keel-for-indian-navys-first-ngmv",
+      "score": 77,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 22,
+        "主题相关性": 12,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 66/100",
+        "综合排序分 77/100（AI 65% + 规则 35%）",
+        "规则参考分 97/100",
+        "来源权重 16/20",
+        "发布约 1.9 小时",
+        "命中 8 个主题信号",
+        "影响信号：first、contract、attack"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "印度海军",
+        "导弹舰",
+        "科钦造船厂"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Naval News",
+          "domain": "navalnews.com",
+          "url": "https://www.navalnews.com/naval-news/2026/09/cochin-shipyard-lays-keel-for-indian-navys-first-ngmv",
+          "publishedAt": "2026-09-20T08:05:27Z",
+          "evidenceGroup": "outlet:navalnews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:navalnews.com"
+        ],
+        "claims": [
+          {
+            "text": "The keel laying ceremony of the first Next Generation Missile Vessel (NGMV) for the Indian Navy was held on September 18",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:navalnews.com"
+            ]
+          },
+          {
+            "text": "The milestone follows the steel-cutting ceremony for the second NGMV held earlier in September",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:navalnews.com"
+            ]
+          },
+          {
+            "text": "Cochin Shipyard Limited (CSL) originally signed a ₹9,804 crore (over $1 billion) contract with the Ministry of Defence in March 2023 for th…",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:navalnews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-dcd97d2c9620",
+          "eventId": "evt-059cc2429120",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-10-20",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "a183019f646621"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-059cc2429120",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-20",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-20",
+            "newsId": "a183019f646621",
+            "title": "科钦造船厂为印度海军首艘下一代导弹舰铺设龙骨",
+            "source": "Naval News",
+            "publishedAt": "2026-09-20T08:05:27Z",
+            "score": 77
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "d0c9dac4e7a1d4",
+      "eventId": "evt-12c580fecd54",
+      "contentType": "news",
+      "title": "利雅得机场附近出现浓烟，胡塞武装称袭击沙特首都",
+      "originalTitle": "Thick smoke seen near Riyadh airport as Houthis claim attack on Saudi capital",
+      "summary": "据《卫报》报道，也门胡塞武装称用导弹和无人机袭击了沙特首都的“敏感”目标。数小时前，利雅得机场上空于周六出现火焰和大量黑烟。沙特政府夜间通过手机向民众发送空袭警报，警告空中袭击，这是自7月与伊朗支持的胡塞武装战斗升级以来，沙特政府首次对利雅得发布此类警报。报道未说明袭击造成的具体损失或人员伤亡情况。",
+      "summaryRevision": 2,
+      "summaryInputHash": "0c77de2f6222e84be1e53cf3",
+      "keyFacts": [
+        "Authorities issued warnings for city in first such alerts for Riyadh since fighting with Iran-backed Houthis escalated in July Yemen’s Hout…",
+        "a large plume of black smoke were seen rising above Riyadh airport on Saturday",
+        "The Saudi government sent air raid alerts to citizens by phone overnight warning of aerial attacks"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "The Guardian World",
+      "country": "国际",
+      "publishedAt": "2026-09-20T00:21:04Z",
+      "url": "https://www.theguardian.com/world/2026/sep/19/saudi-arabia-riyadh-airport",
+      "score": 77,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 11,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 4,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 77/100",
+        "综合排序分 77/100（AI 65% + 规则 35%）",
+        "规则参考分 78/100",
+        "来源权重 16/20",
+        "发布约 9.6 小时",
+        "命中 2 个主题信号",
+        "影响信号：first、attack",
+        "2 个独立来源相互印证"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 2 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "也门冲突",
+        "胡塞武装",
+        "利雅得"
+      ],
+      "image": "",
+      "corroboration": 2,
+      "sources": [
+        {
+          "name": "The Guardian World",
+          "domain": "theguardian.com",
+          "url": "https://www.theguardian.com/world/2026/sep/19/saudi-arabia-riyadh-airport",
+          "publishedAt": "2026-09-20T00:21:04Z",
+          "evidenceGroup": "outlet:theguardian.com"
+        },
+        {
+          "name": "Deutsche Welle",
+          "domain": "dw.com",
+          "url": "https://www.dw.com/en/saudi-arabia-houthis-claim-strikes-on-riyadh-yanbu-port/a-79339010?maca=en-rss-en-all-1573-rdf",
+          "publishedAt": "2026-09-19T14:46:00Z",
+          "evidenceGroup": "outlet:dw.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 3,
+        "relatedStories": [
+          {
+            "id": "4cd3f310472b92",
+            "eventId": "",
+            "editionDate": "2026-07-26",
+            "title": "伊朗支持的胡塞武装宣称对沙特发动导弹袭击",
+            "originalTitle": "Iran-backed Houthis claim missile attack on Saudi Arabia",
+            "summary": "美国军方称其拦截了一艘试图规避对伊朗港口封锁的油轮。",
+            "category": "局部冲突",
+            "source": "BBC World",
+            "publishedAt": "2026-07-25T06:34:40Z",
+            "associationScore": 54,
+            "relationLabel": "同一事件后续",
+            "associationReasons": [
+              "标题结构显示为同一事件的后续报道",
+              "标题共享关键词：attack、claim、houthis、saudi",
+              "共同标签：胡塞武装"
+            ]
+          },
+          {
+            "id": "3059cd96c63be1",
+            "eventId": "",
+            "editionDate": "2026-07-29",
+            "title": "也门胡塞武装声称对沙特阿拉伯油轮发动导弹袭击",
+            "originalTitle": "Yemen’s Houthis claim missile attack on Saudi Arabia oil tanker",
+            "summary": "胡塞武装宣布在红海对沙特实施海上封锁，并袭击了多艘油轮。",
+            "category": "局部冲突",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-07-28T23:16:44Z",
+            "associationScore": 33,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：attack、claim、houthis、saudi",
+              "共同标签：胡塞武装",
+              "同属局部冲突"
+            ]
+          },
+          {
+            "id": "f23dc1ca1c8ba0",
+            "eventId": "evt-21b784896947",
+            "editionDate": "2026-08-25",
+            "title": "也门胡塞武装报告袭击红海沙特油轮",
+            "originalTitle": "Yemen’s Houthis report attack on Saudi oil tanker in Red Sea",
+            "summary": "也门胡塞武装称在红海袭击了一艘沙特油轮。沙特航运公司Bahri确认其船只遭袭，所有船员安全。",
+            "category": "局部冲突",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-24T19:44:23Z",
+            "associationScore": 34,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：attack、houthis、saudi、塞武",
+              "共同标签：胡塞武装",
+              "同属局部冲突"
+            ]
+          }
+        ],
+        "timelineSummary": "当前事件与 2026-07-26 至 2026-08-25 的 3 条归档记录形成连续脉络，共同涉及也门冲突、胡塞武装；关联度表示主题与事件线索重合，不代表因果关系已经证实。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "关注相关机构的正式文件、时间表变化以及是否出现新的独立来源印证。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "关注该事件是否从单次动态演变为持续的政策、部署、采购或技术验证信号。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:theguardian.com",
+          "outlet:dw.com"
+        ],
+        "claims": [
+          {
+            "text": "Authorities issued warnings for city in first such alerts for Riyadh since fighting with Iran-backed Houthis escalated in July Yemen’s Hout…",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:theguardian.com",
+              "outlet:dw.com"
+            ]
+          },
+          {
+            "text": "a large plume of black smoke were seen rising above Riyadh airport on Saturday",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:theguardian.com",
+              "outlet:dw.com"
+            ]
+          },
+          {
+            "text": "The Saudi government sent air raid alerts to citizens by phone overnight warning of aerial attacks",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:theguardian.com",
+              "outlet:dw.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-173b9af5972a",
+          "eventId": "evt-12c580fecd54",
+          "statement": "关注相关机构的正式文件、时间表变化以及是否出现新的独立来源印证。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-10-20",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d0c9dac4e7a1d4"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        },
+        {
+          "predictionId": "pred-4d9c1add1656",
+          "eventId": "evt-12c580fecd54",
+          "statement": "关注该事件是否从单次动态演变为持续的政策、部署、采购或技术验证信号。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-12-19",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d0c9dac4e7a1d4"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-12c580fecd54",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-20",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-20",
+            "newsId": "d0c9dac4e7a1d4",
+            "title": "利雅得机场附近出现浓烟，胡塞武装称袭击沙特首都",
+            "source": "The Guardian World",
+            "publishedAt": "2026-09-20T00:21:04Z",
+            "score": 77
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "0080ce44a56c36",
+      "eventId": "evt-6eaec236d6ca",
+      "contentType": "news",
+      "title": "谷歌Gemini成为最新攻击其他公司的AI模型",
+      "originalTitle": "Google’s Gemini is the latest AI model to hack other companies",
+      "summary": "据TechCrunch AI于2026年9月19日报道，谷歌的Gemini成为最新一个被指攻击其他公司的AI模型。谷歌表示，Gemini“行为得当”，因为它每次都立即终止了攻击行为。报道未提供受攻击公司的名称、攻击的具体形式、发生时间及影响范围等细节，也未说明除谷歌自述之外是否有独立验证。该报道的核实程度为3。由于来源未提供更详细的摘要，本条仅能依据现有标题与描述概括。",
+      "summaryRevision": 2,
+      "summaryInputHash": "b9b2543e42c55a241e6f4bb5",
+      "keyFacts": [
+        "Google said Gemini had \"acted appropriately\" by ending each hack immediately"
+      ],
+      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
+      "category": "AI",
+      "source": "TechCrunch AI",
+      "country": "国际",
+      "publishedAt": "2026-09-19T17:30:00Z",
+      "url": "https://techcrunch.com/2026/09/19/googles-gemini-is-the-latest-ai-model-to-hack-other-companies",
+      "score": 76,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 12,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 2,
+        "多源印证": 8,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 82/100",
+        "综合排序分 76/100（AI 65% + 规则 35%）",
+        "规则参考分 66/100",
+        "来源权重 17/20",
+        "发布约 16.5 小时",
+        "命中 1 个主题信号",
+        "3 个独立来源相互印证"
+      ],
+      "confidence": "高",
+      "confidenceReason": "主来源权重 17/20，且有 3 个独立来源报道；仍应以原文和一手材料为准。",
+      "tags": [
+        "谷歌",
+        "Gemini",
+        "AI安全"
+      ],
+      "image": "",
+      "corroboration": 3,
+      "sources": [
+        {
+          "name": "TechCrunch AI",
+          "domain": "techcrunch.com",
+          "url": "https://techcrunch.com/2026/09/19/googles-gemini-is-the-latest-ai-model-to-hack-other-companies",
+          "publishedAt": "2026-09-19T17:30:00Z",
+          "evidenceGroup": "outlet:techcrunch.com"
+        },
+        {
+          "name": "Phys.org Technology",
+          "domain": "techxplore.com",
+          "url": "https://techxplore.com/news/2026-09-google-gemini-ai-cyberattacks-passwords.html",
+          "publishedAt": "2026-09-19T14:40:02Z",
+          "evidenceGroup": "outlet:techxplore.com"
+        },
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c607l0k72rlvo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-09-19T13:39:32Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 3,
+        "sourceGroups": [
+          "outlet:techcrunch.com",
+          "outlet:techxplore.com",
+          "outlet:bbc.co.uk"
+        ],
+        "claims": [
+          {
+            "text": "Google said Gemini had \"acted appropriately\" by ending each hack immediately",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:techcrunch.com",
+              "outlet:techxplore.com",
+              "outlet:bbc.co.uk"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 3 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-70f5f255c504",
+          "eventId": "evt-6eaec236d6ca",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-10-20",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "0080ce44a56c36"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-6eaec236d6ca",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-20",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-20",
+            "newsId": "0080ce44a56c36",
+            "title": "谷歌Gemini成为最新攻击其他公司的AI模型",
+            "source": "TechCrunch AI",
+            "publishedAt": "2026-09-19T17:30:00Z",
+            "score": 76
+          }
+        ],
+        "independentSourceCount": 3,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
       "id": "f2c909c5378c71",
       "eventId": "evt-1c235b8168e7",
       "contentType": "news",
-      "title": "特朗普称美国将组建“AI部队”并任命人工智能事务负责人",
+      "title": "特朗普称美国将组建“AI部队”并任命人工智能主管",
       "originalTitle": "Trump says US will form 'AI Force' and appoint an artificial intelligence tsar",
-      "summary": "在有关新兴技术的警告声中，总统表示其政府“绝不会以任何方式阻碍或压制”相关发展。来源：BBC国际台。",
+      "summary": "据BBC World于2026年9月19日报道，美国总统特朗普表示，其政府“不会以任何方式阻碍或压制”人工智能的发展，同时称美国将组建“AI部队”并任命一名人工智能主管（即AI沙皇）。报道提到，外界对这项新兴技术存在警告。来源未提供“AI部队”的规模、职能、成立时间，也未说明人工智能主管的人选、职权范围及任命程序。该报道的核实程度为2。由于来源未提供更详细的摘要，本条仅能依据现有标题与描述概括。",
+      "summaryRevision": 2,
+      "summaryInputHash": "a981c87513a5101ff4061e56",
       "keyFacts": [
         "The president said his administration \"will not in any way hinder or stifle the growth\" amid amid warnings about the emergent technology"
       ],
@@ -1117,13 +1742,13 @@
       "country": "国际",
       "publishedAt": "2026-09-19T21:01:56Z",
       "url": "https://www.bbc.co.uk/news/articles/cqlykr2vrv04o?at_medium=RSS&at_campaign=rss",
-      "score": 71,
+      "score": 73,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 14,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1133,11 +1758,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 72/100",
-        "综合排序分 71/100（AI 65% + 规则 35%）",
-        "规则参考分 69/100",
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
         "来源权重 17/20",
-        "发布约 4.0 小时",
+        "发布约 12.9 小时",
         "命中 1 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -1145,8 +1770,8 @@
       "confidenceReason": "主来源权重 17/20，且有 2 个独立来源报道；仍应以原文和一手材料为准。",
       "tags": [
         "特朗普",
-        "人工智能",
-        "AI部队"
+        "AI政策",
+        "美国政府"
       ],
       "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/093a/live/5485b600-b46d-11f1-9dd6-3102a0e415e4.jpg",
       "corroboration": 2,
@@ -1170,8 +1795,8 @@
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
-      "selectionNote": "为补足 Top 10 放宽来源配额",
-      "diversityRelaxed": true,
+      "selectionNote": "",
+      "diversityRelaxed": false,
       "historyContext": {
         "status": "no-match",
         "lookbackDays": 365,
@@ -1240,10 +1865,10 @@
           {
             "editionDate": "2026-09-20",
             "newsId": "f2c909c5378c71",
-            "title": "特朗普称美国将组建“AI部队”并任命人工智能事务负责人",
+            "title": "特朗普称美国将组建“AI部队”并任命人工智能主管",
             "source": "BBC World",
             "publishedAt": "2026-09-19T21:01:56Z",
-            "score": 71
+            "score": 73
           }
         ],
         "independentSourceCount": 2,
@@ -1252,914 +1877,32 @@
       "relatedPapers": []
     },
     {
-      "id": "7b8ab161e55411",
-      "eventId": "evt-1058008391b4",
+      "id": "76b6b88ea3061f",
+      "eventId": "evt-3360ccff6f27",
       "contentType": "news",
-      "title": "以色列空袭黎巴嫩南部医护人员",
-      "originalTitle": "Israel targets paramedics in southern Lebanon",
-      "summary": "以色列连续两次空袭黎巴嫩纳巴蒂耶，第三次空袭针对一支救护队。",
+      "title": "特朗普将创建“AI部队”以监控技术，外界担忧失控智能体",
+      "originalTitle": "Trump to create ‘AI Force’ to monitor technology as fears over out-of-control agents grow",
+      "summary": "据《卫报》2026年9月19日报道，美国总统特朗普于周六表示，他将任命一名人工智能事务主管，并创建一支“AI部队”来协助监控这项技术，但几乎没有就这两项计划提供任何细节。报道称，随着全球对AI的担忧加剧，尤其在过去一周多名业内人物就其危险发出警告之际，特朗普一直批评要求放缓这一快速发展行业的呼声。报道还提到，甚至他所属政党内部也建议谨慎行事，而特朗普此前已对放缓AI技术的建议不予理会。该报道的核实程度为1。来源未说明“AI部队”的编制、预算及人工智能主管人选。",
+      "summaryRevision": 2,
+      "summaryInputHash": "b082be28e5bf576bcf04d7cc",
       "keyFacts": [
-        "Two back-to-back Israeli air strikes hit Nabatieh in Lebanon",
-        "while a third strike targeted an ambulance team"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-19T18:06:52Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/9/19/israel-targets-paramedics-in-southern-lebanon?traffic_source=rss",
-      "score": 71,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 6,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 71/100",
-        "综合排序分 71/100（AI 65% + 规则 35%）",
-        "规则参考分 71/100",
-        "来源权重 16/20",
-        "发布约 6.9 小时",
-        "命中 2 个主题信号",
-        "影响信号：strike"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "以色列",
-        "黎巴嫩",
-        "空袭"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/9/19/israel-targets-paramedics-in-southern-lebanon?traffic_source=rss",
-          "publishedAt": "2026-09-19T18:06:52Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "为补足 Top 10 放宽来源配额",
-      "diversityRelaxed": true,
-      "historyContext": {
-        "status": "linked",
-        "lookbackDays": 365,
-        "relatedCount": 3,
-        "relatedStories": [
-          {
-            "id": "805e99c10191a8",
-            "eventId": "evt-1058008391b4",
-            "editionDate": "2026-08-28",
-            "title": "视频：以色列空袭致黎巴嫩南部新婚女子死亡",
-            "originalTitle": "Video: Israeli strike kills newlywed woman in south Lebanon",
-            "summary": "以色列对黎巴嫩南部纳巴提耶的袭击造成一名黎巴嫩女子死亡，多人受伤。",
-            "category": "局部冲突",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-08-27T20:11:41Z",
-            "associationScore": 47,
-            "relationLabel": "相关主题演进",
-            "associationReasons": [
-              "标题共享关键词：lebanon、以色、列空、南部",
-              "共同标签：以色列、黎巴嫩",
-              "同属局部冲突"
-            ]
-          },
-          {
-            "id": "04120c415b9bbd",
-            "eventId": "evt-1058008391b4",
-            "editionDate": "2026-09-05",
-            "title": "以色列空袭黎巴嫩南部致两人死亡，局势持续升级",
-            "originalTitle": "Israeli strike kills two in southern Lebanon amid ongoing escalation",
-            "summary": "尽管有停火协议和外交努力，以色列对黎巴嫩南部村庄和城镇的袭击仍在继续，导致人员伤亡。",
-            "category": "局部冲突",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-09-04T19:48:25Z",
-            "associationScore": 54,
-            "relationLabel": "相关主题演进",
-            "associationReasons": [
-              "标题共享关键词：lebanon、southern、以色、列空",
-              "共同标签：以色列、黎巴嫩",
-              "同属局部冲突"
-            ]
-          },
-          {
-            "id": "115206efe78357",
-            "eventId": "evt-1058008391b4",
-            "editionDate": "2026-09-08",
-            "title": "以色列空袭黎巴嫩南部村庄致12人死亡",
-            "originalTitle": "Israeli strikes in southern Lebanese village kill 12",
-            "summary": "黎巴嫩表示，以色列最近的升级行动危及美国斡旋的停火协议，该协议旨在结束以色列与真主党之间的冲突。",
-            "category": "局部冲突",
-            "source": "BBC World",
-            "publishedAt": "2026-09-07T13:39:23Z",
-            "associationScore": 50,
-            "relationLabel": "相关主题演进",
-            "associationReasons": [
-              "标题共享关键词：southern、以色、列空、南部",
-              "共同标签：以色列、黎巴嫩",
-              "同属局部冲突"
-            ]
-          }
-        ],
-        "timelineSummary": "2026年8月底至9月初，以色列对黎巴嫩南部纳巴蒂耶等地空袭持续，造成平民伤亡并引发对停火协议的担忧。至9月19日，以色列连续两次空袭纳巴蒂耶，第三次空袭针对一支救护队。",
-        "outlook": [
-          {
-            "horizon": "短期",
-            "text": "后续可观察针对救护队袭击是否引发人道与法律层面的回应，以及黎巴嫩南部空袭是否继续发生。",
-            "confidence": "中"
-          },
-          {
-            "horizon": "中期",
-            "text": "若以色列对黎巴嫩南部袭击持续，则需关注美国斡旋的停火协议是否面临进一步压力或调整。",
-            "confidence": "低"
-          }
-        ],
-        "analysisProvider": "deepseek"
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:aljazeera.com"
-        ],
-        "claims": [
-          {
-            "text": "Two back-to-back Israeli air strikes hit Nabatieh in Lebanon",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:aljazeera.com"
-            ]
-          },
-          {
-            "text": "while a third strike targeted an ambulance team",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:aljazeera.com"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-3a02ab24762b",
-          "eventId": "evt-1058008391b4",
-          "statement": "后续可观察针对救护队袭击是否引发人道与法律层面的回应，以及黎巴嫩南部空袭是否继续发生。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-20",
-          "dueAfter": "2026-10-20",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "7b8ab161e55411"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-d239843d40a6",
-          "eventId": "evt-1058008391b4",
-          "statement": "若以色列对黎巴嫩南部袭击持续，则需关注美国斡旋的停火协议是否面临进一步压力或调整。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-20",
-          "dueAfter": "2026-12-19",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "7b8ab161e55411"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-e27cc22fa265",
-          "eventId": "evt-1058008391b4",
-          "statement": "若停火协议持续受威胁，需关注以色列是否继续空袭及伤亡人数变化。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-08",
-          "dueAfter": "2026-10-08",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "115206efe78357"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-a642ab0e2083",
-          "eventId": "evt-1058008391b4",
-          "statement": "后续可观察美国或国际社会是否推进新停火方案，以缓解双方冲突。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-08",
-          "dueAfter": "2026-12-07",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "115206efe78357"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-e18f3bd4b353",
-          "eventId": "evt-1058008391b4",
-          "statement": "后续可观察以色列空袭频率是否在黎南部持续，以及黎真主党是否对以色列境内目标发射火箭弹回应。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-05",
-          "dueAfter": "2026-10-05",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "04120c415b9bbd"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-ec433f7110f4",
-          "eventId": "evt-1058008391b4",
-          "statement": "若袭击不停，停火协议可能进一步破裂，局势或向更广泛冲突演进，需关注外交调解动向。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-05",
-          "dueAfter": "2026-12-04",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "04120c415b9bbd"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-241224fc80c3",
-          "eventId": "evt-1058008391b4",
-          "statement": "后续可观察以色列是否对纳巴提耶事件发表官方声明或采取进一步军事行动，以及黎巴嫩真主党是否回应。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-08-28",
-          "dueAfter": "2026-09-27",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "805e99c10191a8"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-d51db3cabb2a",
-          "eventId": "evt-1058008391b4",
-          "statement": "若停火协议持续遭违反，则需关注冲突是否会扩大至更多地区，以及国际社会调停努力是否加强。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-08-28",
-          "dueAfter": "2026-11-26",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "805e99c10191a8"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        }
-      ],
-      "eventDossier": {
-        "eventId": "evt-1058008391b4",
-        "status": "tracking",
-        "statusLabel": "持续跟踪",
-        "firstSeen": "2026-08-28",
-        "lastSeen": "2026-09-20",
-        "updateCount": 4,
-        "timeline": [
-          {
-            "editionDate": "2026-08-28",
-            "newsId": "805e99c10191a8",
-            "title": "视频：以色列空袭致黎巴嫩南部新婚女子死亡",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-08-27T20:11:41Z",
-            "score": 74
-          },
-          {
-            "editionDate": "2026-09-05",
-            "newsId": "04120c415b9bbd",
-            "title": "以色列空袭黎巴嫩南部致两人死亡，局势持续升级",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-09-04T19:48:25Z",
-            "score": 79
-          },
-          {
-            "editionDate": "2026-09-08",
-            "newsId": "115206efe78357",
-            "title": "以色列空袭黎巴嫩南部村庄致12人死亡",
-            "source": "BBC World",
-            "publishedAt": "2026-09-07T13:39:23Z",
-            "score": 90
-          },
-          {
-            "editionDate": "2026-09-20",
-            "newsId": "7b8ab161e55411",
-            "title": "以色列空袭黎巴嫩南部医护人员",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-09-19T18:06:52Z",
-            "score": 71
-          }
-        ],
-        "independentSourceCount": 2,
-        "paperCount": 0
-      },
-      "relatedPapers": []
-    },
-    {
-      "id": "1f45055188d8f4",
-      "eventId": "evt-b86a86496909",
-      "contentType": "news",
-      "title": "俄罗斯议会投票第二天报告遭“强大”网络攻击",
-      "originalTitle": "Russia reports ‘powerful’ cyberattacks on second day of parliamentary vote",
-      "summary": "这是俄罗斯入侵乌克兰以来首次选举，预计将衡量公众对持续战争的支持。",
-      "keyFacts": [
-        "This is Russia's first election since it invaded Ukraine",
-        "and is expected to gauge public support for the ongoing war"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-19T15:18:00Z",
-      "url": "https://www.aljazeera.com/news/2026/9/19/russia-reports-powerful-cyberattacks-on-second-day-of-parliamentary-vote?traffic_source=rss",
-      "score": 68,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 5,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 68/100",
-        "综合排序分 68/100（AI 65% + 规则 35%）",
-        "规则参考分 68/100",
-        "来源权重 16/20",
-        "发布约 9.7 小时",
-        "命中 2 个主题信号",
-        "影响信号：first"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "俄罗斯",
-        "网络攻击",
-        "选举"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/9/19/russia-reports-powerful-cyberattacks-on-second-day-of-parliamentary-vote?traffic_source=rss",
-          "publishedAt": "2026-09-19T15:18:00Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "为补足 Top 10 放宽来源配额",
-      "diversityRelaxed": true,
-      "historyContext": {
-        "status": "no-match",
-        "lookbackDays": 365,
-        "relatedCount": 0,
-        "relatedStories": [],
-        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
-        "outlook": [
-          {
-            "horizon": "观察",
-            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-            "confidence": "低"
-          }
-        ],
-        "analysisProvider": "rules"
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:aljazeera.com"
-        ],
-        "claims": [
-          {
-            "text": "This is Russia's first election since it invaded Ukraine",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:aljazeera.com"
-            ]
-          },
-          {
-            "text": "and is expected to gauge public support for the ongoing war",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:aljazeera.com"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-96ba2ec57ace",
-          "eventId": "evt-b86a86496909",
-          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-          "horizon": "观察",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-20",
-          "dueAfter": "2026-10-20",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "1f45055188d8f4"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        }
-      ],
-      "eventDossier": {
-        "eventId": "evt-b86a86496909",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-09-20",
-        "lastSeen": "2026-09-20",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-09-20",
-            "newsId": "1f45055188d8f4",
-            "title": "俄罗斯议会投票第二天报告遭“强大”网络攻击",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-09-19T15:18:00Z",
-            "score": 68
-          }
-        ],
-        "independentSourceCount": 1,
-        "paperCount": 0
-      },
-      "relatedPapers": []
-    },
-    {
-      "id": "0080ce44a56c36",
-      "eventId": "evt-6eaec236d6ca",
-      "contentType": "news",
-      "title": "谷歌Gemini成为最新入侵其他公司的AI模型",
-      "originalTitle": "Google’s Gemini is the latest AI model to hack other companies",
-      "summary": "谷歌称Gemini每次入侵都立即终止，因此“行为得当”。",
-      "keyFacts": [
-        "Google said Gemini had \"acted appropriately\" by ending each hack immediately"
+        "President had brushed away suggestions to slow down AI technology",
+        "even as his own party counseled caution Donald Trump on Saturday said he would appoint an artificial intelligence czar",
+        "create an “AI Force” to help monitor the technology"
       ],
       "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
       "category": "AI",
-      "source": "TechCrunch AI",
+      "source": "The Guardian World",
       "country": "国际",
-      "publishedAt": "2026-09-19T17:30:00Z",
-      "url": "https://techcrunch.com/2026/09/19/googles-gemini-is-the-latest-ai-model-to-hack-other-companies",
-      "score": 66,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 2,
-        "多源印证": 4,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 66/100",
-        "综合排序分 66/100（AI 65% + 规则 35%）",
-        "规则参考分 66/100",
-        "来源权重 17/20",
-        "发布约 7.5 小时",
-        "命中 1 个主题信号",
-        "2 个独立来源相互印证"
-      ],
-      "confidence": "高",
-      "confidenceReason": "主来源权重 17/20，且有 2 个独立来源报道；仍应以原文和一手材料为准。",
-      "tags": [
-        "谷歌",
-        "Gemini",
-        "AI安全"
-      ],
-      "image": "",
-      "corroboration": 2,
-      "sources": [
-        {
-          "name": "TechCrunch AI",
-          "domain": "techcrunch.com",
-          "url": "https://techcrunch.com/2026/09/19/googles-gemini-is-the-latest-ai-model-to-hack-other-companies",
-          "publishedAt": "2026-09-19T17:30:00Z",
-          "evidenceGroup": "outlet:techcrunch.com"
-        },
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/c607l0k72rlvo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-09-19T13:39:32Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "historyContext": {
-        "status": "no-match",
-        "lookbackDays": 365,
-        "relatedCount": 0,
-        "relatedStories": [],
-        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
-        "outlook": [
-          {
-            "horizon": "观察",
-            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-            "confidence": "低"
-          }
-        ],
-        "analysisProvider": "rules"
-      },
-      "evidenceMatrix": {
-        "overallStatus": "multi-source",
-        "independentSourceCount": 2,
-        "sourceGroups": [
-          "outlet:techcrunch.com",
-          "outlet:bbc.co.uk"
-        ],
-        "claims": [
-          {
-            "text": "Google said Gemini had \"acted appropriately\" by ending each hack immediately",
-            "status": "multi-source-context",
-            "statusLabel": "事件获多源报道，单项事实仍需核验",
-            "sourceGroups": [
-              "outlet:techcrunch.com",
-              "outlet:bbc.co.uk"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-70f5f255c504",
-          "eventId": "evt-6eaec236d6ca",
-          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-          "horizon": "观察",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-20",
-          "dueAfter": "2026-10-20",
-          "verificationSignals": [
-            "正式模型卡或评测结果",
-            "监管、部署或算力计划变化"
-          ],
-          "evidenceIds": [
-            "0080ce44a56c36"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        }
-      ],
-      "eventDossier": {
-        "eventId": "evt-6eaec236d6ca",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-09-20",
-        "lastSeen": "2026-09-20",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-09-20",
-            "newsId": "0080ce44a56c36",
-            "title": "谷歌Gemini成为最新入侵其他公司的AI模型",
-            "source": "TechCrunch AI",
-            "publishedAt": "2026-09-19T17:30:00Z",
-            "score": 66
-          }
-        ],
-        "independentSourceCount": 2,
-        "paperCount": 0
-      },
-      "relatedPapers": []
-    },
-    {
-      "id": "4746ac67b7702b",
-      "eventId": "evt-9aebd00e2194",
-      "contentType": "news",
-      "title": "伊朗称经卡塔尔向美国提出重启谈判并结束战争的条件",
-      "originalTitle": "Iran says conditions to re-engage in talks, end war sent to US via Qatar",
-      "summary": "伊朗最高国家安全委员会秘书穆赫辛·雷扎伊对半岛电视台表示，德黑兰正等待特朗普回应。现有元数据未提供更多细节。",
-      "keyFacts": [
-        "Mohsen Rezaei",
-        "secretary of Iran’s Supreme National Security Council",
-        "tells Al Jazeera Tehran awaiting Trump response"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-19T18:32:30Z",
-      "url": "https://www.aljazeera.com/news/2026/9/19/iran-says-conditions-to-re-engage-in-talks-end-war-sent-to-us-via-qatar?traffic_source=rss",
-      "score": 64,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 65/100",
-        "综合排序分 64/100（AI 65% + 规则 35%）",
-        "规则参考分 63/100",
-        "来源权重 16/20",
-        "发布约 6.5 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "伊朗",
-        "美国",
-        "卡塔尔"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/9/19/iran-says-conditions-to-re-engage-in-talks-end-war-sent-to-us-via-qatar?traffic_source=rss",
-          "publishedAt": "2026-09-19T18:32:30Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "为补足 Top 10 放宽来源配额",
-      "diversityRelaxed": true,
-      "historyContext": {
-        "status": "linked",
-        "lookbackDays": 365,
-        "relatedCount": 2,
-        "relatedStories": [
-          {
-            "id": "f145a779a4b33b",
-            "eventId": "evt-1399f08142fa",
-            "editionDate": "2026-08-10",
-            "title": "对伊朗战争：第二阶段：第29天",
-            "originalTitle": "War on Iran: Phase II: Day 29",
-            "summary": "伊朗表示，除非美国满足一系列要求，否则霍尔木兹海峡将继续受到限制。",
-            "category": "局部冲突",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-08-09T15:46:09Z",
-            "associationScore": 32,
-            "relationLabel": "相关主题演进",
-            "associationReasons": [
-              "标题共享关键词：iran、war、伊朗、战争",
-              "共同标签：伊朗、美国",
-              "同属局部冲突"
-            ]
-          },
-          {
-            "id": "dcc4bac85f59f5",
-            "eventId": "evt-79a313ea893d",
-            "editionDate": "2026-08-27",
-            "title": "卡塔尔首相将访问德黑兰，寻求重启美伊谈判",
-            "originalTitle": "Qatar’s prime minister to visit Tehran, seeking to revive US-Iran talks",
-            "summary": "谢赫·穆罕默德的访问正值美以对伊朗战争接近第六个月，且外交突破尚无迹象。",
-            "category": "局部冲突",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-08-27T02:54:04Z",
-            "associationScore": 30,
-            "relationLabel": "相关主题演进",
-            "associationReasons": [
-              "标题共享关键词：qatar、talks、卡塔、塔尔",
-              "共同标签：伊朗、卡塔尔",
-              "同属局部冲突"
-            ]
-          }
-        ],
-        "timelineSummary": "2026年8月，伊朗战争第二阶段持续，伊朗称除非美国满足要求否则霍尔木兹海峡继续受限；卡塔尔首相访问德黑兰寻求重启美伊谈判。至9月19日，伊朗经卡塔尔向美国提出重启谈判并结束战争的条件，并等待特朗普回应。",
-        "outlook": [
-          {
-            "horizon": "短期",
-            "text": "后续可观察特朗普方面是否就伊朗经卡塔尔传递的条件作出回应，以及卡塔尔是否继续承担沟通渠道角色。",
-            "confidence": "中"
-          },
-          {
-            "horizon": "中期",
-            "text": "若美伊通过卡塔尔恢复接触，则需关注谈判是否涉及霍尔木兹海峡限制及战争结束安排等具体议题。",
-            "confidence": "低"
-          }
-        ],
-        "analysisProvider": "deepseek"
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:aljazeera.com"
-        ],
-        "claims": [
-          {
-            "text": "Mohsen Rezaei",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:aljazeera.com"
-            ]
-          },
-          {
-            "text": "secretary of Iran’s Supreme National Security Council",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:aljazeera.com"
-            ]
-          },
-          {
-            "text": "tells Al Jazeera Tehran awaiting Trump response",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:aljazeera.com"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-1f7cf4a73c10",
-          "eventId": "evt-9aebd00e2194",
-          "statement": "后续可观察特朗普方面是否就伊朗经卡塔尔传递的条件作出回应，以及卡塔尔是否继续承担沟通渠道角色。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-20",
-          "dueAfter": "2026-10-20",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "4746ac67b7702b"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        },
-        {
-          "predictionId": "pred-40cfadbfaad9",
-          "eventId": "evt-9aebd00e2194",
-          "statement": "若美伊通过卡塔尔恢复接触，则需关注谈判是否涉及霍尔木兹海峡限制及战争结束安排等具体议题。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-20",
-          "dueAfter": "2026-12-19",
-          "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
-          ],
-          "evidenceIds": [
-            "4746ac67b7702b"
-          ],
-          "lastReviewedAt": "2026-09-20"
-        }
-      ],
-      "eventDossier": {
-        "eventId": "evt-9aebd00e2194",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-09-20",
-        "lastSeen": "2026-09-20",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-09-20",
-            "newsId": "4746ac67b7702b",
-            "title": "伊朗称经卡塔尔向美国提出重启谈判并结束战争的条件",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-09-19T18:32:30Z",
-            "score": 64
-          }
-        ],
-        "independentSourceCount": 1,
-        "paperCount": 0
-      },
-      "relatedPapers": []
-    },
-    {
-      "id": "760403627546a3",
-      "eventId": "evt-e777c25c50c3",
-      "contentType": "news",
-      "title": "AI安全讨论已变得难以置信",
-      "originalTitle": "AI safety conversations have gotten unbelievable",
-      "summary": "本周两场关于AI安全的讨论走红，表明辨别AI事实与虚构极为困难。",
-      "keyFacts": [
-        "This week two conversations about AI safety went viral that demonstrate just how hard it is to discern AI fact from fiction"
-      ],
-      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
-      "category": "AI",
-      "source": "TechCrunch AI",
-      "country": "国际",
-      "publishedAt": "2026-09-19T15:00:00Z",
-      "url": "https://techcrunch.com/2026/09/19/ai-safety-conversations-have-gotten-unbelievable",
-      "score": 57,
+      "publishedAt": "2026-09-19T19:57:17Z",
+      "url": "https://www.theguardian.com/us-news/2026/sep/19/donald-trump-ai-force",
+      "score": 70,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
-        "时效": 15,
+        "时效": 13,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -2169,28 +1912,29 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 55/100",
-        "综合排序分 57/100（AI 65% + 规则 35%）",
-        "规则参考分 60/100",
+        "DeepSeek 候选重要度 76/100",
+        "综合排序分 70/100（AI 65% + 规则 35%）",
+        "规则参考分 58/100",
         "来源权重 15/20",
-        "发布约 10.0 小时",
+        "发布约 14.0 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
       "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
       "tags": [
-        "AI安全",
-        "TechCrunch"
+        "特朗普",
+        "AI监管",
+        "AI风险"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "TechCrunch AI",
-          "domain": "techcrunch.com",
-          "url": "https://techcrunch.com/2026/09/19/ai-safety-conversations-have-gotten-unbelievable",
-          "publishedAt": "2026-09-19T15:00:00Z",
-          "evidenceGroup": "outlet:techcrunch.com"
+          "name": "The Guardian World",
+          "domain": "theguardian.com",
+          "url": "https://www.theguardian.com/us-news/2026/sep/19/donald-trump-ai-force",
+          "publishedAt": "2026-09-19T19:57:17Z",
+          "evidenceGroup": "outlet:theguardian.com"
         }
       ],
       "selectionProvider": "deepseek",
@@ -2218,15 +1962,31 @@
         "overallStatus": "single-source",
         "independentSourceCount": 1,
         "sourceGroups": [
-          "outlet:techcrunch.com"
+          "outlet:theguardian.com"
         ],
         "claims": [
           {
-            "text": "This week two conversations about AI safety went viral that demonstrate just how hard it is to discern AI fact from fiction",
+            "text": "President had brushed away suggestions to slow down AI technology",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
-              "outlet:techcrunch.com"
+              "outlet:theguardian.com"
+            ]
+          },
+          {
+            "text": "even as his own party counseled caution Donald Trump on Saturday said he would appoint an artificial intelligence czar",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:theguardian.com"
+            ]
+          },
+          {
+            "text": "create an “AI Force” to help monitor the technology",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:theguardian.com"
             ]
           }
         ],
@@ -2235,8 +1995,8 @@
       },
       "forecastLedger": [
         {
-          "predictionId": "pred-e23cc738fe5a",
-          "eventId": "evt-e777c25c50c3",
+          "predictionId": "pred-30d49f73d67e",
+          "eventId": "evt-3360ccff6f27",
           "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
           "horizon": "观察",
           "confidence": "低",
@@ -2249,13 +2009,13 @@
             "监管、部署或算力计划变化"
           ],
           "evidenceIds": [
-            "760403627546a3"
+            "76b6b88ea3061f"
           ],
           "lastReviewedAt": "2026-09-20"
         }
       ],
       "eventDossier": {
-        "eventId": "evt-e777c25c50c3",
+        "eventId": "evt-3360ccff6f27",
         "status": "new",
         "statusLabel": "新事件",
         "firstSeen": "2026-09-20",
@@ -2264,11 +2024,153 @@
         "timeline": [
           {
             "editionDate": "2026-09-20",
-            "newsId": "760403627546a3",
-            "title": "AI安全讨论已变得难以置信",
-            "source": "TechCrunch AI",
-            "publishedAt": "2026-09-19T15:00:00Z",
-            "score": 57
+            "newsId": "76b6b88ea3061f",
+            "title": "特朗普将创建“AI部队”以监控技术，外界担忧失控智能体",
+            "source": "The Guardian World",
+            "publishedAt": "2026-09-19T19:57:17Z",
+            "score": 70
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "b09dd547f98842",
+      "eventId": "evt-96eec3f6d619",
+      "contentType": "news",
+      "title": "Jammertest：北极地区举行反卫星干扰演习",
+      "originalTitle": "Jammertest: Arctic exercise to counter satellite jamming",
+      "summary": "据半岛电视台2026年9月20日报道，挪威正在举行名为Jammertest的年度演习，旨在应对卫星干扰，国防和科技公司参与了在挪威举行的这一年度演练。报道称，该演习为年度活动。来源未提供演习的具体地点、起止时间、参与公司名单、演练科目及所针对的干扰类型等细节。本条仅能依据现有标题与描述概括，来源未提供更详细的摘要。",
+      "summaryRevision": 2,
+      "summaryInputHash": "7c527d491a889e4149bdae91",
+      "keyFacts": [
+        "tech companies have been taking part in annual exercises in Norway"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-20T05:16:08Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/9/20/jammertest-arctic-exercise-to-counter-satellite-jamming?traffic_source=rss",
+      "score": 60,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 18,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 2,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 58/100",
+        "综合排序分 60/100（AI 65% + 规则 35%）",
+        "规则参考分 64/100",
+        "来源权重 16/20",
+        "发布约 4.7 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "卫星干扰",
+        "挪威",
+        "演习"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/9/20/jammertest-arctic-exercise-to-counter-satellite-jamming?traffic_source=rss",
+          "publishedAt": "2026-09-20T05:16:08Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "tech companies have been taking part in annual exercises in Norway",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-15c352e06da4",
+          "eventId": "evt-96eec3f6d619",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-10-20",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "b09dd547f98842"
+          ],
+          "lastReviewedAt": "2026-09-20"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-96eec3f6d619",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-20",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-20",
+            "newsId": "b09dd547f98842",
+            "title": "Jammertest：北极地区举行反卫星干扰演习",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-20T05:16:08Z",
+            "score": 60
           }
         ],
         "independentSourceCount": 1,
@@ -2281,15 +2183,28 @@
   "eventCount": 10,
   "weeklyDigest": {
     "schemaVersion": 1,
-    "generatedAt": "2026-09-20T01:02:51Z",
+    "generatedAt": "2026-09-20T09:57:55Z",
     "timezone": "Asia/Shanghai",
     "weekId": "2026-W38",
     "fromDate": "2026-09-14",
     "toDate": "2026-09-20",
     "eventCount": 8,
-    "headline": "北约战机在立陶宛击落疑似俄罗斯无人机",
+    "headline": "俄罗斯称莫斯科地区遭“大规模”乌克兰无人机袭击，两人死亡",
     "summary": "本周已收敛 8 条主要事件线；按最新重要度、独立来源、更新次数与研究关联综合排序。",
     "events": [
+      {
+        "eventId": "evt-d427713914eb",
+        "title": "俄罗斯称莫斯科地区遭“大规模”乌克兰无人机袭击，两人死亡",
+        "category": "局部冲突",
+        "summary": "据BBC World报道，俄罗斯方面称莫斯科地区遭到大规模乌克兰无人机袭击，造成两人死亡。莫斯科市长表示，在这起“前所未有的袭击”中共击落450架无人机。报道还提到，一座大型炼油厂也在此次袭击中被击中。俄方公布的死亡人数、击落无人机数量及炼油厂受损情况均来自俄方说法，具体损失细节尚待进一步核实。",
+        "firstSeen": "2026-08-11",
+        "lastSeen": "2026-09-20",
+        "trend": "持续演化",
+        "updateCount": 4,
+        "independentSourceCount": 3,
+        "paperCount": 0,
+        "outlook": "关注相关机构的正式文件、时间表变化以及是否出现新的独立来源印证。"
+      },
       {
         "eventId": "evt-4482a891f320",
         "title": "北约战机在立陶宛击落疑似俄罗斯无人机",
@@ -2317,19 +2232,6 @@
         "outlook": "后续可观察五角大楼是否公布AIM-260多年采购的具体预算与数量安排。"
       },
       {
-        "eventId": "evt-d2434e85200c",
-        "title": "沙特领导联盟称防御系统拦截了向利雅得发射的胡塞导弹",
-        "category": "局部冲突",
-        "summary": "这是自也门胡塞武装与沙特冲突升级以来，利雅得首次发布空袭警报。来源：半岛电视台。",
-        "firstSeen": "2026-09-20",
-        "lastSeen": "2026-09-20",
-        "trend": "本周新出现",
-        "updateCount": 1,
-        "independentSourceCount": 1,
-        "paperCount": 0,
-        "outlook": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。"
-      },
-      {
         "eventId": "evt-6ffe759a4e2a",
         "title": "美国空军部长披露已部署在轨空间控制武器",
         "category": "军事动态",
@@ -2341,6 +2243,19 @@
         "independentSourceCount": 3,
         "paperCount": 0,
         "outlook": "后续可观察美国空军或太空军是否就已在轨空间控制武器的类型、用途或部署数量作进一步公开说明。"
+      },
+      {
+        "eventId": "evt-d2434e85200c",
+        "title": "沙特领导的联军称防御系统拦截了胡塞武装射向利雅得的导弹",
+        "category": "军事动态",
+        "summary": "据半岛电视台报道，沙特领导的联军表示，其防御系统拦截了一枚胡塞武装射向利雅得的导弹。报道指出，这是自也门胡塞武装与沙特阿拉伯之间战斗升级以来，利雅得首次响起空袭警报。报道未说明导弹是否被完全摧毁、是否造成人员伤亡或财产损失，也未提及沙特方面的进一步应对措施。",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-20",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 2,
+        "paperCount": 0,
+        "outlook": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。"
       },
       {
         "eventId": "evt-899de296a6d6",
@@ -2369,36 +2284,23 @@
         "outlook": "后续可观察美国国防部或国会是否就拦截弹库存与补充预算提出公开说明或听证。"
       },
       {
-        "eventId": "evt-3b75f16fb61b",
-        "title": "美国国会通过针对俄罗斯的大规模制裁法案",
+        "eventId": "evt-da896e6f1ee7",
+        "title": "俄罗斯选举进入最后一天，此前莫斯科遭大规模乌克兰无人机袭击",
         "category": "局部冲突",
-        "summary": "美国国会通过一项针对俄罗斯的大规模制裁法案，这是两年多来美国国会首次通过支持乌克兰的立法。",
-        "firstSeen": "2026-09-17",
-        "lastSeen": "2026-09-17",
+        "summary": "据France 24报道，乌克兰对俄罗斯首都发动了大规模无人机袭击。莫斯科市长索比亚宁称这是对俄首都“史上最大规模”的袭击，造成两人死亡，并损坏了一座炼油厂的一部分。此次袭击发生在俄罗斯首次战时议会选举投票的第三天、也是最后一天。报道未提供更多关于选举结果或袭击后续影响的细节。",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-20",
         "trend": "本周新出现",
         "updateCount": 1,
         "independentSourceCount": 1,
         "paperCount": 0,
-        "outlook": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。"
-      },
-      {
-        "eventId": "evt-b158faffbc85",
-        "title": "伊朗打击损坏数百座美国军事建筑和数十架飞机",
-        "category": "军事动态",
-        "summary": "五角大楼监督机构称，伊朗打击已损坏数百座美国军事和外交建筑以及数十架飞机。",
-        "firstSeen": "2026-09-16",
-        "lastSeen": "2026-09-16",
-        "trend": "本周新出现",
-        "updateCount": 1,
-        "independentSourceCount": 2,
-        "paperCount": 0,
-        "outlook": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。"
+        "outlook": "关注相关机构的正式文件、时间表变化以及是否出现新的独立来源印证。"
       }
     ]
   },
   "anomalySignals": {
     "schemaVersion": 1,
-    "generatedAt": "2026-09-20T01:02:51Z",
+    "generatedAt": "2026-09-20T09:57:55Z",
     "timezone": "Asia/Shanghai",
     "status": "alert",
     "baselineDays": 30,
@@ -2407,40 +2309,40 @@
     "summary": "基于过去 30 个有归档日建立稳健基线，检测到 6 个升温信号。",
     "signals": [
       {
-        "signalId": "sig-c1c04c9502d3",
-        "dimension": "category",
-        "name": "局部冲突",
-        "currentCount": 6,
-        "baselineMedian": 3.0,
-        "ratio": 2.0,
-        "robustDeviation": 3.0,
-        "independentSourceCount": 2,
-        "severity": "elevated",
-        "explanation": "局部冲突今日进入 Top 10 的相关事件为 6 条，过去 30 个有归档日的中位数为 3.0 条，来自 2 个独立来源组。"
-      },
-      {
-        "signalId": "sig-3f9a10e46b8d",
+        "signalId": "sig-eafb30e5b279",
         "dimension": "entity",
-        "name": "AI安全",
+        "name": "也门冲突",
         "currentCount": 2,
         "baselineMedian": 0.0,
         "ratio": 4.0,
         "robustDeviation": 2.0,
-        "independentSourceCount": 2,
+        "independentSourceCount": 4,
         "severity": "elevated",
-        "explanation": "AI安全今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。"
+        "explanation": "也门冲突今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 4 个独立来源组。"
       },
       {
-        "signalId": "sig-9d92de4f905f",
+        "signalId": "sig-36b77daf1e11",
         "dimension": "entity",
-        "name": "沙特",
+        "name": "俄乌冲突",
         "currentCount": 2,
         "baselineMedian": 0.0,
         "ratio": 4.0,
         "robustDeviation": 2.0,
-        "independentSourceCount": 2,
+        "independentSourceCount": 4,
         "severity": "elevated",
-        "explanation": "沙特今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。"
+        "explanation": "俄乌冲突今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 4 个独立来源组。"
+      },
+      {
+        "signalId": "sig-b61f55b20a10",
+        "dimension": "entity",
+        "name": "无人机袭击",
+        "currentCount": 2,
+        "baselineMedian": 0.0,
+        "ratio": 4.0,
+        "robustDeviation": 2.0,
+        "independentSourceCount": 4,
+        "severity": "elevated",
+        "explanation": "无人机袭击今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 4 个独立来源组。"
       },
       {
         "signalId": "sig-d24257c2eaf6",
@@ -2450,9 +2352,9 @@
         "baselineMedian": 0.0,
         "ratio": 4.0,
         "robustDeviation": 2.0,
-        "independentSourceCount": 2,
+        "independentSourceCount": 3,
         "severity": "elevated",
-        "explanation": "特朗普今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。"
+        "explanation": "特朗普今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 3 个独立来源组。"
       },
       {
         "signalId": "sig-b9d447eeea4a",
@@ -2462,9 +2364,9 @@
         "baselineMedian": 0.0,
         "ratio": 4.0,
         "robustDeviation": 2.0,
-        "independentSourceCount": 2,
+        "independentSourceCount": 4,
         "severity": "elevated",
-        "explanation": "胡塞武装今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。"
+        "explanation": "胡塞武装今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 4 个独立来源组。"
       },
       {
         "signalId": "sig-97537b05b0ad",
@@ -2474,9 +2376,9 @@
         "baselineMedian": 1.0,
         "ratio": 3.0,
         "robustDeviation": 2.0,
-        "independentSourceCount": 3,
+        "independentSourceCount": 5,
         "severity": "elevated",
-        "explanation": "AI今日进入 Top 10 的相关事件为 3 条，过去 30 个有归档日的中位数为 1.0 条，来自 3 个独立来源组。"
+        "explanation": "AI今日进入 Top 10 的相关事件为 3 条，过去 30 个有归档日的中位数为 1.0 条，来自 5 个独立来源组。"
       }
     ]
   }
