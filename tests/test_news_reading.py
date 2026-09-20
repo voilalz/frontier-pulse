@@ -112,6 +112,36 @@ class NewsReadingTests(unittest.TestCase):
         self.assertNotIn("corroboration", evidence[0])
         self.assertNotIn("score", evidence[0])
 
+    def test_daily_recovers_successful_stream_translation_after_batch_failure(self):
+        article = self.article("NASA satellite mission")
+        daily_item = MODULE.item_from_article(article, self.config)
+        report = {"items": [daily_item], "translationProvider": "deepseek", "translationStatus": "failed",
+                  "translatedItemCount": 0, "translationWarnings": ["translation failed"],
+                  "warnings": ["selection notice", "translation failed"],
+                  "translationDiagnostics": {"requestedItemCount": 1, "completedItemCount": 0,
+                      "missingItemCount": 1, "missingItemIds": [article.id]}}
+        translated = MODULE.item_from_article(article, self.config, {
+            "titleZh": "卫星任务", "summary": "卫星将于周一发射并部署三台观测仪器。", "_provider": "deepseek",
+        })
+        MODULE.recover_daily_translations(report, {"items": [translated]})
+        self.assertEqual(daily_item["summary"], translated["summary"])
+        self.assertEqual(report["translationStatus"], "ok")
+        self.assertEqual(report["translatedItemCount"], 1)
+        self.assertEqual(report["translationWarnings"], [])
+        self.assertEqual(report["warnings"], ["selection notice"])
+        self.assertEqual(report["translationDiagnostics"]["totalMissingItemCount"], 0)
+
+    def test_daily_recovery_does_not_copy_translation_for_other_evidence(self):
+        article = self.article("NASA satellite mission")
+        daily = MODULE.item_from_article(article, self.config)
+        article.description += " The launch was cancelled."
+        translated = MODULE.item_from_article(article, self.config, {
+            "titleZh": "发射取消", "summary": "任务已取消。", "_provider": "deepseek",
+        })
+        report = {"items": [daily], "translationProvider": "deepseek"}
+        MODULE.recover_daily_translations(report, {"items": [translated]})
+        self.assertEqual(daily["title"], article.title)
+
     def test_rule_fallback_keeps_complete_sentences_and_does_not_pad(self):
         short = "The satellite launched on Monday."
         self.assertEqual(MODULE.fallback_summary(self.article("Satellite launch", short)), short)

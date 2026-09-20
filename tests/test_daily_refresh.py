@@ -111,6 +111,14 @@ class DailyRefreshGateTests(unittest.TestCase):
                 required_summary_revision=3,
             )[0], expected)
 
+    def test_partial_translation_is_not_a_healthy_edition(self):
+        for translation_status in ("partial", "failed"):
+            self.assertTrue(decide_refresh(
+                {"state": "ok", "editionDate": TODAY, "itemCount": 10,
+                 "translationStatus": translation_status},
+                today=TODAY, event_name="push", force_refresh=False,
+            )[0])
+
     def test_status_loading_and_boolean_parsing_fail_safe(self):
         with tempfile.TemporaryDirectory() as directory:
             invalid = Path(directory) / "status.json"

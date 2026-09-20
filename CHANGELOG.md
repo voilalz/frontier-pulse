@@ -3,6 +3,7 @@
 ## 2026-09-20 — News reading and international source coverage
 
 - Enrich short RSS leads from bounded, public article-body reads; retain leads on failure and skip explicitly restricted pages. Remove internal corroboration counts from editing inputs and prevent missing-information padding. Summary revision 3 refreshes earlier summaries once.
+- Recover missing daily translations from successful same-evidence stream translations in the same run. Partially translated editions remain eligible for scheduled recovery.
 - Simplified news cards to headline, fuller summary, image, publisher, time and reading actions. Removed public scores, importance explanations, confidence badges, event dossiers, disputes, forecasts, weekly events and anomaly panels.
 - Prefer fuller RSS/Atom content (up to 6,000 characters) and request evidence-bound 180–320 character Chinese summaries. Invalidate legacy or changed-input translation caches.
 - Added one shared, configurable China-subject editorial policy before ranking and across legacy browser views; publisher location and paper-author nationality are not filters.

@@ -2647,6 +2647,53 @@ def merge_featured_stream_item(item: dict[str, Any], daily_item: dict[str, Any])
                 item[field_name] = daily_item[field_name]
 
 
+def recover_daily_translations(report: dict[str, Any], stream: dict[str, Any]) -> None:
+    """Reuse successful same-evidence stream results after a daily batch failure."""
+    lookup = {item["id"]: item for item in stream.get("items", [])}
+    recovered = 0
+    for item in report["items"]:
+        translated = lookup.get(item["id"], {})
+        if (
+            item.get("translationProvider")
+            or not translated.get("translationProvider")
+            or translated.get("translationProvider") != report.get("translationProvider")
+            or translated.get("summaryRevision") != SUMMARY_REVISION
+            or not item.get("summaryInputHash")
+            or translated.get("summaryInputHash") != item.get("summaryInputHash")
+            or not clean_text(translated.get("title")) or not clean_text(translated.get("summary"))
+        ):
+            continue
+        for name in ("title", "summary", "keyFacts", "why", "tags", "translationProvider"):
+            if name in translated:
+                item[name] = translated[name]
+        recovered += 1
+    if not recovered:
+        return
+    missing = [item["id"] for item in report["items"] if not item.get("translationProvider")]
+    count = len(report["items"]) - len(missing)
+    previous_warnings = set(report.get("translationWarnings", []))
+    warnings = [f"日报中文翻译不完整：{count}/{len(report['items'])}"] if missing else []
+    report["translationStatus"] = "partial" if missing else "ok"
+    report["translatedItemCount"] = count
+    report["translationWarnings"] = warnings
+    report["warnings"] = [value for value in report.get("warnings", []) if value not in previous_warnings] + warnings
+    diagnostics = dict(report.get("translationDiagnostics", {}))
+    diagnostics.update({
+        "recoveredFromStreamItemCount": recovered,
+        "completedItemCount": int(diagnostics.get("completedItemCount", 0)) + recovered,
+        "totalTranslatedItemCount": count,
+        "totalMissingItemCount": len(missing),
+        "missingItemCount": len(missing),
+        "missingItemIds": missing,
+        "missingItems": [value for value in diagnostics.get("missingItems", []) if value.get("id") in missing],
+        "completionReason": "partial_stream_recovery" if missing else "complete_after_stream_recovery",
+        "completionMessage": "已复用同轮动态的中文摘要" if not missing else "已从动态补齐部分中文摘要",
+    })
+    report["translationDiagnostics"] = diagnostics
+    report["brief"] = fallback_brief(report["items"], int(report.get("sourceCount", 0)))
+    LOGGER.info("Recovered %d daily Chinese summaries from the current stream", recovered)
+
+
 def build_stream_report(
     candidates: list[Article],
     config: dict[str, Any],
@@ -4330,6 +4377,9 @@ def main(argv: list[str] | None = None) -> int:
             stream_translation_diagnostics,
         )
         validate_stream_report(stream_report)
+
+        if report:
+            recover_daily_translations(report, stream_report)
 
         research_report: dict[str, Any] | None = None
         research_should_write = False
