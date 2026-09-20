@@ -1,11 +1,12 @@
 {
   "schemaVersion": 10,
   "state": "ok",
-  "lastAttemptAt": "2026-09-20T09:57:55Z",
-  "lastSuccessAt": "2026-09-20T09:57:55Z",
+  "lastAttemptAt": "2026-09-20T10:11:07Z",
+  "summaryRevision": 3,
+  "lastSuccessAt": "2026-09-20T10:11:07Z",
   "editionDate": "2026-09-20",
   "itemCount": 10,
-  "message": "日报更新成功；论文抓取未返回合格条目，已保留上一版论文雷达",
+  "message": "日报更新成功；日报中文翻译在拆分重试后仍缺失 5/10 条：连续两次无有效结果，已停止后续调用；日报中文翻译不完整：5/10；论文抓取未返回合格条目，已保留上一版论文雷达",
   "method": "deepseek",
   "selectionMethod": "deepseek",
   "selectionStrategy": "ai-ranked-rule-constrained",
@@ -30,24 +31,21 @@
     "unconstrainedTop": {
       "categoryCounts": {
         "局部冲突": 5,
-        "军事动态": 4,
-        "AI": 1
+        "军事动态": 2,
+        "AI": 3
       },
       "domainCounts": {
-        "bbc.co.uk": 3,
-        "france24.com": 3,
+        "bbc.co.uk": 4,
         "aljazeera.com": 1,
-        "theguardian.com": 1,
-        "navalnews.com": 1,
-        "techcrunch.com": 1
+        "techcrunch.com": 1,
+        "theguardian.com": 2,
+        "france24.com": 2
       },
       "categoryViolations": {
-        "局部冲突": 5,
-        "军事动态": 4
+        "局部冲突": 5
       },
       "domainViolations": {
-        "bbc.co.uk": 3,
-        "france24.com": 3
+        "bbc.co.uk": 4
       }
     },
     "finalTop": {
@@ -55,15 +53,16 @@
         "局部冲突": 3,
         "军事动态": 3,
         "AI": 3,
-        "航空航天": 1
+        "无人系统": 1
       },
       "domainCounts": {
         "bbc.co.uk": 2,
-        "france24.com": 2,
-        "aljazeera.com": 2,
+        "aljazeera.com": 1,
+        "techcrunch.com": 1,
         "theguardian.com": 2,
+        "france24.com": 2,
         "navalnews.com": 1,
-        "techcrunch.com": 1
+        "dw.com": 1
       },
       "categoryViolations": {},
       "domainViolations": {}
@@ -71,41 +70,71 @@
     "adjustedItemCount": 3,
     "adjustedOutIds": [
       "15fe55246a3a2a",
-      "7ffe8b5c745471",
-      "dbf103d247c131"
+      "dbf103d247c131",
+      "7ffe8b5c745471"
     ],
     "adjustedInIds": [
-      "f2c909c5378c71",
-      "76b6b88ea3061f",
-      "b09dd547f98842"
+      "ce08c0caede593",
+      "a183019f646621",
+      "f5de44bc58e268"
     ],
     "relaxedItemCount": 0
   },
-  "translationStatus": "ok",
+  "translationStatus": "partial",
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
-  "translatedItemCount": 10,
-  "translationWarnings": [],
+  "translatedItemCount": 5,
+  "translationWarnings": [
+    "日报中文翻译在拆分重试后仍缺失 5/10 条：连续两次无有效结果，已停止后续调用",
+    "日报中文翻译不完整：5/10"
+  ],
   "translationDiagnostics": {
     "requestedItemCount": 10,
-    "completedItemCount": 10,
-    "missingItemCount": 0,
-    "missingItemIds": [],
-    "missingItems": [],
+    "completedItemCount": 5,
+    "missingItemCount": 5,
+    "missingItemIds": [
+      "f2c909c5378c71",
+      "76b6b88ea3061f",
+      "ce08c0caede593",
+      "a183019f646621",
+      "f5de44bc58e268"
+    ],
+    "missingItems": [
+      {
+        "id": "f2c909c5378c71",
+        "reason": "empty_or_invalid_response"
+      },
+      {
+        "id": "76b6b88ea3061f",
+        "reason": "empty_or_invalid_response"
+      },
+      {
+        "id": "ce08c0caede593",
+        "reason": "empty_or_invalid_response"
+      },
+      {
+        "id": "a183019f646621",
+        "reason": "empty_or_invalid_response"
+      },
+      {
+        "id": "f5de44bc58e268",
+        "reason": "empty_or_invalid_response"
+      }
+    ],
     "initialBatchSize": 5,
     "initialBatchCount": 2,
-    "requestCount": 2,
-    "retryRequestCount": 0,
+    "requestCount": 5,
+    "retryRequestCount": 3,
     "providerFailureCount": 0,
-    "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "structuralFailureCount": 3,
+    "completionReason": "provider_circuit_breaker",
+    "completionMessage": "连续两次无有效结果，已停止后续调用",
     "lastProviderError": "",
     "targetItemCount": 10,
     "reusedItemCount": 0,
-    "newlyTranslatedItemCount": 10,
-    "totalTranslatedItemCount": 10,
-    "totalMissingItemCount": 0
+    "newlyTranslatedItemCount": 5,
+    "totalTranslatedItemCount": 5,
+    "totalMissingItemCount": 5
   },
   "historyAnalysisStatus": "disabled",
   "historyAnalysisProvider": "",
@@ -122,35 +151,38 @@
   },
   "eventCount": 10,
   "weeklyEventCount": 8,
-  "anomalySignalCount": 6,
+  "anomalySignalCount": 4,
   "paperLinkedItemCount": 0,
-  "warnings": [],
+  "warnings": [
+    "日报中文翻译在拆分重试后仍缺失 5/10 条：连续两次无有效结果，已停止后续调用",
+    "日报中文翻译不完整：5/10"
+  ],
   "coverageStatus": "complete",
   "freshItemCount": 10,
   "supplementalItemCount": 0,
   "effectiveLookbackHours": 24,
-  "streamItemCount": 36,
+  "streamItemCount": 37,
   "streamTranslationProvider": "deepseek",
   "streamTranslationModel": "deepseek-v4-flash",
-  "streamTranslatedItemCount": 36,
+  "streamTranslatedItemCount": 37,
   "streamTranslationWarnings": [],
   "streamTranslationDiagnostics": {
-    "requestedItemCount": 26,
-    "completedItemCount": 26,
+    "requestedItemCount": 32,
+    "completedItemCount": 32,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 5,
-    "requestCount": 5,
-    "retryRequestCount": 0,
+    "initialBatchCount": 6,
+    "requestCount": 8,
+    "retryRequestCount": 2,
     "providerFailureCount": 0,
-    "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "structuralFailureCount": 1,
+    "completionReason": "complete_after_retry",
+    "completionMessage": "缺失条目经拆分重试后已全部完成",
     "lastProviderError": "",
     "reusedItemCount": 0,
-    "featuredTranslatedItemCount": 10
+    "featuredTranslatedItemCount": 5
   },
   "researchItemCount": 24,
   "researchEditorialStatus": "stale",
