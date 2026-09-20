@@ -119,6 +119,17 @@ class DailyRefreshGateTests(unittest.TestCase):
                 today=TODAY, event_name="push", force_refresh=False,
             )[0])
 
+    def test_enabling_history_analysis_refreshes_an_edition_once(self):
+        for analysis_status, expected in [(None, True), ("disabled", True), ("ok", False),
+                                          ("partial", False), ("rules", False), ("not-needed", False)]:
+            with self.subTest(analysis_status=analysis_status):
+                self.assertEqual(decide_refresh(
+                    {"state": "ok", "editionDate": TODAY, "itemCount": 10,
+                     "historyAnalysisStatus": analysis_status},
+                    today=TODAY, event_name="push", force_refresh=False,
+                    require_history_analysis=True,
+                )[0], expected)
+
     def test_status_loading_and_boolean_parsing_fail_safe(self):
         with tempfile.TemporaryDirectory() as directory:
             invalid = Path(directory) / "status.json"

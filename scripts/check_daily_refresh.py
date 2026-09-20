@@ -42,6 +42,7 @@ def decide_refresh(
     force_refresh: bool,
     required_schema: int = 0,
     required_summary_revision: int = 0,
+    require_history_analysis: bool = False,
 ) -> tuple[bool, str]:
     event = str(event_name or "").strip()
     if event == "workflow_dispatch" and force_refresh:
@@ -65,6 +66,8 @@ def decide_refresh(
         summary_revision = 0
     if healthy_today and required_summary_revision > 0 and summary_revision < required_summary_revision:
         return True, "summary_upgrade_required"
+    if healthy_today and require_history_analysis and status.get("historyAnalysisStatus") in {None, "", "disabled"}:
+        return True, "history_analysis_required"
     if healthy_today:
         return False, "healthy_edition_exists"
     return True, "edition_missing_or_unhealthy"
@@ -84,6 +87,7 @@ def main() -> int:
     parser.add_argument("--force", default="false")
     parser.add_argument("--required-schema", type=int, default=0)
     parser.add_argument("--required-summary-revision", type=int, default=0)
+    parser.add_argument("--require-history-analysis", action="store_true")
     parser.add_argument("--github-output", type=Path)
     args = parser.parse_args()
 
@@ -95,6 +99,7 @@ def main() -> int:
         force_refresh=parse_bool(args.force),
         required_schema=max(0, args.required_schema),
         required_summary_revision=max(0, args.required_summary_revision),
+        require_history_analysis=args.require_history_analysis,
     )
     values = {
         "should_run": "true" if should_run else "false",
