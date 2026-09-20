@@ -72,6 +72,46 @@ class NewsReadingTests(unittest.TestCase):
         item = MODULE.item_from_article(self.article("ESA satellite tests"), self.config, {"summary": summary})
         self.assertEqual(item["summary"], summary)
 
+    def test_article_text_uses_body_paragraphs_without_navigation_or_promotions(self):
+        page = '''<nav><p>Navigation</p></nav><article><h1>Satellite launch</h1>
+          <div class="entry-content"><p>The mission <strong>launched</strong> on Monday.</p>
+          <aside><p>Related stories</p></aside><div class="newsletter"><p>Subscribe now</p></div>
+          <p>Three instruments will measure the atmosphere for five years.</p></div>
+          <footer><p>Copyright notice</p></footer></article>'''
+        self.assertEqual(MODULE.extract_article_text(page),
+            "The mission launched on Monday. Three instruments will measure the atmosphere for five years.")
+
+    def test_article_text_reads_structured_body_but_respects_restricted_pages(self):
+        data = {"@type": "NewsArticle", "articleBody": "The mission launched on Monday. " * 12}
+        page = '<script type="application/ld+json">' + json.dumps(data) + '</script>'
+        self.assertIn("launched on Monday", MODULE.extract_article_text(page))
+        restricted = page + '<script type="application/ld+json">{"isAccessibleForFree":false}</script>'
+        self.assertEqual(MODULE.extract_article_text(restricted), "")
+        self.assertEqual(MODULE.extract_article_text('<main><p>Sign in to read this article.</p></main>'), "")
+
+    def test_short_feed_is_enriched_and_failed_article_fetch_keeps_original(self):
+        article = self.article("NASA satellite mission")
+        old_description = article.description
+        body = '<article><p>' + ('The spacecraft carries three sensors and will operate for five years. ' * 20) + '</p></article>'
+        with mock.patch.object(MODULE, "http_get", return_value=body.encode()) as fetch:
+            MODULE.enrich_article_descriptions([article], self.config)
+        self.assertTrue(article.description.startswith(old_description))
+        self.assertIn("three sensors", article.description)
+        self.assertLessEqual(len(article.description), MODULE.SOURCE_TEXT_LIMIT)
+        self.assertEqual(fetch.call_count, 1)
+        unavailable = self.article("ESA mission")
+        with mock.patch.object(MODULE, "http_get", side_effect=RuntimeError("unavailable")):
+            MODULE.enrich_article_descriptions([unavailable], self.config)
+        self.assertEqual(unavailable.description, old_description)
+
+    def test_news_translation_does_not_receive_internal_verification_fields(self):
+        article = self.article("NASA satellite mission")
+        with mock.patch.object(MODULE, "request_structured_json", return_value={"items": []}) as request:
+            MODULE.request_daily_translation_batch([article], self.config, {"provider": "deepseek"})
+        evidence = json.loads(request.call_args.kwargs["input_text"].split("\n", 1)[1])
+        self.assertNotIn("corroboration", evidence[0])
+        self.assertNotIn("score", evidence[0])
+
     def test_rule_fallback_keeps_complete_sentences_and_does_not_pad(self):
         short = "The satellite launched on Monday."
         self.assertEqual(MODULE.fallback_summary(self.article("Satellite launch", short)), short)

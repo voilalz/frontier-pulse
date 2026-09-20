@@ -3,8 +3,8 @@
 
 Scheduled primary/recovery events and workflow-definition pushes are
 idempotent: a healthy 10-item edition for the current publication date and
-current data contract is retained. Manual force or a schema upgrade bypasses
-that guard.
+current data and summary contracts is retained. Manual force or a contract
+upgrade bypasses that guard.
 """
 
 from __future__ import annotations
@@ -41,6 +41,7 @@ def decide_refresh(
     event_name: str,
     force_refresh: bool,
     required_schema: int = 0,
+    required_summary_revision: int = 0,
 ) -> tuple[bool, str]:
     event = str(event_name or "").strip()
     if event == "workflow_dispatch" and force_refresh:
@@ -57,6 +58,12 @@ def decide_refresh(
         current_schema = 0
     if healthy_today and required_schema > 0 and current_schema < required_schema:
         return True, "schema_upgrade_required"
+    try:
+        summary_revision = int(status.get("summaryRevision", 0) or 0)
+    except (TypeError, ValueError):
+        summary_revision = 0
+    if healthy_today and required_summary_revision > 0 and summary_revision < required_summary_revision:
+        return True, "summary_upgrade_required"
     if healthy_today:
         return False, "healthy_edition_exists"
     return True, "edition_missing_or_unhealthy"
@@ -75,6 +82,7 @@ def main() -> int:
     parser.add_argument("--event-name", default="schedule")
     parser.add_argument("--force", default="false")
     parser.add_argument("--required-schema", type=int, default=0)
+    parser.add_argument("--required-summary-revision", type=int, default=0)
     parser.add_argument("--github-output", type=Path)
     args = parser.parse_args()
 
@@ -85,6 +93,7 @@ def main() -> int:
         event_name=args.event_name,
         force_refresh=parse_bool(args.force),
         required_schema=max(0, args.required_schema),
+        required_summary_revision=max(0, args.required_summary_revision),
     )
     values = {
         "should_run": "true" if should_run else "false",
