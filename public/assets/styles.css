@@ -571,6 +571,25 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .read-original:hover { text-decoration: underline; text-underline-offset: 4px; }
 .news-sources { margin-top: 14px; padding-top: 12px; }
 .news-sources .source-list { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-left: 18px; }
+.news-timeline { grid-column: 2 / -1; margin-top: 0; padding-top: 15px; border-top: 1px solid var(--line); }
+.news-timeline > summary { padding-block: 2px; font-weight: 650; }
+.news-timeline .history-context { padding-top: 16px; border: 0; font-size: 15px; line-height: 1.8; }
+.news-timeline h4 { margin: 20px 0 8px; font-size: 14px; }
+.news-timeline .history-caption { margin: 0 0 16px; color: var(--muted); font-size: 13px; }
+.news-timeline .history-empty { margin: 0 0 16px; color: var(--muted); }
+.news-timeline .history-timeline { gap: 12px; }
+.news-timeline .history-timeline::before { left: 97px; }
+.news-timeline .history-timeline li { grid-template-columns: 86px minmax(0, 1fr); gap: 24px; }
+.news-timeline .history-timeline li::before { left: 93px; top: 15px; }
+.news-timeline .history-timeline time { padding-top: 12px; font-size: 12px; white-space: nowrap; }
+.news-timeline .history-event { padding: 12px 14px; }
+.news-timeline .history-event a, .news-timeline .history-event strong { font-size: 15px; line-height: 1.65; }
+.news-timeline .history-event p { margin: 7px 0 0; line-height: 1.8; }
+.news-timeline .history-current-label { margin: 0 0 3px; color: var(--teal) !important; font-weight: 700; }
+.news-timeline .timeline-summary { margin: 0; }
+.news-timeline .history-outlook { gap: 12px; }
+.news-timeline .history-outlook li { padding: 12px 14px; }
+.news-timeline .detail-loading { margin: 14px 0 0; color: var(--muted); font-size: 14px; }
 .brief-points:empty { display: none; }
 @media (max-width: 760px) {
   .news-story { grid-template-columns: minmax(0, 1fr); padding: 20px 18px; }
@@ -579,5 +598,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
   .news-story .story-visual { width: 100%; aspect-ratio: 16 / 8; margin: 0; }
   .news-story .story-copy { width: 100%; }
   .news-story .summary { font-size: 16px; line-height: 1.9; }
+  .news-timeline { grid-column: 1; }
+  .news-timeline .history-timeline li { grid-template-columns: 74px minmax(0, 1fr); gap: 18px; }
+  .news-timeline .history-timeline::before { left: 82px; }
+  .news-timeline .history-timeline li::before { left: 78px; }
+  .news-timeline .history-timeline time { font-size: 11px; }
+  .news-timeline .history-event { padding: 10px; }
   .spotlight-card:first-child p { -webkit-line-clamp: 5; }
 }

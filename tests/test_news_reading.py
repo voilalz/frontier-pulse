@@ -1,6 +1,7 @@
 """Reader-facing contracts: supported summaries and consistent topic filtering."""
 import copy
 import json
+import re
 import subprocess
 import unittest
 from dataclasses import replace
@@ -213,15 +214,18 @@ const input = JSON.parse(fs.readFileSync(0, 'utf8'));
 const source = fs.readFileSync('public/assets/app.js', 'utf8');
 const marker = source.indexOf('  document.addEventListener("click"');
 if (marker < 0) throw new Error('Cannot locate app event boundary');
-const elements = {};
+const toggleStart = source.indexOf('  $("stories").addEventListener("toggle"');
+const toggleEnd = source.indexOf('  $("stories").addEventListener("error"');
+if (toggleStart < 0 || toggleEnd < toggleStart) throw new Error('Cannot locate details toggle handler');
+const elements = {}, handlers = {};
 const context = {URL, URLSearchParams, Date, Set, Map, console,
-  location: {search:'', hash:''}, localStorage:{getItem:()=>null},
+  location: {origin:'https://newsfrontier.top', pathname:'/', search:'', hash:''}, localStorage:{getItem:()=>null},
   window:{matchMedia:()=>({matches:false})},
-  document:{getElementById:id=>(elements[id] ||= {}), querySelectorAll:()=>[]},
-  policy:input.policy, result:null};
+  document:{getElementById:id=>(elements[id] ||= {addEventListener:(name, callback)=>handlers[name]=callback}), querySelectorAll:()=>[]},
+  policy:input.policy, handlers, result:null};
 const expose = '\nif (typeof newsPolicy !== "undefined") newsPolicy = policy;\nresult = (' + input.expression + ');\n})();';
-vm.runInNewContext(source.slice(0,marker) + expose, context);
-process.stdout.write(JSON.stringify(context.result));
+vm.runInNewContext(source.slice(0,marker) + source.slice(toggleStart,toggleEnd) + expose, context);
+Promise.resolve(context.result).then(result=>process.stdout.write(JSON.stringify(result))).catch(error=>{console.error(error);process.exitCode=1;});
 '''
         result = subprocess.run(["node", "-e", script], cwd=ROOT, input=json.dumps({
             "policy": self.config.get("content_policy", {}), "expression": expression,
@@ -245,6 +249,101 @@ process.stdout.write(JSON.stringify(context.result));
             {"title": "我国发布新型无人机", "summary": "中国公司宣布完成试验。"},
         ]
         self.assertEqual(self.browser_result(f'{json.dumps(records)}.map(isAllowedNewsItem)'), [False, True, True, False])
+
+    def timeline_item(self):
+        early = {"id": "early", "editionDate": "2026-09-10", "title": "卫星计划获批",
+                 "summary": "任务获得发射许可。", "source": "ESA", "associationScore": 87}
+        late = {**early, "id": "late", "editionDate": "2026-09-15", "title": "卫星完成测试"}
+        return {"id": "current", "editionDate": "2026-09-20", "title": "卫星准备发射",
+                "summary": "卫星计划于下周发射。", "source": "NASA",
+                "historyContext": {"status": "linked", "relatedStories": [late, early, early],
+                    "timelineSummary": "项目从许可阶段进入发射准备阶段。", "analysisProvider": "deepseek",
+                    "outlook": [{"horizon": "短期", "text": "若按期发射，后续可观察入轨结果。", "confidence": "中"}]}}
+
+    def test_timeline_is_collapsed_chronological_and_links_to_archived_reports(self):
+        item = self.timeline_item()
+        rendered = self.browser_result(f'renderStory(normalizeItem({json.dumps(item)}, 0), 0, false)')
+        self.assertIn("事件时间线与分析", rendered)
+        timeline = rendered.split('<ol class="history-timeline">', 1)[1].split('</ol>', 1)[0]
+        self.assertLess(timeline.index("卫星计划获批"), timeline.index("卫星完成测试"))
+        self.assertLess(timeline.index("卫星完成测试"), timeline.index("本次进展"))
+        self.assertEqual(timeline.count("卫星计划获批"), 1)
+        self.assertIn('/?view=history&amp;date=2026-09-10#item-early', timeline)
+        self.assertIn("项目从许可阶段进入发射准备阶段。", rendered)
+        self.assertIn("若按期发射，后续可观察入轨结果。", rendered)
+        self.assertNotRegex(rendered, r'<details[^>]*\bopen(?:\s|>)')
+        for internal in ["87/100", "关联线索", "置信", "deepseek", "争议矩阵", "事件档案"]:
+            self.assertNotIn(internal, rendered)
+
+    def test_timeline_filters_old_china_nodes_and_their_cached_analysis(self):
+        item = self.timeline_item()
+        item["historyContext"]["relatedStories"].append({"id": "china", "editionDate": "2026-09-12",
+            "title": "中国卫星完成测试", "summary": "中国机构发布计划。"})
+        item["historyContext"]["timelineSummary"] = "中国卫星项目的旧分析。"
+        item["historyContext"]["outlook"][0]["text"] = "后续关注中国项目。"
+        # Bookmarks can pass through normalization more than once.
+        rendered = self.browser_result(f'renderStory(normalizeItem(normalizeItem({json.dumps(item)}, 0), 0), 0, false)')
+        self.assertIn("卫星计划获批", rendered)
+        self.assertIn("本次进展", rendered)
+        self.assertNotIn("中国", rendered)
+
+    def test_compact_timeline_expansion_is_independent_of_source_expansion(self):
+        item = {**self.timeline_item(), "_compact": True}
+        expression = ('(() => {const item=normalizeItem(' + json.dumps(item) + ',0);'
+                      'state.expandedKeys.add("timeline::"+itemKey(item));return renderStory(item,0,false);})()')
+        rendered = self.browser_result(expression)
+        details = re.findall(r'<details\b[^>]*>', rendered)
+        timeline = next(tag for tag in details if 'news-timeline' in tag)
+        sources = next(tag for tag in details if 'news-sources' in tag)
+        self.assertIn(' open', timeline)
+        self.assertIn('data-item-key=', timeline)
+        self.assertNotIn(' open', sources)
+        self.assertIn('展开后读取事件时间线', rendered)
+
+    def test_timeline_without_history_does_not_invent_previous_events_or_outlook(self):
+        item = {**self.timeline_item(), "historyContext": None}
+        rendered = self.browser_result(f'renderStory(normalizeItem({json.dumps(item)}, 0), 0, false)')
+        self.assertIn("暂无可展示的相关历史报道", rendered)
+        self.assertIn("本次进展", rendered)
+        self.assertNotIn("后续观察", rendered)
+
+    def test_expanding_compact_timeline_loads_full_archive_and_keeps_it_open(self):
+        raw = self.timeline_item()
+        expression = ('(async () => {const raw=' + json.dumps(raw) + ';'
+            'const item=normalizeItem({...raw,historyContext:null,_compact:true},0);'
+            'state.items=[item];state.visible=[item];'
+            'state.editionCache.set(raw.editionDate,{items:[normalizeItem(raw,0)]});'
+            'const details={open:true,dataset:{detailsKey:"timeline::"+itemKey(item),itemKey:itemKey(item)},querySelector:()=>null};'
+            'renderStories=()=>{};await handlers.toggle({target:{closest:()=>details}});'
+            'return {compact:state.items[0]._compact,html:renderStory(state.items[0],0,false)};})()')
+        result = self.browser_result(expression)
+        self.assertFalse(result["compact"])
+        self.assertIn("卫星计划获批", result["html"])
+        self.assertRegex(result["html"], r'<details[^>]*news-timeline[^>]* open>')
+
+    def test_news_share_link_is_unchanged_after_adding_timeline_controls(self):
+        expression = ('(async () => {const item=normalizeItem(' + json.dumps(self.timeline_item()) + ',0);'
+            'state.visible=[item];let link="";copyText=async value=>{link=value;};toast=()=>{};'
+            'await shareStory(itemKey(item));return link;})()')
+        self.assertEqual(self.browser_result(expression),
+                         "https://newsfrontier.top/?view=history&date=2026-09-20#item-current")
+
+    def test_history_matching_excludes_china_before_linking(self):
+        current = MODULE.item_from_article(self.article("SpaceX Starship flight test"), self.config)
+        prior = {**current, "id": "prior", "editionDate": "2026-09-19"}
+        excluded = {**prior, "id": "china", "title": "China compares SpaceX Starship flight test"}
+        contexts = MODULE.build_history_contexts([current], [excluded, prior], self.config, self.now)
+        self.assertEqual([story["id"] for story in contexts[current["id"]]["relatedStories"]], ["prior"])
+
+    def test_timeline_analysis_receives_facts_without_internal_matching_scores(self):
+        item = self.timeline_item()
+        with mock.patch.object(MODULE, "request_structured_json", return_value={"items": []}) as request:
+            MODULE.request_history_analysis_batch([item], self.config, {"provider": "deepseek"})
+        evidence = json.loads(request.call_args.kwargs["input_text"].split("\n", 1)[1])
+        story = evidence[0]["relatedArchiveStories"][0]
+        self.assertEqual(story["title"], "卫星完成测试")
+        self.assertEqual(story["editionDate"], "2026-09-15")
+        self.assertNotIn("associationScore", story)
 
     def test_frontend_blocks_old_editions_bookmarks_and_search_hits(self):
         raw = [{"id": "china", "title": "中国测试无人机", "originalTitle": "China tests a drone", "url": "https://example.org/c"},

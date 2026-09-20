@@ -128,9 +128,9 @@
     };
   }
 
-  function normalizeHistoryContext(raw) {
+  function normalizeHistoryContext(raw, editionDate = "", itemId = "") {
     if (!raw || typeof raw !== "object") return null;
-    const relatedStories = (Array.isArray(raw.relatedStories) ? raw.relatedStories : []).map((story) => ({
+    const candidates = (Array.isArray(raw.relatedStories) ? raw.relatedStories : []).map((story) => ({
       id: clean(story?.id),
       eventId: clean(story?.eventId),
       editionDate: /^\d{4}-\d{2}-\d{2}$/.test(clean(story?.editionDate)) ? clean(story.editionDate) : "",
@@ -144,7 +144,12 @@
       relationLabel: clean(story?.relationLabel, "相关主题演进"),
       associationReasons: (Array.isArray(story?.associationReasons) ? story.associationReasons : [])
         .map((reason) => clean(reason)).filter(Boolean).slice(0, 3),
-    })).filter((story) => story.id && story.editionDate && story.title).slice(0, 5);
+    })).filter((story) => story.id && story.editionDate && story.title);
+    const allowed = candidates.filter((story) => isAllowedNewsItem(story) && story.id !== itemId
+      && (!editionDate || story.editionDate < editionDate));
+    const analysisFiltered = Boolean(raw.analysisFiltered) || allowed.length !== candidates.length;
+    const relatedStories = [...new Map(allowed.map((story) => [`${story.editionDate}::${story.id}`, story])).values()]
+      .sort((a, b) => a.editionDate.localeCompare(b.editionDate)).slice(-5);
     const outlook = (Array.isArray(raw.outlook) ? raw.outlook : []).map((item) => ({
       horizon: clean(item?.horizon, "观察"),
       text: clean(item?.text),
@@ -155,8 +160,10 @@
       lookbackDays: Math.max(7, Number(raw.lookbackDays) || 365),
       relatedCount: relatedStories.length,
       relatedStories,
-      timelineSummary: clean(raw.timelineSummary),
-      outlook,
+      // Cached prose may describe a removed archive node; do not expose it.
+      analysisFiltered,
+      timelineSummary: analysisFiltered ? "" : clean(raw.timelineSummary),
+      outlook: analysisFiltered ? [] : outlook,
       analysisProvider: clean(raw.analysisProvider, "rules"),
     };
   }
@@ -298,7 +305,7 @@
       selectionNote: clean(raw.selectionNote),
       diversityRelaxed: Boolean(raw.diversityRelaxed),
       translationProvider: clean(raw.translationProvider),
-      historyContext: normalizeHistoryContext(raw.historyContext),
+      historyContext: normalizeHistoryContext(raw.historyContext, clean(raw.editionDate || editionDate), clean(raw.id)),
       evidenceMatrix: normalizeEvidenceMatrix(raw.evidenceMatrix),
       forecastLedger: normalizeForecastLedger(raw.forecastLedger),
       eventDossier: normalizeEventDossier(raw.eventDossier, clean(raw.eventId)),
@@ -1002,6 +1009,39 @@
     return `item-${safe}`;
   }
 
+  function historyHref(story) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(clean(story?.editionDate)) || !clean(story?.id)) return "";
+    const query = new URLSearchParams({ view: "history", date: story.editionDate });
+    return `${location.pathname || "/"}?${query.toString()}#${anchorId(story)}`;
+  }
+
+  function renderHistoryContext(item) {
+    const context = item.historyContext;
+    const related = context?.relatedStories || [];
+    const history = related.map((story) => `<li>
+      <time datetime="${esc(story.editionDate)}">${esc(story.editionDate)}</time>
+      <div class="history-event"><a href="${esc(historyHref(story))}">${highlightText(story.title)}</a>
+        <small>${esc(story.source)} · ${esc(story.relationLabel)}</small>
+        ${story.summary ? `<p>${highlightText(story.summary)}</p>` : ""}</div>
+    </li>`).join("");
+    const currentDate = item.editionDate || clean(item.publishedAt).slice(0, 10);
+    const current = `<li class="history-current">
+      <time${currentDate ? ` datetime="${esc(currentDate)}"` : ""}>${esc(currentDate || "当前")}</time>
+      <div class="history-event"><small class="history-current-label">本次进展</small><strong>${highlightText(item.title)}</strong><small>${esc(item.source)}</small></div>
+    </li>`;
+    const summary = related.length ? (context.analysisProvider !== "rules" && context.timelineSummary
+      || `以下 ${related.length} 条相关历史报道可用于了解本次进展的背景。`) : "";
+    const outlook = related.length ? context.outlook.map((observation) => `<li><b>${esc(observation.horizon)}</b><span>${esc(observation.text)}</span></li>`).join("") : "";
+    return `<section class="history-context">
+      <p class="history-caption">按报道归档日期排列，点击历史标题可查看当期新闻。</p>
+      ${related.length ? "" : '<p class="history-empty">暂无可展示的相关历史报道，当前仅展示本次进展。</p>'}
+      <ol class="history-timeline">${history}${current}</ol>
+      ${summary ? `<h4>脉络分析</h4><p class="timeline-summary">${esc(summary)}</p>` : ""}
+      ${outlook ? `<h4>后续观察</h4><ul class="history-outlook">${outlook}</ul>` : ""}
+      ${related.length ? '<p class="history-disclaimer">相关报道不一定属于同一事件；后续观察是待验证的方向。</p>' : ""}
+    </section>`;
+  }
+
   function renderRelatedNews(item) {
     const related = item.relatedNews.filter(isAllowedNewsItem);
     if (!related.length) return "";
@@ -1156,6 +1196,11 @@
     const sources = item.sources.map((source) => `<li><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.name || source.domain)}</a></li>`).join("");
     const sourceDetails = item._compact || item.sources.length > 1
       ? `<details class="details news-sources" data-details-key="${esc(key)}"${state.expandedKeys.has(key) ? " open" : ""}><summary>其他来源</summary>${item._compact ? '<p class="detail-loading">展开后读取原始来源链接。</p>' : `<ul class="source-list">${sources}</ul>`}</details>` : "";
+    const timelineKey = `timeline::${key}`;
+    const timelineDetails = `<details class="details news-timeline" data-details-key="${esc(timelineKey)}" data-item-key="${esc(key)}"${state.expandedKeys.has(timelineKey) ? " open" : ""}>
+      <summary>事件时间线与分析</summary>
+      ${item._compact ? '<p class="detail-loading">展开后读取事件时间线与分析。</p>' : renderHistoryContext(item)}
+    </details>`;
     return `<article class="story news-story" id="${esc(anchorId(item))}" data-key="${esc(key)}">
       <span class="rank">${String(index + 1).padStart(2, "0")}</span>
       <div class="story-main${item.image ? " has-image" : ""}">${visual}<div class="story-copy">
@@ -1168,6 +1213,7 @@
         </div>
         ${sourceDetails}
       </div></div>
+      ${timelineDetails}
     </article>`;
   }
 
@@ -1487,7 +1533,7 @@
       return;
     }
     state.expandedKeys.add(key);
-    const item = state.visible.find((candidate) => itemKey(candidate) === key);
+    const item = state.visible.find((candidate) => itemKey(candidate) === (details.dataset.itemKey || key));
     if (!item?._compact || details.dataset.loading) return;
     details.dataset.loading = "true";
     const loading = details.querySelector(".detail-loading");
