@@ -7,6 +7,7 @@ const APP_SHELL = [
   "./index.html",
   "./assets/styles.css",
   "./assets/app.js",
+  "./assets/news-policy.json",
   "./favicon.svg",
   "./og-card.png",
 ];

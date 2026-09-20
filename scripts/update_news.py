@@ -38,6 +38,8 @@ LOGGER = logging.getLogger("frontier-pulse")
 USER_AGENT = "FrontierPulseBot/2.0 (+https://github.com/voilalz/frontier-pulse; public-interest news and research index)"
 CATEGORIES = ("AI", "航空航天", "军事动态", "局部冲突", "前沿技术", "无人系统")
 DEFAULT_TIMEZONE = "Asia/Shanghai"
+SOURCE_TEXT_LIMIT = 6000
+SUMMARY_REVISION = 2
 
 
 @dataclass
@@ -239,7 +241,63 @@ def load_config(path: Path) -> dict[str, Any]:
     missing = [name for name in CATEGORIES if name not in config.get("categories", {})]
     if missing:
         raise ValueError(f"config is missing categories: {', '.join(missing)}")
+    if "content_policy" not in config:
+        policy_path = Path(__file__).resolve().parents[1] / "public/assets/news-policy.json"
+        config["content_policy"] = json.loads(policy_path.read_text(encoding="utf-8"))
     return config
+
+
+def news_subject_excluded(title: str, description: str, policy: dict[str, Any]) -> bool:
+    """Match the subject in a headline or lead, never a publisher's country.
+
+    This is an explicit editorial heuristic, not nationality inference. A
+    passing reference later in a report does not exclude an international story.
+    """
+    if not policy.get("enabled"):
+        return False
+    description = re.sub(r"\b(?:U\.S\.|U\.K\.|U\.N\.|E\.U\.)", lambda match: match[0].replace(".", ""), clean_text(description), flags=re.I)
+    lead = re.split(r"(?<=[!?。！？])\s*|(?<=\.)\s+", description, maxsplit=1)[0][:240]
+    text = f"{clean_text(title)} {lead}".replace("’", "'")
+    text = re.sub(r"\bChinese[- ](?:American|British|Canadian|Australian)\b", "", text, flags=re.I)
+    return any(keyword_matches(text.lower(), term) for term in policy.get("subject_terms", []))
+
+
+def eligible_articles(articles: Iterable[Article], config: dict[str, Any]) -> list[Article]:
+    policy = config.get("content_policy", {})
+    return [article for article in articles if not news_subject_excluded(article.title, article.description, policy)]
+
+
+def summary_input_hash(article: Article) -> str:
+    evidence = article.title + "\n" + clean_text(article.description, SOURCE_TEXT_LIMIT)
+    return hashlib.sha256(evidence.encode("utf-8")).hexdigest()[:24]
+
+
+def current_featured_translation_ids(
+    candidates: list[Article], featured: dict[str, dict[str, Any]], runtime: dict[str, str] | None
+) -> set[str]:
+    """Only matching current evidence can satisfy the stream translation stage."""
+    if not runtime:
+        return set()
+    return {
+        article.id for article in candidates
+        if (item := featured.get(article.id, {}))
+        and clean_text(item.get("translationProvider")) == runtime["provider"]
+        and clean_text(item.get("title")) and clean_text(item.get("summary"))
+        and item.get("summaryRevision") == SUMMARY_REVISION
+        and item.get("summaryInputHash") == summary_input_hash(article)
+    }
+
+
+def reader_summary(value: Any, limit: int = 600) -> str:
+    """Bound output at a sentence boundary when possible, without padding."""
+    text = clean_text(value)
+    if len(text) <= limit:
+        return text
+    prefix = text[:limit]
+    endings = list(re.finditer(r"[。！？.!?](?:\s|$)", prefix))
+    if endings and endings[-1].end() >= limit // 2:
+        return prefix[:endings[-1].end()].strip()
+    return clean_text(text, limit)
 
 
 def resolve_ai_runtime(config: dict[str, Any]) -> dict[str, str] | None:
@@ -321,7 +379,7 @@ def collect_gdelt(
             Article(
                 id=article_id(target, title),
                 title=title,
-                description=clean_text(item.get("description") or item.get("snippet"), 900),
+                description=clean_text(item.get("description") or item.get("snippet"), SOURCE_TEXT_LIMIT),
                 url=target,
                 source=domain or "GDELT",
                 domain=domain,
@@ -372,6 +430,16 @@ def entry_image(node: ET.Element) -> str:
     return ""
 
 
+def entry_description(node: ET.Element) -> str:
+    """RSS summaries and content:encoded may coexist; retain the fuller evidence."""
+    texts = [
+        clean_text("".join(child.itertext()), SOURCE_TEXT_LIMIT)
+        for child in list(node)
+        if local_name(child.tag) in {"description", "summary", "content", "encoded"}
+    ]
+    return max(texts, key=len, default="")
+
+
 def collect_rss(config: dict[str, Any], now: datetime) -> list[Article]:
     feeds = list(config.get("rss_feeds", []))
     safe_date_fallback = now - timedelta(hours=int(config.get("lookback_hours", 24)))
@@ -389,7 +457,7 @@ def collect_rss(config: dict[str, Any], now: datetime) -> list[Article]:
             target = canonical_url(entry_link(node) or child_text(node, ("guid", "id")))
             if not title or not target.startswith(("http://", "https://")):
                 continue
-            description = child_text(node, ("description", "summary", "content", "encoded"))
+            description = entry_description(node)
             published = child_text(node, ("pubdate", "published", "updated", "date"))
             domain = domain_from_url(target)
             published_at, date_estimated = parse_datetime_checked(published, safe_date_fallback)
@@ -397,7 +465,7 @@ def collect_rss(config: dict[str, Any], now: datetime) -> list[Article]:
                 Article(
                     id=article_id(target, title),
                     title=title,
-                    description=clean_text(description, 900),
+                    description=description,
                     url=target,
                     source=feed["name"],
                     domain=domain,
@@ -437,7 +505,7 @@ def collect_fixture(path: Path, now: datetime) -> list[Article]:
             Article(
                 id=str(item.get("id") or article_id(url, title)),
                 title=title,
-                description=clean_text(item.get("description") or item.get("summary"), 900),
+                description=clean_text(item.get("description") or item.get("summary"), SOURCE_TEXT_LIMIT),
                 url=url,
                 source=clean_text(item.get("source")) or domain_from_url(url),
                 domain=clean_text(item.get("domain")) or domain_from_url(url),
@@ -490,7 +558,7 @@ def article_from_public_item(item: dict[str, Any], now: datetime) -> Article | N
     return Article(
         id=clean_text(item.get("id")) or article_id(target, title),
         title=title,
-        description=clean_text(item.get("summary"), 900),
+        description=clean_text(item.get("summary"), SOURCE_TEXT_LIMIT),
         url=target,
         source=clean_text(item.get("source")) or sources[0]["name"],
         domain=domain_from_url(target),
@@ -1445,7 +1513,7 @@ def score_articles(
     active_window = int(lookback_hours or primary_window)
     threshold = now - timedelta(hours=active_window)
     scored: list[Article] = []
-    for article in articles:
+    for article in eligible_articles(articles, config):
         if article.published_at < threshold or article.published_at > now + timedelta(hours=2):
             continue
         article.category, article.tags = classify(article, config)
@@ -1653,7 +1721,7 @@ WHY_TEMPLATES = {
 
 def fallback_summary(article: Article) -> str:
     if article.description:
-        return clean_text(article.description, 180)
+        return reader_summary(article.description)
     return f"据{article.source}公开信息，{article.title}。现有元数据有限，详情应以原始报道为准。"
 
 
@@ -1885,7 +1953,7 @@ def item_from_article(
     score = int(selection.get("score", round(article.raw_score)))
     category = article.category
     tags = [clean_text(tag, 24) for tag in editorial.get("tags", article.tags) if clean_text(tag)][:3]
-    summary = clean_text(editorial.get("summary") or fallback_summary(article), 220)
+    summary = reader_summary(editorial.get("summary") or fallback_summary(article))
     key_facts = [clean_text(fact, 140) for fact in editorial.get("keyFacts", []) if clean_text(fact)][:3]
     if not key_facts:
         key_facts = fallback_key_facts(article, summary)
@@ -1911,6 +1979,8 @@ def item_from_article(
         "title": clean_text(editorial.get("titleZh") or article.title, 180),
         "originalTitle": article.title,
         "summary": summary,
+        "summaryRevision": SUMMARY_REVISION,
+        "summaryInputHash": summary_input_hash(article),
         "keyFacts": key_facts,
         "why": clean_text(editorial.get("why") or WHY_TEMPLATES[category], 180),
         "category": category,
@@ -2074,11 +2144,9 @@ def request_daily_translation_batch(
             "index": {"type": "integer", "enum": indexes},
             "titleZh": {"type": "string"},
             "summary": {"type": "string"},
-            "keyFacts": {"type": "array", "items": {"type": "string"}, "minItems": 2, "maxItems": 3},
-            "why": {"type": "string"},
             "tags": {"type": "array", "items": {"type": "string"}, "maxItems": 3},
         },
-        "required": ["index", "titleZh", "summary", "keyFacts", "why", "tags"],
+        "required": ["index", "titleZh", "summary", "tags"],
         "additionalProperties": False,
     }
     schema = {
@@ -2092,7 +2160,7 @@ def request_daily_translation_batch(
     evidence = [{
         "index": index,
         "title": article.title,
-        "description": clean_text(article.description, 900),
+        "description": clean_text(article.description, SOURCE_TEXT_LIMIT),
         "source": article.source,
         "publishedAt": article.published_at.isoformat().replace("+00:00", "Z"),
         "category": article.category,
@@ -2101,9 +2169,7 @@ def request_daily_translation_batch(
     example = {"items": [{
         "index": index,
         "titleZh": f"第{index}条新闻的忠实中文标题",
-        "summary": "不超过90字的中文摘要",
-        "keyFacts": ["可由输入支持的事实一", "可由输入支持的事实二"],
-        "why": "不超过70字的为什么重要",
+        "summary": "概括事件、背景、关键细节及最新进展的180至320字中文摘要；证据不足时可更短",
         "tags": ["标签"],
     } for index in indexes]}
     result = request_structured_json(
@@ -2112,8 +2178,10 @@ def request_daily_translation_batch(
             "你是国际科技与安全新闻中文编辑。这些新闻已经入选，不得改变顺序、取舍或重要度。"
             "只能依据标题、描述、来源和时间工作，不得补写输入中没有的事实。"
             f"本批共有{len(batch)}条，items必须恰好输出{len(batch)}条且每个index只出现一次。"
-            "每条生成忠实的中文标题、不超过90字的中文摘要、2至3条可由输入直接支持的关键事实、"
-            "不超过70字的为什么重要和最多3个短标签。保留机构、型号、数值和不确定性；军事与冲突新闻保持中性。"
+            "每条生成忠实中文标题和180至320字中文摘要，按事件、背景、关键细节、最新进展组织为4至6句。"
+            "在证据支持时保留时间、地点、主体、动作、关键数值及后续安排；没有的信息不要补写。"
+            "原文不足时允许更短，不要重复凑字数；仅有标题时明确说明来源未提供详细摘要。"
+            "企业或机构自述须保留归属，不得改写成独立验证结论。最多3个短标签；军事与冲突新闻保持中性。"
         ),
         input_text="已入选新闻证据：\n" + json.dumps(evidence, ensure_ascii=False),
         schema_name="frontier_daily_translation",
@@ -2136,15 +2204,13 @@ def request_daily_translation_batch(
             and article.id not in translated
             and clean_text(item.get("titleZh"))
             and clean_text(item.get("summary"))
-            and 2 <= len(facts) <= 3
-            and clean_text(item.get("why"))
             and isinstance(item.get("tags"), list)
         ):
             translated[article.id] = {
                 "titleZh": item["titleZh"],
                 "summary": item["summary"],
                 "keyFacts": facts,
-                "why": item["why"],
+                "why": clean_text(item.get("why")),
                 "tags": item["tags"],
                 "_translationOnly": True,
                 "_provider": runtime["provider"],
@@ -2321,14 +2387,14 @@ def request_stream_translation_batch(
     evidence = [{
         "index": index,
         "title": article.title,
-        "description": clean_text(article.description, 900),
+        "description": clean_text(article.description, SOURCE_TEXT_LIMIT),
         "source": article.source,
         "publishedAt": article.published_at.isoformat().replace("+00:00", "Z"),
     } for index, article in index_to_article.items()]
     example = {"items": [{
         "index": index,
         "titleZh": f"第{index}条新闻的忠实中文标题",
-        "summary": "不超过120字的中文摘要",
+        "summary": "180至320字的中文摘要；证据不足时可更短",
         "tags": ["标签"],
     } for index in indexes]}
     result = request_structured_json(
@@ -2337,7 +2403,8 @@ def request_stream_translation_batch(
             "你是科技新闻翻译编辑。逐条把标题和已有描述忠实翻译、压缩为自然中文，保留机构、型号、数值和不确定性。"
             "不得补充输入中不存在的事实，不得改变立场；描述为空时明确写‘现有元数据未提供摘要’。"
             f"本批共有{len(batch)}条，items必须恰好输出{len(batch)}条且每个index只出现一次。"
-            "每条输出中文标题、不超过120字的中文摘要和最多3个短标签。"
+            "每条输出中文标题、180至320字中文摘要和最多3个短标签。用4至6句概括事件、背景、关键细节、进展及后续安排。"
+            "只写证据中已有的信息，原文不足时允许更短，不要重复凑字数；企业自述保留归属。"
         ),
         input_text="待翻译新闻元数据：\n" + json.dumps(evidence, ensure_ascii=False),
         schema_name="frontier_stream_translation",
@@ -2408,6 +2475,8 @@ def reusable_stream_translations(
             or clean_text(item.get("originalTitle")) != clean_text(article.title)
             or not clean_text(item.get("title"))
             or not clean_text(item.get("summary"))
+            or item.get("summaryRevision") != SUMMARY_REVISION
+            or item.get("summaryInputHash") != summary_input_hash(article)
         ):
             continue
         key_facts = [
@@ -2423,14 +2492,21 @@ def reusable_stream_translations(
             "_translationOnly": True,
             "_provider": runtime["provider"],
             "_reuseSource": "stream",
+            "_summaryRevision": SUMMARY_REVISION,
+            "_summaryInputHash": summary_input_hash(article),
         }
     return reusable
 
 
 def merge_featured_stream_item(item: dict[str, Any], daily_item: dict[str, Any]) -> None:
     """Merge Top N metadata while never replacing Chinese text with rule English text."""
+    current_evidence = (
+        daily_item.get("summaryRevision") == SUMMARY_REVISION
+        and bool(daily_item.get("summaryInputHash"))
+        and daily_item.get("summaryInputHash") == item.get("summaryInputHash")
+    )
     for field_name in (
-        "originalTitle", "category", "score", "scoreBasis", "scoreComponents", "scoreReasons",
+        "category", "score", "scoreBasis", "scoreComponents", "scoreReasons",
         "confidence", "confidenceReason", "sources", "corroboration", "selectionProvider",
         "isSupplemental", "selectionWindowHours", "selectionNote", "diversityRelaxed",
         "eventId", "eventDossier", "evidenceMatrix", "forecastLedger", "relatedPapers",
@@ -2440,8 +2516,8 @@ def merge_featured_stream_item(item: dict[str, Any], daily_item: dict[str, Any])
 
     stream_is_translated = bool(clean_text(item.get("translationProvider")))
     daily_is_translated = bool(clean_text(daily_item.get("translationProvider")))
-    if daily_is_translated or not stream_is_translated:
-        for field_name in ("title", "summary", "keyFacts", "why", "tags", "translationProvider"):
+    if current_evidence and (daily_is_translated or not stream_is_translated):
+        for field_name in ("originalTitle", "title", "summary", "summaryRevision", "summaryInputHash", "keyFacts", "why", "tags", "translationProvider"):
             if field_name in daily_item:
                 item[field_name] = daily_item[field_name]
 
@@ -2483,7 +2559,7 @@ def build_stream_report(
         "",
     )
     return {
-        "schemaVersion": 5,
+        "schemaVersion": 6,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "timezone": config.get("timezone", DEFAULT_TIMEZONE),
         "rangeHours": int(config.get("lookback_hours", 24)),
@@ -3313,6 +3389,8 @@ def build_report(
                 clean_text(reusable.get("_provider")) == runtime["provider"]
                 and clean_text(reusable.get("titleZh"))
                 and clean_text(reusable.get("summary"))
+                and reusable.get("_summaryRevision") == SUMMARY_REVISION
+                and reusable.get("_summaryInputHash") == summary_input_hash(article)
             ):
                 editorial_by_id[article.id] = dict(reusable)
         reused_count = len(editorial_by_id)
@@ -3449,7 +3527,7 @@ def build_report(
     if len(signals) < 3:
         signals = fallback_brief(items, source_count)["signals"]
     return {
-        "schemaVersion": 9,
+        "schemaVersion": 10,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "editionDate": edition,
         "timezone": config.get("timezone", DEFAULT_TIMEZONE),
@@ -3861,7 +3939,7 @@ def write_pipeline_status(
         else:
             previous_translation_status = "unknown"
     payload = {
-        "schemaVersion": 9,
+        "schemaVersion": 10,
         "state": state,
         "lastAttemptAt": now.isoformat().replace("+00:00", "Z"),
         "lastSuccessAt": now.isoformat().replace("+00:00", "Z") if success else previous.get("lastSuccessAt"),
@@ -3984,7 +4062,7 @@ def main(argv: list[str] | None = None) -> int:
             raw = collect_rss(config, now) + collect_gdelt(config, now)
         primary_window = int(config["lookback_hours"])
         stream_candidates = score_articles(
-            deduplicate(raw), config, now, lookback_hours=primary_window
+            deduplicate(eligible_articles(raw, config)), config, now, lookback_hours=primary_window
         )
 
         # The three-hour stream is a fresh, already-validated resilience input.
@@ -4001,7 +4079,7 @@ def main(argv: list[str] | None = None) -> int:
             )
             if cached_stream:
                 recovered_primary = score_articles(
-                    deduplicate([*raw, *cached_stream]),
+                    deduplicate(eligible_articles([*raw, *cached_stream], config)),
                     config,
                     now,
                     lookback_hours=primary_window,
@@ -4047,7 +4125,7 @@ def main(argv: list[str] | None = None) -> int:
                 known_ids = {article.id for article in candidates}
                 for window in windows:
                     expanded = score_articles(
-                        deduplicate(recovery_raw), config, now, lookback_hours=window
+                        deduplicate(eligible_articles(recovery_raw, config)), config, now, lookback_hours=window
                     )
                     for article in expanded:
                         if article.id in known_ids:
@@ -4088,6 +4166,7 @@ def main(argv: list[str] | None = None) -> int:
             }
         stream_translation_warnings: list[str] = []
         stream_translation_diagnostics: dict[str, Any] = {}
+        featured_translated_ids = current_featured_translation_ids(stream_candidates, top_stories, stream_runtime)
         if (
             stream_runtime
             and bool(config.get("stream_translation_enabled", True))
@@ -4097,10 +4176,7 @@ def main(argv: list[str] | None = None) -> int:
                 int(config.get("stream_limit", 300)),
                 int(config.get("stream_translation_limit", 120)),
             ))
-            already_translated = {
-                item_id for item_id, item in top_stories.items()
-                if isinstance(item, dict) and clean_text(item.get("translationProvider"))
-            } | set(stream_translations)
+            already_translated = featured_translated_ids | set(stream_translations)
             translation_candidates = [
                 article for article in stream_candidates[:translation_limit]
                 if article.id not in already_translated
@@ -4109,15 +4185,9 @@ def main(argv: list[str] | None = None) -> int:
                 translation_candidates, config, stream_runtime
             )
             stream_translation_diagnostics["reusedItemCount"] = reused_translation_count
-            stream_translation_diagnostics["featuredTranslatedItemCount"] = sum(
-                isinstance(item, dict) and bool(clean_text(item.get("translationProvider")))
-                for item in top_stories.values()
-            )
+            stream_translation_diagnostics["featuredTranslatedItemCount"] = len(featured_translated_ids)
             stream_translations.update(new_translations)
-        has_translated_top_story = any(
-            isinstance(item, dict) and bool(clean_text(item.get("translationProvider")))
-            for item in top_stories.values()
-        )
+        has_translated_top_story = bool(featured_translated_ids)
         stream_report = build_stream_report(
             stream_candidates,
             config,

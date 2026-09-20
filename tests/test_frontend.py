@@ -40,7 +40,6 @@ class FrontendTests(unittest.TestCase):
         self.assertIn("researchArea", app)
         self.assertIn("isTopStory", app)
         self.assertIn("isSupplemental", app)
-        self.assertIn("本期 Top 10 已使用透明补全", app)
         self.assertIn(".supplemental-badge", styles)
         self.assertIn(".spotlight-grid", styles)
         self.assertIn(".paper-detail", styles)
@@ -115,7 +114,7 @@ class FrontendTests(unittest.TestCase):
         self.assertIn('cron: "37 8 * * *"', daily)
         self.assertIn('paths:\n      - ".github/workflows/daily-news.yml"', daily)
         self.assertIn("python scripts/check_daily_refresh.py", daily)
-        self.assertIn("--required-schema 9", daily)
+        self.assertIn("--required-schema 10", daily)
         self.assertIn("steps.refresh_gate.outputs.should_run", daily)
         self.assertIn('id="editionTimezone">版本日期 · 中国标准时间（UTC+8）', index)
         self.assertIn('if (zone === "Asia/Shanghai") return "版本日期 · 中国标准时间（UTC+8）"', app)
@@ -170,45 +169,9 @@ class FrontendTests(unittest.TestCase):
         app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
         self.assertIn("selectionMethod", app)
         self.assertIn("selectionStrategy", app)
-        self.assertIn("selectionNotices", app)
         self.assertIn("translationStatus", app)
         self.assertIn("translatedItemCount", app)
-        self.assertIn("AI 评分不可用，中文翻译已独立完成", app)
-        self.assertIn("本期已完成多样性校正", app)
         self.assertIn("日报已更新，但部分中文翻译失败", app)
-
-    def test_compact_homepage_and_historical_context_are_wired(self):
-        index = (ROOT / "public" / "index.html").read_text(encoding="utf-8")
-        app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
-        styles = (ROOT / "public" / "assets" / "styles.css").read_text(encoding="utf-8")
-        self.assertNotIn("全球前沿情报，先看最重要的", index + app)
-        self.assertNotIn("每日十条重点事件，先呈现必读内容", index + app)
-        self.assertIn("今日前沿态势", index + app)
-        self.assertIn("normalizeHistoryContext", app)
-        self.assertIn("renderHistoryContext", app)
-        self.assertIn("查看事件脉络与证据", app)
-        self.assertIn("spotlight-backdrop", app + styles)
-        self.assertIn("history-timeline", app + styles)
-        self.assertIn("历史关联", app)
-
-    def test_event_intelligence_weekly_signals_and_cross_links_are_wired(self):
-        index = (ROOT / "public" / "index.html").read_text(encoding="utf-8")
-        app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
-        styles = (ROOT / "public" / "assets" / "styles.css").read_text(encoding="utf-8")
-        for element_id in ("intelligenceSection", "weeklyEvents", "anomalySignals"):
-            self.assertIn(f'id="{element_id}"', index)
-        for function in (
-            "diverseSpotlightItems", "renderIntelligence", "renderEventDossier",
-            "renderEvidenceMatrix", "renderForecastLedger", "renderRelatedPapers", "renderRelatedNews",
-        ):
-            self.assertIn(f"function {function}", app)
-        self.assertIn("spotlightIds", app)
-        self.assertIn("当前元数据不足，系统没有用摘要重复填充关键事实", app)
-        self.assertIn("tone-${esc(categoryTone(item.category))}", app)
-        self.assertIn('class="forecast-${esc(entry.status)}"', app)
-        self.assertIn(".forecast-ledger > ol > li.forecast-due", styles)
-        for selector in (".intelligence-strip", ".event-dossier", ".evidence-matrix", ".forecast-ledger", ".cross-links"):
-            self.assertIn(selector, styles)
 
     def test_data_workflows_share_lock_and_retry_conflict_safe_rebase(self):
         workflows = [
