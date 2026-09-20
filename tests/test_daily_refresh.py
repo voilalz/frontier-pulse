@@ -102,6 +102,15 @@ class DailyRefreshGateTests(unittest.TestCase):
             force_refresh=False,
         )[0])
 
+    def test_summary_upgrade_rebuilds_a_healthy_edition_once(self):
+        healthy = {"schemaVersion": 10, "state": "ok", "editionDate": TODAY, "itemCount": 10}
+        for revision, expected in [(None, True), (2, True), (3, False)]:
+            self.assertEqual(decide_refresh(
+                {**healthy, "summaryRevision": revision}, today=TODAY,
+                event_name="push", force_refresh=False, required_schema=10,
+                required_summary_revision=3,
+            )[0], expected)
+
     def test_status_loading_and_boolean_parsing_fail_safe(self):
         with tempfile.TemporaryDirectory() as directory:
             invalid = Path(directory) / "status.json"

@@ -51,6 +51,7 @@ jobs:
           --event-name "$EVENT_NAME"
           --force "$FORCE_REFRESH"
           --required-schema 10
+          --required-summary-revision 3
           --github-output "$GITHUB_OUTPUT"
       - name: Run unit tests
         if: steps.refresh_gate.outputs.should_run == 'true'
@@ -91,6 +92,7 @@ jobs:
           w=json.load(open('public/data/weekly.json', encoding='utf-8'));
           a=json.load(open('public/data/signals.json', encoding='utf-8'));
           assert p.get('schemaVersion') == 10, p.get('schemaVersion');
+          assert all(x.get('summaryRevision') == 3 for x in p['items']);
           assert p.get('timezone') == 'Asia/Shanghai', p.get('timezone');
           assert p.get('selectionMethod') in ('rules', 'deepseek', 'openai'), p.get('selectionMethod');
           assert p.get('selectionStrategy') in ('rules-diverse', 'ai-ranked-rule-constrained'), p.get('selectionStrategy');
