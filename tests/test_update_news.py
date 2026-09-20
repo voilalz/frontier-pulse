@@ -22,6 +22,7 @@ class UpdateNewsTests(unittest.TestCase):
     def setUp(self):
         self.now = datetime(2026, 7, 16, 0, 0, tzinfo=timezone.utc)
         self.config = MODULE.load_config(ROOT / "config" / "news_config.json")
+        self.config["history_analysis_enabled"] = True
         self.articles = MODULE.collect_fixture(ROOT / "tests" / "fixtures" / "articles.json", self.now)
         self.papers = MODULE.collect_research_fixture(
             ROOT / "tests" / "fixtures" / "papers.json", self.now, self.config
@@ -584,7 +585,7 @@ class UpdateNewsTests(unittest.TestCase):
             ])
             self.assertEqual(status, 0)
             payload = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(payload["schemaVersion"], 9)
+            self.assertEqual(payload["schemaVersion"], 10)
             self.assertEqual(payload["editionDate"], "2026-07-16")
             self.assertEqual(payload["timezone"], "Asia/Shanghai")
             self.assertEqual(payload["method"], "rules")
@@ -602,14 +603,14 @@ class UpdateNewsTests(unittest.TestCase):
             atom = ET.parse(feed_output).getroot()
             self.assertEqual(len(atom.findall("{http://www.w3.org/2005/Atom}entry")), 10)
             pipeline_status = json.loads(status_output.read_text(encoding="utf-8"))
-            self.assertEqual(pipeline_status["schemaVersion"], 9)
+            self.assertEqual(pipeline_status["schemaVersion"], 10)
             self.assertEqual(pipeline_status["state"], "ok")
             self.assertEqual(pipeline_status["selectionMethod"], "rules")
             self.assertEqual(pipeline_status["translationStatus"], "disabled")
             self.assertNotIn("editorialStatus", pipeline_status)
             stream = json.loads(stream_output.read_text(encoding="utf-8"))
             research = json.loads(research_output.read_text(encoding="utf-8"))
-            self.assertEqual(stream["schemaVersion"], 5)
+            self.assertEqual(stream["schemaVersion"], 6)
             self.assertEqual(research["schemaVersion"], 4)
             self.assertEqual(pipeline_status["streamItemCount"], stream["itemCount"])
             self.assertEqual(pipeline_status["researchItemCount"], 6)
@@ -953,6 +954,7 @@ class UpdateNewsTests(unittest.TestCase):
         reusable = {article.id: {
             "titleZh": f"复用中文：{article.title}", "summary": "已有中文摘要",
             "tags": ["复用"], "_translationOnly": True, "_provider": "deepseek",
+            "_summaryRevision": MODULE.SUMMARY_REVISION, "_summaryInputHash": MODULE.summary_input_hash(article),
         } for article in selected}
         with mock.patch.dict(os.environ, {
             "AI_PROVIDER": "deepseek", "DEEPSEEK_API_KEY": "test-key", "OPENAI_API_KEY": "",
@@ -979,6 +981,7 @@ class UpdateNewsTests(unittest.TestCase):
         reusable = {article.id: {
             "titleZh": f"中文：{article.title}", "summary": "中文摘要",
             "tags": ["复用"], "_translationOnly": True, "_provider": "deepseek",
+            "_summaryRevision": MODULE.SUMMARY_REVISION, "_summaryInputHash": MODULE.summary_input_hash(article),
         } for article in candidates[:self.config["candidate_limit"]]}
         with mock.patch.dict(os.environ, {
             "AI_PROVIDER": "deepseek", "DEEPSEEK_API_KEY": "test-key", "OPENAI_API_KEY": "",

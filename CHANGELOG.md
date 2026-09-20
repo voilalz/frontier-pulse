@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-09-20 — News reading and international source coverage
+
+- Simplified news cards to headline, fuller summary, image, publisher, time and reading actions. Removed public scores, importance explanations, confidence badges, event dossiers, disputes, forecasts, weekly events and anomaly panels.
+- Prefer fuller RSS/Atom content (up to 6,000 characters) and request evidence-bound 180–320 character Chinese summaries. Invalidate legacy or changed-input translation caches.
+- Added one shared, configurable China-subject editorial policy before ranking and across legacy browser views; publisher location and paper-author nationality are not filters.
+- Added 13 verified RSS/Atom endpoints, taking the configured source pool from 18 to 31.
+- Updated daily/status schema to 10 and stream schema to 6. Code-release refreshes regenerate the current edition without sending another administrator email.
+
 ## Unreleased — Event intelligence layer
 
 - Fixed the three highest-value product debts: Top 3 now performs event/category/source diversity selection, rule-mode key facts never repeat the summary, and the application shell no longer needs a manually synchronized release number across HTML, assets and Service Worker caches.

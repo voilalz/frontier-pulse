@@ -50,7 +50,7 @@ jobs:
           --timezone Asia/Shanghai
           --event-name "$EVENT_NAME"
           --force "$FORCE_REFRESH"
-          --required-schema 9
+          --required-schema 10
           --github-output "$GITHUB_OUTPUT"
       - name: Run unit tests
         if: steps.refresh_gate.outputs.should_run == 'true'
@@ -90,7 +90,7 @@ jobs:
           e=json.load(open('public/data/events.json', encoding='utf-8'));
           w=json.load(open('public/data/weekly.json', encoding='utf-8'));
           a=json.load(open('public/data/signals.json', encoding='utf-8'));
-          assert p.get('schemaVersion') == 9, p.get('schemaVersion');
+          assert p.get('schemaVersion') == 10, p.get('schemaVersion');
           assert p.get('timezone') == 'Asia/Shanghai', p.get('timezone');
           assert p.get('selectionMethod') in ('rules', 'deepseek', 'openai'), p.get('selectionMethod');
           assert p.get('selectionStrategy') in ('rules-diverse', 'ai-ranked-rule-constrained'), p.get('selectionStrategy');
@@ -139,7 +139,7 @@ jobs:
           echo "Unable to publish generated data after 3 attempts"
           exit 1
       - name: Send administrator email digest
-        if: steps.refresh_gate.outputs.should_run == 'true' && steps.collect.outcome == 'success'
+        if: steps.refresh_gate.outputs.should_run == 'true' && steps.collect.outcome == 'success' && github.event_name != 'push'
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ vars.SMTP_PORT }}
