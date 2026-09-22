@@ -1,21 +1,21 @@
 {
   "schemaVersion": 6,
-  "generatedAt": "2026-09-22T00:53:20Z",
+  "generatedAt": "2026-09-22T01:34:53Z",
   "timezone": "Asia/Shanghai",
   "rangeHours": 24,
   "itemCount": 64,
   "totalCandidateCount": 64,
   "truncated": false,
   "categoryCounts": {
-    "军事动态": 17,
-    "局部冲突": 19,
+    "军事动态": 18,
+    "局部冲突": 18,
     "AI": 8,
     "前沿技术": 1,
     "航空航天": 15,
     "无人系统": 4
   },
   "sourceCounts": {
-    "Al Jazeera": 8,
+    "Al Jazeera": 9,
     "NASA": 8,
     "NVIDIA Blog": 5,
     "Phys.org Technology": 5,
@@ -24,9 +24,9 @@
     "Naval News": 4,
     "The War Zone": 4,
     "Defense News": 3,
-    "Deutsche Welle": 3,
     "France 24": 3,
     "BBC World": 2,
+    "Deutsche Welle": 2,
     "DroneLife": 2,
     "MIT Technology Review": 2,
     "TechCrunch AI": 2,
@@ -40,22 +40,22 @@
   "translatedItemCount": 64,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 18,
-    "completedItemCount": 18,
+    "requestedItemCount": 3,
+    "completedItemCount": 3,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 6,
-    "initialBatchCount": 3,
-    "requestCount": 3,
+    "initialBatchCount": 1,
+    "requestCount": 1,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
     "completionReason": "complete_first_pass",
     "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
-    "reusedItemCount": 46,
-    "featuredTranslatedItemCount": 0
+    "reusedItemCount": 61,
+    "featuredTranslatedItemCount": 10
   },
   "items": [
     {
@@ -78,8 +78,8 @@
       "country": "国际",
       "publishedAt": "2026-09-21T21:12:41Z",
       "url": "https://www.defensenews.com/industry/techwatch/2026/09/21/general-atomics-delivers-fq-42-vengeance-to-nevada-air-base",
-      "score": 100,
-      "scoreBasis": "规则评分",
+      "score": 86,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -94,8 +94,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 86/100（AI 65% + 规则 35%）",
+        "规则参考分 100/100",
         "来源权重 16/20",
-        "发布约 3.7 小时",
+        "发布约 4.4 小时",
         "命中 7 个主题信号",
         "影响信号：test、production、attack",
         "2 个独立来源相互印证"
@@ -125,14 +128,114 @@
           "evidenceGroup": "outlet:suasnews.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 1
+      "eventDossier": {
+        "eventId": "evt-0d269644322c",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-22",
+        "lastSeen": "2026-09-22",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-22",
+            "newsId": "46cd2f1f079d18",
+            "title": "通用原子公司向内华达空军基地交付FQ-42“复仇”无人机",
+            "source": "Defense News",
+            "publishedAt": "2026-09-21T21:12:41Z",
+            "score": 86
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:defensenews.com",
+          "outlet:suasnews.com"
+        ],
+        "claims": [
+          {
+            "text": "A Nevada Air Force Base was picked to house General Atomics’ FQ-42",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:defensenews.com",
+              "outlet:suasnews.com"
+            ]
+          },
+          {
+            "text": "Air Force dubbed the Collaborative Combat Aircraft as Vengeance",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:defensenews.com",
+              "outlet:suasnews.com"
+            ]
+          },
+          {
+            "text": "a new FQ-42 Vengeance aircraft was delivered to Creech Air Force Base",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:defensenews.com",
+              "outlet:suasnews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-e852249484a3",
+          "eventId": "evt-0d269644322c",
+          "statement": "后续可观察通用原子是否按其所称每月6架目标披露“复仇”交付节奏，以及克里奇常规测试评估是否公开新进展。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-22",
+          "dueAfter": "2026-10-22",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "46cd2f1f079d18"
+          ],
+          "lastReviewedAt": "2026-09-22"
+        },
+        {
+          "predictionId": "pred-a2cf41d390a5",
+          "eventId": "evt-0d269644322c",
+          "statement": "若2027财年协同作战飞机预算按申请推进，则需关注FQ-42与FQ-44测试规模及部队整合情况。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-22",
+          "dueAfter": "2026-12-21",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "46cd2f1f079d18"
+          ],
+          "lastReviewedAt": "2026-09-22"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 1,
+      "relatedPapers": []
     },
     {
       "id": "7a2adbaffac169",
@@ -171,7 +274,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 2.1 小时",
+        "发布约 2.8 小时",
         "命中 16 个主题信号",
         "影响信号：contract、escalation、attack"
       ],
@@ -222,8 +325,8 @@
       "country": "国际",
       "publishedAt": "2026-09-21T17:30:55Z",
       "url": "https://www.twz.com/air/general-atomics-fq-42a-vengeance-cca-now-flying-together-with-usaf-fighters",
-      "score": 93,
-      "scoreBasis": "规则评分",
+      "score": 83,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
@@ -238,8 +341,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 77/100",
+        "综合排序分 83/100（AI 65% + 规则 35%）",
+        "规则参考分 93/100",
         "来源权重 15/20",
-        "发布约 7.4 小时",
+        "发布约 8.1 小时",
         "命中 10 个主题信号",
         "影响信号：first、test、strike"
       ],
@@ -261,14 +367,110 @@
           "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 3
+      "eventDossier": {
+        "eventId": "evt-a63f14b6773d",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-22",
+        "lastSeen": "2026-09-22",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-22",
+            "newsId": "e72fd1c4f42b84",
+            "title": "通用原子FQ-42A“复仇”协同作战飞机与美空军战斗机同飞",
+            "source": "The War Zone",
+            "publishedAt": "2026-09-21T17:30:55Z",
+            "score": 83
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "General Atomics has given us the first look at its FQ-42 Vengeance Collaborative Combat Aircraft (CCA) drone flying in formation with crewe…",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "Air Force is continuing to expand crewed-uncrewed teaming",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "other testing of the FQ-42",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-3963ed184e49",
+          "eventId": "evt-a63f14b6773d",
+          "statement": "后续可观察FQ-42与有人战斗机编队飞行是否披露更多细节，以及12月大型部队运用演习中两型协同作战飞机是否如期亮相。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-22",
+          "dueAfter": "2026-10-22",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "e72fd1c4f42b84"
+          ],
+          "lastReviewedAt": "2026-09-22"
+        },
+        {
+          "predictionId": "pred-1e3777feff5f",
+          "eventId": "evt-a63f14b6773d",
+          "statement": "若空军扩大FQ-42与FQ-44测试规模，则需关注F-22作为首款空中控制平台与协同作战飞机的整合进展。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-22",
+          "dueAfter": "2026-12-21",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "e72fd1c4f42b84"
+          ],
+          "lastReviewedAt": "2026-09-22"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 3,
+      "relatedPapers": []
     },
     {
       "id": "d975157fb77169",
@@ -290,8 +492,8 @@
       "country": "国际",
       "publishedAt": "2026-09-21T22:46:25Z",
       "url": "https://www.twz.com/news-features/alarm-bells-ring-across-europe-as-security-situation-with-russia-deteriorates-at-accelerating-pace",
-      "score": 92,
-      "scoreBasis": "规则评分",
+      "score": 84,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
@@ -306,8 +508,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 79/100",
+        "综合排序分 84/100（AI 65% + 规则 35%）",
+        "规则参考分 92/100",
         "来源权重 15/20",
-        "发布约 2.1 小时",
+        "发布约 2.8 小时",
         "命中 11 个主题信号",
         "影响信号：escalation、attack、missile"
       ],
@@ -329,14 +534,91 @@
           "evidenceGroup": "outlet:twz.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 4
+      "eventDossier": {
+        "eventId": "evt-5a01427a8fc0",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-22",
+        "lastSeen": "2026-09-22",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-22",
+            "newsId": "d975157fb77169",
+            "title": "欧洲警报频响：与俄罗斯安全局势加速恶化",
+            "source": "The War Zone",
+            "publishedAt": "2026-09-21T22:46:25Z",
+            "score": 84
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "Across Europe",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "officials are issuing unprecedented warnings about a sharp escalation in Russian aggression",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "an even larger one that could soon come",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-919b45011431",
+          "eventId": "evt-5a01427a8fc0",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-22",
+          "dueAfter": "2026-10-22",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "d975157fb77169"
+          ],
+          "lastReviewedAt": "2026-09-22"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 4,
+      "relatedPapers": []
     },
     {
       "id": "112711131ddf0b",
@@ -358,13 +640,13 @@
       "country": "国际",
       "publishedAt": "2026-09-21T14:22:27Z",
       "url": "https://www.defensenews.com/news/pentagon-congress/2026/09/21/the-pentagon-asked-industry-how-fast-it-could-make-more-weapons-the-numbers-remain-private",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 15,
+        "时效": 14,
         "影响信号": 19,
         "主题相关性": 12,
         "证据完整度": 3,
@@ -375,7 +657,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 10.5 小时",
+        "发布约 11.2 小时",
         "命中 7 个主题信号",
         "影响信号：first、contract、production"
       ],
@@ -443,7 +725,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 13.9 小时",
+        "发布约 14.6 小时",
         "命中 5 个主题信号",
         "影响信号：launch、production、attack"
       ],
@@ -494,13 +776,13 @@
       "country": "国际",
       "publishedAt": "2026-09-21T16:00:10Z",
       "url": "https://blogs.nvidia.com/blog/egypt-africa-ai-ecosystem",
-      "score": 88,
-      "scoreBasis": "规则评分",
+      "score": 71,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 22,
         "主题相关性": 6,
         "证据完整度": 3,
@@ -510,8 +792,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 62/100",
+        "综合排序分 71/100（AI 65% + 规则 35%）",
+        "规则参考分 87/100",
         "来源权重 16/20",
-        "发布约 8.9 小时",
+        "发布约 9.6 小时",
         "命中 3 个主题信号",
         "影响信号：first、launch、deploy"
       ],
@@ -533,14 +818,91 @@
           "evidenceGroup": "outlet:blogs.nvidia.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 7
+      "eventDossier": {
+        "eventId": "evt-e41ca78f5bb4",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-22",
+        "lastSeen": "2026-09-22",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-22",
+            "newsId": "7755df424d4132",
+            "title": "从赋能到执行：埃及人工智能生态达到生产规模",
+            "source": "NVIDIA Blog",
+            "publishedAt": "2026-09-21T16:00:10Z",
+            "score": 71
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:blogs.nvidia.com"
+        ],
+        "claims": [
+          {
+            "text": "Egypt’s AI builders gathered in the Grand Egyptian Museum for a reception that highlighted the nation’s rapidly growing AI ecosystem — span…",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:blogs.nvidia.com"
+            ]
+          },
+          {
+            "text": "enterprises — building applications across industries",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:blogs.nvidia.com"
+            ]
+          },
+          {
+            "text": "The event included a keynote from Paolo Guglielmini",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:blogs.nvidia.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-48701edab0f4",
+          "eventId": "evt-e41ca78f5bb4",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-22",
+          "dueAfter": "2026-10-22",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "7755df424d4132"
+          ],
+          "lastReviewedAt": "2026-09-22"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 7,
+      "relatedPapers": []
     },
     {
       "id": "3440c74b2a5185",
@@ -579,7 +941,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 17.4 小时",
+        "发布约 18.1 小时",
         "命中 5 个主题信号",
         "影响信号：first、contract、production"
       ],
@@ -630,13 +992,13 @@
       "country": "国际",
       "publishedAt": "2026-09-21T16:00:46Z",
       "url": "https://blogs.nvidia.com/blog/physical-ai-halos-safety",
-      "score": 84,
-      "scoreBasis": "规则评分",
+      "score": 72,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 8,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 20,
         "主题相关性": 6,
         "证据完整度": 3,
@@ -646,8 +1008,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 66/100",
+        "综合排序分 72/100（AI 65% + 规则 35%）",
+        "规则参考分 83/100",
         "来源权重 16/20",
-        "发布约 8.9 小时",
+        "发布约 9.6 小时",
         "命中 3 个主题信号",
         "影响信号：first、deploy、test"
       ],
@@ -669,14 +1034,91 @@
           "evidenceGroup": "outlet:blogs.nvidia.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 9
+      "eventDossier": {
+        "eventId": "evt-d0554b7f2583",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-22",
+        "lastSeen": "2026-09-22",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-22",
+            "newsId": "1bb9769be8b378",
+            "title": "为何大规模部署物理人工智能需要每一层的安全",
+            "source": "NVIDIA Blog",
+            "publishedAt": "2026-09-21T16:00:46Z",
+            "score": 72
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:blogs.nvidia.com"
+        ],
+        "claims": [
+          {
+            "text": "Physical AI is moving rapidly from research to large-scale deployment",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:blogs.nvidia.com"
+            ]
+          },
+          {
+            "text": "ABI Research projects an installed base of 49 million level 3-5 autonomous vehicles (AVs)",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:blogs.nvidia.com"
+            ]
+          },
+          {
+            "text": "while Omdia estimates that roughly 60 million industrial robots will be deployed between 2026",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:blogs.nvidia.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-43483734ebf2",
+          "eventId": "evt-d0554b7f2583",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-22",
+          "dueAfter": "2026-10-22",
+          "verificationSignals": [
+            "可复现实验或第三方验证",
+            "工程化、量产或监管节点"
+          ],
+          "evidenceIds": [
+            "1bb9769be8b378"
+          ],
+          "lastReviewedAt": "2026-09-22"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 9,
+      "relatedPapers": []
     },
     {
       "id": "6eef0b003ffbb8",
@@ -715,7 +1157,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 10.0 小时",
+        "发布约 10.7 小时",
         "命中 4 个主题信号",
         "影响信号：first、production、autonomous"
       ],
@@ -766,13 +1208,13 @@
       "country": "国际",
       "publishedAt": "2026-09-21T10:00:35Z",
       "url": "https://blogs.nvidia.com/blog/clean-energy-nvidia-ai",
-      "score": 79,
+      "score": 78,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 13,
+        "时效": 12,
         "影响信号": 18,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -783,7 +1225,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 14.9 小时",
+        "发布约 15.6 小时",
         "命中 2 个主题信号",
         "影响信号：deploy、nuclear、autonomous"
       ],
@@ -851,7 +1293,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 11.9 小时",
+        "发布约 12.6 小时",
         "命中 2 个主题信号",
         "影响信号：first、deploy、production"
       ],
@@ -881,74 +1323,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 12
-    },
-    {
-      "id": "0e3751511f9592",
-      "eventId": "evt-6397e2312c20",
-      "contentType": "news",
-      "title": "特朗普重返联合国，他会说些什么？",
-      "originalTitle": "Trump returns to the UN, what will he say?",
-      "summary": "特朗普在联大一般性辩论期间重返联合国，此时正值他发动的伊朗战争、以色列违反加沙停火协议，以及外界对美国目标的审视。现有元数据未提供摘要。",
-      "summaryRevision": 3,
-      "summaryInputHash": "b634ba9f299f2326f0faad98",
-      "keyFacts": [
-        "Trump returns to UNGA amid Iran war he started",
-        "Israeli violations of a Gaza ceasefire",
-        "and scrutiny of US aims"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-22T00:31:56Z",
-      "url": "https://www.aljazeera.com/video/newsfeed/2026/9/22/aje-onl-nf_trump-returns-to-the-un-what-will-he-say-210926?traffic_source=rss",
-      "score": 76,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 20,
-        "影响信号": 6,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 0.4 小时",
-        "命中 3 个主题信号",
-        "影响信号：ceasefire"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "特朗普",
-        "联合国",
-        "伊朗战争"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/video/newsfeed/2026/9/22/aje-onl-nf_trump-returns-to-the-un-what-will-he-say-210926?traffic_source=rss",
-          "publishedAt": "2026-09-22T00:31:56Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 13
     },
     {
       "id": "55114801bb7417",
@@ -987,7 +1361,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 3.5 小时",
+        "发布约 4.2 小时",
         "命中 3 个主题信号",
         "影响信号：first"
       ],
@@ -1016,7 +1390,155 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 14
+      "streamRank": 13
+    },
+    {
+      "id": "0e3751511f9592",
+      "eventId": "evt-6397e2312c20",
+      "contentType": "news",
+      "title": "特朗普重返联合国，他会说些什么？",
+      "originalTitle": "Trump returns to the UN, what will he say?",
+      "summary": "特朗普在联大一般性辩论期间重返联合国，此时正值他发动的伊朗战争、以色列违反加沙停火协议，以及外界对美国目标的审视。现有元数据未提供摘要。",
+      "summaryRevision": 3,
+      "summaryInputHash": "b634ba9f299f2326f0faad98",
+      "keyFacts": [
+        "Trump returns to UNGA amid Iran war he started",
+        "Israeli violations of a Gaza ceasefire",
+        "and scrutiny of US aims"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-22T00:31:56Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/9/22/aje-onl-nf_trump-returns-to-the-un-what-will-he-say-210926?traffic_source=rss",
+      "score": 71,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 6,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 69/100",
+        "综合排序分 71/100（AI 65% + 规则 35%）",
+        "规则参考分 75/100",
+        "来源权重 16/20",
+        "发布约 1.0 小时",
+        "命中 3 个主题信号",
+        "影响信号：ceasefire"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "特朗普",
+        "联合国",
+        "伊朗战争"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/9/22/aje-onl-nf_trump-returns-to-the-un-what-will-he-say-210926?traffic_source=rss",
+          "publishedAt": "2026-09-22T00:31:56Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-6397e2312c20",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-22",
+        "lastSeen": "2026-09-22",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-22",
+            "newsId": "0e3751511f9592",
+            "title": "特朗普重返联合国，他会说些什么？",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-22T00:31:56Z",
+            "score": 71
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Trump returns to UNGA amid Iran war he started",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "Israeli violations of a Gaza ceasefire",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "and scrutiny of US aims",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-8b4b5ced2c5e",
+          "eventId": "evt-6397e2312c20",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-22",
+          "dueAfter": "2026-10-22",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "0e3751511f9592"
+          ],
+          "lastReviewedAt": "2026-09-22"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 14,
+      "relatedPapers": []
     },
     {
       "id": "819aa91760b2a5",
@@ -1038,8 +1560,8 @@
       "country": "国际",
       "publishedAt": "2026-09-21T16:35:08Z",
       "url": "https://www.france24.com/en/video/20260921-national-security-threat-trump-s-latest-attack-on-us-media",
-      "score": 73,
-      "scoreBasis": "规则评分",
+      "score": 70,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -1054,8 +1576,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 68/100",
+        "综合排序分 70/100（AI 65% + 规则 35%）",
+        "规则参考分 73/100",
         "来源权重 16/20",
-        "发布约 8.3 小时",
+        "发布约 9.0 小时",
         "命中 1 个主题信号",
         "影响信号：first、attack"
       ],
@@ -1077,14 +1602,91 @@
           "evidenceGroup": "outlet:france24.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 15
+      "eventDossier": {
+        "eventId": "evt-280836ef3f51",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-22",
+        "lastSeen": "2026-09-22",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-22",
+            "newsId": "819aa91760b2a5",
+            "title": "“国家安全威胁”：特朗普对美媒发动最新攻击",
+            "source": "France 24",
+            "publishedAt": "2026-09-21T16:35:08Z",
+            "score": 70
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:france24.com"
+        ],
+        "claims": [
+          {
+            "text": "US President Donald Trump on Monday accused mainstream media outlets of being a “cancer”",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:france24.com"
+            ]
+          },
+          {
+            "text": "national security threat in his latest attack on members of the press",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:france24.com"
+            ]
+          },
+          {
+            "text": "Trump barred journalists from CNN",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:france24.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-32ff764bccbd",
+          "eventId": "evt-280836ef3f51",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-22",
+          "dueAfter": "2026-10-22",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "819aa91760b2a5"
+          ],
+          "lastReviewedAt": "2026-09-22"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 15,
+      "relatedPapers": []
     },
     {
       "id": "45038d756e131d",
@@ -1123,7 +1725,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 11.9 小时",
+        "发布约 12.6 小时",
         "命中 4 个主题信号",
         "影响信号：launch"
       ],
@@ -1155,6 +1757,154 @@
       "streamRank": 16
     },
     {
+      "id": "9e7bdba17d6a57",
+      "eventId": "evt-b3006fdf6ec5",
+      "contentType": "news",
+      "title": "NASA发现揭示早期火星复杂水系统",
+      "originalTitle": "NASA Discovery Reveals Complex Water Systems on Early Mars",
+      "summary": "NASA“毅力号”火星车2023年9月抵达火星耶泽罗陨石坑内缘时，科学家发现了出乎意料的火成岩，而非预期的沉积岩。这片被称为“边缘单元”的地质区域沿古代火星湖岸线延伸。研究发现，这些岩石显示出至少三次与水相互作用的迹象，每次接触都进一步改变了其化学组成和外观。相关发现周一发表在《Communications Earth & Environment》期刊上。研究主要作者、普渡大学的Candice Bedford表示，该地点成为水系统的“十字路口”。该发现对理解早期火星气候和宜居性具有重要意义。",
+      "summaryRevision": 3,
+      "summaryInputHash": "0b5e1d13c07a70d5400d7a6a",
+      "keyFacts": [
+        "5 min read Preparations for Next Moonwalk Simulations Underway (and Underwater) The Perseverance rover captured the data used in this panor…",
+        "NASA/JPL-Caltech/MSSS When NASA’s Perseverance rover reached the inner edge of Mars’ Jezero Crater in September 2023",
+        "mission scientists were surprised by what they found"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
+      "country": "国际",
+      "publishedAt": "2026-09-21T16:54:43Z",
+      "url": "https://www.nasa.gov/solar-system/planets/mars/nasa-discovery-reveals-complex-water-systems-on-early-mars",
+      "score": 71,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 16,
+        "影响信号": 5,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 71/100",
+        "综合排序分 71/100（AI 65% + 规则 35%）",
+        "规则参考分 72/100",
+        "来源权重 20/20",
+        "发布约 8.7 小时",
+        "命中 2 个主题信号",
+        "影响信号：first"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "NASA",
+        "毅力号",
+        "火星"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "NASA",
+          "domain": "nasa.gov",
+          "url": "https://www.nasa.gov/solar-system/planets/mars/nasa-discovery-reveals-complex-water-systems-on-early-mars",
+          "publishedAt": "2026-09-21T16:54:43Z",
+          "evidenceGroup": "outlet:nasa.gov"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "eventDossier": {
+        "eventId": "evt-b3006fdf6ec5",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-22",
+        "lastSeen": "2026-09-22",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-22",
+            "newsId": "9e7bdba17d6a57",
+            "title": "NASA发现揭示早期火星复杂水系统",
+            "source": "NASA",
+            "publishedAt": "2026-09-21T16:54:43Z",
+            "score": 71
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:nasa.gov"
+        ],
+        "claims": [
+          {
+            "text": "5 min read Preparations for Next Moonwalk Simulations Underway (and Underwater) The Perseverance rover captured the data used in this panor…",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          },
+          {
+            "text": "NASA/JPL-Caltech/MSSS When NASA’s Perseverance rover reached the inner edge of Mars’ Jezero Crater in September 2023",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          },
+          {
+            "text": "mission scientists were surprised by what they found",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-815d0d275aab",
+          "eventId": "evt-b3006fdf6ec5",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-22",
+          "dueAfter": "2026-10-22",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "9e7bdba17d6a57"
+          ],
+          "lastReviewedAt": "2026-09-22"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 17,
+      "relatedPapers": []
+    },
+    {
       "id": "8b64befa04990c",
       "eventId": "evt-a95a39d41de7",
       "contentType": "news",
@@ -1174,13 +1924,13 @@
       "country": "国际",
       "publishedAt": "2026-09-21T18:00:07Z",
       "url": "https://blogs.nvidia.com/blog/dsx-ready-ai-factories-power-cooling",
-      "score": 72,
+      "score": 71,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 17,
+        "时效": 16,
         "影响信号": 10,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -1191,7 +1941,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.9 小时",
+        "发布约 7.6 小时",
         "命中 1 个主题信号",
         "影响信号：launch、deploy"
       ],
@@ -1220,74 +1970,6 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 17
-    },
-    {
-      "id": "9e7bdba17d6a57",
-      "eventId": "evt-b3006fdf6ec5",
-      "contentType": "news",
-      "title": "NASA发现揭示早期火星复杂水系统",
-      "originalTitle": "NASA Discovery Reveals Complex Water Systems on Early Mars",
-      "summary": "NASA“毅力号”火星车2023年9月抵达火星耶泽罗陨石坑内缘时，科学家发现了出乎意料的火成岩，而非预期的沉积岩。这片被称为“边缘单元”的地质区域沿古代火星湖岸线延伸。研究发现，这些岩石显示出至少三次与水相互作用的迹象，每次接触都进一步改变了其化学组成和外观。相关发现周一发表在《Communications Earth & Environment》期刊上。研究主要作者、普渡大学的Candice Bedford表示，该地点成为水系统的“十字路口”。该发现对理解早期火星气候和宜居性具有重要意义。",
-      "summaryRevision": 3,
-      "summaryInputHash": "0b5e1d13c07a70d5400d7a6a",
-      "keyFacts": [
-        "5 min read Preparations for Next Moonwalk Simulations Underway (and Underwater) The Perseverance rover captured the data used in this panor…",
-        "NASA/JPL-Caltech/MSSS When NASA’s Perseverance rover reached the inner edge of Mars’ Jezero Crater in September 2023",
-        "mission scientists were surprised by what they found"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "NASA",
-      "country": "国际",
-      "publishedAt": "2026-09-21T16:54:43Z",
-      "url": "https://www.nasa.gov/solar-system/planets/mars/nasa-discovery-reveals-complex-water-systems-on-early-mars",
-      "score": 72,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 20,
-        "主题优先级": 9,
-        "时效": 16,
-        "影响信号": 5,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 20/20",
-        "发布约 8.0 小时",
-        "命中 2 个主题信号",
-        "影响信号：first"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "NASA",
-        "毅力号",
-        "火星"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "NASA",
-          "domain": "nasa.gov",
-          "url": "https://www.nasa.gov/solar-system/planets/mars/nasa-discovery-reveals-complex-water-systems-on-early-mars",
-          "publishedAt": "2026-09-21T16:54:43Z",
-          "evidenceGroup": "outlet:nasa.gov"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
       "streamRank": 18
     },
     {
@@ -1296,9 +1978,9 @@
       "contentType": "news",
       "title": "美空军告别EC-130H电子攻击机",
       "originalTitle": "Air Force bids adieu to EC-130H electronic attack plane",
-      "summary": "美国空军已正式退役EC-130H“罗盘呼叫”，为这款电子攻击机40多年的服役画上句号。据空军新闻稿，官员们于9月18日在亚利桑那州戴维斯-蒙森空军基地举行仪式，这架涡轮螺旋桨飞机完成了最后一次作战滑行。该基地是操作“罗盘呼叫”的第55电子作战大队驻地，也是这架飞机计划安息的“坟场”所在地。第755飞机维修中队专职机组长、上士贾斯汀·弗兰科在新闻稿中谈到该机最后滑行时说，这不仅是他在中队时光的结束，也是他人生一个篇章的结束。EC-130H是洛克希德·马丁公司C-130涡轮螺旋桨飞机的改型，由BAE系统公司和L3Harris加装电子攻击设备，1983年服役，用于扰乱敌方通信和干扰雷达。五角大楼披露，该机今年早些时候在针对伊朗的“史诗之怒”行动初期阶段也曾参与作战。空军将以EA-37B取代EC-130H，新机同样沿用“罗盘呼叫”名称。这款新型电子攻击机以湾流G550公务机为基础，并将同样搭载由BAE提供、L3Harris整合的技术。",
+      "summary": "美国空军正式退役EC-130H“罗盘呼叫”电子攻击机，结束该机型40多年的服役。9月18日，空军在亚利桑那州戴维斯-蒙森空军基地举行仪式，该螺旋桨飞机完成最后一次作战滑行；该基地驻有操作“罗盘呼叫”的第55电子作战大队，飞机随后将进入“飞机坟场”。EC-130H由洛克希德·马丁C-130改装，电子攻击设备由BAE系统公司和L3哈里斯提供，1983年服役，用于干扰敌方通信和雷达。五角大楼披露，该机曾参与今年早些时候对伊朗的“史诗之怒”行动初期作战。空军将用EA-37B替换，新机沿用“罗盘呼叫”名称，以湾流G550公务机为基础，同样采用BAE技术、由L3哈里斯整合。第55联队指挥官称“退役的是EC-130，不是罗盘呼叫”，任务将由EA-37B延续。新机飞行高度和速度均为前代两倍，首架于2024年8月交付。空军4月表示将把机队规模增至22架，意大利去年成为首个出口客户。",
       "summaryRevision": 3,
-      "summaryInputHash": "5fde909cdd8dc161f2e4ee68",
+      "summaryInputHash": "7ae6ffc639dcc952e5f4e9ad",
       "keyFacts": [
         "The aircraft will be replaced with the EA-37B",
         "which will carry forward the Compass Call moniker",
@@ -1310,13 +1992,13 @@
       "country": "国际",
       "publishedAt": "2026-09-21T16:20:54Z",
       "url": "https://breakingdefense.com/2026/09/air-force-bids-adieu-to-ec-130h-electronic-attack-plane",
-      "score": 72,
+      "score": 71,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 6,
         "主题相关性": 6,
         "证据完整度": 3,
@@ -1327,16 +2009,16 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 8.5 小时",
+        "发布约 9.2 小时",
         "命中 3 个主题信号",
         "影响信号：attack"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "EC-130H",
-        "电子攻击机",
-        "EA-37B"
+        "美空军",
+        "电子战",
+        "EC-130H"
       ],
       "image": "",
       "corroboration": 1,
@@ -1357,74 +2039,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 19
-    },
-    {
-      "id": "a6754b931364ab",
-      "eventId": "evt-a483c33cb5c7",
-      "contentType": "news",
-      "title": "海军陆战队一号VH-92A首次使用白宫新直升机坪",
-      "originalTitle": "Marine One VH-92A Makes First Operational Use Of New White House Helipad",
-      "summary": "美国总统特朗普当天从白宫南草坪乘机离开，这是白宫新建花岗岩直升机坪的首次实际使用，且由VH-92A“爱国者”而非较老的VH-3D“海王”或VH-60N“白鹰”执行。报道称这同时是两个节点：VH-92A首次从白宫载送总统，以及造价约500万至600万美元的新机坪首次投入实用。特朗普在南草坪用金色大剪刀剪彩，随后飞往马里兰州的安德鲁斯联合基地，最终目的地是纽约，他本周将出席联合国大会。VH-92A此前的运行限制来自排气与旋翼系统，其下洗热气流和旋翼气流曾严重灼伤并掀坏南草坪草皮，因此即便该机2024年8月在拜登任内进入总统机队，海军陆战队仍继续用VH-3D和VH-60N在白宫起降。新机坪由VH-92A制造商西科斯基出资，特朗普及相关方面称此为对未充分披露该机排气影响的部分补偿；其加州花岗岩被称寿命“百万年”，但报道指出此类耐久性说法未获独立证实。",
-      "summaryRevision": 3,
-      "summaryInputHash": "3b9898280613f09d7298fb4a",
-      "keyFacts": [
-        "President Donald Trump’s departure from the White House South Lawn earlier today marked the first operational use of its new granite helipad",
-        "and the VH-92A Patriot — not the older VH-3D Sea King or VH-60N White Hawk — was the airframe that carried him off the pad",
-        "The flight represented a dual milestone: the first time a VH-92A had carried the president from the White House"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "The War Zone",
-      "country": "国际",
-      "publishedAt": "2026-09-21T22:03:41Z",
-      "url": "https://www.twz.com/air/marine-one-vh-92a-makes-first-operational-use-of-new-white-house-helipad",
-      "score": 71,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 5,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 2.8 小时",
-        "命中 2 个主题信号",
-        "影响信号：first"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "VH-92A",
-        "白宫直升机坪",
-        "总统专机"
-      ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/09/White-House-Helipad-VH92.jpg?quality=85",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "The War Zone",
-          "domain": "twz.com",
-          "url": "https://www.twz.com/air/marine-one-vh-92a-makes-first-operational-use-of-new-white-house-helipad",
-          "publishedAt": "2026-09-21T22:03:41Z",
-          "evidenceGroup": "outlet:twz.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 20
     },
     {
       "id": "8bbe89e1845b81",
@@ -1463,7 +2077,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 10.0 小时",
+        "发布约 10.7 小时",
         "命中 1 个主题信号",
         "影响信号：test、attack"
       ],
@@ -1483,6 +2097,74 @@
           "url": "https://blogs.nvidia.com/blog/ai-security-agent-stack",
           "publishedAt": "2026-09-21T14:51:34Z",
           "evidenceGroup": "outlet:blogs.nvidia.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 20
+    },
+    {
+      "id": "a6754b931364ab",
+      "eventId": "evt-a483c33cb5c7",
+      "contentType": "news",
+      "title": "海军陆战队一号VH-92A首次使用白宫新直升机坪",
+      "originalTitle": "Marine One VH-92A Makes First Operational Use Of New White House Helipad",
+      "summary": "美国总统特朗普当天从白宫南草坪乘机离开，这是白宫新建花岗岩直升机坪的首次实际使用，且由VH-92A“爱国者”而非较老的VH-3D“海王”或VH-60N“白鹰”执行。报道称这同时是两个节点：VH-92A首次从白宫载送总统，以及造价约500万至600万美元的新机坪首次投入实用。特朗普在南草坪用金色大剪刀剪彩，随后飞往马里兰州的安德鲁斯联合基地，最终目的地是纽约，他本周将出席联合国大会。VH-92A此前的运行限制来自排气与旋翼系统，其下洗热气流和旋翼气流曾严重灼伤并掀坏南草坪草皮，因此即便该机2024年8月在拜登任内进入总统机队，海军陆战队仍继续用VH-3D和VH-60N在白宫起降。新机坪由VH-92A制造商西科斯基出资，特朗普及相关方面称此为对未充分披露该机排气影响的部分补偿；其加州花岗岩被称寿命“百万年”，但报道指出此类耐久性说法未获独立证实。",
+      "summaryRevision": 3,
+      "summaryInputHash": "3b9898280613f09d7298fb4a",
+      "keyFacts": [
+        "President Donald Trump’s departure from the White House South Lawn earlier today marked the first operational use of its new granite helipad",
+        "and the VH-92A Patriot — not the older VH-3D Sea King or VH-60N White Hawk — was the airframe that carried him off the pad",
+        "The flight represented a dual milestone: the first time a VH-92A had carried the president from the White House"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-09-21T22:03:41Z",
+      "url": "https://www.twz.com/air/marine-one-vh-92a-makes-first-operational-use-of-new-white-house-helipad",
+      "score": 70,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 5,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 3.5 小时",
+        "命中 2 个主题信号",
+        "影响信号：first"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "VH-92A",
+        "白宫直升机坪",
+        "总统专机"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/09/White-House-Helipad-VH92.jpg?quality=85",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/air/marine-one-vh-92a-makes-first-operational-use-of-new-white-house-helipad",
+          "publishedAt": "2026-09-21T22:03:41Z",
+          "evidenceGroup": "outlet:twz.com"
         }
       ],
       "selectionProvider": "",
@@ -1514,13 +2196,13 @@
       "country": "国际",
       "publishedAt": "2026-09-21T12:20:00Z",
       "url": "https://www.technologyreview.com/2026/09/21/1144834/the-download-investigating-deaths-at-the-us-borders-virtual-wall",
-      "score": 71,
+      "score": 70,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 10,
-        "时效": 14,
+        "时效": 13,
         "影响信号": 16,
         "主题相关性": 8,
         "证据完整度": 3,
@@ -1531,7 +2213,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 12.6 小时",
+        "发布约 13.2 小时",
         "命中 4 个主题信号",
         "影响信号：first、deploy、autonomous",
         "编辑质量降权 -12"
@@ -1598,12 +2280,12 @@
       "publishedAt": "2026-09-21T20:17:39Z",
       "url": "https://www.aljazeera.com/news/2026/9/21/pro-putin-party-wins-supermajority-amid-ramped-up-ukrainian-attacks?traffic_source=rss",
       "score": 70,
-      "scoreBasis": "规则评分",
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -1613,8 +2295,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 70/100",
+        "综合排序分 70/100（AI 65% + 规则 35%）",
+        "规则参考分 69/100",
         "来源权重 16/20",
-        "发布约 4.6 小时",
+        "发布约 5.3 小时",
         "命中 2 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -1643,14 +2328,95 @@
           "evidenceGroup": "outlet:dw.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 23
+      "eventDossier": {
+        "eventId": "evt-37ac2b0438ee",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-22",
+        "lastSeen": "2026-09-22",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-22",
+            "newsId": "670349151bf966",
+            "title": "普京政党在俄罗斯议会选举中赢得超级多数",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-21T20:17:39Z",
+            "score": 70
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:aljazeera.com",
+          "outlet:dw.com"
+        ],
+        "claims": [
+          {
+            "text": "Victory of United Russia party strengthens Putin's hand even as the war with Ukraine grows more unpopular",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:aljazeera.com",
+              "outlet:dw.com"
+            ]
+          },
+          {
+            "text": "President Vladimir Putin’s United Russia party has won a record supermajority in tightly orchestrated parliamentary polls that excluded vir…",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:aljazeera.com",
+              "outlet:dw.com"
+            ]
+          },
+          {
+            "text": "near complete official results show",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:aljazeera.com",
+              "outlet:dw.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-6cd5564f7d38",
+          "eventId": "evt-37ac2b0438ee",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-22",
+          "dueAfter": "2026-10-22",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "670349151bf966"
+          ],
+          "lastReviewedAt": "2026-09-22"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 23,
+      "relatedPapers": []
     },
     {
       "id": "79a470fa6976a7",
@@ -1689,7 +2455,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 11.4 小时",
+        "发布约 12.1 小时",
         "命中 3 个主题信号",
         "影响信号：first"
       ],
@@ -1719,141 +2485,6 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 24
-    },
-    {
-      "id": "9f789940dd5074",
-      "eventId": "evt-c72545fc12ea",
-      "contentType": "news",
-      "title": "伊朗战争直播：革命卫队称美以“必须接受”撤出该地区",
-      "originalTitle": "Iran war live: IRGC says US, Israel ‘must accept withdrawal’ from region",
-      "summary": "伊朗伊斯兰革命卫队表示，美国和以色列“必须接受该地区摆脱其邪恶且罪恶的存在”。该声明是围绕伊朗战争的实时报道中的一项表态。现有元数据未提供摘要，除上述引述外，暂无更多可确认的细节，包括声明发布的背景、具体时间、地点、相关方回应以及后续行动安排。",
-      "summaryRevision": 3,
-      "summaryInputHash": "120b69b385efeb79a4f6afb9",
-      "keyFacts": [
-        "The IRGC says the US",
-        "Israel \"must accept the region's freedom from their vile",
-        "criminal presence\""
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-22T00:00:00Z",
-      "url": "https://www.aljazeera.com/news/liveblog/2026/9/22/iran-war-live-irgc-says-us-israel-must-accept-withdrawal-from-region?traffic_source=rss",
-      "score": 68,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 20,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 0.9 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "伊朗",
-        "革命卫队",
-        "美以"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/liveblog/2026/9/22/iran-war-live-irgc-says-us-israel-must-accept-withdrawal-from-region?traffic_source=rss",
-          "publishedAt": "2026-09-22T00:00:00Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 25
-    },
-    {
-      "id": "bb99e4e8a621e4",
-      "eventId": "evt-b255d5c2e696",
-      "contentType": "news",
-      "title": "她死在圣地亚哥边境，一台监控摄像头就在明处",
-      "originalTitle": "She died at the San Diego border. A surveillance camera was in plain sight",
-      "summary": "2025年9月14日下午早些时候，30岁的格拉谢拉·戈麦斯·埃尔南德斯从蒂华纳东侧越过边境进入南加州，边走边给母亲和姐姐发语音消息。她只走了几个小时就已迷路，当天下午2点至3点间给母亲发了最后一条消息，低声说“我走不动了”。两周后法医队前来收尸时，她的遗体大部分已没入土中。她独自死去，但严格来说并不孤单——她身处世界上监控最密集的地带之一。生前她在WhatsApp消息中告诉家人，能看到头顶的直升机，以及下方道路上定期巡行的白色边境巡逻车。即便没有探员看到她或知道她身处困境，另一样东西也看得清清楚楚：附近山顶上一座灰色细长监控塔。该塔由通用动力公司制造，自2019年起架设，配有两组光电和红外摄像机，长焦镜头可追踪5至7英里外的目标，而她仅在一英里外。近年来监控塔数量激增，承包商加装使用人工智能区分越境者与其他人和动物并追踪其动向的新摄像头系统，总成本超过10亿美元。圣地亚哥附近奥泰山荒野的现象尤为突出。",
-      "summaryRevision": 3,
-      "summaryInputHash": "9c08f00e8b8183c54f3e8668",
-      "keyFacts": [
-        "She had only walked for a couple of hours",
-        "and already she was lost",
-        "It was early afternoon on Sept"
-      ],
-      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
-      "category": "AI",
-      "source": "MIT Technology Review",
-      "country": "国际",
-      "publishedAt": "2026-09-21T12:00:00Z",
-      "url": "https://www.technologyreview.com/2026/09/21/1144170/border-towers-surveillance-feature",
-      "score": 68,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 14,
-        "影响信号": 5,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 12.9 小时",
-        "命中 2 个主题信号",
-        "影响信号：first"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "边境监控",
-        "移民死亡",
-        "调查报道"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "MIT Technology Review",
-          "domain": "technologyreview.com",
-          "url": "https://www.technologyreview.com/2026/09/21/1144170/border-towers-surveillance-feature",
-          "publishedAt": "2026-09-21T12:00:00Z",
-          "evidenceGroup": "outlet:technologyreview.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 26
     },
     {
       "id": "81293dc6625cdb",
@@ -1892,7 +2523,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 13.7 小时",
+        "发布约 14.4 小时",
         "命中 4 个主题信号"
       ],
       "confidence": "中",
@@ -1920,7 +2551,74 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 27
+      "streamRank": 25
+    },
+    {
+      "id": "9f789940dd5074",
+      "eventId": "evt-c72545fc12ea",
+      "contentType": "news",
+      "title": "伊朗战争直播：革命卫队称美以“必须接受”撤出该地区",
+      "originalTitle": "Iran war live: IRGC says US, Israel ‘must accept withdrawal’ from region",
+      "summary": "伊朗伊斯兰革命卫队表示，美国和以色列“必须接受该地区摆脱其邪恶且罪恶的存在”。该声明是围绕伊朗战争的实时报道中的一项表态。现有元数据未提供摘要，除上述引述外，暂无更多可确认的细节，包括声明发布的背景、具体时间、地点、相关方回应以及后续行动安排。",
+      "summaryRevision": 3,
+      "summaryInputHash": "120b69b385efeb79a4f6afb9",
+      "keyFacts": [
+        "The IRGC says the US",
+        "Israel \"must accept the region's freedom from their vile",
+        "criminal presence\""
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-22T00:00:00Z",
+      "url": "https://www.aljazeera.com/news/liveblog/2026/9/22/iran-war-live-irgc-says-us-israel-must-accept-withdrawal-from-region?traffic_source=rss",
+      "score": 67,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 1.6 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "革命卫队",
+        "美以"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/liveblog/2026/9/22/iran-war-live-irgc-says-us-israel-must-accept-withdrawal-from-region?traffic_source=rss",
+          "publishedAt": "2026-09-22T00:00:00Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 26
     },
     {
       "id": "c7445042101f8a",
@@ -1959,7 +2657,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 3.8 小时",
+        "发布约 4.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -1987,72 +2685,132 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 28
+      "streamRank": 27
     },
     {
-      "id": "4ef26b40ca243b",
-      "eventId": "evt-3fd17a144801",
+      "id": "bb99e4e8a621e4",
+      "eventId": "evt-b255d5c2e696",
       "contentType": "news",
-      "title": "Drone Solutions获津巴布韦民航局批准，用KITE无人机开展配送",
-      "originalTitle": "Drone Solutions secures CAAZ approval for KITE drone deliveries in Zimbabwe",
-      "summary": "Kite Aero于9月21日宣布，其津巴布韦合作伙伴Drone Solutions International已获得津巴布韦民航局（CAAZ）批准，可使用KITE无人航空系统开展无人机配送业务。该批准涉及Drone Solutions将超视距（BVLOS）配送纳入其运行规范，为在津巴布韦全国开展商业无人机物流铺路。在六个月里，Drone Solutions带领CAAZ和空中交通服务提供方完成了涵盖KITE航空器、运行手册、运行风险评估和空域整合程序的广泛审批流程，并于2026年8月进行了演示飞行。Kite Aero以其无人机运行管理系统AXIOM生成的运行证据支持申请。AXIOM是KITE机队每次飞行、飞行小时和飞行公里的记录系统，其数据覆盖非洲、欧洲、太平洋和美国的超过4.1万架次自主飞行及2万飞行小时，为CAAZ提供了经核实的安全记录和合规框架。Drone Solutions是Kite Aero在津巴布韦及更广泛区域的运营伙伴，在哈拉雷运营一家经CAAZ批准的无人机飞行学校。获批后，Drone Solutions可从培训和演示转向日常配送，首先在区域卫生机构和中心实验室之间开展医疗和病理物流。Kite Aero兼AXIOM首席执行官菲利普·范德堡表示，津巴布韦现加入KITE获批超视距飞行的司法管辖区名单。Drone Solutions首席执行官杰里迈亚·穆萨巴亚纳表示，CA…",
+      "title": "她死在圣地亚哥边境，一台监控摄像头就在明处",
+      "originalTitle": "She died at the San Diego border. A surveillance camera was in plain sight",
+      "summary": "2025年9月14日下午早些时候，30岁的格拉谢拉·戈麦斯·埃尔南德斯从蒂华纳东侧越过边境进入南加州，边走边给母亲和姐姐发语音消息。她只走了几个小时就已迷路，当天下午2点至3点间给母亲发了最后一条消息，低声说“我走不动了”。两周后法医队前来收尸时，她的遗体大部分已没入土中。她独自死去，但严格来说并不孤单——她身处世界上监控最密集的地带之一。生前她在WhatsApp消息中告诉家人，能看到头顶的直升机，以及下方道路上定期巡行的白色边境巡逻车。即便没有探员看到她或知道她身处困境，另一样东西也看得清清楚楚：附近山顶上一座灰色细长监控塔。该塔由通用动力公司制造，自2019年起架设，配有两组光电和红外摄像机，长焦镜头可追踪5至7英里外的目标，而她仅在一英里外。近年来监控塔数量激增，承包商加装使用人工智能区分越境者与其他人和动物并追踪其动向的新摄像头系统，总成本超过10亿美元。圣地亚哥附近奥泰山荒野的现象尤为突出。",
       "summaryRevision": 3,
-      "summaryInputHash": "4851f818fead16a7128dd580",
+      "summaryInputHash": "9c08f00e8b8183c54f3e8668",
       "keyFacts": [
-        "Civil Aviation Authority of Zimbabwe approves Drone Solutions for beyond visual line of sight drone deliveries with the KITE uncrewed aeria…",
-        "Air Traffic Services",
-        "a technical clarification process"
+        "She had only walked for a couple of hours",
+        "and already she was lost",
+        "It was early afternoon on Sept"
       ],
-      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
-      "category": "无人系统",
-      "source": "sUAS News",
+      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
+      "category": "AI",
+      "source": "MIT Technology Review",
       "country": "国际",
-      "publishedAt": "2026-09-21T16:07:00Z",
-      "url": "https://www.suasnews.com/2026/09/drone-solutions-secures-caaz-approval-for-kite-drone-deliveries-in-zimbabwe",
+      "publishedAt": "2026-09-21T12:00:00Z",
+      "url": "https://www.technologyreview.com/2026/09/21/1144170/border-towers-surveillance-feature",
       "score": 67,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 15,
+        "来源": 17,
         "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 0,
+        "时效": 13,
+        "影响信号": 5,
         "主题相关性": 4,
         "证据完整度": 3,
-        "多源印证": 4,
+        "多源印证": 0,
         "编辑降权": 0,
         "日期异常降权": 0,
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 8.8 小时",
+        "来源权重 17/20",
+        "发布约 13.6 小时",
         "命中 2 个主题信号",
-        "2 个独立来源相互印证"
+        "影响信号：first"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 15/20，共 2 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "无人机配送",
-        "津巴布韦",
-        "超视距"
+        "边境监控",
+        "移民死亡",
+        "调查报道"
       ],
       "image": "",
-      "corroboration": 2,
+      "corroboration": 1,
       "sources": [
         {
-          "name": "sUAS News",
-          "domain": "suasnews.com",
-          "url": "https://www.suasnews.com/2026/09/drone-solutions-secures-caaz-approval-for-kite-drone-deliveries-in-zimbabwe",
-          "publishedAt": "2026-09-21T16:07:00Z",
-          "evidenceGroup": "outlet:suasnews.com"
-        },
+          "name": "MIT Technology Review",
+          "domain": "technologyreview.com",
+          "url": "https://www.technologyreview.com/2026/09/21/1144170/border-towers-surveillance-feature",
+          "publishedAt": "2026-09-21T12:00:00Z",
+          "evidenceGroup": "outlet:technologyreview.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 28
+    },
+    {
+      "id": "f8ba1fac8d4665",
+      "eventId": "evt-ff6a15dc103a",
+      "contentType": "news",
+      "title": "网红杰克·保罗和洛根·保罗访问五角大楼",
+      "originalTitle": "Influencers Jake and Logan Paul visit the Pentagon",
+      "summary": "网红洛根·保罗和杰克·保罗访问五角大楼并向美军人员发表讲话，赞扬他们为国服役。现有元数据未提供更多摘要。",
+      "summaryRevision": 3,
+      "summaryInputHash": "d7807ab3ff949383f767c978",
+      "keyFacts": [
+        "Influencers Logan",
+        "Jake Paul visited the Pentagon",
+        "addressed US troops"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-22T01:17:09Z",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/9/22/influencers-jake-and-logan-paul-visit-the-pentagon?traffic_source=rss",
+      "score": 66,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 20,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 0.3 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "五角大楼",
+        "网红",
+        "美军"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
         {
-          "name": "DroneLife",
-          "domain": "dronelife.com",
-          "url": "https://dronelife.com/2026/09/21/bvlos-medical-drone-deliveries-zimbabwe",
-          "publishedAt": "2026-09-21T09:51:38Z",
-          "evidenceGroup": "outlet:dronelife.com"
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/9/22/influencers-jake-and-logan-paul-visit-the-pentagon?traffic_source=rss",
+          "publishedAt": "2026-09-22T01:17:09Z",
+          "evidenceGroup": "outlet:aljazeera.com"
         }
       ],
       "selectionProvider": "",
@@ -2101,7 +2859,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 3.9 小时",
+        "发布约 4.6 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -2168,7 +2926,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 4.0 小时",
+        "发布约 4.7 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -2235,7 +2993,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 5.6 小时",
+        "发布约 6.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2302,7 +3060,7 @@
       },
       "scoreReasons": [
         "来源权重 20/20",
-        "发布约 6.2 小时",
+        "发布约 6.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -2352,8 +3110,8 @@
       "country": "国际",
       "publishedAt": "2026-09-21T17:40:03Z",
       "url": "https://techxplore.com/news/2026-09-ai-safety-pace-technology-experts.html",
-      "score": 66,
-      "scoreBasis": "规则评分",
+      "score": 71,
+      "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
@@ -2368,8 +3126,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
+        "DeepSeek 候选重要度 74/100",
+        "综合排序分 71/100（AI 65% + 规则 35%）",
+        "规则参考分 66/100",
         "来源权重 16/20",
-        "发布约 7.2 小时",
+        "发布约 7.9 小时",
         "命中 3 个主题信号"
       ],
       "confidence": "中",
@@ -2390,71 +3151,156 @@
           "evidenceGroup": "outlet:techxplore.com"
         }
       ],
-      "selectionProvider": "",
+      "selectionProvider": "deepseek",
       "translationProvider": "deepseek",
       "isSupplemental": false,
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 34
+      "eventDossier": {
+        "eventId": "evt-86b790e25a3e",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-22",
+        "lastSeen": "2026-09-22",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-22",
+            "newsId": "71517f27b66691",
+            "title": "联合国专家：AI安全措施跟不上技术发展步伐",
+            "source": "Phys.org Technology",
+            "publishedAt": "2026-09-21T17:40:03Z",
+            "score": 71
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:techxplore.com"
+        ],
+        "claims": [
+          {
+            "text": "The model for managing artificial intelligence (AI) risks \"is unraveling,\" United Nations experts warned in a report published Monday on an…",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techxplore.com"
+            ]
+          },
+          {
+            "text": "September 21",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techxplore.com"
+            ]
+          },
+          {
+            "text": "2026 edited by Andrew Zinin The model for managing artificial intelligence (AI) risks \"is unraveling,\" United Nations experts warned in a r…",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:techxplore.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-dad87a262802",
+          "eventId": "evt-86b790e25a3e",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-22",
+          "dueAfter": "2026-10-22",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "71517f27b66691"
+          ],
+          "lastReviewedAt": "2026-09-22"
+        }
+      ],
+      "isTopStory": true,
+      "streamRank": 34,
+      "relatedPapers": []
     },
     {
-      "id": "6b57738b54f711",
-      "eventId": "evt-b716cf997697",
+      "id": "4ef26b40ca243b",
+      "eventId": "evt-3fd17a144801",
       "contentType": "news",
-      "title": "仿昆虫波纹翼型或助无人机在火星般稀薄空气中飞行",
-      "originalTitle": "Insect-inspired corrugations could help drones fly in Mars-like thin air",
-      "summary": "东京都立大学的研究人员使用进化算法，为超薄、仿生波纹翼型（即机翼的二维截面）确定了最优形状。相关研究于2026年9月21日发布，论文发表在《Computers & Fluids》期刊。轻质膜状机翼是在火星等稀薄大气中以及无人机小型化应用的有力候选方案。研究团队采用“零厚度”模型，从而能专注于翼型波纹图案的影响，而不受机翼前缘厚度和形状的干扰。他们发现了分别针对最小阻力和最大升力优化的设计。无人机在日常生活中的应用日益增多，从包裹配送到媒体直播，也有望用于探索其他行星等特殊环境，但这带来重大挑战。火星大气明显更稀薄，意味着为地球高速运动优化的机翼形状不再最优，需要重新设计以考虑低雷诺数流体特性，此时空气黏性造成的能量耗散远大于惯性的影响。相同流体特性也适用于地球上极小型飞行器的机翼设计，这促使科学家从昆虫翅膀中寻求灵感。此前由东京都立大学教授Masahiro Kanazaki领导的研究团队利用计算机算法探索低雷诺数大气中新型无人机机翼设计，关注仿生波纹如何帮助减小阻力或增加升力，采用进化优化，即算法对不同设计进行气动模拟，根据多目标评判并不断调整以取得更好结果。团队发现，低阻力设计中有些比平板阻力更小，前缘附近的波纹产生空气涡卷，降低了摩擦阻力；而以升力优化的翼型波纹很少，整体呈凸形，后缘附近有凹形特征。他们认为，这些发现将指导无人机小型化以及稀薄大气中的机翼设计。",
+      "title": "Drone Solutions获津巴布韦民航局批准，用KITE无人机开展配送",
+      "originalTitle": "Drone Solutions secures CAAZ approval for KITE drone deliveries in Zimbabwe",
+      "summary": "Kite Aero于9月21日宣布，其津巴布韦合作伙伴Drone Solutions International已获得津巴布韦民航局（CAAZ）批准，可使用KITE无人航空系统开展无人机配送业务。该批准涉及Drone Solutions将超视距（BVLOS）配送纳入其运行规范，为在津巴布韦全国开展商业无人机物流铺路。在六个月里，Drone Solutions带领CAAZ和空中交通服务提供方完成了涵盖KITE航空器、运行手册、运行风险评估和空域整合程序的广泛审批流程，并于2026年8月进行了演示飞行。Kite Aero以其无人机运行管理系统AXIOM生成的运行证据支持申请。AXIOM是KITE机队每次飞行、飞行小时和飞行公里的记录系统，其数据覆盖非洲、欧洲、太平洋和美国的超过4.1万架次自主飞行及2万飞行小时，为CAAZ提供了经核实的安全记录和合规框架。Drone Solutions是Kite Aero在津巴布韦及更广泛区域的运营伙伴，在哈拉雷运营一家经CAAZ批准的无人机飞行学校。获批后，Drone Solutions可从培训和演示转向日常配送，首先在区域卫生机构和中心实验室之间开展医疗和病理物流。Kite Aero兼AXIOM首席执行官菲利普·范德堡表示，津巴布韦现加入KITE获批超视距飞行的司法管辖区名单。Drone Solutions首席执行官杰里迈亚·穆萨巴亚纳表示，CA…",
       "summaryRevision": 3,
-      "summaryInputHash": "00ab6d0db66e1d19e2391556",
+      "summaryInputHash": "4851f818fead16a7128dd580",
       "keyFacts": [
-        "Researchers from Tokyo Metropolitan University have used an evolutionary algorithm to identify optimal shapes for ultra-thin",
-        "bio-inspired corrugated airfoils",
-        "the two-dimensional cut-throughs of wings"
+        "Civil Aviation Authority of Zimbabwe approves Drone Solutions for beyond visual line of sight drone deliveries with the KITE uncrewed aeria…",
+        "Air Traffic Services",
+        "a technical clarification process"
       ],
       "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
       "category": "无人系统",
-      "source": "Phys.org Technology",
+      "source": "sUAS News",
       "country": "国际",
-      "publishedAt": "2026-09-21T16:20:03Z",
-      "url": "https://techxplore.com/news/2026-09-insect-corrugations-drones-fly-mars.html",
+      "publishedAt": "2026-09-21T16:07:00Z",
+      "url": "https://www.suasnews.com/2026/09/drone-solutions-secures-caaz-approval-for-kite-drone-deliveries-in-zimbabwe",
       "score": 66,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 16,
+        "来源": 15,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 0,
-        "主题相关性": 6,
+        "主题相关性": 4,
         "证据完整度": 3,
-        "多源印证": 0,
+        "多源印证": 4,
         "编辑降权": 0,
         "日期异常降权": 0,
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 8.6 小时",
-        "命中 3 个主题信号"
+        "来源权重 15/20",
+        "发布约 9.5 小时",
+        "命中 2 个主题信号",
+        "2 个独立来源相互印证"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 15/20，共 2 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "无人机",
-        "仿生翼型",
-        "火星探索"
+        "无人机配送",
+        "津巴布韦",
+        "超视距"
       ],
-      "image": "https://scx1.b-cdn.net/csz/news/tmb/2026/unweaving-the-aerodyna.jpg",
-      "corroboration": 1,
+      "image": "",
+      "corroboration": 2,
       "sources": [
         {
-          "name": "Phys.org Technology",
-          "domain": "techxplore.com",
-          "url": "https://techxplore.com/news/2026-09-insect-corrugations-drones-fly-mars.html",
-          "publishedAt": "2026-09-21T16:20:03Z",
-          "evidenceGroup": "outlet:techxplore.com"
+          "name": "sUAS News",
+          "domain": "suasnews.com",
+          "url": "https://www.suasnews.com/2026/09/drone-solutions-secures-caaz-approval-for-kite-drone-deliveries-in-zimbabwe",
+          "publishedAt": "2026-09-21T16:07:00Z",
+          "evidenceGroup": "outlet:suasnews.com"
+        },
+        {
+          "name": "DroneLife",
+          "domain": "dronelife.com",
+          "url": "https://dronelife.com/2026/09/21/bvlos-medical-drone-deliveries-zimbabwe",
+          "publishedAt": "2026-09-21T09:51:38Z",
+          "evidenceGroup": "outlet:dronelife.com"
         }
       ],
       "selectionProvider": "",
@@ -2503,7 +3349,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 5.6 小时",
+        "发布约 6.3 小时",
         "命中 1 个主题信号",
         "影响信号：launch"
       ],
@@ -2533,6 +3379,73 @@
       "diversityRelaxed": false,
       "isTopStory": false,
       "streamRank": 36
+    },
+    {
+      "id": "6b57738b54f711",
+      "eventId": "evt-b716cf997697",
+      "contentType": "news",
+      "title": "仿昆虫波纹翼型或助无人机在火星般稀薄空气中飞行",
+      "originalTitle": "Insect-inspired corrugations could help drones fly in Mars-like thin air",
+      "summary": "东京都立大学的研究人员使用进化算法，为超薄、仿生波纹翼型（即机翼的二维截面）确定了最优形状。相关研究于2026年9月21日发布，论文发表在《Computers & Fluids》期刊。轻质膜状机翼是在火星等稀薄大气中以及无人机小型化应用的有力候选方案。研究团队采用“零厚度”模型，从而能专注于翼型波纹图案的影响，而不受机翼前缘厚度和形状的干扰。他们发现了分别针对最小阻力和最大升力优化的设计。无人机在日常生活中的应用日益增多，从包裹配送到媒体直播，也有望用于探索其他行星等特殊环境，但这带来重大挑战。火星大气明显更稀薄，意味着为地球高速运动优化的机翼形状不再最优，需要重新设计以考虑低雷诺数流体特性，此时空气黏性造成的能量耗散远大于惯性的影响。相同流体特性也适用于地球上极小型飞行器的机翼设计，这促使科学家从昆虫翅膀中寻求灵感。此前由东京都立大学教授Masahiro Kanazaki领导的研究团队利用计算机算法探索低雷诺数大气中新型无人机机翼设计，关注仿生波纹如何帮助减小阻力或增加升力，采用进化优化，即算法对不同设计进行气动模拟，根据多目标评判并不断调整以取得更好结果。团队发现，低阻力设计中有些比平板阻力更小，前缘附近的波纹产生空气涡卷，降低了摩擦阻力；而以升力优化的翼型波纹很少，整体呈凸形，后缘附近有凹形特征。他们认为，这些发现将指导无人机小型化以及稀薄大气中的机翼设计。",
+      "summaryRevision": 3,
+      "summaryInputHash": "00ab6d0db66e1d19e2391556",
+      "keyFacts": [
+        "Researchers from Tokyo Metropolitan University have used an evolutionary algorithm to identify optimal shapes for ultra-thin",
+        "bio-inspired corrugated airfoils",
+        "the two-dimensional cut-throughs of wings"
+      ],
+      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
+      "category": "无人系统",
+      "source": "Phys.org Technology",
+      "country": "国际",
+      "publishedAt": "2026-09-21T16:20:03Z",
+      "url": "https://techxplore.com/news/2026-09-insect-corrugations-drones-fly-mars.html",
+      "score": 65,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 0,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 9.2 小时",
+        "命中 3 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "无人机",
+        "仿生翼型",
+        "火星探索"
+      ],
+      "image": "https://scx1.b-cdn.net/csz/news/tmb/2026/unweaving-the-aerodyna.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Phys.org Technology",
+          "domain": "techxplore.com",
+          "url": "https://techxplore.com/news/2026-09-insect-corrugations-drones-fly-mars.html",
+          "publishedAt": "2026-09-21T16:20:03Z",
+          "evidenceGroup": "outlet:techxplore.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 37
     },
     {
       "id": "1b220ef5a1c2af",
@@ -2571,7 +3484,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.9 小时",
+        "发布约 10.6 小时",
         "命中 1 个主题信号",
         "2 个独立来源相互印证"
       ],
@@ -2607,275 +3520,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 37
-    },
-    {
-      "id": "ec0551e97b7793",
-      "eventId": "evt-3fec09917296",
-      "contentType": "news",
-      "title": "FAA通信故障后美国东北部航班恢复运行",
-      "originalTitle": "Flights resume across US north-east after FAA communications failure",
-      "summary": "美国东北部机场运营在周一晚恢复。此前费城一处美国联邦航空管理局（FAA）关键设施主通信线路故障，备用光纤线又被铁路施工人员意外切断，导致电信中断，纽瓦克、拉瓜迪亚、肯尼迪、费城和波士顿机场数百架次航班取消，数千架次航班延误或取消。交通部长肖恩·达菲表示备用线路已修复，受影响机场均已恢复运行，但积压延误需时间消化。FAA称主线路周一上午故障，系统切换备用时发现光纤被切断；达菲早前归咎于Amtrak施工队，Amtrak则指向在新泽西州纽瓦克与新布伦瑞克之间作业的新泽西捷运施工队。同日，美国政府问责局（GAO）报告指出，FAA尚未完成对欺骗、干扰等无线电频谱威胁的风险评估，也缺乏实时检测系统。报告提出九项建议，交通部代表FAA全部同意。",
-      "summaryRevision": 3,
-      "summaryInputHash": "a68c68dc70c22767a4859a5c",
-      "keyFacts": [
-        "Thousands of flights were delayed or canceled",
-        "a primary line failed",
-        "a backup fiber-optic cable was severed Airport operations across the US north-east resumed Monday evening"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "The Guardian World",
-      "country": "国际",
-      "publishedAt": "2026-09-21T23:56:30Z",
-      "url": "https://www.theguardian.com/us-news/2026/sep/21/airports-flight-ground-stop-hacking-threat",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 9,
-        "时效": 20,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 0.9 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "FAA",
-        "航空",
-        "基础设施"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "The Guardian World",
-          "domain": "theguardian.com",
-          "url": "https://www.theguardian.com/us-news/2026/sep/21/airports-flight-ground-stop-hacking-threat",
-          "publishedAt": "2026-09-21T23:56:30Z",
-          "evidenceGroup": "outlet:theguardian.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
       "streamRank": 38
-    },
-    {
-      "id": "c55c66c39629cd",
-      "eventId": "evt-8bdd556a6f3e",
-      "contentType": "news",
-      "title": "美国法官拒绝阻止将野生动物保护区土地移交SpaceX",
-      "originalTitle": "US judge declines to block transfer of wildlife refuge land to Musk’s SpaceX",
-      "summary": "美国联邦地区法官小费尔南多·罗德里格斯周一拒绝阻止特朗普政府通过土地置换向SpaceX移交逾700英亩野生动物保护区土地，同时也拒绝环保组织提出的初步禁令申请。法官称原告未能证明此举会加剧该墨西哥湾沿岸地区的生态风险，其提供的环境损害证据“相对薄弱”，并认为禁令会打乱SpaceX的开发计划、增加其履约困难。今年6月，美国鱼类和野生动物管理局批准该交易：SpaceX交出公司拥有的683英亩土地，换取下里奥格兰德河谷国家野生动物保护区内的联邦土地。该保护区占地10.3万英亩，横跨得州四县。生物多样性中心等原告称这等于把公共土地送给SpaceX，并称诉讼将继续。鱼类和野生动物管理局未回应置评请求，此前曾表示不评论未决诉讼；其6月环境评估认为交易无重大影响，并称具有“净保护效益”。SpaceX未回复置评邮件。",
-      "summaryRevision": 3,
-      "summaryInputHash": "5aab6fa17ae80af792bf0613",
-      "keyFacts": [
-        "Environmental groups vow to continue opposition to deal that would expand site for Elon Musk rocket company A federal judge on Monday refus…",
-        "while environmental groups vowed to continue their legal challenge",
-        "US district judge Fernando Rodriguez Jr declined the plaintiffs’ request for a preliminary injunction to prevent the parcel exchange"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "The Guardian World",
-      "country": "国际",
-      "publishedAt": "2026-09-21T23:54:10Z",
-      "url": "https://www.theguardian.com/us-news/2026/sep/21/judge-spacex-wildlife-refuge-musk",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 9,
-        "时效": 20,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 1.0 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "SpaceX",
-        "土地置换",
-        "环境诉讼"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "The Guardian World",
-          "domain": "theguardian.com",
-          "url": "https://www.theguardian.com/us-news/2026/sep/21/judge-spacex-wildlife-refuge-musk",
-          "publishedAt": "2026-09-21T23:54:10Z",
-          "evidenceGroup": "outlet:theguardian.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 39
-    },
-    {
-      "id": "a96404d9577636",
-      "eventId": "evt-910bbb0c51d7",
-      "contentType": "news",
-      "title": "美国男子因2023年佛蒙特州枪击三名巴勒斯坦学生被定罪",
-      "originalTitle": "US man convicted in 2023 shooting of three Palestinian students in Vermont",
-      "summary": "美国佛蒙特州一个陪审团裁定，51岁的杰森·伊顿因2023年枪击三名巴勒斯坦大学生犯有谋杀未遂罪，驳回其以精神失常为由的无罪辩护。伊顿最高可面临终身监禁。袭击发生在伯灵顿的佛蒙特大学校园附近，导致希沙姆·阿瓦塔尼腰部以下瘫痪，其朋友塔辛·阿利亚哈迈德和基南·阿卜杜勒哈米德受伤。陪审团在为期一周的庭审后于周一审议数小时后作出裁决，庭审包括三名受害者和双方传唤的精神病学专家的证词。伊顿被下令在宣判前继续监禁，宣判日期尚未确定。伊顿未否认2023年11月开枪，但辩护方称他患有妄想性精神病，认为中情局和以色列摩萨德通过调频电台向他传递信息。检方援引州精神病医生的结论称伊顿没有精神疾病或缺陷，证据显示他意图杀害三人。三人现年23岁，在约旦河西岸拉马拉一起长大，后赴美上大学。枪击引发仇恨犯罪调查的呼声，但未提出仇恨犯罪指控。警方后来在伊顿公寓发现三支猎枪，以及一支鲁格.380口径手枪，犯罪实验室检测认定其为枪击所用武器。",
-      "summaryRevision": 3,
-      "summaryInputHash": "2a2eeddf62b94b5c940c3f21",
-      "keyFacts": [
-        "Jason Eaton faces up to life in prison",
-        "a jury rejected his insanity defence",
-        "A jury in the US state of Vermont has convicted a man of attempted murder for shooting three Palestinian college students in 2023"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Al Jazeera",
-      "country": "国际",
-      "publishedAt": "2026-09-21T20:05:07Z",
-      "url": "https://www.aljazeera.com/news/2026/9/21/us-man-convicted-in-2023-shooting-of-three-palestinian-students-in-vermont?traffic_source=rss",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 4.8 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "美国枪击",
-        "佛蒙特州",
-        "巴勒斯坦学生"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/9/21/us-man-convicted-in-2023-shooting-of-three-palestinian-students-in-vermont?traffic_source=rss",
-          "publishedAt": "2026-09-21T20:05:07Z",
-          "evidenceGroup": "outlet:aljazeera.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 40
-    },
-    {
-      "id": "8e2a59395c8820",
-      "eventId": "evt-1dea4945eef1",
-      "contentType": "news",
-      "title": "盖茨基金会发起联盟，为AI构建更具代表性的语言数据集",
-      "originalTitle": "Gates Foundation launches coalition to build more representative language data sets for AI",
-      "summary": "盖茨基金会召集Anthropic、谷歌、OpenAI基金会等约60个组织，组成联盟以帮助人工智能更易支持代表性不足的语言。盖茨基金会认为此举可对抗全球不平等，目标是在五年内覆盖超过30亿人，方式包括更好协调现有工作。基金会首席执行官马克·苏兹曼对美联社表示，这项工作必须“全速前进”，即使一些大型AI公司呼吁行业放缓先进模型开发。他说，政府必须监管网络安全或儿童发展等方面的影响，同时将AI的人道主义应用扩展到目前被“拒之门外”的贫困社区。此合作紧随上周的《守门人》报告，基金会承诺投入10亿美元用于AI相关努力，以改善健康结果、升级教育工具并指导小农实践。报告警告，缺乏代表性的语言数据可能导致模型将马拉维孕妇说的“羊水破了”误译为“扔掉了水”。联盟治理等细节仍在敲定，秘书处将追踪各签署方的承诺。谷歌正资助在印度各区收集超过15万小时音频的Project Vaani，Anthropic则承认其产品“尤其在许多非洲语言上落后”。",
-      "summaryRevision": 3,
-      "summaryInputHash": "f8f31319fbaa8d001fedd242",
-      "keyFacts": [
-        "The Gates Foundation is convening Anthropic",
-        "OpenAI Foundation",
-        "dozens of other organizations to help make artificial intelligence more accessible in underrepresented languages"
-      ],
-      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
-      "category": "AI",
-      "source": "Phys.org Technology",
-      "country": "国际",
-      "publishedAt": "2026-09-21T16:20:07Z",
-      "url": "https://techxplore.com/news/2026-09-gates-foundation-coalition-language-ai.html",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 0,
-        "主题相关性": 4,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 8.6 小时",
-        "命中 2 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "盖茨基金会",
-        "语言数据",
-        "人工智能"
-      ],
-      "image": "https://scx1.b-cdn.net/csz/news/tmb/2026/gates-foundation-launc.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Phys.org Technology",
-          "domain": "techxplore.com",
-          "url": "https://techxplore.com/news/2026-09-gates-foundation-coalition-language-ai.html",
-          "publishedAt": "2026-09-21T16:20:07Z",
-          "evidenceGroup": "outlet:techxplore.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 41
     },
     {
       "id": "1f7186a91248e3",
@@ -2914,7 +3559,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 16.2 小时",
+        "发布约 16.8 小时",
         "命中 1 个主题信号",
         "影响信号：attack"
       ],
@@ -2943,103 +3588,35 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 42
+      "streamRank": 39
     },
     {
-      "id": "d23d1d672bbfbe",
-      "eventId": "evt-f88813d6cfc1",
+      "id": "ec0551e97b7793",
+      "eventId": "evt-3fec09917296",
       "contentType": "news",
-      "title": "德国汽车业危机：35小时工作制能否存续",
-      "originalTitle": "Germany's car crisis: Can the 35-hour workweek survive?",
-      "summary": "德国汽车制造商希望员工在不加薪情况下每周工作40小时而非目前的35小时，称此举有助提升竞争力。工会强烈反对，认为这是对工人权利的侵犯。德国汽车业正面临深层危机，受制于高制造成本、美国惩罚性关税、来自中国的竞争加剧以及向电动车转型困难。大众、奔驰和宝马已宣布减产和削减成本计划，该行业裁员速度快于其他工业部门。大众计划到本十年末在全球裁减约15%员工，即10万个岗位；宝马宣布到2027年底最多裁减8000个岗位。博世和采埃孚等供应商也宣布数千人裁员。行业高管认为德国劳动力成本过高，咨询公司奥纬咨询报告显示，德国每辆车劳动力成本平均为3307美元，日本为769美元，中国为597美元。",
+      "title": "FAA通信故障后美国东北部航班恢复运行",
+      "originalTitle": "Flights resume across US north-east after FAA communications failure",
+      "summary": "美国东北部机场运营在周一晚恢复。此前费城一处美国联邦航空管理局（FAA）关键设施主通信线路故障，备用光纤线又被铁路施工人员意外切断，导致电信中断，纽瓦克、拉瓜迪亚、肯尼迪、费城和波士顿机场数百架次航班取消，数千架次航班延误或取消。交通部长肖恩·达菲表示备用线路已修复，受影响机场均已恢复运行，但积压延误需时间消化。FAA称主线路周一上午故障，系统切换备用时发现光纤被切断；达菲早前归咎于Amtrak施工队，Amtrak则指向在新泽西州纽瓦克与新布伦瑞克之间作业的新泽西捷运施工队。同日，美国政府问责局（GAO）报告指出，FAA尚未完成对欺骗、干扰等无线电频谱威胁的风险评估，也缺乏实时检测系统。报告提出九项建议，交通部代表FAA全部同意。",
       "summaryRevision": 3,
-      "summaryInputHash": "0a614244f6435ac1e4ca7fb7",
+      "summaryInputHash": "a68c68dc70c22767a4859a5c",
       "keyFacts": [
-        "German carmakers want employees to work 40 hours instead of the current 35 without extra pay",
-        "arguing it would improve competitiveness",
-        "Unions strongly oppose the proposal"
+        "Thousands of flights were delayed or canceled",
+        "a primary line failed",
+        "a backup fiber-optic cable was severed Airport operations across the US north-east resumed Monday evening"
       ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Deutsche Welle",
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "The Guardian World",
       "country": "国际",
-      "publishedAt": "2026-09-21T08:13:00Z",
-      "url": "https://www.dw.com/en/germany-s-car-crisis-can-the-35-hour-workweek-survive/a-79307488?maca=en-rss-en-all-1573-rdf",
-      "score": 64,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 12,
-        "影响信号": 6,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 16.7 小时",
-        "命中 1 个主题信号",
-        "影响信号：attack"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "德国汽车业",
-        "工时",
-        "裁员"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Deutsche Welle",
-          "domain": "dw.com",
-          "url": "https://www.dw.com/en/germany-s-car-crisis-can-the-35-hour-workweek-survive/a-79307488?maca=en-rss-en-all-1573-rdf",
-          "publishedAt": "2026-09-21T08:13:00Z",
-          "evidenceGroup": "outlet:dw.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 43
-    },
-    {
-      "id": "60d6567d7f21d9",
-      "eventId": "evt-efc33f42d9d4",
-      "contentType": "news",
-      "title": "OpenAI成立数学顾问组，称其AI已解决100多个公开问题",
-      "originalTitle": "OpenAI forms math advisory group as its AI resolves more than 100 open problems",
-      "summary": "OpenAI周一宣布成立一个独立顾问组，由普林斯顿高等研究院承办，名为“数学与人工智能顾问组”，旨在让数学家对公司的数学相关研究有更多发言权。此前的背景是，OpenAI突然发布了纳维-斯托克斯千年奖难题的解答，并称同一内部模型还在数学大多领域解决了100多个公开问题。本月早些时候，25位菲尔兹奖得主签署公开信，认为AI实验室在争相解出著名数学问题时威胁到他们的智力工作。该顾问组主要提供咨询，评估新成果的重要性并协调发布；成员无报酬，但可主动提建议、公开表达观点并自行决定成员构成，拥有一定独立性。不过OpenAI表示，该组不负责就内部数学研究进度提供建议，也无权放缓或改变研究方向。高等研究院也强调其只有建议权、无决策权。九位数学家成为首批成员，其中仅高等研究院的卡米洛·德莱利斯也签署了菲尔兹奖得主公开信。",
-      "summaryRevision": 3,
-      "summaryInputHash": "96d025950fbbe8c31d24a4d3",
-      "keyFacts": [
-        "The group won't be given leeway to slow down or redirect OpenAI's ongoing mathematical research",
-        "OpenAI announced a new independent advisory group hosted at the Institute for Advanced Study in Princeton",
-        "Called the Advisory Group on Mathematics"
-      ],
-      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
-      "category": "AI",
-      "source": "TechCrunch AI",
-      "country": "国际",
-      "publishedAt": "2026-09-21T20:15:58Z",
-      "url": "https://techcrunch.com/2026/09/21/openai-forms-math-advisory-group-as-its-ai-resolves-more-than-100-open-problems",
+      "publishedAt": "2026-09-21T23:56:30Z",
+      "url": "https://www.theguardian.com/us-news/2026/sep/21/airports-flight-ground-stop-hacking-threat",
       "score": 63,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
-        "主题优先级": 10,
-        "时效": 18,
+        "主题优先级": 9,
+        "时效": 19,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -3050,25 +3627,25 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 4.6 小时",
+        "发布约 1.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "待核验",
       "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
       "tags": [
-        "OpenAI",
-        "数学",
-        "AI研究"
+        "FAA",
+        "航空",
+        "基础设施"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "TechCrunch AI",
-          "domain": "techcrunch.com",
-          "url": "https://techcrunch.com/2026/09/21/openai-forms-math-advisory-group-as-its-ai-resolves-more-than-100-open-problems",
-          "publishedAt": "2026-09-21T20:15:58Z",
-          "evidenceGroup": "outlet:techcrunch.com"
+          "name": "The Guardian World",
+          "domain": "theguardian.com",
+          "url": "https://www.theguardian.com/us-news/2026/sep/21/airports-flight-ground-stop-hacking-threat",
+          "publishedAt": "2026-09-21T23:56:30Z",
+          "evidenceGroup": "outlet:theguardian.com"
         }
       ],
       "selectionProvider": "",
@@ -3078,7 +3655,141 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 44
+      "streamRank": 40
+    },
+    {
+      "id": "c55c66c39629cd",
+      "eventId": "evt-8bdd556a6f3e",
+      "contentType": "news",
+      "title": "美国法官拒绝阻止将野生动物保护区土地移交SpaceX",
+      "originalTitle": "US judge declines to block transfer of wildlife refuge land to Musk’s SpaceX",
+      "summary": "美国联邦地区法官小费尔南多·罗德里格斯周一拒绝阻止特朗普政府通过土地置换向SpaceX移交逾700英亩野生动物保护区土地，同时也拒绝环保组织提出的初步禁令申请。法官称原告未能证明此举会加剧该墨西哥湾沿岸地区的生态风险，其提供的环境损害证据“相对薄弱”，并认为禁令会打乱SpaceX的开发计划、增加其履约困难。今年6月，美国鱼类和野生动物管理局批准该交易：SpaceX交出公司拥有的683英亩土地，换取下里奥格兰德河谷国家野生动物保护区内的联邦土地。该保护区占地10.3万英亩，横跨得州四县。生物多样性中心等原告称这等于把公共土地送给SpaceX，并称诉讼将继续。鱼类和野生动物管理局未回应置评请求，此前曾表示不评论未决诉讼；其6月环境评估认为交易无重大影响，并称具有“净保护效益”。SpaceX未回复置评邮件。",
+      "summaryRevision": 3,
+      "summaryInputHash": "5aab6fa17ae80af792bf0613",
+      "keyFacts": [
+        "Environmental groups vow to continue opposition to deal that would expand site for Elon Musk rocket company A federal judge on Monday refus…",
+        "while environmental groups vowed to continue their legal challenge",
+        "US district judge Fernando Rodriguez Jr declined the plaintiffs’ request for a preliminary injunction to prevent the parcel exchange"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "The Guardian World",
+      "country": "国际",
+      "publishedAt": "2026-09-21T23:54:10Z",
+      "url": "https://www.theguardian.com/us-news/2026/sep/21/judge-spacex-wildlife-refuge-musk",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 9,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 1.7 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "SpaceX",
+        "土地置换",
+        "环境诉讼"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The Guardian World",
+          "domain": "theguardian.com",
+          "url": "https://www.theguardian.com/us-news/2026/sep/21/judge-spacex-wildlife-refuge-musk",
+          "publishedAt": "2026-09-21T23:54:10Z",
+          "evidenceGroup": "outlet:theguardian.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 41
+    },
+    {
+      "id": "a96404d9577636",
+      "eventId": "evt-910bbb0c51d7",
+      "contentType": "news",
+      "title": "美国男子因2023年佛蒙特州枪击三名巴勒斯坦学生被定罪",
+      "originalTitle": "US man convicted in 2023 shooting of three Palestinian students in Vermont",
+      "summary": "美国佛蒙特州一个陪审团裁定，51岁的杰森·伊顿因2023年枪击三名巴勒斯坦大学生犯有谋杀未遂罪，驳回其以精神失常为由的无罪辩护。伊顿最高可面临终身监禁。袭击发生在伯灵顿的佛蒙特大学校园附近，导致希沙姆·阿瓦塔尼腰部以下瘫痪，其朋友塔辛·阿利亚哈迈德和基南·阿卜杜勒哈米德受伤。陪审团在为期一周的庭审后于周一审议数小时后作出裁决，庭审包括三名受害者和双方传唤的精神病学专家的证词。伊顿被下令在宣判前继续监禁，宣判日期尚未确定。伊顿未否认2023年11月开枪，但辩护方称他患有妄想性精神病，认为中情局和以色列摩萨德通过调频电台向他传递信息。检方援引州精神病医生的结论称伊顿没有精神疾病或缺陷，证据显示他意图杀害三人。三人现年23岁，在约旦河西岸拉马拉一起长大，后赴美上大学。枪击引发仇恨犯罪调查的呼声，但未提出仇恨犯罪指控。警方后来在伊顿公寓发现三支猎枪，以及一支鲁格.380口径手枪，犯罪实验室检测认定其为枪击所用武器。",
+      "summaryRevision": 3,
+      "summaryInputHash": "2a2eeddf62b94b5c940c3f21",
+      "keyFacts": [
+        "Jason Eaton faces up to life in prison",
+        "a jury rejected his insanity defence",
+        "A jury in the US state of Vermont has convicted a man of attempted murder for shooting three Palestinian college students in 2023"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-21T20:05:07Z",
+      "url": "https://www.aljazeera.com/news/2026/9/21/us-man-convicted-in-2023-shooting-of-three-palestinian-students-in-vermont?traffic_source=rss",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 5.5 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国枪击",
+        "佛蒙特州",
+        "巴勒斯坦学生"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/9/21/us-man-convicted-in-2023-shooting-of-three-palestinian-students-in-vermont?traffic_source=rss",
+          "publishedAt": "2026-09-21T20:05:07Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 42
     },
     {
       "id": "d712679f3b8495",
@@ -3115,7 +3826,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.5 小时",
+        "发布约 6.2 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3143,7 +3854,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 45
+      "streamRank": 43
     },
     {
       "id": "ecee7671549181",
@@ -3182,7 +3893,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.6 小时",
+        "发布约 6.3 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3210,7 +3921,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 46
+      "streamRank": 44
     },
     {
       "id": "268c9d202baf48",
@@ -3249,7 +3960,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 5.7 小时",
+        "发布约 6.4 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3277,7 +3988,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 47
+      "streamRank": 45
     },
     {
       "id": "41419d72a7d698",
@@ -3316,7 +4027,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.1 小时",
+        "发布约 6.8 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3344,7 +4055,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 48
+      "streamRank": 46
     },
     {
       "id": "b6be7118113f75",
@@ -3383,7 +4094,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 6.2 小时",
+        "发布约 6.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3411,7 +4122,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 49
+      "streamRank": 47
     },
     {
       "id": "4b85c4faf91390",
@@ -3450,7 +4161,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 7.5 小时",
+        "发布约 8.2 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "待核验",
@@ -3478,35 +4189,35 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 50
+      "streamRank": 48
     },
     {
-      "id": "def282929eecc1",
-      "eventId": "evt-0aa8ed8e4ea9",
+      "id": "8e2a59395c8820",
+      "eventId": "evt-1dea4945eef1",
       "contentType": "news",
-      "title": "特朗普最后一刻叫停空袭后胡塞武装推进夺取要地",
-      "originalTitle": "Houthis move to seize strategic terrain after Trump calls off airstrikes at last minute",
-      "summary": "胡塞武装正推进夺取也门战略高地，以将红海沿岸与沙特支持势力控制的地区隔开。此前美国总统特朗普在最后一刻叫停了美军对该组织的空袭，据报道当时炸弹已在装载上机。据《纽约时报》周一报道，在沙特呼吁美国打击胡塞武装后，特朗普近日立场反复。胡塞武装在战场上快速推进，已从沙特支持的也门政府军手中夺取红海沿岸大部分地区，并逼近关键的曼德海峡。报道称沙特王储穆罕默德·本·萨勒曼在通话中恳请特朗普介入阻止胡塞推进，特朗普随后指示五角大楼准备空袭，但又再次改变主意。联合国称自9月初以来也门敌对行动已造成至少12.5万人流离失所，塔伊兹市接收了其中多达8.6万人。沙特近日对胡塞阵地的数百次打击收效有限。消息人士称，也门总统拉沙德·阿里米周日与特朗普通话，请求支持其联合国承认的政府，特朗普未直接承诺军事支持。",
+      "title": "盖茨基金会发起联盟，为AI构建更具代表性的语言数据集",
+      "originalTitle": "Gates Foundation launches coalition to build more representative language data sets for AI",
+      "summary": "盖茨基金会召集Anthropic、谷歌、OpenAI基金会等约60个组织，组成联盟以帮助人工智能更易支持代表性不足的语言。盖茨基金会认为此举可对抗全球不平等，目标是在五年内覆盖超过30亿人，方式包括更好协调现有工作。基金会首席执行官马克·苏兹曼对美联社表示，这项工作必须“全速前进”，即使一些大型AI公司呼吁行业放缓先进模型开发。他说，政府必须监管网络安全或儿童发展等方面的影响，同时将AI的人道主义应用扩展到目前被“拒之门外”的贫困社区。此合作紧随上周的《守门人》报告，基金会承诺投入10亿美元用于AI相关努力，以改善健康结果、升级教育工具并指导小农实践。报告警告，缺乏代表性的语言数据可能导致模型将马拉维孕妇说的“羊水破了”误译为“扔掉了水”。联盟治理等细节仍在敲定，秘书处将追踪各签署方的承诺。谷歌正资助在印度各区收集超过15万小时音频的Project Vaani，Anthropic则承认其产品“尤其在许多非洲语言上落后”。",
       "summaryRevision": 3,
-      "summaryInputHash": "e3aa279da19cecab2761c36e",
+      "summaryInputHash": "f8f31319fbaa8d001fedd242",
       "keyFacts": [
-        "US president reportedly changed his mind over Saudi Arabia’s pleas for assistance as bombs were being loaded Houthi fighters are moving to…",
-        "Donald Trump called off US strikes on the group at the last minute",
-        "reportedly as bombs were being loaded on to aircraft"
+        "The Gates Foundation is convening Anthropic",
+        "OpenAI Foundation",
+        "dozens of other organizations to help make artificial intelligence more accessible in underrepresented languages"
       ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "The Guardian World",
+      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
+      "category": "AI",
+      "source": "Phys.org Technology",
       "country": "国际",
-      "publishedAt": "2026-09-21T16:14:38Z",
-      "url": "https://www.theguardian.com/world/2026/sep/21/houthis-seize-strategic-terrain-yemen-trump-calls-off-airstrikes-last-minute",
+      "publishedAt": "2026-09-21T16:20:07Z",
+      "url": "https://techxplore.com/news/2026-09-gates-foundation-coalition-language-ai.html",
       "score": 63,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 15,
+        "来源": 16,
         "主题优先级": 10,
-        "时效": 16,
+        "时效": 15,
         "影响信号": 0,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -3516,26 +4227,26 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 8.6 小时",
+        "来源权重 16/20",
+        "发布约 9.2 小时",
         "命中 2 个主题信号"
       ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "也门",
-        "胡塞武装",
-        "美国空袭"
+        "盖茨基金会",
+        "语言数据",
+        "人工智能"
       ],
-      "image": "",
+      "image": "https://scx1.b-cdn.net/csz/news/tmb/2026/gates-foundation-launc.jpg",
       "corroboration": 1,
       "sources": [
         {
-          "name": "The Guardian World",
-          "domain": "theguardian.com",
-          "url": "https://www.theguardian.com/world/2026/sep/21/houthis-seize-strategic-terrain-yemen-trump-calls-off-airstrikes-last-minute",
-          "publishedAt": "2026-09-21T16:14:38Z",
-          "evidenceGroup": "outlet:theguardian.com"
+          "name": "Phys.org Technology",
+          "domain": "techxplore.com",
+          "url": "https://techxplore.com/news/2026-09-gates-foundation-coalition-language-ai.html",
+          "publishedAt": "2026-09-21T16:20:07Z",
+          "evidenceGroup": "outlet:techxplore.com"
         }
       ],
       "selectionProvider": "",
@@ -3545,7 +4256,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 51
+      "streamRank": 49
     },
     {
       "id": "a3626eb6eed761",
@@ -3584,7 +4295,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 9.1 小时",
+        "发布约 9.7 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "中",
@@ -3612,7 +4323,209 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
+      "streamRank": 50
+    },
+    {
+      "id": "d23d1d672bbfbe",
+      "eventId": "evt-f88813d6cfc1",
+      "contentType": "news",
+      "title": "德国汽车业危机：35小时工作制能否存续",
+      "originalTitle": "Germany's car crisis: Can the 35-hour workweek survive?",
+      "summary": "德国汽车制造商希望员工在不加薪情况下每周工作40小时而非目前的35小时，称此举有助提升竞争力。工会强烈反对，认为这是对工人权利的侵犯。德国汽车业正面临深层危机，受制于高制造成本、美国惩罚性关税、来自中国的竞争加剧以及向电动车转型困难。大众、奔驰和宝马已宣布减产和削减成本计划，该行业裁员速度快于其他工业部门。大众计划到本十年末在全球裁减约15%员工，即10万个岗位；宝马宣布到2027年底最多裁减8000个岗位。博世和采埃孚等供应商也宣布数千人裁员。行业高管认为德国劳动力成本过高，咨询公司奥纬咨询报告显示，德国每辆车劳动力成本平均为3307美元，日本为769美元，中国为597美元。",
+      "summaryRevision": 3,
+      "summaryInputHash": "0a614244f6435ac1e4ca7fb7",
+      "keyFacts": [
+        "German carmakers want employees to work 40 hours instead of the current 35 without extra pay",
+        "arguing it would improve competitiveness",
+        "Unions strongly oppose the proposal"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Deutsche Welle",
+      "country": "国际",
+      "publishedAt": "2026-09-21T08:13:00Z",
+      "url": "https://www.dw.com/en/germany-s-car-crisis-can-the-35-hour-workweek-survive/a-79307488?maca=en-rss-en-all-1573-rdf",
+      "score": 63,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 11,
+        "影响信号": 6,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 16/20",
+        "发布约 17.4 小时",
+        "命中 1 个主题信号",
+        "影响信号：attack"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "德国汽车业",
+        "工时",
+        "裁员"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Deutsche Welle",
+          "domain": "dw.com",
+          "url": "https://www.dw.com/en/germany-s-car-crisis-can-the-35-hour-workweek-survive/a-79307488?maca=en-rss-en-all-1573-rdf",
+          "publishedAt": "2026-09-21T08:13:00Z",
+          "evidenceGroup": "outlet:dw.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 51
+    },
+    {
+      "id": "60d6567d7f21d9",
+      "eventId": "evt-efc33f42d9d4",
+      "contentType": "news",
+      "title": "OpenAI成立数学顾问组，称其AI已解决100多个公开问题",
+      "originalTitle": "OpenAI forms math advisory group as its AI resolves more than 100 open problems",
+      "summary": "OpenAI周一宣布成立一个独立顾问组，由普林斯顿高等研究院承办，名为“数学与人工智能顾问组”，旨在让数学家对公司的数学相关研究有更多发言权。此前的背景是，OpenAI突然发布了纳维-斯托克斯千年奖难题的解答，并称同一内部模型还在数学大多领域解决了100多个公开问题。本月早些时候，25位菲尔兹奖得主签署公开信，认为AI实验室在争相解出著名数学问题时威胁到他们的智力工作。该顾问组主要提供咨询，评估新成果的重要性并协调发布；成员无报酬，但可主动提建议、公开表达观点并自行决定成员构成，拥有一定独立性。不过OpenAI表示，该组不负责就内部数学研究进度提供建议，也无权放缓或改变研究方向。高等研究院也强调其只有建议权、无决策权。九位数学家成为首批成员，其中仅高等研究院的卡米洛·德莱利斯也签署了菲尔兹奖得主公开信。",
+      "summaryRevision": 3,
+      "summaryInputHash": "96d025950fbbe8c31d24a4d3",
+      "keyFacts": [
+        "The group won't be given leeway to slow down or redirect OpenAI's ongoing mathematical research",
+        "OpenAI announced a new independent advisory group hosted at the Institute for Advanced Study in Princeton",
+        "Called the Advisory Group on Mathematics"
+      ],
+      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
+      "category": "AI",
+      "source": "TechCrunch AI",
+      "country": "国际",
+      "publishedAt": "2026-09-21T20:15:58Z",
+      "url": "https://techcrunch.com/2026/09/21/openai-forms-math-advisory-group-as-its-ai-resolves-more-than-100-open-problems",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 5.3 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "OpenAI",
+        "数学",
+        "AI研究"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "TechCrunch AI",
+          "domain": "techcrunch.com",
+          "url": "https://techcrunch.com/2026/09/21/openai-forms-math-advisory-group-as-its-ai-resolves-more-than-100-open-problems",
+          "publishedAt": "2026-09-21T20:15:58Z",
+          "evidenceGroup": "outlet:techcrunch.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
       "streamRank": 52
+    },
+    {
+      "id": "def282929eecc1",
+      "eventId": "evt-0aa8ed8e4ea9",
+      "contentType": "news",
+      "title": "特朗普最后一刻叫停空袭后胡塞武装推进夺取要地",
+      "originalTitle": "Houthis move to seize strategic terrain after Trump calls off airstrikes at last minute",
+      "summary": "胡塞武装正推进夺取也门战略高地，以将红海沿岸与沙特支持势力控制的地区隔开。此前美国总统特朗普在最后一刻叫停了美军对该组织的空袭，据报道当时炸弹已在装载上机。据《纽约时报》周一报道，在沙特呼吁美国打击胡塞武装后，特朗普近日立场反复。胡塞武装在战场上快速推进，已从沙特支持的也门政府军手中夺取红海沿岸大部分地区，并逼近关键的曼德海峡。报道称沙特王储穆罕默德·本·萨勒曼在通话中恳请特朗普介入阻止胡塞推进，特朗普随后指示五角大楼准备空袭，但又再次改变主意。联合国称自9月初以来也门敌对行动已造成至少12.5万人流离失所，塔伊兹市接收了其中多达8.6万人。沙特近日对胡塞阵地的数百次打击收效有限。消息人士称，也门总统拉沙德·阿里米周日与特朗普通话，请求支持其联合国承认的政府，特朗普未直接承诺军事支持。",
+      "summaryRevision": 3,
+      "summaryInputHash": "e3aa279da19cecab2761c36e",
+      "keyFacts": [
+        "US president reportedly changed his mind over Saudi Arabia’s pleas for assistance as bombs were being loaded Houthi fighters are moving to…",
+        "Donald Trump called off US strikes on the group at the last minute",
+        "reportedly as bombs were being loaded on to aircraft"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "The Guardian World",
+      "country": "国际",
+      "publishedAt": "2026-09-21T16:14:38Z",
+      "url": "https://www.theguardian.com/world/2026/sep/21/houthis-seize-strategic-terrain-yemen-trump-calls-off-airstrikes-last-minute",
+      "score": 62,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 9.3 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "也门",
+        "胡塞武装",
+        "美国空袭"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The Guardian World",
+          "domain": "theguardian.com",
+          "url": "https://www.theguardian.com/world/2026/sep/21/houthis-seize-strategic-terrain-yemen-trump-calls-off-airstrikes-last-minute",
+          "publishedAt": "2026-09-21T16:14:38Z",
+          "evidenceGroup": "outlet:theguardian.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 53
     },
     {
       "id": "c874225cd9c09c",
@@ -3634,13 +4547,13 @@
       "country": "国际",
       "publishedAt": "2026-09-21T14:00:00Z",
       "url": "https://www.esa.int/Science_Exploration/Space_Science/Juice/Juice_to_fly_past_Earth_for_third_gravity_assist",
-      "score": 63,
+      "score": 62,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
         "来源": 19,
         "主题优先级": 9,
-        "时效": 15,
+        "时效": 14,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -3651,7 +4564,7 @@
       },
       "scoreReasons": [
         "来源权重 19/20",
-        "发布约 10.9 小时",
+        "发布约 11.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3679,141 +4592,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 53
-    },
-    {
-      "id": "24954571025c6d",
-      "eventId": "evt-990fe57dde5a",
-      "contentType": "news",
-      "title": "也门战事升级，民众渡红海逃往吉布提",
-      "originalTitle": "Yemenis flee across Red Sea as Houthis and Saudi-backed forces escalate war",
-      "summary": "随着也门胡塞武装与沙特支持的力量在红海沿岸战事升级，大批也门人乘船穿越曼德海峡逃往吉布提。BBC记者弗兰克·加德纳在吉布提北部奥博克的马尔卡齐营地采访了逃难者。50岁的易卜拉欣·伊萨来自前线沿海城镇杜巴卜，他带着家人乘自家渔船逃离，还带上了几只山羊。近几天已有3000多名难民抵达该营地，许多是全家。联合国估计，也门红海沿岸战斗骤增已致超过12万人流离失所。本月，胡塞武装沿也门海岸向曼德海峡快速推进，沙特则对胡塞武装正在固守的沿海平原发动数百次空袭；胡塞武装也向沙特西南部城市和基础设施发射数百架无人机和导弹。吉布提表示无意卷入这场战争。营中100岁的渔民卡西姆·阿卜西说，是飞机轰炸迫使他们逃离，不知道攻击来自哪一方。营地由吉布提政府和联合国共同管理。",
-      "summaryRevision": 3,
-      "summaryInputHash": "b54e631a5cdffdb8ea1b9ff6",
-      "keyFacts": [
-        "The BBC's Frank Gardner speaks to some of those who have fled the war by crossing the Red Sea to Djibouti",
-        "Ibrahim Issa",
-        "is from the Yemeni coastal town of Dhubab"
-      ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "BBC World",
-      "country": "国际",
-      "publishedAt": "2026-09-21T14:14:16Z",
-      "url": "https://www.bbc.co.uk/news/articles/cw4gm7l742dmo?at_medium=RSS&at_campaign=rss",
-      "score": 62,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 17/20",
-        "发布约 10.7 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "也门",
-        "难民",
-        "中东冲突"
-      ],
-      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/5cd3/live/e6442550-b5c0-11f1-abb5-85e9be42cb76.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cw4gm7l742dmo?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-09-21T14:14:16Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
       "streamRank": 54
-    },
-    {
-      "id": "fd52cac949fa5c",
-      "eventId": "evt-b37a7cd18ef3",
-      "contentType": "news",
-      "title": "Doodle Labs为小型FPV无人机带来远程数字通信",
-      "originalTitle": "Doodle Labs Brings Long-Range Digital Communications to Small FPV Drones",
-      "summary": "总部位于加州玛丽安德尔湾的Doodle Labs近期推出Nano²无线电，旨在解决小型无人机在功能完备与体积重量之间的取舍。该无线电重48.3克，在几乎与公司Nano无线电相同的尺寸内集成2×2多输入多输出（MIMO）能力，同时保留跨频段频率捷变和自愈网状网络等功能。Doodle Labs联合首席执行官阿莫尔·帕里克表示，公司设计制造高性能远程弹性连接方案，尤其专注机器人和无人机，其无线电的尺寸、重量和功耗非常适合空中平台。在防务方面，该公司及一家密切合作伙伴入选五角大楼的“无人机优势”计划，其工业级网状无线电将作为该计划的核心通信骨干部署。公司与美军合作可追溯至数年前，首款量产产品Mini Mesh Rider Radio专为无人机和机器人原始设备制造商设计。",
-      "summaryRevision": 3,
-      "summaryInputHash": "cc997a2f9ac384927f5a79ad",
-      "keyFacts": [
-        "The lightweight Nano² radio supports high-quality video",
-        "interference avoidance",
-        "networked operations for military"
-      ],
-      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
-      "category": "无人系统",
-      "source": "DroneLife",
-      "country": "国际",
-      "publishedAt": "2026-09-21T10:28:57Z",
-      "url": "https://dronelife.com/2026/09/21/doodle-labs-digital-communications-small-fpv-drones",
-      "score": 62,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 13,
-        "影响信号": 0,
-        "主题相关性": 6,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 14.4 小时",
-        "命中 3 个主题信号"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "Doodle Labs",
-        "FPV无人机",
-        "无线电"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "DroneLife",
-          "domain": "dronelife.com",
-          "url": "https://dronelife.com/2026/09/21/doodle-labs-digital-communications-small-fpv-drones",
-          "publishedAt": "2026-09-21T10:28:57Z",
-          "evidenceGroup": "outlet:dronelife.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 55
     },
     {
       "id": "a4c1b5fc9598e7",
@@ -3852,7 +4631,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 10.2 小时",
+        "发布约 10.9 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -3871,6 +4650,73 @@
           "url": "https://www.france24.com/en/france-government-hosts-energy-meeting-amid-fuel-price-tensions",
           "publishedAt": "2026-09-21T14:39:19Z",
           "evidenceGroup": "outlet:france24.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 55
+    },
+    {
+      "id": "24954571025c6d",
+      "eventId": "evt-990fe57dde5a",
+      "contentType": "news",
+      "title": "也门战事升级，民众渡红海逃往吉布提",
+      "originalTitle": "Yemenis flee across Red Sea as Houthis and Saudi-backed forces escalate war",
+      "summary": "随着也门胡塞武装与沙特支持的力量在红海沿岸战事升级，大批也门人乘船穿越曼德海峡逃往吉布提。BBC记者弗兰克·加德纳在吉布提北部奥博克的马尔卡齐营地采访了逃难者。50岁的易卜拉欣·伊萨来自前线沿海城镇杜巴卜，他带着家人乘自家渔船逃离，还带上了几只山羊。近几天已有3000多名难民抵达该营地，许多是全家。联合国估计，也门红海沿岸战斗骤增已致超过12万人流离失所。本月，胡塞武装沿也门海岸向曼德海峡快速推进，沙特则对胡塞武装正在固守的沿海平原发动数百次空袭；胡塞武装也向沙特西南部城市和基础设施发射数百架无人机和导弹。吉布提表示无意卷入这场战争。营中100岁的渔民卡西姆·阿卜西说，是飞机轰炸迫使他们逃离，不知道攻击来自哪一方。营地由吉布提政府和联合国共同管理。",
+      "summaryRevision": 3,
+      "summaryInputHash": "b54e631a5cdffdb8ea1b9ff6",
+      "keyFacts": [
+        "The BBC's Frank Gardner speaks to some of those who have fled the war by crossing the Red Sea to Djibouti",
+        "Ibrahim Issa",
+        "is from the Yemeni coastal town of Dhubab"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-09-21T14:14:16Z",
+      "url": "https://www.bbc.co.uk/news/articles/cw4gm7l742dmo?at_medium=RSS&at_campaign=rss",
+      "score": 61,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 14,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 17/20",
+        "发布约 11.3 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "也门",
+        "难民",
+        "中东冲突"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/5cd3/live/e6442550-b5c0-11f1-abb5-85e9be42cb76.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/cw4gm7l742dmo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-09-21T14:14:16Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
         }
       ],
       "selectionProvider": "",
@@ -3919,7 +4765,7 @@
       },
       "scoreReasons": [
         "来源权重 15/20",
-        "发布约 11.2 小时",
+        "发布约 11.9 小时",
         "命中 2 个主题信号"
       ],
       "confidence": "待核验",
@@ -3950,14 +4796,81 @@
       "streamRank": 57
     },
     {
+      "id": "fd52cac949fa5c",
+      "eventId": "evt-b37a7cd18ef3",
+      "contentType": "news",
+      "title": "Doodle Labs为小型FPV无人机带来远程数字通信",
+      "originalTitle": "Doodle Labs Brings Long-Range Digital Communications to Small FPV Drones",
+      "summary": "总部位于加州玛丽安德尔湾的Doodle Labs近期推出Nano²无线电，旨在解决小型无人机在功能完备与体积重量之间的取舍。该无线电重48.3克，在几乎与公司Nano无线电相同的尺寸内集成2×2多输入多输出（MIMO）能力，同时保留跨频段频率捷变和自愈网状网络等功能。Doodle Labs联合首席执行官阿莫尔·帕里克表示，公司设计制造高性能远程弹性连接方案，尤其专注机器人和无人机，其无线电的尺寸、重量和功耗非常适合空中平台。在防务方面，该公司及一家密切合作伙伴入选五角大楼的“无人机优势”计划，其工业级网状无线电将作为该计划的核心通信骨干部署。公司与美军合作可追溯至数年前，首款量产产品Mini Mesh Rider Radio专为无人机和机器人原始设备制造商设计。",
+      "summaryRevision": 3,
+      "summaryInputHash": "cc997a2f9ac384927f5a79ad",
+      "keyFacts": [
+        "The lightweight Nano² radio supports high-quality video",
+        "interference avoidance",
+        "networked operations for military"
+      ],
+      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
+      "category": "无人系统",
+      "source": "DroneLife",
+      "country": "国际",
+      "publishedAt": "2026-09-21T10:28:57Z",
+      "url": "https://dronelife.com/2026/09/21/doodle-labs-digital-communications-small-fpv-drones",
+      "score": 61,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 12,
+        "影响信号": 0,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 15.1 小时",
+        "命中 3 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "Doodle Labs",
+        "FPV无人机",
+        "无线电"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "DroneLife",
+          "domain": "dronelife.com",
+          "url": "https://dronelife.com/2026/09/21/doodle-labs-digital-communications-small-fpv-drones",
+          "publishedAt": "2026-09-21T10:28:57Z",
+          "evidenceGroup": "outlet:dronelife.com"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 58
+    },
+    {
       "id": "ee5451513e50e4",
       "eventId": "evt-e84714b6e418",
       "contentType": "news",
-      "title": "美空军达成飞行员培训目标后，解决短缺仍需数年",
+      "title": "美空军达到飞行员培训目标，但解决短缺仍需多年",
       "originalTitle": "After hitting pilot training goal, resolving shortage will take years, Air Force official says",
-      "summary": "“培养这类人才需要15到20年，”美国空军中将克拉克·奎因说。华盛顿——美国空军透露，将实现每年培养1500名飞行员这一多年目标，官员称该目标对减少超过2000名飞行员的缺口至关重要。但美国空军最高训练军官9月15日表示，即使空军能在可预见的未来保持这一速度，解决飞行员短缺仍需“相当长时间”。“我无法在短期内消除飞行员缺口，”空军教育与训练司令部司令克拉克·奎因中将在空军与太空军协会会议间隙的记者圆桌会上说。奎因推断，预测弥补现有短缺需要多久，因保留率不可预测而复杂，这在很大程度上由波动的经济状况驱动。此外，当前飞行员短缺大多在参谋职位，由职业生涯已深的人员担任，这意味着补充这些职位需要相当长时间。“培养这类人才需要15到20年。我今天就能培养他们，但这些职位在相当长时间内不会填补，”这位将军说。“我确实知道，如果我们不每年培养1500人，我们就永远无法把这个数字降下来。”空军称，2024年实施的新飞行员培训模式是实现每年1500人培养目标的关键。在名为“本科飞行员培训未来”的新框架下，空军与民用主导的培训项目合作进行早期阶段，学员获得私用飞行员执照并学习飞行基础。学员随后进入军方主导的T-6A“德州佬II”飞行训练阶段，被选入战斗机和轰炸机岗位的候选人还将体验T-38“禽爪”。空军参谋长肯·威尔斯巴赫上将在9月14日另一场媒体圆桌会上说：“这种新的飞行员培训方式让我们能够培养所…",
+      "summary": "美国空军透露将实现每年培养1500名飞行员的目标，官员称这对缩小超过2000人的飞行员缺口至关重要。但空军最高训练官员9月15日表示，即使能保持这一速度，解决飞行员短缺仍需“相当长时间”。空军教育与训练司令部司令克拉克·奎因中将在媒体圆桌会上说，“我无法在短期内消除飞行员缺口”，并称补足现有缺口需15到20年，因为这些岗位多由职业生涯中后期人员担任。他指出，经济状况波动导致留存率难以预测，增加了估算难度。空军称2024年实施的新培训模式是达成年度目标的关键，该模式名为“本科飞行员培训的未来”，与民用培训项目合作完成早期阶段，学员取得私人飞行员执照并学习飞行基础，随后进入军用阶段驾驶T-6A“德州佬II”，入选战斗机和轰炸机岗位者还会驾驶T-38“禽爪”。空军参谋长肯·威尔斯巴赫称，新方式使空军能培养所需飞行员，为F-47和B-21等新平台配备人员。他还表示，协同作战飞机等自主平台可能减少飞行任务人力需求，但还需数年。官员曾提出将飞行训练整合到T-7“红鹰”一个平台上，奎因称尚未决定，此举有利有弊，需让教官有更多飞行时间后再判断。",
       "summaryRevision": 3,
-      "summaryInputHash": "dafd291e57666ef64ddaabf6",
+      "summaryInputHash": "b4c278d861e6e579689b33dc",
       "keyFacts": [
         "“It’s going to take 15 or 20 years to get those types of people,” said Air Force Lt",
         "WASHINGTON — The Air Force has revealed that the service will achieve a years-long goal of producing 1,500 pilots annually",
@@ -3986,15 +4899,15 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 11.8 小时",
+        "发布约 12.5 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "美国空军",
-        "飞行员培训",
-        "T-7红鹰"
+        "美空军",
+        "飞行员短缺",
+        "飞行训练"
       ],
       "image": "",
       "corroboration": 1,
@@ -4014,7 +4927,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 58
+      "streamRank": 59
     },
     {
       "id": "58afc0b3428efb",
@@ -4053,7 +4966,7 @@
       },
       "scoreReasons": [
         "来源权重 16/20",
-        "发布约 11.9 小时",
+        "发布约 12.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -4081,7 +4994,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 59
+      "streamRank": 60
     },
     {
       "id": "302637180583cc",
@@ -4120,7 +5033,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 11.9 小时",
+        "发布约 12.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -4148,139 +5061,7 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 60
-    },
-    {
-      "id": "7404c03dd67e4e",
-      "eventId": "evt-2ea0e4641830",
-      "contentType": "news",
-      "title": "北极融化季长度趋于平稳",
-      "originalTitle": "Arctic Melt Season Length Levels Off",
-      "summary": "自卫星记录开始以来，北极海冰融化季在多数十年中延长，尤其是2000年代，但自2010年以来似已趋于稳定。NASA牵头新研究发现，尽管融化季自卫星记录开始以来显著延长，这一趋势在2010年前后意外平稳。研究称，北极海冰融化季现在比1979年长约40天，大部分增加发生在2010年前。此后，平均融化季长度基本未变，尽管年际波动很大。研究人员分析1979年至2023年卫星观测，追踪春季海冰开始融化与秋季重新冻结的时间。",
-      "summaryRevision": 3,
-      "summaryInputHash": "e951f7f2cb3b60d5feb30f45",
-      "keyFacts": [
-        "Earth Observatory Science Earth Observatory Arctic Melt Season Length… Earth Earth Observatory Image of the Day EO Explorer Topics All Topi…"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "NASA",
-      "country": "国际",
-      "publishedAt": "2026-09-21T04:00:00Z",
-      "url": "https://science.nasa.gov/earth/earth-observatory/arctic-melt-season-length-levels-off",
-      "score": 59,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 20,
-        "主题优先级": 9,
-        "时效": 10,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 20/20",
-        "发布约 20.9 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "北极海冰",
-        "气候变化",
-        "NASA"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "NASA",
-          "domain": "science.nasa.gov",
-          "url": "https://science.nasa.gov/earth/earth-observatory/arctic-melt-season-length-levels-off",
-          "publishedAt": "2026-09-21T04:00:00Z",
-          "evidenceGroup": "outlet:science.nasa.gov"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
       "streamRank": 61
-    },
-    {
-      "id": "251396b41bf9f6",
-      "eventId": "evt-7eaccd1059bb",
-      "contentType": "news",
-      "title": "未经授权无人机扰乱卢森堡机场运营",
-      "originalTitle": "Unauthorized Drones Disrupt Operations at Luxembourg Airport",
-      "summary": "卢森堡政府称，9月18日夜间，在芬德尔机场所在空域目视观察到身份不明、未经授权的无人机，机场随即出于安全考虑关闭空域，19架进港航班被迫改道。关闭措施旨在保护乘客、机组人员、机场员工和飞机，运营于9月19日凌晨约1时20分恢复，此前两次检查未发现对航空安全的直接风险。机场运营方lux-Airport表示，这些飞行器先在机场附近、后在机场上空被探测到，并警告在航空公司恢复常态期间延误可能持续。卢森堡随后启动跨部门无人机评估小组，首相弗里登与国防和交通部长巴克斯、内政部长格洛登及相关机构会面。当局称现有信息不足以得出最终结论，正与外国伙伴继续审查所收集的信息，尚未查明无人机、操作者或来源，也未提供可能的动机。9月20日官员称已部署额外探测资源，包括外国伙伴提供的设备；警方还调查了随后几起疑似无人机目击报告，这些报告未要求行动响应。9月21日的政府更新称评估小组仍保持活跃。",
-      "summaryRevision": 3,
-      "summaryInputHash": "5544a3a8fc1a352d7b7a8ce5",
-      "keyFacts": [
-        "Nineteen incoming flights were diverted",
-        "unidentified drones were observed near",
-        "over the airport Unauthorized drone activity temporarily halted flights at Luxembourg Airport on the night of September 18"
-      ],
-      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
-      "category": "无人系统",
-      "source": "DroneLife",
-      "country": "国际",
-      "publishedAt": "2026-09-21T10:17:37Z",
-      "url": "https://dronelife.com/2026/09/21/luxembourg-airport-drone-sightings",
-      "score": 58,
-      "scoreBasis": "规则评分",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 15,
-        "主题优先级": 10,
-        "时效": 13,
-        "影响信号": 0,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "来源权重 15/20",
-        "发布约 14.6 小时",
-        "命中 1 个主题信号"
-      ],
-      "confidence": "待核验",
-      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
-      "tags": [
-        "卢森堡机场",
-        "无人机",
-        "航空安全"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "DroneLife",
-          "domain": "dronelife.com",
-          "url": "https://dronelife.com/2026/09/21/luxembourg-airport-drone-sightings",
-          "publishedAt": "2026-09-21T10:17:37Z",
-          "evidenceGroup": "outlet:dronelife.com"
-        }
-      ],
-      "selectionProvider": "",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "isTopStory": false,
-      "streamRank": 62
     },
     {
       "id": "25b4f2e6811673",
@@ -4319,7 +5100,7 @@
       },
       "scoreReasons": [
         "来源权重 17/20",
-        "发布约 17.9 小时",
+        "发布约 18.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
@@ -4347,35 +5128,33 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "isTopStory": false,
-      "streamRank": 63
+      "streamRank": 62
     },
     {
-      "id": "92032dee1ae719",
-      "eventId": "evt-ce7a578e9118",
+      "id": "7404c03dd67e4e",
+      "eventId": "evt-2ea0e4641830",
       "contentType": "news",
-      "title": "伊朗关闭德黑兰一法语中心，法国誓言回应",
-      "originalTitle": "Iran closes language center in Tehran, France vows response",
-      "summary": "法国外交部9月20日表示，在伊朗当局关闭法国驻德黑兰使馆附属的一处法语中心后，巴黎将召见伊朗大使并采取适当措施。外交部发言人帕斯卡尔·孔法夫勒称，继今年7月法国使馆两名工作人员遭袭击后，这是“针对法国在伊朗文化存在的又一次攻击”，不可辩护、不可接受。当天早些时候，伊朗当局宣布依据检察官办公室的司法命令关闭德黑兰一处法语中心。伊朗司法机构旗下的米赞新闻网站称，该中心“以语言教学为名运营多年”，被指从事“违反外交公约的非法行为”，并“滥用语言培训机构身份”，试图“识别和在该国精英人物中建立网络，同时协助他们离境”。法国此前否认此类指控，并称近月来存在恐吓模式。近年德黑兰与巴黎关系持续紧张。上月法国驱逐两名伊朗外交官，以回应两名法国特使被短暂拘留和禁止入境。外交官称，伊朗还对法国外长让-诺埃尔·巴罗近日纪念玛莎·阿米尼去世四周年的社交媒体帖文不满。伊朗外长阿巴斯·阿拉格齐称该帖是“鳄鱼的眼泪”。两国外长定于周二在联合国大会期间会面。",
+      "title": "北极融化季长度趋于平稳",
+      "originalTitle": "Arctic Melt Season Length Levels Off",
+      "summary": "自卫星记录开始以来，北极海冰融化季在多数十年中延长，尤其是2000年代，但自2010年以来似已趋于稳定。NASA牵头新研究发现，尽管融化季自卫星记录开始以来显著延长，这一趋势在2010年前后意外平稳。研究称，北极海冰融化季现在比1979年长约40天，大部分增加发生在2010年前。此后，平均融化季长度基本未变，尽管年际波动很大。研究人员分析1979年至2023年卫星观测，追踪春季海冰开始融化与秋季重新冻结的时间。",
       "summaryRevision": 3,
-      "summaryInputHash": "ac3dcd937effe02abda869e8",
+      "summaryInputHash": "e951f7f2cb3b60d5feb30f45",
       "keyFacts": [
-        "In response to the Iranian authorities' decision to close a French language center affiliated with its embassy in Tehran",
-        "France vowed to take appropriate measures",
-        "Paris will summon Iran 's ambassador"
+        "Earth Observatory Science Earth Observatory Arctic Melt Season Length… Earth Earth Observatory Image of the Day EO Explorer Topics All Topi…"
       ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Deutsche Welle",
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
       "country": "国际",
-      "publishedAt": "2026-09-21T01:20:00Z",
-      "url": "https://www.dw.com/en/iran-closes-language-center-in-tehran-france-vows-response/a-79348984?maca=en-rss-en-all-1573-rdf",
-      "score": 54,
+      "publishedAt": "2026-09-21T04:00:00Z",
+      "url": "https://science.nasa.gov/earth/earth-observatory/arctic-melt-season-length-levels-off",
+      "score": 58,
       "scoreBasis": "规则评分",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 8,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 9,
         "影响信号": 0,
         "主题相关性": 2,
         "证据完整度": 3,
@@ -4385,26 +5164,93 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "来源权重 16/20",
-        "发布约 23.6 小时",
+        "来源权重 20/20",
+        "发布约 21.6 小时",
         "命中 1 个主题信号"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "伊朗",
-        "法国",
-        "外交"
+        "北极海冰",
+        "气候变化",
+        "NASA"
       ],
       "image": "",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Deutsche Welle",
-          "domain": "dw.com",
-          "url": "https://www.dw.com/en/iran-closes-language-center-in-tehran-france-vows-response/a-79348984?maca=en-rss-en-all-1573-rdf",
-          "publishedAt": "2026-09-21T01:20:00Z",
-          "evidenceGroup": "outlet:dw.com"
+          "name": "NASA",
+          "domain": "science.nasa.gov",
+          "url": "https://science.nasa.gov/earth/earth-observatory/arctic-melt-season-length-levels-off",
+          "publishedAt": "2026-09-21T04:00:00Z",
+          "evidenceGroup": "outlet:science.nasa.gov"
+        }
+      ],
+      "selectionProvider": "",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "isTopStory": false,
+      "streamRank": 63
+    },
+    {
+      "id": "251396b41bf9f6",
+      "eventId": "evt-7eaccd1059bb",
+      "contentType": "news",
+      "title": "未经授权无人机扰乱卢森堡机场运营",
+      "originalTitle": "Unauthorized Drones Disrupt Operations at Luxembourg Airport",
+      "summary": "卢森堡政府称，9月18日夜间，在芬德尔机场所在空域目视观察到身份不明、未经授权的无人机，机场随即出于安全考虑关闭空域，19架进港航班被迫改道。关闭措施旨在保护乘客、机组人员、机场员工和飞机，运营于9月19日凌晨约1时20分恢复，此前两次检查未发现对航空安全的直接风险。机场运营方lux-Airport表示，这些飞行器先在机场附近、后在机场上空被探测到，并警告在航空公司恢复常态期间延误可能持续。卢森堡随后启动跨部门无人机评估小组，首相弗里登与国防和交通部长巴克斯、内政部长格洛登及相关机构会面。当局称现有信息不足以得出最终结论，正与外国伙伴继续审查所收集的信息，尚未查明无人机、操作者或来源，也未提供可能的动机。9月20日官员称已部署额外探测资源，包括外国伙伴提供的设备；警方还调查了随后几起疑似无人机目击报告，这些报告未要求行动响应。9月21日的政府更新称评估小组仍保持活跃。",
+      "summaryRevision": 3,
+      "summaryInputHash": "5544a3a8fc1a352d7b7a8ce5",
+      "keyFacts": [
+        "Nineteen incoming flights were diverted",
+        "unidentified drones were observed near",
+        "over the airport Unauthorized drone activity temporarily halted flights at Luxembourg Airport on the night of September 18"
+      ],
+      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
+      "category": "无人系统",
+      "source": "DroneLife",
+      "country": "国际",
+      "publishedAt": "2026-09-21T10:17:37Z",
+      "url": "https://dronelife.com/2026/09/21/luxembourg-airport-drone-sightings",
+      "score": 57,
+      "scoreBasis": "规则评分",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 12,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "来源权重 15/20",
+        "发布约 15.3 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "卢森堡机场",
+        "无人机",
+        "航空安全"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "DroneLife",
+          "domain": "dronelife.com",
+          "url": "https://dronelife.com/2026/09/21/luxembourg-airport-drone-sightings",
+          "publishedAt": "2026-09-21T10:17:37Z",
+          "evidenceGroup": "outlet:dronelife.com"
         }
       ],
       "selectionProvider": "",
