@@ -415,8 +415,12 @@ def _model_error(value: Any, selected: list[dict[str, Any]], edition: str) -> st
             return f"{path}: length {len(text.strip())}, expected {minimum}..{maximum}"
         return f"{path}: expected plain Chinese prose without links or markup"
 
-    if not isinstance(value, dict) or set(value) != {"editionDate", "headline", "introduction", "sections", "conclusion"}:
-        return "article: unexpected fields or object type"
+    expected_root = {"editionDate", "headline", "introduction", "sections", "conclusion"}
+    if not isinstance(value, dict):
+        return "article: expected one object"
+    if set(value) != expected_root:
+        missing = ",".join(sorted(expected_root - set(value))) or "none"
+        return f"article: missing fields {missing}; unexpected field count {len(set(value) - expected_root)}"
     if value["editionDate"] != edition:
         return "editionDate: does not match edition"
     for key in ("headline", "introduction", "conclusion"):
@@ -488,8 +492,8 @@ def build_daily_deepread(
 ) -> dict[str, Any]:
     """Return schemaVersion 1; fewer than ten eligible events remains insufficient.
 
-    The current edition covers [now - 24 hours, now], inclusive. Only one provider
-    callback is attempted. Any incomplete/invalid response is discarded in full.
+    The current edition covers [now - 24 hours, now], inclusive. At most two provider
+    calls are attempted; the second corrects a validation failure with the same evidence. Any incomplete/invalid response is discarded in full.
     ``sourceCount`` counts unique canonical evidence URLs, not independent outlets.
     """
     if now.tzinfo is None:
@@ -530,6 +534,7 @@ def build_daily_deepread(
         "原始evidenceText仅供理解证据，不得整段转载或输出该字段。历史条目只属于相关背景，不证明同一事件，不计作本期新事件。"
         "区分已报道事实与条件性分析，保留原始报道的归属和不确定性，不宣称材料已经独立核实；展望要说明如果什么证据出现，才可能支持什么判断。"
         "每个输入eventId及其newsId必须恰好出现一次，不得遗漏、复制或增加事件，editionDate必须保持不变。"
+        "顶层JSON对象必须且仅有editionDate、headline、introduction、sections、conclusion五个字段，不要添加外层包装或任何生成状态与计数元数据。"
         "只返回schema允许的纯文本字段，禁止HTML、Markdown链接、URL、sources、image、imageSource以及任何额外字段；来源与图片由程序附加。"
         "各章节用共同问题连接报道，但不暗示不同事件有未经证实的因果关系。watchFor必须是具体观察问题组成的字符串。"
         "JSON示例仅为格式占位，示例中的标题和正文不得照抄；所有段落都要根据本期输入重新撰写。"
@@ -540,21 +545,33 @@ def build_daily_deepread(
         "建议导语180至300字、每节概述100至180字、逐事件analysis100至220字、结语150至240字，所有字段仍须满足schema长度要求。"
         "事件不足10件时如实呈现，不增加故事凑数。请严格遵守每个文本字段的长度范围。"
     )
-    try:
-        response = request_json(
-            runtime, instructions=instructions,
-            input_text=json.dumps({"editionDate": edition, "windowHours": 24, "events": _prompt_items(selected)}, ensure_ascii=False),
-            schema_name="daily_deepread", schema=schema, example=example,
-            max_tokens=max(4000, min(16000, int(_number(config.get("deepread_max_output_tokens", 12000), 12000)))),
+    input_text = json.dumps({"editionDate": edition, "windowHours": 24, "events": _prompt_items(selected)}, ensure_ascii=False)
+    correction = ""
+    for attempt in range(2):
+        try:
+            response = request_json(
+                runtime, instructions=instructions + correction, input_text=input_text,
+                schema_name="daily_deepread", schema=schema, example=example,
+                max_tokens=max(4000, min(16000, int(_number(config.get("deepread_max_output_tokens", 12000), 12000)))),
+            )
+        except Exception:
+            # Provider exceptions can contain endpoint credentials or private text.
+            article["warnings"].append("文章生成服务暂不可用，本期保留基于已有摘要的事实编排。")
+            return article
+        error = _model_error(response, selected, edition)
+        if not error:
+            break
+        logging.getLogger(__name__).warning("Daily deepread validation (attempt %s): %s", attempt + 1, error)
+        if attempt:
+            article["warnings"].append("生成内容未通过结构或证据引用检查，本期保留基于已有摘要的事实编排。" + f" 校验位置：{error}")
+            return article
+        # Retry only once. The model gets safe validation metadata and the same
+        # bounded original evidence, never its rejected prose or unknown keys.
+        correction = (
+            " 上次输出未通过校验，请根据相同原始材料重新生成完整文章并修正：" + error
+            + "。顶层字段必须恰好是editionDate、headline、introduction、sections、conclusion；"
+            "每个指定事件必须完整出现一次。不要输出包装对象、额外字段或格式占位文字。"
         )
-    except Exception:
-        # Provider exceptions can contain endpoint credentials or private text.
-        article["warnings"].append("文章生成服务暂不可用，本期保留基于已有摘要的事实编排。")
-        return article
-    if error := _model_error(response, selected, edition):
-        logging.getLogger(__name__).warning("Daily deepread validation: %s", error)
-        article["warnings"].append("生成内容未通过结构或证据引用检查，本期保留基于已有摘要的事实编排。" + f" 校验位置：{error}")
-        return article
 
     by_event = {item["eventId"]: item for item in selected}
     article.update({key: response[key].strip() for key in ("headline", "introduction", "conclusion")})
