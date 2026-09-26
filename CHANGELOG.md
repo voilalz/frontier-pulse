@@ -7,6 +7,7 @@
 - Balance the AI shortlist and daily edition across technology desks, with a combined security-topic cap and disclosed scarcity fallback.
 - Replace broad history-score identity with conservative object/action/place/date matching, exact ID/URL reuse, legacy isolation and persistent identities for every qualified stream item.
 - Add “每日深读”: a 10–15-event illustrated article (12 by default), grounded citations, thematic analysis, independent dated archives and race-safe date loading. Insufficient or invalid generation falls back without invented events or URLs.
+- Fix the longform writer to fill program-selected section/news keys instead of copying two identifiers for every event. Canonical IDs, grouping and citations remain program-owned; omitted, moved and unknown entries still reject the article. Generation revision 3 refreshes older same-day output.
 - Preserve the existing collapsed event timeline. Upgrade daily/status schema to 11, stream to 7 and registry to 2; publish new deepread and source-health outputs through the existing workflows.
 
 ## 2026-09-20 — News reading and international source coverage
