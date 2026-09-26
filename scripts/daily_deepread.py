@@ -458,7 +458,10 @@ def _model_error(value: Any, selected: list[dict[str, Any]], edition: str) -> st
                 if error := prose_error(event[key], key, f"{event_path}.{key}"):
                     return error
             seen_events.add(event_id)
-    return "events: missing selected events" if seen_events != set(selected_ids) else ""
+    missing = sorted(set(selected_ids) - seen_events)
+    return "events: missing selected eventId/newsId pairs " + ", ".join(
+        f"{event_id}/{selected_ids[event_id]}" for event_id in missing
+    ) if missing else ""
 
 
 def _valid_model(value: Any, selected: list[dict[str, Any]], edition: str) -> bool:
@@ -564,6 +567,13 @@ def build_daily_deepread(
             article["warnings"].append("文章生成服务暂不可用，本期保留基于已有摘要的事实编排。")
             return article
         else:
+            # Publication metadata and citations belong to the pipeline. Ignore
+            # unused root keys rather than publishing or trusting model values.
+            # Every required paragraph, section and event is still validated.
+            if isinstance(response, dict):
+                response = {key: response[key] for key in (
+                    "editionDate", "headline", "introduction", "sections", "conclusion"
+                ) if key in response}
             error = _model_error(response, selected, edition)
         if not error:
             break

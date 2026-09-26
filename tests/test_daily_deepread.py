@@ -351,6 +351,17 @@ class DailyDeepreadTests(unittest.TestCase):
         self.assertEqual(len(calls), 2)
         self.assertNotIn("private parser details", json.dumps(article))
 
+    def test_unused_root_metadata_cannot_displace_a_complete_grounded_article(self):
+        items = [self.item(n) for n in range(12)]
+        response = self.model_response(items)
+        response.update({"generationStatus": "invented-status", "sources": ["https://invented.example"],
+                         "untrusted": "<script>PRIVATE_SENTINEL</script>"})
+        article = MODULE.build_daily_deepread(items, self.config, self.now, self.runtime, lambda *args, **kwargs: response)
+        self.assertEqual(article["generationStatus"], "ok")
+        self.assertEqual(article["headline"], response["headline"])
+        self.assertNotIn("invented.example", json.dumps(article))
+        self.assertNotIn("PRIVATE_SENTINEL", json.dumps(article))
+
     def test_private_body_only_reaches_bounded_model_input_and_not_fallback(self):
         marker = "PRIVATE_BODY_SENTINEL"
         items = [self.item(n, evidenceText=marker + " 测试过程的已公开细节。" * 2000) for n in range(12)]
