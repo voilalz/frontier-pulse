@@ -301,7 +301,7 @@ class DailyDeepreadTests(unittest.TestCase):
         MODULE.build_daily_deepread(items, self.config, self.now, self.runtime, request)
         example = calls[0]["example"]
         self.assertNotEqual(example["introduction"], fallback["introduction"])
-        seeded = {event["analysis"] for section in example["sections"] for event in section["events"]}
+        seeded = {event["analysis"] for section in example["sections"].values() for event in section["events"].values()}
         self.assertFalse(seeded.intersection(event["analysis"] for event in self.events(fallback)))
 
     def test_invalid_structure_gets_one_guided_retry_with_same_original_evidence(self):
@@ -374,6 +374,64 @@ class DailyDeepreadTests(unittest.TestCase):
         self.assertLess(len(calls[0]["input_text"]), 100000)
         self.assertNotIn(marker, json.dumps(article))
         self.assertNotIn("evidenceText", json.dumps(article))
+
+    def keyed_response(self, items):
+        fallback = MODULE.build_daily_deepread(items, self.config, self.now)
+        prose = self.model_response(items)
+        editorial = {event["newsId"]: event for event in prose["sections"][0]["events"]}
+        prose["sections"] = {
+            section["id"]: {
+                "title": "公开进展与下一步的具体问题",
+                "overview": "这些事件都包含新公开的材料，但各自的测试对象和应用条件不同。将它们放在同一节，目的是比较证据披露的完整程度，并不意味着它们属于同一个事件，也不意味着报道之间存在因果关系。",
+                "events": {event["newsId"]: {key: editorial[event["newsId"]][key]
+                           for key in ("title", "summary", "analysis", "watchFor")}
+                           for event in section["events"]},
+            } for section in fallback["sections"]
+        }
+        return prose
+
+    def test_fixed_editorial_slots_preserve_canonical_ids_when_model_keys_are_reordered(self):
+        items = [self.item(n) for n in range(12)]
+        response = self.keyed_response(items)
+        response["sections"] = dict(reversed(list(response["sections"].items())))
+        calls = []
+        def request(*args, **kwargs):
+            calls.append(kwargs)
+            return response
+        article = MODULE.build_daily_deepread(items, self.config, self.now, self.runtime, request)
+        self.assertEqual(article["generationStatus"], "ok")
+        self.assertEqual({(e["newsId"], e["eventId"]) for e in self.events(article)},
+                         {(item["id"], item["eventId"]) for item in items})
+        schema = calls[0]["schema"]["properties"]["sections"]
+        self.assertEqual(schema["type"], "object")
+        self.assertEqual(set(schema["required"]), set(response["sections"]))
+        for section in response["sections"]:
+            events = schema["properties"][section]["properties"]["events"]
+            self.assertEqual(set(events["required"]), set(response["sections"][section]["events"]))
+            for fields in events["properties"].values():
+                self.assertEqual(set(fields["required"]), {"title", "summary", "analysis", "watchFor"})
+
+    def test_fixed_editorial_slots_reject_omissions_unknown_keys_and_moved_events(self):
+        items = [self.item(n) for n in range(12)]
+        valid = self.keyed_response(items)
+        sections = list(valid["sections"])
+        first = sections[0]
+        news_id = next(iter(valid["sections"][first]["events"]))
+        missing = copy.deepcopy(valid)
+        event = missing["sections"][first]["events"].pop(news_id)
+        unknown = copy.deepcopy(valid)
+        unknown["sections"][first]["events"]["untrusted-private-key"] = event
+        moved = copy.deepcopy(missing)
+        moved["sections"][sections[1]]["events"][news_id] = event
+        injected = copy.deepcopy(valid)
+        injected["sections"][first]["events"][news_id]["eventId"] = "invented-event"
+        for response in (missing, unknown, moved, injected):
+            article = MODULE.build_daily_deepread(items, self.config, self.now, self.runtime,
+                                                  lambda *args, **kwargs: response)
+            self.assertEqual(article["generationStatus"], "fallback")
+            self.assertEqual(len(self.events(article)), 12)
+            self.assertNotIn("untrusted-private-key", json.dumps(article))
+            self.assertNotIn("invented-event", json.dumps(article))
 
     def test_sparse_valid_model_keeps_insufficient_status_and_explicit_shortfall(self):
         items = [self.item(n) for n in range(3)]
