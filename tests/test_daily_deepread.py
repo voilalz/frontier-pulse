@@ -281,6 +281,16 @@ class DailyDeepreadTests(unittest.TestCase):
         self.assertNotIn("secret-provider-key", json.dumps(article))
         self.assertTrue(all(event["summary"] and event["analysis"] for event in self.events(article)))
 
+    def test_rejected_model_reports_field_and_length_without_private_text(self):
+        items = [self.item(n) for n in range(12)]
+        response = self.model_response(items)
+        response["sections"][0]["overview"] = "PRIVATE_SENTINEL"
+        error = MODULE._model_error(response, items, "2026-09-21")
+        self.assertIn("sections[0].overview", error)
+        self.assertIn("15", error)
+        self.assertNotIn("PRIVATE_SENTINEL", error)
+        self.assertEqual(MODULE._model_error(self.model_response(items), items, "2026-09-21"), "")
+
     def test_private_body_only_reaches_bounded_model_input_and_not_fallback(self):
         marker = "PRIVATE_BODY_SENTINEL"
         items = [self.item(n, evidenceText=marker + " 测试过程的已公开细节。" * 2000) for n in range(12)]
