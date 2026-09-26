@@ -1,6 +1,12 @@
 name: Full stream update
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/event_identity.py"
+      - "scripts/update_news.py"
   schedule:
     - cron: "17 */3 * * *"
       timezone: "Asia/Shanghai"

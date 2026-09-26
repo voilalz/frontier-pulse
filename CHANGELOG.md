@@ -10,6 +10,7 @@
 - Fix the longform writer to fill program-selected section/news keys instead of copying two identifiers for every event. Canonical IDs, grouping and citations remain program-owned; omitted, moved and unknown entries still reject the article. Generation revision 3 refreshes older same-day output.
 - Reconcile two existing event IDs only when same-day reports name the same distinctive acronym, organization and founding action. Preserve both sources and history under one canonical ID, keep an old-ID alias, and rebuild the same-day deep read under revision 4. The case was verified against two independent reports on the Navy's RASWDC center.
 - Recover malformed whole-article JSON by requesting smaller independently validated sections and a separate lead. Keep titles, summaries, event IDs, sources and images under program control, mark partial chapters honestly, and retry incomplete editions. Revision 5 refreshes the latest article.
+- Reconcile confirmed split IDs from retained registry representatives even after both reports leave the rolling 24-hour window. Replay the event registry through the stream workflow when identity code changes, retaining prior news IDs and an alias for older references.
 - Preserve the existing collapsed event timeline. Upgrade daily/status schema to 11, stream to 7 and registry to 2; publish new deepread and source-health outputs through the existing workflows.
 
 ## 2026-09-20 — News reading and international source coverage
