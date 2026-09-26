@@ -22,6 +22,7 @@ from zoneinfo import ZoneInfo
 
 
 TECHNICAL_CATEGORIES = ("AI", "航空航天", "无人系统", "前沿技术")
+GENERATION_REVISION = 2
 TEXT_LIMITS = {
     "headline": (8, 140),
     "introduction": (100, 1800),
@@ -354,7 +355,7 @@ def _fallback(selected: list[dict[str, Any]], edition: str, generated: str) -> d
         "本期保持空白事件列表，避免把信息缺口写成事实。后续判断仍需要具体报道和可追溯的原始来源；只有新增材料满足时间范围与内容政策，才能进入下一版分析。阅读历史归档可以补充背景，但不应把历史内容当成今天的新进展。"
     )
     return {
-        "schemaVersion": 1, "editionDate": edition, "generatedAt": generated,
+        "schemaVersion": 1, "generationRevision": GENERATION_REVISION, "editionDate": edition, "generatedAt": generated,
         "headline": f"每日深读｜{edition}：{count}件事件中的进展、证据与待答问题" if count else f"每日深读｜{edition}：等待新的可引用材料",
         "introduction": introduction, "sections": sections, "conclusion": conclusion,
         "eventCount": count,
@@ -508,10 +509,20 @@ def build_daily_deepread(
         return article
 
     schema = _schema(selected, edition)
-    example = {key: article[key] for key in ("editionDate", "headline", "introduction", "conclusion")}
+    # This is a format guide, not a draft. Seeding it with the fallback's prose
+    # causes the model to copy generic cautions into unrelated event analyses.
+    example = {
+        "editionDate": edition,
+        "headline": "根据本期具体进展拟定报道标题",
+        "introduction": "围绕本期两到三个主要进展写出具体导语，说明发生了什么与共同的观察问题",
+        "conclusion": "归纳本期报道揭示的具体变化，并指出接下来可观察的实际节点",
+    }
     example["sections"] = [{
-        "id": section["id"], "title": section["title"], "overview": section["overview"],
-        "events": [{key: event[key] for key in ("newsId", "eventId", "title", "summary", "analysis", "watchFor")} for event in section["events"]],
+        "id": section["id"], "title": "根据本节新闻拟定具体主题", "overview": "用本节事实连接一个具体问题，区分事件各自的进展与限制",
+        "events": [{"newsId": event["newsId"], "eventId": event["eventId"],
+                    "title": "本事件的具体标题", "summary": "完整概括原文支持的事实",
+                    "analysis": "针对本事件本身解释意义和影响，明确区分事实与推断",
+                    "watchFor": "本事件接下来可观察的具体进展"} for event in section["events"]],
     } for section in article["sections"]]
     instructions = (
         "你是简体中文国际科技新闻编辑。将给定的独立事件写成一篇有连贯导语、主题章节、章节衔接和结论的每日深读，不能只是重复摘要的卡片集合。"
@@ -521,6 +532,12 @@ def build_daily_deepread(
         "每个输入eventId及其newsId必须恰好出现一次，不得遗漏、复制或增加事件，editionDate必须保持不变。"
         "只返回schema允许的纯文本字段，禁止HTML、Markdown链接、URL、sources、image、imageSource以及任何额外字段；来源与图片由程序附加。"
         "各章节用共同问题连接报道，但不暗示不同事件有未经证实的因果关系。watchFor必须是具体观察问题组成的字符串。"
+        "JSON示例仅为格式占位，示例中的标题和正文不得照抄；所有段落都要根据本期输入重新撰写。"
+        "导语直接点出本期两到三个主要进展，不要只列领域或解释阅读方法；章节概述应以本节具体事实串联问题。"
+        "每条analysis必须针对该事件类型：治理事件讨论责任与治理，理论研究讨论理论条件与解释力，工程试验讨论已完成的节点。"
+        "不要把商业化、量产、模型评测或独立复现等不相干议题套在所有新闻上，不要机械重复链接数量和未独立验证的提醒。"
+        "保留真正影响判断的归属、条件和不确定性，但避免应先明确报道记录了什么等套话。"
+        "建议导语180至300字、每节概述100至180字、逐事件analysis100至220字、结语150至240字，所有字段仍须满足schema长度要求。"
         "事件不足10件时如实呈现，不增加故事凑数。请严格遵守每个文本字段的长度范围。"
     )
     try:
