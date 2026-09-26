@@ -11,6 +11,7 @@ from __future__ import annotations
 import html
 import ipaddress
 import json
+import logging
 import math
 import re
 from collections import Counter
@@ -401,40 +402,62 @@ def _valid_prose(value: Any, key: str) -> bool:
     )
 
 
-def _valid_model(value: Any, selected: list[dict[str, Any]], edition: str) -> bool:
+def _model_error(value: Any, selected: list[dict[str, Any]], edition: str) -> str:
+    """Return a safe diagnostic path, never provider text or untrusted keys."""
+    def prose_error(text: Any, key: str, path: str) -> str:
+        if _valid_prose(text, key):
+            return ""
+        if not isinstance(text, str):
+            return f"{path}: expected text"
+        minimum, maximum = TEXT_LIMITS[key]
+        if not minimum <= len(text.strip()) <= maximum:
+            return f"{path}: length {len(text.strip())}, expected {minimum}..{maximum}"
+        return f"{path}: expected plain Chinese prose without links or markup"
+
     if not isinstance(value, dict) or set(value) != {"editionDate", "headline", "introduction", "sections", "conclusion"}:
-        return False
-    if value["editionDate"] != edition or not all(_valid_prose(value[key], key) for key in ("headline", "introduction", "conclusion")):
-        return False
+        return "article: unexpected fields or object type"
+    if value["editionDate"] != edition:
+        return "editionDate: does not match edition"
+    for key in ("headline", "introduction", "conclusion"):
+        if error := prose_error(value[key], key, key):
+            return error
     sections = value["sections"]
     if not isinstance(sections, list) or not 1 <= len(sections) <= 6:
-        return False
+        return "sections: expected 1..6 sections"
     selected_ids = {item["eventId"]: item["id"] for item in selected}
     seen_events: set[str] = set()
     seen_sections: set[str] = set()
-    for section in sections:
+    for index, section in enumerate(sections):
+        path = f"sections[{index}]"
         if not isinstance(section, dict) or set(section) != {"id", "title", "overview", "events"}:
-            return False
+            return f"{path}: unexpected fields or object type"
         section_id = section["id"]
         if not isinstance(section_id, str) or not re.fullmatch(r"[a-z][a-z0-9-]{0,47}", section_id) or section_id in seen_sections:
-            return False
+            return f"{path}.id: invalid or repeated section ID"
         seen_sections.add(section_id)
-        if not _valid_prose(section["title"], "sectionTitle") or not _valid_prose(section["overview"], "overview"):
-            return False
+        for key, rule in (("title", "sectionTitle"), ("overview", "overview")):
+            if error := prose_error(section[key], rule, f"{path}.{key}"):
+                return error
         if not isinstance(section["events"], list) or not 1 <= len(section["events"]) <= 15:
-            return False
-        for event in section["events"]:
+            return f"{path}.events: expected 1..15 events"
+        for event_index, event in enumerate(section["events"]):
+            event_path = f"{path}.events[{event_index}]"
             if not isinstance(event, dict) or set(event) != {"newsId", "eventId", "title", "summary", "analysis", "watchFor"}:
-                return False
+                return f"{event_path}: unexpected fields or object type"
             event_id = event["eventId"]
             if not isinstance(event_id, str) or event_id in seen_events or event_id not in selected_ids:
-                return False
+                return f"{event_path}.eventId: unknown or repeated event ID"
             if not isinstance(event["newsId"], str) or event["newsId"] != selected_ids[event_id]:
-                return False
-            if not all(_valid_prose(event[key], key) for key in ("title", "summary", "analysis", "watchFor")):
-                return False
+                return f"{event_path}.newsId: does not match canonical event"
+            for key in ("title", "summary", "analysis", "watchFor"):
+                if error := prose_error(event[key], key, f"{event_path}.{key}"):
+                    return error
             seen_events.add(event_id)
-    return seen_events == set(selected_ids)
+    return "events: missing selected events" if seen_events != set(selected_ids) else ""
+
+
+def _valid_model(value: Any, selected: list[dict[str, Any]], edition: str) -> bool:
+    return not _model_error(value, selected, edition)
 
 
 def _prompt_items(selected: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -511,8 +534,9 @@ def build_daily_deepread(
         # Provider exceptions can contain endpoint credentials or private text.
         article["warnings"].append("文章生成服务暂不可用，本期保留基于已有摘要的事实编排。")
         return article
-    if not _valid_model(response, selected, edition):
-        article["warnings"].append("生成内容未通过结构或证据引用检查，本期保留基于已有摘要的事实编排。")
+    if error := _model_error(response, selected, edition):
+        logging.getLogger(__name__).warning("Daily deepread validation: %s", error)
+        article["warnings"].append("生成内容未通过结构或证据引用检查，本期保留基于已有摘要的事实编排。" + f" 校验位置：{error}")
         return article
 
     by_event = {item["eventId"]: item for item in selected}
