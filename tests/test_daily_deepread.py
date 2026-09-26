@@ -328,6 +328,29 @@ class DailyDeepreadTests(unittest.TestCase):
         self.assertEqual(len(calls), 2)
         self.assertEqual(article["generationStatus"], "fallback")
 
+    def test_malformed_json_can_recover_with_one_format_retry(self):
+        items = [self.item(n) for n in range(12)]
+        calls = []
+        def request(*args, **kwargs):
+            calls.append(kwargs)
+            if len(calls) == 1:
+                raise json.JSONDecodeError("private malformed content", "PRIVATE_SENTINEL", 0)
+            return self.model_response(items)
+        article = MODULE.build_daily_deepread(items, self.config, self.now, self.runtime, request)
+        self.assertEqual(article["generationStatus"], "ok")
+        self.assertEqual(len(calls), 2)
+        self.assertNotIn("PRIVATE_SENTINEL", json.dumps(calls))
+
+    def test_permanently_malformed_json_stops_after_two_attempts(self):
+        calls = []
+        def request(*args, **kwargs):
+            calls.append(kwargs)
+            raise ValueError("private parser details")
+        article = MODULE.build_daily_deepread([self.item(n) for n in range(12)], self.config, self.now, self.runtime, request)
+        self.assertEqual(article["generationStatus"], "fallback")
+        self.assertEqual(len(calls), 2)
+        self.assertNotIn("private parser details", json.dumps(article))
+
     def test_private_body_only_reaches_bounded_model_input_and_not_fallback(self):
         marker = "PRIVATE_BODY_SENTINEL"
         items = [self.item(n, evidenceText=marker + " 测试过程的已公开细节。" * 2000) for n in range(12)]
