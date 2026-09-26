@@ -1,6 +1,6 @@
 {
   "schemaVersion": 11,
-  "generatedAt": "2026-09-26T08:13:25Z",
+  "generatedAt": "2026-09-26T08:26:09Z",
   "editionDate": "2026-09-26",
   "timezone": "Asia/Shanghai",
   "method": "deepseek",
@@ -10,7 +10,7 @@
   "selectionProvider": "deepseek",
   "selectionModel": "deepseek-v4-flash",
   "selectionNotices": [
-    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 3 个 Top 10 入选位"
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 5 个 Top 10 入选位"
   ],
   "selectionWarnings": [],
   "selectionDiagnostics": {
@@ -26,24 +26,23 @@
     "aiUnscoredItemCount": 0,
     "unconstrainedTop": {
       "categoryCounts": {
-        "军事动态": 5,
-        "局部冲突": 1,
-        "无人系统": 2,
-        "航空航天": 2
+        "军事动态": 6,
+        "局部冲突": 2,
+        "无人系统": 2
       },
       "domainCounts": {
         "twz.com": 3,
-        "defensenews.com": 2,
+        "defensenews.com": 3,
         "defenseone.com": 2,
         "navalnews.com": 1,
-        "nasaspaceflight.com": 1,
-        "spaceflightnow.com": 1
+        "theguardian.com": 1
       },
       "categoryViolations": {
-        "军事动态": 5
+        "军事动态": 6
       },
       "domainViolations": {
-        "twz.com": 3
+        "twz.com": 3,
+        "defensenews.com": 3
       }
     },
     "finalTop": {
@@ -51,32 +50,36 @@
         "军事动态": 3,
         "局部冲突": 1,
         "无人系统": 1,
-        "航空航天": 2,
-        "AI": 2,
+        "航空航天": 3,
+        "AI": 1,
         "前沿技术": 1
       },
       "domainCounts": {
         "twz.com": 2,
         "defensenews.com": 2,
         "defenseone.com": 1,
-        "nasaspaceflight.com": 1,
         "spaceflightnow.com": 1,
+        "nasaspaceflight.com": 1,
+        "nasa.gov": 1,
         "bbc.co.uk": 1,
-        "theguardian.com": 1,
         "thequantuminsider.com": 1
       },
       "categoryViolations": {},
       "domainViolations": {}
     },
-    "adjustedItemCount": 3,
+    "adjustedItemCount": 5,
     "adjustedOutIds": [
       "5ae8f1cd4053b8",
+      "e70516b03e13ec",
       "59f6c5c426597c",
-      "7bc21b1054bde8"
+      "7bc21b1054bde8",
+      "66a9071dcd21cc"
     ],
     "adjustedInIds": [
+      "b1db57485f0699",
+      "4f4d81aa6a2244",
+      "1476769c157033",
       "d22a199399a36e",
-      "0d0ab2de577942",
       "ed95c5032f9b29"
     ],
     "relaxedItemCount": 0
@@ -87,34 +90,35 @@
   "translatedItemCount": 10,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 0,
-    "completedItemCount": 0,
+    "requestedItemCount": 1,
+    "completedItemCount": 1,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 5,
-    "initialBatchCount": 0,
-    "requestCount": 0,
-    "retryRequestCount": 0,
+    "initialBatchCount": 1,
+    "requestCount": 2,
+    "retryRequestCount": 1,
     "providerFailureCount": 0,
-    "structuralFailureCount": 0,
-    "completionReason": "not_needed",
-    "completionMessage": "没有需要翻译的新条目",
+    "structuralFailureCount": 2,
+    "completionReason": "complete_after_stream_recovery",
+    "completionMessage": "已复用同轮动态的中文摘要",
     "lastProviderError": "",
     "targetItemCount": 10,
-    "reusedItemCount": 10,
+    "reusedItemCount": 9,
     "newlyTranslatedItemCount": 0,
     "totalTranslatedItemCount": 10,
-    "totalMissingItemCount": 0
+    "totalMissingItemCount": 0,
+    "recoveredFromStreamItemCount": 1
   },
   "historyAnalysisStatus": "ok",
   "historyAnalysisProvider": "deepseek",
-  "historyLinkedItemCount": 3,
-  "historyAnalyzedItemCount": 3,
+  "historyLinkedItemCount": 4,
+  "historyAnalyzedItemCount": 4,
   "historyAnalysisWarnings": [],
   "historyAnalysisDiagnostics": {
-    "requestedItemCount": 3,
-    "completedItemCount": 3,
+    "requestedItemCount": 4,
+    "completedItemCount": 4,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
@@ -131,11 +135,11 @@
   "spotlightIds": [
     "5987ab962c666b",
     "fec1da8d9d0887",
-    "4f4d81aa6a2244"
+    "b1db57485f0699"
   ],
   "warnings": [],
-  "candidateCount": 139,
-  "freshCandidateCount": 139,
+  "candidateCount": 137,
+  "freshCandidateCount": 137,
   "supplementalCandidateCount": 0,
   "freshItemCount": 10,
   "supplementalItemCount": 0,
@@ -197,7 +201,7 @@
         "综合排序分 89/100（AI 65% + 规则 35%）",
         "规则参考分 91/100",
         "来源权重 15/20",
-        "发布约 11.6 小时",
+        "发布约 11.8 小时",
         "命中 13 个主题信号",
         "影响信号：first、launch、test"
       ],
@@ -249,16 +253,16 @@
             ]
           }
         ],
-        "timelineSummary": "2026年8月26日报道显示，“黑胡子”低成本高超声速导弹已在F/A-18“超级大黄蜂”上开始测试，目标为未来两年内形成至少有限作战能力。2026年9月25日报道称该导弹首次被看到由F/A-18挂载飞行，但具体时间、地点、型号参数及测试性质均未披露，且无官方声明或后续安排。两则报道构成由测试启动到公开现身飞行的时间演进。",
+        "timelineSummary": "据The War Zone报道，2026年8月归档记录显示“黑胡子”低成本高超音速导弹已在F/A-18“超级大黄蜂”上开始测试，当时称海军目标为未来两年内部署至少有限作战能力。2026年9月25日报道称该导弹首次被看到由“超级大黄蜂”挂载飞行，但未提供时间、地点、型号参数及测试性质，也无官方声明。可见从测试启动到公开现身处于同一演进脉络。",
         "outlook": [
           {
             "horizon": "短期",
-            "text": "后续可观察是否有官方声明或更多影像，确认此次挂载飞行属测试还是展示性质。",
+            "text": "后续可观察美国海军或项目方是否就此次挂载飞行发布官方说明，以及是否披露测试性质与阶段。",
             "confidence": "中"
           },
           {
             "horizon": "中期",
-            "text": "若“黑胡子”与舰载机整合持续推进，则需关注其是否进入实弹试验或部署节点安排。",
+            "text": "若后续出现更多挂载或发射测试报道，则需关注该导弹舰载适配进度与有限作战能力时间表是否调整。",
             "confidence": "低"
           }
         ],
@@ -418,6 +422,44 @@
           "lastReviewedAt": "2026-09-26"
         },
         {
+          "predictionId": "pred-486f368e113a",
+          "eventId": "evt-17e602e5dc18",
+          "statement": "后续可观察美国海军或项目方是否就此次挂载飞行发布官方说明，以及是否披露测试性质与阶段。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-26",
+          "dueAfter": "2026-10-26",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "5987ab962c666b"
+          ],
+          "lastReviewedAt": "2026-09-26"
+        },
+        {
+          "predictionId": "pred-fdb6b9e7d05c",
+          "eventId": "evt-17e602e5dc18",
+          "statement": "若后续出现更多挂载或发射测试报道，则需关注该导弹舰载适配进度与有限作战能力时间表是否调整。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-26",
+          "dueAfter": "2026-12-25",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "5987ab962c666b"
+          ],
+          "lastReviewedAt": "2026-09-26"
+        },
+        {
           "predictionId": "pred-35fc9bbc9720",
           "eventId": "evt-17e602e5dc18",
           "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
@@ -493,7 +535,7 @@
       "country": "国际",
       "publishedAt": "2026-09-25T19:49:34Z",
       "url": "https://www.defensenews.com/global/europe/2026/09/25/trump-administration-obligates-307m-for-military-aid-to-ukraine",
-      "score": 83,
+      "score": 84,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
@@ -509,11 +551,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 82/100",
-        "综合排序分 83/100（AI 65% + 规则 35%）",
+        "DeepSeek 候选重要度 84/100",
+        "综合排序分 84/100（AI 65% + 规则 35%）",
         "规则参考分 85/100",
         "来源权重 16/20",
-        "发布约 12.4 小时",
+        "发布约 12.6 小时",
         "命中 7 个主题信号",
         "影响信号：first、contract、ceasefire"
       ],
@@ -649,7 +691,7 @@
             "title": "特朗普政府拨出3.07亿美元对乌军事援助",
             "source": "Defense News",
             "publishedAt": "2026-09-25T19:49:34Z",
-            "score": 83
+            "score": 84
           }
         ],
         "independentSourceCount": 1,
@@ -683,7 +725,7 @@
       "country": "国际",
       "publishedAt": "2026-09-25T18:49:40Z",
       "url": "https://www.twz.com/news-features/latvia-to-order-andurils-barracuda-cruise-missile-for-long-range-strike-capability",
-      "score": 82,
+      "score": 84,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
@@ -699,11 +741,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 78/100",
-        "综合排序分 82/100（AI 65% + 规则 35%）",
+        "DeepSeek 候选重要度 80/100",
+        "综合排序分 84/100（AI 65% + 规则 35%）",
         "规则参考分 90/100",
         "来源权重 15/20",
-        "发布约 13.4 小时",
+        "发布约 13.6 小时",
         "命中 12 个主题信号",
         "影响信号：first、launch、strike"
       ],
@@ -771,16 +813,16 @@
             ]
           }
         ],
-        "timelineSummary": "2026年7月21日，Embraer与Anduril就“梭鱼”导弹签署谅解备忘录，探索其用于C-390，但无首次测试时间表。2026年9月25日报道称，北约成员国拉脱维亚正推进采购Anduril“梭鱼”系列远程打击导弹，总统林克维奇斯在访美期间强调这一努力，并涉及防务工业合作协议；采购数量、金额及交付时间尚未公布。两则报道显示“梭鱼”从平台整合探索向盟国采购意向延伸。",
+        "timelineSummary": "2026年7月归档记录显示，Embraer与Anduril就“梭鱼”导弹签署谅解备忘录，探讨在C-390上集成，当时无首测时间表。2026年9月25日报道称，北约成员国拉脱维亚正推进采购Anduril“梭鱼”系列远程打击导弹，总统林克维奇斯在访美期间强调该努力，并提及拉脱维亚参与的新防务工业合作；报道称邻国波兰构建分层远程打击体系，但拉脱维亚未公布数量、金额或交付时间。",
         "outlook": [
           {
             "horizon": "短期",
-            "text": "后续可观察拉脱维亚是否公布采购数量、金额、交付时间等具体安排或签署正式合同。",
+            "text": "后续可观察拉脱维亚官方或Anduril是否公布采购数量、金额、交付时间或合同签署信息。",
             "confidence": "中"
           },
           {
             "horizon": "中期",
-            "text": "若拉脱维亚推进采购，则需关注“梭鱼”与C-390之外其他平台及区域打击体系的整合动向。",
+            "text": "若拉脱维亚推进采购，则需关注“梭鱼”是否同步推进与C-390等平台的集成测试及欧洲用户扩展。",
             "confidence": "低"
           }
         ],
@@ -961,6 +1003,44 @@
             "6e1495bd4916ff"
           ],
           "lastReviewedAt": "2026-09-26"
+        },
+        {
+          "predictionId": "pred-3ef725ff35ac",
+          "eventId": "evt-80e2fd4bcb1e",
+          "statement": "后续可观察拉脱维亚官方或Anduril是否公布采购数量、金额、交付时间或合同签署信息。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-26",
+          "dueAfter": "2026-10-26",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "6e1495bd4916ff"
+          ],
+          "lastReviewedAt": "2026-09-26"
+        },
+        {
+          "predictionId": "pred-2bef8dca8159",
+          "eventId": "evt-80e2fd4bcb1e",
+          "statement": "若拉脱维亚推进采购，则需关注“梭鱼”是否同步推进与C-390等平台的集成测试及欧洲用户扩展。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-26",
+          "dueAfter": "2026-12-25",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "6e1495bd4916ff"
+          ],
+          "lastReviewedAt": "2026-09-26"
         }
       ],
       "eventDossier": {
@@ -977,197 +1057,7 @@
             "title": "拉脱维亚将订购Anduril“梭鱼”巡航导弹以获远程打击能力",
             "source": "The War Zone",
             "publishedAt": "2026-09-25T18:49:40Z",
-            "score": 82
-          }
-        ],
-        "independentSourceCount": 1,
-        "paperCount": 0
-      },
-      "relatedPapers": []
-    },
-    {
-      "id": "abab44c0352ec8",
-      "eventId": "evt-e1298620631a",
-      "contentType": "news",
-      "title": "波兰防务官员称美国决定在波兰设立基地",
-      "originalTitle": "Polish defense official says US has decided to establish a base in Poland",
-      "summary": "据Defense One报道，一名波兰防务领导人于周五表示，波兰将实现长期以来的目标，即容纳一个美国永久军事基地。他还表示，两国即将达成一项联合开发武器的协议。该消息未披露基地的具体地点、规模、驻军人数或协议签署的时间表。美国方面尚未就此作出公开确认。若最终落实，这将是波兰与美国防务关系的重要进展，但相关细节仍有待两国官方进一步公布。",
-      "summaryRevision": 4,
-      "summaryEvidence": {
-        "status": "body",
-        "candidateCount": 495,
-        "selectedCount": 1,
-        "reason": "selected-public-body"
-      },
-      "summaryInputHash": "862453f7da3b3e831d89fd1c",
-      "keyFacts": [
-        "Poland will fulfill a longtime goal of hosting a permanent U.S",
-        "military base",
-        "a Polish defense leader said Friday"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Defense One",
-      "country": "国际",
-      "publishedAt": "2026-09-26T02:03:57Z",
-      "url": "https://www.defenseone.com/policy/2026/09/poland-get-us-base-polish-defense-official-says/416257",
-      "score": 81,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 10,
-        "主题相关性": 12,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 80/100",
-        "综合排序分 81/100（AI 65% + 规则 35%）",
-        "规则参考分 83/100",
-        "来源权重 16/20",
-        "发布约 6.2 小时",
-        "命中 7 个主题信号",
-        "影响信号：first、missile"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "波兰",
-        "美国",
-        "军事基地"
-      ],
-      "image": "https://cdn.defenseone.com/media/img/cd/2026/09/25/9881423/thumb.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Defense One",
-          "domain": "defenseone.com",
-          "url": "https://www.defenseone.com/policy/2026/09/poland-get-us-base-polish-defense-official-says/416257",
-          "publishedAt": "2026-09-26T02:03:57Z",
-          "evidenceGroup": "outlet:defenseone.com"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "historyContext": {
-        "status": "no-match",
-        "lookbackDays": 365,
-        "relatedCount": 0,
-        "relatedStories": [],
-        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
-        "outlook": [
-          {
-            "horizon": "观察",
-            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-            "confidence": "低"
-          }
-        ],
-        "analysisProvider": "rules"
-      },
-      "eventIdentity": {
-        "version": 2,
-        "decision": "registry-match",
-        "reason": "immutable-article",
-        "semanticEligible": true,
-        "representativeId": "abab44c0352ec8",
-        "evidence": {
-          "newsIds": [
-            "abab44c0352ec8"
-          ],
-          "urls": [
-            "https://www.defenseone.com/policy/2026/09/poland-get-us-base-polish-defense-official-says/416257"
-          ],
-          "anchors": [
-            "base",
-            "decided",
-            "establish",
-            "poland",
-            "polish"
-          ],
-          "date": "2026-09-26"
-        }
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:defenseone.com"
-        ],
-        "claims": [
-          {
-            "text": "Poland will fulfill a longtime goal of hosting a permanent U.S",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:defenseone.com"
-            ]
-          },
-          {
-            "text": "military base",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:defenseone.com"
-            ]
-          },
-          {
-            "text": "a Polish defense leader said Friday",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:defenseone.com"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-bdf4acf49f0b",
-          "eventId": "evt-e1298620631a",
-          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-          "horizon": "观察",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-26",
-          "dueAfter": "2026-10-26",
-          "verificationSignals": [
-            "正式合同、预算或部署文件",
-            "后续演训、交付或作战序列变化"
-          ],
-          "evidenceIds": [
-            "abab44c0352ec8"
-          ],
-          "lastReviewedAt": "2026-09-26"
-        }
-      ],
-      "eventDossier": {
-        "eventId": "evt-e1298620631a",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-09-26",
-        "lastSeen": "2026-09-26",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-09-26",
-            "newsId": "abab44c0352ec8",
-            "title": "波兰防务官员称美国决定在波兰设立基地",
-            "source": "Defense One",
-            "publishedAt": "2026-09-26T02:03:57Z",
-            "score": 81
+            "score": 84
           }
         ],
         "independentSourceCount": 1,
@@ -1201,7 +1091,7 @@
       "country": "国际",
       "publishedAt": "2026-09-25T18:13:48Z",
       "url": "https://www.defensenews.com/industry/techwatch/2026/09/25/us-navy-stands-up-hub-to-prepare-unmanned-systems-for-combat",
-      "score": 79,
+      "score": 84,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
@@ -1217,11 +1107,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 76/100",
-        "综合排序分 79/100（AI 65% + 规则 35%）",
+        "DeepSeek 候选重要度 83/100",
+        "综合排序分 84/100（AI 65% + 规则 35%）",
         "规则参考分 85/100",
         "来源权重 16/20",
-        "发布约 14.0 小时",
+        "发布约 14.2 小时",
         "命中 4 个主题信号",
         "影响信号：first、deploy、test"
       ],
@@ -1359,7 +1249,7 @@
             "title": "美国海军设立无人系统作战准备中心",
             "source": "Defense News",
             "publishedAt": "2026-09-25T18:13:48Z",
-            "score": 79
+            "score": 84
           }
         ],
         "independentSourceCount": 1,
@@ -1368,38 +1258,40 @@
       "relatedPapers": []
     },
     {
-      "id": "4f4d81aa6a2244",
-      "eventId": "evt-60138fd32724",
+      "id": "abab44c0352ec8",
+      "eventId": "evt-e1298620631a",
       "contentType": "news",
-      "title": "第14次试飞等待批准，近期清单勾勒“星舰”后续步骤",
-      "originalTitle": "Flight 14 waits on approval as a near-term manifest sketches Starship’s next steps",
-      "summary": "据NASASpaceflight报道，“星舰”第14次试飞正在等待批准，同时一份近期飞行清单勾勒出该项目的后续步骤。报道未提供等待批准的具体机构、预计时间、此次试飞的目标或清单中的详细内容。目前尚无更多关于试飞配置、载荷或时间窗口的信息。该报道反映了“星舰”项目在持续推进试飞节奏，后续安排有待官方进一步公布。",
+      "title": "波兰防务官员称美国决定在波兰设立基地",
+      "originalTitle": "Polish defense official says US has decided to establish a base in Poland",
+      "summary": "据Defense One报道，一名波兰防务领导人于周五表示，波兰将实现长期以来的目标，即容纳一个美国永久军事基地。他还表示，两国即将达成一项联合开发武器的协议。该消息未披露基地的具体地点、规模、驻军人数或协议签署的时间表。美国方面尚未就此作出公开确认。若最终落实，这将是波兰与美国防务关系的重要进展，但相关细节仍有待两国官方进一步公布。",
       "summaryRevision": 4,
       "summaryEvidence": {
         "status": "body",
-        "candidateCount": 31,
+        "candidateCount": 495,
         "selectedCount": 1,
         "reason": "selected-public-body"
       },
-      "summaryInputHash": "a772013d66d6fc85f48eb2fa",
+      "summaryInputHash": "862453f7da3b3e831d89fd1c",
       "keyFacts": [
-        "Flight 14 waits on approval as a near-term"
+        "Poland will fulfill a longtime goal of hosting a permanent U.S",
+        "military base",
+        "a Polish defense leader said Friday"
       ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "NASASpaceflight",
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Defense One",
       "country": "国际",
-      "publishedAt": "2026-09-26T04:01:59Z",
-      "url": "https://www.nasaspaceflight.com/2026/09/flight-14-starships-forward-path",
-      "score": 78,
+      "publishedAt": "2026-09-26T02:03:57Z",
+      "url": "https://www.defenseone.com/policy/2026/09/poland-get-us-base-polish-defense-official-says/416257",
+      "score": 82,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 17,
-        "主题优先级": 9,
-        "时效": 18,
-        "影响信号": 13,
-        "主题相关性": 4,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 10,
+        "主题相关性": 12,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -1407,30 +1299,30 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 77/100",
-        "综合排序分 78/100（AI 65% + 规则 35%）",
-        "规则参考分 79/100",
-        "来源权重 17/20",
-        "发布约 4.2 小时",
-        "命中 2 个主题信号",
-        "影响信号：first、launch、test"
+        "DeepSeek 候选重要度 82/100",
+        "综合排序分 82/100（AI 65% + 规则 35%）",
+        "规则参考分 83/100",
+        "来源权重 16/20",
+        "发布约 6.4 小时",
+        "命中 7 个主题信号",
+        "影响信号：first、missile"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "星舰",
-        "试飞",
-        "SpaceX"
+        "波兰",
+        "美国",
+        "军事基地"
       ],
-      "image": "https://www.nasaspaceflight.com/wp-content/uploads/2026/09/NSF-2026-09-26-04-55-29-205.jpg",
+      "image": "https://cdn.defenseone.com/media/img/cd/2026/09/25/9881423/thumb.jpg",
       "corroboration": 1,
       "sources": [
         {
-          "name": "NASASpaceflight",
-          "domain": "nasaspaceflight.com",
-          "url": "https://www.nasaspaceflight.com/2026/09/flight-14-starships-forward-path",
-          "publishedAt": "2026-09-26T04:01:59Z",
-          "evidenceGroup": "outlet:nasaspaceflight.com"
+          "name": "Defense One",
+          "domain": "defenseone.com",
+          "url": "https://www.defenseone.com/policy/2026/09/poland-get-us-base-polish-defense-official-says/416257",
+          "publishedAt": "2026-09-26T02:03:57Z",
+          "evidenceGroup": "outlet:defenseone.com"
         }
       ],
       "selectionProvider": "deepseek",
@@ -1459,23 +1351,20 @@
         "decision": "registry-match",
         "reason": "immutable-article",
         "semanticEligible": true,
-        "representativeId": "4f4d81aa6a2244",
+        "representativeId": "abab44c0352ec8",
         "evidence": {
           "newsIds": [
-            "4f4d81aa6a2244"
+            "abab44c0352ec8"
           ],
           "urls": [
-            "https://www.nasaspaceflight.com/2026/09/flight-14-starships-forward-path"
+            "https://www.defenseone.com/policy/2026/09/poland-get-us-base-polish-defense-official-says/416257"
           ],
           "anchors": [
-            "approval",
-            "manifest",
-            "near-term",
-            "next",
-            "sketches",
-            "starship",
-            "steps",
-            "waits"
+            "base",
+            "decided",
+            "establish",
+            "poland",
+            "polish"
           ],
           "date": "2026-09-26"
         }
@@ -1484,15 +1373,31 @@
         "overallStatus": "single-source",
         "independentSourceCount": 1,
         "sourceGroups": [
-          "outlet:nasaspaceflight.com"
+          "outlet:defenseone.com"
         ],
         "claims": [
           {
-            "text": "Flight 14 waits on approval as a near-term",
+            "text": "Poland will fulfill a longtime goal of hosting a permanent U.S",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
-              "outlet:nasaspaceflight.com"
+              "outlet:defenseone.com"
+            ]
+          },
+          {
+            "text": "military base",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defenseone.com"
+            ]
+          },
+          {
+            "text": "a Polish defense leader said Friday",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defenseone.com"
             ]
           }
         ],
@@ -1501,8 +1406,8 @@
       },
       "forecastLedger": [
         {
-          "predictionId": "pred-7bf33f19f2b7",
-          "eventId": "evt-60138fd32724",
+          "predictionId": "pred-bdf4acf49f0b",
+          "eventId": "evt-e1298620631a",
           "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
           "horizon": "观察",
           "confidence": "低",
@@ -1511,17 +1416,17 @@
           "createdAt": "2026-09-26",
           "dueAfter": "2026-10-26",
           "verificationSignals": [
-            "正式任务时间表或许可",
-            "后续试验、发射或在轨结果"
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
           ],
           "evidenceIds": [
-            "4f4d81aa6a2244"
+            "abab44c0352ec8"
           ],
           "lastReviewedAt": "2026-09-26"
         }
       ],
       "eventDossier": {
-        "eventId": "evt-60138fd32724",
+        "eventId": "evt-e1298620631a",
         "status": "new",
         "statusLabel": "新事件",
         "firstSeen": "2026-09-26",
@@ -1530,11 +1435,11 @@
         "timeline": [
           {
             "editionDate": "2026-09-26",
-            "newsId": "4f4d81aa6a2244",
-            "title": "第14次试飞等待批准，近期清单勾勒“星舰”后续步骤",
-            "source": "NASASpaceflight",
-            "publishedAt": "2026-09-26T04:01:59Z",
-            "score": 78
+            "newsId": "abab44c0352ec8",
+            "title": "波兰防务官员称美国决定在波兰设立基地",
+            "source": "Defense One",
+            "publishedAt": "2026-09-26T02:03:57Z",
+            "score": 82
           }
         ],
         "independentSourceCount": 1,
@@ -1568,7 +1473,7 @@
       "country": "国际",
       "publishedAt": "2026-09-25T20:26:14Z",
       "url": "https://spaceflightnow.com/2026/09/25/spacex-falcon-9-to-launch-classified-mission-for-u-s-space-force-from-west-coast",
-      "score": 78,
+      "score": 79,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
@@ -1584,11 +1489,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 74/100",
-        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "DeepSeek 候选重要度 76/100",
+        "综合排序分 79/100（AI 65% + 规则 35%）",
         "规则参考分 84/100",
         "来源权重 16/20",
-        "发布约 11.8 小时",
+        "发布约 12.0 小时",
         "命中 6 个主题信号",
         "影响信号：first、launch、deploy"
       ],
@@ -1723,7 +1628,448 @@
             "title": "SpaceX猎鹰9号将从西海岸为美太空军发射机密任务",
             "source": "Spaceflight Now",
             "publishedAt": "2026-09-25T20:26:14Z",
-            "score": 78
+            "score": 79
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "4f4d81aa6a2244",
+      "eventId": "evt-60138fd32724",
+      "contentType": "news",
+      "title": "第14次试飞等待批准，近期清单勾勒“星舰”后续步骤",
+      "originalTitle": "Flight 14 waits on approval as a near-term manifest sketches Starship’s next steps",
+      "summary": "据NASASpaceflight报道，“星舰”第14次试飞正在等待批准，同时一份近期飞行清单勾勒出该项目的后续步骤。报道未提供等待批准的具体机构、预计时间、此次试飞的目标或清单中的详细内容。目前尚无更多关于试飞配置、载荷或时间窗口的信息。该报道反映了“星舰”项目在持续推进试飞节奏，后续安排有待官方进一步公布。",
+      "summaryRevision": 4,
+      "summaryEvidence": {
+        "status": "body",
+        "candidateCount": 31,
+        "selectedCount": 1,
+        "reason": "selected-public-body"
+      },
+      "summaryInputHash": "a772013d66d6fc85f48eb2fa",
+      "keyFacts": [
+        "Flight 14 waits on approval as a near-term"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASASpaceflight",
+      "country": "国际",
+      "publishedAt": "2026-09-26T04:01:59Z",
+      "url": "https://www.nasaspaceflight.com/2026/09/flight-14-starships-forward-path",
+      "score": 76,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 9,
+        "时效": 18,
+        "影响信号": 13,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 74/100",
+        "综合排序分 76/100（AI 65% + 规则 35%）",
+        "规则参考分 79/100",
+        "来源权重 17/20",
+        "发布约 4.4 小时",
+        "命中 2 个主题信号",
+        "影响信号：first、launch、test"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "星舰",
+        "试飞",
+        "SpaceX"
+      ],
+      "image": "https://www.nasaspaceflight.com/wp-content/uploads/2026/09/NSF-2026-09-26-04-55-29-205.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "NASASpaceflight",
+          "domain": "nasaspaceflight.com",
+          "url": "https://www.nasaspaceflight.com/2026/09/flight-14-starships-forward-path",
+          "publishedAt": "2026-09-26T04:01:59Z",
+          "evidenceGroup": "outlet:nasaspaceflight.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "4f4d81aa6a2244",
+        "evidence": {
+          "newsIds": [
+            "4f4d81aa6a2244"
+          ],
+          "urls": [
+            "https://www.nasaspaceflight.com/2026/09/flight-14-starships-forward-path"
+          ],
+          "anchors": [
+            "approval",
+            "manifest",
+            "near-term",
+            "next",
+            "sketches",
+            "starship",
+            "steps",
+            "waits"
+          ],
+          "date": "2026-09-26"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:nasaspaceflight.com"
+        ],
+        "claims": [
+          {
+            "text": "Flight 14 waits on approval as a near-term",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasaspaceflight.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-7bf33f19f2b7",
+          "eventId": "evt-60138fd32724",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-26",
+          "dueAfter": "2026-10-26",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "4f4d81aa6a2244"
+          ],
+          "lastReviewedAt": "2026-09-26"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-60138fd32724",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-26",
+        "lastSeen": "2026-09-26",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-26",
+            "newsId": "4f4d81aa6a2244",
+            "title": "第14次试飞等待批准，近期清单勾勒“星舰”后续步骤",
+            "source": "NASASpaceflight",
+            "publishedAt": "2026-09-26T04:01:59Z",
+            "score": 76
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "1476769c157033",
+      "eventId": "evt-54ae7cf50f9d",
+      "contentType": "news",
+      "title": "NASA与波音将通报Starliner研发进展",
+      "originalTitle": "NASA, Boeing to Provide Update on Starliner Development",
+      "summary": "NASA与波音领导层将讨论Starliner的研发情况以及往返国际空间站的常规载人飞行计划。NASA发布的图片显示，波音Starliner飞船停靠在和谐号舱段前向端口，该飞船此前将NASA载人飞行测试宇航员布奇·威尔莫尔和苏尼·威廉姆斯送入国际空间站。通报会参与者包括NASA局长贾里德·艾萨克曼、NASA近地轨道项目经理达娜·韦格尔、NASA宇航员伍迪·霍伯格，以及波音商业载人项目副总裁兼项目经理约翰·马尔霍兰。已获得Crew-13报道资格的媒体可在佛罗里达州NASA肯尼迪航天中心现场参与。",
+      "summaryRevision": 4,
+      "summaryEvidence": {
+        "status": "feed",
+        "candidateCount": 8,
+        "selectedCount": 3,
+        "reason": "selected-feed"
+      },
+      "summaryInputHash": "95ec7a90726152a02fbe9ec5",
+      "keyFacts": [
+        "Boeing’s Starliner spacecraft that launched NASA’s Crew Flight Test astronauts Butch Wilmore",
+        "Suni Williams to the International Space Station is pictured docked to the Harmony module’s forward port",
+        "Boeing leadership will discuss Starliner’s development"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
+      "country": "国际",
+      "publishedAt": "2026-09-25T22:06:50Z",
+      "url": "https://www.nasa.gov/news-release/nasa-boeing-to-provide-update-on-starliner-development",
+      "score": 74,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 15,
+        "影响信号": 4,
+        "主题相关性": 8,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 74/100",
+        "综合排序分 74/100（AI 65% + 规则 35%）",
+        "规则参考分 74/100",
+        "来源权重 20/20",
+        "发布约 10.3 小时",
+        "命中 4 个主题信号",
+        "影响信号：test"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "Starliner",
+        "NASA",
+        "波音"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "NASA",
+          "domain": "nasa.gov",
+          "url": "https://www.nasa.gov/news-release/nasa-boeing-to-provide-update-on-starliner-development",
+          "publishedAt": "2026-09-25T22:06:50Z",
+          "evidenceGroup": "outlet:nasa.gov"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 2,
+        "relatedStories": [
+          {
+            "id": "2503817ed15a81",
+            "eventId": "evt-3f335c180b7d",
+            "editionDate": "2026-08-08",
+            "title": "NASA月球开发与测试设施为阿尔忒弥斯硬件登月做准备",
+            "originalTitle": "NASA’s Lunar Development and Test Facility Prepares Artemis Hardware for Moon",
+            "summary": "在宇航员通过NASA的阿尔忒弥斯计划重返月球表面之前，他们依赖的硬件必须首先证明能够承受严酷的月球环境。位于休斯顿的NASA约翰逊航天中心，工程师们在月球开发与测试设施中正应对探索中最大的挑战之一：月球尘埃。与地球上的沙子不同，月球尘埃尖锐、有磨蚀性且附着性强。",
+            "category": "航空航天",
+            "source": "NASA",
+            "publishedAt": "2026-08-07T06:25:27Z",
+            "associationScore": 31,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：development、nasa",
+              "同属航空航天"
+            ]
+          },
+          {
+            "id": "06c088e311a632",
+            "eventId": "evt-ab55e8caff0b",
+            "editionDate": "2026-08-18",
+            "title": "NASA选择公司提供有效载荷处理服务",
+            "originalTitle": "NASA Selects Companies to Provide Payload Processing Services",
+            "summary": "NASA根据航天器处理运营合同的上车条款，选择了四家公司提供有效载荷处理设施。该条款允许合格的提供商为从多个地点发射的机构任务提供商业有效载荷处理服务，这些地点在初始合同授予时不具备能力。",
+            "category": "航空航天",
+            "source": "NASA",
+            "publishedAt": "2026-08-17T20:17:20Z",
+            "associationScore": 30,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：nasa、provide",
+              "同属航空航天"
+            ]
+          }
+        ],
+        "timelineSummary": "2026年8月归档记录涉及NASA月球开发与测试设施为阿尔忒弥斯硬件做准备，以及NASA选择公司提供有效载荷处理服务，均属NASA项目推进。2026年9月25日NASA发布消息称，NASA与波音领导层将讨论Starliner研发及往返国际空间站定期载人飞行计划，并配以Starliner对接和谐号舱段前端口图片。当前事件聚焦Starliner研发更新，与归档的NASA项目主题相关但对象不同。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "后续可观察NASA与波音更新会是否公布Starliner后续载人飞行时间表、技术问题处置或认证进展。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "若Starliner研发更新提及进度调整，则需关注其对国际空间站商业载人轮换安排及NASA多供应商策略的影响。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "deepseek"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "1476769c157033",
+        "evidence": {
+          "newsIds": [
+            "1476769c157033"
+          ],
+          "urls": [
+            "https://www.nasa.gov/news-release/nasa-boeing-to-provide-update-on-starliner-development"
+          ],
+          "anchors": [
+            "boeing",
+            "provide",
+            "starliner"
+          ],
+          "date": "2026-09-25"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:nasa.gov"
+        ],
+        "claims": [
+          {
+            "text": "Boeing’s Starliner spacecraft that launched NASA’s Crew Flight Test astronauts Butch Wilmore",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          },
+          {
+            "text": "Suni Williams to the International Space Station is pictured docked to the Harmony module’s forward port",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          },
+          {
+            "text": "Boeing leadership will discuss Starliner’s development",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasa.gov"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-e68740acd59e",
+          "eventId": "evt-54ae7cf50f9d",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-26",
+          "dueAfter": "2026-10-26",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "1476769c157033"
+          ],
+          "lastReviewedAt": "2026-09-26"
+        },
+        {
+          "predictionId": "pred-f9887af2c8e9",
+          "eventId": "evt-54ae7cf50f9d",
+          "statement": "后续可观察NASA与波音更新会是否公布Starliner后续载人飞行时间表、技术问题处置或认证进展。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-26",
+          "dueAfter": "2026-10-26",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "1476769c157033"
+          ],
+          "lastReviewedAt": "2026-09-26"
+        },
+        {
+          "predictionId": "pred-59868d65a188",
+          "eventId": "evt-54ae7cf50f9d",
+          "statement": "若Starliner研发更新提及进度调整，则需关注其对国际空间站商业载人轮换安排及NASA多供应商策略的影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-26",
+          "dueAfter": "2026-12-25",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "1476769c157033"
+          ],
+          "lastReviewedAt": "2026-09-26"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-54ae7cf50f9d",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-26",
+        "lastSeen": "2026-09-26",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-26",
+            "newsId": "1476769c157033",
+            "title": "NASA与波音将通报Starliner研发进展",
+            "source": "NASA",
+            "publishedAt": "2026-09-25T22:06:50Z",
+            "score": 74
           }
         ],
         "independentSourceCount": 1,
@@ -1775,7 +2121,7 @@
         "综合排序分 71/100（AI 65% + 规则 35%）",
         "规则参考分 68/100",
         "来源权重 17/20",
-        "发布约 5.4 小时",
+        "发布约 5.6 小时",
         "命中 1 个主题信号",
         "影响信号：test"
       ],
@@ -1905,214 +2251,6 @@
       "relatedPapers": []
     },
     {
-      "id": "0d0ab2de577942",
-      "eventId": "evt-b1db70146538",
-      "contentType": "news",
-      "title": "教皇利奥访法首日警告AI对人类构成威胁",
-      "originalTitle": "Pope Leo warns of AI threat to humanity at start of three-day France visit",
-      "summary": "教皇利奥在为期三天的法国访问开始时警告，人类不应在“机器天堂”中失去人性，并就人工智能的危险回应全球关切。这是18年来首次正式教皇访法。访问正值马克龙十年总统任期接近尾声，法国将于明年春季举行总统选举，极右翼反移民人士玛丽娜·勒庞民调走高。方济各在12年教皇任期内未对法国进行完整国事访问，并拒绝参加2024年巴黎圣母院重建落成典礼。",
-      "summaryRevision": 4,
-      "summaryEvidence": {
-        "status": "body",
-        "candidateCount": 35,
-        "selectedCount": 2,
-        "reason": "selected-public-body"
-      },
-      "summaryInputHash": "992be5caaeebf231fb77f822",
-      "keyFacts": [
-        "Pope Leo has warned against losing humanity in a “paradise of machines” as he addressed global concerns over the dangers of artificial inte…",
-        "The first official papal visit to France in 18 years comes as Emmanuel Macron’s decade in office draws to an end ahead of next spring’s Fre…",
-        "for which the far-right"
-      ],
-      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
-      "category": "AI",
-      "source": "The Guardian World",
-      "country": "国际",
-      "publishedAt": "2026-09-25T16:01:10Z",
-      "url": "https://www.theguardian.com/world/2026/sep/25/pope-leo-ai-threat-to-humanity-three-day-france-visit",
-      "score": 71,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 12,
-        "影响信号": 5,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 4,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 72/100",
-        "综合排序分 71/100（AI 65% + 规则 35%）",
-        "规则参考分 68/100",
-        "来源权重 17/20",
-        "发布约 16.2 小时",
-        "命中 1 个主题信号",
-        "影响信号：first",
-        "2 个独立来源相互印证"
-      ],
-      "confidence": "高",
-      "confidenceReason": "主来源权重 17/20，且有 2 个独立来源报道；仍应以原文和一手材料为准。",
-      "tags": [
-        "教皇利奥",
-        "人工智能",
-        "法国访问"
-      ],
-      "image": "https://i.guim.co.uk/img/media/bda0afa989fbdccf5e1501fceef9d84965bd6fff/16_0_1379_1103/master/1379.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=645a754fd1cb7d30199868e08b63212c",
-      "corroboration": 2,
-      "sources": [
-        {
-          "name": "The Guardian World",
-          "domain": "theguardian.com",
-          "url": "https://www.theguardian.com/world/2026/sep/25/pope-leo-ai-threat-to-humanity-three-day-france-visit",
-          "publishedAt": "2026-09-25T16:01:10Z",
-          "evidenceGroup": "outlet:theguardian.com"
-        },
-        {
-          "name": "BBC World",
-          "domain": "bbc.co.uk",
-          "url": "https://www.bbc.co.uk/news/articles/cmq8j904212po?at_medium=RSS&at_campaign=rss",
-          "publishedAt": "2026-09-25T15:06:41Z",
-          "evidenceGroup": "outlet:bbc.co.uk"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "historyContext": {
-        "status": "no-match",
-        "lookbackDays": 365,
-        "relatedCount": 0,
-        "relatedStories": [],
-        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
-        "outlook": [
-          {
-            "horizon": "观察",
-            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-            "confidence": "低"
-          }
-        ],
-        "analysisProvider": "rules"
-      },
-      "eventIdentity": {
-        "version": 2,
-        "decision": "registry-match",
-        "reason": "immutable-article",
-        "semanticEligible": true,
-        "representativeId": "0d0ab2de577942",
-        "evidence": {
-          "newsIds": [
-            "0d0ab2de577942"
-          ],
-          "urls": [
-            "https://www.bbc.co.uk/news/articles/cmq8j904212po?at_campaign=rss&at_medium=RSS",
-            "https://www.theguardian.com/world/2026/sep/25/pope-leo-ai-threat-to-humanity-three-day-france-visit"
-          ],
-          "anchors": [
-            "ai",
-            "france",
-            "humanity",
-            "leo",
-            "pope",
-            "start",
-            "threat",
-            "three-day",
-            "visit",
-            "warns"
-          ],
-          "date": "2026-09-25"
-        }
-      },
-      "evidenceMatrix": {
-        "overallStatus": "multi-source",
-        "independentSourceCount": 2,
-        "sourceGroups": [
-          "outlet:theguardian.com",
-          "outlet:bbc.co.uk"
-        ],
-        "claims": [
-          {
-            "text": "Pope Leo has warned against losing humanity in a “paradise of machines” as he addressed global concerns over the dangers of artificial inte…",
-            "status": "multi-source-context",
-            "statusLabel": "事件获多源报道，单项事实仍需核验",
-            "sourceGroups": [
-              "outlet:theguardian.com",
-              "outlet:bbc.co.uk"
-            ]
-          },
-          {
-            "text": "The first official papal visit to France in 18 years comes as Emmanuel Macron’s decade in office draws to an end ahead of next spring’s Fre…",
-            "status": "multi-source-context",
-            "statusLabel": "事件获多源报道，单项事实仍需核验",
-            "sourceGroups": [
-              "outlet:theguardian.com",
-              "outlet:bbc.co.uk"
-            ]
-          },
-          {
-            "text": "for which the far-right",
-            "status": "multi-source-context",
-            "statusLabel": "事件获多源报道，单项事实仍需核验",
-            "sourceGroups": [
-              "outlet:theguardian.com",
-              "outlet:bbc.co.uk"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-f752a26e6ded",
-          "eventId": "evt-b1db70146538",
-          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-          "horizon": "观察",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-09-26",
-          "dueAfter": "2026-10-26",
-          "verificationSignals": [
-            "正式模型卡或评测结果",
-            "监管、部署或算力计划变化"
-          ],
-          "evidenceIds": [
-            "0d0ab2de577942"
-          ],
-          "lastReviewedAt": "2026-09-26"
-        }
-      ],
-      "eventDossier": {
-        "eventId": "evt-b1db70146538",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-09-26",
-        "lastSeen": "2026-09-26",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-09-26",
-            "newsId": "0d0ab2de577942",
-            "title": "教皇利奥访法首日警告AI对人类构成威胁",
-            "source": "The Guardian World",
-            "publishedAt": "2026-09-25T16:01:10Z",
-            "score": 71
-          }
-        ],
-        "independentSourceCount": 2,
-        "paperCount": 0
-      },
-      "relatedPapers": []
-    },
-    {
       "id": "ed95c5032f9b29",
       "eventId": "evt-8235d06d2094",
       "contentType": "news",
@@ -2138,7 +2276,7 @@
       "country": "国际",
       "publishedAt": "2026-09-25T08:35:42Z",
       "url": "https://thequantuminsider.com/2026/09/25/digicert-quantum-central-pqc-plans-action",
-      "score": 68,
+      "score": 70,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
@@ -2154,11 +2292,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 65/100",
-        "综合排序分 68/100（AI 65% + 规则 35%）",
+        "DeepSeek 候选重要度 68/100",
+        "综合排序分 70/100（AI 65% + 规则 35%）",
         "规则参考分 73/100",
         "来源权重 15/20",
-        "发布约 23.6 小时",
+        "发布约 23.8 小时",
         "命中 1 个主题信号",
         "影响信号：first、launch、deploy"
       ],
@@ -2210,16 +2348,16 @@
             ]
           }
         ],
-        "timelineSummary": "2026年8月13日有文章将后量子密码学描述为可管理的演进而非危机。2026年9月25日，DigiCert宣布Quantum Central正式可用，该平台用于管理和跟踪企业PQC就绪情况，整合密码学数据、支持修复工作流并提供就绪度仪表板；据其报告，87%组织在规划、测试或实施PQC，仅7%已部署量子安全或混合密码学。事件由理念讨论演进为工具落地。",
+        "timelineSummary": "2026年8月归档记录讨论为后量子密码学构建实用路径，将PQC视为可管理的演进。2026年9月25日DigiCert宣布Quantum Central正式可用，用于管理跟踪企业PQC就绪情况，整合密码数据、应用策略、支持修复工作流并提供仪表板。据其《2026年量子就绪展望》，87%组织在规划、测试或实施PQC，仅7%已部署量子安全或混合密码学。可见从路径讨论演进至就绪管理工具落地。",
         "outlook": [
           {
             "horizon": "短期",
-            "text": "后续可观察DigiCert是否披露Quantum Central的采用规模或客户部署案例。",
+            "text": "后续可观察DigiCert是否公布Quantum Central的采用数据、客户案例或与监管审计要求对接的进展。",
             "confidence": "中"
           },
           {
             "horizon": "中期",
-            "text": "若企业PQC部署率仍低，则需关注平台类工具能否推动从规划测试向实际部署转化。",
+            "text": "若更多企业部署PQC管理平台，则需关注量子安全或混合密码学部署比例是否从低基数上升。",
             "confidence": "低"
           }
         ],
@@ -2361,6 +2499,44 @@
             "ed95c5032f9b29"
           ],
           "lastReviewedAt": "2026-09-26"
+        },
+        {
+          "predictionId": "pred-f48ab2850a8e",
+          "eventId": "evt-8235d06d2094",
+          "statement": "后续可观察DigiCert是否公布Quantum Central的采用数据、客户案例或与监管审计要求对接的进展。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-26",
+          "dueAfter": "2026-10-26",
+          "verificationSignals": [
+            "可复现实验或第三方验证",
+            "工程化、量产或监管节点"
+          ],
+          "evidenceIds": [
+            "ed95c5032f9b29"
+          ],
+          "lastReviewedAt": "2026-09-26"
+        },
+        {
+          "predictionId": "pred-7db7a4d6bc17",
+          "eventId": "evt-8235d06d2094",
+          "statement": "若更多企业部署PQC管理平台，则需关注量子安全或混合密码学部署比例是否从低基数上升。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-26",
+          "dueAfter": "2026-12-25",
+          "verificationSignals": [
+            "可复现实验或第三方验证",
+            "工程化、量产或监管节点"
+          ],
+          "evidenceIds": [
+            "ed95c5032f9b29"
+          ],
+          "lastReviewedAt": "2026-09-26"
         }
       ],
       "eventDossier": {
@@ -2377,7 +2553,7 @@
             "title": "DigiCert推出Quantum Central助力后量子密码就绪",
             "source": "The Quantum Insider",
             "publishedAt": "2026-09-25T08:35:42Z",
-            "score": 68
+            "score": 70
           }
         ],
         "independentSourceCount": 1,
@@ -2386,12 +2562,12 @@
       "relatedPapers": []
     }
   ],
-  "qualifiedCandidateCount": 144,
+  "qualifiedCandidateCount": 141,
   "paperLinkedItemCount": 0,
   "eventCount": 10,
   "weeklyDigest": {
     "schemaVersion": 1,
-    "generatedAt": "2026-09-26T08:13:25Z",
+    "generatedAt": "2026-09-26T08:26:09Z",
     "timezone": "Asia/Shanghai",
     "weekId": "2026-W39",
     "fromDate": "2026-09-21",
@@ -2508,7 +2684,7 @@
   },
   "anomalySignals": {
     "schemaVersion": 1,
-    "generatedAt": "2026-09-26T08:13:25Z",
+    "generatedAt": "2026-09-26T08:26:09Z",
     "timezone": "Asia/Shanghai",
     "status": "alert",
     "baselineDays": 30,
