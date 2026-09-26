@@ -63,6 +63,7 @@ _ACTIONS = {
     "test": r"\btest(?:s|ed|ing)?\b|\bdemonstrat(?:e|es|ed|ion)\b|测试|试验",
     "investigate": r"\binvestigat(?:e|es|ed|ing|ion)\b|\binquir(?:y|ies)\b|调查",
     "land": r"\bland(?:s|ed|ing)?\b|着陆|降落",
+    "establish": r"\bestablish(?:es|ed|ing)?\b|\bstands? up\b|\bstood up\b|\bsets? up\b|设立|成立",
 }
 _ACTORS = {
     "russia", "ukraine", "israel", "iran", "hamas", "hezbollah", "houthi",
@@ -236,6 +237,7 @@ class _Evidence:
     actors: frozenset[str]
     places: frozenset[str]
     objects: frozenset[str]
+    acronyms: frozenset[str]
     identifiers: dict[str, frozenset[str]]
     anchors: frozenset[str]
     incident_dates: frozenset[str]
@@ -255,9 +257,16 @@ def _headline_evidence(original: str, day: date | None) -> _Evidence:
         actions -= {"launch"}
     words = set(re.findall(r"[a-z][a-z0-9-]*", headline))
     anchors = words - _STOP - _ACTION_WORDS
-    subject, target = _roles(original, actions)
+    # U.S. Navy and US Navy must have the same explicit subject role.
+    role_headline = re.sub(r"\bU\.S\.(?:A\.)?", "US", original, flags=re.I)
+    subject, target = _roles(role_headline, actions)
     explicit_places = frozenset(_normal(match.group(1)) for match in _PLACE_PATTERN.finditer(original))
     status_match = _STATUS.search(headline)
+    if (status_match and status_match.group().startswith("prepar")
+            and re.search(r"\bto\s+$", headline[:status_match.start()])):
+        # "stands up a hub to prepare systems" is an established center,
+        # unlike "prepares to establish a center".
+        status_match = None
     status = ""
     if status_match:
         word = status_match.group()
@@ -265,15 +274,20 @@ def _headline_evidence(original: str, day: date | None) -> _Evidence:
     return _Evidence(
         "", frozenset(), headline, day,
         actions, _names(headline, _ACTORS), _names(headline, _PLACES) | explicit_places,
-        _names(headline, _OBJECTS), _identifiers(headline, original), frozenset(anchors),
+        _names(headline, _OBJECTS), frozenset(), _identifiers(headline, original), frozenset(anchors),
         _incident_dates(headline, day), bool(_FOLLOWUP.search(headline)),
         bool(_RECURRENCE.search(headline)), subject, target, status,
     )
 
 
 def _evidence(item: dict[str, Any]) -> _Evidence:
-    parsed = _headline_evidence(_text(item.get("originalTitle") or item.get("title")), _day(item))
-    return replace(parsed, news_id=_text(item.get("id"), 200), urls=frozenset(evidence_urls(item)))
+    original = _text(item.get("originalTitle") or item.get("title"))
+    parsed = _headline_evidence(original, _day(item))
+    # Long named acronyms are discriminating objects when both publishers
+    # explicitly name the same organization and founding action. A generic
+    # common word or model-written summary alone never suffices to merge.
+    acronyms = frozenset(re.findall(r"\b[A-Z][A-Z0-9]{4,11}\b", original + " " + _text(item.get("summary"), 600)))
+    return replace(parsed, news_id=_text(item.get("id"), 200), urls=frozenset(evidence_urls(item)), acronyms=acronyms)
 
 
 def _match(first: _Evidence, second: _Evidence, semantic: bool = True) -> str:
@@ -293,6 +307,8 @@ def _match(first: _Evidence, second: _Evidence, semantic: bool = True) -> str:
     for family in first.identifiers.keys() & second.identifiers.keys():
         if first.identifiers[family] != second.identifiers[family]:
             return ""
+    if first.acronyms and second.acronyms and not first.acronyms & second.acronyms:
+        return ""
     if first.incident_dates and second.incident_dates and not first.incident_dates & second.incident_dates:
         return ""
 
@@ -301,6 +317,12 @@ def _match(first: _Evidence, second: _Evidence, semantic: bool = True) -> str:
     common_ids = first.identifiers.keys() & second.identifiers.keys()
     distinct_object = bool(common_objects - {"starship", "starlink", "gpt", "claude", "gemini", "llama", "grok", "artemis"})
     numbered_object = bool(common_ids and (common_objects or first.actors & second.actors))
+    named_foundation = bool(
+        first.acronyms & second.acronyms
+        and (first.subject & second.subject or first.actors & second.actors)
+        and "establish" in first.actions & second.actions
+        and distance <= 7
+    )
     # A repeated incident needs both a place and a concrete object; the actor
     # alone (or a generic topic such as "AI") cannot identify it.
     incident = "attack" in first.actions & second.actions
@@ -308,7 +330,7 @@ def _match(first: _Evidence, second: _Evidence, semantic: bool = True) -> str:
         set(re.findall(r"\b(?:hospital|school|airport|bridge|power station|refinery|port|market|hotel)\b", first.headline))
         & set(re.findall(r"\b(?:hospital|school|airport|bridge|power station|refinery|port|market|hotel)\b", second.headline))
     )
-    anchored = distinct_object or numbered_object or (incident and incident_object) or len(common_anchors) >= 2
+    anchored = distinct_object or numbered_object or (incident and incident_object) or len(common_anchors) >= 2 or named_foundation
     if not anchored:
         return ""
     shared_action = first.actions & second.actions
@@ -329,12 +351,12 @@ def _match(first: _Evidence, second: _Evidence, semantic: bool = True) -> str:
     if distance:
         later = first if first.day > second.day else second
         same_incident_date = bool(first.incident_dates & second.incident_dates)
-        if not later.followup and not same_incident_date:
+        if not later.followup and not same_incident_date and not named_foundation:
             return ""
         if distance > (30 if numbered_object else 7):
             return ""
-        return "dated-followup"
-    return "same-day-object-action"
+        return "dated-specific-acronym-action" if named_foundation else "dated-followup"
+    return "same-day-specific-acronym-action" if named_foundation else "same-day-object-action"
 
 
 def same_event(first: dict[str, Any], second: dict[str, Any]) -> bool:
@@ -387,6 +409,17 @@ def assign_event_ids(items: list[dict[str, Any]], previous_registry: dict[str, A
     del config
     evidence = [_evidence(item) for item in items]
     records = previous_registry.get("items", []) if isinstance(previous_registry, dict) else []
+    saved_aliases = previous_registry.get("identityAliases", {}) if isinstance(previous_registry, dict) else {}
+    saved_aliases = saved_aliases if isinstance(saved_aliases, dict) else {}
+    def canonical_event(event_id: str) -> str:
+        visited = set()
+        while event_id in saved_aliases and event_id not in visited:
+            visited.add(event_id)
+            next_id = _text(saved_aliases[event_id], 32)
+            if not _EVENT_ID.fullmatch(next_id):
+                break
+            event_id = next_id
+        return event_id
     records = [record for record in records if isinstance(record, dict)
                and _EVENT_ID.fullmatch(_text(record.get("eventId")))] if isinstance(records, list) else []
     news_index: dict[str, set[str]] = {}
@@ -400,7 +433,7 @@ def assign_event_ids(items: list[dict[str, Any]], previous_registry: dict[str, A
     reusable: set[str] = set()
     reserved = {record["eventId"] for record in records}
     for record in records:
-        event_id = record["eventId"]
+        event_id = canonical_event(record["eventId"])
         news_ids = record.get("newsIds", []) if isinstance(record.get("newsIds"), list) else []
         for news_id in news_ids:
             if news_id := _text(news_id, 200):
@@ -446,6 +479,22 @@ def assign_event_ids(items: list[dict[str, Any]], previous_registry: dict[str, A
             decisions[index] = "ambiguous-registry"
             reasons[index] = "multiple-event-identities"
             eligible[index] = False
+
+    # Reconcile old split IDs only with a stronger, same-day named-founding
+    # certificate. Ordinary fuzzy bridges remain separated as before.
+    proposed: dict[str, set[str]] = {}
+    for left in range(len(items)):
+        for right in range(left + 1, len(items)):
+            if (assigned[left] and assigned[right] and assigned[left] != assigned[right]
+                    and eligible[left] and eligible[right]
+                    and _match(evidence[left], evidence[right]) == "same-day-specific-acronym-action"):
+                proposed.setdefault(assigned[left], set()).add(assigned[right])
+                proposed.setdefault(assigned[right], set()).add(assigned[left])
+    merges = {old: min(old, next(iter(peers)))
+              for old, peers in proposed.items() if len(peers) == 1 and len(proposed.get(next(iter(peers)), ())) == 1
+              and old > next(iter(peers))}
+    if merges:
+        assigned = [merges.get(event_id, event_id) for event_id in assigned]
 
     edges: dict[tuple[int, int], str] = {}
     neighbors: list[set[int]] = [set() for _ in items]
@@ -515,6 +564,7 @@ def assign_event_ids(items: list[dict[str, Any]], previous_registry: dict[str, A
                     "reason": reasons[index] if decision != "batch-match" else "unambiguous-article-or-object-action-time",
                     "semanticEligible": group_eligible,
                     "representativeId": seed_evidence.news_id,
+                    "mergedFrom": sorted(old for old, canonical in merges.items() if canonical == event_id),
                     "evidence": {
                         "newsIds": sorted({evidence[member].news_id for member in partition if evidence[member].news_id})[:6],
                         "urls": sorted(set().union(*(evidence[member].urls for member in partition)))[:6],
