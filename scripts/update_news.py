@@ -3301,7 +3301,14 @@ def build_event_registry(
             entries = [entry for record in (older, latest)
                        for entry in (record.get(field, []) if isinstance(record.get(field), list) else [])
                        if isinstance(entry, dict) and clean_text(entry.get(key))]
-            combined[field] = list({clean_text(entry[key]): entry for entry in entries}.values())[-limit:]
+            unique_entries = list({
+                (clean_text(entry.get("editionDate")), clean_text(entry[key])) if field == "timeline"
+                else clean_text(entry[key]): entry for entry in entries
+            }.values())
+            if field == "timeline":
+                unique_entries.sort(key=lambda entry: (
+                    clean_text(entry.get("editionDate")), clean_text(entry.get("publishedAt"))))
+            combined[field] = unique_entries[-limit:]
         combined["independentSourceCount"] = len(combined["sourceGroups"]) or max(
             int(first.get("independentSourceCount", 0) or 0), int(second.get("independentSourceCount", 0) or 0))
         combined["forecastLedger"] = merge_forecast_ledgers(
