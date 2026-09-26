@@ -304,6 +304,30 @@ class DailyDeepreadTests(unittest.TestCase):
         seeded = {event["analysis"] for section in example["sections"] for event in section["events"]}
         self.assertFalse(seeded.intersection(event["analysis"] for event in self.events(fallback)))
 
+    def test_invalid_structure_gets_one_guided_retry_with_same_original_evidence(self):
+        items = [self.item(n) for n in range(12)]
+        calls = []
+        def request(*args, **kwargs):
+            calls.append(kwargs)
+            return {"wrong_envelope": "PRIVATE_PROVIDER_OUTPUT"} if len(calls) == 1 else self.model_response(items)
+        article = MODULE.build_daily_deepread(items, self.config, self.now, self.runtime, request)
+        self.assertEqual(article["generationStatus"], "ok")
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(calls[0]["input_text"], calls[1]["input_text"])
+        self.assertIn("editionDate", calls[1]["instructions"])
+        self.assertIn("article:", calls[1]["instructions"])
+        self.assertNotIn("PRIVATE_PROVIDER_OUTPUT", json.dumps(calls[1]))
+        self.assertNotIn("wrong_envelope", json.dumps(calls[1]))
+
+    def test_permanently_invalid_structure_has_bounded_retry_and_keeps_fallback(self):
+        calls = []
+        def request(*args, **kwargs):
+            calls.append(kwargs)
+            return {}
+        article = MODULE.build_daily_deepread([self.item(n) for n in range(12)], self.config, self.now, self.runtime, request)
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(article["generationStatus"], "fallback")
+
     def test_private_body_only_reaches_bounded_model_input_and_not_fallback(self):
         marker = "PRIVATE_BODY_SENTINEL"
         items = [self.item(n, evidenceText=marker + " 测试过程的已公开细节。" * 2000) for n in range(12)]
