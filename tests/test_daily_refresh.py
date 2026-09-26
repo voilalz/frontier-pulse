@@ -102,6 +102,17 @@ class DailyRefreshGateTests(unittest.TestCase):
             force_refresh=False,
         )[0])
 
+    def test_incomplete_deepread_is_retried_even_when_daily_brief_is_healthy(self):
+        healthy = {"state": "ok", "editionDate": TODAY, "itemCount": 10}
+        ready = {"editionDate": TODAY, "generationStatus": "ok", "eventCount": 12}
+        for report, expected in (({}, True), ({**ready, "editionDate": "2026-08-04"}, True),
+                                 ({**ready, "generationStatus": "fallback"}, True),
+                                 ({**ready, "generationStatus": "insufficient"}, True),
+                                 (ready, False)):
+            with self.subTest(report=report):
+                self.assertEqual(decide_refresh(healthy, today=TODAY, event_name="push",
+                    force_refresh=False, deepread=report)[0], expected)
+
     def test_summary_upgrade_rebuilds_a_healthy_edition_once(self):
         healthy = {"schemaVersion": 10, "state": "ok", "editionDate": TODAY, "itemCount": 10}
         for revision, expected in [(None, True), (2, True), (3, False)]:

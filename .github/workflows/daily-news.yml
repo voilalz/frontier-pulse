@@ -55,6 +55,7 @@ jobs:
         run: >-
           python scripts/check_daily_refresh.py
           --status public/data/status.json
+          --deepread public/data/deepread.json
           --timezone Asia/Shanghai
           --event-name "$EVENT_NAME"
           --force "$FORCE_REFRESH"

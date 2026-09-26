@@ -43,6 +43,7 @@ def decide_refresh(
     required_schema: int = 0,
     required_summary_revision: int = 0,
     require_history_analysis: bool = False,
+    deepread: dict[str, Any] | None = None,
 ) -> tuple[bool, str]:
     event = str(event_name or "").strip()
     if event == "workflow_dispatch" and force_refresh:
@@ -68,6 +69,10 @@ def decide_refresh(
         return True, "summary_upgrade_required"
     if healthy_today and require_history_analysis and status.get("historyAnalysisStatus") in {None, "", "disabled"}:
         return True, "history_analysis_required"
+    if healthy_today and deepread is not None and (
+        deepread.get("editionDate") != today or deepread.get("generationStatus") != "ok"
+    ):
+        return True, "deepread_missing_or_incomplete"
     if healthy_today:
         return False, "healthy_edition_exists"
     return True, "edition_missing_or_unhealthy"
@@ -82,6 +87,7 @@ def append_github_output(path: Path, values: dict[str, str]) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--status", type=Path, required=True)
+    parser.add_argument("--deepread", type=Path)
     parser.add_argument("--timezone", default="Asia/Shanghai")
     parser.add_argument("--event-name", default="schedule")
     parser.add_argument("--force", default="false")
@@ -100,6 +106,7 @@ def main() -> int:
         required_schema=max(0, args.required_schema),
         required_summary_revision=max(0, args.required_summary_revision),
         require_history_analysis=args.require_history_analysis,
+        deepread=load_status(args.deepread) if args.deepread else None,
     )
     values = {
         "should_run": "true" if should_run else "false",
