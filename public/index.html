@@ -33,6 +33,7 @@
       <span class="state-badge" id="dataState">连接中</span>
       <nav class="view-tabs" aria-label="内容视图">
         <a class="active" href="./" data-view="latest">今日简报</a>
+        <a href="./?view=deepread" data-view="deepread">每日深读</a>
         <a href="./?view=stream" data-view="stream">全量动态</a>
         <a href="./?view=research" data-view="research">论文雷达</a>
         <a href="./?view=history" data-view="history">历史</a>
@@ -40,7 +41,7 @@
         <a href="./?view=watchlist" data-view="watchlist">关注</a>
       </nav>
       <div class="top-actions">
-        <label class="search-wrap">
+        <label class="search-wrap" id="searchWrap">
           <span class="sr-only">搜索新闻</span>
           <input id="search" type="search" placeholder="搜索标题、摘要、来源…" autocomplete="off">
           <kbd>/</kbd>
@@ -142,7 +143,11 @@
       </form>
     </section>
 
-    <section class="shell feed" aria-labelledby="feedTitle">
+    <section class="shell deepread" id="deepreadSection" hidden aria-label="每日深读报道">
+      <div id="deepreadContent" aria-live="polite" aria-busy="false"></div>
+    </section>
+
+    <section class="shell feed" id="feedSection" aria-labelledby="feedTitle">
       <div class="feed-head">
         <div><p class="eyebrow" id="feedEyebrow">TOP STORIES</p><h2 id="feedTitle">今日要闻</h2><p id="resultNote">正在加载…</p></div>
         <div class="feed-actions">

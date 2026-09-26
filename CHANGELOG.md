@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-09-26 — Grounded evidence, stable events and daily deep read
+
+- Select title-relevant original paragraphs across RSS, HTML and JSON-LD before editing; reject conflicting article headlines and never recycle published model summaries as source evidence. Summary revision 4 invalidates old translations.
+- Expand to 60 publisher feeds. A same-window live RSS audit measured 92 to 168 qualified unique candidates, including 128 technology items. Publish uncapped acquisition/filter/deduplication diagnostics; verified publication times exclude updated-only and future timestamps.
+- Balance the AI shortlist and daily edition across technology desks, with a combined security-topic cap and disclosed scarcity fallback.
+- Replace broad history-score identity with conservative object/action/place/date matching, exact ID/URL reuse, legacy isolation and persistent identities for every qualified stream item.
+- Add “每日深读”: a 10–15-event illustrated article (12 by default), grounded citations, thematic analysis, independent dated archives and race-safe date loading. Insufficient or invalid generation falls back without invented events or URLs.
+- Preserve the existing collapsed event timeline. Upgrade daily/status schema to 11, stream to 7 and registry to 2; publish new deepread and source-health outputs through the existing workflows.
+
 ## 2026-09-20 — News reading and international source coverage
 
 - Enrich short RSS leads from bounded, public article-body reads; retain leads on failure and skip explicitly restricted pages. Remove internal corroboration counts from editing inputs and prevent missing-information padding. Summary revision 3 refreshes earlier summaries once.

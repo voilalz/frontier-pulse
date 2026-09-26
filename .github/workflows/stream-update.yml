@@ -47,12 +47,16 @@ jobs:
           python -c "import json; p=json.load(open('public/data/stream.json', encoding='utf-8'));
           assert p.get('itemCount') == len(p.get('items', []));
           assert p.get('itemCount', 0) > 0;
+          e=json.load(open('public/data/events.json', encoding='utf-8'));
+          known={n for event in e['items'] for n in event['newsIds']};
+          assert all(x['id'] in known and x.get('eventIdentity') for x in p['items']);
           assert all(x.get('contentType') == 'news' and x.get('url') for x in p['items']);
           print('Validated', p['itemCount'], 'qualified stream items')"
       - name: Commit stream data and status
         if: always()
         run: |
-          git add -A -- public/data/stream.json public/data/stream-status.json
+          git add -A -- public/data/stream.json public/data/stream-status.json public/data/events.json
+          if [ -e public/data/source-health.json ]; then git add -- public/data/source-health.json; fi
           if git diff --cached --quiet; then
             echo "No stream data change"
             exit 0

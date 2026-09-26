@@ -7,6 +7,10 @@ on:
     paths:
       - ".github/workflows/daily-news.yml"
       - "scripts/update_news.py"
+      - "scripts/news_evidence.py"
+      - "scripts/event_identity.py"
+      - "scripts/daily_deepread.py"
+      - "scripts/audit_sources.py"
       - "scripts/check_daily_refresh.py"
       - "config/news_config.json"
       - "public/assets/news-policy.json"
@@ -54,8 +58,8 @@ jobs:
           --timezone Asia/Shanghai
           --event-name "$EVENT_NAME"
           --force "$FORCE_REFRESH"
-          --required-schema 10
-          --required-summary-revision 3
+          --required-schema 11
+          --required-summary-revision 4
           --require-history-analysis
           --github-output "$GITHUB_OUTPUT"
       - name: Run unit tests
@@ -94,10 +98,12 @@ jobs:
           s=json.load(open('public/data/stream.json', encoding='utf-8'));
           r=json.load(open('public/data/research.json', encoding='utf-8'));
           e=json.load(open('public/data/events.json', encoding='utf-8'));
+          d=json.load(open('public/data/deepread.json', encoding='utf-8'));
+          h=json.load(open('public/data/source-health.json', encoding='utf-8'));
           w=json.load(open('public/data/weekly.json', encoding='utf-8'));
           a=json.load(open('public/data/signals.json', encoding='utf-8'));
-          assert p.get('schemaVersion') == 10, p.get('schemaVersion');
-          assert all(x.get('summaryRevision') == 3 for x in p['items']);
+          assert p.get('schemaVersion') == 11, p.get('schemaVersion');
+          assert all(x.get('summaryRevision') == 4 for x in p['items']);
           assert p.get('timezone') == 'Asia/Shanghai', p.get('timezone');
           assert p.get('selectionMethod') in ('rules', 'deepseek', 'openai'), p.get('selectionMethod');
           assert p.get('selectionStrategy') in ('rules-diverse', 'ai-ranked-rule-constrained'), p.get('selectionStrategy');
@@ -114,6 +120,12 @@ jobs:
           assert s.get('itemCount') == len(s.get('items', [])) and s.get('itemCount', 0) > 0;
           assert r.get('itemCount') == len(r.get('items', []));
           assert e.get('eventCount') == len(e.get('items', []));
+          assert e.get('schemaVersion') == 2;
+          de=[x for section in d['sections'] for x in section['events']];
+          assert d.get('editionDate') == p.get('editionDate');
+          assert len(de) == d.get('eventCount') and len(set(x['eventId'] for x in de)) == len(de);
+          assert all(x.get('sources') for x in de);
+          assert h.get('qualifiedCandidateCount') == s.get('qualifiedCandidateCount');
           assert w.get('weekId') and w.get('eventCount') == len(w.get('events', []));
           assert a.get('signalCount') == len(a.get('signals', []));
           assert __import__('pathlib').Path('public/feed.xml').exists();
@@ -122,6 +134,9 @@ jobs:
         if: always() && steps.refresh_gate.outputs.should_run == 'true'
         run: |
           git add -A -- public/data/news.json public/data/status.json public/data/stream.json public/data/stream-status.json public/data/research.json public/data/events.json public/data/weekly.json public/data/signals.json public/data/archive public/data/weekly public/feed.xml
+          for path in public/data/deepread.json public/data/deepread public/data/source-health.json; do
+            if [ -e "$path" ]; then git add -A -- "$path"; fi
+          done
           if git diff --cached --quiet; then
             echo "No data change"
             exit 0

@@ -93,14 +93,13 @@ class NewsReadingTests(unittest.TestCase):
     def test_short_feed_is_enriched_and_failed_article_fetch_keeps_original(self):
         article = self.article("NASA satellite mission")
         old_description = article.description
-        body = '<article><p>' + ('The spacecraft carries three sensors and will operate for five years. ' * 20) + '</p></article>'
+        body = '<article><p>' + ('NASA satellite mission spacecraft carries three sensors and will operate for five years. ' * 20) + '</p></article>'
         with mock.patch.object(MODULE, "http_get", return_value=body.encode()) as fetch:
             MODULE.enrich_article_descriptions([article], self.config)
-        self.assertTrue(article.description.startswith(old_description))
         self.assertIn("three sensors", article.description)
         self.assertLessEqual(len(article.description), MODULE.SOURCE_TEXT_LIMIT)
         self.assertEqual(fetch.call_count, 1)
-        unavailable = self.article("ESA mission")
+        unavailable = self.article("ESA satellite launch", old_description)
         with mock.patch.object(MODULE, "http_get", side_effect=RuntimeError("unavailable")):
             MODULE.enrich_article_descriptions([unavailable], self.config)
         self.assertEqual(unavailable.description, old_description)

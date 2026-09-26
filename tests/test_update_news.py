@@ -500,7 +500,11 @@ class UpdateNewsTests(unittest.TestCase):
             }]},
         }
         MODULE.assign_event_ids([successor], registry, self.config)
-        self.assertEqual(successor["eventId"], first["eventId"])
+        # A historical association cannot establish the identity of a new article.
+        self.assertNotEqual(successor["eventId"], first["eventId"])
+        exact_article = dict(first)
+        MODULE.assign_event_ids([exact_article], registry, self.config)
+        self.assertEqual(exact_article["eventId"], first["eventId"])
         reviewed = MODULE.merge_forecast_ledgers(
             [{
                 "predictionId": "pred-due",
@@ -585,7 +589,7 @@ class UpdateNewsTests(unittest.TestCase):
             ])
             self.assertEqual(status, 0)
             payload = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(payload["schemaVersion"], 10)
+            self.assertEqual(payload["schemaVersion"], 11)
             self.assertEqual(payload["editionDate"], "2026-07-16")
             self.assertEqual(payload["timezone"], "Asia/Shanghai")
             self.assertEqual(payload["method"], "rules")
@@ -603,14 +607,14 @@ class UpdateNewsTests(unittest.TestCase):
             atom = ET.parse(feed_output).getroot()
             self.assertEqual(len(atom.findall("{http://www.w3.org/2005/Atom}entry")), 10)
             pipeline_status = json.loads(status_output.read_text(encoding="utf-8"))
-            self.assertEqual(pipeline_status["schemaVersion"], 10)
+            self.assertEqual(pipeline_status["schemaVersion"], 11)
             self.assertEqual(pipeline_status["state"], "ok")
             self.assertEqual(pipeline_status["selectionMethod"], "rules")
             self.assertEqual(pipeline_status["translationStatus"], "disabled")
             self.assertNotIn("editorialStatus", pipeline_status)
             stream = json.loads(stream_output.read_text(encoding="utf-8"))
             research = json.loads(research_output.read_text(encoding="utf-8"))
-            self.assertEqual(stream["schemaVersion"], 6)
+            self.assertEqual(stream["schemaVersion"], 7)
             self.assertEqual(research["schemaVersion"], 4)
             self.assertEqual(pipeline_status["streamItemCount"], stream["itemCount"])
             self.assertEqual(pipeline_status["researchItemCount"], 6)
@@ -623,6 +627,23 @@ class UpdateNewsTests(unittest.TestCase):
             weekly = json.loads(weekly_output.read_text(encoding="utf-8"))
             signals = json.loads(signals_output.read_text(encoding="utf-8"))
             self.assertEqual(events["eventCount"], len(events["items"]))
+            self.assertEqual(events["schemaVersion"], 2)
+            registry_ids = {news_id for event in events["items"] for news_id in event["newsIds"]}
+            self.assertTrue({item["id"] for item in stream["items"]}.issubset(registry_ids))
+            daily_ids = {item["id"]: item["eventId"] for item in payload["items"]}
+            self.assertTrue(all(item["eventId"] == daily_ids.get(item["id"], item["eventId"]) for item in stream["items"]))
+            deepread = json.loads((root / "deepread.json").read_text())
+            deep_events = [event for section in deepread["sections"] for event in section["events"]]
+            self.assertGreaterEqual(deepread["eventCount"], 10)
+            self.assertLessEqual(deepread["eventCount"], 15)
+            self.assertEqual(len({event["eventId"] for event in deep_events}), deepread["eventCount"])
+            self.assertTrue(all(event["sources"] for event in deep_events))
+            self.assertTrue((root / "deepread/2026-07-16.json").exists())
+            self.assertEqual(json.loads((root / "deepread/index.json").read_text())["editions"][0]["editionDate"], "2026-07-16")
+            self.assertNotIn("evidenceText", (root / "deepread.json").read_text())
+            health = json.loads((root / "source-health.json").read_text())
+            self.assertEqual(stream["qualifiedCandidateCount"], health["qualifiedCandidateCount"])
+
             self.assertEqual(weekly["eventCount"], len(weekly["events"]))
             self.assertTrue((weekly_dir / f"{weekly['weekId']}.json").exists())
             self.assertEqual(signals["signalCount"], len(signals["signals"]))
