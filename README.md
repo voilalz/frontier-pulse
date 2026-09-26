@@ -1,9 +1,21 @@
 # 智域前沿 / Frontier Pulse
 
 
+## 2026-09-26 新闻质量与每日深读
+
+- **摘要证据**：`news_evidence.py` 在送入 LLM 前，按标题主体和动作筛选 RSS 与公开正文段落；分别比较 HTML/JSON-LD 的文章候选，保留相关段落的原始次序，剔除旁栏、推荐和广告。长 RSS、抓取失败和缓存恢复同样经过筛选。只有标题时不补造正文。`summaryEvidence` 记录证据状态和段落计数，原文只用于当轮编辑；摘要修订号升至 4，旧缓存自动失效。
+- **有效覆盖**：`source-health.json` 按真实的前 24 小时记录抓取成功/失败、有效时间、选题排除、主题过滤、去重后的候选数与各主题分布。缺失/估计日期、未来新闻、旧闻、缓存补采和重复转载不计入目标。目标为每日 100–300 条，是否达到以实测为准；独立审计可运行 `python scripts/audit_sources.py --output /tmp/source-health.json`。
+- **编辑结构**：有相应候选时保留 AI、航空航天、无人系统、前沿技术席位，默认军事与冲突合计最多 4 条。送入评分的 72 条短名单也保留科技主题，避免先被高分安全新闻挤出。候选不足才逐级放宽，并保留内部说明。
+- **事件身份**：`event_identity.py` 优先复用精确新闻 ID/规范链接，再按主体、动作、任务/型号、地点和时间做保守匹配。历史关联分不能作为事件相同的依据。事件库 schema 2 保存最多 8 条匹配代表；日报与三小时全量动态共用并更新这份事件库。旧的宽泛事件组只允许精确成员复用，不作为新的模糊匹配依据。匹配目前是可审计规则，仍可能漏掉低词汇重合的转述，需要通过实际误分样本持续校准。
+- **每日深读**：新栏目从过去 24 小时的独立事件中选取默认 12 项（可配置 10–15 项），生成导语、主题章节、逐事件分析和结语。来源链接和图片只由原始新闻元数据附加；图片缺失或加载失败时正常显示正文。LLM 输出必须覆盖全部指定事件且不能新增引用，结构不合格或服务失败时保留基于已有摘要的编排，不用旧闻凑数。结构校验不等同于逐句事实核验。少于 10 件时明确呈现实际数量。
+- **归档与兼容**：最新长文在 `data/deepread.json`，独立日期归档在 `data/deepread/YYYY-MM-DD.json`，清单在 `data/deepread/index.json`。日报/状态 schema 11，动态流 schema 7；旧归档仍可阅读，既有折叠事件时间线保留。代码发布后自动补跑当前日报，不重复触发管理员邮件。
+
+60 个 RSS/Atom 入口覆盖 51 个订阅域名；同一 24 小时快照下，有效独立候选从原配置的 92 条增至 168 条。真实 RSS 覆盖与核验记录见 [信源审计](docs/source-coverage-2026-09-26.md)。
+
+
 ## 2026-09 阅读体验调整
 
-新闻卡片只显示分类、标题、较完整摘要、配图、来源、时间和阅读/收藏/分享操作。评分、为什么重要、置信度、事件档案、证据争议、历史推演和预判台账不再出现在新闻界面；首页不再展示事件线与异常信号。内部排序、去重和历史数据仍保留，隐藏分析的 AI 编辑调用默认关闭。
+新闻卡片只显示分类、标题、较完整摘要、配图、来源、时间和阅读/收藏/分享操作。评分、为什么重要、置信度、事件档案、证据争议和预判台账不再出现在新闻界面；首页不再展示事件线与异常信号。内部排序、去重和历史数据仍保留，事件时间线及其分析通过独立的折叠区阅读。
 
 RSS 同时提供导语和 `content:encoded` / Atom 正文时，采集器选取更完整的文本。对于短导语，还会从原文公开的文章段落或结构化正文补充证据（最多 6,000 字符、每轮最多 120 条、单次请求最多 12 秒）；不读取标记为付费的正文，失败时保留原始导语。正文仅用于当轮编辑，不在站点镜像保存。日报和动态摘要以 180–320 个汉字为目标，概括事件、背景、关键细节、进展和后续安排；来源不足时直接写短，不罗列缺失信息凑篇幅，也不显示核实程度等内部字段。旧摘要缓存按修订号及输入文本指纹失效，日报更新任务会自动迁移旧修订。
 
@@ -23,7 +35,7 @@ RSS 同时提供导语和 `content:encoded` / Atom 正文时，采集器选取�
 ## 已实现功能
 
 - DeepSeek V4 Flash 或 OpenAI 可生成中文标题和信息较完整的摘要；没有 API Key 时保留证据型规则摘要，不伪装为已翻译。
-- 31 个国际 RSS/Atom 信源 + GDELT 并行采集，覆盖官方机构、航空航天、AI、科技、军情与全球冲突媒体，并执行 24 小时时间窗、链接清洗、同事件去重和来源合并。
+- 国际 RSS/Atom 信源 + GDELT 并行采集（可用性及有效产出见信源审计），覆盖官方机构、航空航天、AI、科技、军情与全球冲突媒体，并执行 24 小时时间窗、链接清洗、同事件去重和来源合并。
 - Reuters/AP 等通稿转载会按证据网络折算，不会因多个转载域名虚增“独立来源”；无效日期按时间窗边缘处理并降权。
 - 每日 Top 10 采用“AI 逐条重要度评分 + 规则分融合 + 程序多样性约束”；主题与来源配额由确定性代码执行，正常换位不会再被误报为 AI 故障，并继续过滤 Sponsored / Advertorial 等商业样稿。
 - 独立“全量动态”视图保留最多 300 条通过时间窗、相关性、去重与商业内容过滤的候选，可按 6/12/24 小时、来源、主题和关键词筛选；每日 Top 10 保留在独立简报视图。
@@ -78,7 +90,11 @@ public/
   data/stream.json                  最近 24 小时合格动态流（最多 300 条）
   data/stream-status.json           动态流健康状态
   data/research.json                最近 7 天前沿论文雷达
-  data/events.json                  持久跨日事件档案与预判台账
+  data/events.json                  持久跨日事件身份、档案与预判台账
+  data/source-health.json           实测有效信源覆盖与排除统计
+  data/deepread.json                最新一期每日深读
+  data/deepread/YYYY-MM-DD.json      每日深读独立归档
+  data/deepread/index.json           每日深读可用日期
   data/weekly.json                  当周 5–8 条收敛事件线
   data/weekly/YYYY-Www.json         按 ISO 周归档的周报
   data/signals.json                 30 日稳健基线异常信号
@@ -86,7 +102,11 @@ public/
   data/archive/index.json           可用日期与期刊元数据
   data/archive/search-index.json    月度搜索分片清单
   data/archive/search-YYYY-MM.json  仅含可检索字段的月度分片
-scripts/update_news.py              采集、去重、评分、AI 编辑、历史关联、归档与状态
+scripts/update_news.py              采集、评分、AI 编辑、历史关联、归档与状态
+scripts/news_evidence.py            标题与原文段落相关性筛选
+scripts/event_identity.py           精确事件匹配与稳定身份
+scripts/daily_deepread.py           每日图文深读生成与引用校验
+scripts/audit_sources.py            无 LLM、无补采、无展示截断的 RSS 覆盖审计
 scripts/send_digest.py              SMTP 邮件摘要
 scripts/check_production.py         线上安全头与缓存头验收
 config/news_config.json             主题、信源、权重、时区、模型和归档期限
@@ -238,7 +258,7 @@ python scripts/check_production.py --site-url https://newsfrontier.top/
 - 每日条数：`top_n`，当前前端和校验固定为 10
 - 搜索索引保留期：`archive_retention_days`，默认 730 期
 - 历史关联：`history_lookback_days` 默认 365 日、`history_max_links` 默认 3 条、`history_min_association_score` 默认 30；`history_analysis_enabled` 控制是否用当前 AI 提供方总结已匹配的证据。
-- 事件档案：`event_retention_days` 默认 365 日，`event_same_story_score` 默认 45；只有强同事件关联才能沿用旧 `eventId`。
+- 事件档案：`event_retention_days` 默认 365 日；事件身份由 `event_identity.py` 的精确链接与保守语义规则决定，旧参数 `event_same_story_score` 不再参与身份匹配。
 - 周报与异常：`weekly_event_limit` 默认 8；`signal_baseline_days` 默认 30，并可设置最少基线天数、当日计数和独立来源门槛。
 - 论文—新闻关联：`paper_news_link_limit` 默认 3，`paper_news_min_score` 默认 24。
 - 前端过期阈值：`public/assets/app.js` 中的 36 小时判断

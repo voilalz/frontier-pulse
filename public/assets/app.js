@@ -3,6 +3,8 @@
 
   const ENDPOINTS = {
     latest: "./data/news.json",
+    deepread: "./data/deepread.json",
+    deepreadIndex: "./data/deepread/index.json",
     stream: "./data/stream.json",
     streamStatus: "./data/stream-status.json",
     research: "./data/research.json",
@@ -12,11 +14,12 @@
   };
   let newsPolicy = null;
   const CATEGORIES = ["AI", "航空航天", "军事动态", "局部冲突", "前沿技术", "无人系统"];
-  const VIEWS = new Set(["latest", "stream", "research", "history", "bookmarks", "watchlist"]);
+  const VIEWS = new Set(["latest", "deepread", "stream", "research", "history", "bookmarks", "watchlist"]);
   const PAGE_SIZE = 24;
   const CACHE_KEY = "fp-last-good-report-v2";
   const STREAM_CACHE_KEY = "fp-last-good-stream-v1";
   const RESEARCH_CACHE_KEY = "fp-last-good-research-v1";
+  const DEEPREAD_CACHE_KEY = "fp-last-good-deepread-v1";
   const BOOKMARK_KEY = "fp-bookmarks-v2";
   const WATCH_KEY = "fp-watchwords-v1";
   const RESEARCH_KEYWORDS_KEY = "fp-research-keywords-v1";
@@ -59,6 +62,8 @@
 
   const state = {
     view: initialView,
+    viewRequest: 0,
+    deepreadRequest: 0,
     query: clean(params.get("q")),
     category: "全部",
     source: clean(params.get("source"), "全部"),
@@ -68,6 +73,10 @@
     latestReport: null,
     streamReport: null,
     researchReport: null,
+    deepreadReport: null,
+    deepreadIndex: null,
+    deepreadCache: new Map(),
+    deepreadLoadError: "",
     streamStatus: null,
     currentReport: null,
     items: [],
@@ -481,7 +490,125 @@
     hideAlert();
   }
 
+  function normalizeDeepread(payload) {
+    if (!payload || payload.schemaVersion !== 1 || !Array.isArray(payload.sections)
+        || !/^\d{4}-\d{2}-\d{2}$/.test(payload.editionDate || "")) throw new Error("深读文件格式不完整");
+    const seen = new Set();
+    let filtered = Boolean(payload.contentFiltered);
+    const sections = payload.sections.slice(0, 15).map((section, index) => {
+      const events = (Array.isArray(section?.events) ? section.events : []).filter((event) => {
+        if (!event || !clean(event.newsId) || !clean(event.eventId) || !isAllowedNewsItem(event)
+            || seen.has(event.eventId) || seen.size >= 15) { filtered = true; return false; }
+        seen.add(event.eventId);
+        return true;
+      }).map((event) => ({
+        newsId: clean(event.newsId), eventId: clean(event.eventId), title: clean(event.title),
+        summary: clean(event.summary), analysis: clean(event.analysis), watchFor: clean(event.watchFor),
+        category: clean(event.category), publishedAt: clean(event.publishedAt),
+        sources: (Array.isArray(event.sources) ? event.sources : []).map((source) => ({
+          name: clean(source?.name, "原文"), url: safeUrl(source?.url),
+        })).filter((source) => source.url).slice(0, 8),
+        image: safeUrl(event.image), imageSource: clean(event.imageSource),
+      }));
+      return {id: `deepread-section-${index + 1}`, title: clean(section?.title, "今日进展"),
+        overview: clean(section?.overview), events};
+    }).filter((section) => section.events.length);
+    if (filtered) sections.forEach((section) => { section.overview = ""; section.title = "本期进展"; });
+    const allEvents = sections.flatMap((section) => section.events);
+    return {
+      schemaVersion: 1, editionDate: payload.editionDate, generatedAt: clean(payload.generatedAt),
+      headline: filtered ? "今日前沿深读" : clean(payload.headline, "今日前沿深读"),
+      introduction: filtered ? "" : clean(payload.introduction),
+      conclusion: filtered ? "" : clean(payload.conclusion),
+      generationStatus: allEvents.length < 10 ? "insufficient" : clean(payload.generationStatus, "fallback"),
+      contentFiltered: filtered, sections, eventCount: allEvents.length,
+      sourceCount: new Set(allEvents.flatMap((event) => event.sources.map((source) => source.name))).size,
+    };
+  }
+
+  function renderDeepreadArticle(report) {
+    if (!report?.sections?.length) return '<div class="empty"><h2>这期深读尚未发布</h2><p>请选择已有日期，或在日报更新后回来阅读。</p></div>';
+    const events = report.sections.flatMap((section) => section.events);
+    const length = [report.introduction, report.conclusion, ...report.sections.map((section) => section.overview),
+      ...events.flatMap((event) => [event.summary, event.analysis])].join("").length;
+    const minutes = Math.max(2, Math.round(length / 450));
+    let number = 0;
+    return `<div class="deepread-layout">
+      <aside class="deepread-toc"><p class="eyebrow">IN THIS EDITION</p><b>本期阅读</b>
+        <ol>${report.sections.map((section) => `<li><a href="#${esc(section.id)}">${esc(section.title)}</a><span>${section.events.length} 项进展</span></li>`).join("")}</ol>
+        <p>${report.eventCount} 项事件 · ${report.sourceCount} 个来源<br>约 ${minutes} 分钟</p>
+      </aside>
+      <article class="deepread-article">
+        <header class="deepread-header"><p class="eyebrow">${esc(report.editionDate)} · FRONTIER PULSE</p>
+          <h2>${esc(report.headline)}</h2>
+          ${report.introduction ? `<p class="deepread-lead">${esc(report.introduction)}</p>` : ""}
+          ${report.generationStatus === "insufficient" ? `<p class="deepread-note">本期收录 ${report.eventCount} 项可用事件，后续随日报更新。</p>` : ""}
+        </header>
+        ${report.sections.map((section) => `<section class="deepread-chapter" id="${esc(section.id)}">
+          <h2>${esc(section.title)}</h2>${section.overview ? `<p class="deepread-overview">${esc(section.overview)}</p>` : ""}
+          ${section.events.map((event) => `<section class="deepread-event" id="deepread-event-${++number}">
+            <p class="deepread-kicker">${String(number).padStart(2, "0")} / ${esc(event.category)}</p>
+            <h3>${esc(event.title)}</h3>
+            ${event.image ? `<figure class="deepread-figure"><img src="${esc(event.image)}" alt="${esc(event.title)}" loading="lazy" decoding="async" referrerpolicy="no-referrer"><figcaption>原文配图 · 图片来源：${esc(event.imageSource || event.sources[0]?.name || "原报道")}</figcaption></figure>` : ""}
+            <p>${esc(event.summary)}</p>
+            ${event.analysis ? `<p class="deepread-analysis">${esc(event.analysis)}</p>` : ""}
+            ${event.watchFor ? `<p class="deepread-watch"><b>后续关注</b> ${esc(event.watchFor)}</p>` : ""}
+            <div class="deepread-citations"><span>报道来源</span>${event.sources.map((source) => `<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.name)} ↗</a>`).join("")}</div>
+          </section>`).join("")}
+        </section>`).join("")}
+        ${report.conclusion ? `<footer class="deepread-conclusion"><p class="eyebrow">LOOKING AHEAD</p><h2>接下来，观察什么</h2><p>${esc(report.conclusion)}</p></footer>` : ""}
+      </article>
+    </div>`;
+  }
+
+  async function loadDeepread(date = "", bypassCache = false) {
+    const request = ++state.deepreadRequest;
+    state.deepreadLoadError = "";
+    if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) { state.deepreadReport = null; state.deepreadLoadError = "日期无效"; return; }
+    const indexPromise = (state.deepreadIndex && !bypassCache) ? Promise.resolve() :
+      fetchJson(ENDPOINTS.deepreadIndex, bypassCache).then((index) => {
+        if (request === state.deepreadRequest) state.deepreadIndex = index;
+      }).catch(() => {});
+    try {
+      const report = !bypassCache && date && state.deepreadCache.has(date)
+        ? state.deepreadCache.get(date)
+        : normalizeDeepread(await fetchJson(date ? `./data/deepread/${date}.json` : ENDPOINTS.deepread, bypassCache));
+      if (date && report.editionDate !== date) throw new Error("返回了不同日期的深读");
+      if (request !== state.deepreadRequest) return;
+      state.deepreadReport = report;
+      state.deepreadCache.set(report.editionDate, report);
+      if (!date) writeStorage(DEEPREAD_CACHE_KEY, report);
+    } catch (error) {
+      if (request !== state.deepreadRequest) return;
+      state.deepreadLoadError = clean(error?.message, "暂时无法读取");
+      try {
+        const cached = normalizeDeepread(state.deepreadCache.get(date) || readStorage(DEEPREAD_CACHE_KEY, null));
+        state.deepreadReport = !date || cached.editionDate === date ? cached : null;
+      } catch (_) { state.deepreadReport = null; }
+    }
+    await indexPromise;
+  }
+
   function updateViewHealth() {
+    if (state.view === "deepread") {
+      const report = state.deepreadReport;
+      const badge = $("dataState");
+      badge.className = "state-badge";
+      if (state.deepreadLoadError) {
+        badge.textContent = report ? "深读缓存" : "尚无此期";
+        badge.classList.add("warning");
+        showAlert("warning", report ? "当前展示已保存的深读" : "这期深读暂时无法读取", report
+          ? `版本日期为 ${report.editionDate}，刷新后可重试。`
+          : "请选择已有日期，或稍后刷新。每日深读从栏目上线之日起独立归档。");
+      } else if (report && reportAgeHours(report) > 30 && !initialDate && report.editionDate === availableDates()[0]) {
+        badge.textContent = "深读待更新";
+        showAlert("warning", "最新深读尚未更新", `当前展示 ${report.editionDate} 的报道。`);
+      } else {
+        badge.textContent = report?.generationStatus === "insufficient" ? "本期简版" : "深读已更新";
+        hideAlert();
+      }
+      return;
+    }
     if (state.view === "stream") {
       const badge = $("dataState");
       badge.className = "state-badge";
@@ -701,6 +828,11 @@
   }
 
   function availableDates() {
+    if (state.view === "deepread") {
+      const dates = new Set((state.deepreadIndex?.editions || []).map((item) => item.editionDate));
+      if (state.deepreadReport?.editionDate) dates.add(state.deepreadReport.editionDate);
+      return [...dates].filter((date) => /^\d{4}-\d{2}-\d{2}$/.test(date)).sort().reverse();
+    }
     const dates = new Set((state.archiveIndex?.editions || []).map((item) => item.editionDate));
     if (state.latestReport?.editionDate) dates.add(state.latestReport.editionDate);
     return [...dates].sort().reverse();
@@ -736,11 +868,11 @@
   function syncUrl() {
     const query = new URLSearchParams();
     if (state.view !== "latest") query.set("view", state.view);
-    if (state.view === "history" && state.editionDate) query.set("date", state.editionDate);
+    if (["history", "deepread"].includes(state.view) && state.editionDate) query.set("date", state.editionDate);
     if (state.view === "stream" && state.rangeHours !== 24) query.set("range", String(state.rangeHours));
     if (state.view === "stream" && state.source !== "全部") query.set("source", state.source);
     if (state.view === "research" && state.researchScope === "mine" && state.researchKeywords.length) query.set("scope", "mine");
-    if (state.query) query.set("q", state.query);
+    if (state.query && state.view !== "deepread") query.set("q", state.query);
     const suffix = query.toString();
     history.replaceState(null, "", `${location.pathname}${suffix ? `?${suffix}` : ""}${location.hash || ""}`);
   }
@@ -761,6 +893,7 @@
   function renderViewCopy() {
     const copy = {
       latest: ["DAILY BRIEF", "今日前沿态势", "科技 · AI · 航空航天 · 安全 · 前沿研究", "TOP 10", "今日 Top 10"],
+      deepread: ["THE DAILY READ", "每日深读", "读懂今日进展，连接事实与趋势", "DAILY READ", "每日深读"],
       stream: ["FULL STREAM", `过去 ${state.rangeHours} 小时`, "全量合格动态", "STREAM", "全量动态"],
       research: ["RESEARCH RADAR", "论文雷达", "前沿研究与预印本", "PAPERS", "最新论文"],
       history: ["ARCHIVE", "历史脉络", state.query ? "跨日期检索" : "按日期回看", "ARCHIVE", state.query ? "跨日期搜索" : "历史要闻"],
@@ -779,6 +912,10 @@
     $("researchKeywordPanel").hidden = state.view !== "research";
     $("rangeControls").hidden = state.view !== "stream";
     $("sourceFilterWrap").hidden = state.view !== "stream";
+    $("deepreadSection").hidden = state.view !== "deepread";
+    $("briefSection").hidden = state.view === "deepread";
+    $("feedSection").hidden = state.view === "deepread";
+    $("searchWrap").hidden = state.view === "deepread";
     $("search").placeholder = state.view === "research" ? "搜索论文、作者、摘要…" : "搜索标题、摘要、来源…";
     document.querySelectorAll("[data-range]").forEach((button) => {
       button.classList.toggle("active", Number(button.dataset.range) === state.rangeHours);
@@ -792,7 +929,7 @@
 
   function renderDateControl() {
     const control = $("dateControl");
-    control.hidden = !["latest", "history"].includes(state.view);
+    control.hidden = !["latest", "history", "deepread"].includes(state.view);
     if (control.hidden) return;
     const dates = availableDates();
     const current = state.editionDate || state.latestReport?.editionDate || dates[0] || "";
@@ -1295,6 +1432,15 @@
   function renderAll() {
     renderViewCopy();
     renderDateControl();
+    if (state.view === "deepread") {
+      $("deepreadContent").innerHTML = renderDeepreadArticle(state.deepreadReport);
+      $("deepreadContent").setAttribute("aria-busy", "false");
+      $("dataNote").textContent = state.deepreadReport?.generatedAt
+        ? `本期生成于 ${formatDate(state.deepreadReport.generatedAt)} · 报道附有原文来源，分析与后续观察请结合原文阅读。`
+        : "每日深读将在下一次日报成功更新后发布。";
+      syncUrl();
+      return;
+    }
     renderSpotlight();
     renderWatchwords();
     renderResearchKeywords();
@@ -1330,10 +1476,26 @@
 
   async function switchView(view, options = {}) {
     if (!VIEWS.has(view)) return;
+    const request = ++state.viewRequest;
     if (["stream", "research"].includes(view)) renderViewLoading(view);
     else state.view = view;
     state.category = "全部";
     state.visibleLimit = PAGE_SIZE;
+    if (view === "deepread") {
+      state.currentReport = null;
+      state.items = [];
+      state.editionDate = options.date || "";
+      renderViewCopy();
+      $("deepreadContent").setAttribute("aria-busy", "true");
+      $("deepreadContent").innerHTML = '<div class="loading"></div>';
+      await loadDeepread(options.date || "", Boolean(options.bypassCache));
+      if (request !== state.viewRequest) return;
+      state.currentReport = state.deepreadReport;
+      state.editionDate = options.date || state.deepreadReport?.editionDate || "";
+      updateViewHealth();
+      renderAll();
+      return;
+    }
     if (view === "latest") {
       state.sort = "score";
       state.currentReport = state.latestReport;
@@ -1342,17 +1504,20 @@
     } else if (view === "stream") {
       state.sort = "latest";
       await loadStream(Boolean(options.showToast), Boolean(options.bypassCache));
+      if (request !== state.viewRequest) return;
       state.currentReport = state.streamReport;
       state.items = state.streamReport?.items || [];
       state.editionDate = "";
     } else if (view === "research") {
       state.sort = "score";
       await loadResearch(Boolean(options.showToast), Boolean(options.bypassCache));
+      if (request !== state.viewRequest) return;
       state.currentReport = state.researchReport;
       state.items = state.researchReport?.items || [];
       state.editionDate = "";
     } else if (view === "history") {
       await ensureArchiveIndex(Boolean(options.bypassCache));
+      if (request !== state.viewRequest) return;
       const dates = availableDates();
       state.editionDate = options.date || state.editionDate || dates[0] || state.latestReport?.editionDate || "";
       if (state.query) {
@@ -1550,6 +1715,9 @@
   $("stories").addEventListener("error", (event) => {
     if (event.target.matches(".story-visual img")) event.target.closest(".story-visual")?.remove();
   }, true);
+  $("deepreadContent").addEventListener("error", (event) => {
+    if (event.target.matches(".deepread-figure img")) event.target.closest("figure")?.remove();
+  }, true);
 
   $("search").value = state.query;
   $("search").addEventListener("input", (event) => {
@@ -1573,12 +1741,12 @@
   });
   $("editionPicker").addEventListener("change", async (event) => {
     state.query = ""; $("search").value = "";
-    await switchView("history", { date: event.target.value });
+    await switchView(state.view === "deepread" ? "deepread" : "history", { date: event.target.value });
   });
   [$("previousEdition"), $("nextEdition")].forEach((button) => button.addEventListener("click", async () => {
     if (!button.dataset.date) return;
     state.query = ""; $("search").value = "";
-    await switchView("history", { date: button.dataset.date });
+    await switchView(state.view === "deepread" ? "deepread" : "history", { date: button.dataset.date });
   }));
   $("watchForm").addEventListener("submit", (event) => {
     event.preventDefault();
@@ -1612,6 +1780,7 @@
   });
   $("reloadBtn").addEventListener("click", async () => {
     state.archiveIndex = null; state.searchManifest = null; state.searchItems = null; state.editionCache.clear();
+    state.deepreadIndex = null; state.deepreadCache.clear();
     await loadLatest(true, true);
     await switchView(state.view, { date: state.editionDate, bypassCache: true });
   });
