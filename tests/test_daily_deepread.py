@@ -75,7 +75,7 @@ class DailyDeepreadTests(unittest.TestCase):
         before = copy.deepcopy(items)
         article = MODULE.build_daily_deepread(items, self.config, self.now)
         self.assertEqual(set(article), {
-            "schemaVersion", "editionDate", "generatedAt", "headline", "introduction", "sections",
+            "schemaVersion", "generationRevision", "editionDate", "generatedAt", "headline", "introduction", "sections",
             "conclusion", "eventCount", "sourceCount", "generationStatus", "warnings",
         })
         self.assertEqual(article["schemaVersion"], 1)
@@ -290,6 +290,19 @@ class DailyDeepreadTests(unittest.TestCase):
         self.assertIn("length 16", error)
         self.assertNotIn("PRIVATE_SENTINEL", error)
         self.assertEqual(MODULE._model_error(self.model_response(items), items, "2026-09-21"), "")
+
+    def test_model_format_example_does_not_seed_fallback_editorial_claims(self):
+        items = [self.item(n) for n in range(12)]
+        fallback = MODULE.build_daily_deepread(items, self.config, self.now)
+        calls = []
+        def request(*args, **kwargs):
+            calls.append(kwargs)
+            return self.model_response(items)
+        MODULE.build_daily_deepread(items, self.config, self.now, self.runtime, request)
+        example = calls[0]["example"]
+        self.assertNotEqual(example["introduction"], fallback["introduction"])
+        seeded = {event["analysis"] for section in example["sections"] for event in section["events"]}
+        self.assertFalse(seeded.intersection(event["analysis"] for event in self.events(fallback)))
 
     def test_private_body_only_reaches_bounded_model_input_and_not_fallback(self):
         marker = "PRIVATE_BODY_SENTINEL"

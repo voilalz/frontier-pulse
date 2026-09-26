@@ -113,6 +113,13 @@ class DailyRefreshGateTests(unittest.TestCase):
                 self.assertEqual(decide_refresh(healthy, today=TODAY, event_name="push",
                     force_refresh=False, deepread=report)[0], expected)
 
+    def test_deepread_writing_revision_refreshes_the_article_once(self):
+        healthy = {"state": "ok", "editionDate": TODAY, "itemCount": 10}
+        for revision, expected in ((None, True), (1, True), (2, False)):
+            self.assertEqual(decide_refresh(healthy, today=TODAY, event_name="push", force_refresh=False,
+                deepread={"editionDate": TODAY, "generationStatus": "ok", "generationRevision": revision},
+                required_deepread_revision=2)[0], expected)
+
     def test_summary_upgrade_rebuilds_a_healthy_edition_once(self):
         healthy = {"schemaVersion": 10, "state": "ok", "editionDate": TODAY, "itemCount": 10}
         for revision, expected in [(None, True), (2, True), (3, False)]:
