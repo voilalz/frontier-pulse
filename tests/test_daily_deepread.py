@@ -325,7 +325,7 @@ class DailyDeepreadTests(unittest.TestCase):
             calls.append(kwargs)
             return {}
         article = MODULE.build_daily_deepread([self.item(n) for n in range(12)], self.config, self.now, self.runtime, request)
-        self.assertEqual(len(calls), 2)
+        self.assertEqual(len(calls), 2 + len(article["sections"]) + 1)
         self.assertEqual(article["generationStatus"], "fallback")
 
     def test_malformed_json_can_recover_with_one_format_retry(self):
@@ -341,15 +341,68 @@ class DailyDeepreadTests(unittest.TestCase):
         self.assertEqual(len(calls), 2)
         self.assertNotIn("PRIVATE_SENTINEL", json.dumps(calls))
 
-    def test_permanently_malformed_json_stops_after_two_attempts(self):
+    def test_permanently_malformed_json_stops_after_bounded_stages(self):
         calls = []
         def request(*args, **kwargs):
             calls.append(kwargs)
             raise ValueError("private parser details")
         article = MODULE.build_daily_deepread([self.item(n) for n in range(12)], self.config, self.now, self.runtime, request)
         self.assertEqual(article["generationStatus"], "fallback")
-        self.assertEqual(len(calls), 2)
+        self.assertEqual(len(calls), 2 + len(article["sections"]) + 1)
         self.assertNotIn("private parser details", json.dumps(article))
+
+    def test_sectional_recovery_can_publish_complete_article_after_full_json_fails(self):
+        items = [self.item(n) for n in range(12)]
+        complete = self.keyed_response(items)
+        calls = []
+        def request(*args, **kwargs):
+            calls.append(kwargs)
+            if kwargs["schema_name"] == "daily_deepread":
+                raise json.JSONDecodeError("truncated document", "PRIVATE_BODY_SENTINEL", 0)
+            if kwargs["schema_name"] == "daily_deepread_section":
+                section_id = json.loads(kwargs["input_text"])["sectionId"]
+                response = copy.deepcopy(complete["sections"][section_id])
+                for event in response["events"].values():
+                    event.pop("title")
+                    event.pop("summary")
+                return response
+            if kwargs["schema_name"] == "daily_deepread_lead":
+                return {key: complete[key] for key in ("headline", "introduction", "conclusion")}
+            self.fail("Unknown generation stage")
+        article = MODULE.build_daily_deepread(items, self.config, self.now, self.runtime, request)
+        self.assertEqual(article["generationStatus"], "ok")
+        self.assertEqual(len(self.events(article)), 12)
+        self.assertEqual({(event["newsId"], event["eventId"]) for event in self.events(article)},
+                         {(item["id"], item["eventId"]) for item in items})
+        self.assertEqual(article["headline"], complete["headline"])
+        self.assertEqual({event["analysis"] for event in self.events(article)},
+                         {"如果后续研究能在独立条件下复现公开材料描述的表现，这条消息的意义才可能从单次测试延伸到更广的应用判断。现有摘要没有给出完整部署安排，因此对推广速度的判断仍应保持条件限制。"})
+        self.assertEqual([call["schema_name"] for call in calls].count("daily_deepread"), 2)
+        self.assertEqual([call["schema_name"] for call in calls].count("daily_deepread_section"), len(article["sections"]))
+        self.assertEqual(calls[-1]["schema_name"], "daily_deepread_lead")
+        self.assertNotIn("PRIVATE_BODY_SENTINEL", json.dumps(article))
+
+    def test_failed_section_is_marked_partial_and_keeps_canonical_evidence(self):
+        items = [self.item(n) for n in range(12)]
+        complete = self.keyed_response(items)
+        def request(*args, **kwargs):
+            if kwargs["schema_name"] == "daily_deepread":
+                raise ValueError("invalid full JSON")
+            if kwargs["schema_name"] == "daily_deepread_section":
+                section_id = json.loads(kwargs["input_text"])["sectionId"]
+                if section_id == "intelligence":
+                    raise ValueError("invalid section JSON")
+                response = copy.deepcopy(complete["sections"][section_id])
+                for event in response["events"].values():
+                    event.pop("title")
+                    event.pop("summary")
+                return response
+            return {key: complete[key] for key in ("headline", "introduction", "conclusion")}
+        article = MODULE.build_daily_deepread(items, self.config, self.now, self.runtime, request)
+        self.assertEqual(article["generationStatus"], "partial")
+        self.assertEqual(len(self.events(article)), 12)
+        self.assertTrue(article["warnings"])
+        self.assertTrue(all(event["sources"] for event in self.events(article)))
 
     def test_unused_root_metadata_cannot_displace_a_complete_grounded_article(self):
         items = [self.item(n) for n in range(12)]
