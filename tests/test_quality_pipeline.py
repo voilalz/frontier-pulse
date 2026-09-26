@@ -162,6 +162,31 @@ class QualityPipelineTests(unittest.TestCase):
         self.assertEqual(after["identityAliases"], {max(first["eventId"], second["eventId"]):
                                                     min(first["eventId"], second["eventId"])})
 
+    def test_single_member_legacy_exact_record_can_reconcile_with_named_center(self):
+        from test_event_identity import MODULE as identity, story
+        a = story("a", "US Navy stands up hub to prepare unmanned systems for combat",
+                  "2026-09-25T18:13:48Z", summary="该中心名为机器人与自主系统作战发展中心（RASWDC）。")
+        b = story("b", "U.S. Navy Establishes RASWDC To Accelerate Unmanned Systems Integration",
+                  "2026-09-25T18:28:22Z", summary="美国海军成立RASWDC。")
+        identity.assign_event_ids([a], {}, {})
+        identity.assign_event_ids([b], {}, {})
+        before = news.build_event_registry({"editionDate": "2026-09-25", "generatedAt": "2026-09-25T19:00:00Z",
+                                            "items": [a, b]}, {}, self.config,
+                                           news.parse_datetime("2026-09-25T19:00:00Z", self.now))
+        legacy = next(record for record in before["items"] if "a" in record["newsIds"])
+        legacy["identityRepresentatives"][0]["semanticEligible"] = False
+        current = {"editionDate": "2026-09-27", "generatedAt": "2026-09-26T20:30:00Z", "items": []}
+        repaired = news.build_event_registry(current, before, self.config,
+                                             news.parse_datetime("2026-09-26T20:30:00Z", self.now))
+        self.assertEqual(repaired["eventCount"], 1)
+        self.assertEqual(repaired["identityAliases"], {max(a["eventId"], b["eventId"]):
+                                                      min(a["eventId"], b["eventId"])})
+        broader = copy.deepcopy(before)
+        next(record for record in broader["items"] if "a" in record["newsIds"])["newsIds"].append("unrelated-legacy")
+        protected = news.build_event_registry(current, broader, self.config,
+                                              news.parse_datetime("2026-09-26T20:30:00Z", self.now))
+        self.assertEqual(protected["eventCount"], 2)
+
     def test_featured_cache_cannot_replace_new_evidence_or_added_sources(self):
         current = {"summaryRevision": news.SUMMARY_REVISION, "summaryInputHash": "fresh",
                    "sources": [{"url": "https://nasa.gov/current"}, {"url": "https://esa.int/current"}],

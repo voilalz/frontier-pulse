@@ -415,8 +415,22 @@ def reconcile_registry_ids(previous_registry: dict[str, Any]) -> dict[str, str]:
         if not isinstance(record, dict) or not _EVENT_ID.fullmatch(_text(record.get("eventId"))):
             continue
         representatives = record.get("identityRepresentatives", [])
+        news_ids = record.get("newsIds", [])
+        # A legacy exact-only record with exactly one known article can be
+        # compared under this unusually strong named-center certificate. Never
+        # promote an old multi-article topic group to semantic evidence.
+        singleton = (
+            isinstance(news_ids, list) and len(news_ids) == 1
+            and isinstance(representatives, list) and len(representatives) == 1
+            and isinstance(representatives[0], dict)
+            and representatives[0].get("id") == news_ids[0]
+            and all(entry.get("newsId") == news_ids[0]
+                    for entry in record.get("timeline", []) if isinstance(entry, dict))
+        )
         for representative in representatives if isinstance(representatives, list) else []:
-            if not isinstance(representative, dict) or representative.get("identityVersion") != IDENTITY_VERSION or representative.get("semanticEligible") is not True:
+            if (not isinstance(representative, dict)
+                    or representative.get("identityVersion") != IDENTITY_VERSION
+                    or not (representative.get("semanticEligible") is True or singleton)):
                 continue
             evidence = _evidence(representative)
             if evidence.day and evidence.acronyms and "establish" in evidence.actions and (evidence.subject or evidence.actors):
