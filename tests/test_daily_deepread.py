@@ -287,7 +287,7 @@ class DailyDeepreadTests(unittest.TestCase):
         response["sections"][0]["overview"] = "PRIVATE_SENTINEL"
         error = MODULE._model_error(response, items, "2026-09-21")
         self.assertIn("sections[0].overview", error)
-        self.assertIn("15", error)
+        self.assertIn("length 16", error)
         self.assertNotIn("PRIVATE_SENTINEL", error)
         self.assertEqual(MODULE._model_error(self.model_response(items), items, "2026-09-21"), "")
 
