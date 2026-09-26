@@ -554,11 +554,17 @@ def build_daily_deepread(
                 schema_name="daily_deepread", schema=schema, example=example,
                 max_tokens=max(4000, min(16000, int(_number(config.get("deepread_max_output_tokens", 12000), 12000)))),
             )
+        except ValueError:
+            # The provider adapter parses JSON before returning. Parsing failures
+            # need the same bounded format correction as malformed object shapes.
+            error = "article: response must be one complete valid JSON object"
         except Exception:
             # Provider exceptions can contain endpoint credentials or private text.
+            logging.getLogger(__name__).warning("Daily deepread provider request failed; retaining factual fallback")
             article["warnings"].append("文章生成服务暂不可用，本期保留基于已有摘要的事实编排。")
             return article
-        error = _model_error(response, selected, edition)
+        else:
+            error = _model_error(response, selected, edition)
         if not error:
             break
         logging.getLogger(__name__).warning("Daily deepread validation (attempt %s): %s", attempt + 1, error)
