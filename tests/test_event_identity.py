@@ -109,6 +109,22 @@ class SameEventTests(unittest.TestCase):
                 self.assertEqual(MODULE.same_event(a, b), expected)
                 self.assertEqual(MODULE.same_event(b, a), expected)
 
+    def test_same_named_new_center_from_two_publishers_is_one_event(self):
+        first = story("a", "US Navy stands up hub to prepare unmanned systems for combat",
+                      "2026-09-25T18:13:48Z",
+                      summary="US Navy establishes Robotic and Autonomous Systems Warfighting Development Center (RASWDC) to train sailors.")
+        second = story("b", "U.S. Navy Establishes RASWDC To Accelerate Unmanned Systems Integration",
+                       "2026-09-25T18:28:22Z",
+                       summary="U.S. Navy officially established the Robotic and Autonomous Systems Warfighting Development Center (RASWDC).")
+        self.assertTrue(MODULE.same_event(first, second))
+        self.assertTrue(MODULE.same_event(second, first))
+        unrelated = story("c", "US Navy stands up hub to prepare other unmanned systems for combat",
+                          "2026-09-25T19:00:00Z", summary="US Navy establishes a separate logistics center (LDCOM).")
+        self.assertFalse(MODULE.same_event(unrelated, second))
+        renamed_action = story("d", "U.S. Navy closes RASWDC following review",
+                               "2026-09-25T19:00:00Z", summary=second["summary"])
+        self.assertFalse(MODULE.same_event(first, renamed_action))
+
     def test_same_immutable_article_wins_over_changed_title_and_date(self):
         first = story("article-1", "Initial report", "2026-09-01T10:00:00Z")
         second = story("article-1", "Corrected report", "2026-09-21T10:00:00Z")
@@ -263,6 +279,23 @@ class StableIdentityTests(unittest.TestCase):
         MODULE.assign_event_ids([incoming], registry_for(first, second), {})
         self.assertNotIn(incoming["eventId"], {first["eventId"], second["eventId"]})
         self.assertIn("ambiguous", incoming["eventIdentity"]["decision"])
+
+    def test_strong_named_center_evidence_reconciles_two_exact_registry_ids(self):
+        a = story("a", "US Navy stands up hub to prepare unmanned systems for combat",
+                  "2026-09-25T18:13:48Z", summary="The Navy establishes RASWDC for unmanned systems.")
+        b = story("b", "U.S. Navy Establishes RASWDC To Accelerate Unmanned Systems Integration",
+                  "2026-09-25T18:28:22Z", summary="The U.S. Navy establishes RASWDC for integration.")
+        MODULE.assign_event_ids([a], {}, {})
+        MODULE.assign_event_ids([b], {}, {})
+        self.assertNotEqual(a["eventId"], b["eventId"])
+        registry = registry_for(a, b)
+        current = [copy.deepcopy(a), copy.deepcopy(b)]
+        MODULE.assign_event_ids(current, registry, {})
+        canonical = min(a["eventId"], b["eventId"])
+        self.assertEqual({item["eventId"] for item in current}, {canonical})
+        self.assertEqual({*current[0]["eventIdentity"]["mergedFrom"]},
+                         {max(a["eventId"], b["eventId"])})
+        self.assertEqual(registry, registry_for(a, b))
 
     def test_registry_and_source_items_are_not_mutated_when_matching(self):
         initial = story("original", "NASA launches Europa Clipper mission")

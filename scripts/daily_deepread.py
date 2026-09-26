@@ -22,7 +22,7 @@ from zoneinfo import ZoneInfo
 
 
 TECHNICAL_CATEGORIES = ("AI", "航空航天", "无人系统", "前沿技术")
-GENERATION_REVISION = 3
+GENERATION_REVISION = 4
 TEXT_LIMITS = {
     "headline": (8, 140),
     "introduction": (100, 1800),

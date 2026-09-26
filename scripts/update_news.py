@@ -3261,12 +3261,62 @@ def build_event_registry(
     retention_days = max(30, min(730, int(config.get("event_retention_days", 365))))
     local_date = now.astimezone(ZoneInfo(config.get("timezone", DEFAULT_TIMEZONE))).date()
     cutoff = (local_date - timedelta(days=retention_days)).isoformat()
-    records = {
-        clean_text(record.get("eventId")): dict(record)
-        for record in event_records(previous_registry)
-        if clean_text(record.get("lastSeen")) >= cutoff
-    }
     edition = clean_text(report.get("editionDate"))
+    valid_id = re.compile(r"evt-[0-9a-f]{12}\Z")
+    old_aliases = previous_registry.get("identityAliases", {}) if isinstance(previous_registry, dict) else {}
+    aliases = {
+        old: canonical for old, canonical in old_aliases.items()
+        if isinstance(old, str) and isinstance(canonical, str)
+        and valid_id.fullmatch(old) and valid_id.fullmatch(canonical) and old != canonical
+    } if isinstance(old_aliases, dict) else {}
+    for item in report.get("items", []):
+        identity = item.get("eventIdentity") if isinstance(item.get("eventIdentity"), dict) else {}
+        canonical = clean_text(item.get("eventId"))
+        if not valid_id.fullmatch(canonical):
+            continue
+        for old in identity.get("mergedFrom", []) if isinstance(identity.get("mergedFrom"), list) else []:
+            if isinstance(old, str) and valid_id.fullmatch(old) and old != canonical:
+                aliases[old] = canonical
+
+    def resolve_id(event_id: str) -> str:
+        visited = set()
+        while event_id in aliases and event_id not in visited:
+            visited.add(event_id)
+            event_id = aliases[event_id]
+        return event_id
+
+    def combine_records(first: dict[str, Any], second: dict[str, Any], event_id: str) -> dict[str, Any]:
+        latest, older = sorted((first, second), key=lambda record: (
+            clean_text(record.get("lastSeen")), int(record.get("latestScore", 0) or 0)), reverse=True)
+        combined = dict(latest)
+        combined["eventId"] = event_id
+        combined["firstSeen"] = min(clean_text(first.get("firstSeen")), clean_text(second.get("firstSeen")))
+        combined["lastSeen"] = max(clean_text(first.get("lastSeen")), clean_text(second.get("lastSeen")))
+        for field, limit in (("newsIds", 120), ("editions", retention_days), ("sourceGroups", 16)):
+            combined[field] = list(dict.fromkeys([
+                *(older.get(field, []) if isinstance(older.get(field), list) else []),
+                *(latest.get(field, []) if isinstance(latest.get(field), list) else []),
+            ]))[-limit:]
+        for field, key, limit in (("identityRepresentatives", "id", 8), ("timeline", "newsId", 24), ("paperLinks", "id", 8)):
+            entries = [entry for record in (older, latest)
+                       for entry in (record.get(field, []) if isinstance(record.get(field), list) else [])
+                       if isinstance(entry, dict) and clean_text(entry.get(key))]
+            combined[field] = list({clean_text(entry[key]): entry for entry in entries}.values())[-limit:]
+        combined["independentSourceCount"] = len(combined["sourceGroups"]) or max(
+            int(first.get("independentSourceCount", 0) or 0), int(second.get("independentSourceCount", 0) or 0))
+        combined["forecastLedger"] = merge_forecast_ledgers(
+            older.get("forecastLedger"), latest.get("forecastLedger"), edition)
+        return combined
+
+    records = {}
+    for record in event_records(previous_registry):
+        if clean_text(record.get("lastSeen")) < cutoff:
+            continue
+        event_id = resolve_id(clean_text(record.get("eventId")))
+        if event_id in records:
+            records[event_id] = combine_records(records[event_id], record, event_id)
+        else:
+            records[event_id] = {**record, "eventId": event_id}
     for item in report.get("items", []):
         event_id = clean_text(item.get("eventId")) or stable_event_id(item.get("id"))
         record = records.get(event_id, {})
@@ -3351,6 +3401,8 @@ def build_event_registry(
         "timezone": report.get("timezone", DEFAULT_TIMEZONE),
         "retentionDays": retention_days,
         "eventCount": len(items),
+        "identityAliases": {old: resolve_id(old) for old in sorted(aliases)
+                            if resolve_id(old) != old and resolve_id(old) in records},
         "items": items,
     }
 
