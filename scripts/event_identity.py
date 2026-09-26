@@ -400,6 +400,42 @@ def _sort_key(evidence: _Evidence) -> tuple[str, str, str, str]:
     return evidence.news_id, min(evidence.urls, default=""), str(evidence.day or ""), evidence.headline
 
 
+def reconcile_registry_ids(previous_registry: dict[str, Any]) -> dict[str, str]:
+    """Find unambiguous old splits by indexing named founding records by day.
+
+    Historical stories can age out of the 24-hour input before the matcher is
+    upgraded. Scan only versioned, semantically eligible saved representatives;
+    same-day/acronym buckets avoid quadratic work across the whole registry.
+    """
+    records = previous_registry.get("items", []) if isinstance(previous_registry, dict) else []
+    if not isinstance(records, list):
+        return {}
+    buckets: dict[tuple[date, str], list[tuple[str, _Evidence]]] = {}
+    for record in records:
+        if not isinstance(record, dict) or not _EVENT_ID.fullmatch(_text(record.get("eventId"))):
+            continue
+        representatives = record.get("identityRepresentatives", [])
+        for representative in representatives if isinstance(representatives, list) else []:
+            if not isinstance(representative, dict) or representative.get("identityVersion") != IDENTITY_VERSION or representative.get("semanticEligible") is not True:
+                continue
+            evidence = _evidence(representative)
+            if evidence.day and evidence.acronyms and "establish" in evidence.actions and (evidence.subject or evidence.actors):
+                for acronym in evidence.acronyms:
+                    buckets.setdefault((evidence.day, acronym), []).append((record["eventId"], evidence))
+    proposed: dict[str, set[str]] = {}
+    for entries in buckets.values():
+        for left in range(len(entries)):
+            for right in range(left + 1, len(entries)):
+                first_id, first = entries[left]
+                second_id, second = entries[right]
+                if first_id != second_id and _match(first, second) == "same-day-specific-acronym-action":
+                    proposed.setdefault(first_id, set()).add(second_id)
+                    proposed.setdefault(second_id, set()).add(first_id)
+    return {old: min(old, next(iter(peers)))
+            for old, peers in proposed.items() if len(peers) == 1
+            and len(proposed.get(next(iter(peers)), ())) == 1 and old > next(iter(peers))}
+
+
 def assign_event_ids(items: list[dict[str, Any]], previous_registry: dict[str, Any], config: dict[str, Any]) -> None:
     """Assign deterministic IDs in place, reusing only unambiguous registry evidence.
 
@@ -410,7 +446,8 @@ def assign_event_ids(items: list[dict[str, Any]], previous_registry: dict[str, A
     evidence = [_evidence(item) for item in items]
     records = previous_registry.get("items", []) if isinstance(previous_registry, dict) else []
     saved_aliases = previous_registry.get("identityAliases", {}) if isinstance(previous_registry, dict) else {}
-    saved_aliases = saved_aliases if isinstance(saved_aliases, dict) else {}
+    saved_aliases = {**reconcile_registry_ids(previous_registry),
+                     **(saved_aliases if isinstance(saved_aliases, dict) else {})}
     def canonical_event(event_id: str) -> str:
         visited = set()
         while event_id in saved_aliases and event_id not in visited:

@@ -3257,18 +3257,18 @@ def merge_forecast_ledgers(existing: Any, incoming: Any, edition: str) -> list[d
 def build_event_registry(
     report: dict[str, Any], previous_registry: Any, config: dict[str, Any], now: datetime
 ) -> dict[str, Any]:
-    from event_identity import event_identity_record
+    from event_identity import event_identity_record, reconcile_registry_ids
     retention_days = max(30, min(730, int(config.get("event_retention_days", 365))))
     local_date = now.astimezone(ZoneInfo(config.get("timezone", DEFAULT_TIMEZONE))).date()
     cutoff = (local_date - timedelta(days=retention_days)).isoformat()
     edition = clean_text(report.get("editionDate"))
     valid_id = re.compile(r"evt-[0-9a-f]{12}\Z")
     old_aliases = previous_registry.get("identityAliases", {}) if isinstance(previous_registry, dict) else {}
-    aliases = {
+    aliases = {**reconcile_registry_ids(previous_registry), **{
         old: canonical for old, canonical in old_aliases.items()
         if isinstance(old, str) and isinstance(canonical, str)
         and valid_id.fullmatch(old) and valid_id.fullmatch(canonical) and old != canonical
-    } if isinstance(old_aliases, dict) else {}
+    }} if isinstance(old_aliases, dict) else reconcile_registry_ids(previous_registry)
     for item in report.get("items", []):
         identity = item.get("eventIdentity") if isinstance(item.get("eventIdentity"), dict) else {}
         canonical = clean_text(item.get("eventId"))

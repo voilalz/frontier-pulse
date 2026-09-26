@@ -293,8 +293,8 @@ class StableIdentityTests(unittest.TestCase):
         MODULE.assign_event_ids(current, registry, {})
         canonical = min(a["eventId"], b["eventId"])
         self.assertEqual({item["eventId"] for item in current}, {canonical})
-        self.assertEqual({*current[0]["eventIdentity"]["mergedFrom"]},
-                         {max(a["eventId"], b["eventId"])})
+        self.assertEqual(MODULE.reconcile_registry_ids(registry),
+                         {max(a["eventId"], b["eventId"]): canonical})
         self.assertEqual(registry, registry_for(a, b))
 
     def test_registry_and_source_items_are_not_mutated_when_matching(self):

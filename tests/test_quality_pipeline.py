@@ -143,6 +143,25 @@ class QualityPipelineTests(unittest.TestCase):
         identity.assign_event_ids([following], after, {})
         self.assertEqual(following["eventId"], canonical)
 
+    def test_registry_repairs_confirmed_old_split_after_both_stories_leave_daily_window(self):
+        from test_event_identity import MODULE as identity, story
+        first = story("first", "US Navy stands up hub to prepare unmanned systems for combat",
+                      "2026-09-25T18:13:48Z", summary="The U.S. Navy establishes RASWDC to train sailors.")
+        second = story("second", "U.S. Navy Establishes RASWDC To Accelerate Unmanned Systems Integration",
+                       "2026-09-25T18:28:22Z", summary="The U.S. Navy establishes RASWDC to integrate systems.")
+        identity.assign_event_ids([first], {}, {})
+        identity.assign_event_ids([second], {}, {})
+        before = news.build_event_registry({"editionDate": "2026-09-25", "generatedAt": "2026-09-25T19:00:00Z",
+                                            "items": [first, second]}, {}, self.config,
+                                           news.parse_datetime("2026-09-25T19:00:00Z", self.now))
+        empty_today = {"editionDate": "2026-09-27", "generatedAt": "2026-09-26T20:30:00Z", "items": []}
+        after = news.build_event_registry(empty_today, before, self.config,
+                                          news.parse_datetime("2026-09-26T20:30:00Z", self.now))
+        self.assertEqual(after["eventCount"], 1)
+        self.assertEqual(set(after["items"][0]["newsIds"]), {"first", "second"})
+        self.assertEqual(after["identityAliases"], {max(first["eventId"], second["eventId"]):
+                                                    min(first["eventId"], second["eventId"])})
+
     def test_featured_cache_cannot_replace_new_evidence_or_added_sources(self):
         current = {"summaryRevision": news.SUMMARY_REVISION, "summaryInputHash": "fresh",
                    "sources": [{"url": "https://nasa.gov/current"}, {"url": "https://esa.int/current"}],
