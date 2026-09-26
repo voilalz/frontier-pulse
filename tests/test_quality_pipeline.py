@@ -126,6 +126,10 @@ class QualityPipelineTests(unittest.TestCase):
         before = news.build_event_registry({"editionDate": "2026-09-25", "generatedAt": "2026-09-25T19:00:00Z",
                                             "items": [first, second]}, {}, self.config,
                                            news.parse_datetime("2026-09-25T19:00:00Z", self.now))
+        for record in before["items"]:
+            next_day = {**record["timeline"][0], "editionDate": "2026-09-26"}
+            record["timeline"].append(next_day)
+            record["editions"].append("2026-09-26")
         self.assertEqual(before["eventCount"], 2)
         current = copy.deepcopy([first, second])
         identity.assign_event_ids(current, before, {})
@@ -137,6 +141,10 @@ class QualityPipelineTests(unittest.TestCase):
         self.assertEqual(after["eventCount"], 1)
         self.assertEqual(after["identityAliases"], {old_id: canonical})
         self.assertEqual(set(after["items"][0]["newsIds"]), {"first", "second"})
+        self.assertEqual({(entry["editionDate"], entry["newsId"])
+                          for entry in after["items"][0]["timeline"]},
+                         {("2026-09-25", "first"), ("2026-09-25", "second"),
+                          ("2026-09-26", "first"), ("2026-09-26", "second")})
         self.assertEqual({item["newsId"] for item in after["items"][0]["timeline"]}, {"first", "second"})
         following = story("third", "U.S. Navy Establishes RASWDC To Accelerate Unmanned Systems Integration",
                           "2026-09-26T09:00:00Z", summary=second["summary"])
