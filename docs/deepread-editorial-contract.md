@@ -1,13 +1,13 @@
 # 每日深读编辑内容模型 v2
 
-`public/data/deepread.json` 与每日日期归档共享这一模型。`schemaVersion: 1` 的历史归档仍由网页旧渲染器读取。生成修订号为 8；发布日期采用北京时间，事件材料限定为生成时前 24 小时内有可验证发布时间的新闻。
+`public/data/deepread.json` 与每日日期归档共享这一模型。`schemaVersion: 1` 的历史归档仍由网页旧渲染器读取。生成修订号为 9；发布日期采用北京时间，事件材料限定为生成时前 24 小时内有可验证发布时间的新闻。
 
 ## 公共数据契约
 
 ```json
 {
   "schemaVersion": 2,
-  "generationRevision": 8,
+  "generationRevision": 9,
   "editionDate": "2026-09-27",
   "generatedAt": "2026-09-26T23:07:00Z",
   "headline": "项目从准备进入试验记录",

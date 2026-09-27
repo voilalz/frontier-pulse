@@ -58,7 +58,7 @@ jobs:
           python scripts/check_daily_refresh.py
           --status public/data/status.json
           --deepread public/data/deepread.json
-          --required-deepread-revision 8
+          --required-deepread-revision 9
           --timezone Asia/Shanghai
           --event-name "$EVENT_NAME"
           --force "$FORCE_REFRESH"
@@ -126,7 +126,7 @@ jobs:
           assert e.get('eventCount') == len(e.get('items', []));
           assert e.get('schemaVersion') == 2;
           de=d.get('events', []);
-          assert d.get('schemaVersion') == 2 and d.get('generationRevision') == 8;
+          assert d.get('schemaVersion') == 2 and d.get('generationRevision') == 9;
           assert d.get('editionDate') == p.get('editionDate');
           assert len(de) == d.get('eventCount') and len(de) <= 6 and d.get('candidateCount', 13) <= 12;
           assert len(set(x['eventId'] for x in de)) == len(de);

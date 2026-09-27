@@ -20,7 +20,7 @@ from deepread_editorial_signals import (comparison_keys, delta_score, editorial_
                                         is_political_policy, strip_caption_text)
 
 
-GENERATION_REVISION = 8
+GENERATION_REVISION = 9
 EVIDENCE_LEVELS = ("primary", "multi", "single", "opinion")
 COMPARISON_NOTE = "并列比较不代表事件之间存在因果关系。"
 _CAUSAL_CLAIM = re.compile(r"导致|造成|促使|引发|使得|使其|因而|因此|从而|归因于|推动|带动|促成|触发|"
