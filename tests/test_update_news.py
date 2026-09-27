@@ -633,10 +633,14 @@ class UpdateNewsTests(unittest.TestCase):
             daily_ids = {item["id"]: item["eventId"] for item in payload["items"]}
             self.assertTrue(all(item["eventId"] == daily_ids.get(item["id"], item["eventId"]) for item in stream["items"]))
             deepread = json.loads((root / "deepread.json").read_text())
-            deep_events = [event for section in deepread["sections"] for event in section["events"]]
-            self.assertGreaterEqual(deepread["eventCount"], 10)
-            self.assertLessEqual(deepread["eventCount"], 15)
+            deep_events = deepread["events"]
+            self.assertEqual(deepread["schemaVersion"], 2)
+            self.assertGreaterEqual(deepread["eventCount"], 4)
+            self.assertLessEqual(deepread["eventCount"], 6)
+            self.assertLessEqual(deepread["candidateCount"], 12)
             self.assertEqual(len({event["eventId"] for event in deep_events}), deepread["eventCount"])
+            self.assertEqual({news_id for chapter in deepread["chapters"] for news_id in chapter["newsIds"]},
+                             {event["newsId"] for event in deep_events})
             self.assertTrue(all(event["sources"] for event in deep_events))
             self.assertTrue((root / "deepread/2026-07-16.json").exists())
             self.assertEqual(json.loads((root / "deepread/index.json").read_text())["editions"][0]["editionDate"], "2026-07-16")

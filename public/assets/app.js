@@ -490,7 +490,92 @@
     hideAlert();
   }
 
+  const EVIDENCE_LABELS = {primary: "一手来源", multi: "多源报道", single: "单源报道", opinion: "观点材料"};
+
+  function safeEditorialUrl(value) {
+    const safe = safeUrl(value);
+    if (!safe) return "";
+    const url = new URL(safe);
+    const host = url.hostname.toLowerCase();
+    const octets = /^\d+\.\d+\.\d+\.\d+$/.test(host) ? host.split(".").map(Number) : null;
+    const privateIp = host.startsWith("[") || (octets && (
+      octets[0] === 0 || octets[0] === 10 || octets[0] === 127 || octets[0] >= 224
+      || (octets[0] === 100 && octets[1] >= 64 && octets[1] <= 127)
+      || (octets[0] === 169 && octets[1] === 254)
+      || (octets[0] === 172 && octets[1] >= 16 && octets[1] <= 31)
+      || (octets[0] === 192 && octets[1] === 168)
+      || (octets[0] === 198 && [18, 19].includes(octets[1]))));
+    return url.username || url.password || host === "localhost" || host.endsWith(".localhost")
+      || host.endsWith(".local") || privateIp ? "" : safe;
+  }
+
+  function normalizeEditorialDeepread(payload) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(payload.editionDate || "")
+        || !Array.isArray(payload.events) || !Array.isArray(payload.chapters)) throw new Error("深读文件格式不完整");
+    const seenEvents = new Set(), seenNews = new Set();
+    let filtered = Boolean(payload.contentFiltered);
+    const events = payload.events.slice(0, 12).filter((event) => {
+      const id = clean(event?.newsId), eventId = clean(event?.eventId);
+      if (!id || !eventId || seenEvents.has(eventId) || seenNews.has(id)
+          || !isAllowedNewsItem({...event, summary: event?.excerpt})) { filtered = true; return false; }
+      seenEvents.add(eventId); seenNews.add(id);
+      return true;
+    }).map((event) => {
+      const historyInput = Array.isArray(event.history) ? event.history : [];
+      const history = historyInput.filter((story) =>
+        /^\d{4}-\d{2}-\d{2}$/.test(clean(story?.editionDate))
+        && clean(story.editionDate) < payload.editionDate && clean(story.newsId) !== clean(event.newsId)
+        && isAllowedNewsItem({title: story.title, summary: ""})).map((story) => ({
+          editionDate: clean(story.editionDate), newsId: clean(story.newsId),
+          title: clean(story.title), source: clean(story.source),
+        })).slice(-3);
+      if (historyInput.length !== history.length) filtered = true;
+      return {
+        newsId: clean(event.newsId), eventId: clean(event.eventId), title: clean(event.title),
+        originalTitle: clean(event.originalTitle),
+        excerpt: clean(event.excerpt), category: clean(event.category), publishedAt: clean(event.publishedAt),
+        evidenceLevel: Object.hasOwn(EVIDENCE_LABELS, event.evidenceLevel) ? event.evidenceLevel : "single",
+        sources: (Array.isArray(event.sources) ? event.sources : []).map((source) => ({
+          name: clean(source?.name, "原报道"), url: safeEditorialUrl(source?.url),
+        })).filter((source) => source.url).slice(0, 8),
+        image: safeEditorialUrl(event.image), imageSource: clean(event.imageSource), history,
+      };
+    }).filter((event) => event.sources.length);
+    if (events.length !== payload.events.length) filtered = true;
+    const byNews = new Map(events.map((event) => [event.newsId, event]));
+    const chapters = payload.chapters.slice(0, 6).map((chapter, index) => {
+      const newsIds = (Array.isArray(chapter?.newsIds) ? chapter.newsIds : []).map((value) => clean(value))
+        .filter((id, offset, list) => byNews.has(id) && list.indexOf(id) === offset);
+      const blocks = (Array.isArray(chapter?.blocks) ? chapter.blocks : []).filter((block) => {
+        const refs = Array.isArray(block?.newsIds) ? block.newsIds.map((value) => clean(value)) : [];
+        if (!refs.length || !refs.every((id) => newsIds.includes(id))) { filtered = true; return false; }
+        return ["paragraph", "change"].includes(block.type) && clean(block.text);
+      }).slice(0, 10).map((block) => ({type: block.type, text: clean(block.text),
+        newsIds: block.newsIds.map((value) => clean(value))}));
+      return {id: `deepread-chapter-${index + 1}`, title: clean(chapter?.title, "本期进展"),
+        angle: clean(chapter?.angle), newsIds, blocks};
+    }).filter((chapter) => chapter.newsIds.length);
+    if (chapters.length !== payload.chapters.length) filtered = true;
+    if (filtered) chapters.forEach((chapter) => {
+      chapter.title = "本期进展"; chapter.angle = "";
+      chapter.blocks = chapter.newsIds.map((id) => ({type: "paragraph",
+        text: byNews.get(id).excerpt || byNews.get(id).title, newsIds: [id]}));
+    });
+    const retained = new Set(chapters.flatMap((chapter) => chapter.newsIds));
+    const usedEvents = events.filter((event) => retained.has(event.newsId));
+    return {
+      schemaVersion: 2, editionDate: payload.editionDate, generatedAt: clean(payload.generatedAt),
+      headline: filtered ? "今日前沿深读" : clean(payload.headline, "今日前沿深读"),
+      lead: filtered ? "" : clean(payload.lead),
+      generationStatus: usedEvents.length < 4 ? "insufficient" : clean(payload.generationStatus, "fallback"),
+      contentFiltered: filtered, chapters, events: usedEvents,
+      eventCount: usedEvents.length,
+      sourceCount: new Set(usedEvents.flatMap((event) => event.sources.map((source) => source.url))).size,
+    };
+  }
+
   function normalizeDeepread(payload) {
+    if (payload?.schemaVersion === 2) return normalizeEditorialDeepread(payload);
     if (!payload || payload.schemaVersion !== 1 || !Array.isArray(payload.sections)
         || !/^\d{4}-\d{2}-\d{2}$/.test(payload.editionDate || "")) throw new Error("深读文件格式不完整");
     const seen = new Set();
@@ -526,7 +611,44 @@
     };
   }
 
+  function renderEditorialDeepread(report) {
+    if (!report?.chapters?.length) return '<div class="empty"><h2>这期深读尚未发布</h2><p>请选择已有日期，或在日报更新后回来阅读。</p></div>';
+    const byNews = new Map(report.events.map((event) => [event.newsId, event]));
+    const length = [report.lead, ...report.chapters.flatMap((chapter) => chapter.blocks.map((block) => block.text))].join("").length;
+    const minutes = Math.max(2, Math.round(length / 450));
+    return `<div class="deepread-layout">
+      <aside class="deepread-toc"><p class="eyebrow">IN THIS EDITION</p><b>本期阅读</b>
+        <ol>${report.chapters.map((chapter) => `<li><a href="#${esc(chapter.id)}">${esc(chapter.title)}</a></li>`).join("")}</ol>
+        <p>${report.eventCount} 项核心进展 · 约 ${minutes} 分钟</p>
+        <p class="deepread-evidence-guide">证据标签说明材料来源类型，不代表所有细节已经独立核实。</p>
+      </aside>
+      <article class="deepread-article deepread-editorial">
+        <header class="deepread-header"><p class="eyebrow">${esc(report.editionDate)} · FRONTIER PULSE</p>
+          <h2>${esc(report.headline)}</h2>
+          ${report.lead ? `<p class="deepread-lead">${esc(report.lead)}</p>` : ""}
+          ${report.generationStatus !== "ok" ? `<p class="deepread-note">本期为简版，选题或成文材料仍在补充。</p>` : ""}
+        </header>
+        ${report.chapters.map((chapter) => {
+          const members = chapter.newsIds.map((id) => byNews.get(id)).filter(Boolean);
+          const illustrated = members.find((event) => event.image);
+          return `<section class="deepread-chapter" id="${esc(chapter.id)}">
+            <h2>${esc(chapter.title)}</h2>
+            ${illustrated ? `<figure class="deepread-figure"><img src="${esc(illustrated.image)}" alt="${esc(illustrated.title)}" loading="lazy" decoding="async" referrerpolicy="no-referrer"><figcaption>原文配图 · 图片来源：${esc(illustrated.imageSource || illustrated.sources[0]?.name || "原报道")}</figcaption></figure>` : ""}
+            ${chapter.blocks.map((block) => `<p class="${block.type === "change" ? "deepread-change" : "deepread-paragraph"}">${esc(block.text)}</p>`).join("")}
+            <div class="deepread-source-list"><b>本节资料</b>${members.map((event) => `<div class="deepread-source-row">
+              <span class="deepread-evidence-tag">${EVIDENCE_LABELS[event.evidenceLevel]}</span>
+              <span>${esc(event.title)}</span>
+              ${event.sources.map((source) => `<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.name)} ↗</a>`).join("")}
+              ${event.history.length ? `<small>前次记录：${event.history.map((story) => `<a href="?view=history&amp;date=${esc(story.editionDate)}">${esc(story.editionDate)}</a>`).join("、")}</small>` : ""}
+            </div>`).join("")}</div>
+          </section>`;
+        }).join("")}
+      </article>
+    </div>`;
+  }
+
   function renderDeepreadArticle(report) {
+    if (report?.schemaVersion === 2) return renderEditorialDeepread(report);
     if (!report?.sections?.length) return '<div class="empty"><h2>这期深读尚未发布</h2><p>请选择已有日期，或在日报更新后回来阅读。</p></div>';
     const events = report.sections.flatMap((section) => section.events);
     const length = [report.introduction, report.conclusion, ...report.sections.map((section) => section.overview),
@@ -1436,7 +1558,7 @@
       $("deepreadContent").innerHTML = renderDeepreadArticle(state.deepreadReport);
       $("deepreadContent").setAttribute("aria-busy", "false");
       $("dataNote").textContent = state.deepreadReport?.generatedAt
-        ? `本期生成于 ${formatDate(state.deepreadReport.generatedAt)} · 报道附有原文来源，分析与后续观察请结合原文阅读。`
+        ? `本期生成于 ${formatDate(state.deepreadReport.generatedAt)}`
         : "每日深读将在下一次日报成功更新后发布。";
       syncUrl();
       return;
