@@ -736,6 +736,48 @@ class EditorialDeepreadTests(unittest.TestCase):
         self.assertEqual([block["type"] for block in chapters[0]["blocks"]].count("comparison"), 1)
         self.assertIn("不代表事件之间存在因果关系", chapters[0]["blocks"][-1]["text"])
 
+    def test_valid_single_event_outline_still_groups_supported_independent_topic(self):
+        items = [self.item(n) for n in range(5)]
+        items[0].update(title="OpenAI暂停AI代理训练", originalTitle="OpenAI pauses AI agent model training",
+                        summary="OpenAI因AI代理异常行为暂停模型训练，具体调查结果尚未公布。")
+        items[2].update(title="安全团队调查AI代理权限", originalTitle="Security lab investigates AI agent access",
+                        summary="安全团队调查另一项AI代理权限事件，公开了当前审查范围。")
+        def provider(runtime, **kwargs):
+            if kwargs["schema_name"] == "deepread_outline_v2":
+                return {"selectedNewsIds": [f"news-{n}" for n in range(5)], "chapters": [
+                    {"title": f"第{n}项独立进展", "angle": "核对今天披露的具体动作",
+                     "newsIds": [f"news-{n}"], "kind": "event", "comparisonKey": ""}
+                    for n in range(5)]}
+            outline = json.loads(kwargs["input_text"])["outline"]
+            chapters = {}
+            for chapter in outline:
+                blocks = [{"type": "paragraph", "text": "这项报道披露了当期可核对的具体动作与当前公开的事实范围。",
+                           "newsIds": [news_id]} for news_id in chapter["newsIds"]]
+                if chapter["kind"] == "comparison":
+                    blocks.append({"type": "comparison", "text": (
+                        "两项独立报道分别披露代理训练暂停与权限审查，并列比较不代表事件之间存在因果关系。"),
+                        "newsIds": chapter["newsIds"]})
+                chapters[chapter["id"]] = {"blocks": blocks}
+            return {"headline": "AI代理安全的两项进展与其他独立报道",
+                    "lead": "今天两项独立事件分别涉及AI代理训练和权限审查，其余新闻对应不同技术项目的公开进展。",
+                    "chapters": chapters,
+                    "observations": [
+                        {"text": "第一项代理报道只确认暂停训练，调查结果仍待后续公开材料。",
+                         "newsIds": ["news-0"], "supports": [
+                             {"newsId": "news-0", "supportQuote": "具体调查结果尚未公布"}]},
+                        {"text": "第二项审查已经公开当前范围，进一步结论仍需核对新的证据。",
+                         "newsIds": ["news-2"], "supports": [
+                             {"newsId": "news-2", "supportQuote": "公开了当前审查范围"}]},
+                    ]}
+        report = build_daily_deepread(items, self.config, self.now,
+                                      {"provider": "fixture"}, provider)
+        self.assertEqual(report["eventCount"], 5)
+        self.assertEqual(len(report["chapters"]), 4)
+        chapter = next(c for c in report["chapters"] if c["kind"] == "comparison")
+        self.assertEqual(set(chapter["newsIds"]), {"news-0", "news-2"})
+        self.assertEqual(chapter["comparisonNote"], "并列比较不代表事件之间存在因果关系。")
+        self.assertEqual([b["type"] for b in chapter["blocks"]].count("comparison"), 1)
+
     def test_two_headlines_for_the_same_pause_are_not_forced_into_a_comparison(self):
         items = [self.item(n) for n in range(5)]
         items[0].update(title="OpenAI因AI代理探查网站暂停最新模型训练",
@@ -747,6 +789,27 @@ class EditorialDeepreadTests(unittest.TestCase):
         report = build_daily_deepread(items, self.config, self.now)
         self.assertEqual(report["eventCount"], 5)
         self.assertTrue(all(chapter["kind"] == "event" for chapter in report["chapters"]))
+
+    def test_failed_prose_keeps_sourced_comparison_and_explicit_limit_observations(self):
+        items = [self.item(n) for n in range(5)]
+        items[0].update(title="OpenAI暂停AI代理训练", originalTitle="OpenAI pauses AI agent training",
+                        summary="OpenAI因AI代理异常行为暂停训练，具体调查范围尚未公布。")
+        items[1].update(title="平台测试AI代理购物", originalTitle="Retailer trials AI agent shopping",
+                        summary="平台测试AI代理购物授权，实际应用范围尚未披露。")
+        def provider(runtime, **kwargs):
+            if kwargs["schema_name"] == "deepread_outline_v2":
+                return {"selectedNewsIds": [f"news-{n}" for n in range(5)], "chapters": [
+                    {"title": f"第{n}项独立进展", "angle": "核对本项任务披露的动作",
+                     "newsIds": [f"news-{n}"], "kind": "event", "comparisonKey": ""}
+                    for n in range(5)]}
+            return None
+        report = build_daily_deepread(items, self.config, self.now,
+                                      {"provider": "fixture"}, provider)
+        self.assertEqual(report["eventCount"], 5)
+        self.assertEqual(len(report["chapters"]), 4)
+        self.assertEqual(len(report["observations"]), 2)
+        self.assertTrue(all(o["supports"][0]["supportQuote"] in items[int(o["newsIds"][0][-1])]["summary"]
+                            for o in report["observations"]))
 
     def test_specific_comparison_subjects_extend_beyond_initial_five(self):
         from deepread_editorial_signals import comparison_keys
