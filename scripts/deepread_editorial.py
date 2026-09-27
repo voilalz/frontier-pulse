@@ -20,7 +20,7 @@ from deepread_editorial_signals import (comparison_keys, delta_score, editorial_
                                         is_political_policy, strip_caption_text)
 
 
-GENERATION_REVISION = 11
+GENERATION_REVISION = 10
 EVIDENCE_LEVELS = ("primary", "multi", "single", "opinion")
 COMPARISON_NOTE = "并列比较不代表事件之间存在因果关系。"
 _CAUSAL_CLAIM = re.compile(r"导致|造成|促使|引发|使得|使其|因而|因此|从而|归因于|推动|带动|牵动|促成|触发|"
@@ -200,39 +200,28 @@ def _same_reported_action(first: dict[str, Any], second: dict[str, Any]) -> bool
     return len(a) >= 5 and len(b) >= 5 and a[:5] == b[:5]
 
 
-def _group_independent_comparisons(outline: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Apply the same evidence gate after either a model or fallback outline."""
-    grouped, used = [], set()
-    for index, chapter in enumerate(outline):
-        if index in used:
+def _default_outline(pool: list[dict[str, Any]], count: int) -> list[dict[str, Any]]:
+    chosen = _select(pool, count)
+    outline, used = [], set()
+    for index, item in enumerate(chosen):
+        if item["id"] in used:
             continue
-        if chapter["kind"] != "event" or len(chapter["items"]) != 1:
-            grouped.append(chapter)
-            continue
-        item = chapter["items"][0]
-        pair = next(((other_index, other["items"][0], key)
-                     for other_index, other in enumerate(outline[index + 1:], start=index + 1)
-                     if other_index not in used and other["kind"] == "event" and len(other["items"]) == 1
-                     and other["items"][0]["eventId"] != item["eventId"]
-                     and not _same_reported_action(item, other["items"][0])
-                     for key in sorted(item["_comparisonKeys"] & other["items"][0]["_comparisonKeys"])
+        pair = next(((other, key) for other in chosen[index + 1:] if other["id"] not in used
+                     and other["eventId"] != item["eventId"] and not _same_reported_action(item, other)
+                     for key in sorted(item["_comparisonKeys"] & other["_comparisonKeys"])
                      if key in _COMPARISON_LABELS), None)
         if pair:
-            other_index, other, key = pair
+            other, key = pair
             label = _COMPARISON_LABELS[key]
-            grouped.append({"title": f"{label}：两项独立进展", "angle": f"分别核对两项报道在{label}上披露的事实与未知事项",
+            outline.append({"title": f"{label}：两项独立进展", "angle": f"分别核对两项报道在{label}上披露的事实与未知事项",
                             "items": [item, other], "kind": "comparison", "comparisonKey": key,
                             "sourceFallback": True})
-            used.add(other_index)
+            used.add(other["id"])
         else:
-            grouped.append(chapter)
-    return grouped
-
-
-def _default_outline(pool: list[dict[str, Any]], count: int) -> list[dict[str, Any]]:
-    return _group_independent_comparisons([
-        {"title": item["title"], "angle": "追踪本次报道中的具体变化", "items": [item],
-         "kind": "event", "comparisonKey": ""} for item in _select(pool, count)])
+            outline.append({"title": item["title"], "angle": "追踪本次报道中的具体变化", "items": [item],
+                            "kind": "event", "comparisonKey": ""})
+        used.add(item["id"])
+    return outline
 
 
 def _plan_outline(
@@ -699,8 +688,6 @@ def build_daily_deepread(
     planned = outline is not None
     if outline is None:
         outline = _default_outline(selected[:core], core)
-    else:
-        outline = _group_independent_comparisons(outline)
     article = _article(outline, pool, edition, generated)
     if core < 4:
         article["warnings"].append("本期合格独立事件不足4项，按实际数量刊发简版。")
@@ -720,10 +707,7 @@ def build_daily_deepread(
         _split_unrecovered_comparisons(article, outline)
         article["warnings"].append(
             f"完整正文未通过校验，已逐章恢复{recovered}章，其余保留来源摘要编排的简版。")
-        article["observations"] = _source_limit_observations([item for chapter in outline for item in chapter["items"]])
-        if article["observations"]:
-            article["warnings"].append("今日观察依据来源中明确的未披露事项生成。")
-        if recovered or article["observations"]:
+        if recovered:
             article["generationStatus"] = "partial"
         return article
     article["headline"] = prose["headline"]
