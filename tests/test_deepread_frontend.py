@@ -150,6 +150,45 @@ class DeepreadFrontendTests(unittest.TestCase):
         self.assertNotIn("[::1]", rendered)
         self.assertIn("单源报道", rendered)
 
+    def test_version_two_comparison_and_short_observations_link_to_sources(self):
+        payload = self.editorial_payload()
+        second = copy.deepcopy(payload["events"][0])
+        second.update(newsId="other", eventId="evt-other", title="另一项智能体试验",
+                      sources=[{"name": "第二来源", "url": "https://example.org/other"}])
+        payload["events"].append(second)
+        chapter = payload["chapters"][0]
+        chapter.update(kind="comparison", comparisonKey="ai-agent",
+                       comparisonNote="并列比较不代表事件之间存在因果关系。", newsIds=["nasa", "other"])
+        chapter["blocks"].extend([
+            {"type": "paragraph", "text": "第二项试验公布范围。", "newsIds": ["other"]},
+            {"type": "comparison", "text": "两项报道分别披露试验范围与各自边界。", "newsIds": ["nasa", "other"]},
+        ])
+        payload["observations"] = [{"text": "两项试验分别界定了当前的测试范围。", "newsIds": ["nasa", "other"],
+                                     "supports": [{"newsId": "nasa", "supportQuote": "NASA 公布任务测试结果"},
+                                                  {"newsId": "other", "supportQuote": "另一项智能体试验"}]}]
+        rendered = self.browser_result(f'renderDeepreadArticle(normalizeDeepread({json.dumps(payload)}))')
+        for expected in ["并列比较不代表事件之间存在因果关系", "两项报道分别披露", "今日观察",
+                         "两项试验分别界定", "https://example.org/other", "deepread-comparison"]:
+            self.assertIn(expected, rendered)
+
+    def test_version_two_filter_clears_comparison_note_observations_and_removed_prose(self):
+        payload = self.editorial_payload()
+        banned = copy.deepcopy(payload["events"][0])
+        banned.update(newsId="banned", eventId="evt-banned", title="China launches new satellite",
+                      originalTitle="China launches new satellite")
+        payload["events"].append(banned)
+        payload["chapters"][0].update(kind="comparison", comparisonKey="ai-agent",
+                                      comparisonNote="REMOVED_COMPARISON_NOTE", newsIds=["nasa", "banned"])
+        payload["chapters"][0]["blocks"].append({"type": "comparison", "text": "REMOVED_COMPARISON_PROSE",
+                                                   "newsIds": ["nasa", "banned"]})
+        payload["observations"] = [{"text": "REMOVED_OBSERVATION", "newsIds": ["nasa", "banned"],
+                                     "supports": [{"newsId": "banned", "supportQuote": "China launches"}]}]
+        report = self.browser_result(f'normalizeDeepread({json.dumps(payload)})')
+        self.assertTrue(report["contentFiltered"])
+        self.assertEqual(report["observations"], [])
+        self.assertEqual(report["chapters"][0]["kind"], "event")
+        self.assertNotIn("REMOVED_", json.dumps(report))
+
 
 if __name__ == "__main__":
     unittest.main()

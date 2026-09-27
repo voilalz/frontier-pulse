@@ -11,6 +11,7 @@ on:
       - "scripts/event_identity.py"
       - "scripts/daily_deepread.py"
       - "scripts/deepread_editorial.py"
+      - "scripts/deepread_editorial_signals.py"
       - "scripts/audit_sources.py"
       - "scripts/check_daily_refresh.py"
       - "config/news_config.json"
@@ -57,7 +58,7 @@ jobs:
           python scripts/check_daily_refresh.py
           --status public/data/status.json
           --deepread public/data/deepread.json
-          --required-deepread-revision 6
+          --required-deepread-revision 7
           --timezone Asia/Shanghai
           --event-name "$EVENT_NAME"
           --force "$FORCE_REFRESH"
@@ -125,11 +126,13 @@ jobs:
           assert e.get('eventCount') == len(e.get('items', []));
           assert e.get('schemaVersion') == 2;
           de=d.get('events', []);
-          assert d.get('schemaVersion') == 2 and d.get('generationRevision') == 6;
+          assert d.get('schemaVersion') == 2 and d.get('generationRevision') == 7;
           assert d.get('editionDate') == p.get('editionDate');
           assert len(de) == d.get('eventCount') and len(de) <= 6 and d.get('candidateCount', 13) <= 12;
           assert len(set(x['eventId'] for x in de)) == len(de);
           assert {x['newsId'] for x in de} == {n for c in d['chapters'] for n in c['newsIds']};
+          assert all(c.get('kind') in ('event', 'comparison') and (c.get('kind') != 'comparison' or (2 <= len(c['newsIds']) <= 3 and c.get('comparisonNote') == '并列比较不代表事件之间存在因果关系。')) for c in d['chapters']);
+          assert isinstance(d.get('observations'), list) and (d.get('generationStatus') != 'ok' or 2 <= len(d['observations']) <= 3);
           assert all(x.get('sources') for x in de);
           assert h.get('qualifiedCandidateCount') == s.get('qualifiedCandidateCount');
           assert w.get('weekId') and w.get('eventCount') == len(w.get('events', []));

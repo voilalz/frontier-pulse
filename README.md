@@ -5,7 +5,7 @@
 
 - 从严格 24 小时内最多 12 项独立事件建立候选池，以主题发现和提纲先选 4～6 项核心事件，再按固定新闻引用写自然段落。缺少共同项目或主体的事件各自成节；不足 4 项时如实刊发简版。
 - 同一 canonical `eventId` 的此前时间线供今日变化段使用；其他历史关联不会被当作同一事件。程序固定事件 ID、来源、配图与证据等级；标签区分一手来源、多源报道、单源报道和观点材料。
-- `public/data/deepread.json` 使用与发布渠道无关的 v2 编辑内容模型：章节段落引用事件目录，由 Web 页面渲染，公众号与邮件可沿用相同 JSON 另行排版。历史 v1 日期归档仍可读。契约见 [编辑模型说明](docs/deepread-editorial-contract.md)。
+- `public/data/deepread.json` 使用与发布渠道无关的 v2 编辑内容模型：可将 2～3 件独立事件围绕具体问题并列比较，明确说明不代表因果关系；优先考虑同一事件的实质变化及一手/多源证据，清除配图说明、排除政治政策主题，并以可核对证据支持极短“今日观察”。Web 页面渲染章节与来源，公众号与邮件可沿用相同 JSON 另行排版。历史 v1 日期归档仍可读。契约见 [编辑模型说明](docs/deepread-editorial-contract.md)。
 
 ## 2026-09-26 新闻质量与每日深读（历史版本）
 
@@ -113,6 +113,7 @@ scripts/news_evidence.py            标题与原文段落相关性筛选
 scripts/event_identity.py           精确事件匹配与稳定身份
 scripts/daily_deepread.py           历史 v1 生成及候选证据筛选工具
 scripts/deepread_editorial.py       v2 主题提纲、变化叙事与编辑内容模型
+scripts/deepread_editorial_signals.py  深读过滤、变化与比较议题信号
 scripts/audit_sources.py            无 LLM、无补采、无展示截断的 RSS 覆盖审计
 scripts/send_digest.py              SMTP 邮件摘要
 scripts/check_production.py         线上安全头与缓存头验收

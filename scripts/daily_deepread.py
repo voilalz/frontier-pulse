@@ -198,7 +198,8 @@ def _rank(item: dict[str, Any]) -> tuple:
     return (-item["_quality"], -item["_sourceWeight"], -item["_score"], -item["_published"].timestamp(), item["eventId"], item["id"])
 
 
-def _candidates(items: Iterable[dict[str, Any]], config: dict[str, Any], now: datetime) -> list[dict[str, Any]]:
+def _candidates(items: Iterable[dict[str, Any]], config: dict[str, Any], now: datetime,
+                *, collapse_events: bool = True) -> list[dict[str, Any]]:
     policy = config.get("content_policy", {})
     policy = policy if isinstance(policy, dict) else {}
     weights = {
@@ -238,6 +239,7 @@ def _candidates(items: Iterable[dict[str, Any]], config: dict[str, Any], now: da
         eligible.append(candidate)
 
     representatives: dict[str, dict[str, Any]] = {}
+    retained: list[dict[str, Any]] = []
     seen_news: set[str] = set()
     seen_urls: dict[str, str] = {}
     for item in sorted(eligible, key=_rank):
@@ -248,6 +250,9 @@ def _candidates(items: Iterable[dict[str, Any]], config: dict[str, Any], now: da
         seen_news.add(item["id"])
         if primary:
             seen_urls[primary] = event_id
+        if not collapse_events:
+            retained.append(item)
+            continue
         if event_id not in representatives:
             representatives[event_id] = item
             continue
@@ -255,7 +260,7 @@ def _candidates(items: Iterable[dict[str, Any]], config: dict[str, Any], now: da
         known_urls = {source["url"] for source in representative["sources"]}
         representative["sources"].extend(source for source in item["sources"] if source["url"] not in known_urls)
         representative["sources"] = representative["sources"][:12]
-    return sorted(representatives.values(), key=_rank)
+    return sorted(representatives.values() if collapse_events else retained, key=_rank)
 
 
 def _select(items: list[dict[str, Any]], target: int) -> list[dict[str, Any]]:

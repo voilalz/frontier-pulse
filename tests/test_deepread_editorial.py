@@ -171,6 +171,12 @@ class EditorialDeepreadTests(unittest.TestCase):
             return {
                 "headline": "五项项目进展公布，重点观察具体任务节点",
                 "lead": "今天的五项项目进展分别涉及不同任务。以下按项目梳理今天披露的动作，并在有历史记录时对照前次报道中的节点。",
+                "observations": [
+                    {"text": "首项试验本期公布了任务结果，已完成步骤可与后续安排分开核对。", "newsIds": ["news-0"],
+                     "supports": [{"newsId": "news-0", "supportQuote": "第0项航空试验公布本次任务结果"}]},
+                    {"text": "第二项试验已公布测试步骤，后续安排仍要按原报道的范围追踪。", "newsIds": ["news-1"],
+                     "supports": [{"newsId": "news-1", "supportQuote": "报道列出已完成的测试步骤和后续安排"}]},
+                ],
                 "chapters": {f"chapter-{n+1}": {"blocks": [
                     {"type": "paragraph", "text": f"第{n}项项目今天披露了任务结果和下一步安排，这项报道提供了可追踪的具体节点。", "newsIds": [f"news-{n}"]},
                     *([{"type": "change", "text": "此前公布准备阶段；今天披露了实际试验结果，项目由计划进入执行记录。", "newsIds": ["news-0"]}] if n == 0 else []),
@@ -184,6 +190,7 @@ class EditorialDeepreadTests(unittest.TestCase):
         self.assertEqual(report["eventCount"], 5)
         self.assertTrue(any(block["type"] == "change" for block in report["chapters"][0]["blocks"]))
         self.assertTrue(all(event["sources"] for event in report["events"]))
+        self.assertEqual(len(report["observations"]), 2)
 
     def test_outline_may_select_four_and_splits_weakly_related_events(self):
         items = [self.item(n) for n in range(12)]
@@ -199,6 +206,12 @@ class EditorialDeepreadTests(unittest.TestCase):
             outline = json.loads(kwargs["input_text"])["outline"]
             return {"headline": "四项独立进展各自对应不同任务节点",
                     "lead": "今天的四项报道涉及不同项目，应分别追踪各自完成的具体动作，不按宽泛领域拼接为共同趋势。",
+                    "observations": [
+                        {"text": "第一项任务已有明确试验结果，可以对照报道公布的测试步骤。", "newsIds": ["news-0"],
+                         "supports": [{"newsId": "news-0", "supportQuote": "第0项航空试验公布本次任务结果"}]},
+                        {"text": "第二项任务仍需追踪其后续安排，现有材料只覆盖已完成的步骤。", "newsIds": ["news-1"],
+                         "supports": [{"newsId": "news-1", "supportQuote": "报道列出已完成的测试步骤和后续安排"}]},
+                    ],
                     "chapters": {chapter["id"]: {"blocks": [
                         {"type": "paragraph", "text": "该项目今天公布了已完成的动作和下一阶段安排，材料说明了任务边界。",
                          "newsIds": chapter["newsIds"]}
@@ -301,6 +314,493 @@ class EditorialDeepreadTests(unittest.TestCase):
                                       {"provider": "fixture"}, unexpected)
         self.assertEqual(report["eventCount"], 3)
         self.assertEqual(report["generationStatus"], "insufficient")
+
+    def test_deepread_filters_political_media_access_even_if_misclassified(self):
+        political = self.item(99, category="军事动态", score=100,
+                              originalTitle="White House bars CNN from travelling with Trump on Air Force One",
+                              title="白宫拒绝 CNN 记者随行采访",
+                              summary="白宫公布总统出行安排并调整媒体准入，拒绝CNN记者随行采访，其他媒体就白宫决定发表意见。")
+        technical = self.item(1, category="军事动态",
+                              originalTitle="Dutch ministry briefs parliament on ASWF frigate trials",
+                              title="荷兰国防部向议会通报 ASWF 护卫舰试验",
+                              summary="荷兰国防部向议会通报护卫舰项目试验进展及时间安排。")
+        inputs = []
+        def provider(runtime, **kwargs):
+            inputs.append(kwargs["input_text"])
+            return None
+        report = build_daily_deepread([self.item(n) for n in (0, 2, 3, 4)] + [technical, political],
+                                      self.config, self.now, {"provider": "fixture"}, provider)
+        self.assertEqual(report["candidateCount"], 5)
+        self.assertNotIn("news-99", [x["newsId"] for x in report["events"]])
+        self.assertIn("news-1", [x["newsId"] for x in report["events"]])
+        self.assertNotIn("White House", " ".join(inputs))
+
+    def test_conflict_reporting_stays_out_of_deepread_while_technical_defense_remains(self):
+        conflict = self.item(88, category="局部冲突", score=100,
+                             title="两国互施空袭造成多人死亡", originalTitle="Countries exchange deadly strikes",
+                             summary="两国在边境地区互施空袭，已有多人死亡，相关冲突仍在持续。")
+        technical = self.item(2, category="军事动态", score=95,
+                              title="护卫舰试验公布雷达测试结果", originalTitle="Frigate radar trials report results")
+        report = build_daily_deepread([conflict, technical] + [self.item(n) for n in (0, 1, 3, 4)],
+                                      self.config, self.now)
+        self.assertNotIn("news-88", {entry["newsId"] for entry in report["events"]})
+        self.assertIn("news-2", {entry["newsId"] for entry in report["events"]})
+
+    def test_misclassified_regulatory_bills_are_excluded(self):
+        items = [self.item(n) for n in range(5)]
+        items += [self.item(81, score=100, category="前沿技术", title="参议院通过人工智能监管法案",
+                            originalTitle="Senate passes new AI safety bill"),
+                  self.item(82, score=99, category="AI", title="监管机构通过人工智能安全法",
+                            originalTitle="Regulator adopts new AI safety law")]
+        report = build_daily_deepread(items, self.config, self.now)
+        self.assertEqual(report["candidateCount"], 5)
+        self.assertFalse({"news-81", "news-82"} & {entry["newsId"] for entry in report["events"]})
+
+    def test_misclassified_policy_actions_in_titles_or_leads_are_excluded(self):
+        policy_stories = [
+            self.item(81, score=100, category="AI", title="政府发布人工智能使用新政策",
+                      originalTitle="Government announces new AI use policy"),
+            self.item(82, score=99, category="前沿技术", title="美国实施芯片出口管制",
+                      originalTitle="US imposes new chip export controls"),
+            self.item(83, score=98, category="AI", title="人工智能产业动态",
+                      originalTitle="AI industry update", summary="政府发布新的人工智能使用政策，并规定企业的准入要求。后续实施细则待公布。"),
+        ]
+        technical = self.item(84, title="NASA完成引擎热试验", originalTitle="NASA tests an engine",
+                              summary="NASA完成本次引擎热试验并公布测量结果。报道还提及相关政策背景。")
+        algorithm = self.item(85, title="研究团队改进政策梯度算法",
+                              originalTitle="Researchers improve policy gradient training",
+                              summary="研究团队改进强化学习政策梯度算法，并发布本次性能试验结果。")
+        report = build_daily_deepread([self.item(n) for n in range(3)] + policy_stories + [technical, algorithm],
+                                      self.config, self.now)
+        self.assertEqual(report["candidateCount"], 5)
+        self.assertIn("news-84", {event["newsId"] for event in report["events"]})
+        self.assertIn("news-85", {event["newsId"] for event in report["events"]})
+        self.assertFalse({"news-81", "news-82", "news-83"} &
+                         {event["newsId"] for event in report["events"]})
+        from deepread_editorial_signals import is_political_policy
+        for headline in ("New policy-gradient algorithm improves robotic control",
+                         "Policy optimization for reinforcement learning"):
+            with self.subTest(headline=headline):
+                self.assertFalse(is_political_policy({"category": "AI", "originalTitle": headline,
+                                                      "summary": "Researchers evaluate a control algorithm."}))
+
+    def test_cached_caption_is_removed_from_deepread_material_and_prose(self):
+        summary = ("卡纳维拉尔角太空军基地将部署反无人机激光，主要用于保护关键发射设施。"
+                   "报道配图显示，2026年5月29日猎鹰9号升空，"
+                   "照片由格温·库尔岑拍摄。部署时间尚未披露。")
+        evidence = ("Cape Canaveral will receive lasers to stop drones.\n\n"
+                    "A SpaceX Falcon 9 rocket launches from Cape Canaveral. Space Force photo by Gwen Kurzen.")
+        inputs = []
+        def provider(runtime, **kwargs):
+            inputs.append(kwargs["input_text"])
+            return None
+        report = build_daily_deepread([self.item(n) for n in (1, 2, 3, 4)]
+                                      + [self.item(0, summary=summary, evidenceText=evidence)],
+                                      self.config, self.now, {"provider": "fixture"}, provider)
+        public = json.dumps(report, ensure_ascii=False)
+        self.assertIn("基地将部署反无人机激光", public)
+        self.assertNotIn("猎鹰9", public)
+        self.assertNotIn("格温", public)
+        self.assertNotIn("Falcon 9", " ".join(inputs))
+
+    def test_delta_score_only_marks_verified_same_event_stage_change(self):
+        previous = {"editionDate": "2026-09-25", "newsId": "old-trial",
+                    "title": "NASA公布本次试验计划", "source": "NASA",
+                    "originalTitle": "NASA plans a new trial", "summaryLead": "NASA公布试验安排及准备步骤。"}
+        registry = {"items": [{"eventId": "evt-0", "timeline": [previous]}]}
+        completed = self.item(0, title="NASA完成本次试验", originalTitle="NASA completes the trial")
+        report = build_daily_deepread([completed], self.config, self.now, event_registry=registry)
+        self.assertEqual(report["events"][0]["deltaScore"], 2)
+
+        cancelled = self.item(0, title="NASA取消原定计划的试验", originalTitle="NASA cancels the planned trial")
+        report = build_daily_deepread([cancelled], self.config, self.now, event_registry=registry)
+        self.assertEqual(report["events"][0]["deltaScore"], 3)
+
+        reprint = self.item(0, title="NASA公布本次试验计划", originalTitle="NASA plans a new trial")
+        report = build_daily_deepread([reprint], self.config, self.now, event_registry=registry)
+        self.assertEqual(report["events"][0]["deltaScore"], 0)
+
+        completed_before = {"items": [{"eventId": "evt-0", "timeline": [{
+            **previous, "title": "NASA按计划完成卫星发射任务",
+            "originalTitle": "NASA completes satellite launch as planned",
+            "summaryLead": "NASA按计划完成了卫星发射任务。"}]}]}
+        reprint = self.item(0, title="NASA完成卫星发射任务", originalTitle="NASA completes satellite launch")
+        report = build_daily_deepread([reprint], self.config, self.now, event_registry=completed_before)
+        self.assertEqual(report["events"][0]["deltaScore"], 0)
+
+        future = self.item(0, title="NASA按计划将于明日发射卫星", originalTitle="NASA to launch tomorrow as planned")
+        report = build_daily_deepread([future], self.config, self.now,
+                                      event_registry={"items": [{"eventId": "evt-0", "timeline": [
+                                          {**previous, "title": "NASA公布卫星发射计划"}]}]})
+        self.assertEqual(report["events"][0]["deltaScore"], 0)
+        for title in ("NASA将于明日如期发射卫星", "NASA明日按计划发射卫星", "NASA如期发射卫星（明日）"):
+            with self.subTest(title=title):
+                future = self.item(0, title=title, originalTitle="NASA to launch the satellite tomorrow")
+                report = build_daily_deepread([future], self.config, self.now,
+                                              event_registry={"items": [{"eventId": "evt-0", "timeline": [
+                                                  {**previous, "title": "NASA公布卫星发射计划"}]}]})
+                self.assertEqual(report["events"][0]["deltaScore"], 0)
+
+        different = self.item(0, eventId="evt-unrelated", title="NASA完成本次试验")
+        report = build_daily_deepread([different], self.config, self.now, event_registry=registry)
+        self.assertEqual(report["events"][0]["deltaScore"], 0)
+
+    def test_same_day_completed_story_survives_same_event_deduplication(self):
+        planned = self.item(0, score=88, title="NASA计划本次试验", originalTitle="NASA plans the trial",
+                            evidenceText="NASA described the preparation and schedule for this trial. " * 5,
+                            publishedAt=(self.now - timedelta(hours=3)).isoformat())
+        completed = self.item(20, eventId="evt-0", score=88, title="NASA完成本次试验",
+                              originalTitle="NASA completes the trial",
+                              publishedAt=(self.now - timedelta(hours=1)).isoformat())
+        registry = {"items": [{"eventId": "evt-0", "timeline": [{
+            "editionDate": "2026-09-25", "newsId": "old-trial", "title": "NASA计划本次试验",
+            "originalTitle": "NASA plans the trial", "summaryLead": "NASA公布本项试验准备安排。",
+        }]}]}
+        report = build_daily_deepread([planned, completed], self.config, self.now,
+                                      event_registry=registry)
+        self.assertEqual(report["eventCount"], 1)
+        self.assertEqual(report["events"][0]["newsId"], "news-20")
+        self.assertEqual(report["events"][0]["deltaScore"], 2)
+
+    def test_same_day_plan_source_does_not_upgrade_result_evidence_level(self):
+        planned = self.item(0, eventId="evt-same", score=80, title="NASA计划火箭发射",
+                            originalTitle="NASA plans rocket launch")
+        result = self.item(20, eventId="evt-same", score=90, title="NASA公布火箭发射数据",
+                           originalTitle="NASA releases launch data")
+        report = build_daily_deepread([planned, result], self.config, self.now)
+        event = report["events"][0]
+        self.assertEqual(event["newsId"], "news-20")
+        self.assertEqual(event["evidenceLevel"], "single")
+        self.assertEqual(len(event["sources"]), 1)
+
+    def test_same_event_opposing_reports_are_not_counted_as_corroboration(self):
+        success = self.item(0, eventId="evt-same", score=90,
+                            title="NASA试验取得成功", originalTitle="NASA trial succeeds")
+        failure = self.item(20, eventId="evt-same", score=80,
+                            title="NASA试验出现故障", originalTitle="NASA trial fails")
+        report = build_daily_deepread([success, failure], self.config, self.now)
+        event = report["events"][0]
+        self.assertEqual(event["newsId"], "news-0")
+        self.assertEqual(event["evidenceLevel"], "single")
+        self.assertEqual(len(event["sources"]), 1)
+
+    def test_equally_important_delta_and_better_sources_enter_core_selection(self):
+        items = [self.item(n, category="AI", score=80) for n in range(6)]
+        items[0]["score"] = 95
+        items[3].update(title="NASA完成本次试验", originalTitle="NASA completes the trial")
+        items[4]["sources"] = [
+            {"name": "A", "url": "https://a.example/1", "evidenceGroup": "outlet:a"},
+            {"name": "B", "url": "https://b.example/2", "evidenceGroup": "outlet:b"},
+        ]
+        items[5].update(source="NASA", url="https://nasa.gov/news/1", sources=[
+            {"name": "NASA", "url": "https://nasa.gov/news/1", "evidenceGroup": "official:nasa"}])
+        registry = {"items": [{"eventId": "evt-3", "timeline": [{
+            "editionDate": "2026-09-25", "newsId": "old-trial", "title": "NASA计划本次试验", "source": "NASA",
+            "originalTitle": "NASA plans the trial", "summaryLead": "NASA公布项目下一次试验安排。",
+        }]}]}
+        report = build_daily_deepread(items, self.config, self.now, event_registry=registry)
+        ids = {entry["newsId"] for entry in report["events"]}
+        self.assertEqual(report["candidateCount"], 6)
+        self.assertTrue({"news-0", "news-3", "news-4", "news-5"} <= ids)
+        self.assertEqual(report["eventCount"], 5)
+
+    def test_source_bonus_does_not_replace_a_materially_more_important_story(self):
+        scores = (95, 94, 93, 92, 87, 79)
+        items = [self.item(n, category="AI", score=score) for n, score in enumerate(scores)]
+        items[5].update(source="NASA", url="https://nasa.gov/news/5", sources=[
+            {"name": "NASA", "url": "https://nasa.gov/news/5", "evidenceGroup": "official:nasa"}])
+        report = build_daily_deepread(items, self.config, self.now)
+        ids = {entry["newsId"] for entry in report["events"]}
+        self.assertIn("news-4", ids)
+        self.assertNotIn("news-5", ids)
+
+    def test_technical_diversity_does_not_displace_higher_impact_core_story_before_pool_cap(self):
+        items = [self.item(n, score=95-n, category="其他进展", source="Publisher 0") for n in range(5)]
+        items.extend(self.item(n, score=21, category=("AI", "无人系统", "前沿技术")[n % 3])
+                     for n in range(5, 13))
+        report = build_daily_deepread(items, self.config, self.now)
+        self.assertEqual(report["candidateCount"], 12)
+        self.assertEqual({event["newsId"] for event in report["events"]},
+                         {f"news-{n}" for n in range(5)})
+
+    def test_delta_and_primary_source_can_enter_bounded_pool_from_near_tie(self):
+        items = [self.item(n, score=80, category="航空航天") for n in range(12)]
+        changed = self.item(12, score=79, category="航空航天", title="NASA取消原定卫星试验",
+                            originalTitle="NASA cancels planned satellite trial", source="NASA",
+                            url="https://nasa.gov/news/12",
+                            sources=[{"name": "NASA", "url": "https://nasa.gov/news/12"}])
+        registry = {"items": [{"eventId": "evt-12", "timeline": [{
+            "editionDate": "2026-09-25", "newsId": "old-12", "title": "NASA计划卫星试验",
+            "originalTitle": "NASA plans a satellite trial", "summaryLead": "NASA公布本项目卫星试验计划。"}]}]}
+        report = build_daily_deepread([*items, changed], self.config, self.now, event_registry=registry)
+        self.assertEqual(report["candidateCount"], 12)
+        self.assertIn("news-12", {event["newsId"] for event in report["events"]})
+        self.assertEqual(next(event["deltaScore"] for event in report["events"] if event["newsId"] == "news-12"), 3)
+
+    def test_outline_cannot_swap_out_prioritized_core_story(self):
+        items = [self.item(n, category="AI", score=80) for n in range(6)]
+        items[5].update(source="NASA", url="https://nasa.gov/news/5", sources=[
+            {"name": "NASA", "url": "https://nasa.gov/news/5", "evidenceGroup": "official:nasa"}])
+        def provider(runtime, **kwargs):
+            if kwargs["schema_name"] == "deepread_outline_v2":
+                return {"selectedNewsIds": [f"news-{n}" for n in range(5)], "chapters": [
+                    {"title": f"第{n}条试验的结果", "angle": "核对本项试验披露的结果", "newsIds": [f"news-{n}"]}
+                    for n in range(5)]}
+            return None
+        report = build_daily_deepread(items, self.config, self.now,
+                                      {"provider": "fixture"}, provider)
+        self.assertIn("news-5", {entry["newsId"] for entry in report["events"]})
+        self.assertNotIn("news-4", {entry["newsId"] for entry in report["events"]})
+
+    def test_independent_cross_category_ai_agent_reports_form_comparison_chapter(self):
+        items = [self.item(n, score=95-n) for n in range(5)]
+        items[0].update(title="OpenAI公布AI智能体安全测试", originalTitle="OpenAI tests AI agent safety controls",
+                        summary="OpenAI公布AI智能体安全测试，描述了权限控制如何约束自动访问外部网站。")
+        items[1].update(title="电商平台测试AI智能体购物", originalTitle="Retailer trials AI agent shopping",
+                        category="前沿技术", summary="电商平台测试AI智能体购物，在结算环节加入确认与支付授权。")
+        calls = []
+        def provider(runtime, **kwargs):
+            calls.append(kwargs)
+            if kwargs["schema_name"] == "deepread_outline_v2":
+                return {"selectedNewsIds": [f"news-{n}" for n in range(5)], "chapters": [
+                    {"title": "智能体从能力走向应用时的边界", "angle": "安全权限与支付授权各解决什么问题？",
+                     "newsIds": ["news-0", "news-1"], "kind": "comparison", "comparisonKey": "ai-agent"},
+                    *[{"title": f"第{n}项任务进展", "angle": "核对任务的具体进展",
+                       "newsIds": [f"news-{n}"], "kind": "event", "comparisonKey": ""} for n in (2, 3, 4)],
+                ]}
+            if kwargs["schema_name"] == "deepread_prose_v2":
+                return {"headline": "智能体应用中的具体边界与其他技术进展",
+                        "lead": "今天的两项智能体报道分别披露了访问权限与支付确认机制，其余技术报道各自记录具体进展。",
+                        "observations": [
+                            {"text": "两项智能体实践都明确设置权限边界，但约束分别落在访问与结算环节。",
+                             "newsIds": ["news-0", "news-1"], "supports": [
+                                 {"newsId": "news-0", "supportQuote": "权限控制如何约束自动访问外部网站"},
+                                 {"newsId": "news-1", "supportQuote": "在结算环节加入确认与支付授权"}]},
+                            {"text": "结算环节的测试披露了支付授权与确认步骤，重点是支付前的用户确认。",
+                             "newsIds": ["news-1"], "supports": [
+                                 {"newsId": "news-1", "supportQuote": "在结算环节加入确认与支付授权"}]},
+                        ],
+                        "chapters": {
+                            "chapter-1": {"blocks": [
+                                {"type": "paragraph", "text": "OpenAI披露智能体访问外部网站时采用的安全测试及权限控制。",
+                                 "newsIds": ["news-0"]},
+                                {"type": "paragraph", "text": "电商平台在智能体结算链路引入支付授权与确认步骤，测试范围目前仅限部分用户。",
+                                 "newsIds": ["news-1"]},
+                                {"type": "comparison", "text": "两项独立报道各自说明智能体进入真实流程时的边界管理，一项侧重网站访问，另一项侧重支付确认。",
+                                 "newsIds": ["news-0", "news-1"]},
+                            ]},
+                            **{f"chapter-{n}": {"blocks": [
+                                {"type": "paragraph", "text": f"第{n}项任务公布了已完成的测试步骤，并说明后续安排和实施范围。",
+                                 "newsIds": [f"news-{n}"]}]}
+                                for n in (2, 3, 4)},
+                        }}
+            return None
+        report = build_daily_deepread(items, self.config, self.now,
+                                      {"provider": "fixture"}, provider)
+        self.assertEqual(report["generationStatus"], "ok")
+        self.assertEqual(len(report["chapters"]), 4)
+        self.assertEqual(report["chapters"][0]["kind"], "comparison")
+        self.assertEqual(report["chapters"][0]["comparisonKey"], "ai-agent")
+        self.assertIn("不代表事件之间存在因果关系", report["chapters"][0]["comparisonNote"])
+        self.assertTrue(any(block["type"] == "comparison" for block in report["chapters"][0]["blocks"]))
+        self.assertEqual(len(report["observations"]), 2)
+        outline_input = next(json.loads(call["input_text"]) for call in calls if call["schema_name"] == "deepread_outline_v2")
+        self.assertIn("ai-agent", outline_input["candidates"][0]["comparisonKeys"])
+
+    def test_specific_comparison_subjects_extend_beyond_initial_five(self):
+        from deepread_editorial_signals import comparison_keys
+        topics = [
+            ({"title": "自动驾驶出租车公布安全测试", "originalTitle": "Company A robotaxi safety tests"},
+             {"title": "另一家企业测试机器人出租车", "originalTitle": "Company B robotaxi trials"}),
+            ({"title": "核聚变装置公布实验结果", "originalTitle": "Team A fusion experiment"},
+             {"title": "另一项核聚变实验给出测试数据", "originalTitle": "Team B fusion trial"}),
+            ({"title": "钙钛矿电池公布效率测试", "originalTitle": "Team A perovskite cell efficiency"},
+             {"title": "另一家机构测试钙钛矿器件", "originalTitle": "Team B perovskite device trial"}),
+        ]
+        for first, second in topics:
+            with self.subTest(topic=first["originalTitle"]):
+                self.assertTrue(comparison_keys(first) & comparison_keys(second))
+        self.assertFalse(comparison_keys({"title": "技术项目测试", "originalTitle": "Company reports technology trial"})
+                         & comparison_keys({"title": "另一项技术试验", "originalTitle": "Other company technology test"}))
+        self.assertFalse(comparison_keys({"title": "第一个项目", "originalTitle": "Team A reports technical progress"})
+                         & comparison_keys({"title": "另一个项目", "originalTitle": "Team B reports technical progress"}))
+        generic_headlines = [
+            ("Military rocket test completes", "Military hospital device trial begins"),
+            ("Hardware sensor reaches orbit", "Hardware chip test concludes"),
+            ("Drones targeted by base lasers", "Drones spot sharks in coastal waters"),
+        ]
+        for first, second in generic_headlines:
+            with self.subTest(generic=first):
+                self.assertFalse(comparison_keys({"originalTitle": first})
+                                 & comparison_keys({"originalTitle": second}))
+
+    def test_generic_subject_does_not_justify_comparison(self):
+        items = [self.item(n, category="前沿技术", score=95-n,
+                           originalTitle=f"Government Trials project {n} reports technical progress")
+                 for n in range(5)]
+        def provider(runtime, **kwargs):
+            if kwargs["schema_name"] == "deepread_outline_v2":
+                return {"selectedNewsIds": [f"news-{n}" for n in range(5)], "chapters": [
+                    {"title": "政府科技项目进展对比", "angle": "这些项目为何同步调整？",
+                     "newsIds": ["news-0", "news-1"], "kind": "comparison", "comparisonKey": "technology"},
+                    *[{"title": f"第{n}项任务进展", "angle": "核对独立任务进展", "newsIds": [f"news-{n}"]}
+                      for n in (2, 3, 4)],
+                ]}
+            return None
+        report = build_daily_deepread(items, self.config, self.now,
+                                      {"provider": "fixture"}, provider)
+        self.assertEqual(len(report["chapters"]), 5)
+        self.assertTrue(all(len(chapter["newsIds"]) == 1 for chapter in report["chapters"]))
+        self.assertNotIn("为何同步调整", json.dumps(report, ensure_ascii=False))
+
+    def test_comparison_paragraph_cannot_claim_one_event_caused_another(self):
+        items = [self.item(n, score=95-n, category="AI") for n in range(5)]
+        for n in (0, 1):
+            items[n].update(title=f"第{n}家企业发布AI智能体测试结果",
+                            originalTitle=f"Company {n} tests AI agent safety controls",
+                            summary=f"第{n}家企业公布AI智能体安全测试及权限控制方案。")
+        def provider(runtime, **kwargs):
+            if kwargs["schema_name"] == "deepread_outline_v2":
+                return {"selectedNewsIds": [f"news-{n}" for n in range(5)], "chapters": [
+                    {"title": "两家企业的智能体安全控制", "angle": "两家控制方法各解决什么问题？",
+                     "newsIds": ["news-0", "news-1"], "kind": "comparison", "comparisonKey": "ai-agent"},
+                    *[{"title": f"第{n}项任务进展", "angle": "核对本项任务进展", "newsIds": [f"news-{n}"]}
+                      for n in (2, 3, 4)],
+                ]}
+            if kwargs["schema_name"] == "deepread_prose_v2":
+                return {"headline": "智能体安全方案的不同路径",
+                        "lead": "两家企业分别公布技术测试，比较仅限公开材料中的控制方式；其他三项任务的公开进展按项目独立记录。",
+                        "chapters": {"chapter-1": {"blocks": [
+                            {"type": "paragraph", "text": "第一家企业公布了智能体外部网站访问的控制方案及相应测试步骤。", "newsIds": ["news-0"]},
+                            {"type": "paragraph", "text": "第二家企业公布了另一项智能体权限控制测试，并描述权限限制方法。", "newsIds": ["news-1"]},
+                            {"type": "comparison", "text": "第一家企业的方案导致第二家企业转向权限控制，这两项报道构成直接因果关系。",
+                             "newsIds": ["news-0", "news-1"]},
+                        ]}, **{f"chapter-{n}": {"blocks": [{"type": "paragraph",
+                             "text": f"第{n}项任务公布了已完成的试验步骤，以及后续安排和适用范围。",
+                             "newsIds": [f"news-{n}"]}]} for n in (2, 3, 4)}}}
+            return None
+        report = build_daily_deepread(items, self.config, self.now,
+                                      {"provider": "fixture"}, provider)
+        self.assertEqual(report["chapters"][0]["kind"], "event")
+        self.assertNotEqual(report["generationStatus"], "ok")
+        self.assertNotIn("导致第二家", json.dumps(report, ensure_ascii=False))
+
+    def test_comparison_prose_fails_when_any_block_implies_cross_event_causality(self):
+        from deepread_editorial import _validated_blocks
+        chapter = {"kind": "comparison", "newsIds": ["first", "second"]}
+        individual = [
+            {"type": "paragraph", "text": "第一家公司公布智能体安全测试的当前结果，以及外部网站的权限控制措施。", "newsIds": ["first"]},
+            {"type": "paragraph", "text": "第二家公司公布智能体购物结算环节的支付授权，以及用户确认措施。", "newsIds": ["second"]},
+        ]
+        neutral = {"type": "comparison", "text": "两项独立报道对同一类智能体应用分别设置了不同的权限边界，需要分别核对。",
+                   "newsIds": ["first", "second"]}
+        for text, block_index in [
+            ("第一家公司披露智能体测试后导致第二家公司改变权限设计方向，两个方案有直接的影响关系。", 0),
+            ("第一家公司披露测试，因此第二家公司改变了智能体的权限设计和测试目标。", 2),
+            ("第一家公司的发布推动第二家公司改变智能体产品设计，两项试验互相影响。", 2),
+            ("第一家公司的发布是第二家公司调整产品设计的直接原因，且影响了后续试验。", 2),
+            ("第一家公司的发布带动第二家公司调整产品方向，使其重新选择技术路线。", 2),
+        ]:
+            with self.subTest(text=text):
+                blocks = [dict(block) for block in [*individual, neutral]]
+                blocks[block_index]["text"] = text
+                self.assertIsNone(_validated_blocks(chapter, {"blocks": blocks}, set(), set()))
+
+    def test_unrecovered_comparison_is_split_into_independent_factual_chapters(self):
+        items = [self.item(n) for n in range(5)]
+        for n in (0, 1):
+            items[n].update(title=f"第{n}家企业发布AI智能体试验", originalTitle=f"Company {n} trials AI agents")
+        def provider(runtime, **kwargs):
+            if kwargs["schema_name"] == "deepread_outline_v2":
+                return {"selectedNewsIds": [f"news-{n}" for n in range(5)], "chapters": [
+                    {"title": "智能体试验中的权限问题", "angle": "两家企业如何设置权限边界？",
+                     "newsIds": ["news-0", "news-1"], "kind": "comparison", "comparisonKey": "ai-agent"},
+                    *[{"title": f"第{n}项任务进展", "angle": "核对本项任务结果", "newsIds": [f"news-{n}"]}
+                      for n in (2, 3, 4)],
+                ]}
+            return None
+        report = build_daily_deepread(items, self.config, self.now,
+                                      {"provider": "fixture"}, provider)
+        self.assertEqual(report["eventCount"], 5)
+        self.assertEqual(len(report["chapters"]), 5)
+        self.assertTrue(all(chapter["kind"] == "event" and len(chapter["newsIds"]) == 1
+                            for chapter in report["chapters"]))
+        self.assertNotIn("并列比较", json.dumps(report, ensure_ascii=False))
+
+    def test_unverified_trial_quotes_cannot_ground_global_safety_observations(self):
+        from deepread_editorial import _validated_observations
+        a, b = self.item(0), self.item(1)
+        a.update(summary="该项目仅进行一次未经验证的安全试验，目前未披露正式部署结果。", _evidence="")
+        b.update(summary="第二家团队只招募十名用户开展封闭测试，尚未公布其他地区的上线计划。", _evidence="")
+        claims = [
+            {"text": "所有正式部署均已证实安全，全球用户现在可以放心使用这一技术。", "newsIds": ["news-0"],
+             "supports": [{"newsId": "news-0", "supportQuote": "仅进行一次未经验证的安全试验"}]},
+            {"text": "全球业务已全面铺开，所有地区的用户已经获得完整商业服务。", "newsIds": ["news-1"],
+             "supports": [{"newsId": "news-1", "supportQuote": "只招募十名用户开展封闭测试"}]},
+        ]
+        self.assertIsNone(_validated_observations(claims, [a, b], set()))
+        claims[0]["text"] = "这次试验已经证明设备安全稳定，后续可以直接面向用户开放。"
+        claims[1]["text"] = "这次封闭测试只是十名用户参与，还没有其他地区的上线计划。"
+        self.assertIsNone(_validated_observations(claims, [a, b], set()))
+        claims[0]["text"] = "试验已经获得监管部门批准，一千名患者在医院采用设备，收入达一千万欧元。"
+        claims[1]["text"] = "十名用户的测试让医院部署扩大，并取得一千万欧元收入和新增患者。"
+        self.assertIsNone(_validated_observations(claims, [a, b], set()))
+
+    def test_negated_source_cannot_support_claimed_completed_action(self):
+        from deepread_editorial import _validated_observations
+        first = self.item(0, summary="项目尚未进行正式发射，目前仍处于准备阶段。", _evidence="")
+        second = self.item(1, summary="项目只有有限的模拟测试数据，目前尚未进行正式发射。", _evidence="")
+        claims = [
+            {"text": "首个项目已经完成正式发射，现在可以按实际任务阶段追踪。", "newsIds": ["news-0"],
+             "supports": [{"newsId": "news-0", "supportQuote": "项目尚未进行正式发射"}]},
+            {"text": "第二个项目已经完成正式发射，可据此评估其实际任务进展。", "newsIds": ["news-1"],
+             "supports": [{"newsId": "news-1", "supportQuote": "项目只有有限的模拟测试数据，目前尚未进行正式发射"}]},
+        ]
+        self.assertIsNone(_validated_observations(claims, [first, second], set()))
+        first["summary"] = "项目尚未进入量产阶段，目前仍在样机验证。"
+        second["summary"] = "项目也尚未进入量产阶段，当前只有小规模测试。"
+        claims[0]["text"] = "首个项目已经进入量产阶段，后续可以追踪实际产出进度。"
+        claims[0]["supports"][0]["supportQuote"] = "项目尚未进入量产阶段"
+        claims[1]["text"] = "第二个项目已经进入量产阶段，可以据此观察生产流程。"
+        claims[1]["supports"][0]["supportQuote"] = "项目也尚未进入量产阶段"
+        self.assertIsNone(_validated_observations(claims, [first, second], set()))
+
+    def test_invalid_observation_quotes_and_ids_do_not_replace_valid_prose(self):
+        items = [self.item(n) for n in range(5)]
+        for corruption in ("quote", "unknown-id", "all-core", "one-only"):
+            with self.subTest(corruption=corruption):
+                observations = [
+                    {"text": "第一项试验公布了实际结果，后续安排可按公开步骤继续追踪。", "newsIds": ["news-0"],
+                     "supports": [{"newsId": "news-0", "supportQuote": "第0项航空试验公布本次任务结果"}]},
+                    {"text": "第二项试验已有测试步骤，下一次行动仍待对应项目披露。", "newsIds": ["news-1"],
+                     "supports": [{"newsId": "news-1", "supportQuote": "第1项航空试验公布本次任务结果"}]},
+                ]
+                if corruption == "quote":
+                    observations[0]["supports"][0]["supportQuote"] = "不存在的虚构证据摘录"
+                elif corruption == "unknown-id":
+                    observations[0]["supports"][0]["newsId"] = "made-up"
+                elif corruption == "all-core":
+                    observations[0]["newsIds"] = [f"news-{n}" for n in range(5)]
+                else:
+                    observations.pop()
+
+                def provider(runtime, **kwargs):
+                    if kwargs["schema_name"] == "deepread_outline_v2":
+                        return {"selectedNewsIds": [f"news-{n}" for n in range(5)], "chapters": [
+                            {"title": f"第{n}项任务结果", "angle": "追踪本项任务披露的试验进度", "newsIds": [f"news-{n}"]}
+                            for n in range(5)]}
+                    return {"headline": "五项独立技术进展披露当前任务节点",
+                            "lead": "今天五项独立技术报道分别披露已完成的任务步骤，可以按项目逐一核对公开证据与后续安排。",
+                            "observations": observations,
+                            "chapters": {f"chapter-{n+1}": {"blocks": [{"type": "paragraph",
+                                "text": f"第{n}项试验公布了已完成的步骤和任务结果，报道同时列出后续安排。",
+                                "newsIds": [f"news-{n}"]}]} for n in range(5)}}
+                report = build_daily_deepread(items, self.config, self.now,
+                                              {"provider": "fixture"}, provider)
+                self.assertEqual(report["generationStatus"], "partial")
+                self.assertEqual(report["observations"], [])
+                self.assertIn("五项独立技术进展", report["headline"])
+                self.assertEqual(report["eventCount"], 5)
 
 
 if __name__ == "__main__":

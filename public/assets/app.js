@@ -544,31 +544,57 @@
     if (events.length !== payload.events.length) filtered = true;
     const byNews = new Map(events.map((event) => [event.newsId, event]));
     const chapters = payload.chapters.slice(0, 6).map((chapter, index) => {
-      const newsIds = (Array.isArray(chapter?.newsIds) ? chapter.newsIds : []).map((value) => clean(value))
+      const declaredNewsIds = Array.isArray(chapter?.newsIds) ? chapter.newsIds : [];
+      const newsIds = declaredNewsIds.map((value) => clean(value))
         .filter((id, offset, list) => byNews.has(id) && list.indexOf(id) === offset);
+      if (newsIds.length !== declaredNewsIds.length) filtered = true;
+      const kind = chapter?.kind === "comparison" && newsIds.length >= 2 && newsIds.length <= 3
+        ? "comparison" : "event";
       const blocks = (Array.isArray(chapter?.blocks) ? chapter.blocks : []).filter((block) => {
         const refs = Array.isArray(block?.newsIds) ? block.newsIds.map((value) => clean(value)) : [];
         if (!refs.length || !refs.every((id) => newsIds.includes(id))) { filtered = true; return false; }
+        if (block.type === "comparison") {
+          if (kind === "comparison" && refs.length === newsIds.length
+              && newsIds.every((id) => refs.includes(id)) && clean(block.text)) return true;
+          filtered = true; return false;
+        }
         return ["paragraph", "change"].includes(block.type) && clean(block.text);
       }).slice(0, 10).map((block) => ({type: block.type, text: clean(block.text),
         newsIds: block.newsIds.map((value) => clean(value))}));
       return {id: `deepread-chapter-${index + 1}`, title: clean(chapter?.title, "本期进展"),
-        angle: clean(chapter?.angle), newsIds, blocks};
+        angle: clean(chapter?.angle), kind, comparisonKey: kind === "comparison" ? clean(chapter.comparisonKey) : "",
+        comparisonNote: kind === "comparison" ? "并列比较不代表事件之间存在因果关系。" : "",
+        newsIds, blocks};
     }).filter((chapter) => chapter.newsIds.length);
     if (chapters.length !== payload.chapters.length) filtered = true;
+    const retained = new Set(chapters.flatMap((chapter) => chapter.newsIds));
+    const usedEvents = events.filter((event) => retained.has(event.newsId));
+    const observations = (Array.isArray(payload.observations) ? payload.observations : []).slice(0, 3)
+      .map((entry) => {
+        const refs = Array.isArray(entry?.newsIds) ? entry.newsIds.map((id) => clean(id)) : [];
+        const supports = Array.isArray(entry?.supports) ? entry.supports : [];
+        if (!clean(entry?.text) || !refs.length || refs.length > 2
+            || refs.some((id) => !retained.has(id)) || new Set(refs).size !== refs.length
+            || supports.length !== refs.length || supports.some((support) =>
+              !refs.includes(clean(support?.newsId)) || !clean(support?.supportQuote))) {
+          filtered = true; return null;
+        }
+        return {text: clean(entry.text), newsIds: refs,
+          supports: supports.map((support) => ({newsId: clean(support.newsId), supportQuote: clean(support.supportQuote)}))};
+      }).filter(Boolean);
     if (filtered) chapters.forEach((chapter) => {
-      chapter.title = "本期进展"; chapter.angle = "";
+      chapter.title = "本期进展"; chapter.angle = ""; chapter.kind = "event";
+      chapter.comparisonKey = ""; chapter.comparisonNote = "";
       chapter.blocks = chapter.newsIds.map((id) => ({type: "paragraph",
         text: byNews.get(id).excerpt || byNews.get(id).title, newsIds: [id]}));
     });
-    const retained = new Set(chapters.flatMap((chapter) => chapter.newsIds));
-    const usedEvents = events.filter((event) => retained.has(event.newsId));
     return {
       schemaVersion: 2, editionDate: payload.editionDate, generatedAt: clean(payload.generatedAt),
       headline: filtered ? "今日前沿深读" : clean(payload.headline, "今日前沿深读"),
       lead: filtered ? "" : clean(payload.lead),
       generationStatus: usedEvents.length < 4 ? "insufficient" : clean(payload.generationStatus, "fallback"),
       contentFiltered: filtered, chapters, events: usedEvents,
+      observations: filtered ? [] : observations,
       eventCount: usedEvents.length,
       sourceCount: new Set(usedEvents.flatMap((event) => event.sources.map((source) => source.url))).size,
     };
@@ -633,8 +659,9 @@
           const illustrated = members.find((event) => event.image);
           return `<section class="deepread-chapter" id="${esc(chapter.id)}">
             <h2>${esc(chapter.title)}</h2>
+            ${chapter.kind === "comparison" ? `<p class="deepread-comparison-note">${esc(chapter.comparisonNote)}</p>` : ""}
             ${illustrated ? `<figure class="deepread-figure"><img src="${esc(illustrated.image)}" alt="${esc(illustrated.title)}" loading="lazy" decoding="async" referrerpolicy="no-referrer"><figcaption>原文配图 · 图片来源：${esc(illustrated.imageSource || illustrated.sources[0]?.name || "原报道")}</figcaption></figure>` : ""}
-            ${chapter.blocks.map((block) => `<p class="${block.type === "change" ? "deepread-change" : "deepread-paragraph"}">${esc(block.text)}</p>`).join("")}
+            ${chapter.blocks.map((block) => `<p class="${block.type === "change" ? "deepread-change" : block.type === "comparison" ? "deepread-comparison" : "deepread-paragraph"}">${esc(block.text)}</p>`).join("")}
             <div class="deepread-source-list"><b>本节资料</b>${members.map((event) => `<div class="deepread-source-row">
               <span class="deepread-evidence-tag">${EVIDENCE_LABELS[event.evidenceLevel]}</span>
               <span>${esc(event.title)}</span>
@@ -643,6 +670,12 @@
             </div>`).join("")}</div>
           </section>`;
         }).join("")}
+        ${report.observations?.length ? `<section class="deepread-observations" aria-label="今日观察">
+          <h2>今日观察</h2><ol>${report.observations.map((entry) => `<li><p>${esc(entry.text)}</p>
+            <small>依据：${entry.newsIds.map((id) => {
+              const event = byNews.get(id), source = event?.sources[0];
+              return source ? `<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(event.title)} ↗</a>` : "";
+            }).join(" · ")}</small></li>`).join("")}</ol></section>` : ""}
       </article>
     </div>`;
   }
