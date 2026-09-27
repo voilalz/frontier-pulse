@@ -20,10 +20,10 @@ from deepread_editorial_signals import (comparison_keys, delta_score, editorial_
                                         is_political_policy, strip_caption_text)
 
 
-GENERATION_REVISION = 9
+GENERATION_REVISION = 10
 EVIDENCE_LEVELS = ("primary", "multi", "single", "opinion")
 COMPARISON_NOTE = "并列比较不代表事件之间存在因果关系。"
-_CAUSAL_CLAIM = re.compile(r"导致|造成|促使|引发|使得|使其|因而|因此|从而|归因于|推动|带动|促成|触发|"
+_CAUSAL_CLAIM = re.compile(r"导致|造成|促使|引发|使得|使其|因而|因此|从而|归因于|推动|带动|牵动|促成|触发|"
                            r"原因|由于|因为|源于|缘于|致使|迫使|(?:直接|间接)影响|"
                            r"(?:形成|构成|(?<!不)存在|具有|直接|证明).{0,4}因果关系|"
                            r"\b(?:caused?|because|therefore|resulted? in)\b", re.I)
@@ -39,6 +39,10 @@ _CERTAIN_OUTCOME = re.compile(r"(?:已经?|现已|可以?)(?:证明|证实|验�
 _NEW_QUANTITIES = re.compile(r"(?:\d+(?:\.\d+)?|[一二三四五六七八九十百千万亿]+)(?:名|人|家|座|台|次|万|亿|欧元|美元|英镑|%)|[€$£]\s*\d+", re.I)
 _SENSITIVE_ASSERTIONS = ("监管", "批准", "获批", "医院", "患者", "临床", "收入", "营收", "欧元", "美元",
                          "上市", "盈利", "正式部署", "正式上线")
+_TAG_LIST_ONLY = re.compile(r"[A-Za-z0-9][A-Za-z0-9 &'./-]{0,35}(?:,\s*[A-Za-z0-9][A-Za-z0-9 &'./-]{0,35}){2,}")
+_ACTION_VERB = re.compile(r"\b(?:said|says|is|are|was|were|has|have|had|will|"
+                          r"launch(?:ed|es)?|deploy(?:ed|s)?|train(?:ed|s)?|prepare(?:d|s)?|"
+                          r"test(?:ed|s)?|complete(?:d|s)?|announce(?:d|s)?|report(?:ed|s)?)\b", re.I)
 
 
 def _claims_causality(value: str) -> bool:
@@ -178,10 +182,46 @@ def _related(first: dict[str, Any], second: dict[str, Any]) -> bool:
     return first["category"] == second["category"] and bool(_anchors(first) & _anchors(second))
 
 
+_COMPARISON_LABELS = {
+    "ai-agent": "AI 智能体", "counter-uas": "反无人机技术", "quantum-computing": "量子计算",
+    "hypersonic-missile": "高超音速导弹", "semiconductor-fabrication": "芯片制造",
+    "robotaxi": "自动驾驶出租车", "fusion": "核聚变", "perovskite": "钙钛矿",
+}
+
+
+def _same_reported_action(first: dict[str, Any], second: dict[str, Any]) -> bool:
+    """Avoid comparing near-identical action headlines despite different event IDs."""
+    def signature(item: dict[str, Any]) -> list[str]:
+        synonyms = {"pauses": "pause", "halts": "pause", "suspends": "pause", "stops": "pause"}
+        ignored = {"a", "an", "the", "of", "as", "after", "in", "on", "for", "to", "and", "ai"}
+        words = re.findall(r"[a-z0-9]+", item["originalTitle"].lower())
+        return [synonyms.get(word, word) for word in words if word not in ignored]
+    a, b = signature(first), signature(second)
+    return len(a) >= 5 and len(b) >= 5 and a[:5] == b[:5]
+
+
 def _default_outline(pool: list[dict[str, Any]], count: int) -> list[dict[str, Any]]:
     chosen = _select(pool, count)
-    return [{"title": item["title"], "angle": "追踪本次报道中的具体变化", "items": [item],
-             "kind": "event", "comparisonKey": ""} for item in chosen]
+    outline, used = [], set()
+    for index, item in enumerate(chosen):
+        if item["id"] in used:
+            continue
+        pair = next(((other, key) for other in chosen[index + 1:] if other["id"] not in used
+                     and other["eventId"] != item["eventId"] and not _same_reported_action(item, other)
+                     for key in sorted(item["_comparisonKeys"] & other["_comparisonKeys"])
+                     if key in _COMPARISON_LABELS), None)
+        if pair:
+            other, key = pair
+            label = _COMPARISON_LABELS[key]
+            outline.append({"title": f"{label}：两项独立进展", "angle": f"分别核对两项报道在{label}上披露的事实与未知事项",
+                            "items": [item, other], "kind": "comparison", "comparisonKey": key,
+                            "sourceFallback": True})
+            used.add(other["id"])
+        else:
+            outline.append({"title": item["title"], "angle": "追踪本次报道中的具体变化", "items": [item],
+                            "kind": "event", "comparisonKey": ""})
+        used.add(item["id"])
+    return outline
 
 
 def _plan_outline(
@@ -296,7 +336,12 @@ def _article(outline: list[dict[str, Any]], pool: list[dict[str, Any]], edition:
                       "kind": chapter["kind"], "comparisonKey": chapter["comparisonKey"],
                       "comparisonNote": COMPARISON_NOTE if chapter["kind"] == "comparison" else "",
                       "newsIds": [item["id"] for item in chapter["items"]],
-                      "blocks": [block for item in chapter["items"] for block in _fallback_block(item)]}
+                      "blocks": [block for item in chapter["items"] for block in _fallback_block(item)] + (
+                          [{"type": "comparison", "text": (
+                              f"围绕{_COMPARISON_LABELS[chapter['comparisonKey']]}，两项报道分别记录“{chapter['items'][0]['title']}”"
+                              f"与“{chapter['items'][1]['title']}”。并列比较不代表事件之间存在因果关系。"),
+                            "newsIds": [item["id"] for item in chapter["items"]]}]
+                          if chapter.get("sourceFallback") else [])}
                      for index, chapter in enumerate(outline)],
         "events": [_public_event(item) for item in selected],
         "observations": [],
@@ -372,6 +417,7 @@ def _validated_observations(value: Any, selected: list[dict[str, Any]], placehol
             ref, quote = support["newsId"], support["supportQuote"]
             if (ref not in refs or not isinstance(quote, str) or not 10 <= len(quote) <= 220
                     or quote != quote.strip() or re.search(r"[<>\x00-\x1f]", quote)
+                    or (_TAG_LIST_ONLY.fullmatch(quote) and not _ACTION_VERB.search(quote))
                     or not any(quote in material for material in (
                         by_id[ref]["summary"], by_id[ref]["_evidence"][:3000]))):
                 break
@@ -650,7 +696,9 @@ def build_daily_deepread(
         article["warnings"].append("文章生成服务未启用，当前为基于来源材料的简版。")
         return article
     if not planned:
-        article["warnings"].append("主题提纲未通过校验，采用独立事件提纲。")
+        article["warnings"].append("主题提纲未通过校验，采用有共同问题的来源简版提纲。"
+                                   if any(chapter["kind"] == "comparison" for chapter in outline)
+                                   else "主题提纲未通过校验，采用独立事件提纲。")
     prose = _prose(article, outline, edition, runtime, request_json)
     if prose is None:
         prose = _prose(article, outline, edition, runtime, request_json)

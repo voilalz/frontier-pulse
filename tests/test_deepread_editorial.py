@@ -719,6 +719,35 @@ class EditorialDeepreadTests(unittest.TestCase):
         outline_input = next(json.loads(call["input_text"]) for call in calls if call["schema_name"] == "deepread_outline_v2")
         self.assertIn("ai-agent", outline_input["candidates"][0]["comparisonKeys"])
 
+    def test_rejected_outline_keeps_source_grounded_comparison_of_independent_actions(self):
+        items = [self.item(n) for n in range(5)]
+        items[0].update(title="OpenAI暂停最新模型训练", originalTitle="OpenAI pauses training after agents probed sites",
+                        summary="OpenAI因AI代理意外访问网站暂停了最新模型训练，具体影响范围尚未公布。")
+        items[1].update(title="电商平台测试AI智能体购物授权", originalTitle="Retailer trials AI agent payment authorization",
+                        summary="电商平台测试AI代理支付前的用户授权，并披露了当前的结算测试范围。")
+        report = build_daily_deepread(items, self.config, self.now,
+                                      {"provider": "fixture"}, lambda *_args, **_kwargs: None)
+        chapters = [chapter for chapter in report["chapters"] if chapter["kind"] == "comparison"]
+        self.assertEqual(report["eventCount"], 5)
+        self.assertEqual(len(report["chapters"]), 4)
+        self.assertEqual(len(chapters), 1)
+        self.assertEqual(set(chapters[0]["newsIds"]), {"news-0", "news-1"})
+        self.assertEqual(chapters[0]["comparisonNote"], "并列比较不代表事件之间存在因果关系。")
+        self.assertEqual([block["type"] for block in chapters[0]["blocks"]].count("comparison"), 1)
+        self.assertIn("不代表事件之间存在因果关系", chapters[0]["blocks"][-1]["text"])
+
+    def test_two_headlines_for_the_same_pause_are_not_forced_into_a_comparison(self):
+        items = [self.item(n) for n in range(5)]
+        items[0].update(title="OpenAI因AI代理探查网站暂停最新模型训练",
+                        originalTitle="OpenAI pauses training of latest models after agents probed sites",
+                        summary="OpenAI暂停最新模型训练，原因涉及AI代理意外访问网站。")
+        items[1].update(title="OpenAI因AI代理报告暂停最新模型训练",
+                        originalTitle="OpenAI halts training of latest models as reports of AI agents mount",
+                        summary="OpenAI暂停最新模型训练，正在调查AI代理的异常行为。")
+        report = build_daily_deepread(items, self.config, self.now)
+        self.assertEqual(report["eventCount"], 5)
+        self.assertTrue(all(chapter["kind"] == "event" for chapter in report["chapters"]))
+
     def test_specific_comparison_subjects_extend_beyond_initial_five(self):
         from deepread_editorial_signals import comparison_keys
         topics = [
@@ -857,6 +886,37 @@ class EditorialDeepreadTests(unittest.TestCase):
         claims[0]["text"] = "试验已经获得监管部门批准，一千名患者在医院采用设备，收入达一千万欧元。"
         claims[1]["text"] = "十名用户的测试让医院部署扩大，并取得一千万欧元收入和新增患者。"
         self.assertIsNone(_validated_observations(claims, [a, b], set()))
+
+    def test_cross_event_observation_cannot_claim_internal_review_drove_training_pause(self):
+        from deepread_editorial import _validated_observations
+        first = self.item(0, summary="OpenAI暂停最新模型训练，AI代理探查政府网站的事件仍在调查中。", _evidence="")
+        second = self.item(1, summary="OpenAI内部审查发现Hugging Face事件后的更多安全报告。", _evidence="")
+        claims = [
+            {"text": "内部审查已牵动OpenAI的模型训练节奏，两项报道说明该联系。",
+             "newsIds": ["news-0", "news-1"], "supports": [
+                 {"newsId": "news-0", "supportQuote": "OpenAI暂停最新模型训练"},
+                 {"newsId": "news-1", "supportQuote": "OpenAI内部审查发现Hugging Face事件后的更多安全报告"}]},
+            {"text": "内部审查披露了更多安全报告，具体后续处理仍需进一步核对。",
+             "newsIds": ["news-1"], "supports": [
+                 {"newsId": "news-1", "supportQuote": "OpenAI内部审查发现Hugging Face事件后的更多安全报告"}]},
+        ]
+        self.assertIsNone(_validated_observations(claims, [first, second], set()))
+
+    def test_tag_list_is_not_an_action_quote_for_observation(self):
+        from deepread_editorial import _validated_observations
+        first = self.item(0, summary="基地将部署反无人机激光，具体部署时间尚未公布。", _evidence="")
+        second = self.item(1, summary="海军乘员完成培训，目前正准备部署无人机。",
+                           _evidence="AKINCI, Royal Saudi Navy, UCAV")
+        claims = [
+            {"text": "两项无人系统都已经完成培训并进入实际部署准备。",
+             "newsIds": ["news-0", "news-1"], "supports": [
+                 {"newsId": "news-0", "supportQuote": "基地将部署反无人机激光"},
+                 {"newsId": "news-1", "supportQuote": "AKINCI, Royal Saudi Navy, UCAV"}]},
+            {"text": "海军乘员已经完成培训，实际部署进度仍待后续材料核对。",
+             "newsIds": ["news-1"], "supports": [
+                 {"newsId": "news-1", "supportQuote": "海军乘员完成培训，目前正准备部署无人机"}]},
+        ]
+        self.assertIsNone(_validated_observations(claims, [first, second], set()))
 
     def test_negated_source_cannot_support_claimed_completed_action(self):
         from deepread_editorial import _validated_observations
