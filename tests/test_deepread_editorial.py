@@ -437,6 +437,37 @@ class EditorialDeepreadTests(unittest.TestCase):
             "category": "AI", "originalTitle": "Researchers investigate AI agent failures",
             "summary": "Researchers traced government website access, and a company inquiry into the software failure continues."}))
 
+    def test_misclassified_diplomatic_meeting_stays_out_of_deepread(self):
+        summit = self.item(81, category="AI", score=100,
+                           title="习近平与特朗普正式会晤未公开提及台湾",
+                           originalTitle="No public mentions of Taiwan at official Xi and Trump meeting",
+                           summary="在习近平与特朗普的高调会晤中，双方均未公开提及台湾。")
+        lab = self.item(82, category="AI", score=99,
+                        title="研究团队召开机器人控制技术会议",
+                        originalTitle="Researchers meet for a robotics control workshop",
+                        summary="研究团队召开机器人控制技术会议，随后公布本轮实验的测量结果和后续测试安排。")
+        report = build_daily_deepread([summit, lab] + [self.item(n) for n in range(4)],
+                                      self.config, self.now)
+        self.assertNotIn("news-81", {event["newsId"] for event in report["events"]})
+        self.assertIn("news-82", {event["newsId"] for event in report["events"]})
+
+    def test_misclassified_calls_for_war_stay_out_of_deepread(self):
+        war = self.item(83, category="军事动态", score=100,
+                        title="以色列部长呼吁在约旦河西岸开战",
+                        originalTitle="Israeli minister urges war in the West Bank",
+                        summary="部长呼吁开战，引发对地区战事进一步扩大的担忧。")
+        technical = self.item(84, category="军事动态", score=99,
+                              title="军方完成反无人机装备测试",
+                              originalTitle="Military completes counter drone equipment trial",
+                              summary="军方完成本轮反无人机设备测试，并公开雷达探测和拦截性能数据以及后续安排。")
+        report = build_daily_deepread([war, technical] + [self.item(n) for n in range(4)],
+                                      self.config, self.now)
+        from deepread_editorial_signals import is_political_policy
+        self.assertTrue(is_political_policy(war))
+        self.assertFalse(is_political_policy(technical))
+        self.assertNotIn("news-83", {event["newsId"] for event in report["events"]})
+        self.assertIn("news-84", {event["newsId"] for event in report["events"]})
+
     def test_misclassified_policy_actions_in_titles_or_leads_are_excluded(self):
         policy_stories = [
             self.item(81, score=100, category="AI", title="政府发布人工智能使用新政策",

@@ -15,9 +15,12 @@ _POLITICAL_SUBJECT = re.compile(
     r"trade policy|immigration policy|tariff|sanctions?|regulation|legislation|"
     r"(?:senate|parliament|congress|regulator|government).{0,80}(?:bills?|laws?|legislation)|"
     r"(?:AI|artificial intelligence|safety).{0,30}(?:bill|law)|"
+    r"(?:minister|president|military|army|troops?)\b.{0,80}\b(?:war|civil war|ceasefire|airstrikes?|armed conflict)\b|"
     r"executive order|media access|press access|export controls?|"
     r"polic(?:y|ies)(?![-\s]+(?:gradient|optimization|iteration|network|learning)))\b|"
     r"选举|竞选|政党|外交会谈|外交政策|监管政策|监管规定|政策法案|"
+    r"(?:正式|双边|高调|首脑|国家领导人|总统|首相|元首).{0,18}(?:会晤|峰会|会谈)|"
+    r"(?:部长|总统|军方|武装部队).{0,45}(?:开战|内战|停火|空袭|战争)|"
     r"立法|法案|政策(?!梯度)|出口管制|监管.{0,10}(?:法律|法规|条例|新规)|行政令|关税|制裁|媒体准入|记者准入|随行采访", re.I)
 _POLITICAL_LEAD = re.compile(
     r"(?:政府|监管机构|国会|议会|白宫|欧盟|美国).{0,55}"
