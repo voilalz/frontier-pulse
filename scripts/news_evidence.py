@@ -36,7 +36,7 @@ project system technology tech research study result results mission model ai
 """.split())
 _SKIP_TAGS = {"nav", "aside", "footer", "form", "button", "select", "input",
               "svg", "canvas", "iframe", "style", "script", "noscript", "template",
-              "figcaption", "head"}
+              "figure", "figcaption", "head"}
 _VOID_TAGS = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link",
               "meta", "param", "source", "track", "wbr"}
 _BLOCK_TAGS = {"p", "div", "section", "article", "main", "li", "ul", "ol",
@@ -44,7 +44,8 @@ _BLOCK_TAGS = {"p", "div", "section", "article", "main", "li", "ul", "ol",
 _NOISE_ATTR = re.compile(
     r"(?:^|[\s_-])(?:ads?|advert(?:isement|ising)?|sponsored|newsletter|related|"
     r"recommend(?:ed|ation|ations)?|recirculation|most-popular|promo(?:tion)?|"
-    r"share|social|navigation|sidebar|teaser|outbrain|taboola|breadcrumb|cookie|"
+    r"share|social|navigation|sidebar|teaser|caption|photo-credit|image-credit|"
+    r"outbrain|taboola|breadcrumb|cookie|"
     r"consent)(?:$|[\s_-])", re.I)
 _RESTRICTED_ATTR = re.compile(
     r"(?:^|[\s_-])(?:paywall|subscription-wall|subscriber-only|subscribers-only|"
@@ -57,6 +58,12 @@ _NOISE_TEXT = re.compile(
     r"subscribe|sign\s+(?:in|up)|log\s*in|advertisement|sponsored|follow\s+us|"
     r"share\s+this|copyright|all\s+rights\s+reserved|newsletter|continue\s+reading|"
     r"more\s+from|most\s+(?:read|popular))\b", re.I)
+_PHOTO_CREDIT = re.compile(
+    r"\b(?:photo(?:graph)?|picture|image)\s*(?:by|credit\b|:)"
+    r"|\b(?:photo|picture|image)\s+courtesy\s+of\b", re.I)
+_CHINESE_CAPTION = re.compile(
+    r"(?:报道)?配图(?:显示|为)|照片由.{1,80}?(?:拍摄|提供)|"
+    r"图片(?:来源|由.{1,80}?(?:拍摄|提供))|图源\s*[:：]|摄影\s*[:：]")
 _BODY_ATTR = re.compile(
     r"(?:^|[\s_-])(?:article|story|post|entry)[_-](?:body|content|text)(?:$|[\s_-])", re.I)
 _HEADING_TAGS = {"h1", "h2", "h3", "h4", "h5", "h6"}
@@ -73,6 +80,37 @@ _BLOCKED_EVENT = re.compile(
 
 def _clean(value: str) -> str:
     return re.sub(r"\s+", " ", unescape(value)).strip()
+
+
+def strip_caption_text(value: str) -> str:
+    """Remove obvious photograph captions while retaining ordinary image evidence."""
+    if not isinstance(value, str):
+        return ""
+    kept = []
+    for paragraph in re.split(r"\n\s*\n|\r\n", value):
+        sentences = re.split(r"(?<=[。！？])|(?<=[.!?])\s+(?=[A-Z])", paragraph)
+        cleaned = []
+        for sentence in sentences:
+            # An image can itself be the reported evidence. Preserve the
+            # finding even when its provider or photographer is credited.
+            image_finding = (not re.search(r"(?:报道)?配图", sentence)
+                             and (re.search(r"\b(?:shows?|reveals?|indicates?|detects?|identifies?)\b", sentence, re.I)
+                                  or re.search(r"(?:显示|揭示|发现|证实|识别).{2,}", sentence))
+                             and (not _PHOTO_CREDIT.search(sentence)
+                                  or re.search(r"\bimage\s+by\b", sentence, re.I)))
+            if _CHINESE_CAPTION.search(sentence) and not image_finding:
+                continue
+            if _PHOTO_CREDIT.search(sentence) and not image_finding:
+                # The immediately preceding sentence of a photo credit is
+                # normally the pictured action rather than this story's news.
+                if cleaned and re.search(r"\b(?:launch(?:es|ed)?|pictured|shown|seen)\b", cleaned[-1], re.I):
+                    cleaned.pop()
+                continue
+            cleaned.append(sentence)
+        result = " ".join(part.strip() for part in cleaned if part.strip()).strip()
+        if result:
+            kept.append(result)
+    return "\n\n".join(kept)
 
 
 def _normal(value: str) -> str:
@@ -240,13 +278,13 @@ def _text(node: _Node, excluded: set[_Node] | None = None, raw: bool = False) ->
     return "".join(parts)
 
 
-def _chunks(value: str, sentences: bool = False) -> list[str]:
+def _chunks(value: str, sentences: bool = False, preserve_long: bool = False) -> list[str]:
     result = []
     for line in re.split(r"[\r\n]+", value):
         line = _clean(line)
         if not line:
             continue
-        parts = re.split(r"(?<=[.!?])\s+(?=[A-Z0-9\"“'])|(?<=[。！？])\s*", line) if sentences or len(line) > 500 else [line]
+        parts = re.split(r"(?<=[.!?])\s+(?=[A-Z0-9\"“'])|(?<=[。！？])\s*", line) if sentences or (len(line) > 500 and not preserve_long) else [line]
         for part in parts:
             if not part:
                 continue
@@ -257,11 +295,12 @@ def _chunks(value: str, sentences: bool = False) -> list[str]:
     return result
 
 
-def _paragraphs(root: _Node, excluded: set[_Node], sentences: bool = False) -> list[str]:
+def _paragraphs(root: _Node, excluded: set[_Node], sentences: bool = False,
+                preserve_long: bool = False) -> list[str]:
     result, buffer = [], []
 
     def flush():
-        result.extend(_chunks("".join(buffer), sentences))
+        result.extend(_chunks("".join(buffer), sentences, preserve_long=preserve_long))
         buffer.clear()
 
     def visit(node):
@@ -374,7 +413,8 @@ def _page_candidates(page: str) -> tuple[list[tuple[str, list[str]]], bool]:
         headline = next((_clean(_text(node)) for node in local if node.tag == "h1"), "")
         if not headline and root.tag == "article":
             headline = next((_clean(_text(node)) for node in local if node.tag == "h2"), "")
-        paragraphs = _paragraphs(root, roots - {root})
+        paragraphs = [_clean(cleaned) for paragraph in _paragraphs(root, roots - {root})
+                      if (cleaned := strip_caption_text(paragraph)).strip()]
         if paragraphs:
             candidates.append((headline or page_headline, paragraphs))
     visible_text = _text(parser.root)
@@ -383,8 +423,11 @@ def _page_candidates(page: str) -> tuple[list[tuple[str, list[str]]], bool]:
 
 def _feed_paragraphs(lead: str) -> list[str]:
     if re.search(r"<[a-zA-Z][\s\S]*?>", lead):
-        return _paragraphs(_parse(lead).root, set(), sentences=True)
-    return _chunks(lead[:_INPUT_LIMIT], sentences=True)
+        paragraphs = _paragraphs(_parse(lead).root, set(), sentences=False, preserve_long=True)
+    else:
+        paragraphs = _chunks(lead[:_INPUT_LIMIT], sentences=False, preserve_long=True)
+    return [sentence for paragraph in paragraphs
+            for sentence in _chunks(strip_caption_text(paragraph), sentences=True)]
 
 
 def _selection(paragraphs: list[str], signature: _Signature) -> tuple[list[str], float]:

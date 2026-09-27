@@ -132,6 +132,67 @@ class NewsEvidenceTests(unittest.TestCase):
         result = select_relevant_evidence("NASA launches Europa Clipper", lead, "")
         self.assertEqual(result["paragraphs"], [first, second])
 
+    def test_photo_credit_in_feed_is_not_selected_as_news_evidence(self):
+        fact = "Cape Canaveral will deploy lasers to intercept drones entering the base."
+        caption = ("A SpaceX Falcon 9 rocket launches from Cape Canaveral. "
+                   "Space Force photo by Gwen Kurzen.")
+        lead = f"<p>{fact}</p><p>{caption}</p>"
+        result = select_relevant_evidence("Cape Canaveral lasers intercept drones", lead, "")
+        self.assertIn(fact, result["text"])
+        self.assertNotIn("Falcon 9", result["text"])
+        self.assertNotIn("Gwen Kurzen", result["text"])
+
+    def test_long_plain_rss_lead_keeps_credit_adjacent_to_pictured_action_until_scrubbed(self):
+        fact = "Cape Canaveral will deploy lasers to intercept drones entering the base."
+        lead = (fact + " The installation protects launch facilities on the air base. " * 12
+                + "A SpaceX Falcon 9 rocket launches from Cape Canaveral. Space Force photo by Gwen Kurzen.")
+        result = select_relevant_evidence("Cape Canaveral lasers intercept drones", lead, "")
+        self.assertIn(fact, result["text"])
+        self.assertNotIn("Falcon 9", result["text"])
+        self.assertNotIn("Gwen Kurzen", result["text"])
+
+    def test_credit_caption_with_shows_is_not_an_image_finding(self):
+        fact = "Cape Canaveral will deploy lasers to intercept drones entering the base."
+        caption = "Space Force photo by Gwen Kurzen shows a Falcon 9 launching from Cape Canaveral."
+        result = select_relevant_evidence("Cape Canaveral lasers intercept drones", f"{fact} {caption}", "")
+        self.assertIn(fact, result["text"])
+        self.assertNotIn("Falcon 9", result["text"])
+
+    def test_figure_without_figcaption_tag_does_not_supply_evidence(self):
+        fact = "NASA reported that the Europa Clipper instruments completed their tests."
+        page = ('<article><h1>NASA Europa Clipper instruments complete tests</h1>'
+                f'<figure><p>NASA Europa Clipper lifts off. Photo by Jane Smith.</p></figure><p>{fact}</p></article>')
+        result = select_relevant_evidence("NASA Europa Clipper instruments complete tests", "", page)
+        self.assertEqual(result["paragraphs"], [fact])
+
+    def test_plain_html_body_caption_does_not_supply_news_evidence(self):
+        fact = "Cape Canaveral will deploy lasers to intercept drones entering the base."
+        caption = ("A SpaceX Falcon 9 rocket launches from Cape Canaveral. "
+                   "Space Force photo by Gwen Kurzen.")
+        for wrapper in ('<p class="caption">', '<p>'):
+            with self.subTest(wrapper=wrapper):
+                page = ('<article><h1>Cape Canaveral lasers intercept drones</h1>'
+                        f'<p>{fact}</p>{wrapper}{caption}</p></article>')
+                result = select_relevant_evidence("Cape Canaveral lasers intercept drones", "", page)
+                self.assertEqual(result["status"], "body")
+                self.assertEqual(result["paragraphs"], [fact])
+
+    def test_real_satellite_image_finding_remains_evidence(self):
+        finding = "Satellite images showed new damage to the launch pad after the test."
+        result = select_relevant_evidence("Satellite images show launch pad damage", finding, "")
+        self.assertIn(finding, result["text"])
+
+    def test_image_credit_with_actual_finding_is_evidence_in_both_languages(self):
+        cases = [
+            ("Planet Labs image shows new launch pad damage",
+             "Planet Labs image by John Doe shows new damage to the launch pad."),
+            ("卫星图片显示发射台受损", "卫星图片由Planet Labs提供，显示发射台受损。"),
+        ]
+        for title, finding in cases:
+            with self.subTest(title=title):
+                result = select_relevant_evidence(title, finding, "")
+                self.assertIn(finding, result["text"])
+
     def test_no_relevant_evidence_returns_empty_text_instead_of_repeating_title(self):
         result = select_relevant_evidence("NASA launches Europa Clipper", "The football match ended in a draw.", "")
         self.assertEqual(result["status"], "title-only")
