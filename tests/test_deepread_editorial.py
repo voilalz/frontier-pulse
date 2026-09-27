@@ -286,6 +286,21 @@ class EditorialDeepreadTests(unittest.TestCase):
                             for entry in report["observations"]))
         self.assertNotIn("全面获批", json.dumps(report["observations"], ensure_ascii=False))
 
+    def test_source_limit_observations_skip_metadata_and_use_unreported_deployment_details(self):
+        items = [self.item(n, score=95-n) for n in range(5)]
+        items[0]["summary"] = "AI智能体训练已经暂停，具体影响范围和调查结论尚未公布。"
+        items[1]["summary"] = ("乘组已经抵达佛罗里达。现有元数据未提供摘要中除上述抵达事实之外的"
+                                "具体发射时间、任务细节或后续安排。")
+        items[2]["summary"] = ("舰队已完成相关操作乘员培训，正在准备部署无人机。"
+                                "报道未披露部署时间、驻扎地点和数量等细节，相关进展尚处于准备阶段。")
+        report = build_daily_deepread(items, self.config, self.now,
+                                      {"provider": "fixture"}, lambda *_args, **_kwargs: None)
+        self.assertEqual({tuple(entry["newsIds"]) for entry in report["observations"]},
+                         {("news-0",), ("news-2",)})
+        self.assertIn("部署时间", next(entry["text"] for entry in report["observations"]
+                                   if entry["newsIds"] == ["news-2"]))
+        self.assertNotIn("元数据", json.dumps(report["observations"], ensure_ascii=False))
+
     def test_outline_splits_unrelated_satellite_projects_in_same_category(self):
         items = [self.item(n) for n in range(4)]
         items[0].update(category="航空航天", originalTitle="NASA satellite tests communication relay")
@@ -596,6 +611,34 @@ class EditorialDeepreadTests(unittest.TestCase):
         self.assertEqual(event["evidenceLevel"], "single")
         self.assertEqual(len(event["sources"]), 1)
 
+    def test_same_action_across_event_ids_uses_one_core_slot_and_both_sources(self):
+        items = [self.item(n, category="AI", score=90-n) for n in range(6)]
+        items[0].update(title="OpenAI在代理异常后暂停最新模型训练",
+                        originalTitle="OpenAI pauses training of latest models after agents probed sites",
+                        summary="OpenAI暂停最新模型训练，并就智能体访问外部网站的行为展开调查。")
+        items[1].update(title="OpenAI暂停最新模型训练，代理事件仍在调查",
+                        originalTitle="OpenAI halts training of latest models as AI agents go rogue",
+                        summary="另一媒体报道OpenAI暂停最新模型训练，同时记录智能体行为调查。")
+        report = build_daily_deepread(items, self.config, self.now)
+        selected = {event["newsId"]: event for event in report["events"]}
+        self.assertEqual(set(selected), {"news-0", "news-2", "news-3", "news-4", "news-5"})
+        self.assertEqual(selected["news-0"]["eventId"], "evt-0")
+        self.assertEqual(selected["news-0"]["evidenceLevel"], "multi")
+        self.assertEqual({source["url"] for source in selected["news-0"]["sources"]},
+                         {items[0]["url"], items[1]["url"]})
+
+    def test_matching_headline_prefix_does_not_merge_distinct_numbered_models(self):
+        items = [self.item(n, category="AI", score=90-n) for n in range(6)]
+        items[0].update(originalTitle="OpenAI pauses training of latest models as GPT-7 fails checks",
+                        title="OpenAI暂停GPT-7模型训练", summary="OpenAI暂停GPT-7模型的训练，正核查相关测试结果。")
+        items[1].update(originalTitle="OpenAI halts training of latest models as GPT-8 fails checks",
+                        title="OpenAI暂停GPT-8模型训练", summary="OpenAI暂停GPT-8模型的训练，正核查另一批测试结果。")
+        report = build_daily_deepread(items, self.config, self.now)
+        selected = {event["newsId"]: event for event in report["events"]}
+        self.assertEqual(set(selected), {"news-0", "news-1", "news-2", "news-3", "news-4"})
+        self.assertEqual(selected["news-0"]["evidenceLevel"], "single")
+        self.assertEqual(selected["news-1"]["evidenceLevel"], "single")
+
     def test_equally_important_delta_and_better_sources_enter_core_selection(self):
         items = [self.item(n, category="AI", score=80) for n in range(6)]
         items[0]["score"] = 95
@@ -779,7 +822,7 @@ class EditorialDeepreadTests(unittest.TestCase):
         self.assertEqual([b["type"] for b in chapter["blocks"]].count("comparison"), 1)
 
     def test_two_headlines_for_the_same_pause_are_not_forced_into_a_comparison(self):
-        items = [self.item(n) for n in range(5)]
+        items = [self.item(n) for n in range(6)]
         items[0].update(title="OpenAI因AI代理探查网站暂停最新模型训练",
                         originalTitle="OpenAI pauses training of latest models after agents probed sites",
                         summary="OpenAI暂停最新模型训练，原因涉及AI代理意外访问网站。")
@@ -788,6 +831,7 @@ class EditorialDeepreadTests(unittest.TestCase):
                         summary="OpenAI暂停最新模型训练，正在调查AI代理的异常行为。")
         report = build_daily_deepread(items, self.config, self.now)
         self.assertEqual(report["eventCount"], 5)
+        self.assertNotIn("news-1", {event["newsId"] for event in report["events"]})
         self.assertTrue(all(chapter["kind"] == "event" for chapter in report["chapters"]))
 
     def test_failed_prose_keeps_sourced_comparison_and_explicit_limit_observations(self):

@@ -20,7 +20,7 @@ from deepread_editorial_signals import (comparison_keys, delta_score, editorial_
                                         is_political_policy, strip_caption_text)
 
 
-GENERATION_REVISION = 11
+GENERATION_REVISION = 12
 EVIDENCE_LEVELS = ("primary", "multi", "single", "opinion")
 COMPARISON_NOTE = "并列比较不代表事件之间存在因果关系。"
 _CAUSAL_CLAIM = re.compile(r"导致|造成|促使|引发|使得|使其|因而|因此|从而|归因于|推动|带动|牵动|促成|触发|"
@@ -191,6 +191,12 @@ _COMPARISON_LABELS = {
 
 def _same_reported_action(first: dict[str, Any], second: dict[str, Any]) -> bool:
     """Avoid comparing near-identical action headlines despite different event IDs."""
+    numbered = re.compile(r"\b(gpt|claude|gemini|llama|grok|artemis|starship|crew|falcon|soyuz)"
+                          r"\s*[- ]?\s*(\d+(?:\.\d+)*)\b", re.I)
+    first_numbered = {(name.lower(), version) for name, version in numbered.findall(first["originalTitle"])}
+    second_numbered = {(name.lower(), version) for name, version in numbered.findall(second["originalTitle"])}
+    if first_numbered != second_numbered:
+        return False
     def signature(item: dict[str, Any]) -> list[str]:
         synonyms = {"pauses": "pause", "halts": "pause", "suspends": "pause", "stops": "pause"}
         ignored = {"a", "an", "the", "of", "as", "after", "in", "on", "for", "to", "and", "ai"}
@@ -458,13 +464,17 @@ def _source_limit_observations(selected: list[dict[str, Any]]) -> list[dict[str,
     for item in selected:
         for sentence in re.split(r"(?<=[。！？])\s*", item["summary"]):
             sentence = sentence.strip()
-            if not 10 <= len(sentence) <= 220:
+            if (not 10 <= len(sentence) <= 220
+                    or re.search(r"现有元数据|摘要中|原文未提供|\bmetadata\b", sentence, re.I)):
                 continue
             match = re.search(r"(?:^|，)([^，。！？]{4,44}?)(?:尚未披露|尚未公布|未披露|未说明|未提供)", sentence)
-            if not match:
-                continue
-            scope = match.group(1).strip()
-            if not scope or _claims_causality(scope):
+            if match:
+                scope = match.group(1).strip()
+            else:
+                after = re.search(r"(?:尚未披露|尚未公布|未披露|未说明|未提供)([^。！？]{4,60})", sentence)
+                scope = (re.split(r"，(?=相关|但|而|不过|也|目前|仍)", after.group(1), maxsplit=1)[0]
+                         .strip("，、；; ") if after else "")
+            if not 4 <= len(scope) <= 44 or _claims_causality(scope):
                 continue
             judgment = f"现有材料尚不足以判断{scope}，需等后续公开信息。"
             if judgment in seen_judgments:
@@ -690,7 +700,23 @@ def build_daily_deepread(
     unique = {}
     for item in sorted(eligible, key=editorial_priority):
         unique.setdefault(item["eventId"], item)
-    pool = sorted(unique.values(), key=editorial_priority)[:candidate_limit]
+    representatives: list[dict[str, Any]] = []
+    for item in sorted(unique.values(), key=editorial_priority):
+        matching = next((previous for previous in representatives if _same_reported_action(previous, item)), None)
+        if matching is None:
+            representatives.append(item)
+            continue
+        # Two outlets can receive distinct upstream event IDs for the same
+        # reported action. Retain the leading event ID and both verified URLs.
+        known_urls = {source["url"] for source in matching["sources"]}
+        matching["sources"].extend(dict(source) for source in item["sources"] if source["url"] not in known_urls)
+        groups = {source.get("evidenceGroup") or urlsplit(source["url"]).hostname
+                  for source in matching["sources"]}
+        if item["_evidenceLevel"] == "primary":
+            matching["_evidenceLevel"] = "primary"
+        elif matching["_evidenceLevel"] != "primary" and len(groups - {None, ""}) >= 2:
+            matching["_evidenceLevel"] = "multi"
+    pool = sorted(representatives, key=editorial_priority)[:candidate_limit]
     core = min(len(pool), max(4, min(6, int(_number(config.get("deepread_core_events", 5), 5)))))
     selected = sorted(pool, key=editorial_priority)[:6]
     outline = None
