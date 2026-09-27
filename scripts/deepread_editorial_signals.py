@@ -22,8 +22,11 @@ _POLITICAL_SUBJECT = re.compile(
 _POLITICAL_LEAD = re.compile(
     r"(?:政府|监管机构|国会|议会|白宫|欧盟|美国).{0,55}"
     r"(?:政策|法案|法规|条例|出口管制|禁令)|"
+    r"(?:参议院|众议院|国会|议会|监管机构).{0,75}(?:调查|听证|传唤|质询)|"
     r"\b(?:government|regulator|parliament|congress|white house)\b.{0,75}"
-    r"\b(?:policy|policies|bill|law|regulation|export controls?)\b", re.I)
+    r"\b(?:policy|policies|bill|law|regulation|export controls?)\b|"
+    r"\b(?:senate|parliament|congress|regulator)\b.{0,75}"
+    r"\b(?:hearings?|inquir(?:y|ies)|summons?|investigation)\b", re.I)
 _PRESS_ACCESS = re.compile(
     r"(?:white house|白宫).{0,55}(?:cnn|press|reporters?|journalists?|媒体|记者)|"
     r"(?:cnn|press|reporters?|journalists?|媒体|记者).{0,55}(?:white house|白宫)", re.I)

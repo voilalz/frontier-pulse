@@ -192,7 +192,7 @@ class EditorialDeepreadTests(unittest.TestCase):
         self.assertTrue(all(event["sources"] for event in report["events"]))
         self.assertEqual(len(report["observations"]), 2)
 
-    def test_outline_may_select_four_and_splits_weakly_related_events(self):
+    def test_outline_selects_four_when_configured_and_splits_weakly_related_events(self):
         items = [self.item(n) for n in range(12)]
         items[0].update(category="AI", originalTitle="OpenAI bots disrupt agency websites")
         items[1].update(category="AI", originalTitle="OpenAI pauses strongest model after data leak")
@@ -216,12 +216,75 @@ class EditorialDeepreadTests(unittest.TestCase):
                         {"type": "paragraph", "text": "该项目今天公布了已完成的动作和下一阶段安排，材料说明了任务边界。",
                          "newsIds": chapter["newsIds"]}
                     ]} for chapter in outline}}
-        report = build_daily_deepread(items, self.config, self.now,
+        report = build_daily_deepread(items, {**self.config, "deepread_core_events": 4}, self.now,
                                       {"provider": "fixture"}, provider)
         self.assertEqual(report["generationStatus"], "ok")
         self.assertEqual(report["eventCount"], 4)
         self.assertEqual(len(report["chapters"]), 4)
         self.assertTrue(all(len(chapter["newsIds"]) == 1 for chapter in report["chapters"]))
+
+    def test_model_cannot_expand_five_core_events_to_six(self):
+        def provider(runtime, **kwargs):
+            if kwargs["schema_name"] == "deepread_outline_v2":
+                return {"selectedNewsIds": [f"news-{n}" for n in range(6)], "chapters": [
+                    {"title": f"第{n}项试验进展", "angle": "核对本次试验公布的结果", "newsIds": [f"news-{n}"]}
+                    for n in range(6)]}
+            return None
+        report = build_daily_deepread([self.item(n) for n in range(8)], self.config, self.now,
+                                      {"provider": "fixture"}, provider)
+        self.assertEqual(report["eventCount"], 5)
+        self.assertEqual(len(report["chapters"]), 5)
+
+    def test_two_supported_observations_survive_an_invalid_third(self):
+        def provider(runtime, **kwargs):
+            if kwargs["schema_name"] == "deepread_outline_v2":
+                return {"selectedNewsIds": [f"news-{n}" for n in range(5)], "chapters": [
+                    {"title": f"第{n}项试验进展", "angle": "核对本次试验公布的结果", "newsIds": [f"news-{n}"]}
+                    for n in range(5)]}
+            outline = json.loads(kwargs["input_text"])["outline"]
+            observations = [{"text": f"第{n}项试验已有结果，报道还列出已完成的步骤与后续安排。",
+                             "newsIds": [f"news-{n}"], "supports": [{"newsId": f"news-{n}",
+                             "supportQuote": f"第{n}项航空试验公布本次任务结果，报道列出已完成的测试步骤和后续安排"}]}
+                            for n in range(2)]
+            observations.append({"text": "第三项试验现已全面证实安全，后续可以直接推广应用。",
+                                 "newsIds": ["news-2"], "supports": [
+                                     {"newsId": "news-2", "supportQuote": "不存在的原文引述"}]})
+            return {"headline": "五项航空试验报道展示了各自不同的进展",
+                    "lead": "本期对五项独立试验逐项核对当前公开的结果和后续安排，不将一个项目的结论推及其他项目。",
+                    "chapters": {chapter["id"]: {"blocks": [{"type": "paragraph",
+                         "text": "这项报道公布本次试验的结果和已完成的测试步骤，也列出后续安排。",
+                         "newsIds": chapter["newsIds"]}]} for chapter in outline},
+                    "observations": observations}
+        report = build_daily_deepread([self.item(n) for n in range(5)], self.config, self.now,
+                                      {"provider": "fixture"}, provider)
+        self.assertEqual(report["generationStatus"], "ok")
+        self.assertEqual([entry["newsIds"] for entry in report["observations"]], [["news-0"], ["news-1"]])
+
+    def test_explicit_evidence_limits_supply_short_observations_when_provider_quotes_fail(self):
+        items = [self.item(n, summary=(
+            f"第{n}项项目已完成初步测试并公布结果。"
+            + ("具体影响范围和下一阶段试验时间尚未披露。" if n < 3
+               else "设备的实际部署地点和数量尚未披露。"))) for n in range(5)]
+        def provider(runtime, **kwargs):
+            if kwargs["schema_name"] == "deepread_outline_v2":
+                return None
+            outline = json.loads(kwargs["input_text"])["outline"]
+            return {"headline": "项目测试结果与尚待披露的后续节点",
+                    "lead": "本期五项独立报道均已披露初步测试结果，但若干后续安排和具体影响范围仍有待进一步公开核对。",
+                    "chapters": {chapter["id"]: {"blocks": [{"type": "paragraph",
+                         "text": "报道确认了初步测试和公开结果，也说明目前尚未披露后续具体安排。",
+                         "newsIds": chapter["newsIds"]}]} for chapter in outline},
+                    "observations": [{"text": "所有项目均已全面获批并开始量产。",
+                                      "newsIds": ["news-0"], "supports": [
+                                          {"newsId": "news-0", "supportQuote": "并不存在的原文"}]}]}
+        report = build_daily_deepread(items, self.config, self.now,
+                                      {"provider": "fixture"}, provider)
+        self.assertEqual(len(report["observations"]), 2)
+        self.assertIn("现有材料尚不足以判断设备的实际部署地点和数量，需等后续公开信息。",
+                      {entry["text"] for entry in report["observations"]})
+        self.assertTrue(all(entry["supports"][0]["supportQuote"] in items[int(entry["newsIds"][0][-1])]["summary"]
+                            for entry in report["observations"]))
+        self.assertNotIn("全面获批", json.dumps(report["observations"], ensure_ascii=False))
 
     def test_outline_splits_unrelated_satellite_projects_in_same_category(self):
         items = [self.item(n) for n in range(4)]
@@ -355,6 +418,24 @@ class EditorialDeepreadTests(unittest.TestCase):
         report = build_daily_deepread(items, self.config, self.now)
         self.assertEqual(report["candidateCount"], 5)
         self.assertFalse({"news-81", "news-82"} & {entry["newsId"] for entry in report["events"]})
+
+    def test_parliamentary_ai_inquiry_is_excluded_even_when_tagged_ai(self):
+        inquiry = self.item(81, score=100, category="AI",
+                            title="澳大利亚传唤两家AI公司CEO出席人工智能调查",
+                            originalTitle="Australia summons AI CEOs to appear at AI inquiry",
+                            summary="澳大利亚要求公司负责人出席参议院人工智能调查，公开听证会将于周四举行。")
+        lab = self.item(82, category="AI", score=99,
+                        title="研究团队调查AI代理的访问权限",
+                        originalTitle="Researchers investigate AI agent access in lab trials",
+                        summary="实验团队开展安全测试，测量AI代理访问权限并公布初步结果。")
+        report = build_daily_deepread([inquiry, lab] + [self.item(n) for n in range(4)],
+                                      self.config, self.now)
+        self.assertNotIn("news-81", {entry["newsId"] for entry in report["events"]})
+        self.assertIn("news-82", {entry["newsId"] for entry in report["events"]})
+        from deepread_editorial_signals import is_political_policy
+        self.assertFalse(is_political_policy({
+            "category": "AI", "originalTitle": "Researchers investigate AI agent failures",
+            "summary": "Researchers traced government website access, and a company inquiry into the software failure continues."}))
 
     def test_misclassified_policy_actions_in_titles_or_leads_are_excluded(self):
         policy_stories = [
