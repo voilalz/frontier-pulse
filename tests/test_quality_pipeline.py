@@ -108,6 +108,8 @@ class QualityPipelineTests(unittest.TestCase):
         news.assign_event_ids([first], {}, self.config)
         registry = news.build_event_registry({"editionDate": "2026-09-20", "generatedAt": "2026-09-20T13:00:00Z", "items": [first]}, {}, self.config, self.now)
         self.assertTrue(registry["items"][0]["identityRepresentatives"])
+        self.assertEqual(registry["items"][0]["timeline"][0]["originalTitle"], first["originalTitle"])
+        self.assertTrue(registry["items"][0]["timeline"][0]["summaryLead"])
         following = {**first, "id": "followup", "url": "https://space.example/europa-update",
                      "originalTitle": "NASA confirms Europa Clipper spacecraft healthy after Jupiter launch",
                      "publishedAt": "2026-09-21T07:00:00Z"}

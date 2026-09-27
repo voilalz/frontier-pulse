@@ -1,7 +1,13 @@
 # 智域前沿 / Frontier Pulse
 
 
-## 2026-09-26 新闻质量与每日深读
+## 2026-09-27 每日深读编辑模型
+
+- 从严格 24 小时内最多 12 项独立事件建立候选池，以主题发现和提纲先选 4～6 项核心事件，再按固定新闻引用写自然段落。缺少共同项目或主体的事件各自成节；不足 4 项时如实刊发简版。
+- 同一 canonical `eventId` 的此前时间线供今日变化段使用；其他历史关联不会被当作同一事件。程序固定事件 ID、来源、配图与证据等级；标签区分一手来源、多源报道、单源报道和观点材料。
+- `public/data/deepread.json` 使用与发布渠道无关的 v2 编辑内容模型：章节段落引用事件目录，由 Web 页面渲染，公众号与邮件可沿用相同 JSON 另行排版。历史 v1 日期归档仍可读。契约见 [编辑模型说明](docs/deepread-editorial-contract.md)。
+
+## 2026-09-26 新闻质量与每日深读（历史版本）
 
 - **摘要证据**：`news_evidence.py` 在送入 LLM 前，按标题主体和动作筛选 RSS 与公开正文段落；分别比较 HTML/JSON-LD 的文章候选，保留相关段落的原始次序，剔除旁栏、推荐和广告。长 RSS、抓取失败和缓存恢复同样经过筛选。只有标题时不补造正文。`summaryEvidence` 记录证据状态和段落计数，原文只用于当轮编辑；摘要修订号升至 4，旧缓存自动失效。
 - **有效覆盖**：`source-health.json` 按真实的前 24 小时记录抓取成功/失败、有效时间、选题排除、主题过滤、去重后的候选数与各主题分布。缺失/估计日期、未来新闻、旧闻、缓存补采和重复转载不计入目标。目标为每日 100–300 条，是否达到以实测为准；独立审计可运行 `python scripts/audit_sources.py --output /tmp/source-health.json`。
@@ -105,7 +111,8 @@ public/
 scripts/update_news.py              采集、评分、AI 编辑、历史关联、归档与状态
 scripts/news_evidence.py            标题与原文段落相关性筛选
 scripts/event_identity.py           精确事件匹配与稳定身份
-scripts/daily_deepread.py           每日图文深读生成与引用校验
+scripts/daily_deepread.py           历史 v1 生成及候选证据筛选工具
+scripts/deepread_editorial.py       v2 主题提纲、变化叙事与编辑内容模型
 scripts/audit_sources.py            无 LLM、无补采、无展示截断的 RSS 覆盖审计
 scripts/send_digest.py              SMTP 邮件摘要
 scripts/check_production.py         线上安全头与缓存头验收

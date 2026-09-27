@@ -3332,6 +3332,8 @@ def build_event_registry(
             "editionDate": edition,
             "newsId": clean_text(item.get("id")),
             "title": clean_text(item.get("title"), 200),
+            "originalTitle": clean_text(item.get("originalTitle"), 240),
+            "summaryLead": clean_text(item.get("summary"), 240),
             "source": clean_text(item.get("source")),
             "publishedAt": clean_text(item.get("publishedAt")),
             "score": int(item.get("score", 0) or 0),
@@ -4694,14 +4696,15 @@ def main(argv: list[str] | None = None) -> int:
             validate_stream_report(stream_report)
             if research_report is not None:
                 validate_research_report(research_report, allow_empty=not bool(research_report.get("items")))
-            from daily_deepread import build_daily_deepread
+            from deepread_editorial import build_daily_deepread
             evidence_by_id = {article.id: article.description for article in stream_candidates if not article.date_estimated}
             deepread_inputs = [
                 {**item, "evidenceText": evidence_by_id[item["id"]]}
                 for item in identity_items.values() if item["id"] in evidence_by_id
             ]
             deepread = build_daily_deepread(deepread_inputs, config, now,
-                                            runtime=stream_runtime, request_json=request_structured_json)
+                                            runtime=stream_runtime, request_json=request_structured_json,
+                                            event_registry=event_registry, history_items=history_items)
 
         if args.stream_only:
             write_json_atomic(args.stream_output, stream_report)
