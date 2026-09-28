@@ -1,38 +1,34 @@
 {
   "schemaVersion": 4,
-  "generatedAt": "2026-09-26T13:41:08Z",
+  "generatedAt": "2026-09-28T01:36:13Z",
   "timezone": "Asia/Shanghai",
   "rangeDays": 7,
   "method": "deepseek",
-  "editorialStatus": "stale",
+  "editorialStatus": "ok",
   "editorialProvider": "deepseek",
   "editorialModel": "deepseek-v4-flash",
   "translatedItemCount": 24,
-  "warnings": [
-    "论文抓取未返回合格条目，已保留上一版论文雷达"
-  ],
+  "warnings": [],
   "editorialDiagnostics": {
-    "requestedItemCount": 0,
-    "completedItemCount": 0,
+    "requestedItemCount": 24,
+    "completedItemCount": 24,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
-    "initialBatchSize": 0,
-    "initialBatchCount": 0,
-    "requestCount": 0,
+    "initialBatchSize": 5,
+    "initialBatchCount": 5,
+    "requestCount": 5,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "collection_empty_reused_previous",
-    "completionMessage": "论文抓取未返回合格条目，已保留上一版论文雷达",
-    "lastProviderError": "",
-    "previousEditorialStatus": "stale",
-    "discardedHistoricalWarningCount": 1
+    "completionReason": "complete_first_pass",
+    "completionMessage": "全部条目首轮完成",
+    "lastProviderError": ""
   },
   "itemCount": 24,
   "areaCounts": {
-    "机器学习": 17,
-    "人工智能": 7
+    "机器学习": 19,
+    "人工智能": 5
   },
   "collectionKeywords": [
     {
@@ -50,56 +46,123 @@
   ],
   "items": [
     {
-      "id": "arxiv:2609.30157",
+      "id": "arxiv:2609.31371",
       "contentType": "paper",
-      "title": "量子网络中同时纠缠请求策略的学习与解释",
-      "originalTitle": "Learning and interpreting policies for simultaneous entanglement requests in quantum networks",
-      "summary": "将链路级纠缠资源调度与多体纠缠生成建模为马尔可夫决策过程，用带MPNN的双重DQN、经验回放与课程训练学习策略。在物理相关拓扑上，链路激活概率比基线启发式低至71%时仍保持100%成功率；任务限定硬件时最多低59%仍保持至少80%成功率。还用LLM从示例动作推导启发式以解释策略。",
-      "abstract": "Future quantum networks will make use of entanglement to perform numerous tasks, such as sending quantum information over long distances, distributed quantum computing, and quantum sensing. In general, these tasks will need to be performed simultaneously in various regions of a network, while minimizing resources and latency. We will thus require policies for scheduling link-level entanglement resources, and using the link-level entanglement to create various forms of multipartite entanglement required for every t…",
+      "title": "理解基于LLM的日志异常检测：性能、效率与鲁棒性的实证研究",
+      "originalTitle": "Towards Understanding LLM-Based Log Anomaly Detection: An Empirical Study of Performance, Efficiency, and Robustness",
+      "summary": "大语言模型在日志异常检测中展现潜力，但其适配策略、架构与部署配置的影响尚不明确。本文在三个公开日志数据集上系统实证分析不同适配策略、模型架构、参数量与量化设置，并考察结构、语义和标签噪声下的鲁棒性，揭示性能、效率与鲁棒性的实践权衡。",
+      "abstract": "Large language models (LLMs) have demonstrated promising performance in log anomaly detection, yet how their adaptation strategies, architectures, and deployment configurations affect detection effectiveness remains insufficiently understood. To investigate these factors, we conduct a systematic empirical analysis across three public log datasets, examining different adaptation strategies, model architectures, parameter scales, and quantization settings. Our results reveal substantial performance differences acros…",
       "keyFacts": [
-        "如何为量子网络中同时出现的纠缠请求学习链路级纠缠调度与多体纠缠生成策略，并解释所学策略？",
-        "将问题建模为马尔可夫决策过程，采用带消息传递神经网络的双重深度Q网络、经验回放缓冲区和课程训练；并定义指标、让大语言模型依据策略示例动作推导新启发式以解释策略。",
-        "对一组物理相关网络拓扑，策略在链路激活概率比基线启发式最多低71%时仍保持100%成功率；在任务放置受硬件类型限制时，最多低59%的激活概率下仍保持至少80%成功率；LLM推导的启发式性能与DQN策略相近。"
+        "基于大语言模型的日志异常检测中，适配策略、模型架构、参数规模和量化设置如何影响检测效果，以及模型在结构、语义和标签噪声下的鲁棒性如何？",
+        "在三个公开日志数据集上进行系统实证分析，考察不同适配策略、模型架构、参数规模和量化设置，并在不同扰动水平下检验结构、语义和标签噪声下的检测鲁棒性。",
+        "不同适配策略之间存在显著性能差异；模型规模扩大在不同数据集上带来不同检测增益；检测准确率相当的模型计算成本可能显著不同；低比特量化在评估配置中大体保持检测性能；并揭示了不同噪声下的鲁棒性表现。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
       "researchArea": "机器学习",
       "source": "arXiv",
       "country": "国际",
-      "publishedAt": "2026-09-24T17:16:00Z",
-      "updatedAt": "2026-09-24T17:16:00Z",
-      "url": "https://arxiv.org/abs/2609.30157v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30157v1",
+      "publishedAt": "2026-09-25T15:08:16Z",
+      "updatedAt": "2026-09-25T15:08:16Z",
+      "url": "https://arxiv.org/abs/2609.31371v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31371v1",
       "authors": [
-        "Leon Rode",
-        "Sumeet Khatri",
-        "Supartha Podder"
+        "Bin Li",
+        "Dongdong Wang",
+        "Siyang Lu"
       ],
       "arxivCategories": [
-        "quant-ph",
+        "cs.LG",
+        "cs.CR"
+      ],
+      "primaryCategory": "cs.LG",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "基于大语言模型的日志异常检测中，适配策略、模型架构、参数规模和量化设置如何影响检测效果，以及模型在结构、语义和标签噪声下的鲁棒性如何？",
+      "method": "在三个公开日志数据集上进行系统实证分析，考察不同适配策略、模型架构、参数规模和量化设置，并在不同扰动水平下检验结构、语义和标签噪声下的检测鲁棒性。",
+      "findings": "不同适配策略之间存在显著性能差异；模型规模扩大在不同数据集上带来不同检测增益；检测准确率相当的模型计算成本可能显著不同；低比特量化在评估配置中大体保持检测性能；并揭示了不同噪声下的鲁棒性表现。",
+      "limitations": "摘要未说明",
+      "score": 83,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "日志异常检测",
+        "大语言模型",
+        "实证研究",
+        "鲁棒性"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31371v1",
+          "publishedAt": "2026-09-25T15:08:16Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31214",
+      "contentType": "paper",
+      "title": "我们在估计哪种影响？数据归因中反事实设定的作用",
+      "originalTitle": "Which Influence Are We Estimating? The Role of Counterfactual Specifications in Data Attribution",
+      "summary": "现有影响估计器常产生不一致排序，通常被归因于近似误差。本文认为根本原因是设定不匹配：影响取决于被归因的行为、对训练样本的干预以及反事实训练过程。作者将影响形式化为反事实估计量，区分设定不匹配与近似误差，并给出局部分解与实验验证。",
+      "abstract": "Estimating the influence of training examples on model behavior is essential for data debugging, valuation, and attribution. Existing influence estimators often produce incompatible rankings, which are commonly ascribed to approximation error. We argue that a more fundamental source of disagreement is specification mismatch: influence depends on the behavior being attributed, the intervention applied to each training example, and the counterfactual training process that maps the intervention to a model response. T…",
+      "keyFacts": [
+        "数据影响估计器之间排序不一致的根本原因是什么？反事实设定（被归因行为、干预方式和反事实训练过程）如何影响数据归因？",
+        "将影响形式化为反事实估计量，区分不同估计量之间的设定不匹配与固定估计量的近似误差，按隐含设定组织代表性估计器，推导局部分解以揭示行为信号、训练信号与反事实参数响应的交互，并进行受控实验及噪声标签检测和LLM归因实验。",
+        "不同设定下的精确估计量可导致不同排序，而近似误差随扰动远离线性化点而增大；在噪声标签检测与LLM归因中，设定选择显著影响归因质量，尤其是行为替代量的选择；行为对齐的设定能识别被默认损失或相似度设定掩盖的目标特定训练样本。"
+      ],
+      "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "人工智能",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T12:56:12Z",
+      "updatedAt": "2026-09-25T12:56:12Z",
+      "url": "https://arxiv.org/abs/2609.31214v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31214v1",
+      "authors": [
+        "Zhe Li",
+        "Wei Zhao",
+        "Peixin Zhang",
+        "Jun Sun"
+      ],
+      "arxivCategories": [
+        "cs.AI",
         "cs.LG"
       ],
-      "primaryCategory": "quant-ph",
+      "primaryCategory": "cs.AI",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何为量子网络中同时出现的纠缠请求学习链路级纠缠调度与多体纠缠生成策略，并解释所学策略？",
-      "method": "将问题建模为马尔可夫决策过程，采用带消息传递神经网络的双重深度Q网络、经验回放缓冲区和课程训练；并定义指标、让大语言模型依据策略示例动作推导新启发式以解释策略。",
-      "findings": "对一组物理相关网络拓扑，策略在链路激活概率比基线启发式最多低71%时仍保持100%成功率；在任务放置受硬件类型限制时，最多低59%的激活概率下仍保持至少80%成功率；LLM推导的启发式性能与DQN策略相近。",
+      "question": "数据影响估计器之间排序不一致的根本原因是什么？反事实设定（被归因行为、干预方式和反事实训练过程）如何影响数据归因？",
+      "method": "将影响形式化为反事实估计量，区分不同估计量之间的设定不匹配与固定估计量的近似误差，按隐含设定组织代表性估计器，推导局部分解以揭示行为信号、训练信号与反事实参数响应的交互，并进行受控实验及噪声标签检测和LLM归因实验。",
+      "findings": "不同设定下的精确估计量可导致不同排序，而近似误差随扰动远离线性化点而增大；在噪声标签检测与LLM归因中，设定选择显著影响归因质量，尤其是行为替代量的选择；行为对齐的设定能识别被默认损失或相似度设定掩盖的目标特定训练样本。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 83,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
-        "主题：机器学习",
+        "主题：人工智能",
         "按主题相关性、摘要完整度与发布时间排序"
       ],
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子网络",
-        "强化学习",
-        "纠缠调度",
-        "策略解释"
+        "数据归因",
+        "影响函数",
+        "反事实估计",
+        "设定分析"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -108,53 +171,53 @@
         {
           "name": "arXiv",
           "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30157v1",
-          "publishedAt": "2026-09-24T17:16:00Z",
+          "url": "https://arxiv.org/abs/2609.31214v1",
+          "publishedAt": "2026-09-25T12:56:12Z",
           "evidenceGroup": "repository:arxiv"
         }
       ],
       "relatedNews": []
     },
     {
-      "id": "arxiv:2609.30173",
+      "id": "arxiv:2609.31197",
       "contentType": "paper",
-      "title": "GridSFM：求解交流最优潮流的基座模型",
-      "originalTitle": "GridSFM: A Foundation Model for Solving AC Optimal Power Flow",
-      "summary": "提出GridSFM，将跨电网拓扑预训练基座模型与物理信息微调结合以求解大规模AC-OPF。模型为1500万参数物理启发图神经网络，在54个500至4000节点拓扑上预训练；在10000节点留出运行条件下零样本发电成本误差2.45%且不随规模增长退化。仅用100个已解实例微调即可适应未见电网。",
-      "abstract": "We introduce GridSFM, a framework that combines a pretrained foundation model across grid topologies with physics-informed fine-tuning for solving AC Optimal Power Flow (AC-OPF) at scale. It is a $15$ million parameter physics-inspired graph neural network pretrained across $54$ topologies of $500$ to $4{,}000$ buses. Our model attains a $2.45\\%$ zero-shot generation-cost error on a $10{,}000$ bus case held-out operating conditions with no degradation as system size grows. Building on this, we pair the pretrained…",
+      "title": "ALF：面向科学发现的主动学习框架",
+      "originalTitle": "ALF: An Active Learning Framework for Scientific Discovery",
+      "summary": "科学发现中的机器学习几乎总是受数据约束，主动学习在标注需要昂贵实验、测量或模拟时具有前景。现有工具通常仅覆盖数据获取环路的一部分，且偏重离线基准或在线部署之一。本文提出ALF，一个模块化主动学习框架，通过五个模块组件运行完整数据获取环路，并统一离线与在线API。",
+      "abstract": "Machine learning for scientific discovery is almost systematically data bound. Producing relevant high quality data, under budget constraints, is amongst the most promising ways to advance the field. Active learning (AL) offers promise wherever labelling requires expensive experiment, measurement, or simulation. Most existing tools cover only part of the data acquisition loop, and typically focus on either offline benchmarking or online deployment, but not both. We present ALF, a modular AL Framework that runs the…",
       "keyFacts": [
-        "如何构建可跨电网拓扑泛化、用于大规模求解交流最优潮流（AC-OPF）的基座模型？",
-        "提出GridSFM，使用1500万参数的物理启发图神经网络在54个500至4000节点拓扑上预训练，并基于牛顿法潮流设计物理信息微调；通过提升问题并用对数惩罚松弛处理AC-OPF可行集不连通问题，证明弹性可行集可收缩、最小化子在惩罚阈值之上仍为最小化子且投影适定。",
-        "在10000节点案例的留出运行条件下零样本发电成本误差为2.45%，且随系统规模增大无退化；仅用100个已解实例即可适应至10000节点的未见电网；作为热启动点时，在成本和求解迭代次数上优于用更多数据训练的单拓扑专用神经网络。"
+        "如何构建一个同时支持离线受控实验和在线真实世界部署、覆盖完整数据获取环路的模块化主动学习框架？",
+        "提出模块化主动学习框架ALF，通过五个模块化组件运行完整数据获取环路，为离线（针对已有数据集）和在线（针对oracle获取新候选）两种设置提供统一API；框架开源。",
+        "ALF通过五个模块化组件运行完整数据获取环路，并为离线与在线两种设置提供统一API；ALF已开源。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
       "researchArea": "机器学习",
       "source": "arXiv",
       "country": "国际",
-      "publishedAt": "2026-09-24T17:25:06Z",
-      "updatedAt": "2026-09-24T17:25:06Z",
-      "url": "https://arxiv.org/abs/2609.30173v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30173v1",
+      "publishedAt": "2026-09-25T12:34:16Z",
+      "updatedAt": "2026-09-25T12:34:16Z",
+      "url": "https://arxiv.org/abs/2609.31197v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31197v1",
       "authors": [
-        "Luke Bhan",
-        "Weiwei Yang",
-        "Margaret Capetz",
-        "Baosen Zhang"
+        "Shikha Surana",
+        "Alex Hawkins-Hooker",
+        "Olivia Gallup",
+        "Christoph Brunken",
+        "Jules Tilly",
+        "Paul Duckworth"
       ],
       "arxivCategories": [
-        "eess.SY",
-        "cs.LG",
-        "math.OC"
+        "cs.LG"
       ],
-      "primaryCategory": "eess.SY",
+      "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何构建可跨电网拓扑泛化、用于大规模求解交流最优潮流（AC-OPF）的基座模型？",
-      "method": "提出GridSFM，使用1500万参数的物理启发图神经网络在54个500至4000节点拓扑上预训练，并基于牛顿法潮流设计物理信息微调；通过提升问题并用对数惩罚松弛处理AC-OPF可行集不连通问题，证明弹性可行集可收缩、最小化子在惩罚阈值之上仍为最小化子且投影适定。",
-      "findings": "在10000节点案例的留出运行条件下零样本发电成本误差为2.45%，且随系统规模增大无退化；仅用100个已解实例即可适应至10000节点的未见电网；作为热启动点时，在成本和求解迭代次数上优于用更多数据训练的单拓扑专用神经网络。",
+      "question": "如何构建一个同时支持离线受控实验和在线真实世界部署、覆盖完整数据获取环路的模块化主动学习框架？",
+      "method": "提出模块化主动学习框架ALF，通过五个模块化组件运行完整数据获取环路，为离线（针对已有数据集）和在线（针对oracle获取新候选）两种设置提供统一API；框架开源。",
+      "findings": "ALF通过五个模块化组件运行完整数据获取环路，并为离线与在线两种设置提供统一API；ALF已开源。",
       "limitations": "摘要未说明",
-      "score": 88,
+      "score": 83,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -164,10 +227,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "AC-OPF",
-        "图神经网络",
-        "基座模型",
-        "物理信息微调"
+        "主动学习",
+        "科学发现",
+        "开源框架",
+        "数据获取"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -176,23 +239,92 @@
         {
           "name": "arXiv",
           "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30173v1",
-          "publishedAt": "2026-09-24T17:25:06Z",
+          "url": "https://arxiv.org/abs/2609.31197v1",
+          "publishedAt": "2026-09-25T12:34:16Z",
           "evidenceGroup": "repository:arxiv"
         }
       ],
       "relatedNews": []
     },
     {
-      "id": "arxiv:2609.30104",
+      "id": "arxiv:2609.31184",
       "contentType": "paper",
-      "title": "MQSS-Selector：面向MLIR编译流水线的强化学习引导Pass选择",
-      "originalTitle": "MQSS-Selector: RL-Guided Pass Selection for an MLIR Compilation Pipeline",
-      "summary": "针对HPC与量子计算融合基础设施中设备选择、编译器Pass优化和作业队列调度割裂的问题，提出统一的基于学习的MQSS-Selector，将各阶段整合为连贯框架。该方案利用强化学习与深度学习模型，可扩展为同时优化保真度、编译时间和调度延迟等多目标，并动态适应电路特征与设备条件。",
-      "abstract": "High Performance Computing (HPC) and Quantum Computing (QC) systems are increasingly converging towards unified High Performance Computing-Quantum Computing (HPCQC) infrastructures, driven by a growing need to bridge classical and quantum workflows, which affects all levels of the system stack, from the hardware to compilers and runtimes, all the way to applications. However, today's QC devices are still in the Noisy Intermediate-Scale Quantum (NISQ) era, are error-prone and resource-limited, and therefore require…",
+      "title": "考虑偏差可实现可持续的LLM评估",
+      "originalTitle": "Accounting for Bias Enables Sustainable LLM Evaluation",
+      "summary": "LLM作为评判者已成为可扩展主观评估的事实标准，但当前排行榜通过运行更多比较来补偿系统性测量偏差，既不统计严谨又计算浪费。本文提出统一潜变量框架，联合建模成对与序数数据，显式校正位置偏差、冗长偏差、评判者严厉度和自我增强等混杂因素，以更少比较恢复可靠排名。",
+      "abstract": "LLM-as-a-judge has become the de facto standard for scalable, subjective evaluation, yet current leaderboards compensate for systematic measurement bias by running ever more comparisons, an approach that is both statistically unsound and computationally wasteful. The root cause is an incomplete measurement model, treating LLM judges as neutral, interchangeable instruments ignores documented biases like position bias, verbosity bias, judge severity, and self-enhancement, that no volume of additional data can elimin…",
       "keyFacts": [
-        "如何统一HPC-QC软件栈中分散的设备选择、编译器Pass优化和作业队列调度，并同时优化多个目标？",
-        "提出统一的基于学习的MQSS-Selector，在MLIR编译流水线中利用强化学习和深度学习模型进行Pass选择，并设计为可扩展以同时优化多个目标。",
+        "如何在不依赖大量额外比较的情况下，对LLM评判者中位置偏差、冗长偏差、评判者严厉度和自我增强等系统性测量偏差进行校正，从而获得可靠的模型排名？",
+        "提出一个统一潜变量框架，联合建模成对数据与序数数据，并显式校正位置偏差、冗长偏差、评判者严厉度和自我增强等混杂因素。",
+        "该框架能够从显著更少的比较中恢复可靠排名；由于拟合该模型的计算成本相对于单轮LLM推理可忽略不计，偏差校正在统计上更严谨，也是更可持续的可信评估方法。"
+      ],
+      "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "人工智能",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T12:16:25Z",
+      "updatedAt": "2026-09-25T12:16:25Z",
+      "url": "https://arxiv.org/abs/2609.31184v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31184v1",
+      "authors": [
+        "Harshita Katoch",
+        "David Antony Selby",
+        "Gerrit Großmann",
+        "Sebastian Vollmer"
+      ],
+      "arxivCategories": [
+        "cs.AI",
+        "cs.LG",
+        "stat.AP",
+        "stat.ME"
+      ],
+      "primaryCategory": "cs.AI",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "如何在不依赖大量额外比较的情况下，对LLM评判者中位置偏差、冗长偏差、评判者严厉度和自我增强等系统性测量偏差进行校正，从而获得可靠的模型排名？",
+      "method": "提出一个统一潜变量框架，联合建模成对数据与序数数据，并显式校正位置偏差、冗长偏差、评判者严厉度和自我增强等混杂因素。",
+      "findings": "该框架能够从显著更少的比较中恢复可靠排名；由于拟合该模型的计算成本相对于单轮LLM推理可忽略不计，偏差校正在统计上更严谨，也是更可持续的可信评估方法。",
+      "limitations": "摘要未说明",
+      "score": 83,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：人工智能",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "LLM评估",
+        "偏差校正",
+        "潜变量模型",
+        "可持续评估"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31184v1",
+          "publishedAt": "2026-09-25T12:16:25Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31168",
+      "contentType": "paper",
+      "title": "面向非典型听觉的音频情绪识别",
+      "originalTitle": "Audio emotion recognition for atypical hearing",
+      "summary": "本博士工作旨在探索非典型聆听情境下的音频情绪识别，聚焦自闭症患者的听觉过敏现象，该现象难以评估且因人而异。核心思路是利用对声学特征中情感的理解，依赖从少量标注数据泛化情感反应的能力。第一步是在神经典型听者的效价-唤醒数据集上，用低秩适配微调大型基础模型CLAP。",
+      "abstract": "My doctoral work aims to explore Audio Emotion Recognition (AER) in the context of atypical listening. This research focuses on auditory hypersensitivity in people with autism, a phenomenon that is often difficult to evaluate and unique to each individual. Our core idea is to leverage our understanding of affect from acoustic traits, relying on the possibility of generalizing affective responses from a small amount of annotated data. As a first step, we fine-tune a large foundation model, Contrastive Language-Audi…",
+      "keyFacts": [
+        "如何在非典型聆听（尤其是自闭症患者的听觉过敏）情境下进行音频情绪识别，并利用少量标注数据泛化情感反应？",
+        "利用对声学特征中情感的理解，依赖从少量标注数据泛化情感反应；第一步是在神经典型听者的效价与唤醒数据集上，使用低秩适配（LoRA）微调大型基础模型对比语言-音频预训练（CLAP）。",
         "摘要未说明"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
@@ -200,1305 +332,23 @@
       "researchArea": "机器学习",
       "source": "arXiv",
       "country": "国际",
-      "publishedAt": "2026-09-24T16:46:49Z",
-      "updatedAt": "2026-09-24T16:46:49Z",
-      "url": "https://arxiv.org/abs/2609.30104v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30104v1",
+      "publishedAt": "2026-09-25T11:59:00Z",
+      "updatedAt": "2026-09-25T11:59:00Z",
+      "url": "https://arxiv.org/abs/2609.31168v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31168v1",
       "authors": [
-        "Andre Youssefi",
-        "Ercüment Kaya",
-        "Minh Chung",
-        "Jorge Echavarria",
-        "Laura B. Schulz",
-        "Martin Schulz"
+        "Ulysse Roussel"
       ],
       "arxivCategories": [
-        "quant-ph",
-        "cs.DC",
-        "cs.LG",
-        "cs.PL"
+        "cs.LG"
       ],
-      "primaryCategory": "quant-ph",
+      "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何统一HPC-QC软件栈中分散的设备选择、编译器Pass优化和作业队列调度，并同时优化多个目标？",
-      "method": "提出统一的基于学习的MQSS-Selector，在MLIR编译流水线中利用强化学习和深度学习模型进行Pass选择，并设计为可扩展以同时优化多个目标。",
+      "question": "如何在非典型聆听（尤其是自闭症患者的听觉过敏）情境下进行音频情绪识别，并利用少量标注数据泛化情感反应？",
+      "method": "利用对声学特征中情感的理解，依赖从少量标注数据泛化情感反应；第一步是在神经典型听者的效价与唤醒数据集上，使用低秩适配（LoRA）微调大型基础模型对比语言-音频预训练（CLAP）。",
       "findings": "摘要未说明",
       "limitations": "摘要未说明",
-      "score": 88,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：机器学习",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "MLIR",
-        "强化学习",
-        "编译优化",
-        "HPC-QC"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30104v1",
-          "publishedAt": "2026-09-24T16:46:49Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30258",
-      "contentType": "paper",
-      "title": "面向具身强化学习中私有轨迹重建的时序梯度反演",
-      "originalTitle": "Temporal Gradient Inversion for Private Trajectory Reconstruction in Embodied Reinforcement Learning",
-      "summary": "提出TRACE，一种摊销式时序梯度反演攻击，可从每步策略学习梯度自回归重建私有观测-动作轨迹序列。攻击利用先前单帧方法忽略的两个结构信号：具身梯度间的跨时间相关性（以条件互信息界形式化）和策略头梯度结构中的动作闭式恢复。在留出具身场景中达18.8 dB PSNR，近完美动作恢复，每帧3–4.5 ms。",
-      "abstract": "Distributed learning in embodied reinforcement-learning agents offers a degree of privacy by retaining raw sensor data on-device and transmitting only policy gradients to the server. Yet temporal structure can amplify this leakage beyond single-frame attacks. We introduce Temporal Reconstruction Attack on Consecutive Encodings (TRACE), an amortized temporal gradient-inversion attack that autoregressively reconstructs the sequence of private observation-action trajectories from per-step policy-learning gradients. T…",
-      "keyFacts": [
-        "分布式具身强化学习中仅传输策略梯度时，时序结构是否会放大隐私泄漏，从而可重建私有观测-动作轨迹序列？",
-        "提出TRACE摊销式时序梯度反演攻击，从每步策略学习梯度自回归重建观测-动作轨迹；利用跨时间梯度相关性（形式化为条件互信息界）与策略头梯度结构的动作闭式恢复（证明在标准熵正则足够小时精确）。",
-        "在留出具身场景中达到18.8 dB PSNR与近完美动作恢复，每重建帧耗时3–4.5 ms；在所有重建指标上优于基于学习的基线，超过优化攻击且快数个数量级；在循环、残差和紧凑Transformer受害架构、多模态输入及更大离散动作空间中均适用。"
-      ],
-      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "机器学习",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T17:59:18Z",
-      "updatedAt": "2026-09-24T17:59:18Z",
-      "url": "https://arxiv.org/abs/2609.30258v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30258v1",
-      "authors": [
-        "Sudip Bhujel",
-        "Shanghao Shi",
-        "Ruiquan Huang",
-        "Ning Zhang",
-        "Yang Xiao"
-      ],
-      "arxivCategories": [
-        "cs.LG"
-      ],
-      "primaryCategory": "cs.LG",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "分布式具身强化学习中仅传输策略梯度时，时序结构是否会放大隐私泄漏，从而可重建私有观测-动作轨迹序列？",
-      "method": "提出TRACE摊销式时序梯度反演攻击，从每步策略学习梯度自回归重建观测-动作轨迹；利用跨时间梯度相关性（形式化为条件互信息界）与策略头梯度结构的动作闭式恢复（证明在标准熵正则足够小时精确）。",
-      "findings": "在留出具身场景中达到18.8 dB PSNR与近完美动作恢复，每重建帧耗时3–4.5 ms；在所有重建指标上优于基于学习的基线，超过优化攻击且快数个数量级；在循环、残差和紧凑Transformer受害架构、多模态输入及更大离散动作空间中均适用。",
-      "limitations": "防御实验表明保护时序梯度流可能需要序列感知的隐私机制。",
-      "score": 86,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：机器学习",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "梯度反演",
-        "具身强化学习",
-        "隐私攻击",
-        "轨迹重建"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30258v1",
-          "publishedAt": "2026-09-24T17:59:18Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30147",
-      "contentType": "paper",
-      "title": "GRASP：面向战略规划的生成、修订与评估智能体AI",
-      "originalTitle": "GRASP: Generating, Revising, and Assessing for Strategic Planning with Agentic AI",
-      "summary": "针对LLM可靠性随任务复杂度上升而下降的问题，提出策略感知多阶段规划框架GRASP，将规划流水线解耦为上下文隔离的专门模块：预编译全局宏观指南（GenPlan）、在隔离上下文中探索局部替代策略（RevPlan）并用多准则判别器独立评估轨迹（VerPlan）。在多数据集上取得新最优，并显著缓解多任务扩展时的性能崩溃。",
-      "abstract": "Large Language Models (LLMs) typically exhibit a performance profile where reliability degrades as task complexity increases. We address the challenge of generating high-quality natural language executable plans for complex tasks by introducing $\\textbf{GRASP}$, a strategy-aware, multi-stage planning framework. GRASP decouples the planning pipeline across specialized, context-isolated modules: it pre-compiles global macro-guidelines (GenPlan), explores alternative localized strategies within isolated context windo…",
-      "keyFacts": [
-        "如何为复杂任务生成高质量自然语言可执行计划，并缓解LLM随任务复杂度增加而出现的可靠性下降？",
-        "提出GRASP策略感知多阶段规划框架，将规划流水线解耦为上下文隔离的专门模块：预编译全局宏观指南（GenPlan）、在隔离上下文窗口中探索局部替代策略（RevPlan）、用多准则判别器独立评估轨迹（VerPlan）。",
-        "在Natural Plan Calendar Scheduling上较直接LLM规划器提升约12.4%，ZebraLogic约30.8%，SciBench Math亦提升；在多任务扩展下，标准规划器立即性能崩溃，而GRASP完全消除多任务退化惩罚；交错双任务环境中较直接LLM规划器绝对准确率最多提升16.7%；比前沿推理模型（如GPT-5-mini）高14.5%。"
-      ],
-      "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "人工智能",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T17:11:35Z",
-      "updatedAt": "2026-09-24T17:11:35Z",
-      "url": "https://arxiv.org/abs/2609.30147v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30147v1",
-      "authors": [
-        "Arunabh Srivastava",
-        "Mohammad A.",
-        "Khojastepour",
-        "Srimat Chakradhar",
-        "Sennur Ulukus"
-      ],
-      "arxivCategories": [
-        "cs.AI",
-        "cs.CL",
-        "cs.LG",
-        "cs.MA"
-      ],
-      "primaryCategory": "cs.AI",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何为复杂任务生成高质量自然语言可执行计划，并缓解LLM随任务复杂度增加而出现的可靠性下降？",
-      "method": "提出GRASP策略感知多阶段规划框架，将规划流水线解耦为上下文隔离的专门模块：预编译全局宏观指南（GenPlan）、在隔离上下文窗口中探索局部替代策略（RevPlan）、用多准则判别器独立评估轨迹（VerPlan）。",
-      "findings": "在Natural Plan Calendar Scheduling上较直接LLM规划器提升约12.4%，ZebraLogic约30.8%，SciBench Math亦提升；在多任务扩展下，标准规划器立即性能崩溃，而GRASP完全消除多任务退化惩罚；交错双任务环境中较直接LLM规划器绝对准确率最多提升16.7%；比前沿推理模型（如GPT-5-mini）高14.5%。",
-      "limitations": "摘要未说明",
-      "score": 86,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：人工智能",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "LLM规划",
-        "智能体",
-        "多阶段框架",
-        "战略规划"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30147v1",
-          "publishedAt": "2026-09-24T17:11:35Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30085",
-      "contentType": "paper",
-      "title": "残差相关性作为GP协同区域化联合不确定性增益的诊断指标",
-      "originalTitle": "Residual Correlation as a Diagnostic for Joint-Uncertainty Gains from GP Coregionalisation",
-      "summary": "研究多目标回归中GP-ICM协同区域化的收益来源，发现其主要收益在联合不确定性量化而非点预测；原始目标相关性无法预测耦合是否有效，而残差相关性最具预测力。提出轻量诊断量D_logdet，可在独立GP上计算，在合成研究、16个基准及冻结表征上，点预测基本不变，D_logdet强烈预测ICM的NLL改进；并提出Residual-ICM，在保持独立边际方差的同时加入残差相关结构。",
-      "abstract": "In multi-target regression, correlated targets are often coupled through multi-output Gaussian processes with an intrinsic model of coregionalisation (GP-ICM), assuming that sharing statistical strength improves overall performance. In practice, the benefits are inconsistent. Across the settings studied, we find that the main benefit of coregionalisation is joint uncertainty quantification rather than point prediction. Raw target correlation does not predict when coupling helps; in the separable GP-ICM settings st…",
-      "keyFacts": [
-        "多目标回归中，GP-ICM协同区域化何时带来收益，以及能否在独立GP上诊断联合不确定性增益？",
-        "提出诊断量D_logdet=-1/2 log det R_res，表示建模完整残差协方差相对对角残差的理想联合NLL增益，可在独立GP上计算；在受控合成研究、16个多目标基准、用于关键点回归的冻结transformer和卷积神经网络表征上评估；并提出Residual-ICM。",
-        "协同区域化的主要收益是联合不确定性量化而非点预测；原始目标相关性不能预测耦合帮助，残差相关性是最强预测因子；点预测基本不变（ΔR²≈0），D_logdet强烈预测ICM的NLL改进（ρ_s=-0.83，p<0.001），优于特征样本比等启发式；Residual-ICM在比较方法中取得最佳平均联合NLL。"
-      ],
-      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "机器学习",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T16:33:59Z",
-      "updatedAt": "2026-09-24T16:33:59Z",
-      "url": "https://arxiv.org/abs/2609.30085v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30085v1",
-      "authors": [
-        "Fangqin Zhou",
-        "Joaquin Vanschoren"
-      ],
-      "arxivCategories": [
-        "cs.LG"
-      ],
-      "primaryCategory": "cs.LG",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "多目标回归中，GP-ICM协同区域化何时带来收益，以及能否在独立GP上诊断联合不确定性增益？",
-      "method": "提出诊断量D_logdet=-1/2 log det R_res，表示建模完整残差协方差相对对角残差的理想联合NLL增益，可在独立GP上计算；在受控合成研究、16个多目标基准、用于关键点回归的冻结transformer和卷积神经网络表征上评估；并提出Residual-ICM。",
-      "findings": "协同区域化的主要收益是联合不确定性量化而非点预测；原始目标相关性不能预测耦合帮助，残差相关性是最强预测因子；点预测基本不变（ΔR²≈0），D_logdet强烈预测ICM的NLL改进（ρ_s=-0.83，p<0.001），优于特征样本比等启发式；Residual-ICM在比较方法中取得最佳平均联合NLL。",
-      "limitations": "该诊断仅针对全局高斯残差依赖，即可分离协同区域化所捕获的结构；摘要未说明其他局限。",
-      "score": 85,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：机器学习",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "高斯过程",
-        "协同区域化",
-        "多目标回归",
-        "不确定性量化"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30085v1",
-          "publishedAt": "2026-09-24T16:33:59Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30079",
-      "contentType": "paper",
-      "title": "基于可达性的带节点与边特征图神经网络形式化验证",
-      "originalTitle": "Reachability-Based Formal Verification of Graph Neural Networks with Node and Edge Features",
-      "summary": "针对GNN在电力系统等任务中形式化验证范围受限的问题，扩展NNV框架，提出GraphStar集以刻画节点和边特征的不确定性，支持线性消息传递传播和ReLU非线性可靠近似，覆盖GCN与GINE层。在IEEE-24、IEEE-39、IEEE-118的潮流、最优潮流和连锁故障任务及ENZYMES、PROTEINS基准上评估GNNV，结果显示其对ReLU图分类模型提供比CORA更紧的鲁棒性保证，并首次在联合节点和边扰动下为GINE潮流和最优潮流模型提供边感知鲁棒性保证。",
-      "abstract": "Graph neural networks (GNNs) have become a prominent approach for developing fast, topology-aware surrogates in electric power systems, supporting tasks such as power flow (PF) analysis, optimal power flow (OPF) estimation, and cascading failure analysis (CFA). Despite this growing use, formally verifying GNN-based models remains challenging, with existing methods limited in scope. We extend the neural network verification (NNV) framework to graph-structured inputs through GraphStar sets, a generalization of Star…",
-      "keyFacts": [
-        "如何对带节点和边特征的图神经网络进行形式化验证，并在电力系统任务中提供鲁棒性保证？",
-        "扩展神经网络验证（NNV）框架，引入GraphStar集（Star集的泛化）以捕获节点和边特征的不确定性，支持线性消息传递操作传播及ReLU非线性可靠近似，覆盖GCN和GINE层；在IEEE-24、IEEE-39、IEEE-118的PF、OPF、CFA任务及ENZYMES、PROTEINS基准上评估GNNV。",
-        "GNNV在基于ReLU激活的图分类模型上比CORA提供更紧的鲁棒性保证；首次在联合节点和边扰动下为基于GINE的PF和OPF模型提供边感知鲁棒性保证。"
-      ],
-      "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "人工智能",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T16:29:32Z",
-      "updatedAt": "2026-09-24T16:29:32Z",
-      "url": "https://arxiv.org/abs/2609.30079v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30079v1",
-      "authors": [
-        "Anne M. Tumlin",
-        "Ben Wooding",
-        "Zhenxuan Shao",
-        "Diego Manzanas Lopez",
-        "Tyler Derr",
-        "Taylor T. Johnson"
-      ],
-      "arxivCategories": [
-        "cs.LG",
-        "cs.AI"
-      ],
-      "primaryCategory": "cs.LG",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何对带节点和边特征的图神经网络进行形式化验证，并在电力系统任务中提供鲁棒性保证？",
-      "method": "扩展神经网络验证（NNV）框架，引入GraphStar集（Star集的泛化）以捕获节点和边特征的不确定性，支持线性消息传递操作传播及ReLU非线性可靠近似，覆盖GCN和GINE层；在IEEE-24、IEEE-39、IEEE-118的PF、OPF、CFA任务及ENZYMES、PROTEINS基准上评估GNNV。",
-      "findings": "GNNV在基于ReLU激活的图分类模型上比CORA提供更紧的鲁棒性保证；首次在联合节点和边扰动下为基于GINE的PF和OPF模型提供边感知鲁棒性保证。",
-      "limitations": "摘要未说明。",
-      "score": 85,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：人工智能",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "图神经网络",
-        "形式化验证",
-        "可达性分析",
-        "电力系统"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30079v1",
-          "publishedAt": "2026-09-24T16:29:32Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30250",
-      "contentType": "paper",
-      "title": "在线阴谋论的智能体检测",
-      "originalTitle": "Agentic Detection of Online Conspiracies",
-      "summary": "社交媒体阴谋话语常不通过明确主张或稳定词汇标记表达，相同表面内容可能表达支持、合理关切、批评、讽刺或嘲弄，核心挑战在于推断说话者意图即言外之力。提出配备社会查询工具的智能体框架，利用相关社会语境，在覆盖2018年末至2023年初四年间80%–90%希伯来语推文的独特数据集上验证。在人工标注对抗数据集上，上下文感知工作流持续优于纯文本分类，智能体框架显著优于其他框架和设置，包括接触相同上下文的非智能体模型；并分析结果、错误和效率（token经济）权衡。",
-      "abstract": "Conspiratorial discourse on social media is not always expressed through explicit claims or stable lexical markers. The same surface content may express endorsement, legitimate concerns, criticism, satire, or mockery. The main challenge is therefore not only recognizing conspiracy-related claims, but inferring the speaker's intent -- the utterance's illocutionary force. We argue that this can be achieved through the use of relevant social contexts and propose an agentic framework, equipped with a set of tools supp…",
-      "keyFacts": [
-        "如何通过社会语境和智能体推理推断社交媒体阴谋话语的言外之力，而非仅识别阴谋相关主张？",
-        "提出配备支持社会查询工具集的智能体框架，利用独特希伯来语推文数据集（覆盖四年间80%–90%公共希伯来语推文，含多个选举周期、新冠疫情期间及疫苗接种活动）恢复不同社会语境；在人工标注对抗数据集上评估。",
-        "上下文感知工作流持续优于纯文本分类；智能体框架显著优于其他框架和设置，包括接触相同上下文的非智能体模型；支持将阴谋检测视为社会嵌入的解释任务，有效分类不仅依赖上下文获取，还依赖智能体按案例自适应推理、仅请求与当前推理步骤相关的证据。"
-      ],
-      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "机器学习",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T17:58:43Z",
-      "updatedAt": "2026-09-24T17:58:43Z",
-      "url": "https://arxiv.org/abs/2609.30250v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30250v1",
-      "authors": [
-        "Lior Biton",
-        "Oren Tsur"
-      ],
-      "arxivCategories": [
-        "cs.CL",
-        "cs.LG"
-      ],
-      "primaryCategory": "cs.CL",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何通过社会语境和智能体推理推断社交媒体阴谋话语的言外之力，而非仅识别阴谋相关主张？",
-      "method": "提出配备支持社会查询工具集的智能体框架，利用独特希伯来语推文数据集（覆盖四年间80%–90%公共希伯来语推文，含多个选举周期、新冠疫情期间及疫苗接种活动）恢复不同社会语境；在人工标注对抗数据集上评估。",
-      "findings": "上下文感知工作流持续优于纯文本分类；智能体框架显著优于其他框架和设置，包括接触相同上下文的非智能体模型；支持将阴谋检测视为社会嵌入的解释任务，有效分类不仅依赖上下文获取，还依赖智能体按案例自适应推理、仅请求与当前推理步骤相关的证据。",
-      "limitations": "摘要未说明。",
-      "score": 84,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：机器学习",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "阴谋论检测",
-        "智能体",
-        "社会语境",
-        "社交媒体"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30250v1",
-          "publishedAt": "2026-09-24T17:58:43Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30227",
-      "contentType": "paper",
-      "title": "信还是不信：语音中的检索增强事实核查",
-      "originalTitle": "To Trust or Not to Trust: Retrieval-Augmented Fact Checking in Speech",
-      "summary": "在线错误信息日益以新闻片段、播客、采访、政治演讲和社交媒体视频等口语形式出现，需要直接从语音验证主张的系统。提出VeriSpeak探针基准，包含3,879条口语主张，涵盖时间、地理和关系事实，真假标签均衡，用于研究事实核验能力是否从文本迁移到语音，以及检索增强LALM能否利用文本证据支持或反驳口语主张。实验揭示一致的文本-语音模态差距，检索单独收益有限，检索结合显式推理改善主张-证据比较，思维调优LALM达到86.1%准确率。",
-      "abstract": "Online misinformation increasingly appears in spoken formats such as news clips, podcasts, interviews, political speeches, and social media videos, creating a need for fact-checking systems that can verify claims directly from speech. We introduce VeriSpeak, a probe benchmark for studying speech-based fact verification in Large Audio Language Models (LALMs). VeriSpeak contains 3,879 spoken claims spanning temporal, geographical, and relational facts, with balanced true and false labels. The benchmark is designed t…",
-      "keyFacts": [
-        "事实核验能力能否从文本迁移到语音，以及检索增强大型音频语言模型能否利用文本证据正确支持或反驳口语主张？",
-        "提出VeriSpeak探针基准，含3,879条口语主张，涵盖时间、地理和关系事实，真假标签均衡；在大型音频语言模型上考察文本到语音的迁移及检索增强效果。",
-        "存在一致的文本-语音模态差距：能可靠验证书面主张的LALM在相同主张被说出时常常失败；检索单独提供有限增益，因为模型常将检索证据与口语主张混淆；检索结合显式推理改善主张-证据比较，思维调优LALM达到86.1%准确率。"
-      ],
-      "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "人工智能",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T17:50:40Z",
-      "updatedAt": "2026-09-24T17:50:40Z",
-      "url": "https://arxiv.org/abs/2609.30227v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30227v1",
-      "authors": [
-        "Debajyoti Mazumder",
-        "Mamta",
-        "Abhirama Subramanyam Penamakuri"
-      ],
-      "arxivCategories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.CL",
-        "cs.SD"
-      ],
-      "primaryCategory": "cs.LG",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "事实核验能力能否从文本迁移到语音，以及检索增强大型音频语言模型能否利用文本证据正确支持或反驳口语主张？",
-      "method": "提出VeriSpeak探针基准，含3,879条口语主张，涵盖时间、地理和关系事实，真假标签均衡；在大型音频语言模型上考察文本到语音的迁移及检索增强效果。",
-      "findings": "存在一致的文本-语音模态差距：能可靠验证书面主张的LALM在相同主张被说出时常常失败；检索单独提供有限增益，因为模型常将检索证据与口语主张混淆；检索结合显式推理改善主张-证据比较，思维调优LALM达到86.1%准确率。",
-      "limitations": "摘要未说明。",
-      "score": 84,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：人工智能",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "语音事实核查",
-        "检索增强",
-        "大型音频语言模型",
-        "多模态"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30227v1",
-          "publishedAt": "2026-09-24T17:50:40Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30226",
-      "contentType": "paper",
-      "title": "PoEM：从现有策略预测强化学习结果",
-      "originalTitle": "PoEM: Predicting RL Outcomes from Existing Policies",
-      "summary": "基础模型通过强化学习后训练以最大化特定奖励，该过程计算密集、有时不稳定，且每次奖励模型变化或需组合多个奖励时都须从头运行。提出PoEM框架，利用一组已在其他奖励上后训练的模型，预测新奖励函数上的RL输出，而无需实际运行RL。研究表明，若新奖励可写成现有奖励的线性组合，则对数空间新策略可写成现对数策略的线性组合；即使奖励非线性相关，RL训练的对数策略在不同奖励间也常张成近似低秩子空间。组合权重可仅用奖励或基策略在样本上的输出估计，并转化为算法。在文本和图像模态的合成与真实奖励上实验验证。",
-      "abstract": "Foundation models are post-trained with reinforcement learning (RL) to maximize specific rewards, such as human alignment, correctness, or instruction following. This post-training process is computationally intensive, sometimes unstable, and has to be run from scratch every time the reward model changes or when we want to combine multiple rewards. We hence ask: given a new reward function, is it possible to predict the RL outcomes without actually running RL on it? We answer this in the affirmative by introducing…",
-      "keyFacts": [
-        "给定新的奖励函数，能否在不实际运行强化学习的情况下预测其RL结果？",
-        "提出PoEM框架，使用一组已在其他奖励上后训练的模型预测新奖励的RL输出；利用新奖励可表示为现有奖励线性组合时对数空间策略的线性组合性质，以及即使奖励非线性相关时对数策略跨奖励近似低秩子空间的观察，仅用奖励或基策略在样本上的输出估计组合权重，形成无需额外RL训练的算法；在文本和图像模态的合成与真实奖励上实验验证。",
-        "若新奖励可写成现有奖励的线性组合，则对数空间新策略可写成现有对数策略的线性组合；即使奖励非线性连接，RL训练的对数策略在不同奖励间常张成近似低秩子空间；组合权重可仅用奖励或基策略输出估计；实验在合成和真实奖励、文本和图像模态上验证了该方法。"
-      ],
-      "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "人工智能",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T17:50:25Z",
-      "updatedAt": "2026-09-24T17:50:25Z",
-      "url": "https://arxiv.org/abs/2609.30226v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30226v1",
-      "authors": [
-        "Kimia Hamidieh",
-        "Giannis Daras",
-        "Antonio Torralba"
-      ],
-      "arxivCategories": [
-        "cs.LG",
-        "cs.AI",
-        "cs.CL",
-        "cs.CV"
-      ],
-      "primaryCategory": "cs.LG",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "给定新的奖励函数，能否在不实际运行强化学习的情况下预测其RL结果？",
-      "method": "提出PoEM框架，使用一组已在其他奖励上后训练的模型预测新奖励的RL输出；利用新奖励可表示为现有奖励线性组合时对数空间策略的线性组合性质，以及即使奖励非线性相关时对数策略跨奖励近似低秩子空间的观察，仅用奖励或基策略在样本上的输出估计组合权重，形成无需额外RL训练的算法；在文本和图像模态的合成与真实奖励上实验验证。",
-      "findings": "若新奖励可写成现有奖励的线性组合，则对数空间新策略可写成现有对数策略的线性组合；即使奖励非线性连接，RL训练的对数策略在不同奖励间常张成近似低秩子空间；组合权重可仅用奖励或基策略输出估计；实验在合成和真实奖励、文本和图像模态上验证了该方法。",
-      "limitations": "摘要未说明。",
-      "score": 84,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：人工智能",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "强化学习",
-        "后训练",
-        "奖励函数",
-        "策略预测"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30226v1",
-          "publishedAt": "2026-09-24T17:50:25Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30218",
-      "contentType": "paper",
-      "title": "语言模型的最小侵入式引导",
-      "originalTitle": "Minimally Invasive Steering of Language Models",
-      "summary": "提出MISVO，利用诱导token分布的局部KL几何惩罚干预，用Fisher二次型度量分布敏感性，经冻结LM头矩阵向量积解析计算梯度；将序列级KL梯度分解为解析Fisher项与后缀得分函数项，证明固定生成时域下后缀项为引导幅度的二阶项，三种Fisher代理与全KL梯度一阶一致；在约1B–14B模型偏好与代码任务中，七种设定中六种平均奖励最高，多样性与连贯性接近Best-of-N。",
-      "abstract": "Pre-logit steering adapts a frozen language model to a test-time reward by adding vectors to its final hidden states. Unregularized reward optimization can substantially alter the output distribution and degrade generation quality. We propose Minimally Invasive Steering Vector Optimization (MISVO), which penalizes interventions using the local KL geometry of the induced token distribution. The resulting Fisher quadratic measures distributional sensitivity and admits an analytic gradient computed through matrix--ve…",
-      "keyFacts": [
-        "如何通过添加向量到冻结语言模型最终隐状态来适配测试时奖励，同时避免未正则化奖励优化大幅改变输出分布并降低生成质量。",
-        "提出MISVO，以局部KL几何惩罚干预，用Fisher二次型度量分布敏感性，通过冻结语言模型头的矩阵-向量积解析计算梯度；推导序列级KL梯度分解；使用冻结参考代理优化位置特定干预而不更新模型参数；在约1B–14B参数模型的偏好和代码生成任务上评估。",
-        "序列级KL梯度可分解为解析Fisher项与后缀得分函数项；固定生成时域下后缀项对引导幅度为二阶，三种Fisher代理与全KL梯度一阶一致；在七种模型-任务设定中的六种取得最高平均奖励，多样性和连贯性分数接近Best-of-N。"
-      ],
-      "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "人工智能",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T17:46:46Z",
-      "updatedAt": "2026-09-24T17:46:46Z",
-      "url": "https://arxiv.org/abs/2609.30218v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30218v1",
-      "authors": [
-        "Taha Entesari",
-        "Jingyu Zhang",
-        "Daniel Khashabi",
-        "Mahyar Fazlyab"
-      ],
-      "arxivCategories": [
-        "cs.LG",
-        "cs.AI"
-      ],
-      "primaryCategory": "cs.LG",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何通过添加向量到冻结语言模型最终隐状态来适配测试时奖励，同时避免未正则化奖励优化大幅改变输出分布并降低生成质量。",
-      "method": "提出MISVO，以局部KL几何惩罚干预，用Fisher二次型度量分布敏感性，通过冻结语言模型头的矩阵-向量积解析计算梯度；推导序列级KL梯度分解；使用冻结参考代理优化位置特定干预而不更新模型参数；在约1B–14B参数模型的偏好和代码生成任务上评估。",
-      "findings": "序列级KL梯度可分解为解析Fisher项与后缀得分函数项；固定生成时域下后缀项对引导幅度为二阶，三种Fisher代理与全KL梯度一阶一致；在七种模型-任务设定中的六种取得最高平均奖励，多样性和连贯性分数接近Best-of-N。",
-      "limitations": "摘要未说明",
-      "score": 84,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：人工智能",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "语言模型引导",
-        "预logit转向",
-        "KL几何",
-        "奖励优化"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30218v1",
-          "publishedAt": "2026-09-24T17:46:46Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30212",
-      "contentType": "paper",
-      "title": "锚定额外近端方法：单调包含问题的最优高阶方法",
-      "originalTitle": "Anchored Extra-Proximal Methods: Optimal Higher-Order Methods for Monotone Inclusion Problems",
-      "summary": "研究复合单调包含问题在切残差准则下的确定性预言机复杂度，提出AEP框架，结合锚定外推与满足相对误差条件的不精确锚定近端更新；一阶情形恢复复合快速外推梯度法，p≥2时结合二分线搜索得到p阶方法，在Õ(ε^{-2/(3p-1)})次预言机调用内使切残差至多ε，匹配Ω(ε^{-2/(3p-1)})下界，达到最优ε依赖。",
-      "abstract": "We study the deterministic oracle complexity of finding approximate solutions to composite monotone inclusion problems, formed by the sum of a smooth single-valued monotone operator and a maximally monotone set-valued operator, under the tangent-residual criterion. We introduce the Anchored Extra-Proximal (AEP) framework, which combines an anchored extrapolation step with an inexact anchored proximal update satisfying a relative-error condition. The framework recovers the composite Fast Extragradient method in the…",
-      "keyFacts": [
-        "在切残差准则下，求解由光滑单值单调算子与极大单调集值算子之和构成的复合单调包含问题，确定性预言机复杂度能否达到最优ε依赖。",
-        "提出锚定额外近端（AEP）框架，结合锚定外推步骤与满足相对误差条件的不精确锚定近端更新；一阶恢复复合快速外推梯度法；对p≥2，假设单值算子第(p-1)阶导数Lipschitz连续，结合二分线搜索构造p阶方法；并给出p阶预言机模型下确定性算法的最坏情况下界。",
-        "对每个p≥2，p阶方法在Õ(ε^{-2/(3p-1)})次预言机调用内找到切残差至多ε的点，改进此前最优Õ(ε^{-1/p})及经典O(ε^{-2/(p+1)})上界；下界为Ω(ε^{-2/(3p-1)})，不限制算法为张量步或其他预设更新结构；所提方法对所有p≥2在ε依赖上达到对数因子内最优。"
-      ],
-      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "机器学习",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T17:43:45Z",
-      "updatedAt": "2026-09-24T17:43:45Z",
-      "url": "https://arxiv.org/abs/2609.30212v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30212v1",
-      "authors": [
-        "Ruichen Jiang",
-        "TaeHo Yoon"
-      ],
-      "arxivCategories": [
-        "math.OC",
-        "cs.LG",
-        "stat.ML"
-      ],
-      "primaryCategory": "math.OC",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "在切残差准则下，求解由光滑单值单调算子与极大单调集值算子之和构成的复合单调包含问题，确定性预言机复杂度能否达到最优ε依赖。",
-      "method": "提出锚定额外近端（AEP）框架，结合锚定外推步骤与满足相对误差条件的不精确锚定近端更新；一阶恢复复合快速外推梯度法；对p≥2，假设单值算子第(p-1)阶导数Lipschitz连续，结合二分线搜索构造p阶方法；并给出p阶预言机模型下确定性算法的最坏情况下界。",
-      "findings": "对每个p≥2，p阶方法在Õ(ε^{-2/(3p-1)})次预言机调用内找到切残差至多ε的点，改进此前最优Õ(ε^{-1/p})及经典O(ε^{-2/(p+1)})上界；下界为Ω(ε^{-2/(3p-1)})，不限制算法为张量步或其他预设更新结构；所提方法对所有p≥2在ε依赖上达到对数因子内最优。",
-      "limitations": "摘要未说明",
-      "score": 84,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：机器学习",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "单调包含",
-        "高阶方法",
-        "预言机复杂度",
-        "最优收敛"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30212v1",
-          "publishedAt": "2026-09-24T17:43:45Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30210",
-      "contentType": "paper",
-      "title": "多模态大语言模型中的对齐幻觉",
-      "originalTitle": "The Alignment Illusion in Multimodal Large Language Models",
-      "summary": "检验标量视觉-文本对齐分数是否反映内容级跨模态交互；对视觉流施加受控干预，用高斯噪声替换投影器输出视觉token，13个MLLM（0.5B–72B，五族）任务准确率骤降，但CKA、SVCCA、MIR和主角度余弦不能一致区分损坏流；归因于共享语言模型通路各向异性MLP下投影诱导对齐，提出主角度间隙（PA gap）分离权重诱导相似性与多方向视觉结构。",
-      "abstract": "Layer-wise visual-text similarity in Multimodal Large Language Models (MLLMs) is widely interpreted as evidence that the language model progressively integrates visual content into a shared representation space. This reading rests on the assumption that scalar alignment scores reflect content-level cross-modal interaction. To test this assumption, we apply controlled interventions to the visual stream. Across 13 MLLMs from five families spanning 0.5B to 72B parameters, replacing projector-output visual tokens with…",
-      "keyFacts": [
-        "多模态大语言模型中逐层视觉-文本相似度是否可作为内容级跨模态交互的证据，标量对齐分数是否反映真实的跨模态内容交互。",
-        "对视觉流施加受控干预，将投影器输出视觉token替换为高斯噪声；在来自五个族、0.5B至72B参数的13个MLLM上，用CKA、SVCCA、MIR和主角度余弦四种标量度量评估；提出主角度间隙（PA gap），即前两个主角度余弦之差；在分级视觉损坏和结构化无关图像下比较。",
-        "损坏视觉流导致任务准确率骤降，但四种标量度量不能一致区分损坏流与原始流，称为对齐幻觉；归因于共享语言模型通路中各向异性MLP下投影将视觉和文本token拉向共同输出方向，产生权重诱导对齐；该组件近似一维；PA gap在分级视觉损坏下比标量分数更一致地跟踪任务准确率，并在结构化无关图像下暴露内部几何与任务准确率分离的情形。"
-      ],
-      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "机器学习",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T17:42:29Z",
-      "updatedAt": "2026-09-24T17:42:29Z",
-      "url": "https://arxiv.org/abs/2609.30210v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30210v1",
-      "authors": [
-        "Hong-Han Wang",
-        "Yuntao Wang",
-        "Hu Ding"
-      ],
-      "arxivCategories": [
-        "cs.CV",
-        "cs.LG"
-      ],
-      "primaryCategory": "cs.CV",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "多模态大语言模型中逐层视觉-文本相似度是否可作为内容级跨模态交互的证据，标量对齐分数是否反映真实的跨模态内容交互。",
-      "method": "对视觉流施加受控干预，将投影器输出视觉token替换为高斯噪声；在来自五个族、0.5B至72B参数的13个MLLM上，用CKA、SVCCA、MIR和主角度余弦四种标量度量评估；提出主角度间隙（PA gap），即前两个主角度余弦之差；在分级视觉损坏和结构化无关图像下比较。",
-      "findings": "损坏视觉流导致任务准确率骤降，但四种标量度量不能一致区分损坏流与原始流，称为对齐幻觉；归因于共享语言模型通路中各向异性MLP下投影将视觉和文本token拉向共同输出方向，产生权重诱导对齐；该组件近似一维；PA gap在分级视觉损坏下比标量分数更一致地跟踪任务准确率，并在结构化无关图像下暴露内部几何与任务准确率分离的情形。",
-      "limitations": "摘要未说明",
-      "score": 84,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：机器学习",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "多模态大语言模型",
-        "跨模态对齐",
-        "对齐幻觉",
-        "主角度间隙"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30210v1",
-          "publishedAt": "2026-09-24T17:42:29Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30198",
-      "contentType": "paper",
-      "title": "超越压缩：为神经代理求解器训练稳定长时程展开的潜在表示",
-      "originalTitle": "Beyond Compression: Training Latent Representations for Stable Long-Horizon Rollout in Neural Surrogate Solvers",
-      "summary": "潜在神经代理求解器用压缩潜在空间加速时变物理系统模拟，但长自回归展开误差累积。研究表明不稳定源于仅以重建目标训练潜在表示，而非表示本身；系统评估Koopman算子学习、Hamming噪声注入、噪声注入与多步展开微调等训练级干预，这些干预常降低重建和单步预测指标，却使长展开误差降低约40%，在两个物理基准上匹配或超过全分辨率模型，浮点运算少两个数量级、GPU内存减半，并稳定外推中尺度晶体塑性高周疲劳模拟。",
-      "abstract": "Latent neural surrogate solvers, or latent dynamics models, accelerate simulations of time-dependent physical systems by evolving a compressed latent space rather than resolving full-resolution fields directly. In principle this reduces computational cost and simplifies learning, but in practice errors often accumulate rapidly during long autoregressive rollouts, limiting predictive utility. We show that this instability does not stem from the latent representation itself, but arises when it is trained solely for…",
-      "keyFacts": [
-        "潜在神经代理求解器在长自回归展开中误差快速累积的根源是什么，如何通过训练级干预使潜在表示对齐长时程预测并提升稳定性。",
-        "系统评估训练级干预：Koopman算子学习和自编码器训练中Hamming噪声注入以改善压缩，噪声注入和多步展开微调以改善动力学；在两个物理基准及中尺度晶体塑性高周疲劳模拟上评估长展开误差、重建、单步预测精度、浮点运算量和GPU内存。",
-        "不稳定并非源于潜在表示本身，而是仅以重建目标训练导致表示不适合长时程预测；改善长展开稳定性的干预常降低重建和单步预测等常规指标；这些干预合计使长展开误差降低约40%，在两个物理基准上匹配或超过全分辨率模型，浮点运算少两个数量级、GPU内存减半；在高周疲劳晶体塑性模拟中实现远超训练时域数量级的稳定外推。"
-      ],
-      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "机器学习",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T17:36:46Z",
-      "updatedAt": "2026-09-24T17:36:46Z",
-      "url": "https://arxiv.org/abs/2609.30198v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30198v1",
-      "authors": [
-        "Andreas E. Robertson",
-        "Ashley T. Lenau",
-        "John D. Shimanek",
-        "Benjamin A. Jasperson",
-        "Vivek Oommen",
-        "David L. Damm",
-        "Krishna Garikipati",
-        "Remi Dingreville"
-      ],
-      "arxivCategories": [
-        "cs.LG",
-        "cond-mat.mtrl-sci",
-        "cs.CE"
-      ],
-      "primaryCategory": "cs.LG",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "潜在神经代理求解器在长自回归展开中误差快速累积的根源是什么，如何通过训练级干预使潜在表示对齐长时程预测并提升稳定性。",
-      "method": "系统评估训练级干预：Koopman算子学习和自编码器训练中Hamming噪声注入以改善压缩，噪声注入和多步展开微调以改善动力学；在两个物理基准及中尺度晶体塑性高周疲劳模拟上评估长展开误差、重建、单步预测精度、浮点运算量和GPU内存。",
-      "findings": "不稳定并非源于潜在表示本身，而是仅以重建目标训练导致表示不适合长时程预测；改善长展开稳定性的干预常降低重建和单步预测等常规指标；这些干预合计使长展开误差降低约40%，在两个物理基准上匹配或超过全分辨率模型，浮点运算少两个数量级、GPU内存减半；在高周疲劳晶体塑性模拟中实现远超训练时域数量级的稳定外推。",
-      "limitations": "摘要未说明",
-      "score": 84,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：机器学习",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "神经代理求解器",
-        "潜在动力学",
-        "长时程展开",
-        "物理模拟"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30198v1",
-          "publishedAt": "2026-09-24T17:36:46Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30185",
-      "contentType": "paper",
-      "title": "学习动力学中的内在外在耦合",
-      "originalTitle": "Intrinsic-Extrinsic Coupling in Learning Dynamics",
-      "summary": "将内在外在耦合形式化为受限学习状态干预的延续条件价值，用观测相对纤维描述当前一致性；实现有限帧分类头写入，保护当前logits同时修复指定历史裕度。在CLINC派生类增量设定中，回放使写入的32次更新贡献从五个正确预测变为零；在输出蒸馏、RoBERTa主干和SGDW动力学下也出现非零交互，SGDW下128次更新三个激活根的计数交互均为负；内容控制匹配或超过开发增益，五根新鲜测试中根依赖而非一致有益。",
-      "abstract": "A learner's current observations need not determine its response to further training. We formulate intrinsic-extrinsic coupling through the continuation-conditioned value of a constrained learning-state intervention, with observation-relative fibers describing present agreement. An executable finite-frame classifier-head write protects current logits while repairing specified historical margins under finite-precision acceptance checks. We distinguish local admissibility, continuation-conditioned intervention value…",
-      "keyFacts": [
-        "学习者当前观测不一定决定其对后续训练的响应，如何形式化内在外在耦合，并区分局部可容许性、延续条件干预价值和完整策略性能。",
-        "通过受限学习状态干预的延续条件价值形式化内在外在耦合，用观测相对纤维描述当前一致性；实现可执行的有限帧分类头写入，在有限精度接受检查下保护当前logits并修复指定历史裕度；在CLINC派生类增量设定中进行四单元匹配对比，并使用输出蒸馏、RoBERTa主干和优化器原生SGDW动力学；进行协调测试和五根新鲜测试比较。",
-        "四单元匹配对比识别出同一内在干预与不同外在延续之间的读出特定非加性；在CLINC派生类增量设定中，回放使写入的32次更新贡献从五个正确预测变为零；在输出蒸馏、RoBERTa主干和SGDW动力学下也出现非零交互；SGDW下128次更新三个激活根的计数交互均为负，表明耦合不一定意味着正协同；数学分析区分可行局部修复、有利终端输出与训练可达修复区域；内容控制匹配或超过开发增益；五根新鲜测试每个臂均含Fiber，显示根依赖而非一致有益的计数效果；在次要交叉熵读出上，引导分配在全部五对中平均损失低于标准回放。"
-      ],
-      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "机器学习",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T17:30:22Z",
-      "updatedAt": "2026-09-24T17:30:22Z",
-      "url": "https://arxiv.org/abs/2609.30185v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30185v1",
-      "authors": [
-        "Qinyou Wang"
-      ],
-      "arxivCategories": [
-        "cs.LG",
-        "stat.ML"
-      ],
-      "primaryCategory": "cs.LG",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "学习者当前观测不一定决定其对后续训练的响应，如何形式化内在外在耦合，并区分局部可容许性、延续条件干预价值和完整策略性能。",
-      "method": "通过受限学习状态干预的延续条件价值形式化内在外在耦合，用观测相对纤维描述当前一致性；实现可执行的有限帧分类头写入，在有限精度接受检查下保护当前logits并修复指定历史裕度；在CLINC派生类增量设定中进行四单元匹配对比，并使用输出蒸馏、RoBERTa主干和优化器原生SGDW动力学；进行协调测试和五根新鲜测试比较。",
-      "findings": "四单元匹配对比识别出同一内在干预与不同外在延续之间的读出特定非加性；在CLINC派生类增量设定中，回放使写入的32次更新贡献从五个正确预测变为零；在输出蒸馏、RoBERTa主干和SGDW动力学下也出现非零交互；SGDW下128次更新三个激活根的计数交互均为负，表明耦合不一定意味着正协同；数学分析区分可行局部修复、有利终端输出与训练可达修复区域；内容控制匹配或超过开发增益；五根新鲜测试每个臂均含Fiber，显示根依赖而非一致有益的计数效果；在次要交叉熵读出上，引导分配在全部五对中平均损失低于标准回放。",
-      "limitations": "摘要未说明",
-      "score": 84,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：机器学习",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "学习动力学",
-        "内在外在耦合",
-        "持续学习",
-        "类增量学习"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30185v1",
-          "publishedAt": "2026-09-24T17:30:22Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30167",
-      "contentType": "paper",
-      "title": "音频语言模型对听与读的区分性特征表征是否一致？",
-      "originalTitle": "Do Audio Language Models Hear and Read Distinctive Features Alike?",
-      "summary": "音频语言模型用单一解码器处理语音与文本。本文比较同一音素在听到与读到时该解码器对区分性特征的表示方向：对仅差一个特征的最小音素对取均值表示之差，平均后得到各流的方向，并计算两流方向余弦；因两流对任意音素对已趋一致，故以随机配对构建参照而非零。应用于6个模型、7个特征、11个语系的15种语言。",
-      "abstract": "Audio language models pass speech and text through a single decoder. We ask whether that decoder represents a distinctive feature in the same direction when a phoneme is heard and when it is read. For minimal pairs of phonemes differing in one feature, we take the offset between the two members' mean representations. Averaging those offsets gives a direction for each stream, and we measure the cosine between the two. Because the two streams already agree about arbitrary phoneme pairs, we compare every measure agai…",
-      "keyFacts": [
-        "音频语言模型的单一解码器在“听到”音素与“读到”音素时，是否以相同方向表示区分性特征？",
-        "对仅差一个特征的最小音素对取两个成员的平均表示之差并平均，得到每条流的方向，计算两流方向的余弦；以随机配对构建参照，对6个模型、7个特征、11个语系的15种语言进行多检验校正后的比较。",
-        "只有两个Qwen2.5-Omni模型中的voicing在多检验校正后超过参照，参照在模型间相差七倍；在六个模型中的三个里，voicing在14种有足够最小音素对的语言中音频方向一致，其中两个模型的所有语言对一致；决定某一特征由哪条流表示的是模型家族而非模型规模。"
-      ],
-      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "机器学习",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T17:21:16Z",
-      "updatedAt": "2026-09-24T17:21:16Z",
-      "url": "https://arxiv.org/abs/2609.30167v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30167v1",
-      "authors": [
-        "Yuanhao Chen",
-        "Peter Chin"
-      ],
-      "arxivCategories": [
-        "cs.CL",
-        "cs.LG",
-        "cs.SD",
-        "stat.AP"
-      ],
-      "primaryCategory": "cs.CL",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "音频语言模型的单一解码器在“听到”音素与“读到”音素时，是否以相同方向表示区分性特征？",
-      "method": "对仅差一个特征的最小音素对取两个成员的平均表示之差并平均，得到每条流的方向，计算两流方向的余弦；以随机配对构建参照，对6个模型、7个特征、11个语系的15种语言进行多检验校正后的比较。",
-      "findings": "只有两个Qwen2.5-Omni模型中的voicing在多检验校正后超过参照，参照在模型间相差七倍；在六个模型中的三个里，voicing在14种有足够最小音素对的语言中音频方向一致，其中两个模型的所有语言对一致；决定某一特征由哪条流表示的是模型家族而非模型规模。",
-      "limitations": "摘要未说明",
-      "score": 84,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：机器学习",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "音频语言模型",
-        "语音与文本表征",
-        "区分性特征",
-        "多语言"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30167v1",
-          "publishedAt": "2026-09-24T17:21:16Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30151",
-      "contentType": "paper",
-      "title": "模型拒绝候选时给出的理由是否起作用？",
-      "originalTitle": "Does a model's stated reason for rejecting a candidate do any work?",
-      "summary": "让语言模型在候选间选择并解释时，它常以对手档案缺少某事实为由拒绝，如无导演、无死亡日期。该句可作为关于输入文本的可检验主张。本文把陈述该事实的真实语料句插入对手档案再以贪婪解码重问，并设置两条控制：同长度无关句置于同一档案，以及两句置于模型从未提及的第三选项。",
-      "abstract": "Asked to choose between candidates and explain the choice, a language model often rejects a rival by naming a fact its profile lacks: no director, no date of death. That sentence is a claim about the text in front of the model, and it can be tested without any judge. We insert a real corpus sentence stating the named fact into the rival's profile and ask again under greedy decoding. Two controls separate content from placement: a length-matched irrelevant sentence at the same profile, and the same two sentences at…",
-      "keyFacts": [
-        "语言模型拒绝候选时陈述的理由（如档案缺少某事实）是否真正影响其选择？",
-        "将陈述被点名事实的真实语料句插入对手档案后以贪婪解码重新提问；设置长度匹配的无关句置于同一档案、以及同样两句置于模型从未提及的第三选项作为控制。在2WikiMultihopQA上运行三次，其中最大一次用六个开放模型。",
-        "最大一次运行中，在被点名档案处提供被点名事实比无关控制更能改变选择，比值比3.57 [1.54, 8.26]，Holm p=0.0210，且剔除任一单模型后仍成立；但设计原本要检测的对比——同一事实置于无人点名的选项——未通过校正，Holm p=0.2428；最强的族内结果是完全不含内容主张的：同一无关句在被点名对手处比在第三选项处更能改变选择，Holm p=0.0008。"
-      ],
-      "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "人工智能",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T17:13:35Z",
-      "updatedAt": "2026-09-24T17:13:35Z",
-      "url": "https://arxiv.org/abs/2609.30151v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30151v1",
-      "authors": [
-        "Archit Rastogi"
-      ],
-      "arxivCategories": [
-        "cs.CL",
-        "cs.AI",
-        "cs.LG"
-      ],
-      "primaryCategory": "cs.CL",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "语言模型拒绝候选时陈述的理由（如档案缺少某事实）是否真正影响其选择？",
-      "method": "将陈述被点名事实的真实语料句插入对手档案后以贪婪解码重新提问；设置长度匹配的无关句置于同一档案、以及同样两句置于模型从未提及的第三选项作为控制。在2WikiMultihopQA上运行三次，其中最大一次用六个开放模型。",
-      "findings": "最大一次运行中，在被点名档案处提供被点名事实比无关控制更能改变选择，比值比3.57 [1.54, 8.26]，Holm p=0.0210，且剔除任一单模型后仍成立；但设计原本要检测的对比——同一事实置于无人点名的选项——未通过校正，Holm p=0.2428；最强的族内结果是完全不含内容主张的：同一无关句在被点名对手处比在第三选项处更能改变选择，Holm p=0.0008。",
-      "limitations": "摘要指出修复与控制还在共同候选提及、关系模板和流畅度上存在差异；对前两者的事后匹配保持内容效应方向，匹配流畅度则削弱其一，因此内容对比只是界定效应而非确立效应；强制单token概率读数在同一对比上与自由文本选择方向不一致，且三种解释均未获支持。",
-      "score": 84,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：人工智能",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "语言模型解释",
-        "候选选择",
-        "事实插入",
-        "可复现性"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30151v1",
-          "publishedAt": "2026-09-24T17:13:35Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30150",
-      "contentType": "paper",
-      "title": "面向大规模铁路网络管理的图推理与拓扑感知多智能体强化学习",
-      "originalTitle": "Graph-Based Inference and Topology-Aware Multi-Agent Reinforcement Learning for Large-Scale Railway Network Management",
-      "summary": "现代基础设施资产管理是长期规划、系统级交互的复杂序贯决策问题，集中式强化学习难扩展，分散式方法难以协调。本文提出图基框架：用分层贝叶斯模型结合图上的高斯过程核，从瑞士联邦铁路真实数据推断空间相关的网络化维护环境；并引入集成图神经网络与图Transformer的拓扑感知多智能体强化学习优化网络级策略。",
-      "abstract": "Modern infrastructure asset management constitutes a complex sequential decision-making problem, characterized by long planning horizons and system-level interactions, such as spatial deterioration correlations and economies of scale. While deep reinforcement learning has shown promise in optimizing maintenance policies, scaling to real-world networks remains challenging. Centralized approaches become computationally intractable in large-scale systems, whereas decentralized approaches often fail to capture essenti…",
-      "keyFacts": [
-        "如何将深度强化学习扩展到真实大规模铁路网络的维护决策中，同时兼顾环境建模与协调机制？",
-        "提出图基框架：先用分层贝叶斯模型结合图上的高斯过程核，从瑞士联邦铁路真实数据推断空间相关的网络化维护规划环境；再引入拓扑感知多智能体强化学习框架，集成图神经网络与图Transformer优化网络级策略。",
-        "数值结果表明，所提方法显著优于优化启发式和标准多智能体强化学习基线，在保持大规模网络上更优性能的同时减少计算训练时间；仅在小网络部分训练的图智能体可零样本迁移部署于大规模未见网络而无需再训练。"
-      ],
-      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "机器学习",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T17:12:39Z",
-      "updatedAt": "2026-09-24T17:12:39Z",
-      "url": "https://arxiv.org/abs/2609.30150v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30150v1",
-      "authors": [
-        "Giacomo Arcieri",
-        "Gregory Duthé",
-        "Christophe Muller",
-        "Konstantinos G. Papakonstantinou",
-        "Daniel Straub",
-        "Eleni Chatzi"
-      ],
-      "arxivCategories": [
-        "cs.LG"
-      ],
-      "primaryCategory": "cs.LG",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何将深度强化学习扩展到真实大规模铁路网络的维护决策中，同时兼顾环境建模与协调机制？",
-      "method": "提出图基框架：先用分层贝叶斯模型结合图上的高斯过程核，从瑞士联邦铁路真实数据推断空间相关的网络化维护规划环境；再引入拓扑感知多智能体强化学习框架，集成图神经网络与图Transformer优化网络级策略。",
-      "findings": "数值结果表明，所提方法显著优于优化启发式和标准多智能体强化学习基线，在保持大规模网络上更优性能的同时减少计算训练时间；仅在小网络部分训练的图智能体可零样本迁移部署于大规模未见网络而无需再训练。",
-      "limitations": "摘要未说明",
-      "score": 84,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：机器学习",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "基础设施维护",
-        "多智能体强化学习",
-        "图神经网络",
-        "零样本迁移"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30150v1",
-          "publishedAt": "2026-09-24T17:12:39Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30115",
-      "contentType": "paper",
-      "title": "轨道误差动力学：自组织临界性、瞬态参数共振与零存储神经合成中的非线性生物本体论",
-      "originalTitle": "Orbital Error Dynamics: Self-Organized Criticality, Ephemeral Parameter Resonance, and Non-Linear Biological Ontologies in Zero-Storage Neural Synthesis",
-      "summary": "现代深度网络将参数视为存储于物理内存的静态浮点矩阵，造成冯诺依曼瓶颈与表示坍缩。本文提出轨道误差动力学（OED），突触权重不是存储质量（O(W)），而是由复二次多项式映射z_{n+1}=z_n^2+c程序化导出的瞬态拓扑共振（O(1)）。并引入弯正弦波假设、观察者视界几何、重尾仿生扰动跳跃算子等。",
-      "abstract": "Modern deep neural networks treat parameters as static floating-point matrices stored in physical memory, incurring Von Neumann memory bottlenecks and representation collapse. We formulate Orbital Error Dynamics (OED), an analytical framework wherein synaptic weights are not stored masses (O(W)), but transient topological resonances (O(1)) derived procedurally from the complex quadratic polynomial map z_{n+1} = z_n^2 + c. We introduce the Bent Sine Wave Hypothesis, demonstrating that non-equilibrium living systems…",
-      "keyFacts": [
-        "能否不把突触权重作为存储的浮点矩阵，而由复二次多项式映射程序化生成瞬态拓扑共振，从而避开冯诺依曼瓶颈与表示坍缩？",
-        "提出轨道误差动力学（OED）分析框架：权重由复二次多项式映射z_{n+1}=z_n^2+c程序化导出（O(1)而非O(W)）；引入弯正弦波假设、观察者视界几何、重尾仿生扰动跳跃算子、肠脑双脑架构与自适应CD4+调节性免疫门控，并将4核苷酸遗传基础投影到C的四个象限。在Two-Moons流形上进行多种子实证验证（5个种子，80/20训练/测试划分，32x32网格，零测试时更新，零标签泄漏）。",
-        "由24字节坐标种子程序化参数化在Two-Moons上取得77.67% ± 5.35%的干净测试准确率（与无约束梯度基线85.67% ± 5.35%的配对差在8.00个百分点以内，95% CI: [-1.07%, 17.07%]），在分布偏移N(1.2, 0.4)下为71.33% ± 3.80%；并与模拟光学协处理器存在概念等价性。"
-      ],
-      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "机器学习",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T16:55:06Z",
-      "updatedAt": "2026-09-24T16:55:06Z",
-      "url": "https://arxiv.org/abs/2609.30115v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30115v1",
-      "authors": [
-        "Volkan Dağlı",
-        "Zerrin Dağlı",
-        "Dağhan Dağlı"
-      ],
-      "arxivCategories": [
-        "cs.NE",
-        "cs.LG",
-        "nlin.CD"
-      ],
-      "primaryCategory": "cs.NE",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "能否不把突触权重作为存储的浮点矩阵，而由复二次多项式映射程序化生成瞬态拓扑共振，从而避开冯诺依曼瓶颈与表示坍缩？",
-      "method": "提出轨道误差动力学（OED）分析框架：权重由复二次多项式映射z_{n+1}=z_n^2+c程序化导出（O(1)而非O(W)）；引入弯正弦波假设、观察者视界几何、重尾仿生扰动跳跃算子、肠脑双脑架构与自适应CD4+调节性免疫门控，并将4核苷酸遗传基础投影到C的四个象限。在Two-Moons流形上进行多种子实证验证（5个种子，80/20训练/测试划分，32x32网格，零测试时更新，零标签泄漏）。",
-      "findings": "由24字节坐标种子程序化参数化在Two-Moons上取得77.67% ± 5.35%的干净测试准确率（与无约束梯度基线85.67% ± 5.35%的配对差在8.00个百分点以内，95% CI: [-1.07%, 17.07%]），在分布偏移N(1.2, 0.4)下为71.33% ± 3.80%；并与模拟光学协处理器存在概念等价性。",
-      "limitations": "摘要未说明",
-      "score": 84,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：机器学习",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "零存储神经合成",
-        "轨道误差动力学",
-        "自组织临界性",
-        "仿生计算"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30115v1",
-          "publishedAt": "2026-09-24T16:55:06Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30105",
-      "contentType": "paper",
-      "title": "对数凹分布的SoS可认证性",
-      "originalTitle": "On the SoS Certifiability of Log-Concave Distributions",
-      "summary": "对于R^d上任意的各向同性对数凹分布P，本文证明多项式(Cm)^m||v||_2^m - E_{X~P} ^m对每个偶数m>=2都是平方和，其中C>0为通用常数。这去掉了Kothari与Steinhardt定理中对庞加莱常数的依赖，恢复对数凹分布的最优矩界。作为直接推论，可在高维统计估计问题中获得具有维度无关误差保证的高效算法。",
-      "abstract": "For an arbitrary isotropic log-concave distribution $P$ on $\\mathbb{R}^d$, we prove that the polynomial $(Cm)^m\\|v\\|_2^m - \\mathbb{E}_{X\\sim P}\\langle X,v\\rangle^m$ is a sum of squares for every even $m\\ge2$, where $C>0$ is a universal constant. This removes the dependence on the Poincaré constant in the theorem of Kothari and Steinhardt (arXiv:1711.07465), recovering the optimal moment bounds for log-concave distributions. As an immediate corollary, we obtain computationally efficient algorithms with dimension-fr…",
-      "keyFacts": [
-        "能否在去掉对庞加莱常数依赖的情况下，证明对数凹分布矩多项式的平方和（SoS）可认证性并恢复最优矩界？",
-        "使用随机局部化将P分解为随机强对数凹测度的平均，其中心矩可由Diakonikolas、Hopkins、Pensia与Tiegel（STOC 2025; arXiv:2410.21194）的亚高斯证书处理；通过协方差自适应的局部化选择，证明由Letwin关于二次型方差不等式（arXiv:2607.24164）导出的四阶矩证书足以在每个偶数度上控制该平均。",
-        "证明了对任意各向同性对数凹分布P，多项式(Cm)^m||v||_2^m - E_{X~P} ^m对每个偶数m>=2都是平方和，C>0为通用常数；这去掉了Kothari与Steinhardt（arXiv:1711.07465）定理中对庞加莱常数的依赖，恢复了对数凹分布的最优矩界，并作为直接推论给出高维统计估计问题的维度无关误差保证的高效算法。"
-      ],
-      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "机器学习",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T16:48:02Z",
-      "updatedAt": "2026-09-24T16:48:02Z",
-      "url": "https://arxiv.org/abs/2609.30105v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30105v1",
-      "authors": [
-        "Aleksandr Storozhenko"
-      ],
-      "arxivCategories": [
-        "cs.LG",
-        "cs.CC",
-        "math.PR"
-      ],
-      "primaryCategory": "cs.LG",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "能否在去掉对庞加莱常数依赖的情况下，证明对数凹分布矩多项式的平方和（SoS）可认证性并恢复最优矩界？",
-      "method": "使用随机局部化将P分解为随机强对数凹测度的平均，其中心矩可由Diakonikolas、Hopkins、Pensia与Tiegel（STOC 2025; arXiv:2410.21194）的亚高斯证书处理；通过协方差自适应的局部化选择，证明由Letwin关于二次型方差不等式（arXiv:2607.24164）导出的四阶矩证书足以在每个偶数度上控制该平均。",
-      "findings": "证明了对任意各向同性对数凹分布P，多项式(Cm)^m||v||_2^m - E_{X~P} ^m对每个偶数m>=2都是平方和，C>0为通用常数；这去掉了Kothari与Steinhardt（arXiv:1711.07465）定理中对庞加莱常数的依赖，恢复了对数凹分布的最优矩界，并作为直接推论给出高维统计估计问题的维度无关误差保证的高效算法。",
-      "limitations": "摘要未说明",
-      "score": 84,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：机器学习",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "对数凹分布",
-        "平方和认证",
-        "随机局部化",
-        "高维统计估计"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30105v1",
-          "publishedAt": "2026-09-24T16:48:02Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30088",
-      "contentType": "paper",
-      "title": "AT-SKM-Net：面向动态图上线性硬约束可行性的加速可训练采样Kaczmarz-Motzkin框架",
-      "originalTitle": "AT-SKM-Net: An Accelerated Trainable Sampling Kaczmarz-Motzkin Framework for Linear Hard-Constraint Feasibility on Dynamic Graphs",
-      "summary": "针对动态图线性硬约束优化中T-SKM-Net需处理全部约束、计算成本高的问题，提出AT-SKM-Net：用拓扑感知异质GNN引导混合采样聚焦活跃约束，并用Cholesky更新将等式投影复杂度在低秩扰动下从O(N^3)降至O(N^2)。在随机几何图、N-1安全约束DC-OPF和最小成本天然气输送问题上，迭代数最多减少85%，SKM层加速2.95x-7.29x，且约束违反为零。",
-      "abstract": "Graph-structured optimization with linear constraints is fundamental to critical infrastructure but faces scalability limits due to massive strict hard constraints and high dimensionality. While recent projection-based methods such as Trainable Sampling Kaczmarz-Motzkin Net (T-SKM-Net) guarantee feasibility, they face high computational costs in dynamic environments by processing the entire constraint set and requiring expensive matrix factorizations. To bridge this gap, we propose the Accelerated Trainable-SKM (A…",
-      "keyFacts": [
-        "如何降低投影类约束优化方法（如T-SKM-Net）在动态图线性硬约束问题中的计算成本与冗余计算，同时保持可行性？",
-        "提出AT-SKM-Net框架：采用由拓扑感知异质GNN模型引导的混合采样策略集中计算活跃约束；引入Cholesky更新机制处理图约束的拓扑变化，在低秩扰动下将等式投影复杂度从O(N^3)降至O(N^2)；在随机几何图、N-1安全约束DC-OPF和最小成本天然气输送问题上进行实验。",
-        "实验表明AT-SKM将迭代次数最多减少85%，实现2.95x-7.29x的SKM层加速，同时保持零约束违反。"
-      ],
-      "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "人工智能",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T16:36:49Z",
-      "updatedAt": "2026-09-24T16:36:49Z",
-      "url": "https://arxiv.org/abs/2609.30088v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30088v1",
-      "authors": [
-        "Xiaochen Zhang",
-        "Haoyu Zhu",
-        "Yao Zhang",
-        "Qingchun Hou"
-      ],
-      "arxivCategories": [
-        "cs.LG",
-        "cs.AI",
-        "math.OC"
-      ],
-      "primaryCategory": "cs.LG",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何降低投影类约束优化方法（如T-SKM-Net）在动态图线性硬约束问题中的计算成本与冗余计算，同时保持可行性？",
-      "method": "提出AT-SKM-Net框架：采用由拓扑感知异质GNN模型引导的混合采样策略集中计算活跃约束；引入Cholesky更新机制处理图约束的拓扑变化，在低秩扰动下将等式投影复杂度从O(N^3)降至O(N^2)；在随机几何图、N-1安全约束DC-OPF和最小成本天然气输送问题上进行实验。",
-      "findings": "实验表明AT-SKM将迭代次数最多减少85%，实现2.95x-7.29x的SKM层加速，同时保持零约束违反。",
-      "limitations": "摘要未说明",
-      "score": 83,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：人工智能",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "图优化",
-        "Kaczmarz方法",
-        "GNN",
-        "硬约束可行性"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30088v1",
-          "publishedAt": "2026-09-24T16:36:49Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30087",
-      "contentType": "paper",
-      "title": "返回还是修订？学习修订何时有助于检索增强问答",
-      "originalTitle": "Return or Revise? Learning When Revision Helps Retrieval-Augmented QA",
-      "summary": "研究答案修订系统中返回现有草稿还是用检索证据修订的决策问题，提出在相同正确性评判下对草稿与候选修订配对评分，定义可恢复性并训练策略预测它。在25,870道开放域问题上，配对结果评分器在全部九个Llama设置-种子拟合中AUC均更高，开发阈值下平均提升0.23-0.68准确率点；策略优于总是修订并弥补超三分之一oracle差距，但仍执行38-46%有害修订；当存在无草稿标准RAG答案时，在两者间选择更优约2点（Llama）和4点（OLMo），加入候选修订作为第三选项无显著增益。",
-      "abstract": "We consider the decision of whether to return an existing draft answer or revise it using retrieved evidence, as in answer-revision systems. Draft confidence estimates whether the current answer is correct, but the decision requires estimating the effect of a specified revision. For offline training and evaluation, we grade both the returned draft and its candidate revision under the same correctness judge, which makes repair, harm, and the gap to an oracle observable. We call this paired effect its recoverability…",
-      "keyFacts": [
-        "在答案修订系统中，如何决定是返回现有草稿答案还是用检索证据修订它？",
-        "在相同正确性评判下对返回的草稿和候选修订配对评分，定义配对效应为可恢复性；训练策略在修订前预测该可恢复性；在25,870道留出开放域问题、三种修订设置下评估，并在九个Llama设置-种子拟合中比较配对结果评分器与草稿正确性评分器。",
-        "配对结果评分器在全部九个Llama设置-种子拟合中AUC均高于匹配的草稿正确性评分器，开发选定阈值下平均提升0.23-0.68准确率点，该差异仅在密集检索下跨训练运行显著；所得策略优于总是修订，并平均弥补超过三分之一的oracle差距，但仍执行38-46%的有害修订；当无草稿的标准RAG答案也可用时，在草稿与该答案间选择更强，Llama约高2点、OLMo约高4点，将候选修订作为第三选项无显著增益。"
-      ],
-      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "机器学习",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T16:35:54Z",
-      "updatedAt": "2026-09-24T16:35:54Z",
-      "url": "https://arxiv.org/abs/2609.30087v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30087v1",
-      "authors": [
-        "Nicholas Kashani Motlagh",
-        "Tim Anderson",
-        "Jeremy Gwinnup",
-        "Grant Erdmann"
-      ],
-      "arxivCategories": [
-        "cs.CL",
-        "cs.IR",
-        "cs.LG"
-      ],
-      "primaryCategory": "cs.CL",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "在答案修订系统中，如何决定是返回现有草稿答案还是用检索证据修订它？",
-      "method": "在相同正确性评判下对返回的草稿和候选修订配对评分，定义配对效应为可恢复性；训练策略在修订前预测该可恢复性；在25,870道留出开放域问题、三种修订设置下评估，并在九个Llama设置-种子拟合中比较配对结果评分器与草稿正确性评分器。",
-      "findings": "配对结果评分器在全部九个Llama设置-种子拟合中AUC均高于匹配的草稿正确性评分器，开发选定阈值下平均提升0.23-0.68准确率点，该差异仅在密集检索下跨训练运行显著；所得策略优于总是修订，并平均弥补超过三分之一的oracle差距，但仍执行38-46%的有害修订；当无草稿的标准RAG答案也可用时，在草稿与该答案间选择更强，Llama约高2点、OLMo约高4点，将候选修订作为第三选项无显著增益。",
-      "limitations": "摘要指出配对评分的准确率提升差异仅在密集检索下跨训练运行显著；策略仍执行38-46%的有害修订；可恢复性仅描述单次修订，其作为可用动作的价值取决于替代选项。",
       "score": 83,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -1509,10 +359,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "检索增强问答",
-        "答案修订",
-        "策略学习",
-        "可恢复性"
+        "音频情绪识别",
+        "非典型听觉",
+        "自闭症",
+        "CLAP"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1521,113 +371,115 @@
         {
           "name": "arXiv",
           "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30087v1",
-          "publishedAt": "2026-09-24T16:35:54Z",
+          "url": "https://arxiv.org/abs/2609.31168v1",
+          "publishedAt": "2026-09-25T11:59:00Z",
           "evidenceGroup": "repository:arxiv"
         }
       ],
       "relatedNews": []
     },
     {
-      "id": "arxiv:2609.30078",
+      "id": "arxiv:2609.31157",
       "contentType": "paper",
-      "title": "核范数正则化贝叶斯矩阵补全",
-      "originalTitle": "Nuclear Norm-Regularized Bayesian Matrix Completion",
-      "summary": "矩阵补全常用核范数正则化最小二乘，但只给点估计、无不确定性量化。贝叶斯形式在噪声方差已知时后验对数凹，而实际方差未知需加先验。本文给出该模型首个具有显式非渐近保证的采样器，复杂度为矩阵维度和目标精度倒数的多项式。方法是将噪声精度分布离散到网格上，并通过热力学积分构建类别后验。该扩展不限于矩阵补全，也可用于非对数凹性限于单一变量、其余变量联合分布非光滑的采样问题。这是可行性结果，复杂度为多项式但并非当前规模下可部署算法。",
-      "abstract": "Matrix completion, the problem of estimating missing entries in a matrix from noisily observed ones, underlies a diverse array of problems such as recommender systems and counterfactual outcome estimation in panel data. Many algorithms address the problem using regularized least squares, often with the nuclear norm as a regularizer, but this method yields a point estimate with no built-in uncertainty quantification. A Bayesian formulation is a natural alternative, and if the noise variance is known, the nuclear no…",
+      "title": "具有物理信息预测先验的贝叶斯张量自编码器用于多维时间序列异常检测",
+      "originalTitle": "Bayesian Tensor Autoencoder with Physics-informed Predictive Prior for Multi-dimensional Time Series Anomaly Detection",
+      "summary": "针对多维时间序列异常检测中重塑操作破坏内在相关性的问题，提出物理信息预测先验张量自编码器（PPPTAE），以张量AE为骨干，用贝叶斯融合将预测先验嵌入重建式AE，并引入张量低秩分解规则缓解过泛化。",
+      "abstract": "Multi-dimensional time series, inherently tensorial, are common in practice. Despite great progress in time series anomaly detection, most existing methods are confined to uni-/multi-variate time series. When handling multi-dimensional time series using these methods, reshaping operations are required, which inevitably break the intrinsic correlations and thus lead to performance degradation. In uni-/multi-variate time series anomaly detection, AutoEncoders (AEs) are widely adopted and generally categorized into r…",
       "keyFacts": [
-        "在噪声方差未知的情况下，能否为核范数正则化贝叶斯矩阵补全构造具有显式非渐近多项式时间保证的采样器？",
-        "将噪声精度（噪声方差倒数）的分布离散到网格上，并通过热力学积分构建类别后验，从而扩展已知噪声方差下的对数凹后验模型。",
-        "给出该模型首个具有显式非渐近保证的采样器，其复杂度为矩阵维度和目标精度倒数的多项式；该扩展不特定于矩阵补全，也可用于非对数凹性限于单一变量、其余变量联合分布非光滑的采样问题；这是可行性结果，所示多项式复杂度并非旨在作为当前问题规模下可部署的算法。"
+        "如何为多维时间序列异常检测设计能桥接重建式与预测式自编码器、并保留张量内在相关性的方法？",
+        "以张量自编码器为骨干，提出贝叶斯融合方法将预测先验融入重建式AE，并在预测先验的神经网络中引入张量低秩分解规则这一物理规律，形成PPPTAE框架。",
+        "摘要指出该贝叶斯融合方法可增强模型对正常数据的建模能力，PPPTAE框架被提出以应对AE的过泛化问题。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
       "researchArea": "机器学习",
       "source": "arXiv",
       "country": "国际",
-      "publishedAt": "2026-09-24T16:29:25Z",
-      "updatedAt": "2026-09-24T16:29:25Z",
-      "url": "https://arxiv.org/abs/2609.30078v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30078v1",
+      "publishedAt": "2026-09-25T11:52:35Z",
+      "updatedAt": "2026-09-25T11:52:35Z",
+      "url": "https://arxiv.org/abs/2609.31157v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31157v1",
       "authors": [
-        "Calvin Tolbert"
+        "Jianan Liu",
+        "Chunguang Li"
+      ],
+      "arxivCategories": [
+        "cs.LG"
+      ],
+      "primaryCategory": "cs.LG",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "如何为多维时间序列异常检测设计能桥接重建式与预测式自编码器、并保留张量内在相关性的方法？",
+      "method": "以张量自编码器为骨干，提出贝叶斯融合方法将预测先验融入重建式AE，并在预测先验的神经网络中引入张量低秩分解规则这一物理规律，形成PPPTAE框架。",
+      "findings": "摘要指出该贝叶斯融合方法可增强模型对正常数据的建模能力，PPPTAE框架被提出以应对AE的过泛化问题。",
+      "limitations": "摘要未说明",
+      "score": 83,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "时间序列异常检测",
+        "张量自编码器",
+        "贝叶斯融合",
+        "物理信息"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31157v1",
+          "publishedAt": "2026-09-25T11:52:35Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31368",
+      "contentType": "paper",
+      "title": "基于贝叶斯树邻接文法的方程发现",
+      "originalTitle": "Equation discovery with Bayesian tree-adjoining grammars",
+      "summary": "将树邻接文法（TAG）置于贝叶斯框架下，对树结构及其参数定义生成先验，用带保结构树移动的可逆跳MCMC推断结构、参数与预测的联合后验，并在NARX系统、Silverbox基准和Christchurch Bay Tower波浪载荷数据上验证。",
+      "abstract": "Tree-Adjoining Grammars (TAGs) have recently been introduced to Nonlinear System Identification (NLSI) as a means of encoding an entire model class as a finite set of grammatical rules, from which candidate models are assembled as trees. Existing TAG-based identifiers rely on evolutionary optimisation and return point estimates of the model structure. This paper instead proposes the TAG framework within a Bayesian setting. A generative prior is defined over tree structures and their parameters, and a Reversible-Ju…",
+      "keyFacts": [
+        "如何将TAG框架用于贝叶斯设定，以量化动力系统方程发现中的不确定性？",
+        "对树结构及其参数定义生成先验，使用带保结构树移动的可逆跳MCMC采样器推断联合后验；考虑一步预测目标（共轭参数提议）和基于模拟的目标（无似然推断）。",
+        "在模拟多项式NARX系统、Silverbox基准和Christchurch Bay Tower波浪载荷数据上验证；将Morison方程嵌入为固定初始树得到灰箱模型，其表现优于物理驱动基线。"
+      ],
+      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "机器学习",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T15:04:40Z",
+      "updatedAt": "2026-09-25T15:04:40Z",
+      "url": "https://arxiv.org/abs/2609.31368v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31368v1",
+      "authors": [
+        "Christopher A. Lindley",
+        "Nikolaos Dervilis",
+        "Keith Worden"
       ],
       "arxivCategories": [
         "stat.ML",
-        "cs.LG"
+        "cs.LG",
+        "eess.SY",
+        "stat.CO"
       ],
       "primaryCategory": "stat.ML",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "在噪声方差未知的情况下，能否为核范数正则化贝叶斯矩阵补全构造具有显式非渐近多项式时间保证的采样器？",
-      "method": "将噪声精度（噪声方差倒数）的分布离散到网格上，并通过热力学积分构建类别后验，从而扩展已知噪声方差下的对数凹后验模型。",
-      "findings": "给出该模型首个具有显式非渐近保证的采样器，其复杂度为矩阵维度和目标精度倒数的多项式；该扩展不特定于矩阵补全，也可用于非对数凹性限于单一变量、其余变量联合分布非光滑的采样问题；这是可行性结果，所示多项式复杂度并非旨在作为当前问题规模下可部署的算法。",
-      "limitations": "摘要说明这是可行性结果，所得多项式复杂度并非作为当前问题规模下可部署的算法；摘要未说明其他局限。",
-      "score": 83,
-      "scoreBasis": "研究相关度",
-      "scoreComponents": {},
-      "scoreReasons": [
-        "主题：机器学习",
-        "按主题相关性、摘要完整度与发布时间排序"
-      ],
-      "confidence": "预印本",
-      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
-      "tags": [
-        "矩阵补全",
-        "贝叶斯采样",
-        "核范数",
-        "非渐近保证"
-      ],
-      "translationProvider": "deepseek",
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "arXiv",
-          "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30078v1",
-          "publishedAt": "2026-09-24T16:29:25Z",
-          "evidenceGroup": "repository:arxiv"
-        }
-      ],
-      "relatedNews": []
-    },
-    {
-      "id": "arxiv:2609.30215",
-      "contentType": "paper",
-      "title": "成员查询模型中凸体上线性优化的近二次下界",
-      "originalTitle": "A Nearly Quadratic Lower Bound for Linear Optimization over Convex Bodies in the Membership Oracle Model",
-      "summary": "本文证明成员查询模型中凸体上线性优化与均匀采样的随机算法具有近二次下界。对线性优化，该下界在维度上仅相差多对数因子即匹配已知近二次上界；对均匀采样，改进了此前的线性下界；所构造的实例还蕴含体积估计的相同下界。",
-      "abstract": "We prove nearly quadratic lower bounds for randomized algorithms for linear optimization and uniform sampling over convex bodies in the membership oracle model. For linear optimization, this matches the known nearly quadratic upper bound up to a polylog factor in the dimension. For uniform sampling, this improves on the previous linear lower bound. Our construction also implies the same lower bound for volume estimation.",
-      "keyFacts": [
-        "在成员查询模型中，凸体上的线性优化和均匀采样需要多少随机查询复杂度？",
-        "构造下界实例，证明成员查询模型中线性优化与均匀采样随机算法的近二次下界，并与已知上界比较。",
-        "证明了线性优化与均匀采样的近二次下界：线性优化下界与已知近二次上界在维度上仅差多对数因子，均匀采样下界改进了此前的线性下界；该构造还蕴含体积估计的相同下界。"
-      ],
-      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
-      "category": "研究论文",
-      "researchArea": "机器学习",
-      "source": "arXiv",
-      "country": "国际",
-      "publishedAt": "2026-09-24T17:45:58Z",
-      "updatedAt": "2026-09-24T17:45:58Z",
-      "url": "https://arxiv.org/abs/2609.30215v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.30215v1",
-      "authors": [
-        "Santosh S. Vempala"
-      ],
-      "arxivCategories": [
-        "cs.DS",
-        "cs.LG",
-        "math.FA",
-        "math.OC"
-      ],
-      "primaryCategory": "cs.DS",
-      "collectionKeywords": [],
-      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "在成员查询模型中，凸体上的线性优化和均匀采样需要多少随机查询复杂度？",
-      "method": "构造下界实例，证明成员查询模型中线性优化与均匀采样随机算法的近二次下界，并与已知上界比较。",
-      "findings": "证明了线性优化与均匀采样的近二次下界：线性优化下界与已知近二次上界在维度上仅差多对数因子，均匀采样下界改进了此前的线性下界；该构造还蕴含体积估计的相同下界。",
+      "question": "如何将TAG框架用于贝叶斯设定，以量化动力系统方程发现中的不确定性？",
+      "method": "对树结构及其参数定义生成先验，使用带保结构树移动的可逆跳MCMC采样器推断联合后验；考虑一步预测目标（共轭参数提议）和基于模拟的目标（无似然推断）。",
+      "findings": "在模拟多项式NARX系统、Silverbox基准和Christchurch Bay Tower波浪载荷数据上验证；将Morison方程嵌入为固定初始树得到灰箱模型，其表现优于物理驱动基线。",
       "limitations": "摘要未说明",
       "score": 81,
       "scoreBasis": "研究相关度",
@@ -1639,10 +491,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "成员查询模型",
-        "线性优化",
-        "下界",
-        "凸体采样"
+        "方程发现",
+        "贝叶斯推断",
+        "树邻接文法",
+        "非线性系统辨识"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1651,16 +503,1156 @@
         {
           "name": "arXiv",
           "domain": "arxiv.org",
-          "url": "https://arxiv.org/abs/2609.30215v1",
-          "publishedAt": "2026-09-24T17:45:58Z",
+          "url": "https://arxiv.org/abs/2609.31368v1",
+          "publishedAt": "2026-09-25T15:04:40Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31363",
+      "contentType": "paper",
+      "title": "Brenier与对抗训练相遇：面向鲁棒学习的最优传输几何",
+      "originalTitle": "Brenier Meets Adversarial Training: Optimal Transport Geometry for Robust Learning",
+      "summary": "研究带Wasserstein惩罚的惩罚式DRO，将对手问题重述为传输映射优化并证明最优映射循环单调；指出现有逐样本对抗训练违反循环单调性，提出多起点粒子上升和输入凸神经网络参数化两种补救方法，在回归、分类和控制任务上优于基线。",
+      "abstract": "Distributionally robust optimization (DRO) provides a principled framework for learning under distribution shift, but its practical use is hindered by the difficulty of evaluating worst-case risks for nonconvex loss functions. We study a penalized DRO formulation in which the adversary may choose any distribution but incurs a Wasserstein penalty for deviating from the empirical distribution. We show that the adversary's problem can be reformulated as an optimization problem over transport maps that push empirical…",
+      "keyFacts": [
+        "如何利用最优传输几何刻画惩罚式DRO中的最坏情况风险，并改进对抗训练的鲁棒性？",
+        "将对手问题重述为传输映射优化问题，证明最优映射的循环单调性；提出多起点粒子上升（并行梯度上升与重分配交替）和以输入凸神经网络梯度参数化对抗映射两种方法。",
+        "标准逐样本对抗训练违反循环单调性并浪费传输成本；在鲁棒回归、图像分类和鲁棒控制实验中，所提方法一致优于标准对抗训练和最先进基线，在分布偏移下鲁棒性和泛化性更好。"
+      ],
+      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "机器学习",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T14:57:04Z",
+      "updatedAt": "2026-09-25T14:57:04Z",
+      "url": "https://arxiv.org/abs/2609.31363v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31363v1",
+      "authors": [
+        "Alireza Abdollahpoorrostam",
+        "Ehsan Sharifian",
+        "Buse Şen",
+        "Marco Cuturi",
+        "Daniel Kuhn"
+      ],
+      "arxivCategories": [
+        "cs.LG",
+        "math.OC",
+        "stat.ML"
+      ],
+      "primaryCategory": "cs.LG",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "如何利用最优传输几何刻画惩罚式DRO中的最坏情况风险，并改进对抗训练的鲁棒性？",
+      "method": "将对手问题重述为传输映射优化问题，证明最优映射的循环单调性；提出多起点粒子上升（并行梯度上升与重分配交替）和以输入凸神经网络梯度参数化对抗映射两种方法。",
+      "findings": "标准逐样本对抗训练违反循环单调性并浪费传输成本；在鲁棒回归、图像分类和鲁棒控制实验中，所提方法一致优于标准对抗训练和最先进基线，在分布偏移下鲁棒性和泛化性更好。",
+      "limitations": "摘要未说明",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "分布鲁棒优化",
+        "最优传输",
+        "对抗训练",
+        "循环单调性"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31363v1",
+          "publishedAt": "2026-09-25T14:57:04Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31356",
+      "contentType": "paper",
+      "title": "开放词汇领域遗忘",
+      "originalTitle": "Open Vocabulary Domain Unlearning",
+      "summary": "指出现有近似领域遗忘方法受封闭词汇假设限制，仅过拟合已见类-域对；形式化开放词汇领域遗忘（OVDU）协议，要求领域遗忘迁移到留出类；提出基于Fisher信息掩码与目标流形散射（TMS）的参数编辑框架，在PACS、OfficeHome和DomainNet上大幅提升开放词汇泛化，仅用4样本即超过8样本基线峰值。",
+      "abstract": "Vision-Language Models (VLMs) exhibit remarkable zero-shot generalization, yet they often encode unwanted or hazardous stylistic domains such as idealized textbook diagrams in medical AI or cartoon vehicles in autonomous driving. Approximate Domain Unlearning (ADU) aims to selectively erase a model's recognition of a target visual domain while preserving accuracy on the remaining domains. However, existing ADU methods operate under a flawed closed-vocabulary assumption: they evaluate unlearning solely on the speci…",
+      "keyFacts": [
+        "如何实现类不可知的真实领域遗忘，使遗忘效果能迁移到未见的留出类别？",
+        "形式化开放词汇领域遗忘（OVDU）协议；提出手术式参数编辑框架，先用Fisher信息掩码隔离领域敏感权重，再用基于偏好挖掘的目标流形散射（TMS）目标局部打散遗忘领域的风格几何。",
+        "在PACS、OfficeHome和DomainNet上，方法相比现有基线大幅提升开放词汇泛化；样本效率突出，仅用4样本即超过8样本基线的峰值结果。"
+      ],
+      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "机器学习",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T14:52:36Z",
+      "updatedAt": "2026-09-25T14:52:36Z",
+      "url": "https://arxiv.org/abs/2609.31356v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31356v1",
+      "authors": [
+        "Sumanth Udupa",
+        "Mehrtash Harandi",
+        "Yadan Luo",
+        "Mahsa Baktashmotlagh"
+      ],
+      "arxivCategories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "primaryCategory": "cs.CV",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "如何实现类不可知的真实领域遗忘，使遗忘效果能迁移到未见的留出类别？",
+      "method": "形式化开放词汇领域遗忘（OVDU）协议；提出手术式参数编辑框架，先用Fisher信息掩码隔离领域敏感权重，再用基于偏好挖掘的目标流形散射（TMS）目标局部打散遗忘领域的风格几何。",
+      "findings": "在PACS、OfficeHome和DomainNet上，方法相比现有基线大幅提升开放词汇泛化；样本效率突出，仅用4样本即超过8样本基线的峰值结果。",
+      "limitations": "摘要未说明",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "视觉语言模型",
+        "领域遗忘",
+        "开放词汇",
+        "参数编辑"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31356v1",
+          "publishedAt": "2026-09-25T14:52:36Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31351",
+      "contentType": "paper",
+      "title": "渐进记忆Transformer：面向时间序列的记忆感知注意力",
+      "originalTitle": "Progressive Memory Transformer: Memory-Aware Attention for Time-Series",
+      "summary": "提出显式强制局部、中程和全局三尺度结构层次的学习框架，并引入渐进记忆Transformer（PMT），通过可写、窗口对齐的记忆在token与序列表示之外暴露中程尺度；在七个UCR/UEA/UCI分类基准、线索保持探针和预测基准上评估。",
+      "abstract": "Time-series carry structure simultaneously at multiple scales (fine-grained variation, mid-range motifs, and global properties) and downstream tasks operate at correspondingly different scales. Most existing self-supervised learning approaches supervise representations globally via instance-level contrastive losses and limited temporal neighborhood supervision, but do not explicitly exploit the structural hierarchy. We propose a learning framework that explicitly enforces a structural hierarchy across three scales…",
+      "keyFacts": [
+        "如何让时间序列自监督学习显式利用多尺度结构层次，并使骨干网络在各尺度上暴露表示？",
+        "提出分别针对token连续性、窗口级motif和序列级一致性的局部、中程与全局三个独立目标；设计渐进记忆Transformer（PMT），为Transformer增加可写、窗口对齐的记忆以暴露中程尺度表示。",
+        "在七个UCR/UEA/UCI分类基准、线索保持探针和预测基准上，PMT学习的表示在全局、中程和局部尺度上探针表现良好；低标签（1–5%标签）分类强，多预测视野下预测性能有竞争力，记忆状态捕捉中程motif有定量和定性证据。"
+      ],
+      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "机器学习",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T14:49:42Z",
+      "updatedAt": "2026-09-25T14:49:42Z",
+      "url": "https://arxiv.org/abs/2609.31351v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31351v1",
+      "authors": [
+        "Tord Sture Stangeland",
+        "Andreas Köhler",
+        "Steffen Mæland",
+        "Adín Ramíres Rivera"
+      ],
+      "arxivCategories": [
+        "cs.LG"
+      ],
+      "primaryCategory": "cs.LG",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "如何让时间序列自监督学习显式利用多尺度结构层次，并使骨干网络在各尺度上暴露表示？",
+      "method": "提出分别针对token连续性、窗口级motif和序列级一致性的局部、中程与全局三个独立目标；设计渐进记忆Transformer（PMT），为Transformer增加可写、窗口对齐的记忆以暴露中程尺度表示。",
+      "findings": "在七个UCR/UEA/UCI分类基准、线索保持探针和预测基准上，PMT学习的表示在全局、中程和局部尺度上探针表现良好；低标签（1–5%标签）分类强，多预测视野下预测性能有竞争力，记忆状态捕捉中程motif有定量和定性证据。",
+      "limitations": "摘要未说明",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "时间序列",
+        "Transformer",
+        "记忆机制",
+        "多尺度表示"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31351v1",
+          "publishedAt": "2026-09-25T14:49:42Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31329",
+      "contentType": "paper",
+      "title": "连接身体与大脑：基因驱动的形态-控制协同设计",
+      "originalTitle": "Bridging Body and Brain: Gene-Driven Morphology--Control Co-Design",
+      "summary": "现有形态-控制协同设计方法用独立网络间接耦合，缺乏高层协调。受协调生物发育的自然基因启发，提出紧凑潜蓝图Morphogene，通过AdaConcat在肢体层面联合条件化形态与控制生成；进而提出GeCode，将协同设计建模为Morphogene空间探索，结合局部细化与全局探索。2D和3D任务上持续超越现有最优方法，收敛更快、最终性能更高。",
+      "abstract": "Morphology--control co-design jointly optimizes an agent's body structure and control policy as an integrated embodied system. However, existing methods typically model morphology design and control with separate networks coupled only indirectly through a shared task objective, limiting explicit high-level coordination. Inspired by natural genes that coordinate biological development, we introduce \\textbf{Morphogene}, a compact latent blueprint that bridges an agent's body and brain. Through AdaConcat, Morphogene…",
+      "keyFacts": [
+        "如何让形态设计与控制策略形成显式的高层协调，而非仅通过共享任务目标间接耦合，从而更高效地探索身体-大脑设计空间？",
+        "受自然基因启发，提出紧凑潜蓝图Morphogene，并通过AdaConcat在肢体层面联合条件化形态与控制生成；基于该表示提出GeCode，将协同设计建模为在Morphogene空间中的探索，每个Morphogene锚定一个局部设计区域，性能引导更新推动锚点向有前景区域移动。",
+        "在多种2D和3D协同设计任务的大量实验中，GeCode持续优于现有最先进方法，收敛速度显著更快，最终性能更高。"
+      ],
+      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "机器学习",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T14:36:18Z",
+      "updatedAt": "2026-09-25T14:36:18Z",
+      "url": "https://arxiv.org/abs/2609.31329v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31329v1",
+      "authors": [
+        "Fu Feng",
+        "Ruixiao Shi",
+        "Yucheng Xie",
+        "Jing Wang",
+        "Xin Geng"
+      ],
+      "arxivCategories": [
+        "cs.LG"
+      ],
+      "primaryCategory": "cs.LG",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "如何让形态设计与控制策略形成显式的高层协调，而非仅通过共享任务目标间接耦合，从而更高效地探索身体-大脑设计空间？",
+      "method": "受自然基因启发，提出紧凑潜蓝图Morphogene，并通过AdaConcat在肢体层面联合条件化形态与控制生成；基于该表示提出GeCode，将协同设计建模为在Morphogene空间中的探索，每个Morphogene锚定一个局部设计区域，性能引导更新推动锚点向有前景区域移动。",
+      "findings": "在多种2D和3D协同设计任务的大量实验中，GeCode持续优于现有最先进方法，收敛速度显著更快，最终性能更高。",
+      "limitations": "摘要未说明",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "形态-控制协同设计",
+        "具身智能",
+        "进化优化"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31329v1",
+          "publishedAt": "2026-09-25T14:36:18Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31325",
+      "contentType": "paper",
+      "title": "更多传感器，仅一个场：重新思考持续时空预测",
+      "originalTitle": "More Sensors Only One Field: Rethinking Continual Spatio-Temporal Forecasting",
+      "summary": "持续时空预测中，基于图的持续学习方法将表示绑定于当前传感器布局，传感器扩展会改变已学空间关系表示。提出STFO，将预测知识参数化为共享的场演化算子，用归一化坐标聚合把不规则传感器历史映射到固定潜网格，并用谱描述子应对过程漂移、坐标解码查询。在PEMS-Stream、CA-Stream、AIR-Stream上取得最优平均预测性能，STFO-Large较DOL平均MAE在PEMS-Stream降8.4%、CA-Stream降4.7%。",
+      "abstract": "Continual spatio-temporal forecasting supports traffic management and environmental monitoring under evolving dynamics and expanding sensor networks. However, conventional graph-based continual learning methods tie forecasting representations to the current sensor layout, so sensor expansion can alter the representation of learned spatial relationships. Our key insight is that sensor expansion changes the evidence available about a process without necessarily changing the dynamics to be learned. We propose STFO (S…",
+      "keyFacts": [
+        "在传感器网络持续扩展、过程动态持续漂移的持续时空预测中，如何避免传感器扩展改变已学空间关系表示，并复用已学知识？",
+        "提出STFO（时空场算子），将预测知识参数化为共享的场演化算子；用基于归一化坐标的聚合将不规则传感器历史提升到固定潜网格，以谱描述子总结跨空间尺度变化并条件化傅里叶传播与注意力，再通过坐标解码在传感器位置查询演化场并结合空间校正与局部历史预测。",
+        "在PEMS-Stream、CA-Stream和AIR-Stream上的实验表明取得最先进的平均预测性能；STFO-Large相比DOL将平均MAE在PEMS-Stream上降低8.4%，在CA-Stream上降低4.7%。"
+      ],
+      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "机器学习",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T14:29:22Z",
+      "updatedAt": "2026-09-25T14:29:22Z",
+      "url": "https://arxiv.org/abs/2609.31325v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31325v1",
+      "authors": [
+        "Lewei Xie",
+        "Haoyu Zhang",
+        "Jiajun Zhou",
+        "Yulong Chen",
+        "Guanxing Chen",
+        "Yu-An Huang",
+        "Hau-San Wong",
+        "Yifan Zhang",
+        "Zhi-An Huang"
+      ],
+      "arxivCategories": [
+        "cs.LG"
+      ],
+      "primaryCategory": "cs.LG",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "在传感器网络持续扩展、过程动态持续漂移的持续时空预测中，如何避免传感器扩展改变已学空间关系表示，并复用已学知识？",
+      "method": "提出STFO（时空场算子），将预测知识参数化为共享的场演化算子；用基于归一化坐标的聚合将不规则传感器历史提升到固定潜网格，以谱描述子总结跨空间尺度变化并条件化傅里叶传播与注意力，再通过坐标解码在传感器位置查询演化场并结合空间校正与局部历史预测。",
+      "findings": "在PEMS-Stream、CA-Stream和AIR-Stream上的实验表明取得最先进的平均预测性能；STFO-Large相比DOL将平均MAE在PEMS-Stream上降低8.4%，在CA-Stream上降低4.7%。",
+      "limitations": "摘要未说明",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "时空预测",
+        "持续学习",
+        "传感器扩展"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31325v1",
+          "publishedAt": "2026-09-25T14:29:22Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31315",
+      "contentType": "paper",
+      "title": "LUCID：在混杂下进行时间序列的推断与发现",
+      "originalTitle": "LUCID: Learning Under Confounding for Inference and Discovery in Time Series",
+      "summary": "现实时间序列中普遍存在未观测共同原因，会诱导虚假关联并被误认为直接边。提出LUCID，一种状态自适应去混杂层，先用Marčenko-Pastur谱路由器从数据估计混杂状态，再施加匹配的去混杂策略；可包裹现有发现引擎，在三种方法上均有一致提升。在合成分布外基准上取得最佳家族加权有向滞后分辨图F1（0.60），比最强基线绝对提升0.19（约46%相对提升）。",
+      "abstract": "Unobserved common causes are pervasive in real-world time series and can induce spurious associations that causal discovery methods mistake for direct edges. We propose LUCID (Learning Under Confounding for Inference and Discovery, a regime-adaptive deconfounding layer that first estimates the confounding regime from data using a Marčenko--Pastur spectral router, then applies a deconfounding strategy matched to that regime. When the spectrum indicates pervasive factor confounding, LUCID attenuates factor-dominated…",
+      "keyFacts": [
+        "当时间序列中存在未观测共同原因导致的混杂时，如何避免因果发现方法把虚假关联误判为直接边，并提升有向滞后分辨图结构的恢复质量？",
+        "提出LUCID（Learning Under Confounding for Inference and Discovery），即一种状态自适应去混杂层：先用Marčenko-Pastur谱路由器从数据估计混杂状态，再施加与该状态匹配的去混杂策略；当谱表明普遍因子混杂时，衰减因子主导的变异并从新息中恢复同期（lag-0）结构，边选择以数据驱动的无边零假设校准；可包裹现有发现引擎。",
+        "在三类现有发现方法上均取得一致改进；在涵盖混杂强度与稀疏性、载荷密度、滞后结构、波动动态、边异质性、持续性、间歇性与尾部行为变化的合成分布外基准上，取得最佳家族加权有向滞后分辨图F1（0.60），比最强基线绝对提升0.19（约46%相对提升）；相对更宽松的滞后折叠评分优势更明显，且在间歇性和重尾混杂下保持稳健。"
+      ],
+      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "机器学习",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T14:21:21Z",
+      "updatedAt": "2026-09-25T14:21:21Z",
+      "url": "https://arxiv.org/abs/2609.31315v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31315v1",
+      "authors": [
+        "Mohammad Fesanghary"
+      ],
+      "arxivCategories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "primaryCategory": "cs.LG",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "当时间序列中存在未观测共同原因导致的混杂时，如何避免因果发现方法把虚假关联误判为直接边，并提升有向滞后分辨图结构的恢复质量？",
+      "method": "提出LUCID（Learning Under Confounding for Inference and Discovery），即一种状态自适应去混杂层：先用Marčenko-Pastur谱路由器从数据估计混杂状态，再施加与该状态匹配的去混杂策略；当谱表明普遍因子混杂时，衰减因子主导的变异并从新息中恢复同期（lag-0）结构，边选择以数据驱动的无边零假设校准；可包裹现有发现引擎。",
+      "findings": "在三类现有发现方法上均取得一致改进；在涵盖混杂强度与稀疏性、载荷密度、滞后结构、波动动态、边异质性、持续性、间歇性与尾部行为变化的合成分布外基准上，取得最佳家族加权有向滞后分辨图F1（0.60），比最强基线绝对提升0.19（约46%相对提升）；相对更宽松的滞后折叠评分优势更明显，且在间歇性和重尾混杂下保持稳健。",
+      "limitations": "摘要未说明",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "因果发现",
+        "时间序列",
+        "混杂"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31315v1",
+          "publishedAt": "2026-09-25T14:21:21Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31306",
+      "contentType": "paper",
+      "title": "面向表格基础模型的注意力机制基准评测",
+      "originalTitle": "Benchmarking Attention for Tabular Foundation Models",
+      "summary": "TabPFN、Mitra、ConTextTab等表格上下文学习器依赖行注意力与列注意力交替处理二维嵌入序列，其模式与语言模型的一维情形显著不同，而高效注意力研究多集中于一维序列。为此建立可复现基准，评测Torch SDPA（efficient与cuDNN）、FlashAttention-2/3/4及推理后端vLLM、SageAttention，在A100、H100、B200上测量真实表格形状的前向与反向吞吐。",
+      "abstract": "Tabular in-context learners such as TabPFN, Mitra, or ConTextTab rely on alternating row and column attention over 2D sequences of latent embeddings. These attention patterns differ markedly from the one-dimensional case in language models: row attention involves longer sequences while column attention operates on much shorter ones, and the strided memory layout of tabular data makes producing contiguous tensors costly. Moreover, the hidden dimensions used in current models are small compared to recent language mo…",
+      "keyFacts": [
+        "在二维表格上下文学习的注意力场景下，不同高效注意力后端（Torch SDPA、FlashAttention-2/3/4、vLLM、SageAttention）在多种真实表格形状与三代GPU上的吞吐表现如何，最优后端如何随列注意力与行注意力、硬件及模型细节变化？",
+        "建立可复现的基准测试环境，针对表格注意力的独特特性，在A100、H100、B200三代GPU上评测Torch SDPA（efficient和cuDNN）、FlashAttention-2/3/4以及推理专用后端vLLM和SageAttention，在真实表格形状下测量前向与反向吞吐。",
+        "最优后端在列注意力与行注意力之间不同，并随硬件和模型细节变化：针对各代GPU定制的FlashAttention实现总体最佳，但在列注意力长序列时偶被cuDNN超越，交叉点取决于头维度；推理专用后端中SageAttention在行注意力及超过16k行的长序列上表现良好。"
+      ],
+      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "机器学习",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T14:14:48Z",
+      "updatedAt": "2026-09-25T14:14:48Z",
+      "url": "https://arxiv.org/abs/2609.31306v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31306v1",
+      "authors": [
+        "Maximilian Schambach",
+        "Clemens Biehl",
+        "Sam Thelin"
+      ],
+      "arxivCategories": [
+        "cs.LG"
+      ],
+      "primaryCategory": "cs.LG",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "在二维表格上下文学习的注意力场景下，不同高效注意力后端（Torch SDPA、FlashAttention-2/3/4、vLLM、SageAttention）在多种真实表格形状与三代GPU上的吞吐表现如何，最优后端如何随列注意力与行注意力、硬件及模型细节变化？",
+      "method": "建立可复现的基准测试环境，针对表格注意力的独特特性，在A100、H100、B200三代GPU上评测Torch SDPA（efficient和cuDNN）、FlashAttention-2/3/4以及推理专用后端vLLM和SageAttention，在真实表格形状下测量前向与反向吞吐。",
+      "findings": "最优后端在列注意力与行注意力之间不同，并随硬件和模型细节变化：针对各代GPU定制的FlashAttention实现总体最佳，但在列注意力长序列时偶被cuDNN超越，交叉点取决于头维度；推理专用后端中SageAttention在行注意力及超过16k行的长序列上表现良好。",
+      "limitations": "摘要未说明",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "表格基础模型",
+        "注意力机制",
+        "基准评测"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31306v1",
+          "publishedAt": "2026-09-25T14:14:48Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31303",
+      "contentType": "paper",
+      "title": "随机Nesterov加速的几何矩收缩",
+      "originalTitle": "Geometric Moment Contraction for Stochastic Nesterov Acceleration",
+      "summary": "研究常参数随机Nesterov递推的几何矩收缩（GMC）。在均值强单调性与随机L^p Lipschitz连续性下，通过显式Perron比较证明同步L^p收缩，仅用有限p阶梯度矩；p=2时给出更简单的显式证书。其二次高动量缩放是所选度量导致的局限，而非尖锐稳定性边界。论文量化该损失，给出一般均值二次S-过程，并在更强逐样本扇区信息下利用端点Lyapunov不等式。",
+      "abstract": "We study geometric moment contraction (GMC) of the constant-parameter stochastic Nesterov recursion \\[ Y_k=Θ_k+β(Θ_k-Θ_{k-1}),\\qquad Θ_{k+1}=Y_k-γG(Y_k,X_{k+1}). \\] Under mean strong monotonicity and stochastic $L^p$ Lipschitz continuity, an explicit Perron comparison proves synchronous $L^p$ contraction when $βγL_p 1$, using only a finite $p$th gradient moment. At $p=2$, a simpler explicit certificate gives \\[ 0<γ<\\frac{2μ(1-β)^2}{L_2^2(1-β+2β^2)}. \\] Its quadratic high-momentum scaling is a limitation of the cho…",
+      "keyFacts": [
+        "常参数随机Nesterov递推在何种条件下具有同步L^p几何矩收缩？所得显式步长证书的保守性来源与改进空间是什么？",
+        "在均值强单调性与随机L^p Lipschitz连续性假设下，使用显式Perron比较证明同步L^p收缩（仅需有限p阶梯度矩）；p=2时给出更简单的显式证书；量化该证书的保守性，提供一般均值二次S-过程，并在更强逐样本扇区信息下利用端点Lyapunov不等式。",
+        "证明了同步L^p收缩；p=2时显式证书为0<γ<2μ(1-β)^2/(L_2^2(1-β+2β^2))，其二次高动量缩放是所选度量导致的局限而非尖锐稳定性边界；经验证的端点证书可比显式度量保守性小若干数量级。"
+      ],
+      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "机器学习",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T14:14:14Z",
+      "updatedAt": "2026-09-25T14:14:14Z",
+      "url": "https://arxiv.org/abs/2609.31303v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31303v1",
+      "authors": [
+        "Wei Biao Wu"
+      ],
+      "arxivCategories": [
+        "stat.ML",
+        "cs.LG"
+      ],
+      "primaryCategory": "stat.ML",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "常参数随机Nesterov递推在何种条件下具有同步L^p几何矩收缩？所得显式步长证书的保守性来源与改进空间是什么？",
+      "method": "在均值强单调性与随机L^p Lipschitz连续性假设下，使用显式Perron比较证明同步L^p收缩（仅需有限p阶梯度矩）；p=2时给出更简单的显式证书；量化该证书的保守性，提供一般均值二次S-过程，并在更强逐样本扇区信息下利用端点Lyapunov不等式。",
+      "findings": "证明了同步L^p收缩；p=2时显式证书为0<γ<2μ(1-β)^2/(L_2^2(1-β+2β^2))，其二次高动量缩放是所选度量导致的局限而非尖锐稳定性边界；经验证的端点证书可比显式度量保守性小若干数量级。",
+      "limitations": "二次高动量缩放是所选度量造成的保守性损失，而非尖锐稳定性边界；摘要未说明其他局限。",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "随机优化",
+        "Nesterov加速",
+        "收缩分析"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31303v1",
+          "publishedAt": "2026-09-25T14:14:14Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31291",
+      "contentType": "paper",
+      "title": "输出头量化的Softmax重参数化",
+      "originalTitle": "Softmax Reparameterization for Output-Head Quantization",
+      "summary": "针对大词表输出头推理开销，提出训练后软最大重参数化：量化前选功能等价输出头，从每行减去词表行均值的标量倍，系数按验证KL分别对RTN、激活加权MSE和全Hessian GPTQ搜索。W4上AW-MSE KL在Phi-4-mini从0.936降至0.256，收益在GPTQ校准和W2下持续且与逐通道缩放、仿射量化互补，冻结系数可迁移。",
+      "abstract": "Large vocabularies make output heads a substantial inference cost in small language models. We propose softmax reparameterization, a post-training method that selects a functionally equivalent output head before quantization. The method subtracts a scalar multiple of the vocabulary-row mean from every output row and selects the coefficient by validation KL separately for RTN, activation-weighted MSE, and full-Hessian GPTQ. This one-dimensional search includes the original head and fixed mean-centering, preserves t…",
+      "keyFacts": [
+        "大词表使小语言模型输出头推理成本高昂，能否在量化前通过功能等价的输出头重参数化减少量化失真？",
+        "提出软最大重参数化训练后方法：从每个输出行减去词表行均值的标量倍，用验证KL分别对RTN、激活加权MSE和全Hessian GPTQ选择系数；一维搜索含原始头和固定均值中心化，保持全精度softmax分布，秩一校正处理非线性logit路径；在七个头、四个头三个W4量化器上评估，并做W2压缩压力测试和匹配残差分析。",
+        "W4收益集中在基线量化严重扭曲预测处：Phi-4-mini上AW-MSE KL从0.936降至0.256；收益在更强GPTQ校准下保持，与精确逐通道缩放和仿射量化互补；四个头三个W4量化器下，冻结WikiText系数迁移到C4和OpenWebMath，在系数不为1的18个比较中优于均值中心化，其余6个持平；W2下收益扩展到几乎整个模型-量化器矩阵；改进保真度可伴随更大logit重建误差并降低残差Fisher加权代价；移位兼容头无额外推理操作，保持W4打包执行，解码器BF16时量化Phi输出头使batch-one生成延迟降低10.8%。"
+      ],
+      "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "人工智能",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T14:01:25Z",
+      "updatedAt": "2026-09-25T14:01:25Z",
+      "url": "https://arxiv.org/abs/2609.31291v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31291v1",
+      "authors": [
+        "Asim Kadav",
+        "Christian Flores",
+        "Chirag Arora",
+        "Varun Kotte",
+        "Hongbo Zheng",
+        "Lan Yan",
+        "Priya Shanmugasundaram",
+        "Tracy Holloway King"
+      ],
+      "arxivCategories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "primaryCategory": "cs.LG",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "大词表使小语言模型输出头推理成本高昂，能否在量化前通过功能等价的输出头重参数化减少量化失真？",
+      "method": "提出软最大重参数化训练后方法：从每个输出行减去词表行均值的标量倍，用验证KL分别对RTN、激活加权MSE和全Hessian GPTQ选择系数；一维搜索含原始头和固定均值中心化，保持全精度softmax分布，秩一校正处理非线性logit路径；在七个头、四个头三个W4量化器上评估，并做W2压缩压力测试和匹配残差分析。",
+      "findings": "W4收益集中在基线量化严重扭曲预测处：Phi-4-mini上AW-MSE KL从0.936降至0.256；收益在更强GPTQ校准下保持，与精确逐通道缩放和仿射量化互补；四个头三个W4量化器下，冻结WikiText系数迁移到C4和OpenWebMath，在系数不为1的18个比较中优于均值中心化，其余6个持平；W2下收益扩展到几乎整个模型-量化器矩阵；改进保真度可伴随更大logit重建误差并降低残差Fisher加权代价；移位兼容头无额外推理操作，保持W4打包执行，解码器BF16时量化Phi输出头使batch-one生成延迟降低10.8%。",
+      "limitations": "摘要未说明",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：人工智能",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "模型量化",
+        "输出头量化",
+        "Softmax重参数化",
+        "语言模型推理"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31291v1",
+          "publishedAt": "2026-09-25T14:01:25Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31250",
+      "contentType": "paper",
+      "title": "动态张量重物化中的确定性状态切换与可行性反转",
+      "originalTitle": "Deterministic Regime Switching and Feasibility Inversion in Dynamic Tensor Rematerialization",
+      "summary": "在DTR参考模拟器simrd上用公开执行轨迹报告细粒度确定性不稳定：LSTM轨迹中内存预算相差0.10%即选快慢两种执行状态，开销差达7.3倍，慢状态由同一存储广泛重复驱逐驱动；ResNet-32轨迹中细预算扫描显示确定性可行性反转，比率0.101可行、0.102-0.106不可行、0.107起再可行。",
+      "abstract": "We report fine-grained, deterministic instability in Dynamic Tensor Rematerialization (DTR), an online eviction policy for memory-constrained DNN training, measured on the reference DTR simulator (simrd) using public execution traces. On an LSTM trace, memory budgets differing by 0.10% of unconstrained peak memory select fast and slow execution regimes whose overheads differ by as much as 7.3x; the slow regime is driven by broadly repeated re-eviction of the same storages (evictions per storage rise from 1.33 to 8…",
+      "keyFacts": [
+        "动态张量重物化（DTR）在内存受限DNN训练中是否存在细粒度确定性不稳定，其机制是否单一？",
+        "在DTR参考模拟器simrd上使用公开执行轨迹进行细粒度确定性测量，包括LSTM轨迹预算扰动、ResNet-32轨迹细预算扫描和可行性反转追踪，并使用DTR作者自身变体做消融。",
+        "LSTM轨迹中内存预算相差无约束峰值内存的0.10%即选择快慢执行状态，开销差达7.3倍；慢状态由同一存储广泛重复驱逐驱动（每存储驱逐从1.33升至8.27，而不同被驱逐存储集合基本不变：5,233对5,236，Jaccard 0.999）。ResNet-32轨迹中细预算扫描显示确定性可行性反转：比率0.101可行，0.102-0.106不可行（OOM），0.107起再次可行；OOM直接原因是在所有可驱逐张量被驱逐后，完全钉住的递归重物化前沿仍超出预算。消融指向联合大小-陈旧度评分项导致LSTM不稳定。作者认为至少存在两种不同的预算敏感病理。"
+      ],
+      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "机器学习",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T13:26:36Z",
+      "updatedAt": "2026-09-25T13:26:36Z",
+      "url": "https://arxiv.org/abs/2609.31250v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31250v1",
+      "authors": [
+        "Mahesh Reddy Pagadala"
+      ],
+      "arxivCategories": [
+        "cs.LG",
+        "cs.DC"
+      ],
+      "primaryCategory": "cs.LG",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "动态张量重物化（DTR）在内存受限DNN训练中是否存在细粒度确定性不稳定，其机制是否单一？",
+      "method": "在DTR参考模拟器simrd上使用公开执行轨迹进行细粒度确定性测量，包括LSTM轨迹预算扰动、ResNet-32轨迹细预算扫描和可行性反转追踪，并使用DTR作者自身变体做消融。",
+      "findings": "LSTM轨迹中内存预算相差无约束峰值内存的0.10%即选择快慢执行状态，开销差达7.3倍；慢状态由同一存储广泛重复驱逐驱动（每存储驱逐从1.33升至8.27，而不同被驱逐存储集合基本不变：5,233对5,236，Jaccard 0.999）。ResNet-32轨迹中细预算扫描显示确定性可行性反转：比率0.101可行，0.102-0.106不可行（OOM），0.107起再次可行；OOM直接原因是在所有可驱逐张量被驱逐后，完全钉住的递归重物化前沿仍超出预算。消融指向联合大小-陈旧度评分项导致LSTM不稳定。作者认为至少存在两种不同的预算敏感病理。",
+      "limitations": "所有结果仅关于参考模拟器，在生产运行时中的复现为未来工作；作者区分了已证明与仍属假设的内容。",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "动态张量重物化",
+        "内存受限训练",
+        "模拟器",
+        "预印本"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31250v1",
+          "publishedAt": "2026-09-25T13:26:36Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31222",
+      "contentType": "paper",
+      "title": "冻结口袋条件分子扩散的预算商残差引导",
+      "originalTitle": "Budgeted Quotient-Residual Guidance for Frozen Pocket-Conditioned Molecular Diffusion",
+      "summary": "提出预算商残差引导（QRG），一种推理时校正，无需重训练分子生成器即可激活距离、接触和锚定子结构等商目标。QRG将商余向量提升为度量水平的环境方向，并通过由冻结采样器自身步长范数设定的信任预算传递。在冻结TargetDiff上，Local-QRG将片段生长、骨架跃迁和连接子设计的有效性分别从0.815、0.664、0.681提升至0.864、0.707、0.712。",
+      "abstract": "Pocket-conditioned molecular diffusion updates ambient atom coordinates, but many lead-optimization objectives are expressed on quotient features such as distances, contacts, and anchored substructures. We introduce budgeted quotient-residual guidance (QRG), an inference-time correction that makes these quotient objectives active without retraining the molecular generator. QRG lifts quotient covectors to metric-horizontal ambient directions and delivers them through a trust budget set by the frozen sampler's own s…",
+      "keyFacts": [
+        "如何在不重训练冻结口袋条件分子扩散生成器的情况下，让距离、接触和锚定子结构等商特征目标在推理时生效？",
+        "提出预算商残差引导（QRG）推理时校正：将商余向量提升为度量水平的环境方向，通过由冻结采样器自身步长范数设定的信任预算传递，并推导水平提升、闭式采样器预算更新、冻结反向步周围的KL/动能解释、等变性条件及预算封顶的乘积预算拆分。在冻结TargetDiff骨干和官方seed-0 CBGBench配体生成/编辑扫描上评估，使用Local-QRG和PredNext-QRG。",
+        "受控商任务确认采样器相对传递激活了原始局部商梯度未激活的信号。冻结TargetDiff上，Local-QRG将片段生长有效性从0.815提升至0.864，骨架跃迁从0.664提升至0.707，连接子设计从0.681提升至0.712；PredNext-QRG改善片段/骨架，在连接子上接近中性。匹配多种子分子切片中新颖性保持1.000，多样性保留，无需采样器重训练或骨干修改。"
+      ],
+      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "机器学习",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T13:02:11Z",
+      "updatedAt": "2026-09-25T13:02:11Z",
+      "url": "https://arxiv.org/abs/2609.31222v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31222v1",
+      "authors": [
+        "Xinyu Wang",
+        "Jinbo Bi",
+        "Minghu Song"
+      ],
+      "arxivCategories": [
+        "cs.LG"
+      ],
+      "primaryCategory": "cs.LG",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "如何在不重训练冻结口袋条件分子扩散生成器的情况下，让距离、接触和锚定子结构等商特征目标在推理时生效？",
+      "method": "提出预算商残差引导（QRG）推理时校正：将商余向量提升为度量水平的环境方向，通过由冻结采样器自身步长范数设定的信任预算传递，并推导水平提升、闭式采样器预算更新、冻结反向步周围的KL/动能解释、等变性条件及预算封顶的乘积预算拆分。在冻结TargetDiff骨干和官方seed-0 CBGBench配体生成/编辑扫描上评估，使用Local-QRG和PredNext-QRG。",
+      "findings": "受控商任务确认采样器相对传递激活了原始局部商梯度未激活的信号。冻结TargetDiff上，Local-QRG将片段生长有效性从0.815提升至0.864，骨架跃迁从0.664提升至0.707，连接子设计从0.681提升至0.712；PredNext-QRG改善片段/骨架，在连接子上接近中性。匹配多种子分子切片中新颖性保持1.000，多样性保留，无需采样器重训练或骨干修改。",
+      "limitations": "摘要未说明",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "分子扩散",
+        "推理时引导",
+        "商特征",
+        "药物设计"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31222v1",
+          "publishedAt": "2026-09-25T13:02:11Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31206",
+      "contentType": "paper",
+      "title": "自监督表示学习：从光谱基础模型到极光发射光谱",
+      "originalTitle": "Self-Supervised Representation Learning: From Spectral Foundation Models to Auroral Emission Spectra",
+      "summary": "极光光谱仪ASIS录得数十万条发射光谱但仅数百条有专家标签。在223,000条无标签光谱上以掩码自编码器预训练一维Vision Transformer。无标签表示可恢复物理学家用于诊断沉降粒子的发射线强度比（R^2 0.91 vs 未训练对照0.77），单线性探针分类性能与13个专家特征相当；微调后以宏观AP 88.5对77.8超越此前监督极光分类器，达0.870 mAP，用10%标签即超出同架构从头训练+0.159。",
+      "abstract": "Auroral spectrographs such as the Auroral Spectrograph In Skibotn (ASIS) record hundreds of thousands of emission spectra, but only a few hundred can be labelled by an expert. To exploit the rest, we pretrain a 1D Vision Transformer with a masked autoencoder on 223,000 unlabelled spectra. Without labels, its representation recovers the emission-line intensity ratios that physicists use to diagnose the precipitating particles (R^2 0.91 vs. 0.77 for an untrained control) and, under one linear probe, classifies as we…",
+      "keyFacts": [
+        "能否利用大量无标签极光发射光谱，通过自监督学习获得可恢复诊断性发射线强度比并媲美专家特征的表示？",
+        "在223,000条无标签ASIS极光光谱上，用掩码自编码器预训练一维Vision Transformer；进行线性探针、微调、归因分析，并测试两个天文光谱基础模型（SpectraFM、SpecFormer）和一个时间序列模型的迁移。",
+        "无标签表示可恢复物理学家用于诊断沉降粒子的发射线强度比（R^2 0.91，未训练对照0.77）；单线性探针下分类性能与13个专家设计特征相当。微调后以宏观AP 88.5对77.8超越此前监督极光分类器，达到0.870 mAP，并以10%标签超出同架构从头训练+0.159；归因显示模型使用两个N2+带。迁移方面，红外的SpectraFM低于未训练对照，而光学的SpecFormer接近但未达到域内预训练。"
+      ],
+      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "机器学习",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T12:45:06Z",
+      "updatedAt": "2026-09-25T12:45:06Z",
+      "url": "https://arxiv.org/abs/2609.31206v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31206v1",
+      "authors": [
+        "Matthieu Le Lain",
+        "Gaël Cessateur",
+        "Sébastien Lefèvre"
+      ],
+      "arxivCategories": [
+        "cs.LG",
+        "physics.space-ph"
+      ],
+      "primaryCategory": "cs.LG",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "能否利用大量无标签极光发射光谱，通过自监督学习获得可恢复诊断性发射线强度比并媲美专家特征的表示？",
+      "method": "在223,000条无标签ASIS极光光谱上，用掩码自编码器预训练一维Vision Transformer；进行线性探针、微调、归因分析，并测试两个天文光谱基础模型（SpectraFM、SpecFormer）和一个时间序列模型的迁移。",
+      "findings": "无标签表示可恢复物理学家用于诊断沉降粒子的发射线强度比（R^2 0.91，未训练对照0.77）；单线性探针下分类性能与13个专家设计特征相当。微调后以宏观AP 88.5对77.8超越此前监督极光分类器，达到0.870 mAP，并以10%标签超出同架构从头训练+0.159；归因显示模型使用两个N2+带。迁移方面，红外的SpectraFM低于未训练对照，而光学的SpecFormer接近但未达到域内预训练。",
+      "limitations": "摘要未说明",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "自监督学习",
+        "极光光谱",
+        "掩码自编码器",
+        "基础模型迁移"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31206v1",
+          "publishedAt": "2026-09-25T12:45:06Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31180",
+      "contentType": "paper",
+      "title": "BAT-CLIP：脑、音频与文本的三模态对齐",
+      "originalTitle": "BAT-CLIP: Trimodal Alignment of Brain, Audio and Text",
+      "summary": "现有CLIP式脑-语音对齐仅将神经活动锚定到音频或文本单一模态，导致时间结构与语言可分性之间的权衡。提出BAT-CLIP，首个面向iEEG的CLIP式三模态对齐框架，在共享冻结音频-文本流形中把神经嵌入同时对齐到预训练音频和文本锚点。在自然播客基准上，BAT-CLIP比双模态CLIP基线表示更鲁棒。",
+      "abstract": "Decoding and interpreting naturalistic speech from the brain increasingly relies on alignment to pretrained speech and language representation spaces. However, current CLIP-style brain-speech alignment ground neural activity to a single anchor modality-audio or text-despite the brain's inherently multimodal speech processing. This induces a trade-off: audio anchoring preserves temporal structure but weakens linguistic separability, while text anchoring captures semantics yet discards acoustic detail. We propose BA…",
+      "keyFacts": [
+        "能否在共享的冻结音频-文本流形中，将iEEG神经嵌入同时对齐到预训练音频和文本锚点，以缓解单模态锚定带来的权衡？",
+        "提出BAT-CLIP，首个面向iEEG的CLIP式三模态对齐框架，在共享冻结音频-文本流形中联合对齐神经嵌入到预训练音频和文本锚点；在自然播客基准上评估，并考察使用自监督基础模型进行CLIP训练的重要性。",
+        "在自然播客基准上，BAT-CLIP产生比双模态CLIP基线更鲁棒的表示；研究强调了使用自监督基础模型进行CLIP训练的重要性。"
+      ],
+      "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "人工智能",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T12:13:01Z",
+      "updatedAt": "2026-09-25T12:13:01Z",
+      "url": "https://arxiv.org/abs/2609.31180v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31180v1",
+      "authors": [
+        "Suhyun Kim",
+        "Jinmo Han",
+        "Danny Dongyeop Han",
+        "Ahhyun Lucy Lee",
+        "Jewoon Lee",
+        "Yonghyeon Gwon",
+        "Zach Paris",
+        "Chun Kee Chung",
+        "Saewoong Bahk",
+        "Nam Soo Kim",
+        "Seong Jae Hwang",
+        "Jiook Cha"
+      ],
+      "arxivCategories": [
+        "cs.SD",
+        "cs.AI",
+        "cs.LG",
+        "eess.AS"
+      ],
+      "primaryCategory": "cs.SD",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "能否在共享的冻结音频-文本流形中，将iEEG神经嵌入同时对齐到预训练音频和文本锚点，以缓解单模态锚定带来的权衡？",
+      "method": "提出BAT-CLIP，首个面向iEEG的CLIP式三模态对齐框架，在共享冻结音频-文本流形中联合对齐神经嵌入到预训练音频和文本锚点；在自然播客基准上评估，并考察使用自监督基础模型进行CLIP训练的重要性。",
+      "findings": "在自然播客基准上，BAT-CLIP产生比双模态CLIP基线更鲁棒的表示；研究强调了使用自监督基础模型进行CLIP训练的重要性。",
+      "limitations": "摘要未说明",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：人工智能",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "脑机接口",
+        "iEEG",
+        "三模态对齐",
+        "CLIP"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31180v1",
+          "publishedAt": "2026-09-25T12:13:01Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31165",
+      "contentType": "paper",
+      "title": "BreathGRU：一种用于呼吸音频语音与呼吸分割的新型半监督双向门控循环单元框架",
+      "originalTitle": "BreathGRU: A Novel Semi-Supervised Bidirectional Gated Recurrent Unit Framework for Speech and Breath Segmentation for Respiratory Audio",
+      "summary": "针对现有方法常将呼吸事件误判为非语音或静音的问题，提出半监督双向门控循环单元框架BreathGRU，结合帧级声学特征、伪标签精化和时长约束分段Viterbi解码进行语音与呼吸分割。在人工标注录音上评估，呼吸事件召回率0.83，起始定位误差0.14秒，平均匹配IoU 0.81。",
+      "abstract": "Speech-breath segmentation is a fundamental preprocessing step in respiratory audio analysis, enabling applications such as respiratory acoustic biomarker extraction, lung function prediction and disease monitoring. Existing approaches, including threshold methods, Fourier Transform-based techniques, and unsupervised and pretrained voice activity detection (VAD) models, primarily focus on speech detection and often classify breathing events as non-speech or silence, limiting their applicability for precise breath…",
+      "keyFacts": [
+        "如何实现呼吸音频中语音与呼吸事件的精确分割，以避免现有语音检测或VAD方法将呼吸事件误判为非语音或静音？",
+        "提出半监督双向门控循环单元（BiGRU）框架BreathGRU，结合帧级声学特征提取、双向循环建模、伪标签精化和时长约束分段Viterbi解码；使用人工标注录音，采用基于事件、时间、重叠、时长和边界的多种分割指标进行评估。",
+        "BreathGRU取得最高呼吸事件召回率0.83、最低起始定位误差0.14秒和最高平均匹配IoU 0.81，整体分割性能与大型预训练VAD模型Silero具有竞争力；定性评估显示其与人工标注高度一致，呼吸检测优于Silero。结果表明显式呼吸事件建模优于通用VAD模型。"
+      ],
+      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "机器学习",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T11:58:02Z",
+      "updatedAt": "2026-09-25T11:58:02Z",
+      "url": "https://arxiv.org/abs/2609.31165v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31165v1",
+      "authors": [
+        "Sania Fatima Sayed",
+        "John W. Holloway",
+        "Reyer Zwiggelaar",
+        "Faisal I. Rezwan"
+      ],
+      "arxivCategories": [
+        "cs.SD",
+        "cs.LG",
+        "eess.AS"
+      ],
+      "primaryCategory": "cs.SD",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "如何实现呼吸音频中语音与呼吸事件的精确分割，以避免现有语音检测或VAD方法将呼吸事件误判为非语音或静音？",
+      "method": "提出半监督双向门控循环单元（BiGRU）框架BreathGRU，结合帧级声学特征提取、双向循环建模、伪标签精化和时长约束分段Viterbi解码；使用人工标注录音，采用基于事件、时间、重叠、时长和边界的多种分割指标进行评估。",
+      "findings": "BreathGRU取得最高呼吸事件召回率0.83、最低起始定位误差0.14秒和最高平均匹配IoU 0.81，整体分割性能与大型预训练VAD模型Silero具有竞争力；定性评估显示其与人工标注高度一致，呼吸检测优于Silero。结果表明显式呼吸事件建模优于通用VAD模型。",
+      "limitations": "摘要未说明",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "呼吸音频分割",
+        "半监督学习",
+        "双向门控循环单元",
+        "语音活动检测"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31165v1",
+          "publishedAt": "2026-09-25T11:58:02Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31164",
+      "contentType": "paper",
+      "title": "SPADE：逃离流行度-相似度前沿以度量意外推荐",
+      "originalTitle": "SPADE: Escaping the Popularity-Similarity Frontier to Measure Serendipitous Recommendations",
+      "summary": "针对现有离线超越准确度指标常孤立考虑历史相似度或全局流行度的问题，提出SPADE指标，将物品映射到二维空间计算用户特定的最大流行度与历史相似度帕累托前沿，并对正确推荐的测试集物品平均最小欧氏距离。在五个数据集和五种基线算法上评估，能防止算法用不相关或非个性化推荐利用指标。",
+      "abstract": "Recommender systems engineer serendipity to foster active exploration and break predictable consumption cycles. The problem with existing offline beyond-accuracy metrics is that they often either isolate historical similarity or global popularity. We aim to design an evaluation metric that examines similarity, popularity, and actual user relevance. To achieve this, we introduce SPADE (Serendipitous Pareto Distance Evaluation). SPADE maps all items into a two-dimensional space to directly calculate a user-specific…",
+      "keyFacts": [
+        "如何设计一种同时考察相似度、流行度和实际用户相关性的推荐评估指标，以度量意外发现（serendipity）？",
+        "引入SPADE（Serendipitous Pareto Distance Evaluation），将物品映射到二维空间，直接计算用户特定的最大流行度与历史相似度帕累托前沿，并对正确推荐的测试集物品平均其到该边界的最小欧氏距离；在五个数据集和五种基线算法上评估。",
+        "跨五个数据集和五种基线算法的评估证实SPADE有效；结果表明该指标能成功防止算法用不相关或非个性化推荐利用超越准确度指标，可靠地隔离出意外发现。"
+      ],
+      "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "人工智能",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T11:57:53Z",
+      "updatedAt": "2026-09-25T11:57:53Z",
+      "url": "https://arxiv.org/abs/2609.31164v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31164v1",
+      "authors": [
+        "Tobias Vente",
+        "Maarten Peirsman",
+        "Noah Daniëls",
+        "Hannu Toivonen",
+        "Bart Goethals"
+      ],
+      "arxivCategories": [
+        "cs.IR",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "primaryCategory": "cs.IR",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "如何设计一种同时考察相似度、流行度和实际用户相关性的推荐评估指标，以度量意外发现（serendipity）？",
+      "method": "引入SPADE（Serendipitous Pareto Distance Evaluation），将物品映射到二维空间，直接计算用户特定的最大流行度与历史相似度帕累托前沿，并对正确推荐的测试集物品平均其到该边界的最小欧氏距离；在五个数据集和五种基线算法上评估。",
+      "findings": "跨五个数据集和五种基线算法的评估证实SPADE有效；结果表明该指标能成功防止算法用不相关或非个性化推荐利用超越准确度指标，可靠地隔离出意外发现。",
+      "limitations": "摘要未说明",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：人工智能",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "推荐系统",
+        "意外发现",
+        "离线评估指标",
+        "帕累托前沿"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31164v1",
+          "publishedAt": "2026-09-25T11:57:53Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31162",
+      "contentType": "paper",
+      "title": "WorldTS：面向多模态协变量感知时间序列预测的世界建模",
+      "originalTitle": "WorldTS: World Modeling for Multimodal Covariate-aware Time Series Forecasting",
+      "summary": "针对观测序列仅提供底层系统动态的部分视图、外部多模态信息如何直接塑造潜在状态形成与演化尚未充分探索的问题，提出WorldTS世界建模预测框架，将多模态协变量直接整合进预测。采用两阶段训练：先学习以多模态协变量为条件的预测相关潜在状态动态，冻结后再训练观测解码器。在21个真实数据集上实验。",
+      "abstract": "Time series forecasting is typically framed as learning a direct mapping from historical to future observations in the observation space. However, sequences of observations generally provide only a partial view of the dynamics of the underlying system, with future observations being shaped by latent dynamics. Recent latent-space forecasting methods thus achieve improved performance by predicting future observations from latent-space representations of historical observations rather than directly forecasting future…",
+      "keyFacts": [
+        "如何将外部多模态协变量直接整合进时间序列预测，以塑造潜在状态的形成与演化，从而提升预测性能？",
+        "提出WorldTS世界建模预测框架，采用两阶段训练策略：第一阶段学习以多模态协变量为条件的预测相关潜在状态动态，得到编码的未来状态；第二阶段冻结已学状态动态，训练观测解码器将预测未来状态映射回未来观测；在21个真实世界数据集上进行实验。",
+        "在21个真实世界数据集上的大量实验为WorldTS及其有效性提供了洞见。"
+      ],
+      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "机器学习",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T11:54:18Z",
+      "updatedAt": "2026-09-25T11:54:18Z",
+      "url": "https://arxiv.org/abs/2609.31162v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31162v1",
+      "authors": [
+        "Yuhan Zhu",
+        "Xiangfei Qiu",
+        "Hanyin Cheng",
+        "Wangmeng Shen",
+        "Chenjuan Guo",
+        "Bin Yang",
+        "Jilin Hu",
+        "Christian S. Jensen"
+      ],
+      "arxivCategories": [
+        "cs.LG"
+      ],
+      "primaryCategory": "cs.LG",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "如何将外部多模态协变量直接整合进时间序列预测，以塑造潜在状态的形成与演化，从而提升预测性能？",
+      "method": "提出WorldTS世界建模预测框架，采用两阶段训练策略：第一阶段学习以多模态协变量为条件的预测相关潜在状态动态，得到编码的未来状态；第二阶段冻结已学状态动态，训练观测解码器将预测未来状态映射回未来观测；在21个真实世界数据集上进行实验。",
+      "findings": "在21个真实世界数据集上的大量实验为WorldTS及其有效性提供了洞见。",
+      "limitations": "摘要未说明",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "时间序列预测",
+        "世界模型",
+        "多模态协变量",
+        "潜在状态动态"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31162v1",
+          "publishedAt": "2026-09-25T11:54:18Z",
+          "evidenceGroup": "repository:arxiv"
+        }
+      ],
+      "relatedNews": []
+    },
+    {
+      "id": "arxiv:2609.31161",
+      "contentType": "paper",
+      "title": "我行动故我在：JEPA的动作条件何时足以学习因果机制？",
+      "originalTitle": "I Act Therefore I Am: When Is JEPA's Action-Conditioning Enough to Learn Causal Mechanisms?",
+      "summary": "研究JEPA能否从观测中恢复底层因果状态，而非仅实现准确预测。引入潜在变量模型，其中高维观测由动作条件转移机制驱动的潜在因果状态生成，提出结合条件似然最大化与熵最大化的信息论目标，建立可识别性条件，关键条件是转移机制中充分动作诱导变化；据此提出动作调制JEPA（A-JEPA）。",
+      "abstract": "Recent empirical and theoretical advances suggest that joint-embedding predictive architectures (JEPAs) may learn meaningful representations for action-conditioned prediction of future outcomes, thus becoming one of the foundational structures for world models. However, accurate prediction does not, in general, necessarily imply recovery of underlying causal states that give rise to the observed dynamics. This work investigates when and how JEPAs can recover the underlying causal states from observations. We first…",
+      "keyFacts": [
+        "联合嵌入预测架构（JEPA）何时以及如何能从观测中恢复产生观测动态的底层因果状态？",
+        "引入潜在变量模型，其中高维观测由潜在因果状态生成，其动态由动作条件转移机制支配；基于该形式化提出结合条件似然最大化与熵最大化的通用信息论目标，建立可识别性条件；以动作调制高斯加性噪声模型实例化该目标，得到动作调制JEPA（A-JEPA），并在合成环境和视觉基准上实验。",
+        "建立了可识别性条件，使该通用目标学到的表示能恢复底层潜在因果状态（至多成分级可逆变换和置换）；关键条件之一是转移机制中充分的动作诱导变化。合成环境实验在可识别性条件下验证了理论发现，并对适度违反具有鲁棒性；视觉基准表明状态恢复改善并可迁移到未见转移机制。"
+      ],
+      "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
+      "category": "研究论文",
+      "researchArea": "机器学习",
+      "source": "arXiv",
+      "country": "国际",
+      "publishedAt": "2026-09-25T11:54:16Z",
+      "updatedAt": "2026-09-25T11:54:16Z",
+      "url": "https://arxiv.org/abs/2609.31161v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.31161v1",
+      "authors": [
+        "Yuhang Liu",
+        "Zhuo Huang",
+        "Javen Qinfeng Shi"
+      ],
+      "arxivCategories": [
+        "cs.LG"
+      ],
+      "primaryCategory": "cs.LG",
+      "collectionKeywords": [],
+      "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
+      "question": "联合嵌入预测架构（JEPA）何时以及如何能从观测中恢复产生观测动态的底层因果状态？",
+      "method": "引入潜在变量模型，其中高维观测由潜在因果状态生成，其动态由动作条件转移机制支配；基于该形式化提出结合条件似然最大化与熵最大化的通用信息论目标，建立可识别性条件；以动作调制高斯加性噪声模型实例化该目标，得到动作调制JEPA（A-JEPA），并在合成环境和视觉基准上实验。",
+      "findings": "建立了可识别性条件，使该通用目标学到的表示能恢复底层潜在因果状态（至多成分级可逆变换和置换）；关键条件之一是转移机制中充分的动作诱导变化。合成环境实验在可识别性条件下验证了理论发现，并对适度违反具有鲁棒性；视觉基准表明状态恢复改善并可迁移到未见转移机制。",
+      "limitations": "摘要未说明",
+      "score": 81,
+      "scoreBasis": "研究相关度",
+      "scoreComponents": {},
+      "scoreReasons": [
+        "主题：机器学习",
+        "按主题相关性、摘要完整度与发布时间排序"
+      ],
+      "confidence": "预印本",
+      "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
+      "tags": [
+        "联合嵌入预测架构",
+        "因果状态恢复",
+        "可识别性",
+        "世界模型"
+      ],
+      "translationProvider": "deepseek",
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "arXiv",
+          "domain": "arxiv.org",
+          "url": "https://arxiv.org/abs/2609.31161v1",
+          "publishedAt": "2026-09-25T11:54:16Z",
           "evidenceGroup": "repository:arxiv"
         }
       ],
       "relatedNews": []
     }
   ],
-  "newsLinkedPaperCount": 0,
-  "staleReason": "论文抓取未返回合格条目，已保留上一版论文雷达",
-  "staleAt": "2026-09-27T12:25:39Z",
-  "retainedGeneratedAt": "2026-09-26T13:41:08Z"
+  "newsLinkedPaperCount": 0
 }
