@@ -1,6 +1,6 @@
 {
   "schemaVersion": 4,
-  "generatedAt": "2026-09-30T02:03:14Z",
+  "generatedAt": "2026-09-30T05:56:04Z",
   "timezone": "Asia/Shanghai",
   "rangeDays": 7,
   "method": "deepseek",
@@ -17,12 +17,12 @@
     "missingItems": [],
     "initialBatchSize": 5,
     "initialBatchCount": 12,
-    "requestCount": 14,
-    "retryRequestCount": 2,
+    "requestCount": 12,
+    "retryRequestCount": 0,
     "providerFailureCount": 0,
-    "structuralFailureCount": 1,
-    "completionReason": "complete_after_retry",
-    "completionMessage": "缺失条目经拆分重试后已全部完成",
+    "structuralFailureCount": 0,
+    "completionReason": "complete_first_pass",
+    "completionMessage": "全部条目首轮完成",
     "lastProviderError": ""
   },
   "itemCount": 60,
@@ -54,14 +54,14 @@
     {
       "id": "arxiv:2609.37810",
       "contentType": "paper",
-      "title": "探索、执行、演化：具身智能体的技能获取与复用闭环",
+      "title": "探索、执行、进化：具身智能体的技能获取与复用闭环",
       "originalTitle": "Explore, Execute, Evolve: A Skill Acquisition and Reuse Loop for Embodied Agents",
-      "summary": "提出RoboSkill框架，通过探索、执行、演化闭环连接技能获取与复用：智能体探索收集任务信息，执行中适应反馈，并依据执行记录演化技能库，循环复用技能指导后续探索与执行。结合触觉反馈降低交互不确定性，用可复用代码增强文本引导以减少推理开销。在LIBERO-10上提升首回合成功率12.5至25.0个百分点，降低平均运行时间7.6%至72.4%。",
+      "summary": "针对通用多模态智能体零样本求解机器人任务时执行成本高的问题，提出RoboSkill框架，通过探索—执行—进化闭环连接技能获取与复用：探索收集任务信息，执行中适应反馈，依据执行记录进化技能库，再用技能引导下一轮探索与执行以闭合环路。以触觉反馈补充视觉、以可复用代码增强文本指导。LIBERO-10上首回合成功率提升12.5至25.0个百分点，平均运行时间降低7.6%至72.4%；真机上成功率提升8.3个百分点，成功回合平均时间至少降低14.4%。",
       "abstract": "Vision-language-action and world-action models have demonstrated impressive capabilities in robotics, yet generalization to unseen tasks remains challenging. More recently, general-purpose multimodal agents have shown great potential for zero-shot robotic task solving. However, they often incur high execution costs by reasoning and exploring the physical world from scratch. To reduce these costs, we introduce RoboSkill, a framework that connects skill acquisition and reuse through an Explore, Execute, Evolve loop…",
       "keyFacts": [
-        "如何降低通用多模态智能体在零样本机器人任务求解中从零推理和探索物理世界所产生的高执行成本？",
-        "提出RoboSkill框架，构建探索、执行、演化闭环；结合视觉与触觉反馈，用可复用代码增强文本引导；在LIBERO-10及真实机器人上评测四个智能体。",
-        "在LIBERO-10上首回合成功率提升12.5至25.0个百分点，平均运行时间降低7.6%至72.4%；在真实机器人上成功率提升8.3个百分点，成功试验的平均运行时间至少降低14.4%。"
+        "如何降低通用多模态智能体在机器人任务求解中从零推理与物理探索带来的高执行成本，并提升对未见任务的泛化能力？",
+        "提出RoboSkill框架，构建探索、执行、进化闭环，连接技能获取与复用；用触觉反馈补充视觉以减少物理交互不确定性，用可复用代码增强文本指导以减少技能复用时的推理开销；在LIBERO-10与真实机器人上测试。",
+        "在LIBERO-10上，RoboSkill使四种智能体的首回合成功率提升12.5至25.0个百分点，平均运行时间降低7.6%至72.4%；在真实机器人上成功率提升8.3个百分点，成功试验平均运行时间至少降低14.4%。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -89,10 +89,10 @@
         "多模态智能体"
       ],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何降低通用多模态智能体在零样本机器人任务求解中从零推理和探索物理世界所产生的高执行成本？",
-      "method": "提出RoboSkill框架，构建探索、执行、演化闭环；结合视觉与触觉反馈，用可复用代码增强文本引导；在LIBERO-10及真实机器人上评测四个智能体。",
-      "findings": "在LIBERO-10上首回合成功率提升12.5至25.0个百分点，平均运行时间降低7.6%至72.4%；在真实机器人上成功率提升8.3个百分点，成功试验的平均运行时间至少降低14.4%。",
-      "limitations": "摘要未说明。",
+      "question": "如何降低通用多模态智能体在机器人任务求解中从零推理与物理探索带来的高执行成本，并提升对未见任务的泛化能力？",
+      "method": "提出RoboSkill框架，构建探索、执行、进化闭环，连接技能获取与复用；用触觉反馈补充视觉以减少物理交互不确定性，用可复用代码增强文本指导以减少技能复用时的推理开销；在LIBERO-10与真实机器人上测试。",
+      "findings": "在LIBERO-10上，RoboSkill使四种智能体的首回合成功率提升12.5至25.0个百分点，平均运行时间降低7.6%至72.4%；在真实机器人上成功率提升8.3个百分点，成功试验平均运行时间至少降低14.4%。",
+      "limitations": "摘要未说明",
       "score": 96,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -106,7 +106,8 @@
       "tags": [
         "具身智能体",
         "技能复用",
-        "机器人操作"
+        "机器人操作",
+        "多模态"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -127,12 +128,12 @@
       "contentType": "paper",
       "title": "MatToolBench：面向真实材料科学工作流的多模态智能体基准",
       "originalTitle": "MatToolBench: Benchmarking Multimodal Agents in Real-World Materials Science Workflows",
-      "summary": "提出MatToolBench，首个在真实环境评估多模态GUI智能体操作专业材料科学软件的基准，含10个工具、三种模态（GUI操作、OriginPro脚本、代码数据库查询）共204项任务，均在Windows 11虚拟机中执行，由专家拆解为细粒度子标准以支持可解释部分评分。实验发现通用基准上的强表现无法迁移到专业科学工作流，最佳模型在GUI任务成功率仅25%、代码任务45%。",
+      "summary": "针对多模态GUI智能体在专业科学软件中能力缺乏评估的问题，提出首个面向专业材料科学软件的真实环境基准MatToolBench，含10个工具、三种模态（GUI操作、OriginPro脚本、数据库代码查询）共204个任务，均在Windows 11虚拟机内执行。任务由领域专家分解为细粒度子标准以支持可解释的部分得分；GUI评估管线平均F1达0.98。实验显示通用基准的强性能无法迁移到专业科学工作流，最佳模型GUI任务成功率仅25%、代码任务45%。",
       "abstract": "Multimodal GUI agents have achieved impressive results on general software benchmarks, yet their ability to operate professional scientific software remains largely unexplored. In materials science, sparse domain-specific web data, specialized interfaces, and tacit workflow conventions create blind spots that general-purpose pretraining cannot readily bridge. We present MatToolBench, the first real-environment benchmark for evaluating multimodal GUI agents on professional materials science software, comprising 204…",
       "keyFacts": [
-        "多模态GUI智能体能否操作专业材料科学软件与工作流，其能力边界与失败原因是什么？",
-        "构建真实环境基准MatToolBench，含204项任务、10个工具，覆盖GUI操作、OriginPro脚本和代码数据库查询三种模态，在Windows 11虚拟机中执行；由领域专家分解子标准进行多级评测，GUI评测管道平均F1为0.98，并开展人类与LLM一致性研究验证多模态评判。",
-        "通用基准上的强表现无法迁移到专业科学工作流；失败源于领域特定操作知识、科学软件预训练覆盖稀疏、跨工具产物交接薄弱以及仅视觉可见的关键状态；最佳模型GUI任务成功率仅25%，代码任务仅45%。"
+        "多模态GUI智能体能否操作专业材料科学软件，其能力边界与失败原因是什么？",
+        "构建MatToolBench真实环境基准，包含10个工具的204个任务，覆盖GUI操作、OriginPro脚本与代码数据库查询三种模态，全部在Windows 11虚拟机中执行；由领域专家将任务分解为细粒度子标准做部分得分评估；对OriginPro绘图任务开展人类与大模型一致性研究以验证多模态评判用于二次美学评估；多层评估管线的GUI部分平均F1为0.98。",
+        "通用基准上的强性能不能迁移到专业科学工作流；差距并非仅由视觉定位问题导致，而来自领域专属操作知识、预训练对科学软件覆盖稀疏、跨工具产物交接薄弱以及仅视觉可见的关键状态。最佳模型在GUI任务上成功率仅25%，代码任务45%。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -162,10 +163,10 @@
         "多模态智能体"
       ],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "多模态GUI智能体能否操作专业材料科学软件与工作流，其能力边界与失败原因是什么？",
-      "method": "构建真实环境基准MatToolBench，含204项任务、10个工具，覆盖GUI操作、OriginPro脚本和代码数据库查询三种模态，在Windows 11虚拟机中执行；由领域专家分解子标准进行多级评测，GUI评测管道平均F1为0.98，并开展人类与LLM一致性研究验证多模态评判。",
-      "findings": "通用基准上的强表现无法迁移到专业科学工作流；失败源于领域特定操作知识、科学软件预训练覆盖稀疏、跨工具产物交接薄弱以及仅视觉可见的关键状态；最佳模型GUI任务成功率仅25%，代码任务仅45%。",
-      "limitations": "摘要未说明。",
+      "question": "多模态GUI智能体能否操作专业材料科学软件，其能力边界与失败原因是什么？",
+      "method": "构建MatToolBench真实环境基准，包含10个工具的204个任务，覆盖GUI操作、OriginPro脚本与代码数据库查询三种模态，全部在Windows 11虚拟机中执行；由领域专家将任务分解为细粒度子标准做部分得分评估；对OriginPro绘图任务开展人类与大模型一致性研究以验证多模态评判用于二次美学评估；多层评估管线的GUI部分平均F1为0.98。",
+      "findings": "通用基准上的强性能不能迁移到专业科学工作流；差距并非仅由视觉定位问题导致，而来自领域专属操作知识、预训练对科学软件覆盖稀疏、跨工具产物交接薄弱以及仅视觉可见的关键状态。最佳模型在GUI任务上成功率仅25%，代码任务45%。",
+      "limitations": "摘要未说明",
       "score": 95,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
@@ -178,8 +179,10 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "多模态智能体",
-        "科学工作流",
-        "基准评测"
+        "基准测试",
+        "材料科学",
+        "GUI操作",
+        "科学工作流"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -198,14 +201,14 @@
     {
       "id": "arxiv:2609.35651",
       "contentType": "paper",
-      "title": "去噪多机器人轨迹",
+      "title": "多机器人轨迹去噪",
       "originalTitle": "Denoising Multi-Robot Trajectories",
-      "summary": "在动力学感知的扩散去噪框架D4orm基础上，提出面向不同运行需求的规划架构家族。D4orm以采样优化通过大规模并行采样生成轨迹，迭代优化候选控制轨迹的形变，生成满足动力学且无冲突的轨迹。作者提出解耦规划器提升可扩展性、带反馈控制的在线滚动时域规划器以及面向资源受限场景的分布式规划器。实验表明其比MPPI和学习型扩散方法更快更可靠，并展示十架真实四旋翼、100个仿真机器人和六台地面机器人的机载分布式持续运行。",
+      "summary": "针对多机器人轨迹规划的非凸、多模态与高维难题，基于动力感知扩散去噪框架D4orm构建多种规划架构：解耦规划器提升可扩展性，带反馈控制的在线滚动时域规划器，以及面向资源受限场景的分布式规划器。D4orm以采样优化和GPU并行采样生成满足运动动力学且无冲突的轨迹。二维与三维环境下差速驱动和全向机器人评估表明，基于D4orm的方法比MPPI等采样优化方法和基于扩散模型的学得方法更快更可靠地找到高质量解；还展示十架真实四旋翼零样本部署、100个仿真机器人大规模解冲突与六台地面机器人全机载分布式终身运行。",
       "abstract": "Multi-robot trajectory planning is a fundamental problem in multi-robot coordination but remains computationally challenging due to its nonconvex, multimodal, and high-dimensional nature. This work builds upon D4orm, a dynamics-aware diffusion-denoising framework, and develops a family of planning architectures for diverse operational requirements. Unlike conventional numerical optimization methods, D4orm employs sampling-based optimization to generate solution trajectories through massively parallel sampling, lev…",
       "keyFacts": [
-        "如何高效求解非凸、多模态、高维多机器人轨迹规划问题，并满足可扩展性、在线反馈和资源受限等多样运行需求？",
-        "基于动力学感知扩散去噪框架D4orm构建规划器家族，包括解耦规划器、在线滚动时域规划器和分布式规划器；在2D和3D环境下用差速驱动与全向机器人评估，并与MPPI及学习型扩散方法比较。",
-        "基于D4orm的方法比MPPI等采样优化方法和学习型扩散方法更快、更可靠地找到高质量解；实现十架真实四旋翼零样本部署、100个仿真机器人大规模解冲突以及六台地面机器人完全机载分布式持续运行。"
+        "如何高效生成满足运动动力学约束且无冲突的多机器人轨迹，并适配可扩展、在线与分布式等不同运行需求？",
+        "以动力感知扩散去噪框架D4orm为基本模块，开发解耦规划器、带反馈控制的在线滚动时域规划器和资源受限下的分布式规划器；通过大规模并行采样的采样式优化生成候选控制轨迹的变形；在二维和三维环境中用差速驱动与全向机器人评估，并与MPPI及基于学得扩散模型的方法比较；开展十架真实四旋翼、100个仿真机器人以及六台地面机器人的全机载分布式终身运行实验。",
+        "基于D4orm的方法比MPPI等采样式优化方法及基于学得扩散模型的方法更快、更可靠地找到高质量解；实现十架带障碍真实四旋翼的零样本部署、100个仿真机器人的大规模解冲突和六台地面机器人全机载分布式终身运行。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -231,11 +234,11 @@
         "蜂群机器人"
       ],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何高效求解非凸、多模态、高维多机器人轨迹规划问题，并满足可扩展性、在线反馈和资源受限等多样运行需求？",
-      "method": "基于动力学感知扩散去噪框架D4orm构建规划器家族，包括解耦规划器、在线滚动时域规划器和分布式规划器；在2D和3D环境下用差速驱动与全向机器人评估，并与MPPI及学习型扩散方法比较。",
-      "findings": "基于D4orm的方法比MPPI等采样优化方法和学习型扩散方法更快、更可靠地找到高质量解；实现十架真实四旋翼零样本部署、100个仿真机器人大规模解冲突以及六台地面机器人完全机载分布式持续运行。",
-      "limitations": "摘要未说明。",
-      "score": 93,
+      "question": "如何高效生成满足运动动力学约束且无冲突的多机器人轨迹，并适配可扩展、在线与分布式等不同运行需求？",
+      "method": "以动力感知扩散去噪框架D4orm为基本模块，开发解耦规划器、带反馈控制的在线滚动时域规划器和资源受限下的分布式规划器；通过大规模并行采样的采样式优化生成候选控制轨迹的变形；在二维和三维环境中用差速驱动与全向机器人评估，并与MPPI及基于学得扩散模型的方法比较；开展十架真实四旋翼、100个仿真机器人以及六台地面机器人的全机载分布式终身运行实验。",
+      "findings": "基于D4orm的方法比MPPI等采样式优化方法及基于学得扩散模型的方法更快、更可靠地找到高质量解；实现十架带障碍真实四旋翼的零样本部署、100个仿真机器人的大规模解冲突和六台地面机器人全机载分布式终身运行。",
+      "limitations": "摘要未说明",
+      "score": 92,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -246,9 +249,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "多机器人协调",
+        "多机器人",
+        "轨迹规划",
         "扩散去噪",
-        "轨迹规划"
+        "分布式规划"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -267,14 +271,14 @@
     {
       "id": "arxiv:2609.36530",
       "contentType": "paper",
-      "title": "面向可控扩散多机器人运动规划的轨迹级模式引导",
+      "title": "面向可控扩散式多机器人运动规划的轨迹级模式引导",
       "originalTitle": "Trajectory-Level Mode Guidance for Controllable Diffusion-Based Multi-Robot Motion Planning",
-      "summary": "针对运动规划存在多可行解、扩散模型可学习多模态轨迹分布但难以在不受限下融入粗略部分轨迹先验的问题，提出在干净轨迹空间引导生成，并以随时间步变化的引导强度逐步注入轨迹先验。每个反向扩散步中，重建的干净轨迹统一整合规划代价与部分先验：规划代价经梯度细化，先验在相应噪声水平以递减强度注入，早期引导靠近先验、后期逐渐释放以保持多模态。框架通过引入机器人间碰撞代价扩展到多机器人规划。",
+      "summary": "针对扩散模型难以在保持多模态的同时引入粗略部分轨迹先验的问题，提出在干净轨迹空间引导生成，并随扩散时间步以变化的引导强度逐步注入轨迹先验：每个反向扩散步中，重建的干净轨迹为整合规划代价与部分先验提供统一空间，规划代价通过梯度精炼融入，部分先验按对应噪声水平以递减强度注入，从而早期趋向先验、后期释放约束以保留多模态。纳入机器人间碰撞代价后可自然扩展至多机器人规划。单机器人和多机器人实验展示可控轨迹合成、多样可行解与安全多智能体协调。",
       "abstract": "Motion planning often admits multiple feasible solutions, making multimodal generation valuable, particularly for flexible multi-robot coordination. Diffusion models naturally learn such trajectory distributions, yet incorporating coarse and partial trajectory priors without restricting generation remains challenging. Such priors indicate a desirable region of the solution space rather than a single solution, motivating conditioned generation that preserves multimodality. In this paper, we guide trajectory generat…",
       "keyFacts": [
-        "如何在扩散式运动规划中融入粗略且部分的轨迹先验以引导生成方向，同时不牺牲模型固有的多模态解多样性？",
-        "在干净轨迹空间进行引导，采用与时间步相关的递减引导强度逐步注入轨迹先验；每步反向扩散中，重建的干净轨迹统一整合规划代价（梯度细化）与部分先验；并通过加入机器人间碰撞代价扩展到多机器人规划。",
-        "单机器人和多机器人规划实验展示出可控的轨迹合成、多样的可行解以及安全的多智能体协调。"
+        "如何在基于扩散的多机器人运动规划中引入粗略且部分的轨迹先验进行可控生成，同时不破坏模型固有的多解多样性？",
+        "在干净轨迹空间引导生成，并采用随时间步变化的引导强度逐步注入部分轨迹先验；每个反向扩散步用重建的干净轨迹统一整合规划代价与部分先验，规划代价由梯度精炼引入，部分先验在相应噪声水平以递减强度注入；通过加入机器人间碰撞代价扩展到多机器人规划；在单机器人和多机器人规划任务上实验。",
+        "实验表明可实现可控的轨迹合成、多样的可行解，以及安全的多智能体协调。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -298,11 +302,11 @@
         "蜂群机器人"
       ],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何在扩散式运动规划中融入粗略且部分的轨迹先验以引导生成方向，同时不牺牲模型固有的多模态解多样性？",
-      "method": "在干净轨迹空间进行引导，采用与时间步相关的递减引导强度逐步注入轨迹先验；每步反向扩散中，重建的干净轨迹统一整合规划代价（梯度细化）与部分先验；并通过加入机器人间碰撞代价扩展到多机器人规划。",
-      "findings": "单机器人和多机器人规划实验展示出可控的轨迹合成、多样的可行解以及安全的多智能体协调。",
-      "limitations": "摘要未说明。",
-      "score": 92,
+      "question": "如何在基于扩散的多机器人运动规划中引入粗略且部分的轨迹先验进行可控生成，同时不破坏模型固有的多解多样性？",
+      "method": "在干净轨迹空间引导生成，并采用随时间步变化的引导强度逐步注入部分轨迹先验；每个反向扩散步用重建的干净轨迹统一整合规划代价与部分先验，规划代价由梯度精炼引入，部分先验在相应噪声水平以递减强度注入；通过加入机器人间碰撞代价扩展到多机器人规划；在单机器人和多机器人规划任务上实验。",
+      "findings": "实验表明可实现可控的轨迹合成、多样的可行解，以及安全的多智能体协调。",
+      "limitations": "摘要未说明",
+      "score": 91,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -313,9 +317,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "扩散模型",
+        "多机器人",
         "运动规划",
-        "多机器人协调"
+        "扩散模型",
+        "多模态生成"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -336,12 +341,12 @@
       "contentType": "paper",
       "title": "面向自主机器人策略改进的技能空间射击",
       "originalTitle": "Skill-Space Shooting for Autonomous Robot Policy Improvement",
-      "summary": "针对部署于物理世界的机器人需在遇到新情况和失败后超越初始训练进行改进的问题，提出技能空间射击方法。其洞见是许多纠错属于可复用的短行为即技能，这些技能跨任务复现且可由基础模型据场景推理。方法用基础模型指导，通过可复用技能探索纠错，并将成功试验转化为策略改进。真实世界实验显示自主运行的策略反复改进，技能也可共享以减少新任务改进所需的教学。",
+      "summary": "针对机器人在部署中遇到新情况与失败需要超越初始训练继续改进、且不宜依赖人类逐一演示纠正的问题，提出技能空间射击：利用基础模型引导，通过可复用技能探索纠正行为，并将成功试验转化为策略改进。其洞见在于许多纠正是跨任务反复出现、且基础模型可从场景推理的熟悉短行为即技能。真实世界实验显示，自主行动的策略可获得反复改进，技能还可共享以减少在新任务上改进所需的教学。该方法使可复用技能成为纠正性监督来源，支持任务内与跨任务的可扩展、可泛化策略改进。",
       "abstract": "Robots deployed in the physical world must be able to improve beyond their initial training as they encounter new situations and failures. For this improvement to scale across tasks, it must make effective use of experience without requiring human demonstration of each correction. Recent agentic systems offer a way to reduce this reliance on human effort by using foundation models to autonomously compose learned behaviors to complete tasks. Yet completing tasks this way does not itself teach a task policy to overc…",
       "keyFacts": [
-        "如何让机器人在物理世界自主利用经验改进任务策略，而无需为每次纠错提供人类演示？",
-        "提出技能空间射击，利用基础模型指导在可复用技能空间中探索纠错，将成功试验转化为策略改进；并在真实世界实验中验证，同时考察技能共享对新任务教学需求的影响。",
-        "真实世界实验显示，自主运行的策略可反复改进；技能可共享，从而减少在新任务上改进所需的教学。"
+        "机器人如何在无人类逐一演示纠正的条件下，利用经验自主改进任务策略，并使改进可跨任务扩展？",
+        "提出技能空间射击，用基础模型引导在可复用技能空间中探索纠正行为，并将成功试验转化为策略改进；技能可跨任务共享；在真实世界实验中评估自主策略的反复改进与技能共享效果。",
+        "真实世界实验显示，自主行动的策略可反复改进；技能也可共享，从而减少在新任务上改进所需的教学。技能作为纠正性监督来源，支持任务内与跨任务的可扩展且可泛化的策略改进。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -366,11 +371,11 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何让机器人在物理世界自主利用经验改进任务策略，而无需为每次纠错提供人类演示？",
-      "method": "提出技能空间射击，利用基础模型指导在可复用技能空间中探索纠错，将成功试验转化为策略改进；并在真实世界实验中验证，同时考察技能共享对新任务教学需求的影响。",
-      "findings": "真实世界实验显示，自主运行的策略可反复改进；技能可共享，从而减少在新任务上改进所需的教学。",
-      "limitations": "摘要未说明。",
-      "score": 92,
+      "question": "机器人如何在无人类逐一演示纠正的条件下，利用经验自主改进任务策略，并使改进可跨任务扩展？",
+      "method": "提出技能空间射击，用基础模型引导在可复用技能空间中探索纠正行为，并将成功试验转化为策略改进；技能可跨任务共享；在真实世界实验中评估自主策略的反复改进与技能共享效果。",
+      "findings": "真实世界实验显示，自主行动的策略可反复改进；技能也可共享，从而减少在新任务上改进所需的教学。技能作为纠正性监督来源，支持任务内与跨任务的可扩展且可泛化的策略改进。",
+      "limitations": "摘要未说明",
+      "score": 91,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -382,7 +387,8 @@
       "tags": [
         "机器人策略改进",
         "基础模型",
-        "技能复用"
+        "技能复用",
+        "自主学习"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -403,12 +409,12 @@
       "contentType": "paper",
       "title": "Cropland PAtteRNS：面向卫星影像时间序列作物分割的平行维度注意力网络与数据集差异关注",
       "originalTitle": "Cropland PAtteRNS: Parallel Dimensional Attention Networks and Attention to Dataset Disparity for Crop Segmentation in Satellite Imagery Time Series Data",
-      "summary": "提出混合Transformer-卷积模型Cropland PAtteRNS，首次对Sentinel-2多光谱SITS数据的时间、光谱、空间维度分别使用自注意力，并通过新型并行Transformer架构降低三重因子化自注意力的计算复杂度。在PASTIS和MTLCC多个tile尺寸变体上验证，作物类别分割优于现有模型，边界IoU表现尤强；发现数据集类别分组缺陷会显著损害性能，不同tile尺寸结果不可比。",
+      "summary": "提出混合Transformer-卷积模型Cropland PAtteRNS，首次在Sentinel-2多光谱SITS数据上分别对时间、光谱和空间维度使用自注意力，并通过新型平行Transformer架构降低三重因子化自注意力的计算复杂度。在PASTIS和MTLCC多个瓦片尺寸变体上与最先进作物分割模型比较，在边界IoU等指标上表现最优；并发现数据集类别分组缺陷会显著损害性能，不同瓦片尺寸变体结果不可比。",
       "abstract": "The landscape of satellite imagery time series datasets and boundary-pushing architectures for cropland segmentation has never been richer. However, in this gold rush, important truths are being missed on both fronts, as a drive for the most novel concepts or the largest datasets pushes finer details to the side. In this paper, we present our hybrid transformer-convolutional model, Cropland Parallel Attention and Refinement Network for Segmentation (PAtteRNS), the first model to use self-attention mechanisms separ…",
       "keyFacts": [
-        "如何为Sentinel-2多光谱卫星影像时间序列设计高效的时空谱全因子化注意力作物分割模型，并厘清数据集类别分组与tile尺寸差异对模型比较的影响？",
-        "提出混合Transformer-卷积模型PAtteRNS，引入并行Transformer架构实现时间、光谱、空间三重因子化自注意力并降低计算复杂度；通过消融研究验证架构，并在PASTIS和MTLCC多个tile尺寸变体上与现有作物分割模型对比，采用包括Boundary IoU在内的多种分割指标评估。",
-        "模型在作物类别分割任务上优于所有对比模型，多种分割指标验证，且在常被低估的田块边界刻画质量（Boundary IoU）上表现尤为突出；数据集中错误的类别分组会显著负面影响模型性能；不同tile尺寸的作物分割数据集变体结果彼此不可比，使跨tile尺寸的模型性能公平比较失效。"
+        "如何为Sentinel-2多光谱卫星影像时间序列数据设计能分别对时间、光谱、空间维度进行自注意力的高效作物分割模型，并评估数据集差异对模型性能的影响？",
+        "提出混合Transformer-卷积模型Cropland PAtteRNS，首次分别对时间、光谱、空间维度使用自注意力，引入新型平行Transformer架构降低三重因子化自注意力的计算复杂度；深入消融实验；在PASTIS和MTLCC多个瓦片尺寸变体上与最先进作物分割模型比较。",
+        "模型在作物类别分割任务上优于所有对比模型，在多个分割指标上得到验证，尤其在常被忽视的地块边界描绘质量指标Boundary IoU上表现突出；数据集中有缺陷的类别分组会显著负面影响模型性能；不同瓦片尺寸变体产生不可相互比较的结果，使跨瓦片尺寸的公平比较失效。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -431,11 +437,11 @@
       "primaryCategory": "cs.CV",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何为Sentinel-2多光谱卫星影像时间序列设计高效的时空谱全因子化注意力作物分割模型，并厘清数据集类别分组与tile尺寸差异对模型比较的影响？",
-      "method": "提出混合Transformer-卷积模型PAtteRNS，引入并行Transformer架构实现时间、光谱、空间三重因子化自注意力并降低计算复杂度；通过消融研究验证架构，并在PASTIS和MTLCC多个tile尺寸变体上与现有作物分割模型对比，采用包括Boundary IoU在内的多种分割指标评估。",
-      "findings": "模型在作物类别分割任务上优于所有对比模型，多种分割指标验证，且在常被低估的田块边界刻画质量（Boundary IoU）上表现尤为突出；数据集中错误的类别分组会显著负面影响模型性能；不同tile尺寸的作物分割数据集变体结果彼此不可比，使跨tile尺寸的模型性能公平比较失效。",
+      "question": "如何为Sentinel-2多光谱卫星影像时间序列数据设计能分别对时间、光谱、空间维度进行自注意力的高效作物分割模型，并评估数据集差异对模型性能的影响？",
+      "method": "提出混合Transformer-卷积模型Cropland PAtteRNS，首次分别对时间、光谱、空间维度使用自注意力，引入新型平行Transformer架构降低三重因子化自注意力的计算复杂度；深入消融实验；在PASTIS和MTLCC多个瓦片尺寸变体上与最先进作物分割模型比较。",
+      "findings": "模型在作物类别分割任务上优于所有对比模型，在多个分割指标上得到验证，尤其在常被忽视的地块边界描绘质量指标Boundary IoU上表现突出；数据集中有缺陷的类别分组会显著负面影响模型性能；不同瓦片尺寸变体产生不可相互比较的结果，使跨瓦片尺寸的公平比较失效。",
       "limitations": "摘要未说明",
-      "score": 92,
+      "score": 91,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -445,10 +451,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "遥感图像分割",
         "作物分割",
-        "Transformer",
-        "注意力机制"
+        "卫星影像时间序列",
+        "自注意力",
+        "Transformer"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -467,14 +473,14 @@
     {
       "id": "arxiv:2609.38161",
       "contentType": "paper",
-      "title": "LLM图重建中失真的谱理论：紧界与经验刻画",
+      "title": "LLM图重建失真的谱理论：紧界与实证刻画",
       "originalTitle": "A Spectral Theory of Distortion in LLM Graph Reconstruction: Sharp Bounds and Empirical Characterization",
-      "summary": "证明拉普拉斯谱间Wasserstein距离被两个边数项夹住：边数净变化为下界、对称差为上界，均按2/n缩放，n为顶点数。该界是紧的，仅增边或仅删边时两端重合。用三个开源权重模型在45个合成图上生成135次重建，77个为单侧编辑，29个混合编辑输出满足X>0，甚至出现边数恰好保持但有十九条边同时被虚构和丢失的情形。",
+      "summary": "证明拉普拉斯谱间Wasserstein距离被两个边数项夹逼：边数净变化为下界、对称差为上界，均以2/n缩放，n为顶点数；该界是紧的，两端仅当重建只增边或只删边时重合，此时距离只是重标度边数，不反映哪些边变化。当两端不同时，距离与下界的残差为正仅当重建既新增又丢失边，可作为混合编辑的证书。在45个合成图、3个开放权重模型产生的135次重建中刻画这些情形。",
       "abstract": "Evaluations of graph reconstruction by language models typically report a single aggregate distance between the original and the reconstructed graph. We prove that for the Wasserstein distance between Laplacian spectra such a summary is bracketed by two edge counts, the net change in edge number from below and the symmetric difference from above, each scaled by $2/n$ where $n$ is the number of vertices. The bracket is sharp: its two ends coincide exactly when the reconstruction only adds edges or only deletes them…",
       "keyFacts": [
-        "语言模型图重建评估中常用的单一聚合距离是否足以刻画重建失真？拉普拉斯谱的Wasserstein距离能提供何种可计算的诊断信息？",
-        "对拉普拉斯谱间的Wasserstein距离进行理论证明，给出由边数净变化（下界）与对称差（上界）构成、按2/n缩放的紧界；并在三个开源权重模型对45个合成图产生的135次重建上进行经验刻画。",
-        "该界是紧的：仅在增边或仅删边时两端重合，此时距离只是重缩放的边数，无法说明哪些边改变；当两端不同时，距离与下界之差为正仅当重建同时虚构和丢失边，从而可仅凭报告的摘要信息判定混合编辑。135次重建中77个输出为单侧编辑，29个混合输出满足X>0，包括边数完全保持但19条边同时被虚构和丢失的案例；三个模型编辑策略不同，从复制输入到尝试补全但大量幻觉，这种区别不被聚合失真指标揭示。"
+        "语言模型图重建评估中报告的单一聚合距离是否足以刻画重建的结构变化？拉普拉斯谱间Wasserstein距离能被什么量界住？",
+        "理论证明：拉普拉斯谱间Wasserstein距离被边数净变化与对称差两个边数项以2/n缩放夹逼，并分析界的紧性。实证：在3个开放权重模型于45个合成图上产生的135次重建中刻画这些情形。",
+        "界是紧的；两端仅当重建只增边或只删边时重合，此时距离不说明哪些边变化；当两端不同时，残差为正仅当重建既新增又丢失边，可作混合编辑证书。135次重建中77个输出为单侧编辑，29个混合输出X>0，包括边数完全保持但同时新增和丢失19条边的情形；三个模型编辑策略不同，从复制输入到以大量幻觉为代价尝试补全，聚合失真无法揭示该区别。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -495,11 +501,11 @@
       "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "语言模型图重建评估中常用的单一聚合距离是否足以刻画重建失真？拉普拉斯谱的Wasserstein距离能提供何种可计算的诊断信息？",
-      "method": "对拉普拉斯谱间的Wasserstein距离进行理论证明，给出由边数净变化（下界）与对称差（上界）构成、按2/n缩放的紧界；并在三个开源权重模型对45个合成图产生的135次重建上进行经验刻画。",
-      "findings": "该界是紧的：仅在增边或仅删边时两端重合，此时距离只是重缩放的边数，无法说明哪些边改变；当两端不同时，距离与下界之差为正仅当重建同时虚构和丢失边，从而可仅凭报告的摘要信息判定混合编辑。135次重建中77个输出为单侧编辑，29个混合输出满足X>0，包括边数完全保持但19条边同时被虚构和丢失的案例；三个模型编辑策略不同，从复制输入到尝试补全但大量幻觉，这种区别不被聚合失真指标揭示。",
+      "question": "语言模型图重建评估中报告的单一聚合距离是否足以刻画重建的结构变化？拉普拉斯谱间Wasserstein距离能被什么量界住？",
+      "method": "理论证明：拉普拉斯谱间Wasserstein距离被边数净变化与对称差两个边数项以2/n缩放夹逼，并分析界的紧性。实证：在3个开放权重模型于45个合成图上产生的135次重建中刻画这些情形。",
+      "findings": "界是紧的；两端仅当重建只增边或只删边时重合，此时距离不说明哪些边变化；当两端不同时，残差为正仅当重建既新增又丢失边，可作混合编辑证书。135次重建中77个输出为单侧编辑，29个混合输出X>0，包括边数完全保持但同时新增和丢失19条边的情形；三个模型编辑策略不同，从复制输入到以大量幻觉为代价尝试补全，聚合失真无法揭示该区别。",
       "limitations": "摘要未说明",
-      "score": 92,
+      "score": 91,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -509,10 +515,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "图重建",
+        "LLM图重建",
         "谱理论",
         "Wasserstein距离",
-        "大语言模型评估"
+        "实证分析"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -531,14 +537,14 @@
     {
       "id": "arxiv:2609.38108",
       "contentType": "paper",
-      "title": "LLM智能体是否执行其声明的计划？从规划模式声明到模式特定执行",
+      "title": "LLM智能体会执行它们声明的计划吗？从规划模式声明到模式特定执行",
       "originalTitle": "Do LLM Agents Execute the Plans They Declare? From Planning-Mode Declaration to Pattern-Specific Execution",
-      "summary": "研究“计划声明-执行差距”，提出Planning-as-Routing：LLM声明Predefined、Sequential、Hierarchical或Search四种规划模式之一，由确定性路由器分派给对应的模式特定执行器。在四个基准、三个LLM上发现：通用Plan+ReAct常无法保持声明的规划结构；模式有效性因环境和模型而异；最大增益来自执行，ALFWorld成功率从0.48升至0.92，SWE-bench Verified从0.36升至0.44，但模型仍不能可靠选择最强模式。",
+      "summary": "研究计划声明-执行差距，提出Planning-as-Routing：LLM声明四种规划模式之一（预定义、顺序、层次、搜索），确定性路由器将任务分派给对应模式特定执行器。在四个基准和三个LLM上发现：通用Plan+ReAct常无法保持声明的规划结构，长计划尤甚，仅22%–45%轨迹保持；规划模式有效性随环境和模型变化；模式特定执行器带来最大增益，ALFWorld成功率从0.48升至0.92，SWE-bench Verified从0.36升至0.44；但当前LLM不能可靠为每个任务选择最强模式。",
       "abstract": "Large language models (LLMs) enable agents to solve long-horizon tasks by generating a plan and then executing it in an environment. However, successful planning requires two distinct capabilities: selecting an appropriate plan for the task and executing it faithfully. Existing planner--executor systems can fail at either stage, while final task success alone cannot distinguish selection from execution failures. We therefore study the Plan Declaration--Execution Gap and introduce Planning-as-Routing, where an LLM…",
       "keyFacts": [
-        "LLM智能体声明的规划模式是否被忠实执行？规划失败源于模式选择还是执行保真，如何区分并改善？",
-        "提出Planning-as-Routing：由LLM声明Predefined、Sequential、Hierarchical或Search四种规划模式之一，确定性路由器将任务分派给相应的模式特定执行器；在四个基准和三个LLM上比较通用Plan+ReAct与模式特定执行器。",
-        "通用Plan+ReAct常不能保持声明的规划结构，尤其对较长计划，三个基准中仅22%–45%的轨迹保持结构；规划模式有效性因环境与模型而异，Search在ALFWorld最佳、Hierarchical在SWE-bench最佳，同一基准内最强模式也可随模型变化；最大增益来自执行，模式特定执行器使ALFWorld任务成功率从0.48提升至0.92，SWE-bench Verified从0.36提升至0.44；当前LLM不能可靠地为每个任务选择最强模式，少量示例在某些基准-模型组合中改善选择。"
+        "LLM智能体能否忠实执行其声明的规划结构？最终任务成功能否区分规划模式选择失败与执行失败？",
+        "提出Planning-as-Routing，由LLM声明四种规划模式之一（Predefined、Sequential、Hierarchical、Search），确定性路由器分派给对应模式特定执行器；在四个基准和三个LLM上评估，并与通用Plan+ReAct比较，另测试少样本示例对模式选择的影响。",
+        "通用Plan+ReAct常无法保持声明的规划结构，跨三个基准仅22%–45%轨迹保持，模式特定执行器则强制执行预期结构；规划模式有效性随环境和模型变化，Search在ALFWorld最优、Hierarchical在SWE-bench最优，同一基准内最强模式因模型而异；最大增益来自执行，模式特定执行器将ALFWorld成功率从0.48提升至0.92、SWE-bench Verified从0.36提升至0.44；当前LLM不能可靠选择最强模式，少样本示例在部分基准-模型组合中改善选择。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -563,11 +569,11 @@
       "primaryCategory": "cs.AI",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "LLM智能体声明的规划模式是否被忠实执行？规划失败源于模式选择还是执行保真，如何区分并改善？",
-      "method": "提出Planning-as-Routing：由LLM声明Predefined、Sequential、Hierarchical或Search四种规划模式之一，确定性路由器将任务分派给相应的模式特定执行器；在四个基准和三个LLM上比较通用Plan+ReAct与模式特定执行器。",
-      "findings": "通用Plan+ReAct常不能保持声明的规划结构，尤其对较长计划，三个基准中仅22%–45%的轨迹保持结构；规划模式有效性因环境与模型而异，Search在ALFWorld最佳、Hierarchical在SWE-bench最佳，同一基准内最强模式也可随模型变化；最大增益来自执行，模式特定执行器使ALFWorld任务成功率从0.48提升至0.92，SWE-bench Verified从0.36提升至0.44；当前LLM不能可靠地为每个任务选择最强模式，少量示例在某些基准-模型组合中改善选择。",
+      "question": "LLM智能体能否忠实执行其声明的规划结构？最终任务成功能否区分规划模式选择失败与执行失败？",
+      "method": "提出Planning-as-Routing，由LLM声明四种规划模式之一（Predefined、Sequential、Hierarchical、Search），确定性路由器分派给对应模式特定执行器；在四个基准和三个LLM上评估，并与通用Plan+ReAct比较，另测试少样本示例对模式选择的影响。",
+      "findings": "通用Plan+ReAct常无法保持声明的规划结构，跨三个基准仅22%–45%轨迹保持，模式特定执行器则强制执行预期结构；规划模式有效性随环境和模型变化，Search在ALFWorld最优、Hierarchical在SWE-bench最优，同一基准内最强模式因模型而异；最大增益来自执行，模式特定执行器将ALFWorld成功率从0.48提升至0.92、SWE-bench Verified从0.36提升至0.44；当前LLM不能可靠选择最强模式，少样本示例在部分基准-模型组合中改善选择。",
       "limitations": "摘要未说明",
-      "score": 92,
+      "score": 91,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -580,7 +586,7 @@
         "LLM智能体",
         "规划与执行",
         "任务路由",
-        "长程任务"
+        "推理"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -599,14 +605,14 @@
     {
       "id": "arxiv:2609.38107",
       "contentType": "paper",
-      "title": "正确答案、无效轨迹：可验证小学数学揭示的思维链轨迹问题",
+      "title": "正确答案，无效轨迹：可验证小学数学揭示的思维链轨迹问题",
       "originalTitle": "Correct Answers, Invalid Traces: What Verifiable Grade-School Math Reveals About Chain-of-Thought Traces",
-      "summary": "利用合成小学数学基准iGSM逐步程序化检验思维链轨迹，考察正确答案是否伴随有效轨迹。仅在有效最小轨迹上训练的模型，答案正确与轨迹有效在分布内几乎重合，但在分布外解耦：最难实例中31.6%的正确答案轨迹无效，其中过半通过所有语法与算术检查却未通过语义依赖检查。非最小训练轨迹会诱导非最小输出；打乱10%训练轨迹句子的词序仍保持近纯净准确率，且无轨迹通过验证。",
+      "summary": "利用iGSM合成小学数学基准逐步程序化检查思维链轨迹，测试正确答案是否可靠伴随有效轨迹。仅在有效最小轨迹上训练的模型在分布内答案正确性与轨迹有效性几乎一致，但分布外解耦：最难实例中31.6%正确答案的轨迹无效，其中过半通过句法和算术检查但未通过语义依赖检查。非最小训练轨迹诱导非最小输出；重问同一问题揭示继承自原查询的计算，削弱最小性作为选择性规划证据；打乱10%训练轨迹句子中的词元仍保持接近干净准确率，尽管无轨迹通过验证；交换训练轨迹同样保持高分布内准确率。",
       "abstract": "Chain-of-thought traces are widely read as records of how models reach their answers, informing debugging, agent auditing, and claims about reasoning. Testing this interpretation is difficult because natural-language thinking traces are rarely mechanically verifiable. We revisit it in iGSM, a synthetic grade-school mathematics benchmark designed to study thinking traces and used to support claims of learned reasoning and planning. Crucially, iGSM exposes the exact quantities and dependencies that a correct solutio…",
       "keyFacts": [
-        "思维链轨迹是否可靠记录模型得出答案的过程？正确答案是否伴随有效的推理轨迹？",
-        "在合成小学数学基准iGSM上，利用其暴露的正确解答所需确量及依赖关系，对生成轨迹逐步程序化验证；先评估仅在有效最小轨迹上训练的模型，再对轨迹监督进行干预，包括非最小训练轨迹、更换查询重问、打乱10%训练轨迹句子词序以及交换训练轨迹。",
-        "答案正确与轨迹有效在分布内几乎重合，但分布外解耦：最难实例中31.6%的正确答案轨迹无效，其中过半通过所有语法与算术检查但未通过语义依赖检查。非最小训练轨迹诱导非最小输出；对同一问题以不同查询重问，暴露出继承自原查询的计算，削弱最小性作为选择性规划证据的效力。打乱10%训练轨迹句子的词序，尽管无轨迹通过验证，仍保持分布外近纯净准确率；交换训练轨迹同样保持高分布内准确率。"
+        "思维链轨迹是否可靠记录模型如何得出答案？正确答案是否可靠伴随有效轨迹？训练轨迹监督如何影响轨迹属性？",
+        "使用iGSM合成小学数学基准，该基准暴露正确解应使用的精确量与依赖关系，可逐步程序化检查生成轨迹；先评估仅在有效最小轨迹上训练的模型，再对轨迹监督进行干预，包括非最小训练轨迹、重问同一问题、打乱10%训练轨迹句子的词元、交换训练轨迹，以检验答案正确性与轨迹有效性的关系。",
+        "仅用有效最小轨迹训练时，答案正确性与轨迹有效性在分布内几乎一致，但分布外解耦：最难实例中31.6%正确答案的轨迹无效，其中过半通过所有句法和算术检查却未通过语义依赖检查。非最小训练轨迹诱导非最小输出；重问同一问题揭示继承自原查询的计算，削弱最小性作为选择性规划的证据；打乱10%训练轨迹句子词元后，尽管无轨迹通过验证，分布外准确率仍接近干净；交换训练轨迹同样保持高分布内准确率。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -632,11 +638,11 @@
       "primaryCategory": "cs.CL",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "思维链轨迹是否可靠记录模型得出答案的过程？正确答案是否伴随有效的推理轨迹？",
-      "method": "在合成小学数学基准iGSM上，利用其暴露的正确解答所需确量及依赖关系，对生成轨迹逐步程序化验证；先评估仅在有效最小轨迹上训练的模型，再对轨迹监督进行干预，包括非最小训练轨迹、更换查询重问、打乱10%训练轨迹句子词序以及交换训练轨迹。",
-      "findings": "答案正确与轨迹有效在分布内几乎重合，但分布外解耦：最难实例中31.6%的正确答案轨迹无效，其中过半通过所有语法与算术检查但未通过语义依赖检查。非最小训练轨迹诱导非最小输出；对同一问题以不同查询重问，暴露出继承自原查询的计算，削弱最小性作为选择性规划证据的效力。打乱10%训练轨迹句子的词序，尽管无轨迹通过验证，仍保持分布外近纯净准确率；交换训练轨迹同样保持高分布内准确率。",
+      "question": "思维链轨迹是否可靠记录模型如何得出答案？正确答案是否可靠伴随有效轨迹？训练轨迹监督如何影响轨迹属性？",
+      "method": "使用iGSM合成小学数学基准，该基准暴露正确解应使用的精确量与依赖关系，可逐步程序化检查生成轨迹；先评估仅在有效最小轨迹上训练的模型，再对轨迹监督进行干预，包括非最小训练轨迹、重问同一问题、打乱10%训练轨迹句子的词元、交换训练轨迹，以检验答案正确性与轨迹有效性的关系。",
+      "findings": "仅用有效最小轨迹训练时，答案正确性与轨迹有效性在分布内几乎一致，但分布外解耦：最难实例中31.6%正确答案的轨迹无效，其中过半通过所有句法和算术检查却未通过语义依赖检查。非最小训练轨迹诱导非最小输出；重问同一问题揭示继承自原查询的计算，削弱最小性作为选择性规划的证据；打乱10%训练轨迹句子词元后，尽管无轨迹通过验证，分布外准确率仍接近干净；交换训练轨迹同样保持高分布内准确率。",
       "limitations": "摘要未说明",
-      "score": 92,
+      "score": 91,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -648,7 +654,7 @@
       "tags": [
         "思维链",
         "可验证推理",
-        "基准测试",
+        "小学数学",
         "AI安全"
       ],
       "translationProvider": "deepseek",
@@ -668,14 +674,14 @@
     {
       "id": "arxiv:2609.38104",
       "contentType": "paper",
-      "title": "广泛探索、精准推理：通过采样推动小模型迈向前沿",
+      "title": "广泛探索，精准推理：通过采样推动小模型迈向前沿",
       "originalTitle": "Explore Broadly, Reason Sharply: Push Small Models toward the Frontier via Sampling",
-      "summary": "提出并行幂温控（PPT），以并行回火实现幂锐化LLM采样。多个不同锐化水平的副本并行交互，低幂副本探索多样推理轨迹，高幂链进一步利用锐化目标偏好的高似然回答；针对先前幂采样器的截断偏差进行定制，并研究有限内存与算力预算下的交换策略。实验表明PPT显著改进单链幂锐化采样，优于RL后训练模型，推理轨迹质量更高，性能甚至可与前沿模型相比。",
+      "summary": "提出Parallel Power Tempering（PPT），以并行回火实现幂锐化LLM采样。并行运行多个处于不同锐化水平的交互副本，低幂副本探索多样推理轨迹，高幂链进一步利用锐化目标偏好的高似然回答。针对先前幂采样器中的截断偏差进行定制，并研究有限内存与计算预算下的有效交换策略。实验表明PPT显著改进单链幂锐化采样，超越RL后训练模型，生成更高质量推理轨迹，性能甚至可比前沿模型。",
       "abstract": "Power-sharpened sampling is an inference-time alternative to reinforcement-learning (RL) post-training for enhancing reasoning in large language models (LLMs). High-probability sequences are amplified under the base model without parameter updates or external rewards, avoiding the costly optimization and jagged generalization of RL. However, this approach faces a fundamental exploration--exploitation trade-off, as % strong sharpening restricts exploration, trapping samplers in plausible but incorrect reasoning tra…",
       "keyFacts": [
-        "如何解决幂锐化采样在推理增强中探索与利用的权衡，使小模型在不更新参数的情况下达到接近前沿模型的推理表现？",
-        "提出并行幂温控（Parallel Power Tempering, PPT），通过并行回火实现幂锐化LLM采样：并行运行多个处于不同锐化水平的交互副本，低幂副本负责探索多样推理轨迹，高幂链负责利用高似然回答；针对先前幂采样器中的截断偏差进行定制，并在有限内存与算力预算下研究有效交换策略。",
-        "实验表明PPT显著改进单链幂锐化采样，并优于RL后训练模型，产生更高质量的推理轨迹，性能甚至可与前沿模型相比。"
+        "如何在推理时通过幂锐化采样增强LLM推理，同时解决强锐化限制探索、弱锐化使答案分布弥散的探索-利用权衡？",
+        "提出Parallel Power Tempering（PPT），通过并行回火实现幂锐化LLM采样，并行运行多个不同锐化水平的交互副本，低幂副本探索多样推理轨迹、高幂链利用高似然回答；针对先前幂采样器的截断偏差进行定制，并研究有限内存和计算预算下的有效交换策略；进行大量实验。",
+        "PPT显著改进单链幂锐化采样，超越RL后训练模型，产生更高质量的推理轨迹，甚至达到与前沿模型相当的性能。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -701,11 +707,11 @@
       "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何解决幂锐化采样在推理增强中探索与利用的权衡，使小模型在不更新参数的情况下达到接近前沿模型的推理表现？",
-      "method": "提出并行幂温控（Parallel Power Tempering, PPT），通过并行回火实现幂锐化LLM采样：并行运行多个处于不同锐化水平的交互副本，低幂副本负责探索多样推理轨迹，高幂链负责利用高似然回答；针对先前幂采样器中的截断偏差进行定制，并在有限内存与算力预算下研究有效交换策略。",
-      "findings": "实验表明PPT显著改进单链幂锐化采样，并优于RL后训练模型，产生更高质量的推理轨迹，性能甚至可与前沿模型相比。",
+      "question": "如何在推理时通过幂锐化采样增强LLM推理，同时解决强锐化限制探索、弱锐化使答案分布弥散的探索-利用权衡？",
+      "method": "提出Parallel Power Tempering（PPT），通过并行回火实现幂锐化LLM采样，并行运行多个不同锐化水平的交互副本，低幂副本探索多样推理轨迹、高幂链利用高似然回答；针对先前幂采样器的截断偏差进行定制，并研究有限内存和计算预算下的有效交换策略；进行大量实验。",
+      "findings": "PPT显著改进单链幂锐化采样，超越RL后训练模型，产生更高质量的推理轨迹，甚至达到与前沿模型相当的性能。",
       "limitations": "摘要未说明",
-      "score": 92,
+      "score": 91,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -715,10 +721,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "推理增强",
-        "采样方法",
+        "推理采样",
         "并行回火",
-        "小模型"
+        "幂锐化",
+        "LLM推理"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -737,14 +743,14 @@
     {
       "id": "arxiv:2609.38095",
       "contentType": "paper",
-      "title": "针对快速稳定零阶训练的探针空间预条件方法",
+      "title": "用于快速稳定零阶训练的探针空间预条件方法",
       "originalTitle": "Probe-Space Preconditioning for Fast and Stable Zero-Order Training",
-      "summary": "为解决零阶优化收敛落后于反向传播的问题，论文探索两种方法：将计算预算从多步转移到大批量多扰动的1SPSA，以及加入每步一次干净前向传播计算探针空间对角预条件器的1.5-SPSA。在Qwen3和OPT的6个后训练数据集上，1.5-SPSA以更少步数达到最优结果。",
+      "summary": "零阶优化（ZOO）在推理模式下训练，仅需约60GB显存即可训练OPT-30B，但收敛落后于反向传播。本文评估两种缩小差距的方法：将计算预算重新分配到大批量多扰动少步数，使1SPSA优于MeZO；并提出1.5-SPSA，每步增加一次干净前向传播以计算探针空间中的廉价对角预条件子，降低高曲率方向权重。在Qwen3和OPT上对6个后训练数据集基准测试，1.5-SPSA以更少优化步数取得ZOO最先进结果，如OPT-13B在SST-2上仅70步即比MeZO和BP高3.1%。",
       "abstract": "Backpropagation (BP) dominates deep learning but imposes a massive memory tax. For example, training OPT-30B with Adam requires $\\approx$ 600GB of GPU memory (assuming batch size 8 and sequence length 2048). Alternatively, zero-order optimization (ZOO) trains in inference-mode (requiring only $\\approx$ 60GB for the same model): no stored activations, no gradients, and no optimizer states. However, ZOO convergence has lagged behind BP. In this work, we evaluate two methods to close this gap. First, we show that rea…",
       "keyFacts": [
-        "如何缩小零阶优化（ZOO）与反向传播（BP）之间的收敛差距，同时保持推理模式训练的低内存优势？",
-        "评估1SPSA在大有效批量、多扰动、少步数下的表现；提出1.5-SPSA，在1SPSA基础上每步增加一次干净前向传播，计算探针空间中廉价的曲率对角预条件器；结合8位打包随机生成器、Triton融合解包/应用内核和分布式并行。",
-        "1.5-SPSA在Qwen3和OPT的6个后训练数据集上优于先前零阶求解器，且优化步数大幅减少；训练OPT-13B时，在SST-2上仅用70步即比MeZO和BP准确率高3.1%，而MeZO需100,000步；可在A100等商用GPU上对高达OPT-30B的模型进行快速稳定训练。"
+        "如何缩小零阶优化（ZOO）与反向传播（BP）在收敛速度和性能上的差距，同时保持ZOO在推理模式下的低显存优势？",
+        "评估两种方法：一是将训练计算预算从多步数重新分配到大批量多扰动（探针）少步数，使1SPSA优于MeZO；二是提出1.5-SPSA，在1SPSA每步增加一次干净前向传播计算探针空间中的廉价对角预条件子。在Qwen3和OPT模型家族的6个后训练数据集上基准测试，并组合8位打包随机生成器、triton融合解包/应用核和分布式并行。",
+        "1SPSA在大批量多扰动少步数设置下以更少训练计算优于MeZO；1.5-SPSA通过下加权高曲率方向改善收敛速率和收敛性，在Qwen3和OPT的6个后训练数据集上以更少优化步数取得ZOO最先进结果；OPT-13B在SST-2上仅70步比MeZO和BP高3.1%准确率，而MeZO需100,000步；组合技术可在商品GPU（如A100）上就地快速稳定训练OPT-30B等大模型。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -766,11 +772,11 @@
       "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何缩小零阶优化（ZOO）与反向传播（BP）之间的收敛差距，同时保持推理模式训练的低内存优势？",
-      "method": "评估1SPSA在大有效批量、多扰动、少步数下的表现；提出1.5-SPSA，在1SPSA基础上每步增加一次干净前向传播，计算探针空间中廉价的曲率对角预条件器；结合8位打包随机生成器、Triton融合解包/应用内核和分布式并行。",
-      "findings": "1.5-SPSA在Qwen3和OPT的6个后训练数据集上优于先前零阶求解器，且优化步数大幅减少；训练OPT-13B时，在SST-2上仅用70步即比MeZO和BP准确率高3.1%，而MeZO需100,000步；可在A100等商用GPU上对高达OPT-30B的模型进行快速稳定训练。",
+      "question": "如何缩小零阶优化（ZOO）与反向传播（BP）在收敛速度和性能上的差距，同时保持ZOO在推理模式下的低显存优势？",
+      "method": "评估两种方法：一是将训练计算预算从多步数重新分配到大批量多扰动（探针）少步数，使1SPSA优于MeZO；二是提出1.5-SPSA，在1SPSA每步增加一次干净前向传播计算探针空间中的廉价对角预条件子。在Qwen3和OPT模型家族的6个后训练数据集上基准测试，并组合8位打包随机生成器、triton融合解包/应用核和分布式并行。",
+      "findings": "1SPSA在大批量多扰动少步数设置下以更少训练计算优于MeZO；1.5-SPSA通过下加权高曲率方向改善收敛速率和收敛性，在Qwen3和OPT的6个后训练数据集上以更少优化步数取得ZOO最先进结果；OPT-13B在SST-2上仅70步比MeZO和BP高3.1%准确率，而MeZO需100,000步；组合技术可在商品GPU（如A100）上就地快速稳定训练OPT-30B等大模型。",
       "limitations": "摘要未说明",
-      "score": 92,
+      "score": 91,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -782,8 +788,8 @@
       "tags": [
         "零阶优化",
         "预条件",
-        "大语言模型训练",
-        "内存高效训练"
+        "内存高效训练",
+        "大语言模型"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -804,12 +810,12 @@
       "contentType": "paper",
       "title": "用Hessian零空间延拓遍历神经网络解空间",
       "originalTitle": "Traversing the solution space of neural networks with Hessian Null Space Continuation",
-      "summary": "论文提出Hessian零空间延拓（HNC），一种利用局部曲率遍历保持网络功能的权重空间区域的方法，可引导至指定性质的解。在RNN、ImageNet训练的视觉Transformer和强化学习智能体中，HNC找到与原始网络差异更大的表征与策略，并测量解集的局部几何。",
+      "summary": "深度网络在同一任务上可学到多种解，许多解是模式连通的，由低损失区域连接，但其内部计算如何变化未知。本文引入Hessian零空间延拓（HNC），利用局部曲率遍历保持网络功能的权重空间区域，并可导向指定性质的解。在RNN记忆任务中，HNC达到截然不同的表示和动力学而行为保持；在ImageNet训练的ViT中，HNC找到的表示与原始网络差异超过任何独立训练的不同架构或目标模型；在强化学习智能体中，HNC发现可比回报下的不同导航策略并暴露奖励黑客。HNC还测量解集的局部几何，表明模型规模和任务复杂度塑造其维度和功能敏感性。",
       "abstract": "On a single task, deep networks can learn many solutions, depending on their optimizer, training data, architecture, and hyperparameters. Many of these solutions are mode-connected: rather than isolated points in weight space, they are connected by low-loss regions. Yet how their internal computation varies within these regions is unknown. A parallel line of work has identified the degeneracy of neural representations: many networks reach similar training loss with distinct internal structures. However, it is uncl…",
       "keyFacts": [
-        "在权重空间中，模式连通区域内不同解的内部计算和表征如何变化？解集的几何与功能敏感性如何受模型规模和任务复杂度影响？",
-        "提出Hessian Null Space Continuation（HNC），利用局部曲率遍历保持网络功能的权重空间区域，并可被引导向具有指定性质的解。",
-        "在记忆任务RNN中，HNC在保持行为的同时达到截然不同的表征和动力学；在ImageNet视觉Transformer中，找到比任何独立训练的不同架构或目标模型差异更大的表征；在强化学习智能体中发现可比回报下的不同导航策略，并在AI Safety Gridworld中暴露奖励黑客；HNC测量解集局部几何，显示模型规模和任务复杂度如何塑造其维度和功能敏感性。"
+        "在权重空间的局部模式连通区域内，是否可能存在多种不同的内部计算机制，以及这些解在权重空间中如何关联？",
+        "引入Hessian零空间延拓（HNC），一种可扩展方法，利用局部曲率遍历保持网络功能的权重空间区域，并可导向指定性质的解。在RNN记忆任务、ImageNet训练的Vision Transformers、强化学习智能体和AI Safety Gridworld上应用，并测量解集的局部几何。",
+        "首次表明权重空间局部模式连通区域内存在许多不同内部机制；在RNN中HNC达到截然不同的表示和动力学且行为保持；在ViT中找到的表示与原始网络差异超过任何独立训练的不同架构或目标模型；在强化学习中揭示不同导航策略和奖励黑客；HNC显示模型规模和任务复杂度塑造解集的维度和功能敏感性；表明单个训练解附近存在大量标准梯度优化未见的表示多样性。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -836,11 +842,11 @@
       "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "在权重空间中，模式连通区域内不同解的内部计算和表征如何变化？解集的几何与功能敏感性如何受模型规模和任务复杂度影响？",
-      "method": "提出Hessian Null Space Continuation（HNC），利用局部曲率遍历保持网络功能的权重空间区域，并可被引导向具有指定性质的解。",
-      "findings": "在记忆任务RNN中，HNC在保持行为的同时达到截然不同的表征和动力学；在ImageNet视觉Transformer中，找到比任何独立训练的不同架构或目标模型差异更大的表征；在强化学习智能体中发现可比回报下的不同导航策略，并在AI Safety Gridworld中暴露奖励黑客；HNC测量解集局部几何，显示模型规模和任务复杂度如何塑造其维度和功能敏感性。",
+      "question": "在权重空间的局部模式连通区域内，是否可能存在多种不同的内部计算机制，以及这些解在权重空间中如何关联？",
+      "method": "引入Hessian零空间延拓（HNC），一种可扩展方法，利用局部曲率遍历保持网络功能的权重空间区域，并可导向指定性质的解。在RNN记忆任务、ImageNet训练的Vision Transformers、强化学习智能体和AI Safety Gridworld上应用，并测量解集的局部几何。",
+      "findings": "首次表明权重空间局部模式连通区域内存在许多不同内部机制；在RNN中HNC达到截然不同的表示和动力学且行为保持；在ViT中找到的表示与原始网络差异超过任何独立训练的不同架构或目标模型；在强化学习中揭示不同导航策略和奖励黑客；HNC显示模型规模和任务复杂度塑造解集的维度和功能敏感性；表明单个训练解附近存在大量标准梯度优化未见的表示多样性。",
       "limitations": "摘要未说明",
-      "score": 92,
+      "score": 91,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -850,10 +856,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "损失景观",
-        "模式连通性",
+        "解空间",
         "Hessian零空间",
-        "表征多样性"
+        "表示多样性",
+        "模式连通性"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -874,12 +880,12 @@
       "contentType": "paper",
       "title": "精确学习的最优量子-经典分离",
       "originalTitle": "Optimal Quantum-Classical Separations for Exact Learning",
-      "summary": "论文研究成员查询下的精确学习，针对确定性、随机和量子查询复杂度，否证了长期猜想R(C)=O(Q(C)^2+Q(C)log N)。构造出概念类使R(C)=Ω(Q(C)^3 log N/log Q(C))，D(C')=Ω(Q(C')^3 log N)，分别匹配已有上界，并首次表明量子学习加速可超越Grover和Bernstein-Vazirani范式。",
+      "summary": "研究成员查询下概念类C⊆{0,1}^N的精确学习，关注确定性、随机化和量子查询复杂度D(C)、R(C)、Q(C)之间的关系。长期猜想R(C)=O(Q(C)^2+Q(C)log N)。本文构造概念类C和C'，满足R(C)=Ω(Q(C)^3 log N / log Q(C))且D(C')=Ω(Q(C')^3 log N)，分别匹配Arunachalam等[Quantum'21]和Servedio与Gortler[SICOMP'04]的上界，从而反驳该猜想，表明Arunachalam等的随机化上界节省本质上依赖随机性，并首次表明学习中的量子加速可超越Grover和Bernstein-Vazirani范式。",
       "abstract": "We study exact learning with membership queries for concept classes $\\mathcal C\\subseteq\\{0,1\\}^N$, focusing on the relationships among their deterministic, randomized, and quantum query complexities, denoted $\\mathsf{D}(\\mathcal C)$, $\\mathsf{R}(\\mathcal C)$, and $\\mathsf{Q}(\\mathcal C)$, respectively. The two canonical quantum speedups in this model are witnessed by Grover search and Bernstein-Vazirani, leading to the longstanding conjecture $$ \\mathsf{R}(\\mathcal C)=O(\\mathsf{Q}(\\mathcal C)^2+\\mathsf{Q}(\\mathca…",
       "keyFacts": [
-        "在成员查询精确学习模型中，概念类的确定性、随机和量子查询复杂度之间存在怎样的最优关系？经典与量子学习之间能否实现超越Grover和Bernstein-Vazirani的加速？",
-        "构造满足特定查询复杂度下界的概念类C和C'，将随机与量子查询复杂度、确定性与量子查询复杂度关联，并与已有上界进行比较。",
-        "否证了猜想R(C)=O(Q(C)^2+Q(C)log N)；构造概念类满足R(C)=Ω(Q(C)^3 log N / log Q(C))和D(C')=Ω(Q(C')^3 log N)；第一个界与Arunachalam等人[Quantum'21]的上界在常数因子内匹配，第二个界与Servedio和Gortler[SICOMP'04]的上界匹配；表明Arunachalam等人的随机上界节省本质上依赖随机性；首次显示学习中的量子加速可超越Grover和Bernstein-Vazirani范式。"
+        "在成员查询精确学习模型中，概念类的确定性、随机化和量子查询复杂度之间的最优关系是什么？长期猜想R(C)=O(Q(C)^2+Q(C)log N)是否成立？",
+        "构造满足特定下界的概念类C和C'，证明R(C)=Ω(Q(C)^3 log N / log Q(C))和D(C')=Ω(Q(C')^3 log N)，并与已有上界比较。",
+        "反驳了长期猜想；构造的C和C'分别匹配Arunachalam等[Quantum'21]和Servedio与Gortler[SICOMP'04]的上界；表明Arunachalam等的随机化上界节省本质上依赖随机性；首次表明学习中的量子加速可超越Grover和Bernstein-Vazirani范式；刻画了经典与量子查询复杂度之间的最优关系。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -903,11 +909,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "在成员查询精确学习模型中，概念类的确定性、随机和量子查询复杂度之间存在怎样的最优关系？经典与量子学习之间能否实现超越Grover和Bernstein-Vazirani的加速？",
-      "method": "构造满足特定查询复杂度下界的概念类C和C'，将随机与量子查询复杂度、确定性与量子查询复杂度关联，并与已有上界进行比较。",
-      "findings": "否证了猜想R(C)=O(Q(C)^2+Q(C)log N)；构造概念类满足R(C)=Ω(Q(C)^3 log N / log Q(C))和D(C')=Ω(Q(C')^3 log N)；第一个界与Arunachalam等人[Quantum'21]的上界在常数因子内匹配，第二个界与Servedio和Gortler[SICOMP'04]的上界匹配；表明Arunachalam等人的随机上界节省本质上依赖随机性；首次显示学习中的量子加速可超越Grover和Bernstein-Vazirani范式。",
+      "question": "在成员查询精确学习模型中，概念类的确定性、随机化和量子查询复杂度之间的最优关系是什么？长期猜想R(C)=O(Q(C)^2+Q(C)log N)是否成立？",
+      "method": "构造满足特定下界的概念类C和C'，证明R(C)=Ω(Q(C)^3 log N / log Q(C))和D(C')=Ω(Q(C')^3 log N)，并与已有上界比较。",
+      "findings": "反驳了长期猜想；构造的C和C'分别匹配Arunachalam等[Quantum'21]和Servedio与Gortler[SICOMP'04]的上界；表明Arunachalam等的随机化上界节省本质上依赖随机性；首次表明学习中的量子加速可超越Grover和Bernstein-Vazirani范式；刻画了经典与量子查询复杂度之间的最优关系。",
       "limitations": "摘要未说明",
-      "score": 92,
+      "score": 91,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -919,8 +925,8 @@
       "tags": [
         "量子查询复杂度",
         "精确学习",
-        "量子加速",
-        "查询复杂度分离"
+        "量子-经典分离",
+        "成员查询"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -941,12 +947,12 @@
       "contentType": "paper",
       "title": "基于异构科学接口的能源与辐射系统基础模型",
       "originalTitle": "A foundation model for energy and radiation systems built on heterogeneous scientific interfaces",
-      "summary": "论文研究保留原生推断类与输出域的科学基础模型GEODE，将任务特定科学接口耦合到共享路由小波算子库。单模型联合预训练腔流、辐射剂量和弹塑性应力，再以2.1%参数私有接口获得换热器和反应堆子通道。参数隔离保持旧预测，无限制微调使旧预测退化14-29倍。",
+      "summary": "科学基础模型通常在异构物理问题被翻译为兼容的网格化、标记化或符号表示后评估，使科学接口处于预训练模型和复用审计之外。本文研究互补设置，边界历史、稀疏监测记录和加载历史保留原生推理类，输出保持在笛卡尔、经纬度和非结构化域。GEODE将任务特定科学接口耦合到共享路由小波算子库。单一联合预训练模型表示腔体流、辐射剂量和弹塑性应力，然后通过训练包含其2.1%参数的私有接口获得热交换器和反应堆子通道。参数隔离保持早期预测不变，而无限制微调使其退化14-29倍。规范匹配随机库对照表明预训练计算贡献依任务和数据机制而定。单独分解显示全场相对L2误差在场地水平主导范数时可大幅低估相对空间变化的误差。任务特定算子在五个问题中的三个上更准确。",
       "abstract": "Scientific foundation models are commonly evaluated after heterogeneous physical problems have already been translated into a compatible gridded, tokenized or symbolic representation. This leaves the scientific interface outside both the pretrained model and the audit of what is actually reused. We study the complementary setting in which boundary histories, sparse monitor records and loading histories retain their native inference classes and their outputs remain on Cartesian, latitude-longitude and unstructured…",
       "keyFacts": [
-        "当科学基础模型跨越异构科学接口时，多任务覆盖、旧任务保持和预训练复用是否是独立属性？如何在不将物理问题预先转化为统一表示的情况下构建和审计基础模型？",
-        "GEODE将任务特定的科学接口耦合到共享的路由小波算子库，单模型联合预训练腔流、辐射剂量和弹塑性应力，然后通过训练包含2.1%参数量的私有接口获得换热器和反应堆子通道任务；使用范数匹配的随机库对照和误差分解进行分析。",
-        "参数隔离使早期预测不变，而无限制微调使早期预测退化14-29倍；范数匹配随机库对照表明预训练计算的贡献取决于任务和数据机制；单独分解显示当场级主导范数时，全字段相对L2误差可能大幅低估相对空间变化的误差；任务特定算子在五个问题中的三个上更准确。"
+        "当科学基础模型跨越异构接口时，多任务覆盖、保持和预训练复用是否是必须独立测试的分离属性？",
+        "GEODE将任务特定科学接口耦合到共享路由小波算子库。单一联合预训练模型表示腔体流、辐射剂量和弹塑性应力，然后通过训练包含其2.1%参数的私有接口获得热交换器和反应堆子通道。使用规范匹配随机库对照和误差分解进行分析。",
+        "单一联合预训练模型可表示腔体流、辐射剂量和弹塑性应力，并通过训练2.1%参数的私有接口获得热交换器和反应堆子通道；参数隔离保持早期预测不变，无限制微调使其退化14-29倍；规范匹配随机库对照表明预训练计算贡献依任务和数据机制而定；全场相对L2误差在场地水平主导范数时可大幅低估相对空间变化的误差；任务特定算子在五个问题中的三个上更准确；多任务覆盖、保持和预训练复用是必须独立测试的分离属性。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -971,11 +977,11 @@
       "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "当科学基础模型跨越异构科学接口时，多任务覆盖、旧任务保持和预训练复用是否是独立属性？如何在不将物理问题预先转化为统一表示的情况下构建和审计基础模型？",
-      "method": "GEODE将任务特定的科学接口耦合到共享的路由小波算子库，单模型联合预训练腔流、辐射剂量和弹塑性应力，然后通过训练包含2.1%参数量的私有接口获得换热器和反应堆子通道任务；使用范数匹配的随机库对照和误差分解进行分析。",
-      "findings": "参数隔离使早期预测不变，而无限制微调使早期预测退化14-29倍；范数匹配随机库对照表明预训练计算的贡献取决于任务和数据机制；单独分解显示当场级主导范数时，全字段相对L2误差可能大幅低估相对空间变化的误差；任务特定算子在五个问题中的三个上更准确。",
+      "question": "当科学基础模型跨越异构接口时，多任务覆盖、保持和预训练复用是否是必须独立测试的分离属性？",
+      "method": "GEODE将任务特定科学接口耦合到共享路由小波算子库。单一联合预训练模型表示腔体流、辐射剂量和弹塑性应力，然后通过训练包含其2.1%参数的私有接口获得热交换器和反应堆子通道。使用规范匹配随机库对照和误差分解进行分析。",
+      "findings": "单一联合预训练模型可表示腔体流、辐射剂量和弹塑性应力，并通过训练2.1%参数的私有接口获得热交换器和反应堆子通道；参数隔离保持早期预测不变，无限制微调使其退化14-29倍；规范匹配随机库对照表明预训练计算贡献依任务和数据机制而定；全场相对L2误差在场地水平主导范数时可大幅低估相对空间变化的误差；任务特定算子在五个问题中的三个上更准确；多任务覆盖、保持和预训练复用是必须独立测试的分离属性。",
       "limitations": "摘要未说明",
-      "score": 92,
+      "score": 91,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -988,7 +994,7 @@
         "科学基础模型",
         "异构接口",
         "小波算子",
-        "迁移学习"
+        "参数隔离"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1009,12 +1015,12 @@
       "contentType": "paper",
       "title": "用于可认证状态估计的QCQP可表示IMU预积分因子",
       "originalTitle": "A QCQP-Representable IMU Pre-Integration Factor for Certifiable State Estimation",
-      "summary": "论文提出首个可直接将IMU预积分纳入可认证估计的QCQP可表示IMU预积分因子。针对指数映射无精确多项式表示和SDP松弛可能较松的问题，基于Cayley映射推导因子并加入冗余约束。应用于可认证GNSS-IMU平滑，在合成和真实数据上获得紧松弛并求解到验证全局最优。",
+      "summary": "提出一种QCQP可表示的IMU预积分因子，使预积分惯性测量可用于可认证估计。据我们所知，这是首个将IMU预积分直接纳入可认证估计的工作。惯性传感是机器人中常见可靠的模态，纳入它拓宽了可认证估计的实用范围。主要挑战是获得所需代数结构和足够紧的凸松弛。标准IMU预积分依赖指数映射，无法精确多项式表示；获得QCQP公式需要辅助提升变量，标准SDP松弛可能较松。本文通过基于Cayley映射推导IMU预积分因子及显式冗余约束集来收紧松弛。在合成和真实数据上应用于可认证GNSS-IMU平滑，结果表明该公式产生紧松弛并验证全局最优性求解估计问题。",
       "abstract": "We propose a QCQP-representable IMU pre-integration factor that enables certifiable estimation with pre-integrated inertial measurements. To the best of our knowledge, this is the first work to directly incorporate IMU pre-integration into certifiable estimation. Inertial sensing is a common and reliable modality in robotics, and incorporating it broadens the practical scope of certifiable estimation. The main challenges are obtaining the required algebraic structure and a sufficiently tight convex relaxation. Sta…",
       "keyFacts": [
-        "如何将IMU预积分直接纳入可认证状态估计，同时获得所需代数结构和足够紧的凸松弛？",
-        "基于Cayley映射推导IMU预积分因子，并引入一组显式冗余约束以收紧所得松弛；将该因子应用于可认证GNSS-IMU平滑，并在合成和真实世界数据上评估。",
-        "提出的因子使可认证GNSS-IMU平滑问题获得紧松弛，并能将估计问题求解到验证的全局最优性；在合成和真实世界数据上均得到验证。"
+        "如何将IMU预积分直接纳入可认证估计，同时获得所需代数结构和足够紧的凸松弛？",
+        "推导基于Cayley映射的IMU预积分因子和显式冗余约束集以收紧松弛，并将其应用于可认证GNSS-IMU平滑，在合成和真实世界数据上评估。",
+        "该公式产生紧松弛，并验证全局最优性求解估计问题；据我们所知，这是首个将IMU预积分直接纳入可认证估计的工作。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1037,11 +1043,11 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何将IMU预积分直接纳入可认证状态估计，同时获得所需代数结构和足够紧的凸松弛？",
-      "method": "基于Cayley映射推导IMU预积分因子，并引入一组显式冗余约束以收紧所得松弛；将该因子应用于可认证GNSS-IMU平滑，并在合成和真实世界数据上评估。",
-      "findings": "提出的因子使可认证GNSS-IMU平滑问题获得紧松弛，并能将估计问题求解到验证的全局最优性；在合成和真实世界数据上均得到验证。",
+      "question": "如何将IMU预积分直接纳入可认证估计，同时获得所需代数结构和足够紧的凸松弛？",
+      "method": "推导基于Cayley映射的IMU预积分因子和显式冗余约束集以收紧松弛，并将其应用于可认证GNSS-IMU平滑，在合成和真实世界数据上评估。",
+      "findings": "该公式产生紧松弛，并验证全局最优性求解估计问题；据我们所知，这是首个将IMU预积分直接纳入可认证估计的工作。",
       "limitations": "摘要未说明",
-      "score": 92,
+      "score": 91,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1073,14 +1079,14 @@
     {
       "id": "arxiv:2609.38043",
       "contentType": "paper",
-      "title": "UserProxyBench：面向智能体基准与训练的LLM用户模拟器评估",
+      "title": "UserProxyBench：面向智能体基准与训练的大语言模型用户模拟器评估",
       "originalTitle": "UserProxyBench: Evaluating LLM User Simulators for Agent Benchmarks and Training",
-      "summary": "提出UserProxyBench评估层与用户保真度分数UFS，在tau-bench家族375项企业任务上固定智能体为GPT-5.5、仅更换用户代理，平均任务奖励变化15.2分，24.4%成功回合存在用户规格违规，主要失败为过早披露信息。",
+      "summary": "提出UserProxyBench评估层与用户保真度分数（UFS），衡量模拟用户对基准私有用户指令的遵循程度。固定智能体为GPT-5.5、仅变化用户代理，在375个企业任务上任务奖励均值变化15.2点，24.4%的成功回合存在用户规范违规，主要失败是过早披露信息。七种代理呈现成本-保真度前沿。",
       "abstract": "Interactive agent benchmarks and multi-turn reinforcement learning increasingly place a second language model in the role of the user. This simulated user controls what information the agent receives and when, yet current benchmarks score only the agent and do not directly measure whether the user correctly executed its assigned role. We introduce UserProxyBench, an evaluation layer over the tau-bench family, and the User Fidelity Score (UFS), which measures adherence to the benchmark's private user instructions u…",
       "keyFacts": [
-        "当前交互式智能体基准只给智能体打分，不直接衡量充当用户的第二个语言模型是否正确执行其被分配的角色，即用户模拟器的保真度问题。",
-        "提出UserProxyBench，作为tau-bench家族之上的评估层，并设计用户保真度分数UFS，依据基准私有用户指令、以任务为根基的评分标准独立于智能体成功与否来衡量保真度；固定智能体为GPT-5.5，在375项企业任务上仅变动用户代理，覆盖七个代理。",
-        "仅更换用户代理即令平均任务奖励变化15.2分；24.4%的成功回合含用户规格违规；主导失败是过早披露，即用户在信息被请求前就提供；该行为对任务奖励影响很小，但在成功回合中使智能体平均少调用1.06次工具；在七个代理上识别出经验性的成本—保真度前沿。"
+        "现有多轮交互基准只给智能体打分，未直接衡量被置于用户角色的语言模型是否正确执行其指定角色，如何评估用户模拟器的保真度及其对评测结果的影响？",
+        "提出UserProxyBench（tau-bench系列的评估层）和用户保真度分数（UFS），用任务锚定的评分标准独立于智能体成功与否来评估对私有用户指令的遵循度；将智能体固定为GPT-5.5，仅改变用户代理，在375个企业任务上实验，并比较七种代理。",
+        "任务奖励均值变化达15.2点；24.4%的成功回合含有用户规范违规；主要失败模式是过早披露（用户在被请求前提供信息），该行为对任务奖励影响很小，但在成功回合中使智能体平均少调用1.06次工具；跨七种代理识别出经验性的成本-保真度前沿。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1101,11 +1107,11 @@
       "primaryCategory": "cs.AI",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "当前交互式智能体基准只给智能体打分，不直接衡量充当用户的第二个语言模型是否正确执行其被分配的角色，即用户模拟器的保真度问题。",
-      "method": "提出UserProxyBench，作为tau-bench家族之上的评估层，并设计用户保真度分数UFS，依据基准私有用户指令、以任务为根基的评分标准独立于智能体成功与否来衡量保真度；固定智能体为GPT-5.5，在375项企业任务上仅变动用户代理，覆盖七个代理。",
-      "findings": "仅更换用户代理即令平均任务奖励变化15.2分；24.4%的成功回合含用户规格违规；主导失败是过早披露，即用户在信息被请求前就提供；该行为对任务奖励影响很小，但在成功回合中使智能体平均少调用1.06次工具；在七个代理上识别出经验性的成本—保真度前沿。",
+      "question": "现有多轮交互基准只给智能体打分，未直接衡量被置于用户角色的语言模型是否正确执行其指定角色，如何评估用户模拟器的保真度及其对评测结果的影响？",
+      "method": "提出UserProxyBench（tau-bench系列的评估层）和用户保真度分数（UFS），用任务锚定的评分标准独立于智能体成功与否来评估对私有用户指令的遵循度；将智能体固定为GPT-5.5，仅改变用户代理，在375个企业任务上实验，并比较七种代理。",
+      "findings": "任务奖励均值变化达15.2点；24.4%的成功回合含有用户规范违规；主要失败模式是过早披露（用户在被请求前提供信息），该行为对任务奖励影响很小，但在成功回合中使智能体平均少调用1.06次工具；跨七种代理识别出经验性的成本-保真度前沿。",
       "limitations": "摘要未说明",
-      "score": 92,
+      "score": 91,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1116,9 +1122,9 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "大语言模型",
-        "用户模拟器",
         "智能体基准",
-        "评估方法"
+        "用户模拟器",
+        "强化学习"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1137,14 +1143,14 @@
     {
       "id": "arxiv:2609.38023",
       "contentType": "paper",
-      "title": "PE-EK-PINN：用于可扩展物理信息神经网络的内嵌物理与演化核",
+      "title": "PE-EK-PINN：面向可扩展物理信息神经网络的演化核物理嵌入",
       "originalTitle": "PE-EK-PINN: Physics Embedding with Evolving Kernel for Scalable Physics-Informed Neural Networks",
-      "summary": "提出PE-EK-PINN，把物理核视为可复用的已学习表示：冻结已收敛子系统场并提升为演化核，其变换副本可复用于更高层配置而无须重新推导控制方程，使活跃核峰值数与系统规模无关，累计训练成本从O(N)降至O(log N)。",
+      "summary": "提出PE-EK-PINN，将物理核视为可复用学习表示而非固定解析输入：冻结已收敛子系统场并提升为演化核，其变换副本用于表示更高层配置，无需推导新方程。使峰值活跃核数与系统规模无关，累计训练成本从O(N)降至O(log N)。在偶极阵列、复合线源几何与交叉阵列上训练成本大幅降低，相对L2误差相当或更低，256偶极阵列求解比直接PE-PINN快30倍以上。",
       "abstract": "Physics-Informed Neural Networks (PINNs) embed governing equations into deep learning, but enforce them only through loss residuals, leaving highly oscillatory wave behavior to be discovered by optimization. As a result, methods that achieve relative $L_2$ errors below $10^{-3}$ on standard manufactured Helmholtz benchmarks can fail on practical radiation problems involving singular excitations, absorbing boundaries, and wave fields spanning tens of wavelengths. Architectural physics embedding addresses this limit…",
       "keyFacts": [
-        "物理信息神经网络仅通过损失残差施加控制方程，高度振荡的波动行为需靠优化自行发现；架构式物理嵌入虽将场分解为解析振荡核与可学习包络，但核字典需手工构造，且随基本单元数增长，对天线阵列、超表面等层级系统呈指数增长。",
-        "提出PE-EK-PINN，将物理核作为可复用学习表示而非固定解析输入；把已收敛子系统场冻结并提升为演化核，复用其变换副本表示更高层配置而无需推导新控制方程；在偶极子阵列、复合线源几何与交叉阵列上进行实验。",
-        "所得层级使活跃核峰值数与系统规模无关，累计训练成本从O(N)降至O(log N)；实验显示训练成本大幅降低，同时相对L2误差降低或相当；PE-EK-PINN求解256偶极子阵列比直接PE-PINN快30倍以上。"
+        "架构式物理嵌入需要人工构建随系统规模（如天线阵列、超表面）呈指数增长的核字典，如何避免这一扩展瓶颈并降低训练成本？",
+        "提出PE-EK-PINN，将物理核作为可复用学习表示：冻结已收敛的子系统场并提升为演化核，其变换副本用于表示更高层配置而无需推导新控制方程，形成峰值活跃核数与系统规模无关的层级结构。在偶极阵列、复合线源几何与交叉阵列上进行实验。",
+        "累计训练成本从O(N)降至O(log N)，峰值活跃核数与系统规模无关；实验显示训练成本显著降低，同时相对L2误差降低或相当；PE-EK-PINN求解256偶极阵列比直接PE-PINN快30倍以上。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1166,11 +1172,11 @@
       "primaryCategory": "cs.AI",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "物理信息神经网络仅通过损失残差施加控制方程，高度振荡的波动行为需靠优化自行发现；架构式物理嵌入虽将场分解为解析振荡核与可学习包络，但核字典需手工构造，且随基本单元数增长，对天线阵列、超表面等层级系统呈指数增长。",
-      "method": "提出PE-EK-PINN，将物理核作为可复用学习表示而非固定解析输入；把已收敛子系统场冻结并提升为演化核，复用其变换副本表示更高层配置而无需推导新控制方程；在偶极子阵列、复合线源几何与交叉阵列上进行实验。",
-      "findings": "所得层级使活跃核峰值数与系统规模无关，累计训练成本从O(N)降至O(log N)；实验显示训练成本大幅降低，同时相对L2误差降低或相当；PE-EK-PINN求解256偶极子阵列比直接PE-PINN快30倍以上。",
+      "question": "架构式物理嵌入需要人工构建随系统规模（如天线阵列、超表面）呈指数增长的核字典，如何避免这一扩展瓶颈并降低训练成本？",
+      "method": "提出PE-EK-PINN，将物理核作为可复用学习表示：冻结已收敛的子系统场并提升为演化核，其变换副本用于表示更高层配置而无需推导新控制方程，形成峰值活跃核数与系统规模无关的层级结构。在偶极阵列、复合线源几何与交叉阵列上进行实验。",
+      "findings": "累计训练成本从O(N)降至O(log N)，峰值活跃核数与系统规模无关；实验显示训练成本显著降低，同时相对L2误差降低或相当；PE-EK-PINN求解256偶极阵列比直接PE-PINN快30倍以上。",
       "limitations": "摘要未说明",
-      "score": 92,
+      "score": 91,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1181,9 +1187,9 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "物理信息神经网络",
-        "亥姆霍兹问题",
-        "可扩展训练",
-        "核方法"
+        "亥姆霍兹方程",
+        "可扩展性",
+        "天线阵列"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1204,12 +1210,12 @@
       "contentType": "paper",
       "title": "可审计长期记忆：在LongMemEval-S上测得500题中479/475的确定性检索链",
       "originalTitle": "Auditable Long-Term Memory: A Deterministic Retrieval Chain Measured at 479/475 of 500 on LongMemEval-S",
-      "summary": "在LongMemEval-S上评估可审计长期记忆系统：混合候选检索、交叉编码器重排、覆盖优先的包编译与确定性推理脚手架，LLM仅作可替换的最终阅读器；两次500题评测在GPT-4o下得479/500与475/500，检索链将全部金标会话纳入候选池468/470。",
+      "summary": "评估一个可审计长期记忆系统：混合候选检索、交叉编码器重排、覆盖优先的包编译与确定性推理支架，LLM仅作可替换的最终阅读器。候选池含全部金标会话468/470，金标完整包462/470。以未固定CLI别名的Claude Opus阅读器两次500题评测得479/500与475/500（GPT-4o评分）。",
       "abstract": "We evaluate an auditable long-term memory system on LongMemEval-S. Its retrieval chain uses hybrid candidate retrieval, cross-encoder reranking, coverage-first packet compilation, and deterministic reasoning scaffolds; an LLM is used only as a replaceable final reader. The chain places all gold sessions in the candidate pool for 468/470 answerable questions and produces gold-complete packets for 462/470. With a Claude Opus reader called through an unpinned CLI alias, two 500-question passes score 479/500 and 475/5…",
       "keyFacts": [
-        "如何构建并评估一条可审计的长期记忆检索链，在LongMemEval-S上取得与公开结果可比较的得分，同时明确其结论的局限。",
-        "检索链采用混合候选检索、交叉编码器重排、覆盖优先的包编译与确定性推理脚手架，LLM仅作可替换的最终阅读器；使用通过未固定CLI别名调用的Claude Opus阅读器，进行两次500题评测，并以grok-4.6-high阅读器和最大推理努力智能体变体对照，另用第二评判模型复核。",
-        "检索链将全部金标会话纳入候选池达468/470，生成金标完整包462/470；两次500题评测得479/500和475/500；72条可回答知识更新行使用了实质性修改的评分提示，其官方文本下的效果尚未测量；该结果与Chronos High公开的478/500交错；grok-4.6-high得476/474，最大推理努力智能体变体回退到461/465；第二评判模型在两轮与主评判一致493/500（98.6%），均给出472/500；官方评判对字节相同的首轮答案重评时翻转三个判定；负对照拒绝了一个修复三份错误草稿但破坏十一份正确草稿的验证器。"
+        "一个使用确定性检索链、仅以LLM作为可替换最终阅读器的可审计长期记忆系统，在LongMemEval-S上能达到怎样的检索完整性与问答表现？",
+        "构建检索链：混合候选检索、交叉编码器重排、覆盖优先的包编译和确定性推理支架，LLM仅作为可替换的最终阅读器；在LongMemEval-S上评测，由Claude Opus经未固定CLI别名阅读，用GPT-4o等评分，并做第二评判者与阴性对照实验。",
+        "候选池包含全部金标会话468/470，生成金标完整包462/470；两次500题评测得479/500与475/500，跨Chronos High已发表478/500；同一包上grok-4.6-high得476/474，最大推理努力智能体变体回退至461/465；第二评判者在每次通过中与主评判者一致493/500（98.6%）并均打472/500；官方评判者重评字节相同的第1次答案时翻转三个判定；阴性对照否决了一个修复3份错误草稿却破坏11份正确草稿的验证器。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1231,11 +1237,11 @@
       "primaryCategory": "cs.CL",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何构建并评估一条可审计的长期记忆检索链，在LongMemEval-S上取得与公开结果可比较的得分，同时明确其结论的局限。",
-      "method": "检索链采用混合候选检索、交叉编码器重排、覆盖优先的包编译与确定性推理脚手架，LLM仅作可替换的最终阅读器；使用通过未固定CLI别名调用的Claude Opus阅读器，进行两次500题评测，并以grok-4.6-high阅读器和最大推理努力智能体变体对照，另用第二评判模型复核。",
-      "findings": "检索链将全部金标会话纳入候选池达468/470，生成金标完整包462/470；两次500题评测得479/500和475/500；72条可回答知识更新行使用了实质性修改的评分提示，其官方文本下的效果尚未测量；该结果与Chronos High公开的478/500交错；grok-4.6-high得476/474，最大推理努力智能体变体回退到461/465；第二评判模型在两轮与主评判一致493/500（98.6%），均给出472/500；官方评判对字节相同的首轮答案重评时翻转三个判定；负对照拒绝了一个修复三份错误草稿但破坏十一份正确草稿的验证器。",
-      "limitations": "所有组件均在同一500题上开发，无留出评估或独立人工裁定；检索与脚手架方法来源及转录衍生审计未公开；主阅读器获得额外操作者上下文，其完整请求未保留，MCP工具可用性未解决；读者代际、评分提示、可能的数据版本差异及系统内方差，均无法确立优越性或等价性。",
-      "score": 92,
+      "question": "一个使用确定性检索链、仅以LLM作为可替换最终阅读器的可审计长期记忆系统，在LongMemEval-S上能达到怎样的检索完整性与问答表现？",
+      "method": "构建检索链：混合候选检索、交叉编码器重排、覆盖优先的包编译和确定性推理支架，LLM仅作为可替换的最终阅读器；在LongMemEval-S上评测，由Claude Opus经未固定CLI别名阅读，用GPT-4o等评分，并做第二评判者与阴性对照实验。",
+      "findings": "候选池包含全部金标会话468/470，生成金标完整包462/470；两次500题评测得479/500与475/500，跨Chronos High已发表478/500；同一包上grok-4.6-high得476/474，最大推理努力智能体变体回退至461/465；第二评判者在每次通过中与主评判者一致493/500（98.6%）并均打472/500；官方评判者重评字节相同的第1次答案时翻转三个判定；阴性对照否决了一个修复3份错误草稿却破坏11份正确草稿的验证器。",
+      "limitations": "所有组件均在同样500题上开发，无留出评估或独立人工裁定；检索与支架方法来源及转录派生审计未公开；主阅读器获得额外操作者上下文，其完整请求未保留，MCP工具可用性未解决；72条可回答知识更新行使用了实质性修改的评分提示，其在官方文本下的效果未测量。",
+      "score": 91,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1247,8 +1253,8 @@
       "tags": [
         "长期记忆",
         "检索增强生成",
-        "评估基准",
-        "可审计性"
+        "可审计性",
+        "基准评测"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1267,14 +1273,14 @@
     {
       "id": "arxiv:2609.37941",
       "contentType": "paper",
-      "title": "一种用于AEM水电解退化预测的高效机器学习方法",
+      "title": "AEM水电解退化预测的高效机器学习方法",
       "originalTitle": "An Efficient Machine Learning Approach for Degradation Forecasting in AEM Water Electrolysis",
-      "summary": "本研究基于单电池阴离子交换膜水电解器（AEMWE）在恒定电流负载下、跨多个异质实验活动的新数据集，训练并评估了包括线性基线、LSTM和CNN在内的不同复杂度机器学习模型，用于电池电压退化曲线的中期预测；模型在专为异质工业数据设计的严格训练与评估框架内被评估。",
+      "summary": "针对恒定电流负载下多组异构实验的单电池阴离子交换膜水电解（AEMWE）新数据集开展数据驱动分析，训练并评估从线性基线、LSTM到CNN等多种复杂度的机器学习模型，用于电池电压退化曲线的中期预测，并在专为异构工业数据设计的严格训练与评估框架内评估。",
       "abstract": "This study provides a data-driven analysis of a novel dataset of single-cell Anion Exchange Membrane water electrolyzers (AEMWE), operated under constant current load across multiple heterogeneous experimental campaigns. We train and evaluate a range of machine learning models with different complexity, including linear baselines, LSTMs and CNNs, to perform medium-term forecasting of the cell voltage degradation curve. The models are assessed within a rigorous training and evaluation framework specifically designe…",
       "keyFacts": [
-        "如何对AEM水电解器在异质实验条件下获得的电池电压退化曲线进行中期预测？",
-        "基于单电池AEMWE在恒定电流负载下、跨多个异质实验活动的新数据集，训练并评估包括线性基线、LSTM和CNN在内的多种不同复杂度机器学习模型，并使用专为异质工业数据设计的严格训练与评估框架。",
-        "摘要未说明具体实验结果。"
+        "在恒定电流负载、多组异构实验条件下运行的单电池AEMWE数据集上，不同复杂度的机器学习模型能否有效进行电池电压退化曲线的中期预测？",
+        "训练并评估包括线性基线、LSTM和CNN在内的多种复杂度机器学习模型，在专为异构工业数据设计的严格训练与评估框架内进行。",
+        "摘要未说明"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1301,9 +1307,9 @@
       "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何对AEM水电解器在异质实验条件下获得的电池电压退化曲线进行中期预测？",
-      "method": "基于单电池AEMWE在恒定电流负载下、跨多个异质实验活动的新数据集，训练并评估包括线性基线、LSTM和CNN在内的多种不同复杂度机器学习模型，并使用专为异质工业数据设计的严格训练与评估框架。",
-      "findings": "摘要未说明具体实验结果。",
+      "question": "在恒定电流负载、多组异构实验条件下运行的单电池AEMWE数据集上，不同复杂度的机器学习模型能否有效进行电池电压退化曲线的中期预测？",
+      "method": "训练并评估包括线性基线、LSTM和CNN在内的多种复杂度机器学习模型，在专为异构工业数据设计的严格训练与评估框架内进行。",
+      "findings": "摘要未说明",
       "limitations": "摘要未说明",
       "score": 91,
       "scoreBasis": "研究相关度",
@@ -1315,10 +1321,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "AEM水电解",
+        "阴离子交换膜水电解",
         "退化预测",
-        "机器学习",
-        "时间序列预测"
+        "时间序列预测",
+        "工业数据"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1337,14 +1343,14 @@
     {
       "id": "arxiv:2609.37922",
       "contentType": "paper",
-      "title": "WayFinder：用于零样本路点生成与低级运动学控制的分层视觉-语言-动作框架",
+      "title": "WayFinder：面向零样本路点生成与底层运动控制的分层视觉-语言-动作框架",
       "originalTitle": "WayFinder: Hierarchical Visual-Language-Action for Zero-Shot Waypoint Generation and Low-Level Kinematic Control",
-      "summary": "WayFinder是一种端到端闭环分层VLA框架，通过解耦高层任务推理与低级运动学控制来避免微调：离板零样本MLLM策略处理语言上下文和状态地图以生成战略路点，轻量级在板策略基于连续传感器反馈异步执行高频实时运动学控制；在Microsoft AirSim中测试四个复杂度和三种MLLM规模，结果显示导航可靠性优于基线低级策略，仅在导航失败时查询高层MLLM，成功率高至27.45%。",
+      "summary": "提出WayFinder，端到端闭环分层VLA框架，无需微调，将高层任务推理与底层运动控制解耦：零样本离板多模态大语言模型策略处理语言上下文与状态图以生成策略性路点，异步的轻量板载策略基于连续传感器反馈执行高频实时运动控制。在Microsoft AirSim中测试四个复杂度和三种MLLM规模，导航成功率最高提升27.45%。",
       "abstract": "Visual Language Action (VLA) models offer unprecedented generalization for autonomous robots; however, their real-world deployment is frequently bottlenecked by unreliable execution and the prohibitive computational cost of fine-tuning for specific robot embodiments and tasks. To bridge this gap, we propose WayFinder, an end-to-end, closed-loop hierarchical VLA framework that circumvents the need for fine-tuning by decoupling high-level task reasoning from low-level kinematic control. WayFinder utilizes a zero-sho…",
       "keyFacts": [
-        "如何在不进行微调的情况下，实现VLA模型在真实机器人上的可靠执行并降低特定具身与任务的计算成本？",
-        "提出端到端闭环分层VLA框架WayFinder，用离板零样本MLLM策略处理语言上下文和状态地图生成战略路点，同时由轻量级在板策略基于连续传感器反馈异步执行高频实时运动学控制；在Microsoft AirSim中测试四个不同复杂度环境和三种MLLM规模。",
-        "WayFinder的导航可靠性优于基线低级策略；仅在导航失败时查询高层MLLM，从而无需微调、减少昂贵推理，并将导航成功率提升最多27.45%。"
+        "如何避免视觉-语言-动作模型在真实机器人部署中因不可靠执行和针对特定本体与任务的昂贵微调而受限，实现零样本路点生成与底层运动控制？",
+        "提出WayFinder，端到端闭环分层VLA框架：零样本离板多模态大语言模型（MLLM）策略处理语言上下文和状态图生成策略性路点，异步的轻量板载策略基于连续传感器反馈执行高频实时运动控制；在Microsoft AirSim中测试四个不同复杂度环境和三种MLLM规模。",
+        "WayFinder相比基线底层策略取得更优的导航可靠性；仅在导航失败时查询高层MLLM，无需微调、减少昂贵推理，导航成功率最高提升27.45%。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1365,9 +1371,9 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何在不进行微调的情况下，实现VLA模型在真实机器人上的可靠执行并降低特定具身与任务的计算成本？",
-      "method": "提出端到端闭环分层VLA框架WayFinder，用离板零样本MLLM策略处理语言上下文和状态地图生成战略路点，同时由轻量级在板策略基于连续传感器反馈异步执行高频实时运动学控制；在Microsoft AirSim中测试四个不同复杂度环境和三种MLLM规模。",
-      "findings": "WayFinder的导航可靠性优于基线低级策略；仅在导航失败时查询高层MLLM，从而无需微调、减少昂贵推理，并将导航成功率提升最多27.45%。",
+      "question": "如何避免视觉-语言-动作模型在真实机器人部署中因不可靠执行和针对特定本体与任务的昂贵微调而受限，实现零样本路点生成与底层运动控制？",
+      "method": "提出WayFinder，端到端闭环分层VLA框架：零样本离板多模态大语言模型（MLLM）策略处理语言上下文和状态图生成策略性路点，异步的轻量板载策略基于连续传感器反馈执行高频实时运动控制；在Microsoft AirSim中测试四个不同复杂度环境和三种MLLM规模。",
+      "findings": "WayFinder相比基线底层策略取得更优的导航可靠性；仅在导航失败时查询高层MLLM，无需微调、减少昂贵推理，导航成功率最高提升27.45%。",
       "limitations": "摘要未说明",
       "score": 91,
       "scoreBasis": "研究相关度",
@@ -1379,7 +1385,7 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "视觉-语言-动作模型",
+        "视觉-语言-动作",
         "零样本导航",
         "分层控制",
         "机器人"
@@ -1403,12 +1409,12 @@
       "contentType": "paper",
       "title": "ExceptionDrive：面向规划的自动驾驶反事实极端案例基准",
       "originalTitle": "ExceptionDrive: A Planning-Oriented Counterfactual Corner-Case Benchmark for Autonomous Driving",
-      "summary": "ExceptionDrive是一个面向规划的反事实基准，用VLM辅助筛选、局部多视角编辑与质量审计向真实nuScenes场景插入危险，覆盖六大安全族共21项任务，定义危险区域、局部安全约束与可接受响应，并用无参考协议以UR、HCC、HPR、CTS评估编辑后的预测。七种代表性规划器常侵入危险区域或间隔不足；Reminder Agent将视觉证据与共享分类转为结构化记录，零样本实验提升策略准确率并减少警告不足。",
+      "summary": "提出基于反事实规划的自动驾驶基准ExceptionDrive，用VLM辅助筛选、局部多视角编辑与质量审计向真实nuScenes场景注入危险，保留上下文。含21项任务、六大安全族，定义危险/冲突区域、局部安全约束与可接受响应。采用无参考协议以UR、HCC、HPR、CTS评估。七种规划器常侵入危险区域或间隔不足。Reminder Agent在零样本中提升策略准确率并减少预警不足。",
       "abstract": "Average performance on routine driving benchmarks does not establish planner reliability under rare, safety-critical hazards. We proposed ExceptionDrive, a counterfactual planning benchmark that uses VLM-assisted screening, localized multi-view editing, and quality auditing to insert hazards into real nuScenes scenes while preserving their context. Its 21 tasks span six safety families and define hazard or conflict regions, local safety constraints, and acceptable responses. Because hazard insertion can invalidate…",
       "keyFacts": [
-        "常规驾驶基准上的平均性能无法确立规划器在罕见安全关键危险下的可靠性；如何构建反事实规划基准并要求规划器在插入危险的真实场景中安全响应。",
-        "提出ExceptionDrive基准，采用VLM辅助筛选、局部多视角编辑与质量审计在真实nuScenes场景中插入危险并保留上下文，定义21项任务、六大安全族、危险或冲突区域及局部安全约束，采用无参考协议以UR、HCC、HPR、CTS评估编辑后的预测，并开发将视觉证据与共享分类转为结构化记录的Reminder Agent。",
-        "七种代表性规划器频繁侵入危险区域或提供不足间隔；Reminder Agent在不使用样本特定任务标签的情况下将视觉证据与共享分类转为危险存在、类型和推荐高层策略；零样本实验中提醒提升策略准确率并减少警告不足。"
+        "常规驾驶基准的平均性能无法确立规划器在罕见安全关键危险下的可靠性，如何构建并评估此类场景？",
+        "提出ExceptionDrive反事实规划基准，采用VLM辅助筛选、局部多视角编辑与质量审计向真实nuScenes场景注入危险；定义无参考评估协议UR、HCC、HPR、CTS；开发Reminder Agent并用于VLM决策智能体的零样本实验。",
+        "七种代表性规划器频繁侵入危险区域或间隔不足；Reminder Agent的记录在零样本实验中提升策略准确率并减少预警不足。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1436,9 +1442,9 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "常规驾驶基准上的平均性能无法确立规划器在罕见安全关键危险下的可靠性；如何构建反事实规划基准并要求规划器在插入危险的真实场景中安全响应。",
-      "method": "提出ExceptionDrive基准，采用VLM辅助筛选、局部多视角编辑与质量审计在真实nuScenes场景中插入危险并保留上下文，定义21项任务、六大安全族、危险或冲突区域及局部安全约束，采用无参考协议以UR、HCC、HPR、CTS评估编辑后的预测，并开发将视觉证据与共享分类转为结构化记录的Reminder Agent。",
-      "findings": "七种代表性规划器频繁侵入危险区域或提供不足间隔；Reminder Agent在不使用样本特定任务标签的情况下将视觉证据与共享分类转为危险存在、类型和推荐高层策略；零样本实验中提醒提升策略准确率并减少警告不足。",
+      "question": "常规驾驶基准的平均性能无法确立规划器在罕见安全关键危险下的可靠性，如何构建并评估此类场景？",
+      "method": "提出ExceptionDrive反事实规划基准，采用VLM辅助筛选、局部多视角编辑与质量审计向真实nuScenes场景注入危险；定义无参考评估协议UR、HCC、HPR、CTS；开发Reminder Agent并用于VLM决策智能体的零样本实验。",
+      "findings": "七种代表性规划器频繁侵入危险区域或间隔不足；Reminder Agent的记录在零样本实验中提升策略准确率并减少预警不足。",
       "limitations": "摘要未说明",
       "score": 91,
       "scoreBasis": "研究相关度",
@@ -1452,8 +1458,8 @@
       "tags": [
         "自动驾驶",
         "反事实基准",
-        "规划安全",
-        "视觉语言模型"
+        "安全关键场景",
+        "规划评估"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1472,14 +1478,14 @@
     {
       "id": "arxiv:2609.38119",
       "contentType": "paper",
-      "title": "VideoLoop：用于对抗长视频智能体语义震荡的循环工作记忆",
+      "title": "VideoLoop：以循环工作记忆对抗长视频智能体中的语义抖动",
       "originalTitle": "VideoLoop: Looped Working Memory Against Semantic Thrashing in Long-Form Video Agents",
-      "summary": "长视频理解需要多模态智能体在多步推理中迭代收集证据，但仅追加式工作记忆增长会导致对关键证据的注意力崩溃，即语义震荡。VideoLoop采用外循环推理视频、内循环在每步后从无界文件系统检索过往观测与中间分析并重写有界工作记忆。该方法可即插即用地提升四个主流LVLM骨干，在VideoMME（长）平均提升4.2个百分点；最难四分之一问题上盲评仅读上下文的正确率为81.1%，而仅追加式为60.9%；配合Gemini 3.1 Pro在VideoMME（长）、VideoMMMU、LongVideoBench（长）分别达88.3%、88.8%、80.9%。",
+      "summary": "针对长视频智能体的语义抖动问题，先给出结构性论证：仅追加记忆能纳入新证据但无法移除累积噪声或阻止有序上下文增长，除非引入重写算子。据此提出VideoLoop，含外层视频推理循环与内层检索并重写有界工作记忆的循环。实验表明其以即插即用方式提升四种主流LVLM骨干，在VideoMME（长）平均提升4.2个百分点；最难四分之一问题上盲判达81.1%对60.9%；Gemini 3.1 Pro下达88.3%、88.8%与80.9%。",
       "abstract": "Long-form video understanding requires multimodal agents to iteratively gather evidence over many reasoning steps. However, most existing agentic methods suffer from semantic thrashing: as append-only working memory grows, attention to key evidence collapses, and the agent loses access to what it has already found. First, we provide a structural argument showing that append-only memory can incorporate newly observed target evidence, but cannot remove accumulated noise or prevent ordered context growth without a re…",
       "keyFacts": [
-        "长视频理解任务中，仅追加式工作记忆增长会导致对关键证据的注意力崩溃（语义震荡），如何让智能体在迭代推理中保留已发现证据并避免上下文无序增长。",
-        "首先给出结构性论证说明仅追加式记忆无法去除累积噪声或阻止有序上下文增长；据此提出VideoLoop，一个具有两个耦合循环的多模态智能体，外循环对视频推理，内循环在每步后从无界文件系统检索过往观测与中间分析工件并重写有界工作记忆。",
-        "VideoLoop以即插即用方式提升四个流行LVLM骨干，在VideoMME（长）上平均增益4.2个百分点；在VideoMME（长）最难四分之一问题上，仅读取智能体上下文的盲评正确率为81.1%，而仅追加式智能体为60.9%；配合Gemini 3.1 Pro，在VideoMME（长）、VideoMMMU、LongVideoBench（长）上分别达88.3%、88.8%、80.9%。"
+        "长视频理解中，随着仅追加工作记忆增长导致对关键证据注意力崩溃的语义抖动问题如何解决？",
+        "提出含内外两个耦合循环的多模态智能体VideoLoop：外层对视频推理，内层每步从不限文件系统中检索过往观察与中间分析，并重写有界工作记忆。",
+        "VideoLoop以即插即用方式提升四个流行LVLM骨干，在VideoMME（长）上平均较基线提升4.2个百分点；最难四分之一问题上，仅读上下文的盲判正确率81.1%，对比仅追加智能体的60.9%；Gemini 3.1 Pro下VideoMME（长）88.3%、VideoMMMU 88.8%、LongVideoBench（长）80.9%。"
       ],
       "why": "该研究与计算机视觉相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1505,11 +1511,11 @@
         "多模态智能体"
       ],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "长视频理解任务中，仅追加式工作记忆增长会导致对关键证据的注意力崩溃（语义震荡），如何让智能体在迭代推理中保留已发现证据并避免上下文无序增长。",
-      "method": "首先给出结构性论证说明仅追加式记忆无法去除累积噪声或阻止有序上下文增长；据此提出VideoLoop，一个具有两个耦合循环的多模态智能体，外循环对视频推理，内循环在每步后从无界文件系统检索过往观测与中间分析工件并重写有界工作记忆。",
-      "findings": "VideoLoop以即插即用方式提升四个流行LVLM骨干，在VideoMME（长）上平均增益4.2个百分点；在VideoMME（长）最难四分之一问题上，仅读取智能体上下文的盲评正确率为81.1%，而仅追加式智能体为60.9%；配合Gemini 3.1 Pro，在VideoMME（长）、VideoMMMU、LongVideoBench（长）上分别达88.3%、88.8%、80.9%。",
+      "question": "长视频理解中，随着仅追加工作记忆增长导致对关键证据注意力崩溃的语义抖动问题如何解决？",
+      "method": "提出含内外两个耦合循环的多模态智能体VideoLoop：外层对视频推理，内层每步从不限文件系统中检索过往观察与中间分析，并重写有界工作记忆。",
+      "findings": "VideoLoop以即插即用方式提升四个流行LVLM骨干，在VideoMME（长）上平均较基线提升4.2个百分点；最难四分之一问题上，仅读上下文的盲判正确率81.1%，对比仅追加智能体的60.9%；Gemini 3.1 Pro下VideoMME（长）88.3%、VideoMMMU 88.8%、LongVideoBench（长）80.9%。",
       "limitations": "摘要未说明",
-      "score": 91,
+      "score": 90,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1523,7 +1529,7 @@
         "长视频理解",
         "多模态智能体",
         "工作记忆",
-        "语义震荡"
+        "语义抖动"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1542,14 +1548,14 @@
     {
       "id": "arxiv:2609.38086",
       "contentType": "paper",
-      "title": "VISTA：通过同策略蒸馏为主动多模态智能体内化集体视觉经验",
+      "title": "VISTA：面向主动多模态智能体通过同策略蒸馏内化集体视觉经验",
       "originalTitle": "VISTA: Internalizing Collective Visual Experience via On-Policy Distillation for Active Multimodal Agents",
-      "summary": "主动多模态智能体使用视觉工具在推理中获取任务相关证据；尽管强化学习对每个输入采样多条交互轨迹，基于结果的目标主要用组估计标量优势，互补视觉发现未被充分利用。VISTA通过同策略蒸馏将同输入 rollout 的观测转为共享监督：集体视觉经验蒸馏（CVED）结合交互上下文组织观测并与个体决策对齐；异质性感知策略改进（HAPI）强化成功轨迹并为失败尝试提供经验引导蒸馏。经验条件教师评估学生采样的响应前缀，使一条轨迹的发现指导另一条学习，而不替换学生原有历史或生成新目标轨迹。训练后智能体保留视觉工具并基于自身交互历史行动。",
+      "summary": "主动多模态智能体用视觉工具获取证据，但基于结果的目标只把同输入的多次交互轨迹用于估计标量优势，浪费了互补视觉发现。VISTA通过同策略蒸馏把同输入rollout的观察转化为共享监督：CVED用交互上下文组织观察并与个体决策对齐，HAPI强化成功轨迹并为失败尝试提供经验引导蒸馏。经验条件教师评估学生采样前缀，使一条轨迹的发现指导另一条学习，且不替换原始历史。VISTA在同规模主动多模态智能体中取得最强平均表现。",
       "abstract": "Active multimodal agents use visual tools to acquire task-relevant evidence while reasoning. Although reinforcement learning samples multiple interaction trajectories per input, outcome-based objectives primarily use the group to estimate scalar advantages, leaving complementary visual discoveries underused. We introduce VISTA, which internalizes collective visual experience through on-policy distillation by turning observations from same-input rollouts into shared supervision. Collective visual experience distill…",
       "keyFacts": [
-        "主动多模态智能体通过视觉工具获取证据，但基于结果的强化学习虽采样多条轨迹，仅用组估计标量优势，互补的视觉发现未被充分利用；如何让同一输入的不同轨迹的视觉发现相互指导学习。",
-        "提出VISTA，通过同策略蒸馏内化集体视觉经验；集体视觉经验蒸馏（CVED）用交互上下文组织观测并与个体决策对齐，异质性感知策略改进（HAPI）强化成功轨迹并为失败尝试提供经验引导蒸馏；经验条件教师评估学生采样的响应前缀，使一条轨迹的发现指导另一条学习，而不替换学生原始历史或生成新目标轨迹；训练后智能体保留视觉工具并基于自身交互历史行动。",
-        "VISTA在评估的同等规模主动多模态智能体中取得最强平均性能，并在细粒度感知与通用推理任务上持续优于同骨干训练基线，表明集体经验对主动多模态学习有价值。"
+        "如何利用同输入多次交互轨迹中互补的视觉发现来改进主动多模态智能体的学习？",
+        "提出VISTA，通过同策略蒸馏内化集体视觉经验，包括集体视觉经验蒸馏（CVED）和异质性感知策略改进（HAPI），并使用经验条件教师评估学生采样响应前缀。",
+        "VISTA在评估的同等规模主动多模态智能体中取得最强平均性能，并在细粒度感知与通用推理任务上持续优于同骨干训练基线。"
       ],
       "why": "该研究与计算机视觉相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1578,11 +1584,11 @@
         "多模态智能体"
       ],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "主动多模态智能体通过视觉工具获取证据，但基于结果的强化学习虽采样多条轨迹，仅用组估计标量优势，互补的视觉发现未被充分利用；如何让同一输入的不同轨迹的视觉发现相互指导学习。",
-      "method": "提出VISTA，通过同策略蒸馏内化集体视觉经验；集体视觉经验蒸馏（CVED）用交互上下文组织观测并与个体决策对齐，异质性感知策略改进（HAPI）强化成功轨迹并为失败尝试提供经验引导蒸馏；经验条件教师评估学生采样的响应前缀，使一条轨迹的发现指导另一条学习，而不替换学生原始历史或生成新目标轨迹；训练后智能体保留视觉工具并基于自身交互历史行动。",
-      "findings": "VISTA在评估的同等规模主动多模态智能体中取得最强平均性能，并在细粒度感知与通用推理任务上持续优于同骨干训练基线，表明集体经验对主动多模态学习有价值。",
+      "question": "如何利用同输入多次交互轨迹中互补的视觉发现来改进主动多模态智能体的学习？",
+      "method": "提出VISTA，通过同策略蒸馏内化集体视觉经验，包括集体视觉经验蒸馏（CVED）和异质性感知策略改进（HAPI），并使用经验条件教师评估学生采样响应前缀。",
+      "findings": "VISTA在评估的同等规模主动多模态智能体中取得最强平均性能，并在细粒度感知与通用推理任务上持续优于同骨干训练基线。",
       "limitations": "摘要未说明",
-      "score": 91,
+      "score": 90,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1595,8 +1601,8 @@
       "tags": [
         "主动多模态智能体",
         "同策略蒸馏",
-        "强化学习",
-        "视觉工具"
+        "视觉工具",
+        "集体经验"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1615,14 +1621,14 @@
     {
       "id": "arxiv:2609.38176",
       "contentType": "paper",
-      "title": "局部去噪的失效作为语义物种形成",
+      "title": "局部去噪失效作为语义物种形成",
       "originalTitle": "Breakdown of Local Denoising as Semantic Speciation",
-      "summary": "生成模型动力学存在两个看似不同的时间窗口：样本确定语义类别的物种形成窗口，以及局部上下文窗口不再足以生成的非局域窗口。受多种前沿模型中两者近乎同时出现的证据启发，我们通过语义信息的空间分布研究其关系。在“共同原因”假设下证明非局域窗口必位于物种形成窗口内；该假设认为语义标签解释远距离词元间相关性的一部分，这对许多真实数据集是自然的。进一步给出条件使两窗口随系统规模增大收缩到单一极限时间，定义“相变”，并在高斯混合中解析验证。",
+      "summary": "生成模型动态呈现两个看似不同的时间窗口：样本锁定语义类别的物种形成窗口，以及局部上下文窗口不足以生成的非局域性窗口。基于前沿模型中二者近乎同时出现的证据，通过语义信息的空间分布研究其关系。在共同原因假设下证明非局域性窗口必位于物种形成窗口内；该假设认为语义标签解释远距离token间相关性的一部分。进一步给出两窗口随系统规模增大收缩为单一极限时间的条件，定义相变，并在高斯混合中解析验证。",
       "abstract": "The dynamics of generative models exhibit two apparently distinct temporal windows: a speciation window, in which a sample commits to a semantic class, and a nonlocality window, in which local context windows become insufficient for generation. Motivated by evidence of their near-concurrence in a variety of frontier models, we investigate their relationship through the spatial distribution of semantic information. Under a \"common cause\" hypothesis, we prove that the nonlocality window must lie in the speciation wi…",
       "keyFacts": [
-        "生成模型动力学中的物种形成窗口（样本确定语义类别）与非局域窗口（局部上下文窗口不足以生成）看似不同，但多种前沿模型中两者近乎同时出现；如何解释两者关系。",
-        "通过语义信息的空间分布研究二者关系；在“共同原因”假设下证明非局域窗口必位于物种形成窗口内，该假设认为语义标签解释远距离词元间相关性的一部分；给出条件使两窗口随系统规模增大收缩到单一极限时间，定义“相变”，并在高斯混合中解析验证。",
-        "在共同原因假设下，非局域窗口必须位于物种形成窗口内；给出条件使两个窗口随系统规模增大收缩为单一极限时间，定义“相变”，并在高斯混合中解析验证该行为；结果识别了语义信息解释物种形成与非局域近乎同时出现的一类条件，连接了生成建模中语义结构涌现的两种互补视角。"
+        "生成模型中物种形成窗口与非局域性窗口之间是什么关系？",
+        "从语义信息的空间分布入手，在共同原因假设下进行理论证明，给出两窗口随系统规模收缩为单一极限时间的条件，并在高斯混合中做解析验证。",
+        "在共同原因假设下，非局域性窗口必位于物种形成窗口内；给出两窗口收缩为单一极限时间的条件以定义相变，并在高斯混合中解析验证该行为。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1649,11 +1655,11 @@
       "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "生成模型动力学中的物种形成窗口（样本确定语义类别）与非局域窗口（局部上下文窗口不足以生成）看似不同，但多种前沿模型中两者近乎同时出现；如何解释两者关系。",
-      "method": "通过语义信息的空间分布研究二者关系；在“共同原因”假设下证明非局域窗口必位于物种形成窗口内，该假设认为语义标签解释远距离词元间相关性的一部分；给出条件使两窗口随系统规模增大收缩到单一极限时间，定义“相变”，并在高斯混合中解析验证。",
-      "findings": "在共同原因假设下，非局域窗口必须位于物种形成窗口内；给出条件使两个窗口随系统规模增大收缩为单一极限时间，定义“相变”，并在高斯混合中解析验证该行为；结果识别了语义信息解释物种形成与非局域近乎同时出现的一类条件，连接了生成建模中语义结构涌现的两种互补视角。",
+      "question": "生成模型中物种形成窗口与非局域性窗口之间是什么关系？",
+      "method": "从语义信息的空间分布入手，在共同原因假设下进行理论证明，给出两窗口随系统规模收缩为单一极限时间的条件，并在高斯混合中做解析验证。",
+      "findings": "在共同原因假设下，非局域性窗口必位于物种形成窗口内；给出两窗口收缩为单一极限时间的条件以定义相变，并在高斯混合中解析验证该行为。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1685,14 +1691,14 @@
     {
       "id": "arxiv:2609.38173",
       "contentType": "paper",
-      "title": "情境机器人学习简化为：面向操作任务的民主化配方",
+      "title": "情境机器人学习可以很简单：面向操作任务的民主化配方",
       "originalTitle": "In-context Robot Learning Made Simple: A Democratized Recipe for Manipulation Tasks",
-      "summary": "情境机器人学习（ICL）使机器人能从视觉演示推断并执行任务，但问题定义不清，因为视觉演示同时传达动作轨迹、物体语义、操作可供性、空间关系与任务目标，机器人实际应遵循何种信息并不明确。本文首先给出机器人ICL的清晰问题定义，明确其学习目标并解决提示歧义；据此构建极简可复现框架SimpleICL，包含视觉提示编码器与低成本数据采集协议，无需大规模预训练或专用数据基础设施，在仿真与真实环境中均表现良好。实验还揭示机器人ICL在动作、语义、组合与可供性辨别方面的关键性质，并将开源数据与训练流程。",
+      "summary": "研究机器人情境学习（ICL），即从视觉演示推断并执行任务。针对视觉演示同时传达动作轨迹、物体语义、操作可供性、空间关系和任务目标所导致的提示歧义，给出明确问题定义，界定学习目标。据此提出极简可复现框架SimpleICL，含视觉提示编码器和低成本数据采集协议，无需大规模预训练或专用数据基础设施，在仿真与真实环境中表现良好，并揭示动作、语义、组合与可供性辨别等性质，数据与训练流程将开源。",
       "abstract": "We study robotic in-context learning (ICL), an emerging paradigm that enables robots to infer and execute tasks from visual demonstrations. Despite its growing promise, the problem itself remains under-defined: a visual demonstration simultaneously conveys action trajectories, object semantics, manipulation affordances, spatial relations, and task goals, making it unclear what information the robot is actually expected to follow. In this work, we first provide a clear problem definition of robot ICL that explicitl…",
       "keyFacts": [
-        "机器人情境学习（ICL）中，视觉演示同时传达动作轨迹、物体语义、操作可供性、空间关系与任务目标，导致问题定义不清，机器人实际应遵循何种信息不明确；如何定义机器人ICL的学习目标并解决提示歧义。",
-        "首先给出机器人ICL的清晰问题定义，明确学习目标并解决提示歧义；据此构建极简且可复现的ICL框架SimpleICL，包含视觉提示编码器与低成本数据采集协议，无需大规模预训练或专用数据基础设施，并在仿真与真实环境中实验。",
-        "SimpleICL在仿真与真实环境中均取得强性能，无需大规模预训练或专用数据基础设施；大量实验揭示机器人ICL在动作、语义、组合与可供性辨别方面的关键性质；作者将完全开源数据与训练流程。"
+        "机器人情境学习应跟随视觉演示中的何种信息？该问题此前定义不清，如何明确定义并简单实现？",
+        "给出机器人情境学习的问题定义以明确学习目标并消除提示歧义；提出SimpleICL框架，含视觉提示编码器和低成本数据采集协议，在仿真与真实环境实验。",
+        "无需大规模预训练或专用数据基础设施，框架在仿真和真实环境中取得强性能；实验揭示机器人情境学习的动作、语义、组合和可供性辨别等关键性质。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1724,11 +1730,11 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "机器人情境学习（ICL）中，视觉演示同时传达动作轨迹、物体语义、操作可供性、空间关系与任务目标，导致问题定义不清，机器人实际应遵循何种信息不明确；如何定义机器人ICL的学习目标并解决提示歧义。",
-      "method": "首先给出机器人ICL的清晰问题定义，明确学习目标并解决提示歧义；据此构建极简且可复现的ICL框架SimpleICL，包含视觉提示编码器与低成本数据采集协议，无需大规模预训练或专用数据基础设施，并在仿真与真实环境中实验。",
-      "findings": "SimpleICL在仿真与真实环境中均取得强性能，无需大规模预训练或专用数据基础设施；大量实验揭示机器人ICL在动作、语义、组合与可供性辨别方面的关键性质；作者将完全开源数据与训练流程。",
+      "question": "机器人情境学习应跟随视觉演示中的何种信息？该问题此前定义不清，如何明确定义并简单实现？",
+      "method": "给出机器人情境学习的问题定义以明确学习目标并消除提示歧义；提出SimpleICL框架，含视觉提示编码器和低成本数据采集协议，在仿真与真实环境实验。",
+      "findings": "无需大规模预训练或专用数据基础设施，框架在仿真和真实环境中取得强性能；实验揭示机器人情境学习的动作、语义、组合和可供性辨别等关键性质。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1740,7 +1746,7 @@
       "tags": [
         "机器人情境学习",
         "操作任务",
-        "视觉提示",
+        "视觉演示",
         "可复现框架"
       ],
       "translationProvider": "deepseek",
@@ -1760,14 +1766,14 @@
     {
       "id": "arxiv:2609.38172",
       "contentType": "paper",
-      "title": "反事实视频生成实现可扩展的人形移动操作",
+      "title": "反事实视频生成实现可扩展的人形机器人移动操作",
       "originalTitle": "Counterfactual Video Generation Enables Scalable Humanoid Loco-Manipulation",
-      "summary": "提出PRISM真实-仿真-真实框架，用视频到视频生成将少量真实视频放大为数百个反事实人-物交互视频，经接触锚定真实-仿真管线重建人/物运动并重定向为物理合理轨迹，训练单一策略泛化到同类未见物体，真机部署无需微调，仅用机载深度即可拾取、搬运和放下盒子、桶、箱和球。",
+      "summary": "提出PRISM真实-仿真-真实框架，用视频到视频生成将少量真实视频扩展为数百个反事实人机交互视频，经接触锚定的真实到仿真流程重建人与物体运动并重定向为物理可行轨迹；类内多样性使单一策略泛化到同类新物体，在真机无微调下仅用机载深度完成抓取、搬运与放置箱子、桶、箱柜和球。",
       "abstract": "Teaching humanoids loco-manipulation skills, such as carrying diverse objects, via visual imitation is a promising path toward generalist robots. However, collecting diverse, high-quality interaction videos, such as clips that clearly show a person's full body and unoccluded interactions with objects, poses a practical barrier to scaling this approach. We propose PRISM, a real-to-sim-to-real framework that overcomes this limitation by amplifying a handful of real videos into a large, diverse training set. PRISM fi…",
       "keyFacts": [
-        "如何利用视觉模仿让人形机器人掌握多样物体的移动操作技能，并克服高质量交互视频收集困难的问题。",
-        "PRISM真实-仿真-真实框架：先用视频到视频生成从少量真实视频生成数百个反事实人-物交互视频，再用接触锚定真实-仿真管线重建人/物运动并将不完美视频数据重定向为物理合理轨迹，最后用类内变化训练单一策略。",
-        "反事实视频的类内变化使单一策略能泛化到每个类别内未见物体；策略在真实机器人上无需任何真实世界微调即可部署，仅用机载深度观测就能拾取、搬运和放下盒子、桶、箱和球，适应新实例、尺寸和初始配置。"
+        "如何通过视觉模仿让人形机器人获得搬运多样物体的移动操作技能，并解决高质量交互视频采集困难导致的规模化瓶颈。",
+        "PRISM真实-仿真-真实框架：先用视频到视频（V2V）生成从少量真实示例视频生成数百个反事实人机交互视频，再用接触锚定的真实到仿真流程重建人与物体运动，将不完美视频数据重定向为物理可行轨迹。",
+        "反事实视频的类内差异使单一策略能泛化到每个类别中未见过的物体；该策略部署到真实机器人且无需真实世界微调，仅用机载深度观测即可拾取、搬运和放下箱子、桶、箱柜和球，适应新实例、尺寸和初始配置。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1797,11 +1803,11 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何利用视觉模仿让人形机器人掌握多样物体的移动操作技能，并克服高质量交互视频收集困难的问题。",
-      "method": "PRISM真实-仿真-真实框架：先用视频到视频生成从少量真实视频生成数百个反事实人-物交互视频，再用接触锚定真实-仿真管线重建人/物运动并将不完美视频数据重定向为物理合理轨迹，最后用类内变化训练单一策略。",
-      "findings": "反事实视频的类内变化使单一策略能泛化到每个类别内未见物体；策略在真实机器人上无需任何真实世界微调即可部署，仅用机载深度观测就能拾取、搬运和放下盒子、桶、箱和球，适应新实例、尺寸和初始配置。",
+      "question": "如何通过视觉模仿让人形机器人获得搬运多样物体的移动操作技能，并解决高质量交互视频采集困难导致的规模化瓶颈。",
+      "method": "PRISM真实-仿真-真实框架：先用视频到视频（V2V）生成从少量真实示例视频生成数百个反事实人机交互视频，再用接触锚定的真实到仿真流程重建人与物体运动，将不完美视频数据重定向为物理可行轨迹。",
+      "findings": "反事实视频的类内差异使单一策略能泛化到每个类别中未见过的物体；该策略部署到真实机器人且无需真实世界微调，仅用机载深度观测即可拾取、搬运和放下箱子、桶、箱柜和球，适应新实例、尺寸和初始配置。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1812,9 +1818,9 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "人形机器人",
-        "移动操作",
         "视频生成",
-        "真实-仿真-真实"
+        "视觉模仿",
+        "仿真到真实"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1835,12 +1841,12 @@
       "contentType": "paper",
       "title": "STEPQuant：Delta规则循环状态量化中误差何时何地重要",
       "originalTitle": "STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization",
-      "summary": "发现循环状态量化误差影响具有时间与空间两个维度：长寿命记忆中的误差持续多步，不同关键行的误差对输出影响不同且状态幅值行列差异大。据此提出STEPQuant时空训练后量化框架，按误差幅值和记忆寿命分配精度，联合拟合关键行与值列缩放，在Qwen3.8-27B和Kimi-Linear-48B-A3B-Instruct上名义6比特预算接近FP32状态精度，4比特优于均匀INT8，经SGLang优化内核实现超5倍循环状态压缩、总服务内存减少最高68.7%。",
+      "summary": "发现循环状态量化误差影响沿时间与空间两个维度不同：长寿命记忆误差持续多步，不同键行影响输出各异且状态行列幅值差异大。据此提出STEPQuant时空训练后量化框架，按误差幅度与记忆寿命分配精度，联合拟合键行与值列尺度；在Qwen3.8-27B和Kimi-Linear-48B-A3B-Instruct上，6比特预算接近FP32状态精度，4比特配置优于均匀INT8。",
       "abstract": "Linear attention replaces growing KV caches with fixed-size recurrent states, yet these persistent states can become a substantial memory bottleneck under concurrent serving. Directly quantizing recurrent states to low precision often leads to severe accuracy degradation, as quantization errors propagate through successive state updates. We discover that the impact of these errors depends on two complementary dimensions: temporally, errors in long-lived memory can persist across many decoding steps; spatially, err…",
       "keyFacts": [
-        "线性注意力中固定大小循环状态成为内存瓶颈，如何在不显著降低精度的前提下量化循环状态以降低服务内存。",
-        "提出STEPQuant，一种面向Delta规则循环状态的时空训练后量化框架，依据误差幅值和记忆寿命分配精度，并基于状态分布和关键行对输出误差的影响联合拟合关键行与值列缩放；集成到SGLang并优化GPU内核。",
-        "在Qwen3.8-27B和Kimi-Linear-48B-A3B-Instruct的长短生成基准上，STEPQuant在名义6比特预算下接近FP32状态精度，4比特配置优于均匀INT8；集成SGLang后6比特实现超5倍循环状态压缩，总服务内存减少最高68.7%。"
+        "线性注意力中持久循环状态造成内存瓶颈，直接低精度量化循环状态会因误差传播导致严重精度下降，如何按误差影响的时间和空间维度分配量化精度。",
+        "STEPQuant：面向Delta规则循环状态的时空训练后量化框架，依据误差幅度和记忆寿命分配精度，并基于状态分布及键行对输出误差的影响联合拟合键行与值列尺度；集成到SGLang并配备优化GPU内核。",
+        "在Qwen3.8-27B和Kimi-Linear-48B-A3B-Instruct的长短生成基准上，名义6比特预算下精度接近FP32状态，4比特配置优于均匀INT8；6比特STEPQuant实现超过5倍循环状态压缩，并将总服务内存降低最多68.7%。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1870,11 +1876,11 @@
       "primaryCategory": "cs.CL",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "线性注意力中固定大小循环状态成为内存瓶颈，如何在不显著降低精度的前提下量化循环状态以降低服务内存。",
-      "method": "提出STEPQuant，一种面向Delta规则循环状态的时空训练后量化框架，依据误差幅值和记忆寿命分配精度，并基于状态分布和关键行对输出误差的影响联合拟合关键行与值列缩放；集成到SGLang并优化GPU内核。",
-      "findings": "在Qwen3.8-27B和Kimi-Linear-48B-A3B-Instruct的长短生成基准上，STEPQuant在名义6比特预算下接近FP32状态精度，4比特配置优于均匀INT8；集成SGLang后6比特实现超5倍循环状态压缩，总服务内存减少最高68.7%。",
+      "question": "线性注意力中持久循环状态造成内存瓶颈，直接低精度量化循环状态会因误差传播导致严重精度下降，如何按误差影响的时间和空间维度分配量化精度。",
+      "method": "STEPQuant：面向Delta规则循环状态的时空训练后量化框架，依据误差幅度和记忆寿命分配精度，并基于状态分布及键行对输出误差的影响联合拟合键行与值列尺度；集成到SGLang并配备优化GPU内核。",
+      "findings": "在Qwen3.8-27B和Kimi-Linear-48B-A3B-Instruct的长短生成基准上，名义6比特预算下精度接近FP32状态，4比特配置优于均匀INT8；6比特STEPQuant实现超过5倍循环状态压缩，并将总服务内存降低最多68.7%。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1884,10 +1890,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "循环状态量化",
+        "量化",
         "线性注意力",
-        "训练后量化",
-        "推理服务"
+        "循环状态",
+        "LLM推理"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1906,14 +1912,14 @@
     {
       "id": "arxiv:2609.38166",
       "contentType": "paper",
-      "title": "LeapQuant：基于精确循环状态量化的高效线性注意力",
+      "title": "LeapQuant：精确循环状态量化下的高效线性注意力",
       "originalTitle": "LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization",
-      "summary": "针对线性注意力循环状态反复读写瓶颈及量化误差累积与离群行列问题，提出免训练LeapQuant，在8比特循环状态量化下实现近无损性能。采用按窗口量化，窗口内用固定低比特状态叠加高精度缓存更新计算输出；保留最大离群值为少量高精度补偿令牌；量化前平滑残差。在Qwen、Kimi、GLM系列上精度可比FP32，内核平均加速2.05–3.70倍，端到端1.47倍。",
+      "summary": "针对线性注意力循环状态反复读写瓶颈及量化误差累积、离群行列问题，提出免训练LeapQuant：逐窗口量化，跳过一窗token仅在其末尾量化一次，窗内用固定低位状态与高精度缓冲更新计算输出；并将状态最大离群值保留为高精度Compensator Tokens，量化前平滑残差。在Qwen、Kimi、GLM系列上8比特接近无损，B200等GPU内核加速2.05–3.70倍，端到端1.47倍。",
       "abstract": "Recent LLMs increasingly adopt hybrid designs that replace standard attention with linear attention, such as Gated DeltaNet (GDN) and Kimi Delta Attention (KDA). Although they compress the context into a fixed-size recurrent state and substantially reduce the cost of long-context processing, repeatedly reading and updating that state remains a major inference bottleneck. Quantization offers a natural way to reduce this cost, but can significantly degrade model quality, due to the accumulation of rounding errors an…",
       "keyFacts": [
-        "线性注意力模型重复读取和更新固定大小循环状态是主要推理瓶颈，而量化会因舍入误差累积和状态离群行列显著降低模型质量，如何实现近乎无损的低比特循环状态量化。",
-        "提出免训练的LeapQuant：按窗口量化，跳过一窗令牌并仅在窗口末端量化状态，窗口内输出由固定低比特状态与高精度缓存更新共同计算；保留状态最大离群值作为少量高精度补偿令牌并共享真实令牌更新路径；量化前对剩余残差平滑。",
-        "在Qwen、Kimi和GLM模型系列的综合实验中，LeapQuant在精度与FP32基线相当的情况下大幅降低推理内存和计算成本，在NVIDIA B200、RTX PRO 6000和RTX 5090上内核级平均加速2.05–3.70倍，端到端推理加速1.47倍。"
+        "混合LLM采用门控DeltaNet、Kimi Delta Attention等线性注意力压缩上下文，但反复读取更新固定大小循环状态仍是主要推理瓶颈，量化又会因舍入误差累积和状态离群行列显著降低模型质量。",
+        "LeapQuant免训练方法：提出逐窗口量化，跳过一窗token并在窗尾仅量化一次，窗内输出由固定低比特状态与高精度缓冲更新计算；保留状态最大离群值为少量高精度Compensator Tokens，共享真实token更新路径，并在量化前平滑剩余残差。",
+        "在Qwen、Kimi和GLM模型家族上，LeapQuant在精度与FP32基线相当的情况下大幅降低推理内存与计算成本，在NVIDIA B200、RTX PRO 6000和RTX 5090 GPU上内核级平均加速2.05–3.70倍，端到端推理加速1.47倍。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -1946,11 +1952,11 @@
       "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "线性注意力模型重复读取和更新固定大小循环状态是主要推理瓶颈，而量化会因舍入误差累积和状态离群行列显著降低模型质量，如何实现近乎无损的低比特循环状态量化。",
-      "method": "提出免训练的LeapQuant：按窗口量化，跳过一窗令牌并仅在窗口末端量化状态，窗口内输出由固定低比特状态与高精度缓存更新共同计算；保留状态最大离群值作为少量高精度补偿令牌并共享真实令牌更新路径；量化前对剩余残差平滑。",
-      "findings": "在Qwen、Kimi和GLM模型系列的综合实验中，LeapQuant在精度与FP32基线相当的情况下大幅降低推理内存和计算成本，在NVIDIA B200、RTX PRO 6000和RTX 5090上内核级平均加速2.05–3.70倍，端到端推理加速1.47倍。",
+      "question": "混合LLM采用门控DeltaNet、Kimi Delta Attention等线性注意力压缩上下文，但反复读取更新固定大小循环状态仍是主要推理瓶颈，量化又会因舍入误差累积和状态离群行列显著降低模型质量。",
+      "method": "LeapQuant免训练方法：提出逐窗口量化，跳过一窗token并在窗尾仅量化一次，窗内输出由固定低比特状态与高精度缓冲更新计算；保留状态最大离群值为少量高精度Compensator Tokens，共享真实token更新路径，并在量化前平滑剩余残差。",
+      "findings": "在Qwen、Kimi和GLM模型家族上，LeapQuant在精度与FP32基线相当的情况下大幅降低推理内存与计算成本，在NVIDIA B200、RTX PRO 6000和RTX 5090 GPU上内核级平均加速2.05–3.70倍，端到端推理加速1.47倍。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -1961,9 +1967,9 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "线性注意力",
-        "循环状态量化",
-        "免训练",
-        "推理加速"
+        "量化",
+        "推理加速",
+        "免训练"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -1982,14 +1988,14 @@
     {
       "id": "arxiv:2609.38164",
       "contentType": "paper",
-      "title": "Rho：高效可适应VLA模型的基础",
+      "title": "Rho：高效可适配VLA模型的基础",
       "originalTitle": "Rho: A Foundation for Efficiently Adaptable VLA Models",
-      "summary": "提出开放权重双臂操作VLA模型族Rho，面向YAM Box、UR AI Trainer和FR3 Duo三种具身，支持数据轻量任务适应。系统消融动作专家架构与训练配方，在受控仿真和真机实验表明具身中期训练改善下游适应。Rho变体匹配或超越现有开放权重VLA，并内置在线适应能力：内部潜策略从纠正反馈学习，为冻结流匹配动作专家选择观测条件噪声输入，少至15个纠正回合即可处理离线微调分布边缘的任务情况。",
+      "summary": "提出开源权重VLA模型家族Rho，面向双臂操作，针对YAM Box、UR AI Trainer和FR3 Duo三种代表性双臂具身实现数据轻量任务适配。系统消融动作专家架构与训练配方，受控仿真和真机实验显示具身中期训练提升下游适配；其内建潜在策略可在线适配，仅15个纠正回合即可处理离线微调分布边缘情形；并发布基础模型及各具身检查点。",
       "abstract": "General-purpose physical AI models must combine broad visual and linguistic capabilities with precise control across robot embodiments and efficient adaptation to downstream tasks. We introduce Rho, a family of open-weights VLA models for bimanual manipulation designed for data-light task adaptation on 3 embodiments representative of dual-arm robots across research labs and the industry -- YAM Box, UR AI Trainer, and FR3 Duo. We systematically ablate Rho's action-expert architecture and training recipe, and show i…",
       "keyFacts": [
-        "如何构建兼具广泛视觉语言能力和跨具身精确控制、且能高效适应下游任务的通用物理AI模型。",
-        "提出Rho开放权重VLA模型族，针对三种双臂机器人具身设计；系统消融动作专家架构和训练配方，进行受控仿真与物理机器人实验；内部潜策略从纠正反馈学习为冻结流匹配动作专家选择观测条件噪声输入。",
-        "具身中期训练改善下游适应；Rho变体在YAM Box、UR AI Trainer和FR3 Duo上匹配或超越现有开放权重VLA，并在所评估任务、具身和基线中取得最强整体性能；少至15个纠正回合即可让轻量适应模块处理离线微调分布边缘的任务情况。"
+        "通用物理AI模型需兼具广泛视觉语言能力、跨机器人具身的精确控制以及对下游任务的高效数据轻量适配。",
+        "提出开源权重VLA模型家族Rho，面向双臂操作，在YAM Box、UR AI Trainer和FR3 Duo三种具身上进行数据轻量任务适配；系统消融其动作专家架构与训练配方，并在受控仿真和真机实验中进行评估；内部潜在策略从纠正反馈学习。",
+        "具身中期训练可提升下游适配；Rho各具身变体匹配或超过现有开源权重VLA，并在本报告评估的任务、具身和基线中取得最强总体性能；其内建在线适配能力使内部潜在策略能从纠正反馈中为冻结的流匹配动作专家选择观测条件噪声输入，仅需15个纠正回合即可处理离线微调分布边缘的任务情形。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2022,11 +2028,11 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何构建兼具广泛视觉语言能力和跨具身精确控制、且能高效适应下游任务的通用物理AI模型。",
-      "method": "提出Rho开放权重VLA模型族，针对三种双臂机器人具身设计；系统消融动作专家架构和训练配方，进行受控仿真与物理机器人实验；内部潜策略从纠正反馈学习为冻结流匹配动作专家选择观测条件噪声输入。",
-      "findings": "具身中期训练改善下游适应；Rho变体在YAM Box、UR AI Trainer和FR3 Duo上匹配或超越现有开放权重VLA，并在所评估任务、具身和基线中取得最强整体性能；少至15个纠正回合即可让轻量适应模块处理离线微调分布边缘的任务情况。",
+      "question": "通用物理AI模型需兼具广泛视觉语言能力、跨机器人具身的精确控制以及对下游任务的高效数据轻量适配。",
+      "method": "提出开源权重VLA模型家族Rho，面向双臂操作，在YAM Box、UR AI Trainer和FR3 Duo三种具身上进行数据轻量任务适配；系统消融其动作专家架构与训练配方，并在受控仿真和真机实验中进行评估；内部潜在策略从纠正反馈学习。",
+      "findings": "具身中期训练可提升下游适配；Rho各具身变体匹配或超过现有开源权重VLA，并在本报告评估的任务、具身和基线中取得最强总体性能；其内建在线适配能力使内部潜在策略能从纠正反馈中为冻结的流匹配动作专家选择观测条件噪声输入，仅需15个纠正回合即可处理离线微调分布边缘的任务情形。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2036,10 +2042,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "VLA模型",
+        "VLA",
         "双臂操作",
-        "具身适应",
-        "在线适应"
+        "机器人基础模型",
+        "在线适配"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2060,12 +2066,12 @@
       "contentType": "paper",
       "title": "重新思考世界-动作建模的表征",
       "originalTitle": "Rethinking Representations for World-Action Modeling",
-      "summary": "通过受控比较研究世界-动作模型的表征空间，发现重建保真度和预训练感知特征均不足以保证有效策略学习。据此提出ReWAM，基于预训练DINO特征，用特征校准和时间表征瓶颈组织为紧凑世界状态，动作锚定表征塑造仅将动作损失梯度路由至瓶颈，让策略塑造表征内容而世界模型学习其演化。无需生成式视频预训练，在RoboTwin 2.0达93.6%成功率，RoboDojo平均分12.29、成功率8.28%，使用约600小时具身预训练数据。",
+      "summary": "通过受控比较研究发现，仅靠重建保真度或预训练感知特征都不足以保证有效策略学习。据此提出以预训练DINO特征为核心的ReWAM：特征校准与时间表征瓶颈将特征组织为适合动力学建模的紧凑世界状态，动作锚定表征塑形仅将动作损失梯度路由到瓶颈；无需生成式视频预训练，在RoboTwin 2.0达93.6%成功率。",
       "abstract": "World-action models jointly learn robot policies and predict future observations, making the representation space an interface between control and prediction. We study the design of this space through controlled comparisons, finding that neither reconstruction fidelity nor pre-trained perceptual features alone ensure effective policy learning. These findings motivate ReWAM, a representation-centric world-action model built on pre-trained DINO features. Feature Calibration and a Temporal Representation Bottleneck o…",
       "keyFacts": [
-        "世界-动作模型的表征空间作为控制与预测的接口，应如何设计才能同时支持有效策略学习和未来观测预测。",
-        "通过受控比较研究表征设计；提出ReWAM，基于预训练DINO特征，采用特征校准和时间表征瓶颈组织紧凑世界状态，并以动作锚定表征塑造仅将动作损失梯度路由至瓶颈。",
-        "重建保真度和预训练感知特征单独均不足以确保有效策略学习；ReWAM无需生成式视频预训练，在RoboTwin 2.0达93.6%成功率，在RoboDojo平均分12.29、成功率8.28%，使用约600小时具身预训练数据。"
+        "世界-动作模型联合学习机器人策略与预测未来观测，使表征空间成为控制与预测的接口，需要研究该空间应如何设计。",
+        "通过受控比较研究表征空间设计，并提出ReWAM：基于预训练DINO特征的表征中心世界-动作模型，包含特征校准、时间表征瓶颈，以及动作锚定表征塑形，仅将动作损失梯度路由至瓶颈。",
+        "仅重建保真度或预训练感知特征均不足以确保有效策略学习；ReWAM无需生成式视频预训练即在RoboTwin 2.0上达到93.6%成功率；在RoboDojo上使用约600小时具身预训练数据达到平均分12.29和8.28%成功率。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2100,11 +2106,11 @@
       "primaryCategory": "cs.CV",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "世界-动作模型的表征空间作为控制与预测的接口，应如何设计才能同时支持有效策略学习和未来观测预测。",
-      "method": "通过受控比较研究表征设计；提出ReWAM，基于预训练DINO特征，采用特征校准和时间表征瓶颈组织紧凑世界状态，并以动作锚定表征塑造仅将动作损失梯度路由至瓶颈。",
-      "findings": "重建保真度和预训练感知特征单独均不足以确保有效策略学习；ReWAM无需生成式视频预训练，在RoboTwin 2.0达93.6%成功率，在RoboDojo平均分12.29、成功率8.28%，使用约600小时具身预训练数据。",
+      "question": "世界-动作模型联合学习机器人策略与预测未来观测，使表征空间成为控制与预测的接口，需要研究该空间应如何设计。",
+      "method": "通过受控比较研究表征空间设计，并提出ReWAM：基于预训练DINO特征的表征中心世界-动作模型，包含特征校准、时间表征瓶颈，以及动作锚定表征塑形，仅将动作损失梯度路由至瓶颈。",
+      "findings": "仅重建保真度或预训练感知特征均不足以确保有效策略学习；ReWAM无需生成式视频预训练即在RoboTwin 2.0上达到93.6%成功率；在RoboDojo上使用约600小时具身预训练数据达到平均分12.29和8.28%成功率。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2114,10 +2120,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "世界-动作模型",
-        "表征学习",
+        "世界模型",
         "机器人策略",
-        "DINO特征"
+        "表征学习",
+        "DINO"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2136,14 +2142,14 @@
     {
       "id": "arxiv:2609.38155",
       "contentType": "paper",
-      "title": "超越时间线：以接地实体传记增强长视频记忆",
+      "title": "超越时间线：以具身实体传记增强长视频记忆",
       "originalTitle": "Beyond the Timeline: Augmenting Long-Video Memory with Grounded Entity Biographies",
-      "summary": "长视频问答需跨时段连接同一物体的事件，但按时间描述与文本派生实体无法解决物理身份问题：不同物体可能描述相同，同一物体的观测又散落各处。提出接地实体传记（GEB）长视频记忆框架，将同一物理实例的视觉接地观测聚合成可检索传记并保留各时刻语境。问答时传记与情节证据共同检索。在四个基准（含全天与整周录像）上优于既有记忆框架，EgoLifeQA达72.0%，超出最佳公开结果4.4个百分点；消融显示接地身份关联与传记阅读均有贡献，仅加描述无法完全复现。",
+      "summary": "针对长视频问答中同一物理实体因描述相同而身份混淆、跨事件观测断裂的问题，提出长视频记忆框架“具身实体传记”（GEB），将同一物理实例的视觉具身观测跨片段分组为可检索传记，并在问答时与情节证据一同检索。在四个基准（含全天与整周录像）上，GEB在多项选择与开放式问答中均优于先前记忆框架；在EgoLifeQA上达72.0%准确率，比最佳已发表结果高4.4个百分点。消融显示具身身份关联与传记阅读均有贡献。",
       "abstract": "Answering questions about long videos often requires connecting events involving the same objects across hours or days. Chronological descriptions and text-derived entities can leave physical identity unresolved: different objects may share a description, while observations of the same object remain disconnected across events. Retrieving relevant events therefore does not necessarily recover the \"biography\" of the particular entity a question concerns. To address this, we introduce Grounded Entity Biographies (GEB…",
       "keyFacts": [
-        "如何在长视频问答中跨小时或跨天连接涉及同一物理实体的事件，解决描述相同但物理身份不同、同一物体观测却彼此断开的检索问题？",
-        "提出接地实体传记（GEB）长视频记忆框架，把同一物理实例的视觉接地观测跨片段聚合成可检索传记并保留各时刻语境；问答时检索传记与情节证据结合。在四个基准（含全天与整周录像）上评测，并进行消融实验。",
-        "在四个基准（含全天与整周录像）上，GEB在多项选择与开放式问答中均优于既有记忆框架；在EgoLifeQA上达到72.0%准确率，比最佳公开结果高4.4个百分点。消融表明接地身份关联与传记阅读都有贡献，仅增加描述无法完全弥补。"
+        "如何让长视频问答跨越数小时或数天，把涉及同一物理实体的观测连接起来并检索该特定实体的“传记”，而非仅检索相关事件？",
+        "提出长视频记忆框架Grounded Entity Biographies（GEB），将同一物理实例的视觉具身观测跨视频片段分组为可检索传记，并在问答时同时检索传记与情节证据。",
+        "在四个基准（含全天与整周录像）上，GEB在多项选择与开放式问答中均优于先前记忆框架；在EgoLifeQA上达到72.0%准确率，比最佳已发表结果高4.4个百分点；消融表明具身身份关联与传记阅读均带来提升，仅增加描述无法完全复现。"
       ],
       "why": "该研究与人工智能相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2174,11 +2180,11 @@
       "primaryCategory": "cs.CV",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何在长视频问答中跨小时或跨天连接涉及同一物理实体的事件，解决描述相同但物理身份不同、同一物体观测却彼此断开的检索问题？",
-      "method": "提出接地实体传记（GEB）长视频记忆框架，把同一物理实例的视觉接地观测跨片段聚合成可检索传记并保留各时刻语境；问答时检索传记与情节证据结合。在四个基准（含全天与整周录像）上评测，并进行消融实验。",
-      "findings": "在四个基准（含全天与整周录像）上，GEB在多项选择与开放式问答中均优于既有记忆框架；在EgoLifeQA上达到72.0%准确率，比最佳公开结果高4.4个百分点。消融表明接地身份关联与传记阅读都有贡献，仅增加描述无法完全弥补。",
+      "question": "如何让长视频问答跨越数小时或数天，把涉及同一物理实体的观测连接起来并检索该特定实体的“传记”，而非仅检索相关事件？",
+      "method": "提出长视频记忆框架Grounded Entity Biographies（GEB），将同一物理实例的视觉具身观测跨视频片段分组为可检索传记，并在问答时同时检索传记与情节证据。",
+      "findings": "在四个基准（含全天与整周录像）上，GEB在多项选择与开放式问答中均优于先前记忆框架；在EgoLifeQA上达到72.0%准确率，比最佳已发表结果高4.4个百分点；消融表明具身身份关联与传记阅读均带来提升，仅增加描述无法完全复现。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2188,10 +2194,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "长视频理解",
-        "视频问答",
-        "记忆框架",
-        "实体接地"
+        "长视频问答",
+        "视频记忆",
+        "实体身份关联",
+        "检索增强"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2210,14 +2216,14 @@
     {
       "id": "arxiv:2609.38136",
       "contentType": "paper",
-      "title": "CLeaR：解决风格迁移中泄漏-退化困境的统一框架",
+      "title": "CLeaR：解决风格迁移中泄漏—退化困境的统一框架",
       "originalTitle": "CLeaR: A Unified Framework for Resolving the Leakage-Degradation Dilemma in Style Transfer",
-      "summary": "风格迁移常出现内容泄漏：参考图中的物体、布局或语义出现在输出中。既有方法面临泄漏-退化困境：抑制内容更强会削弱风格保真，保留风格更充分又会重新引入参考内容。CLeaR是无训练框架，先用正交子空间投影在各视觉基础模型（VFM）特征空间定义内容减弱的风格目标，再以集成反演优化满足多VFM风格约束的共享像素空间风格锚点，最后用能量引导校准在扩散采样中将去噪轨迹引向集成定义的风格流形。理论分析表明风格锚点估计误差随VFM数量增加而减小。StyleBench上风格对齐更好、内容泄漏更少，LLM-as-Judge评估更优。",
+      "summary": "现有风格迁移常出现内容泄漏，即风格参考中的物体、布局或语义出现在生成结果中；而更强的内容抑制可能削弱风格保真，形成泄漏—退化困境。提出免训练框架CLeaR：用正交子空间投影在各视觉基础模型（VFM）特征空间定义减内容风格目标，通过集成反演优化共享像素空间风格锚点，并以能量引导校准在扩散采样中维持风格对齐。理论分析表明风格锚点估计误差随VFM数量增加而下降。StyleBench实验显示其改善风格对齐、减少内容泄漏，且LLM-as-Judge评价更优。",
       "abstract": "Style transfer aims to render target content in the style of a reference image, but existing methods often suffer from content leakage, where objects, layouts, or semantics from the style reference appear in the generated output. Although prior data-driven and training-free methods can reduce leakage, they often face a leakage-degradation dilemma: stronger content suppression may weaken style fidelity, while richer style preservation may reintroduce unwanted reference content. We identify this dilemma across the f…",
       "keyFacts": [
-        "风格迁移中内容泄漏与风格保真之间存在泄漏-退化困境，能否在无需训练的前提下同时减少内容泄漏并保持风格对齐？",
-        "提出无训练的CLeaR框架：用正交子空间投影在各视觉基础模型（VFM）特征空间中定义内容减弱的风格目标；用集成反演优化共享像素空间风格锚点以满足多VFM风格约束；用能量引导校准在扩散采样中把去噪轨迹导向集成定义的风格流形。并给出风格锚点估计误差随VFM数量增加而减小的理论分析。在StyleBench上评测。",
-        "StyleBench实验表明，与现有方法相比，CLeaR提升了风格对齐、减少了内容泄漏，并获得更好的LLM-as-Judge评估结果；理论分析显示风格锚点估计误差随VFM数量增加而减小。"
+        "如何在整个风格迁移流程（特征分离、特征空间定位与扩散生成）中缓解内容泄漏，同时避免因更强内容抑制而削弱风格保真？",
+        "提出免训练框架CLeaR，依次使用正交子空间投影定义各视觉基础模型特征空间中的减内容风格目标、集成反演优化满足多VFM风格约束的共享像素空间风格锚点、能量引导校准在扩散采样中引导去噪轨迹朝集成定义的风格流形；并提供理论分析。",
+        "理论分析表明风格锚点估计误差随视觉基础模型数量增加而减小；StyleBench实验显示CLeaR相比现有方法改善风格对齐、减少内容泄漏，并获得更好的LLM-as-Judge评价。"
       ],
       "why": "该研究与计算机视觉相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2238,11 +2244,11 @@
       "primaryCategory": "cs.CV",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "风格迁移中内容泄漏与风格保真之间存在泄漏-退化困境，能否在无需训练的前提下同时减少内容泄漏并保持风格对齐？",
-      "method": "提出无训练的CLeaR框架：用正交子空间投影在各视觉基础模型（VFM）特征空间中定义内容减弱的风格目标；用集成反演优化共享像素空间风格锚点以满足多VFM风格约束；用能量引导校准在扩散采样中把去噪轨迹导向集成定义的风格流形。并给出风格锚点估计误差随VFM数量增加而减小的理论分析。在StyleBench上评测。",
-      "findings": "StyleBench实验表明，与现有方法相比，CLeaR提升了风格对齐、减少了内容泄漏，并获得更好的LLM-as-Judge评估结果；理论分析显示风格锚点估计误差随VFM数量增加而减小。",
+      "question": "如何在整个风格迁移流程（特征分离、特征空间定位与扩散生成）中缓解内容泄漏，同时避免因更强内容抑制而削弱风格保真？",
+      "method": "提出免训练框架CLeaR，依次使用正交子空间投影定义各视觉基础模型特征空间中的减内容风格目标、集成反演优化满足多VFM风格约束的共享像素空间风格锚点、能量引导校准在扩散采样中引导去噪轨迹朝集成定义的风格流形；并提供理论分析。",
+      "findings": "理论分析表明风格锚点估计误差随视觉基础模型数量增加而减小；StyleBench实验显示CLeaR相比现有方法改善风格对齐、减少内容泄漏，并获得更好的LLM-as-Judge评价。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2254,8 +2260,8 @@
       "tags": [
         "风格迁移",
         "内容泄漏",
-        "视觉基础模型",
-        "扩散采样"
+        "扩散模型",
+        "免训练"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2274,14 +2280,14 @@
     {
       "id": "arxiv:2609.38133",
       "contentType": "paper",
-      "title": "解耦生成引导的多智能体流匹配",
+      "title": "多智能体流匹配与解耦生成引导",
       "originalTitle": "Multi-Agent Flow Matching with Decoupled Generative Guidance",
-      "summary": "生成建模可从复杂多模态分布生成多样对象，但通常不保证生成对象满足硬约束。多智能体生成中更难：硬要求可能依赖多个智能体，而每个智能体需在不依赖其他智能体同步计算的引导输入下确定自身引导。提出DeGG-Flow，将生成过程表示为控制仿射动力系统，为两类耦合要求给出引导条件：多智能体共同满足的共享要求，及各智能体依赖邻居的私有要求。对两类均建立可行性条件与有限时域收敛保证，并推导刻画引导所致分布偏差的Wasserstein界。在多机器人协作跨越空间间隙并重构环境、以及带可供性要求的多物体场景生成上演示，可直接生成满足全部硬要求的对象，包括训练未见过的团队规模。",
+      "summary": "生成建模虽能产生多样对象，但通常不保证满足硬约束；多智能体场景中，硬需求可能依赖多个智能体，而各智能体又需在不依赖其他智能体同时计算的引导输入下确定自身引导。提出DeGG-Flow框架，将生成过程表示为控制仿射动力系统，针对共享需求与私有需求两类耦合要求给出引导条件、可行性条件与有限时域收敛保证，并推导引导导致的分布偏差的Wasserstein界。在多机器人协作跨越空间间隙与多物体场景生成（含可供性要求）中，DeGG-Flow直接生成满足全部硬要求的对象，包括训练未见过的团队规模。",
       "abstract": "Generative modeling is widely used for producing diverse objects from complex, multimodal distributions. However, its expressivity does not, in general, come with formal guarantees that the generated objects satisfy hard constraints or requirements. In multi-agent generation, this problem becomes more challenging because a hard requirement can depend on multiple agents, while each agent may need to determine its own guidance input without relying on the simultaneously computed guidance inputs of other agents. To t…",
       "keyFacts": [
-        "多智能体生成中，如何在不依赖其他智能体同步计算引导输入的前提下，保证生成对象满足跨智能体耦合的硬约束？",
-        "提出DeGG-Flow框架，将生成过程表示为控制仿射动力系统，为共享要求（依赖多智能体共同满足）和私有要求（各智能体依赖邻居）两类耦合要求推导引导条件；建立可行性与有限时域收敛保证，并推导Wasserstein界以刻画引导引起的分布偏差。在多机器人协作跨越空间间隙并重构环境、以及带可供性要求的多物体场景生成两个任务上演示。",
-        "在两个应用上，DeGG-Flow直接生成满足全部相应硬要求的对象，包括在训练未见过的团队规模下；并为两类耦合要求提供可行性条件、有限时域收敛保证及Wasserstein分布偏差界。"
+        "在多智能体生成中，如何让各智能体在不依赖其他智能体同时计算的引导输入的情况下，使生成对象满足跨智能体耦合的硬约束？",
+        "提出DeGG-Flow，将多智能体生成过程表示为控制仿射动力系统，为共享需求和私有需求两类耦合要求推导引导条件、可行性条件与有限时域收敛保证，并推导Wasserstein分布偏差界。",
+        "在多机器人协作通过重构环境跨越空间间隙和多物体场景生成（含可供性要求）两个应用中，DeGG-Flow直接生成满足所有相应硬要求的对象，包括训练中未见过的团队规模。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2306,11 +2312,11 @@
       "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "多智能体生成中，如何在不依赖其他智能体同步计算引导输入的前提下，保证生成对象满足跨智能体耦合的硬约束？",
-      "method": "提出DeGG-Flow框架，将生成过程表示为控制仿射动力系统，为共享要求（依赖多智能体共同满足）和私有要求（各智能体依赖邻居）两类耦合要求推导引导条件；建立可行性与有限时域收敛保证，并推导Wasserstein界以刻画引导引起的分布偏差。在多机器人协作跨越空间间隙并重构环境、以及带可供性要求的多物体场景生成两个任务上演示。",
-      "findings": "在两个应用上，DeGG-Flow直接生成满足全部相应硬要求的对象，包括在训练未见过的团队规模下；并为两类耦合要求提供可行性条件、有限时域收敛保证及Wasserstein分布偏差界。",
+      "question": "在多智能体生成中，如何让各智能体在不依赖其他智能体同时计算的引导输入的情况下，使生成对象满足跨智能体耦合的硬约束？",
+      "method": "提出DeGG-Flow，将多智能体生成过程表示为控制仿射动力系统，为共享需求和私有需求两类耦合要求推导引导条件、可行性条件与有限时域收敛保证，并推导Wasserstein分布偏差界。",
+      "findings": "在多机器人协作通过重构环境跨越空间间隙和多物体场景生成（含可供性要求）两个应用中，DeGG-Flow直接生成满足所有相应硬要求的对象，包括训练中未见过的团队规模。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2342,14 +2348,14 @@
     {
       "id": "arxiv:2609.38132",
       "contentType": "paper",
-      "title": "平均奖励弱耦合MDP中实现O(1/N)最优性间隙",
+      "title": "在平均奖励弱耦合MDP中实现O(1/N)最优性间隙",
       "originalTitle": "Achieving an $O(1/N)$ Optimality Gap in Average-Reward Weakly-Coupled MDPs",
-      "summary": "研究平均奖励弱耦合马尔可夫决策过程（WCMDP），由N个共享多个每步预算约束的较小MDP（臂）组成，臂具有相同模型参数、多个动作以及依赖状态和动作的成本。对restless bandits（RB）这一特例，既有工作给出一般条件下O(1/√N)最优性间隙的策略，并识别了可优于1/√N的条件；但对一般WCMDP，此前无结果优于1/√N。本文识别与RB类似的条件，设计策略达到O(1/N)最优性间隙。与基于推广优先级排序的先前方法不同，该策略不基于优先级，而是旨在诱导局部线性的平均场动力学。",
+      "summary": "研究平均奖励弱耦合马尔可夫决策过程（WCMDP），其由N个共享多个每步预算约束的较小MDP（臂）组成，臂具有相同模型参数、多个动作及状态和动作相关成本。对 restless bandits 这一特例，先前工作已给出O(1/√N)最优性间隙策略及更优间隙的条件，但一般WCMDP尚无优于1/√N的结果。本文识别出与RBs类似的可实现更优间隙的条件，并设计非基于优先级、旨在诱导局部线性平均场动力学的策略，达到O(1/N)最优性间隙。",
       "abstract": "We study average-reward weakly-coupled Markov decision processes (WCMDPs), where a WCMDP consists of $N$ smaller MDPs, called arms, that share multiple per-step budget constraints. We consider the setting where the arms have identical model parameters, multiple actions, and state- and action-dependent costs. For restless bandits (RBs), a well-studied special case of WCMDPs, prior work has developed policies that achieve an $O(1/\\sqrt{N})$ optimality gap under general conditions, and has further identified conditio…",
       "keyFacts": [
-        "在平均奖励弱耦合马尔可夫决策过程（WCMDP）中，能否在何种条件下实现优于此前1/√N的最优性间隙？",
-        "针对由N个共享多个每步预算约束的臂组成的WCMDP（臂具有相同模型参数、多个动作、状态和动作相关成本），识别与restless bandits类似的条件，并设计一种不基于优先级排序、而是诱导局部线性平均场动力学的策略。",
-        "在所识别条件下设计了达到O(1/N)最优性间隙的策略。此前对一般WCMDP不存在优于1/√N的结果；该策略与基于推广优先级排序的先前方法不同，非优先级驱动，而是诱导局部线性平均场动力学。"
+        "对一般平均奖励弱耦合MDP（WCMDP），在什么条件下可实现优于1/√N的最优性间隙，并如何设计达到O(1/N)间隙的策略？",
+        "识别出与restless bandits类似的可实现更优最优性间隙的条件，并设计一种非基于优先级、旨在诱导局部线性平均场动力学的策略。",
+        "所设计策略达到O(1/N)最优性间隙，优于此前一般WCMDP中不优于1/√N的结果。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2375,11 +2381,11 @@
       "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "在平均奖励弱耦合马尔可夫决策过程（WCMDP）中，能否在何种条件下实现优于此前1/√N的最优性间隙？",
-      "method": "针对由N个共享多个每步预算约束的臂组成的WCMDP（臂具有相同模型参数、多个动作、状态和动作相关成本），识别与restless bandits类似的条件，并设计一种不基于优先级排序、而是诱导局部线性平均场动力学的策略。",
-      "findings": "在所识别条件下设计了达到O(1/N)最优性间隙的策略。此前对一般WCMDP不存在优于1/√N的结果；该策略与基于推广优先级排序的先前方法不同，非优先级驱动，而是诱导局部线性平均场动力学。",
+      "question": "对一般平均奖励弱耦合MDP（WCMDP），在什么条件下可实现优于1/√N的最优性间隙，并如何设计达到O(1/N)间隙的策略？",
+      "method": "识别出与restless bandits类似的可实现更优最优性间隙的条件，并设计一种非基于优先级、旨在诱导局部线性平均场动力学的策略。",
+      "findings": "所设计策略达到O(1/N)最优性间隙，优于此前一般WCMDP中不优于1/√N的结果。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2392,7 +2398,7 @@
         "弱耦合MDP",
         "平均奖励",
         "最优性间隙",
-        "restless bandits"
+        "平均场"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2411,14 +2417,14 @@
     {
       "id": "arxiv:2609.38121",
       "contentType": "paper",
-      "title": "WUSH-KV：带数据自适应变换的KV缓存量化",
+      "title": "WUSH-KV：基于数据自适应变换的KV缓存量化",
       "originalTitle": "WUSH-KV: KV Cache Quantization with Data-Adaptive Transforms",
-      "summary": "KV缓存的内存与带宽开销随上下文长度和批量增大，限制长上下文推理效率。提出低比特KV缓存量化方法WUSH-KV，改编WUSH：后者利用矩阵乘积两个因子各自的二阶统计量构造数据感知变换以降低量化误差。WUSH-KV用校准数据分别构造键和值的变换，值变换折入模型权重，键变换在RoPE之后施加，可与裁剪量化器配对。对其中一种量化器QuEST INT，在温和假设下证明WUSH变换近最优。使用该量化器时，WUSH-KV降低逐层重建误差，并在所测变换中取得最低端到端困惑度。将WUSH-KV集成进SGLang并使用OSCAR式百分位裁剪仿射量化；2比特下在所有评测模型与下游任务上表现与OSCAR变换相当或更优。",
+      "summary": "KV缓存内存与带宽随上下文长度和批量大小增长，限制长上下文推理效率。提出WUSH-KV低比特KV缓存量化方法，将WUSH应用于缓存：利用矩阵乘积两个因子的二阶统计量构建数据感知变换以降低量化误差，用校准数据分别为键和值构建变换，值变换折叠进模型权重，键变换在RoPE后应用，并可与裁剪量化器搭配。对QuEST INT量化器，在温和假设下证明WUSH变换近乎最优。该方法降低逐层重建误差，在测试变换中取得最低端到端困惑度；集成到SGLang并使用OSCAR式百分位裁剪仿射量化后，2比特下在所有评估模型和下游任务中与OSCAR变换相当或更优。",
       "abstract": "KV cache memory and bandwidth costs grow with context length and batch size, which limits efficient long-context inference. To address this bottleneck, we introduce WUSH-KV for low-bit KV-cache quantization. It adapts WUSH, which constructs a data-aware transform from the second-order statistics of both factors in a matrix product to reduce quantization error. WUSH-KV uses calibration data to construct separate key and value transforms, with the value transform folded into the model weights and the key transform a…",
       "keyFacts": [
-        "如何降低KV缓存的内存与带宽开销以实现高效长上下文推理，并在低比特量化下减少误差？",
-        "提出WUSH-KV低比特KV缓存量化方法，改编WUSH——利用矩阵乘积两个因子各自的二阶统计量构造数据感知变换以降低量化误差。用校准数据分别构造键和值变换，值变换折入模型权重，键变换在RoPE之后施加，并与裁剪量化器配对。对量化器QuEST INT，在温和假设下证明WUSH变换近最优。将WUSH-KV集成进SGLang并使用OSCAR式百分位裁剪仿射量化。",
-        "使用QuEST INT量化器时，WUSH-KV降低逐层重建误差，并在所测变换中取得最低端到端困惑度；集成进SGLang并采用OSCAR式百分位裁剪仿射量化后，在2比特下于所有评测模型和下游任务上表现与OSCAR变换相当或更优；对QuEST INT，在温和假设下证明WUSH变换近最优。"
+        "如何通过低比特KV缓存量化同时降低长上下文推理的内存与带宽开销，并减小量化误差？",
+        "提出WUSH-KV，用校准数据基于矩阵乘积两个因子的二阶统计量构建数据感知的键、值独立变换，值变换折叠进模型权重、键变换在RoPE后应用，并可与裁剪量化器配合；对QuEST INT给出近乎最优性的理论分析；集成到SGLang并使用OSCAR式百分位裁剪仿射量化。",
+        "对QuEST INT，在温和假设下WUSH变换近乎最优；WUSH-KV降低逐层重建误差，并在所测变换中取得最低端到端困惑度；2比特下在所有评估模型和下游任务中与OSCAR变换性能相当或更优。"
       ],
       "why": "该研究与机器学习相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2442,11 +2448,11 @@
       "primaryCategory": "cs.LG",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何降低KV缓存的内存与带宽开销以实现高效长上下文推理，并在低比特量化下减少误差？",
-      "method": "提出WUSH-KV低比特KV缓存量化方法，改编WUSH——利用矩阵乘积两个因子各自的二阶统计量构造数据感知变换以降低量化误差。用校准数据分别构造键和值变换，值变换折入模型权重，键变换在RoPE之后施加，并与裁剪量化器配对。对量化器QuEST INT，在温和假设下证明WUSH变换近最优。将WUSH-KV集成进SGLang并使用OSCAR式百分位裁剪仿射量化。",
-      "findings": "使用QuEST INT量化器时，WUSH-KV降低逐层重建误差，并在所测变换中取得最低端到端困惑度；集成进SGLang并采用OSCAR式百分位裁剪仿射量化后，在2比特下于所有评测模型和下游任务上表现与OSCAR变换相当或更优；对QuEST INT，在温和假设下证明WUSH变换近最优。",
+      "question": "如何通过低比特KV缓存量化同时降低长上下文推理的内存与带宽开销，并减小量化误差？",
+      "method": "提出WUSH-KV，用校准数据基于矩阵乘积两个因子的二阶统计量构建数据感知的键、值独立变换，值变换折叠进模型权重、键变换在RoPE后应用，并可与裁剪量化器配合；对QuEST INT给出近乎最优性的理论分析；集成到SGLang并使用OSCAR式百分位裁剪仿射量化。",
+      "findings": "对QuEST INT，在温和假设下WUSH变换近乎最优；WUSH-KV降低逐层重建误差，并在所测变换中取得最低端到端困惑度；2比特下在所有评估模型和下游任务中与OSCAR变换性能相当或更优。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2459,7 +2465,7 @@
         "KV缓存量化",
         "长上下文推理",
         "数据自适应变换",
-        "低比特量化"
+        "SGLang"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2478,14 +2484,14 @@
     {
       "id": "arxiv:2609.38105",
       "contentType": "paper",
-      "title": "FORM：通过直接材料定律辨识的机器人操作",
+      "title": "FORM：通过直接材料定律辨识实现机器人操作",
       "originalTitle": "FORM: Robot Manipulation through Direct Material Law Identification",
-      "summary": "提出FORM，用弱形式动量平衡将观测到的材料运动与接触力转化为未知材料参数的线性方程，方程采用与正向模拟器相同的物质点法离散，辨识归约为线性最小二乘求解。四类材料上辨识时间从约10-25分钟降至2-5秒，在四种操作任务中复用单次交互辨识的模型进行规划。",
+      "summary": "提出FORM，利用弱形式动量平衡将观测到的材料运动与接触力转化为未知材料参数的线性方程，采用与正向仿真器相同的物质点法离散化，辨识归结为线性最小二乘求解。跨四类材料将辨识时间从约10–25分钟降至2–5秒，并在仿真与硬件上完成四项操作任务。",
       "abstract": "When interacting with an unfamiliar deformable material, a robot lacks prior knowledge of its physical properties and how it will respond to applied forces and motion. Rapid online identification is therefore essential for reliable manipulation. We present FORM (From Observed Response to Material laws), which identifies material properties from a single robot interaction and reuses the recovered model to plan manipulation under new actions and geometries. We use weak-form momentum balance to convert observed mater…",
       "keyFacts": [
-        "机器人在与不熟悉的可变形材料交互时缺乏其物理属性先验知识，能否从单次交互中快速在线辨识材料属性并复用于新动作与新几何的规划？",
-        "采用弱形式动量平衡，将观测到的材料运动与接触力转化为未知材料参数的线性方程；方程使用与正向模拟器相同的物质点法离散，辨识归约为线性最小二乘求解，无需重新拟合或转换即可直接用于预测。",
-        "在四类材料上将辨识时间从迭代基线的约10-25分钟降至2-5秒，同时在新运动、初始条件和几何上保持有竞争力的精度；在弹性杆插入、弹性球杆推杆、弹塑性塑形和目标体积倾倒四任务中复用模型规划；弹性属性估计误差在3.4%以内，弹塑性属性在2%以内，面团塑形IoU达72.4-77.8%，60-160 mL目标体积下平均倾倒误差保持3.8 mL。"
+        "机器人在接触未知可变形材料时缺乏其物理属性先验，如何从单次交互中快速在线辨识材料属性并复用于新动作与新几何下的操作规划？",
+        "使用弱形式动量平衡，把观测到的材料运动与接触力转化为关于未知材料参数的线性方程；方程采用与正向仿真器相同的物质点法离散化组装，辨识归结为线性最小二乘求解，解可直接用于预测而无需重新拟合或转换。",
+        "跨四类材料，FORM将辨识时间从迭代基线的约10–25分钟降至2–5秒，同时在新运动、初始条件和几何上保持有竞争力的精度；在仿真与硬件上演示弹性杆插入、弹性球杆高尔夫推杆、弹塑性塑形和目标体积倾倒四项任务；弹性属性估计误差在3.4%以内，弹塑性属性在2%以内，面团塑形IoU达72.4–77.8%，在60–160 mL目标体积下平均倾倒误差为3.8 mL。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2513,11 +2519,11 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "机器人在与不熟悉的可变形材料交互时缺乏其物理属性先验知识，能否从单次交互中快速在线辨识材料属性并复用于新动作与新几何的规划？",
-      "method": "采用弱形式动量平衡，将观测到的材料运动与接触力转化为未知材料参数的线性方程；方程使用与正向模拟器相同的物质点法离散，辨识归约为线性最小二乘求解，无需重新拟合或转换即可直接用于预测。",
-      "findings": "在四类材料上将辨识时间从迭代基线的约10-25分钟降至2-5秒，同时在新运动、初始条件和几何上保持有竞争力的精度；在弹性杆插入、弹性球杆推杆、弹塑性塑形和目标体积倾倒四任务中复用模型规划；弹性属性估计误差在3.4%以内，弹塑性属性在2%以内，面团塑形IoU达72.4-77.8%，60-160 mL目标体积下平均倾倒误差保持3.8 mL。",
+      "question": "机器人在接触未知可变形材料时缺乏其物理属性先验，如何从单次交互中快速在线辨识材料属性并复用于新动作与新几何下的操作规划？",
+      "method": "使用弱形式动量平衡，把观测到的材料运动与接触力转化为关于未知材料参数的线性方程；方程采用与正向仿真器相同的物质点法离散化组装，辨识归结为线性最小二乘求解，解可直接用于预测而无需重新拟合或转换。",
+      "findings": "跨四类材料，FORM将辨识时间从迭代基线的约10–25分钟降至2–5秒，同时在新运动、初始条件和几何上保持有竞争力的精度；在仿真与硬件上演示弹性杆插入、弹性球杆高尔夫推杆、弹塑性塑形和目标体积倾倒四项任务；弹性属性估计误差在3.4%以内，弹塑性属性在2%以内，面团塑形IoU达72.4–77.8%，在60–160 mL目标体积下平均倾倒误差为3.8 mL。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2528,8 +2534,8 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "机器人操作",
-        "可变形物体",
-        "材料辨识",
+        "可变形材料",
+        "材料属性辨识",
         "物质点法"
       ],
       "translationProvider": "deepseek",
@@ -2549,14 +2555,14 @@
     {
       "id": "arxiv:2609.38087",
       "contentType": "paper",
-      "title": "CrossBFM：跨人形机器人形态蒸馏共享潜在行为空间",
+      "title": "CrossBFM：跨人形本体的共享潜在行为空间蒸馏",
       "originalTitle": "CrossBFM: Distilling a Shared Latent Behavior Space Across Humanoid Embodiments",
-      "summary": "CrossBFM将潜在行为空间视为可跨形态迁移的资产，利用重定向提供的帧级跨形态对应，提出无机器人特定参数的统一编码器，在不到一GPU小时内同时蒸馏所有训练形态的行为空间；潜变量条件跟踪器再以PPO训练约10 GPU小时实现全身控制。",
+      "summary": "提出CrossBFM，将潜在空间视为可跨本体迁移的资产，借助重定向提供的帧级跨本体对应关系，设计无机器人特定参数的统一编码器，在不到1个GPU小时内同时蒸馏所有训练本体，再用潜条件跟踪器以PPO训练约10个GPU小时实现全身控制。",
       "abstract": "Behavior Foundation Models (BFMs) give humanoids a promptable policy over a latent behavior space, enabling one single vector to represent a motion to imitate, a pose to reach, or a reward to maximize. Forward-Backward representations successfully produce such spaces, but at the cost of hundreds of GPU-hours for a single robot. Moreover, when the training process is repeated for a second robot, it produces a second space unrelated to the first, resulting in embodiment-specific latents that do not unify or transfer…",
       "keyFacts": [
-        "行为基础模型为单个机器人训练需数百GPU小时，且为第二个机器人重复训练会产生互不相关的独立潜在空间，导致形态特定的潜变量无法统一或迁移，能否构建跨形态共享的潜在行为空间？",
-        "将潜在空间视为可迁移资产，利用重定向提供的帧级跨形态对应，提出无机器人特定参数的统一编码器架构以同时蒸馏所有训练形态的行为空间；随后以常规PPO训练潜变量条件跟踪器实现全身控制。",
-        "在三个蒸馏人形机器人上三种提示模式均可迁移：潜变量条件策略的运动跟踪仅比关节条件对应方案损失0.025 rad，姿态间平滑到达目标无跌倒，全部41个奖励提示均实现奖励优化；在四分之一运动语料上回归编码器仅损失5%跟踪性能；在机器人子集上训练编码器并在未见机器人上评估可恢复已见机器人跟踪性能的89%，表明对形态相似机器人具有跨形态泛化能力；并在真实机器人上验证了三种提示模式。"
+        "行为基础模型每台机器人需数百GPU小时训练，且重复训练得到的第二个空间与第一个不相关，导致本体特定潜变量无法统一或迁移；如何以低成本蒸馏出跨本体共享的潜在行为空间？",
+        "利用重定向提供的帧级跨本体对应关系，提出无机器人特定参数的统一编码器架构，在不到一个GPU小时内同时为所有训练本体蒸馏行为空间；随后由潜条件跟踪器以常规PPO训练方式在额外约10个GPU小时内将蒸馏潜变量转为全身控制。",
+        "在三个蒸馏的人形本体上三种提示模式均可迁移：潜条件策略的运动跟踪相比关节条件版本仅损失0.025 rad，姿态间平滑目标到达无摔倒，全部41个奖励提示均可优化；在四分之一运动语料上回归编码器仅损失5%跟踪性能；在部分机器人上训练编码器并在未见机器人上评估，可恢复已见机器人最高89%的跟踪性能；并在真实机器人上验证了三种提示模式。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2584,11 +2590,11 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "行为基础模型为单个机器人训练需数百GPU小时，且为第二个机器人重复训练会产生互不相关的独立潜在空间，导致形态特定的潜变量无法统一或迁移，能否构建跨形态共享的潜在行为空间？",
-      "method": "将潜在空间视为可迁移资产，利用重定向提供的帧级跨形态对应，提出无机器人特定参数的统一编码器架构以同时蒸馏所有训练形态的行为空间；随后以常规PPO训练潜变量条件跟踪器实现全身控制。",
-      "findings": "在三个蒸馏人形机器人上三种提示模式均可迁移：潜变量条件策略的运动跟踪仅比关节条件对应方案损失0.025 rad，姿态间平滑到达目标无跌倒，全部41个奖励提示均实现奖励优化；在四分之一运动语料上回归编码器仅损失5%跟踪性能；在机器人子集上训练编码器并在未见机器人上评估可恢复已见机器人跟踪性能的89%，表明对形态相似机器人具有跨形态泛化能力；并在真实机器人上验证了三种提示模式。",
+      "question": "行为基础模型每台机器人需数百GPU小时训练，且重复训练得到的第二个空间与第一个不相关，导致本体特定潜变量无法统一或迁移；如何以低成本蒸馏出跨本体共享的潜在行为空间？",
+      "method": "利用重定向提供的帧级跨本体对应关系，提出无机器人特定参数的统一编码器架构，在不到一个GPU小时内同时为所有训练本体蒸馏行为空间；随后由潜条件跟踪器以常规PPO训练方式在额外约10个GPU小时内将蒸馏潜变量转为全身控制。",
+      "findings": "在三个蒸馏的人形本体上三种提示模式均可迁移：潜条件策略的运动跟踪相比关节条件版本仅损失0.025 rad，姿态间平滑目标到达无摔倒，全部41个奖励提示均可优化；在四分之一运动语料上回归编码器仅损失5%跟踪性能；在部分机器人上训练编码器并在未见机器人上评估，可恢复已见机器人最高89%的跟踪性能；并在真实机器人上验证了三种提示模式。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2598,10 +2604,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "人形机器人",
         "行为基础模型",
-        "跨形态迁移",
-        "知识蒸馏"
+        "人形机器人",
+        "跨本体迁移",
+        "潜在空间蒸馏"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2622,12 +2628,12 @@
       "contentType": "paper",
       "title": "MotorMind：为通用视觉语言模型搭建零样本机器人操作支架",
       "originalTitle": "MotorMind: Scaffolding General Vision Language Models for Zero-Shot Robot Manipulation",
-      "summary": "提出MotorMind，将VLM提出的中层动作连接到确定性机器人控制与反馈，并配异步监控与后台记忆更新，不依赖任务特定策略训练、编码智能体或SAM3等额外接地工具。在LIBERO-PRO基础套件达66.7%成功率，扰动下53.8%，真实xArm6上平均95%。",
+      "summary": "提出MotorMind，将VLM提出的中层动作连接到确定性机器人控制与反馈，并具备异步监控和后台记忆更新。无需任务特定策略训练、编码智能体或额外定位工具，在LIBERO-PRO基础套件取得66.7%成功率、扰动下53.8%，真实xArm6平均成功率95%。",
       "abstract": "Vision-language-action (VLA) models have advanced robotic manipulation, but their zero-shot generalization in new tasks and environments remains limited, and their reliance on specialized training keeps them from benefiting directly from rapidly advancing general-purpose vision-language models (VLMs). In parallel, recent agentic robotic systems leverage VLMs for high-level reasoning or coding agents for robot control, but often depend on extensive external models and tools, introducing additional complexity and co…",
       "keyFacts": [
-        "通用视觉语言模型能否像人类遥操作员一样直接从观测推理、发出动作并持续适应执行反馈来操作机器人，而不依赖学习到的动作专家、编码智能体或SAM3等外部模型与接地工具？",
-        "构建机器人操作支架MotorMind，将VLM提出的中层动作连接到确定性机器人控制与反馈，并采用异步监控与后台记忆更新；不使用任务特定策略训练、编码智能体或SAM3等额外接地工具。",
-        "在LIBERO-PRO基础套件上成功率为66.7%，扰动下为53.8%，而所评估的先前零样本方法分别至多为13.3%和19.2%；同一接口在真实xArm6机器人上于直接操作与人类扰动设置下平均成功率达95%；替换为更强VLM骨干可进一步提升性能；剩余失败主要源于视觉接地、具身推理和动作知识，并随VLM能力提升而减少。"
+        "通用视觉语言模型能否像人类遥操作者一样，直接从观测推理、发出动作并持续适应执行反馈来操作机器人，而不依赖学习到的动作专家、编码智能体或SAM3等定位工具？",
+        "构建机器人操作支架MotorMind，把VLM提出的中层动作连接到确定性机器人控制与反馈，并进行异步监控与后台记忆更新；不进行任务特定策略训练，不使用编码智能体或SAM3等额外定位工具。",
+        "在LIBERO-PRO基础套件上成功率为66.7%，扰动下为53.8%，而所评估的先前零样本方法分别至多为13.3%和19.2%；同一接口在真实xArm6机器人上跨直接操作与人为扰动设置达到95%平均成功率；替换为更强VLM骨干可进一步提升性能，剩余失败主要源于视觉定位、具身推理和动作知识，并随VLM能力提升而减少。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2652,11 +2658,11 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "通用视觉语言模型能否像人类遥操作员一样直接从观测推理、发出动作并持续适应执行反馈来操作机器人，而不依赖学习到的动作专家、编码智能体或SAM3等外部模型与接地工具？",
-      "method": "构建机器人操作支架MotorMind，将VLM提出的中层动作连接到确定性机器人控制与反馈，并采用异步监控与后台记忆更新；不使用任务特定策略训练、编码智能体或SAM3等额外接地工具。",
-      "findings": "在LIBERO-PRO基础套件上成功率为66.7%，扰动下为53.8%，而所评估的先前零样本方法分别至多为13.3%和19.2%；同一接口在真实xArm6机器人上于直接操作与人类扰动设置下平均成功率达95%；替换为更强VLM骨干可进一步提升性能；剩余失败主要源于视觉接地、具身推理和动作知识，并随VLM能力提升而减少。",
+      "question": "通用视觉语言模型能否像人类遥操作者一样，直接从观测推理、发出动作并持续适应执行反馈来操作机器人，而不依赖学习到的动作专家、编码智能体或SAM3等定位工具？",
+      "method": "构建机器人操作支架MotorMind，把VLM提出的中层动作连接到确定性机器人控制与反馈，并进行异步监控与后台记忆更新；不进行任务特定策略训练，不使用编码智能体或SAM3等额外定位工具。",
+      "findings": "在LIBERO-PRO基础套件上成功率为66.7%，扰动下为53.8%，而所评估的先前零样本方法分别至多为13.3%和19.2%；同一接口在真实xArm6机器人上跨直接操作与人为扰动设置达到95%平均成功率；替换为更强VLM骨干可进一步提升性能，剩余失败主要源于视觉定位、具身推理和动作知识，并随VLM能力提升而减少。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2667,9 +2673,9 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "视觉语言模型",
-        "机器人操作",
-        "零样本泛化",
-        "LIBERO-PRO"
+        "零样本操作",
+        "机器人控制",
+        "中层动作"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2688,14 +2694,14 @@
     {
       "id": "arxiv:2609.38059",
       "contentType": "paper",
-      "title": "WorldLine：面向机器人操作的动作驱动视觉模拟",
+      "title": "WorldLine：面向机器人操作的动作驱动视觉仿真器",
       "originalTitle": "WorldLine: Action-Driven Visual Simulation for Robotic Manipulation",
-      "summary": "WorldLine将可迁移动力学学习与异构动作接地解耦：从超过10,000小时无动作机器人视频学习操作动力学，用超过2,000小时、覆盖十余种形态的动作轨迹进行接地，并采用图像空间动作表示作为共享控制接口。失败轨迹上机器人掩码IoU较最强基线提升0.1626。",
+      "summary": "提出WorldLine，将可迁移动力学学习与异构动作接地解耦：从超过10000小时无动作机器人视频学习操作动力学，并用超过10种本体的2000多小时动作轨迹进行接地，图像空间动作表示提供共享控制接口。在失败轨迹上机器人掩码IoU相比最强基线提升0.1626。",
       "abstract": "Real-world robot learning is constrained by the cost of collecting experience and evaluating candidate behaviors. Video generation models offer a scalable foundation for visual simulators that predict action outcomes before physical execution. Yet they often favor visual plausibility over accurate action following and coherent robot--object dynamics, while action-conditioned simulators depend on scarce, embodiment-specific data that are difficult to share across incompatible control spaces. We introduce WorldLine…",
       "keyFacts": [
-        "视频生成模型往往偏重视觉合理性而非准确的动作跟随与连贯的机器人-物体动力学，而动作条件模拟器依赖难以跨不兼容控制空间共享的形态特定数据，能否构建可扩展且高效的动作驱动视觉模拟器？",
-        "提出WorldLine，将可迁移动力学学习与异构动作接地解耦：从超过10,000小时无动作机器人视频学习操作动力学，用超过2,000小时、覆盖十余种形态的动作轨迹进行接地；采用图像空间动作表示作为跨形态共享控制接口，并进行多视图与失败增广训练及关系正则化，辅以面向机器人的少步蒸馏实现高效因果推演。",
-        "在留出与域外设置下保持较强视觉质量和机器人运动一致性；在失败轨迹上机器人掩码IoU较最强基线提升0.1626；在RoboTwin和AgiBot上以74%平均准确率预测轨迹成功，比最强基线高一个百分点；在未经RoboTwin训练或适应的情况下，其推演使任务成功率较直接策略执行提升最多21.4个百分点。"
+        "如何构建动作驱动的视觉仿真器，在预测动作后果时兼顾动作跟随准确性与机器人-物体动态一致性，并跨不兼容控制空间共享，而不依赖稀缺的特定本体数据？",
+        "WorldLine将可迁移动力学学习与异构动作接地解耦：从超过10000小时无动作机器人视频学习操作动力学，用超过2000小时、跨十多种本体的动作轨迹进行接地；采用图像空间动作表示作为共享控制接口，并使用多视角与失败富集训练及关系正则化，配合面向机器人的少步蒸馏实现高效因果推演。",
+        "在留出与域外设置下保持较强视觉质量和机器人运动一致性；在失败轨迹上机器人掩码IoU相比最强基线提升0.1626；在RoboTwin和AgiBot上以74%平均准确率预测轨迹成功，比最强基线高1个百分点；在未使用RoboTwin训练或适应的情况下，其推演将任务成功率相比直接策略执行最多提升21.4个百分点。"
       ],
       "why": "该研究与机器人与无人系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2722,11 +2728,11 @@
       "primaryCategory": "cs.RO",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "视频生成模型往往偏重视觉合理性而非准确的动作跟随与连贯的机器人-物体动力学，而动作条件模拟器依赖难以跨不兼容控制空间共享的形态特定数据，能否构建可扩展且高效的动作驱动视觉模拟器？",
-      "method": "提出WorldLine，将可迁移动力学学习与异构动作接地解耦：从超过10,000小时无动作机器人视频学习操作动力学，用超过2,000小时、覆盖十余种形态的动作轨迹进行接地；采用图像空间动作表示作为跨形态共享控制接口，并进行多视图与失败增广训练及关系正则化，辅以面向机器人的少步蒸馏实现高效因果推演。",
-      "findings": "在留出与域外设置下保持较强视觉质量和机器人运动一致性；在失败轨迹上机器人掩码IoU较最强基线提升0.1626；在RoboTwin和AgiBot上以74%平均准确率预测轨迹成功，比最强基线高一个百分点；在未经RoboTwin训练或适应的情况下，其推演使任务成功率较直接策略执行提升最多21.4个百分点。",
+      "question": "如何构建动作驱动的视觉仿真器，在预测动作后果时兼顾动作跟随准确性与机器人-物体动态一致性，并跨不兼容控制空间共享，而不依赖稀缺的特定本体数据？",
+      "method": "WorldLine将可迁移动力学学习与异构动作接地解耦：从超过10000小时无动作机器人视频学习操作动力学，用超过2000小时、跨十多种本体的动作轨迹进行接地；采用图像空间动作表示作为共享控制接口，并使用多视角与失败富集训练及关系正则化，配合面向机器人的少步蒸馏实现高效因果推演。",
+      "findings": "在留出与域外设置下保持较强视觉质量和机器人运动一致性；在失败轨迹上机器人掩码IoU相比最强基线提升0.1626；在RoboTwin和AgiBot上以74%平均准确率预测轨迹成功，比最强基线高1个百分点；在未使用RoboTwin训练或适应的情况下，其推演将任务成功率相比直接策略执行最多提升21.4个百分点。",
       "limitations": "摘要未说明",
-      "score": 90,
+      "score": 89,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2736,10 +2742,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "世界模型",
-        "视频生成",
+        "视觉仿真器",
+        "动作条件视频生成",
         "机器人操作",
-        "视觉模拟器"
+        "跨本体"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2758,14 +2764,14 @@
     {
       "id": "arxiv:2609.38020",
       "contentType": "paper",
-      "title": "通过批处理工作负载时间迁移评估AI数据中心的电网需求灵活性",
+      "title": "基于批工作负载时间迁移的AI数据中心电网需求灵活性评估",
       "originalTitle": "Grid Demand Flexibility Assessment of AI Data Centers via Batch Workload Temporal Shifting",
-      "summary": "提出通过批处理工作负载时间迁移评估AI数据中心电网兼容需求灵活性的框架：用基于平均的资源使用处理方法将细粒度CPU、GPU和内存使用映射到与电力系统运行兼容的统一时间区间，构建保持执行连续性、延迟约束和服务器资源容量的调度模型，并耦合利用率相关的服务器功率模型。",
+      "summary": "提出通过批工作负载时间迁移评估AI数据中心电网兼容需求灵活性的框架：开发基于平均的资源使用处理方法，将细粒度CPU、GPU和内存使用映射为统一时间区间，并建立保留执行连续性、延迟约束和服务器资源容量的调度模型，耦合利用率相关服务器功耗模型。",
       "abstract": "The rapid growth of artificial intelligence (AI) data centers has introduced new challenges to power system operation. As their power demand becomes larger and more variable, quantitatively characterizing their demand flexibility is increasingly important for effective power system coordination. However, heterogeneous workload characteristics and resource requirements make this flexibility difficult to characterize directly. This paper proposes a framework for assessing the grid-compatible demand flexibility of AI…",
       "keyFacts": [
-        "随着AI数据中心电力需求更大且更多变，如何在其异构工作负载特性与资源需求下定量刻画其电网兼容的需求灵活性，以支持有效的电力系统协调？",
-        "提出评估框架：采用基于平均的资源使用处理方法，将细粒度CPU、GPU和内存使用映射为与电力系统运行兼容的统一时间区间；构建工作负载时间调度模型以迁移批处理工作负载，同时保持执行连续性、延迟约束和服务器资源容量；并将其与利用率相关的服务器功率模型耦合，把调度决策转化为服务器功率需求；评估短期峰值削减和持续降功率最大时长两项灵活性指标。",
-        "基于真实GPU集群轨迹的数值结果表明，工作负载时间迁移可为AI数据中心提供可量化且电网兼容的需求灵活性，同时对计算工作负载的干扰有限。"
+        "在AI数据中心功率需求更大且更易波动的情况下，如何克服异构工作负载特性与资源需求带来的困难，定量刻画其电网兼容的需求灵活性？",
+        "提出基于批工作负载时间迁移的评估框架；开发基于平均的资源使用处理方法，将细粒度CPU、GPU和内存使用映射为与电力系统运行兼容的统一时间区间；构建工作负载时间调度模型以迁移批工作负载，同时保持执行连续性、延迟约束和服务器资源容量，并与利用率相关的服务器功耗模型耦合，将调度决策转化为服务器功率需求；评估短期峰值削减与持续功率降低最大时长两项互补灵活性指标。",
+        "基于真实GPU集群轨迹的数值结果表明，工作负载时间迁移能够为AI数据中心提供可量化且电网兼容的需求灵活性，同时对计算工作负载的干扰有限。"
       ],
       "why": "该研究与自主与控制系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2787,9 +2793,9 @@
       "primaryCategory": "eess.SY",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "随着AI数据中心电力需求更大且更多变，如何在其异构工作负载特性与资源需求下定量刻画其电网兼容的需求灵活性，以支持有效的电力系统协调？",
-      "method": "提出评估框架：采用基于平均的资源使用处理方法，将细粒度CPU、GPU和内存使用映射为与电力系统运行兼容的统一时间区间；构建工作负载时间调度模型以迁移批处理工作负载，同时保持执行连续性、延迟约束和服务器资源容量；并将其与利用率相关的服务器功率模型耦合，把调度决策转化为服务器功率需求；评估短期峰值削减和持续降功率最大时长两项灵活性指标。",
-      "findings": "基于真实GPU集群轨迹的数值结果表明，工作负载时间迁移可为AI数据中心提供可量化且电网兼容的需求灵活性，同时对计算工作负载的干扰有限。",
+      "question": "在AI数据中心功率需求更大且更易波动的情况下，如何克服异构工作负载特性与资源需求带来的困难，定量刻画其电网兼容的需求灵活性？",
+      "method": "提出基于批工作负载时间迁移的评估框架；开发基于平均的资源使用处理方法，将细粒度CPU、GPU和内存使用映射为与电力系统运行兼容的统一时间区间；构建工作负载时间调度模型以迁移批工作负载，同时保持执行连续性、延迟约束和服务器资源容量，并与利用率相关的服务器功耗模型耦合，将调度决策转化为服务器功率需求；评估短期峰值削减与持续功率降低最大时长两项互补灵活性指标。",
+      "findings": "基于真实GPU集群轨迹的数值结果表明，工作负载时间迁移能够为AI数据中心提供可量化且电网兼容的需求灵活性，同时对计算工作负载的干扰有限。",
       "limitations": "摘要未说明",
       "score": 89,
       "scoreBasis": "研究相关度",
@@ -2803,8 +2809,8 @@
       "tags": [
         "AI数据中心",
         "需求灵活性",
-        "批处理调度",
-        "电力系统"
+        "工作负载迁移",
+        "电力系统运行"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2823,14 +2829,14 @@
     {
       "id": "arxiv:2609.37827",
       "contentType": "paper",
-      "title": "石墨烯在Ge(001)/Si(001)上的电子耦合与电荷转移图景：机器学习辅助的多尺度分析",
+      "title": "Ge(001)/Si(001)上石墨烯的电子耦合与电荷转移：机器学习辅助的多尺度分析",
       "originalTitle": "Electronic Coupling and Charge-Transfer Landscape of Graphene on Ge(001)/Si(001): Multiscale Analysis Assisted by Machine Learning",
-      "summary": "结合UPS、KPFM、ARPES、STS与DFT解析石墨烯在Ge(001)/Si(001)上的功函数调制与电子耦合。UPS/KPFM显示功函数空间非均匀，与衬底纳米刻面形貌相关；ARPES与DFT表明原始界面为n型掺杂；氧化界面模型预测反转为p型。机器学习辅助STS分类识别出从近自由悬浮到强耦合等不同局域电子区域。",
+      "summary": "结合UPS、KPFM、ARPES、STS和DFT研究Ge(001)/Si(001)上石墨烯的功函数调制与电子耦合，发现空间非均匀功函数与衬底纳米刻面形貌相关；原始界面呈n型掺杂，氧化界面模型预测反转为p型；机器学习辅助分类STS数据解析出从近自由悬浮到强耦合的局域电子区域。",
       "abstract": "Understanding and controlling charge transfer at graphene-semiconductor interfaces is essential for the integration of two-dimensional materials into silicon-compatible technologies. Here, we combine ultraviolet photoelectron spectroscopy (UPS), Kelvin probe force microscopy (KPFM), angle-resolved photoemission spectroscopy (ARPES), scanning tunneling spectroscopy (STS) and density functional theory (DFT) to resolve work-function modulation and electronic coupling in graphene grown on Ge(001)/Si(001). UPS and KPFM…",
       "keyFacts": [
-        "石墨烯在Ge(001)/Si(001)界面的电荷转移、功函数调制与电子耦合机制是什么，以及文献中掺杂极性差异的来源？",
-        "紫外光电子能谱（UPS）、开尔文探针力显微镜（KPFM）、角分辨光电子能谱（ARPES）、扫描隧道光谱（STS）与密度泛函理论（DFT），并结合机器学习辅助的STS数据分类。",
-        "UPS与KPFM揭示功函数空间非均匀，与衬底纳米刻面形貌相关；ARPES与DFT表明原始界面为n型掺杂、电子由Ge转移至石墨烯；氧化界面建模预测反转为p型掺杂。机器学习辅助STS分类分辨出从纳米刻面顶部近自由悬浮石墨烯到面间强耦合区域及纳米带类区域的不同局域电子态。"
+        "如何理解并控制石墨烯-半导体界面的电荷转移，以将二维材料集成到硅兼容技术中？",
+        "紫外光电子能谱(UPS)、开尔文探针力显微镜(KPFM)、角分辨光电子能谱(ARPES)、扫描隧道光谱(STS)与密度泛函理论(DFT)结合，并采用机器学习辅助的STS数据分类。",
+        "UPS和KPFM揭示与衬底纳米刻面形貌相关的空间非均匀功函数；ARPES和DFT表明原始界面为n型掺杂、电子从Ge转移到石墨烯；氧化界面建模预测反转为p型掺杂；机器学习辅助STS分类解析出从纳米刻面顶部近自由悬浮石墨烯到刻面间强耦合区域及类纳米带区域的局域电子响应。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2863,9 +2869,9 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "石墨烯在Ge(001)/Si(001)界面的电荷转移、功函数调制与电子耦合机制是什么，以及文献中掺杂极性差异的来源？",
-      "method": "紫外光电子能谱（UPS）、开尔文探针力显微镜（KPFM）、角分辨光电子能谱（ARPES）、扫描隧道光谱（STS）与密度泛函理论（DFT），并结合机器学习辅助的STS数据分类。",
-      "findings": "UPS与KPFM揭示功函数空间非均匀，与衬底纳米刻面形貌相关；ARPES与DFT表明原始界面为n型掺杂、电子由Ge转移至石墨烯；氧化界面建模预测反转为p型掺杂。机器学习辅助STS分类分辨出从纳米刻面顶部近自由悬浮石墨烯到面间强耦合区域及纳米带类区域的不同局域电子态。",
+      "question": "如何理解并控制石墨烯-半导体界面的电荷转移，以将二维材料集成到硅兼容技术中？",
+      "method": "紫外光电子能谱(UPS)、开尔文探针力显微镜(KPFM)、角分辨光电子能谱(ARPES)、扫描隧道光谱(STS)与密度泛函理论(DFT)结合，并采用机器学习辅助的STS数据分类。",
+      "findings": "UPS和KPFM揭示与衬底纳米刻面形貌相关的空间非均匀功函数；ARPES和DFT表明原始界面为n型掺杂、电子从Ge转移到石墨烯；氧化界面建模预测反转为p型掺杂；机器学习辅助STS分类解析出从纳米刻面顶部近自由悬浮石墨烯到刻面间强耦合区域及类纳米带区域的局域电子响应。",
       "limitations": "摘要未说明",
       "score": 89,
       "scoreBasis": "研究相关度",
@@ -2880,7 +2886,7 @@
         "石墨烯",
         "界面电荷转移",
         "机器学习",
-        "多尺度表征"
+        "光电子能谱"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2901,12 +2907,12 @@
       "contentType": "paper",
       "title": "VideoGen-Agent：强化视频生成智能体",
       "originalTitle": "VideoGen-Agent: Reinforcing Video Generation Agents",
-      "summary": "提出VideoGen-Agent，通过多任务智能体强化学习训练的多模态智能体，经多轮交互调用增强、生成与验证工具进行视频生成。在六类任务数据集上先监督微调后强化学习，采用类别感知混合奖励。构建600条提示的VABench，得分从56.5提升至75.6，升级生成工具后达86.1；人类评分者在84.3%比较中偏好升级配置。",
+      "summary": "提出VideoGen-Agent，一种通过多任务智能体强化学习训练的多模态智能体，协调增强、生成和验证工具进行多轮交互；在涵盖六类任务的类别平衡数据集上训练共享策略，采用类别感知混合奖励；在600条提示的VABench上，相比基础文生视频生成器提升19.1分（56.5至75.6），升级生成工具后达86.1分，人类评分者在84.3%比较中偏好升级配置。",
       "abstract": "Recent advances in video generative models have enabled high-fidelity, temporally coherent video generation. However, these models often struggle to satisfy prompts requiring specialized knowledge, specific identities, physical consistency, or ordered events. In this paper, we present VideoGen-Agent, a multimodal agent trained through multitask agentic reinforcement learning to use external tools for video generation. The agent coordinates augmentation, generation, and verification tools through multi-turn interac…",
       "keyFacts": [
-        "如何训练多模态智能体协调外部工具，以满足需要专门知识、特定身份、物理一致性或有序事件的视频生成提示？",
-        "多任务智能体强化学习；智能体通过多轮交互协调增强、生成与验证工具；在六类任务类别均衡数据集上先用教师生成轨迹监督微调，再强化学习；采用类别感知混合奖励评估工具调用有效性、任务适配工具使用与生成视频质量；构建VABench基准。",
-        "在VABench上，VideoGen-Agent较其基础文本到视频生成器提升19.1分，从56.5到75.6；升级生成工具后分数升至86.1，无需额外智能体训练；人类评分者在84.3%的比较中偏好升级配置而非最强单基线。"
+        "如何使视频生成模型满足需要专门知识、特定身份、物理一致性或有序事件的提示？",
+        "通过多任务智能体强化学习训练多模态智能体，以多轮交互协调增强、生成和验证工具；在六类任务类别平衡数据集上，先对教师生成轨迹进行监督微调建立工具使用行为，再通过强化学习优化；采用类别感知混合奖励评估工具调用有效性、任务适配工具使用和生成视频质量；引入包含600条提示的VABench基准。",
+        "在VABench上，VideoGen-Agent比基础文生视频生成器提升19.1分，从56.5提高到75.6；升级生成工具后无需额外智能体训练进一步升至86.1；人类评分者在84.3%的比较中偏好升级配置而非最强独立基线。"
       ],
       "why": "该研究与计算机视觉相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -2939,11 +2945,11 @@
         "多模态智能体"
       ],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何训练多模态智能体协调外部工具，以满足需要专门知识、特定身份、物理一致性或有序事件的视频生成提示？",
-      "method": "多任务智能体强化学习；智能体通过多轮交互协调增强、生成与验证工具；在六类任务类别均衡数据集上先用教师生成轨迹监督微调，再强化学习；采用类别感知混合奖励评估工具调用有效性、任务适配工具使用与生成视频质量；构建VABench基准。",
-      "findings": "在VABench上，VideoGen-Agent较其基础文本到视频生成器提升19.1分，从56.5到75.6；升级生成工具后分数升至86.1，无需额外智能体训练；人类评分者在84.3%的比较中偏好升级配置而非最强单基线。",
+      "question": "如何使视频生成模型满足需要专门知识、特定身份、物理一致性或有序事件的提示？",
+      "method": "通过多任务智能体强化学习训练多模态智能体，以多轮交互协调增强、生成和验证工具；在六类任务类别平衡数据集上，先对教师生成轨迹进行监督微调建立工具使用行为，再通过强化学习优化；采用类别感知混合奖励评估工具调用有效性、任务适配工具使用和生成视频质量；引入包含600条提示的VABench基准。",
+      "findings": "在VABench上，VideoGen-Agent比基础文生视频生成器提升19.1分，从56.5提高到75.6；升级生成工具后无需额外智能体训练进一步升至86.1；人类评分者在84.3%的比较中偏好升级配置而非最强独立基线。",
       "limitations": "摘要未说明",
-      "score": 89,
+      "score": 88,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -2957,7 +2963,7 @@
         "视频生成",
         "智能体",
         "强化学习",
-        "工具使用"
+        "多模态"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -2978,12 +2984,12 @@
       "contentType": "paper",
       "title": "垂直起降场设计方法与容量分析",
       "originalTitle": "Vertiport Design Methodology and Capacity Analysis",
-      "summary": "提出基于随机排队模型的垂直起降场设计与容量分析方法，容量定义为在保持指定最大排队延迟高概率下每小时最大稳态吞吐量。采用带有限缓冲的两节点排队网络推导单TLOF垂直起降场平均队列长度与延迟，并用仿真验证。容量受起降与周转交互显著约束，参数方差降低容量，马尔可夫模型中吞吐约理论最大离场容量的50%。",
+      "summary": "利用随机排队模型提出垂直起降场设计与容量分析方法，容量定义为在大概率满足最大排队延迟下每小时最大稳态吞吐量；建立带有限缓冲区的两节点排队网络模型解析推导单TLOF垂直起降场的平均队长和延迟，并用仿真验证；发现容量受起降与周转活动交互显著制约，参数方差进一步降低容量，确定性时间可大幅提升容量，吞吐量通常约为马尔可夫模型理论最大出发容量的50%。",
       "abstract": "This paper presents a comprehensive methodology for vertiport design and capacity analysis using stochastic queueing models. Vertiport capacity is defined as the maximum steady-state throughput of aircraft per hour while maintaining a specified maximum queuing delay with high probability. We introduce a two-node queueing network model with a finite buffer to analytically derive mean queue lengths and delays at singleTLOF vertiports, supported by a simulation model that validates these findings under various operat…",
       "keyFacts": [
-        "如何建立垂直起降场设计与容量分析方法，并量化起降/周转交互、参数方差与停车位配置对吞吐量的影响？",
-        "随机排队模型：带有限缓冲的两节点排队网络模型解析推导单TLOF垂直起降场的平均队列长度与延迟，并辅以仿真模型在不同运行条件下验证。",
-        "垂直起降场容量受起降与周转活动交互显著约束；操作参数方差进一步降低容量，确定性时间显著提升容量；马尔可夫模型中吞吐通常约为理论最大离场容量的50%，并随最大排队延迟置信度增加而急剧下降；具备足够停车位的非马尔可夫模型可达满TLOF容量；方法可识别使单位面积吞吐最大化的最优停车位数量。"
+        "如何为垂直起降场设计并分析容量，以支持可扩展和高效的UAM部署？",
+        "使用随机排队模型，引入带有限缓冲区的两节点排队网络模型，解析推导单TLOF垂直起降场的平均队长和延迟，并用仿真模型在不同运行条件下验证。",
+        "垂直起降场容量显著受起降与周转活动交互制约；操作参数方差进一步降低容量，确定性时间大幅增强容量；马尔可夫模型中吞吐量通常约为理论最大出发容量的50%，随最大排队延迟置信度提高而急剧下降；具有足够停车坪的非马尔可夫模型可实现满TLOF容量；方法还识别出使单位面积吞吐量最大化的最优停车坪数量。"
       ],
       "why": "该研究与自主与控制系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3005,11 +3011,11 @@
       "primaryCategory": "eess.SY",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何建立垂直起降场设计与容量分析方法，并量化起降/周转交互、参数方差与停车位配置对吞吐量的影响？",
-      "method": "随机排队模型：带有限缓冲的两节点排队网络模型解析推导单TLOF垂直起降场的平均队列长度与延迟，并辅以仿真模型在不同运行条件下验证。",
-      "findings": "垂直起降场容量受起降与周转活动交互显著约束；操作参数方差进一步降低容量，确定性时间显著提升容量；马尔可夫模型中吞吐通常约为理论最大离场容量的50%，并随最大排队延迟置信度增加而急剧下降；具备足够停车位的非马尔可夫模型可达满TLOF容量；方法可识别使单位面积吞吐最大化的最优停车位数量。",
+      "question": "如何为垂直起降场设计并分析容量，以支持可扩展和高效的UAM部署？",
+      "method": "使用随机排队模型，引入带有限缓冲区的两节点排队网络模型，解析推导单TLOF垂直起降场的平均队长和延迟，并用仿真模型在不同运行条件下验证。",
+      "findings": "垂直起降场容量显著受起降与周转活动交互制约；操作参数方差进一步降低容量，确定性时间大幅增强容量；马尔可夫模型中吞吐量通常约为理论最大出发容量的50%，随最大排队延迟置信度提高而急剧下降；具有足够停车坪的非马尔可夫模型可实现满TLOF容量；方法还识别出使单位面积吞吐量最大化的最优停车坪数量。",
       "limitations": "摘要未说明",
-      "score": 89,
+      "score": 88,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3020,8 +3026,8 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "垂直起降场",
-        "排队网络",
         "容量分析",
+        "排队模型",
         "城市空中交通"
       ],
       "translationProvider": "deepseek",
@@ -3041,14 +3047,14 @@
     {
       "id": "arxiv:2609.37244",
       "contentType": "paper",
-      "title": "腔耦合硅C中心的L波段单光子产生",
+      "title": "腔耦合硅C中心产生L波段单光子",
       "originalTitle": "L-band single-photon generation from a cavity-coupled silicon C-center",
-      "summary": "报告隔离单个硅C中心，其零声子发射位于电信L波段。通过将单发射体耦合到纳米光子晶体腔，零声子线自发发射速率增强，激发态寿命较体材料缩短五倍，对应Purcell因子下界33。二阶自相关测量确认单光子发射，未背景校正光学纯度g(2)(0)=0.23。",
+      "summary": "报道了单个硅C中心的隔离，通过将单发射体耦合到纳米光子晶体腔增强零声子线自发辐射率，观测到激发态寿命相比体条件缩短五倍，对应珀塞尔因子下界33；二阶自相关测量确认单光子发射，未背景校正下光学纯度g(2)(0)=0.23，确立了硅中天然电信L波段量子光源。",
       "abstract": "Monolithic integration of single-photon sources into silicon photonics offers a compelling solution for realizing scalable quantum telecommunication architectures. Among the candidate silicon color centers, the C-center features a zero-phonon emission in the telecom L-band, corresponding to the spectral window of minimum transmission loss in optical fibers. Despite this advantage, isolating single C-centers has remained an unrealized challenge in solid-state quantum optics. In this work, we report the isolation of…",
       "keyFacts": [
-        "能否在硅中隔离单个C中心并实现电信L波段的高效单光子发射？",
-        "将单个硅C中心耦合到纳米光子晶体腔；测量激发态寿命；进行二阶自相关测量。",
-        "实现单个硅C中心的隔离；耦合腔后零声子线自发发射速率增强，激发态寿命较体条件缩短五倍，对应Purcell因子下界33；二阶自相关测量确认所研究缺陷为单光子发射，未背景校正光学纯度为g(2)(0)=0.23。"
+        "如何隔离单个硅C中心，以实现与硅光子学单片集成的可扩展量子通信架构？",
+        "将单个硅C中心耦合到纳米光子晶体腔，通过时间分辨测量激发态寿命，并进行二阶自相关测量。",
+        "成功隔离单个硅C中心；耦合到纳米光子晶体腔后，零声子线自发辐射率增强，激发态寿命相比体条件缩短五倍，对应珀塞尔因子下界33；二阶自相关测量确认单光子发射，未背景校正下光学纯度g(2)(0)=0.23。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3078,9 +3084,9 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "能否在硅中隔离单个C中心并实现电信L波段的高效单光子发射？",
-      "method": "将单个硅C中心耦合到纳米光子晶体腔；测量激发态寿命；进行二阶自相关测量。",
-      "findings": "实现单个硅C中心的隔离；耦合腔后零声子线自发发射速率增强，激发态寿命较体条件缩短五倍，对应Purcell因子下界33；二阶自相关测量确认所研究缺陷为单光子发射，未背景校正光学纯度为g(2)(0)=0.23。",
+      "question": "如何隔离单个硅C中心，以实现与硅光子学单片集成的可扩展量子通信架构？",
+      "method": "将单个硅C中心耦合到纳米光子晶体腔，通过时间分辨测量激发态寿命，并进行二阶自相关测量。",
+      "findings": "成功隔离单个硅C中心；耦合到纳米光子晶体腔后，零声子线自发辐射率增强，激发态寿命相比体条件缩短五倍，对应珀塞尔因子下界33；二阶自相关测量确认单光子发射，未背景校正下光学纯度g(2)(0)=0.23。",
       "limitations": "摘要未说明",
       "score": 88,
       "scoreBasis": "研究相关度",
@@ -3092,9 +3098,9 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "硅色心",
         "单光子源",
-        "光子晶体腔",
+        "硅C中心",
+        "纳米光子晶体腔",
         "量子通信"
       ],
       "translationProvider": "deepseek",
@@ -3116,12 +3122,12 @@
       "contentType": "paper",
       "title": "高可再生能源电力系统中的辅助服务：市场设计比较、新兴趋势与未来挑战",
       "originalTitle": "Ancillary Services in High-Renewable Power Systems: Comparing Market Design, Emerging Trends, and Future Challenges",
-      "summary": "比较英国、德国、丹麦、意大利、加利福尼亚、德克萨斯和澳大利亚的辅助服务市场设计，涵盖频率控制与备用、电压与无功支持、系统稳定、恢复和拥塞管理五类服务。梳理定义、采购、报酬与协调方式，提出产品级分类与频率控制/备用产品时序可视化，归纳四大趋势与若干挑战。",
+      "summary": "比较英国、德国、丹麦、意大利、加利福尼亚、德克萨斯和澳大利亚的辅助服务市场设计，涵盖频率控制与备用、电压与无功支持、系统稳定性、恢复和阻塞管理五类服务；建立一致的产品级分类，提供频率控制和备用产品的可比时间可视化，映射实施模式；识别出四个趋势和若干挑战，发现市场设计未趋同。",
       "abstract": "Rapid growth in renewable generation is changing power-system operation and increasing the importance of ancillary services for security and reliability. As inverter-based resources displace conventional synchronous generation, system operators must procure a broader set of services spanning five categories: frequency control and reserves, voltage and reactive power support, system stability, restoration, and congestion management. This paper compares ancillary-service market design in Great Britain, Germany, Denm…",
       "keyFacts": [
-        "随着可再生能源增长，不同电力系统的辅助服务市场如何定义、采购、报酬和协调服务，存在哪些共同趋势与挑战？",
-        "对英国、德国、丹麦、意大利、加利福尼亚、德克萨斯和澳大利亚的辅助服务市场设计进行比较综述；建立一致的产品级分类，提供频率控制与备用产品的可比时序可视化，并映射各服务与系统的实施方式。",
-        "归纳出四大趋势：更快更细粒度的频率响应产品；更显式采购稳定性能力（包括惯量、系统强度和动态电压支持）；储能、需求侧资源及其他逆变器型资源更广泛参与；更多采用基于位置、定向和技术中立的采购。挑战包括协调不足、对位置和运行条件相关灵活性与稳定能力的估值不完整、分布式和新兴资源参与壁垒、市场与运行安排协调不足。比较未发现向单一市场设计收敛，支持差异化但协调的辅助服务框架。"
+        "随着可变可再生能源发电增加，不同电力系统如何定义、采购、补偿和协调辅助服务？",
+        "对英国、德国、丹麦、意大利、加利福尼亚、德克萨斯和澳大利亚的辅助服务市场设计进行比较综述，建立产品级分类并提供频率控制与备用产品的可比时间可视化。",
+        "出现四个趋势：更快更细粒度的频率响应产品、更明确采购稳定性能力（包括惯量、系统强度和动态电压支持）、储能和需求侧资源等更广泛参与、更多使用基于位置和针对性的技术中性采购；挑战包括协调有限、灵活性和稳定性能力估值不完整、分布式和新兴资源参与障碍、市场与运行安排协调不足；比较发现未趋同于单一市场设计。"
       ],
       "why": "该研究与自主与控制系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3144,9 +3150,9 @@
       "primaryCategory": "eess.SY",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "随着可再生能源增长，不同电力系统的辅助服务市场如何定义、采购、报酬和协调服务，存在哪些共同趋势与挑战？",
-      "method": "对英国、德国、丹麦、意大利、加利福尼亚、德克萨斯和澳大利亚的辅助服务市场设计进行比较综述；建立一致的产品级分类，提供频率控制与备用产品的可比时序可视化，并映射各服务与系统的实施方式。",
-      "findings": "归纳出四大趋势：更快更细粒度的频率响应产品；更显式采购稳定性能力（包括惯量、系统强度和动态电压支持）；储能、需求侧资源及其他逆变器型资源更广泛参与；更多采用基于位置、定向和技术中立的采购。挑战包括协调不足、对位置和运行条件相关灵活性与稳定能力的估值不完整、分布式和新兴资源参与壁垒、市场与运行安排协调不足。比较未发现向单一市场设计收敛，支持差异化但协调的辅助服务框架。",
+      "question": "随着可变可再生能源发电增加，不同电力系统如何定义、采购、补偿和协调辅助服务？",
+      "method": "对英国、德国、丹麦、意大利、加利福尼亚、德克萨斯和澳大利亚的辅助服务市场设计进行比较综述，建立产品级分类并提供频率控制与备用产品的可比时间可视化。",
+      "findings": "出现四个趋势：更快更细粒度的频率响应产品、更明确采购稳定性能力（包括惯量、系统强度和动态电压支持）、储能和需求侧资源等更广泛参与、更多使用基于位置和针对性的技术中性采购；挑战包括协调有限、灵活性和稳定性能力估值不完整、分布式和新兴资源参与障碍、市场与运行安排协调不足；比较发现未趋同于单一市场设计。",
       "limitations": "摘要未说明",
       "score": 88,
       "scoreBasis": "研究相关度",
@@ -3159,9 +3165,9 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "辅助服务",
-        "电力市场",
         "高可再生能源",
-        "市场设计比较"
+        "市场设计",
+        "电力系统"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3180,14 +3186,14 @@
     {
       "id": "arxiv:2609.36999",
       "contentType": "paper",
-      "title": "面向可扩展电力系统量子机组组合：编码与复杂度降低技术",
+      "title": "面向可扩展电力系统量子机组组合：编码与复杂度约减技术",
       "originalTitle": "Towards Scalable Quantum Unit Commitment in Power Systems: Encoding and Complexity Reduction Techniques",
-      "summary": "本文提出量子优化机组组合（UC）框架，采用泡利相关编码（PCE）作为量子比特约简预处理，基于采样的量子对角化（SQD）作为混合后处理精化。UC问题被二值化并转为QUBO，映射为伊辛表示，在Qibo框架内进行绝热量子演化。研究分析了随发电机数量增加，PCE和SQD对量子比特可扩展性、计算量、可行性和最优解恢复概率的影响。",
+      "summary": "本文构建量子优化机组组合（UC）框架，采用泡利关联编码（PCE）作为量子比特约减预处理，基于采样的量子对角化（SQD）作为混合后处理精化。UC以二值形式建模，转为QUBO并映射为适合Qibo中绝热量子演化的Ising表示，分析PCE与SQD对可扩展性、计算量、可行性与最优解恢复概率的影响。",
       "abstract": "This paper develops a Quantum optimisation Unit Commitment (UC) framework that benefits from Pauli Correlation Encoding (PCE) as a qubit reduction preprocessing technique and Sample-based Quantum Diagonalisation (SQD) as a hybrid post-processing refinement method. The UC problem is formulated in binary form, then transformed into a QUBO problem and mapped onto an Ising representation suitable for adiabatic quantum evolution within the Qibo framework. This study analyses how PCE and SQD techniques affect qubit scal…",
       "keyFacts": [
-        "PCE和SQD技术如何影响量子机组组合问题随发电机数量增加时的量子比特可扩展性、计算量、可行性和最优解恢复概率？",
-        "将UC问题二值化并转化为QUBO，映射为适合绝热量子演化的伊辛表示，在Qibo框架内实现；使用Pauli Correlation Encoding（PCE）进行量子比特约简预处理，使用Sample-based Quantum Diagonalisation（SQD）进行混合后处理精化。",
-        "PCE减小了编码问题的有效规模，SQD提高了概率在可行解和最优解上的集中度，二者结合在多个可扩展案例中表现最佳，相比未约简公式能以更低有效计算成本获得更可靠解。"
+        "如何用量子优化方法求解电力系统机组组合问题，并在发电机数量增加时降低量子比特规模与计算成本、提高解的质量？",
+        "将UC问题二值化后转化为QUBO，并映射为适合Qibo框架内绝热量子演化的Ising表示；使用泡利关联编码（PCE）进行量子比特约减预处理，使用基于采样的量子对角化（SQD）作为混合后处理精化方法。",
+        "PCE减少了编码问题的有效规模，SQD提高了概率在可行解和最优解上的集中度；两者结合在多个可扩展案例研究中表现最佳，相比未约减的建模方式能以更低的有效计算成本获得更可靠的解。"
       ],
       "why": "该研究与自主与控制系统相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3212,11 +3218,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "PCE和SQD技术如何影响量子机组组合问题随发电机数量增加时的量子比特可扩展性、计算量、可行性和最优解恢复概率？",
-      "method": "将UC问题二值化并转化为QUBO，映射为适合绝热量子演化的伊辛表示，在Qibo框架内实现；使用Pauli Correlation Encoding（PCE）进行量子比特约简预处理，使用Sample-based Quantum Diagonalisation（SQD）进行混合后处理精化。",
-      "findings": "PCE减小了编码问题的有效规模，SQD提高了概率在可行解和最优解上的集中度，二者结合在多个可扩展案例中表现最佳，相比未约简公式能以更低有效计算成本获得更可靠解。",
-      "limitations": "摘要未说明",
-      "score": 88,
+      "question": "如何用量子优化方法求解电力系统机组组合问题，并在发电机数量增加时降低量子比特规模与计算成本、提高解的质量？",
+      "method": "将UC问题二值化后转化为QUBO，并映射为适合Qibo框架内绝热量子演化的Ising表示；使用泡利关联编码（PCE）进行量子比特约减预处理，使用基于采样的量子对角化（SQD）作为混合后处理精化方法。",
+      "findings": "PCE减少了编码问题的有效规模，SQD提高了概率在可行解和最优解上的集中度；两者结合在多个可扩展案例研究中表现最佳，相比未约减的建模方式能以更低的有效计算成本获得更可靠的解。",
+      "limitations": "摘要未说明。",
+      "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3229,7 +3235,7 @@
         "量子优化",
         "机组组合",
         "QUBO",
-        "量子比特约简"
+        "量子比特约减"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3248,14 +3254,14 @@
     {
       "id": "arxiv:2609.38177",
       "contentType": "paper",
-      "title": "Imagine3D-LLM：教多模态大语言模型在回答前想象3D场景",
+      "title": "Imagine3D-LLM：教多模态大模型在回答前想象3D场景",
       "originalTitle": "Imagine3D-LLM: Teaching MLLMs to Imagine 3D Scenes Before Answering",
-      "summary": "多视角图像的3D推理仍是多模态大语言模型（MLLM）的难题。受人类空间推理启发，本文提出Imagine3D-LLM，在图像token后附加少量可学习摘要token，解码为紧凑3D高斯泼溅表示，并用光度重建损失监督，与标准下一token预测联合训练。尽管仅摘要token接收直接重建监督，该目标也增强了底层图像特征的跨帧对应。",
+      "summary": "受人类空间推理启发，提出Imagine3D-LLM：在图像token后附加少量可学习摘要token，将其解码为紧凑3D高斯泼溅表示，并以光度重建损失监督，与标准下一token预测联合训练。仅摘要token受直接重建监督，却增强了底层图像特征的跨帧对应。该模型在多项空间推理与3D理解基准上持续优于先前方法。",
       "abstract": "Reasoning about the 3D world from multi-view images remains a fundamental challenge for Multimodal Large Language Models (MLLMs). While modern MLLMs handle single-image inputs effectively, they struggle to integrate evidence across viewpoints into a coherent 3D understanding. A growing body of work attempts to close this gap by injecting 3D awareness into MLLMs, either by boosting fine-grained pixel-level cross-view correspondence or by fusing features from 3D geometry foundation models, yet a substantial gap to h…",
       "keyFacts": [
-        "如何让多模态大语言模型从多视角图像中形成连贯的3D理解，以改进空间推理？",
-        "在图像token后附加少量可学习摘要token，将其解码为紧凑3D Gaussian Splatting表示，用光度重建损失监督，并与标准下一token预测目标联合训练。",
-        "Imagine3D-LLM在多个空间推理和3D理解基准上持续优于先前方法；仅摘要token接收直接重建监督时，该目标也诱导LLM底层图像特征中更强的跨帧对应。"
+        "如何让多模态大模型从多视角图像中形成连贯的3D理解，以进行空间推理，而不依赖细粒度几何线索或直接注入3D基础模型特征？",
+        "在多模态大模型中，于图像token后附加一小组可学习摘要token，将其解码为紧凑的3D高斯泼溅表示，用光度重建损失监督，并与标准下一token预测目标联合训练。",
+        "尽管只有摘要token接受直接重建监督，该目标也在LLM底层图像特征中诱导出更强的跨帧对应；Imagine3D-LLM在多个空间推理和3D理解基准上持续优于先前方法，表明想象场景比被告知像素级几何更有效。"
       ],
       "why": "该研究与计算机视觉相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3288,11 +3294,11 @@
       "primaryCategory": "cs.CV",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何让多模态大语言模型从多视角图像中形成连贯的3D理解，以改进空间推理？",
-      "method": "在图像token后附加少量可学习摘要token，将其解码为紧凑3D Gaussian Splatting表示，用光度重建损失监督，并与标准下一token预测目标联合训练。",
-      "findings": "Imagine3D-LLM在多个空间推理和3D理解基准上持续优于先前方法；仅摘要token接收直接重建监督时，该目标也诱导LLM底层图像特征中更强的跨帧对应。",
-      "limitations": "摘要未说明",
-      "score": 88,
+      "question": "如何让多模态大模型从多视角图像中形成连贯的3D理解，以进行空间推理，而不依赖细粒度几何线索或直接注入3D基础模型特征？",
+      "method": "在多模态大模型中，于图像token后附加一小组可学习摘要token，将其解码为紧凑的3D高斯泼溅表示，用光度重建损失监督，并与标准下一token预测目标联合训练。",
+      "findings": "尽管只有摘要token接受直接重建监督，该目标也在LLM底层图像特征中诱导出更强的跨帧对应；Imagine3D-LLM在多个空间推理和3D理解基准上持续优于先前方法，表明想象场景比被告知像素级几何更有效。",
+      "limitations": "摘要未说明。",
+      "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3302,10 +3308,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "多模态大语言模型",
-        "3D理解",
-        "高斯泼溅",
-        "空间推理"
+        "多模态大模型",
+        "3D高斯泼溅",
+        "空间推理",
+        "跨视角对应"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3324,14 +3330,14 @@
     {
       "id": "arxiv:2609.38168",
       "contentType": "paper",
-      "title": "经典关联何时证明纠缠恢复",
+      "title": "经典关联何时证明纠缠可恢复",
       "originalTitle": "When Classical Correlations Certify Entanglement Recovery",
-      "summary": "纠缠与态可区分性可通过互补基测量相联系，但该联系能否推广到不假设互补性的一般测量尚不明确。本文证明关键在于测量诱导的不可约性，一种比互补性更宽松的条件。对满足不可约性条件的POVM，建立了一侧局部变换为最大纠缠态的不保真度与态判别失败概率之间的定量关系，并刻画了两种误差同时消失的条件。",
+      "summary": "本文研究纠缠与状态可区分性在一般测量下的联系，证明关键在于测量诱导的不可约性，该条件比互补性宽松。对满足不可约性条件的POVM，建立单侧局域变换到最大纠缠态的不保真度与状态判别失败概率之间的定量关系，并刻画两者同时消失的条件。结果应用于纠缠蒸馏与量子纠错，其误差可由实验可及的局域测量估计经典输入输出关联来认证。",
       "abstract": "Entanglement and state distinguishability have long been central topics in quantum foundations. While each has developed into a rich subject in its own right, they can be connected through measurements in complementary bases. This connection provides insights into quantum and classical correlations and underlies many information-processing tasks, most notably quantum error correction (QEC). However, it has remained largely open whether the connection between entanglement and distinguishability extends to general m…",
       "keyFacts": [
-        "纠缠与可区分性之间的联系能否扩展到不假设互补性的一般测量？",
-        "对满足测量诱导不可约性条件的POVM，建立一侧局部变换为最大纠缠态的不保真度与态判别失败概率之间的定量关系，并刻画两者误差同时消失的条件。",
-        "肯定地回答了该问题，关键是由测量诱导的不可约性这一比互补性更宽松的条件；结果直接应用于纠缠蒸馏和量子纠错，其误差可通过实验可访问的局部测量估计经典输入输出关联来认证，无需互补性；还导出连接信息增益-不可逆性与可观测噪声-扰动的新权衡关系。"
+        "纠缠与可区分性之间的联系能否在无需假设互补性的一般测量下推广，并用于纠缠蒸馏与量子纠错的误差认证？",
+        "针对满足测量诱导不可约性条件的POVM，建立单侧局域变换到最大纠缠态的不保真度与状态判别失败概率之间的定量关系，并刻画两者同时消失的条件。",
+        "给出了肯定答案：不可约性这一比互补性宽松得多的条件足以建立纠缠与可区分性的定量联系；结果可直接应用于纠缠蒸馏与量子纠错，其误差可通过实验可及的局域测量估计经典输入输出关联来认证，而无需互补性；还导出连接信息增益—不可逆性与可观测噪声—扰动的权衡关系。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3357,11 +3363,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "纠缠与可区分性之间的联系能否扩展到不假设互补性的一般测量？",
-      "method": "对满足测量诱导不可约性条件的POVM，建立一侧局部变换为最大纠缠态的不保真度与态判别失败概率之间的定量关系，并刻画两者误差同时消失的条件。",
-      "findings": "肯定地回答了该问题，关键是由测量诱导的不可约性这一比互补性更宽松的条件；结果直接应用于纠缠蒸馏和量子纠错，其误差可通过实验可访问的局部测量估计经典输入输出关联来认证，无需互补性；还导出连接信息增益-不可逆性与可观测噪声-扰动的新权衡关系。",
-      "limitations": "摘要未说明",
-      "score": 88,
+      "question": "纠缠与可区分性之间的联系能否在无需假设互补性的一般测量下推广，并用于纠缠蒸馏与量子纠错的误差认证？",
+      "method": "针对满足测量诱导不可约性条件的POVM，建立单侧局域变换到最大纠缠态的不保真度与状态判别失败概率之间的定量关系，并刻画两者同时消失的条件。",
+      "findings": "给出了肯定答案：不可约性这一比互补性宽松得多的条件足以建立纠缠与可区分性的定量联系；结果可直接应用于纠缠蒸馏与量子纠错，其误差可通过实验可及的局域测量估计经典输入输出关联来认证，而无需互补性；还导出连接信息增益—不可逆性与可观测噪声—扰动的权衡关系。",
+      "limitations": "摘要未说明。",
+      "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3371,10 +3377,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "纠缠",
-        "可区分性",
+        "纠缠蒸馏",
         "量子纠错",
-        "POVM"
+        "POVM",
+        "测量权衡"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3393,14 +3399,14 @@
     {
       "id": "arxiv:2609.38160",
       "contentType": "paper",
-      "title": "Lindbladian耗散的最优容忍测试",
+      "title": "林德布拉德耗散的最优容忍检验",
       "originalTitle": "Optimal Tolerant Testing of Lindbladian Dissipation",
-      "summary": "量化耗散对控制量子噪声和刻画开放系统动力学至关重要。本文研究未知、时间无关、强度有界的Lindblad生成元，跃迁算符局部但允许无限制重叠，仅使用无记忆前向演化访问。任务是以归一化Frobenius范数区分耗散强度至多ε1与至少ε2。给出总演化时间O(ε2/(ε2-ε1)^2)的算法，并证明匹配下界，确立最优性。",
+      "summary": "研究在仅有记忆无关前向演化访问下，对未知时不变、强度有界的林德布拉德生成元进行容忍检验：区分耗散强度至多为ε1与至少为ε2。给出总演化时间O(ε2/(ε2-ε1)^2)的算法（常数成功概率），并给出匹配下界Ω(ε2/(ε2-ε1)^2)，证明即使自适应协议也最优。该结果将耗散检验扩展到容忍设定，并去除了有界度要求。",
       "abstract": "Quantifying dissipation is essential for controlling quantum noise and characterizing open-system dynamics. In practical experimental settings, residual noise may still persist despite efforts to suppress it, making it important to determine whether the dissipative strength remains within a prescribed tolerance threshold. We study this question for an unknown, time-independent Lindblad generator with bounded strength, where the jump operators are local but with unrestricted overlap, using only memoryless forward-e…",
       "keyFacts": [
-        "在仅有无记忆前向演化访问下，如何判断未知Lindblad生成元的耗散强度是否在给定容忍阈值内？",
-        "针对未知、时间无关、强度有界的Lindblad生成元，跃迁算符局部但重叠不受限制，仅使用无记忆前向演化访问，以归一化Frobenius范数度量的耗散强度区分至多ε1与至少ε2。",
-        "给出总演化时间O(ε2/(ε2-ε1)^2)且常数成功概率的算法，并给出匹配下界Ω(ε2/(ε2-ε1)^2)，即使对自适应协议也证明最优性；将耗散测试扩展到容忍设置并消除有界度要求。"
+        "在仅有记忆无关前向演化访问、跳跃算符局域但重叠不受限的情况下，能否最优地区分未知时不变林德布拉德生成元的耗散强度是至多ε1还是至少ε2？",
+        "针对强度有界、跳跃算符局域但重叠不受限的未知时不变林德布拉德生成元，使用仅记忆无关的前向演化访问，给出容忍检验算法，并建立匹配下界。",
+        "算法以总演化时间O(ε2/(ε2-ε1)^2)和常数成功概率解决所有非平凡阈值的检验任务；下界Ω(ε2/(ε2-ε1)^2)表明该算法最优，即使对自适应协议也成立。该工作将耗散检验扩展到容忍设定，并消除了有界度要求。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3422,11 +3428,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "在仅有无记忆前向演化访问下，如何判断未知Lindblad生成元的耗散强度是否在给定容忍阈值内？",
-      "method": "针对未知、时间无关、强度有界的Lindblad生成元，跃迁算符局部但重叠不受限制，仅使用无记忆前向演化访问，以归一化Frobenius范数度量的耗散强度区分至多ε1与至少ε2。",
-      "findings": "给出总演化时间O(ε2/(ε2-ε1)^2)且常数成功概率的算法，并给出匹配下界Ω(ε2/(ε2-ε1)^2)，即使对自适应协议也证明最优性；将耗散测试扩展到容忍设置并消除有界度要求。",
-      "limitations": "摘要未说明",
-      "score": 88,
+      "question": "在仅有记忆无关前向演化访问、跳跃算符局域但重叠不受限的情况下，能否最优地区分未知时不变林德布拉德生成元的耗散强度是至多ε1还是至少ε2？",
+      "method": "针对强度有界、跳跃算符局域但重叠不受限的未知时不变林德布拉德生成元，使用仅记忆无关的前向演化访问，给出容忍检验算法，并建立匹配下界。",
+      "findings": "算法以总演化时间O(ε2/(ε2-ε1)^2)和常数成功概率解决所有非平凡阈值的检验任务；下界Ω(ε2/(ε2-ε1)^2)表明该算法最优，即使对自适应协议也成立。该工作将耗散检验扩展到容忍设定，并消除了有界度要求。",
+      "limitations": "摘要未说明。",
+      "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3436,10 +3442,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "Lindbladian",
-        "耗散测试",
-        "容忍测试",
-        "量子噪声"
+        "量子噪声",
+        "林德布拉德生成元",
+        "容忍检验",
+        "最优下界"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3458,14 +3464,14 @@
     {
       "id": "arxiv:2609.38154",
       "contentType": "paper",
-      "title": "LongLive-Plug：视频生成的一次性蒸馏",
+      "title": "LongLive-Plug：面向视频生成的一次性蒸馏",
       "originalTitle": "LongLive-Plug: Once-for-All Distillation for Video Generation",
-      "summary": "视频扩散模型逐渐发展为面向多样下游任务的专用模型，常包含蒸馏阶段（如加速采样或改进长视频生成），但该阶段通常对每个专用模型重复。本文提出LongLive-Plug，一种一次性蒸馏框架，在基模型上学习可复用的LoRA能力，实现无需训练的即插即用部署到兼容下游模型。能力包括单次无分类器引导、少步采样和长上下文纠错。",
+      "summary": "提出LongLive-Plug，一种一次性蒸馏框架：在基模型上以LoRA学习可复用能力，实现向兼容下游模型的免训练、即插即用部署，能力涵盖单次无分类器引导、少步采样和自回归长上下文纠错。适配器即使下游模型增加条件分支或扩展输出通道仍可复用。在三个骨干家族、八大任务类别的54个下游模型上验证了免训练部署。",
       "abstract": "Video diffusion models are increasingly developed into specialized models for diverse downstream tasks, and this development often includes a distillation stage, for example to accelerate sampling or to improve long-video generation. This stage is typically repeated for every specialized model. We introduce LongLive-Plug, a once-for-all distillation framework that learns reusable capabilities as LoRAs on a base model for training-free, plug-and-play deployment to compatible downstream models. These capabilities in…",
       "keyFacts": [
-        "如何避免为每个视频生成下游专用模型重复进行蒸馏阶段？",
-        "提出LongLive-Plug一次性蒸馏框架，在基模型上学习可复用LoRA适配器，包含单次无分类器引导、少步采样和长上下文纠错能力，实现无需训练、即插即用部署到兼容下游模型。",
-        "在三个骨干家族、八个任务类别（包括世界建模、机器人、编辑和多模态生成）的54个下游模型上验证了无需训练部署；即使下游模型添加条件分支、扩展输出通道，适配器仍可复用；尽管在固定引导尺度训练，CFG LoRA通过推理权重提供文本引导控制，与少步LoRA结合可同时保持少步生成和CFG可控性；每种能力可每个骨干家族蒸馏一次并复用，无需逐目标重训练。"
+        "能否一次性蒸馏可复用的视频生成能力，使其无需针对每个专门化下游模型重复蒸馏即可免训练、即插即用地部署？",
+        "提出一次性蒸馏框架LongLive-Plug，在基模型上以LoRA学习可复用能力（单次无分类器引导、少步采样、长上下文纠错），并将适配器免训练部署到兼容的下游模型；训练使用固定引导尺度。",
+        "尽管在固定引导尺度下训练，专用CFG LoRA仍可通过其推理权重提供文本引导控制；与少步LoRA结合可同时在下游任务上保持少步生成和CFG可控性。在三个骨干家族、八个任务类别（含世界建模、机器人、编辑和多模态生成）的54个下游模型上验证了免训练部署；每种能力可按骨干家族蒸馏一次并复用，无需逐目标重训。"
       ],
       "why": "该研究与计算机视觉相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3496,11 +3502,11 @@
       "primaryCategory": "cs.CV",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何避免为每个视频生成下游专用模型重复进行蒸馏阶段？",
-      "method": "提出LongLive-Plug一次性蒸馏框架，在基模型上学习可复用LoRA适配器，包含单次无分类器引导、少步采样和长上下文纠错能力，实现无需训练、即插即用部署到兼容下游模型。",
-      "findings": "在三个骨干家族、八个任务类别（包括世界建模、机器人、编辑和多模态生成）的54个下游模型上验证了无需训练部署；即使下游模型添加条件分支、扩展输出通道，适配器仍可复用；尽管在固定引导尺度训练，CFG LoRA通过推理权重提供文本引导控制，与少步LoRA结合可同时保持少步生成和CFG可控性；每种能力可每个骨干家族蒸馏一次并复用，无需逐目标重训练。",
-      "limitations": "摘要未说明",
-      "score": 88,
+      "question": "能否一次性蒸馏可复用的视频生成能力，使其无需针对每个专门化下游模型重复蒸馏即可免训练、即插即用地部署？",
+      "method": "提出一次性蒸馏框架LongLive-Plug，在基模型上以LoRA学习可复用能力（单次无分类器引导、少步采样、长上下文纠错），并将适配器免训练部署到兼容的下游模型；训练使用固定引导尺度。",
+      "findings": "尽管在固定引导尺度下训练，专用CFG LoRA仍可通过其推理权重提供文本引导控制；与少步LoRA结合可同时在下游任务上保持少步生成和CFG可控性。在三个骨干家族、八个任务类别（含世界建模、机器人、编辑和多模态生成）的54个下游模型上验证了免训练部署；每种能力可按骨干家族蒸馏一次并复用，无需逐目标重训。",
+      "limitations": "摘要未说明。",
+      "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3510,10 +3516,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "视频生成",
-        "扩散模型",
+        "视频扩散模型",
         "蒸馏",
-        "LoRA"
+        "LoRA",
+        "免训练部署"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3534,12 +3540,12 @@
       "contentType": "paper",
       "title": "并行访问下钻石距离中查询最优的酉信道层析",
       "originalTitle": "Query-optimal unitary channel tomography in diamond distance with parallel access",
-      "summary": "研究并行查询能否在钻石距离下达到与顺序查询同等效率的酉信道层析。提出使用O(d²/ε)次并行查询的学习协议，匹配Haah等人FOCS'23给出的下界，闭合并行与顺序策略间的差距，并应用于边界区域量子信道层析和费米线性光学层析。",
+      "summary": "该研究探讨并行查询能否像顺序查询一样高效学习未知d维酉信道。作者提出新协议，仅用O(d²/ε)次并行查询即在钻石距离内达到ε精度，匹配FOCS '23给出的下界，从而弥合并行与顺序策略间的差距，并应用于边界区域信道层析与费米线性光学层析。",
       "abstract": "In the study of quantum process tomography, it has remained open how to learn a unitary channel in diamond distance with strictly parallel queries as efficiently as with sequential queries. Sequential queries allow one to exploit adaptivity to refine the estimate and adjust the learning strategy accordingly, whereas such adjustments are impossible for parallel queries. From the perspective of higher-order quantum operations, any parallel learning strategy can be simulated by a sequential one, whereas the converse…",
       "keyFacts": [
-        "能否用严格并行的查询，以与顺序查询相同的高效率在钻石距离下学习酉信道？",
-        "提出一种新的学习协议，使用O(d²/ε)次并行查询来学习未知d维酉信道，并与Haah、Kothari、O'Donnell和Tang在FOCS '23给出的下界进行比较。",
-        "该协议以O(d²/ε)次并行查询达到钻石距离误差ε，匹配已有下界，从而闭合了并行与顺序策略在酉信道层析中的差距；并应用于边界区域量子信道层析达到最优查询复杂度，并改进了已知最优的费米线性光学层析协议的查询效率。"
+        "在钻石距离度量下，使用严格并行查询学习未知d维酉信道，能否达到与顺序查询相同的查询复杂度？",
+        "提出一种使用O(d²/ε)次并行查询学习未知d维酉信道的新协议，并与已知下界比较。",
+        "新协议达到O(d²/ε)并行查询复杂度，匹配Haah等人FOCS '23的下界，弥合并行与顺序策略差距；应用于边界区域量子信道层析达到最优查询复杂度，并改进费米线性光学层析的查询效率。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3561,11 +3567,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "能否用严格并行的查询，以与顺序查询相同的高效率在钻石距离下学习酉信道？",
-      "method": "提出一种新的学习协议，使用O(d²/ε)次并行查询来学习未知d维酉信道，并与Haah、Kothari、O'Donnell和Tang在FOCS '23给出的下界进行比较。",
-      "findings": "该协议以O(d²/ε)次并行查询达到钻石距离误差ε，匹配已有下界，从而闭合了并行与顺序策略在酉信道层析中的差距；并应用于边界区域量子信道层析达到最优查询复杂度，并改进了已知最优的费米线性光学层析协议的查询效率。",
+      "question": "在钻石距离度量下，使用严格并行查询学习未知d维酉信道，能否达到与顺序查询相同的查询复杂度？",
+      "method": "提出一种使用O(d²/ε)次并行查询学习未知d维酉信道的新协议，并与已知下界比较。",
+      "findings": "新协议达到O(d²/ε)并行查询复杂度，匹配Haah等人FOCS '23的下界，弥合并行与顺序策略差距；应用于边界区域量子信道层析达到最优查询复杂度，并改进费米线性光学层析的查询效率。",
       "limitations": "摘要未说明",
-      "score": 88,
+      "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3577,8 +3583,8 @@
       "tags": [
         "量子过程层析",
         "酉信道",
-        "钻石距离",
-        "并行查询"
+        "并行查询",
+        "查询复杂度"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3597,14 +3603,14 @@
     {
       "id": "arxiv:2609.38144",
       "contentType": "paper",
-      "title": "量子信道上私有通信的精确强逆指数",
+      "title": "量子信道上私密通信的精确强逆指数",
       "originalTitle": "The exact strong converse exponent for private communication over quantum channels",
-      "summary": "确定一般有限维量子窃听信道上秘密密钥传输与生成的精确强逆指数，以与理想密钥的平方保真度联合衡量可靠性和保密性。引入新的Renyi私有信息，其正则化刻画该指数，并给出用普通私有信息表示的精确积分表示，导出均匀连续性界，表明正则化量在Renyi阶趋于1时收敛到私有容量。",
+      "summary": "本文确定一般有限维量子窃听信道上密钥传输与生成的精确强逆指数，以与理想密钥的平方保真度联合度量可靠性与保密性。引入新型Renyi私密信息，其正则化刻画该指数，并给出用普通私密信息表示的精确积分形式与一致连续性界，证明Renyi阶趋于1时收敛到私密容量。",
       "abstract": "We determine the exact strong converse exponent for secret-key transmission and generation over general finite-dimensional quantum wiretap channels, measuring reliability and secrecy jointly by squared fidelity to an ideal secret key. We introduce a novel Renyi private information whose regularization characterizes this exponent. An exact integral representation in terms of ordinary private information gives a uniform continuity bound, showing that the regularized quantity converges to private capacity as the Reny…",
       "keyFacts": [
-        "一般有限维量子窃听信道上秘密密钥传输与生成的精确强逆指数是什么？",
-        "引入新的Renyi私有信息，用其正则化刻画强逆指数；给出用普通私有信息表示的精确积分表示，并导出均匀连续性界。",
-        "正则化Renyi私有信息在Renyi阶趋于1时收敛到私有容量；对任意窃听信道，在高于私有容量的每个速率下保真度呈指数衰减。"
+        "一般有限维量子窃听信道上密钥传输与生成的精确强逆指数是什么？",
+        "引入新型Renyi私密信息，其正则化刻画强逆指数，并给出普通私密信息的精确积分表示和一致连续性界。",
+        "正则化Renyi私密信息刻画精确强逆指数；Renyi阶趋于1时收敛到私密容量；对任意窃听信道，在高于私密容量的每个速率上保真度指数衰减。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3627,11 +3633,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "一般有限维量子窃听信道上秘密密钥传输与生成的精确强逆指数是什么？",
-      "method": "引入新的Renyi私有信息，用其正则化刻画强逆指数；给出用普通私有信息表示的精确积分表示，并导出均匀连续性界。",
-      "findings": "正则化Renyi私有信息在Renyi阶趋于1时收敛到私有容量；对任意窃听信道，在高于私有容量的每个速率下保真度呈指数衰减。",
+      "question": "一般有限维量子窃听信道上密钥传输与生成的精确强逆指数是什么？",
+      "method": "引入新型Renyi私密信息，其正则化刻画强逆指数，并给出普通私密信息的精确积分表示和一致连续性界。",
+      "findings": "正则化Renyi私密信息刻画精确强逆指数；Renyi阶趋于1时收敛到私密容量；对任意窃听信道，在高于私密容量的每个速率上保真度指数衰减。",
       "limitations": "摘要未说明",
-      "score": 88,
+      "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3643,8 +3649,8 @@
       "tags": [
         "量子窃听信道",
         "强逆指数",
-        "私有容量",
-        "Renyi私有信息"
+        "私密容量",
+        "Renyi信息"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3665,12 +3671,12 @@
       "contentType": "paper",
       "title": "量子LDPC码的局部自主推断机",
       "originalTitle": "Local autonomous inference machines for quantum LDPC codes",
-      "summary": "提出一种基于置信传播的局部分布式量子LDPC码解码框架，具有严格局部处理、局部反馈、自主运行和高并行性。证明在迭代BP下有阈值的码可提升为保持阈值的自主局部测量-反馈动力学；对朴素BP无阈值行为的码，利用BP提供的局部边缘信息使活跃综合缺陷移动、配对和湮灭。数值上在二维和三维环面码的点状扇区及三维环面码的膜状扇区和双变量自行车量子LDPC码族中研究推断动力学。",
+      "summary": "本文提出基于置信传播的局部分布式量子LDPC码解码框架，结合严格局部综合征处理、局部反馈、自主运行与高度并行解码。证明任何在迭代BP下具有阈值的码可提升为保持阈值的自主局部测量-反馈动力学；对朴素BP无阈值的码，局部信念驱动活跃缺陷移动、配对和湮灭。",
       "abstract": "We introduce a local and distributed framework for decoding quantum LDPC codes. Built atop belief propagation (BP), the architecture combines strictly local processing of syndrome information, local feedback, autonomous operation, and highly parallelized decoding. We establish the framework at two complementary levels. First, we show that any code exhibiting a threshold under iterative BP decoding can be promoted to an autonomous local measurement-and-feedback dynamics while preserving that threshold. We then turn…",
       "keyFacts": [
-        "能否为量子LDPC码构建局部、分布式、自主运行且高度并行的解码框架？",
-        "基于置信传播（BP）构建局部分布式解码架构，包含综合征信息的严格局部处理、局部反馈和自主操作；将BP阈值码提升为自主局部测量-反馈动力学，并利用局部信念使活跃综合征缺陷移动、配对、湮灭，进行数值模拟。",
-        "任何在迭代BP解码下具有阈值的码可被提升为保持该阈值的自主局部测量-反馈动力学；对朴素BP不显示阈值的码，该构造在二维和三维环面码的点状扇区中数值显示阈值行为，而传统BP解码失败；还研究了三维环面码的膜状扇区和双变量自行车量子LDPC码族中的推断动力学。"
+        "如何构建局部、分布式、自主运行的量子LDPC码解码框架，使其在朴素BP失效的情形下仍具阈值行为？",
+        "基于置信传播构建局部测量-反馈动力学框架，并开展线性与非线性数值模拟。",
+        "任何在迭代BP下具阈值的码可提升为保持阈值的自主局部动力学；局部信念使活跃缺陷移动、配对和湮灭；数值显示二维和三维环面码点状扇区出现阈值行为，并研究三维环面码膜状扇区及双变量自行车量子LDPC码的推断动力学。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3692,11 +3698,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "能否为量子LDPC码构建局部、分布式、自主运行且高度并行的解码框架？",
-      "method": "基于置信传播（BP）构建局部分布式解码架构，包含综合征信息的严格局部处理、局部反馈和自主操作；将BP阈值码提升为自主局部测量-反馈动力学，并利用局部信念使活跃综合征缺陷移动、配对、湮灭，进行数值模拟。",
-      "findings": "任何在迭代BP解码下具有阈值的码可被提升为保持该阈值的自主局部测量-反馈动力学；对朴素BP不显示阈值的码，该构造在二维和三维环面码的点状扇区中数值显示阈值行为，而传统BP解码失败；还研究了三维环面码的膜状扇区和双变量自行车量子LDPC码族中的推断动力学。",
+      "question": "如何构建局部、分布式、自主运行的量子LDPC码解码框架，使其在朴素BP失效的情形下仍具阈值行为？",
+      "method": "基于置信传播构建局部测量-反馈动力学框架，并开展线性与非线性数值模拟。",
+      "findings": "任何在迭代BP下具阈值的码可提升为保持阈值的自主局部动力学；局部信念使活跃缺陷移动、配对和湮灭；数值显示二维和三维环面码点状扇区出现阈值行为，并研究三维环面码膜状扇区及双变量自行车量子LDPC码的推断动力学。",
       "limitations": "摘要未说明",
-      "score": 88,
+      "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3708,8 +3714,8 @@
       "tags": [
         "量子LDPC码",
         "置信传播",
-        "自主解码",
-        "局部推断"
+        "局部解码",
+        "阈值行为"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3728,14 +3734,14 @@
     {
       "id": "arxiv:2609.38134",
       "contentType": "paper",
-      "title": "最优量子对称性测试中的资源兼容性",
+      "title": "最优量子对称性检验中的资源兼容性",
       "originalTitle": "Resource Compatibility in Optimal Quantum Symmetry Testing",
-      "summary": "研究能否不使用与对称性自然关联的量子资源而最优地测试对称性。对并行子群-对-Haar测试，导出零第一类错误下所有协议的表示论逆界：第二类错误超出量下界为两个非负惩罚之和，最优时惩罚消失，导致支撑与权重锁定。由此排除无资源最优性，并给出对角环面和正交子群及qutrit Clifford群中的查询依赖资源要求。",
+      "summary": "本文研究不使用天然量子资源能否最优检验对称性。针对并行子群对Haar检验，对任何零I型错误协议给出表示论定量逆界：过度II型错误下界为两个非负惩罚之和。最优时两惩罚消失，导致系统边缘分布的支持与权重锁定。结果给出diagonal torus与qutrit Clifford群的资源需求。",
       "abstract": "Can a symmetry be tested optimally without using the quantum resource naturally associated with it? For parallel subgroup-versus-Haar testing, we derive a quantitative representation-theoretic converse for every protocol with zero type-I error: the excess type-II error is bounded below by the sum of two nonnegative penalties, one for weight on suboptimal subgroup types and one for deviations of within-type Schur profiles from their typewise extremal profiles. At optimality, both penalties vanish, yielding support…",
       "keyFacts": [
-        "能否在不使用与对称性自然关联的量子资源的情况下最优地测试该对称性？",
-        "对并行子群-对-Haar测试，导出零第一类错误下所有协议的定量表示论逆界，将第二类错误超出量下界表示为两个非负惩罚之和，并分析最优时的支撑与权重锁定结构；针对对角环面、正交子群和qutrit Clifford群分析最优测试所需的相干性。",
-        "第二类错误超出量下界为两个非负惩罚之和，最优时二者消失，给出最优系统边缘的支撑和权重锁定；锁定集与自由边缘集不相交排除了无资源最优性；对d≥2的对角环面，无相干最优测试仅可能用单次查询，并确定所有非相干系统边缘协议下的精确最优第二类错误和达到无限制最优所需的最小系统边缘相干性；对d≥2的正交子群，实协议在每个查询数下达到最优；对qutrit Clifford群，Wigner正最优协议在三次和四次查询存在，但五到九次不存在，超过九次是否仍存在尚待解决。"
+        "在不使用与对称性天然关联的量子资源时，能否最优地检验该对称性？",
+        "针对并行子群对Haar检验，推导表示论定量逆界，并分析系统边缘分布的支持与权重锁定及相干性需求。",
+        "任何零I型错误协议的过度II型错误下界为两个非负惩罚之和；最优时惩罚消失导致支持与权重锁定；锁定集与自由边缘集不交排除无资源最优性；diagonal torus在d≥2时无相干最优仅限单次查询；正交子群实数协议每查询数达最优；qutrit Clifford群Wigner正最优协议在三、四次查询存在，五至九次不存在，九次以上未知。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3758,11 +3764,11 @@
       "primaryCategory": "quant-ph",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "能否在不使用与对称性自然关联的量子资源的情况下最优地测试该对称性？",
-      "method": "对并行子群-对-Haar测试，导出零第一类错误下所有协议的定量表示论逆界，将第二类错误超出量下界表示为两个非负惩罚之和，并分析最优时的支撑与权重锁定结构；针对对角环面、正交子群和qutrit Clifford群分析最优测试所需的相干性。",
-      "findings": "第二类错误超出量下界为两个非负惩罚之和，最优时二者消失，给出最优系统边缘的支撑和权重锁定；锁定集与自由边缘集不相交排除了无资源最优性；对d≥2的对角环面，无相干最优测试仅可能用单次查询，并确定所有非相干系统边缘协议下的精确最优第二类错误和达到无限制最优所需的最小系统边缘相干性；对d≥2的正交子群，实协议在每个查询数下达到最优；对qutrit Clifford群，Wigner正最优协议在三次和四次查询存在，但五到九次不存在，超过九次是否仍存在尚待解决。",
-      "limitations": "qutrit Clifford群超过九次查询是否存在Wigner正最优协议仍未解决。",
-      "score": 88,
+      "question": "在不使用与对称性天然关联的量子资源时，能否最优地检验该对称性？",
+      "method": "针对并行子群对Haar检验，推导表示论定量逆界，并分析系统边缘分布的支持与权重锁定及相干性需求。",
+      "findings": "任何零I型错误协议的过度II型错误下界为两个非负惩罚之和；最优时惩罚消失导致支持与权重锁定；锁定集与自由边缘集不交排除无资源最优性；diagonal torus在d≥2时无相干最优仅限单次查询；正交子群实数协议每查询数达最优；qutrit Clifford群Wigner正最优协议在三、四次查询存在，五至九次不存在，九次以上未知。",
+      "limitations": "九次以上查询时Wigner正最优协议是否存在仍待解决；重叠本身不足以确立可达性。",
+      "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3772,10 +3778,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "量子对称性测试",
+        "量子对称性检验",
         "资源兼容性",
         "表示论",
-        "Wigner正性"
+        "量子相干性"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3796,12 +3802,12 @@
       "contentType": "paper",
       "title": "周期性辐照潮汐锁定行星的大气动力学与变率",
       "originalTitle": "Atmospheric dynamics and variability of periodically irradiated tidally locked planets",
-      "summary": "首次从基本动力学角度研究变辐照潮汐锁定行星的大气响应，使用1.5层浅水模型并强迫至随时间变化的辐射平衡，推导响应均值、振幅和相位滞后的线性解析表达式，发现当辐照变化与波时标匹配且阻尼弱时发生共振，产生全球驻波模并使夜侧暂时变暖，热点随强迫频率纵向振荡并在共振时到达反恒星点，合成相位曲线在共振时因夜侧变暖而形状反转。",
+      "summary": "周期性恒星加热可能在不规则行星上产生永久热或冷半球等新气候态。本文首次从基本动力学角度研究变辐照潮汐锁定行星的大气响应，采用1.5层浅水模型向时变辐射平衡强迫。推导出响应均值、振幅与相位滞后的线性化解析式，发现当辐照变化与波时标匹配且阻尼弱时发生共振，产生全球驻波模和暂时更暖夜侧。",
       "abstract": "Time-variable stellar heating may create new climate states, such as permanently hot or cold hemispheres, on asynchronous planets. Planets on eccentric orbits, circumbinary planets and planets on polar orbits around gravity-darkened stars all receive variable irradiation, yet variably irradiated planets (VIPs) have not been studied from a fundamental dynamical perspective. We present the first generalized study of the atmospheric response of variably irradiated tidally locked planets, using a 1.5-layer shallow-wat…",
       "keyFacts": [
-        "周期变化的恒星加热如何影响潮汐锁定行星的大气动力学和可观测变率？",
-        "使用1.5层浅水模型，将大气强迫至随时间变化的辐射平衡；推导响应均值、振幅和相位滞后的线性解析表达式；进行线性与非线性模拟。",
-        "响应表现为受迫阻尼谐振子，稳态强迫极限下可恢复已知的潮汐锁定行星趋势；当辐照变化与波时标匹配且阻尼弱时发生共振，因波自由传播和干涉产生全球驻波模，导致夜侧暂时变暖；线性和非线性模拟复现该结果，热点以强迫频率纵向振荡并在共振时到达反恒星点，振荡方向因旋转速率和非线性而向东或向西；合成相位曲线携带该变率特征，并在共振时因夜侧变暖而形状反转；在观测系统中发现11颗行星具有至少10%的相位曲线调制，偏心伪同步巨星最有希望，其中HAT-P-2b预测调制最大。"
+        "变辐照潮汐锁定行星的大气对周期性恒星加热的动力学响应与变率如何？",
+        "使用1.5层浅水模型向时变辐射平衡强迫，结合线性化解析表达式以及线性与非线性模拟。",
+        "响应表现为受迫阻尼谐振子；当辐照变化与波时标匹配且阻尼弱时发生共振，产生全球驻波模和暂时更暖夜侧；热点以强迫频率纵向振荡，共振时到达反恒星点；振荡方向取决于自转率和非线性；合成相位曲线携带变率特征并在共振时因夜侧变暖而形状反转；发现11颗行星相位曲线调制至少10%，偏心伪同步巨星最有前景，HAT-P-2b预测调制最大。"
       ],
       "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3826,11 +3832,11 @@
       "primaryCategory": "astro-ph.EP",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "周期变化的恒星加热如何影响潮汐锁定行星的大气动力学和可观测变率？",
-      "method": "使用1.5层浅水模型，将大气强迫至随时间变化的辐射平衡；推导响应均值、振幅和相位滞后的线性解析表达式；进行线性与非线性模拟。",
-      "findings": "响应表现为受迫阻尼谐振子，稳态强迫极限下可恢复已知的潮汐锁定行星趋势；当辐照变化与波时标匹配且阻尼弱时发生共振，因波自由传播和干涉产生全球驻波模，导致夜侧暂时变暖；线性和非线性模拟复现该结果，热点以强迫频率纵向振荡并在共振时到达反恒星点，振荡方向因旋转速率和非线性而向东或向西；合成相位曲线携带该变率特征，并在共振时因夜侧变暖而形状反转；在观测系统中发现11颗行星具有至少10%的相位曲线调制，偏心伪同步巨星最有希望，其中HAT-P-2b预测调制最大。",
+      "question": "变辐照潮汐锁定行星的大气对周期性恒星加热的动力学响应与变率如何？",
+      "method": "使用1.5层浅水模型向时变辐射平衡强迫，结合线性化解析表达式以及线性与非线性模拟。",
+      "findings": "响应表现为受迫阻尼谐振子；当辐照变化与波时标匹配且阻尼弱时发生共振，产生全球驻波模和暂时更暖夜侧；热点以强迫频率纵向振荡，共振时到达反恒星点；振荡方向取决于自转率和非线性；合成相位曲线携带变率特征并在共振时因夜侧变暖而形状反转；发现11颗行星相位曲线调制至少10%，偏心伪同步巨星最有前景，HAT-P-2b预测调制最大。",
       "limitations": "摘要未说明",
-      "score": 88,
+      "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3840,10 +3846,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "系外行星",
+        "系外行星大气",
         "潮汐锁定",
-        "大气动力学",
-        "浅水模型"
+        "浅水模型",
+        "共振"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3864,12 +3870,12 @@
       "contentType": "paper",
       "title": "利用空间模式分选器对机械谐振器进行多模辐射压力驱动",
       "originalTitle": "Multimode radiation pressure actuation of a mechanical resonator using a spatial mode sorter",
-      "summary": "利用空间模式解复用器（SPADE）产生动态结构光，对纳米机械膜进行辐射压力驱动。使用单模和双模照明，直接成像由膜运动介导的厄米-高斯模式间位置依赖模间耦合。应用多模辐射压力反馈同时冷却两个近简并膜模式。结果适用于多种机械系统，为基于SPADE的量子光力学奠定基础。",
+      "summary": "本文利用空间模式解复用器产生的动态结构光，演示了对纳米机械薄膜的辐射压力驱动。通过单模和双模照明，直接成像了由薄膜运动介导的厄米-高斯模式间的位置依赖模式耦合，并应用多模辐射压力反馈同时冷却两个近简并的薄膜模式。",
       "abstract": "Multimode optomechanical scattering is ubiquitous in free-space imaging protocols, but its radiation pressure counterpart is challenging to detect with extended objects. Here we demonstrate radiation pressure actuation of a nanomechanical membrane using dynamically structured light from a spatial mode demultiplexer (SPADE). Using single- and two-mode illumination, we directly image the position-dependent intermodal coupling between Hermite-Gauss (HG) modes as mediated by the membrane's motion. As an application, w…",
       "keyFacts": [
-        "如何利用空间模式分选器产生的动态结构光实现对机械谐振器的多模辐射压力驱动，并应用于同时冷却近简并机械模式？",
-        "使用空间模式解复用器（SPADE）产生动态结构光；采用单模和双模照明；直接成像位置依赖的模间耦合；应用多模辐射压力反馈冷却两个近简并膜模式。",
-        "实现了对纳米机械膜的辐射压力驱动；直接成像了由膜运动介导的厄米-高斯模间位置依赖耦合；利用多模辐射压力反馈同时冷却了两个近简并膜模式。"
+        "如何利用空间模式分选器（SPADE）产生的动态结构光实现对扩展物体的多模辐射压力驱动与探测？",
+        "使用空间模式解复用器（SPADE）产生的动态结构光对纳米机械薄膜进行单模和双模照明，成像由薄膜运动介导的厄米-高斯模式间位置依赖模式耦合，并应用多模辐射压力反馈冷却两个近简并薄膜模式。",
+        "成功演示了纳米机械薄膜的多模辐射压力驱动，直接成像了厄米-高斯模式间由薄膜运动介导的位置依赖模式耦合，并利用多模辐射压力反馈同时冷却了两个近简并的薄膜模式。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3896,11 +3902,11 @@
       "primaryCategory": "physics.optics",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何利用空间模式分选器产生的动态结构光实现对机械谐振器的多模辐射压力驱动，并应用于同时冷却近简并机械模式？",
-      "method": "使用空间模式解复用器（SPADE）产生动态结构光；采用单模和双模照明；直接成像位置依赖的模间耦合；应用多模辐射压力反馈冷却两个近简并膜模式。",
-      "findings": "实现了对纳米机械膜的辐射压力驱动；直接成像了由膜运动介导的厄米-高斯模间位置依赖耦合；利用多模辐射压力反馈同时冷却了两个近简并膜模式。",
-      "limitations": "摘要未说明",
-      "score": 88,
+      "question": "如何利用空间模式分选器（SPADE）产生的动态结构光实现对扩展物体的多模辐射压力驱动与探测？",
+      "method": "使用空间模式解复用器（SPADE）产生的动态结构光对纳米机械薄膜进行单模和双模照明，成像由薄膜运动介导的厄米-高斯模式间位置依赖模式耦合，并应用多模辐射压力反馈冷却两个近简并薄膜模式。",
+      "findings": "成功演示了纳米机械薄膜的多模辐射压力驱动，直接成像了厄米-高斯模式间由薄膜运动介导的位置依赖模式耦合，并利用多模辐射压力反馈同时冷却了两个近简并的薄膜模式。",
+      "limitations": "摘要未说明。",
+      "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3910,10 +3916,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "光力学",
+        "光机械",
         "辐射压力",
         "空间模式分选",
-        "机械谐振器"
+        "量子光机械"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -3934,12 +3940,12 @@
       "contentType": "paper",
       "title": "四元混合金属硫卤化物的热力学可达性如何？",
       "originalTitle": "How Thermodynamically Accessible are Quaternary Mixed-Metal Chalcohalides?",
-      "summary": "结合密度泛函理论与Alexandria材料数据库，快速可靠评估54种M(II)₂M(III)Ch₂X₃化合物的热力学可达性。所有评估的MMCH均预测热力学不稳定，但相当部分处于凸包计算不确定度内。预测分解遵循五种不同反应路径，最常见生成M(III)₂Ch₃、M(II)X₂和M(II)Ch。六种Sn基MMCH的溶液处理支持分析，首次合成Sn₂InS₂Br₃。",
+      "summary": "研究结合密度泛函理论与Alexandria Materials Database，快速评估了54种M(II)₂M(III)Ch₂X₃四元混合金属硫卤化物（MMCHs）的热力学可达性。所有评估的MMCHs均被预测为热力学不稳定，但相当一部分位于凸包的计算不确定度内，分解遵循五种不同反应路径。",
       "abstract": "Quaternary mixed-metal chalcohalides (MMCHs) are a promising mixed-anion semiconductor family, but their thermodynamic accessibility remains largely unexplored. We combine density functional theory with the Alexandria Materials Database to carry out a rapid and reliable evaluation of the thermodynamic accessibility of 54 M(II)$_2$M(III)Ch$_2$X$_3$ compounds. All evaluated MMCHs are predicted to be thermodynamically unstable, but a considerable fraction of MMCHs lie within computational uncertainty of the convex hu…",
       "keyFacts": [
-        "四元混合金属硫卤化物（MMCHs）的热力学可达性如何，哪些因素制约其合成？",
-        "结合密度泛函理论与Alexandria材料数据库，评估54种M(II)₂M(III)Ch₂X₃化合物的热力学可达性；对六种Sn基MMCH进行溶液处理验证。",
-        "所有评估的MMCH均预测热力学不稳定，但相当部分处于凸包计算不确定度内；预测分解遵循五种反应路径，最常见为M(III)₂Ch₃、M(II)X₂和M(II)Ch；溶液处理支持分析，首次在多相膜中合成Sn₂InS₂Br₃；凸包接近度和竞争相形成是关键制约因素。"
+        "四元混合金属硫卤化物（MMCHs）的热力学可达性如何？",
+        "结合密度泛函理论与Alexandria Materials Database，对54种M(II)₂M(III)Ch₂X₃化合物进行热力学可达性评估，并对六种Sn基MMCHs进行溶液加工验证。",
+        "所有评估的MMCHs均被预测为热力学不稳定，但相当一部分位于凸包的计算不确定度内；其预测分解遵循五种不同反应路径，最常见的是分解为M(III)₂Ch₃、M(II)X₂和M(II)Ch；六种Sn基MMCHs的溶液加工支持该分析，其中包括首次以多相薄膜形式合成此前未报道的Sn₂InS₂Br₃。"
       ],
       "why": "该研究与先进材料相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -3967,11 +3973,11 @@
       "primaryCategory": "cond-mat.mtrl-sci",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "四元混合金属硫卤化物（MMCHs）的热力学可达性如何，哪些因素制约其合成？",
-      "method": "结合密度泛函理论与Alexandria材料数据库，评估54种M(II)₂M(III)Ch₂X₃化合物的热力学可达性；对六种Sn基MMCH进行溶液处理验证。",
-      "findings": "所有评估的MMCH均预测热力学不稳定，但相当部分处于凸包计算不确定度内；预测分解遵循五种反应路径，最常见为M(III)₂Ch₃、M(II)X₂和M(II)Ch；溶液处理支持分析，首次在多相膜中合成Sn₂InS₂Br₃；凸包接近度和竞争相形成是关键制约因素。",
-      "limitations": "摘要未说明",
-      "score": 88,
+      "question": "四元混合金属硫卤化物（MMCHs）的热力学可达性如何？",
+      "method": "结合密度泛函理论与Alexandria Materials Database，对54种M(II)₂M(III)Ch₂X₃化合物进行热力学可达性评估，并对六种Sn基MMCHs进行溶液加工验证。",
+      "findings": "所有评估的MMCHs均被预测为热力学不稳定，但相当一部分位于凸包的计算不确定度内；其预测分解遵循五种不同反应路径，最常见的是分解为M(III)₂Ch₃、M(II)X₂和M(II)Ch；六种Sn基MMCHs的溶液加工支持该分析，其中包括首次以多相薄膜形式合成此前未报道的Sn₂InS₂Br₃。",
+      "limitations": "摘要未说明。",
+      "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -3981,9 +3987,9 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
-        "硫卤化物",
-        "热力学",
+        "混合金属硫卤化物",
         "密度泛函理论",
+        "热力学可达性",
         "材料数据库"
       ],
       "translationProvider": "deepseek",
@@ -4003,14 +4009,14 @@
     {
       "id": "arxiv:2609.38124",
       "contentType": "paper",
-      "title": "最小合理相关原理",
+      "title": "最小合理关联原理",
       "originalTitle": "The Principle of Minimum Justified Correlation",
-      "summary": "证明香农熵、费舍尔信息和量子力学动能均可视为相关性度量。从基本相关性破坏映射出发：联合概率密度ρ(x,y)替换为边缘分布乘积ρ_x(x)ρ_y(y)。离散情况下香农熵非减；连续情况下得到坐标不变相关性度量I[ρ]=h[ρ_x]+h[ρ_y]-h[ρ]。相对费舍尔信息J(ρ||ρ_xρ_y)行为类似。对归一化实量子波函数，减少量与平均动能减少成正比。支持最小合理相关原理。",
+      "summary": "本文表明香农熵、费舍尔信息与量子力学动能均可视为关联的度量。以将联合概率密度替换为边缘分布乘积的关联破坏映射为起点，在连续情形下导出坐标不变的关联度量及相关费舍尔信息，并证明归一化实量子波函数的均值动能减少与该相对费舍尔信息成正比。",
       "abstract": "It is shown that Shannon entropy, Fisher information, and quantum-mechanical kinetic energy may all be viewed as measures of correlation. We begin with a fundamental correlation-destroying map: a joint probability density $ρ(x,y)$ is replaced by $ρ_x(x)ρ_y(y)$, the product of its marginal distributions. In the discrete case, Shannon's entropy is nondecreasing under this map. For continuous distributions, this fundamental map leads to a well-behaved, coordinate-invariant correlation measure, analogous to the discre…",
       "keyFacts": [
-        "香农熵、费舍尔信息和量子力学动能能否统一视为相关性度量，并由此支持一个最小合理相关原理？",
-        "从基本相关性破坏映射出发进行理论推导：将联合概率密度替换为边缘分布乘积；分析离散和连续情况下的香农熵、费舍尔信息及相对费舍尔信息行为；推导量子波函数平均动能与相对费舍尔信息的关系。",
-        "离散情况下香农熵在映射下非减；连续情况下得到坐标不变相关性度量I[ρ]=h[ρ_x]+h[ρ_y]-h[ρ]；相对费舍尔信息J(ρ||ρ_xρ_y)行为类似；对归一化实量子波函数，平均动能减少量与相对费舍尔信息成正比：⟨T⟩_ψ - ⟨T⟩_Φ = (ℏ²/8m) J(ρ||ρ_xρ_y)，其中Φ=√(ρ_xρ_y)；结果支持最小合理相关原理。"
+        "香农熵、费舍尔信息与量子力学动能能否统一视为关联的度量，并由此支持一个最小合理关联原理？",
+        "以将联合概率密度ρ(x,y)替换为边缘分布乘积ρ_x(x)ρ_y(y)的关联破坏映射为出发点，分别分析离散与连续情形下香农熵与费舍尔信息的行为，并推导归一化实量子波函数中均值动能减少与相对费舍尔信息的比例关系。",
+        "离散情形下香农熵在该映射下非减；连续情形下导出坐标不变的关联度量I[ρ]=h[ρ_x]+h[ρ_y]-h[ρ]，相对费舍尔信息J(ρ‖ρ_xρ_y)行为类似，且归一化实量子波函数的均值动能减少恰好正比于该相对费舍尔信息，比例系数为ℏ²/8m；结果支持最小合理关联原理，即给定物理约束时选择关联最小的分布。"
       ],
       "why": "该研究与量子技术相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -4031,11 +4037,11 @@
       "primaryCategory": "cond-mat.stat-mech",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "香农熵、费舍尔信息和量子力学动能能否统一视为相关性度量，并由此支持一个最小合理相关原理？",
-      "method": "从基本相关性破坏映射出发进行理论推导：将联合概率密度替换为边缘分布乘积；分析离散和连续情况下的香农熵、费舍尔信息及相对费舍尔信息行为；推导量子波函数平均动能与相对费舍尔信息的关系。",
-      "findings": "离散情况下香农熵在映射下非减；连续情况下得到坐标不变相关性度量I[ρ]=h[ρ_x]+h[ρ_y]-h[ρ]；相对费舍尔信息J(ρ||ρ_xρ_y)行为类似；对归一化实量子波函数，平均动能减少量与相对费舍尔信息成正比：⟨T⟩_ψ - ⟨T⟩_Φ = (ℏ²/8m) J(ρ||ρ_xρ_y)，其中Φ=√(ρ_xρ_y)；结果支持最小合理相关原理。",
-      "limitations": "摘要未说明",
-      "score": 88,
+      "question": "香农熵、费舍尔信息与量子力学动能能否统一视为关联的度量，并由此支持一个最小合理关联原理？",
+      "method": "以将联合概率密度ρ(x,y)替换为边缘分布乘积ρ_x(x)ρ_y(y)的关联破坏映射为出发点，分别分析离散与连续情形下香农熵与费舍尔信息的行为，并推导归一化实量子波函数中均值动能减少与相对费舍尔信息的比例关系。",
+      "findings": "离散情形下香农熵在该映射下非减；连续情形下导出坐标不变的关联度量I[ρ]=h[ρ_x]+h[ρ_y]-h[ρ]，相对费舍尔信息J(ρ‖ρ_xρ_y)行为类似，且归一化实量子波函数的均值动能减少恰好正比于该相对费舍尔信息，比例系数为ℏ²/8m；结果支持最小合理关联原理，即给定物理约束时选择关联最小的分布。",
+      "limitations": "摘要未说明。",
+      "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -4048,7 +4054,7 @@
         "香农熵",
         "费舍尔信息",
         "量子力学",
-        "相关性度量"
+        "关联度量"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -4067,14 +4073,14 @@
     {
       "id": "arxiv:2609.38122",
       "contentType": "paper",
-      "title": "快速且流动：使用归一化流和嵌套采样进行引力波背景贝叶斯模型比较",
+      "title": "快速而流畅：使用归一化流与嵌套采样进行引力波背景贝叶斯模型比较",
       "originalTitle": "Fast and Flow-rious: Gravitational Wave Background Bayesian Model Comparison using Normalizing Flows and Nested Sampling",
-      "summary": "脉冲星计时阵列（PTA）已发现纳赫兹引力波背景（GWB）证据，下一步是表征GWB并识别来源。传统贝叶斯因子计算方法计算昂贵或效率低。本文提出结合归一化流、嵌套采样和对所有非GWB参数边缘化的PTA似然的方法。流使用新开发的Python包coppuccino训练，学习数据的copula。在解析目标和模拟PTA数据上验证，恢复解析证据在误差棒内，AUC分数0.996。可在消费级硬件上数分钟内完成任意GWB谱模型的贝叶斯模型比较。",
+      "summary": "本文提出一种脉冲星计时阵列（PTA）模型比较方法，结合归一化流、嵌套采样以及对所有非引力波背景参数边缘化后的PTA似然。该方法在解析目标和模拟PTA数据上得到验证，将贝叶斯因子作为注入模型的二分类器时AUC达0.996，可在消费级硬件上数分钟内完成任意引力波背景谱模型的贝叶斯模型比较。",
       "abstract": "In 2023, pulsar timing array (PTA) collaborations around the world announced evidence for a nanohertz gravitational-wave background (GWB). Beyond increasing the detection significance, the next major goal is to characterize the GWB and identify its source(s). The typical model-comparison metric used in PTA analyses is the Bayes factor (BF). However, BF computation methods used in the PTA literature, such as product-space sampling and thermodynamic integration, are computationally expensive or inefficient if the mo…",
       "keyFacts": [
-        "如何高效计算脉冲星计时阵列中引力波背景任意谱模型的贝叶斯因子，以进行模型比较？",
-        "结合归一化流、嵌套采样和对所有非GWB参数边缘化的PTA似然；使用新开发的Python包coppuccino训练流，学习数据的copula（转换为均匀边缘后的依赖结构）；在解析目标和模拟PTA数据上验证。",
-        "在解析目标和模拟PTA数据上恢复了解析证据在误差棒内；将贝叶斯因子视为注入模型的二元分类器时，AUC分数达到0.996；方法可在消费级硬件上数分钟内完成任意GWB谱模型的贝叶斯模型比较。"
+        "如何高效地对脉冲星计时阵列中的引力波背景谱模型进行贝叶斯模型比较，避免传统方法在模型差异大或非嵌套时计算昂贵或低效的问题？",
+        "结合归一化流、嵌套采样以及对所有非引力波背景参数边缘化后的PTA似然；使用新开发的Python包coppuccino训练流，学习数据的copula（变换到均匀边缘后的依赖结构）；在解析目标和模拟PTA数据上验证。",
+        "在解析目标上于误差棒内恢复了解析证据；在模拟PTA数据上，将贝叶斯因子视为注入模型的二分类器时AUC得分为0.996；该方法可在消费级硬件上数分钟内完成任意引力波背景谱模型的贝叶斯模型比较。"
       ],
       "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -4099,11 +4105,11 @@
       "primaryCategory": "gr-qc",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何高效计算脉冲星计时阵列中引力波背景任意谱模型的贝叶斯因子，以进行模型比较？",
-      "method": "结合归一化流、嵌套采样和对所有非GWB参数边缘化的PTA似然；使用新开发的Python包coppuccino训练流，学习数据的copula（转换为均匀边缘后的依赖结构）；在解析目标和模拟PTA数据上验证。",
-      "findings": "在解析目标和模拟PTA数据上恢复了解析证据在误差棒内；将贝叶斯因子视为注入模型的二元分类器时，AUC分数达到0.996；方法可在消费级硬件上数分钟内完成任意GWB谱模型的贝叶斯模型比较。",
-      "limitations": "摘要未说明",
-      "score": 88,
+      "question": "如何高效地对脉冲星计时阵列中的引力波背景谱模型进行贝叶斯模型比较，避免传统方法在模型差异大或非嵌套时计算昂贵或低效的问题？",
+      "method": "结合归一化流、嵌套采样以及对所有非引力波背景参数边缘化后的PTA似然；使用新开发的Python包coppuccino训练流，学习数据的copula（变换到均匀边缘后的依赖结构）；在解析目标和模拟PTA数据上验证。",
+      "findings": "在解析目标上于误差棒内恢复了解析证据；在模拟PTA数据上，将贝叶斯因子视为注入模型的二分类器时AUC得分为0.996；该方法可在消费级硬件上数分钟内完成任意引力波背景谱模型的贝叶斯模型比较。",
+      "limitations": "摘要未说明。",
+      "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -4113,10 +4119,10 @@
       "confidence": "预印本",
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
+        "脉冲星计时阵列",
         "引力波背景",
-        "贝叶斯模型比较",
         "归一化流",
-        "脉冲星计时阵列"
+        "嵌套采样"
       ],
       "translationProvider": "deepseek",
       "image": "",
@@ -4135,14 +4141,14 @@
     {
       "id": "arxiv:2609.38100",
       "contentType": "paper",
-      "title": "基于神经网络仿真和贝叶斯推断的甚高能伽马射线暴余辉拟合",
+      "title": "基于神经网络代理模型与贝叶斯推断的甚高能伽马射线暴余辉拟合",
       "originalTitle": "Very High-Energy GRB Afterglow Fits with Neural-Network Emulation and Bayesian inference",
-      "summary": "甚高能（E>100 GeV）伽马射线暴余辉可由同步自康普顿（SSC）解释，但全数值代码计算成本高，不适用于MCMC等传统参数推断。本文提出基于人工神经网络（ANN）的高效代理模型，模拟一区动力学SSC辐射代码。训练使用100,800个光谱的多维参数网格，对应无限薄球状冲击波在恒定密度星际介质中传播。ANN中位相对误差通常低于2%。通过MCMC对GRB 190114C从X射线到TeV伽马射线的多波段余辉观测进行贝叶斯后验估计，发现各向同性等效动能E_k,iso≈7.2×10^54 erg，滑行体洛伦兹因子Γ≳500，ISM密度n≈0.1 cm^-3。长时标光曲线偏差表明ISM环境不一致，更倾向径向分层外部介质。",
+      "summary": "本文提出基于人工神经网络的代理模型，以模拟一维动力学同步辐射自康普顿（SSC）辐射代码。使用100800个光谱训练ANN，中位相对误差通常低于2%。通过MCMC对GRB 190114C从X射线到TeV的余辉观测进行贝叶斯后验估计，发现各向同性能量约7.2×10⁵⁴ erg、体洛伦兹因子≳500、ISM密度约0.1 cm⁻³。",
       "abstract": "The very high-energy ($E > 100$ GeV) afterglow emission in gamma-ray bursts (GRBs) can be explained by synchrotron self-Compton (SSC). Modeling this emission accurately requires fully numerical codes that solve the time-dependent coupled particle--photon kinetic equations while accounting for Klein--Nishina suppression. However, their substantial computational cost makes them impractical for traditional parameter inference techniques such as Markov Chain Monte Carlo (MCMC) sampling. In this work, we present a high…",
       "keyFacts": [
-        "如何高效地使用全数值SSC代码对甚高能伽马射线暴余辉进行贝叶斯参数推断，并应用于GRB 190114C的多波段观测？",
-        "构建基于人工神经网络（ANN）的代理模型，模拟一区动力学SSC辐射代码；使用包含100,800个光谱的多维模型参数网格训练，对应无限薄球状冲击波在恒定密度星际介质中传播；通过MCMC进行贝叶斯参数后验估计，拟合GRB 190114C从X射线到TeV伽马射线的多波段余辉观测。",
-        "ANN很好地再现数值光谱，全频域中位相对误差通常低于2%；拟合得到各向同性等效动能E_k,iso≈7.2×10^54 erg，滑行体洛伦兹因子Γ≳500，ISM密度n≈0.1 cm^-3；长时标模型光曲线与观测的偏差表明ISM环境不一致，更倾向径向分层外部介质。"
+        "如何高效拟合伽马射线暴的甚高能（E>100 GeV）余辉辐射，从而避免全数值动力学代码在传统参数推断（如MCMC）中计算成本过高的问题？",
+        "构建基于人工神经网络（ANN）的代理模型，模拟单区动力学同步辐射自康普顿辐射代码；使用由无限薄球状冲击波在恒定密度星际介质中传播产生的100800个光谱组成的多维模型参数网格训练ANN；利用该代理框架通过MCMC进行贝叶斯参数后验估计，并拟合GRB 190114C在不同历元从X射线到TeV伽马射线的宽带余辉观测。",
+        "ANN能很好地复现数值光谱，中位相对误差通常低于2%；对GRB 190114C的拟合发现一个各向同性能量E_k,iso约7.2×10⁵⁴ erg、以≳500的滑行体洛伦兹因子进入密度n约0.1 cm⁻³的星际介质的能量喷流；模型光变曲线在长时间尺度上与观测的偏差表明ISM环境不一致，更倾向于径向分层的外部介质。"
       ],
       "why": "该研究与天文与空间科学相关；结论仍需结合完整论文、实验设置与后续同行评审判断。",
       "category": "研究论文",
@@ -4165,11 +4171,11 @@
       "primaryCategory": "astro-ph.HE",
       "collectionKeywords": [],
       "peerReviewStatus": "预印本 · 未经 arXiv 同行评审",
-      "question": "如何高效地使用全数值SSC代码对甚高能伽马射线暴余辉进行贝叶斯参数推断，并应用于GRB 190114C的多波段观测？",
-      "method": "构建基于人工神经网络（ANN）的代理模型，模拟一区动力学SSC辐射代码；使用包含100,800个光谱的多维模型参数网格训练，对应无限薄球状冲击波在恒定密度星际介质中传播；通过MCMC进行贝叶斯参数后验估计，拟合GRB 190114C从X射线到TeV伽马射线的多波段余辉观测。",
-      "findings": "ANN很好地再现数值光谱，全频域中位相对误差通常低于2%；拟合得到各向同性等效动能E_k,iso≈7.2×10^54 erg，滑行体洛伦兹因子Γ≳500，ISM密度n≈0.1 cm^-3；长时标模型光曲线与观测的偏差表明ISM环境不一致，更倾向径向分层外部介质。",
-      "limitations": "摘要未说明",
-      "score": 88,
+      "question": "如何高效拟合伽马射线暴的甚高能（E>100 GeV）余辉辐射，从而避免全数值动力学代码在传统参数推断（如MCMC）中计算成本过高的问题？",
+      "method": "构建基于人工神经网络（ANN）的代理模型，模拟单区动力学同步辐射自康普顿辐射代码；使用由无限薄球状冲击波在恒定密度星际介质中传播产生的100800个光谱组成的多维模型参数网格训练ANN；利用该代理框架通过MCMC进行贝叶斯参数后验估计，并拟合GRB 190114C在不同历元从X射线到TeV伽马射线的宽带余辉观测。",
+      "findings": "ANN能很好地复现数值光谱，中位相对误差通常低于2%；对GRB 190114C的拟合发现一个各向同性能量E_k,iso约7.2×10⁵⁴ erg、以≳500的滑行体洛伦兹因子进入密度n约0.1 cm⁻³的星际介质的能量喷流；模型光变曲线在长时间尺度上与观测的偏差表明ISM环境不一致，更倾向于径向分层的外部介质。",
+      "limitations": "摘要未说明。",
+      "score": 87,
       "scoreBasis": "研究相关度",
       "scoreComponents": {},
       "scoreReasons": [
@@ -4180,9 +4186,9 @@
       "confidenceReason": "该条目来自论文资料库；摘要展示不等同于独立复现或同行评审结论。",
       "tags": [
         "伽马射线暴",
+        "余辉",
         "神经网络",
-        "贝叶斯推断",
-        "同步自康普顿"
+        "贝叶斯推断"
       ],
       "translationProvider": "deepseek",
       "image": "",
