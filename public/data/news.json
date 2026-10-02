@@ -1,6 +1,6 @@
 {
   "schemaVersion": 11,
-  "generatedAt": "2026-10-02T02:10:23Z",
+  "generatedAt": "2026-10-02T06:08:33Z",
   "editionDate": "2026-10-02",
   "timezone": "Asia/Shanghai",
   "method": "deepseek",
@@ -10,7 +10,7 @@
   "selectionProvider": "deepseek",
   "selectionModel": "deepseek-v4-flash",
   "selectionNotices": [
-    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 5 个 Top 10 入选位"
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 4 个 Top 10 入选位"
   ],
   "selectionWarnings": [],
   "selectionDiagnostics": {
@@ -27,59 +27,58 @@
     "unconstrainedTop": {
       "categoryCounts": {
         "军事动态": 5,
-        "局部冲突": 4,
+        "局部冲突": 3,
+        "无人系统": 1,
         "航空航天": 1
       },
       "domainCounts": {
-        "twz.com": 4,
-        "defensenews.com": 4,
-        "aljazeera.com": 2
+        "twz.com": 2,
+        "defensenews.com": 5,
+        "c4isrnet.com": 1,
+        "aljazeera.com": 1,
+        "unmannedairspace.info": 1
       },
       "categoryViolations": {
-        "军事动态": 5,
-        "局部冲突": 4
+        "军事动态": 5
       },
       "domainViolations": {
-        "twz.com": 4,
-        "defensenews.com": 4
+        "defensenews.com": 5
       }
     },
     "finalTop": {
       "categoryCounts": {
         "军事动态": 3,
         "局部冲突": 1,
-        "航空航天": 3,
         "无人系统": 1,
-        "AI": 1,
-        "前沿技术": 1
+        "航空航天": 3,
+        "前沿技术": 1,
+        "AI": 1
       },
       "domainCounts": {
         "twz.com": 2,
         "defensenews.com": 2,
-        "aljazeera.com": 1,
+        "c4isrnet.com": 1,
+        "unmannedairspace.info": 1,
         "nasaspaceflight.com": 1,
         "spaceflightnow.com": 1,
-        "unmannedairspace.info": 1,
-        "blogs.nvidia.com": 1,
-        "thequantuminsider.com": 1
+        "thequantuminsider.com": 1,
+        "blogs.nvidia.com": 1
       },
       "categoryViolations": {},
       "domainViolations": {}
     },
-    "adjustedItemCount": 5,
+    "adjustedItemCount": 4,
     "adjustedOutIds": [
+      "4ce731e24d2132",
       "60ed7efcd92bd7",
-      "76f36ddedc9f0f",
-      "c3498c796cfa74",
-      "20e648fbc5c9c7",
-      "2f603ca29bd734"
+      "e05a48eec9c5ec",
+      "943059aaf69baf"
     ],
     "adjustedInIds": [
       "bdc6b0c9f48e6f",
-      "026f787c3940ca",
-      "eae16cd585381d",
-      "9128069ece23e4",
-      "4563dd5bc323b1"
+      "57635b2b4e4cb5",
+      "4563dd5bc323b1",
+      "326e4610984629"
     ],
     "relaxedItemCount": 0
   },
@@ -89,34 +88,34 @@
   "translatedItemCount": 10,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 1,
-    "completedItemCount": 1,
+    "requestedItemCount": 0,
+    "completedItemCount": 0,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 5,
-    "initialBatchCount": 1,
-    "requestCount": 1,
+    "initialBatchCount": 0,
+    "requestCount": 0,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "completionReason": "not_needed",
+    "completionMessage": "没有需要翻译的新条目",
     "lastProviderError": "",
     "targetItemCount": 10,
-    "reusedItemCount": 9,
-    "newlyTranslatedItemCount": 1,
+    "reusedItemCount": 10,
+    "newlyTranslatedItemCount": 0,
     "totalTranslatedItemCount": 10,
     "totalMissingItemCount": 0
   },
   "historyAnalysisStatus": "ok",
   "historyAnalysisProvider": "deepseek",
-  "historyLinkedItemCount": 4,
-  "historyAnalyzedItemCount": 4,
+  "historyLinkedItemCount": 5,
+  "historyAnalyzedItemCount": 5,
   "historyAnalysisWarnings": [],
   "historyAnalysisDiagnostics": {
-    "requestedItemCount": 4,
-    "completedItemCount": 4,
+    "requestedItemCount": 5,
+    "completedItemCount": 5,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
@@ -132,18 +131,18 @@
   },
   "spotlightIds": [
     "1ae14ff2ed7d78",
-    "943059aaf69baf",
+    "eae16cd585381d",
     "478a14e5ecb8cf"
   ],
   "warnings": [],
-  "candidateCount": 167,
-  "freshCandidateCount": 167,
+  "candidateCount": 171,
+  "freshCandidateCount": 171,
   "supplementalCandidateCount": 0,
   "freshItemCount": 10,
   "supplementalItemCount": 0,
   "coverageStatus": "complete",
   "effectiveLookbackHours": 24,
-  "sourceCount": 50,
+  "sourceCount": 48,
   "scoring": {
     "label": "重要度，不等同于事实真伪",
     "formula": "基础分 + 来源 + 主题优先级 + 时效 + 影响信号 + 相关性 + 证据完整度 + 多源印证 - 编辑降权",
@@ -151,11 +150,11 @@
   },
   "brief": {
     "headline": "乌克兰称首次实战使用FP-7弹道导弹",
-    "summary": "本期从 50 个公开信源筛选出 10 条重点事件，覆盖科技、AI、航空航天、安全动态与无人系统。",
+    "summary": "本期从 48 个公开信源筛选出 10 条重点事件，覆盖科技、AI、航空航天、安全动态与无人系统。",
     "signals": [
-      "FP-7今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。",
-      "Fire Point今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。",
-      "猎鹰重型今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。"
+      "军事动态：乌克兰表示已首次在实战中使用其国产FP-7战术弹道导弹。乌克兰总统泽连斯基宣布，乌方完成了由乌克兰防务公司Fire Point研制的地面发射弹道导弹FP-7的首次作战使用。Fire Point自俄罗斯全面入侵以来迅速扩张，最初从无人机起步，随后进入远程打击导弹和弹道导弹技术领域。据乌克兰及该公司发布的信息，FP-7射程约250公里（155英里）…",
+      "军事动态：波音公司周四表示，美国空军又订购了4架MH-139A“灰狼”直升机，这是该机型首份全速生产订单，距美空军宣布该机已具备执行核导弹安保任务的能力仅数周。波音发言人对《防务新闻》称，这份“灰狼”合同价值约8500万美元，包含部分保障工作，于9月25日授予，公司预计2028年或2029年交付这4架直升机。波音防务、空间与安全部门垂直起降项目副总裁兼总经…",
+      "军事动态：两家总部位于加利福尼亚州的初创公司在“无人机优势”竞赛最新阶段中名列前茅，该竞赛是五角大楼为寻找能够大规模生产高质量、低成本商用无人机的企业而开展的。根据竞赛排行榜，Neros Technologies在受限环境测试类别中得分最高。Perennial Autonomy在“深度打击”测试中位居第一，该测试要求操作员在敌方防御范围之外发起攻击。五角大…"
     ]
   },
   "items": [
@@ -185,13 +184,13 @@
       "country": "国际",
       "publishedAt": "2026-10-01T22:36:17Z",
       "url": "https://www.twz.com/news-features/ukraine-claims-first-combat-use-of-fp-7-ballistic-missile",
-      "score": 90,
+      "score": 94,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 16,
         "影响信号": 22,
         "主题相关性": 12,
         "证据完整度": 3,
@@ -201,11 +200,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 88/100",
-        "综合排序分 90/100（AI 65% + 规则 35%）",
-        "规则参考分 95/100",
+        "DeepSeek 候选重要度 94/100",
+        "综合排序分 94/100（AI 65% + 规则 35%）",
+        "规则参考分 93/100",
         "来源权重 15/20",
-        "发布约 3.6 小时",
+        "发布约 7.5 小时",
         "命中 9 个主题信号",
         "影响信号：first、launch、test"
       ],
@@ -345,7 +344,7 @@
             "summaryLead": "乌克兰表示已首次在实战中使用其国产FP-7战术弹道导弹。乌克兰总统泽连斯基宣布，乌方完成了由乌克兰防务公司Fire Point研制的地面发射弹道导弹FP-7的首次作战使用。Fire Point自俄罗斯全面入侵以来迅速扩张，最初从无人机起步，随后进入远程打击导弹和弹道导弹技术领域。据乌克兰及该公司发布的信息，FP-7射程约250公里（155英里），弹头重约150公斤（331磅）。值得注意的是，Fire Point还将FP-7的基本导弹架构用于另一种武器，即由地对地FP-7衍生…",
             "source": "The War Zone",
             "publishedAt": "2026-10-01T22:36:17Z",
-            "score": 90
+            "score": 94
           }
         ],
         "independentSourceCount": 1,
@@ -354,40 +353,40 @@
       "relatedPapers": []
     },
     {
-      "id": "e05a48eec9c5ec",
-      "eventId": "evt-4df4c5bca077",
+      "id": "fb67ee1cc92b31",
+      "eventId": "evt-7a85aba87d48",
       "contentType": "news",
-      "title": "泽连斯基称乌克兰首次实战部署FP-7战术弹道导弹",
-      "originalTitle": "Ukraine deploys FP-7 tactical ballistic missile in combat for first time, Zelenskyy says",
-      "summary": "乌克兰总统泽连斯基于周四表示，乌克兰已首次在实战中部署其FP-7战术弹道导弹。泽连斯基在Telegram上写道：“乌克兰战术弹道导弹FP-7。首次实战使用。感谢成果。下一步是生产。”他没有说明FP-7在何处使用，也没有说明打击了什么目标。乌克兰军事分析人士将FP-7描述为一种短程导弹，射程约200公里（125英里）。该导弹制造商Fire Point表示，它正作为今年启动的欧洲导弹防御计划Freyja中的弹道拦截弹进行研发。",
+      "title": "波音获首份全速生产“灰狼”直升机订单，迎大单周",
+      "originalTitle": "Boeing adds to big week with first full-rate Grey Wolf helicopter order",
+      "summary": "波音公司周四表示，美国空军又订购了4架MH-139A“灰狼”直升机，这是该机型首份全速生产订单，距美空军宣布该机已具备执行核导弹安保任务的能力仅数周。波音发言人对《防务新闻》称，这份“灰狼”合同价值约8500万美元，包含部分保障工作，于9月25日授予，公司预计2028年或2029年交付这4架直升机。波音防务、空间与安全部门垂直起降项目副总裁兼总经理凯瑟琳·若利韦特在公司新闻稿中称，这一里程碑验证了“灰狼”的关键就绪水平，并支持该军种在战略导弹基地部署以保护重要国家资产的计划。1月8日，第40直升机中队的两架“灰狼”在马尔姆斯特罗姆执行了首次作战任务，飞行6小时，护送导弹维护和装甲安保车辆往返基地以东100多英里的一处发射设施，途中未加油。",
       "summaryRevision": 4,
       "summaryEvidence": {
         "status": "body",
-        "candidateCount": 17,
-        "selectedCount": 5,
+        "candidateCount": 24,
+        "selectedCount": 4,
         "reason": "selected-public-body"
       },
-      "summaryInputHash": "fee7d5e58fa2a55c784df4ca",
+      "summaryInputHash": "8af4595041e8281a8008ed4b",
       "keyFacts": [
-        "Ukraine has deployed its FP-7 tactical ballistic missile in combat for the first time",
-        "President Volodymyr Zelenskyy said on Thursday",
-        "“Ukrainian tactical ballistic missile FP-7"
+        "Air Force has ordered four more MH-139A Grey Wolf helicopters",
+        "the first under full-rate production",
+        "Boeing said Thursday"
       ],
       "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
       "category": "军事动态",
       "source": "Defense News",
       "country": "国际",
-      "publishedAt": "2026-10-01T19:54:35Z",
-      "url": "https://www.defensenews.com/industry/techwatch/2026/10/01/ukraine-deploys-fp-7-tactical-ballistic-missile-in-combat-for-first-time-zelenskyy-says",
-      "score": 87,
+      "publishedAt": "2026-10-01T17:49:35Z",
+      "url": "https://www.defensenews.com/industry/techwatch/2026/10/01/boeing-adds-to-big-week-with-first-full-rate-grey-wolf-helicopter-order",
+      "score": 92,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 17,
-        "影响信号": 19,
-        "主题相关性": 10,
+        "时效": 14,
+        "影响信号": 22,
+        "主题相关性": 12,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -395,29 +394,29 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 86/100",
-        "综合排序分 87/100（AI 65% + 规则 35%）",
-        "规则参考分 90/100",
+        "DeepSeek 候选重要度 92/100",
+        "综合排序分 92/100（AI 65% + 规则 35%）",
+        "规则参考分 92/100",
         "来源权重 16/20",
-        "发布约 6.3 小时",
-        "命中 5 个主题信号",
-        "影响信号：first、test、production"
+        "发布约 12.3 小时",
+        "命中 7 个主题信号",
+        "影响信号：first、launch、contract"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "FP-7",
-        "泽连斯基",
-        "Fire Point"
+        "波音",
+        "MH-139A灰狼",
+        "美国空军"
       ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/QZLLTKUZORETZJQHBPOQAGD2LA.jpg",
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/ABPRLK62PND5FGATYIKRXZCHI4.jpg",
       "corroboration": 1,
       "sources": [
         {
           "name": "Defense News",
           "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/industry/techwatch/2026/10/01/ukraine-deploys-fp-7-tactical-ballistic-missile-in-combat-for-first-time-zelenskyy-says",
-          "publishedAt": "2026-10-01T19:54:35Z",
+          "url": "https://www.defensenews.com/industry/techwatch/2026/10/01/boeing-adds-to-big-week-with-first-full-rate-grey-wolf-helicopter-order",
+          "publishedAt": "2026-10-01T17:49:35Z",
           "evidenceGroup": "outlet:defensenews.com"
         }
       ],
@@ -447,24 +446,25 @@
         "decision": "registry-match",
         "reason": "immutable-article",
         "semanticEligible": true,
-        "representativeId": "e05a48eec9c5ec",
+        "representativeId": "fb67ee1cc92b31",
         "mergedFrom": [],
         "evidence": {
           "newsIds": [
-            "e05a48eec9c5ec"
+            "fb67ee1cc92b31"
           ],
           "urls": [
-            "https://www.defensenews.com/industry/techwatch/2026/10/01/ukraine-deploys-fp-7-tactical-ballistic-missile-in-combat-for-first-time-zelenskyy-says"
+            "https://www.defensenews.com/industry/techwatch/2026/10/01/boeing-adds-to-big-week-with-first-full-rate-grey-wolf-helicopter-order"
           ],
           "anchors": [
-            "ballistic",
-            "combat",
-            "deploys",
-            "fp-7",
-            "missile",
-            "tactical",
-            "time",
-            "zelenskyy"
+            "adds",
+            "big",
+            "boeing",
+            "full-rate",
+            "grey",
+            "helicopter",
+            "order",
+            "week",
+            "wolf"
           ],
           "date": "2026-10-01"
         }
@@ -477,7 +477,7 @@
         ],
         "claims": [
           {
-            "text": "Ukraine has deployed its FP-7 tactical ballistic missile in combat for the first time",
+            "text": "Air Force has ordered four more MH-139A Grey Wolf helicopters",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
@@ -485,7 +485,7 @@
             ]
           },
           {
-            "text": "President Volodymyr Zelenskyy said on Thursday",
+            "text": "the first under full-rate production",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
@@ -493,7 +493,7 @@
             ]
           },
           {
-            "text": "“Ukrainian tactical ballistic missile FP-7",
+            "text": "Boeing said Thursday",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
@@ -506,8 +506,8 @@
       },
       "forecastLedger": [
         {
-          "predictionId": "pred-22ab0ce85447",
-          "eventId": "evt-4df4c5bca077",
+          "predictionId": "pred-ebf816f3e42c",
+          "eventId": "evt-7a85aba87d48",
           "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
           "horizon": "观察",
           "confidence": "低",
@@ -520,13 +520,13 @@
             "后续演训、交付或作战序列变化"
           ],
           "evidenceIds": [
-            "e05a48eec9c5ec"
+            "fb67ee1cc92b31"
           ],
           "lastReviewedAt": "2026-10-02"
         }
       ],
       "eventDossier": {
-        "eventId": "evt-4df4c5bca077",
+        "eventId": "evt-7a85aba87d48",
         "status": "new",
         "statusLabel": "新事件",
         "firstSeen": "2026-10-02",
@@ -535,13 +535,13 @@
         "timeline": [
           {
             "editionDate": "2026-10-02",
-            "newsId": "e05a48eec9c5ec",
-            "title": "泽连斯基称乌克兰首次实战部署FP-7战术弹道导弹",
-            "originalTitle": "Ukraine deploys FP-7 tactical ballistic missile in combat for first time, Zelenskyy says",
-            "summaryLead": "乌克兰总统泽连斯基于周四表示，乌克兰已首次在实战中部署其FP-7战术弹道导弹。泽连斯基在Telegram上写道：“乌克兰战术弹道导弹FP-7。首次实战使用。感谢成果。下一步是生产。”他没有说明FP-7在何处使用，也没有说明打击了什么目标。乌克兰军事分析人士将FP-7描述为一种短程导弹，射程约200公里（125英里）。该导弹制造商Fire Point表示，它正作为今年启动的欧洲导弹防御计划Freyja中的弹道拦截弹进行研发。",
+            "newsId": "fb67ee1cc92b31",
+            "title": "波音获首份全速生产“灰狼”直升机订单，迎大单周",
+            "originalTitle": "Boeing adds to big week with first full-rate Grey Wolf helicopter order",
+            "summaryLead": "波音公司周四表示，美国空军又订购了4架MH-139A“灰狼”直升机，这是该机型首份全速生产订单，距美空军宣布该机已具备执行核导弹安保任务的能力仅数周。波音发言人对《防务新闻》称，这份“灰狼”合同价值约8500万美元，包含部分保障工作，于9月25日授予，公司预计2028年或2029年交付这4架直升机。波音防务、空间与安全部门垂直起降项目副总裁兼总经理凯瑟琳·若利韦特在公司新闻稿中称，这一里程碑验证了“灰狼”的关键就绪水平，并支持该军种在战略导弹基地部署以保护重要国家资产的计划…",
             "source": "Defense News",
-            "publishedAt": "2026-10-01T19:54:35Z",
-            "score": 87
+            "publishedAt": "2026-10-01T17:49:35Z",
+            "score": 92
           }
         ],
         "independentSourceCount": 1,
@@ -550,40 +550,40 @@
       "relatedPapers": []
     },
     {
-      "id": "943059aaf69baf",
-      "eventId": "evt-c6ee6e2b0c53",
+      "id": "191ea7c8282934",
+      "eventId": "evt-35b30dbc95fd",
       "contentType": "news",
-      "title": "俄罗斯普京在莫斯科讲话中排除与乌克兰停火",
-      "originalTitle": "Russia’s Putin rules out ceasefire with Ukraine during speech in Moscow",
-      "summary": "俄罗斯总统普京排除了与乌克兰就远程打击停火的可能性，同时莫斯科加大对基辅的空中攻击力度。普京在总部位于莫斯科的智库论坛上讲话称，乌克兰通过这些打击“部分实现了目标”，对俄罗斯炼油厂的袭击已使该国损失1%的国内生产总值（GDP），但他补充说俄罗斯现在正以同样方式回应。俄罗斯已加大远程打击力度，目标是乌克兰的钢铁企业以及供应链，尤其是铁路部门。乌克兰指责莫斯科故意打击民用目标，并使基辅几乎持续处于警戒状态，以迎接又一个艰难的冬天。普京还表示，俄罗斯更愿意通过谈判结束乌克兰冲突，并希望其在敌对行动结束后成为一个中立国家。",
+      "title": "Neros与Perennial Autonomy在五角大楼无人机竞赛中领先",
+      "originalTitle": "Neros, Perennial Autonomy lead in Pentagon’s drone competition",
+      "summary": "两家总部位于加利福尼亚州的初创公司在“无人机优势”竞赛最新阶段中名列前茅，该竞赛是五角大楼为寻找能够大规模生产高质量、低成本商用无人机的企业而开展的。根据竞赛排行榜，Neros Technologies在受限环境测试类别中得分最高。Perennial Autonomy在“深度打击”测试中位居第一，该测试要求操作员在敌方防御范围之外发起攻击。五角大楼利用这些公司的排名来决定采购多少架无人机，这意味着得分越高的公司获得越大的订单。总体而言，五角大楼向Neros订购了14000架无人机——该公司在深度打击测试中也排名第三——并向Perennial订购了8000架。",
       "summaryRevision": 4,
       "summaryEvidence": {
         "status": "body",
-        "candidateCount": 24,
-        "selectedCount": 4,
+        "candidateCount": 20,
+        "selectedCount": 3,
         "reason": "selected-public-body"
       },
-      "summaryInputHash": "b5fbf142d7a432355f3c6bf0",
+      "summaryInputHash": "20f6f166e26397e1b177e109",
       "keyFacts": [
-        "Russian President Vladimir Putin has ruled out a ceasefire on long-range strikes with Ukraine as Moscow steps up its campaign of aerial att…",
-        "Speaking at the forum of the Moscow-based think tank",
-        "Putin said Ukraine had “partially achieved its objectives” with ⁠these strikes"
+        "Two California-based startups took the top spots in the latest phase of the Drone Dominance competition",
+        "a Pentagon effort to find companies that can produce high-quality",
+        "low-cost commercial drones at scale"
       ],
-      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
-      "category": "局部冲突",
-      "source": "Al Jazeera",
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "C4ISRNET",
       "country": "国际",
-      "publishedAt": "2026-10-01T21:33:15Z",
-      "url": "https://www.aljazeera.com/news/2026/10/1/russias-putin-rules-out-ceasefire-with-ukraine-during-speech-in-moscow?traffic_source=rss",
-      "score": 86,
+      "publishedAt": "2026-10-01T14:02:08Z",
+      "url": "https://www.c4isrnet.com/unmanned/2026/10/01/neros-perennial-autonomy-lead-in-pentagons-drone-competition",
+      "score": 90,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
-        "影响信号": 19,
-        "主题相关性": 6,
+        "时效": 12,
+        "影响信号": 22,
+        "主题相关性": 12,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -591,30 +591,30 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 85/100",
-        "综合排序分 86/100（AI 65% + 规则 35%）",
-        "规则参考分 87/100",
+        "DeepSeek 候选重要度 90/100",
+        "综合排序分 90/100（AI 65% + 规则 35%）",
+        "规则参考分 90/100",
         "来源权重 16/20",
-        "发布约 4.6 小时",
-        "命中 3 个主题信号",
-        "影响信号：deploy、ceasefire、nuclear"
+        "发布约 16.1 小时",
+        "命中 7 个主题信号",
+        "影响信号：first、contract、test"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "普京",
-        "俄乌冲突",
-        "停火"
+        "五角大楼",
+        "无人机竞赛",
+        "采购"
       ],
-      "image": "https://www.aljazeera.com/wp-content/uploads/2026/10/afp_6abec0ab0d44-1790886059.jpg?resize=1920%2C1440",
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/5P3QO3TXHJGJNCRVDV4YDT266Y.jpg",
       "corroboration": 1,
       "sources": [
         {
-          "name": "Al Jazeera",
-          "domain": "aljazeera.com",
-          "url": "https://www.aljazeera.com/news/2026/10/1/russias-putin-rules-out-ceasefire-with-ukraine-during-speech-in-moscow?traffic_source=rss",
-          "publishedAt": "2026-10-01T21:33:15Z",
-          "evidenceGroup": "outlet:aljazeera.com"
+          "name": "C4ISRNET",
+          "domain": "c4isrnet.com",
+          "url": "https://www.c4isrnet.com/unmanned/2026/10/01/neros-perennial-autonomy-lead-in-pentagons-drone-competition",
+          "publishedAt": "2026-10-01T14:02:08Z",
+          "evidenceGroup": "outlet:c4isrnet.com"
         }
       ],
       "selectionProvider": "deepseek",
@@ -626,72 +626,37 @@
       "historyContext": {
         "status": "linked",
         "lookbackDays": 365,
-        "relatedCount": 3,
+        "relatedCount": 1,
         "relatedStories": [
           {
-            "id": "f78a9a407ec467",
-            "eventId": "evt-b2fd912d4632",
-            "editionDate": "2026-09-06",
-            "title": "俄罗斯总统普京会见美国特使，讨论特朗普结束乌克兰战争的提议",
-            "originalTitle": "Russia’s Putin meets US envoys to discuss Trump proposal to end Ukraine war",
-            "summary": "在莫斯科和基辅的会谈期间，俄罗斯和乌克兰都承诺三天内不攻击对方首都。",
-            "category": "局部冲突",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-09-05T18:12:52Z",
-            "associationScore": 32,
+            "id": "4be6d795ca91e9",
+            "eventId": "",
+            "editionDate": "2026-07-30",
+            "title": "五角大楼征集可发射攻击无人机的无人艇",
+            "originalTitle": "Pentagon puts out call for robot boats that launch attack drones",
+            "summary": "五角大楼发布需求，寻求可发射攻击无人机的无人艇，并要求在120天内准备好测试。",
+            "category": "军事动态",
+            "source": "Defense News",
+            "publishedAt": "2026-07-29T19:22:52Z",
+            "associationScore": 33,
             "relationLabel": "相关主题演进",
             "associationReasons": [
-              "标题共享关键词：putin、russia、ukraine、乌克",
-              "共同标签：俄乌冲突",
-              "同属局部冲突"
-            ]
-          },
-          {
-            "id": "83f9a270e22c04",
-            "eventId": "evt-6977d0f36ec0",
-            "editionDate": "2026-09-06",
-            "title": "美国特使在莫斯科与普京会晤讨论乌克兰问题",
-            "originalTitle": "US envoys meet Putin in Moscow for Ukraine talks",
-            "summary": "特朗普总统表示，特使Steve Witkoff和Jared Kushner“带去了一项结束战争的提议”。",
-            "category": "局部冲突",
-            "source": "BBC World",
-            "publishedAt": "2026-09-05T21:39:02Z",
-            "associationScore": 31,
-            "relationLabel": "相关主题演进",
-            "associationReasons": [
-              "标题共享关键词：moscow、putin、ukraine、乌克",
-              "同属局部冲突"
-            ]
-          },
-          {
-            "id": "a9d1613d3da466",
-            "eventId": "evt-c8786f49e6ee",
-            "editionDate": "2026-09-23",
-            "title": "泽连斯基称乌克兰已准备好与俄罗斯达成能源停火",
-            "originalTitle": "Zelensky says Ukraine is ready for an energy ceasefire with Russia",
-            "summary": "在纽约联合国大会期间，乌克兰总统泽连斯基于周二向记者表示，如果莫斯科同样停止对能源基础设施的打击，基辅准备停止对俄罗斯能源基础设施的袭击。他希望在冬季到来前结束战争。报道未提供俄方回应或具体停火安排等进一步信息。",
-            "category": "局部冲突",
-            "source": "France 24",
-            "publishedAt": "2026-09-22T21:38:04Z",
-            "associationScore": 30,
-            "relationLabel": "相关主题演进",
-            "associationReasons": [
-              "标题共享关键词：ceasefire、russia、ukraine、乌克",
-              "共同标签：俄乌冲突",
-              "同属局部冲突"
+              "标题共享关键词：pentagon、五角、人机、大楼",
+              "共同标签：五角大楼",
+              "同属军事动态"
             ]
           }
         ],
-        "timelineSummary": "2026年9月5日，普京在莫斯科会见美国特使，讨论特朗普提出的结束乌克兰战争提议，双方承诺三天内不攻击对方首都。9月22日，泽连斯基在联合国大会期间表示，若莫斯科停止打击能源基础设施，基辅准备停止对俄能源设施袭击，希望在冬季前结束战争。10月1日，普京在莫斯科智库论坛讲话中排除远程打击停火，称乌方袭击已使俄损失1%的GDP，俄正以同样方式回应，同时表示更愿通过谈判结束冲突。",
+        "timelineSummary": "2026年7月29日归档的报道显示五角大楼曾征集可发射攻击无人机的无人艇并要求120天内备妥测试；至10月1日，五角大楼“无人机优势”竞赛最新阶段排行榜中，加州两家初创公司Neros与Perennial Autonomy在受限环境与深度打击类别领先，并分别获得14000架与8000架订单，排名被用于决定采购规模。",
         "outlook": [
           {
             "horizon": "短期",
-            "text": "后续可观察俄乌双方是否就停止打击能源基础设施作出相互回应，以及远程打击强度是否出现变化。",
+            "text": "后续可观察五角大楼是否公布该竞赛后续阶段排名或新增采购数量。",
             "confidence": "中"
           },
           {
             "horizon": "中期",
-            "text": "若外交接触重启，则需关注谈判议题是否从临时停火扩展至中立地位等更广泛安排，否则冲突可能延续至冬季。",
+            "text": "若这两家公司持续高分，则需关注其产能与低成本量产承诺是否兑现。",
             "confidence": "低"
           }
         ],
@@ -702,23 +667,22 @@
         "decision": "registry-match",
         "reason": "immutable-article",
         "semanticEligible": true,
-        "representativeId": "943059aaf69baf",
+        "representativeId": "191ea7c8282934",
         "mergedFrom": [],
         "evidence": {
           "newsIds": [
-            "943059aaf69baf"
+            "191ea7c8282934"
           ],
           "urls": [
-            "https://www.aljazeera.com/news/2026/10/1/russias-putin-rules-out-ceasefire-with-ukraine-during-speech-in-moscow?traffic_source=rss"
+            "https://www.c4isrnet.com/unmanned/2026/10/01/neros-perennial-autonomy-lead-in-pentagons-drone-competition"
           ],
           "anchors": [
-            "ceasefire",
-            "during",
-            "moscow",
-            "out",
-            "putin",
-            "rules",
-            "speech"
+            "autonomy",
+            "competition",
+            "lead",
+            "neros",
+            "pentagon",
+            "perennial"
           ],
           "date": "2026-10-01"
         }
@@ -727,31 +691,31 @@
         "overallStatus": "single-source",
         "independentSourceCount": 1,
         "sourceGroups": [
-          "outlet:aljazeera.com"
+          "outlet:c4isrnet.com"
         ],
         "claims": [
           {
-            "text": "Russian President Vladimir Putin has ruled out a ceasefire on long-range strikes with Ukraine as Moscow steps up its campaign of aerial att…",
+            "text": "Two California-based startups took the top spots in the latest phase of the Drone Dominance competition",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
-              "outlet:aljazeera.com"
+              "outlet:c4isrnet.com"
             ]
           },
           {
-            "text": "Speaking at the forum of the Moscow-based think tank",
+            "text": "a Pentagon effort to find companies that can produce high-quality",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
-              "outlet:aljazeera.com"
+              "outlet:c4isrnet.com"
             ]
           },
           {
-            "text": "Putin said Ukraine had “partially achieved its objectives” with ⁠these strikes",
+            "text": "low-cost commercial drones at scale",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
-              "outlet:aljazeera.com"
+              "outlet:c4isrnet.com"
             ]
           }
         ],
@@ -760,9 +724,9 @@
       },
       "forecastLedger": [
         {
-          "predictionId": "pred-35b9be4137d6",
-          "eventId": "evt-c6ee6e2b0c53",
-          "statement": "后续可观察俄乌双方是否就停止打击能源基础设施作出相互回应，以及远程打击强度是否出现变化。",
+          "predictionId": "pred-50474420ecfd",
+          "eventId": "evt-35b30dbc95fd",
+          "statement": "后续可观察五角大楼是否公布该竞赛后续阶段排名或新增采购数量。",
           "horizon": "短期",
           "confidence": "中",
           "status": "open",
@@ -770,18 +734,18 @@
           "createdAt": "2026-10-02",
           "dueAfter": "2026-11-01",
           "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
           ],
           "evidenceIds": [
-            "943059aaf69baf"
+            "191ea7c8282934"
           ],
           "lastReviewedAt": "2026-10-02"
         },
         {
-          "predictionId": "pred-94fe196dcdfb",
-          "eventId": "evt-c6ee6e2b0c53",
-          "statement": "若外交接触重启，则需关注谈判议题是否从临时停火扩展至中立地位等更广泛安排，否则冲突可能延续至冬季。",
+          "predictionId": "pred-45c55ab7dffa",
+          "eventId": "evt-35b30dbc95fd",
+          "statement": "若这两家公司持续高分，则需关注其产能与低成本量产承诺是否兑现。",
           "horizon": "中期",
           "confidence": "低",
           "status": "open",
@@ -789,17 +753,17 @@
           "createdAt": "2026-10-02",
           "dueAfter": "2026-12-31",
           "verificationSignals": [
-            "至少两个独立来源确认",
-            "官方声明、停火执行或兵力态势变化"
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
           ],
           "evidenceIds": [
-            "943059aaf69baf"
+            "191ea7c8282934"
           ],
           "lastReviewedAt": "2026-10-02"
         }
       ],
       "eventDossier": {
-        "eventId": "evt-c6ee6e2b0c53",
+        "eventId": "evt-35b30dbc95fd",
         "status": "new",
         "statusLabel": "新事件",
         "firstSeen": "2026-10-02",
@@ -808,13 +772,13 @@
         "timeline": [
           {
             "editionDate": "2026-10-02",
-            "newsId": "943059aaf69baf",
-            "title": "俄罗斯普京在莫斯科讲话中排除与乌克兰停火",
-            "originalTitle": "Russia’s Putin rules out ceasefire with Ukraine during speech in Moscow",
-            "summaryLead": "俄罗斯总统普京排除了与乌克兰就远程打击停火的可能性，同时莫斯科加大对基辅的空中攻击力度。普京在总部位于莫斯科的智库论坛上讲话称，乌克兰通过这些打击“部分实现了目标”，对俄罗斯炼油厂的袭击已使该国损失1%的国内生产总值（GDP），但他补充说俄罗斯现在正以同样方式回应。俄罗斯已加大远程打击力度，目标是乌克兰的钢铁企业以及供应链，尤其是铁路部门。乌克兰指责莫斯科故意打击民用目标，并使基辅几乎持续处于警戒状态，以迎接又一个艰难的冬天。普京还表示，俄罗斯更愿意通过谈判结束乌克兰冲突…",
-            "source": "Al Jazeera",
-            "publishedAt": "2026-10-01T21:33:15Z",
-            "score": 86
+            "newsId": "191ea7c8282934",
+            "title": "Neros与Perennial Autonomy在五角大楼无人机竞赛中领先",
+            "originalTitle": "Neros, Perennial Autonomy lead in Pentagon’s drone competition",
+            "summaryLead": "两家总部位于加利福尼亚州的初创公司在“无人机优势”竞赛最新阶段中名列前茅，该竞赛是五角大楼为寻找能够大规模生产高质量、低成本商用无人机的企业而开展的。根据竞赛排行榜，Neros Technologies在受限环境测试类别中得分最高。Perennial Autonomy在“深度打击”测试中位居第一，该测试要求操作员在敌方防御范围之外发起攻击。五角大楼利用这些公司的排名来决定采购多少架无人机，这意味着得分越高的公司获得越大的订单。总体而言，五角大楼向Neros订购了14000架…",
+            "source": "C4ISRNET",
+            "publishedAt": "2026-10-01T14:02:08Z",
+            "score": 90
           }
         ],
         "independentSourceCount": 1,
@@ -823,40 +787,36 @@
       "relatedPapers": []
     },
     {
-      "id": "b1216fc3f82fff",
-      "eventId": "evt-19a7658ef867",
+      "id": "c3498c796cfa74",
+      "eventId": "evt-cf917ece201c",
       "contentType": "news",
-      "title": "美国用常规炸药爆破隧道，模拟“解耦”核爆炸",
-      "originalTitle": "U.S. Mimics “Decoupled” Nuclear Detonation By Blowing Up A Tunnel Conventionally",
-      "summary": "美国政府本周在内华达沙漠深处的一条隧道内引爆常规炸药，进行了一项旨在复现所谓“解耦”核爆炸的试验。在解耦试验中，装置在一个大型地下腔室内起爆，从而大幅降低爆炸的地震信号。报道称，研究人员在实验中使用了包括加速度计、地震仪、次声传感器、电磁传感器、化学与放射性示踪采样器以及气象传感器在内的多种先进传感器收集测量数据。这些测量将增进科学家对地下爆炸所产生信号特征的理解，并增强美国探测和表征核爆炸事件的能力。美国目前已保有由空军技术应用中心（AFTAC）监管的原子能探测系统（USAEDS）网络。",
+      "title": "探访乌克兰首次作战部署的机器人两栖车辆",
+      "originalTitle": "Inside Ukraine’s First Combat Deployment Of Robotic Amphibious Vehicles",
+      "summary": "现有元数据未提供摘要。",
       "summaryRevision": 4,
       "summaryEvidence": {
-        "status": "feed",
-        "candidateCount": 45,
-        "selectedCount": 2,
-        "reason": "restricted-page-selected-feed"
+        "status": "title-only",
+        "candidateCount": 66,
+        "selectedCount": 0,
+        "reason": "restricted-page-no-relevant-evidence"
       },
-      "summaryInputHash": "211cc5fe6a31aec0d4c0e90e",
-      "keyFacts": [
-        "government set off conventional explosives inside a tunnel deep in the Nevada desert this week in a test designed to replicate a so-called…",
-        "In a decoupled test",
-        "the device is detonated inside a large underground chamber"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
+      "summaryInputHash": "30233143055d068d6f32f900",
+      "keyFacts": [],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
       "source": "The War Zone",
       "country": "国际",
-      "publishedAt": "2026-10-01T16:05:24Z",
-      "url": "https://www.twz.com/nuclear/u-s-mimics-decoupled-nuclear-detonation-by-blowing-up-a-tunnel-conventionally",
-      "score": 83,
+      "publishedAt": "2026-10-01T19:20:50Z",
+      "url": "https://www.twz.com/land/inside-ukraines-first-combat-deployment-of-robotic-amphibious-vehicles",
+      "score": 89,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
         "时效": 15,
-        "影响信号": 16,
-        "主题相关性": 8,
+        "影响信号": 21,
+        "主题相关性": 10,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -864,29 +824,28 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 83/100",
-        "综合排序分 83/100（AI 65% + 规则 35%）",
-        "规则参考分 82/100",
+        "DeepSeek 候选重要度 89/100",
+        "综合排序分 89/100（AI 65% + 规则 35%）",
+        "规则参考分 89/100",
         "来源权重 15/20",
-        "发布约 10.1 小时",
-        "命中 4 个主题信号",
-        "影响信号：test、production、nuclear"
+        "发布约 10.8 小时",
+        "命中 5 个主题信号",
+        "影响信号：first、test、attack"
       ],
       "confidence": "待核验",
       "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
       "tags": [
-        "核爆炸探测",
-        "内华达",
-        "地下试验"
+        "乌克兰",
+        "机器人两栖车辆"
       ],
-      "image": "https://www.twz.com/wp-content/uploads/2026/10/conventional-explosive-tunnel-test-decoupled-nuclear-testing.jpg?quality=85",
+      "image": "https://www.twz.com/wp-content/uploads/2026/10/Ukraine-Amphibious-robotic-vehicles.jpg?quality=85",
       "corroboration": 1,
       "sources": [
         {
           "name": "The War Zone",
           "domain": "twz.com",
-          "url": "https://www.twz.com/nuclear/u-s-mimics-decoupled-nuclear-detonation-by-blowing-up-a-tunnel-conventionally",
-          "publishedAt": "2026-10-01T16:05:24Z",
+          "url": "https://www.twz.com/land/inside-ukraines-first-combat-deployment-of-robotic-amphibious-vehicles",
+          "publishedAt": "2026-10-01T19:20:50Z",
           "evidenceGroup": "outlet:twz.com"
         }
       ],
@@ -897,43 +856,64 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "historyContext": {
-        "status": "no-match",
+        "status": "linked",
         "lookbackDays": 365,
-        "relatedCount": 0,
-        "relatedStories": [],
-        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "relatedCount": 1,
+        "relatedStories": [
+          {
+            "id": "5c4fe9f341e3ca",
+            "eventId": "evt-aea54a10d730",
+            "editionDate": "2026-10-01",
+            "title": "乌克兰前国防部长为杀人机器人发起“曼哈顿计划”",
+            "originalTitle": "Ukraine’s former defense minister launches ‘Manhattan Project’ for killer robots",
+            "summary": "乌克兰前国防部长米哈伊洛·费多罗夫在乌克兰最大年度科技会议IT Arena上向满场自称科技爱好者表示，乌克兰需要一项“新的曼哈顿计划”。该会议在利沃夫举行。机器人只是这位前部长计划在这一新项目中发展的国防科技领域之一。现有元数据未提供更多关于该项目范围、时间表或参与机构的细节。",
+            "category": "局部冲突",
+            "source": "Defense News",
+            "publishedAt": "2026-09-30T08:29:57Z",
+            "associationScore": 30,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：ukraine、乌克、克兰、器人",
+              "共同标签：乌克兰",
+              "同属局部冲突"
+            ]
+          }
+        ],
+        "timelineSummary": "2026年9月30日归档的报道称乌克兰前国防部长费多罗夫在利沃夫IT Arena会议上提出为机器人领域发起“新的曼哈顿计划”，但未披露范围与时间表；10月1日的报道则记录乌克兰首次作战部署机器人两栖车辆，现有元数据未提供更多摘要细节。",
         "outlook": [
           {
-            "horizon": "观察",
-            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "horizon": "短期",
+            "text": "后续可观察乌方是否披露该两栖机器人车辆的部署单位与作战用途细节。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "若相关项目获明确预算或机构支持，则需关注其与战场机器人部署的衔接。",
             "confidence": "低"
           }
         ],
-        "analysisProvider": "rules"
+        "analysisProvider": "deepseek"
       },
       "eventIdentity": {
         "version": 2,
         "decision": "registry-match",
         "reason": "immutable-article",
         "semanticEligible": true,
-        "representativeId": "b1216fc3f82fff",
+        "representativeId": "c3498c796cfa74",
         "mergedFrom": [],
         "evidence": {
           "newsIds": [
-            "b1216fc3f82fff"
+            "c3498c796cfa74"
           ],
           "urls": [
-            "https://www.twz.com/nuclear/u-s-mimics-decoupled-nuclear-detonation-by-blowing-up-a-tunnel-conventionally"
+            "https://www.twz.com/land/inside-ukraines-first-combat-deployment-of-robotic-amphibious-vehicles"
           ],
           "anchors": [
-            "blowing",
-            "conventionally",
-            "decoupled",
-            "detonation",
-            "mimics",
-            "nuclear",
-            "tunnel",
-            "up"
+            "amphibious",
+            "combat",
+            "deployment",
+            "inside",
+            "robotic"
           ],
           "date": "2026-10-01"
         }
@@ -944,58 +924,52 @@
         "sourceGroups": [
           "outlet:twz.com"
         ],
-        "claims": [
-          {
-            "text": "government set off conventional explosives inside a tunnel deep in the Nevada desert this week in a test designed to replicate a so-called…",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:twz.com"
-            ]
-          },
-          {
-            "text": "In a decoupled test",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:twz.com"
-            ]
-          },
-          {
-            "text": "the device is detonated inside a large underground chamber",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:twz.com"
-            ]
-          }
-        ],
+        "claims": [],
         "disputes": [],
         "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
       },
       "forecastLedger": [
         {
-          "predictionId": "pred-611a6ab16634",
-          "eventId": "evt-19a7658ef867",
-          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-          "horizon": "观察",
-          "confidence": "低",
+          "predictionId": "pred-e359594d4c3f",
+          "eventId": "evt-cf917ece201c",
+          "statement": "后续可观察乌方是否披露该两栖机器人车辆的部署单位与作战用途细节。",
+          "horizon": "短期",
+          "confidence": "中",
           "status": "open",
           "statusLabel": "待验证",
           "createdAt": "2026-10-02",
           "dueAfter": "2026-11-01",
           "verificationSignals": [
-            "正式合同、预算或部署文件",
-            "后续演训、交付或作战序列变化"
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
           ],
           "evidenceIds": [
-            "b1216fc3f82fff"
+            "c3498c796cfa74"
+          ],
+          "lastReviewedAt": "2026-10-02"
+        },
+        {
+          "predictionId": "pred-8509237e6256",
+          "eventId": "evt-cf917ece201c",
+          "statement": "若相关项目获明确预算或机构支持，则需关注其与战场机器人部署的衔接。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-02",
+          "dueAfter": "2026-12-31",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "c3498c796cfa74"
           ],
           "lastReviewedAt": "2026-10-02"
         }
       ],
       "eventDossier": {
-        "eventId": "evt-19a7658ef867",
+        "eventId": "evt-cf917ece201c",
         "status": "new",
         "statusLabel": "新事件",
         "firstSeen": "2026-10-02",
@@ -1004,716 +978,50 @@
         "timeline": [
           {
             "editionDate": "2026-10-02",
-            "newsId": "b1216fc3f82fff",
-            "title": "美国用常规炸药爆破隧道，模拟“解耦”核爆炸",
-            "originalTitle": "U.S. Mimics “Decoupled” Nuclear Detonation By Blowing Up A Tunnel Conventionally",
-            "summaryLead": "美国政府本周在内华达沙漠深处的一条隧道内引爆常规炸药，进行了一项旨在复现所谓“解耦”核爆炸的试验。在解耦试验中，装置在一个大型地下腔室内起爆，从而大幅降低爆炸的地震信号。报道称，研究人员在实验中使用了包括加速度计、地震仪、次声传感器、电磁传感器、化学与放射性示踪采样器以及气象传感器在内的多种先进传感器收集测量数据。这些测量将增进科学家对地下爆炸所产生信号特征的理解，并增强美国探测和表征核爆炸事件的能力。美国目前已保有由空军技术应用中心（AFTAC）监管的原子能探测系统（US…",
+            "newsId": "c3498c796cfa74",
+            "title": "探访乌克兰首次作战部署的机器人两栖车辆",
+            "originalTitle": "Inside Ukraine’s First Combat Deployment Of Robotic Amphibious Vehicles",
+            "summaryLead": "现有元数据未提供摘要。",
             "source": "The War Zone",
-            "publishedAt": "2026-10-01T16:05:24Z",
-            "score": 83
+            "publishedAt": "2026-10-01T19:20:50Z",
+            "score": 89
           }
         ],
         "independentSourceCount": 1,
-        "paperCount": 0
+        "paperCount": 2
       },
-      "relatedPapers": []
-    },
-    {
-      "id": "478a14e5ecb8cf",
-      "eventId": "evt-cfe76905ef30",
-      "contentType": "news",
-      "title": "太空军选定两家公司，2028年前建造新型“太空对太空”侦察卫星",
-      "originalTitle": "Space Force picks two companies to build new ‘space-to-space’ satellites by 2028",
-      "summary": "美国太空军与五角大楼已委托两家公司建造新型侦察卫星，可对距地球逾2.2万英里的目标提供高分辨率“太空对太空图像”。这些新合同是RG-XX项目的最新重大进展，该项目是太空军的下一代轨道跟踪计划，目标是在地球同步轨道部署一支灵活、低成本的侦察卫星群，以在本十年末增强美国在太空的防务能力。五角大楼和两家公司迄今均未披露合同金额或资金来源；太空系统司令部一名发言人告诉《防务新闻》，这笔资金并非来自“仙女座”合同池，该池为RG-XX提供最高62亿美元的合同额度。",
-      "summaryRevision": 4,
-      "summaryEvidence": {
-        "status": "body",
-        "candidateCount": 23,
-        "selectedCount": 3,
-        "reason": "selected-public-body"
-      },
-      "summaryInputHash": "9471ca8e70dc051d6aa5f754",
-      "keyFacts": [
-        "Ukraine — The Space Force",
-        "the Pentagon have commissioned two companies to build new reconnaissance satellites capable of delivering high-resolution “space-to-space i…",
-        "The new contracts are the latest major development in the RG-XX program"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "Defense News",
-      "country": "国际",
-      "publishedAt": "2026-10-01T12:49:43Z",
-      "url": "https://www.defensenews.com/space/2026/10/01/space-force-picks-two-companies-to-build-new-space-to-space-satellites-by-2028",
-      "score": 81,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 13,
-        "影响信号": 18,
-        "主题相关性": 12,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 79/100",
-        "综合排序分 81/100（AI 65% + 规则 35%）",
-        "规则参考分 86/100",
-        "来源权重 16/20",
-        "发布约 13.3 小时",
-        "命中 6 个主题信号",
-        "影响信号：launch、contract、missile"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "太空军",
-        "RG-XX",
-        "侦察卫星"
-      ],
-      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/DB77HC2MBVHJPAPUF5BXGAU75E.jpg",
-      "corroboration": 1,
-      "sources": [
+      "relatedPapers": [
         {
-          "name": "Defense News",
-          "domain": "defensenews.com",
-          "url": "https://www.defensenews.com/space/2026/10/01/space-force-picks-two-companies-to-build-new-space-to-space-satellites-by-2028",
-          "publishedAt": "2026-10-01T12:49:43Z",
-          "evidenceGroup": "outlet:defensenews.com"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "historyContext": {
-        "status": "linked",
-        "lookbackDays": 365,
-        "relatedCount": 1,
-        "relatedStories": [
-          {
-            "id": "868aad2d44d512",
-            "eventId": "",
-            "editionDate": "2026-08-01",
-            "title": "太空军选15家公司签9.81亿美元训练靶场合同",
-            "originalTitle": "Space Force picks 15 companies for $981 million training range contract",
-            "summary": "供应商将竞标建造卫星、传感器和系统，以实现更逼真的军事太空演习。",
-            "category": "军事动态",
-            "source": "SpaceNews",
-            "publishedAt": "2026-07-31T13:18:20Z",
-            "associationScore": 47,
-            "relationLabel": "同一事件后续",
-            "associationReasons": [
-              "标题结构显示为同一事件的后续报道",
-              "标题共享关键词：companies、force、picks、space",
-              "共同标签：太空军"
-            ]
-          }
-        ],
-        "timelineSummary": "2026年7月31日，太空军选定15家公司参与价值9.81亿美元的训练靶场合同，供应商将竞标建造卫星、传感器和系统以支持军事太空演习。10月1日，太空军与五角大楼委托两家公司建造可对距地球逾2.2万英里目标提供高分辨率太空对太空图像的新型侦察卫星，属RG-XX下一代轨道跟踪计划最新进展，目标是在地球同步轨道部署灵活、低成本侦察卫星群。合同金额与资金来源未披露。",
-        "outlook": [
-          {
-            "horizon": "短期",
-            "text": "后续可观察太空系统司令部或相关公司是否披露合同金额、资金来源及卫星设计或交付节点信息。",
-            "confidence": "中"
-          },
-          {
-            "horizon": "中期",
-            "text": "若RG-XX按计划推进，则需关注2028年前是否出现卫星建造、集成或部署的公开进展；若资金未落实，则需关注项目是否延期。",
-            "confidence": "低"
-          }
-        ],
-        "analysisProvider": "deepseek"
-      },
-      "eventIdentity": {
-        "version": 2,
-        "decision": "registry-match",
-        "reason": "immutable-article",
-        "semanticEligible": true,
-        "representativeId": "478a14e5ecb8cf",
-        "mergedFrom": [],
-        "evidence": {
-          "newsIds": [
-            "478a14e5ecb8cf"
-          ],
-          "urls": [
-            "https://www.defensenews.com/space/2026/10/01/space-force-picks-two-companies-to-build-new-space-to-space-satellites-by-2028"
-          ],
-          "anchors": [
-            "build",
-            "picks",
-            "space-to-space"
-          ],
-          "date": "2026-10-01"
-        }
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:defensenews.com"
-        ],
-        "claims": [
-          {
-            "text": "Ukraine — The Space Force",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:defensenews.com"
-            ]
-          },
-          {
-            "text": "the Pentagon have commissioned two companies to build new reconnaissance satellites capable of delivering high-resolution “space-to-space i…",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:defensenews.com"
-            ]
-          },
-          {
-            "text": "The new contracts are the latest major development in the RG-XX program",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:defensenews.com"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-707a502516e2",
-          "eventId": "evt-cfe76905ef30",
-          "statement": "后续可观察太空系统司令部或相关公司是否披露合同金额、资金来源及卫星设计或交付节点信息。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-10-02",
-          "dueAfter": "2026-11-01",
-          "verificationSignals": [
-            "正式任务时间表或许可",
-            "后续试验、发射或在轨结果"
-          ],
-          "evidenceIds": [
-            "478a14e5ecb8cf"
-          ],
-          "lastReviewedAt": "2026-10-02"
+          "id": "arxiv:2610.02120",
+          "title": "SkeleWAM：面向高效机器人操作的骨架世界-动作建模",
+          "originalTitle": "SkeleWAM: Skeleton World-Action Modeling for Efficient Robotic Manipulation",
+          "researchArea": "机器人与无人系统",
+          "publishedAt": "2026-10-01T17:35:10Z",
+          "url": "https://arxiv.org/abs/2610.02120v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.02120v1",
+          "associationScore": 24,
+          "relationType": "同主题研究",
+          "associationReasons": [
+            "标题共同线索：robotic、器人、机器",
+            "新闻主题与机器人与无人系统研究方向对应"
+          ]
         },
         {
-          "predictionId": "pred-7049420367ef",
-          "eventId": "evt-cfe76905ef30",
-          "statement": "若RG-XX按计划推进，则需关注2028年前是否出现卫星建造、集成或部署的公开进展；若资金未落实，则需关注项目是否延期。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-10-02",
-          "dueAfter": "2026-12-31",
-          "verificationSignals": [
-            "正式任务时间表或许可",
-            "后续试验、发射或在轨结果"
-          ],
-          "evidenceIds": [
-            "478a14e5ecb8cf"
-          ],
-          "lastReviewedAt": "2026-10-02"
+          "id": "arxiv:2610.01910",
+          "title": "离散曲面上的机器人学习：理论与应用",
+          "originalTitle": "Robot Learning on Discrete Surfaces: Theory and Applications",
+          "researchArea": "机器人与无人系统",
+          "publishedAt": "2026-10-01T15:53:39Z",
+          "url": "https://arxiv.org/abs/2610.01910v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.01910v1",
+          "associationScore": 24,
+          "relationType": "同主题研究",
+          "associationReasons": [
+            "标题共同线索：器人、机器、的机",
+            "新闻主题与机器人与无人系统研究方向对应"
+          ]
         }
-      ],
-      "eventDossier": {
-        "eventId": "evt-cfe76905ef30",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-10-02",
-        "lastSeen": "2026-10-02",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-10-02",
-            "newsId": "478a14e5ecb8cf",
-            "title": "太空军选定两家公司，2028年前建造新型“太空对太空”侦察卫星",
-            "originalTitle": "Space Force picks two companies to build new ‘space-to-space’ satellites by 2028",
-            "summaryLead": "美国太空军与五角大楼已委托两家公司建造新型侦察卫星，可对距地球逾2.2万英里的目标提供高分辨率“太空对太空图像”。这些新合同是RG-XX项目的最新重大进展，该项目是太空军的下一代轨道跟踪计划，目标是在地球同步轨道部署一支灵活、低成本的侦察卫星群，以在本十年末增强美国在太空的防务能力。五角大楼和两家公司迄今均未披露合同金额或资金来源；太空系统司令部一名发言人告诉《防务新闻》，这笔资金并非来自“仙女座”合同池，该池为RG-XX提供最高62亿美元的合同额度。",
-            "source": "Defense News",
-            "publishedAt": "2026-10-01T12:49:43Z",
-            "score": 81
-          }
-        ],
-        "independentSourceCount": 1,
-        "paperCount": 0
-      },
-      "relatedPapers": []
-    },
-    {
-      "id": "bdc6b0c9f48e6f",
-      "eventId": "evt-1507f536a59c",
-      "contentType": "news",
-      "title": "猎鹰重型火箭将发射机密载荷NROL-97进入高能轨道",
-      "originalTitle": "Falcon Heavy set to launch classified NROL-97 to high-energy orbit",
-      "summary": "猎鹰重型火箭将发射机密载荷NROL-97进入……",
-      "summaryRevision": 4,
-      "summaryEvidence": {
-        "status": "body",
-        "candidateCount": 30,
-        "selectedCount": 1,
-        "reason": "selected-public-body"
-      },
-      "summaryInputHash": "be9002af96454e71ced7cc29",
-      "keyFacts": [
-        "Falcon Heavy set to launch classified NROL-97 to"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "NASASpaceflight",
-      "country": "国际",
-      "publishedAt": "2026-10-01T19:17:40Z",
-      "url": "https://www.nasaspaceflight.com/2026/10/nrol97-launch",
-      "score": 78,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 17,
-        "主题优先级": 9,
-        "时效": 17,
-        "影响信号": 14,
-        "主题相关性": 10,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 74/100",
-        "综合排序分 78/100（AI 65% + 规则 35%）",
-        "规则参考分 85/100",
-        "来源权重 17/20",
-        "发布约 6.9 小时",
-        "命中 5 个主题信号",
-        "影响信号：first、launch、missile"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "猎鹰重型",
-        "NROL-97"
-      ],
-      "image": "https://www.nasaspaceflight.com/wp-content/uploads/2026/10/20260930_CC_NROL_97_sunset_DSC_0504_desktop_32cdaaf193-scaled-e1790881481877.jpg",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "NASASpaceflight",
-          "domain": "nasaspaceflight.com",
-          "url": "https://www.nasaspaceflight.com/2026/10/nrol97-launch",
-          "publishedAt": "2026-10-01T19:17:40Z",
-          "evidenceGroup": "outlet:nasaspaceflight.com"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "historyContext": {
-        "status": "linked",
-        "lookbackDays": 365,
-        "relatedCount": 2,
-        "relatedStories": [
-          {
-            "id": "b1db57485f0699",
-            "eventId": "evt-50395f4992cc",
-            "editionDate": "2026-09-26",
-            "title": "SpaceX猎鹰9号将从西海岸为美太空军发射机密任务",
-            "originalTitle": "SpaceX Falcon 9 to launch classified mission for U.S. Space Force from West Coast",
-            "summary": "SpaceX计划于周六黎明前从加利福尼亚州范登堡太空军基地执行一次美国军用卫星星座的秘密发射任务。USSF-385任务将由猎鹰9号火箭搭载，计划于太平洋夏令时上午7时（美国东部夏令时上午10时／协调世界时14时）升空。火箭将从4号东发射复合体向南飞行。这项为美国太空军执行的机密任务被认为是部署基于SpaceX“星盾”（Starshield，面向政府用途的星链卫星版本）系列卫星的第三次飞行。这将是范登堡本月第六次、也是最后一次猎鹰9号发射",
-            "category": "航空航天",
-            "source": "Spaceflight Now",
-            "publishedAt": "2026-09-25T20:26:14Z",
-            "associationScore": 30,
-            "relationLabel": "相关主题演进",
-            "associationReasons": [
-              "标题共享关键词：classified、falcon、launch、发射",
-              "同属航空航天"
-            ]
-          },
-          {
-            "id": "bf423b116c0a9a",
-            "eventId": "evt-ff0dc5910f96",
-            "editionDate": "2026-09-30",
-            "title": "发射预览：Crew-13前往国际空间站，为NRO执行猎鹰重型任务",
-            "originalTitle": "Launch Preview: Crew-13 to head to ISS, Falcon Heavy mission for the NRO",
-            "summary": "现有元数据未提供摘要。标题显示本期发射预览涵盖Crew-13前往国际空间站以及为国家侦察局（NRO）执行的猎鹰重型任务。描述仅提及第75远征队宇航员在Crew-13相关活动期间继续开展科学工作，未提供更多细节、时间安排或任务背景。",
-            "category": "航空航天",
-            "source": "NASASpaceflight",
-            "publishedAt": "2026-09-29T21:48:36Z",
-            "associationScore": 33,
-            "relationLabel": "相关主题演进",
-            "associationReasons": [
-              "标题共享关键词：falcon、heavy、launch、发射",
-              "共同标签：猎鹰重型",
-              "同属航空航天"
-            ]
-          }
-        ],
-        "timelineSummary": "2026年9月25日，SpaceX猎鹰9号从范登堡太空军基地执行USSF-385机密任务，被认为部署星盾系列卫星，为范登堡当月第六次也是最后一次猎鹰9号发射。9月29日，发射预览提及Crew-13前往国际空间站以及为国家侦察局执行的猎鹰重型任务。10月1日，猎鹰重型火箭计划发射机密载荷NROL-97进入高能轨道，现有信息未提供更多任务细节。",
-        "outlook": [
-          {
-            "horizon": "短期",
-            "text": "后续可观察NROL-97发射窗口、轨道参数或任务结果是否由官方或发射方进一步公布。",
-            "confidence": "中"
-          },
-          {
-            "horizon": "中期",
-            "text": "若该任务与9月底预览所述猎鹰重型任务为同一安排，则需关注国家侦察局后续是否披露载荷性质或部署状态。",
-            "confidence": "低"
-          }
-        ],
-        "analysisProvider": "deepseek"
-      },
-      "eventIdentity": {
-        "version": 2,
-        "decision": "registry-match",
-        "reason": "immutable-article",
-        "semanticEligible": true,
-        "representativeId": "bdc6b0c9f48e6f",
-        "mergedFrom": [],
-        "evidence": {
-          "newsIds": [
-            "bdc6b0c9f48e6f"
-          ],
-          "urls": [
-            "https://www.nasaspaceflight.com/2026/10/nrol97-launch"
-          ],
-          "anchors": [
-            "classified",
-            "falcon",
-            "heavy",
-            "high-energy",
-            "nrol-97",
-            "orbit",
-            "set"
-          ],
-          "date": "2026-10-01"
-        }
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:nasaspaceflight.com"
-        ],
-        "claims": [
-          {
-            "text": "Falcon Heavy set to launch classified NROL-97 to",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:nasaspaceflight.com"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-2cfdfca01b17",
-          "eventId": "evt-1507f536a59c",
-          "statement": "后续可观察NROL-97发射窗口、轨道参数或任务结果是否由官方或发射方进一步公布。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-10-02",
-          "dueAfter": "2026-11-01",
-          "verificationSignals": [
-            "正式任务时间表或许可",
-            "后续试验、发射或在轨结果"
-          ],
-          "evidenceIds": [
-            "bdc6b0c9f48e6f"
-          ],
-          "lastReviewedAt": "2026-10-02"
-        },
-        {
-          "predictionId": "pred-0865736fd841",
-          "eventId": "evt-1507f536a59c",
-          "statement": "若该任务与9月底预览所述猎鹰重型任务为同一安排，则需关注国家侦察局后续是否披露载荷性质或部署状态。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-10-02",
-          "dueAfter": "2026-12-31",
-          "verificationSignals": [
-            "正式任务时间表或许可",
-            "后续试验、发射或在轨结果"
-          ],
-          "evidenceIds": [
-            "bdc6b0c9f48e6f"
-          ],
-          "lastReviewedAt": "2026-10-02"
-        }
-      ],
-      "eventDossier": {
-        "eventId": "evt-1507f536a59c",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-10-02",
-        "lastSeen": "2026-10-02",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-10-02",
-            "newsId": "bdc6b0c9f48e6f",
-            "title": "猎鹰重型火箭将发射机密载荷NROL-97进入高能轨道",
-            "originalTitle": "Falcon Heavy set to launch classified NROL-97 to high-energy orbit",
-            "summaryLead": "猎鹰重型火箭将发射机密载荷NROL-97进入……",
-            "source": "NASASpaceflight",
-            "publishedAt": "2026-10-01T19:17:40Z",
-            "score": 78
-          }
-        ],
-        "independentSourceCount": 1,
-        "paperCount": 0
-      },
-      "relatedPapers": []
-    },
-    {
-      "id": "026f787c3940ca",
-      "eventId": "evt-ad6a7e0b6ea1",
-      "contentType": "news",
-      "title": "猎鹰重型火箭将为美国间谍卫星机构执行首次任务",
-      "originalTitle": "Falcon Heavy to fly its first mission for U.S. spy satellite agency",
-      "summary": "SpaceX的一枚猎鹰重型火箭计划于周四晚间从佛罗里达州发射，执行一项为国家侦察局（NRO）的机密任务。国家侦察局是美国的间谍卫星机构。此次发射将是猎鹰重型火箭首次为美国间谍卫星机构执行任务。现有元数据未提供更多任务细节、载荷性质及后续安排。",
-      "summaryRevision": 4,
-      "summaryEvidence": {
-        "status": "feed",
-        "candidateCount": 1,
-        "selectedCount": 1,
-        "reason": "selected-feed"
-      },
-      "summaryInputHash": "ff1a549e3a99ae0dd767b4b5",
-      "keyFacts": [
-        "A SpaceX Falcon Heavy rocket is scheduled to launch from Florida Thursday night on a classified mission for the National Reconnaissance Off…",
-        "America’s spy satellite agency"
-      ],
-      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
-      "category": "航空航天",
-      "source": "Spaceflight Now",
-      "country": "国际",
-      "publishedAt": "2026-10-01T22:37:30Z",
-      "url": "https://spaceflightnow.com/2026/10/01/falcon-heavy-to-fly-its-first-mission-for-u-s-spy-satellite-agency",
-      "score": 77,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 9,
-        "时效": 18,
-        "影响信号": 13,
-        "主题相关性": 8,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 74/100",
-        "综合排序分 77/100（AI 65% + 规则 35%）",
-        "规则参考分 82/100",
-        "来源权重 16/20",
-        "发布约 3.5 小时",
-        "命中 4 个主题信号",
-        "影响信号：first、launch、contract"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "SpaceX",
-        "猎鹰重型",
-        "国家侦察局"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Spaceflight Now",
-          "domain": "spaceflightnow.com",
-          "url": "https://spaceflightnow.com/2026/10/01/falcon-heavy-to-fly-its-first-mission-for-u-s-spy-satellite-agency",
-          "publishedAt": "2026-10-01T22:37:30Z",
-          "evidenceGroup": "outlet:spaceflightnow.com"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "historyContext": {
-        "status": "linked",
-        "lookbackDays": 365,
-        "relatedCount": 1,
-        "relatedStories": [
-          {
-            "id": "bf423b116c0a9a",
-            "eventId": "evt-ff0dc5910f96",
-            "editionDate": "2026-09-30",
-            "title": "发射预览：Crew-13前往国际空间站，为NRO执行猎鹰重型任务",
-            "originalTitle": "Launch Preview: Crew-13 to head to ISS, Falcon Heavy mission for the NRO",
-            "summary": "现有元数据未提供摘要。标题显示本期发射预览涵盖Crew-13前往国际空间站以及为国家侦察局（NRO）执行的猎鹰重型任务。描述仅提及第75远征队宇航员在Crew-13相关活动期间继续开展科学工作，未提供更多细节、时间安排或任务背景。",
-            "category": "航空航天",
-            "source": "NASASpaceflight",
-            "publishedAt": "2026-09-29T21:48:36Z",
-            "associationScore": 33,
-            "relationLabel": "相关主题演进",
-            "associationReasons": [
-              "标题共享关键词：falcon、heavy、mission、任务",
-              "共同标签：猎鹰重型",
-              "同属航空航天"
-            ]
-          }
-        ],
-        "timelineSummary": "2026年9月29日，发射预览提及Crew-13前往国际空间站以及为国家侦察局执行的猎鹰重型任务，未提供更多时间或背景细节。10月1日，SpaceX猎鹰重型火箭计划从佛罗里达州发射，执行国家侦察局机密任务，这将是猎鹰重型火箭首次为美国间谍卫星机构执行任务。现有元数据未提供更多任务细节、载荷性质及后续安排。",
-        "outlook": [
-          {
-            "horizon": "短期",
-            "text": "后续可观察此次发射是否如期进行，以及国家侦察局或SpaceX是否公布任务结果或基本发射信息。",
-            "confidence": "中"
-          },
-          {
-            "horizon": "中期",
-            "text": "若此次任务成功，则需关注猎鹰重型是否被继续用于国家侦察局后续机密发射；若推迟，则需关注任务安排是否调整。",
-            "confidence": "低"
-          }
-        ],
-        "analysisProvider": "deepseek"
-      },
-      "eventIdentity": {
-        "version": 2,
-        "decision": "registry-match",
-        "reason": "immutable-article",
-        "semanticEligible": true,
-        "representativeId": "026f787c3940ca",
-        "mergedFrom": [],
-        "evidence": {
-          "newsIds": [
-            "026f787c3940ca"
-          ],
-          "urls": [
-            "https://spaceflightnow.com/2026/10/01/falcon-heavy-to-fly-its-first-mission-for-u-s-spy-satellite-agency"
-          ],
-          "anchors": [
-            "agency",
-            "falcon",
-            "fly",
-            "heavy",
-            "spy"
-          ],
-          "date": "2026-10-01"
-        }
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:spaceflightnow.com"
-        ],
-        "claims": [
-          {
-            "text": "A SpaceX Falcon Heavy rocket is scheduled to launch from Florida Thursday night on a classified mission for the National Reconnaissance Off…",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:spaceflightnow.com"
-            ]
-          },
-          {
-            "text": "America’s spy satellite agency",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:spaceflightnow.com"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-65ca69cf2acc",
-          "eventId": "evt-ad6a7e0b6ea1",
-          "statement": "后续可观察此次发射是否如期进行，以及国家侦察局或SpaceX是否公布任务结果或基本发射信息。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-10-02",
-          "dueAfter": "2026-11-01",
-          "verificationSignals": [
-            "正式任务时间表或许可",
-            "后续试验、发射或在轨结果"
-          ],
-          "evidenceIds": [
-            "026f787c3940ca"
-          ],
-          "lastReviewedAt": "2026-10-02"
-        },
-        {
-          "predictionId": "pred-6037f81433b8",
-          "eventId": "evt-ad6a7e0b6ea1",
-          "statement": "若此次任务成功，则需关注猎鹰重型是否被继续用于国家侦察局后续机密发射；若推迟，则需关注任务安排是否调整。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-10-02",
-          "dueAfter": "2026-12-31",
-          "verificationSignals": [
-            "正式任务时间表或许可",
-            "后续试验、发射或在轨结果"
-          ],
-          "evidenceIds": [
-            "026f787c3940ca"
-          ],
-          "lastReviewedAt": "2026-10-02"
-        }
-      ],
-      "eventDossier": {
-        "eventId": "evt-ad6a7e0b6ea1",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-10-02",
-        "lastSeen": "2026-10-02",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-10-02",
-            "newsId": "026f787c3940ca",
-            "title": "猎鹰重型火箭将为美国间谍卫星机构执行首次任务",
-            "originalTitle": "Falcon Heavy to fly its first mission for U.S. spy satellite agency",
-            "summaryLead": "SpaceX的一枚猎鹰重型火箭计划于周四晚间从佛罗里达州发射，执行一项为国家侦察局（NRO）的机密任务。国家侦察局是美国的间谍卫星机构。此次发射将是猎鹰重型火箭首次为美国间谍卫星机构执行任务。现有元数据未提供更多任务细节、载荷性质及后续安排。",
-            "source": "Spaceflight Now",
-            "publishedAt": "2026-10-01T22:37:30Z",
-            "score": 77
-          }
-        ],
-        "independentSourceCount": 1,
-        "paperCount": 0
-      },
-      "relatedPapers": []
+      ]
     },
     {
       "id": "eae16cd585381d",
@@ -1741,13 +1049,13 @@
       "country": "国际",
       "publishedAt": "2026-10-01T12:34:09Z",
       "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/ondas-launches-long-range-dronebuster-reach-c-uas-system",
-      "score": 75,
+      "score": 85,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 13,
+        "时效": 11,
         "影响信号": 22,
         "主题相关性": 8,
         "证据完整度": 3,
@@ -1757,11 +1065,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 68/100",
-        "综合排序分 75/100（AI 65% + 规则 35%）",
-        "规则参考分 87/100",
+        "DeepSeek 候选重要度 85/100",
+        "综合排序分 85/100（AI 65% + 规则 35%）",
+        "规则参考分 85/100",
         "来源权重 16/20",
-        "发布约 13.6 小时",
+        "发布约 17.6 小时",
         "命中 4 个主题信号",
         "影响信号：first、contract、test"
       ],
@@ -1902,7 +1210,7 @@
             "summaryLead": "Ondas推出了Dronebuster REACH，这是其Dronebuster系列非动能反无人航空系统（C-UAS）技术中的远程型号，首套系统已签约交付美国海军研究办公室（ONR）。REACH采用Dronebuster系列所使用的电子攻击技术，包括指挥与控制干扰和GNSS压制，并可选配定位、导航与授时（PNT）电子攻击。Ondas表示，该系统以比其手持效应器更远的距离和更高的功率提供这些能力。REACH被设计为分层C-UAS架构的一部分，可接收Ondas探测、跟踪与识别（…",
             "source": "Unmanned Airspace",
             "publishedAt": "2026-10-01T12:34:09Z",
-            "score": 75
+            "score": 85
           }
         ],
         "independentSourceCount": 1,
@@ -1911,40 +1219,40 @@
       "relatedPapers": []
     },
     {
-      "id": "9128069ece23e4",
-      "eventId": "evt-7fd21f57cc47",
+      "id": "478a14e5ecb8cf",
+      "eventId": "evt-cfe76905ef30",
       "contentType": "news",
-      "title": "英伟达GPU助力OpenAI GPT-6 Astra Ultrafast加速推理",
-      "originalTitle": "How NVIDIA GPUs Help Accelerate OpenAI’s GPT-6 Astra Ultrafast",
-      "summary": "据英伟达博客消息，OpenAI的GPT-6 Astra Ultrafast运行于英伟达Blackwell GPU之上，现已在OpenAI API以及面向符合条件的ChatGPT Work和Codex用户开放。该模式借助针对英伟达Blackwell架构的推理优化，令牌生成速度最高可达Astra标准模式的8倍。OpenAI推理负责人Philippe Tillet表示，英伟达在工具和文档上的深度投入，使OpenAI的模型能够出色地为Blackwell和Rubin GPU编程。OpenAI还利用内部模型优化在英伟达GPU上运行的推理软件，借助平台可编程性测试并实现改进。开发者即日起可通过API使用GPT-6 Astra Ultrafast。",
+      "title": "太空军选定两家公司，2028年前建造新型“太空对太空”侦察卫星",
+      "originalTitle": "Space Force picks two companies to build new ‘space-to-space’ satellites by 2028",
+      "summary": "美国太空军与五角大楼已委托两家公司建造新型侦察卫星，可对距地球逾2.2万英里的目标提供高分辨率“太空对太空图像”。这些新合同是RG-XX项目的最新重大进展，该项目是太空军的下一代轨道跟踪计划，目标是在地球同步轨道部署一支灵活、低成本的侦察卫星群，以在本十年末增强美国在太空的防务能力。五角大楼和两家公司迄今均未披露合同金额或资金来源；太空系统司令部一名发言人告诉《防务新闻》，这笔资金并非来自“仙女座”合同池，该池为RG-XX提供最高62亿美元的合同额度。",
       "summaryRevision": 4,
       "summaryEvidence": {
-        "status": "feed",
-        "candidateCount": 7,
-        "selectedCount": 6,
-        "reason": "selected-feed"
+        "status": "body",
+        "candidateCount": 23,
+        "selectedCount": 3,
+        "reason": "selected-public-body"
       },
-      "summaryInputHash": "17747d1d005e3959e8a167d3",
+      "summaryInputHash": "9471ca8e70dc051d6aa5f754",
       "keyFacts": [
-        "GPT-6 Astra Ultrafast",
-        "running on NVIDIA Blackwell GPUs",
-        "is available now in the OpenAI API"
+        "Ukraine — The Space Force",
+        "the Pentagon have commissioned two companies to build new reconnaissance satellites capable of delivering high-resolution “space-to-space i…",
+        "The new contracts are the latest major development in the RG-XX program"
       ],
-      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
-      "category": "AI",
-      "source": "NVIDIA Blog",
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "Defense News",
       "country": "国际",
-      "publishedAt": "2026-10-01T23:44:13Z",
-      "url": "https://blogs.nvidia.com/blog/gpus-openai-gpt-6-astra-ultrafast",
-      "score": 71,
+      "publishedAt": "2026-10-01T12:49:43Z",
+      "url": "https://www.defensenews.com/space/2026/10/01/space-force-picks-two-companies-to-build-new-space-to-space-satellites-by-2028",
+      "score": 84,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 4,
-        "主题相关性": 2,
+        "主题优先级": 9,
+        "时效": 11,
+        "影响信号": 18,
+        "主题相关性": 12,
         "证据完整度": 3,
         "多源印证": 0,
         "编辑降权": 0,
@@ -1952,30 +1260,30 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 72/100",
-        "综合排序分 71/100（AI 65% + 规则 35%）",
-        "规则参考分 69/100",
+        "DeepSeek 候选重要度 84/100",
+        "综合排序分 84/100（AI 65% + 规则 35%）",
+        "规则参考分 84/100",
         "来源权重 16/20",
-        "发布约 2.4 小时",
-        "命中 1 个主题信号",
-        "影响信号：test"
+        "发布约 17.3 小时",
+        "命中 6 个主题信号",
+        "影响信号：launch、contract、missile"
       ],
       "confidence": "中",
       "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "英伟达",
-        "OpenAI",
-        "AI推理"
+        "太空军",
+        "RG-XX",
+        "侦察卫星"
       ],
-      "image": "https://blogs.nvidia.com/wp-content/uploads/2026/09/twitter-gif-2104993966043320759-v5.png",
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/DB77HC2MBVHJPAPUF5BXGAU75E.jpg",
       "corroboration": 1,
       "sources": [
         {
-          "name": "NVIDIA Blog",
-          "domain": "blogs.nvidia.com",
-          "url": "https://blogs.nvidia.com/blog/gpus-openai-gpt-6-astra-ultrafast",
-          "publishedAt": "2026-10-01T23:44:13Z",
-          "evidenceGroup": "outlet:blogs.nvidia.com"
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/space/2026/10/01/space-force-picks-two-companies-to-build-new-space-to-space-satellites-by-2028",
+          "publishedAt": "2026-10-01T12:49:43Z",
+          "evidenceGroup": "outlet:defensenews.com"
         }
       ],
       "selectionProvider": "deepseek",
@@ -1985,44 +1293,62 @@
       "selectionNote": "",
       "diversityRelaxed": false,
       "historyContext": {
-        "status": "no-match",
+        "status": "linked",
         "lookbackDays": 365,
-        "relatedCount": 0,
-        "relatedStories": [],
-        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "relatedCount": 1,
+        "relatedStories": [
+          {
+            "id": "868aad2d44d512",
+            "eventId": "",
+            "editionDate": "2026-08-01",
+            "title": "太空军选15家公司签9.81亿美元训练靶场合同",
+            "originalTitle": "Space Force picks 15 companies for $981 million training range contract",
+            "summary": "供应商将竞标建造卫星、传感器和系统，以实现更逼真的军事太空演习。",
+            "category": "军事动态",
+            "source": "SpaceNews",
+            "publishedAt": "2026-07-31T13:18:20Z",
+            "associationScore": 47,
+            "relationLabel": "同一事件后续",
+            "associationReasons": [
+              "标题结构显示为同一事件的后续报道",
+              "标题共享关键词：companies、force、picks、space",
+              "共同标签：太空军"
+            ]
+          }
+        ],
+        "timelineSummary": "2026年7月31日归档的报道显示太空军曾选定15家公司参与9.81亿美元训练靶场合同，供应商竞标建造卫星、传感器与系统；10月1日报道称太空军与五角大楼委托两家公司建造可提供太空对太空高分辨率图像的新型侦察卫星，属RG-XX项目最新进展，目标本十年末部署，合同金额与资金未披露。",
         "outlook": [
           {
-            "horizon": "观察",
-            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "horizon": "短期",
+            "text": "后续可观察太空系统司令部是否公布承包商名称或RG-XX卫星的具体发射安排。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "若2028年前建造节点临近，则需关注资金是否来自“仙女座”合同池之外的渠道。",
             "confidence": "低"
           }
         ],
-        "analysisProvider": "rules"
+        "analysisProvider": "deepseek"
       },
       "eventIdentity": {
         "version": 2,
-        "decision": "new-event",
-        "reason": "no-unambiguous-match",
+        "decision": "registry-match",
+        "reason": "immutable-article",
         "semanticEligible": true,
-        "representativeId": "9128069ece23e4",
+        "representativeId": "478a14e5ecb8cf",
         "mergedFrom": [],
         "evidence": {
           "newsIds": [
-            "9128069ece23e4"
+            "478a14e5ecb8cf"
           ],
           "urls": [
-            "https://blogs.nvidia.com/blog/gpus-openai-gpt-6-astra-ultrafast"
+            "https://www.defensenews.com/space/2026/10/01/space-force-picks-two-companies-to-build-new-space-to-space-satellites-by-2028"
           ],
           "anchors": [
-            "accelerate",
-            "astra",
-            "gpt-6",
-            "gpus",
-            "help",
-            "how",
-            "nvidia",
-            "openai",
-            "ultrafast"
+            "build",
+            "picks",
+            "space-to-space"
           ],
           "date": "2026-10-01"
         }
@@ -2031,31 +1357,31 @@
         "overallStatus": "single-source",
         "independentSourceCount": 1,
         "sourceGroups": [
-          "outlet:blogs.nvidia.com"
+          "outlet:defensenews.com"
         ],
         "claims": [
           {
-            "text": "GPT-6 Astra Ultrafast",
+            "text": "Ukraine — The Space Force",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
-              "outlet:blogs.nvidia.com"
+              "outlet:defensenews.com"
             ]
           },
           {
-            "text": "running on NVIDIA Blackwell GPUs",
+            "text": "the Pentagon have commissioned two companies to build new reconnaissance satellites capable of delivering high-resolution “space-to-space i…",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
-              "outlet:blogs.nvidia.com"
+              "outlet:defensenews.com"
             ]
           },
           {
-            "text": "is available now in the OpenAI API",
+            "text": "The new contracts are the latest major development in the RG-XX program",
             "status": "single-source",
             "statusLabel": "当前仅见单一独立来源",
             "sourceGroups": [
-              "outlet:blogs.nvidia.com"
+              "outlet:defensenews.com"
             ]
           }
         ],
@@ -2064,27 +1390,84 @@
       },
       "forecastLedger": [
         {
-          "predictionId": "pred-9fb31810e119",
-          "eventId": "evt-7fd21f57cc47",
-          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-          "horizon": "观察",
-          "confidence": "低",
+          "predictionId": "pred-707a502516e2",
+          "eventId": "evt-cfe76905ef30",
+          "statement": "后续可观察太空系统司令部或相关公司是否披露合同金额、资金来源及卫星设计或交付节点信息。",
+          "horizon": "短期",
+          "confidence": "中",
           "status": "open",
           "statusLabel": "待验证",
           "createdAt": "2026-10-02",
           "dueAfter": "2026-11-01",
           "verificationSignals": [
-            "正式模型卡或评测结果",
-            "监管、部署或算力计划变化"
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
           ],
           "evidenceIds": [
-            "9128069ece23e4"
+            "478a14e5ecb8cf"
+          ],
+          "lastReviewedAt": "2026-10-02"
+        },
+        {
+          "predictionId": "pred-7049420367ef",
+          "eventId": "evt-cfe76905ef30",
+          "statement": "若RG-XX按计划推进，则需关注2028年前是否出现卫星建造、集成或部署的公开进展；若资金未落实，则需关注项目是否延期。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-02",
+          "dueAfter": "2026-12-31",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "478a14e5ecb8cf"
+          ],
+          "lastReviewedAt": "2026-10-02"
+        },
+        {
+          "predictionId": "pred-20e022e8273c",
+          "eventId": "evt-cfe76905ef30",
+          "statement": "后续可观察太空系统司令部是否公布承包商名称或RG-XX卫星的具体发射安排。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-02",
+          "dueAfter": "2026-11-01",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "478a14e5ecb8cf"
+          ],
+          "lastReviewedAt": "2026-10-02"
+        },
+        {
+          "predictionId": "pred-8f385fd7651d",
+          "eventId": "evt-cfe76905ef30",
+          "statement": "若2028年前建造节点临近，则需关注资金是否来自“仙女座”合同池之外的渠道。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-02",
+          "dueAfter": "2026-12-31",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "478a14e5ecb8cf"
           ],
           "lastReviewedAt": "2026-10-02"
         }
       ],
       "eventDossier": {
-        "eventId": "evt-7fd21f57cc47",
+        "eventId": "evt-cfe76905ef30",
         "status": "new",
         "statusLabel": "新事件",
         "firstSeen": "2026-10-02",
@@ -2093,13 +1476,560 @@
         "timeline": [
           {
             "editionDate": "2026-10-02",
-            "newsId": "9128069ece23e4",
-            "title": "英伟达GPU助力OpenAI GPT-6 Astra Ultrafast加速推理",
-            "originalTitle": "How NVIDIA GPUs Help Accelerate OpenAI’s GPT-6 Astra Ultrafast",
-            "summaryLead": "据英伟达博客消息，OpenAI的GPT-6 Astra Ultrafast运行于英伟达Blackwell GPU之上，现已在OpenAI API以及面向符合条件的ChatGPT Work和Codex用户开放。该模式借助针对英伟达Blackwell架构的推理优化，令牌生成速度最高可达Astra标准模式的8倍。OpenAI推理负责人Philippe Tillet表示，英伟达在工具和文档上的深度投入，使OpenAI的模型能够出色地为Blackwell和Rubin GPU编程。Op…",
-            "source": "NVIDIA Blog",
-            "publishedAt": "2026-10-01T23:44:13Z",
-            "score": 71
+            "newsId": "478a14e5ecb8cf",
+            "title": "太空军选定两家公司，2028年前建造新型“太空对太空”侦察卫星",
+            "originalTitle": "Space Force picks two companies to build new ‘space-to-space’ satellites by 2028",
+            "summaryLead": "美国太空军与五角大楼已委托两家公司建造新型侦察卫星，可对距地球逾2.2万英里的目标提供高分辨率“太空对太空图像”。这些新合同是RG-XX项目的最新重大进展，该项目是太空军的下一代轨道跟踪计划，目标是在地球同步轨道部署一支灵活、低成本的侦察卫星群，以在本十年末增强美国在太空的防务能力。五角大楼和两家公司迄今均未披露合同金额或资金来源；太空系统司令部一名发言人告诉《防务新闻》，这笔资金并非来自“仙女座”合同池，该池为RG-XX提供最高62亿美元的合同额度。",
+            "source": "Defense News",
+            "publishedAt": "2026-10-01T12:49:43Z",
+            "score": 84
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "bdc6b0c9f48e6f",
+      "eventId": "evt-1507f536a59c",
+      "contentType": "news",
+      "title": "猎鹰重型火箭将发射机密载荷NROL-97进入高能轨道",
+      "originalTitle": "Falcon Heavy set to launch classified NROL-97 to high-energy orbit",
+      "summary": "猎鹰重型火箭将发射机密载荷NROL-97进入……",
+      "summaryRevision": 4,
+      "summaryEvidence": {
+        "status": "body",
+        "candidateCount": 30,
+        "selectedCount": 1,
+        "reason": "selected-public-body"
+      },
+      "summaryInputHash": "be9002af96454e71ced7cc29",
+      "keyFacts": [
+        "Falcon Heavy set to launch classified NROL-97 to"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASASpaceflight",
+      "country": "国际",
+      "publishedAt": "2026-10-01T19:17:40Z",
+      "url": "https://www.nasaspaceflight.com/2026/10/nrol97-launch",
+      "score": 83,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 9,
+        "时效": 15,
+        "影响信号": 14,
+        "主题相关性": 10,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 83/100",
+        "综合排序分 83/100（AI 65% + 规则 35%）",
+        "规则参考分 83/100",
+        "来源权重 17/20",
+        "发布约 10.8 小时",
+        "命中 5 个主题信号",
+        "影响信号：first、launch、missile"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "猎鹰重型",
+        "NROL-97"
+      ],
+      "image": "https://www.nasaspaceflight.com/wp-content/uploads/2026/10/NSF-2026-10-02-05-28-54-976.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "NASASpaceflight",
+          "domain": "nasaspaceflight.com",
+          "url": "https://www.nasaspaceflight.com/2026/10/nrol97-launch",
+          "publishedAt": "2026-10-01T19:17:40Z",
+          "evidenceGroup": "outlet:nasaspaceflight.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 2,
+        "relatedStories": [
+          {
+            "id": "b1db57485f0699",
+            "eventId": "evt-50395f4992cc",
+            "editionDate": "2026-09-26",
+            "title": "SpaceX猎鹰9号将从西海岸为美太空军发射机密任务",
+            "originalTitle": "SpaceX Falcon 9 to launch classified mission for U.S. Space Force from West Coast",
+            "summary": "SpaceX计划于周六黎明前从加利福尼亚州范登堡太空军基地执行一次美国军用卫星星座的秘密发射任务。USSF-385任务将由猎鹰9号火箭搭载，计划于太平洋夏令时上午7时（美国东部夏令时上午10时／协调世界时14时）升空。火箭将从4号东发射复合体向南飞行。这项为美国太空军执行的机密任务被认为是部署基于SpaceX“星盾”（Starshield，面向政府用途的星链卫星版本）系列卫星的第三次飞行。这将是范登堡本月第六次、也是最后一次猎鹰9号发射",
+            "category": "航空航天",
+            "source": "Spaceflight Now",
+            "publishedAt": "2026-09-25T20:26:14Z",
+            "associationScore": 30,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：classified、falcon、launch、发射",
+              "同属航空航天"
+            ]
+          },
+          {
+            "id": "bf423b116c0a9a",
+            "eventId": "evt-ff0dc5910f96",
+            "editionDate": "2026-09-30",
+            "title": "发射预览：Crew-13前往国际空间站，为NRO执行猎鹰重型任务",
+            "originalTitle": "Launch Preview: Crew-13 to head to ISS, Falcon Heavy mission for the NRO",
+            "summary": "现有元数据未提供摘要。标题显示本期发射预览涵盖Crew-13前往国际空间站以及为国家侦察局（NRO）执行的猎鹰重型任务。描述仅提及第75远征队宇航员在Crew-13相关活动期间继续开展科学工作，未提供更多细节、时间安排或任务背景。",
+            "category": "航空航天",
+            "source": "NASASpaceflight",
+            "publishedAt": "2026-09-29T21:48:36Z",
+            "associationScore": 33,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：falcon、heavy、launch、发射",
+              "共同标签：猎鹰重型",
+              "同属航空航天"
+            ]
+          }
+        ],
+        "timelineSummary": "2026年9月25日归档的报道称SpaceX计划从范登堡用猎鹰9号为太空军执行机密任务，涉及星盾系列卫星；9月29日归档的发射预览提到为NRO执行的猎鹰重型任务；10月1日报道显示猎鹰重型火箭将发射机密载荷NROL-97进入高能轨道。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "后续可观察猎鹰重型火箭发射窗口是否如期执行及任务是否确认入轨。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "若NROL-97进入高能轨道，则需关注其与既有星盾及NRO任务序列的关联。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "deepseek"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "bdc6b0c9f48e6f",
+        "mergedFrom": [],
+        "evidence": {
+          "newsIds": [
+            "bdc6b0c9f48e6f"
+          ],
+          "urls": [
+            "https://www.nasaspaceflight.com/2026/10/nrol97-launch"
+          ],
+          "anchors": [
+            "classified",
+            "falcon",
+            "heavy",
+            "high-energy",
+            "nrol-97",
+            "orbit",
+            "set"
+          ],
+          "date": "2026-10-01"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:nasaspaceflight.com"
+        ],
+        "claims": [
+          {
+            "text": "Falcon Heavy set to launch classified NROL-97 to",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:nasaspaceflight.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-2cfdfca01b17",
+          "eventId": "evt-1507f536a59c",
+          "statement": "后续可观察NROL-97发射窗口、轨道参数或任务结果是否由官方或发射方进一步公布。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-02",
+          "dueAfter": "2026-11-01",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "bdc6b0c9f48e6f"
+          ],
+          "lastReviewedAt": "2026-10-02"
+        },
+        {
+          "predictionId": "pred-0865736fd841",
+          "eventId": "evt-1507f536a59c",
+          "statement": "若该任务与9月底预览所述猎鹰重型任务为同一安排，则需关注国家侦察局后续是否披露载荷性质或部署状态。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-02",
+          "dueAfter": "2026-12-31",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "bdc6b0c9f48e6f"
+          ],
+          "lastReviewedAt": "2026-10-02"
+        },
+        {
+          "predictionId": "pred-0a9d9bd06a40",
+          "eventId": "evt-1507f536a59c",
+          "statement": "后续可观察猎鹰重型火箭发射窗口是否如期执行及任务是否确认入轨。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-02",
+          "dueAfter": "2026-11-01",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "bdc6b0c9f48e6f"
+          ],
+          "lastReviewedAt": "2026-10-02"
+        },
+        {
+          "predictionId": "pred-d95495036bee",
+          "eventId": "evt-1507f536a59c",
+          "statement": "若NROL-97进入高能轨道，则需关注其与既有星盾及NRO任务序列的关联。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-02",
+          "dueAfter": "2026-12-31",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "bdc6b0c9f48e6f"
+          ],
+          "lastReviewedAt": "2026-10-02"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-1507f536a59c",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-10-02",
+        "lastSeen": "2026-10-02",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-10-02",
+            "newsId": "bdc6b0c9f48e6f",
+            "title": "猎鹰重型火箭将发射机密载荷NROL-97进入高能轨道",
+            "originalTitle": "Falcon Heavy set to launch classified NROL-97 to high-energy orbit",
+            "summaryLead": "猎鹰重型火箭将发射机密载荷NROL-97进入……",
+            "source": "NASASpaceflight",
+            "publishedAt": "2026-10-01T19:17:40Z",
+            "score": 83
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "57635b2b4e4cb5",
+      "eventId": "evt-6b9a865ad645",
+      "contentType": "news",
+      "title": "新乘组升空前往空间站执行为期六个月任务",
+      "originalTitle": "Fresh crew takes off for six-month stay aboard space station",
+      "summary": "Crew 13指挥官杰西卡·沃特金斯、飞行员卢克·德莱尼、俄罗斯宇航员谢尔盖·捷捷里亚特尼科夫和加拿大宇航员约书亚·库特里克搭乘SpaceX载人龙飞船，于上午11:10从卡纳维拉尔角太空军基地40号发射台升空。拥有地质学博士学位的沃特金斯曾于2022年乘坐载人龙飞船飞往太空。猎鹰9号助推器和载人龙飞船脱离稠密低层大气后，猎鹰9号一级自行返回并精准降落在太空军基地，火箭上面级则继续爬升至太空。乘组表示预计任务非常繁忙，包括大量站内和站外维护、数次太空行走、来访飞行器捕获与存储操作、大量科学实验以及外联活动。等待迎接沃特金斯一行的是他们将要替换的乘组：Crew 12指挥官杰西卡·迈尔、飞行员杰克·哈撒韦以及欧洲航天局……",
+      "summaryRevision": 4,
+      "summaryEvidence": {
+        "status": "feed",
+        "candidateCount": 4,
+        "selectedCount": 4,
+        "reason": "selected-feed"
+      },
+      "summaryInputHash": "adaa5375d32f7ba6ab5ef9dd",
+      "keyFacts": [
+        "Strapped into a SpaceX Crew Dragon capsule",
+        "Crew 13 commander Jessica Watkins",
+        "pilot Luke Delaney"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "Spaceflight Now",
+      "country": "国际",
+      "publishedAt": "2026-10-01T20:46:05Z",
+      "url": "https://spaceflightnow.com/2026/10/01/fresh-crew-takes-off-for-six-month-stay-aboard-space-station",
+      "score": 81,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 15,
+        "影响信号": 13,
+        "主题相关性": 10,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 81/100",
+        "综合排序分 81/100（AI 65% + 规则 35%）",
+        "规则参考分 81/100",
+        "来源权重 16/20",
+        "发布约 9.4 小时",
+        "命中 5 个主题信号",
+        "影响信号：first、launch、test"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "Crew 13",
+        "国际空间站",
+        "SpaceX"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Spaceflight Now",
+          "domain": "spaceflightnow.com",
+          "url": "https://spaceflightnow.com/2026/10/01/fresh-crew-takes-off-for-six-month-stay-aboard-space-station",
+          "publishedAt": "2026-10-01T20:46:05Z",
+          "evidenceGroup": "outlet:spaceflightnow.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 3,
+        "relatedStories": [
+          {
+            "id": "0abe0595170be5",
+            "eventId": "evt-0f5d7f2d8051",
+            "editionDate": "2026-09-19",
+            "title": "NASA授予SpaceX三次前往空间站的载人飞行任务",
+            "originalTitle": "NASA Awards SpaceX Three Crew Flights to Space Station",
+            "summary": "为继续定期向国际空间站运送乘组，NASA通过合同修改授予SpaceX三次额外任务。",
+            "category": "航空航天",
+            "source": "NASA",
+            "publishedAt": "2026-09-18T16:02:31Z",
+            "associationScore": 38,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：crew、space、station、任务",
+              "共同标签：spacex、国际空间站",
+              "同属航空航天"
+            ]
+          },
+          {
+            "id": "4dcfa53edd39e6",
+            "eventId": "evt-0f5d7f2d8051",
+            "editionDate": "2026-09-25",
+            "title": "NASA公布SpaceX Crew-14空间站任务乘组安排",
+            "originalTitle": "NASA Shares SpaceX Crew-14 Assignments for Space Station Mission",
+            "summary": "NASA公布了SpaceX Crew-14任务的乘组安排，四名来自三家航天机构的成员将不早于2027年春季发射前往国际空间站，执行长期科学考察。NASA宇航员凯拉·巴伦和克里斯·伯奇将分别担任航天器指令长和飞行员，日本宇宙航空研究开发机构宇航员诹访诚和俄罗斯航天集团宇航员阿鲁秋恩·基维良担任任务专家。对接后，Crew-14将加入空间站第75/76远征队。这是NASA低地球轨道计划下与SpaceX进行的第14次商业乘组轮换。乘组将开展科学",
+            "category": "航空航天",
+            "source": "NASA",
+            "publishedAt": "2026-09-24T21:15:46Z",
+            "associationScore": 34,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：space、station、乘组、任务",
+              "共同标签：spacex、国际空间站",
+              "同属航空航天"
+            ]
+          },
+          {
+            "id": "3027748ddf69cc",
+            "eventId": "evt-9a0812191f42",
+            "editionDate": "2026-10-01",
+            "title": "NASA与SpaceX将发射下一批载人任务前往国际空间站",
+            "originalTitle": "Live coverage: NASA, SpaceX to launch next crewed mission to the International Space Station",
+            "summary": "据Spaceflight Now报道，NASA与SpaceX将发射下一批载人任务前往国际空间站。执行任务的SpaceX“龙”飞船名为“Grace”，停放在卡纳维拉尔角太空军基地40号发射台的一枚“猎鹰9”火箭之上。NASA SpaceX Crew-13任务的四名成员于9月（具体日期原文未完整给出）乘坐T-38喷气机抵达肯尼迪航天中心。NASA宇航员、Crew-13任务飞行员卢克·德莱尼抵达后与媒体交谈，提及教练、导师、老师以及在NASA",
+            "category": "航空航天",
+            "source": "Spaceflight Now",
+            "publishedAt": "2026-10-01T02:03:53Z",
+            "associationScore": 30,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：space、station、任务、前往",
+              "共同标签：spacex、国际空间站",
+              "同属航空航天"
+            ]
+          }
+        ],
+        "timelineSummary": "2026年9月18日归档的报道称NASA通过合同修改授予SpaceX三次额外空间站载人任务；9月24日归档的报道公布Crew-14乘组安排，不早于2027年春季发射；10月1日Crew-13指挥官沃特金斯等四人搭乘载人龙飞船从卡纳维拉尔角升空，执行为期约六个月任务，将替换Crew-12乘组。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "后续可观察Crew-13是否按计划与空间站对接并完成乘组轮换。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "若轮换顺利，则需关注Crew-14在2027年春季发射窗口的准备工作。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "deepseek"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "57635b2b4e4cb5",
+        "mergedFrom": [],
+        "evidence": {
+          "newsIds": [
+            "57635b2b4e4cb5"
+          ],
+          "urls": [
+            "https://spaceflightnow.com/2026/10/01/fresh-crew-takes-off-for-six-month-stay-aboard-space-station"
+          ],
+          "anchors": [
+            "crew",
+            "fresh",
+            "off",
+            "six-month",
+            "stay",
+            "takes"
+          ],
+          "date": "2026-10-01"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:spaceflightnow.com"
+        ],
+        "claims": [
+          {
+            "text": "Strapped into a SpaceX Crew Dragon capsule",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spaceflightnow.com"
+            ]
+          },
+          {
+            "text": "Crew 13 commander Jessica Watkins",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spaceflightnow.com"
+            ]
+          },
+          {
+            "text": "pilot Luke Delaney",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:spaceflightnow.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-78c80b16e64a",
+          "eventId": "evt-6b9a865ad645",
+          "statement": "后续可观察Crew-13是否按计划与空间站对接并完成乘组轮换。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-02",
+          "dueAfter": "2026-11-01",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "57635b2b4e4cb5"
+          ],
+          "lastReviewedAt": "2026-10-02"
+        },
+        {
+          "predictionId": "pred-76847d9cd775",
+          "eventId": "evt-6b9a865ad645",
+          "statement": "若轮换顺利，则需关注Crew-14在2027年春季发射窗口的准备工作。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-02",
+          "dueAfter": "2026-12-31",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "57635b2b4e4cb5"
+          ],
+          "lastReviewedAt": "2026-10-02"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-6b9a865ad645",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-10-02",
+        "lastSeen": "2026-10-02",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-10-02",
+            "newsId": "57635b2b4e4cb5",
+            "title": "新乘组升空前往空间站执行为期六个月任务",
+            "originalTitle": "Fresh crew takes off for six-month stay aboard space station",
+            "summaryLead": "Crew 13指挥官杰西卡·沃特金斯、飞行员卢克·德莱尼、俄罗斯宇航员谢尔盖·捷捷里亚特尼科夫和加拿大宇航员约书亚·库特里克搭乘SpaceX载人龙飞船，于上午11:10从卡纳维拉尔角太空军基地40号发射台升空。拥有地质学博士学位的沃特金斯曾于2022年乘坐载人龙飞船飞往太空。猎鹰9号助推器和载人龙飞船脱离稠密低层大气后，猎鹰9号一级自行返回并精准降落在太空军基地，火箭上面级则继续爬升至太空。乘组表示预计任务非常繁忙，包括大量站内和站外维护、数次太空行走、来访飞行器捕获与存储…",
+            "source": "Spaceflight Now",
+            "publishedAt": "2026-10-01T20:46:05Z",
+            "score": 81
           }
         ],
         "independentSourceCount": 1,
@@ -2133,13 +2063,13 @@
       "country": "国际",
       "publishedAt": "2026-10-01T10:12:44Z",
       "url": "https://thequantuminsider.com/2026/10/01/california-fusion-legislation-30-million-quantum-investment",
-      "score": 69,
+      "score": 77,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 8,
-        "时效": 12,
+        "时效": 10,
         "影响信号": 22,
         "主题相关性": 4,
         "证据完整度": 3,
@@ -2149,11 +2079,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 64/100",
-        "综合排序分 69/100（AI 65% + 规则 35%）",
-        "规则参考分 79/100",
+        "DeepSeek 候选重要度 77/100",
+        "综合排序分 77/100（AI 65% + 规则 35%）",
+        "规则参考分 77/100",
         "来源权重 15/20",
-        "发布约 16.0 小时",
+        "发布约 19.9 小时",
         "命中 2 个主题信号",
         "影响信号：first、launch、breakthrough"
       ],
@@ -2305,7 +2235,205 @@
             "summaryLead": "加州州长加文·纽森签署立法，为聚变能源建立战略框架，并宣布新增3000万美元投资，用于量子与深空研究。这项量子投资是在加州2025年启动“Quantum California”之后作出的，并增加了该州现有的资金、劳动力项目、研究基础设施和产业计划。纽森在加州大学伯克利分校一个量子实验室与教职员工共同宣布了上述消息。新预算拨款紧随其2025年签署的里程碑式立法，该立法启动了全州性倡议Quantum California，汇集大学、国家实验室、私营公司、投资者和政策制定者。量子…",
             "source": "The Quantum Insider",
             "publishedAt": "2026-10-01T10:12:44Z",
-            "score": 69
+            "score": 77
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "326e4610984629",
+      "eventId": "evt-525a4d76a968",
+      "contentType": "news",
+      "title": "高效、耐用、可通用：NVIDIA AI工厂如何最大化投资回报",
+      "originalTitle": "Productive, Durable, Fungible: How NVIDIA AI Factories Maximize Return on Investment",
+      "summary": "NVIDIA表示，其AI工厂在设计上旨在同时最大化高效、耐用和可通用这三点。NVIDIA平台具有高效、耐用和可通用的特性，从而最大化AI工厂的回报。现有元数据未提供摘要中关于具体产品型号、性能数据、客户案例或投资回报测算的更多细节。该内容来自NVIDIA博客，发布时间为2026年10月1日。后续安排或进一步说明未在现有元数据中交代。",
+      "summaryRevision": 4,
+      "summaryEvidence": {
+        "status": "feed",
+        "candidateCount": 3,
+        "selectedCount": 2,
+        "reason": "selected-feed"
+      },
+      "summaryInputHash": "e10ade42473d17d0f5aaae28",
+      "keyFacts": [
+        "NVIDIA AI factories are engineered to maximize all three",
+        "NVIDIA platform is productive",
+        "which maximizes AI factory returns"
+      ],
+      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
+      "category": "AI",
+      "source": "NVIDIA Blog",
+      "country": "国际",
+      "publishedAt": "2026-10-01T13:00:49Z",
+      "url": "https://blogs.nvidia.com/blog/productive-durable-fungible-ai-factories",
+      "score": 76,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 11,
+        "影响信号": 9,
+        "主题相关性": 12,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 76/100",
+        "综合排序分 76/100（AI 65% + 规则 35%）",
+        "规则参考分 76/100",
+        "来源权重 16/20",
+        "发布约 17.1 小时",
+        "命中 6 个主题信号",
+        "影响信号：first、contract"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "NVIDIA",
+        "AI工厂",
+        "投资回报"
+      ],
+      "image": "https://blogs.nvidia.com/wp-content/uploads/2026/09/fungibility-blog-1280x680-1.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "NVIDIA Blog",
+          "domain": "blogs.nvidia.com",
+          "url": "https://blogs.nvidia.com/blog/productive-durable-fungible-ai-factories",
+          "publishedAt": "2026-10-01T13:00:49Z",
+          "evidenceGroup": "outlet:blogs.nvidia.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "326e4610984629",
+        "mergedFrom": [],
+        "evidence": {
+          "newsIds": [
+            "326e4610984629"
+          ],
+          "urls": [
+            "https://blogs.nvidia.com/blog/productive-durable-fungible-ai-factories"
+          ],
+          "anchors": [
+            "ai",
+            "durable",
+            "factories",
+            "fungible",
+            "how",
+            "investment",
+            "maximize",
+            "nvidia",
+            "productive",
+            "return"
+          ],
+          "date": "2026-10-01"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:blogs.nvidia.com"
+        ],
+        "claims": [
+          {
+            "text": "NVIDIA AI factories are engineered to maximize all three",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:blogs.nvidia.com"
+            ]
+          },
+          {
+            "text": "NVIDIA platform is productive",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:blogs.nvidia.com"
+            ]
+          },
+          {
+            "text": "which maximizes AI factory returns",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:blogs.nvidia.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-ddd9c88cb655",
+          "eventId": "evt-525a4d76a968",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-02",
+          "dueAfter": "2026-11-01",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "326e4610984629"
+          ],
+          "lastReviewedAt": "2026-10-02"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-525a4d76a968",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-10-02",
+        "lastSeen": "2026-10-02",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-10-02",
+            "newsId": "326e4610984629",
+            "title": "高效、耐用、可通用：NVIDIA AI工厂如何最大化投资回报",
+            "originalTitle": "Productive, Durable, Fungible: How NVIDIA AI Factories Maximize Return on Investment",
+            "summaryLead": "NVIDIA表示，其AI工厂在设计上旨在同时最大化高效、耐用和可通用这三点。NVIDIA平台具有高效、耐用和可通用的特性，从而最大化AI工厂的回报。现有元数据未提供摘要中关于具体产品型号、性能数据、客户案例或投资回报测算的更多细节。该内容来自NVIDIA博客，发布时间为2026年10月1日。后续安排或进一步说明未在现有元数据中交代。",
+            "source": "NVIDIA Blog",
+            "publishedAt": "2026-10-01T13:00:49Z",
+            "score": 76
           }
         ],
         "independentSourceCount": 1,
@@ -2314,32 +2442,45 @@
       "relatedPapers": []
     }
   ],
-  "qualifiedCandidateCount": 169,
-  "paperLinkedItemCount": 0,
+  "qualifiedCandidateCount": 168,
+  "paperLinkedItemCount": 1,
   "eventCount": 10,
   "weeklyDigest": {
     "schemaVersion": 1,
-    "generatedAt": "2026-10-02T02:10:23Z",
+    "generatedAt": "2026-10-02T06:08:33Z",
     "timezone": "Asia/Shanghai",
     "weekId": "2026-W40",
     "fromDate": "2026-09-28",
     "toDate": "2026-10-04",
     "eventCount": 8,
-    "headline": "波音获首份全速生产“灰狼”直升机订单，迎大单周",
+    "headline": "乌克兰称首次实战使用FP-7弹道导弹",
     "summary": "本周已收敛 8 条主要事件线；按最新重要度、独立来源、更新次数与研究关联综合排序。",
     "events": [
       {
-        "eventId": "evt-7a85aba87d48",
-        "title": "波音获首份全速生产“灰狼”直升机订单，迎大单周",
+        "eventId": "evt-28669ec4ccfa",
+        "title": "乌克兰称首次实战使用FP-7弹道导弹",
         "category": "军事动态",
-        "summary": "波音公司周四表示，美国空军又订购了4架MH-139A“灰狼”直升机，这是该机型首份全速生产订单，距美空军宣布该机已具备执行核导弹安保任务的能力仅数周。波音发言人对《防务新闻》称，这份“灰狼”合同价值约8500万美元，包含部分保障工作，于9月25日授予，公司预计2028年或2029年交付这4架直升机。波音防务、空间与安全部门垂直起降项目副总裁兼总经理凯瑟琳·若利韦特在公司新闻稿中称，这一里程碑验证了“灰狼”的关键就绪水平，并支持该军种在战略导弹基地部署以保护重要国家资产的计划。1月8日，第40直升机中队的两架“灰狼…",
+        "summary": "乌克兰表示已首次在实战中使用其国产FP-7战术弹道导弹。乌克兰总统泽连斯基宣布，乌方完成了由乌克兰防务公司Fire Point研制的地面发射弹道导弹FP-7的首次作战使用。Fire Point自俄罗斯全面入侵以来迅速扩张，最初从无人机起步，随后进入远程打击导弹和弹道导弹技术领域。据乌克兰及该公司发布的信息，FP-7射程约250公里（155英里），弹头重约150公斤（331磅）。值得注意的是，Fire Point还将FP-7的基本导弹架构用于另一种武器，即由地对地FP-7衍生的FP-7.X反导拦截弹。该公司期望两套…",
         "firstSeen": "2026-10-02",
         "lastSeen": "2026-10-02",
         "trend": "本周新出现",
         "updateCount": 1,
         "independentSourceCount": 1,
         "paperCount": 0,
-        "outlook": "继续观察新的独立来源与正式信息。"
+        "outlook": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。"
+      },
+      {
+        "eventId": "evt-cf917ece201c",
+        "title": "探访乌克兰首次作战部署的机器人两栖车辆",
+        "category": "局部冲突",
+        "summary": "现有元数据未提供摘要。",
+        "firstSeen": "2026-10-02",
+        "lastSeen": "2026-10-02",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 1,
+        "paperCount": 2,
+        "outlook": "后续可观察乌方是否披露该两栖机器人车辆的部署单位与作战用途细节。"
       },
       {
         "eventId": "evt-5a1a62b7fd03",
@@ -2351,6 +2492,45 @@
         "trend": "本周新出现",
         "updateCount": 1,
         "independentSourceCount": 2,
+        "paperCount": 0,
+        "outlook": "继续观察新的独立来源与正式信息。"
+      },
+      {
+        "eventId": "evt-7a85aba87d48",
+        "title": "波音获首份全速生产“灰狼”直升机订单，迎大单周",
+        "category": "军事动态",
+        "summary": "波音公司周四表示，美国空军又订购了4架MH-139A“灰狼”直升机，这是该机型首份全速生产订单，距美空军宣布该机已具备执行核导弹安保任务的能力仅数周。波音发言人对《防务新闻》称，这份“灰狼”合同价值约8500万美元，包含部分保障工作，于9月25日授予，公司预计2028年或2029年交付这4架直升机。波音防务、空间与安全部门垂直起降项目副总裁兼总经理凯瑟琳·若利韦特在公司新闻稿中称，这一里程碑验证了“灰狼”的关键就绪水平，并支持该军种在战略导弹基地部署以保护重要国家资产的计划。1月8日，第40直升机中队的两架“灰狼…",
+        "firstSeen": "2026-10-02",
+        "lastSeen": "2026-10-02",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 1,
+        "paperCount": 0,
+        "outlook": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。"
+      },
+      {
+        "eventId": "evt-a507cf7644f3",
+        "title": "以色列对加沙袭击致七人死亡，“停火”违规持续",
+        "category": "局部冲突",
+        "summary": "在以色列继续违反已持续近一年的“停火”之际，加沙地带至少七名巴勒斯坦人在以色列袭击中丧生，十多人受伤。半岛电视台记者欣德·胡达里从加沙城报道称，医生表示由于多年以色列袭击和封锁使医疗系统遭到摧毁，挽救伤者生命十分困难。她还表示，此次袭击的死亡人数未来数小时可能上升。胡达里说，加沙本应实现停火，但以色列军队的暴力没有尽头，巴勒斯坦人每天都在被杀、受伤，人道局势不断恶化，加沙居民的生存条件“可怕”。",
+        "firstSeen": "2026-09-30",
+        "lastSeen": "2026-09-30",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 1,
+        "paperCount": 0,
+        "outlook": "继续观察新的独立来源与正式信息。"
+      },
+      {
+        "eventId": "evt-3fbf0661e5ed",
+        "title": "巨大飞跃：研究人员在轨演示可编程量子光子处理器",
+        "category": "航空航天",
+        "summary": "研究人员在轨运行了一台可编程量子光子处理器，演示了双光子干涉，作为迈向星载量子计算的早期一步。该处理器在六路径光路中操纵两个光子，但探测器故障、辐射损伤和阳光相关噪声限制了其性能。研究人员已在轨运行一台可编程量子光子处理器，展示了一种基于光的计算能力，最终可能帮助卫星在将数据传回地球之前进行分析。",
+        "firstSeen": "2026-09-29",
+        "lastSeen": "2026-09-29",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 1,
         "paperCount": 0,
         "outlook": "继续观察新的独立来源与正式信息。"
       },
@@ -2378,108 +2558,19 @@
         "updateCount": 1,
         "independentSourceCount": 1,
         "paperCount": 0,
-        "outlook": "继续观察新的独立来源与正式信息。"
-      },
-      {
-        "eventId": "evt-a507cf7644f3",
-        "title": "以色列对加沙袭击致七人死亡，“停火”违规持续",
-        "category": "局部冲突",
-        "summary": "在以色列继续违反已持续近一年的“停火”之际，加沙地带至少七名巴勒斯坦人在以色列袭击中丧生，十多人受伤。半岛电视台记者欣德·胡达里从加沙城报道称，医生表示由于多年以色列袭击和封锁使医疗系统遭到摧毁，挽救伤者生命十分困难。她还表示，此次袭击的死亡人数未来数小时可能上升。胡达里说，加沙本应实现停火，但以色列军队的暴力没有尽头，巴勒斯坦人每天都在被杀、受伤，人道局势不断恶化，加沙居民的生存条件“可怕”。",
-        "firstSeen": "2026-09-30",
-        "lastSeen": "2026-09-30",
-        "trend": "本周新出现",
-        "updateCount": 1,
-        "independentSourceCount": 1,
-        "paperCount": 0,
-        "outlook": "继续观察新的独立来源与正式信息。"
-      },
-      {
-        "eventId": "evt-8b914df382e4",
-        "title": "私人情报公司称乌克兰打击了对俄导弹至关重要的工厂",
-        "category": "局部冲突",
-        "summary": "苏格兰格拉斯哥——据乌克兰私人情报公司Dallas Analytics获得的泄露文件，乌克兰9月26日打击的一家俄罗斯工厂为俄多种导弹供应电子元件，可能使莫斯科失去后备供应商。这些关于位于俄罗斯西部罗斯托夫州亚速光学机械厂（AOMZ）的文件涵盖2023年4月至2025年3月，包括内部通信、国家合同记录和合作时间表，还包括拥有该工厂的国家控股公司战术导弹集团（KTRV）的函件。文件中有一份明显的供应时间表，列出70多个项目，并提到44家部件供应商。",
-        "firstSeen": "2026-10-02",
-        "lastSeen": "2026-10-02",
-        "trend": "本周新出现",
-        "updateCount": 1,
-        "independentSourceCount": 1,
-        "paperCount": 0,
-        "outlook": "继续观察新的独立来源与正式信息。"
-      },
-      {
-        "eventId": "evt-cf917ece201c",
-        "title": "探访乌克兰首次作战部署的机器人两栖车辆",
-        "category": "局部冲突",
-        "summary": "现有元数据未提供摘要。",
-        "firstSeen": "2026-10-02",
-        "lastSeen": "2026-10-02",
-        "trend": "本周新出现",
-        "updateCount": 1,
-        "independentSourceCount": 1,
-        "paperCount": 0,
-        "outlook": "继续观察新的独立来源与正式信息。"
-      },
-      {
-        "eventId": "evt-3fbf0661e5ed",
-        "title": "巨大飞跃：研究人员在轨演示可编程量子光子处理器",
-        "category": "航空航天",
-        "summary": "研究人员在轨运行了一台可编程量子光子处理器，演示了双光子干涉，作为迈向星载量子计算的早期一步。该处理器在六路径光路中操纵两个光子，但探测器故障、辐射损伤和阳光相关噪声限制了其性能。研究人员已在轨运行一台可编程量子光子处理器，展示了一种基于光的计算能力，最终可能帮助卫星在将数据传回地球之前进行分析。",
-        "firstSeen": "2026-09-29",
-        "lastSeen": "2026-09-29",
-        "trend": "本周新出现",
-        "updateCount": 1,
-        "independentSourceCount": 1,
-        "paperCount": 0,
-        "outlook": "继续观察新的独立来源与正式信息。"
+        "outlook": "后续可观察五角大楼是否公布该竞赛后续阶段排名或新增采购数量。"
       }
     ]
   },
   "anomalySignals": {
     "schemaVersion": 1,
-    "generatedAt": "2026-10-02T02:10:23Z",
+    "generatedAt": "2026-10-02T06:08:33Z",
     "timezone": "Asia/Shanghai",
-    "status": "alert",
+    "status": "stable",
     "baselineDays": 30,
     "observationDays": 30,
-    "signalCount": 3,
-    "summary": "基于过去 30 个有归档日建立稳健基线，检测到 3 个升温信号。",
-    "signals": [
-      {
-        "signalId": "sig-ad2a20ad4ffe",
-        "dimension": "entity",
-        "name": "FP-7",
-        "currentCount": 2,
-        "baselineMedian": 0.0,
-        "ratio": 4.0,
-        "robustDeviation": 2.0,
-        "independentSourceCount": 2,
-        "severity": "elevated",
-        "explanation": "FP-7今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。"
-      },
-      {
-        "signalId": "sig-e46e34316812",
-        "dimension": "entity",
-        "name": "Fire Point",
-        "currentCount": 2,
-        "baselineMedian": 0.0,
-        "ratio": 4.0,
-        "robustDeviation": 2.0,
-        "independentSourceCount": 2,
-        "severity": "elevated",
-        "explanation": "Fire Point今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。"
-      },
-      {
-        "signalId": "sig-09bbda0201ad",
-        "dimension": "entity",
-        "name": "猎鹰重型",
-        "currentCount": 2,
-        "baselineMedian": 0.0,
-        "ratio": 4.0,
-        "robustDeviation": 2.0,
-        "independentSourceCount": 2,
-        "severity": "elevated",
-        "explanation": "猎鹰重型今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。"
-      }
-    ]
+    "signalCount": 0,
+    "summary": "基于过去 30 个有归档日建立稳健基线，检测到 0 个升温信号。",
+    "signals": []
   }
 }
