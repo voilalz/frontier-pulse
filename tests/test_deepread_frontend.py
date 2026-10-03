@@ -9,6 +9,20 @@ from test_update_news import MODULE, ROOT
 class DeepreadFrontendTests(unittest.TestCase):
     browser_result = reading_tests.NewsReadingTests.browser_result
 
+    def test_raw_evidence_can_expand_at_the_paragraph_with_source_and_capture_time(self):
+        from evidence_trace import make_evidence
+        payload = self.editorial_payload()
+        event = payload['events'][0]
+        url = event['sources'][0]['url']
+        event['evidenceRecords'] = make_evidence('NASA完成无人机导航试验，飞行持续30分钟。', url, '2026-09-21T00:00:00Z')
+        payload['chapters'][0]['blocks'][0]['evidenceIds'] = [r['evidenceId'] for r in event['evidenceRecords']]
+        rendered = self.browser_result(f'renderDeepreadArticle(normalizeDeepread({json.dumps(payload)}))')
+        self.assertIn('原文依据', rendered)
+        self.assertIn('NASA完成无人机导航试验，飞行持续30分钟。', rendered)
+        self.assertIn('抓取', rendered)
+        self.assertIn('08:00', rendered)
+        self.assertIn(event['evidenceRecords'][0]['evidenceId'], rendered)
+
     def setUp(self):
         self.config = MODULE.load_config(ROOT / "config/news_config.json")
         self.payload = {

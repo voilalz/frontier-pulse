@@ -7,6 +7,7 @@ on:
     paths:
       - "scripts/event_identity.py"
       - "scripts/update_news.py"
+      - "scripts/publication.py"
   schedule:
     - cron: "17 */3 * * *"
       timezone: "Asia/Shanghai"
@@ -21,17 +22,21 @@ concurrency:
 
 jobs:
   refresh-stream:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          fetch-depth: 2
+          fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+      - name: Prepare isolated generation directory
+        if: true
+        run: python scripts/publication.py prepare --stage "$RUNNER_TEMP/frontier-stage"
       - name: Collect the qualified 24-hour stream
         id: collect
         continue-on-error: true
@@ -43,51 +48,55 @@ jobs:
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
         run: >-
           python scripts/update_news.py
+          --output "$RUNNER_TEMP/frontier-stage/data/news.json"
+          --events-output "$RUNNER_TEMP/frontier-stage/data/events.json"
+          --source-health-output "$RUNNER_TEMP/frontier-stage/data/source-health.json"
           --stream-only
-          --skip-research
-          --stream-output public/data/stream.json
-          --stream-status-output public/data/stream-status.json
-      - name: Verify stream payload
+          --stream-output "$RUNNER_TEMP/frontier-stage/data/stream.json"
+          --stream-status-output "$RUNNER_TEMP/frontier-stage/data/stream-status.json"
+      - name: Validate staged publication
+        id: validate
         if: steps.collect.outcome == 'success'
-        run: >-
-          python -c "import json; p=json.load(open('public/data/stream.json', encoding='utf-8'));
-          assert p.get('itemCount') == len(p.get('items', []));
-          assert p.get('itemCount', 0) > 0;
-          e=json.load(open('public/data/events.json', encoding='utf-8'));
-          known={n for event in e['items'] for n in event['newsIds']};
-          assert all(x['id'] in known and x.get('eventIdentity') for x in p['items']);
-          assert all(x.get('contentType') == 'news' and x.get('url') for x in p['items']);
-          print('Validated', p['itemCount'], 'qualified stream items')"
+        run: python scripts/publication.py validate --mode stream --stage "$RUNNER_TEMP/frontier-stage"
+      - name: Promote validated publication
+        id: promote
+        if: steps.validate.outcome == 'success'
+        run: python scripts/publication.py promote --mode stream --stage "$RUNNER_TEMP/frontier-stage"
+      - name: Record failed generation or validation
+        if: always() && steps.promote.outcome != 'success'
+        run: python scripts/publication.py fail --mode stream
       - name: Commit stream data and status
+        id: publish
         if: always()
+        env:
+          PROMOTED: ${{ steps.promote.outcome }}
         run: |
-          git add -A -- public/data/stream.json public/data/stream-status.json public/data/events.json
-          if [ -e public/data/source-health.json ]; then git add -- public/data/source-health.json; fi
+          if [ "$PROMOTED" = success ]; then
+            git add -A -- public/data/stream.json public/data/stream-status.json public/data/events.json public/data/source-health.json
+          else
+            git add -- public/data/stream-status.json
+          fi
           if git diff --cached --quiet; then
-            echo "No stream data change"
+            echo "No publication change"
             exit 0
           fi
           git config user.name "frontier-pulse-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore(data): refresh qualified full stream"
+          git commit -m "chore(data): publish validated stream output or failure status"
           for attempt in 1 2 3; do
-            git fetch origin main --depth=20
-            # During a rebase, "theirs" is this workflow's generated-data commit.
-            if ! git rebase -X theirs origin/main; then
+            git fetch origin main
+            # Fail closed on conflicting generation; never force an old bundle over new data.
+            if ! git rebase origin/main; then
               git rebase --abort || true
-              echo "Unable to replay generated data onto the latest main"
               exit 1
             fi
-            if git push origin HEAD:main; then
-              exit 0
-            fi
+            if git push origin HEAD:main; then exit 0; fi
             echo "main changed during push; retrying publication ($attempt/3)"
             sleep "$((attempt * 2))"
           done
-          echo "Unable to publish generated data after 3 attempts"
           exit 1
-      - name: Mark failed stream collection
-        if: steps.collect.outcome == 'failure'
+      - name: Mark failed publication
+        if: always() && (steps.promote.outcome != 'success' || steps.publish.outcome != 'success')
         run: |
           echo "The previous full stream was retained and stream-status.json records the failure."
           exit 1

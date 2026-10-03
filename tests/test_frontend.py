@@ -62,7 +62,7 @@ class FrontendTests(unittest.TestCase):
 
     def test_cache_is_bypassed_only_for_manual_refresh(self):
         app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
-        self.assertIn("fetchJson(ENDPOINTS.latest, bypassCache)", app)
+        self.assertIn("fetchPublicationJson(ENDPOINTS.latest, bypassCache)", app)
         self.assertNotIn("fetchJson(ENDPOINTS.latest, true)", app)
         self.assertIn("await loadLatest(true, true)", app)
         self.assertIn("cache: bypassCache ? \"no-store\" : \"default\"", app)
@@ -110,8 +110,7 @@ class FrontendTests(unittest.TestCase):
         self.assertIn('"timezone": "Asia/Shanghai"', config)
         self.assertIn('timezone: "Asia/Shanghai"', daily)
         self.assertIn('timezone: "Asia/Shanghai"', stream)
-        self.assertIn('cron: "7 7 * * *"', daily)
-        self.assertIn('cron: "37 8 * * *"', daily)
+        self.assertIn('cron: "10 7 * * *"', daily)
         self.assertIn('paths:\n      - ".github/workflows/daily-news.yml"', daily)
         self.assertIn("python scripts/check_daily_refresh.py", daily)
         self.assertIn("--required-schema 11", daily)
@@ -120,8 +119,6 @@ class FrontendTests(unittest.TestCase):
         self.assertIn('if (zone === "Asia/Shanghai") return "版本日期 · 中国标准时间（UTC+8）"', app)
         self.assertIn('if (zone === "Asia/Tokyo") return "版本日期 · 东京时间（UTC+9）"', app)
         self.assertIn('function chinaEditionClock(value = new Date())', app)
-        self.assertIn('chinaNow.minutes >= 8 * 60 + 15', app)
-        self.assertIn('"今日日报尚未生成"', app)
 
     def test_public_metadata_and_generation_config_use_custom_domain(self):
         index = (ROOT / "public" / "index.html").read_text(encoding="utf-8")
@@ -145,25 +142,6 @@ class FrontendTests(unittest.TestCase):
         self.assertIn("/data/stream.json\n  Cache-Control: public, max-age=300", headers)
         self.assertIn("/data/research.json\n  Cache-Control: public, max-age=1800", headers)
 
-    def test_personal_research_keywords_and_deepseek_translation_ui_are_safe(self):
-        index = (ROOT / "public" / "index.html").read_text(encoding="utf-8")
-        app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
-        styles = (ROOT / "public" / "assets" / "styles.css").read_text(encoding="utf-8")
-        for element_id in (
-            "researchKeywordPanel", "researchKeywordForm", "researchKeywordInput",
-            "researchKeywordChips", "collectionKeywordChips", "mineResearchCount",
-        ):
-            self.assertIn(f'id="{element_id}"', index)
-        self.assertIn("fp-research-keywords-v1", app)
-        self.assertIn("最多保存 20 个论文关键词", app)
-        self.assertIn("matchedResearchKeywords", app)
-        self.assertIn("data-research-scope", index + app)
-        self.assertIn("collectionKeywords", app)
-        self.assertIn("DeepSeek 中文", app)
-        self.assertIn("translationDiagnostics", app)
-        self.assertIn("缺失 ID 与原因已写入公开状态数据", app)
-        self.assertIn(".research-keyword-panel", styles)
-        self.assertNotIn("DEEPSEEK_API_KEY", index + app + styles)
 
     def test_daily_selection_and_translation_health_are_independent(self):
         app = (ROOT / "public" / "assets" / "app.js").read_text(encoding="utf-8")
@@ -182,7 +160,7 @@ class FrontendTests(unittest.TestCase):
             self.assertIn("group: frontier-data-main", workflow)
             self.assertIn("cancel-in-progress: false", workflow)
             self.assertIn("for attempt in 1 2 3; do", workflow)
-            self.assertIn("git rebase -X theirs origin/main", workflow)
+            self.assertIn("git rebase origin/main", workflow)
             self.assertIn("main changed during push; retrying publication", workflow)
 
 

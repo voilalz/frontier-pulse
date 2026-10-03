@@ -1,0 +1,2721 @@
+{
+  "schemaVersion": 1,
+  "primaryDomain": "SLAM",
+  "guides": [
+    {
+      "paperId": "classic:slam:fastslam",
+      "primaryDomain": "SLAM",
+      "title": "FastSLAM: A Factored Solution to the Simultaneous Localization and Mapping Problem",
+      "status": "ready",
+      "learningOrder": 1,
+      "overview": "本文从给定机器人完整路径后的地标条件独立性出发，把联合定位建图后验分解为路径分布和各地标的条件分布。路径由粒子近似，每个粒子携带独立的地标高斯估计；平衡树与共享未改动分支减轻重采样时复制整张地图的开销。论文还按粒子分别处理观测对应关系，并用实物与仿真实验考察规模和误差；据此阅读时应区分精确后验分解、有限粒子近似与地标观测线性化。",
+      "guide": {
+        "problem": "移动机器人既不知道自己的准确位姿，也不知道地标的位置，带噪运动和观测使二者的估计相互关联。传统联合扩展卡尔曼滤波维护整张地图的协方差，一次局部观测也要更新大量相关项，地标增加会迅速推高计算负担。",
+        "method": "先给每条路径假设按运动模型采样新的位姿，再以观测似然计算权重并重采样。在给定路径的条件下，仅更新被观测地标的扩展卡尔曼滤波器，其余地标高斯保持原值。地图高斯存放在平衡二叉树叶节点，复制粒子时只新建通往改动地标的路径，其余分支共享指针。",
+        "contribution": "关键贡献是把路径不确定性与条件地标估计分开表示，同时用树结构把这种分解落实为可扩展的数据组织。未知对应关系由每个粒子独立选择，不同粒子可保留不同匹配甚至不同地标数，避免所有假设立即接受同一个关联决定。",
+        "applicability": "论文实验在平面运动、静止点地标和距离方位观测框架下展开，实物试验以激光扫描岩石构成的场地。工程上，若任务能提取稳定地标且需要保留多个路径和关联假设，这种表示值得比较；评估仍须结合运动噪声和可见地标分布。",
+        "limitations": "精确的是给定路径后的概率分解，实际算法仍用有限粒子近似路径后验，并在线性化观测模型后更新地标高斯。论文明确指出某些情形所需粒子数可能过大，数据关联的快速搜索也附带地标间距和传感器误差等条件。",
+        "readingAdvice": "据此可先沿动态图看清条件独立性，再逐步追踪一个粒子如何采样、更新地标和被重采样，把树的共享分支与概率分解分别理解。据此复核实验时应分别检查实物地图误差与仿真规模变化，观察粒子数和感知范围如何影响结果，别把小粒子集的示例推广到所有环境。"
+      },
+      "fullText": {
+        "url": "https://robots.stanford.edu/papers/montemerlo.fastslam-tr.pdf",
+        "format": "pdf",
+        "sha256": "805ad93bafae89cdf78592707dc006680c81e0bbb827cce6b1690fb9e640f29e",
+        "pageCount": 6,
+        "checkedAt": "2026-10-02T04:26:33.941548+00:00",
+        "edition": "作者提供的六页 AAAI 2002 同名论文稿；未混入 2003 FastSLAM 2.0 的观测引导提议分布或结果。",
+        "sourceFile": "SLAM/fastslam.pdf",
+        "textFile": "SLAM/fastslam.pages.json",
+        "textSha256": "2a6ed112740e81afed04665b4245ec9ad1d65ae672da7f634cfdfacb82433cb9"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "reviewedAt": "2026-10-02T04:39:56.935842+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "本文从给定机器人完整路径后的地标条件独立性出发，把联合定位建图后验分解为路径分布和各地标的条件分布。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF页2，Factored Representation，式4及相邻解释",
+          "context": {
+            "page": 2,
+            "start": 5213,
+            "end": 5617,
+            "sha256": "47459d9f4ed6510e628750262d7fb049204d0a58876f883eafb3a7f4fede9e18"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "路径由粒子近似，每个粒子携带独立的地标高斯估计；平衡树与共享未改动分支减轻重采样时复制整张地图的开销。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3,
+            4
+          ],
+          "locator": "PDF页3，路径粒子及地标估计；页4，Efficient Implementation",
+          "context": {
+            "page": 3,
+            "start": 153,
+            "end": 2453,
+            "sha256": "46e0635a3ac474c67f92753c47a672a720501cc506b218051471b40cf54721a3"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "路径由粒子近似，每个粒子携带独立的地标高斯估计；平衡树与共享未改动分支减轻重采样时复制整张地图的开销。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3,
+            4
+          ],
+          "locator": "PDF页4，Efficient Implementation，图2—3",
+          "context": {
+            "page": 4,
+            "start": 1612,
+            "end": 3912,
+            "sha256": "4ef47b7381c60795afc97bea19b124b4b0c9ac0adb62b98146d2e7f8cf2e74c3"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "论文还按粒子分别处理观测对应关系，并用实物与仿真实验考察规模和误差；据此阅读时应区分精确后验分解、有限粒子近似与地标观测线性化。",
+          "classification": "readerInference",
+          "sourcePages": [
+            3,
+            5
+          ],
+          "locator": "PDF页5，Data Association及Experimental Results；页3，EKF近似",
+          "context": {
+            "page": 5,
+            "start": 1149,
+            "end": 3449,
+            "sha256": "16be8caa6c3c25c7a114e31a3dbb0ab1683f7b3dc48b6327be33b45773950216"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "论文还按粒子分别处理观测对应关系，并用实物与仿真实验考察规模和误差；据此阅读时应区分精确后验分解、有限粒子近似与地标观测线性化。",
+          "classification": "readerInference",
+          "sourcePages": [
+            3,
+            5
+          ],
+          "locator": "PDF页3，Landmark Location Estimation，式9—10",
+          "context": {
+            "page": 3,
+            "start": 4727,
+            "end": 6273,
+            "sha256": "c351cbe076bddc6c8f986dcafc5db3330c770733d73133d1630b78b4af815bb2"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "移动机器人既不知道自己的准确位姿，也不知道地标的位置，带噪运动和观测使二者的估计相互关联。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF页2，SLAM Problem Definition，式1—3",
+          "context": {
+            "page": 2,
+            "start": 1541,
+            "end": 3841,
+            "sha256": "98a9b68bc84c6badeeb005f7395003d246bce86c77f8095cbd2c4a8cf12757d1"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "传统联合扩展卡尔曼滤波维护整张地图的协方差，一次局部观测也要更新大量相关项，地标增加会迅速推高计算负担。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF页1，Introduction，EKF协方差和更新成本",
+          "context": {
+            "page": 1,
+            "start": 2647,
+            "end": 4947,
+            "sha256": "65b91d4b2a3ba09d55ff0e4f59d5d54c4b51f1e83202ad31a323e83a52de46c8"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "先给每条路径假设按运动模型采样新的位姿，再以观测似然计算权重并重采样。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3,
+            4
+          ],
+          "locator": "PDF页3，Particle Filter Path Estimation，式5—7及页4式11",
+          "context": {
+            "page": 3,
+            "start": 1630,
+            "end": 3930,
+            "sha256": "d1185fb4a088b26ac5badcca84027c0ac20c53f81ffaa33336fad8b631235476"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "先给每条路径假设按运动模型采样新的位姿，再以观测似然计算权重并重采样。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3,
+            4
+          ],
+          "locator": "PDF页4，式11后，线性高斯积分计算权重",
+          "context": {
+            "page": 4,
+            "start": 1216,
+            "end": 3516,
+            "sha256": "37d2fdb4668494d29160a3fe61937237e62b4384ebaad86b1da643f26792991f"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "在给定路径的条件下，仅更新被观测地标的扩展卡尔曼滤波器，其余地标高斯保持原值。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF页3，Landmark Location Estimation，式8—10",
+          "context": {
+            "page": 3,
+            "start": 3416,
+            "end": 5716,
+            "sha256": "1c049a511870f53be4e4f916bea6be567a3118ee1395a02cb7143c5c2f3e6833"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "地图高斯存放在平衡二叉树叶节点，复制粒子时只新建通往改动地标的路径，其余分支共享指针。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF页4，Efficient Implementation，图2—3",
+          "context": {
+            "page": 4,
+            "start": 2124,
+            "end": 4424,
+            "sha256": "fc05ce90ce6b06941a7f848a39c759dd3eff5598e6c9d1919a1b99b50d41e111"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "关键贡献是把路径不确定性与条件地标估计分开表示，同时用树结构把这种分解落实为可扩展的数据组织。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            6
+          ],
+          "locator": "PDF页6，Conclusion；页2式4",
+          "context": {
+            "page": 6,
+            "start": 894,
+            "end": 3194,
+            "sha256": "37efd9efb90d272170d4f2a460bb6b05cb35064fffffc0344a97650c90dba7b8"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "关键贡献是把路径不确定性与条件地标估计分开表示，同时用树结构把这种分解落实为可扩展的数据组织。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            6
+          ],
+          "locator": "PDF页2，Factored Representation，式4",
+          "context": {
+            "page": 2,
+            "start": 5189,
+            "end": 5617,
+            "sha256": "274ef7ea6250e91588e374be7a7dc7a8cdc2a7a5deaa96b7fb562b0f7c196312"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "未知对应关系由每个粒子独立选择，不同粒子可保留不同匹配甚至不同地标数，避免所有假设立即接受同一个关联决定。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF页5，Data Association，按粒子匹配和重采样解释",
+          "context": {
+            "page": 5,
+            "start": 1149,
+            "end": 3449,
+            "sha256": "16be8caa6c3c25c7a114e31a3dbb0ab1683f7b3dc48b6327be33b45773950216"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "论文实验在平面运动、静止点地标和距离方位观测框架下展开，实物试验以激光扫描岩石构成的场地。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            5
+          ],
+          "locator": "PDF页2，问题假设；页5实物实验图4",
+          "context": {
+            "page": 2,
+            "start": 1738,
+            "end": 4038,
+            "sha256": "3ac5c490b741c3afd9d31981dca83ea329e4a2537323b408cac94a7d614ede0d"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "论文实验在平面运动、静止点地标和距离方位观测框架下展开，实物试验以激光扫描岩石构成的场地。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            5
+          ],
+          "locator": "PDF页5，Experimental Results，图4",
+          "context": {
+            "page": 5,
+            "start": 2740,
+            "end": 4818,
+            "sha256": "f111d521d4b76f9ea4eb94a604cd16fc47049c476fcea6177f067473e1221589"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "工程上，若任务能提取稳定地标且需要保留多个路径和关联假设，这种表示值得比较；评估仍须结合运动噪声和可见地标分布。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF页2，对应关系假设与粒子需求讨论",
+          "context": {
+            "page": 2,
+            "start": 4131,
+            "end": 5617,
+            "sha256": "4123c08bfd93956054d8b8b9c6e1229716cb721e61c3ccc47c54a9c72cfe3b35"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "精确的是给定路径后的概率分解，实际算法仍用有限粒子近似路径后验，并在线性化观测模型后更新地标高斯。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF页3，粒子渐近近似及EKF线性化",
+          "context": {
+            "page": 3,
+            "start": 2937,
+            "end": 5237,
+            "sha256": "6578fa0f37a8e10922092532fd7cc210029b7eb088e6b52b5d1b39ec60cc9715"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "精确的是给定路径后的概率分解，实际算法仍用有限粒子近似路径后验，并在线性化观测模型后更新地标高斯。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF页3，Landmark Location Estimation，式9",
+          "context": {
+            "page": 3,
+            "start": 4727,
+            "end": 6273,
+            "sha256": "c351cbe076bddc6c8f986dcafc5db3330c770733d73133d1630b78b4af815bb2"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "论文明确指出某些情形所需粒子数可能过大，数据关联的快速搜索也附带地标间距和传感器误差等条件。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            5
+          ],
+          "locator": "PDF页2，粒子数限制；页5，关联搜索假设",
+          "context": {
+            "page": 2,
+            "start": 1441,
+            "end": 3741,
+            "sha256": "63bffd4e340a8d351cc2b05ccde1e202f91ae07ab20478b62886fbbc3e3bca6c"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "论文明确指出某些情形所需粒子数可能过大，数据关联的快速搜索也附带地标间距和传感器误差等条件。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            5
+          ],
+          "locator": "PDF页5，Data Association末段",
+          "context": {
+            "page": 5,
+            "start": 1978,
+            "end": 4278,
+            "sha256": "df3bd303805e5ae6c22a8644ffe5d00f4d2f0043c2f6b9c70a1ecd719b04cfc7"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此可先沿动态图看清条件独立性，再逐步追踪一个粒子如何采样、更新地标和被重采样，把树的共享分支与概率分解分别理解。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2,
+            4
+          ],
+          "locator": "PDF页2图1及式4；页3粒子；页4图3",
+          "context": {
+            "page": 2,
+            "start": 54,
+            "end": 2354,
+            "sha256": "b215ea4298542deab59b9780d5f75989e7c929c198638b41ffba5117fc97fcb4"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此可先沿动态图看清条件独立性，再逐步追踪一个粒子如何采样、更新地标和被重采样，把树的共享分支与概率分解分别理解。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2,
+            4
+          ],
+          "locator": "PDF页4，图3共享子树",
+          "context": {
+            "page": 4,
+            "start": 3814,
+            "end": 6099,
+            "sha256": "e043a9c6823838e86ddd6ed631e07d45e2415f93ba31c586d676d6d657316c2a"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此复核实验时应分别检查实物地图误差与仿真规模变化，观察粒子数和感知范围如何影响结果，别把小粒子集的示例推广到所有环境。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5,
+            6
+          ],
+          "locator": "PDF页5实验；页6图5—6",
+          "context": {
+            "page": 5,
+            "start": 3371,
+            "end": 4818,
+            "sha256": "7cedd7581c4e3ad0428489f619645379a5beb3a5241918618261d3f564840048"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此复核实验时应分别检查实物地图误差与仿真规模变化，观察粒子数和感知范围如何影响结果，别把小粒子集的示例推广到所有环境。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5,
+            6
+          ],
+          "locator": "PDF页6，图5—6",
+          "context": {
+            "page": 6,
+            "start": 8,
+            "end": 2308,
+            "sha256": "f08b94cc13a8c8df57d49c72978cfd0d6feea87ae89b5e46e142b383e0d2cf67"
+          }
+        }
+      ]
+    },
+    {
+      "paperId": "classic:slam:isam2",
+      "primaryDomain": "SLAM",
+      "title": "iSAM2: Incremental smoothing and mapping using the Bayes tree",
+      "status": "ready",
+      "learningOrder": 2,
+      "overview": "本文把稀疏矩阵分解解释为图模型中的变量消元，再用有向贝叶斯树组织消元所得条件密度，使新增观测对应到局部树编辑。算法结合增量变量排序、按需重线性化和局部状态回代，减少重复计算并替代原先周期性的批处理步骤。实验比较运行时间与最小二乘目标拟合质量，表现随数据结构而变；据此可把它作为持续增长的非线性估计后端来读，不能把局部更新等同于固定最坏耗时。",
+      "guide": {
+        "problem": "机器人在线获得新测量时，需要及时更新此前全部约束所支持的轨迹和地图，而从头求解完整问题会重复处理未受影响的区域。原有增量方法虽然复用矩阵分解，却仍靠周期性全局重排和重线性化维持稀疏性与精度，造成额外计算和批处理频率选择。",
+        "method": "因子图消元生成弦贝叶斯网，再把团及其给定分隔变量的条件密度组成贝叶斯树。加入因素时移除受影响团到树根的路径，重新排序和消元，再接回未改变的子树。估计偏离线性化点超过阈值才重线性化；回代则在增量变化足够小时停止向下传播，未访问变量保留前次增量。",
+        "contribution": "贝叶斯树把概率推断、稀疏分解和可编辑数据结构联系起来，使重排与重线性化都能随新增约束增量进行。排序策略把最近访问的变量放到消元序列末端，使后续测量通常只改动树的较小部分；这兼顾当前填充和未来更新成本。",
+        "applicability": "论文以位姿图和含地标的二维、三维实测或模拟数据检验算法，因子形式也允许加入校准参数等多变量约束。工程上，已有前端能提供初始化和可信约束时，可用它组织持续扩张的估计问题，并按更新频率调节精度与计算量。",
+        "limitations": "求解依赖足够好的初始化，大回环可能影响广泛区域；局部更新策略没有给出所有场景下固定时间的保证。文中精度基准是迭代收敛的最小二乘解和约束拟合指标，不是外部测量的物理轨迹真值；不同数据集上也并非总是最快。",
+        "readingAdvice": "据此先对照因子图、平方根信息矩阵和贝叶斯树的小例子，再手工模拟加入回环后的拆树与接回过程。据此再分清重线性化阈值与回代变化阈值，最后按各数据集核对时间峰值和拟合误差，避免把节省平均计算误读为消除了回环开销。"
+      },
+      "fullText": {
+        "url": "https://www.cs.cmu.edu/~kaess/pub/Kaess12ijrr.pdf",
+        "format": "pdf",
+        "sha256": "52c917e56d338afbb388462053850ff735ddadf48831c59ec8c5418448e5c790",
+        "pageCount": 19,
+        "checkedAt": "2026-10-02T04:26:32.976262+00:00",
+        "edition": "作者站点 Kaess12ijrr.pdf，PDF首页明示 Draft manuscript, April 6, 2011. Submitted to IJRR.；这是对应目录2012 IJRR论文的2011投稿草稿，非最终期刊排版版；附录A为多媒体索引。",
+        "sourceFile": "SLAM/isam2.pdf",
+        "textFile": "SLAM/isam2.pages.json",
+        "textSha256": "74b69cbf3e8a2ceb0446b0fb9255ecf503ca6ec321d4f1485d52f2ba65efbd55"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "reviewedAt": "2026-10-02T04:39:56.935842+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "本文把稀疏矩阵分解解释为图模型中的变量消元，再用有向贝叶斯树组织消元所得条件密度，使新增观测对应到局部树编辑。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF页6，§3.2—3.3，条件密度及增量推断",
+          "context": {
+            "page": 6,
+            "start": 1532,
+            "end": 3832,
+            "sha256": "141e8a7004fd681333ae42897ee0481f03e9fe4318629689181f4b353a5040bb"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "算法结合增量变量排序、按需重线性化和局部状态回代，减少重复计算并替代原先周期性的批处理步骤。",
+          "classification": "paperFact",
+          "sourcePages": [
+            9,
+            10
+          ],
+          "locator": "PDF页9，§4；页10，局部回代",
+          "context": {
+            "page": 9,
+            "start": 2220,
+            "end": 4520,
+            "sha256": "6ac1022fa1d7c7866990b7164234e226456086f2dc52d66bd731541f23458fd3"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "算法结合增量变量排序、按需重线性化和局部状态回代，减少重复计算并替代原先周期性的批处理步骤。",
+          "classification": "paperFact",
+          "sourcePages": [
+            9,
+            10
+          ],
+          "locator": "PDF页10，§4.2，算法7",
+          "context": {
+            "page": 10,
+            "start": 2134,
+            "end": 3600,
+            "sha256": "edca83970d99bf65f3c4e13bafac0145309a197d417879562da004ac3e2cf0e7"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "实验比较运行时间与最小二乘目标拟合质量，表现随数据结构而变；据此可把它作为持续增长的非线性估计后端来读，不能把局部更新等同于固定最坏耗时。",
+          "classification": "readerInference",
+          "sourcePages": [
+            11,
+            13,
+            15
+          ],
+          "locator": "PDF页13—15，计时；页11，复杂度；页15—16，质量指标",
+          "context": {
+            "page": 13,
+            "start": 1927,
+            "end": 2489,
+            "sha256": "94eba68b103b48e1ad024d0d3b204cf644bc96b65a3fc7875a087de36cea3b57"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "实验比较运行时间与最小二乘目标拟合质量，表现随数据结构而变；据此可把它作为持续增长的非线性估计后端来读，不能把局部更新等同于固定最坏耗时。",
+          "classification": "readerInference",
+          "sourcePages": [
+            11,
+            13,
+            15
+          ],
+          "locator": "PDF页11，§4.3，回环成本上界",
+          "context": {
+            "page": 11,
+            "start": 2836,
+            "end": 3686,
+            "sha256": "ac5d6b85b67f677491a92402a5c1fbcf570f4c794df6813ddfab08ba61ae53e5"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "实验比较运行时间与最小二乘目标拟合质量，表现随数据结构而变；据此可把它作为持续增长的非线性估计后端来读，不能把局部更新等同于固定最坏耗时。",
+          "classification": "readerInference",
+          "sourcePages": [
+            11,
+            13,
+            15
+          ],
+          "locator": "PDF页15，§5.3，约束拟合指标",
+          "context": {
+            "page": 15,
+            "start": 3144,
+            "end": 3639,
+            "sha256": "48e0754be3c90cd3bfb3179d6adc7eadbe3590e45d8c19718e0937c82321b603"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "机器人在线获得新测量时，需要及时更新此前全部约束所支持的轨迹和地图，而从头求解完整问题会重复处理未受影响的区域。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            4
+          ],
+          "locator": "PDF页2，§2在线增量定义；页4批处理成本",
+          "context": {
+            "page": 2,
+            "start": 3943,
+            "end": 5619,
+            "sha256": "14ac392871500a5eb2d312155e1592508c09223d60cda79a957d754e4cc684ee"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "机器人在线获得新测量时，需要及时更新此前全部约束所支持的轨迹和地图，而从头求解完整问题会重复处理未受影响的区域。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            4
+          ],
+          "locator": "PDF页4，§2，批处理重复计算",
+          "context": {
+            "page": 4,
+            "start": 3109,
+            "end": 4993,
+            "sha256": "1e40d899c98a143c68fdfcb03b15b98321910cdba31cdc182a4dcfbeb604a1c3"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "原有增量方法虽然复用矩阵分解，却仍靠周期性全局重排和重线性化维持稀疏性与精度，造成额外计算和批处理频率选择。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF页4，原iSAM重排/重线性化局限",
+          "context": {
+            "page": 4,
+            "start": 3742,
+            "end": 4993,
+            "sha256": "6b93b5f6c20c406f350330956492ff8b165cae88ea5ca589d858fbd92d2fac8d"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "因子图消元生成弦贝叶斯网，再把团及其给定分隔变量的条件密度组成贝叶斯树。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF页6，§3.2，式13与算法3",
+          "context": {
+            "page": 6,
+            "start": 1972,
+            "end": 4272,
+            "sha256": "906ba4a35e8d4ee68ac26bdc630d2655585f3015cb0569947623091fcfd42eac"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "加入因素时移除受影响团到树根的路径，重新排序和消元，再接回未改变的子树。",
+          "classification": "paperFact",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF页8，算法4及图6",
+          "context": {
+            "page": 8,
+            "start": 754,
+            "end": 3054,
+            "sha256": "3950b190c3dd99157e5d3e2d9a0562b0e16db08d3ee1175e4bb0d5b825ceee82"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "估计偏离线性化点超过阈值才重线性化；回代则在增量变化足够小时停止向下传播，未访问变量保留前次增量。",
+          "classification": "paperFact",
+          "sourcePages": [
+            9,
+            10
+          ],
+          "locator": "PDF页9，§4.1算法5；页10，§4.2算法7",
+          "context": {
+            "page": 9,
+            "start": 5013,
+            "end": 5950,
+            "sha256": "df62a2e350242f338ab96fa46748a504e1589f468cb20f31c4278ec629599486"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "估计偏离线性化点超过阈值才重线性化；回代则在增量变化足够小时停止向下传播，未访问变量保留前次增量。",
+          "classification": "paperFact",
+          "sourcePages": [
+            9,
+            10
+          ],
+          "locator": "PDF页10，§4.2，变化阈值及保留旧增量",
+          "context": {
+            "page": 10,
+            "start": 2237,
+            "end": 3600,
+            "sha256": "08b0c0c8c8ab6bc98ca1db3e49b01cae2cc7ba27e089fac4871f90acf3e35402"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "贝叶斯树把概率推断、稀疏分解和可编辑数据结构联系起来，使重排与重线性化都能随新增约束增量进行。",
+          "classification": "paperFact",
+          "sourcePages": [
+            17
+          ],
+          "locator": "PDF页17，§7",
+          "context": {
+            "page": 17,
+            "start": 3750,
+            "end": 6000,
+            "sha256": "41f81baa989174aab0c9f827c5744a104734b49e9b28e75bd93810353e84a6e4"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "排序策略把最近访问的变量放到消元序列末端，使后续测量通常只改动树的较小部分；这兼顾当前填充和未来更新成本。",
+          "classification": "paperFact",
+          "sourcePages": [
+            9
+          ],
+          "locator": "PDF页9，§3.4，CCOLAMD增量排序",
+          "context": {
+            "page": 9,
+            "start": 360,
+            "end": 2660,
+            "sha256": "9cdb1a375f70965d164287e0a9ec74f70a67b97c50f02b2b154298ea578795a5"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "论文以位姿图和含地标的二维、三维实测或模拟数据检验算法，因子形式也允许加入校准参数等多变量约束。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            12
+          ],
+          "locator": "PDF页2，§2因子形式；页12—15数据集",
+          "context": {
+            "page": 2,
+            "start": 5238,
+            "end": 5619,
+            "sha256": "b6f9a98b3fe7f6f15e5589331652dc23530aa22eaef592295402d92f35a815d3"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "论文以位姿图和含地标的二维、三维实测或模拟数据检验算法，因子形式也允许加入校准参数等多变量约束。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            12
+          ],
+          "locator": "PDF页12，§5，数据集类型",
+          "context": {
+            "page": 12,
+            "start": 924,
+            "end": 1885,
+            "sha256": "c1b91b25df327f110017de26e226de63775f2ab0258d93916b9ecc095738a8e9"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "工程上，已有前端能提供初始化和可信约束时，可用它组织持续扩张的估计问题，并按更新频率调节精度与计算量。",
+          "classification": "readerInference",
+          "sourcePages": [
+            12
+          ],
+          "locator": "PDF页12算法8；页9—11阈值与初始化",
+          "context": {
+            "page": 12,
+            "start": 281,
+            "end": 1885,
+            "sha256": "e4a251be32305b7c5f5eab1fd132098b4cb12a73f4d1c5713c36175667ff5b2f"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "求解依赖足够好的初始化，大回环可能影响广泛区域；局部更新策略没有给出所有场景下固定时间的保证。",
+          "classification": "paperFact",
+          "sourcePages": [
+            11,
+            17
+          ],
+          "locator": "PDF页11，§4.3初始化和复杂度；页17回环边界",
+          "context": {
+            "page": 11,
+            "start": 1757,
+            "end": 3686,
+            "sha256": "3948c5af3bf6aabae6855f60a81cc6c3730b3865a6ea276a484e097aa36132a6"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "求解依赖足够好的初始化，大回环可能影响广泛区域；局部更新策略没有给出所有场景下固定时间的保证。",
+          "classification": "paperFact",
+          "sourcePages": [
+            11,
+            17
+          ],
+          "locator": "PDF页17，§6，回环可同批处理昂贵",
+          "context": {
+            "page": 17,
+            "start": 1813,
+            "end": 4113,
+            "sha256": "166975c5ec2cefeeb20135c65d8b83deb8e6d0402b1692757ebacdb0eb77c11b"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "文中精度基准是迭代收敛的最小二乘解和约束拟合指标，不是外部测量的物理轨迹真值；不同数据集上也并非总是最快。",
+          "classification": "paperFact",
+          "sourcePages": [
+            14,
+            16
+          ],
+          "locator": "PDF页16，§5.3基准定义；页14表1",
+          "context": {
+            "page": 16,
+            "start": 970,
+            "end": 3270,
+            "sha256": "05fdc9807d3e55754f6c75d0e79b2ffefbf27f5312e55802fcae1c623ea72c38"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "文中精度基准是迭代收敛的最小二乘解和约束拟合指标，不是外部测量的物理轨迹真值；不同数据集上也并非总是最快。",
+          "classification": "paperFact",
+          "sourcePages": [
+            14,
+            16
+          ],
+          "locator": "PDF页14，表1逐数据集运行时间",
+          "context": {
+            "page": 14,
+            "start": 1720,
+            "end": 3119,
+            "sha256": "4aea065ff5538f66a3df37456cf9f41b087322aaacc7a582fd707d89c7475a53"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此先对照因子图、平方根信息矩阵和贝叶斯树的小例子，再手工模拟加入回环后的拆树与接回过程。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4,
+            8
+          ],
+          "locator": "PDF页4图3；页8图6和算法4",
+          "context": {
+            "page": 4,
+            "start": 346,
+            "end": 2646,
+            "sha256": "b02b5ac835a49314b58bd956839ee21f1bbfd1f48850c0057bb8b133e26b1841"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此先对照因子图、平方根信息矩阵和贝叶斯树的小例子，再手工模拟加入回环后的拆树与接回过程。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4,
+            8
+          ],
+          "locator": "PDF页8图6",
+          "context": {
+            "page": 8,
+            "start": 146,
+            "end": 2446,
+            "sha256": "19490c7549c60cb43c1d998309c141a50ead9e9fab8ef0b457e9609d809c2fad"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此再分清重线性化阈值与回代变化阈值，最后按各数据集核对时间峰值和拟合误差，避免把节省平均计算误读为消除了回环开销。",
+          "classification": "readerInference",
+          "sourcePages": [
+            10,
+            14
+          ],
+          "locator": "PDF页10算法7；页11图9—10；页14—16实验",
+          "context": {
+            "page": 10,
+            "start": 3020,
+            "end": 3600,
+            "sha256": "ff640204ba220f53f655edbea93484045af2c54490aa231c10080be1f13b20fa"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此再分清重线性化阈值与回代变化阈值，最后按各数据集核对时间峰值和拟合误差，避免把节省平均计算误读为消除了回环开销。",
+          "classification": "readerInference",
+          "sourcePages": [
+            10,
+            14
+          ],
+          "locator": "PDF页14图14",
+          "context": {
+            "page": 14,
+            "start": 1485,
+            "end": 3119,
+            "sha256": "81f7f0e75bb6c9fba7b9749b74a7f3230ddf9ac839954db412fab47dbd4caa0b"
+          }
+        }
+      ]
+    },
+    {
+      "paperId": "classic:slam:orbslam",
+      "primaryDomain": "SLAM",
+      "title": "ORB-SLAM: A Versatile and Accurate Monocular SLAM System",
+      "status": "ready",
+      "learningOrder": 3,
+      "overview": "本文构建以同一组二值视觉特征贯穿跟踪、建图、重定位和回环检测的单目系统，把局部几何估计与地点识别连接起来。系统通过共视关系限定局部优化，并以生成树、强共视边和回环边组成的精简图纠正累积漂移；关键帧先积极插入，再剔除冗余。自动初始化在平面和非平面模型间选择，歧义或视差不足时延迟建图；据此应把它读成各模块协同的完整流程，而不是仅换一种描述子就能取得同样性能。",
+      "guide": {
+        "problem": "单目图像要同时恢复相机轨迹和稀疏环境结构，可靠的对应关系、足够视差与良好初值是束调整有效工作的前提。工程上，长期探索要兼顾计算增长、遮挡后的恢复和回到旧区域时的漂移修正，仅有相邻图像的运动估计还需补上这些系统环节。",
+        "method": "跟踪、局部建图与回环并行运行；跟踪先估计位姿，再投影局部地图寻找更多匹配，局部建图三角化新点并做束调整。词袋检索提出重定位或回环候选，回环几何验证后用相似变换处理单目尺度漂移，并在精简图上传播校正。初始化并行拟合单应和基础矩阵，再检查重建视差、正深度及重投影误差，只接受无明显歧义的解。",
+        "contribution": "贡献在于复用统一特征和共视结构，把局部精细优化、全局回环与丢失后的恢复整合成可实时运行的系统。积极生成、随后严格筛选地图点与关键帧，使困难运动时可扩张地图，反复访问已有场景时减少冗余状态。",
+        "applicability": "原文覆盖室内手持相机、校园机器人和室外车载单目序列，并分别评估定位、重定位、回环和重复访问行为。工程上，若需要可重用的稀疏地图及地点识别，可据其共视图组织局部计算；使用时仍须确保有可跟踪的视觉结构和有效初始化。",
+        "limitations": "单目尺度需与真值对齐后才比较轨迹误差；远处物体、纹理不足或初始化歧义仍会限制系统。输出是稀疏点图，密集重建另属扩展方向；校园反向穿越的回环未被发现，也说明地点识别不保证每次成功。",
+        "readingAdvice": "据此先沿系统图追踪一张图像到关键帧、地图点和回环边的转换，再核对初始化如何主动拒绝危险的几何解。据此读优化附录时区分只优化位姿的跟踪、同时优化点与相机的局部束调整，以及含尺度的图优化，再结合失败序列检查系统边界。"
+      },
+      "fullText": {
+        "url": "https://arxiv.org/pdf/1502.00956",
+        "format": "pdf",
+        "sha256": "442bcef21b04c007628c452e21b3122296e76fee727b1fc766e7d2b666ec3634",
+        "pageCount": 18,
+        "checkedAt": "2026-10-02T04:26:33.431971+00:00",
+        "edition": "arXiv:1502.00956v2，2015-09-18；TRO已接收作者稿，额外版权/接收封面为PDF页1，PDF页2对应印刷页1；含非线性优化附录；仅原始单目ORB-SLAM，不混入ORB-SLAM2/3能力。",
+        "sourceFile": "SLAM/orbslam.pdf",
+        "textFile": "SLAM/orbslam.pages.json",
+        "textSha256": "e2e8a379406717976fc2a9248bdf7433c361ae1605f600be0a47eccb3b066781"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "reviewedAt": "2026-10-02T04:39:56.935842+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "本文构建以同一组二值视觉特征贯穿跟踪、建图、重定位和回环检测的单目系统，把局部几何估计与地点识别连接起来。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF页4，§III-A及系统图1",
+          "context": {
+            "page": 4,
+            "start": 4298,
+            "end": 5587,
+            "sha256": "7343d1c29a8befc9694e319d6d13541d873c3ae86ec28013f50f883e1fd980cf"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "系统通过共视关系限定局部优化，并以生成树、强共视边和回环边组成的精简图纠正累积漂移；关键帧先积极插入，再剔除冗余。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5,
+            6
+          ],
+          "locator": "PDF页5，§III-B—D；页6精简图；页9关键帧剔除",
+          "context": {
+            "page": 5,
+            "start": 947,
+            "end": 3247,
+            "sha256": "e4f7403e8bd54ef9aaf51fb232b138e14cabeabce7010e4d890c848474f50e25"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "系统通过共视关系限定局部优化，并以生成树、强共视边和回环边组成的精简图纠正累积漂移；关键帧先积极插入，再剔除冗余。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5,
+            6
+          ],
+          "locator": "PDF页6，§III-D，精简图组成",
+          "context": {
+            "page": 6,
+            "start": 447,
+            "end": 2747,
+            "sha256": "fbec4c74b0688534226e46ab6f73a10430c157a98452df1afe4615585836ec9d"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "自动初始化在平面和非平面模型间选择，歧义或视差不足时延迟建图；据此应把它读成各模块协同的完整流程，而不是仅换一种描述子就能取得同样性能。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6,
+            7
+          ],
+          "locator": "PDF页6—7，§IV初始化；页16系统集成贡献",
+          "context": {
+            "page": 6,
+            "start": 3126,
+            "end": 5426,
+            "sha256": "a1c1c114da90025cf5d04e1d5d7292ec0b297f455d75c4e84a9c028376525e0d"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "自动初始化在平面和非平面模型间选择，歧义或视差不足时延迟建图；据此应把它读成各模块协同的完整流程，而不是仅换一种描述子就能取得同样性能。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6,
+            7
+          ],
+          "locator": "PDF页7，§IV，歧义拒绝初始化",
+          "context": {
+            "page": 7,
+            "start": 1370,
+            "end": 3670,
+            "sha256": "fbd8a486d0d3bc03cbfb0f15972f21e67b83f0eb4b89119fcb362ad005710b16"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "单目图像要同时恢复相机轨迹和稀疏环境结构，可靠的对应关系、足够视差与良好初值是束调整有效工作的前提。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF页2，§I束调整的条件",
+          "context": {
+            "page": 2,
+            "start": 1269,
+            "end": 3569,
+            "sha256": "b0e9e98a0535f699f8534aa4b435d38521f23dca533372d780f5ee8190cd88ef"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "工程上，长期探索要兼顾计算增长、遮挡后的恢复和回到旧区域时的漂移修正，仅有相邻图像的运动估计还需补上这些系统环节。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF页2，§I，PTAM局限及系统任务",
+          "context": {
+            "page": 2,
+            "start": 3701,
+            "end": 5669,
+            "sha256": "b36170a2689ad2791bf3c25eb5067bd380c2ce28e8c8f541957904476adb94b9"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "跟踪、局部建图与回环并行运行；跟踪先估计位姿，再投影局部地图寻找更多匹配，局部建图三角化新点并做束调整。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF页5，§III-B，三个线程",
+          "context": {
+            "page": 5,
+            "start": 32,
+            "end": 2332,
+            "sha256": "6d6e997499e56239c6382fee2ef6757152acfcef19cd65d1cc9c235ab1003dee"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "词袋检索提出重定位或回环候选，回环几何验证后用相似变换处理单目尺度漂移，并在精简图上传播校正。",
+          "classification": "paperFact",
+          "sourcePages": [
+            8,
+            9
+          ],
+          "locator": "PDF页8，§V-C；页9，§VII",
+          "context": {
+            "page": 8,
+            "start": 85,
+            "end": 2385,
+            "sha256": "588db6fc0e4ae1a068c3751d68226653b9c40e38cacc9d6701c09d3815a9ef0e"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "词袋检索提出重定位或回环候选，回环几何验证后用相似变换处理单目尺度漂移，并在精简图上传播校正。",
+          "classification": "paperFact",
+          "sourcePages": [
+            8,
+            9
+          ],
+          "locator": "PDF页9，§VII-B—D，相似变换及回环纠正",
+          "context": {
+            "page": 9,
+            "start": 2081,
+            "end": 4381,
+            "sha256": "d51520e1338559f0c9aa8cb7578184ec90a898d0dd3e5f8e620c63c6d75fd265"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "初始化并行拟合单应和基础矩阵，再检查重建视差、正深度及重投影误差，只接受无明显歧义的解。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6,
+            7
+          ],
+          "locator": "PDF页6，§IV；页7，运动恢复与检查",
+          "context": {
+            "page": 6,
+            "start": 3485,
+            "end": 5760,
+            "sha256": "f555e9e94712ea64b196a5fdb934d58dc101da5e28cba611b6410a07ebb234ef"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "初始化并行拟合单应和基础矩阵，再检查重建视差、正深度及重投影误差，只接受无明显歧义的解。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6,
+            7
+          ],
+          "locator": "PDF页7，§IV，模型解检查",
+          "context": {
+            "page": 7,
+            "start": 1184,
+            "end": 3484,
+            "sha256": "ce6dc0747bd742834c7c61532dd8d31f1b78fdc1339ec092f760c0ddc0d9820d"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "贡献在于复用统一特征和共视结构，把局部精细优化、全局回环与丢失后的恢复整合成可实时运行的系统。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF页2，§I贡献列表",
+          "context": {
+            "page": 2,
+            "start": 4035,
+            "end": 5669,
+            "sha256": "bf23f0f6c7d9454a2856537818f1c8af2b352aada9f8abb08100fe36ce4044f8"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "积极生成、随后严格筛选地图点与关键帧，使困难运动时可扩张地图，反复访问已有场景时减少冗余状态。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF页5，§III-C，生成和剔除策略",
+          "context": {
+            "page": 5,
+            "start": 3683,
+            "end": 5095,
+            "sha256": "96bdf996c224b5e073ee98c01e5d142215afa110ead2b500bf1bc88c46cf1824"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "原文覆盖室内手持相机、校园机器人和室外车载单目序列，并分别评估定位、重定位、回环和重复访问行为。",
+          "classification": "paperFact",
+          "sourcePages": [
+            9
+          ],
+          "locator": "PDF页9，§VIII实验设计",
+          "context": {
+            "page": 9,
+            "start": 4444,
+            "end": 5890,
+            "sha256": "1abaceab5e3a6b8c791796c6385c94bff8bc2be842a0507c94121c5436208bd3"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "工程上，若需要可重用的稀疏地图及地点识别，可据其共视图组织局部计算；使用时仍须确保有可跟踪的视觉结构和有效初始化。",
+          "classification": "readerInference",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF页8，§V-D局部地图；页11、13失败场景",
+          "context": {
+            "page": 8,
+            "start": 926,
+            "end": 3226,
+            "sha256": "1ab18d724dba60b77729b25649237147e1315b88963e37bba9d174d3fa925695"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "单目尺度需与真值对齐后才比较轨迹误差；远处物体、纹理不足或初始化歧义仍会限制系统。",
+          "classification": "paperFact",
+          "sourcePages": [
+            11,
+            13
+          ],
+          "locator": "PDF页11，§VIII-B尺度对齐及歧义；页13，高速公路失败",
+          "context": {
+            "page": 11,
+            "start": 1275,
+            "end": 3575,
+            "sha256": "ff135bbe85db8d008e6636c17dd042ff91ba697a1dadeefacc689cd445939678"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "单目尺度需与真值对齐后才比较轨迹误差；远处物体、纹理不足或初始化歧义仍会限制系统。",
+          "classification": "paperFact",
+          "sourcePages": [
+            11,
+            13
+          ],
+          "locator": "PDF页13，§VIII-E，近处可跟踪物体缺失",
+          "context": {
+            "page": 13,
+            "start": 2217,
+            "end": 4242,
+            "sha256": "b41ffca3653809086e13635ca19e58dab0b0d18263ae9f1c30ac3ec9e7ba3d31"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "输出是稀疏点图，密集重建另属扩展方向；校园反向穿越的回环未被发现，也说明地点识别不保证每次成功。",
+          "classification": "paperFact",
+          "sourcePages": [
+            11,
+            16
+          ],
+          "locator": "PDF页16，§IX-C密集重建；页11图6未检测回环",
+          "context": {
+            "page": 16,
+            "start": 3963,
+            "end": 5808,
+            "sha256": "3106157d471e96a27100c2db67239661829f6e3404b8f9759621623b5dc26a93"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "输出是稀疏点图，密集重建另属扩展方向；校园反向穿越的回环未被发现，也说明地点识别不保证每次成功。",
+          "classification": "paperFact",
+          "sourcePages": [
+            11,
+            16
+          ],
+          "locator": "PDF页11，图6，反向大回环",
+          "context": {
+            "page": 11,
+            "start": 105,
+            "end": 2405,
+            "sha256": "c4218391931edc24908eb3b5e4aa065a5c9298c119955bf9a88e227d189cd6d7"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此先沿系统图追踪一张图像到关键帧、地图点和回环边的转换，再核对初始化如何主动拒绝危险的几何解。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF页4图1；页6—7初始化",
+          "context": {
+            "page": 4,
+            "start": 3416,
+            "end": 5587,
+            "sha256": "5f71931ad769d367a35048f9a4a2b39632b7a617f739d603fb236f5dfa0ce5eb"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此读优化附录时区分只优化位姿的跟踪、同时优化点与相机的局部束调整，以及含尺度的图优化，再结合失败序列检查系统边界。",
+          "classification": "readerInference",
+          "sourcePages": [
+            16,
+            17
+          ],
+          "locator": "PDF页16—17，Non-linear Optimizations；页11、13失败序列",
+          "context": {
+            "page": 16,
+            "start": 4425,
+            "end": 5808,
+            "sha256": "709b0ec459ea4c2a8a1b894cf016131d427f23b0255b51c85ad8dbe8cafbccc7"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此读优化附录时区分只优化位姿的跟踪、同时优化点与相机的局部束调整，以及含尺度的图优化，再结合失败序列检查系统边界。",
+          "classification": "readerInference",
+          "sourcePages": [
+            16,
+            17
+          ],
+          "locator": "PDF页17，附录，相似变换图优化",
+          "context": {
+            "page": 17,
+            "start": 35,
+            "end": 2335,
+            "sha256": "de7d039df0ebefa8542f8230350e09f212242c4a2c717db7d34aca33a43abd1c"
+          }
+        }
+      ]
+    },
+    {
+      "paperId": "classic:slam:dso",
+      "primaryDomain": "SLAM",
+      "title": "Direct Sparse Odometry",
+      "status": "ready",
+      "learningOrder": 4,
+      "overview": "本文提出直接而稀疏的单目里程计，在图像上优化光度误差，联合估计相机位姿、内参与参考图像中点的逆深度。它从具有亮度梯度的区域分散选点，不要求每点都有可匹配的角点描述子，也不加入连接各点深度的几何平滑先验。光度标定纳入曝光、暗角和响应函数，滑动窗口用边缘化控制状态数量；据此其价值在于测量模型与稀疏优化的组合，实验优劣应连同标定和回环设置一起理解。",
+      "guide": {
+        "problem": "传统特征流程先建立匹配再优化几何误差，直接方法则把亮度作为测量，能利用边缘与弱纹理上的信息。但密集几何平滑会引入点间相关，使所有参数的联合优化变得昂贵；本文尝试保留直接测量而限制所用点集。",
+        "method": "参考像素经逆深度和相对相机位姿投影到目标图像，在小邻域累加稳健光度残差，并用仿射亮度参数补偿变化。窗口内以高斯牛顿法共同优化位姿、内参、逆深度和亮度参数，旧状态用舒尔补边缘化形成二次先验。前端分区挑选梯度点，沿极线取得粗深度初值，再按空间覆盖激活候选，并移除不可靠匹配和遮挡观测。",
+        "contribution": "它将直接光度模型与稀疏联合优化结合，避免只能在角点采样，同时把曝光、相机响应与暗角纳入图像形成模型。参数研究分别检查标定、选点类型、窗口与点数，表明在该测试集上增加数据量并不会一直带来相应的精度收益。",
+        "applicability": "评测使用光度标定的单目数据、飞行机器人图像流及合成室内序列，所用模型仍是单目视觉里程计。工程上，能获得准确几何和光度模型、且需要连续局部运动估计时，可比较这种方法；弱纹理中的亮度梯度是可用信息，但完全无梯度仍不提供同类约束。",
+        "limitations": "几何畸变与未建模的滚动快门会明显破坏直接残差，非凸优化还需要足够准确的前端初值。旧状态边缘化后不能像完整地图那样重新使用；对比关闭了对手的显式回环和重定位，结果不能直接代表完整系统能力。",
+        "readingAdvice": "据此先分清直接与间接、稀疏与密集这两组独立概念，再对照因子图追踪一个逆深度点影响哪些相机和亮度参数。据此随后检查首次估计雅可比和边缘化固定线性化点的作用，最后分别读取误差、失败率与噪声实验，避免把点云更密误当作定位更准。"
+      },
+      "fullText": {
+        "url": "https://arxiv.org/pdf/1607.02565",
+        "format": "pdf",
+        "sha256": "cd85260a38b0b5d0e82c85c37c3540c498a953e39a501d9af5192a35b8284223",
+        "pageCount": 17,
+        "checkedAt": "2026-10-02T04:26:33.604791+00:00",
+        "edition": "arXiv:1607.02565v2，2016-10-07，17页作者预印本；对应目录2018 TPAMI论文身份，但不是最终期刊排版版；仅转述该v2中的模型和实验。",
+        "sourceFile": "SLAM/dso.pdf",
+        "textFile": "SLAM/dso.pages.json",
+        "textSha256": "ecb77169e4b96a15c6c2df8b50ba4e109bccd7a3bcb365f766c13a3961ac90c8"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "reviewedAt": "2026-10-02T04:39:56.935842+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "本文提出直接而稀疏的单目里程计，在图像上优化光度误差，联合估计相机位姿、内参与参考图像中点的逆深度。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF页3，§2，联合模型",
+          "context": {
+            "page": 3,
+            "start": 3907,
+            "end": 4904,
+            "sha256": "2fb0cfe7d484bc91e9e0ecd5dce6a8d35998c12f12a1b7b5f5cdb709ece0ed47"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "它从具有亮度梯度的区域分散选点，不要求每点都有可匹配的角点描述子，也不加入连接各点深度的几何平滑先验。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            9
+          ],
+          "locator": "PDF页2，四种模型及§1.1；页9选点",
+          "context": {
+            "page": 2,
+            "start": 2939,
+            "end": 5186,
+            "sha256": "71a0396f4091d9cadaacf98b06a7fa8a9fcc040059354ac7aedb5df8c95e6a84"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "它从具有亮度梯度的区域分散选点，不要求每点都有可匹配的角点描述子，也不加入连接各点深度的几何平滑先验。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            9
+          ],
+          "locator": "PDF页9，§3.2，梯度区域选点",
+          "context": {
+            "page": 9,
+            "start": 2205,
+            "end": 4187,
+            "sha256": "471fb8f48e37812db72e9255cd96c98492031944ed14aea796cda6f605b7c9f0"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "光度标定纳入曝光、暗角和响应函数，滑动窗口用边缘化控制状态数量；据此其价值在于测量模型与稀疏优化的组合，实验优劣应连同标定和回环设置一起理解。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4,
+            7,
+            11
+          ],
+          "locator": "PDF页4，光度标定；页7边缘化；页11比较设置",
+          "context": {
+            "page": 4,
+            "start": 2599,
+            "end": 4061,
+            "sha256": "4b35789434480477fecc293abefc56b36f44938c12d5de07f864054042be445b"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "光度标定纳入曝光、暗角和响应函数，滑动窗口用边缘化控制状态数量；据此其价值在于测量模型与稀疏优化的组合，实验优劣应连同标定和回环设置一起理解。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4,
+            7,
+            11
+          ],
+          "locator": "PDF页7，§2.3边缘化",
+          "context": {
+            "page": 7,
+            "start": 761,
+            "end": 3061,
+            "sha256": "ed65dcce12e7d609ba0d1769bd1cd758f41a0f503e0ad34fe69a8821ee5e03c0"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "光度标定纳入曝光、暗角和响应函数，滑动窗口用边缘化控制状态数量；据此其价值在于测量模型与稀疏优化的组合，实验优劣应连同标定和回环设置一起理解。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4,
+            7,
+            11
+          ],
+          "locator": "PDF页11，评测关闭显式回环与重定位",
+          "context": {
+            "page": 11,
+            "start": 1853,
+            "end": 4153,
+            "sha256": "d9eff96a782997a8fb51f82b7e1b6ef86b295113b5d59732a16fa45487651f79"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "传统特征流程先建立匹配再优化几何误差，直接方法则把亮度作为测量，能利用边缘与弱纹理上的信息。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF页2，Direct vs Indirect及§1.1",
+          "context": {
+            "page": 2,
+            "start": 80,
+            "end": 2380,
+            "sha256": "7e7850bd8c88629eff7e0ba42af0c9addceecf580aaf12fc0b52f5d42dc51cce"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "但密集几何平滑会引入点间相关，使所有参数的联合优化变得昂贵；本文尝试保留直接测量而限制所用点集。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF页3，§1.1，图2及稀疏动机",
+          "context": {
+            "page": 3,
+            "start": 580,
+            "end": 2880,
+            "sha256": "23f6345d5912638f8cd2d08ac5c811b4d544c4cbd189810cefc28939f13359f4"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "参考像素经逆深度和相对相机位姿投影到目标图像，在小邻域累加稳健光度残差，并用仿射亮度参数补偿变化。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            5
+          ],
+          "locator": "PDF页4—5，§2.2，式4—8与图4",
+          "context": {
+            "page": 4,
+            "start": 3347,
+            "end": 4061,
+            "sha256": "73f3c5248f7c0eff127c82908fc0466114246dfe2b2296404f64d83fe1b82d3f"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "参考像素经逆深度和相对相机位姿投影到目标图像，在小邻域累加稳健光度残差，并用仿射亮度参数补偿变化。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            5
+          ],
+          "locator": "PDF页5，仿射亮度变换",
+          "context": {
+            "page": 5,
+            "start": 369,
+            "end": 2669,
+            "sha256": "d54a5c394fe35fc607c8d4f46a09f21327ef605a8070f56ae931ce34f9378947"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "窗口内以高斯牛顿法共同优化位姿、内参、逆深度和亮度参数，旧状态用舒尔补边缘化形成二次先验。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6,
+            7
+          ],
+          "locator": "PDF页6，§2.3；页7边缘化",
+          "context": {
+            "page": 6,
+            "start": 835,
+            "end": 3135,
+            "sha256": "59e2c5d657b67f9fcf5a1c0eccbe2b2ecfc8265071ed28776c9b329348e029b1"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "窗口内以高斯牛顿法共同优化位姿、内参、逆深度和亮度参数，旧状态用舒尔补边缘化形成二次先验。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6,
+            7
+          ],
+          "locator": "PDF页7，式16—19",
+          "context": {
+            "page": 7,
+            "start": 2050,
+            "end": 4350,
+            "sha256": "72f955d5648abc4a9603b96f1d533c301d590974b9053b0e4216e7bfe4208b31"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "前端分区挑选梯度点，沿极线取得粗深度初值，再按空间覆盖激活候选，并移除不可靠匹配和遮挡观测。",
+          "classification": "paperFact",
+          "sourcePages": [
+            9,
+            10
+          ],
+          "locator": "PDF页9，§3.2；页10激活及剔除",
+          "context": {
+            "page": 9,
+            "start": 2205,
+            "end": 4187,
+            "sha256": "471fb8f48e37812db72e9255cd96c98492031944ed14aea796cda6f605b7c9f0"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "前端分区挑选梯度点，沿极线取得粗深度初值，再按空间覆盖激活候选，并移除不可靠匹配和遮挡观测。",
+          "classification": "paperFact",
+          "sourcePages": [
+            9,
+            10
+          ],
+          "locator": "PDF页10，§3.2候选与观测移除",
+          "context": {
+            "page": 10,
+            "start": 573,
+            "end": 2873,
+            "sha256": "03fb2742c69589f73c52ecadf5e4ef9dfea49a6dd25f27c4b404889ca58cdefe"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "它将直接光度模型与稀疏联合优化结合，避免只能在角点采样，同时把曝光、相机响应与暗角纳入图像形成模型。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            15
+          ],
+          "locator": "PDF页15—16，§5；页4标定",
+          "context": {
+            "page": 15,
+            "start": 3780,
+            "end": 4137,
+            "sha256": "3dbbbfd2ad7133f70acf6f0f326ed28ad4a161b2d72546709d89fd66666dd045"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "它将直接光度模型与稀疏联合优化结合，避免只能在角点采样，同时把曝光、相机响应与暗角纳入图像形成模型。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            15
+          ],
+          "locator": "PDF页4，§2.1.2",
+          "context": {
+            "page": 4,
+            "start": 2705,
+            "end": 4061,
+            "sha256": "92480757e6b2f33777115601c6c3e681a03ba50d3d6fc09757af81ba84e1536a"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "参数研究分别检查标定、选点类型、窗口与点数，表明在该测试集上增加数据量并不会一直带来相应的精度收益。",
+          "classification": "paperFact",
+          "sourcePages": [
+            13
+          ],
+          "locator": "PDF页13，§4.2，图15—17",
+          "context": {
+            "page": 13,
+            "start": 1384,
+            "end": 3684,
+            "sha256": "9624b1516e2d936a7face8d41acd8f6f14fea495af1726fe8f33a13a06a7ce80"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "评测使用光度标定的单目数据、飞行机器人图像流及合成室内序列，所用模型仍是单目视觉里程计。",
+          "classification": "paperFact",
+          "sourcePages": [
+            10
+          ],
+          "locator": "PDF页10，§4，TUM-monoVO/EuRoC/ICL-NUIM",
+          "context": {
+            "page": 10,
+            "start": 1675,
+            "end": 3975,
+            "sha256": "6b94d087e6c2befc216bd99ccf5c3999b65c1dd8dc369cba80da9112e025030f"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "工程上，能获得准确几何和光度模型、且需要连续局部运动估计时，可比较这种方法；弱纹理中的亮度梯度是可用信息，但完全无梯度仍不提供同类约束。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF页2，§1.1梯度信息；页15标定与传感器讨论",
+          "context": {
+            "page": 2,
+            "start": 5058,
+            "end": 5186,
+            "sha256": "8d9f3bb77fa58c22d8d08c89814d8931d693fce3d5f0a55d0312d0a3a685d758"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "几何畸变与未建模的滚动快门会明显破坏直接残差，非凸优化还需要足够准确的前端初值。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7,
+            14
+          ],
+          "locator": "PDF页14—15，§4.3；页7初始化要求",
+          "context": {
+            "page": 14,
+            "start": 3496,
+            "end": 4392,
+            "sha256": "33a452a9712b1ed8995701b528be3cb268590e2e9636ab93def4f42a8aa9012a"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "几何畸变与未建模的滚动快门会明显破坏直接残差，非凸优化还需要足够准确的前端初值。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7,
+            14
+          ],
+          "locator": "PDF页7，§3，非凸模型初值",
+          "context": {
+            "page": 7,
+            "start": 2968,
+            "end": 4470,
+            "sha256": "c4e8808d6d993638b2be7f8ee5b5122e7a18b1c88325e7acb7b652254d4705d4"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "旧状态边缘化后不能像完整地图那样重新使用；对比关闭了对手的显式回环和重定位，结果不能直接代表完整系统能力。",
+          "classification": "paperFact",
+          "sourcePages": [
+            11,
+            12
+          ],
+          "locator": "PDF页12，§4.1，VO与完整SLAM区别；页11关闭设置",
+          "context": {
+            "page": 12,
+            "start": 2099,
+            "end": 3011,
+            "sha256": "158245889fb25e545a0017c7c3575a68946cb9fd30dfe57c7d65bf344843881e"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "旧状态边缘化后不能像完整地图那样重新使用；对比关闭了对手的显式回环和重定位，结果不能直接代表完整系统能力。",
+          "classification": "paperFact",
+          "sourcePages": [
+            11,
+            12
+          ],
+          "locator": "PDF页11，评测方法设置",
+          "context": {
+            "page": 11,
+            "start": 1853,
+            "end": 4153,
+            "sha256": "d9eff96a782997a8fb51f82b7e1b6ef86b295113b5d59732a16fa45487651f79"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此先分清直接与间接、稀疏与密集这两组独立概念，再对照因子图追踪一个逆深度点影响哪些相机和亮度参数。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2,
+            5
+          ],
+          "locator": "PDF页2，模型分类；页5图5",
+          "context": {
+            "page": 2,
+            "start": 1884,
+            "end": 4184,
+            "sha256": "1cd1065505a186d80ae5ab8d82eca13e3144269d943164246e7f074ca5f98a77"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此先分清直接与间接、稀疏与密集这两组独立概念，再对照因子图追踪一个逆深度点影响哪些相机和亮度参数。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2,
+            5
+          ],
+          "locator": "PDF页5图5",
+          "context": {
+            "page": 5,
+            "start": 2452,
+            "end": 4670,
+            "sha256": "9869e9b92e604dca240a132f76b9d8dcb9746207b023d9442fce652ad7573620"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此随后检查首次估计雅可比和边缘化固定线性化点的作用，最后分别读取误差、失败率与噪声实验，避免把点云更密误当作定位更准。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6,
+            13
+          ],
+          "locator": "PDF页6—7，§2.3；页13—15，参数和噪声研究",
+          "context": {
+            "page": 6,
+            "start": 3032,
+            "end": 4837,
+            "sha256": "6ce967c7aec77f6dacb2969c41e4e90ba2b21e8c392e758e576164b57d06eb95"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此随后检查首次估计雅可比和边缘化固定线性化点的作用，最后分别读取误差、失败率与噪声实验，避免把点云更密误当作定位更准。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6,
+            13
+          ],
+          "locator": "PDF页13，图16",
+          "context": {
+            "page": 13,
+            "start": 2496,
+            "end": 4044,
+            "sha256": "3915b291a5f077c3c55196a068012f8384cf182fe336c01ead0a9f7c4eea48bc"
+          }
+        }
+      ]
+    },
+    {
+      "paperId": "classic:slam:loam",
+      "primaryDomain": "SLAM",
+      "title": "LOAM: Lidar Odometry and Mapping in Real-time",
+      "status": "ready",
+      "learningOrder": 5,
+      "overview": "本文处理移动激光雷达一轮扫描内各点时刻不同造成的运动畸变，将快速运动估计和较慢的精细地图匹配拆为并行算法。里程计从相邻扫描的边缘和平面特征求运动并校正点云，建图再用局部点簇几何把点云配准到累积地图，融合两路变换持续输出位姿。该版不含回环，惯性测量是可选的预处理辅助；据此应把低漂移看作特定测试中的里程计表现，不能把局部地图精细程度等同于全局一致性保证。",
+      "guide": {
+        "problem": "激光点逐时接收，若雷达同时平移和旋转，把整轮扫描当成同一时刻会造成点云错位，而畸变点云又妨碍估计运动。算法希望在在线输出运动的同时得到精细地图，因此要协调配准精度与计算成本，避免每次都做昂贵的完整优化。",
+        "method": "按同一扫描线邻域的平滑度选择边缘和平面点，抑制相邻重复特征、近乎平行光束的表面点及遮挡边界。里程计以点到线和点到平面的距离建立残差，在单轮内匀速近似下按点时刻插值变换，用稳健非线性迭代估计运动并去畸变。建图用地图邻域协方差的特征值和特征向量确认线或面，再细化位姿；较慢地图变换与快速里程计变换合成为输出。",
+        "contribution": "主要贡献是不同时间尺度的两阶段分工：先及时校正运动畸变，再给地图匹配更多特征和迭代空间。对应关系搜索分别利用扫描结构和地图点簇几何，把速度与精度要求落实为不同的数据关联策略。",
+        "applicability": "论文在自制旋转雷达的室内外场景及车载激光数据上验证，基础算法依赖预标定雷达和连续、平滑的运动。工程上，具备边缘与平面结构且需要及时位姿输出的任务可参考这种分工；若运动骤变，可比较原文的惯性预处理辅助而非直接假定匀速。",
+        "limitations": "该版没有回环检测，长路径漂移仍会累积；惯性辅助仅用于点云预处理，不是把惯性偏置与轨迹紧耦合优化。局部点云匹配误差与全程运动漂移在论文中分别评估；自然场景匹配更不精确，单轮匀速假设也限制基础模型。",
+        "readingAdvice": "据此先沿框图分清每轮扫描、里程计更新和地图更新，再用点的时间戳追踪畸变校正，而不要只盯住最终点云。据此再比较扫描对应与地图对应怎样生成线面残差，最后分别检查局部地图误差、闭合路线端点差和惯性辅助对照，理解各指标回答的是哪一个问题。"
+      },
+      "fullText": {
+        "url": "https://www.roboticsproceedings.org/rss10/p07.pdf",
+        "format": "pdf",
+        "sha256": "0d66f17eadd7770e5894df92a3ca854a9a53f366f2aec6a828eb1bbcd6e28941",
+        "pageCount": 9,
+        "checkedAt": "2026-10-02T04:26:33.307538+00:00",
+        "edition": "Robotics: Science and Systems X官方2014论文p07，9页；仅该LOAM会议版，不混入2017 Low-drift and Real-time Lidar Odometry and Mapping扩展论文或后来回环系统。",
+        "sourceFile": "SLAM/loam.pdf",
+        "textFile": "SLAM/loam.pages.json",
+        "textSha256": "9468c79c1a434c8de6dcd649c05275f97d9059ec738c9a6b5d5dc8190b92e43b"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "reviewedAt": "2026-10-02T04:39:56.935842+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "本文处理移动激光雷达一轮扫描内各点时刻不同造成的运动畸变，将快速运动估计和较慢的精细地图匹配拆为并行算法。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF页1，§I及图1，运动畸变与双算法",
+          "context": {
+            "page": 1,
+            "start": 1600,
+            "end": 3900,
+            "sha256": "00c1028604ccf387acb2f964971f822d34bd4838ced010bc595b4ea76802699a"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "里程计从相邻扫描的边缘和平面特征求运动并校正点云，建图再用局部点簇几何把点云配准到累积地图，融合两路变换持续输出位姿。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3,
+            6
+          ],
+          "locator": "PDF页3，§IV-B；页6，§VI",
+          "context": {
+            "page": 3,
+            "start": 345,
+            "end": 2645,
+            "sha256": "a36cd126f235a634c6bc657dd769902fb3aef62ce376bf1ff712fd9fab166249"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "里程计从相邻扫描的边缘和平面特征求运动并校正点云，建图再用局部点簇几何把点云配准到累积地图，融合两路变换持续输出位姿。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3,
+            6
+          ],
+          "locator": "PDF页6，§VI特征几何及图9",
+          "context": {
+            "page": 6,
+            "start": 1744,
+            "end": 4044,
+            "sha256": "4d38a32aba2157197c30209ee1a57d2cfabd88a5c2c08c6237d383dd4fd03b94"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "该版不含回环，惯性测量是可选的预处理辅助；据此应把低漂移看作特定测试中的里程计表现，不能把局部地图精细程度等同于全局一致性保证。",
+          "classification": "readerInference",
+          "sourcePages": [
+            7,
+            8
+          ],
+          "locator": "PDF页8，§VIII；页7，§VII-B",
+          "context": {
+            "page": 8,
+            "start": 3737,
+            "end": 4066,
+            "sha256": "56245195412faa6ccdce1d8de6d726eb757476c2c0d51cc5068a38b7c8e6a295"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "该版不含回环，惯性测量是可选的预处理辅助；据此应把低漂移看作特定测试中的里程计表现，不能把局部地图精细程度等同于全局一致性保证。",
+          "classification": "readerInference",
+          "sourcePages": [
+            7,
+            8
+          ],
+          "locator": "PDF页7，§VII-B，IMU辅助",
+          "context": {
+            "page": 7,
+            "start": 1741,
+            "end": 3709,
+            "sha256": "f56fd3079bdef9840d38af19bb7143901f9c726ae30b7b8aa7917fab8fb324e4"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "激光点逐时接收，若雷达同时平移和旋转，把整轮扫描当成同一时刻会造成点云错位，而畸变点云又妨碍估计运动。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF页1，§I，连续扫描中的位姿需求",
+          "context": {
+            "page": 1,
+            "start": 1792,
+            "end": 4092,
+            "sha256": "662da42118b425ff876d84abeb90ff8692b586c740f37e13a7f286a690d9822c"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "算法希望在在线输出运动的同时得到精细地图，因此要协调配准精度与计算成本，避免每次都做昂贵的完整优化。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF页1，双算法计算与精度分工",
+          "context": {
+            "page": 1,
+            "start": 634,
+            "end": 2934,
+            "sha256": "9f3eddeb87b102ce1955d5758b3eaf40590634b7f7026f1ead66eeeae326039d"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "按同一扫描线邻域的平滑度选择边缘和平面点，抑制相邻重复特征、近乎平行光束的表面点及遮挡边界。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF页3，§V-A，式1及图4",
+          "context": {
+            "page": 3,
+            "start": 1580,
+            "end": 3880,
+            "sha256": "1e71d50038acf0f0c83b4d356ab365852f1809f046181fbb8ca9e4e7a53b7633"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "里程计以点到线和点到平面的距离建立残差，在单轮内匀速近似下按点时刻插值变换，用稳健非线性迭代估计运动并去畸变。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            5
+          ],
+          "locator": "PDF页4—5，§V-B—D，式2—12和算法1",
+          "context": {
+            "page": 4,
+            "start": 5093,
+            "end": 5389,
+            "sha256": "4097dd6a65dd13c44f8c34c31862c129a1a2610aefe4a2a29d83d684205d3e4d"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "里程计以点到线和点到平面的距离建立残差，在单轮内匀速近似下按点时刻插值变换，用稳健非线性迭代估计运动并去畸变。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            5
+          ],
+          "locator": "PDF页5，算法1及权重解释",
+          "context": {
+            "page": 5,
+            "start": 3995,
+            "end": 4985,
+            "sha256": "ab7e5b87538d9b5ac8761a98aa9c8efe8e31557f784dd517ad5727c074155e02"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "建图用地图邻域协方差的特征值和特征向量确认线或面，再细化位姿；较慢地图变换与快速里程计变换合成为输出。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF页6，§VI，图8—9",
+          "context": {
+            "page": 6,
+            "start": 1744,
+            "end": 4044,
+            "sha256": "4d38a32aba2157197c30209ee1a57d2cfabd88a5c2c08c6237d383dd4fd03b94"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "主要贡献是不同时间尺度的两阶段分工：先及时校正运动畸变，再给地图匹配更多特征和迭代空间。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF页1，§I，双算法配合",
+          "context": {
+            "page": 1,
+            "start": 5313,
+            "end": 5856,
+            "sha256": "f6303b81c7dd2fa1cdcc35d8eb4e975ee9cf8b9eefff1ac93eec8850545a94e5"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "对应关系搜索分别利用扫描结构和地图点簇几何，把速度与精度要求落实为不同的数据关联策略。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            8
+          ],
+          "locator": "PDF页8，§VIII；页4扫描关联和页6地图关联",
+          "context": {
+            "page": 8,
+            "start": 3521,
+            "end": 4066,
+            "sha256": "e15aabb5d593578ce91f54c927c5804f1307fd73ab3ebbb442313330332ef3a9"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "对应关系搜索分别利用扫描结构和地图点簇几何，把速度与精度要求落实为不同的数据关联策略。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            8
+          ],
+          "locator": "PDF页4，§V-B扫描线对应关系",
+          "context": {
+            "page": 4,
+            "start": 1682,
+            "end": 3982,
+            "sha256": "418ac6af4ba5cd28ce4a4f56010c0932a2eb565b4968ab7834abedf2886a4794"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "论文在自制旋转雷达的室内外场景及车载激光数据上验证，基础算法依赖预标定雷达和连续、平滑的运动。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            8
+          ],
+          "locator": "PDF页2，§III假设；页6—8实验",
+          "context": {
+            "page": 2,
+            "start": 3532,
+            "end": 5832,
+            "sha256": "6fcb58a630bc6cd0f027d5ff011c7034a41ce5b17c9076cf53232b43c2142615"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "论文在自制旋转雷达的室内外场景及车载激光数据上验证，基础算法依赖预标定雷达和连续、平滑的运动。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            8
+          ],
+          "locator": "PDF页8，KITTI测试",
+          "context": {
+            "page": 8,
+            "start": 1014,
+            "end": 3314,
+            "sha256": "6900f07e329f8f5756a51d82726c760b237ca781103a512806639e94692d52ea"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "工程上，具备边缘与平面结构且需要及时位姿输出的任务可参考这种分工；若运动骤变，可比较原文的惯性预处理辅助而非直接假定匀速。",
+          "classification": "readerInference",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF页7，§VII-B，速度变化和惯性辅助",
+          "context": {
+            "page": 7,
+            "start": 1662,
+            "end": 3709,
+            "sha256": "bc86488a53483c438c89e2a36f30be01427b79ca29494d282e7625c25a2fad21"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "该版没有回环检测，长路径漂移仍会累积；惯性辅助仅用于点云预处理，不是把惯性偏置与轨迹紧耦合优化。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7,
+            8
+          ],
+          "locator": "PDF页8，§VIII未来工作；页7惯性预处理",
+          "context": {
+            "page": 8,
+            "start": 3737,
+            "end": 4066,
+            "sha256": "56245195412faa6ccdce1d8de6d726eb757476c2c0d51cc5068a38b7c8e6a295"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "该版没有回环检测，长路径漂移仍会累积；惯性辅助仅用于点云预处理，不是把惯性偏置与轨迹紧耦合优化。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7,
+            8
+          ],
+          "locator": "PDF页7，§VII-B",
+          "context": {
+            "page": 7,
+            "start": 1741,
+            "end": 3709,
+            "sha256": "f56fd3079bdef9840d38af19bb7143901f9c726ae30b7b8aa7917fab8fb324e4"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "局部点云匹配误差与全程运动漂移在论文中分别评估；自然场景匹配更不精确，单轮匀速假设也限制基础模型。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            7
+          ],
+          "locator": "PDF页7，§VII-A局部/累计误差；页4运动假设",
+          "context": {
+            "page": 7,
+            "start": 654,
+            "end": 2954,
+            "sha256": "0a59f84ea8170897b12ad43f9bd1934a354202dc999022f33b9284f434c5c931"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "局部点云匹配误差与全程运动漂移在论文中分别评估；自然场景匹配更不精确，单轮匀速假设也限制基础模型。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            7
+          ],
+          "locator": "PDF页4，§V-C，匀速",
+          "context": {
+            "page": 4,
+            "start": 5093,
+            "end": 5389,
+            "sha256": "4097dd6a65dd13c44f8c34c31862c129a1a2610aefe4a2a29d83d684205d3e4d"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此先沿框图分清每轮扫描、里程计更新和地图更新，再用点的时间戳追踪畸变校正，而不要只盯住最终点云。",
+          "classification": "readerInference",
+          "sourcePages": [
+            3,
+            4
+          ],
+          "locator": "PDF页3图3；页4图6；页5式4",
+          "context": {
+            "page": 3,
+            "start": 112,
+            "end": 2412,
+            "sha256": "dcd6b99ddbfe7355cad202d9f259067ae1574512f4139808e3c982458db0a802"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此先沿框图分清每轮扫描、里程计更新和地图更新，再用点的时间戳追踪畸变校正，而不要只盯住最终点云。",
+          "classification": "readerInference",
+          "sourcePages": [
+            3,
+            4
+          ],
+          "locator": "PDF页4图6",
+          "context": {
+            "page": 4,
+            "start": 313,
+            "end": 2613,
+            "sha256": "d9263fdb5265f75e039293ac40971361084d7c62b3ba04b5d630b242a20c4a69"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此再比较扫描对应与地图对应怎样生成线面残差，最后分别检查局部地图误差、闭合路线端点差和惯性辅助对照，理解各指标回答的是哪一个问题。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6,
+            7
+          ],
+          "locator": "PDF页6局部精度；页7累计漂移；页8表2",
+          "context": {
+            "page": 6,
+            "start": 5000,
+            "end": 5688,
+            "sha256": "6eb0da001f5531a20aa020112473c16eaf42077e50b9f616d2664f4f72534e19"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此再比较扫描对应与地图对应怎样生成线面残差，最后分别检查局部地图误差、闭合路线端点差和惯性辅助对照，理解各指标回答的是哪一个问题。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6,
+            7
+          ],
+          "locator": "PDF页7，§VII-A，漂移评价",
+          "context": {
+            "page": 7,
+            "start": 854,
+            "end": 3154,
+            "sha256": "2916e2db6c05cd22429932173f000c43be608c3a50c180adfa3725940bebafda"
+          }
+        }
+      ]
+    },
+    {
+      "paperId": "classic:slam:liosam",
+      "primaryDomain": "SLAM",
+      "title": "LIO-SAM: Tightly-coupled Lidar Inertial Odometry via Smoothing and Mapping",
+      "status": "ready",
+      "learningOrder": 6,
+      "overview": "本文将激光惯性里程计组织成因子图，把惯性预积分、激光运动、可选卫星定位和回环约束接入统一的增量估计。惯性运动估计用于点云去畸变和配准初值，激光约束又参与惯性偏置估计；新关键帧只对有限近期子关键帧构成的局部地图匹配。实验通过去掉卫星或回环因子比较漂移变化；据此重点应是局部配准与全局约束的配合，读卫星定位误差时还须记住其评测排除了高度轴。",
+      "guide": {
+        "problem": "仅靠逐次扫描匹配会在长时间运行中积累漂移，直接维护大范围体素图也不便加入绝对位置和回环校正。雷达扫描期间的运动需要更充分的惯性辅助，而实时系统又无法把每个激光帧的全部信息都无限保留并联合处理。",
+        "method": "状态包含姿态、位置、速度及惯性偏置，惯性预积分约束与激光里程计因子共同参与优化，新节点加入后用增量平滑更新图。按运动变化选择关键帧，把近期子关键帧的边缘和平面特征合成局部体素地图，再用惯性预测初始化新帧的几何配准。卫星观测提供绝对位置因素，回环先按空间邻近寻找旧状态，再匹配历史子关键帧形成相对约束，允许纠正旧轨迹。",
+        "contribution": "贡献是把去畸变、配准初始化、惯性偏置估计与全局图优化连起来，并让额外传感器观测以因子形式加入。局部匹配和关键帧筛选控制前端工作量；实验分别移除卫星与回环约束，展示不同信息源对长期漂移的作用。",
+        "applicability": "原文在手持装置、地面机器人和船上采集数据，既覆盖结构丰富区域，也涉及卫星信号间歇和特征不足的水道环境。工程上，已有可靠雷达与惯性观测、并可获得回访或绝对位置约束的任务可参考此框架，但外部约束何时可用必须单独验证。",
+        "limitations": "回环按空间距离搜索候选，局部特征不足会使配准困难；文中仅加入卫星修正仍出现高度漂移。卫星误差对比不含高度轴，文中另以回到起点时的位置差衡量闭合误差；无人机实验在结论中仍列为未来工作。",
+        "readingAdvice": "据此先沿系统图逐一说明四种因子的来源，再追踪一次惯性预测、点云去畸变、局部匹配和偏置反馈的循环。据此读实验时分开看端点差、相对卫星轨迹的水平误差和运行时间，并核对关闭哪些因子；只凭俯视图重合，不能判断高度漂移已经消失。"
+      },
+      "fullText": {
+        "url": "https://arxiv.org/pdf/2007.00258",
+        "format": "pdf",
+        "sha256": "8ad11438fc0849de88b1604932f8bfd2732aee640aaf5fb41974b34f555c86f6",
+        "pageCount": 8,
+        "checkedAt": "2026-10-02T04:26:33.435410+00:00",
+        "edition": "arXiv:2007.00258v3，2020-07-14，8页IROS同名作者预印本；只引用v3正文。页5表I与Rotation/Walking段落的最大旋转速度互换，全部不采用；页4式12疑似变换记号问题，不转述公式。",
+        "sourceFile": "SLAM/liosam.pdf",
+        "textFile": "SLAM/liosam.pages.json",
+        "textSha256": "09fb7bde8386df49fb4b33ce73ec491ec4bec28d7dd9c76531f299f6252bc69d"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "reviewedAt": "2026-10-02T04:39:56.935842+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "本文将激光惯性里程计组织成因子图，把惯性预积分、激光运动、可选卫星定位和回环约束接入统一的增量估计。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            3
+          ],
+          "locator": "PDF页2图1；页3，§III-A，四类因子与iSAM2",
+          "context": {
+            "page": 2,
+            "start": 320,
+            "end": 2620,
+            "sha256": "4d3c742dc401aa931e25e461fafdb2497f0164f9de43f69bd6f74aa95836cf61"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "本文将激光惯性里程计组织成因子图，把惯性预积分、激光运动、可选卫星定位和回环约束接入统一的增量估计。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            3
+          ],
+          "locator": "PDF页3，§III-A",
+          "context": {
+            "page": 3,
+            "start": 27,
+            "end": 2327,
+            "sha256": "039f5f3a7f3d0ccf7ac8afb7689361552413f7f9b4b52803dd74fe300187aa5d"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "惯性运动估计用于点云去畸变和配准初值，激光约束又参与惯性偏置估计；新关键帧只对有限近期子关键帧构成的局部地图匹配。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1,
+            3
+          ],
+          "locator": "PDF页1，§I去畸变及偏置；页3，§III-C子关键帧",
+          "context": {
+            "page": 1,
+            "start": 4170,
+            "end": 5891,
+            "sha256": "5aeb2204e1e27ba9118de4ced38f707d8aea158c39d23ef374d1e84aaf6c4ab9"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "惯性运动估计用于点云去畸变和配准初值，激光约束又参与惯性偏置估计；新关键帧只对有限近期子关键帧构成的局部地图匹配。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1,
+            3
+          ],
+          "locator": "PDF页3，局部子关键帧地图",
+          "context": {
+            "page": 3,
+            "start": 3808,
+            "end": 5522,
+            "sha256": "96716ef4f4d09aa7115847037bffc6b2e893567e3553462e30f95207dd6e4aeb"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "实验通过去掉卫星或回环因子比较漂移变化；据此重点应是局部配准与全局约束的配合，读卫星定位误差时还须记住其评测排除了高度轴。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5,
+            7
+          ],
+          "locator": "PDF页5，§IV-C消融；页7，GPS误差不含z",
+          "context": {
+            "page": 5,
+            "start": 3847,
+            "end": 4380,
+            "sha256": "eaa4f2b3ca2e570242d5462b2b0c7379dbb7e25cbe32c560217acbcbc8d4b928"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "实验通过去掉卫星或回环因子比较漂移变化；据此重点应是局部配准与全局约束的配合，读卫星定位误差时还须记住其评测排除了高度轴。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5,
+            7
+          ],
+          "locator": "PDF页7，§IV-F，排除z轴",
+          "context": {
+            "page": 7,
+            "start": 474,
+            "end": 2774,
+            "sha256": "81cc59f30cf90a501f313c2952a4295263ce8a1c38ea47bc0af81b91b42d62ca"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "仅靠逐次扫描匹配会在长时间运行中积累漂移，直接维护大范围体素图也不便加入绝对位置和回环校正。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF页1，§I，LOAM式地图组织问题",
+          "context": {
+            "page": 1,
+            "start": 3562,
+            "end": 5862,
+            "sha256": "7e2091727a92580574021fbc06f77d3061e020907803db35053b3b76e59d68f8"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "雷达扫描期间的运动需要更充分的惯性辅助，而实时系统又无法把每个激光帧的全部信息都无限保留并联合处理。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1,
+            3
+          ],
+          "locator": "PDF页1，§I；页3关键帧筛选",
+          "context": {
+            "page": 1,
+            "start": 4170,
+            "end": 5891,
+            "sha256": "5aeb2204e1e27ba9118de4ced38f707d8aea158c39d23ef374d1e84aaf6c4ab9"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "雷达扫描期间的运动需要更充分的惯性辅助，而实时系统又无法把每个激光帧的全部信息都无限保留并联合处理。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1,
+            3
+          ],
+          "locator": "PDF页3，§III-C，全部帧计算成本",
+          "context": {
+            "page": 3,
+            "start": 2721,
+            "end": 5021,
+            "sha256": "6100560865070601a4962b7e10c2879caa158bb66c406fced3a3e482f4a578db"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "状态包含姿态、位置、速度及惯性偏置，惯性预积分约束与激光里程计因子共同参与优化，新节点加入后用增量平滑更新图。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            3
+          ],
+          "locator": "PDF页2，§III-A；页3，§III-A—B",
+          "context": {
+            "page": 2,
+            "start": 3710,
+            "end": 4898,
+            "sha256": "d6cb73b144f47be339104e5ad3e71105daed7493e871eba0e6c7d11617e698e1"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "状态包含姿态、位置、速度及惯性偏置，惯性预积分约束与激光里程计因子共同参与优化，新节点加入后用增量平滑更新图。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            3
+          ],
+          "locator": "PDF页3，§III-B，偏置与激光因子联合优化",
+          "context": {
+            "page": 3,
+            "start": 1945,
+            "end": 4245,
+            "sha256": "19359614fe2bfdae1913317fa6b044daeb0ebaaf4f4c146991443a6905830e12"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "按运动变化选择关键帧，把近期子关键帧的边缘和平面特征合成局部体素地图，再用惯性预测初始化新帧的几何配准。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF页3，§III-C，筛帧及局部地图",
+          "context": {
+            "page": 3,
+            "start": 2916,
+            "end": 5216,
+            "sha256": "66ef1a911fd10963e008a704e6910de501b89fec8f66287bc9568b76a43fb8f5"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "按运动变化选择关键帧，把近期子关键帧的边缘和平面特征合成局部体素地图，再用惯性预测初始化新帧的几何配准。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF页3，§III-C.2，惯性预测初始变换",
+          "context": {
+            "page": 3,
+            "start": 5420,
+            "end": 5522,
+            "sha256": "22a59c028b102b96336ed094ec42095f7aac74481eb6a68d91e93eee52a5d83f"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "卫星观测提供绝对位置因素，回环先按空间邻近寻找旧状态，再匹配历史子关键帧形成相对约束，允许纠正旧轨迹。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF页4，§III-D—E，GPS和回环",
+          "context": {
+            "page": 4,
+            "start": 1666,
+            "end": 3966,
+            "sha256": "338d338dbe73c57fecf27ff7c52cfafa843e0af6979924eae897c459f60e94f0"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "贡献是把去畸变、配准初始化、惯性偏置估计与全局图优化连起来，并让额外传感器观测以因子形式加入。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF页1，§I，紧耦合框架",
+          "context": {
+            "page": 1,
+            "start": 4428,
+            "end": 5891,
+            "sha256": "ab0a66a7b0cf5d56377f4ef9d91d7774e55f592e748e0c8ab0085d61175470ca"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "局部匹配和关键帧筛选控制前端工作量；实验分别移除卫星与回环约束，展示不同信息源对长期漂移的作用。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3,
+            5
+          ],
+          "locator": "PDF页3，§III-C；页5—6消融",
+          "context": {
+            "page": 3,
+            "start": 3268,
+            "end": 5522,
+            "sha256": "82e7444683e34c52cd2f868f54b3eeffd68693c1d7908aada20f784895d2b7a9"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "局部匹配和关键帧筛选控制前端工作量；实验分别移除卫星与回环约束，展示不同信息源对长期漂移的作用。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3,
+            5
+          ],
+          "locator": "PDF页5，§IV-C，LIO-odom/LIO-GPS/LIO-SAM",
+          "context": {
+            "page": 5,
+            "start": 3764,
+            "end": 4380,
+            "sha256": "ae1e8f8713737b1ec5d29f6c476eb4570fb657ce2f9c06553a48d6a71f2c5b45"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "原文在手持装置、地面机器人和船上采集数据，既覆盖结构丰富区域，也涉及卫星信号间歇和特征不足的水道环境。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            6
+          ],
+          "locator": "PDF页4图2；页6，Amsterdam测试",
+          "context": {
+            "page": 4,
+            "start": 2608,
+            "end": 4908,
+            "sha256": "2e94f661dfa45b6524a8bb681ea6a0edccbc6dadb0729427bd188bc6089aa943"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "原文在手持装置、地面机器人和船上采集数据，既覆盖结构丰富区域，也涉及卫星信号间歇和特征不足的水道环境。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            6
+          ],
+          "locator": "PDF页6，§IV-E，桥下退化及GPS间歇",
+          "context": {
+            "page": 6,
+            "start": 3309,
+            "end": 4558,
+            "sha256": "d495da90fa89d08efbd0212a587d85bc9377b5eedf4def7490d929cde4d8acf1"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "工程上，已有可靠雷达与惯性观测、并可获得回访或绝对位置约束的任务可参考此框架，但外部约束何时可用必须单独验证。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF页4，§III-D；页6，GPS可用区域与高度漂移",
+          "context": {
+            "page": 4,
+            "start": 1680,
+            "end": 3980,
+            "sha256": "3e15dc82b5d8ee9c8eb65d7aaeb1c82711048c8de04aef5972d9780ce40e2872"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "回环按空间距离搜索候选，局部特征不足会使配准困难；文中仅加入卫星修正仍出现高度漂移。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            6
+          ],
+          "locator": "PDF页4，§III-E；页6，桥下退化与高度漂移",
+          "context": {
+            "page": 4,
+            "start": 3312,
+            "end": 5142,
+            "sha256": "f95decd0251136df1b0a14b7dd729199bd5a9965927f4847e01c9551f96d3a33"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "回环按空间距离搜索候选，局部特征不足会使配准困难；文中仅加入卫星修正仍出现高度漂移。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            6
+          ],
+          "locator": "PDF页6，§IV-D，高度漂移",
+          "context": {
+            "page": 6,
+            "start": 2839,
+            "end": 4558,
+            "sha256": "ae9a08306f50a34722fada2904fa898bc01b5041222c11ccf9999bb88364b1c5"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "卫星误差对比不含高度轴，文中另以回到起点时的位置差衡量闭合误差；无人机实验在结论中仍列为未来工作。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5,
+            7,
+            8
+          ],
+          "locator": "PDF页7，§IV-F；页5表2；页8未来工作",
+          "context": {
+            "page": 7,
+            "start": 474,
+            "end": 2774,
+            "sha256": "81cc59f30cf90a501f313c2952a4295263ce8a1c38ea47bc0af81b91b42d62ca"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "卫星误差对比不含高度轴，文中另以回到起点时的位置差衡量闭合误差；无人机实验在结论中仍列为未来工作。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5,
+            7,
+            8
+          ],
+          "locator": "PDF页5，表2，回到起点位置差",
+          "context": {
+            "page": 5,
+            "start": 3462,
+            "end": 4380,
+            "sha256": "3472740df216069e0333813db4a72f4a53539fedacd181cc31e33a122400aabc"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "卫星误差对比不含高度轴，文中另以回到起点时的位置差衡量闭合误差；无人机实验在结论中仍列为未来工作。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5,
+            7,
+            8
+          ],
+          "locator": "PDF页8，§V，UAV测试未来工作",
+          "context": {
+            "page": 8,
+            "start": 1492,
+            "end": 3792,
+            "sha256": "87d6e2082cfdc035d2b61d197d700b2385e4e140bb66df735fbe680b015bbd0a"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此先沿系统图逐一说明四种因子的来源，再追踪一次惯性预测、点云去畸变、局部匹配和偏置反馈的循环。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF页2图1；页1，§I；页3，§III-B—C",
+          "context": {
+            "page": 2,
+            "start": 207,
+            "end": 2507,
+            "sha256": "c53d48daf2017a47128b6f28132722bc6d09fa81f776de9a9728dec8e762c948"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此读实验时分开看端点差、相对卫星轨迹的水平误差和运行时间，并核对关闭哪些因子；只凭俯视图重合，不能判断高度漂移已经消失。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6,
+            7
+          ],
+          "locator": "PDF页6，§IV-D；页7，§IV-F；页5表2",
+          "context": {
+            "page": 6,
+            "start": 2696,
+            "end": 4558,
+            "sha256": "b9ba7b9c69831916248af9629c30ba8b9901b646ebc4504b47acb48d1085f2c8"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此读实验时分开看端点差、相对卫星轨迹的水平误差和运行时间，并核对关闭哪些因子；只凭俯视图重合，不能判断高度漂移已经消失。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6,
+            7
+          ],
+          "locator": "PDF页7，§IV-F",
+          "context": {
+            "page": 7,
+            "start": 474,
+            "end": 2774,
+            "sha256": "81cc59f30cf90a501f313c2952a4295263ce8a1c38ea47bc0af81b91b42d62ca"
+          }
+        }
+      ]
+    }
+  ]
+}

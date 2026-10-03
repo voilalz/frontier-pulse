@@ -1,6 +1,6 @@
 # Cloudflare 静态托管 + GitHub Actions 上线清单
 
-当前公开地址使用 `workers.dev`。Pages、Workers Static Assets 或自定义 Worker 都可能提供静态文件，不能只凭域名后缀判断部署类型；应在 Cloudflare Dashboard 的 Deployments/Settings 中核对构建来源、关联 Commit 和输出目录。仓库的 `_headers` 已在线上实测生效，但每次切换部署路线后仍必须重新验收。
+当前正式域名为 `https://newsfrontier.top/`。Pages、Workers Static Assets 或自定义 Worker 都可能提供静态文件，不能只凭域名后缀判断部署类型；应在 Cloudflare Dashboard 的 Deployments/Settings 中核对构建来源、关联 Commit 和输出目录。仓库的 `_headers` 已在线上实测生效，但每次切换部署路线后仍必须重新验收。
 
 ## 方案 A：Cloudflare Git Integration（推荐）
 
@@ -35,12 +35,12 @@
 进入仓库 `Actions → Daily news update → Run workflow`。成功标准：
 
 - 工作流绿色通过；
-- `public/data/news.json` 包含 `timezone: Asia/Tokyo`；
+- `public/data/news.json` 包含 `timezone: Asia/Shanghai`；
 - `items` 恰好为 10 条；
 - Cloudflare Deployment 对应最新提交。
 - `public/feed.xml` 存在且可被 Atom 阅读器解析。
 
-之后工作流会在每天 `Asia/Tokyo 08:00` 自动运行。GitHub 的计划任务不是分钟级 SLA，高负载时可能延后。
+之后工作流会在每天 `Asia/Shanghai 07:10` 启动生成，以北京时间 08:00 发布为目标。GitHub 的计划任务不是分钟级 SLA，高负载时可能延后。
 
 ## 方案 B：Wrangler Direct Upload（可选）
 
@@ -139,7 +139,7 @@ Actions Variables：
 - RSS/GDELT 出现 `403`、`429` 或超时：其他信源仍会继续；持续失败时替换该信源。
 - DeepSeek/OpenAI 候选评分调用或结构化输出解析失败：`selectionMethod` 切换为 `rules`、`selectionStatus` 为 `fallback`；最终规则 Top 10 仍会进入独立中文翻译阶段。类别/来源集中则由程序正常校正为 `adjusted`，不会再误报为 AI 失败。
 - 页面显示“翻译不完整”：日报查看 `status.json.translationDiagnostics`，全量动态查看 `stream-status.json.translationDiagnostics`，论文查看 `status.json.researchEditorialDiagnostics`；其中记录缺失 ID、逐项原因、拆分重试次数和最终完成原因。成功条目会被缓存，稍后重跑只补缺失项。
-- 页面显示“数据过期”：`generatedAt` 已超过 36 小时；检查日报工作流、信源和 Cloudflare 最新部署。
+- 页面显示“今日待更新”：当前栏目的版本日期仍早于北京时间今天；08:00 后检查日报工作流、信源和 Cloudflare 最新部署。
 - 页面显示“最近一次自动更新失败”：打开 `public/data/status.json` 或 Actions 日志查看已公开的简短原因；上一期数据不会被覆盖。
 - 邮件未发送：先确认工作流中 `Send administrator email digest` 步骤是否显示跳过配置；再核对 SMTP 端口、SSL/STARTTLS 和授权码。
 - `git push` 被拒绝：两个数据工作流共用 `frontier-data-main` 并发锁，并会执行最多三次冲突安全的 rebase/push；若仍失败，再检查 Actions 的 `Read and write permissions` 和 `main` 分支保护规则。
@@ -159,3 +159,7 @@ python scripts/check_production.py --site-url https://你的域名/
 ```
 
 预期首页有 CSP、`X-Content-Type-Options: nosniff`；`news.json` 为 `max-age=300`，`status.json` 为 `max-age=60`，归档与搜索清单为 `max-age=300`。同一个响应不应出现两组 `max-age`。常规前端请求不追加时间戳，只有用户主动点击刷新时才绕过缓存。
+
+## A01–A05 发布与恢复
+
+整期快照、单命令恢复、外部监测器的未启用配置及后续授权操作，见 [发布与恢复说明](docs/reliable-publishing.md)。本分支不自动部署监测器。

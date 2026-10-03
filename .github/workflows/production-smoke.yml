@@ -2,8 +2,8 @@ name: Production smoke test
 
 on:
   schedule:
-    - cron: "20 8 * * *"
-      timezone: "Asia/Tokyo"
+    - cron: "50 7 * * *"
+      timezone: "Asia/Shanghai"
   workflow_dispatch:
 
 permissions:
@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      SITE_URL: ${{ vars.SITE_URL || 'https://frontier-pulse.jiumi674.workers.dev/' }}
+      SITE_URL: ${{ vars.SITE_URL || 'https://newsfrontier.top/' }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6

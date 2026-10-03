@@ -1,0 +1,2942 @@
+{
+  "schemaVersion": 1,
+  "primaryDomain": "AI",
+  "guides": [
+    {
+      "paperId": "classic:ai:word2vec",
+      "primaryDomain": "AI",
+      "title": "Efficient Estimation of Word Representations in Vector Space",
+      "status": "ready",
+      "learningOrder": 1,
+      "overview": "这篇论文把词表示学习的重点从完整语言模型转向可扩展的向量训练。作者移除昂贵的非线性隐藏层，提出连续词袋与跳字模型，分别由上下文预测中心词、由中心词预测周围词，并用词向量的关系运算检验语义和句法规律。实验比较模型结构、语料规模、向量维度与训练轮次。工程上，可据计算预算选择表示训练方案。工程上，类比测试只覆盖单词并严格匹配答案，不能等同于通用语言理解。据此，它适合先理解表示与训练目标，再衔接注意力模型。",
+      "guide": {
+        "problem": "把词视作互不相关的编号，无法直接表达词之间的相似关系。完整神经语言模型虽能学习分布式表示，非线性隐藏层却带来昂贵计算。论文要解决的是如何在大语料和大词表上高效学习词向量，并保留能通过向量关系运算检测的语义与句法规律。",
+        "method": "连续词袋模型（CBOW）将窗口内词向量平均后预测中心词，忽略窗口内部顺序；跳字模型（Skip-gram）从中心词预测前后邻词，并降低远处词的采样权重。两者采用共享投影和霍夫曼树层次归一化输出。据此，实现时应先画清预测方向，避免把两种训练样本混用。",
+        "contribution": "论文把向量的线性关系转化为明确的类比评测：对词向量做加减，再按余弦距离寻找答案。同语料、同维度比较中，跳字模型在语义类比上更好，连续词袋在句法任务上更好。扩展实验还展示数据量与维度需要共同增加，单独扩大一方会收益递减。",
+        "applicability": "据此，可将这些词向量用作大规模文本系统的表示起点，并根据关注的关系类型选择训练结构。论文的句子补全实验中，跳字分数与循环语言模型分数的组合优于各自单用；据此，组合结果是互补表示的证据，不能证明词向量可替代所有语言建模。",
+        "limitations": "类比测试仅包含单词实体，排除了多词名称；正确率要求答案精确匹配，同义词也计为错误，模型未输入词形信息。工程上，评价应另查实际任务和词表覆盖。分布式训练的核数是共享机房中的估计，工程上不能把文中耗时当成任意硬件的可复现保证。",
+        "readingAdvice": "据此，建议先对照结构图与复杂度分析，理解为何移除隐藏层能够换取更大训练规模；再分开读语义、句法结果以及训练轮次比较。据此，最后阅读修订版的后续工作说明，区分本文主实验与后来发布的代码和实体向量，避免把后续技术倒写成本篇的方法。"
+      },
+      "fullText": {
+        "url": "https://arxiv.org/pdf/1301.3781v3",
+        "sha256": "a44d7e22d2005752271c9cc1929c6462d4c8270916b063977992a883e3a54362",
+        "pageCount": 12,
+        "checkedAt": "2026-10-02T04:26:16.839399+00:00",
+        "sourceFile": "AI/word2vec.pdf",
+        "textFile": "AI/word2vec.pages.json",
+        "textSha256": "159a50c08a8eb438a37c68cf7f61871dcb1eed7bbf91c4fab8b54189157eb032",
+        "format": "pdf",
+        "edition": "作者 arXiv:1301.3781v3（2013-09-07），12 页，含第 7 节后续工作；同一 ICLR 2013 目录身份的修订作者版，不把后续 NIPS 2013 方法并入主实验。"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "reviewedAt": "2026-10-02T04:45:00.468513+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "这篇论文把词表示学习的重点从完整语言模型转向可扩展的向量训练。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §1.2, focus on vector-learning stage",
+          "context": {
+            "page": 2,
+            "start": 1920,
+            "end": 2343,
+            "sha256": "e54871d3dbcbb1b6330472e05191bd14d63cbdb8ccd8cc5117b731bb460a1373"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "作者移除昂贵的非线性隐藏层，提出连续词袋与跳字模型，分别由上下文预测中心词、由中心词预测周围词，并用词向量的关系运算检验语义和句法规律。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §3–3.2, architectures and prediction direction",
+          "context": {
+            "page": 4,
+            "start": 726,
+            "end": 3687,
+            "sha256": "8738b5fedbe063405ded62b345d5fa580f7c564e11559c37f4f03919d2d4e3ce"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "作者移除昂贵的非线性隐藏层，提出连续词袋与跳字模型，分别由上下文预测中心词、由中心词预测周围词，并用词向量的关系运算检验语义和句法规律。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §4, vector-offset evaluation",
+          "context": {
+            "page": 5,
+            "start": 665,
+            "end": 2150,
+            "sha256": "0ac6244a221e545b46a9331947ac02ad42bcdc53191e2903049a67884aa2d219"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "实验比较模型结构、语料规模、向量维度与训练轮次。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), Tables 2–3, corpus/dimension/architecture comparisons",
+          "context": {
+            "page": 7,
+            "start": 0,
+            "end": 871,
+            "sha256": "d8b1953e1fc6890f1336bcfd90cc91db200a4c4d58071ef7534a4f4bb459d401"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "实验比较模型结构、语料规模、向量维度与训练轮次。",
+          "classification": "paperFact",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8 (one-based file index), Table 5, epoch comparisons",
+          "context": {
+            "page": 8,
+            "start": 682,
+            "end": 1767,
+            "sha256": "e9475c60f554810a5af37aca6bd09df1250f9d5bfabe8349dc7dc2a54a18e092"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "工程上，可据计算预算选择表示训练方案。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §4.2, time-constrained optimization",
+          "context": {
+            "page": 6,
+            "start": 2532,
+            "end": 3314,
+            "sha256": "da10e05fb58b64f046eb7bdce60287dffa94c3f45457283f37e02a5e2cb06c4d"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "工程上，类比测试只覆盖单词并严格匹配答案，不能等同于通用语言理解。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §4.1, evaluation restrictions",
+          "context": {
+            "page": 6,
+            "start": 1457,
+            "end": 2058,
+            "sha256": "248fabc8a8c3e874272f250ce3f7004388cdcde495f253bb53d60c648907da12"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "据此，它适合先理解表示与训练目标，再衔接注意力模型。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §3, reader-selected method-chain order",
+          "context": {
+            "page": 4,
+            "start": 726,
+            "end": 3687,
+            "sha256": "8738b5fedbe063405ded62b345d5fa580f7c564e11559c37f4f03919d2d4e3ce"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "把词视作互不相关的编号，无法直接表达词之间的相似关系。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1, atomic word indices",
+          "context": {
+            "page": 1,
+            "start": 983,
+            "end": 1155,
+            "sha256": "f3d567450d0886886616c7a470cbbb7e29a528bc3fb5b0c2e0704735449c602a"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "完整神经语言模型虽能学习分布式表示，非线性隐藏层却带来昂贵计算。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §2.1, computational bottleneck",
+          "context": {
+            "page": 3,
+            "start": 911,
+            "end": 1941,
+            "sha256": "4a33dace0d5c825c0d33c9d36fbb808727881c2fae23ca2921970cf200f7cf9e"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "论文要解决的是如何在大语料和大词表上高效学习词向量，并保留能通过向量关系运算检测的语义与句法规律。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1.1, scale objectives",
+          "context": {
+            "page": 1,
+            "start": 2480,
+            "end": 2680,
+            "sha256": "8a78742c1f6f40deee247345aaa466c647da20b7f60c0f820aa9fa43a3fdb8d7"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "论文要解决的是如何在大语料和大词表上高效学习词向量，并保留能通过向量关系运算检测的语义与句法规律。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §1.1 continuation, linear regularities",
+          "context": {
+            "page": 2,
+            "start": 1016,
+            "end": 1485,
+            "sha256": "820351f360e5fb5a502a1a768514538cc88e75e8ae1cb9658ef47de0105a3536"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "连续词袋模型（CBOW）将窗口内词向量平均后预测中心词，忽略窗口内部顺序；跳字模型（Skip-gram）从中心词预测前后邻词，并降低远处词的采样权重。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §3.1–3.2, averaging/order/directions/distance sampling",
+          "context": {
+            "page": 4,
+            "start": 1827,
+            "end": 3687,
+            "sha256": "b1a615a75e22b3ad5c53586bc5962d1c7e3e6fcbd632d31d020b53859800629f"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "两者采用共享投影和霍夫曼树层次归一化输出。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §2.1, hierarchical softmax",
+          "context": {
+            "page": 3,
+            "start": 1942,
+            "end": 2046,
+            "sha256": "1b899e0620b4db3a23873c755b272ec89265848363fd0d3a3be16ef215144fa1"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "两者采用共享投影和霍夫曼树层次归一化输出。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §3.1–3.2, shared projection",
+          "context": {
+            "page": 4,
+            "start": 1827,
+            "end": 3276,
+            "sha256": "075ddbc91de30f5d691d32e4c6a328ea2ec169ec2692631f38f13cb7a2848edc"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "据此，实现时应先画清预测方向，避免把两种训练样本混用。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), Figure 1, prediction-direction comparison",
+          "context": {
+            "page": 5,
+            "start": 248,
+            "end": 421,
+            "sha256": "b5a5fad0c242e6f65204df975c24bd9869366c43d50dee5421c8d53b81692bd5"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "论文把向量的线性关系转化为明确的类比评测：对词向量做加减，再按余弦距离寻找答案。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §4, vector algebra/cosine search",
+          "context": {
+            "page": 5,
+            "start": 1535,
+            "end": 2150,
+            "sha256": "eca66b91039d5c9b90c06bb6e55fd81351febb9bd1e32e1ba874fd501fdd6103"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "同语料、同维度比较中，跳字模型在语义类比上更好，连续词袋在句法任务上更好。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), Table 3, matched training data and 640-dimensional vectors",
+          "context": {
+            "page": 7,
+            "start": 422,
+            "end": 871,
+            "sha256": "25e900b44d806a542347c3567eae5237b028bc16a4676f284ca4e54c6b99b88b"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "扩展实验还展示数据量与维度需要共同增加，单独扩大一方会收益递减。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §4.2, joint scaling and diminishing improvements",
+          "context": {
+            "page": 6,
+            "start": 3093,
+            "end": 3314,
+            "sha256": "28b1ab65a2281e34ea30e359bb3873802050a85f6f96c6ed5702a8136348340c"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "据此，可将这些词向量用作大规模文本系统的表示起点，并根据关注的关系类型选择训练结构。",
+          "classification": "readerInference",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), §4.3, relative relation-task performance",
+          "context": {
+            "page": 7,
+            "start": 2304,
+            "end": 2923,
+            "sha256": "c690e43d89bb8edd21d14a394a96b9856ceb7807eff3b3b0aee210fbcda67cbe"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "论文的句子补全实验中，跳字分数与循环语言模型分数的组合优于各自单用；据此，组合结果是互补表示的证据，不能证明词向量可替代所有语言建模。",
+          "classification": "readerInference",
+          "sourcePages": [
+            9
+          ],
+          "locator": "PDF p.9 (one-based file index), Table 7, combination exceeds component scores",
+          "context": {
+            "page": 9,
+            "start": 401,
+            "end": 651,
+            "sha256": "808ee2b3d6c103b9fdf21f9eec51380c3212fce888336d6af7401aa8746fd840"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "论文的句子补全实验中，跳字分数与循环语言模型分数的组合优于各自单用；据此，组合结果是互补表示的证据，不能证明词向量可替代所有语言建模。",
+          "classification": "readerInference",
+          "sourcePages": [
+            9
+          ],
+          "locator": "PDF p.9 (one-based file index), §4.5, complementary scores",
+          "context": {
+            "page": 9,
+            "start": 2120,
+            "end": 2506,
+            "sha256": "af860cd7a0c30430c2a61a2e0f8c69fef01d97f5c029f0b626faf8af1198b982"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "类比测试仅包含单词实体，排除了多词名称；正确率要求答案精确匹配，同义词也计为错误，模型未输入词形信息。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §4.1, single-token/exact-match/no morphology restrictions",
+          "context": {
+            "page": 6,
+            "start": 1457,
+            "end": 2058,
+            "sha256": "248fabc8a8c3e874272f250ce3f7004388cdcde495f253bb53d60c648907da12"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "工程上，评价应另查实际任务和词表覆盖。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §4.1, reader advice from metric scope",
+          "context": {
+            "page": 6,
+            "start": 1576,
+            "end": 2058,
+            "sha256": "6e2727041d9fe7301e6902cc0fb8839d9b80e72018ac75e5bdf1f1a426f2fa6a"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "分布式训练的核数是共享机房中的估计，工程上不能把文中耗时当成任意硬件的可复现保证。",
+          "classification": "readerInference",
+          "sourcePages": [
+            9
+          ],
+          "locator": "PDF p.9 (one-based file index), §4.4 continuation, fluctuating shared machines",
+          "context": {
+            "page": 9,
+            "start": 652,
+            "end": 996,
+            "sha256": "15f9b99a2bbb4cab3845cdcc708f963046320965585f376335077e53877cd001"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，建议先对照结构图与复杂度分析，理解为何移除隐藏层能够换取更大训练规模；再分开读语义、句法结果以及训练轮次比较。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §3, complexity and structure",
+          "context": {
+            "page": 4,
+            "start": 726,
+            "end": 3687,
+            "sha256": "8738b5fedbe063405ded62b345d5fa580f7c564e11559c37f4f03919d2d4e3ce"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，建议先对照结构图与复杂度分析，理解为何移除隐藏层能够换取更大训练规模；再分开读语义、句法结果以及训练轮次比较。",
+          "classification": "readerInference",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8 (one-based file index), Table 5 and epoch discussion",
+          "context": {
+            "page": 8,
+            "start": 682,
+            "end": 1767,
+            "sha256": "e9475c60f554810a5af37aca6bd09df1250f9d5bfabe8349dc7dc2a54a18e092"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，最后阅读修订版的后续工作说明，区分本文主实验与后来发布的代码和实体向量，避免把后续技术倒写成本篇的方法。",
+          "classification": "readerInference",
+          "sourcePages": [
+            11
+          ],
+          "locator": "PDF p.11 (one-based file index), §7, chronology of code and entity vectors",
+          "context": {
+            "page": 11,
+            "start": 0,
+            "end": 594,
+            "sha256": "44e25a9dd81955a5f18b4c8d6690e7af1136aa8e8c249a15be9b41565a612be6"
+          }
+        }
+      ]
+    },
+    {
+      "paperId": "classic:ai:adam",
+      "primaryDomain": "AI",
+      "title": "Adam: A Method for Stochastic Optimization",
+      "status": "ready",
+      "learningOrder": 2,
+      "overview": "这篇论文研究高维随机目标的一阶优化，把梯度均值与平方梯度的指数移动平均结合起来，为每个参数形成自适应更新尺度。它特别解释零初始化造成的早期偏差，并用校正后的矩估计构造更新规则。实验涵盖稀疏文本特征、全连接网络、卷积网络与变分自编码器，据此，可比较噪声、稀疏性和校正项的作用。理论部分采用在线凸优化设定，作者明确说明它不适用于非凸实验。据此，应把算法机制、实验观察与理论条件分别理解。",
+      "guide": {
+        "problem": "大数据训练常使用小批量梯度，随机抽样与随机正则化都会使目标带噪声。高维参数又使高阶方法难以采用。论文关注如何以较少状态量，利用一阶梯度为不同参数调整步长，同时应对稀疏梯度和随训练变化的目标，而非要求完整批量求解。",
+        "method": "算法分别维护梯度及逐元素平方梯度的指数移动平均，对零初始化的偏差进行校正，再以校正均值除以校正平方矩的平方根与稳定项之和来更新参数。这里平方矩不是中心化方差。工程上，复现应逐项核对时间指数、逐元素运算和稳定项的位置。",
+        "contribution": "论文将移动平均的方向信息与参数尺度调整放在同一更新中，并推导初始化校正的来源。变分自编码器实验比较有无校正，显示缓慢衰减平方矩时缺少校正会带来早期不稳定。文中还从无穷范数构造扩展算法，说明自适应尺度并不只有平方矩一种形式。",
+        "applicability": "作者用逻辑回归检验稀疏词袋特征，再在含随机丢弃的网络与卷积网络中比较优化器。据此，工程上可把它作为带噪或稀疏梯度训练的候选起点，但仍需搜索全局步长。文中比较使用相同参数初始化，并报告网格搜索所得最佳配置；据此，默认值并非免调参保证。",
+        "limitations": "作者明确指出凸优化分析不适用于非凸网络；理论条件还包括有界梯度、受限参数距离及衰减的步长和动量系数。卷积实验中相对带动量随机梯度法的改善较小。工程上，训练损失下降与测试泛化应分别检查，也不能把论文中的经验稳定性当成任意目标的收敛证明。",
+        "readingAdvice": "据此，先手算初始几步，核对矩估计为何偏向零，再读偏差校正推导；随后对照稀疏特征实验和校正消融，区分尺度适应与初始化修正的效果。最后回读凸分析的假设和附录，确认理论采用的衰减配置；不要将默认算法的非凸表现直接代入该分析。"
+      },
+      "fullText": {
+        "url": "https://arxiv.org/pdf/1412.6980v9",
+        "sha256": "eab9c73ae2ceda884b94830bda99312254bac4806f6c9f045cbab90721ecda31",
+        "pageCount": 15,
+        "checkedAt": "2026-10-02T04:26:17.232518+00:00",
+        "sourceFile": "AI/adam.pdf",
+        "textFile": "AI/adam.pages.json",
+        "textSha256": "eaaae96fcc6555e47073df4cdbfa75738236919c516a399fd00d310c6f349bf9",
+        "format": "pdf",
+        "edition": "作者 arXiv:1412.6980v9（2017-01-30），15 页；页眉标注 Published as a conference paper at ICLR 2015，保留目录 ICLR 2015 身份；含收敛论证附录，非未经修订的 2015 原始字节。"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "reviewedAt": "2026-10-02T04:45:00.470445+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "这篇论文研究高维随机目标的一阶优化，把梯度均值与平方梯度的指数移动平均结合起来，为每个参数形成自适应更新尺度。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1, high-dimensional stochastic objectives",
+          "context": {
+            "page": 1,
+            "start": 2751,
+            "end": 3000,
+            "sha256": "a453412d8c2f13bfac9ec65e3bf2347be8b0829a5a72c0b4c06ce69d3589a1aa"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "这篇论文研究高维随机目标的一阶优化，把梯度均值与平方梯度的指数移动平均结合起来，为每个参数形成自适应更新尺度。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §2, individual adaptive moments",
+          "context": {
+            "page": 2,
+            "start": 2351,
+            "end": 3092,
+            "sha256": "3a77f2acf00d92a091209243f10de564cd0c51649a205634ae254aec0da04c3e"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "它特别解释零初始化造成的早期偏差，并用校正后的矩估计构造更新规则。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §2, zero-initialization bias correction",
+          "context": {
+            "page": 2,
+            "start": 2351,
+            "end": 3092,
+            "sha256": "3a77f2acf00d92a091209243f10de564cd0c51649a205634ae254aec0da04c3e"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "实验涵盖稀疏文本特征、全连接网络、卷积网络与变分自编码器，据此，可比较噪声、稀疏性和校正项的作用。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §6, experimental models and controlled comparisons",
+          "context": {
+            "page": 5,
+            "start": 2283,
+            "end": 2874,
+            "sha256": "b7b640f07865d7c077a0b29962693769517f2b07dac7eba1c09c5d4ecb83f779"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "实验涵盖稀疏文本特征、全连接网络、卷积网络与变分自编码器，据此，可比较噪声、稀疏性和校正项的作用。",
+          "classification": "readerInference",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8 (one-based file index), §6.4, VAE bias-correction experiment",
+          "context": {
+            "page": 8,
+            "start": 481,
+            "end": 1876,
+            "sha256": "eb5af4b5355a88da5cf9c368fd2aa4046b0a65c80e3e21c82b466159de3847ea"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "理论部分采用在线凸优化设定，作者明确说明它不适用于非凸实验。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §4, online convex framework",
+          "context": {
+            "page": 4,
+            "start": 45,
+            "end": 232,
+            "sha256": "913bbb01dd1f909129a1388d2f8566fbab4fca876553d1f8b6a283ee6fd838dc"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "理论部分采用在线凸优化设定，作者明确说明它不适用于非凸实验。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §6.2, explicit limitation of convergence analysis",
+          "context": {
+            "page": 6,
+            "start": 1011,
+            "end": 1166,
+            "sha256": "ec467dff0f36f12f9c28d6df8448e0e75e27ddf64cc5f6a01457415dc21cdc73"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "据此，应把算法机制、实验观察与理论条件分别理解。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §4 theorem assumptions and decay settings",
+          "context": {
+            "page": 4,
+            "start": 1387,
+            "end": 1663,
+            "sha256": "5de8f08b834c3f6291019918ce2654864120e1592d549927883c27004fc243ed"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "大数据训练常使用小批量梯度，随机抽样与随机正则化都会使目标带噪声。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1, subsampling/dropout noise",
+          "context": {
+            "page": 1,
+            "start": 1929,
+            "end": 2750,
+            "sha256": "a33ba9c0f8b6d4b489160738bfc9967d7939b551d24ce7b49f0981b364e96463"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "高维参数又使高阶方法难以采用。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1, high dimension and higher-order methods",
+          "context": {
+            "page": 1,
+            "start": 2751,
+            "end": 3000,
+            "sha256": "a453412d8c2f13bfac9ec65e3bf2347be8b0829a5a72c0b4c06ce69d3589a1aa"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "论文关注如何以较少状态量，利用一阶梯度为不同参数调整步长，同时应对稀疏梯度和随训练变化的目标，而非要求完整批量求解。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1, adaptive per-parameter scales, sparse/nonstationary settings",
+          "context": {
+            "page": 1,
+            "start": 3001,
+            "end": 4005,
+            "sha256": "65ae051d059024fdaf0f826f160830a6147b6c11c9acb21ce0639ef85271b366"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "算法分别维护梯度及逐元素平方梯度的指数移动平均，对零初始化的偏差进行校正，再以校正均值除以校正平方矩的平方根与稳定项之和来更新参数。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), Algorithm 1, moment/correction/denominator operations",
+          "context": {
+            "page": 2,
+            "start": 45,
+            "end": 1203,
+            "sha256": "690609ceb214db5639ca4efeca36caca25eb5f936156d588ca4893fad1ca0428"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "这里平方矩不是中心化方差。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §2, second raw moment rather than centered variance",
+          "context": {
+            "page": 2,
+            "start": 2553,
+            "end": 2693,
+            "sha256": "aa45b913534980b108540a53e95ea353dfe8240847b721f8f19e874c52c53db8"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "工程上，复现应逐项核对时间指数、逐元素运算和稳定项的位置。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), Algorithm 1, replication checklist from exact operations",
+          "context": {
+            "page": 2,
+            "start": 45,
+            "end": 1203,
+            "sha256": "690609ceb214db5639ca4efeca36caca25eb5f936156d588ca4893fad1ca0428"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "论文将移动平均的方向信息与参数尺度调整放在同一更新中，并推导初始化校正的来源。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §3, derivation of correction",
+          "context": {
+            "page": 3,
+            "start": 1976,
+            "end": 3685,
+            "sha256": "2d7ffb088ce9916d28aa4c12ccd1e5424033c470d4b57248cc83361e1c5d75db"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "变分自编码器实验比较有无校正，显示缓慢衰减平方矩时缺少校正会带来早期不稳定。",
+          "classification": "paperFact",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8 (one-based file index), §6.4 and Figure 4, slow-decay ablation instability",
+          "context": {
+            "page": 8,
+            "start": 481,
+            "end": 1876,
+            "sha256": "eb5af4b5355a88da5cf9c368fd2aa4046b0a65c80e3e21c82b466159de3847ea"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "文中还从无穷范数构造扩展算法，说明自适应尺度并不只有平方矩一种形式。",
+          "classification": "paperFact",
+          "sourcePages": [
+            9
+          ],
+          "locator": "PDF p.9 (one-based file index), §7.1/Algorithm 2, infinity-norm extension",
+          "context": {
+            "page": 9,
+            "start": 45,
+            "end": 1604,
+            "sha256": "e5aeb3a660aa52152ed139c213932f0239870775137bed6f9675c553c0485a9f"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "作者用逻辑回归检验稀疏词袋特征，再在含随机丢弃的网络与卷积网络中比较优化器。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §6.1, IMDB bag-of-words",
+          "context": {
+            "page": 5,
+            "start": 3950,
+            "end": 4244,
+            "sha256": "c64b3884611351adecccffc9eba56c12d302092ed656686cefb1a584c3192db4"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "作者用逻辑回归检验稀疏词袋特征，再在含随机丢弃的网络与卷积网络中比较优化器。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §6.2, networks with stochastic dropout",
+          "context": {
+            "page": 6,
+            "start": 964,
+            "end": 2763,
+            "sha256": "43b3f9019a9a632b7c781fe4351ea91e9ac41212700748981fab574214d5dbff"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "作者用逻辑回归检验稀疏词袋特征，再在含随机丢弃的网络与卷积网络中比较优化器。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), §6.3, convolutional-network comparison",
+          "context": {
+            "page": 7,
+            "start": 871,
+            "end": 1449,
+            "sha256": "f636430abc09996e70e0d4e880b6c4534ff501a0f5f19e2f1251d65bf6038c8a"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "据此，工程上可把它作为带噪或稀疏梯度训练的候选起点，但仍需搜索全局步长。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §6, actual hyperparameter search",
+          "context": {
+            "page": 5,
+            "start": 2626,
+            "end": 2874,
+            "sha256": "9f074b82abd66c1a5585e7c91d7efa04d3e0144222cbec3eb3626a0df2d592e9"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "文中比较使用相同参数初始化，并报告网格搜索所得最佳配置；据此，默认值并非免调参保证。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §6, search and matching initialization",
+          "context": {
+            "page": 5,
+            "start": 2626,
+            "end": 2874,
+            "sha256": "9f074b82abd66c1a5585e7c91d7efa04d3e0144222cbec3eb3626a0df2d592e9"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "作者明确指出凸优化分析不适用于非凸网络；理论条件还包括有界梯度、受限参数距离及衰减的步长和动量系数。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §4, bounded gradients/parameter distances and decays",
+          "context": {
+            "page": 4,
+            "start": 1387,
+            "end": 1663,
+            "sha256": "5de8f08b834c3f6291019918ce2654864120e1592d549927883c27004fc243ed"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "作者明确指出凸优化分析不适用于非凸网络；理论条件还包括有界梯度、受限参数距离及衰减的步长和动量系数。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §6.2, explicit nonconvex exclusion",
+          "context": {
+            "page": 6,
+            "start": 1011,
+            "end": 1166,
+            "sha256": "ec467dff0f36f12f9c28d6df8448e0e75e27ddf64cc5f6a01457415dc21cdc73"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "卷积实验中相对带动量随机梯度法的改善较小。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), §6.3, marginal improvement relative to momentum SGD",
+          "context": {
+            "page": 7,
+            "start": 1939,
+            "end": 2096,
+            "sha256": "84e5a2c16fc9841473150be618933b598376d159afe476c20c60be660acfa9eb"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "工程上，训练损失下降与测试泛化应分别检查，也不能把论文中的经验稳定性当成任意目标的收敛证明。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §6.2, empirical/theoretical distinction",
+          "context": {
+            "page": 6,
+            "start": 1095,
+            "end": 1245,
+            "sha256": "c6e7fcd31d85fd0a8be2900f46714e523a9eaea36edb03c772b17bc8f0335193"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先手算初始几步，核对矩估计为何偏向零，再读偏差校正推导；随后对照稀疏特征实验和校正消融，区分尺度适应与初始化修正的效果。最后回读凸分析的假设和附录，确认理论采用的衰减配置；不要将默认算法的非凸表现直接代入该分析。",
+          "classification": "readerInference",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §3, derivation",
+          "context": {
+            "page": 3,
+            "start": 1976,
+            "end": 3685,
+            "sha256": "2d7ffb088ce9916d28aa4c12ccd1e5424033c470d4b57248cc83361e1c5d75db"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先手算初始几步，核对矩估计为何偏向零，再读偏差校正推导；随后对照稀疏特征实验和校正消融，区分尺度适应与初始化修正的效果。最后回读凸分析的假设和附录，确认理论采用的衰减配置；不要将默认算法的非凸表现直接代入该分析。",
+          "classification": "readerInference",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8 (one-based file index), §6.4/Figure 4, ablation",
+          "context": {
+            "page": 8,
+            "start": 481,
+            "end": 1876,
+            "sha256": "eb5af4b5355a88da5cf9c368fd2aa4046b0a65c80e3e21c82b466159de3847ea"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先手算初始几步，核对矩估计为何偏向零，再读偏差校正推导；随后对照稀疏特征实验和校正消融，区分尺度适应与初始化修正的效果。最后回读凸分析的假设和附录，确认理论采用的衰减配置；不要将默认算法的非凸表现直接代入该分析。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §4, assumptions to retain when reading Appendix §10.1",
+          "context": {
+            "page": 4,
+            "start": 1387,
+            "end": 1663,
+            "sha256": "5de8f08b834c3f6291019918ce2654864120e1592d549927883c27004fc243ed"
+          }
+        }
+      ]
+    },
+    {
+      "paperId": "classic:ai:vae",
+      "primaryDomain": "AI",
+      "title": "Auto-Encoding Variational Bayes",
+      "status": "ready",
+      "learningOrder": 3,
+      "overview": "这篇论文针对连续潜变量模型中难以计算的后验与边缘似然，提出可用随机梯度优化的变分下界估计。它把潜变量采样改写为独立噪声经过可微变换，让生成模型和识别模型共同学习；神经网络实例由此成为变分自编码器。高斯实例将目标分成期望重构对数似然与后验近似相对先验的散度项，并展示图像生成与潜空间可视化。实验评估下界和低维边缘似然，附录另推导参数的全变分处理。据此，阅读时应分清通用估计器、网络实例和实际验证范围。",
+      "guide": {
+        "problem": "复杂解码器使边缘似然积分与真实后验难以计算，逐样本执行采样推断又难以扩展到大数据。论文同时希望学习生成参数、从观测推断潜变量，并近似处理观测的边缘分布。关键障碍是后验近似依赖待学习参数，普通采样梯度估计的方差很大。",
+        "method": "引入识别分布近似后验，联合优化生成与识别参数的似然下界。重参数化将潜变量写成独立噪声的可微函数，使梯度穿过采样步骤。高斯实例由编码器输出均值和标准差，生成潜变量后送入概率解码器；能解析计算的散度单独求解，其余期望用采样估计。",
+        "contribution": "贡献既是可微的随机下界估计器，也是用共享识别模型替代逐样本昂贵推断的学习方式。图像实验中，相比唤醒睡眠算法，下界优化更快且达到更高值。工程上，这支持联合学习的计算路线，不应把更高下界自动解释成任意数据上更准确的真实后验。",
+        "applicability": "论文展示数字与人脸图像的生成和低维潜空间可视化；解码分布根据观测类型选择伯努利或高斯。据此，可将它作为需要概率编码、生成和表示学习的模型基础。作者也提出去噪、补全等用途，但本文实验重点不是这些任务；工程上，迁移时需要额外验证。",
+        "limitations": "本文方法要求连续潜变量及适当的可微重参数化；示例中的对角高斯后验是简化选择，并非通用算法强制限制。边缘似然估计在较高潜空间维度上变得不可靠；对全局参数进行变分推断虽在附录推导，却未实验。据此，下界、估计似然和扩展设想需分别阅读。",
+        "readingAdvice": "据此，先从联合分布与识别分布画出两个方向，再推导下界的重构项与散度项；用高斯重参数化核对梯度路径。接着看附录中散度的解析解、解码分布和似然估计步骤，最后比较下界曲线与潜空间图，区分优化指标、评估近似和直观展示各自支持的结论。"
+      },
+      "fullText": {
+        "url": "https://arxiv.org/pdf/1312.6114v10",
+        "sha256": "524a45520e6ad1f32c951f459e5a21c2698c29193b3b9b4826aa5655bd88d1de",
+        "pageCount": 14,
+        "checkedAt": "2026-10-02T04:26:17.628454+00:00",
+        "sourceFile": "AI/vae.pdf",
+        "textFile": "AI/vae.pages.json",
+        "textSha256": "b3e656479f4372d65d53b33c904fc181699c02b155a397af2415679849c87a5a",
+        "format": "pdf",
+        "edition": "作者 arXiv:1312.6114v10（2014-05-01），14 页，含附录 A–F；对应目录 ICLR 2014 论文的作者版，未采用 2022 v11 的排印修订。"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "reviewedAt": "2026-10-02T04:45:00.472136+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "这篇论文针对连续潜变量模型中难以计算的后验与边缘似然，提出可用随机梯度优化的变分下界估计。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1, intractable posterior/likelihood and SGVB",
+          "context": {
+            "page": 1,
+            "start": 1185,
+            "end": 2080,
+            "sha256": "999bd2d0b4c350d4d04f9b4e2632f2431d979f6936d99a23b85095fcf332ace2"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "它把潜变量采样改写为独立噪声经过可微变换，让生成模型和识别模型共同学习；神经网络实例由此成为变分自编码器。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §2, joint recognition/generative parameters",
+          "context": {
+            "page": 3,
+            "start": 0,
+            "end": 476,
+            "sha256": "4b4f1d997b658ca7b46d03db17c9e9d81c0d7a674830e1858a11310d6f5bd632"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "它把潜变量采样改写为独立噪声经过可微变换，让生成模型和识别模型共同学习；神经网络实例由此成为变分自编码器。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §2.4, independent-noise differentiable map",
+          "context": {
+            "page": 4,
+            "start": 2670,
+            "end": 3362,
+            "sha256": "24f1117087c2a1239c655131d44a41a585eb832d2655a525f2db5fa746c6e966"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "它把潜变量采样改写为独立噪声经过可微变换，让生成模型和识别模型共同学习；神经网络实例由此成为变分自编码器。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1, neural-network instance",
+          "context": {
+            "page": 1,
+            "start": 2767,
+            "end": 2866,
+            "sha256": "5bf8d95ea93e63ff89652bc361516bbc4ebf5645b15930523a0cc8347d917733"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "高斯实例将目标分成期望重构对数似然与后验近似相对先验的散度项，并展示图像生成与潜空间可视化。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §3/Eq.10, analytic KL plus reconstruction expectation",
+          "context": {
+            "page": 5,
+            "start": 3224,
+            "end": 3818,
+            "sha256": "560fdb19b3259b13623dc0c268889a4f1a513850f9e45baa013309d637d8a5ae"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "高斯实例将目标分成期望重构对数似然与后验近似相对先验的散度项，并展示图像生成与潜空间可视化。",
+          "classification": "paperFact",
+          "sourcePages": [
+            10
+          ],
+          "locator": "PDF p.10 (one-based file index), Appendix A/Figures 4–5, generated manifolds and samples",
+          "context": {
+            "page": 10,
+            "start": 59,
+            "end": 693,
+            "sha256": "a18d187de0fb4b92eb042040dc448c615a8344c898a6d36ce0462b4a084cd827"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "实验评估下界和低维边缘似然，附录另推导参数的全变分处理。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), §5, lower-bound and low-dimensional marginal-likelihood evaluation",
+          "context": {
+            "page": 7,
+            "start": 2495,
+            "end": 3906,
+            "sha256": "3d6fe4056b61c84cda8afad944b73594ed1bcaa4f99e15f8c0a407b1138f8971"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "实验评估下界和低维边缘似然，附录另推导参数的全变分处理。",
+          "classification": "paperFact",
+          "sourcePages": [
+            12
+          ],
+          "locator": "PDF p.12 (one-based file index), Appendix F, full variational parameter treatment",
+          "context": {
+            "page": 12,
+            "start": 1427,
+            "end": 1674,
+            "sha256": "e2a3d175b5e864b3bd5f04a574b33cafae7ccb8b229f4ce1b84267db4f6c809f"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "据此，阅读时应分清通用估计器、网络实例和实际验证范围。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §2, theoretical extension untested",
+          "context": {
+            "page": 2,
+            "start": 316,
+            "end": 532,
+            "sha256": "4e96a4a563fb1b8b12a07f724abca77753597112e10c359a423e52310ae1fdb9"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "复杂解码器使边缘似然积分与真实后验难以计算，逐样本执行采样推断又难以扩展到大数据。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §2.1, nonlinear likelihood and per-datapoint sampling cost",
+          "context": {
+            "page": 2,
+            "start": 1687,
+            "end": 2568,
+            "sha256": "4fdc24ac212b780237716b8578f4403f652a57894fce11fdbe589997ffc97b87"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "论文同时希望学习生成参数、从观测推断潜变量，并近似处理观测的边缘分布。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §2.1, three inference/learning goals",
+          "context": {
+            "page": 2,
+            "start": 2569,
+            "end": 3361,
+            "sha256": "874bda0f33f6a795fb0716a78191e6ef6deecb95256a4d96bb23c7d5cf4c876d"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "关键障碍是后验近似依赖待学习参数，普通采样梯度估计的方差很大。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §2.2, parameter-dependent posterior and high-variance estimator",
+          "context": {
+            "page": 3,
+            "start": 1742,
+            "end": 2263,
+            "sha256": "b662f503ac7e45e76f4fa0a9f7f377eaded252283c7dbed51d8812d589120c90"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "引入识别分布近似后验，联合优化生成与识别参数的似然下界。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §2, recognition approximation",
+          "context": {
+            "page": 3,
+            "start": 0,
+            "end": 476,
+            "sha256": "4b4f1d997b658ca7b46d03db17c9e9d81c0d7a674830e1858a11310d6f5bd632"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "引入识别分布近似后验，联合优化生成与识别参数的似然下界。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §2.2, ELBO and joint optimization",
+          "context": {
+            "page": 3,
+            "start": 1029,
+            "end": 1879,
+            "sha256": "e88e0ff7179994b5ec0f0e5fb79c44cd3a8b9e6fae6757ae1a2716a7892a5ad5"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "重参数化将潜变量写成独立噪声的可微函数，使梯度穿过采样步骤。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §2.4, pathwise differentiability",
+          "context": {
+            "page": 4,
+            "start": 2670,
+            "end": 3362,
+            "sha256": "24f1117087c2a1239c655131d44a41a585eb832d2655a525f2db5fa746c6e966"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "高斯实例由编码器输出均值和标准差，生成潜变量后送入概率解码器；能解析计算的散度单独求解，其余期望用采样估计。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §3/Eq.10, encoder moments, sampling and analytic divergence",
+          "context": {
+            "page": 5,
+            "start": 2833,
+            "end": 3818,
+            "sha256": "a1ec033e6350bf609c7cda2429cad3877ebae3791f043478c6365405f56adbb9"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "贡献既是可微的随机下界估计器，也是用共享识别模型替代逐样本昂贵推断的学习方式。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1, shared recognition model and SGVB instead of iterative inference",
+          "context": {
+            "page": 1,
+            "start": 2081,
+            "end": 2604,
+            "sha256": "6375df56956e59c0f6c67904b27e0e3cf05b9d71f0df0a3a2cb05996354e36ff"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "图像实验中，相比唤醒睡眠算法，下界优化更快且达到更高值。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), Figure 2, faster and better lower-bound optimization versus wake-sleep",
+          "context": {
+            "page": 7,
+            "start": 642,
+            "end": 892,
+            "sha256": "e0551e8406e311c8b33ee68134cd7b8d769436edb6f62598f46e743884b592cc"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "工程上，这支持联合学习的计算路线，不应把更高下界自动解释成任意数据上更准确的真实后验。",
+          "classification": "readerInference",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §2.2/Eq.1, approximate-posterior KL gap",
+          "context": {
+            "page": 3,
+            "start": 1235,
+            "end": 1561,
+            "sha256": "e83982a9557f47e57beb69c540427f4bfc4dd00f7dd77fa7dfa3321abcb705ee"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "论文展示数字与人脸图像的生成和低维潜空间可视化；解码分布根据观测类型选择伯努利或高斯。",
+          "classification": "paperFact",
+          "sourcePages": [
+            10
+          ],
+          "locator": "PDF p.10 (one-based file index), Appendix A/Figures 4–5, image samples and latent manifolds",
+          "context": {
+            "page": 10,
+            "start": 59,
+            "end": 693,
+            "sha256": "a18d187de0fb4b92eb042040dc448c615a8344c898a6d36ce0462b4a084cd827"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "论文展示数字与人脸图像的生成和低维潜空间可视化；解码分布根据观测类型选择伯努利或高斯。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §3, type-dependent observation distribution",
+          "context": {
+            "page": 5,
+            "start": 2005,
+            "end": 2275,
+            "sha256": "69e1dd893dec1992a8551e78ba0c1f94cc7a6c8a866c786a296338e4acd72dae"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "据此，可将它作为需要概率编码、生成和表示学习的模型基础。",
+          "classification": "readerInference",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §2, probabilistic encoder/decoder interpretation",
+          "context": {
+            "page": 3,
+            "start": 477,
+            "end": 1028,
+            "sha256": "60c8b8a0b3198bad9335a567d5d3a553fce62df9014b943baefb66f465b2240e"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "作者也提出去噪、补全等用途，但本文实验重点不是这些任务；工程上，迁移时需要额外验证。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §2.1, suggested denoising/inpainting uses",
+          "context": {
+            "page": 2,
+            "start": 3115,
+            "end": 3361,
+            "sha256": "59d5622174ea20d18065a4ef4eae3066c984e7220ec954faa651dbe9329bf534"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "作者也提出去噪、补全等用途，但本文实验重点不是这些任务；工程上，迁移时需要额外验证。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §5, actual image-generation evaluation scope",
+          "context": {
+            "page": 6,
+            "start": 4081,
+            "end": 4286,
+            "sha256": "015051643110440f240b47dbe95dc362948ccb9d9b9f764424af1cde46c522b9"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "本文方法要求连续潜变量及适当的可微重参数化；示例中的对角高斯后验是简化选择，并非通用算法强制限制。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §2.4, continuous variables and differentiable transform",
+          "context": {
+            "page": 4,
+            "start": 2670,
+            "end": 3362,
+            "sha256": "24f1117087c2a1239c655131d44a41a585eb832d2655a525f2db5fa746c6e966"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "本文方法要求连续潜变量及适当的可微重参数化；示例中的对角高斯后验是简化选择，并非通用算法强制限制。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §3, diagonal Gaussian as illustrative choice",
+          "context": {
+            "page": 5,
+            "start": 2479,
+            "end": 2786,
+            "sha256": "0e2c2bd7422196ae5b3e3f9f106d6b95abde896fbc340666bc2b3133cdd46950"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "本文方法要求连续潜变量及适当的可微重参数化；示例中的对角高斯后验是简化选择，并非通用算法强制限制。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §3 footnote 2, not a general method restriction",
+          "context": {
+            "page": 5,
+            "start": 3820,
+            "end": 3902,
+            "sha256": "21c215d64737a009fa07578fbdadbc3099cb0c4fe544c17151af0283417a7923"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "边缘似然估计在较高潜空间维度上变得不可靠；对全局参数进行变分推断虽在附录推导，却未实验。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), §5, unreliable higher-dimensional likelihood estimates",
+          "context": {
+            "page": 7,
+            "start": 3158,
+            "end": 3596,
+            "sha256": "cee9206c5e1521ed2be1c253a5f48bc00ff70c89581f4588f9bf320fac03e455"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "边缘似然估计在较高潜空间维度上变得不可靠；对全局参数进行变分推断虽在附录推导，却未实验。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §2, full-parameter variational extension not experimentally tested",
+          "context": {
+            "page": 2,
+            "start": 316,
+            "end": 532,
+            "sha256": "4e96a4a563fb1b8b12a07f724abca77753597112e10c359a423e52310ae1fdb9"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "据此，下界、估计似然和扩展设想需分别阅读。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §2, reader distinction of tested and theoretical scope",
+          "context": {
+            "page": 2,
+            "start": 316,
+            "end": 532,
+            "sha256": "4e96a4a563fb1b8b12a07f724abca77753597112e10c359a423e52310ae1fdb9"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先从联合分布与识别分布画出两个方向，再推导下界的重构项与散度项；用高斯重参数化核对梯度路径。接着看附录中散度的解析解、解码分布和似然估计步骤，最后比较下界曲线与潜空间图，区分优化指标、评估近似和直观展示各自支持的结论。",
+          "classification": "readerInference",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §2.2, bound decomposition",
+          "context": {
+            "page": 3,
+            "start": 1029,
+            "end": 1879,
+            "sha256": "e88e0ff7179994b5ec0f0e5fb79c44cd3a8b9e6fae6757ae1a2716a7892a5ad5"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先从联合分布与识别分布画出两个方向，再推导下界的重构项与散度项；用高斯重参数化核对梯度路径。接着看附录中散度的解析解、解码分布和似然估计步骤，最后比较下界曲线与潜空间图，区分优化指标、评估近似和直观展示各自支持的结论。",
+          "classification": "readerInference",
+          "sourcePages": [
+            11
+          ],
+          "locator": "PDF p.11 (one-based file index), Appendices B–D, analytic KL/decoder/likelihood estimator",
+          "context": {
+            "page": 11,
+            "start": 103,
+            "end": 2219,
+            "sha256": "3658126ffab89eb3e42e4facff458397b09ac8673534d21b9d2e7ce67d92cdcb"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先从联合分布与识别分布画出两个方向，再推导下界的重构项与散度项；用高斯重参数化核对梯度路径。接着看附录中散度的解析解、解码分布和似然估计步骤，最后比较下界曲线与潜空间图，区分优化指标、评估近似和直观展示各自支持的结论。",
+          "classification": "readerInference",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), Figure 2, optimization versus visualization interpretation",
+          "context": {
+            "page": 7,
+            "start": 642,
+            "end": 892,
+            "sha256": "e0551e8406e311c8b33ee68134cd7b8d769436edb6f62598f46e743884b592cc"
+          }
+        }
+      ]
+    },
+    {
+      "paperId": "classic:ai:gan",
+      "primaryDomain": "AI",
+      "title": "Generative Adversarial Nets",
+      "status": "ready",
+      "learningOrder": 4,
+      "overview": "这篇论文通过生成器与判别器的竞争学习生成分布。生成器把随机噪声映射为样本，判别器区分真实数据和生成数据，两个网络通过交替更新参与极小极大博弈。论文先在无限容量的分布空间分析理想解，再用神经网络实验展示样本生成的可行性，并讨论早期梯度饱和时的替代目标。它不直接给出显式样本密度，实验中的核密度似然估计也有局限。据此，关键阅读任务是区分理想分布论证、有限网络训练与样本评价，理解竞争信号带来的能力和代价。",
+      "guide": {
+        "problem": "深度生成模型的似然与推断计算常难以处理，训练时对梯度的复杂近似也增加负担。论文寻找一种能够生成数据、却无需显式求解数据似然或运行马尔可夫链的学习途径：用另一个可训练模型判断样本真伪，为生成过程提供可反向传播的信号。",
+        "method": "生成器把先验噪声经可微网络送到数据空间；判别器提高真实样本与伪样本的分类正确性，生成器则试图让伪样本被判断为真实。实际训练交替更新双方。早期判别器过强会使原始生成目标饱和，作者建议改为增大生成样本被判为真实的对数概率。",
+        "contribution": "固定生成分布时可求出最优判别器，代入后将理想目标联系到两种分布之间的詹森香农散度，说明分布相等是全局最优。实验给出数字、人脸和彩色图像样本及潜空间插值，展示对抗学习的可行性；作者没有声称这些样本整体优于所有既有生成方法。",
+        "applicability": "据此，它适合从噪声直接生成连续样本、且可对生成输出求导的任务，并让读者比较样本质量导向的学习与显式似然学习。论文把条件生成、辅助推断网络和半监督用途列为扩展方向；据此，这些是可研究的路线，不能当成本文已经完成的实验成果。",
+        "limitations": "收敛论证依赖足够容量、判别器到达最优和对分布作合适更新，作者明确说有限参数网络不满足该证明。训练还需协调双方，否则多个噪声可能映到相同输出而损失多样性。核密度评估方差较高且不适合高维空间，工程上应同时检查覆盖与样本质量。",
+        "readingAdvice": "据此，先对照博弈目标和交替更新流程，分清判别器的分类损失与生成器获得的梯度；再读最优判别器和全局最优论证，并保留其假设。随后把样本图、最近训练样本对照和核密度表一起看，最后回读局限与扩展，避免以视觉吸引力替代分布评价。"
+      },
+      "fullText": {
+        "url": "https://papers.nips.cc/paper_files/paper/2014/file/f033ed80deb0234979a61f95710dbe25-Paper.pdf",
+        "sha256": "331961622a2f6588c48a34ecddc6a3d052ffe8fcfba333f233d5f27b2da5565d",
+        "pageCount": 9,
+        "checkedAt": "2026-10-02T04:26:18.441427+00:00",
+        "sourceFile": "AI/gan.pdf",
+        "textFile": "AI/gan.pages.json",
+        "textSha256": "0adce7d38cafe400999be54f1814a9184352eaaa4fed4366a05a46405135fc2f",
+        "format": "pdf",
+        "edition": "NIPS 2014 正式论文集 PDF，9 页，Generative Adversarial Nets；正文、图表、参考文献均在此文件，无另列附录。"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "reviewedAt": "2026-10-02T04:45:00.474226+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "这篇论文通过生成器与判别器的竞争学习生成分布。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1, generator/discriminator competition",
+          "context": {
+            "page": 1,
+            "start": 2318,
+            "end": 2536,
+            "sha256": "e6091eae82bc495a30d36a7c965479377387ed89eb876ea5d13f904ecb8b6863"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "生成器把随机噪声映射为样本，判别器区分真实数据和生成数据，两个网络通过交替更新参与极小极大博弈。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §3/Eq.1, noise-to-sample and alternating minimax training",
+          "context": {
+            "page": 3,
+            "start": 1953,
+            "end": 3477,
+            "sha256": "7b779047164dc65ae779003f05fdc28005a0c27de15223c435c825f209954a82"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "论文先在无限容量的分布空间分析理想解，再用神经网络实验展示样本生成的可行性，并讨论早期梯度饱和时的替代目标。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §3–4, saturation alternative and nonparametric scope",
+          "context": {
+            "page": 3,
+            "start": 3478,
+            "end": 4408,
+            "sha256": "eb63172001830a1e8a5b04387c25612e2582f04a7cae2a7a0a68d163e0c5f914"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "论文先在无限容量的分布空间分析理想解，再用神经网络实验展示样本生成的可行性，并讨论早期梯度饱和时的替代目标。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), §7, experimental viability conclusion",
+          "context": {
+            "page": 7,
+            "start": 1812,
+            "end": 1954,
+            "sha256": "c62c3539781f296e242d59fca80aa3345eb98701e864a97908e789aa38ac29ab"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "它不直接给出显式样本密度，实验中的核密度似然估计也有局限。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §5, Parzen evaluation limitations",
+          "context": {
+            "page": 6,
+            "start": 1224,
+            "end": 1994,
+            "sha256": "cab294a16e03c5e0f7941477e6e165b31ecdc624fc2c6af374b0a19ed4e70e39"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "它不直接给出显式样本密度，实验中的核密度似然估计也有局限。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §6, no explicit density representation",
+          "context": {
+            "page": 6,
+            "start": 2471,
+            "end": 2551,
+            "sha256": "9f7522b89f6dd8bb1182a3395fb323efab4c3e89cf806d21a6ad7e25a70831a0"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "据此，关键阅读任务是区分理想分布论证、有限网络训练与样本评价，理解竞争信号带来的能力和代价。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §4.2, reader distinction of proof and finite model",
+          "context": {
+            "page": 5,
+            "start": 2950,
+            "end": 3288,
+            "sha256": "02b45460fc21e1f62bb8e4081ae947d222b92cab6d9c8e25219d0ee9ebbe6ac6"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "深度生成模型的似然与推断计算常难以处理，训练时对梯度的复杂近似也增加负担。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1, intractable probabilistic computation and approximate gradients",
+          "context": {
+            "page": 1,
+            "start": 1927,
+            "end": 2316,
+            "sha256": "4ef6411eae7217d8034f488c87877a180549ded0ebfe296681071ed8c20b6887"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "论文寻找一种能够生成数据、却无需显式求解数据似然或运行马尔可夫链的学习途径：用另一个可训练模型判断样本真伪，为生成过程提供可反向传播的信号。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §1 continuation, backprop and direct forward sampling",
+          "context": {
+            "page": 2,
+            "start": 105,
+            "end": 605,
+            "sha256": "c2b68530cfda603103b5e1f5582d4d09efe246f9afb6467c58918e7f617cbf85"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "论文寻找一种能够生成数据、却无需显式求解数据似然或运行马尔可夫链的学习途径：用另一个可训练模型判断样本真伪，为生成过程提供可反向传播的信号。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §3, discriminative learning signal",
+          "context": {
+            "page": 3,
+            "start": 1953,
+            "end": 2471,
+            "sha256": "e1eb8834dcab6fbddd7cfe581b394ae656cd4f53996bfe40f1457d93c2fb35e8"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "生成器把先验噪声经可微网络送到数据空间；判别器提高真实样本与伪样本的分类正确性，生成器则试图让伪样本被判断为真实。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §3, differentiable generator and discriminator roles",
+          "context": {
+            "page": 3,
+            "start": 1953,
+            "end": 2620,
+            "sha256": "a484f89b3583c6157763eafe9141c74751c14c0b765bd5720a07fe2dbe0aeb2d"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "实际训练交替更新双方。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §3, alternating updates",
+          "context": {
+            "page": 3,
+            "start": 3246,
+            "end": 3477,
+            "sha256": "c37162f28cb9dca4f0940cc7428d20d2724c0133d53639efc450b3b17439e94f"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "早期判别器过强会使原始生成目标饱和，作者建议改为增大生成样本被判为真实的对数概率。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §3, alternative nonsaturating generator objective",
+          "context": {
+            "page": 3,
+            "start": 3478,
+            "end": 3954,
+            "sha256": "95d13b3c5f4ca23ac71d00ba28251e2128fde66cc85f753f8071c824b4af52c6"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "固定生成分布时可求出最优判别器，代入后将理想目标联系到两种分布之间的詹森香农散度，说明分布相等是全局最优。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §4.1/Proposition 1, optimal discriminator",
+          "context": {
+            "page": 4,
+            "start": 2278,
+            "end": 2372,
+            "sha256": "43a7a6ebfbbc8bb7d4732c869fe0f40b1af83d588629b2c1abe655d6bec7cfa6"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "固定生成分布时可求出最优判别器，代入后将理想目标联系到两种分布之间的詹森香农散度，说明分布相等是全局最优。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §4.1/Theorem 1/Eq.6, JSD and global optimum",
+          "context": {
+            "page": 5,
+            "start": 923,
+            "end": 2014,
+            "sha256": "589346816e23521421211b5fd70c60c36b5531fde51827ddd8ecc6d11b697db5"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "实验给出数字、人脸和彩色图像样本及潜空间插值，展示对抗学习的可行性；作者没有声称这些样本整体优于所有既有生成方法。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), Figures 2–3, image samples and latent interpolation",
+          "context": {
+            "page": 7,
+            "start": 12,
+            "end": 780,
+            "sha256": "b12fcca1a54686a67b4969527351032c3a4cdf7fa941d7ac2f994bb79e7c4f2e"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "实验给出数字、人脸和彩色图像样本及潜空间插值，展示对抗学习的可行性；作者没有声称这些样本整体优于所有既有生成方法。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §5, expressly bounded sample-quality claim",
+          "context": {
+            "page": 6,
+            "start": 2075,
+            "end": 2336,
+            "sha256": "23015aacb477c3d9f9a03476c57313a9c9323c49e52e19b64ece3b94ec7df645"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "据此，它适合从噪声直接生成连续样本、且可对生成输出求导的任务，并让读者比较样本质量导向的学习与显式似然学习。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §2, differentiability through visible outputs",
+          "context": {
+            "page": 2,
+            "start": 2562,
+            "end": 2653,
+            "sha256": "e10892cd17e943e3cd5b1e7c5756175c769cf0d0e9bd885e8d66cae345cbe82f"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "论文把条件生成、辅助推断网络和半监督用途列为扩展方向；据此，这些是可研究的路线，不能当成本文已经完成的实验成果。",
+          "classification": "readerInference",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), §7, conditional generation/inference/semisupervised extensions",
+          "context": {
+            "page": 7,
+            "start": 781,
+            "end": 1626,
+            "sha256": "06f48205b41da7674e728b87ef5398ab614467aaa26264f81178082199e69deb"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "收敛论证依赖足够容量、判别器到达最优和对分布作合适更新，作者明确说有限参数网络不满足该证明。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §4.2, ideal conditions and nonapplication to finite parameters",
+          "context": {
+            "page": 5,
+            "start": 2046,
+            "end": 3288,
+            "sha256": "0cab82a30f28bc13b8773d05061d4661d35180069854ad8c80dd86a45ca2ed2e"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "训练还需协调双方，否则多个噪声可能映到相同输出而损失多样性。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §6, synchronization and many-to-one collapse",
+          "context": {
+            "page": 6,
+            "start": 2471,
+            "end": 2823,
+            "sha256": "b860a084abe157412df62c6ac3f30aaa9a0ddd2fd16e82940096d34ed1580df7"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "核密度评估方差较高且不适合高维空间，工程上应同时检查覆盖与样本质量。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §5, evaluation uncertainty and high-dimensional weakness",
+          "context": {
+            "page": 6,
+            "start": 1677,
+            "end": 1994,
+            "sha256": "3b13407ab454ce161379493b97626114f55e0a72fac0b42d7d1dcafc6431d005"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先对照博弈目标和交替更新流程，分清判别器的分类损失与生成器获得的梯度；再读最优判别器和全局最优论证，并保留其假设。随后把样本图、最近训练样本对照和核密度表一起看，最后回读局限与扩展，避免以视觉吸引力替代分布评价。",
+          "classification": "readerInference",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §3/Eq.1, reader gradient/objective comparison",
+          "context": {
+            "page": 3,
+            "start": 1817,
+            "end": 3954,
+            "sha256": "9003705dfc03f1d95f55a996ee9a12f06ef5d2d309f4ccb9216c519735a7ca0e"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先对照博弈目标和交替更新流程，分清判别器的分类损失与生成器获得的梯度；再读最优判别器和全局最优论证，并保留其假设。随后把样本图、最近训练样本对照和核密度表一起看，最后回读局限与扩展，避免以视觉吸引力替代分布评价。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §4, ideal optimum and practical scope",
+          "context": {
+            "page": 5,
+            "start": 923,
+            "end": 3288,
+            "sha256": "2ba900014754cc70b94661fdd9f9e9ef2109661ac610ef256a2d71fe7bb61c2f"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先对照博弈目标和交替更新流程，分清判别器的分类损失与生成器获得的梯度；再读最优判别器和全局最优论证，并保留其假设。随后把样本图、最近训练样本对照和核密度表一起看，最后回读局限与扩展，避免以视觉吸引力替代分布评价。",
+          "classification": "readerInference",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), Figure 2, nearest-training-example comparison",
+          "context": {
+            "page": 7,
+            "start": 12,
+            "end": 645,
+            "sha256": "96ce09712fd3122e485316560fd54b90b218f7b526ec46b180620eec321080f7"
+          }
+        }
+      ]
+    },
+    {
+      "paperId": "classic:ai:a3c",
+      "primaryDomain": "AI",
+      "title": "Asynchronous Methods for Deep Reinforcement Learning",
+      "status": "ready",
+      "learningOrder": 5,
+      "overview": "这篇论文把深度强化学习的稳定训练与并行交互联系起来。多个行动学习线程各自运行环境，把不同轨迹的梯度异步更新到共享模型，减少连续经验的相关性，并允许使用同策略学习方法。异步优势演员评论家算法（A3C）同时学习策略与状态价值，用多步回报构造优势估计，并加入策略熵鼓励探索。实验覆盖游戏、连续控制和视觉迷宫，另比较线程数对速度与数据效率的影响。据此，应将异步执行、回报估计和探索机制分开理解，同时保留模拟环境与评测协议的限制。",
+      "guide": {
+        "problem": "在线强化学习的连续观察相互关联，策略变化又使数据分布非平稳，神经网络训练容易不稳定。经验回放能缓解这些问题，却增加存储和计算，并要求从旧策略数据学习。论文探索能否借并行环境交互稳定学习，使同策略方法也能训练深度控制器。",
+        "method": "多个线程在各自环境中采样，累计梯度后异步更新共享参数。A3C同时维护策略与状态价值，用折扣多步奖励加折扣末端价值减当前价值形成优势估计，更新策略和价值。离散任务中两者通常共享非输出层，策略熵项帮助避免过早收敛到确定性策略。",
+        "contribution": "贡献是把并行行动学习者作为稳定训练框架，涵盖基于价值和基于策略的方法。A3C在游戏、连续动作物理模拟与随机视觉迷宫中取得有效策略。作者还分别按耗时与训练数据量研究并行性，显示加速有时同时伴随数据效率改善。",
+        "applicability": "据此，工程上适合有多个可并行环境副本、并愿意在线采集新轨迹的学习任务；论文在普通多核处理器上训练，展示不依赖大型分布式系统的路线。连续动作实验扩展策略输出，而非把离散价值方法直接搬过去；工程上，真实设备上的交互成本仍需另行评估。",
+        "limitations": "作者指出不使用回放不等于回放无用，复用旧数据仍可能改善交互昂贵场景的数据效率。部分学习曲线选取搜索中表现最好的运行，比较时需保留该条件。工程上，还应分别看平均与中位表现，不能把汇总平均优势理解为每个游戏都更好。",
+        "readingAdvice": "据此，先把策略梯度中的基线与优势估计联系起来，再沿多步回报检查策略和价值如何更新；对照补充材料核对终止状态与非终止状态的末端处理。随后分别读分数、耗时及数据效率图，辨清横轴和选模规则，最后核对优化统计是否在线程之间共享。"
+      },
+      "fullText": {
+        "url": "https://proceedings.mlr.press/v48/mniha16.pdf",
+        "sha256": "6548032d7105072e254872c82e02f82cbf34ea780eeed15454d90300b8fea563",
+        "pageCount": 10,
+        "checkedAt": "2026-10-02T04:26:18.887597+00:00",
+        "sourceFile": "AI/a3c.pdf",
+        "textFile": "AI/a3c.pages.json",
+        "textSha256": "3dfd672ce051f63e8227666c83ec23e725e96ce4b37b314b3f9a46e9fa4c66a2",
+        "format": "pdf",
+        "edition": "ICML 2016 / PMLR 48 正式主论文 PDF，10 页（论文集页码 1928–1937）；官方补充材料另为 10 页，已完整复核并在审计单列，主证据 offsets 仅指本主文件。"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "reviewedAt": "2026-10-02T04:45:00.475942+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "这篇论文把深度强化学习的稳定训练与并行交互联系起来。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1, parallel interaction as stable deep-RL paradigm",
+          "context": {
+            "page": 1,
+            "start": 2820,
+            "end": 3488,
+            "sha256": "c013720938d999ba9ff55b8a67f581c10603411bee2bc5bbbb7d8ae67a221dbb"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "多个行动学习线程各自运行环境，把不同轨迹的梯度异步更新到共享模型，减少连续经验的相关性，并允许使用同策略学习方法。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §4, shared asynchronous updates and decorrelation",
+          "context": {
+            "page": 3,
+            "start": 1782,
+            "end": 4624,
+            "sha256": "99b359da505484e03c3f6fd97843ae702f8c6269747a334e5aa205eb42dc07d3"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "多个行动学习线程各自运行环境，把不同轨迹的梯度异步更新到共享模型，减少连续经验的相关性，并允许使用同策略学习方法。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §4, per-thread environment and accumulated gradients",
+          "context": {
+            "page": 3,
+            "start": 4891,
+            "end": 5222,
+            "sha256": "3d02845e1b4f68a68d5ac9efb47d3f8c17e00465408d7496580ba5b2179641e7"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "异步优势演员评论家算法（A3C）同时学习策略与状态价值，用多步回报构造优势估计，并加入策略熵鼓励探索。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §4, A3C policy/value/multistep advantage and entropy",
+          "context": {
+            "page": 4,
+            "start": 2300,
+            "end": 4252,
+            "sha256": "79289dbe2f88c76d97caa284463b942540e89806493902e81d96f028a7116a45"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "实验覆盖游戏、连续控制和视觉迷宫，另比较线程数对速度与数据效率的影响。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §5.3–5.4, continuous and visual domains",
+          "context": {
+            "page": 6,
+            "start": 852,
+            "end": 3914,
+            "sha256": "3cac369007001441cbf2c710f49fdd829f7d11840d821f69472fde62d4485114"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "实验覆盖游戏、连续控制和视觉迷宫，另比较线程数对速度与数据效率的影响。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §5.5, threads, wall-clock and data efficiency",
+          "context": {
+            "page": 6,
+            "start": 3961,
+            "end": 5298,
+            "sha256": "11c2c6071e37fcf4c7bad1a2dc427fb36af3a5c49e4a9802f80c5e1b17abd6b6"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "据此，应将异步执行、回报估计和探索机制分开理解，同时保留模拟环境与评测协议的限制。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), Figure 1, evaluation protocol to retain",
+          "context": {
+            "page": 5,
+            "start": 53,
+            "end": 551,
+            "sha256": "f5046bea7715d11ff520a4bcb01453dc3d004857489c851648b4eb187f592326"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "在线强化学习的连续观察相互关联，策略变化又使数据分布非平稳，神经网络训练容易不稳定。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1, instability/nonstationarity/correlated online observations",
+          "context": {
+            "page": 1,
+            "start": 1437,
+            "end": 2079,
+            "sha256": "d11300791e8c6e411a5ad13d639adab23398510fed96876f037e775797b10928"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "经验回放能缓解这些问题，却增加存储和计算，并要求从旧策略数据学习。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1, replay memory/computation/off-policy costs",
+          "context": {
+            "page": 1,
+            "start": 2484,
+            "end": 2819,
+            "sha256": "6bd49ccdf2d7c35ac931b4a0fbe7c97ce54edc74a92db6a0c1c66987084bd760"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "论文探索能否借并行环境交互稳定学习，使同策略方法也能训练深度控制器。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1, parallel online/on-policy goal",
+          "context": {
+            "page": 1,
+            "start": 2820,
+            "end": 3488,
+            "sha256": "c013720938d999ba9ff55b8a67f581c10603411bee2bc5bbbb7d8ae67a221dbb"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "多个线程在各自环境中采样，累计梯度后异步更新共享参数。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §4, per-environment accumulated gradients",
+          "context": {
+            "page": 3,
+            "start": 4891,
+            "end": 5222,
+            "sha256": "3d02845e1b4f68a68d5ac9efb47d3f8c17e00465408d7496580ba5b2179641e7"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "A3C同时维护策略与状态价值，用折扣多步奖励加折扣末端价值减当前价值形成优势估计，更新策略和价值。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §4, multistep advantage formula and joint updates",
+          "context": {
+            "page": 4,
+            "start": 2300,
+            "end": 3126,
+            "sha256": "76d62d0e8bbdb0236365adc64acc384dc5afb38c5b636fabb4f84f89fb721d10"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "离散任务中两者通常共享非输出层，策略熵项帮助避免过早收敛到确定性策略。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §4, shared non-output layers and entropy motivation",
+          "context": {
+            "page": 4,
+            "start": 3253,
+            "end": 3789,
+            "sha256": "5792b4e7037667cae0001e31df5a5cf785342846f96e5ccbc6175be606acaf5c"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "贡献是把并行行动学习者作为稳定训练框架，涵盖基于价值和基于策略的方法。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), §6, stable policy/value framework",
+          "context": {
+            "page": 7,
+            "start": 1468,
+            "end": 2075,
+            "sha256": "747bd40fac9b148e15bccce27cfdf5d488df6caa0153c628df6cd117213a4095"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "A3C在游戏、连续动作物理模拟与随机视觉迷宫中取得有效策略。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §5.1, Atari policy learning",
+          "context": {
+            "page": 5,
+            "start": 1280,
+            "end": 1781,
+            "sha256": "a8ae6cea1425afcc2d8143134941913898f7583601a7d08f28ce5b991bf1ebd4"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "A3C在游戏、连续动作物理模拟与随机视觉迷宫中取得有效策略。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §5.3–5.4, results through final maze-score discussion",
+          "context": {
+            "page": 6,
+            "start": 852,
+            "end": 3914,
+            "sha256": "3cac369007001441cbf2c710f49fdd829f7d11840d821f69472fde62d4485114"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "作者还分别按耗时与训练数据量研究并行性，显示加速有时同时伴随数据效率改善。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §5.5, speed and data-efficiency distinction",
+          "context": {
+            "page": 6,
+            "start": 3961,
+            "end": 5298,
+            "sha256": "11c2c6071e37fcf4c7bad1a2dc427fb36af3a5c49e4a9802f80c5e1b17abd6b6"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "据此，工程上适合有多个可并行环境副本、并愿意在线采集新轨迹的学习任务；论文在普通多核处理器上训练，展示不依赖大型分布式系统的路线。",
+          "classification": "readerInference",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1 (one-based file index), §1, parallel environment instances and single-machine implementation",
+          "context": {
+            "page": 1,
+            "start": 2904,
+            "end": 3874,
+            "sha256": "9ed19d448da08a0b3e05e2636ea267c04d853c115f23af874334b47667f5113d"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "连续动作实验扩展策略输出，而非把离散价值方法直接搬过去；工程上，真实设备上的交互成本仍需另行评估。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §5.3, extension of policy-based algorithm",
+          "context": {
+            "page": 6,
+            "start": 1206,
+            "end": 1359,
+            "sha256": "0a718578474a33b189f3f430d6fb428a883b3660b4ca1a992ed9558152ed3e57"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "连续动作实验扩展策略输出，而非把离散价值方法直接搬过去；工程上，真实设备上的交互成本仍需另行评估。",
+          "classification": "readerInference",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), §6, interaction cost motivation; real-device extrapolation is reader inference",
+          "context": {
+            "page": 7,
+            "start": 2695,
+            "end": 2881,
+            "sha256": "bf04b2996e78fd179ff8265d5d189638a60d8c2afdd6fbfc3147c5d4593434d4"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "作者指出不使用回放不等于回放无用，复用旧数据仍可能改善交互昂贵场景的数据效率。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), §6, replay remains useful for data efficiency",
+          "context": {
+            "page": 7,
+            "start": 2340,
+            "end": 2881,
+            "sha256": "6335efefc220d5d17b4dc63f87a248c64f25c765670e1089b59671fe4dad99ec"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "部分学习曲线选取搜索中表现最好的运行，比较时需保留该条件。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), Figure 1, best-five-of-search averaging",
+          "context": {
+            "page": 5,
+            "start": 53,
+            "end": 551,
+            "sha256": "f5046bea7715d11ff520a4bcb01453dc3d004857489c851648b4eb187f592326"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "部分学习曲线选取搜索中表现最好的运行，比较时需保留该条件。",
+          "classification": "paperFact",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8 (one-based file index), Figure 3, selected best-rate averaging",
+          "context": {
+            "page": 8,
+            "start": 53,
+            "end": 404,
+            "sha256": "1f1a2aa163876139651e7c53e6e8ef4bbcb62a3368f6f3cf59e4c279aab1d379"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "工程上，还应分别看平均与中位表现，不能把汇总平均优势理解为每个游戏都更好。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), Table 1 and §5.1, aggregate mean/median do not imply every-game superiority",
+          "context": {
+            "page": 5,
+            "start": 2933,
+            "end": 3322,
+            "sha256": "262fc3b1ac2ffca6bd4fc752e919d565b0311df85a0a84005f2166804ff4f34a"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先把策略梯度中的基线与优势估计联系起来，再沿多步回报检查策略和价值如何更新；对照补充材料核对终止状态与非终止状态的末端处理。随后分别读分数、耗时及数据效率图，辨清横轴和选模规则，最后核对优化统计是否在线程之间共享。",
+          "classification": "readerInference",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §3, baseline/advantage reading route",
+          "context": {
+            "page": 3,
+            "start": 919,
+            "end": 1752,
+            "sha256": "0a8bbe31dbce02f4acdd2bef9189d89084273cf3a4b0e5326eb52f02f67ccfb8"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先把策略梯度中的基线与优势估计联系起来，再沿多步回报检查策略和价值如何更新；对照补充材料核对终止状态与非终止状态的末端处理。随后分别读分数、耗时及数据效率图，辨清横轴和选模规则，最后核对优化统计是否在线程之间共享。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §4, pointer to terminal/nonterminal supplement algorithm",
+          "context": {
+            "page": 4,
+            "start": 2300,
+            "end": 3126,
+            "sha256": "76d62d0e8bbdb0236365adc64acc384dc5afb38c5b636fabb4f84f89fb721d10"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先把策略梯度中的基线与优势估计联系起来，再沿多步回报检查策略和价值如何更新；对照补充材料核对终止状态与非终止状态的末端处理。随后分别读分数、耗时及数据效率图，辨清横轴和选模规则，最后核对优化统计是否在线程之间共享。",
+          "classification": "readerInference",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8 (one-based file index), Figures 3–4, axes and selection rules",
+          "context": {
+            "page": 8,
+            "start": 53,
+            "end": 404,
+            "sha256": "1f1a2aa163876139651e7c53e6e8ef4bbcb62a3368f6f3cf59e4c279aab1d379"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先把策略梯度中的基线与优势估计联系起来，再沿多步回报检查策略和价值如何更新；对照补充材料核对终止状态与非终止状态的末端处理。随后分别读分数、耗时及数据效率图，辨清横轴和选模规则，最后核对优化统计是否在线程之间共享。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §4 optimization, shared statistics and supplement pointer",
+          "context": {
+            "page": 4,
+            "start": 4253,
+            "end": 4889,
+            "sha256": "7a83cd82352df3a43f192e6a0a14e428d3e6641e1e7d85fff195f1c6c40f9478"
+          }
+        }
+      ]
+    },
+    {
+      "paperId": "classic:ai:transformer",
+      "primaryDomain": "AI",
+      "title": "Attention Is All You Need",
+      "status": "ready",
+      "learningOrder": 6,
+      "overview": "这篇论文以注意力重构序列转导的编码器和解码器，去掉按位置递推的循环计算。缩放点积注意力依据查询与键匹配后汇聚值，多头机制在不同投影空间并行处理关系；位置编码、逐位置前馈层、残差与归一化共同构成完整模型。解码器仍用遮罩保留自回归依赖，训练并行不等于生成完全并行。正式论文以机器翻译和模型变体比较支持其设计，并讨论长序列的计算代价。据此，应同时阅读计算结构、训练配方和评测条件，避免把注意力单独视为全部方法。",
+      "guide": {
+        "problem": "循环序列模型沿符号位置逐步更新隐藏状态，限制单个训练样本内的并行化，长序列尤其受影响。卷积虽能并行，远处位置的联系仍需要跨越多层。论文希望缩短信号路径并减少顺序操作，在保持编码器解码器结构的同时学习输入和输出之间的依赖。",
+        "method": "查询与键做点积，经键维度平方根缩放和归一化后对值加权；多头使用不同线性投影，拼接结果再投影。模型叠加逐位置前馈层、残差和层归一化，并加入位置编码。解码器用移位输入与未来位置遮罩，交叉注意力的键和值则来自编码器输出。",
+        "contribution": "自注意力让不同位置直接相连，减少层内顺序操作和最长依赖路径。正式论文的翻译比较展示质量与训练计算量上的优势，同时用变体实验检查头数、维度、丢弃和位置表示。头数增加并非持续改善，学习位置嵌入与正弦位置编码得到近似结果。",
+        "applicability": "论文实际检验英语到德语和法语的翻译，并按近似句长组织批次。据此，工程上适合需要在序列内部汇集远程信息、且能承受成对注意力计算的转导任务。图像、音频和视频用途及局部注意力在正式版本中仍是未来方向，不能据此宣称已经验证。",
+        "limitations": "全局自注意力计算随序列长度平方增长，长序列需要权衡；解码生成仍逐个符号进行。正弦位置编码可外推更长序列只是作者选择它的动机。工程上还应注意，文中训练计算量依据耗时和硬件能力估算，不能直接等同于不同实现的实测效率。",
+        "readingAdvice": "据此，先沿架构图标出自注意力、交叉注意力与遮罩，再检查查询键值维度及缩放；接着读复杂度表，区分并行操作与总计算量。最后结合训练章节核对优化器、预热、正则化和检查点平均，并把开发集变体结果与测试集翻译比较分别阅读。"
+      },
+      "fullText": {
+        "url": "https://papers.nips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf",
+        "sha256": "d87d482d5ae7960e2e43d7dd6d21377e60e73e8fce1bf2a01aff7aca8a08c537",
+        "pageCount": 11,
+        "checkedAt": "2026-10-02T04:26:18.441813+00:00",
+        "sourceFile": "AI/transformer.pdf",
+        "textFile": "AI/transformer.pages.json",
+        "textSha256": "33a1e6bf5f3dd57f571844bfcc8052db07707c383f8352ce0704d9745d5e5c54",
+        "format": "pdf",
+        "edition": "NIPS 2017 正式论文集 PDF，11 页，含翻译实验与参考文献；文件未附其正文提及的注意力可视化附录。作者 arXiv v5 的 15 页及新增解析实验另作版本核对，不迁移其结果。"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "reviewedAt": "2026-10-02T04:45:00.478139+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "这篇论文以注意力重构序列转导的编码器和解码器，去掉按位置递推的循环计算。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §1, attention instead of sequence-aligned recurrence",
+          "context": {
+            "page": 2,
+            "start": 1100,
+            "end": 1291,
+            "sha256": "6a9870a4f757c2480eef7e32ea354da2d94899fd8c66149ab399080a44a92455"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "缩放点积注意力依据查询与键匹配后汇聚值，多头机制在不同投影空间并行处理关系；位置编码、逐位置前馈层、残差与归一化共同构成完整模型。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §3.2, scaled dot product and multiple projections",
+          "context": {
+            "page": 4,
+            "start": 185,
+            "end": 2212,
+            "sha256": "8b16a2dc04f41394dcf89416663966d85b2eb52cabb3bce4c83fcf50214b7471"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "缩放点积注意力依据查询与键匹配后汇聚值，多头机制在不同投影空间并行处理关系；位置编码、逐位置前馈层、残差与归一化共同构成完整模型。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §3.1, residual/post-layer normalization",
+          "context": {
+            "page": 3,
+            "start": 91,
+            "end": 486,
+            "sha256": "6637cbeb0c1a1544e1b537a4cd023b754995605ba36126b41424d0faee3fa91c"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "缩放点积注意力依据查询与键匹配后汇聚值，多头机制在不同投影空间并行处理关系；位置编码、逐位置前馈层、残差与归一化共同构成完整模型。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §3.3–3.5, FFN and positional information",
+          "context": {
+            "page": 5,
+            "start": 1689,
+            "end": 3139,
+            "sha256": "b1d24d4c51b7c0c8f1640667b50648b4ca31a1a538abf6b8dd5e7850bfe531ce"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "解码器仍用遮罩保留自回归依赖，训练并行不等于生成完全并行。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §3.1, autoregressive masking",
+          "context": {
+            "page": 3,
+            "start": 851,
+            "end": 1169,
+            "sha256": "e7b3ac29fddb7b29f2178363f05fd38bd0aebe5a107e2b006afc18cb3d3e73a9"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "解码器仍用遮罩保留自回归依赖，训练并行不等于生成完全并行。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §3, one-at-a-time autoregressive generation",
+          "context": {
+            "page": 2,
+            "start": 3573,
+            "end": 3810,
+            "sha256": "c9c086f7c2e1459b9b78e34146e53cfa65e2ddc77bf20a62e438d2cebd498d0c"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "正式论文以机器翻译和模型变体比较支持其设计，并讨论长序列的计算代价。",
+          "classification": "paperFact",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8 (one-based file index), §6.1–6.2, translation and variation evidence",
+          "context": {
+            "page": 8,
+            "start": 864,
+            "end": 2892,
+            "sha256": "d8bb0378abd513b9ef81a967ba9d246be287f795f13debecfc9e9ff85603d0b1"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "正式论文以机器翻译和模型变体比较支持其设计，并讨论长序列的计算代价。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §4, long-sequence cost caveat",
+          "context": {
+            "page": 6,
+            "start": 3011,
+            "end": 3436,
+            "sha256": "58b8066023302a7364172dcbf24869176c6fd273a5572db12d1c583d75b0d8c8"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "据此，应同时阅读计算结构、训练配方和评测条件，避免把注意力单独视为全部方法。",
+          "classification": "readerInference",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), §5, training recipe as reader-selected route",
+          "context": {
+            "page": 7,
+            "start": 1251,
+            "end": 2897,
+            "sha256": "36ac41d3f0009eff28b2495599bd8430f6e0c61f4affdbb3117a4af888734039"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "循环序列模型沿符号位置逐步更新隐藏状态，限制单个训练样本内的并行化，长序列尤其受影响。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §1, sequential bottleneck within training examples",
+          "context": {
+            "page": 2,
+            "start": 0,
+            "end": 750,
+            "sha256": "4065e50f9ca8900083ee1faf0be32874fc1b539f91c8193468db5e114f78efa4"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "卷积虽能并行，远处位置的联系仍需要跨越多层。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §2, convolutional dependency paths",
+          "context": {
+            "page": 2,
+            "start": 1782,
+            "end": 2066,
+            "sha256": "ed021de425983f7ad8a2153da70c78b998f4c5864263fc6528af749ae21f074b"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "论文希望缩短信号路径并减少顺序操作，在保持编码器解码器结构的同时学习输入和输出之间的依赖。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §4, complexity/parallelism/path-length desiderata",
+          "context": {
+            "page": 6,
+            "start": 1607,
+            "end": 2820,
+            "sha256": "1632f233c78849290ed883f1826cb7581ef7fcb57fe9b912f89c727e06b2a2ba"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "论文希望缩短信号路径并减少顺序操作，在保持编码器解码器结构的同时学习输入和输出之间的依赖。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §3, encoder-decoder structure",
+          "context": {
+            "page": 2,
+            "start": 3332,
+            "end": 3810,
+            "sha256": "64c16b26e438f1c625fbd7dc6523f249f2e9d8904cc78728539b83b79fca97c1"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "查询与键做点积，经键维度平方根缩放和归一化后对值加权；多头使用不同线性投影，拼接结果再投影。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4 (one-based file index), §3.2.1–3.2.2, scale/softmax/project/concatenate",
+          "context": {
+            "page": 4,
+            "start": 185,
+            "end": 1996,
+            "sha256": "62bc5577aab795c39c8b362a0860894b38e0e860c607d6eaeefe2e61f906cee0"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "模型叠加逐位置前馈层、残差和层归一化，并加入位置编码。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §3.1, residual and layer normalization",
+          "context": {
+            "page": 3,
+            "start": 48,
+            "end": 486,
+            "sha256": "55c471d0133aabbab79639d68f78c0386a8a94273a69df667a44fb16798fec12"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "模型叠加逐位置前馈层、残差和层归一化，并加入位置编码。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §3.3–3.5, FFN and position encoding",
+          "context": {
+            "page": 5,
+            "start": 1689,
+            "end": 3139,
+            "sha256": "b1d24d4c51b7c0c8f1640667b50648b4ca31a1a538abf6b8dd5e7850bfe531ce"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "解码器用移位输入与未来位置遮罩，交叉注意力的键和值则来自编码器输出。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §3.1, shifted inputs plus mask",
+          "context": {
+            "page": 3,
+            "start": 851,
+            "end": 1169,
+            "sha256": "e7b3ac29fddb7b29f2178363f05fd38bd0aebe5a107e2b006afc18cb3d3e73a9"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "解码器用移位输入与未来位置遮罩，交叉注意力的键和值则来自编码器输出。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5 (one-based file index), §3.2.3, encoder keys/values and decoder queries",
+          "context": {
+            "page": 5,
+            "start": 590,
+            "end": 840,
+            "sha256": "5d8fb7cf853bf2bd593646b70e031ed1b2fa646f5d56d58161796c0e5ad961fc"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "自注意力让不同位置直接相连，减少层内顺序操作和最长依赖路径。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), Table 1, connectivity/serial operations/path lengths",
+          "context": {
+            "page": 6,
+            "start": 0,
+            "end": 505,
+            "sha256": "753c850cdc14381a2644dc313ece17e723f6119cfd4c29b88e4fd6d28d3dd3b1"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "正式论文的翻译比较展示质量与训练计算量上的优势，同时用变体实验检查头数、维度、丢弃和位置表示。",
+          "classification": "paperFact",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8 (one-based file index), Table 2, actual formal-edition quality/computation results",
+          "context": {
+            "page": 8,
+            "start": 0,
+            "end": 677,
+            "sha256": "db59d85bd47e2d42e58b58a4372059a9d57ea071247a95f78766ee53fdf7016f"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "正式论文的翻译比较展示质量与训练计算量上的优势，同时用变体实验检查头数、维度、丢弃和位置表示。",
+          "classification": "paperFact",
+          "sourcePages": [
+            9
+          ],
+          "locator": "PDF p.9 (one-based file index), Table 3 and discussion, dimension/head/dropout/position variations",
+          "context": {
+            "page": 9,
+            "start": 0,
+            "end": 1390,
+            "sha256": "2f073a32fcd0ea87eb9c56ef3680334c23ec33bd6bdc9b69fcf1b6ef12c942be"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "头数增加并非持续改善，学习位置嵌入与正弦位置编码得到近似结果。",
+          "classification": "paperFact",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8 (one-based file index), §6.2, excess heads reduce quality",
+          "context": {
+            "page": 8,
+            "start": 2930,
+            "end": 3220,
+            "sha256": "0ef1c66f2a2c94ce4c9da9375df8b60ccaf506eef839233abcf26fba33de24b0"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "头数增加并非持续改善，学习位置嵌入与正弦位置编码得到近似结果。",
+          "classification": "paperFact",
+          "sourcePages": [
+            9
+          ],
+          "locator": "PDF p.9 (one-based file index), Table 3 row E, learned versus sinusoidal encoding",
+          "context": {
+            "page": 9,
+            "start": 1238,
+            "end": 1390,
+            "sha256": "07ea3dff8e5d47d2ea260afa19049cb1880d23d5fe4e9b285b3a393f47ca7b74"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "论文实际检验英语到德语和法语的翻译，并按近似句长组织批次。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), §5.1, EN-DE/EN-FR data and length batching",
+          "context": {
+            "page": 7,
+            "start": 1321,
+            "end": 1819,
+            "sha256": "d8683d9a3e50055f2f1c0d9e296c1045ace8d867ce6c5a1811f9a5fce2c0c577"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "据此，工程上适合需要在序列内部汇集远程信息、且能承受成对注意力计算的转导任务。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §4, global information versus paired-computation cost",
+          "context": {
+            "page": 6,
+            "start": 2821,
+            "end": 3436,
+            "sha256": "edf6cfbce2a78f152a14aafd38647e8ff3e77a7a7d87a3af24e9fa5c8863bdda"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "图像、音频和视频用途及局部注意力在正式版本中仍是未来方向，不能据此宣称已经验证。",
+          "classification": "readerInference",
+          "sourcePages": [
+            9
+          ],
+          "locator": "PDF p.9 (one-based file index), §7, multimodal and restricted attention are future work",
+          "context": {
+            "page": 9,
+            "start": 1974,
+            "end": 2376,
+            "sha256": "5a009f68c464ee081aefc6c9604ee2a24ed1dd700f28917ecddfb8205cecfa37"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "全局自注意力计算随序列长度平方增长，长序列需要权衡；解码生成仍逐个符号进行。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), Table 1, quadratic global attention cost",
+          "context": {
+            "page": 6,
+            "start": 0,
+            "end": 505,
+            "sha256": "753c850cdc14381a2644dc313ece17e723f6119cfd4c29b88e4fd6d28d3dd3b1"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "全局自注意力计算随序列长度平方增长，长序列需要权衡；解码生成仍逐个符号进行。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2 (one-based file index), §3, sequential symbol generation",
+          "context": {
+            "page": 2,
+            "start": 3573,
+            "end": 3810,
+            "sha256": "c9c086f7c2e1459b9b78e34146e53cfa65e2ddc77bf20a62e438d2cebd498d0c"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "正弦位置编码可外推更长序列只是作者选择它的动机。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), §3.5, extrapolation as motivation rather than demonstrated experiment",
+          "context": {
+            "page": 6,
+            "start": 1438,
+            "end": 1585,
+            "sha256": "38e4aac322835b401963a004632819b4cbbbfd40b6388975f7464ed1dc08477d"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "工程上还应注意，文中训练计算量依据耗时和硬件能力估算，不能直接等同于不同实现的实测效率。",
+          "classification": "readerInference",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8 (one-based file index), §6.1, estimated FLOPs from time and hardware throughput",
+          "context": {
+            "page": 8,
+            "start": 2343,
+            "end": 2559,
+            "sha256": "7926c2f3c705b41c42c6ca480f75fe257bb6ed6589e45d5695111ea0d228601f"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先沿架构图标出自注意力、交叉注意力与遮罩，再检查查询键值维度及缩放；接着读复杂度表，区分并行操作与总计算量。最后结合训练章节核对优化器、预热、正则化和检查点平均，并把开发集变体结果与测试集翻译比较分别阅读。",
+          "classification": "readerInference",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3 (one-based file index), §3.1 and Figure 1, decoder routes/mask",
+          "context": {
+            "page": 3,
+            "start": 487,
+            "end": 1169,
+            "sha256": "5efd846e313e851f9f2a0b703ad05c3e3eabb0a3bf109e2be35579623d994460"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先沿架构图标出自注意力、交叉注意力与遮罩，再检查查询键值维度及缩放；接着读复杂度表，区分并行操作与总计算量。最后结合训练章节核对优化器、预热、正则化和检查点平均，并把开发集变体结果与测试集翻译比较分别阅读。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6 (one-based file index), Table 1, distinguish total from sequential work",
+          "context": {
+            "page": 6,
+            "start": 0,
+            "end": 505,
+            "sha256": "753c850cdc14381a2644dc313ece17e723f6119cfd4c29b88e4fd6d28d3dd3b1"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先沿架构图标出自注意力、交叉注意力与遮罩，再检查查询键值维度及缩放；接着读复杂度表，区分并行操作与总计算量。最后结合训练章节核对优化器、预热、正则化和检查点平均，并把开发集变体结果与测试集翻译比较分别阅读。",
+          "classification": "readerInference",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7 (one-based file index), §5.3–5.4, optimizer/warmup/regularization",
+          "context": {
+            "page": 7,
+            "start": 2369,
+            "end": 3206,
+            "sha256": "409c8703520db0193d9fa4d7c0c1ce3eff097956d300f68e61aa9d030e99573e"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此，先沿架构图标出自注意力、交叉注意力与遮罩，再检查查询键值维度及缩放；接着读复杂度表，区分并行操作与总计算量。最后结合训练章节核对优化器、预热、正则化和检查点平均，并把开发集变体结果与测试集翻译比较分别阅读。",
+          "classification": "readerInference",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8 (one-based file index), §6.1–6.2, checkpoint averaging and dev/test distinctions",
+          "context": {
+            "page": 8,
+            "start": 1750,
+            "end": 2892,
+            "sha256": "78c7d8bbf841d325239fa6ad0adc25e5111e956e3c69c6293419c12dd6b71d73"
+          }
+        }
+      ]
+    }
+  ]
+}

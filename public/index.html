@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="聚合全球科技、AI、航空航天、安全动态、无人系统与前沿论文，提供每日 Top 10、全量动态和中文研究雷达。">
+  <meta name="description" content="聚合全球科技、AI、航空航天、安全动态、无人系统与经典论文，提供每日 Top 10、全量动态和每日经典论文。">
   <meta name="theme-color" content="#102a38">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:title" content="智域前沿 · 全球科技、安全与研究情报">
-  <meta property="og:description" content="每日 Top 10、24 小时全量动态与前沿论文雷达，提供完整中文摘要与原文来源。">
+  <meta property="og:description" content="每日 Top 10、24 小时全量动态与每日经典论文，提供完整中文摘要与原文来源。">
   <meta property="og:url" content="https://newsfrontier.top/">
   <meta property="og:image" content="https://newsfrontier.top/og-card.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="智域前沿 · 全球科技、安全与研究情报">
-  <meta name="twitter:description" content="每日 Top 10、24 小时全量动态与前沿论文雷达，提供完整中文摘要与原文来源。">
+  <meta name="twitter:description" content="每日 Top 10、24 小时全量动态与每日经典论文，提供完整中文摘要与原文来源。">
   <meta name="twitter:image" content="https://newsfrontier.top/og-card.png">
   <link rel="canonical" href="https://newsfrontier.top/">
   <link rel="alternate" type="application/atom+xml" title="智域前沿每日版" href="./feed.xml">
@@ -35,7 +35,7 @@
         <a class="active" href="./" data-view="latest">今日简报</a>
         <a href="./?view=deepread" data-view="deepread">每日深读</a>
         <a href="./?view=stream" data-view="stream">全量动态</a>
-        <a href="./?view=research" data-view="research">论文雷达</a>
+        <a href="./?view=research" data-view="research">每日经典论文</a>
         <a href="./?view=history" data-view="history">历史</a>
         <a href="./?view=bookmarks" data-view="bookmarks">收藏</a>
         <a href="./?view=watchlist" data-view="watchlist">关注</a>
@@ -46,10 +46,8 @@
           <input id="search" type="search" placeholder="搜索标题、摘要、来源…" autocomplete="off">
           <kbd>/</kbd>
         </label>
-        <a class="action subtle feed-link" href="./feed.xml" title="使用 RSS/Atom 阅读器订阅">Atom 订阅</a>
         <button class="icon-button" id="themeBtn" type="button" title="切换深色模式" aria-label="切换深色模式">◐</button>
         <button class="icon-button" id="reloadBtn" type="button" title="刷新数据" aria-label="刷新数据">↻</button>
-        <button class="action" id="emailBtn" type="button">邮件推送</button>
       </div>
     </div>
   </header>
@@ -101,35 +99,6 @@
       </div>
     </section>
 
-    <aside class="shell research-notice" id="researchNotice" hidden>
-      <b>研究阅读提示</b>
-      <p>论文条目优先来自公开预印本资料库。中文摘要只用于快速理解，不代表研究已经同行评审或独立复现。</p>
-    </aside>
-
-    <section class="shell research-keyword-panel" id="researchKeywordPanel" hidden aria-labelledby="researchKeywordTitle">
-      <div class="research-keyword-copy">
-        <p class="eyebrow">PERSONAL PAPER SIGNALS</p>
-        <h2 id="researchKeywordTitle">我的论文关键词</h2>
-        <p>最多保存 20 个中英文关键词，只保存在当前浏览器。论文标题、摘要、研究字段和系统采集标签命中后会高亮，并进入你的专属论文流。</p>
-        <div class="research-scope" role="group" aria-label="论文流范围">
-          <button class="active" type="button" data-research-scope="all" aria-pressed="true">全部论文 <span id="allResearchCount">0</span></button>
-          <button type="button" data-research-scope="mine" aria-pressed="false">我的论文流 <span id="mineResearchCount">0</span></button>
-        </div>
-      </div>
-      <div class="research-keyword-tools">
-        <form id="researchKeywordForm">
-          <label for="researchKeywordInput">添加关键词 <span id="researchKeywordLimit">0 / 20</span></label>
-          <div><input id="researchKeywordInput" maxlength="60" placeholder="例如：多模态智能体"><button type="submit">添加</button></div>
-          <div class="watch-chips" id="researchKeywordChips" aria-live="polite"></div>
-        </form>
-        <div class="collection-keywords">
-          <b>系统采集词</b>
-          <p>这些词会直接搜索 arXiv 的标题与摘要；个人关键词则用于本机筛选。</p>
-          <div id="collectionKeywordChips"></div>
-        </div>
-      </div>
-    </section>
-
     <section class="shell watch-panel" id="watchPanel" hidden>
       <div>
         <p class="eyebrow">LOCAL WATCHLIST</p>
@@ -146,6 +115,9 @@
     <section class="shell deepread" id="deepreadSection" hidden aria-label="每日深读报道">
       <div id="deepreadContent" aria-live="polite" aria-busy="false"></div>
     </section>
+
+    <section class="shell classic-section" id="classicSection" hidden aria-label="每日经典论文"></section>
+    <section class="shell classic-bookmarks" id="classicBookmarks" hidden aria-label="收藏的经典论文"></section>
 
     <section class="shell feed" id="feedSection" aria-labelledby="feedTitle">
       <div class="feed-head">
@@ -176,7 +148,7 @@
 
   <footer class="shell foot">
     <p id="dataNote">正在检查数据状态…</p>
-    <p>仅保存新闻与论文元数据及短摘要 · 收藏、关注词和论文关键词只保存在本机</p>
+    <p>新闻与经典论文导读均附原文来源 · 收藏和关注词只保存在本机</p>
   </footer>
 
   <dialog id="infoDialog">
@@ -186,6 +158,9 @@
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
   <noscript><div class="noscript">此页面需要 JavaScript 才能读取和筛选日报数据。</div></noscript>
+  <script src="./assets/publication-client.js" defer></script>
+  <script src="./assets/classic-client.js" defer></script>
+  <script src="./assets/classic-papers.js" defer></script>
   <script src="./assets/app.js" defer></script>
 </body>
 </html>

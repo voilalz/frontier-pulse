@@ -1,5 +1,13 @@
 # Changelog
 
+## 未发布：A01–A05
+
+- 导航移除 Atom 和邮件推送入口，保留后台能力。
+- 暂存目录生成，验证后提升；失败仅更新状态。
+- 七个带 SHA-256 清单的完整快照与恢复命令，前端按版本读取。
+- 北京时间统一展示，区分当前更新、待更新、失败和历史版本。
+- 独立监测与每日最多两次幂等补跑代码，默认关闭、未部署。
+
 ## 2026-09-26 — Grounded evidence, stable events and daily deep read
 
 - Select title-relevant original paragraphs across RSS, HTML and JSON-LD before editing; reject conflicting article headlines and never recycle published model summaries as source evidence. Summary revision 4 invalidates old translations.

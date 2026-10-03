@@ -7,6 +7,9 @@ const APP_SHELL = [
   "./index.html",
   "./assets/styles.css",
   "./assets/app.js",
+  "./assets/publication-client.js",
+  "./assets/classic-client.js",
+  "./assets/classic-papers.js",
   "./assets/news-policy.json",
   "./favicon.svg",
   "./og-card.png",
@@ -35,6 +38,12 @@ async function networkFirst(request) {
   } catch (error) {
     const cached = await cache.match(request, { ignoreSearch: false });
     if (cached) return cached;
+    // Query parameters select views inside the same cached application shell.
+    // Data and immutable snapshots still require an exact URL match.
+    if (request.mode === "navigate") {
+      const shell = await cache.match(new URL("./index.html", self.location.href));
+      if (shell) return shell;
+    }
     throw error;
   }
 }
