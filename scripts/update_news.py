@@ -43,7 +43,7 @@ USER_AGENT = "FrontierPulseBot/2.0 (+https://github.com/voilalz/frontier-pulse; 
 CATEGORIES = ("AI", "航空航天", "军事动态", "局部冲突", "前沿技术", "无人系统")
 DEFAULT_TIMEZONE = "Asia/Shanghai"
 SOURCE_TEXT_LIMIT = 6000
-SUMMARY_REVISION = 4
+SUMMARY_REVISION = 5
 
 
 @dataclass
@@ -63,6 +63,7 @@ class Article:
     raw_score: float = 0.0
     corroboration: int = 1
     evidence_sources: list[dict[str, str]] = field(default_factory=list)
+    source_evidence: list[dict[str, str]] = field(default_factory=list)
     score_components: dict[str, int] = field(default_factory=dict)
     score_reasons: list[str] = field(default_factory=list)
     is_supplemental: bool = False
@@ -395,6 +396,7 @@ def enrich_article_descriptions(articles: list[Article], config: dict[str, Any])
 
     def apply(article: Article, page: str = "") -> None:
         result = select_relevant_evidence(article.title, article.description, page)
+        capture_source_evidence(article, result["text"], result["status"])
         article.description = result["text"]
         article.evidence_quality = {key: result[key] for key in (
             "status", "candidateCount", "selectedCount", "reason"
@@ -735,7 +737,7 @@ def article_from_public_item(item: dict[str, Any], now: datetime) -> Article | N
         if source.get("evidenceGroup") or source.get("domain") or source.get("name")
     }
     category = clean_text(item.get("category"))
-    return Article(
+    cached = Article(
         id=clean_text(item.get("id")) or article_id(target, title),
         title=title,
         # Public summaries may be model-authored, including an obsolete
@@ -752,6 +754,17 @@ def article_from_public_item(item: dict[str, Any], now: datetime) -> Article | N
         corroboration=max(1, len(independent)),
         evidence_sources=sources,
     )
+
+    from evidence_trace import validate_evidence
+    records = item.get("evidenceRecords", [])
+    try:
+        validate_evidence(records)
+    except (ValueError, TypeError, KeyError):
+        records = []
+    allowed = {target, *(source["url"] for source in sources)}
+    cached.source_evidence = [dict(record) for record in records if record["url"] in allowed]
+    cached.description = " ".join(record["text"] for record in cached.source_evidence)
+    return cached
 
 
 def collect_public_cache(
@@ -1561,7 +1574,26 @@ def ensure_evidence_sources(article: Article) -> None:
         article.evidence_sources = [source_evidence(article)]
 
 
+def capture_source_evidence(article: Article, raw_text: str | None = None, status: str = "") -> list[dict[str, str]]:
+    from evidence_trace import make_evidence, merge_evidence, validate_evidence
+    from news_evidence import select_relevant_evidence
+    existing = article.source_evidence
+    try:
+        validate_evidence(existing)
+    except (ValueError, TypeError, KeyError):
+        existing = []
+    if raw_text is None:
+        result = select_relevant_evidence(article.title, article.description, "")
+        raw_text, status = result["text"], result["status"]
+    fresh = make_evidence(raw_text, article.url, utc_now().isoformat(), "body" if status == "body" else "feed")
+    seen = {(record["url"], record["text"]) for record in existing}
+    article.source_evidence = merge_evidence(existing, [r for r in fresh if (r["url"], r["text"]) not in seen])
+    return article.source_evidence
+
+
 def merge_evidence_sources(target: Article, incoming: Article) -> None:
+    from evidence_trace import merge_evidence
+    target.source_evidence = merge_evidence(capture_source_evidence(target), capture_source_evidence(incoming))
     ensure_evidence_sources(target)
     ensure_evidence_sources(incoming)
     if descriptions_look_syndicated(target, incoming):
@@ -1595,30 +1627,19 @@ def article_identity_input(article: Article) -> dict[str, Any]:
 
 def deduplicate(articles: Iterable[Article]) -> list[Article]:
     from event_identity import same_event
-    unique: list[Article] = []
-    urls: dict[str, Article] = {}
+    groups: list[list[Article]] = []
     for article in sorted(articles, key=lambda item: item.published_at, reverse=True):
         ensure_evidence_sources(article)
-        key = canonical_url(article.url)
-        if key in urls:
-            merge_evidence_sources(urls[key], article)
-            if not urls[key].description and article.description:
-                urls[key].description = article.description
-            continue
-        duplicate = False
-        for existing in unique:
-            close_in_time = abs((existing.published_at - article.published_at).total_seconds()) <= 24 * 3600
-            if close_in_time and same_event(article_identity_input(article), article_identity_input(existing)):
-                merge_evidence_sources(existing, article)
-                if not existing.description and article.description:
-                    existing.description = article.description
-                duplicate = True
-                break
-        if duplicate:
-            continue
-        urls[key] = article
-        unique.append(article)
-    return unique
+        group = next((members for members in groups if all(
+            same_event(article_identity_input(article), article_identity_input(member)) for member in members)), None)
+        if group is None:
+            groups.append([article])
+        else:
+            merge_evidence_sources(group[0], article)
+            if not group[0].description and article.description:
+                group[0].description = article.description
+            group.append(article)
+    return [group[0] for group in groups]
 
 
 WEAK_TOPIC_TERMS = {
@@ -2186,6 +2207,15 @@ def item_from_article(
     if not key_facts:
         key_facts = fallback_key_facts(article, summary)
     ensure_evidence_sources(article)
+    from evidence_trace import TRACE_VERSION, trace_claim, validate_claim_refs, safe_title, excerpt_summary
+    records = capture_source_evidence(article)
+    summary_refs = editorial.get("summaryEvidenceRefs") or trace_claim(summary, records)
+    if not validate_claim_refs(summary, summary_refs, records):
+        summary = excerpt_summary(records) if records else "未提取到可引用的正文，请查看原始报道。"
+        summary_refs = trace_claim(summary, records)
+    facts = [{"text": fact, "evidenceIds": refs} for fact in key_facts
+             if fact != summary and (refs := trace_claim(fact, records))]
+    key_facts = [fact["text"] for fact in facts]
     confidence, confidence_reason = confidence_assessment(article, config)
     score_reasons = list(article.score_reasons)
     selection_provider = clean_text(selection.get("_provider"))
@@ -2204,10 +2234,14 @@ def item_from_article(
         "id": article.id,
         "eventId": "evt-" + hashlib.sha1(article.id.encode("utf-8")).hexdigest()[:12],
         "contentType": "news",
-        "title": clean_text(editorial.get("titleZh") or article.title, 180),
+        "title": safe_title(clean_text(editorial.get("titleZh") or article.title, 180), article.title, records),
         "originalTitle": article.title,
         "summary": summary,
         "summaryRevision": SUMMARY_REVISION,
+        "traceVersion": TRACE_VERSION,
+        "evidenceRecords": records,
+        "summaryEvidenceRefs": summary_refs,
+        "keyFactEvidence": facts,
         "summaryEvidence": dict(article.evidence_quality),
         "summaryInputHash": summary_input_hash(article),
         "keyFacts": key_facts,
@@ -2390,6 +2424,7 @@ def request_daily_translation_batch(
         "index": index,
         "title": article.title,
         "description": clean_text(article.description, SOURCE_TEXT_LIMIT),
+        "evidenceRecords": capture_source_evidence(article),
         "source": article.source,
         "publishedAt": article.published_at.isoformat().replace("+00:00", "Z"),
         "category": article.category,
@@ -2397,16 +2432,16 @@ def request_daily_translation_batch(
     example = {"items": [{
         "index": index,
         "titleZh": f"第{index}条新闻的忠实中文标题",
-        "summary": "概括事件、背景、关键细节及最新进展的180至320字中文摘要；证据不足时可更短",
+        "summary": "从原文片段中连续摘录有用事实；片段不足时保持简短",
         "tags": ["标签"],
     } for index in indexes]}
     result = request_structured_json(
         runtime,
         instructions=(
             "你是国际科技与安全新闻中文编辑。这些新闻已经入选，不得改变顺序、取舍或重要度。"
-            "只能依据标题、描述、来源和时间工作，不得补写输入中没有的事实。"
+            "只能依据原始标题和evidenceRecords中的原文片段工作，不得把描述中的模型摘要当作证据。"
             f"本批共有{len(batch)}条，items必须恰好输出{len(batch)}条且每个index只出现一次。"
-            "每条生成忠实中文标题和180至320字中文摘要，按事件、背景、关键细节、最新进展组织为4至6句。"
+            "标题忠实保留原始主体、否定和阶段；摘要连续摘录原文句子，允许保留原文语言，不要求字数或句数。"
             "在证据支持时保留时间、地点、主体、动作、关键数值及后续安排；没有的信息不要补写。"
             "篇幅取决于可用事实，原文不足时直接写短，不要罗列原文未交代的地点、人名、规模等信息凑字数。"
             "禁止输出核实程度、信源数量、评分或编辑过程等内部字段；仅有标题且描述为空时才简短说明没有详细摘要。"
@@ -2760,8 +2795,13 @@ def merge_featured_stream_item(item: dict[str, Any], daily_item: dict[str, Any])
 
     stream_is_translated = bool(clean_text(item.get("translationProvider")))
     daily_is_translated = bool(clean_text(daily_item.get("translationProvider")))
+    from evidence_trace import validate_news_trace
+    try:
+        validate_news_trace(daily_item)
+    except (ValueError, TypeError, KeyError):
+        current_evidence = False
     if current_evidence and (daily_is_translated or not stream_is_translated):
-        for field_name in ("originalTitle", "title", "summary", "summaryRevision", "summaryInputHash", "keyFacts", "why", "tags", "translationProvider"):
+        for field_name in ("originalTitle", "title", "summary", "summaryRevision", "summaryInputHash", "keyFacts", "why", "tags", "translationProvider", "traceVersion", "evidenceRecords", "summaryEvidenceRefs", "keyFactEvidence"):
             if field_name in daily_item:
                 item[field_name] = daily_item[field_name]
 
@@ -2782,7 +2822,12 @@ def recover_daily_translations(report: dict[str, Any], stream: dict[str, Any]) -
             or not clean_text(translated.get("title")) or not clean_text(translated.get("summary"))
         ):
             continue
-        for name in ("title", "summary", "keyFacts", "why", "tags", "translationProvider"):
+        from evidence_trace import validate_news_trace
+        try:
+            validate_news_trace(translated)
+        except (ValueError, TypeError, KeyError):
+            continue
+        for name in ("title", "summary", "keyFacts", "why", "tags", "translationProvider", "traceVersion", "evidenceRecords", "summaryEvidenceRefs", "keyFactEvidence"):
             if name in translated:
                 item[name] = translated[name]
         recovered += 1
@@ -4071,7 +4116,9 @@ def validate_research_report(report: dict[str, Any], *, allow_empty: bool = True
     validate_ai_batch_diagnostics(report.get("editorialDiagnostics"), "research editorial")
 
 
-def write_json_atomic(path: Path, payload: Any) -> None:
+def write_json_atomic(path: Path, payload: Any, *, allow_releases: bool = False) -> None:
+    from news_boundary import safe_path
+    path = safe_path(path, write=True, allow_releases=allow_releases)
     path.parent.mkdir(parents=True, exist_ok=True)
     encoded = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
     with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as handle:
@@ -4082,6 +4129,8 @@ def write_json_atomic(path: Path, payload: Any) -> None:
 
 def write_atom_feed(report: dict[str, Any], path: Path, site_url: str) -> None:
     """Publish a standards-based Atom feed without introducing a backend service."""
+    from news_boundary import safe_path
+    path = safe_path(path, write=True)
     atom = "http://www.w3.org/2005/Atom"
     ET.register_namespace("", atom)
     feed = ET.Element(f"{{{atom}}}feed")
@@ -4151,6 +4200,7 @@ def compact_search_item(item: dict[str, Any], edition: str) -> dict[str, Any]:
 
 
 def read_existing_search_items(search_output: Path) -> list[dict[str, Any]]:
+    from news_boundary import owns, safe_path
     previous = read_json_safe(search_output, {})
     if not isinstance(previous, dict):
         return []
@@ -4159,9 +4209,9 @@ def read_existing_search_items(search_output: Path) -> list[dict[str, Any]]:
     items: list[dict[str, Any]] = []
     for shard in previous.get("shards", []):
         month = str(shard.get("month", "")) if isinstance(shard, dict) else ""
-        if not re.fullmatch(r"\d{4}-\d{2}", month):
+        if not owns(f"data/archive/search-{month}.json"):
             continue
-        payload = read_json_safe(search_output.parent / f"search-{month}.json", {})
+        payload = read_json_safe(safe_path(search_output.parent / f"search-{month}.json"), {})
         if isinstance(payload, dict) and isinstance(payload.get("items"), list):
             items.extend(item for item in payload["items"] if isinstance(item, dict))
     return items
@@ -4195,6 +4245,7 @@ def archive_report(
     retention_days: int,
 ) -> None:
     """Store one replaceable-by-date edition plus compact navigation/search indexes."""
+    from news_boundary import owns
     edition = str(report["editionDate"])
     archive_path = archive_dir / f"{edition}.json"
     write_json_atomic(archive_path, report)
@@ -4242,7 +4293,7 @@ def archive_report(
     monthly: dict[str, list[dict[str, Any]]] = {}
     for item in search_items:
         item_edition = str(item.get("editionDate", ""))
-        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", item_edition):
+        if not owns(f'data/archive/{item_edition}.json'):
             continue
         monthly.setdefault(item_edition[:7], []).append(compact_search_item(item, item_edition))
 
@@ -4280,8 +4331,9 @@ def archive_report(
         })
 
     for old_shard in search_output.parent.glob("search-????-??.json"):
-        if old_shard.name not in active_shard_names:
-            old_shard.unlink()
+        from news_boundary import owns, safe_path
+        if owns('data/archive/' + old_shard.name) and old_shard.name not in active_shard_names:
+            safe_path(old_shard, write=True).unlink()
 
     write_json_atomic(search_output, {
         "schemaVersion": 2,
@@ -4366,13 +4418,13 @@ def write_pipeline_status(
         "streamTranslatedItemCount": int(stream_report.get("translatedItemCount", 0)) if success and stream_report else previous.get("streamTranslatedItemCount", 0),
         "streamTranslationWarnings": stream_report.get("translationWarnings", []) if success and stream_report else previous.get("streamTranslationWarnings", []),
         "streamTranslationDiagnostics": stream_report.get("translationDiagnostics", {}) if success and stream_report else previous.get("streamTranslationDiagnostics", {}),
-        "researchItemCount": int(research_report.get("itemCount", 0)) if success and research_report else previous.get("researchItemCount", 0),
-        "researchEditorialStatus": research_report.get("editorialStatus") if success and research_report else previous.get("researchEditorialStatus"),
-        "researchEditorialProvider": research_report.get("editorialProvider") if success and research_report else previous.get("researchEditorialProvider"),
-        "researchEditorialModel": research_report.get("editorialModel") if success and research_report else previous.get("researchEditorialModel"),
-        "researchTranslatedItemCount": int(research_report.get("translatedItemCount", 0)) if success and research_report else previous.get("researchTranslatedItemCount", 0),
-        "researchWarnings": research_report.get("warnings", []) if success and research_report else previous.get("researchWarnings", []),
-        "researchEditorialDiagnostics": research_report.get("editorialDiagnostics", {}) if success and research_report else previous.get("researchEditorialDiagnostics", {}),
+        "researchItemCount": int(research_report.get("itemCount", 0)) if success and research_report else (0 if success else previous.get("researchItemCount", 0)),
+        "researchEditorialStatus": research_report.get("editorialStatus") if success and research_report else (None if success else previous.get("researchEditorialStatus")),
+        "researchEditorialProvider": research_report.get("editorialProvider") if success and research_report else (None if success else previous.get("researchEditorialProvider")),
+        "researchEditorialModel": research_report.get("editorialModel") if success and research_report else (None if success else previous.get("researchEditorialModel")),
+        "researchTranslatedItemCount": int(research_report.get("translatedItemCount", 0)) if success and research_report else (0 if success else previous.get("researchTranslatedItemCount", 0)),
+        "researchWarnings": research_report.get("warnings", []) if success and research_report else ([] if success else previous.get("researchWarnings", [])),
+        "researchEditorialDiagnostics": research_report.get("editorialDiagnostics", {}) if success and research_report else ({} if success else previous.get("researchEditorialDiagnostics", {})),
     }
     write_json_atomic(path, payload)
 
@@ -4422,12 +4474,52 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--status-output", type=Path, default=Path("public/data/status.json"))
     parser.add_argument("--feed-output", type=Path, default=Path("public/feed.xml"))
     parser.add_argument("--fixture", type=Path, help="Use a local fixture instead of live sources")
-    parser.add_argument("--research-fixture", type=Path, help="Use a local research fixture instead of arXiv")
+    parser.add_argument("--research-fixture", type=Path, help="Deprecated compatibility argument; unused by news")
     parser.add_argument("--skip-ai", action="store_true", help="Disable optional DeepSeek/OpenAI editorial translation")
-    parser.add_argument("--skip-research", action="store_true", help="Do not refresh the research radar")
+    parser.add_argument("--skip-research", action="store_true", help="Deprecated compatibility argument; news never refreshes papers")
     parser.add_argument("--stream-only", action="store_true", help="Refresh the full stream without replacing the daily Top 10")
     parser.add_argument("--now", help="Override current time for deterministic tests")
     return parser.parse_args(argv)
+
+
+def preflight_news_outputs(args, now, config=None):
+    """Inventory configured and derived news targets before any mutation."""
+    from news_boundary import safe_path, owns
+    inputs = {path.resolve() for path in [args.config, args.fixture] if path is not None}
+    outputs = [args.stream_output, args.stream_status_output, args.events_output,
+               args.source_health_output]
+    directories = []
+    if not args.stream_only:
+        outputs += [args.output, args.status_output, args.deepread_output, args.weekly_output,
+                    args.signals_output, args.archive_index, args.search_index, args.feed_output]
+        directories = [(args.archive_dir, 'data/archive/'),
+                       (args.search_index.parent, 'data/archive/'),
+                       (args.deepread_output.parent / 'deepread', 'data/deepread/'),
+                       (args.weekly_dir, 'data/weekly/')]
+        if config is not None:
+            local = now.astimezone(ZoneInfo(config.get('timezone', DEFAULT_TIMEZONE))).date()
+            edition = local.isoformat()
+            year, week, _ = local.isocalendar()
+            outputs += [args.archive_dir / f'{edition}.json',
+                        args.deepread_output.parent / 'deepread' / f'{edition}.json',
+                        args.deepread_output.parent / 'deepread/index.json',
+                        args.weekly_dir / f'{year}-W{week:02d}.json',
+                        args.search_index.parent / f'search-{edition[:7]}.json']
+    for directory, prefix in directories:
+        checked = safe_path(directory, write=True)
+        if checked.exists() and not checked.is_dir():
+            raise ValueError('News archive path is not a directory')
+        if checked in inputs:
+            raise ValueError('News directory aliases a source input')
+        # Do not inspect or follow files outside the news naming rules.
+        if checked.exists():
+            outputs.extend(path for path in checked.iterdir() if owns(prefix + path.name))
+    for path in outputs:
+        checked = safe_path(path, write=True)
+        if checked.exists() and not checked.is_file():
+            raise ValueError('News output path is not a file')
+        if checked in inputs:
+            raise ValueError('News output aliases a source input')
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -4441,7 +4533,17 @@ def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"), format="%(levelname)s %(message)s")
     now = parse_datetime(args.now, utc_now()) if args.now else utc_now()
     try:
+        preflight_news_outputs(args, now)
+    except (ValueError, OSError) as exc:
+        LOGGER.error('Unsafe news output: %s', exc)
+        return 2
+    try:
         config = load_config(args.config)
+        try:
+            preflight_news_outputs(args, now, config)
+        except (ValueError, OSError) as exc:
+            LOGGER.error('Unsafe derived news output: %s', exc)
+            return 2
         history_items = read_existing_search_items(args.search_index) if not args.stream_only else []
         previous_event_registry = read_json_safe(args.events_output, {})
         source_diagnostics: list[dict[str, Any]] = []
@@ -4617,38 +4719,6 @@ def main(argv: list[str] | None = None) -> int:
             report["qualifiedCandidateCount"] = collection_report["qualifiedCandidateCount"]
             attach_item_intelligence(report["items"], report["editionDate"])
 
-        research_report: dict[str, Any] | None = None
-        research_should_write = False
-        research_collection_warning = ""
-        if not args.skip_research:
-            if args.research_fixture:
-                raw_papers = collect_research_fixture(args.research_fixture, now, config)
-            elif args.fixture:
-                raw_papers = []
-            else:
-                raw_papers = collect_arxiv(config, now)
-            papers = score_research_papers(raw_papers, config, now)
-            if papers:
-                research_report = build_research_report(papers, config, now, args.skip_ai)
-                validate_research_report(research_report, allow_empty=False)
-                research_should_write = True
-            else:
-                previous_research = read_json_safe(args.research_output, {})
-                if isinstance(previous_research, dict) and isinstance(previous_research.get("items"), list) and previous_research["items"]:
-                    research_collection_warning = "论文抓取未返回合格条目，已保留上一版论文雷达"
-                    research_report = retain_stale_research_report(
-                        previous_research,
-                        research_collection_warning,
-                        now,
-                    )
-                    validate_research_report(research_report, allow_empty=False)
-                    research_should_write = True
-                    LOGGER.warning(research_collection_warning)
-                else:
-                    research_report = build_research_report([], config, now, args.skip_ai)
-                    validate_research_report(research_report)
-                    research_should_write = True
-
         registry_report = {
             "editionDate": now.astimezone(ZoneInfo(config.get("timezone", DEFAULT_TIMEZONE))).date().isoformat(),
             "generatedAt": stream_report["generatedAt"], "timezone": config.get("timezone", DEFAULT_TIMEZONE),
@@ -4659,17 +4729,9 @@ def main(argv: list[str] | None = None) -> int:
         anomaly_report: dict[str, Any] | None = None
         deepread: dict[str, Any] | None = None
         if report:
-            research_for_linking = research_report
-            if research_for_linking is None:
-                previous_research = read_json_safe(args.research_output, {})
-                if isinstance(previous_research, dict) and isinstance(previous_research.get("items"), list):
-                    research_for_linking = previous_research
-            if isinstance(research_for_linking, dict):
-                link_news_and_research(report, research_for_linking, config)
-            else:
-                for item in report["items"]:
-                    item["relatedPapers"] = []
-                report["paperLinkedItemCount"] = 0
+            for item in report["items"]:
+                item["relatedPapers"] = []
+            report["paperLinkedItemCount"] = 0
 
             # Update daily-only intelligence without losing stream-only records.
             event_registry = build_event_registry(report, event_registry, config, now)
@@ -4694,8 +4756,6 @@ def main(argv: list[str] | None = None) -> int:
                     merge_featured_stream_item(stream_item, daily_item)
             validate_report(report, int(config["top_n"]))
             validate_stream_report(stream_report)
-            if research_report is not None:
-                validate_research_report(research_report, allow_empty=not bool(research_report.get("items")))
             from deepread_editorial import build_daily_deepread
             evidence_by_id = {article.id: article.description for article in stream_candidates if not article.date_estimated}
             deepread_inputs = [
@@ -4709,8 +4769,6 @@ def main(argv: list[str] | None = None) -> int:
         if args.stream_only:
             write_json_atomic(args.stream_output, stream_report)
             write_json_atomic(args.events_output, event_registry)
-            if research_report is not None and research_should_write:
-                write_json_atomic(args.research_output, research_report)
             write_stream_status(
                 args.stream_status_output,
                 state="ok",
@@ -4739,8 +4797,6 @@ def main(argv: list[str] | None = None) -> int:
         write_json_atomic(args.weekly_output, weekly_digest)
         write_json_atomic(args.weekly_dir / f"{weekly_digest['weekId']}.json", weekly_digest)
         write_json_atomic(args.signals_output, anomaly_report)
-        if research_report is not None and research_should_write:
-            write_json_atomic(args.research_output, research_report)
         write_atom_feed(
             report,
             args.feed_output,
@@ -4749,8 +4805,6 @@ def main(argv: list[str] | None = None) -> int:
         success_message = "日报更新成功"
         if report.get("warnings"):
             success_message += "；" + "；".join(report["warnings"])
-        if research_report and research_report.get("warnings"):
-            success_message += "；" + "；".join(research_report["warnings"])
         write_pipeline_status(
             args.status_output,
             state="ok",
@@ -4758,7 +4812,6 @@ def main(argv: list[str] | None = None) -> int:
             message=success_message,
             report=report,
             stream_report=stream_report,
-            research_report=research_report,
         )
         write_stream_status(
             args.stream_status_output,

@@ -70,7 +70,10 @@ class NewsReadingTests(unittest.TestCase):
 
     def test_long_supported_summary_is_not_cut_at_old_220_character_limit(self):
         summary = "欧洲团队公布了新一代卫星测试计划，介绍了试验目标和载荷。" * 8 + "最终发射时间仍待批准。"
-        item = MODULE.item_from_article(self.article("ESA satellite tests"), self.config, {"summary": summary})
+        article = self.article("ESA satellite tests")
+        from evidence_trace import make_evidence
+        article.source_evidence = make_evidence(summary, article.url, self.now.isoformat())
+        item = MODULE.item_from_article(article, self.config, {"summary": summary})
         self.assertEqual(item["summary"], summary)
 
     def test_article_text_uses_body_paragraphs_without_navigation_or_promotions(self):
@@ -177,7 +180,9 @@ class NewsReadingTests(unittest.TestCase):
             top_stories={article.id: stale}, translations={article.id: {
                 "titleZh": "新标题", "summary": "新摘要包含更完整的任务信息和发射计划。", "_provider": "deepseek",
             }})
-        self.assertEqual(stream["items"][0]["summary"], "新摘要包含更完整的任务信息和发射计划。")
+        self.assertNotEqual(stream["items"][0]["summary"], "旧的短摘要")
+        from evidence_trace import validate_news_trace
+        validate_news_trace(stream["items"][0])
 
     def test_stale_featured_translation_does_not_skip_stream_translation(self):
         article = self.article("NASA satellite mission")
@@ -203,7 +208,9 @@ class NewsReadingTests(unittest.TestCase):
             top_stories={article.id: daily}, translations={article.id: {
                 "titleZh": "卫星任务推迟", "summary": "任务已推迟至十月。", "_provider": "deepseek",
             }})
-        self.assertEqual(stream["items"][0]["summary"], "任务已推迟至十月。")
+        self.assertNotEqual(stream["items"][0]["summary"], "旧任务计划。")
+        from evidence_trace import validate_news_trace
+        validate_news_trace(stream["items"][0])
 
     def browser_result(self, expression):
         # Execute the real normalizers/renderers; avoid network and browser startup.
@@ -219,7 +226,7 @@ if (toggleStart < 0 || toggleEnd < toggleStart) throw new Error('Cannot locate d
 const elements = {}, handlers = {};
 const context = {URL, URLSearchParams, Date, Set, Map, console,
   location: {origin:'https://newsfrontier.top', pathname:'/', search:'', hash:''}, localStorage:{getItem:()=>null},
-  window:{matchMedia:()=>({matches:false})},
+  window:{FrontierPublication:require('./public/assets/publication-client.js'),matchMedia:()=>({matches:false})},
   document:{getElementById:id=>(elements[id] ||= {addEventListener:(name, callback)=>handlers[name]=callback}), querySelectorAll:()=>[]},
   policy:input.policy, handlers, result:null};
 const expose = '\nif (typeof newsPolicy !== "undefined") newsPolicy = policy;\nresult = (' + input.expression + ');\n})();';

@@ -50,6 +50,10 @@ _ALIASES = (
     (r"\blifts? off\b|\blifted off\b|\bblasts? off\b", "launch"),
 )
 _ACTIONS = {
+    "pause": r"\b(?:paus(?:e|es|ed|ing)|halt(?:s|ed|ing)?|suspend(?:s|ed|ing)?)\b|暂停|中止",
+    "resume": r"\b(?:resum(?:e|es|ed|ing)|restart(?:s|ed|ing)?)\b|恢复|重启",
+    "cancel": r"\bcancel(?:s|led|ed|ling|ing)?\b|取消",
+    "delay": r"\b(?:delay(?:s|ed|ing)?|postpon(?:e|es|ed|ing))\b|推迟|延期",
     "lawsuit": r"\bsu(?:e|es|ed|ing)\b|\blawsuits?\b|\blitigation\b|起诉|诉讼",
     "attack": r"\battack(?:s|ed|ing)?\b|\bstrikes?\b|\bassault(?:s|ed)?\b|\bbomb(?:ing|ings|ed)?\b|袭击|轰炸",
     "launch": r"\blaunch(?:es|ed|ing)?\b|\bliftoff\b|发射|升空",
@@ -293,15 +297,14 @@ def _evidence(item: dict[str, Any]) -> _Evidence:
 def _match(first: _Evidence, second: _Evidence, semantic: bool = True) -> str:
     if first.news_id and first.news_id == second.news_id:
         return "article-id"
-    if first.urls & second.urls:
-        return "article-url"
-    if not semantic or not first.day or not second.day or not first.headline or not second.headline:
-        return ""
+    shared_url = bool(first.urls & second.urls)
+    if not first.day or not second.day or not first.headline or not second.headline:
+        return "article-url" if shared_url else ""
     distance = abs((first.day - second.day).days)
     if distance > 30 or first.recurrence != second.recurrence or first.status != second.status:
         return ""
     for left, right in ((first.places, second.places), (first.actors, second.actors), (first.objects, second.objects),
-                        (first.subject, second.subject), (first.target, second.target)):
+                        (first.subject, second.subject)):
         if left and right and not left & right:
             return ""
     for family in first.identifiers.keys() & second.identifiers.keys():
@@ -312,6 +315,20 @@ def _match(first: _Evidence, second: _Evidence, semantic: bool = True) -> str:
     if first.incident_dates and second.incident_dates and not first.incident_dates & second.incident_dates:
         return ""
 
+    if (bool(re.search(r"\b(?:not|never|denies|denied)\b|并未|否认", first.headline))
+            != bool(re.search(r"\b(?:not|never|denies|denied)\b|并未|否认", second.headline))):
+        return ""
+    components = r"\b(?:heatshield|abort motor|rotors|sensors|docking hardware)\b"
+    left_parts, right_parts = set(re.findall(components, first.headline)), set(re.findall(components, second.headline))
+    if left_parts and right_parts and not left_parts & right_parts:
+        return ""
+    numbered_payload = bool((first.identifiers.keys() & second.identifiers.keys()) - {"falcon"})
+    if first.target and second.target and not first.target & second.target and not numbered_payload:
+        return ""
+    if not semantic:
+        return "article-url" if shared_url else ""
+    if shared_url:
+        return "article-url" if not (first.actions and second.actions and not first.actions & second.actions) else ""
     common_objects = first.objects & second.objects
     common_anchors = first.anchors & second.anchors
     common_ids = first.identifiers.keys() & second.identifiers.keys()
@@ -362,6 +379,18 @@ def _match(first: _Evidence, second: _Evidence, semantic: bool = True) -> str:
 def same_event(first: dict[str, Any], second: dict[str, Any]) -> bool:
     """Match a discrete event; unrelated historical context is never evidence."""
     return bool(_match(_evidence(first), _evidence(second)))
+
+
+def _lineage_match(first: _Evidence, second: _Evidence) -> bool:
+    numbered = (first.identifiers.keys() & second.identifiers.keys()) - {"falcon"}
+    return bool(first.day and second.day and abs((first.day-second.day).days) <= 30
+                and numbered and all(first.identifiers[key] == second.identifiers[key] for key in numbered)
+                and first.actors & second.actors and first.incident_dates & second.incident_dates
+                and first.status != second.status and first.actions & second.actions)
+
+
+def same_event_lineage(first, second):
+    return bool(_match(_evidence(first), _evidence(second)) or _lineage_match(_evidence(first), _evidence(second)))
 
 
 def event_identity_record(item: dict[str, Any]) -> dict[str, Any]:
@@ -507,6 +536,11 @@ def assign_event_ids(items: list[dict[str, Any]], previous_registry: dict[str, A
                     saved = _evidence(representative)
                     semantic_by_day.setdefault(saved_day, []).append((event_id, saved))
 
+    url_proof = {}
+    for record in records:
+        for representative in record.get("identityRepresentatives", []):
+            if isinstance(representative, dict):
+                url_proof.setdefault(canonical_event(record["eventId"]), []).append(_evidence(representative))
     assigned: list[str] = [""] * len(items)
     eligible = [True] * len(items)
     decisions = ["new-event"] * len(items)
@@ -514,13 +548,16 @@ def assign_event_ids(items: list[dict[str, Any]], previous_registry: dict[str, A
     for index, current in enumerate(evidence):
         exact = set(news_index.get(current.news_id, set()))
         for url in current.urls:
-            exact.update(url_index.get(url, set()))
+            for event_id in url_index.get(url, set()):
+                proof = [saved for saved in url_proof.get(event_id, []) if url in saved.urls]
+                if not proof or any(_match(current, saved) or _lineage_match(current, saved) for saved in proof):
+                    exact.add(event_id)
         matches = exact
         if not matches and current.day:
             matches = {event_id
                        for offset in range(-30, 31)
                        for event_id, saved in semantic_by_day.get(current.day + timedelta(days=offset), ())
-                       if _match(current, saved)}
+                       if _match(current, saved) or _lineage_match(current, saved)}
         if len(matches) == 1:
             assigned[index] = next(iter(matches))
             eligible[index] = assigned[index] in reusable
@@ -531,6 +568,17 @@ def assign_event_ids(items: list[dict[str, Any]], previous_registry: dict[str, A
             reasons[index] = "multiple-event-identities"
             eligible[index] = False
 
+    # A generic historical representative cannot bridge incompatible current
+    # payloads. Detach the ambiguous registry assignment before batch grouping.
+    for event_id in set(assigned) - {""}:
+        members = [index for index, saved in enumerate(assigned) if saved == event_id]
+        if any(not (_match(evidence[left], evidence[right]) or _lineage_match(evidence[left], evidence[right]))
+               for left in members for right in members if left < right):
+            for index in members:
+                assigned[index] = ""
+                eligible[index] = True
+                decisions[index] = "ambiguous-registry"
+                reasons[index] = "incompatible-current-registry-members"
     # Reconcile old split IDs only with a stronger, same-day named-founding
     # certificate. Ordinary fuzzy bridges remain separated as before.
     proposed: dict[str, set[str]] = {}
@@ -583,7 +631,9 @@ def assign_event_ids(items: list[dict[str, Any]], previous_registry: dict[str, A
             current = pending.pop()
             for other in neighbors[current] & remaining - group:
                 reason = edges[min(current, other), max(current, other)]
-                if (current in ambiguous or other in ambiguous) and reason not in {"article-id", "article-url"}:
+                if current in ambiguous or other in ambiguous:
+                    continue
+                if any((min(other, member), max(other, member)) not in edges for member in group):
                     continue
                 group.add(other)
                 pending.append(other)

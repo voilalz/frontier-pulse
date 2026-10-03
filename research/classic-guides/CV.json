@@ -1,0 +1,3114 @@
+{
+  "schemaVersion": 1,
+  "primaryDomain": "CV",
+  "guides": [
+    {
+      "paperId": "classic:cv:sift",
+      "primaryDomain": "CV",
+      "title": "Distinctive Image Features from Scale-Invariant Keypoints",
+      "status": "ready",
+      "learningOrder": 1,
+      "overview": "这篇论文把跨尺度、旋转与一定视角变化下的图像对应问题，拆成稳定关键点检测、方向归一化和局部描述。作者用高斯差分寻找尺度空间极值，剔除低对比与边缘响应，再以局部梯度直方图描述纹理，并把匹配接到姿态聚类和几何验证。全文逐项实验解释这些环节如何配合，既讨论重复检测，也检查大数据库中的区分能力。据此建议分清尺度与旋转不变性、对视角变化的鲁棒性，以及特定实例识别与一般类别识别的边界。",
+      "guide": {
+        "problem": "同一物体在两幅图中的大小、朝向、照明和可见部分可能不同，固定尺度角点与直接像素相关难以保持可靠对应。本文要求局部点既能重复定位，又足够独特，使它在含大量干扰特征的数据库中仍能匹配；最终识别还需排除背景带来的错误对应。",
+        "method": "先搜索高斯差分的空间与尺度极值，再插值定位并去除低对比点和不稳定边缘响应。方向分配建立局部坐标系，分区梯度直方图经归一化形成一百二十八维描述子。匹配用最近与次近邻距离之比筛选，再经霍夫姿态聚类、仿射拟合和离群点剔除验证。",
+        "contribution": "贡献是把检测、描述与验证连成可分析的系统：检测重复性与描述区分性分别受检验，直方图分区与插值允许局部位置偏移，归一化减弱照明影响。对象识别示例说明局部证据能够在遮挡和杂乱背景中聚合；工程上推断，这些例子并不等于所有类别都可识别。",
+        "applicability": "原文展示物体实例识别和地点识别，并讨论三维重建、跟踪与全景拼接等对应任务。工程上据此可把它作为需要局部匹配、具有可重复纹理的场景基线，同时保留几何一致性检查；不能只凭某个描述子距离较小就认定物体身份。",
+        "limitations": "方法并非完全仿射不变，大幅三维视角改变仍会破坏定位与描述。原文指出非平面物体比平面纹理更受视角和照明影响，建议整合多个训练视图；结论也要求更系统地测试完整三维视角与照明变化，并提出补充颜色等特征的方向。",
+        "readingAdvice": "据此建议先沿引言的处理链区分检测器与描述子，再读局部描述章节和匹配章节，画出归一化、距离比检验与几何验证各自解决的问题。对照描述子示意图与正文确认实际维数，最后回读重复性实验和识别示例，分别判断实验条件与应用证据。"
+      },
+      "fullText": {
+        "url": "https://www.cs.ubc.ca/~lowe/papers/ijcv04.pdf",
+        "format": "pdf",
+        "sha256": "06f8acc68583e8b7a041d1fda84db83283e49f6cedc4638ea5cdd2f61caf8e3e",
+        "pageCount": 28,
+        "checkedAt": "2026-10-02T04:26:46.581633+00:00",
+        "edition": "作者网站的 2004-01-05 IJCV 已接收稿，文件 28 页；不是期刊 pp.91–110 的排版版。",
+        "sourceFile": "CV/sift2004.pdf",
+        "textFile": "CV/sift2004.pages.json",
+        "textSha256": "1ef4fe7ba81adc93893cb0787c664e3eb7fc8c0dba5f6ab619d07e18538b2126"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "reviewedAt": "2026-10-03T08:07:07.008373+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "这篇论文把跨尺度、旋转与一定视角变化下的图像对应问题，拆成稳定关键点检测、方向归一化和局部描述。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§1 Introduction，四阶段",
+          "context": {
+            "page": 2,
+            "start": 1127,
+            "end": 3227,
+            "sha256": "ee4026647fb8991757bd332ebdf29e2b8cd21e7b187dc314d811c2231d6a8909"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "作者用高斯差分寻找尺度空间极值",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5；§3，式(1)",
+          "context": {
+            "page": 5,
+            "start": 1300,
+            "end": 3043,
+            "sha256": "6f3aa3a012d1c96f1c749d6b7ae819c6607e3a08f11560e4adf9eae268c0f47c"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "剔除低对比与边缘响应",
+          "classification": "paperFact",
+          "sourcePages": [
+            10,
+            12
+          ],
+          "locator": "PDF p.10；§4；p.12 §4.1",
+          "context": {
+            "page": 10,
+            "start": 1995,
+            "end": 3247,
+            "sha256": "793d19349663a3eca003487e0a1debdee34a397cecfbf7d9ea9ed10a0d90605b"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "再以局部梯度直方图描述纹理",
+          "classification": "paperFact",
+          "sourcePages": [
+            15
+          ],
+          "locator": "PDF p.15；§6.1，Figure 7",
+          "context": {
+            "page": 15,
+            "start": 726,
+            "end": 2526,
+            "sha256": "7a003ac6879d641409a76139359adf97de3bd33a525b9aaa167c0a9e3f267f18"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "并把匹配接到姿态聚类和几何验证",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§1，Hough 聚类及仿射验证",
+          "context": {
+            "page": 3,
+            "start": 157,
+            "end": 1957,
+            "sha256": "c4d931ad9ee8069a9c5c3c2837d96d56b3d8e474199112f9a03d953e7f20e064"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "既讨论重复检测",
+          "classification": "paperFact",
+          "sourcePages": [
+            9
+          ],
+          "locator": "PDF p.9；§3.2，Figures 3–4",
+          "context": {
+            "page": 9,
+            "start": 465,
+            "end": 2265,
+            "sha256": "d3bed1ea9bb6cd5a27dd705a971c75f93b9e0bbf014e7a70f4d515884c3bd9a8"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "也检查大数据库中的区分能力",
+          "classification": "paperFact",
+          "sourcePages": [
+            18
+          ],
+          "locator": "PDF p.18；§6.4，Figure 10",
+          "context": {
+            "page": 18,
+            "start": 470,
+            "end": 2270,
+            "sha256": "fa2f42c4d23d9e674cc027f498ce63f0e58f3de62cadc5fc1c18736f8230faa4"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "据此建议分清尺度与旋转不变性、对视角变化的鲁棒性，以及特定实例识别与一般类别识别的边界。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2,
+            4,
+            26
+          ],
+          "locator": "PDF p.26；§9 类别特征未来工作；pp.2,4 不变性范围",
+          "context": {
+            "page": 26,
+            "start": 561,
+            "end": 2361,
+            "sha256": "30a5ec7f6f0034284f793460419c776630c5f207668dcf17dedf9bee3bbd0b09"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "同一物体在两幅图中的大小、朝向、照明和可见部分可能不同",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§1，匹配中的变换与遮挡",
+          "context": {
+            "page": 2,
+            "start": 15,
+            "end": 1815,
+            "sha256": "7e2fc10d50b364dc2eab6f58123251773940bb3a5c7d0a960a77a9481775e463"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "固定尺度角点",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§2，尺度敏感性",
+          "context": {
+            "page": 3,
+            "start": 3378,
+            "end": 3738,
+            "sha256": "05add3b3eb6975d45d136e0b1316706b1c1d76869224bf066ebfd87c490b91e9"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "直接像素相关难以保持可靠对应",
+          "classification": "paperFact",
+          "sourcePages": [
+            14
+          ],
+          "locator": "PDF p.14；§6，错位与像素相关",
+          "context": {
+            "page": 14,
+            "start": 994,
+            "end": 2487,
+            "sha256": "03fb2bb3e1d0ef458f893d3947f04f7128b85dde825f3e83ac7b3d102d74bc93"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "本文要求局部点既能重复定位，又足够独特，使它在含大量干扰特征的数据库中仍能匹配",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§1，定位、区分性与大库",
+          "context": {
+            "page": 2,
+            "start": 15,
+            "end": 1815,
+            "sha256": "7e2fc10d50b364dc2eab6f58123251773940bb3a5c7d0a960a77a9481775e463"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "最终识别还需排除背景带来的错误对应",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§1，误匹配与一致性验证",
+          "context": {
+            "page": 3,
+            "start": 0,
+            "end": 1800,
+            "sha256": "c3197777438c7ab7953ac5a5daf569563f93d2917291ad8e989c88f63732a22b"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "先搜索高斯差分的空间与尺度极值",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7；§3.1，Figure 2",
+          "context": {
+            "page": 7,
+            "start": 1524,
+            "end": 2807,
+            "sha256": "dfbba9ae4a7fc19441e8986518bb4dc202f5588ea24f5704ee0fd5ba4224e56e"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "再插值定位并去除低对比点和不稳定边缘响应",
+          "classification": "paperFact",
+          "sourcePages": [
+            10,
+            11,
+            12
+          ],
+          "locator": "PDF p.10；§4 插值，式(2–3)；p.12 §4.1",
+          "context": {
+            "page": 10,
+            "start": 1962,
+            "end": 3247,
+            "sha256": "d32f0ed1379b7a74bc4792b3682427888c62902401771ffb78a48dfc31b3d558"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "方向分配建立局部坐标系",
+          "classification": "paperFact",
+          "sourcePages": [
+            13
+          ],
+          "locator": "PDF p.13；§5",
+          "context": {
+            "page": 13,
+            "start": 25,
+            "end": 1825,
+            "sha256": "385719cbc92ee2fe3025d9dcfb1e060b58e61824ee37500d21b216c92879e555"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "分区梯度直方图经归一化形成一百二十八维描述子",
+          "classification": "paperFact",
+          "sourcePages": [
+            15,
+            16
+          ],
+          "locator": "PDF p.16；§6.1，4×4×8=128，照明归一化",
+          "context": {
+            "page": 16,
+            "start": 0,
+            "end": 1500,
+            "sha256": "6b2b1b64e930527bf9ba40044ebe9b3a6754db1f30ece5bc8eff8d8ecf0c298c"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "匹配用最近与次近邻距离之比筛选",
+          "classification": "paperFact",
+          "sourcePages": [
+            20
+          ],
+          "locator": "PDF p.20；§7.1，Figure 11",
+          "context": {
+            "page": 20,
+            "start": 516,
+            "end": 2316,
+            "sha256": "bb86c389a3c4c2d6c9ae80a51ee8841221e29a69b52e59f8226e4764105476d6"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "再经霍夫姿态聚类",
+          "classification": "paperFact",
+          "sourcePages": [
+            21
+          ],
+          "locator": "PDF p.21；§7.3",
+          "context": {
+            "page": 21,
+            "start": 1293,
+            "end": 3093,
+            "sha256": "7f8a1c7de30ac826bd677ff7a6b995b8b22e21b052f62fb0b9f9df54926789ca"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "仿射拟合和离群点剔除验证",
+          "classification": "paperFact",
+          "sourcePages": [
+            22,
+            23
+          ],
+          "locator": "PDF p.23；§7.4，正规方程与迭代剔除",
+          "context": {
+            "page": 23,
+            "start": 455,
+            "end": 2255,
+            "sha256": "7f7ea5aa46b12a7638033786a9cdd7f1c27e795d27c7c88bed665a98f26220af"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "把检测、描述与验证连成可分析的系统",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            3
+          ],
+          "locator": "PDF p.2；§1 四阶段；p.3 验证",
+          "context": {
+            "page": 2,
+            "start": 1127,
+            "end": 2927,
+            "sha256": "e89e7189f31e412b95d4492e13775f74edc8f3e1393a76cb3f830c70f20dee3c"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "检测重复性与描述区分性分别受检验",
+          "classification": "paperFact",
+          "sourcePages": [
+            9,
+            18
+          ],
+          "locator": "PDF p.9；§3.2 Figure 3；p.18 §6.4",
+          "context": {
+            "page": 9,
+            "start": 465,
+            "end": 2265,
+            "sha256": "d3bed1ea9bb6cd5a27dd705a971c75f93b9e0bbf014e7a70f4d515884c3bd9a8"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "直方图分区与插值允许局部位置偏移",
+          "classification": "paperFact",
+          "sourcePages": [
+            15
+          ],
+          "locator": "PDF p.15；§6.1，Figure 7，三线性插值",
+          "context": {
+            "page": 15,
+            "start": 1911,
+            "end": 2978,
+            "sha256": "518cd5dfb2ada2056123518326fd682aa6cbaabeb4e5436d89a3008bb1580904"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "归一化减弱照明影响",
+          "classification": "paperFact",
+          "sourcePages": [
+            16
+          ],
+          "locator": "PDF p.16；§6.1，向量归一化、截断再归一化",
+          "context": {
+            "page": 16,
+            "start": 469,
+            "end": 2269,
+            "sha256": "ebca69f2c871404704e01b4bac853d201e2f0d37a92590d5d88a48319ab8e3a2"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "对象识别示例说明局部证据能够在遮挡和杂乱背景中聚合",
+          "classification": "paperFact",
+          "sourcePages": [
+            23
+          ],
+          "locator": "PDF p.23；Figure 12；§8",
+          "context": {
+            "page": 23,
+            "start": 0,
+            "end": 1800,
+            "sha256": "bd19f508d90d44b4dc6f92a7b33420edb018d6964d560aa5147a0823777b55d4"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "工程上推断，这些例子并不等于所有类别都可识别。",
+          "classification": "readerInference",
+          "sourcePages": [
+            26
+          ],
+          "locator": "PDF p.26；§9，通用类别学习仍为未来方向",
+          "context": {
+            "page": 26,
+            "start": 561,
+            "end": 2361,
+            "sha256": "30a5ec7f6f0034284f793460419c776630c5f207668dcf17dedf9bee3bbd0b09"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "原文展示物体实例识别和地点识别",
+          "classification": "paperFact",
+          "sourcePages": [
+            23,
+            24
+          ],
+          "locator": "PDF p.24；§8，Figure 13；p.23 Figure 12",
+          "context": {
+            "page": 24,
+            "start": 1189,
+            "end": 1817,
+            "sha256": "9c42689e6d9d8f1bd49c217b2b7df0e97f7826035391755ba67199415fb146ca"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "并讨论三维重建、跟踪与全景拼接等对应任务",
+          "classification": "paperFact",
+          "sourcePages": [
+            25
+          ],
+          "locator": "PDF p.25；§9，潜在对应任务",
+          "context": {
+            "page": 25,
+            "start": 3193,
+            "end": 3821,
+            "sha256": "94d96e880aa4a3a9712f70bd3868e02dd1d725bccaac726f4c4e1f046e58a853"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "工程上据此可把它作为需要局部匹配、具有可重复纹理的场景基线，同时保留几何一致性检查；不能只凭某个描述子距离较小就认定物体身份。",
+          "classification": "readerInference",
+          "sourcePages": [
+            19,
+            25
+          ],
+          "locator": "PDF p.19；§7，单点对应后须聚类和几何拟合；p.25 纹理场景",
+          "context": {
+            "page": 19,
+            "start": 558,
+            "end": 2358,
+            "sha256": "06ea991eb308c78246612c7ae64cc44b45fea13fd0ba7ea3cf543302470d0a58"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "方法并非完全仿射不变",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4；§2，显式不完全仿射不变",
+          "context": {
+            "page": 4,
+            "start": 2286,
+            "end": 4036,
+            "sha256": "88717b98bbe8f3560a5928f222138cc8a695b68d8e16c5a2771814c075095ab4"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "大幅三维视角改变仍会破坏定位与描述",
+          "classification": "paperFact",
+          "sourcePages": [
+            17,
+            18
+          ],
+          "locator": "PDF p.17；§6.3；Figure 9 p.18",
+          "context": {
+            "page": 17,
+            "start": 499,
+            "end": 2299,
+            "sha256": "f3c6989c4c450461e0484656d425f743012f3587a0636397b31e47c7bd71c6b2"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "原文指出非平面物体比平面纹理更受视角和照明影响，建议整合多个训练视图",
+          "classification": "paperFact",
+          "sourcePages": [
+            25
+          ],
+          "locator": "PDF p.25；§8，平面与 3D 物体差异",
+          "context": {
+            "page": 25,
+            "start": 339,
+            "end": 2139,
+            "sha256": "6d7e93bc693598758cf8be9d9e957bbc4ce7b2d50406d9c9e875015b2e0e5f66"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "结论也要求更系统地测试完整三维视角与照明变化，并提出补充颜色等特征的方向",
+          "classification": "paperFact",
+          "sourcePages": [
+            25
+          ],
+          "locator": "PDF p.25；§9，未来工作",
+          "context": {
+            "page": 25,
+            "start": 3549,
+            "end": 3821,
+            "sha256": "c713ce65f5b2939a329a0ac0137310900ab8d7be62d93e946ff0a5bbf7db2f5f"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此建议先沿引言的处理链区分检测器与描述子，再读局部描述章节和匹配章节，画出归一化、距离比检验与几何验证各自解决的问题。对照描述子示意图与正文确认实际维数，最后回读重复性实验和识别示例，分别判断实验条件与应用证据。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2,
+            9,
+            15,
+            16,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24
+          ],
+          "locator": "PDF p.15；阅读路线：pp.2 §1，9 §3.2，15–16 §6.1，19–23 §7，23–24 §8",
+          "context": {
+            "page": 15,
+            "start": 36,
+            "end": 1836,
+            "sha256": "f9fd19d1e0a59906bdaabae774b3d17c36a4f72df806b8ca589d96f6b4b77ace"
+          }
+        }
+      ]
+    },
+    {
+      "paperId": "classic:cv:hog",
+      "primaryDomain": "CV",
+      "title": "Histograms of Oriented Gradients for Human Detection",
+      "status": "ready",
+      "learningOrder": 2,
+      "overview": "论文以大体直立、多数身体可见的行人为测试对象，研究什么局部形状表示能在复杂背景和照明下可靠区分人与非人。方法把梯度方向直方图铺在密集网格上，用重叠块反复做局部对比度归一化，再交给线性支持向量机。它与稀疏关键点描述的差别，是保留检测窗口内的整体空间排列。全文通过控制变量分析梯度、方向分箱、块大小和归一化，并发布更困难的行人数据集。据此建议沿消融分析理解方法为何有效，而不只背诵默认参数。",
+      "guide": {
+        "problem": "人体服装、姿态和背景变化很大，检测器需要抓住稳定的形状线索。本文把问题集中在特征表示，采用简单线性支持向量机作为整个研究的基线。原有行人库较容易，作者另建背景与姿态更复杂的数据集，使描述子的差异更容易显现。",
+        "method": "在小单元内按梯度幅值向方向箱投票，插值减小位置和方向分箱的突变；把相邻单元组成块并归一化，再拼接整个窗口。默认采用九个无符号方向箱。重叠块使同一单元在不同邻域下被多次归一化，窗口在多尺度上扫描，分类结果再经非极大值抑制。",
+        "contribution": "本文的核心证据是细梯度、较细方向编码、适度空间分箱和强局部归一化要配合使用。实验比较了小波、梯度降维与形状上下文等表示，并单独改变实现选项。性能分析还把训练出的权重连回头肩与脚部轮廓，解释分类器实际利用哪些线索。",
+        "applicability": "原文主要验证静态图像中大体直立行人的窗口分类与检测。工程上据此适合用它建立形状主导任务的可解释基线，研究背景边缘、局部对比度和负样本挖掘的作用；换到其他物体时，据此应重新检查方向符号和窗口布局，不能直接搬用行人的配置。",
+        "limitations": "作者明确限制测试对象为大部分可见的直立行人，并把关节形变、部件模型和运动信息列为后续工作。工程上推断，严重遮挡或姿态跨度很大的任务不能由这些结果直接担保。论文也提醒，部分历史检测器的数据划分与负样本不可得，比较并非完全对等。",
+        "readingAdvice": "据此建议先读流程图和数据协议，弄清窗口误报与漏检的坐标，再读归一化章节，比较单元、块和重叠的不同职责。随后沿参数曲线检查每次只改变什么，以及代价如何变化。最后把权重可视化与轮廓解释相互核对，避免把稀疏关键点匹配当成本文检测流程。"
+      },
+      "fullText": {
+        "url": "https://lear.inrialpes.fr/people/triggs/pubs/Dalal-cvpr05.pdf",
+        "format": "pdf",
+        "sha256": "eb2bad4bc1e30c9a467a135100ba2be4d12fd8736675af0268e98ebd179c46f0",
+        "pageCount": 8,
+        "checkedAt": "2026-10-02T04:26:52.135619+00:00",
+        "edition": "合作者 INRIA 网站的 CVPR 2005 会议作者稿，文件与内部页码 1–8；不是后续技术报告。",
+        "sourceFile": "CV/hog2005.pdf",
+        "textFile": "CV/hog2005.pages.json",
+        "textSha256": "f4aff6f88efbc50c307255f58aa40e413eb71112ffdab68f17bbb78aaa90d23b"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "reviewedAt": "2026-10-03T08:07:07.008373+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "论文以大体直立、多数身体可见的行人为测试对象，研究什么局部形状表示能在复杂背景和照明下可靠区分人与非人。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1；§1，测试范围与形状表示",
+          "context": {
+            "page": 1,
+            "start": 1117,
+            "end": 2917,
+            "sha256": "b61767053e4a6f0c6ca0f1679963bd1bdcf2c8a10a415b30ea593ca217218481"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "方法把梯度方向直方图铺在密集网格上，用重叠块反复做局部对比度归一化，再交给线性支持向量机。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§3，cells/blocks/SVM；Figure 1",
+          "context": {
+            "page": 2,
+            "start": 766,
+            "end": 2566,
+            "sha256": "a0afd761a6d6109b4425a44f7c9a00df63148734a887af510f3290c07a1ad661"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "它与稀疏关键点描述的差别，是保留检测窗口内的整体空间排列。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§6.4，dense grid 对比 SIFT",
+          "context": {
+            "page": 6,
+            "start": 781,
+            "end": 2581,
+            "sha256": "6eb3e925449040f12f8e75c4dfc84bd160060afd4be8ca7567f9c23b4a984468"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "全文通过控制变量分析梯度、方向分箱、块大小和归一化",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            5,
+            6
+          ],
+          "locator": "PDF p.4；§6 与 Figure 4 pp.4–5",
+          "context": {
+            "page": 4,
+            "start": 1177,
+            "end": 2977,
+            "sha256": "20f3caf6840c799416a3e9cd1696623e7402d18460379539674c54751feb8636"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "并发布更困难的行人数据集",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§4，INRIA 数据",
+          "context": {
+            "page": 2,
+            "start": 4050,
+            "end": 5850,
+            "sha256": "659ef8e5b4ceacb9a0f4faca1670ecd6be38e9a3664834608528f8cee9fbd155"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "据此建议沿消融分析理解方法为何有效，而不只背诵默认参数。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4；§6，默认配置与逐项分析",
+          "context": {
+            "page": 4,
+            "start": 647,
+            "end": 2447,
+            "sha256": "c9acb35c1a44a61f5f57bee00448090577cb0b6aac512433db4a9a5ce8d7040e"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "人体服装、姿态和背景变化很大，检测器需要抓住稳定的形状线索。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1,
+            3
+          ],
+          "locator": "PDF p.1；§1；Figure 2 p.3",
+          "context": {
+            "page": 1,
+            "start": 1117,
+            "end": 2917,
+            "sha256": "b61767053e4a6f0c6ca0f1679963bd1bdcf2c8a10a415b30ea593ca217218481"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "本文把问题集中在特征表示，采用简单线性支持向量机作为整个研究的基线。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1；§1，线性 SVM 简洁性与速度",
+          "context": {
+            "page": 1,
+            "start": 2015,
+            "end": 3815,
+            "sha256": "bfc5626e1d9f2c7d5aaf418699c5fbb2b86ba175689f26e7e60a9a9faa5ff986"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "原有行人库较容易，作者另建背景与姿态更复杂的数据集，使描述子的差异更容易显现。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§4，MIT 对比更困难 INRIA",
+          "context": {
+            "page": 2,
+            "start": 4050,
+            "end": 5850,
+            "sha256": "659ef8e5b4ceacb9a0f4faca1670ecd6be38e9a3664834608528f8cee9fbd155"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "在小单元内按梯度幅值向方向箱投票，插值减小位置和方向分箱的突变",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            5
+          ],
+          "locator": "PDF p.4；§6.3，投票与双线性插值",
+          "context": {
+            "page": 4,
+            "start": 3526,
+            "end": 4408,
+            "sha256": "81a3000ed779d93f96a47cde5050f76f1e788edab9af7ab1f21dd73d081888d3"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "把相邻单元组成块并归一化，再拼接整个窗口",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5；§6.4",
+          "context": {
+            "page": 5,
+            "start": 2875,
+            "end": 3749,
+            "sha256": "ea81bd850bd36444044d2b7a1f7b7863f11403c49453218df31649bc3e14e567"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "默认采用九个无符号方向箱。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4；§6，默认 9 个 0°–180° 方向箱",
+          "context": {
+            "page": 4,
+            "start": 647,
+            "end": 2447,
+            "sha256": "c9acb35c1a44a61f5f57bee00448090577cb0b6aac512433db4a9a5ce8d7040e"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "重叠块使同一单元在不同邻域下被多次归一化",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§6.4",
+          "context": {
+            "page": 6,
+            "start": 0,
+            "end": 1800,
+            "sha256": "c3a949176cbfd0353fc5f3b496686ba7fe9888c1a6bb6c585718f3200ecba0a5"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "窗口在多尺度上扫描，分类结果再经非极大值抑制",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；Figure 1 caption，扫描输出 pyramid 上 NMS",
+          "context": {
+            "page": 2,
+            "start": 235,
+            "end": 2035,
+            "sha256": "c1e23f21594a73ddf9bdec63003b3ff19f31d346fd564c8e0f7530bee125399b"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "本文的核心证据是细梯度、较细方向编码、适度空间分箱和强局部归一化要配合使用。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7；§7，实施选项结论",
+          "context": {
+            "page": 7,
+            "start": 4351,
+            "end": 5793,
+            "sha256": "e2e3d25df57105f1ecc044265a49d9f8c1e4082e8dc3c395c8c8dfe43b0152ba"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "实验比较了小波、梯度降维与形状上下文等表示",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§5，Haar/PCA-SIFT/Shape Context 比较",
+          "context": {
+            "page": 3,
+            "start": 1145,
+            "end": 2945,
+            "sha256": "370f3ba4c852737f08f4e7199afe61a3680007ef04593c42298869d98a25197e"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "并单独改变实现选项",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4；§6，Figure 4",
+          "context": {
+            "page": 4,
+            "start": 1177,
+            "end": 2977,
+            "sha256": "20f3caf6840c799416a3e9cd1696623e7402d18460379539674c54751feb8636"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "性能分析还把训练出的权重连回头肩与脚部轮廓，解释分类器实际利用哪些线索。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7,
+            8
+          ],
+          "locator": "PDF p.7；§6.4，Figure 6 p.8",
+          "context": {
+            "page": 7,
+            "start": 1041,
+            "end": 2841,
+            "sha256": "646de381089587e34bd65e34be78a22ac4df9348c152422240dffefdeff3a607"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "原文主要验证静态图像中大体直立行人的窗口分类与检测。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1,
+            2
+          ],
+          "locator": "PDF p.1；§1 测试范围；Figure 1 p.2",
+          "context": {
+            "page": 1,
+            "start": 2015,
+            "end": 3815,
+            "sha256": "bfc5626e1d9f2c7d5aaf418699c5fbb2b86ba175689f26e7e60a9a9faa5ff986"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "工程上据此适合用它建立形状主导任务的可解释基线，研究背景边缘、局部对比度和负样本挖掘的作用",
+          "classification": "readerInference",
+          "sourcePages": [
+            2,
+            7
+          ],
+          "locator": "PDF p.2；§4 负样本挖掘；p.7 §6.4 轮廓权重",
+          "context": {
+            "page": 2,
+            "start": 4623,
+            "end": 5935,
+            "sha256": "b55ec18ef51f01582d53d185076cd29b324a283a4dd4f726cccc5b9ab97a4916"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "换到其他物体时，据此应重新检查方向符号和窗口布局，不能直接搬用行人的配置。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5；§6.3，其他类别方向符号不同",
+          "context": {
+            "page": 5,
+            "start": 2412,
+            "end": 3749,
+            "sha256": "1fea128a63e8475d68ff989aac03b1357d134f58e26707b50f7921580ae27f16"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "作者明确限制测试对象为大部分可见的直立行人",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1；§1",
+          "context": {
+            "page": 1,
+            "start": 2015,
+            "end": 3815,
+            "sha256": "bfc5626e1d9f2c7d5aaf418699c5fbb2b86ba175689f26e7e60a9a9faa5ff986"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "并把关节形变、部件模型和运动信息列为后续工作",
+          "classification": "paperFact",
+          "sourcePages": [
+            7,
+            8
+          ],
+          "locator": "PDF p.7；§7；p.8 续句",
+          "context": {
+            "page": 7,
+            "start": 5071,
+            "end": 5793,
+            "sha256": "ed3eba88cbb2b0e4df27e220e660ceeb2ed8b3ea2f6fc79beb7d78acb0f881c2"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "工程上推断，严重遮挡或姿态跨度很大的任务不能由这些结果直接担保。",
+          "classification": "readerInference",
+          "sourcePages": [
+            1,
+            7,
+            8
+          ],
+          "locator": "PDF p.7；§7，对当前固定模板与 future parts 的边界",
+          "context": {
+            "page": 7,
+            "start": 5071,
+            "end": 5793,
+            "sha256": "ed3eba88cbb2b0e4df27e220e660ceeb2ed8b3ea2f6fc79beb7d78acb0f881c2"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "论文也提醒，部分历史检测器的数据划分与负样本不可得，比较并非完全对等。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§5，历史 MIT 比较限制",
+          "context": {
+            "page": 3,
+            "start": 3236,
+            "end": 4851,
+            "sha256": "0cb307e90dcd7da6edef718ebb545e31868ebd1e3efe4b6bed2a9e899885d2fe"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此建议先读流程图和数据协议，弄清窗口误报与漏检的坐标，再读归一化章节，比较单元、块和重叠的不同职责。随后沿参数曲线检查每次只改变什么，以及代价如何变化。最后把权重可视化与轮廓解释相互核对，避免把稀疏关键点匹配当成本文检测流程。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "locator": "PDF p.2；阅读路线：p.2 Figure 1/§4；pp.4–6 §6/Figures 4–5；pp.7–8 Figure 6/权重解释",
+          "context": {
+            "page": 2,
+            "start": 235,
+            "end": 2035,
+            "sha256": "c1e23f21594a73ddf9bdec63003b3ff19f31d346fd564c8e0f7530bee125399b"
+          }
+        }
+      ]
+    },
+    {
+      "paperId": "classic:cv:alexnet",
+      "primaryDomain": "CV",
+      "title": "ImageNet Classification with Deep Convolutional Neural Networks",
+      "status": "ready",
+      "learningOrder": 3,
+      "overview": "这篇论文研究大规模标注图像上的监督分类，把较深卷积网络、非饱和激活、图形处理器实现和抗过拟合训练组合起来。网络从原始颜色像素学习表示，卷积层提取特征，全连接层完成类别预测；随机裁剪、翻转、颜色扰动与随机失活帮助利用有限训练数据。全文不仅报告比赛结果，还用层删除、训练速度和定性检索说明深度与表征的作用。据此建议区分不同年份的数据集、单模型与集成，以及是否使用额外预训练数据。",
+      "guide": {
+        "problem": "现实物体具有丰富外观变化，小规模图像库难以支撑高容量模型。大规模卷积训练又受计算与显存约束，即使标注很多也会出现过拟合。本文同时处理模型容量、可训练性和泛化问题，而不是只更换最后的分类器或堆叠更多参数。",
+        "method": "架构包含五个卷积层和三个全连接层，以非饱和整流激活训练，在部分层使用局部响应归一化与重叠最大池化。网络分到两块图形处理器，并只在指定层交换特征。训练用随机裁剪、水平翻转和颜色扰动，前两个全连接隐藏层采用随机失活。",
+        "contribution": "论文把大规模监督卷积学习做成实际可训练的系统，并显示去掉卷积层会损害分类表现。整流激活的训练曲线、抗过拟合策略和学习到的滤波器共同支撑方法解释。结果表分别报告单模型、模型集成及额外预训练，据此不能把最优集成成绩归给基本单网络。",
+        "applicability": "原文以图像级分类为主，也展示隐藏层特征诱导的近邻检索，包括姿态不同的动物图像。工程上据此可把它用于学习监督视觉表示与训练配方的入门实验；据此推断，需要定位或像素标签的任务还必须另行设计输出和评价，分类结果本身不提供这些能力。",
+        "limitations": "模型规模受显存和可接受训练时间限制，网络要求固定输入尺寸，预处理与裁剪改变了所见图像。原文承认大参数量仍有明显过拟合风险，随机失活也增加收敛迭代。工程上推断，数据量、测试裁剪和硬件条件变化后，论文的收益不能视为自动复现。",
+        "readingAdvice": "据此建议先把网络图与各层连接关系对应，再读数据增强和随机失活，区分训练扰动与测试时预测平均。查看结果表时逐行记下训练数据、模型数与评价集，尤其留意预训练标记。最后看层删除讨论与定性检索，把性能提升和作者对表征的解释分开判断。"
+      },
+      "fullText": {
+        "url": "https://proceedings.neurips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf",
+        "format": "pdf",
+        "sha256": "90137160c57217953d5f61857e64ca58e85f06e1b13b4f475c918b1b582b9771",
+        "pageCount": 9,
+        "checkedAt": "2026-10-02T04:26:49.547633+00:00",
+        "edition": "NeurIPS/NIPS 2012 正式会议论文 PDF，文件内部页码 1–9；采用 PDF 正文而非内容不同的网页摘要。另检阅官方补充定性图包。",
+        "sourceFile": "CV/alexnet2012.pdf",
+        "textFile": "CV/alexnet2012.pages.json",
+        "textSha256": "90ed6fb88132629932510857b8ae917021b9cc15b8fef3d96db640a62ff3d791"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "reviewedAt": "2026-10-03T08:07:07.008373+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "这篇论文研究大规模标注图像上的监督分类，把较深卷积网络、非饱和激活、图形处理器实现和抗过拟合训练组合起来。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            3,
+            5,
+            6
+          ],
+          "locator": "PDF p.2；§1，贡献及 §3–4 指引",
+          "context": {
+            "page": 2,
+            "start": 485,
+            "end": 2285,
+            "sha256": "0af56b6474391c7b6a2a60546761037d62ab37e43c17161ff59783597d29061b"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "网络从原始颜色像素学习表示",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§2，中心化原始 RGB 输入",
+          "context": {
+            "page": 2,
+            "start": 3491,
+            "end": 4092,
+            "sha256": "0ac149e8aaabe8f9d2b5eef59ec973c73184d9ca734449ee85dac3f0665ca78d"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "卷积层提取特征，全连接层完成类别预测",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4；§3.5，卷积/全连接与 softmax",
+          "context": {
+            "page": 4,
+            "start": 2827,
+            "end": 4383,
+            "sha256": "1ee805eb6bd09fbd599e30cacf34a23c926169ed6354027f7c562e8f82a2fcbf"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "随机裁剪、翻转、颜色扰动与随机失活帮助利用有限训练数据",
+          "classification": "paperFact",
+          "sourcePages": [
+            5,
+            6
+          ],
+          "locator": "PDF p.5；§4.1；p.6 §4.2",
+          "context": {
+            "page": 5,
+            "start": 1500,
+            "end": 3321,
+            "sha256": "8ffc6fc64528edf73acd55c428ccfa5a7f1717e60802da4e34be6f99e2efc3d6"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "全文不仅报告比赛结果",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7；§6，Tables 1–2",
+          "context": {
+            "page": 7,
+            "start": 194,
+            "end": 1994,
+            "sha256": "79453b697a1b8a1c665b65d7bf1b6457ac8ec77c9ad346e30a708f85cbdfc6ce"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "还用层删除",
+          "classification": "paperFact",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8；§7，移除卷积层表现下降",
+          "context": {
+            "page": 8,
+            "start": 2253,
+            "end": 3424,
+            "sha256": "c4c4482efafa32c6ef76de664344255ada40692118c25777b62e338a2be9080e"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "训练速度",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§3.1，Figure 1 CIFAR-10 激活对照",
+          "context": {
+            "page": 3,
+            "start": 22,
+            "end": 1822,
+            "sha256": "856b75da80d6b430d466f47c388239e323f1d28e43e553c13eddd1195facf086"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "定性检索说明深度与表征的作用",
+          "classification": "paperFact",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8；§6.1，Figure 4，特征近邻实例",
+          "context": {
+            "page": 8,
+            "start": 983,
+            "end": 2783,
+            "sha256": "c3759e482dc2edf22ef487b491e801810ecf58722494e17afbf656221b78867e"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "据此建议区分不同年份的数据集、单模型与集成，以及是否使用额外预训练数据。",
+          "classification": "readerInference",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7；§6，Tables 1–2/星号预训练",
+          "context": {
+            "page": 7,
+            "start": 2274,
+            "end": 3921,
+            "sha256": "c93c09605588909bf7205cb4e817353b8a7d69d2526dc6785b2bfb2cb019ca26"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "现实物体具有丰富外观变化，小规模图像库难以支撑高容量模型。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1；§1，数据规模与容量",
+          "context": {
+            "page": 1,
+            "start": 1954,
+            "end": 3464,
+            "sha256": "59b5961e538f3e1782e7e2ce0ee8e0d28d427d9de0795783a6869970f6cdba7b"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "大规模卷积训练又受计算与显存约束，即使标注很多也会出现过拟合。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§1，计算、过拟合、显存与训练时间",
+          "context": {
+            "page": 2,
+            "start": 0,
+            "end": 2500,
+            "sha256": "50fb4a139e888107a64309f89a80906a8a87c939dfde2b2883887a213afdeccb"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "本文同时处理模型容量、可训练性和泛化问题",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§1，贡献指向架构/实现与抗过拟合",
+          "context": {
+            "page": 2,
+            "start": 485,
+            "end": 2285,
+            "sha256": "0af56b6474391c7b6a2a60546761037d62ab37e43c17161ff59783597d29061b"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "架构包含五个卷积层和三个全连接层",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4；§3.5，五卷积三全连接",
+          "context": {
+            "page": 4,
+            "start": 2827,
+            "end": 3927,
+            "sha256": "371c169139cd713e4d524ccaed4074e0c318e798ade92f7d65729c1ff5795a1d"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "以非饱和整流激活训练",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§3.1，max(0,x)",
+          "context": {
+            "page": 3,
+            "start": 557,
+            "end": 2357,
+            "sha256": "f08dddbf69aea04a7c55bf1a3b399270fdb27e54497392f73cbbbd1e4e1fd807"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "在部分层使用局部响应归一化与重叠最大池化",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4；§3.5，归一化/池化位置；§3.3–3.4",
+          "context": {
+            "page": 4,
+            "start": 3687,
+            "end": 4383,
+            "sha256": "ab46076fd26f1d027f9859ccd8dfcb091bc8a647520137a776c8d7bc96f23b04"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "网络分到两块图形处理器，并只在指定层交换特征。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3,
+            5
+          ],
+          "locator": "PDF p.3；§3.2；Figure 2 p.5",
+          "context": {
+            "page": 3,
+            "start": 2263,
+            "end": 4054,
+            "sha256": "a022eec2949d0d49bc358549cf2a001c90134ed09ce06cf9ca64bba49d534159"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "训练用随机裁剪、水平翻转和颜色扰动",
+          "classification": "paperFact",
+          "sourcePages": [
+            5,
+            6
+          ],
+          "locator": "PDF p.5；§4.1，裁剪翻转；pp.5–6 颜色 PCA",
+          "context": {
+            "page": 5,
+            "start": 2127,
+            "end": 3321,
+            "sha256": "9d513330dee50880fc896a18f6b02c91442262caf47258a39aeb1d9d5ff63a51"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "前两个全连接隐藏层采用随机失活",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§4.2，前两全连接层",
+          "context": {
+            "page": 6,
+            "start": 2060,
+            "end": 3860,
+            "sha256": "22f99bbb0c14b2241e245c9b38e355722a153f94099e829d3f80b9d49ac7d068"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "论文把大规模监督卷积学习做成实际可训练的系统，并显示去掉卷积层会损害分类表现。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            8
+          ],
+          "locator": "PDF p.2；§1，GPU 实现与删除层观察；p.8 §7",
+          "context": {
+            "page": 2,
+            "start": 485,
+            "end": 2285,
+            "sha256": "0af56b6474391c7b6a2a60546761037d62ab37e43c17161ff59783597d29061b"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "整流激活的训练曲线",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§3.1，Figure 1",
+          "context": {
+            "page": 3,
+            "start": 22,
+            "end": 1822,
+            "sha256": "856b75da80d6b430d466f47c388239e323f1d28e43e553c13eddd1195facf086"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "抗过拟合策略",
+          "classification": "paperFact",
+          "sourcePages": [
+            5,
+            6
+          ],
+          "locator": "PDF p.5；§4；p.6 dropout",
+          "context": {
+            "page": 5,
+            "start": 1126,
+            "end": 2926,
+            "sha256": "a9e141fc27d8e9e58b5b00bd1e6852b5ceaebad7e20a82e624696bd847bcdd5c"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "学习到的滤波器",
+          "classification": "paperFact",
+          "sourcePages": [
+            6,
+            7
+          ],
+          "locator": "PDF p.7；§6.1，Figure 3 p.6",
+          "context": {
+            "page": 7,
+            "start": 3310,
+            "end": 3921,
+            "sha256": "aed69a6f669413a55d728fabd19acb288eefb8ffbef29e2d2e163be505de78c8"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "结果表分别报告单模型、模型集成及额外预训练",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7；§6，Table 2 逐模型结果",
+          "context": {
+            "page": 7,
+            "start": 2274,
+            "end": 3921,
+            "sha256": "c93c09605588909bf7205cb4e817353b8a7d69d2526dc6785b2bfb2cb019ca26"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "据此不能把最优集成成绩归给基本单网络。",
+          "classification": "readerInference",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7；§6，单模型与 5/7 模型含预训练分别列出",
+          "context": {
+            "page": 7,
+            "start": 1359,
+            "end": 3159,
+            "sha256": "d21b0be71c87f6f622c74a4ebf2ae0bc526f4fae862fc4efbc013b0750166d11"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "原文以图像级分类为主",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§2，top-1/top-5 分类评价",
+          "context": {
+            "page": 2,
+            "start": 2909,
+            "end": 4092,
+            "sha256": "26d513219be147a58a9f8faf5bf526738b8325fee1814f01a69da010b22db823"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "也展示隐藏层特征诱导的近邻检索，包括姿态不同的动物图像。",
+          "classification": "paperFact",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8；§6.1，Figure 4，狗与象姿态实例",
+          "context": {
+            "page": 8,
+            "start": 983,
+            "end": 2783,
+            "sha256": "c3759e482dc2edf22ef487b491e801810ecf58722494e17afbf656221b78867e"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "工程上据此可把它用于学习监督视觉表示与训练配方的入门实验",
+          "classification": "readerInference",
+          "sourcePages": [
+            4,
+            5,
+            6,
+            8
+          ],
+          "locator": "PDF p.8；§7，监督分类与深度证据",
+          "context": {
+            "page": 8,
+            "start": 2253,
+            "end": 3424,
+            "sha256": "c4c4482efafa32c6ef76de664344255ada40692118c25777b62e338a2be9080e"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "据此推断，需要定位或像素标签的任务还必须另行设计输出和评价，分类结果本身不提供这些能力。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4；§3.5，千类 softmax 图像分类输出",
+          "context": {
+            "page": 4,
+            "start": 2973,
+            "end": 4383,
+            "sha256": "7d47696d8bbd3d6c10344fd77851e5692a5a422b133d410e0c7e5f25faa57d1d"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "模型规模受显存和可接受训练时间限制",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§1",
+          "context": {
+            "page": 2,
+            "start": 1571,
+            "end": 3371,
+            "sha256": "6f64860aca3b130b41cf2919e63e98b5a5426fd4e2daabeb69a35a848a6eeb44"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "网络要求固定输入尺寸，预处理与裁剪改变了所见图像",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§2，缩放与中心裁剪",
+          "context": {
+            "page": 2,
+            "start": 3135,
+            "end": 4092,
+            "sha256": "97a4387b9627f16dab4c389569a2fce07633fb8f79bf17d5da3446a9d1e02081"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "原文承认大参数量仍有明显过拟合风险",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5；§4，60M 参数与过拟合",
+          "context": {
+            "page": 5,
+            "start": 1148,
+            "end": 2948,
+            "sha256": "700a573ebb42e4786d4774a697b9fc0d18b648e534c0f7190a1a5ba817f26395"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "随机失活也增加收敛迭代",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§4.2，迭代约增倍",
+          "context": {
+            "page": 6,
+            "start": 2060,
+            "end": 3860,
+            "sha256": "22f99bbb0c14b2241e245c9b38e355722a153f94099e829d3f80b9d49ac7d068"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "工程上推断，数据量、测试裁剪和硬件条件变化后，论文的收益不能视为自动复现。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2,
+            5,
+            7
+          ],
+          "locator": "PDF p.7；§6 脚注5 测试平均条件；p.2 硬件预算",
+          "context": {
+            "page": 7,
+            "start": 3806,
+            "end": 3921,
+            "sha256": "6840ae5ad6d2d4074bbc0412a34cb6d35179628a22ab7546b70b76275f39ffad"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此建议先把网络图与各层连接关系对应，再读数据增强和随机失活，区分训练扰动与测试时预测平均。查看结果表时逐行记下训练数据、模型数与评价集，尤其留意预训练标记。最后看层删除讨论与定性检索，把性能提升和作者对表征的解释分开判断。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5,
+            6,
+            7,
+            8
+          ],
+          "locator": "PDF p.7；阅读路线：p.5 Figure 2/§4.1；p.6 §4.2；p.7 Tables 1–2；p.8 §6.1/§7",
+          "context": {
+            "page": 7,
+            "start": 2274,
+            "end": 3921,
+            "sha256": "c93c09605588909bf7205cb4e817353b8a7d69d2526dc6785b2bfb2cb019ca26"
+          }
+        }
+      ]
+    },
+    {
+      "paperId": "classic:cv:resnet",
+      "primaryDomain": "CV",
+      "title": "Deep Residual Learning for Image Recognition",
+      "status": "ready",
+      "learningOrder": 4,
+      "overview": "论文从深层普通网络训练误差反而更高的退化现象出发，将若干层改写为学习输入映射的残差，再通过捷径相加恢复目标映射。关键不是宣称层数越多越好，而是用相近结构的普通与残差网络比较，检验优化是否变得容易。正文进一步讨论维度不同时的投影、瓶颈设计和特征迁移，并用极深小图像网络说明训练顺利与测试泛化不是同一件事。据此建议分清优化退化、梯度问题和过拟合，并把分类、检测的证据分别看待。",
+      "guide": {
+        "problem": "增加深度本可容纳一个复制浅层网络、其余层为恒等映射的解，但普通网络实际训练误差仍升高。作者指出这类退化不能简单解释为过拟合，也在使用归一化的实验中检查了信号与梯度。问题因此转向优化器能否找到已有的好解，而非只问容量够不够。",
+        "method": "让堆叠层学习残差，把块内映射写成y=F(x)+x；相加之后仍接非线性。输入输出维度相同可用恒等捷径，不同时可投影对齐。较深模型采用先压缩通道、再空间卷积、再恢复通道的瓶颈，使残差路径的计算代价可控；整网仍由反向传播训练。",
+        "contribution": "普通与残差网络的对照显示，残差改写改善优化，并让更深模型取得更低训练误差与较好验证表现。恒等与投影的比较说明增加捷径参数不是解决退化的必要条件。检测实验进一步以同一框架替换主干，检验表示迁移的作用，而非同时混入所有比赛技巧。",
+        "applicability": "正文验证图像分类以及作为检测系统主干的迁移，附录补充检测实现。工程上据此可把残差块视为构建深层视觉表征的基础，并分别核对通道数、空间步长和捷径对齐；据此，迁移任务仍要保留其训练协议，不能只替换名称就期待论文中的改善幅度。",
+        "limitations": "作者把更容易优化作为假设与实验结论。工程上推断，这些收益不构成任意网络、任意任务都能获益的保证。极深的小图像模型虽达到很低训练误差，测试却劣于较浅残差模型，作者归因于过拟合并提出加强正则化。工程上推断，深度预算仍须由数据规模和验证结果决定。",
+        "readingAdvice": "据此建议先看普通网络的训练曲线，再对照残差块与维度对齐公式，确认捷径连接改变了什么。读结构表时区分基本块和瓶颈块，结果表中分清裁剪测试、多尺度测试及集成。最后回到极深模型的分析，把训练误差下降与泛化提升当作两个要分别验证的命题。"
+      },
+      "fullText": {
+        "url": "https://openaccess.thecvf.com/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf",
+        "format": "pdf",
+        "sha256": "51b5de45eb0b558b19c3affe49503cff50cb170a32de602983d6e2ec286942a7",
+        "pageCount": 9,
+        "checkedAt": "2026-10-02T04:26:47.313424+00:00",
+        "edition": "CVF 开放的 CVPR 2016 正式会议版，文件 9 页，印刷页码 770–778；另完整检阅官方 4 页 Supplementary Materials。",
+        "sourceFile": "CV/resnet2016.pdf",
+        "textFile": "CV/resnet2016.pages.json",
+        "textSha256": "eb87d8cf83cb811d004b928193289870c6fd944ffba74dce11eb430770159736"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "reviewedAt": "2026-10-03T08:07:07.008373+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "论文从深层普通网络训练误差反而更高的退化现象出发",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1；§1，Figure 1",
+          "context": {
+            "page": 1,
+            "start": 3193,
+            "end": 4245,
+            "sha256": "d6c8a970f4651ce556bdac43444765ca8a5a1cbfd6fb47781ecbdef614eaa993"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "将若干层改写为学习输入映射的残差，再通过捷径相加恢复目标映射",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§1，H(x) 与 F(x)+x；Figure 2",
+          "context": {
+            "page": 2,
+            "start": 314,
+            "end": 2114,
+            "sha256": "e0cfb2d6229a3f67a25e3789e4c00b7beeb06b6cddbd6cefcd69ead77a4df680"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "用相近结构的普通与残差网络比较，检验优化是否变得容易",
+          "classification": "paperFact",
+          "sourcePages": [
+            3,
+            5
+          ],
+          "locator": "PDF p.3；§3.2 公平比较；p.5 Figure 4/Table 2",
+          "context": {
+            "page": 3,
+            "start": 3051,
+            "end": 4851,
+            "sha256": "9fddb8581fe059ed15e977d072ebbdb155422a19f54865350ebf1c6505b7dc7b"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "正文进一步讨论维度不同时的投影",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§3.2，式(2)",
+          "context": {
+            "page": 3,
+            "start": 3245,
+            "end": 5045,
+            "sha256": "4c33bdc8978c8e9ca313a6f39aa4718f45ea0b46ac2205c7b0f6f7845adbe7f1"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "瓶颈设计",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§4.1，Figure 5",
+          "context": {
+            "page": 6,
+            "start": 3194,
+            "end": 4558,
+            "sha256": "b1efd197eb9cab18fff645339540056b46179a4e3236526f3d6dadb3fee957d9"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "特征迁移",
+          "classification": "paperFact",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8；§4.3，Tables 7–8",
+          "context": {
+            "page": 8,
+            "start": 3427,
+            "end": 4365,
+            "sha256": "ff8b4ccb53076e70447b42dbe8cb165930375ad4558623dac816720859bc004d"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "并用极深小图像网络说明训练顺利与测试泛化不是同一件事",
+          "classification": "paperFact",
+          "sourcePages": [
+            7,
+            8
+          ],
+          "locator": "PDF p.8；§4.2，1202 层优化与过拟合；Table 6 p.7",
+          "context": {
+            "page": 8,
+            "start": 1882,
+            "end": 3682,
+            "sha256": "7461bedb059f2ab9cff04389518facb6b2c2f27e8514762c0ba9c08939a97e7e"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "据此建议分清优化退化、梯度问题和过拟合，并把分类、检测的证据分别看待。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5,
+            8
+          ],
+          "locator": "PDF p.5；§4.1 BN 梯度检查；p.8 §4.2–4.3",
+          "context": {
+            "page": 5,
+            "start": 2032,
+            "end": 3832,
+            "sha256": "5e5d7188d61e4ac4a07c432880cc99cc058e7729668b410b527f3688d8f2a34d"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "增加深度本可容纳一个复制浅层网络、其余层为恒等映射的解，但普通网络实际训练误差仍升高。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1；§1，构造恒等解与优化困难",
+          "context": {
+            "page": 1,
+            "start": 3743,
+            "end": 4245,
+            "sha256": "a001c270707f190671427b1ea94d4c2dec075b750d7c9df2680f1c73386b4677"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "作者指出这类退化不能简单解释为过拟合",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1；§1，训练退化不由过拟合引起",
+          "context": {
+            "page": 1,
+            "start": 3400,
+            "end": 4245,
+            "sha256": "1bb02259a2fdc907bbadd28c2f0b81da3c9c9e9c034657d4ff6e819ef1c1ee7a"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "也在使用归一化的实验中检查了信号与梯度",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5；§4.1，BN 信号/梯度范数",
+          "context": {
+            "page": 5,
+            "start": 2032,
+            "end": 3832,
+            "sha256": "5e5d7188d61e4ac4a07c432880cc99cc058e7729668b410b527f3688d8f2a34d"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "问题因此转向优化器能否找到已有的好解，而非只问容量够不够。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1；§1，解的存在与优化器未找到",
+          "context": {
+            "page": 1,
+            "start": 4008,
+            "end": 4245,
+            "sha256": "423f3d6d70c15230a770464b298de6e459133ac958657de25c0f9142b9bb7144"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "让堆叠层学习残差，把块内映射写成y=F(x)+x；相加之后仍接非线性。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§3.2，式(1) 与加法后的第二非线性",
+          "context": {
+            "page": 3,
+            "start": 2101,
+            "end": 3801,
+            "sha256": "2da4fd3200b67236639578eca3aa5cc66cfae57f6b13027bee5abf56a26873e8"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "输入输出维度相同可用恒等捷径，不同时可投影对齐。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§3.2，式(1–2)",
+          "context": {
+            "page": 3,
+            "start": 3245,
+            "end": 5045,
+            "sha256": "4c33bdc8978c8e9ca313a6f39aa4718f45ea0b46ac2205c7b0f6f7845adbe7f1"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "较深模型采用先压缩通道、再空间卷积、再恢复通道的瓶颈，使残差路径的计算代价可控",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§4.1，1×1/3×3/1×1，Figure 5",
+          "context": {
+            "page": 6,
+            "start": 3194,
+            "end": 4558,
+            "sha256": "b1efd197eb9cab18fff645339540056b46179a4e3236526f3d6dadb3fee957d9"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "整网仍由反向传播训练",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§1，SGD/backprop",
+          "context": {
+            "page": 2,
+            "start": 1337,
+            "end": 3137,
+            "sha256": "d67f7040dee9576871a114f66dffa118893a56501ae0c149ec5a95ccea28ed35"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "普通与残差网络的对照显示，残差改写改善优化，并让更深模型取得更低训练误差与较好验证表现。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5；§4.1，Figure 4/Table 2",
+          "context": {
+            "page": 5,
+            "start": 3182,
+            "end": 3886,
+            "sha256": "89047532cda5e4c4e2429188d2859ac6c159c5f5f72dfda875220c6a7eb29415"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "恒等与投影的比较说明增加捷径参数不是解决退化的必要条件。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§4.1 Identity vs. Projection；Table 3",
+          "context": {
+            "page": 6,
+            "start": 2817,
+            "end": 4558,
+            "sha256": "69d6c606789dc7098367a726705ec1ab4653dfd9af3b09b367b0975d27d339fb"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "检测实验进一步以同一框架替换主干，检验表示迁移的作用，而非同时混入所有比赛技巧。",
+          "classification": "paperFact",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8；§4.3，相同 baseline 实现替换 VGG；Tables 7–8",
+          "context": {
+            "page": 8,
+            "start": 3706,
+            "end": 4365,
+            "sha256": "d8e5fb3243a20cd568bd4d50c6422f508c2604cc052eba1d8fccd8d8625378bd"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "正文验证图像分类以及作为检测系统主干的迁移，附录补充检测实现。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "locator": "PDF p.8；§4.3，明确指向 appendix；pp.4–7 分类",
+          "context": {
+            "page": 8,
+            "start": 3427,
+            "end": 4365,
+            "sha256": "ff8b4ccb53076e70447b42dbe8cb165930375ad4558623dac816720859bc004d"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "工程上据此可把残差块视为构建深层视觉表征的基础，并分别核对通道数、空间步长和捷径对齐",
+          "classification": "readerInference",
+          "sourcePages": [
+            3,
+            5
+          ],
+          "locator": "PDF p.3；§3.2 对齐；p.5 Table 1 步长/通道",
+          "context": {
+            "page": 3,
+            "start": 3245,
+            "end": 5045,
+            "sha256": "4c33bdc8978c8e9ca313a6f39aa4718f45ea0b46ac2205c7b0f6f7845adbe7f1"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "据此，迁移任务仍要保留其训练协议，不能只替换名称就期待论文中的改善幅度。",
+          "classification": "readerInference",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8；§4.3，基线对照实现条件与 appendix 指引",
+          "context": {
+            "page": 8,
+            "start": 3791,
+            "end": 4365,
+            "sha256": "5bcc52e931d6a3e660f0bee6f9b710f57470da813a3bc15e9c1b260f1007915b"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "作者把更容易优化作为假设与实验结论。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            5
+          ],
+          "locator": "PDF p.2；§1 假设；p.5 §4.1 对照实验",
+          "context": {
+            "page": 2,
+            "start": 631,
+            "end": 2431,
+            "sha256": "0bd235f8dde2d1538075b13364dbc277212067aca698fdd86c5cee92a77ede89"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "工程上推断，这些收益不构成任意网络、任意任务都能获益的保证。",
+          "classification": "readerInference",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§3.1，近似能力与学习难度为假设",
+          "context": {
+            "page": 3,
+            "start": 798,
+            "end": 2598,
+            "sha256": "fe78c7df19d9d6a51e00253048babb2fe1708c98fbf6d58b7fa47bda58f5d131"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "极深的小图像模型虽达到很低训练误差，测试却劣于较浅残差模型，作者归因于过拟合并提出加强正则化。",
+          "classification": "paperFact",
+          "sourcePages": [
+            7,
+            8
+          ],
+          "locator": "PDF p.8；§4.2，Figure 6/Table 6 p.7",
+          "context": {
+            "page": 8,
+            "start": 1882,
+            "end": 3882,
+            "sha256": "c7f134f883dc6fc5aeee0c4a4bbd62f97d42f67740a00ec3b7b5d70c66400395"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "工程上推断，深度预算仍须由数据规模和验证结果决定。",
+          "classification": "readerInference",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8；§4.2，1202 层在小数据上的泛化限制",
+          "context": {
+            "page": 8,
+            "start": 2307,
+            "end": 4107,
+            "sha256": "427f0f9852286149aa4fbf605b2dc2d76ac2766713b528983d4b8a8608e68499"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此建议先看普通网络的训练曲线，再对照残差块与维度对齐公式，确认捷径连接改变了什么。读结构表时区分基本块和瓶颈块，结果表中分清裁剪测试、多尺度测试及集成。最后回到极深模型的分析，把训练误差下降与泛化提升当作两个要分别验证的命题。",
+          "classification": "readerInference",
+          "sourcePages": [
+            3,
+            5,
+            6,
+            7,
+            8
+          ],
+          "locator": "PDF p.6；阅读路线：p.5 Figure 4/Table 1；p.3 §3.2 式(1–2)；p.6 Figure 5/Tables 3–5；pp.7–8 极深模型",
+          "context": {
+            "page": 6,
+            "start": 254,
+            "end": 2054,
+            "sha256": "b321fddd7f1415e6b92f07f35474e3f2d3ba3754c07eba325d02221a0591444f"
+          }
+        }
+      ]
+    },
+    {
+      "paperId": "classic:cv:faster-rcnn",
+      "primaryDomain": "CV",
+      "title": "Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks",
+      "status": "ready",
+      "learningOrder": 5,
+      "overview": "论文把区域候选生成从外部算法移入卷积网络，使候选网络与后续检测器共享整图特征。区域候选网络在各位置围绕不同尺度和宽高比的锚框，预测物体性与边框偏移；检测器再对候选区域分类并细化位置。原版用交替训练形成共享系统，全文通过候选数量、分类回归分支与共享特征的消融解释收益。据此建议区分类别无关候选与类别检测，核对训练集和运行时间分项，也不要把候选召回率直接当作最终检测精度。",
+      "guide": {
+        "problem": "共享卷积已加速区域检测，外部候选算法反而成为计算瓶颈。简单把候选算法搬到图形处理器仍错过与检测器共用特征的机会。本文希望在保证最终检测质量的同时减少候选成本，因此把候选的学习目标与整个检测系统联系起来，而非只优化候选数量。",
+        "method": "区域候选网络滑过共享特征图，对每个位置的锚框同时预测物体性和坐标偏移，本文用三个尺度与三种宽高比。训练给锚框分配正负标签，回归损失只作用于正样本。原版采用四步交替训练：先分别训练两网，再固定共享层调整各自头部，随后以抑制和排序筛选候选。",
+        "contribution": "共享卷积把候选生成的边际计算压到附加网络层，较少候选还减少区域级处理。消融显示物体性分数帮助高排名候选，而位置回归让锚框变成更准确的框。论文同时比较最终检测精度与耗时，说明收益来自候选质量、计算共享和候选数量共同变化。",
+        "applicability": "本文在通用物体检测数据上验证候选加区域检测的两阶段流程，并展示多种尺度与宽高比对象。工程上据此可把它作为研究可学习候选、共享特征和边框回归的基线；工程上，部署时需重测主干、输入尺度、候选筛选与区域头各自的时间，不能只报候选网络耗时。",
+        "limitations": "正文采用交替优化，把同时改变候选机制的联合训练收敛列为后续问题。实验指出训练与测试候选分布不一致会降低表现；候选召回曲线也只与最终检测精度松散相关。工程上推断，固定锚框配置是否适合新的目标尺度，必须通过目标数据上的实验确认。",
+        "readingAdvice": "据此建议先画出共享主干、候选网络与区域检测器，再读锚框标签和损失，分清物体性与类别分数。按交替训练逐步标注哪些参数固定，随后查消融表的训练候选和测试候选。最后核对计时表的硬件、候选与区域处理分项，并用检测精度检验候选诊断的解释。"
+      },
+      "fullText": {
+        "url": "https://proceedings.neurips.cc/paper_files/paper/2015/file/14bfa6bb14875e45bba028a21ed38046-Paper.pdf",
+        "format": "pdf",
+        "sha256": "fad7c52aae4a7197c2b85869440d691d3c666d02c6853b65544a293fb6e5395b",
+        "pageCount": 9,
+        "checkedAt": "2026-10-02T04:26:49.378386+00:00",
+        "edition": "NeurIPS/NIPS 2015 正式会议版，文件内部页码 1–9；另完整检阅官方 ZIP 内 2 页补充 PDF。不是后来扩展的 arXiv/TPAMI 版。",
+        "sourceFile": "CV/fasterrcnn2015.pdf",
+        "textFile": "CV/fasterrcnn2015.pages.json",
+        "textSha256": "d6e1b46fdf39e413e2f1046e9344ae574aca43074956f65b10d17779715a76b5"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "reviewedAt": "2026-10-03T08:07:07.008373+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "论文把区域候选生成从外部算法移入卷积网络，使候选网络与后续检测器共享整图特征。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§1，共享卷积与 RPN",
+          "context": {
+            "page": 2,
+            "start": 296,
+            "end": 2096,
+            "sha256": "51a67a5c05f34a7e5eb49bf2b8638c392502ecb38a954ce13689dc9fc2a472fc"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "区域候选网络在各位置围绕不同尺度和宽高比的锚框，预测物体性与边框偏移",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§3，Translation-Invariant Anchors；Figure 1",
+          "context": {
+            "page": 3,
+            "start": 1328,
+            "end": 3128,
+            "sha256": "ab115d0bcf36ff32c52aa0d56b863c1951603aeccdfd5d7e01b94a20c6095895"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "检测器再对候选区域分类并细化位置",
+          "classification": "paperFact",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8；§4，Two-Stage Proposal + Detection",
+          "context": {
+            "page": 8,
+            "start": 1561,
+            "end": 3361,
+            "sha256": "aae0c10d21513b88b9367d7ba955c57b968fd7c9e101dbe326e7f6da6c1bcc6a"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "原版用交替训练形成共享系统",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5；§3，四步交替训练",
+          "context": {
+            "page": 5,
+            "start": 286,
+            "end": 2086,
+            "sha256": "602d1839673dfa9c4d1b8bf9f24ee88861d549e460d874d3d316229d074182f5"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "全文通过候选数量、分类回归分支与共享特征的消融解释收益",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§4，Table 1",
+          "context": {
+            "page": 6,
+            "start": 1283,
+            "end": 3658,
+            "sha256": "039e8c2a8adda1607c7d55b92a1c68b8b50ebfa26b58a26a442bbf0a3b96da6a"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "据此建议区分类别无关候选与类别检测，核对训练集和运行时间分项，也不要把候选召回率直接当作最终检测精度。",
+          "classification": "readerInference",
+          "sourcePages": [
+            7,
+            8
+          ],
+          "locator": "PDF p.7；§4 诊断指标；p.7 Tables 2–4；p.8 两阶段任务区分",
+          "context": {
+            "page": 7,
+            "start": 3379,
+            "end": 3709,
+            "sha256": "01e81a0309cfdbd234f4a0808bd34b39ed9a41c07a22493f3aea8fcbd4d29067"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "共享卷积已加速区域检测，外部候选算法反而成为计算瓶颈。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1；§1，候选瓶颈",
+          "context": {
+            "page": 1,
+            "start": 1842,
+            "end": 3295,
+            "sha256": "58293cf5adf6d35ebd7fff393b4d0a9bca1308ae6bcff20367096f901f34c432"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "简单把候选算法搬到图形处理器仍错过与检测器共用特征的机会。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1；§1，GPU 重实现与共享机会",
+          "context": {
+            "page": 1,
+            "start": 2699,
+            "end": 3295,
+            "sha256": "1fc3eee543afeb22a4fd66f9621c0debd47aa7bd37197de38ba2e2728a8a21a0"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "本文希望在保证最终检测质量的同时减少候选成本，因此把候选的学习目标与整个检测系统联系起来，而非只优化候选数量。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            5
+          ],
+          "locator": "PDF p.2；§1 联合系统目标；p.5 §4 强调最终 mAP",
+          "context": {
+            "page": 2,
+            "start": 296,
+            "end": 2096,
+            "sha256": "51a67a5c05f34a7e5eb49bf2b8638c392502ecb38a954ce13689dc9fc2a472fc"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "区域候选网络滑过共享特征图，对每个位置的锚框同时预测物体性和坐标偏移，本文用三个尺度与三种宽高比。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            3
+          ],
+          "locator": "PDF p.3；§3，三尺度/三宽高比，Figure 1",
+          "context": {
+            "page": 3,
+            "start": 1328,
+            "end": 2928,
+            "sha256": "950fd8e07f91eddc023809b31a1c0579d5c6529c7783c15b15b400d10901a00a"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "训练给锚框分配正负标签",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§3，锚框正负/忽略标签",
+          "context": {
+            "page": 3,
+            "start": 2834,
+            "end": 3839,
+            "sha256": "96a3b5955c4c195fb501380757b899bc40d4809a20a02f7e786bbaaec63fff5c"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "回归损失只作用于正样本",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4；§3，式(1) 中 p* 门控回归",
+          "context": {
+            "page": 4,
+            "start": 586,
+            "end": 2386,
+            "sha256": "7874e576b580af0c00708676120c3cc2168c5c3cd2595495a21662ad80216421"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "原版采用四步交替训练：先分别训练两网，再固定共享层调整各自头部",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5；§3，四步训练，前两步未共享",
+          "context": {
+            "page": 5,
+            "start": 286,
+            "end": 2086,
+            "sha256": "602d1839673dfa9c4d1b8bf9f24ee88861d549e460d874d3d316229d074182f5"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "随后以抑制和排序筛选候选",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5；§3 Implementation Details，NMS 后 top-N",
+          "context": {
+            "page": 5,
+            "start": 3300,
+            "end": 4743,
+            "sha256": "b3b25915640bc2551d80af6ffffc83bad57fa5590c8de393ee23124afcde26ed"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "共享卷积把候选生成的边际计算压到附加网络层",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7；§4，Table 4，候选时间只计附加层",
+          "context": {
+            "page": 7,
+            "start": 2837,
+            "end": 3709,
+            "sha256": "274a1c1b3d10ce30dc23c0cf8a49cca468874e322ba447d23670250045ee0d2c"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "较少候选还减少区域级处理",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§4，region-wise fc 成本",
+          "context": {
+            "page": 6,
+            "start": 1104,
+            "end": 2904,
+            "sha256": "a041a402eafc7381b31740414c80898952e62013038688e6cb8f7d9e9b8837f9"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "消融显示物体性分数帮助高排名候选",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§4，Table 1 cls 消融",
+          "context": {
+            "page": 6,
+            "start": 2883,
+            "end": 3658,
+            "sha256": "d8efcbf1ee93a6c0f5087588bdac97a2b07287c3091623aa73e837095343f707"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "而位置回归让锚框变成更准确的框",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§4，Table 1 reg 消融",
+          "context": {
+            "page": 6,
+            "start": 3202,
+            "end": 3658,
+            "sha256": "3deebf189441d9eb9c7a04a73d9cedb579eb9f785ed17acc50488886e20ea1e9"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "论文同时比较最终检测精度与耗时，说明收益来自候选质量、计算共享和候选数量共同变化。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6,
+            7
+          ],
+          "locator": "PDF p.7；§4，Tables 2–4",
+          "context": {
+            "page": 7,
+            "start": 1996,
+            "end": 3709,
+            "sha256": "42aa5702aa086c8bf1409822f54464f979bef8437952625f066a03dafb15f31b"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "本文在通用物体检测数据上验证候选加区域检测的两阶段流程",
+          "classification": "paperFact",
+          "sourcePages": [
+            8
+          ],
+          "locator": "PDF p.8；§4，Table 5，PASCAL VOC 两阶段检测",
+          "context": {
+            "page": 8,
+            "start": 1561,
+            "end": 3361,
+            "sha256": "aae0c10d21513b88b9367d7ba955c57b968fd7c9e101dbe326e7f6da6c1bcc6a"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "并展示多种尺度与宽高比对象",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；Figure 1，检测示例",
+          "context": {
+            "page": 3,
+            "start": 309,
+            "end": 2109,
+            "sha256": "e0c2fa05a449bb2a20fe9a7670f69fafcfe806b8bf277cece38abb011557518b"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "工程上据此可把它作为研究可学习候选、共享特征和边框回归的基线",
+          "classification": "readerInference",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§4，可学习候选/共享/cls/reg 消融",
+          "context": {
+            "page": 6,
+            "start": 1283,
+            "end": 3658,
+            "sha256": "039e8c2a8adda1607c7d55b92a1c68b8b50ebfa26b58a26a442bbf0a3b96da6a"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "工程上，部署时需重测主干、输入尺度、候选筛选与区域头各自的时间，不能只报候选网络耗时。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5,
+            7
+          ],
+          "locator": "PDF p.7；§4，Table 4 计时分项和硬件；p.5 输入尺度",
+          "context": {
+            "page": 7,
+            "start": 1068,
+            "end": 2868,
+            "sha256": "ad526d9eb025a0a0f3396daf4a127cdc996e3f5176102a2bdc8ab35a97ef290c"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "正文采用交替优化，把同时改变候选机制的联合训练收敛列为后续问题。",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5；§3，共同变化候选的联合优化尚待研究",
+          "context": {
+            "page": 5,
+            "start": 0,
+            "end": 1800,
+            "sha256": "7ebdad85d0f2f24686e5c49184b2dc8a0571122e6574c48fb39dddce732c6232"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "实验指出训练与测试候选分布不一致会降低表现",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§4，Table 1，训练/测试候选不一致",
+          "context": {
+            "page": 6,
+            "start": 2170,
+            "end": 3658,
+            "sha256": "9af743a2ea9abf724ee291d0a41ae6a91964de5b3dee7cbf1808280e78f7e331"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "候选召回曲线也只与最终检测精度松散相关",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7；§4，诊断 vs 最终评价",
+          "context": {
+            "page": 7,
+            "start": 3379,
+            "end": 3709,
+            "sha256": "01e81a0309cfdbd234f4a0808bd34b39ed9a41c07a22493f3aea8fcbd4d29067"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "工程上推断，固定锚框配置是否适合新的目标尺度，必须通过目标数据上的实验确认。",
+          "classification": "readerInference",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5；§3，本文固定尺度/宽高比与输入缩放",
+          "context": {
+            "page": 5,
+            "start": 1672,
+            "end": 3472,
+            "sha256": "3a2538fd13653653dcd5591eac0c1917a3c10c9072d891830138fcfb2ca4b921"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此建议先画出共享主干、候选网络与区域检测器，再读锚框标签和损失，分清物体性与类别分数。按交替训练逐步标注哪些参数固定，随后查消融表的训练候选和测试候选。最后核对计时表的硬件、候选与区域处理分项，并用检测精度检验候选诊断的解释。",
+          "classification": "readerInference",
+          "sourcePages": [
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "locator": "PDF p.7；阅读路线：p.3 Figure 1/锚框标签/式(1)；p.4 损失；p.5 交替训练；p.6 Table 1；p.7 Tables 2–4/Recall 分析",
+          "context": {
+            "page": 7,
+            "start": 1068,
+            "end": 2868,
+            "sha256": "ad526d9eb025a0a0f3396daf4a127cdc996e3f5176102a2bdc8ab35a97ef290c"
+          }
+        }
+      ]
+    },
+    {
+      "paperId": "classic:cv:unet",
+      "primaryDomain": "CV",
+      "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+      "status": "ready",
+      "learningOrder": 6,
+      "overview": "论文面向少量标注的显微图像分割，把捕获上下文的收缩路径与恢复分辨率的扩张路径配对，并把高分辨率特征裁剪后拼接回来。它同时强调弹性形变增强、相邻细胞边界的加权损失，以及在显存约束下用重叠分块处理大图。全文用神经膜和光学显微细胞任务验证这套结构与训练方式。据此建议把架构、标注策略和指标一同看：电子显微挑战按形变误差排序，并不表示同一模型在所有误差指标上都最优。",
+      "guide": {
+        "problem": "医学显微任务需要给每个像素标签，但大量标注图像难以获得。逐像素滑窗网络重复计算，并在上下文大小与定位精度之间折中；相互接触的同类细胞还容易连成一体。本文同时处理定位、样本效率和对象间分离。",
+        "method": "收缩路径卷积并下采样，扩张路径上采样后与对应的高分辨率特征拼接。原版使用无填充卷积，拼接前需裁剪，输出也小于输入；重叠分块与镜像边界补足大图上下文。训练采用弹性形变等增强，以类别频率与相邻细胞间隙构造像素权重，强调难分开的边界。",
+        "contribution": "结构把上下文传到高分辨率端，训练配方使少标注的分割可行。神经膜挑战与两个光学显微细胞任务分别提供证据，分块策略也明确处理显存限制。神经膜表按形变误差排序，其他方法在另一些误差列更好，据此，贡献应结合任务和指标描述，不能统称所有指标领先。",
+        "applicability": "原文验证电子显微神经结构以及相差、微分干涉显微细胞分割。工程上据此适合建立需要上下文与精细边界、标注有限的分割基线，尤其可研究增强和边界加权的作用；据此，更换成像方式时应检查形变是否保持标签含义，并重新核对拼接后的空间对应。",
+        "limitations": "少样本效果与强增强、任务数据和边界权重共同出现。工程上推断，这不构成脱离这些条件的普遍保证。工程上推断，所示显微实验不能直接担保其他器官、成像设备或临床流程的表现。原版有效卷积需要裁剪及分块上下文；据此，忽略这些几何关系会让复现与论文设置不同。",
+        "readingAdvice": "据此建议先沿网络图追踪尺寸和复制拼接，再把分块图中输入上下文与输出区域对应起来。读损失时区分类别平衡和细胞间隙权重，随后读形变增强与实验协议。最后逐列比较神经膜误差表，再看细胞交并比表，把少标注条件、测试平均与评价指标一并记下。"
+      },
+      "fullText": {
+        "url": "https://link.springer.com/content/pdf/10.1007/978-3-319-24574-4_28.pdf",
+        "format": "pdf",
+        "sha256": "12a66db7590fbdd0ee0877f69adaea8568ecb76287d2e47cfd685f3f6022509a",
+        "pageCount": 8,
+        "checkedAt": "2026-10-02T04:27:08.282172+00:00",
+        "edition": "Springer MICCAI 2015 Part III, LNCS 9351 正式章节，文件 8 页，印刷页码 234–241；不是 arXiv 版。",
+        "sourceFile": "CV/unet2015.pdf",
+        "textFile": "CV/unet2015.pages.json",
+        "textSha256": "5c7ba6a6f585a270f34992dc75dc9a8effb5cba7ddc7b0bc90d3649626929a32"
+      },
+      "review": {
+        "fullTextRead": true,
+        "readPages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "reviewedAt": "2026-10-03T08:07:07.008373+00:00"
+      },
+      "claimEvidence": [
+        {
+          "section": "overview",
+          "claim": "论文面向少量标注的显微图像分割",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1；§1，像素标签与标注稀缺",
+          "context": {
+            "page": 1,
+            "start": 2005,
+            "end": 2729,
+            "sha256": "1f2cfcbc797fea057ba75957320480320d1f28c2b7f682b50a34f74b0f31854a"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "把捕获上下文的收缩路径与恢复分辨率的扩张路径配对，并把高分辨率特征裁剪后拼接回来。",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4；§2，收缩/扩张及裁剪拼接；Figure 1 p.2",
+          "context": {
+            "page": 4,
+            "start": 91,
+            "end": 1891,
+            "sha256": "fc89829310d557bbc1c8ad24c20d16e782db460191a5d784e8b1d80b52465b71"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "它同时强调弹性形变增强",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§1，弹性形变；p.5 §3.1",
+          "context": {
+            "page": 3,
+            "start": 1265,
+            "end": 2671,
+            "sha256": "79c041342d7d330c198e0365f774b312ba9765d3046c7ce2f906899fa64f1cd9"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "相邻细胞边界的加权损失",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5；§3，式(2) 与 Figure 3",
+          "context": {
+            "page": 5,
+            "start": 565,
+            "end": 2259,
+            "sha256": "180e7a56cd4ec4ad9c3e3793f0f9e02c64ab0ae5b82ea00069c021644d75b1cd"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "以及在显存约束下用重叠分块处理大图",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§1，Figure 2 overlap-tile 与 GPU 显存",
+          "context": {
+            "page": 3,
+            "start": 884,
+            "end": 2671,
+            "sha256": "e8c72b848e34c92887a180801e7051a18169fb80fcd0acc7e78481f2adb46654"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "全文用神经膜和光学显微细胞任务验证这套结构与训练方式。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6,
+            7
+          ],
+          "locator": "PDF p.6；§4 神经膜；p.7 §4 两项细胞任务",
+          "context": {
+            "page": 6,
+            "start": 715,
+            "end": 2470,
+            "sha256": "2089b09eacdc3f8d245399540cca61effd5df7cb107fdf6ec5bc25c053220579"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "据此建议把架构、标注策略和指标一同看",
+          "classification": "readerInference",
+          "sourcePages": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "locator": "PDF p.6；§4，训练/评测数据与评价协议",
+          "context": {
+            "page": 6,
+            "start": 1031,
+            "end": 2470,
+            "sha256": "50aa91126b6a660f81c3bef6f653db105cc7161d7cc837acec45f6d33ad272e0"
+          }
+        },
+        {
+          "section": "overview",
+          "claim": "电子显微挑战按形变误差排序，并不表示同一模型在所有误差指标上都最优。",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§4，Table 1，排序条件及各列",
+          "context": {
+            "page": 6,
+            "start": 68,
+            "end": 1368,
+            "sha256": "2ba651135c42a1e487dcd43f6a197112dd3f49a93819833f0c7a5b5454a3a02c"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "医学显微任务需要给每个像素标签，但大量标注图像难以获得。",
+          "classification": "paperFact",
+          "sourcePages": [
+            1
+          ],
+          "locator": "PDF p.1；§1，像素输出与标注稀缺",
+          "context": {
+            "page": 1,
+            "start": 2005,
+            "end": 2729,
+            "sha256": "1f2cfcbc797fea057ba75957320480320d1f28c2b7f682b50a34f74b0f31854a"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "逐像素滑窗网络重复计算，并在上下文大小与定位精度之间折中",
+          "classification": "paperFact",
+          "sourcePages": [
+            2
+          ],
+          "locator": "PDF p.2；§1，滑窗的两项缺点",
+          "context": {
+            "page": 2,
+            "start": 636,
+            "end": 1947,
+            "sha256": "22c7c0cc6756650f3d29964e6d4201cdd5a4e296001abf3371f1f0f42e34fbbe"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "相互接触的同类细胞还容易连成一体",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§1，接触对象分离",
+          "context": {
+            "page": 3,
+            "start": 1899,
+            "end": 2671,
+            "sha256": "9e9ff3980810eafef02856893864b321c443d2ee5ceafcd192501204bdcd29cb"
+          }
+        },
+        {
+          "section": "problem",
+          "claim": "本文同时处理定位、样本效率和对象间分离",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            3
+          ],
+          "locator": "PDF p.3；§1，数据增强与加权分离；p.2 定位",
+          "context": {
+            "page": 3,
+            "start": 1265,
+            "end": 2671,
+            "sha256": "79c041342d7d330c198e0365f774b312ba9765d3046c7ce2f906899fa64f1cd9"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "收缩路径卷积并下采样，扩张路径上采样后与对应的高分辨率特征拼接。",
+          "classification": "paperFact",
+          "sourcePages": [
+            2,
+            4
+          ],
+          "locator": "PDF p.4；§2；Figure 1 p.2",
+          "context": {
+            "page": 4,
+            "start": 91,
+            "end": 1891,
+            "sha256": "fc89829310d557bbc1c8ad24c20d16e782db460191a5d784e8b1d80b52465b71"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "原版使用无填充卷积，拼接前需裁剪，输出也小于输入",
+          "classification": "paperFact",
+          "sourcePages": [
+            4
+          ],
+          "locator": "PDF p.4；§2 裁剪；§3 输出小于输入",
+          "context": {
+            "page": 4,
+            "start": 576,
+            "end": 2376,
+            "sha256": "5fa82be9022e52a158e4f30a8f62c268b143855836cc6e64bdbce81bc0163b5f"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "重叠分块与镜像边界补足大图上下文",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§1，Figure 2，mirroring",
+          "context": {
+            "page": 3,
+            "start": 884,
+            "end": 2671,
+            "sha256": "e8c72b848e34c92887a180801e7051a18169fb80fcd0acc7e78481f2adb46654"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "训练采用弹性形变等增强",
+          "classification": "paperFact",
+          "sourcePages": [
+            5,
+            6
+          ],
+          "locator": "PDF p.5；§3.1；p.6 形变插值",
+          "context": {
+            "page": 5,
+            "start": 1699,
+            "end": 2259,
+            "sha256": "180fcd2e29a19870a9f5ba00d08d3fb5fb90a3191862e4cc1702bb2232104934"
+          }
+        },
+        {
+          "section": "method",
+          "claim": "以类别频率与相邻细胞间隙构造像素权重，强调难分开的边界",
+          "classification": "paperFact",
+          "sourcePages": [
+            5
+          ],
+          "locator": "PDF p.5；§3，式(2)，wc 与最近/次近细胞距离",
+          "context": {
+            "page": 5,
+            "start": 565,
+            "end": 2259,
+            "sha256": "180e7a56cd4ec4ad9c3e3793f0f9e02c64ab0ae5b82ea00069c021644d75b1cd"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "结构把上下文传到高分辨率端",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§1，扩张路径的上下文传播",
+          "context": {
+            "page": 3,
+            "start": 332,
+            "end": 2132,
+            "sha256": "abf97c75844b12dec644221588a984c77beb980ffc9f24af42255aa8cdd253ee"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "训练配方使少标注的分割可行",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7；§5，总结中明确增强条件",
+          "context": {
+            "page": 7,
+            "start": 1625,
+            "end": 2049,
+            "sha256": "e89092a1cba38e3970af790a4972333f576f252e49c539f5c3b6d6adc419b637"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "神经膜挑战与两个光学显微细胞任务分别提供证据",
+          "classification": "paperFact",
+          "sourcePages": [
+            6,
+            7
+          ],
+          "locator": "PDF p.6；§4，三项任务；p.7 两细胞实验",
+          "context": {
+            "page": 6,
+            "start": 715,
+            "end": 2470,
+            "sha256": "2089b09eacdc3f8d245399540cca61effd5df7cb107fdf6ec5bc25c053220579"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "分块策略也明确处理显存限制",
+          "classification": "paperFact",
+          "sourcePages": [
+            3
+          ],
+          "locator": "PDF p.3；§1，Figure 2",
+          "context": {
+            "page": 3,
+            "start": 1126,
+            "end": 2671,
+            "sha256": "b7d7d8a80dcba4ca81f01bdff4d37e51aec53ec2bae44ba6f08195292a5608fc"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "神经膜表按形变误差排序，其他方法在另一些误差列更好",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§4，Table 1 Warping/Rand/Pixel 三列",
+          "context": {
+            "page": 6,
+            "start": 68,
+            "end": 1368,
+            "sha256": "2ba651135c42a1e487dcd43f6a197112dd3f49a93819833f0c7a5b5454a3a02c"
+          }
+        },
+        {
+          "section": "contribution",
+          "claim": "据此，贡献应结合任务和指标描述，不能统称所有指标领先。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§4，Table 1 各列最优不同",
+          "context": {
+            "page": 6,
+            "start": 68,
+            "end": 1868,
+            "sha256": "eb8da7dc17bad2bd25060a4ea9723c516a52a52224b3350f6b1a3e27d2c5bdf7"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "原文验证电子显微神经结构",
+          "classification": "paperFact",
+          "sourcePages": [
+            6
+          ],
+          "locator": "PDF p.6；§4，EM 神经结构实验",
+          "context": {
+            "page": 6,
+            "start": 715,
+            "end": 2470,
+            "sha256": "2089b09eacdc3f8d245399540cca61effd5df7cb107fdf6ec5bc25c053220579"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "以及相差、微分干涉显微细胞分割",
+          "classification": "paperFact",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7；§4，PhC-U373 与 DIC-HeLa；Table 2",
+          "context": {
+            "page": 7,
+            "start": 604,
+            "end": 2049,
+            "sha256": "98ae12f6e1adf0616aa085bb5537c9f9cf0c9d2127020858af91fa159fc1b36b"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "工程上据此适合建立需要上下文与精细边界、标注有限的分割基线，尤其可研究增强和边界加权的作用",
+          "classification": "readerInference",
+          "sourcePages": [
+            3,
+            5
+          ],
+          "locator": "PDF p.3；§1，少标注/形变与细胞边界；p.5 §3",
+          "context": {
+            "page": 3,
+            "start": 1265,
+            "end": 2671,
+            "sha256": "79c041342d7d330c198e0365f774b312ba9765d3046c7ce2f906899fa64f1cd9"
+          }
+        },
+        {
+          "section": "applicability",
+          "claim": "据此，更换成像方式时应检查形变是否保持标签含义，并重新核对拼接后的空间对应。",
+          "classification": "readerInference",
+          "sourcePages": [
+            4,
+            5
+          ],
+          "locator": "PDF p.5；§3.1，显微图像形变先验；p.4 §2 裁剪拼接",
+          "context": {
+            "page": 5,
+            "start": 1699,
+            "end": 2259,
+            "sha256": "180fcd2e29a19870a9f5ba00d08d3fb5fb90a3191862e4cc1702bb2232104934"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "少样本效果与强增强、任务数据和边界权重共同出现。",
+          "classification": "paperFact",
+          "sourcePages": [
+            3,
+            5,
+            6,
+            7
+          ],
+          "locator": "PDF p.3；§1，增强/加权；pp.6–7 任务数据",
+          "context": {
+            "page": 3,
+            "start": 1265,
+            "end": 2671,
+            "sha256": "79c041342d7d330c198e0365f774b312ba9765d3046c7ce2f906899fa64f1cd9"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "工程上推断，这不构成脱离这些条件的普遍保证。",
+          "classification": "readerInference",
+          "sourcePages": [
+            7
+          ],
+          "locator": "PDF p.7；§5，少标注效果的增强条件",
+          "context": {
+            "page": 7,
+            "start": 1625,
+            "end": 2049,
+            "sha256": "e89092a1cba38e3970af790a4972333f576f252e49c539f5c3b6d6adc419b637"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "工程上推断，所示显微实验不能直接担保其他器官、成像设备或临床流程的表现。",
+          "classification": "readerInference",
+          "sourcePages": [
+            6,
+            7
+          ],
+          "locator": "PDF p.6；§4，三项显微实验的适用范围",
+          "context": {
+            "page": 6,
+            "start": 715,
+            "end": 2470,
+            "sha256": "2089b09eacdc3f8d245399540cca61effd5df7cb107fdf6ec5bc25c053220579"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "原版有效卷积需要裁剪及分块上下文",
+          "classification": "paperFact",
+          "sourcePages": [
+            3,
+            4
+          ],
+          "locator": "PDF p.4；§2，裁剪/偶数池化尺寸；p.3 Figure 2",
+          "context": {
+            "page": 4,
+            "start": 888,
+            "end": 2688,
+            "sha256": "96a410e4d239146b3257c1821dd363bd81e733009b487ed1084864e59529950c"
+          }
+        },
+        {
+          "section": "limitations",
+          "claim": "据此，忽略这些几何关系会让复现与论文设置不同。",
+          "classification": "readerInference",
+          "sourcePages": [
+            3,
+            4
+          ],
+          "locator": "PDF p.4；§2，裁剪/偶数池化尺寸；p.3 Figure 2",
+          "context": {
+            "page": 4,
+            "start": 888,
+            "end": 2688,
+            "sha256": "96a410e4d239146b3257c1821dd363bd81e733009b487ed1084864e59529950c"
+          }
+        },
+        {
+          "section": "readingAdvice",
+          "claim": "据此建议先沿网络图追踪尺寸和复制拼接，再把分块图中输入上下文与输出区域对应起来。读损失时区分类别平衡和细胞间隙权重，随后读形变增强与实验协议。最后逐列比较神经膜误差表，再看细胞交并比表，把少标注条件、测试平均与评价指标一并记下。",
+          "classification": "readerInference",
+          "sourcePages": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "locator": "PDF p.6；阅读路线：p.2 Figure 1；p.3 Figure 2；pp.4–5 式(1–2)/§3.1；p.6 Table 1/7旋转平均；p.7 Table 2",
+          "context": {
+            "page": 6,
+            "start": 68,
+            "end": 1868,
+            "sha256": "eb8da7dc17bad2bd25060a4ea9723c516a52a52224b3350f6b1a3e27d2c5bdf7"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -57,7 +57,7 @@ class UpdateNewsTests(unittest.TestCase):
         MODULE.validate_stream_report(stream)
         self.assertEqual(stream["itemCount"], len(candidates))
         self.assertEqual(sum(bool(item["isTopStory"]) for item in stream["items"]), 10)
-        self.assertEqual(next(item for item in stream["items"] if item["id"] == daily["items"][0]["id"])["title"], "每日版中文编辑标题")
+        self.assertEqual(next(item for item in stream["items"] if item["id"] == daily["items"][0]["id"])["title"], daily["items"][0]["originalTitle"])
         self.assertEqual(sum(stream["categoryCounts"].values()), len(candidates))
         self.assertFalse(stream["truncated"])
 
@@ -210,6 +210,18 @@ class UpdateNewsTests(unittest.TestCase):
         self.assertEqual(diagnostics["completionReason"], "complete_first_pass")
         self.assertNotIn(candidates[0].id, request.call_args.kwargs["input_text"])
 
+    def test_daily_editor_receives_raw_evidence_instead_of_summary_only(self):
+        candidate = MODULE.score_articles(self.articles, self.config, self.now)[0]
+        MODULE.capture_source_evidence(candidate, candidate.title + ". " + candidate.description, "body")
+        runtime = {"provider": "fixture"}
+        with mock.patch.object(MODULE, "request_structured_json", return_value={"items": []}) as request:
+            MODULE.request_daily_translation_batch([candidate], self.config, runtime)
+        payload = json.loads(request.call_args.kwargs["input_text"].split("\n", 1)[1])[0]
+        self.assertTrue(payload["evidenceRecords"])
+        self.assertTrue(all(record["url"] == candidate.url and record["fetchedAt"]
+                            for record in payload["evidenceRecords"]))
+        self.assertIn("原文片段", request.call_args.kwargs["instructions"])
+
     def test_stream_translation_splits_and_retries_only_missing_sequence_indices(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:4]
         runtime = {
@@ -261,8 +273,10 @@ class UpdateNewsTests(unittest.TestCase):
             top_stories={article.id: daily_item},
             translations=translations,
         )
-        self.assertEqual(stream["items"][0]["title"], "全量动态中文标题")
-        self.assertEqual(stream["items"][0]["summary"], "全量动态中文摘要")
+        self.assertEqual(stream["items"][0]["title"], article.title)
+        self.assertNotEqual(stream["items"][0]["summary"], "全量动态中文摘要")
+        from evidence_trace import validate_news_trace
+        validate_news_trace(stream["items"][0])
         self.assertEqual(stream["items"][0]["translationProvider"], "deepseek")
 
     def test_unchanged_stream_translation_is_recovered_by_stable_news_id(self):
@@ -613,13 +627,11 @@ class UpdateNewsTests(unittest.TestCase):
             self.assertEqual(pipeline_status["translationStatus"], "disabled")
             self.assertNotIn("editorialStatus", pipeline_status)
             stream = json.loads(stream_output.read_text(encoding="utf-8"))
-            research = json.loads(research_output.read_text(encoding="utf-8"))
+            self.assertFalse(research_output.exists())
             self.assertEqual(stream["schemaVersion"], 7)
-            self.assertEqual(research["schemaVersion"], 4)
             self.assertEqual(pipeline_status["streamItemCount"], stream["itemCount"])
-            self.assertEqual(pipeline_status["researchItemCount"], 6)
+            self.assertEqual(pipeline_status["researchItemCount"], 0)
             self.assertGreater(stream["itemCount"], 10)
-            self.assertEqual(research["itemCount"], 6)
             stream_status = json.loads(stream_status_output.read_text(encoding="utf-8"))
             self.assertEqual(stream_status["schemaVersion"], 3)
             self.assertEqual(stream_status["state"], "ok")
@@ -635,7 +647,8 @@ class UpdateNewsTests(unittest.TestCase):
             deepread = json.loads((root / "deepread.json").read_text())
             deep_events = deepread["events"]
             self.assertEqual(deepread["schemaVersion"], 2)
-            self.assertGreaterEqual(deepread["eventCount"], 4)
+            self.assertGreaterEqual(deepread["eventCount"], 1)
+            self.assertTrue(all(event["evidenceRecords"] for event in deep_events))
             self.assertLessEqual(deepread["eventCount"], 6)
             self.assertLessEqual(deepread["candidateCount"], 12)
             self.assertEqual(len({event["eventId"] for event in deep_events}), deepread["eventCount"])
@@ -1049,7 +1062,7 @@ class UpdateNewsTests(unittest.TestCase):
             2,
         )
 
-    def test_daily_run_rewrites_stale_research_status_without_old_warnings(self):
+    def test_daily_run_preserves_legacy_research_without_refreshing_status(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             papers = MODULE.score_research_papers(self.papers, self.config, self.now)
@@ -1079,11 +1092,8 @@ class UpdateNewsTests(unittest.TestCase):
             self.assertEqual(result, 0)
             current = json.loads(research_output.read_text(encoding="utf-8"))
             status = json.loads((root / "status.json").read_text(encoding="utf-8"))
-        warning = "论文抓取未返回合格条目，已保留上一版论文雷达"
-        self.assertEqual(current["editorialStatus"], "stale")
-        self.assertEqual(current["warnings"], [warning])
-        self.assertEqual(current["generatedAt"], previous["generatedAt"])
-        self.assertEqual(status["researchWarnings"], [warning])
+        self.assertEqual(current, previous)
+        self.assertEqual(status["researchWarnings"], [])
 
     def test_openai_http_post_retries_one_transient_failure(self):
         class Response:

@@ -191,7 +191,7 @@ def _quality(item: dict[str, Any]) -> int:
         return 4
     if summary == _plain(item.get("title")) or summary == _plain(item.get("originalTitle")):
         return 0
-    return 3 if len(summary) >= 45 else 2 if len(summary) >= 24 else 1 if len(summary) >= 12 else 0
+    return 2 if item.get("evidenceRecords") else 3 if len(summary) >= 45 else 2 if len(summary) >= 24 else 1 if len(summary) >= 12 else 0
 
 
 def _rank(item: dict[str, Any]) -> tuple:
@@ -226,6 +226,8 @@ def _candidates(items: Iterable[dict[str, Any]], config: dict[str, Any], now: da
             "id": item["id"], "eventId": item["eventId"], "title": title,
             "originalTitle": _plain(item.get("originalTitle"), 300),
             "summary": _plain(item.get("summary"), 1000),
+            "evidenceRecords": item.get("evidenceRecords", []),
+            "summaryEvidenceRefs": item.get("summaryEvidenceRefs", []),
             "category": _plain(item.get("category"), 60) or "其他进展",
             "publishedAt": published.isoformat().replace("+00:00", "Z"),
             "sources": sources, "image": image, "imageSource": source if image else "",

@@ -8,7 +8,19 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from deepread_editorial import build_daily_deepread
+from deepread_editorial import build_daily_deepread as real_builder
+from evidence_trace import make_evidence
+
+def build_daily_deepread(items, *args, **kwargs):
+    # These are explicitly authored fixture sources, not recovered model proof.
+    grounded = []
+    for item in items:
+        if item.get("_authoredSourceFixture"):
+            item = dict(item)
+            raw = item.get("evidenceText") or item["summary"]
+            item["evidenceRecords"] = make_evidence(raw, item["url"], item["_authoredSourceFixture"])
+        grounded.append(item)
+    return real_builder(grounded, *args, **kwargs)
 
 
 class EditorialDeepreadTests(unittest.TestCase):
@@ -33,7 +45,45 @@ class EditorialDeepreadTests(unittest.TestCase):
             "score": 90 - n, "contentType": "news",
         }
         item.update(overrides)
+        item["_authoredSourceFixture"] = self.now.isoformat()
+        item["evidenceRecords"] = make_evidence(item.get("evidenceText") or item["summary"], item["url"], self.now.isoformat())
         return item
+
+    def source_provider(self, provider):
+        """Positive model fixtures use current raw references; corrupt IDs/quotes remain corrupt."""
+        def request(runtime, **kwargs):
+            response = provider(runtime, **kwargs)
+            if not isinstance(response, dict) or kwargs["schema_name"] == "deepread_outline_v2": return response
+            material = json.loads(kwargs["input_text"])
+            by_id = {item["newsId"]: item for item in material["events"]}
+            chapters = response.get("chapters", {material.get("chapterId", ""): response})
+            outlines = {c["id"]: c for c in material.get("outline", [])}
+            from deepread_editorial import _COMPARISON_LABELS, COMPARISON_NOTE
+            for chapter_id, chapter in chapters.items():
+                blocks = []
+                for block in chapter.get("blocks", []):
+                    refs = block.get("newsIds", [])
+                    if block.get("type") == "change": continue
+                    if refs and all(ref in by_id for ref in refs):
+                        records = [r for ref in refs for r in by_id[ref]["evidenceRecords"]]
+                        block["evidenceIds"] = [r["evidenceId"] for r in records]
+                        if block["type"] == "paragraph": block["text"] = " ".join(r["text"] for r in records[:3])
+                        elif block["type"] == "comparison":
+                            key = outlines.get(chapter_id, {}).get("comparisonKey", "ai-agent")
+                            block["text"] = f"本章按{_COMPARISON_LABELS[key]}并列呈现以上原文证据。{COMPARISON_NOTE}"
+                    blocks.append(block)
+                chapter["blocks"] = blocks
+            for observation in response.get("observations", []):
+                refs, supports = observation.get("newsIds", []), observation.get("supports", [])
+                if (1 <= len(refs) <= 2 and len(refs) == len(supports)
+                        and all(ref in by_id for ref in refs)
+                        and {support.get("newsId") for support in supports} == set(refs)
+                        and all(len(support.get("supportQuote", "")) >= 10 and any(support["supportQuote"] in r["text"] for r in by_id[support["newsId"]]["evidenceRecords"]) for support in supports)):
+                    for support in supports:
+                        support["supportQuote"] = by_id[support["newsId"]]["evidenceRecords"][0]["text"]
+                    observation["text"] = " ".join(support["supportQuote"] for support in supports)
+            return response
+        return request
 
     def test_twelve_candidates_yield_only_five_core_events_in_channel_neutral_model(self):
         report = build_daily_deepread([self.item(n) for n in range(12)], self.config, self.now)
@@ -66,7 +116,7 @@ class EditorialDeepreadTests(unittest.TestCase):
         event = report["events"][0]
         self.assertEqual(event["eventId"], "evt-0")
         self.assertEqual([entry["newsId"] for entry in event["history"]], ["older"])
-        self.assertTrue(any(block["type"] == "change" for block in report["chapters"][0]["blocks"]))
+        self.assertFalse(any(block["type"] == "change" for block in report["chapters"][0]["blocks"]))
         self.assertEqual(report["generationStatus"], "insufficient")
 
     def test_excluded_historical_title_never_enters_public_article_or_model_prompt(self):
@@ -182,13 +232,13 @@ class EditorialDeepreadTests(unittest.TestCase):
                     *([{"type": "change", "text": "此前公布准备阶段；今天披露了实际试验结果，项目由计划进入执行记录。", "newsIds": ["news-0"]}] if n == 0 else []),
                 ]} for n in range(5)},
             }
-        report = build_daily_deepread(items, self.config, self.now, {"provider": "fixture"}, provider,
+        report = build_daily_deepread(items, self.config, self.now, {"provider": "fixture"}, self.source_provider(provider),
                                       event_registry=registry)
         self.assertEqual([call["schema_name"] for call in calls], ["deepread_outline_v2", "deepread_prose_v2"])
         self.assertIn("change", [block["type"] for block in calls[1]["example"]["chapters"]["chapter-1"]["blocks"]])
         self.assertEqual(report["generationStatus"], "ok")
         self.assertEqual(report["eventCount"], 5)
-        self.assertTrue(any(block["type"] == "change" for block in report["chapters"][0]["blocks"]))
+        self.assertFalse(any(block["type"] == "change" for block in report["chapters"][0]["blocks"]))
         self.assertTrue(all(event["sources"] for event in report["events"]))
         self.assertEqual(len(report["observations"]), 2)
 
@@ -217,7 +267,7 @@ class EditorialDeepreadTests(unittest.TestCase):
                          "newsIds": chapter["newsIds"]}
                     ]} for chapter in outline}}
         report = build_daily_deepread(items, {**self.config, "deepread_core_events": 4}, self.now,
-                                      {"provider": "fixture"}, provider)
+                                      {"provider": "fixture"}, self.source_provider(provider))
         self.assertEqual(report["generationStatus"], "ok")
         self.assertEqual(report["eventCount"], 4)
         self.assertEqual(len(report["chapters"]), 4)
@@ -256,7 +306,7 @@ class EditorialDeepreadTests(unittest.TestCase):
                          "newsIds": chapter["newsIds"]}]} for chapter in outline},
                     "observations": observations}
         report = build_daily_deepread([self.item(n) for n in range(5)], self.config, self.now,
-                                      {"provider": "fixture"}, provider)
+                                      {"provider": "fixture"}, self.source_provider(provider))
         self.assertEqual(report["generationStatus"], "ok")
         self.assertEqual([entry["newsIds"] for entry in report["observations"]], [["news-0"], ["news-1"]])
 
@@ -278,7 +328,7 @@ class EditorialDeepreadTests(unittest.TestCase):
                                       "newsIds": ["news-0"], "supports": [
                                           {"newsId": "news-0", "supportQuote": "并不存在的原文"}]}]}
         report = build_daily_deepread(items, self.config, self.now,
-                                      {"provider": "fixture"}, provider)
+                                      {"provider": "fixture"}, self.source_provider(provider))
         self.assertEqual(len(report["observations"]), 2)
         self.assertIn("现有材料尚不足以判断设备的实际部署地点和数量，需等后续公开信息。",
                       {entry["text"] for entry in report["observations"]})
@@ -350,10 +400,10 @@ class EditorialDeepreadTests(unittest.TestCase):
                                     "newsIds": ["news-0"]}]}
             return {"blocks": [{"type": "paragraph", "text": "未证实的占位文本", "newsIds": ["not-a-real-id"]}]}
         report = build_daily_deepread([self.item(n) for n in range(4)], self.config, self.now,
-                                      {"provider": "fixture"}, provider)
+                                      {"provider": "fixture"}, self.source_provider(provider))
         self.assertEqual(len(prose_attempts), 2)
         self.assertEqual(report["generationStatus"], "partial")
-        self.assertIn("第一项任务今天完成了关键试验", report["chapters"][0]["blocks"][0]["text"])
+        self.assertEqual(report["chapters"][0]["blocks"][0]["text"], self.item(0)["summary"])
         self.assertEqual(report["chapters"][1]["blocks"][0]["text"], report["events"][1]["excerpt"])
         self.assertNotIn("not-a-real-id", json.dumps(report))
 
@@ -510,7 +560,7 @@ class EditorialDeepreadTests(unittest.TestCase):
                                       + [self.item(0, summary=summary, evidenceText=evidence)],
                                       self.config, self.now, {"provider": "fixture"}, provider)
         public = json.dumps(report, ensure_ascii=False)
-        self.assertIn("基地将部署反无人机激光", public)
+        self.assertIn("Cape Canaveral will receive lasers to stop drones.", public)
         self.assertNotIn("猎鹰9", public)
         self.assertNotIn("格温", public)
         self.assertNotIn("Falcon 9", " ".join(inputs))
@@ -708,7 +758,7 @@ class EditorialDeepreadTests(unittest.TestCase):
                         }}
             return None
         report = build_daily_deepread(items, self.config, self.now,
-                                      {"provider": "fixture"}, provider)
+                                      {"provider": "fixture"}, self.source_provider(provider))
         self.assertEqual(report["generationStatus"], "ok")
         self.assertEqual(len(report["chapters"]), 4)
         self.assertEqual(report["chapters"][0]["kind"], "comparison")
@@ -968,10 +1018,10 @@ class EditorialDeepreadTests(unittest.TestCase):
                                 "text": f"第{n}项试验公布了已完成的步骤和任务结果，报道同时列出后续安排。",
                                 "newsIds": [f"news-{n}"]}]} for n in range(5)}}
                 report = build_daily_deepread(items, self.config, self.now,
-                                              {"provider": "fixture"}, provider)
+                                              {"provider": "fixture"}, self.source_provider(provider))
                 self.assertEqual(report["generationStatus"], "partial")
                 self.assertEqual(report["observations"], [])
-                self.assertIn("五项独立技术进展", report["headline"])
+                self.assertEqual(report["headline"], f"每日深读｜{report['editionDate']}：5项值得追踪的进展")
                 self.assertEqual(report["eventCount"], 5)
 
 

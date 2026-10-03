@@ -91,6 +91,9 @@ def strip_caption_text(value: str) -> str:
         sentences = re.split(r"(?<=[。！？])|(?<=[.!?])\s+(?=[A-Z])", paragraph)
         cleaned = []
         for sentence in sentences:
+            if (_NOISE_TEXT.search(sentence.strip())
+                    or re.match(r"^(?:推荐阅读|相关阅读|相关推荐|延伸阅读|点击订阅)", sentence.strip())):
+                continue
             # An image can itself be the reported evidence. Preserve the
             # finding even when its provider or photographer is credited.
             image_finding = (not re.search(r"(?:报道)?配图", sentence)
