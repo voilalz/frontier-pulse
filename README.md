@@ -1,5 +1,24 @@
 # 智域前沿 / Frontier Pulse
 
+顺序6已完成新闻生成/发布/恢复与经典论文的隔离（Python510项、Node16项；六项Important均经失败回归修复）。新闻只操作明确拥有的文件，新快照增加news-only-v1范围；旧混合快照恢复忽略research，仅恢复新闻。查看[隔离操作与边界](docs/news-classics-isolation.md)及[混合审计](docs/audits/2026-10-04-news-classics-isolation/mixed-acceptance.json)。200篇目录、30篇导读及真实队列保持第5步字节；页面/旧收藏和独立经典工作流仍留到顺序7–8，未推送、合并或部署。
+
+
+## 2026-10-03 经典论文独立轮换与发布
+
+顺序5已实现北京时间固定日历轮换、90天推荐/预留间隔、不可变历史、离线备稿和独立原子快照/恢复。真实种子覆盖10月3日至17日，30篇、每领域6篇；未来14天有28篇完整备稿。查看[操作说明](docs/classic-publishing.md)、[真实输入模拟](docs/audits/2026-10-03-classic-publishing/real-acceptance.json)及[交接](handoff.md)。本轮保持836个既有代码/数据/审计文件不变；README和交接单独更新。该段是顺序5记录；当时新闻双向隔离、页面与工作流尚待顺序6–8；未写生产数据、推送、合并或部署。[独立审查](docs/audits/2026-10-03-classic-publishing/review.md)发现的四项Important均已用失败回归修复，Python472项、Node16项通过；精确HEAD与恢复结果见恢复包。
+
+## 2026-10-03 经典论文全文导读
+
+已完成 AI、SLAM、GNC、CV、UAV 各六篇，共 30 篇中文全文导读；每篇包含概览与问题、方法、贡献、适用场景、局限、阅读建议。查看[导读合集](docs/classic-fulltext-guides.md)、[独立复查](docs/audits/2026-10-02-classic-guides/review.md)和[恢复说明](docs/classic-guides-recovery.md)。正文按实际全文版本写作，保留来源、页码、上下文与文件哈希；正式版、作者稿及重印版本的差异逐篇披露。输入继续冻结，顺序5仅编排已验收内容。
+
+## 2026-10-01 经典论文目录（来源核验完成）
+
+已核验 200 篇唯一论文，AI、SLAM、GNC、CV、UAV 各 40 篇；真实书目与两个独立经典依据逐篇审阅，严格离线门禁通过。查看[论文索引](docs/classic-paper-index.md)、[来源审计](docs/audits/2026-10-01-classic-sources/review.md)与[交接](handoff.md)。本轮沿用目录原始字节；页面、发布流程接入仍在后续任务中；未推送、合并或部署。
+
+## A01–A05：发布可靠性（待合并审查）
+
+新增临时生成与发布校验、七个不可变完整快照、单命令恢复，以及按版本固定的日报/深读/归档读取。所有页面时间使用北京时间，导航移除 Atom 和邮件按钮，后台订阅与邮件保留。日报生成调整为北京时间 07:10，08:00 为发布目标。独立外部监测代码默认关闭，未部署，需后续授权启用；操作、验收及限制见 [发布与恢复说明](docs/reliable-publishing.md)。
+
 
 ## 2026-09-27 每日深读编辑模型
 

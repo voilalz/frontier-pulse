@@ -1,6 +1,12 @@
 (() => {
   "use strict";
 
+  const publication = window.FrontierPublication;
+  const classicUI = window.FrontierClassics;
+  let releaseManifest = null;
+  const RELEASE_CACHE_KEY = "fp-release-manifest-v1";
+  const publicationCacheKey = (key) => releaseManifest ? `${key}:${releaseManifest.releaseId}` : key;
+
   const ENDPOINTS = {
     latest: "./data/news.json",
     deepread: "./data/deepread.json",
@@ -63,8 +69,9 @@
   const state = {
     view: initialView,
     viewRequest: 0,
+    historicalSelection: false,
     deepreadRequest: 0,
-    query: clean(params.get("q")),
+    query: initialView === "research" ? "" : clean(params.get("q")),
     category: "全部",
     source: clean(params.get("source"), "全部"),
     rangeHours: initialRange,
@@ -106,12 +113,7 @@
   if (!state.researchKeywords.length) state.researchScope = "all";
 
   function formatDate(value, includeTime = true) {
-    const date = new Date(value);
-    if (Number.isNaN(date.valueOf())) return "时间未知";
-    const options = includeTime
-      ? { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false, timeZoneName: "short" }
-      : { year: "numeric", month: "2-digit", day: "2-digit" };
-    return new Intl.DateTimeFormat("zh-CN", options).format(date);
+    return publication.formatDate(value, includeTime);
   }
 
   function editionTimezoneLabel(value) {
@@ -375,7 +377,7 @@
     const separator = url.includes("?") ? "&" : "?";
     const target = bypassCache ? `${url}${separator}t=${Date.now()}` : url;
     const response = await fetch(target, { cache: bypassCache ? "no-store" : "default" });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    if (!response.ok) { const error = new Error(`HTTP ${response.status}`); error.status = response.status; throw error; }
     return response.json();
   }
 
@@ -385,6 +387,33 @@
     element.hidden = false;
     clearTimeout(toast.timer);
     toast.timer = setTimeout(() => { element.hidden = true; }, 2600);
+  }
+
+  async function loadPublication(bypassCache = false) {
+    try {
+      const manifest = publication.validateManifest(await fetchJson("./data/release.json", bypassCache));
+      releaseManifest = manifest;
+      writeStorage(RELEASE_CACHE_KEY, manifest);
+    } catch (error) {
+      const cached = readStorage(RELEASE_CACHE_KEY, null);
+      if (cached) releaseManifest = publication.validateManifest(cached);
+      else if (error.status === 404) releaseManifest = null;
+      else throw error;
+    }
+  }
+
+  async function fetchPublicationJson(path, bypassCache = false) {
+    const pinned = releaseManifest;
+    const payload = await fetchJson(publication.resolve(pinned, path), bypassCache);
+    if (pinned !== releaseManifest) throw new Error("版本已切换，请重新读取");
+    const current = path === ENDPOINTS.latest || path === ENDPOINTS.deepread
+      || path === `./data/archive/${pinned?.editionDate}.json`
+      || path === `./data/deepread/${pinned?.editionDate}.json`;
+    if (pinned && ((current && !publication.accepts(pinned, payload))
+      || ([ENDPOINTS.archive, ENDPOINTS.deepreadIndex, ENDPOINTS.search].includes(path) && payload.releaseId !== pinned.releaseId))) {
+      throw new Error("内容版本与发布清单不一致");
+    }
+    return payload;
   }
 
   function showAlert(kind, title, detail) {
@@ -406,25 +435,36 @@
     return Number.isFinite(generated) ? (Date.now() - generated) / 3_600_000 : Infinity;
   }
 
-  function chinaEditionClock(value = new Date()) {
-    const parts = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
-      timeZone: "Asia/Shanghai",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      hourCycle: "h23",
-    }).formatToParts(value).filter((part) => part.type !== "literal").map((part) => [part.type, part.value]));
-    return {
-      date: `${parts.year}-${parts.month}-${parts.day}`,
-      minutes: Number(parts.hour) * 60 + Number(parts.minute),
-    };
+  function chinaEditionClock(value = new Date()) { return publication.clock(value); }
+
+  function renderEditionHealth(report, label, historical = false, failed = false) {
+    const date = report?.editionDate || (report?.generatedAt ? chinaEditionClock(new Date(report.generatedAt)).date : "");
+    const health = publication.health({editionDate: date, historical, failed});
+    const badge = $("dataState");
+    badge.className = "state-badge";
+    badge.textContent = health.label;
+    if (health.kind === "current") return false;
+    if (health.kind === "failed") {
+      badge.classList.add("failed");
+      showAlert("failed", `${label}更新失败`, `当前保留 ${date || "上一次"} 的内容，稍后刷新可重试。`);
+    } else if (health.overdue) {
+      badge.classList.add("warning");
+      showAlert("warning", `今日${label}尚未更新`, `北京时间已过 08:00，当前版本为 ${date || "未知"}。正在等待当天内容。`);
+    } else { hideAlert(); }
+    return true;
   }
 
   function updateHealth(report) {
     const badge = $("dataState");
     badge.className = "state-badge";
+    if (state.view === "history" && state.currentReport) {
+      renderEditionHealth(state.currentReport, "日报", true);
+      return;
+    }
+    if (state.pipelineStatus?.state === "failed") {
+      renderEditionHealth(report, "日报", false, true);
+      return;
+    }
     if (state.latestLoadError) {
       badge.textContent = state.usingCache ? "本机缓存" : "读取失败";
       badge.classList.add("failed");
@@ -433,33 +473,7 @@
         : `页面没有启用任何样例回退，且本机没有可用缓存。错误：${state.latestLoadError}`);
       return;
     }
-    if (state.pipelineStatus?.state === "failed") {
-      badge.textContent = "更新失败";
-      badge.classList.add("failed");
-      const lastSuccess = state.pipelineStatus.lastSuccessAt ? formatDate(state.pipelineStatus.lastSuccessAt) : "未知";
-      showAlert("failed", "最近一次自动更新失败", `${state.pipelineStatus.message || "采集流程未成功完成"}；最后成功时间：${lastSuccess}。页面继续保留上一期真实数据。`);
-      return;
-    }
-    const chinaNow = chinaEditionClock();
-    const editionDate = clean(report?.editionDate);
-    const editionIsOlder = !/^\d{4}-\d{2}-\d{2}$/.test(editionDate) || editionDate < chinaNow.date;
-    if (chinaNow.minutes >= 8 * 60 + 15 && editionIsOlder) {
-      badge.textContent = "今日未更新";
-      badge.classList.add("warning");
-      showAlert(
-        "warning",
-        "今日日报尚未生成",
-        `北京时间已过 08:15，当前最新版本仍为 ${editionDate || "日期未知"}。自动任务可能延迟或未触发；全量动态仍可继续使用。`,
-      );
-      return;
-    }
-    const age = reportAgeHours(report);
-    if (age > 36) {
-      badge.textContent = "数据过期";
-      badge.classList.add("warning");
-      showAlert("warning", "日报可能已经过期", `当前数据生成于 ${formatDate(report?.generatedAt)}，已超过 36 小时。请检查 GitHub Actions、信源可用性和部署状态。`);
-      return;
-    }
+    if (renderEditionHealth(report, "日报", false, state.pipelineStatus?.state === "failed")) return;
     if (report?.items?.length !== 10) {
       badge.textContent = "数量异常";
       badge.classList.add("warning");
@@ -486,7 +500,7 @@
     }
     // Ranking diagnostics remain in status.json for operators; readers only
     // see data freshness and language availability above.
-    badge.textContent = "已更新";
+    badge.textContent = "今日已更新";
     hideAlert();
   }
 
@@ -539,6 +553,9 @@
           name: clean(source?.name, "原报道"), url: safeEditorialUrl(source?.url),
         })).filter((source) => source.url).slice(0, 8),
         image: safeEditorialUrl(event.image), imageSource: clean(event.imageSource), history,
+        evidenceRecords: (Array.isArray(event.evidenceRecords) ? event.evidenceRecords : []).slice(0,144)
+          .filter((record) => /^evd-[a-f0-9]{20}$/.test(record?.evidenceId) && safeEditorialUrl(record?.url) && clean(record?.text))
+          .map((record) => ({evidenceId:record.evidenceId, text:clean(record.text), url:safeEditorialUrl(record.url), fetchedAt:clean(record.fetchedAt)})),
       };
     }).filter((event) => event.sources.length);
     if (events.length !== payload.events.length) filtered = true;
@@ -560,7 +577,8 @@
         }
         return ["paragraph", "change"].includes(block.type) && clean(block.text);
       }).slice(0, 10).map((block) => ({type: block.type, text: clean(block.text),
-        newsIds: block.newsIds.map((value) => clean(value))}));
+        newsIds: block.newsIds.map((value) => clean(value)),
+        evidenceIds: Array.isArray(block.evidenceIds) ? block.evidenceIds.filter((ref) => /^evd-[a-f0-9]{20}$/.test(ref)) : []}));
       return {id: `deepread-chapter-${index + 1}`, title: clean(chapter?.title, "本期进展"),
         angle: clean(chapter?.angle), kind, comparisonKey: kind === "comparison" ? clean(chapter.comparisonKey) : "",
         comparisonNote: kind === "comparison" ? "并列比较不代表事件之间存在因果关系。" : "",
@@ -589,7 +607,7 @@
         text: byNews.get(id).excerpt || byNews.get(id).title, newsIds: [id]}));
     });
     return {
-      schemaVersion: 2, editionDate: payload.editionDate, generatedAt: clean(payload.generatedAt),
+      releaseId: clean(payload.releaseId), schemaVersion: 2, editionDate: payload.editionDate, generatedAt: clean(payload.generatedAt),
       headline: filtered ? "今日前沿深读" : clean(payload.headline, "今日前沿深读"),
       lead: filtered ? "" : clean(payload.lead),
       generationStatus: usedEvents.length < 4 ? "insufficient" : clean(payload.generationStatus, "fallback"),
@@ -637,6 +655,17 @@
     };
   }
 
+  function renderRawEvidence(block, members) {
+    const refs = new Set(block.evidenceIds || []);
+    const records = new Map(members.flatMap((event) => event.evidenceRecords || [])
+      .filter((record) => refs.has(record.evidenceId)).map((record) => [record.evidenceId, record]));
+    if (!records.size) return "";
+    return `<details class="deepread-evidence"><summary>原文依据 · ${records.size} 段</summary><ul>${[...records.values()].map((record) =>
+      `<li data-evidence-id="${esc(record.evidenceId)}"><blockquote>${esc(record.text)}</blockquote>
+       <a href="${esc(record.url)}" target="_blank" rel="noopener noreferrer">查看原文</a>
+       <small>抓取 ${esc(formatDate(record.fetchedAt))}</small></li>`).join("")}</ul></details>`;
+  }
+
   function renderEditorialDeepread(report) {
     if (!report?.chapters?.length) return '<div class="empty"><h2>这期深读尚未发布</h2><p>请选择已有日期，或在日报更新后回来阅读。</p></div>';
     const byNews = new Map(report.events.map((event) => [event.newsId, event]));
@@ -661,7 +690,7 @@
             <h2>${esc(chapter.title)}</h2>
             ${chapter.kind === "comparison" ? `<p class="deepread-comparison-note">${esc(chapter.comparisonNote)}</p>` : ""}
             ${illustrated ? `<figure class="deepread-figure"><img src="${esc(illustrated.image)}" alt="${esc(illustrated.title)}" loading="lazy" decoding="async" referrerpolicy="no-referrer"><figcaption>原文配图 · 图片来源：${esc(illustrated.imageSource || illustrated.sources[0]?.name || "原报道")}</figcaption></figure>` : ""}
-            ${chapter.blocks.map((block) => `<p class="${block.type === "change" ? "deepread-change" : block.type === "comparison" ? "deepread-comparison" : "deepread-paragraph"}">${esc(block.text)}</p>`).join("")}
+            ${chapter.blocks.map((block) => `<p class="${block.type === "change" ? "deepread-change" : block.type === "comparison" ? "deepread-comparison" : "deepread-paragraph"}">${esc(block.text)}</p>${renderRawEvidence(block, members)}`).join("")}
             <div class="deepread-source-list"><b>本节资料</b>${members.map((event) => `<div class="deepread-source-row">
               <span class="deepread-evidence-tag">${EVIDENCE_LABELS[event.evidenceLevel]}</span>
               <span>${esc(event.title)}</span>
@@ -721,24 +750,24 @@
     state.deepreadLoadError = "";
     if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) { state.deepreadReport = null; state.deepreadLoadError = "日期无效"; return; }
     const indexPromise = (state.deepreadIndex && !bypassCache) ? Promise.resolve() :
-      fetchJson(ENDPOINTS.deepreadIndex, bypassCache).then((index) => {
+      fetchPublicationJson(ENDPOINTS.deepreadIndex, bypassCache).then((index) => {
         if (request === state.deepreadRequest) state.deepreadIndex = index;
       }).catch(() => {});
     try {
       const report = !bypassCache && date && state.deepreadCache.has(date)
         ? state.deepreadCache.get(date)
-        : normalizeDeepread(await fetchJson(date ? `./data/deepread/${date}.json` : ENDPOINTS.deepread, bypassCache));
+        : normalizeDeepread(await fetchPublicationJson(date ? `./data/deepread/${date}.json` : ENDPOINTS.deepread, bypassCache));
       if (date && report.editionDate !== date) throw new Error("返回了不同日期的深读");
       if (request !== state.deepreadRequest) return;
       state.deepreadReport = report;
       state.deepreadCache.set(report.editionDate, report);
-      if (!date) writeStorage(DEEPREAD_CACHE_KEY, report);
+      if (!date) writeStorage(publicationCacheKey(DEEPREAD_CACHE_KEY), report);
     } catch (error) {
       if (request !== state.deepreadRequest) return;
       state.deepreadLoadError = clean(error?.message, "暂时无法读取");
       try {
-        const cached = normalizeDeepread(state.deepreadCache.get(date) || readStorage(DEEPREAD_CACHE_KEY, null));
-        state.deepreadReport = !date || cached.editionDate === date ? cached : null;
+        const cached = normalizeDeepread(state.deepreadCache.get(date) || readStorage(publicationCacheKey(DEEPREAD_CACHE_KEY), null));
+        state.deepreadReport = ((!date && publication.accepts(releaseManifest, cached)) || (date && cached.editionDate === date)) ? cached : null;
       } catch (_) { state.deepreadReport = null; }
     }
     await indexPromise;
@@ -755,11 +784,10 @@
         showAlert("warning", report ? "当前展示已保存的深读" : "这期深读暂时无法读取", report
           ? `版本日期为 ${report.editionDate}，刷新后可重试。`
           : "请选择已有日期，或稍后刷新。每日深读从栏目上线之日起独立归档。");
-      } else if (report && reportAgeHours(report) > 30 && !initialDate && report.editionDate === availableDates()[0]) {
-        badge.textContent = "深读待更新";
-        showAlert("warning", "最新深读尚未更新", `当前展示 ${report.editionDate} 的报道。`);
+      } else if (renderEditionHealth(report, "深读", state.historicalSelection, state.pipelineStatus?.state === "failed")) {
+        return;
       } else {
-        badge.textContent = report?.generationStatus === "insufficient" ? "本期简版" : "深读已更新";
+        badge.textContent = report?.generationStatus === "insufficient" ? "今日简版" : "今日已更新";
         hideAlert();
       }
       return;
@@ -821,12 +849,8 @@
         showAlert("warning", "论文雷达暂无条目", "本期未抓取到符合研究方向与时间窗的论文，请检查 arXiv 可用性和研究分类配置。");
         return;
       }
-      if (reportAgeHours(state.researchReport) > 36) {
-        badge.textContent = "论文已过期";
-        badge.classList.add("warning");
-        showAlert("warning", "论文雷达可能已经过期", `当前论文数据生成于 ${formatDate(state.researchReport?.generatedAt)}，已超过 36 小时。`);
-        return;
-      }
+      if (renderEditionHealth(state.researchReport, "论文", false,
+        ["failed", "stale"].includes(state.researchReport?.editorialStatus))) return;
       const researchDiagnostics = state.researchReport?.editorialDiagnostics || state.pipelineStatus?.researchEditorialDiagnostics;
       const warnings = [
         ...(Array.isArray(state.researchReport?.warnings) ? state.researchReport.warnings : []),
@@ -841,7 +865,7 @@
         showAlert("warning", researchEditorialStatus === "partial" ? "论文雷达部分批次未完成翻译" : "论文雷达已降级", [...new Set(warnings)].join("；") || "本期保留论文元数据与原始摘要，未完成 AI 中文编辑。");
         return;
       }
-      badge.textContent = "论文在线";
+      badge.textContent = "今日已更新";
       hideAlert();
       return;
     }
@@ -868,27 +892,30 @@
   }
 
   async function loadLatest(showToast = false, bypassCache = false) {
-    $("dataState").textContent = "同步中";
+    const owner = state.viewRequest;
+    if (state.view === "latest") $("dataState").textContent = "同步中";
     state.latestLoadError = "";
     state.usingCache = false;
     const statusPromise = loadPipelineStatus(bypassCache);
     try {
-      const report = normalizeReport(await fetchJson(ENDPOINTS.latest, bypassCache));
+      const report = normalizeReport(await fetchPublicationJson(ENDPOINTS.latest, bypassCache));
       state.latestReport = report;
       state.editionCache.set(report.editionDate, report);
-      writeStorage(CACHE_KEY, report);
+      writeStorage(publicationCacheKey(CACHE_KEY), report);
       migrateLegacyBookmarks(report.items);
-      if (showToast) toast("已读取最新日报");
+      if (showToast && owner === state.viewRequest && state.view !== "research") toast("已读取最新日报");
     } catch (error) {
       state.latestLoadError = clean(error?.message, "未知错误");
       try {
-        state.latestReport = normalizeReport(readStorage(CACHE_KEY, null));
+        state.latestReport = normalizeReport(readStorage(publicationCacheKey(CACHE_KEY), null));
+        if (!publication.accepts(releaseManifest, state.latestReport)) throw new Error("日报缓存版本不匹配");
         state.usingCache = true;
       } catch (_) {
         state.latestReport = null;
       }
     }
     await statusPromise;
+    if (owner !== state.viewRequest || state.view === "research") return;
     updateHealth(state.latestReport);
     if (state.view === "latest") {
       state.currentReport = state.latestReport;
@@ -944,7 +971,7 @@
   async function ensureArchiveIndex(bypassCache = false) {
     if (state.archiveIndex && !bypassCache) return state.archiveIndex;
     try {
-      const payload = await fetchJson(ENDPOINTS.archive, bypassCache);
+      const payload = await fetchPublicationJson(ENDPOINTS.archive, bypassCache);
       const editions = (Array.isArray(payload?.editions) ? payload.editions : [])
         .filter((item) => /^\d{4}-\d{2}-\d{2}$/.test(item?.editionDate || ""))
         .sort((a, b) => b.editionDate.localeCompare(a.editionDate));
@@ -958,7 +985,7 @@
   async function ensureSearchIndex(bypassCache = false) {
     if (state.searchItems && !bypassCache) return state.searchItems;
     try {
-      const payload = await fetchJson(ENDPOINTS.search, bypassCache);
+      const payload = await fetchPublicationJson(ENDPOINTS.search, bypassCache);
       state.searchManifest = payload;
       let rawItems = Array.isArray(payload?.items) ? payload.items : [];
       if (Number(payload?.schemaVersion) >= 2 && Array.isArray(payload?.shards)) {
@@ -966,7 +993,7 @@
         const shards = payload.shards.filter((shard) => /^\.\/data\/archive\/search-\d{4}-\d{2}\.json$/.test(clean(shard?.file)));
         for (let index = 0; index < shards.length; index += 4) {
           const batch = await Promise.all(shards.slice(index, index + 4).map(async (shard) => {
-            const shardPayload = await fetchJson(shard.file, bypassCache);
+            const shardPayload = await fetchPublicationJson(shard.file, bypassCache);
             return Array.isArray(shardPayload?.items) ? shardPayload.items : [];
           }));
           rawItems.push(...batch.flat());
@@ -1009,7 +1036,7 @@
     $("stories").setAttribute("aria-busy", "true");
     $("stories").innerHTML = '<div class="loading"></div>';
     try {
-      const report = normalizeReport(await fetchJson(`./data/archive/${date}.json`, bypassCache));
+      const report = normalizeReport(await fetchPublicationJson(`./data/archive/${date}.json`, bypassCache));
       state.editionCache.set(date, report);
       state.currentReport = report;
       state.items = report.items;
@@ -1050,7 +1077,7 @@
       latest: ["DAILY BRIEF", "今日前沿态势", "科技 · AI · 航空航天 · 安全 · 前沿研究", "TOP 10", "今日 Top 10"],
       deepread: ["THE DAILY READ", "每日深读", "读懂今日进展，连接事实与趋势", "DAILY READ", "每日深读"],
       stream: ["FULL STREAM", `过去 ${state.rangeHours} 小时`, "全量合格动态", "STREAM", "全量动态"],
-      research: ["RESEARCH RADAR", "论文雷达", "前沿研究与预印本", "PAPERS", "最新论文"],
+      research: ["DAILY CLASSICS", "每日经典论文", "每天两篇，循序阅读奠基方法与长期影响", "CLASSICS", "每日两篇"],
       history: ["ARCHIVE", "历史脉络", state.query ? "跨日期检索" : "按日期回看", "ARCHIVE", state.query ? "跨日期搜索" : "历史要闻"],
       bookmarks: ["COLLECTION", "我的收藏", "仅保存在当前浏览器", "SAVED", "收藏新闻"],
       watchlist: ["WATCHLIST", "关注词", "从历史索引中追踪持续信号", "SIGNALS", "关注词命中"],
@@ -1063,14 +1090,14 @@
     $("feedTitle").textContent = copy[4];
     $("watchPanel").hidden = state.view !== "watchlist";
     $("spotlightSection").hidden = state.view !== "latest";
-    $("researchNotice").hidden = state.view !== "research";
-    $("researchKeywordPanel").hidden = state.view !== "research";
+    $("classicSection").hidden = state.view !== "research";
+    $("classicBookmarks").hidden = state.view !== "bookmarks";
     $("rangeControls").hidden = state.view !== "stream";
     $("sourceFilterWrap").hidden = state.view !== "stream";
     $("deepreadSection").hidden = state.view !== "deepread";
-    $("briefSection").hidden = state.view === "deepread";
-    $("feedSection").hidden = state.view === "deepread";
-    $("searchWrap").hidden = state.view === "deepread";
+    $("briefSection").hidden = ["deepread", "research"].includes(state.view);
+    $("feedSection").hidden = ["deepread", "research"].includes(state.view);
+    $("searchWrap").hidden = ["deepread", "research"].includes(state.view);
     $("search").placeholder = state.view === "research" ? "搜索论文、作者、摘要…" : "搜索标题、摘要、来源…";
     document.querySelectorAll("[data-range]").forEach((button) => {
       button.classList.toggle("active", Number(button.dataset.range) === state.rangeHours);
@@ -1362,7 +1389,7 @@
     if (!item?._compact || !/^\d{4}-\d{2}-\d{2}$/.test(item.editionDate)) return item;
     let report = state.editionCache.get(item.editionDate);
     if (!report) {
-      report = normalizeReport(await fetchJson(`./data/archive/${item.editionDate}.json`));
+      report = normalizeReport(await fetchPublicationJson(`./data/archive/${item.editionDate}.json`));
       state.editionCache.set(item.editionDate, report);
     }
     const full = report.items.find((candidate) => candidate.id === item.id);
@@ -1452,7 +1479,7 @@
       <span class="rank">${String(index + 1).padStart(2, "0")}</span>
       <div class="story-main"><div class="story-copy">
         <div class="meta">
-          <span class="cat paper-cat">${esc(item.researchArea || "前沿研究")}</span>
+          <span class="cat paper-cat">${esc(item.researchArea || "前沿研究")}</span><span class="legacy-paper-label">旧版论文</span>
           <b>${esc(item.source)}</b><span>${esc(formatDate(item.publishedAt, false))}</span>
           <span class="review-status">${esc(item.peerReviewStatus || "评审状态未标注")}</span>
           ${item.translationProvider ? `<span class="translation-badge">${esc(item.translationProvider === "deepseek" ? "DeepSeek 中文" : "AI 中文")}</span>` : ""}
@@ -1556,37 +1583,11 @@
       : '<span class="method-kicker">尚未添加关注词</span>';
   }
 
-  function renderResearchKeywords() {
-    const panel = $("researchKeywordPanel");
-    if (!panel) return;
-    const keywords = state.researchKeywords;
-    const mineCount = state.items.filter((item) => item.contentType === "paper" && matchedResearchKeywords(item).length).length;
-    $("researchKeywordLimit").textContent = `${keywords.length} / 20`;
-    $("allResearchCount").textContent = state.items.filter((item) => item.contentType === "paper").length;
-    $("mineResearchCount").textContent = mineCount;
-    $("researchKeywordChips").innerHTML = keywords.length
-      ? keywords.map((keyword) => `<button class="watch-chip" type="button" data-remove-research-keyword="${esc(keyword)}" title="移除论文关键词">${esc(keyword)}<span>×</span></button>`).join("")
-      : '<span class="method-kicker">尚未添加论文关键词</span>';
-    document.querySelectorAll("[data-research-scope]").forEach((button) => {
-      const active = button.dataset.researchScope === state.researchScope;
-      button.classList.toggle("active", active);
-      button.setAttribute("aria-pressed", String(active));
-      if (button.dataset.researchScope === "mine") button.disabled = !keywords.length;
-    });
-    const configured = Array.isArray(state.researchReport?.collectionKeywords)
-      ? state.researchReport.collectionKeywords : [];
-    $("collectionKeywordChips").innerHTML = configured.length
-      ? configured.map((definition) => {
-        const label = clean(typeof definition === "string" ? definition : definition?.label || definition?.query);
-        const query = clean(typeof definition === "object" ? definition?.query : "");
-        return label ? `<span title="${esc(query ? `arXiv 标题/摘要查询：${query}` : label)}">${esc(label)}</span>` : "";
-      }).join("")
-      : '<span class="method-kicker">管理员尚未配置额外采集词</span>';
-  }
-
   function renderAll() {
     renderViewCopy();
     renderDateControl();
+    if (state.view === "research") return;
+    if (state.view === "bookmarks") classicUI.renderBookmarks();
     if (state.view === "deepread") {
       $("deepreadContent").innerHTML = renderDeepreadArticle(state.deepreadReport);
       $("deepreadContent").setAttribute("aria-busy", "false");
@@ -1598,7 +1599,6 @@
     }
     renderSpotlight();
     renderWatchwords();
-    renderResearchKeywords();
     renderSourceFilter();
     renderFilters();
     renderBrief();
@@ -1632,6 +1632,37 @@
   async function switchView(view, options = {}) {
     if (!VIEWS.has(view)) return;
     const request = ++state.viewRequest;
+    if (view === "research") {
+      state.view = view;
+      hideAlert();
+      renderViewCopy();
+      $("dateControl").hidden = true;
+      await classicUI.show({initial:Boolean(options.initial), ...(options.date !== undefined ? {date:options.date} : {}), bypassCache:Boolean(options.bypassCache)});
+      return;
+    }
+    if (view === "bookmarks") {
+      classicUI.hide();
+      state.view = view;
+      state.category = "全部";
+      state.visibleLimit = PAGE_SIZE;
+      state.currentReport = null;
+      state.items = state.bookmarks.map((item, index) => normalizeItem(item, index, item.editionDate));
+      hideAlert();
+      $("dataState").textContent = "本机收藏";
+      $("dataState").className = "state-badge";
+      renderAll();
+      return;
+    }
+    try { await ensureNewsContext(); }
+    catch (error) {
+      if (request !== state.viewRequest) return;
+      if (options.initial) throw error;
+      toast("新闻暂时无法读取：" + clean(error.message));
+      return;
+    }
+    if (request !== state.viewRequest) return;
+    classicUI.hide();
+    state.historicalSelection = view === "history" || (view === "deepread" && Boolean(options.historical));
     if (["stream", "research"].includes(view)) renderViewLoading(view);
     else state.view = view;
     state.category = "全部";
@@ -1662,13 +1693,6 @@
       if (request !== state.viewRequest) return;
       state.currentReport = state.streamReport;
       state.items = state.streamReport?.items || [];
-      state.editionDate = "";
-    } else if (view === "research") {
-      state.sort = "score";
-      await loadResearch(Boolean(options.showToast), Boolean(options.bypassCache));
-      if (request !== state.viewRequest) return;
-      state.currentReport = state.researchReport;
-      state.items = state.researchReport?.items || [];
       state.editionDate = "";
     } else if (view === "history") {
       await ensureArchiveIndex(Boolean(options.bypassCache));
@@ -1758,11 +1782,6 @@
   }
 
   function openDialog(type) {
-    if (type === "email") {
-      $("dialogEyebrow").textContent = "DAILY EMAIL DIGEST";
-      $("dialogTitle").textContent = "每日邮件推送";
-      $("dialogContent").innerHTML = `<p>邮件由 GitHub Actions 在日报成功生成后，通过管理员配置的 SMTP 账户发送。收件人地址只存放在加密的 GitHub Secrets 中，不会出现在网页或源码里。</p><ol><li>在仓库 Actions Secrets 配置 <code>SMTP_HOST</code>、<code>SMTP_USERNAME</code>、<code>SMTP_PASSWORD</code>、<code>EMAIL_FROM</code> 和 <code>EMAIL_TO</code>。</li><li>可选配置 <code>SITE_URL</code>，让邮件中的“查看日报”链接指向正式域名。</li><li>手动运行一次 Daily news update 验证邮件。未配置时流程会安全跳过，不影响网站更新。</li></ol><p>普通访问者可以通过页面顶部的 <a href="./feed.xml">Atom 订阅</a>在阅读器中接收更新，无需提交邮箱。公开网页仍不开放匿名邮件登记，以避免邮箱收集、滥发和合规风险；管理员可在 <code>EMAIL_TO</code> 中维护多个收件人。</p>`;
-    } else {
       $("dialogEyebrow").textContent = "SCORING METHODOLOGY";
       if (state.view === "research") {
         $("dialogTitle").textContent = "论文相关度如何理解";
@@ -1771,7 +1790,6 @@
         $("dialogTitle").textContent = "关于新闻摘要";
         $("dialogContent").innerHTML = "<p>摘要依据来源提供的标题、导语与正文整理，尽量保留事件背景、关键细节和最新进展。来源信息不足时，摘要会相应缩短；点击原文可阅读完整报道。</p>";
       }
-    }
     $("infoDialog").showModal();
   }
 
@@ -1896,12 +1914,12 @@
   });
   $("editionPicker").addEventListener("change", async (event) => {
     state.query = ""; $("search").value = "";
-    await switchView(state.view === "deepread" ? "deepread" : "history", { date: event.target.value });
+    await switchView(state.view === "deepread" ? "deepread" : "history", { date: event.target.value, historical: true });
   });
   [$("previousEdition"), $("nextEdition")].forEach((button) => button.addEventListener("click", async () => {
     if (!button.dataset.date) return;
     state.query = ""; $("search").value = "";
-    await switchView(state.view === "deepread" ? "deepread" : "history", { date: button.dataset.date });
+    await switchView(state.view === "deepread" ? "deepread" : "history", { date: button.dataset.date, historical: true });
   }));
   $("watchForm").addEventListener("submit", (event) => {
     event.preventDefault();
@@ -1914,30 +1932,32 @@
     writeStorage(WATCH_KEY, state.watchwords);
     renderAll(); toast("已添加关注词");
   });
-  $("researchKeywordForm").addEventListener("submit", (event) => {
-    event.preventDefault();
-    const input = $("researchKeywordInput");
-    const keyword = clean(input.value).slice(0, 60);
-    if (!keyword) return;
-    if (state.researchKeywords.some((item) => item.toLocaleLowerCase() === keyword.toLocaleLowerCase())) {
-      toast("该论文关键词已存在");
+  $("reloadBtn").addEventListener("click", async () => {
+    if (state.view === "research") {
+      $("reloadBtn").disabled = true;
+      try { await classicUI.show({bypassCache:true}); }
+      finally { $("reloadBtn").disabled = false; }
       return;
     }
-    if (state.researchKeywords.length >= 20) { toast("最多保存 20 个论文关键词"); return; }
-    state.researchKeywords.push(keyword);
-    state.researchScope = "mine";
-    state.visibleLimit = PAGE_SIZE;
-    input.value = "";
-    writeStorage(RESEARCH_KEYWORDS_KEY, state.researchKeywords);
-    writeStorage(RESEARCH_SCOPE_KEY, state.researchScope);
-    renderAll();
-    toast("已添加并切换到专属论文流");
-  });
-  $("reloadBtn").addEventListener("click", async () => {
     state.archiveIndex = null; state.searchManifest = null; state.searchItems = null; state.editionCache.clear();
     state.deepreadIndex = null; state.deepreadCache.clear();
-    await loadLatest(true, true);
-    await switchView(state.view, { date: state.editionDate, bypassCache: true });
+    const date = state.editionDate, historical = state.historicalSelection, refreshView = state.view;
+    $("reloadBtn").disabled = true;
+    ++state.deepreadRequest; const owner = ++state.viewRequest;
+    try {
+      await loadPublication(true);
+      if (owner !== state.viewRequest || state.view !== refreshView) return;
+      await loadLatest(true, true);
+      if (owner !== state.viewRequest || state.view !== refreshView) return;
+      await switchView(refreshView, { date: historical ? date : "", historical, bypassCache: true });
+    } catch (error) {
+      if (owner !== state.viewRequest || state.view !== refreshView) return;
+      await loadPipelineStatus(true);
+      if (owner !== state.viewRequest || state.view !== refreshView) return;
+      if (state.pipelineStatus?.state === "failed") updateViewHealth();
+      else showAlert("failed", "刷新失败", clean(error.message));
+    }
+    finally { $("reloadBtn").disabled = false; }
   });
   $("exportBtn").addEventListener("click", () => {
     const payload = { exportedAt: new Date().toISOString(), view: state.view, query: state.query, items: state.visible };
@@ -1949,7 +1969,6 @@
     setTimeout(() => URL.revokeObjectURL(link.href), 500);
     toast("已导出当前结果");
   });
-  $("emailBtn").addEventListener("click", () => openDialog("email"));
   $("themeBtn").addEventListener("click", () => applyTheme(state.theme === "dark" ? "light" : "dark", true));
   $("scoringHelp").addEventListener("click", () => openDialog("scoring"));
   document.querySelector("[data-close-dialog]").addEventListener("click", () => $("infoDialog").close());
@@ -1961,21 +1980,29 @@
     }
   });
 
+  let newsContextPromise;
+  async function ensureNewsContext() {
+    if (!newsContextPromise) newsContextPromise = (async () => {
+      newsPolicy = await fetchJson("./assets/news-policy.json");
+      if (!Array.isArray(newsPolicy?.subject_terms) || !newsPolicy.subject_terms.length) throw new Error("新闻内容规则暂时不可用，请刷新重试。");
+      await loadPublication();
+      await loadLatest();
+      await ensureArchiveIndex();
+    })().catch(error => { newsContextPromise = null; throw error; });
+    return newsContextPromise;
+  }
   async function init() {
     applyTheme(state.theme);
-    $("stories").innerHTML = '<div class="loading"></div><div class="loading"></div>';
-    newsPolicy = await fetchJson("./assets/news-policy.json");
-    if (!Array.isArray(newsPolicy?.subject_terms) || !newsPolicy.subject_terms.length) throw new Error("新闻内容规则暂时不可用，请刷新重试。");
-    await loadLatest();
-    await ensureArchiveIndex();
-    await switchView(initialView, { date: initialDate });
-    scrollToInitialHash();
     if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
       navigator.serviceWorker.register("./sw.js").catch(() => { /* offline support is optional */ });
     }
+    $("stories").innerHTML = '<div class="loading"></div><div class="loading"></div>';
+    await switchView(initialView, { date: initialDate, historical: Boolean(initialDate), initial:true });
+    scrollToInitialHash();
   }
 
   init().catch((error) => {
+    if (state.view === "research") return;
     state.items = [];
     showAlert("failed", "页面初始化失败", clean(error?.message, "未知错误"));
     renderAll();

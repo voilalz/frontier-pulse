@@ -678,3 +678,44 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
   .news-timeline .history-event { padding: 10px; }
   .spotlight-card:first-child p { -webkit-line-clamp: 5; }
 }
+
+.deepread-evidence { margin: -.25rem 0 1.4rem; font-size: .85rem; color: var(--muted); }
+.deepread-evidence summary { cursor: pointer; padding: .4rem 0; }
+.deepread-evidence ul { padding-left: 1.1rem; }
+.deepread-evidence li { margin: .7rem 0; overflow-wrap: anywhere; }
+.deepread-evidence blockquote { margin: .4rem 0; padding: .6rem .85rem; border-left: 2px solid currentColor; line-height: 1.65; }
+.deepread-evidence small { display: block; margin-top: .25rem; }
+/* Daily classics share the reading shell and keep bibliographic dates distinct. */
+.classic-section,.classic-bookmarks { margin-bottom: 48px; }
+.classic-toolbar { display:flex; justify-content:space-between; gap:24px; align-items:center; margin-bottom:24px; }
+.classic-tabs { display:flex; flex-wrap:wrap; gap:8px; }
+.classic-tabs button,.classic-actions button { border:1px solid var(--line); border-radius:8px; padding:9px 14px; background:var(--card); color:var(--ink); cursor:pointer; }
+.classic-tabs button.active { color:var(--teal); border-color:var(--teal); }
+.classic-history-controls { display:flex; gap:16px; margin:20px 0; }
+.classic-history-controls label { display:grid; gap:7px; flex:1; }
+.classic-history-controls input,.classic-history-controls select { width:100%; padding:12px; border:1px solid var(--line); border-radius:8px; color:var(--ink); background:var(--card); }
+.classic-grid { align-items:start; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+.classic-card { min-width:0; padding:28px; border:1px solid var(--line); border-radius:14px; background:var(--card); overflow-wrap:anywhere; }
+.classic-card h3 { font-size:1.4rem; line-height:1.45; margin:14px 0; }
+.classic-authors,.classic-bibliography { color:var(--muted); line-height:1.8; font-size:.88rem; }
+.classic-overview,.classic-guide p,.classic-evidence p { line-height:1.9; }
+.classic-actions { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin:24px 0; }
+.classic-card details { border-top:1px solid var(--line); padding-top:16px; }
+.classic-card summary { cursor:pointer; font-weight:600; }
+.classic-guide section { margin:20px 0; }
+.classic-guide h4,.classic-evidence h4 { margin-bottom:8px; }
+.classic-guide small,.classic-source-note { color:var(--muted); }
+.classic-evidence li { margin:12px 0; line-height:1.6; }
+.classic-notice { color:var(--muted); margin:16px 0; line-height:1.7; }
+.classic-stock { padding:14px; border:1px solid var(--line); border-radius:8px; }
+.classic-empty { padding:30px 0; }
+.legacy-paper-label { border:1px solid var(--line); padding:2px 7px; border-radius:5px; }
+@media(max-width:720px) {
+  .classic-grid { grid-template-columns:1fr; }
+  .classic-toolbar { align-items:stretch; flex-direction:column; gap:18px; }
+  .classic-history-controls { flex-direction:column; }
+  .classic-card { padding:20px; }
+  .classic-date-control { align-self:flex-start; }
+}
+
+#classicSection[hidden], #classicBookmarks[hidden], #classicHistoryControls[hidden], .classic-date-control[hidden] { display:none; }

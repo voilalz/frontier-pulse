@@ -1,0 +1,13 @@
+{
+  "name": "frontier-pulse-regression",
+  "private": true,
+  "version": "1.0.0",
+  "engines": {"node": ">=24"},
+  "scripts": {
+    "test:client": "node --test --test-isolation=none tests/test_*.mjs",
+    "test:browser": "node tests/browser/reading.cjs && node tests/browser/classics.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

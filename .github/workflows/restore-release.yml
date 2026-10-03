@@ -1,0 +1,36 @@
+name: Restore retained release
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: "完整快照 ID（public/releases 中的目录名）"
+        required: true
+        type: string
+permissions:
+  contents: write
+concurrency:
+  group: frontier-data-main
+  cancel-in-progress: false
+jobs:
+  restore:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Restore verified snapshot
+        env:
+          RELEASE_ID: ${{ inputs.release_id }}
+        run: python scripts/publication.py restore --release-id "$RELEASE_ID"
+      - name: Commit restoration
+        run: |
+          git add -A -- public/data public/feed.xml
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name "frontier-pulse-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(data): restore retained publication snapshot"
+          git push origin HEAD:main

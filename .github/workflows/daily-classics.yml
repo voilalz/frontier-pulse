@@ -1,0 +1,55 @@
+name: Daily classic papers
+
+on:
+  schedule:
+    - cron: '10 7 * * *'
+      timezone: Asia/Shanghai
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/daily-classics.yml'
+      - 'scripts/classic_*.py'
+      - 'scripts/publish_classics.py'
+      - 'research/classic-publishing/**'
+      - 'research/classic-guides/**'
+      - 'research/classics/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: frontier-data-main
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Publish from accepted offline inventory
+        run: python scripts/classic_daily.py
+      - name: Commit only classic publication
+        run: |
+          git add -- public/classics
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name frontier-pulse-bot
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore(classics): publish daily classic edition or pending status'
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              exit 1
+            fi
+            if git push origin HEAD:main; then exit 0; fi
+            sleep "$((attempt * 2))"
+          done
+          exit 1
