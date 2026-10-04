@@ -85,6 +85,56 @@ class BilingualDeepreadTests(unittest.TestCase):
             self.assertEqual(entry["text"], self.translations[entry["newsIds"][0]][0])
         self.assertTrue(all("Results remain preliminary" in c["blocks"][1]["text"] for c in report["chapters"]))
 
+    def test_invalid_observations_are_retried_without_regenerating_valid_chapters(self):
+        items = self.items()
+        calls = []
+        def provider(runtime, **kwargs):
+            calls.append(kwargs["schema_name"])
+            if kwargs["schema_name"] == "deepread_observations_v2":
+                payload = json.loads(kwargs["input_text"])
+                candidates = payload["candidates"]
+                for candidate in candidates:
+                    self.assertLessEqual(len(candidate["sourceText"]), 220)
+                    item = next(item for item in items if item["id"] == candidate["newsId"])
+                    self.assertIn(candidate["sourceText"], [r["text"] for r in item["evidenceRecords"]])
+                chosen = [next(c for c in candidates if c["newsId"] == item["id"]) for item in items[:2]]
+                return {"observations": [{"text": self.translations[c["newsId"]][0],
+                    "sourceText": c["sourceText"], "newsIds": [c["newsId"]],
+                    "supports": [{"newsId": c["newsId"], "supportQuote": c["sourceText"]}]} for c in chosen]}
+            result = self.provider(runtime, **kwargs)
+            if kwargs["schema_name"] == "deepread_prose_v2":
+                result["observations"] = []
+            return result
+        report = build_daily_deepread(items, {**self.config, "deepread_core_events": 4}, self.now,
+                                     {"provider": "deepseek"}, provider)
+        self.assertEqual(calls.count("deepread_prose_v2"), 1)
+        self.assertEqual(calls.count("deepread_observations_v2"), 1)
+        self.assertEqual(report["generationStatus"], "ok")
+        validate_deepread_trace(report)
+        normalized = self.browser_result(f'normalizeEditorialDeepread({json.dumps(report)})')
+        self.assertEqual(len(normalized["observations"]), 2)
+        self.assertEqual(normalized["observations"][0]["text"], self.translations[items[0]["id"]][0])
+
+    def test_failed_observation_retry_preserves_chapters_and_partial_status(self):
+        calls = []
+        def provider(runtime, **kwargs):
+            calls.append(kwargs["schema_name"])
+            if kwargs["schema_name"] == "deepread_observations_v2":
+                return {"observations": [{"text": "项目已全面获批并成功生产九十九艘飞船。",
+                    "sourceText": "This invented quote is not captured source evidence.",
+                    "newsIds": ["prose-0"], "supports": [{"newsId": "prose-0", "supportQuote": "Invented evidence."}]}] * 2}
+            result = self.provider(runtime, **kwargs)
+            if kwargs["schema_name"] == "deepread_prose_v2":
+                result["observations"] = []
+            return result
+        report = build_daily_deepread(self.items(), {**self.config, "deepread_core_events": 4}, self.now,
+                                     {"provider": "deepseek"}, provider)
+        self.assertEqual(calls.count("deepread_observations_v2"), 1)
+        self.assertEqual(report["generationStatus"], "partial")
+        self.assertEqual(report["observations"], [])
+        self.assertTrue(all(len(c["blocks"]) == 2 for c in report["chapters"]))
+        validate_deepread_trace(report)
+
     def test_publication_and_frontend_refuse_tampered_prose_binding(self):
         report = self.report()
         block = report["chapters"][0]["blocks"][0]
