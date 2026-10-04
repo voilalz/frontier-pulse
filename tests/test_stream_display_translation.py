@@ -108,3 +108,43 @@ class StreamDisplayTranslationTests(unittest.TestCase):
             top_stories={article.id:stream["items"][0]})
         self.assertEqual(regenerated["translatedItemCount"], 1)
         self.assertEqual(regenerated["items"][0]["displayTranslation"]["summary"], "卫星计划于周一发射。")
+
+    def test_normal_date_currency_and_word_numbers_remain_valid_translations(self):
+        from evidence_trace import translation_text_valid
+        for translated, source in [
+            ("雷神获244亿美元合同", "Raytheon awarded $24.4 billion contract"),
+            ("1942年10月3日V-2发射成功", "Oct. 3, 1942: The V-2 successfully launches"),
+            ("平台新增7国", "The platform adds seven countries"),
+            ("合同金额为2400万美元", "The contract is worth $24 million"),
+            ("雷神获41亿美元合同", "Raytheon awarded $4.1 billion contract"),
+            ("模型升级至2.0.1版本", "The model upgrades to version 2.0.1."),
+            ("平台新增24国", "The platform adds twenty-four countries"),
+        ]:
+            with self.subTest(translated=translated):
+                self.assertTrue(translation_text_valid(translated, source))
+                item = {"title":source, "originalTitle":source, "summary":source, "summaryEvidenceRefs":["sample"],
+                        "displayTranslation":{"version":1,"language":"zh-CN","provider":"deepseek",
+                            "title":translated,"summary":translated,"sourceTitle":source,"sourceSummary":source,
+                            "sourceEvidenceRefs":["sample"]}}
+                self.assertEqual(self.browser_result(f'normalizeItem({json.dumps(item)}, 0)')["title"], translated)
+        self.assertFalse(translation_text_valid("雷神获244万元合同", "Raytheon awarded $24.4 billion contract"))
+        self.assertFalse(translation_text_valid("模型升级至2.0.2版本", "The model upgrades to version 2.0.1."))
+
+    def test_title_only_response_keeps_source_placeholder(self):
+        article = self.article("Iran war live: latest news", "")
+        translated = self.translation(article)
+        stream = MODULE.build_stream_report([article], self.config, self.now, translations=translated)
+        self.assertEqual(stream["translatedItemCount"], 1)
+        self.assertEqual(stream["items"][0]["displayTranslation"]["summary"], "未提取到可引用的正文，请查看原始报道。")
+
+    def test_rejected_content_does_not_prevent_later_stream_batches(self):
+        articles = [self.article("NASA satellite mission") for _ in range(3)]
+        for index, article in enumerate(articles):
+            article.id = str(index)
+        config = {**self.config, "stream_translation_batch_size":1, "stream_translation_retry_rounds":0}
+        invalid = {"items":[{"index":1,"titleZh":"2099年卫星任务","summary":"中文摘要","tags":[]}]}
+        valid = {"items":[{"index":1,"titleZh":"卫星任务","summary":"中文摘要","tags":[]}]}
+        with mock.patch.object(MODULE, "request_structured_json", side_effect=[invalid,invalid,valid]):
+            translated, _, diagnostics = MODULE.ai_translate_articles(articles, config, {"provider":"deepseek"})
+        self.assertEqual(set(translated), {"2"})
+        self.assertEqual(diagnostics["missingItemCount"], 2)
