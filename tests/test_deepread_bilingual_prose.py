@@ -116,6 +116,14 @@ class BilingualDeepreadTests(unittest.TestCase):
             ("The NASA capsule is not approved for launch.", "美国航天局飞船尚未获得发射批准。", "飞船已获批发射，但尚未公布日期。"),
             ("NASA tested one capsule in the laboratory.", "美国航天局在实验室测试了一艘飞船。", "美国航天局在实验室测试了九十九艘飞船。"),
             ("NASA tested ninety-nine capsules in the laboratory.", "美国航天局在实验室测试了九十九艘飞船。", "美国航天局在实验室测试了九十八艘飞船。"),
+            ("SM-6 is the only combat-proven weapon for this mission.", "SM-6是执行这项任务唯一经过实战验证的武器。", "SM-6是执行这项任务经过实战验证的武器。"),
+            ("Northrop has seven decades of autonomy experience.", "诺斯罗普拥有七十年的自主系统经验。", "诺斯罗普拥有七年的自主系统经验。"),
+            ("The NASA capsule launch failed.", "美国航天局的飞船发射失败。", "美国航天局的飞船发射成功。"),
+            ("The Navy is enforcing maritime dominance.", "美国海军正在维护海上主导权。", "美国海军正在 enforcing maritime dominance。"),
+            ("The Navy is enforcing maritime dominance.", "美国海军正在维护海上主导权。", "美国海军正在enforcing maritime dominance。"),
+            *[("The Navy is enforcing maritime dominance.", "美国海军正在维护海上主导权。",
+               "美国海军正在enforcing" + space + "maritime" + space + "dominance。")
+              for space in ("\u00a0", "\ufeff", "\u0085")],
         ]
         for source, faithful, invented in vectors:
             with self.subTest(source=source):
@@ -126,6 +134,30 @@ class BilingualDeepreadTests(unittest.TestCase):
                 self.assertFalse(valid_prose_translation({**value, "text": invented}, source, refs))
                 self.assertEqual(self.browser_result(f'proseDisplayText({json.dumps(value)}, {json.dumps(source)}, {json.dumps(refs)})'), faithful)
                 self.assertEqual(self.browser_result(f'proseDisplayText({json.dumps({**value, "text": invented})}, {json.dumps(source)}, {json.dumps(refs)})'), "")
+
+    def test_prose_keeps_english_proper_names(self):
+        source, text, refs = "USS Gerald Ford is in the port.", "USS Gerald Ford目前正在港口。", ["evd-" + "a" * 20]
+        value = {"version": 1, "language": "zh-CN", "provider": "deepseek", "text": text,
+                 "sourceText": source, "sourceEvidenceRefs": refs}
+        self.assertTrue(valid_prose_translation(value, source, refs))
+        self.assertEqual(self.browser_result(f'proseDisplayText({json.dumps(value)}, {json.dumps(source)}, {json.dumps(refs)})'), text)
+
+    def test_outline_prompt_and_example_match_fixed_membership_and_chinese_contract(self):
+        calls = []
+        def provider(runtime, **kwargs):
+            if kwargs["schema_name"] == "deepread_outline_v2":
+                payload = json.loads(kwargs["input_text"])
+                fixed = payload.get("fixedSelectedNewsIds")
+                self.assertEqual(fixed, kwargs["example"]["selectedNewsIds"])
+                self.assertEqual(fixed, kwargs["schema"]["properties"]["selectedNewsIds"]["items"]["enum"])
+                self.assertTrue(all(any('\u4e00' <= char <= '\u9fff' for char in chapter["title"])
+                                    for chapter in kwargs["example"]["chapters"]))
+                calls.append(kwargs["schema_name"])
+            return self.provider(runtime, **kwargs)
+        report = build_daily_deepread(self.items(), {**self.config, "deepread_core_events": 4}, self.now,
+                                     {"provider": "deepseek"}, provider)
+        self.assertEqual(calls, ["deepread_outline_v2"])
+        self.assertEqual(report["generationStatus"], "ok")
 
     def test_fixed_comparison_text_cannot_be_rewritten_as_a_fact(self):
         items = self.items()[:2]
