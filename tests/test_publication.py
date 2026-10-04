@@ -93,6 +93,47 @@ class PublicationTests(unittest.TestCase):
             self.assertEqual(load(self.public / 'releases/r-001/data' / name)['releaseId'], 'r-001')
         pub.verify_snapshot(self.public / 'releases/r-001')
 
+    def add_legacy_deepread_archive(self):
+        # Production's 2026-09-26 edition nests events inside schema-1 sections.
+        archived = load(ROOT / 'tests/fixtures/deepread-legacy-2026-09-26.json')
+        path = self.stage / 'data/deepread/2026-09-26.json'
+        save(path, archived)
+        index_path = self.stage / 'data/deepread/index.json'
+        index = load(index_path)
+        index['editions'].append({'editionDate': '2026-09-26'})
+        save(index_path, index)
+        return path
+
+    def test_legacy_section_archive_does_not_block_current_daily_publication(self):
+        path = self.add_legacy_deepread_archive()
+        original = load(path)
+        self.promote()
+        self.assertEqual(load(self.public / 'data/release.json')['editionDate'], '2026-07-16')
+        retained = load(self.public / 'data/deepread/2026-09-26.json')
+        self.assertEqual(retained['schemaVersion'], 1)
+        self.assertEqual(retained['sections'], original['sections'])
+        pub.verify_snapshot(self.public / 'releases/r-001')
+
+    def test_malformed_legacy_section_archive_still_blocks_publication(self):
+        path = self.add_legacy_deepread_archive()
+        original = load(path)
+        for fault in ['sections', 'section', 'events', 'event']:
+            with self.subTest(fault=fault):
+                archived = copy.deepcopy(original)
+                if fault == 'sections':
+                    archived['sections'] = {}
+                elif fault == 'section':
+                    archived['sections'][0] = None
+                elif fault == 'events':
+                    archived['sections'][0]['events'] = {}
+                else:
+                    archived['sections'][0]['events'][0] = None
+                save(path, archived)
+                before = self.state()
+                with self.assertRaises(ValueError):
+                    self.promote()
+                self.assertEqual(self.state(), before)
+
     def test_corrupt_referenced_search_shard_cannot_replace_readable_content(self):
         self.promote()
         before = self.state()
