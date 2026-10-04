@@ -299,6 +299,11 @@
       for (const m of normalized.matchAll(wordPattern)) values.add(canonical(String(m[1].toLowerCase().split(/[-\s]+/).reduce((total, word)=>total+words[word],0)), scales[(m[2]||"").toLowerCase()]||1));
       const months = "Jan(?:uary)? Feb(?:ruary)? Mar(?:ch)? Apr(?:il)? May Jun(?:e)? Jul(?:y)? Aug(?:ust)? Sep(?:tember)? Oct(?:ober)? Nov(?:ember)? Dec(?:ember)?".split(" ");
       months.forEach((month,i)=>{if(new RegExp("\\b"+month+"\\.?\\s+\\d{1,4}\\b","i").test(normalized))values.add(canonical(String(i+1)));});
+      for (const m of normalized.matchAll(/\b(\d{1,2})[.:](\d{2})\s*(am|pm)\b/gi)) {
+        const hour=Number(m[1]), minute=Number(m[2]);
+        if(hour>=1&&hour<=12&&minute<60) [hour,minute,hour%12+(m[3].toLowerCase()==="pm"?12:0)].forEach(n=>values.add(canonical(String(n))));
+      }
+      for (const m of normalized.matchAll(/\b(\d+(?:\.\d+)?)m\s+years?\b/gi)) values.add(canonical(m[1],1e6));
       return values;
     };
     const validZh = (text, source) => {

@@ -119,6 +119,8 @@ class StreamDisplayTranslationTests(unittest.TestCase):
             ("雷神获41亿美元合同", "Raytheon awarded $4.1 billion contract"),
             ("模型升级至2.0.1版本", "The model upgrades to version 2.0.1."),
             ("平台新增24国", "The platform adds twenty-four countries"),
+            ("导弹于早上6时30分发射", "The missile was launched at about 6.30am"),
+            ("数据需要6600万年才能读完", "The data would take a human 66m years to read"),
         ]:
             with self.subTest(translated=translated):
                 self.assertTrue(translation_text_valid(translated, source))
@@ -129,6 +131,21 @@ class StreamDisplayTranslationTests(unittest.TestCase):
                 self.assertEqual(self.browser_result(f'normalizeItem({json.dumps(item)}, 0)')["title"], translated)
         self.assertFalse(translation_text_valid("雷神获244万元合同", "Raytheon awarded $24.4 billion contract"))
         self.assertFalse(translation_text_valid("模型升级至2.0.2版本", "The model upgrades to version 2.0.1."))
+
+    def test_complete_quoted_excerpts_remain_traceable_when_joined(self):
+        from evidence_trace import make_evidence, trace_claim, validate_claim_refs, validate_news_trace
+        first = "NASA plans a launch for Monday."
+        second = '“The mission is not yet approved,” the agency said.'
+        article = self.article("NASA satellite mission", first + " " + second)
+        records = make_evidence(first, article.url, self.now.isoformat()) + make_evidence(second, article.url, self.now.isoformat())
+        article.source_evidence = records
+        refs = [r["evidenceId"] for r in records]
+        self.assertTrue(validate_claim_refs(first + " " + second, refs, records))
+        self.assertEqual(set(trace_claim(first + " " + second, records)), set(refs))
+        self.assertFalse(validate_claim_refs(first + ' “The mission is approved,” the agency said.', refs, records))
+        self.assertFalse(validate_claim_refs(first + ' “The mission is not yet approved,” the agency said.', refs[:1], records))
+        item = MODULE.item_from_article(article, self.config)
+        validate_news_trace(item)
 
     def test_title_only_response_keeps_source_placeholder(self):
         article = self.article("Iran war live: latest news", "")
