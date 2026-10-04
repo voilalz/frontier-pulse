@@ -1,31 +1,40 @@
 {
   "schemaVersion": 3,
   "state": "ok",
-  "lastAttemptAt": "2026-10-04T10:53:08Z",
-  "lastSuccessAt": "2026-10-04T10:53:08Z",
-  "itemCount": 36,
+  "lastAttemptAt": "2026-10-04T13:13:22Z",
+  "lastSuccessAt": "2026-10-04T13:13:22Z",
+  "itemCount": 37,
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
   "translatedItemCount": 36,
-  "translationWarnings": [],
+  "translationWarnings": [
+    "新闻中文翻译在拆分重试后仍缺失 1/11 条：拆分重试后仍有条目缺失",
+    "全量动态中文翻译不完整：36/37"
+  ],
   "translationDiagnostics": {
-    "requestedItemCount": 0,
-    "completedItemCount": 0,
-    "missingItemCount": 0,
-    "missingItemIds": [],
-    "missingItems": [],
+    "requestedItemCount": 11,
+    "completedItemCount": 10,
+    "missingItemCount": 1,
+    "missingItemIds": [
+      "d19cc7d4170f13"
+    ],
+    "missingItems": [
+      {
+        "id": "d19cc7d4170f13",
+        "reason": "translation_content_rejected"
+      }
+    ],
     "initialBatchSize": 6,
-    "initialBatchCount": 0,
-    "requestCount": 0,
-    "retryRequestCount": 0,
+    "initialBatchCount": 2,
+    "requestCount": 4,
+    "retryRequestCount": 2,
     "providerFailureCount": 0,
-    "structuralFailureCount": 0,
-    "completionReason": "not_needed",
-    "completionMessage": "没有需要翻译的新条目",
+    "structuralFailureCount": 2,
+    "completionReason": "partial_after_retry",
+    "completionMessage": "拆分重试后仍有条目缺失",
     "lastProviderError": "",
-    "reusedItemCount": 36,
-    "featuredTranslatedItemCount": 9
+    "reusedItemCount": 26,
+    "featuredTranslatedItemCount": 7
   },
-  "message": "全量动态更新成功，共 36 条",
-  "releaseId": "r20261004T110111-3d1db246"
+  "message": "全量动态更新成功，共 37 条"
 }
