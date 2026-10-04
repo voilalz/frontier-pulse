@@ -336,6 +336,9 @@ def validate_deepread_trace(article):
                 or safe_title(event.get("title"), event.get("originalTitle", ""), records) != event.get("title")):
 
             raise ValueError("invalid deepread event evidence")
+        if "displayTranslation" in event and not valid_display_translation({
+                **event, "summary": event.get("excerpt")}):
+            raise ValueError("deepread display translation differs from source")
         for history in event.get("history", []):
             if is_political_policy(history):
                 raise ValueError("political historical reference")
