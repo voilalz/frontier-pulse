@@ -1,30 +1,45 @@
 {
   "schemaVersion": 3,
   "state": "ok",
-  "lastAttemptAt": "2026-10-04T10:14:49Z",
-  "lastSuccessAt": "2026-10-04T10:14:49Z",
-  "itemCount": 37,
+  "lastAttemptAt": "2026-10-04T10:29:30Z",
+  "lastSuccessAt": "2026-10-04T10:29:30Z",
+  "itemCount": 36,
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
-  "translatedItemCount": 37,
-  "translationWarnings": [],
+  "translatedItemCount": 35,
+  "translationWarnings": [
+    "新闻中文翻译在拆分重试后仍缺失 2/3 条：拆分重试后仍有条目缺失",
+    "全量动态中文翻译不完整：35/36"
+  ],
   "translationDiagnostics": {
-    "requestedItemCount": 2,
-    "completedItemCount": 2,
-    "missingItemCount": 0,
-    "missingItemIds": [],
-    "missingItems": [],
+    "requestedItemCount": 3,
+    "completedItemCount": 1,
+    "missingItemCount": 2,
+    "missingItemIds": [
+      "46b2b9c329926e",
+      "8298adacb1a7fd"
+    ],
+    "missingItems": [
+      {
+        "id": "46b2b9c329926e",
+        "reason": "translation_content_rejected"
+      },
+      {
+        "id": "8298adacb1a7fd",
+        "reason": "translation_content_rejected"
+      }
+    ],
     "initialBatchSize": 6,
     "initialBatchCount": 1,
-    "requestCount": 1,
-    "retryRequestCount": 0,
+    "requestCount": 5,
+    "retryRequestCount": 4,
     "providerFailureCount": 0,
-    "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "structuralFailureCount": 4,
+    "completionReason": "partial_after_retry",
+    "completionMessage": "拆分重试后仍有条目缺失",
     "lastProviderError": "",
-    "reusedItemCount": 35,
-    "featuredTranslatedItemCount": 9
+    "reusedItemCount": 33,
+    "featuredTranslatedItemCount": 8
   },
-  "message": "全量动态更新成功，共 37 条"
+  "message": "全量动态更新成功，共 36 条"
 }
