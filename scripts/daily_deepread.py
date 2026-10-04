@@ -238,6 +238,9 @@ def _candidates(items: Iterable[dict[str, Any]], config: dict[str, Any], now: da
             "_evidence": _plain(item.get("evidenceText"), 4000),
             "_history": item.get("historyContext") if isinstance(item.get("historyContext"), dict) else {},
         }
+        from evidence_trace import valid_display_translation
+        if valid_display_translation(candidate | {"displayTranslation": item.get("displayTranslation")}):
+            candidate["displayTranslation"] = dict(item["displayTranslation"])
         eligible.append(candidate)
 
     representatives: dict[str, dict[str, Any]] = {}

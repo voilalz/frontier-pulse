@@ -2264,36 +2264,34 @@ def item_from_article(
         "corroboration": article.corroboration,
         "sources": article.evidence_sources,
         "selectionProvider": selection_provider,
-        "translationProvider": clean_text(editorial.get("_provider")),
+        "translationProvider": "",
         "isSupplemental": article.is_supplemental,
         "selectionWindowHours": article.selection_window_hours,
         "selectionNote": article.selection_note,
         "diversityRelaxed": article.diversity_relaxed,
     }
-    # Stream caches carry a display-only translation tied to literal source
-    # excerpts. Preserve that binding when the same story enters the daily set.
-    if "_sourceTitle" in editorial or "_sourceSummary" in editorial:
+    # Keep literal source claims for evidence validation; Chinese belongs in a
+    # separate display payload bound to those exact claims.
+    if editorial.get("_provider") in {"deepseek", "openai"}:
         from evidence_trace import valid_display_translation
-        item["translationProvider"] = ""
-        item["title"] = article.title
-        source_summary = editorial.get("_sourceSummary")
+        source_title = editorial.get("_sourceTitle", article.title)
+        source_summary = editorial.get("_sourceSummary", summary)
         refs = trace_claim(source_summary, records) if isinstance(source_summary, str) else []
-        if editorial.get("_sourceTitle") == article.title and (
+        if source_title == article.title and (
             source_summary == summary or validate_claim_refs(source_summary, refs, records)
         ):
-            item["summary"] = source_summary
-            item["summaryEvidenceRefs"] = refs
-            item["displayTranslation"] = {
+            display = {
                 "version": 1, "language": "zh-CN", "provider": editorial.get("_provider"),
                 "title": clean_text(editorial.get("titleZh"), 180),
                 "summary": reader_summary(editorial.get("summary")),
                 "sourceTitle": article.title, "sourceSummary": source_summary,
                 "sourceEvidenceRefs": list(refs),
             }
-            if valid_display_translation(item):
+            candidate = {**item, "summary": source_summary, "summaryEvidenceRefs": refs,
+                         "displayTranslation": display}
+            if valid_display_translation(candidate):
+                item.update(candidate)
                 item["translationProvider"] = editorial["_provider"]
-            else:
-                item.pop("displayTranslation")
     return item
 
 
@@ -2437,6 +2435,7 @@ def request_daily_translation_batch(
 ) -> dict[str, dict[str, Any]]:
     """Translate and edit already-selected daily stories without changing selection."""
     index_to_article = {index: article for index, article in enumerate(batch, 1)}
+    source_items = {index: item_from_article(article, config) for index, article in index_to_article.items()}
     indexes = list(index_to_article)
     item_schema = {
         "type": "object",
@@ -2460,25 +2459,27 @@ def request_daily_translation_batch(
     evidence = [{
         "index": index,
         "title": article.title,
-        "description": clean_text(article.description, SOURCE_TEXT_LIMIT),
-        "evidenceRecords": capture_source_evidence(article),
+        "description": source_items[index]["summary"],
+        "evidenceRecords": source_items[index]["evidenceRecords"],
         "source": article.source,
         "publishedAt": article.published_at.isoformat().replace("+00:00", "Z"),
         "category": article.category,
     } for index, article in index_to_article.items()]
     example = {"items": [{
         "index": index,
-        "titleZh": f"第{index}条新闻的忠实中文标题",
-        "summary": "从原文片段中连续摘录有用事实；片段不足时保持简短",
+        "titleZh": "忠实中文标题",
+        "summary": "忠实翻译给定description中的事实，使用自然中文",
         "tags": ["标签"],
     } for index in indexes]}
     result = request_structured_json(
         runtime,
         instructions=(
             "你是国际科技与安全新闻中文编辑。这些新闻已经入选，不得改变顺序、取舍或重要度。"
-            "只能依据原始标题和evidenceRecords中的原文片段工作，不得把描述中的模型摘要当作证据。"
+            "将原始title与description中的原文片段忠实翻译成自然中文；evidenceRecords供核对来源。"
             f"本批共有{len(batch)}条，items必须恰好输出{len(batch)}条且每个index只出现一次。"
-            "标题忠实保留原始主体、否定和阶段；摘要连续摘录原文句子，允许保留原文语言，不要求字数或句数。"
+            "titleZh和summary必须为中文，专有名称可保留原文。保留原始主体、否定、归属和阶段。"
+            "summary只翻译给定description，不从其他片段扩写，不要求字数或句数。"
+            "若description为‘未提取到可引用的正文，请查看原始报道。’，summary必须原样保留这句。"
             "在证据支持时保留时间、地点、主体、动作、关键数值及后续安排；没有的信息不要补写。"
             "篇幅取决于可用事实，原文不足时直接写短，不要罗列原文未交代的地点、人名、规模等信息凑字数。"
             "禁止输出核实程度、信源数量、评分或编辑过程等内部字段；仅有标题且描述为空时才简短说明没有详细摘要。"
@@ -2493,6 +2494,7 @@ def request_daily_translation_batch(
         max_tokens=int(config.get("daily_translation_max_tokens", 7000)),
     )
     translated: dict[str, dict[str, Any]] = {}
+    rejected = False
     for item in result.get("items", []):
         if not isinstance(item, dict):
             continue
@@ -2509,6 +2511,14 @@ def request_daily_translation_batch(
             and clean_text(item.get("summary"))
             and isinstance(item.get("tags"), list)
         ):
+            from evidence_trace import translation_text_valid
+            source = source_items[item_index]
+            if not source["evidenceRecords"]:
+                item = {**item, "summary": source["summary"]}
+            if not (translation_text_valid(item["titleZh"], article.title)
+                    and translation_text_valid(item["summary"], article.title + " " + source["summary"])):
+                rejected = True
+                continue
             translated[article.id] = {
                 "titleZh": item["titleZh"],
                 "summary": item["summary"],
@@ -2517,7 +2527,11 @@ def request_daily_translation_batch(
                 "tags": item["tags"],
                 "_translationOnly": True,
                 "_provider": runtime["provider"],
+                "_sourceTitle": article.title,
+                "_sourceSummary": source["summary"],
             }
+    if rejected and not translated:
+        raise TranslationContentRejected("日报翻译未使用中文或包含原文没有的数值")
     return translated
 
 
@@ -2857,13 +2871,14 @@ def merge_featured_stream_item(item: dict[str, Any], daily_item: dict[str, Any])
 
 def recover_daily_translations(report: dict[str, Any], stream: dict[str, Any]) -> None:
     """Reuse successful same-evidence stream results after a daily batch failure."""
+    from evidence_trace import validate_news_trace, valid_display_translation
     lookup = {item["id"]: item for item in stream.get("items", [])}
     recovered = 0
     for item in report["items"]:
         translated = lookup.get(item["id"], {})
         if (
-            item.get("translationProvider")
-            or not translated.get("translationProvider")
+            valid_display_translation(item)
+            or not valid_display_translation(translated)
             or translated.get("translationProvider") != report.get("translationProvider")
             or translated.get("summaryRevision") != SUMMARY_REVISION
             or not item.get("summaryInputHash")
@@ -2871,7 +2886,6 @@ def recover_daily_translations(report: dict[str, Any], stream: dict[str, Any]) -
             or not clean_text(translated.get("title")) or not clean_text(translated.get("summary"))
         ):
             continue
-        from evidence_trace import validate_news_trace
         try:
             validate_news_trace(translated)
         except (ValueError, TypeError, KeyError):
@@ -2882,7 +2896,7 @@ def recover_daily_translations(report: dict[str, Any], stream: dict[str, Any]) -
         recovered += 1
     if not recovered:
         return
-    missing = [item["id"] for item in report["items"] if not item.get("translationProvider")]
+    missing = [item["id"] for item in report["items"] if not valid_display_translation(item)]
     count = len(report["items"]) - len(missing)
     previous_warnings = set(report.get("translationWarnings", []))
     warnings = [f"日报中文翻译不完整：{count}/{len(report['items'])}"] if missing else []
@@ -3880,6 +3894,7 @@ def build_report(
     # selected. Reuse unchanged full-stream translations before making calls.
     translation_status = "disabled" if skip_ai else "not-configured"
     if runtime:
+        from evidence_trace import valid_display_translation
         reusable_translations = reusable_translations or {}
         for article in selected:
             reusable = reusable_translations.get(article.id, {})
@@ -3889,6 +3904,7 @@ def build_report(
                 and clean_text(reusable.get("summary"))
                 and reusable.get("_summaryRevision") == SUMMARY_REVISION
                 and reusable.get("_summaryInputHash") == summary_input_hash(article)
+                and valid_display_translation(item_from_article(article, config, reusable))
             ):
                 editorial_by_id[article.id] = dict(reusable)
         reused_count = len(editorial_by_id)
@@ -3956,6 +3972,19 @@ def build_report(
         for article in selected
     ]
     items.sort(key=lambda item: (item["score"], item["publishedAt"]), reverse=True)
+    from evidence_trace import valid_display_translation
+    translated_count = sum(valid_display_translation(item) for item in items)
+    if runtime:
+        translation_status = "ok" if translated_count == len(items) else "partial" if translated_count else "failed"
+        missing_ids = [item["id"] for item in items if not valid_display_translation(item)]
+        translation_diagnostics.update({
+            "totalTranslatedItemCount": translated_count,
+            "totalMissingItemCount": len(missing_ids),
+            "missingItemCount": len(missing_ids), "missingItemIds": missing_ids,
+        })
+        translation_warnings = [w for w in translation_warnings if "日报中文翻译不完整" not in w]
+        if missing_ids:
+            translation_warnings.append(f"日报中文翻译不完整：{translated_count}/{len(items)}")
     history_contexts = build_history_contexts(items, history_items or [], config, now)
     for item in items:
         item["historyContext"] = history_contexts.get(
@@ -4041,7 +4070,7 @@ def build_report(
         "translationStatus": translation_status,
         "translationProvider": runtime.get("provider") if runtime else "",
         "translationModel": runtime.get("model") if runtime else "",
-        "translatedItemCount": sum(bool(item.get("translationProvider")) for item in items),
+        "translatedItemCount": translated_count,
         "translationWarnings": translation_warnings,
         "translationDiagnostics": translation_diagnostics,
         "historyAnalysisStatus": history_analysis_status,
@@ -4118,7 +4147,11 @@ def validate_report(report: dict[str, Any], expected_count: int) -> None:
         raise ValueError("daily spotlightIds must identify three stories")
     if len(set(spotlight_ids)) != len(spotlight_ids) or not set(spotlight_ids).issubset(ids):
         raise ValueError("daily spotlightIds contain invalid or duplicate ids")
-    translated = sum(bool(item.get("translationProvider")) for item in items)
+    from evidence_trace import valid_display_translation
+    if any((item.get("translationProvider") or "displayTranslation" in item)
+           and not valid_display_translation(item) for item in items):
+        raise ValueError("daily translation is not bound to its source")
+    translated = sum(valid_display_translation(item) for item in items)
     if int(report.get("translatedItemCount", translated)) != translated:
         raise ValueError("daily translatedItemCount does not match items")
     if clean_text(report.get("selectionMethod")) not in {"rules", "deepseek", "openai"}:
@@ -4288,6 +4321,9 @@ SEARCHABLE_FIELDS = (
 
 def compact_search_item(item: dict[str, Any], edition: str) -> dict[str, Any]:
     compact = {field: item[field] for field in SEARCHABLE_FIELDS if field in item}
+    from evidence_trace import valid_display_translation
+    if valid_display_translation(item):
+        compact.update(title=item["displayTranslation"]["title"], summary=item["displayTranslation"]["summary"])
     compact["editionDate"] = edition
     compact["_compact"] = True
     return compact

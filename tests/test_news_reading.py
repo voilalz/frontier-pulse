@@ -116,7 +116,8 @@ class NewsReadingTests(unittest.TestCase):
         self.assertNotIn("score", evidence[0])
 
     def test_daily_recovers_successful_stream_translation_after_batch_failure(self):
-        article = self.article("NASA satellite mission")
+        article = self.article("NASA satellite mission", "A satellite launch is scheduled for Monday with three observation instruments.")
+        MODULE.capture_source_evidence(article, article.description, "body")
         daily_item = MODULE.item_from_article(article, self.config)
         report = {"items": [daily_item], "translationProvider": "deepseek", "translationStatus": "failed",
                   "translatedItemCount": 0, "translationWarnings": ["translation failed"],

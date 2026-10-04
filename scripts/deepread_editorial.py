@@ -322,7 +322,7 @@ def _plan_outline(
 
 
 def _public_event(item: dict[str, Any]) -> dict[str, Any]:
-    return {"newsId": item["id"], "eventId": item["eventId"], "title": item["title"],
+    event = {"newsId": item["id"], "eventId": item["eventId"], "title": item["title"],
             "originalTitle": item["originalTitle"],
             "excerpt": item["summary"], "category": item["category"], "publishedAt": item["publishedAt"],
             "sources": [dict(source) for source in item["sources"]],
@@ -330,6 +330,10 @@ def _public_event(item: dict[str, Any]) -> dict[str, Any]:
             "evidenceLevel": item["_evidenceLevel"], "deltaScore": item.get("_deltaScore", 0),
             "history": item["_history"], "evidenceRecords": item["evidenceRecords"],
             "summaryEvidenceRefs": item["summaryEvidenceRefs"]}
+    from evidence_trace import valid_display_translation
+    if valid_display_translation(item):
+        event["displayTranslation"] = dict(item["displayTranslation"])
+    return event
 
 
 def _fallback_block(item: dict[str, Any]) -> list[dict[str, Any]]:

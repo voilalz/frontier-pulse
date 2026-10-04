@@ -194,7 +194,7 @@ class UpdateNewsTests(unittest.TestCase):
         }
         response = {"items": [{
             "index": index,
-            "titleZh": f"中文标题{index}",
+            "titleZh": "中文标题",
             "summary": "中文摘要",
             "keyFacts": ["事实一", "事实二"],
             "why": "重要性",
@@ -861,6 +861,8 @@ class UpdateNewsTests(unittest.TestCase):
 
     def test_ai_selection_failure_does_not_block_daily_translation(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
+        for article in candidates:
+            MODULE.capture_source_evidence(article, article.description, "body")
         def translate(articles, _config, runtime):
             translated = {article.id: {
                 "titleZh": f"中文：{article.title}", "summary": "中文摘要",
@@ -923,6 +925,8 @@ class UpdateNewsTests(unittest.TestCase):
 
     def test_daily_partial_translation_has_its_own_status_and_missing_ids(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
+        for article in candidates:
+            MODULE.capture_source_evidence(article, article.description, "body")
         translated_id = MODULE.choose_diverse(
             candidates[:self.config["candidate_limit"]], self.config, 10
         )[0].id
@@ -960,6 +964,8 @@ class UpdateNewsTests(unittest.TestCase):
 
     def test_ai_ranking_is_deterministically_adjusted_for_diversity_and_still_translates(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
+        for article in candidates:
+            MODULE.capture_source_evidence(article, article.description, "body")
         for article in candidates[:3]:
             article.domain = "crowded.example"
         ai_result = {"items": [
@@ -999,6 +1005,8 @@ class UpdateNewsTests(unittest.TestCase):
 
     def test_daily_reuses_existing_stream_translations_by_news_id(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
+        for article in candidates:
+            MODULE.capture_source_evidence(article, article.description, "body")
         selected = MODULE.choose_diverse(candidates[:self.config["candidate_limit"]], self.config, 10)
         reusable = {article.id: {
             "titleZh": f"复用中文：{article.title}", "summary": "已有中文摘要",
@@ -1023,6 +1031,8 @@ class UpdateNewsTests(unittest.TestCase):
 
     def test_successful_ai_selection_and_translation_keep_separate_provenance(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)
+        for article in candidates:
+            MODULE.capture_source_evidence(article, article.description, "body")
         ai_result = {"items": [
             {"id": article.id, "score": 95 - index}
             for index, article in enumerate(candidates[:self.config["candidate_limit"]])

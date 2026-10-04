@@ -590,10 +590,13 @@
           title: clean(story.title), source: clean(story.source),
         })).slice(-3);
       if (historyInput.length !== history.length) filtered = true;
+      const display = normalizeItem({...event, summary: event.excerpt}, 0);
       return {
-        newsId: clean(event.newsId), eventId: clean(event.eventId), title: clean(event.title),
+        newsId: clean(event.newsId), eventId: clean(event.eventId), title: display.title,
         originalTitle: clean(event.originalTitle),
-        excerpt: clean(event.excerpt), category: clean(event.category), publishedAt: clean(event.publishedAt),
+        excerpt: display.summary, sourceTitle: clean(event.title), sourceExcerpt: clean(event.excerpt),
+        summaryEvidenceRefs: event.summaryEvidenceRefs,
+        category: clean(event.category), publishedAt: clean(event.publishedAt),
         evidenceLevel: Object.hasOwn(EVIDENCE_LABELS, event.evidenceLevel) ? event.evidenceLevel : "single",
         sources: (Array.isArray(event.sources) ? event.sources : []).map((source) => ({
           name: clean(source?.name, "原报道"), url: safeEditorialUrl(source?.url),
@@ -622,10 +625,18 @@
           filtered = true; return false;
         }
         return ["paragraph", "change"].includes(block.type) && clean(block.text);
-      }).slice(0, 10).map((block) => ({type: block.type, text: clean(block.text),
-        newsIds: block.newsIds.map((value) => clean(value)),
-        evidenceIds: Array.isArray(block.evidenceIds) ? block.evidenceIds.filter((ref) => /^evd-[a-f0-9]{20}$/.test(ref)) : []}));
-      return {id: `deepread-chapter-${index + 1}`, title: clean(chapter?.title, "本期进展"),
+      }).slice(0, 10).map((block) => {
+        const refs = block.newsIds.map((value) => clean(value));
+        const event = refs.length === 1 ? byNews.get(refs[0]) : null;
+        const translatedExcerpt = block.type === "paragraph" && event
+          && block.text === event.sourceExcerpt
+          && JSON.stringify(block.evidenceIds) === JSON.stringify(event.summaryEvidenceRefs);
+        return {type: block.type, text: translatedExcerpt ? event.excerpt : clean(block.text), newsIds: refs,
+          evidenceIds: Array.isArray(block.evidenceIds) ? block.evidenceIds.filter((ref) => /^evd-[a-f0-9]{20}$/.test(ref)) : []};
+      });
+      const event = kind === "event" && newsIds.length === 1 ? byNews.get(newsIds[0]) : null;
+      const title = event && chapter?.title === event.sourceTitle ? event.title : clean(chapter?.title, "本期进展");
+      return {id: `deepread-chapter-${index + 1}`, title,
         angle: clean(chapter?.angle), kind, comparisonKey: kind === "comparison" ? clean(chapter.comparisonKey) : "",
         comparisonNote: kind === "comparison" ? "并列比较不代表事件之间存在因果关系。" : "",
         newsIds, blocks};
