@@ -291,7 +291,10 @@ def _chunks(value: str, sentences: bool = False, preserve_long: bool = False) ->
         for part in parts:
             if not part:
                 continue
-            if result and re.search(r"\b(?:Mr|Mrs|Ms|Dr|Prof|Jr|Sr|Inc|Ltd|U\.S|U\.K)\.$", result[-1]):
+            abbreviation = result and re.search(r"\b(?:Mr|Mrs|Ms|Dr|Prof|Jr|Sr|Inc|Ltd|U\.S|U\.K)\.$", result[-1])
+            month_date = (result and re.search(r"\b(?:Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.$", result[-1])
+                          and re.match(r"\d{1,2}\b", part))
+            if abbreviation or month_date:
                 result[-1] += " " + part
             else:
                 result.append(part)

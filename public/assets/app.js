@@ -325,11 +325,25 @@
       return total + current;
     };
     const proseQuantities = text => {
+      text = text.normalize("NFKC");
       const values = quantityValues(text);
       const numeral = "[零〇一二两三四五六七八九十百千万亿]+(?:点[零〇一二三四五六七八九]+)?";
-      const pattern = new RegExp("(?<![上下每这那另])(" + numeral + ")(?=个|项|名|人|家|台|艘|架|颗|枚|辆|套|组|种|年|月|日|天|次|倍|米|秒|小时|美元|元|%|％)|百分之(" + numeral + ")", "g");
-      for (const match of text.matchAll(pattern)) values.add("number:" + chineseNumber(match[1] || match[2]));
+      const units = "个|项|名|人|家|台|艘|架|颗|枚|辆|套|组|种|年|月|日|天|次|倍|米|秒|小时|美元|元|%|％";
+      const magnitudes = {十:10,百:100,千:1000,万:1e4,百万:1e6,千万:1e7,亿:1e8,十亿:1e9,万亿:1e12};
+      const approximate = new RegExp("(?:数|几)(" + Object.keys(magnitudes).sort((a,b)=>b.length-a.length).join("|") + ")(?=" + units + ")", "g");
+      const exactText = text.replace(approximate, (_, unit) => { values.add("approx:" + magnitudes[unit]); return " "; })
+        // quantityValues already counted each Arabic coefficient with its scale.
+        .replace(/\d+(?:[.,]\d+)*\s*(?:万亿|百万|千万|十亿|亿|万|千|百)/g, " ");
+      for (const [word, magnitude] of Object.entries({tens:10,hundreds:100,thousands:1000,millions:1e6,billions:1e9,trillions:1e12})) {
+        if (new RegExp("\\b" + word + "\\b", "i").test(text)) values.add("approx:" + magnitude);
+      }
+      const pattern = new RegExp("(?<![上下每这那另唯])(" + numeral + ")(?=" + units + ")|百分之(" + numeral + ")", "g");
+      for (const match of exactText.matchAll(pattern)) values.add("number:" + chineseNumber(match[1] || match[2]));
       if (/\b(?:a|an)\b/i.test(text)) values.add("number:1");
+      const numberWords = new Set("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety first second third fourth fifth sixth seventh eighth ninth tenth half".split(" "));
+      for (const match of text.matchAll(/\bonly\s+((?:[a-z]+[- ]+){0,4})(?:weapon|model|system|ship|capsule|company)\b/gi)) {
+        if (![...match[1].matchAll(/[a-z]+/gi)].some(word => numberWords.has(word[0].toLowerCase()))) values.add("number:1");
+      }
       return values;
     };
     const scope = [
