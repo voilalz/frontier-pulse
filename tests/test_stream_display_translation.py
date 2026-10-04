@@ -70,6 +70,38 @@ class StreamDisplayTranslationTests(unittest.TestCase):
         rendered = self.browser_result(f'normalizeItem({json.dumps(regenerated["items"][0])}, 0)')
         self.assertEqual(rendered["summary"], "卫星计划于周一发射。")
 
+    def test_daily_item_retains_reused_stream_display_translation(self):
+        article, stream = self.stream()
+        cached = MODULE.reusable_stream_translations(stream, [article],
+            {"provider":"deepseek", "model":"test-model"})
+        daily = MODULE.item_from_article(article, self.config, cached[article.id])
+        from evidence_trace import validate_news_trace
+        validate_news_trace(daily)
+        rendered = self.browser_result(f'normalizeItem({json.dumps(daily)}, 0)')
+        self.assertEqual(rendered["title"], "美国航天局卫星任务")
+        self.assertEqual(rendered["summary"], "卫星计划于周一发射。")
+        self.assertEqual(daily["translationProvider"], "deepseek")
+
+    def test_daily_rejects_reused_translation_bound_to_other_source(self):
+        article, stream = self.stream()
+        cached = MODULE.reusable_stream_translations(stream, [article],
+            {"provider":"deepseek", "model":"test-model"})
+        cached[article.id]["_sourceSummary"] = "A different mission is scheduled for Friday."
+        daily = MODULE.item_from_article(article, self.config, cached[article.id])
+        self.assertEqual(daily["translationProvider"], "")
+        self.assertNotIn("displayTranslation", daily)
+
+    def test_daily_stream_recovery_copies_visible_translation(self):
+        article, stream = self.stream()
+        daily = MODULE.item_from_article(article, self.config)
+        report = {"items":[daily], "translationProvider":"deepseek",
+            "translationWarnings":[], "warnings":[], "sourceCount":1}
+        MODULE.recover_daily_translations(report, stream)
+        rendered = self.browser_result(f'normalizeItem({json.dumps(daily)}, 0)')
+        self.assertEqual(rendered["title"], "美国航天局卫星任务")
+        self.assertEqual(rendered["summary"], "卫星计划于周一发射。")
+        self.assertEqual(report["translatedItemCount"], 1)
+
     def test_featured_shorter_excerpt_cannot_discard_current_stream_translation(self):
         article = self.article("NASA satellite mission",
             "NASA plans a satellite launch for Monday. The satellite will monitor solar activity.")
