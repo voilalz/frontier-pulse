@@ -313,13 +313,33 @@ def _chinese_number(token):
 
 
 def _prose_quantities(text):
+    text = unicodedata.normalize("NFKC", text)
     values = quantity_values(text)
     numeral = r"[零〇一二两三四五六七八九十百千万亿]+(?:点[零〇一二三四五六七八九]+)?"
+    units = r"个|项|名|人|家|台|艘|架|颗|枚|辆|套|组|种|年|月|日|天|次|倍|米|秒|小时|美元|元|%|％"
+    magnitudes = {"十": 10, "百": 100, "千": 1000, "万": 10**4, "百万": 10**6,
+                  "千万": 10**7, "亿": 10**8, "十亿": 10**9, "万亿": 10**12}
+    approximate = r"(?:数|几)(" + "|".join(sorted(magnitudes, key=len, reverse=True)) + r")(?=" + units + r")"
+    def collect_approximate(match):
+        values.add("approx:" + str(magnitudes[match[1]]))
+        return " "
+    exact_text = re.sub(approximate, collect_approximate, text)
+    # Arabic coefficients and Chinese scales were already normalized together.
+    # Do not count the 亿 in 244亿美元 a second time as an independent quantity.
+    exact_text = re.sub(r"\d+(?:[.,]\d+)*\s*(?:万亿|百万|千万|十亿|亿|万|千|百)", " ", exact_text)
+    for word, magnitude in {"tens": 10, "hundreds": 100, "thousands": 1000,
+                            "millions": 10**6, "billions": 10**9, "trillions": 10**12}.items():
+        if re.search(r"\b" + word + r"\b", text, re.I):
+            values.add("approx:" + str(magnitude))
     # Count explicit quantities, rather than idioms such as '下一次' or '一同'.
-    for match in re.finditer(r"(?<![上下每这那另])(" + numeral + r")(?=个|项|名|人|家|台|艘|架|颗|枚|辆|套|组|种|年|月|日|天|次|倍|米|秒|小时|美元|元|%|％)|百分之(" + numeral + r")", text):
+    for match in re.finditer(r"(?<![上下每这那另唯])(" + numeral + r")(?=" + units + r")|百分之(" + numeral + r")", exact_text):
         values.add(_quantity_key(_chinese_number(match[1] or match[2])))
     if re.search(r"\b(?:a|an)\b", text, re.I):
         values.add("number:1")
+    # 'The only ... weapon' entails a singular type; do not read 唯一一种 as 11.
+    for match in re.finditer(r"\bonly\s+((?:[a-z]+[- ]+){0,4})(?:weapon|model|system|ship|capsule|company)\b", text, re.I):
+        if not any(word.lower() in _NUMBER_WORDS for word in re.findall(r"[a-z]+", match[1], re.I)):
+            values.add("number:1")
     return values
 
 

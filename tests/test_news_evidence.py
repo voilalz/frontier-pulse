@@ -6,6 +6,18 @@ from scripts.news_evidence import select_relevant_evidence
 
 
 class NewsEvidenceTests(unittest.TestCase):
+    def test_abbreviated_month_stays_bound_to_date_in_article_evidence(self):
+        title = "Northrop Grumman Talon Blue completes first autonomous flight"
+        for month in ("Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Sep", "Sept", "Oct", "Nov", "Dec"):
+            with self.subTest(month=month):
+                sentence = (f"{month}. 3, 2026 – Northrop Grumman's YFQ-48A Talon Blue completed "
+                            "its first fully autonomous flight, including taxi, takeoff and landing.")
+                data = {"@type": "NewsArticle", "headline": title, "articleBody": sentence}
+                page = f'<script type="application/ld+json">{json.dumps(data)}</script>'
+                result = select_relevant_evidence(title, "", page)
+                self.assertEqual(result["status"], "body")
+                self.assertEqual(result["paragraphs"], [sentence])
+
     def test_matching_short_article_beats_long_unrelated_article(self):
         mission = "NASA launched Europa Clipper on Monday to investigate Jupiter's icy moon."
         page = (
