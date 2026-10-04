@@ -96,6 +96,7 @@ async function main(){
               assert.equal(await page.locator('#searchWrap').isVisible(),false);
               assert.equal(await page.locator('#dateControl').isVisible(),false);
               assert.equal(await page.locator('#classicCards .classic-card a').first().getAttribute('href').then(x=>x.startsWith('https://')),true);
+              assert.doesNotMatch(await page.locator('#classicSection').textContent(), /每日两篇|每日固定|轮换|经典依据|为什么是经典/);
               await page.locator('#classicCards details summary').first().click();
               assert.equal(await page.locator('#classicCards .classic-card').first().locator('.classic-guide section').count(),6);
               await previous(page);await page.locator('#classicNext').click();

@@ -271,12 +271,21 @@
       const primary = normalizeSource({}, raw);
       if (primary) sources.push(primary);
     }
-    const summary = clean(raw.summary, "暂无摘要，请阅读原文核验。");
+    const validZh = (text, source) => typeof text === "string" && typeof source === "string"
+      && /[\u4e00-\u9fff]/.test(text)
+      && (text.match(/\p{Decimal_Number}+(?:[.,]\p{Decimal_Number}+)*/gu) || []).every(n => (source.match(/\p{Decimal_Number}+(?:[.,]\p{Decimal_Number}+)*/gu) || []).includes(n));
+    const t = raw.displayTranslation;
+    const translated = t && t.version === 1 && t.language === "zh-CN"
+      && ["deepseek", "openai"].includes(t.provider)
+      && t.sourceTitle === raw.originalTitle && t.sourceSummary === raw.summary
+      && JSON.stringify(t.sourceEvidenceRefs) === JSON.stringify(raw.summaryEvidenceRefs)
+      && validZh(t.title, t.sourceTitle) && validZh(t.summary, t.sourceSummary);
+    const summary = clean(translated ? t.summary : raw.summary, "暂无摘要，请阅读原文核验。");
     const item = {
       id: clean(raw.id, `item-${index}`),
       eventId: clean(raw.eventId),
       contentType: clean(raw.contentType, "news"),
-      title: clean(raw.title),
+      title: clean(translated ? t.title : raw.title),
       originalTitle: clean(raw.originalTitle || raw.title),
       summary,
       keyFacts: (Array.isArray(raw.keyFacts) ? raw.keyFacts : []).map((fact) => clean(fact)).filter(Boolean).slice(0, 4),
@@ -1077,7 +1086,7 @@
       latest: ["DAILY BRIEF", "今日前沿态势", "科技 · AI · 航空航天 · 安全 · 前沿研究", "TOP 10", "今日 Top 10"],
       deepread: ["THE DAILY READ", "每日深读", "读懂今日进展，连接事实与趋势", "DAILY READ", "每日深读"],
       stream: ["FULL STREAM", `过去 ${state.rangeHours} 小时`, "全量合格动态", "STREAM", "全量动态"],
-      research: ["DAILY CLASSICS", "每日经典论文", "每天两篇，循序阅读奠基方法与长期影响", "CLASSICS", "每日两篇"],
+      research: ["DAILY CLASSICS", "每日经典论文", "", "CLASSICS", "当日推荐"],
       history: ["ARCHIVE", "历史脉络", state.query ? "跨日期检索" : "按日期回看", "ARCHIVE", state.query ? "跨日期搜索" : "历史要闻"],
       bookmarks: ["COLLECTION", "我的收藏", "仅保存在当前浏览器", "SAVED", "收藏新闻"],
       watchlist: ["WATCHLIST", "关注词", "从历史索引中追踪持续信号", "SIGNALS", "关注词命中"],

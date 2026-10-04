@@ -224,12 +224,15 @@ class UpdateNewsTests(unittest.TestCase):
 
     def test_stream_translation_splits_and_retries_only_missing_sequence_indices(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:4]
+        from evidence_trace import make_evidence
+        for article in candidates:
+            article.source_evidence = make_evidence(article.description, article.url, self.now.isoformat())
         runtime = {
             "provider": "deepseek", "api_key": "secret", "model": "deepseek-v4-flash",
             "endpoint": "https://api.deepseek.com/chat/completions",
         }
         def translated(index):
-            return {"index": index, "titleZh": f"中文标题{index}", "summary": "中文摘要", "tags": ["测试"]}
+            return {"index": index, "titleZh": "中文标题", "summary": "中文摘要", "tags": ["测试"]}
         responses = [
             {"items": [translated(1), translated(2)]},
             {"items": [translated(1)]},
@@ -277,7 +280,7 @@ class UpdateNewsTests(unittest.TestCase):
         self.assertNotEqual(stream["items"][0]["summary"], "全量动态中文摘要")
         from evidence_trace import validate_news_trace
         validate_news_trace(stream["items"][0])
-        self.assertEqual(stream["items"][0]["translationProvider"], "deepseek")
+        self.assertEqual(stream["items"][0]["translationProvider"], "")
 
     def test_unchanged_stream_translation_is_recovered_by_stable_news_id(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:2]
@@ -285,8 +288,13 @@ class UpdateNewsTests(unittest.TestCase):
             "provider": "deepseek", "api_key": "secret", "model": "deepseek-v4-flash",
             "endpoint": "https://api.deepseek.com/chat/completions",
         }
+        from evidence_trace import make_evidence
+        for article in candidates:
+            article.source_evidence = make_evidence(article.description, article.url, self.now.isoformat())
+        sources = {article.id: MODULE.item_from_article(article, self.config) for article in candidates}
         translations = {article.id: {
             "titleZh": f"中文：{article.title}", "summary": "中文摘要", "tags": ["复用"],
+            "_sourceTitle": article.title, "_sourceSummary": sources[article.id]["summary"],
             "_translationOnly": True, "_provider": "deepseek",
         } for article in candidates}
         previous = MODULE.build_stream_report(
@@ -299,6 +307,9 @@ class UpdateNewsTests(unittest.TestCase):
 
     def test_stream_translation_records_missing_ids_and_completion_reason(self):
         candidates = MODULE.score_articles(MODULE.deduplicate(self.articles), self.config, self.now)[:2]
+        from evidence_trace import make_evidence
+        for article in candidates:
+            article.source_evidence = make_evidence(article.description, article.url, self.now.isoformat())
         runtime = {
             "provider": "deepseek", "api_key": "secret", "model": "deepseek-v4-flash",
             "endpoint": "https://api.deepseek.com/chat/completions",

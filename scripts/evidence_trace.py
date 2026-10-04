@@ -205,6 +205,35 @@ def framing_supported(text, records, headlines=(), neutral=()):
     return isinstance(text, str) and (text in headlines or text in neutral or bool(trace_claim(text, records)))
 
 
+def translation_text_valid(text, source):
+    """Language/quantity sanity checks, not proof of semantic equivalence."""
+    if not isinstance(source, str) or not isinstance(text, str) or not re.search(r"[\u4e00-\u9fff]", text):
+        return False
+    source_numbers = set(re.findall(r"\d+(?:[.,]\d+)*", source))
+    return set(re.findall(r"\d+(?:[.,]\d+)*", text)) <= source_numbers
+
+
+def valid_display_translation(item):
+    """Bind a display-only translation to the exact traceable source payload."""
+    value = item.get("displayTranslation")
+    if not isinstance(value, dict):
+        return False
+    return (value.get("version") == 1 and value.get("language") == "zh-CN"
+            and isinstance(value.get("provider"), str)
+            and value.get("provider") in {"deepseek", "openai"}
+            and isinstance(value.get("sourceTitle"), str)
+            and isinstance(value.get("sourceSummary"), str)
+            and value.get("sourceTitle") == item.get("originalTitle")
+            and value.get("sourceSummary") == item.get("summary")
+            and value.get("sourceEvidenceRefs") == item.get("summaryEvidenceRefs")
+            and translation_text_valid(value.get("title"), value["sourceTitle"])
+            and translation_text_valid(value.get("summary"), value["sourceSummary"])
+            and (validate_claim_refs(item.get("summary"), item.get("summaryEvidenceRefs"), item.get("evidenceRecords"))
+                 or (item.get("evidenceRecords") == [] and item.get("summaryEvidenceRefs") == []
+                     and item.get("summary") == "未提取到可引用的正文，请查看原始报道。"
+                     and value.get("summary") == item.get("summary"))))
+
+
 def validate_news_trace(item):
     records = item.get("evidenceRecords")
     validate_evidence(records)
@@ -223,6 +252,8 @@ def validate_news_trace(item):
         raise ValueError("untraced key facts")
     if any(not validate_claim_refs(f.get("text"), f.get("evidenceIds"), records) for f in facts):
         raise ValueError("unsupported key fact")
+    if "displayTranslation" in item and not valid_display_translation(item):
+        raise ValueError("display translation differs from source")
 
 
 def validate_deepread_trace(article):

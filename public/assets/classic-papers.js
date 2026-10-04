@@ -16,8 +16,8 @@
   const domains={AI:'AI · 人工智能',SLAM:'SLAM · 定位建图',GNC:'GNC · 制导导航控制',CV:'CV · 计算机视觉',UAV:'UAV · 无人飞行系统'};
   const link=(url,label)=>safe(url)?`<a href="${esc(safe(url))}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`:'';
   section.innerHTML=`<div class="classic-toolbar"><div class="classic-tabs" role="group" aria-label="论文阅读范围">
-    <button type="button" data-classic-mode="daily">每日两篇</button><button type="button" data-classic-mode="history">论文历史库</button>
-    </div><div class="date-control classic-date-control"><span>推荐日期 · 北京时间（UTC+8）</span><div>
+    <button type="button" data-classic-mode="daily">当日推荐</button><button type="button" data-classic-mode="history">论文历史库</button>
+    </div><div class="date-control classic-date-control"><span>推荐日期 · 北京时间</span><div>
     <button type="button" id="classicPrevious" aria-label="上一日推荐">←</button><input type="date" id="classicDate" aria-label="选择论文推荐日期">
     <button type="button" id="classicNext" aria-label="下一日推荐">→</button></div><small id="classicDateHint"></small></div></div>
     <div id="classicHistoryControls" class="classic-history-controls" hidden><label>标题或作者<input type="search" id="classicSearch" placeholder="搜索已推荐论文标题、完整作者" autocomplete="off"></label>
@@ -37,9 +37,7 @@
       <p class="classic-bibliography">发表年份：<b>${esc(p.year)}</b> · ${esc(p.venue)}<br>推荐日期：<time datetime="${esc(d)}">${esc(d)}</time></p>
       <p class="classic-overview">${esc(p.overview)}</p><div class="classic-actions">${link(p.canonicalUrl,'书目原文')}${link(p.fullText?.url,'阅读全文')}
       <button type="button" data-classic-save aria-pressed="${isSaved(p)}">${isSaved(p)?'取消收藏':'收藏'}</button><button type="button" data-classic-cite>复制引用</button></div>
-      <details><summary>完整导读与经典依据</summary><div class="classic-guide">${guides}</div><div class="classic-evidence"><h4>为什么是经典</h4><p>${esc(p.classicRationale)}</p>
-      <ul>${(p.classicEvidence||[]).map(e=>`<li>${link(e.url,e.kind+' · '+e.locator)}</li>`).join('')}</ul>
-      <p class="classic-source-note">导读依据：${link(p.fullText?.url,p.fullText?.edition||'可核验全文')} · ${esc(p.fullText?.pageCount)}页。全文事实与阅读推论分别标注。</p></div></details></article>`;
+      <details><summary>阅读导读</summary><div class="classic-guide">${guides}</div></details></article>`;
   }
   function rows(){
     if(!state)return [];
@@ -65,7 +63,7 @@
     $('classicNext').disabled=i<=0;
     $('classicPrevious').dataset.date=i>=0?dates[i+1]||'':'';
     $('classicNext').dataset.date=i>0?dates[i-1]||'':'';
-    $('classicDateHint').textContent=`${dates.length}期已发布推荐 · 发表年份单独标注`;
+    $('classicDateHint').textContent=`${dates.length}期推荐`;
     section.querySelector('.classic-date-control').hidden=mode!=='daily';
     $('classicHistoryControls').hidden=mode!=='history';
     section.querySelectorAll('[data-classic-mode]').forEach(b=>{b.classList.toggle('active',b.dataset.classicMode===mode);b.setAttribute('aria-pressed',String(b.dataset.classicMode===mode));});
@@ -74,15 +72,14 @@
     $('dataState').className='state-badge'+(health==='今日待更新'||state?.cached?' warning':'');
     const pending=health==='今日待更新';
     $('classicNotice').textContent=state
-      ? `${mode==='history'?'只检索实际已发布推荐。':'每日固定两篇，按五日主领域轮换。'}${pending?' 今日待更新；保留上期原推荐日期。':''}${state.cached?' 当前展示已校验缓存，刷新可重试。':''}`
+      ? `${pending?'今日待更新；当前保留上期推荐。':''}${state.cached?' 当前展示缓存，刷新可重试。':''}`
       : '尚无可用的经典推荐，稍后刷新可重试。';
-    const stock=state?.status;
-    $('classicStock').hidden=!stock?.lowStock;
-    $('classicStock').textContent=stock?.lowStock?`完整备稿库存低于14篇（${stock.readyPaperCount}篇，统计日期${stock.inventoryDate}）。当天备稿不足时保留上一期。`:'';
+    $('classicNotice').hidden=!$('classicNotice').textContent.trim();
+    $('classicStock').hidden=true;
     const list=rows();
     $('classicCards').innerHTML=list.length?list.map(card).join(''):`<p class="classic-empty">${mode==='history'?'没有匹配的已推荐论文。':'所选日期尚无已发布推荐。'}</p>`;
     $('classicCards').setAttribute('aria-busy','false');
-    $('dataNote').textContent='经典阅读按北京时间日历编排；概览与导读附有原文定位，请结合完整论文理解适用条件。';
+    $('dataNote').textContent='';
     sync();
   }
   async function show(options={}){
@@ -97,7 +94,7 @@
         state=loaded;if(!state.cached)write(KEY,state.cache);
       }catch(error){
         if(ticket!==request)return;
-        state=null;render();$('classicNotice').textContent='经典推荐读取失败：'+error.message+'；可点击刷新重试。';return;
+        state=null;render();$('classicNotice').hidden=false;$('classicNotice').textContent='经典推荐读取失败：'+error.message+'；可点击刷新重试。';return;
       }
     }
     if(ticket===request)render();
