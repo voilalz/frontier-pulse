@@ -172,7 +172,19 @@ def _validate(stage, mode, expected_date):
                 require(len(ids) == len(rows) and archived.get('itemCount', len(rows)) == len(rows), 'Invalid archive count')
                 archive_ids[date] = ids
             else:
-                require(isinstance(archived.get('events', archived.get('items')), list), 'Invalid deepread archive')
+                # Schema 1 stores historical events inside sections. The reader
+                # still supports that format; it must not block a new edition.
+                if archived.get('schemaVersion') == 1 and 'sections' in archived:
+                    sections = archived['sections']
+                    require(isinstance(sections, list) and all(
+                        isinstance(section, dict)
+                        and isinstance(section.get('events'), list)
+                        and all(isinstance(event, dict) for event in section['events'])
+                        for section in sections
+                    ), f'Invalid deepread archive: {date}')
+                else:
+                    require(isinstance(archived.get('events', archived.get('items')), list),
+                            f'Invalid deepread archive: {date}')
     search = read_json(data / 'archive/search-index.json')
     require(search.get('schemaVersion') == 2 and isinstance(search.get('shards'), list), 'Invalid search index')
     seen_rows, seen_months = set(), set()
