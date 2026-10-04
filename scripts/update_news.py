@@ -436,15 +436,17 @@ def current_featured_translation_ids(
     candidates: list[Article], featured: dict[str, dict[str, Any]], runtime: dict[str, str] | None
 ) -> set[str]:
     """Only matching current evidence can satisfy the stream translation stage."""
+    from evidence_trace import valid_display_translation
     if not runtime:
         return set()
     return {
         article.id for article in candidates
         if (item := featured.get(article.id, {}))
         and clean_text(item.get("translationProvider")) == runtime["provider"]
-        and clean_text(item.get("title")) and clean_text(item.get("summary"))
+        and valid_display_translation(item)
         and item.get("summaryRevision") == SUMMARY_REVISION
         and item.get("summaryInputHash") == summary_input_hash(article)
+        and item.get("summary") == item_from_article(article, {})["summary"]
     }
 
 
@@ -2657,13 +2659,14 @@ def request_stream_translation_batch(
         "required": ["items"],
         "additionalProperties": False,
     }
+    sources = {index: item_from_article(article, config) for index, article in index_to_article.items()}
     evidence = [{
         "index": index,
-        "title": article.title,
-        "description": clean_text(article.description, SOURCE_TEXT_LIMIT),
-        "source": article.source,
-        "publishedAt": article.published_at.isoformat().replace("+00:00", "Z"),
-    } for index, article in index_to_article.items()]
+        "title": source["originalTitle"],
+        "description": source["summary"],
+        "source": source["source"],
+        "publishedAt": source["publishedAt"],
+    } for index, source in sources.items()]
     example = {"items": [{
         "index": index,
         "titleZh": f"第{index}条新闻的忠实中文标题",
@@ -2675,6 +2678,7 @@ def request_stream_translation_batch(
         instructions=(
             "你是科技新闻翻译编辑。逐条把标题和已有描述忠实翻译、压缩为自然中文，保留机构、型号、数值和不确定性。"
             "不得补充输入中不存在的事实，不得改变立场；描述为空时明确写‘现有元数据未提供摘要’。"
+            "若description为‘未提取到可引用的正文，请查看原始报道。’，summary必须原样保留这句，不得编造摘要。"
             "摘要须围绕标题主体与动作，只使用筛选后的相关证据，不能让背景取代新闻主体。"
             f"本批共有{len(batch)}条，items必须恰好输出{len(batch)}条且每个index只出现一次。"
             "每条输出中文标题、180至320字中文摘要和最多3个短标签。用4至6句概括事件、背景、关键细节、进展及后续安排。"
@@ -2693,17 +2697,23 @@ def request_stream_translation_batch(
             continue
         item_index = sequence_index(item.get("index"), len(batch))
         article = index_to_article.get(item_index)
+        from evidence_trace import translation_text_valid
+        source = sources.get(item_index, {})
         if (
             article
             and article.id not in translated
             and clean_text(item.get("titleZh"))
-            and clean_text(item.get("summary"))
+            and translation_text_valid(item.get("titleZh"), source["originalTitle"])
+            and translation_text_valid(item.get("summary"), source["summary"])
+            and (source["evidenceRecords"] or item.get("summary") == source["summary"])
             and isinstance(item.get("tags"), list)
         ):
             translated[article.id] = {
                 "titleZh": item["titleZh"],
                 "summary": item["summary"],
                 "tags": item["tags"],
+                "_sourceTitle": source["originalTitle"],
+                "_sourceSummary": source["summary"],
                 "_translationOnly": True,
                 "_provider": runtime["provider"],
             }
@@ -2731,6 +2741,7 @@ def reusable_stream_translations(
     runtime: dict[str, str] | None,
 ) -> dict[str, dict[str, Any]]:
     """Recover trustworthy translations for unchanged article IDs from the stream cache."""
+    from evidence_trace import valid_display_translation
     if not runtime or not isinstance(previous_stream, dict):
         return {}
     if (
@@ -2746,6 +2757,7 @@ def reusable_stream_translations(
         article = current_by_id.get(item_id)
         if (
             not article
+            or not valid_display_translation(item)
             or clean_text(item.get("translationProvider")) != runtime["provider"]
             or clean_text(item.get("originalTitle")) != clean_text(article.title)
             or not clean_text(item.get("title"))
@@ -2759,11 +2771,13 @@ def reusable_stream_translations(
             if clean_text(fact)
         ] if isinstance(item.get("keyFacts"), list) else []
         reusable[item_id] = {
-            "titleZh": item["title"],
-            "summary": item["summary"],
+            "titleZh": item["displayTranslation"]["title"],
+            "summary": item["displayTranslation"]["summary"],
             "keyFacts": key_facts,
             "why": clean_text(item.get("why")) or WHY_TEMPLATES[article.category],
             "tags": item.get("tags", []),
+            "_sourceTitle": item["displayTranslation"]["sourceTitle"],
+            "_sourceSummary": item["displayTranslation"]["sourceSummary"],
             "_translationOnly": True,
             "_provider": runtime["provider"],
             "_reuseSource": "stream",
@@ -2793,15 +2807,14 @@ def merge_featured_stream_item(item: dict[str, Any], daily_item: dict[str, Any])
             if field_name in daily_item:
                 item[field_name] = daily_item[field_name]
 
-    stream_is_translated = bool(clean_text(item.get("translationProvider")))
-    daily_is_translated = bool(clean_text(daily_item.get("translationProvider")))
-    from evidence_trace import validate_news_trace
+    from evidence_trace import validate_news_trace, valid_display_translation
+    stream_is_translated = valid_display_translation(item)
     try:
         validate_news_trace(daily_item)
     except (ValueError, TypeError, KeyError):
         current_evidence = False
-    if current_evidence and (daily_is_translated or not stream_is_translated):
-        for field_name in ("originalTitle", "title", "summary", "summaryRevision", "summaryInputHash", "keyFacts", "why", "tags", "translationProvider", "traceVersion", "evidenceRecords", "summaryEvidenceRefs", "keyFactEvidence"):
+    if current_evidence and not stream_is_translated:
+        for field_name in ("originalTitle", "title", "summary", "summaryRevision", "summaryInputHash", "keyFacts", "why", "tags", "translationProvider", "traceVersion", "evidenceRecords", "summaryEvidenceRefs", "keyFactEvidence", "displayTranslation"):
             if field_name in daily_item:
                 item[field_name] = daily_item[field_name]
 
@@ -2869,6 +2882,7 @@ def build_stream_report(
     translation_diagnostics: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Publish the complete qualified 24-hour candidate stream, capped for payload safety."""
+    from evidence_trace import valid_display_translation
     limit = max(1, int(config.get("stream_limit", 300)))
     selected = candidates[:limit]
     featured_items = top_stories if isinstance(top_stories, dict) else {}
@@ -2876,10 +2890,40 @@ def build_stream_report(
     translations = translations or {}
     items: list[dict[str, Any]] = []
     for article in selected:
-        item = item_from_article(article, config, translations.get(article.id))
+        editorial = translations.get(article.id, {})
+        item = item_from_article(article, config)
         daily_item = featured_items.get(article.id)
         if isinstance(daily_item, dict):
+            source_fields = {key: item[key] for key in (
+                "originalTitle", "title", "summary", "summaryRevision", "summaryInputHash",
+                "traceVersion", "evidenceRecords", "summaryEvidenceRefs", "keyFactEvidence", "keyFacts",
+            )}
             merge_featured_stream_item(item, daily_item)
+            # Daily may use a shorter valid excerpt of the same article. The
+            # stream translator was given the full canonical stream excerpt.
+            item.update(source_fields)
+            if not editorial and valid_display_translation(daily_item):
+                value = daily_item["displayTranslation"]
+                editorial = {"titleZh": value["title"], "summary": value["summary"],
+                             "_sourceTitle": value["sourceTitle"], "_sourceSummary": value["sourceSummary"],
+                             "_provider": value["provider"], "tags": daily_item.get("tags", [])}
+        # The literal source remains canonical for publication/evidence checks.
+        # Translations are separately bound to the exact input sent to the model.
+        item.pop("displayTranslation", None)
+        item["translationProvider"] = ""
+        if editorial.get("_sourceTitle") == item["originalTitle"] and editorial.get("_sourceSummary") == item["summary"]:
+            item["displayTranslation"] = {
+                "version": 1, "language": "zh-CN", "provider": editorial.get("_provider"),
+                "title": clean_text(editorial.get("titleZh"), 180),
+                "summary": reader_summary(editorial.get("summary")),
+                "sourceTitle": item["originalTitle"], "sourceSummary": item["summary"],
+                "sourceEvidenceRefs": list(item["summaryEvidenceRefs"]),
+            }
+            if valid_display_translation(item):
+                item["translationProvider"] = editorial["_provider"]
+                item["tags"] = editorial.get("tags", item["tags"])
+            else:
+                item.pop("displayTranslation")
         item["isTopStory"] = article.id in featured
         item["streamRank"] = len(items) + 1
         items.append(item)
@@ -2894,6 +2938,10 @@ def build_stream_report(
         (clean_text(item.get("translationProvider")) for item in items if clean_text(item.get("translationProvider"))),
         "",
     )
+    translated_count = sum(valid_display_translation(item) for item in items)
+    warnings = list(translation_warnings or [])
+    if translation_runtime and translated_count < len(items):
+        warnings.append(f"全量动态中文翻译不完整：{translated_count}/{len(items)}")
     return {
         "schemaVersion": 7,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
@@ -2906,8 +2954,8 @@ def build_stream_report(
         "sourceCounts": dict(sorted(source_counts.items(), key=lambda pair: (-pair[1], pair[0]))),
         "translationProvider": translation_runtime.get("provider") if translation_runtime else inferred_provider,
         "translationModel": translation_runtime.get("model") if translation_runtime else "",
-        "translatedItemCount": sum(bool(item.get("translationProvider")) for item in items),
-        "translationWarnings": list(translation_warnings or []),
+        "translatedItemCount": translated_count,
+        "translationWarnings": list(dict.fromkeys(warnings)),
         "translationDiagnostics": dict(translation_diagnostics or {}),
         "items": items,
     }
@@ -4088,7 +4136,11 @@ def validate_stream_report(report: dict[str, Any]) -> None:
         raise ValueError("stream report contains missing or duplicate ids")
     if any(item.get("contentType") != "news" for item in items):
         raise ValueError("stream report may only contain news items")
-    translated = sum(bool(item.get("translationProvider")) for item in items)
+    from evidence_trace import valid_display_translation
+    for item in items:
+        if "displayTranslation" in item and not valid_display_translation(item):
+            raise ValueError("invalid stream display translation")
+    translated = sum(valid_display_translation(item) for item in items)
     if int(report.get("translatedItemCount", translated)) != translated:
         raise ValueError("stream translatedItemCount does not match items")
     validate_ai_batch_diagnostics(report.get("translationDiagnostics"), "stream translation")

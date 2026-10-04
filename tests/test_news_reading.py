@@ -187,9 +187,13 @@ class NewsReadingTests(unittest.TestCase):
     def test_stale_featured_translation_does_not_skip_stream_translation(self):
         article = self.article("NASA satellite mission")
         runtime = {"provider": "deepseek", "model": "test-model"}
-        daily = MODULE.item_from_article(article, self.config, {
+        from evidence_trace import make_evidence
+        article.source_evidence = make_evidence(article.description, article.url, self.now.isoformat())
+        source = MODULE.item_from_article(article, self.config)
+        daily = MODULE.build_stream_report([article], self.config, self.now, translations={article.id: {
+            "_sourceTitle": article.title, "_sourceSummary": source["summary"],
             "titleZh": "卫星任务", "summary": "卫星将于周一发射。", "_provider": "deepseek",
-        })
+        }})["items"][0]
         featured = {article.id: daily}
         self.assertEqual(MODULE.current_featured_translation_ids([article], featured, runtime), {article.id})
         daily.pop("summaryRevision")
