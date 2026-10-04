@@ -280,6 +280,90 @@ def translation_text_valid(text, source):
     return quantity_values(text) <= quantity_values(source)
 
 
+_TRANSLATION_SCOPE = tuple(re.compile(pattern, re.I) for pattern in (
+    r"计划|规划|拟|预计|预期|将|即将|有望|预定|未来|可能|\b(?:plans?|planned|will|scheduled|expected|may|might|could)\b",
+    r"仅|只|有限|限定|受限|限制|\b(?:only|limited)\b",
+    r"模拟|仿真|\b(?:simulation|simulated)\b",
+    r"初步|初期|初始|\bpreliminary\b",
+    r"部分|一些|若干|少数|小规模|\b(?:some|partial|small.scale)\b",
+    r"不|未|没有|无|失败|\b(?:not|no|without|never|failed|unsuccessful)\b|\b\w+n['’]t\b",
+))
+
+
+def _chinese_number(token):
+    digits = dict(zip("零〇一二两三四五六七八九", [0, 0, 1, 2, 2, 3, 4, 5, 6, 7, 8, 9]))
+    if "点" in token:
+        whole, fraction = token.split("点", 1)
+        return _chinese_number(whole) + Decimal("0." + "".join(str(digits[char]) for char in fraction))
+    for unit, scale in (("亿", 10**8), ("万", 10**4)):
+        if unit in token:
+            left, right = token.split(unit, 1)
+            return _chinese_number(left or "一") * scale + _chinese_number(right)
+    if not any(unit in token for unit in "十百千"):
+        return Decimal("".join(str(digits[char]) for char in token) or "0")
+    total, current = 0, 0
+    for char in token:
+        if char in digits:
+            current = digits[char]
+        else:
+            total += (current or 1) * {"十": 10, "百": 100, "千": 1000}[char]
+            current = 0
+    return Decimal(total + current)
+
+
+def _prose_quantities(text):
+    values = quantity_values(text)
+    numeral = r"[零〇一二两三四五六七八九十百千万亿]+(?:点[零〇一二三四五六七八九]+)?"
+    # Count explicit quantities, rather than idioms such as '下一次' or '一同'.
+    for match in re.finditer(r"(?<![上下每这那另])(" + numeral + r")(?=个|项|名|人|家|台|艘|架|颗|枚|辆|套|组|种|年|月|日|天|次|倍|米|秒|小时|美元|元|%|％)|百分之(" + numeral + r")", text):
+        values.add(_quantity_key(_chinese_number(match[1] or match[2])))
+    if re.search(r"\b(?:a|an)\b", text, re.I):
+        values.add("number:1")
+    return values
+
+
+_NEGATIVE_ACTIONS = (
+    (r"approv\w*|permission|clearance|authori[sz]\w*", r"批准|获批|许可|授权"),
+    (r"production|commercial\w*", r"量产|生产|商用|商业化"),
+    (r"publish\w*|reveal\w*|disclos\w*|announc\w*", r"公布|披露|发布|公开|宣布"),
+    (r"launch\w*", r"发射|推出|发布"),
+    (r"deploy\w*", r"部署"),
+    (r"test\w*|validat\w*|prov\w*", r"测试|验证|证明"),
+    (r"success\w*|succeed\w*", r"成功"),
+)
+
+
+def _translation_negation_valid(text, source):
+    for clause in re.split(r"[.;,:]|\b(?:and|but)\b", source, flags=re.I):
+        if not _TRANSLATION_SCOPE[-1].search(clause):
+            continue
+        for original, translated in _NEGATIVE_ACTIONS:
+            if re.search(r"\b(?:" + original + r")\b", clause, re.I):
+                # An unrelated negative date cannot negate an affirmative approval.
+                if not re.search(r"(?:不|未|没有|无|失败)[^，。；！？,;.!?]{0,16}(?:" + translated + r")", text):
+                    return False
+                break
+    return True
+
+
+def valid_prose_translation(value, source_text, evidence_refs):
+    """Validate a display translation bound to a separately verified source claim."""
+    return (isinstance(value, dict) and value.get("version") == 1
+            and value.get("language") == "zh-CN" and isinstance(value.get("provider"), str)
+            and value["provider"] in {"deepseek", "openai"}
+            and isinstance(source_text, str) and 10 <= len(source_text) <= 900 and source_text == source_text.strip()
+            and isinstance(evidence_refs, list) and bool(evidence_refs)
+            and value.get("sourceText") == source_text and value.get("sourceEvidenceRefs") == evidence_refs
+            and isinstance(value.get("text"), str) and 10 <= len(value["text"]) <= 900
+            and value["text"] == value["text"].strip()
+            and not re.search(r"[<>\x00-\x1f]|(?:https?|javascript|data|file|vbscript)\s*:", value["text"], re.I)
+            and translation_text_valid(value["text"], source_text)
+            and _prose_quantities(value["text"]) <= _prose_quantities(source_text)
+            and (not re.search(r"[\u4e00-\u9fff]", source_text) or value["text"] == source_text)
+            and _translation_negation_valid(value["text"], source_text)
+            and all(not pattern.search(source_text) or pattern.search(value["text"]) for pattern in _TRANSLATION_SCOPE))
+
+
 def valid_display_translation(item):
     """Bind a display-only translation to the exact traceable source payload."""
     value = item.get("displayTranslation")
@@ -385,6 +469,10 @@ def validate_deepread_trace(article):
                     or not (supported or validate_claim_refs(block.get("text"), block.get("evidenceIds"), records))
                     or any(not set(block.get("evidenceIds", [])) & {r["evidenceId"] for r in by_id[ref]["evidenceRecords"]} for ref in refs)):
                 raise ValueError("unsupported/political deepread paragraph")
+            if "displayTranslation" in block and (
+                    not valid_prose_translation(block["displayTranslation"], block.get("text"), block.get("evidenceIds"))
+                    or is_political_policy({"title": block["displayTranslation"].get("text")})):
+                raise ValueError("deepread prose translation differs from source")
     for observation in article.get("observations", []):
         refs = observation.get("newsIds", [])
         supports = observation.get("supports", [])
@@ -394,3 +482,8 @@ def validate_deepread_trace(article):
                 or len(supports) != len(refs)
                 or not validate_observation(observation.get("text"), supports, by_id)):
             raise ValueError("unsupported/political observation")
+        if "displayTranslation" in observation and (
+                not valid_prose_translation(observation["displayTranslation"], observation.get("text"),
+                                            [support.get("evidenceId") for support in supports])
+                or is_political_policy({"title": observation["displayTranslation"].get("text")})):
+            raise ValueError("deepread observation translation differs from source")

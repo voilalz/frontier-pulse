@@ -203,7 +203,7 @@ class EditorialDeepreadTests(unittest.TestCase):
         self.assertEqual(report["events"][0]["eventId"], "evt-0")
         self.assertEqual(report["events"][0]["evidenceLevel"], "single")
 
-    def test_outline_then_prose_uses_fixed_membership_and_mandatory_history_change(self):
+    def test_outline_then_prose_uses_fixed_membership_without_unverified_history_change(self):
         items = [self.item(n) for n in range(12)]
         registry = {"items": [{"eventId": "evt-0", "timeline": [
             {"editionDate": "2026-09-26", "newsId": "prior", "title": "项目进入准备阶段", "source": "NASA",
@@ -235,7 +235,7 @@ class EditorialDeepreadTests(unittest.TestCase):
         report = build_daily_deepread(items, self.config, self.now, {"provider": "fixture"}, self.source_provider(provider),
                                       event_registry=registry)
         self.assertEqual([call["schema_name"] for call in calls], ["deepread_outline_v2", "deepread_prose_v2"])
-        self.assertIn("change", [block["type"] for block in calls[1]["example"]["chapters"]["chapter-1"]["blocks"]])
+        self.assertNotIn("change", [block["type"] for block in calls[1]["example"]["chapters"]["chapter-1"]["blocks"]])
         self.assertEqual(report["generationStatus"], "ok")
         self.assertEqual(report["eventCount"], 5)
         self.assertFalse(any(block["type"] == "change" for block in report["chapters"][0]["blocks"]))
