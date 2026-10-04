@@ -231,6 +231,7 @@ _NUMBER_WORDS = dict(zip(
     "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety first second third fourth fifth sixth seventh eighth ninth tenth half".split(),
     list(range(21)) + list(range(30, 100, 10)) + list(range(1, 11)) + [0.5]))
 _SCALES = {"hundred":100, "thousand":1000, "million":10**6, "billion":10**9, "trillion":10**12,
+           "decade":10, "decades":10, "century":100, "centuries":100,
            "百":100, "千":1000, "万":10**4, "百万":10**6, "千万":10**7,
            "亿":10**8, "十亿":10**9, "万亿":10**12}
 _SCALE_PATTERN = "|".join(sorted(_SCALES, key=len, reverse=True))
@@ -282,7 +283,7 @@ def translation_text_valid(text, source):
 
 _TRANSLATION_SCOPE = tuple(re.compile(pattern, re.I) for pattern in (
     r"计划|规划|拟|预计|预期|将|即将|有望|预定|未来|可能|\b(?:plans?|planned|will|scheduled|expected|may|might|could)\b",
-    r"仅|只|有限|限定|受限|限制|\b(?:only|limited)\b",
+    r"仅|只|唯一|有限|限定|受限|限制|\b(?:only|limited)\b",
     r"模拟|仿真|\b(?:simulation|simulated)\b",
     r"初步|初期|初始|\bpreliminary\b",
     r"部分|一些|若干|少数|小规模|\b(?:some|partial|small.scale)\b",
@@ -340,15 +341,15 @@ def _translation_negation_valid(text, source):
         for original, translated in _NEGATIVE_ACTIONS:
             if re.search(r"\b(?:" + original + r")\b", clause, re.I):
                 # An unrelated negative date cannot negate an affirmative approval.
-                if not re.search(r"(?:不|未|没有|无|失败)[^，。；！？,;.!?]{0,16}(?:" + translated + r")", text):
+                if not re.search(r"(?:不|未|没有|无|失败)[^，。；！？,;.!?]{0,16}(?:" + translated + r")|(?:" + translated + r")(?:失败|未成功)", text):
                     return False
                 break
     return True
 
 
-def valid_prose_translation(value, source_text, evidence_refs):
-    """Validate a display translation bound to a separately verified source claim."""
-    return (isinstance(value, dict) and value.get("version") == 1
+def prose_translation_issue(value, source_text, evidence_refs):
+    """Return a bounded reason without logging source prose or model content."""
+    if not (isinstance(value, dict) and value.get("version") == 1
             and value.get("language") == "zh-CN" and isinstance(value.get("provider"), str)
             and value["provider"] in {"deepseek", "openai"}
             and isinstance(source_text, str) and 10 <= len(source_text) <= 900 and source_text == source_text.strip()
@@ -356,12 +357,29 @@ def valid_prose_translation(value, source_text, evidence_refs):
             and value.get("sourceText") == source_text and value.get("sourceEvidenceRefs") == evidence_refs
             and isinstance(value.get("text"), str) and 10 <= len(value["text"]) <= 900
             and value["text"] == value["text"].strip()
-            and not re.search(r"[<>\x00-\x1f]|(?:https?|javascript|data|file|vbscript)\s*:", value["text"], re.I)
-            and translation_text_valid(value["text"], source_text)
-            and _prose_quantities(value["text"]) <= _prose_quantities(source_text)
-            and (not re.search(r"[\u4e00-\u9fff]", source_text) or value["text"] == source_text)
-            and _translation_negation_valid(value["text"], source_text)
-            and all(not pattern.search(source_text) or pattern.search(value["text"]) for pattern in _TRANSLATION_SCOPE))
+            and not re.search(r"[<>\x00-\x1f]|(?:https?|javascript|data|file|vbscript)\s*:", value["text"], re.I)):
+        return "binding/format"
+    text = value["text"]
+    if not re.search(r"[\u4e00-\u9fff]", text):
+        return "language"
+    if re.search(r"(?a:\b)[a-z]{2,}(?:[\s\ufeff]+[a-z]{2,}){2,}(?a:\b)", text):
+        return "untranslated-phrase"
+    introduced = _prose_quantities(text) - _prose_quantities(source_text)
+    if introduced:
+        return "quantities:" + ",".join(sorted(introduced))
+    if re.search(r"[\u4e00-\u9fff]", source_text) and text != source_text:
+        return "Chinese-source-rewritten"
+    if not _translation_negation_valid(text, source_text):
+        return "negated-action"
+    for label, pattern in zip(("planned", "limited", "simulation", "preliminary", "partial", "negation"), _TRANSLATION_SCOPE):
+        if pattern.search(source_text) and not pattern.search(text):
+            return "qualifier:" + label
+    return ""
+
+
+def valid_prose_translation(value, source_text, evidence_refs):
+    """Validate a display translation bound to a separately verified source claim."""
+    return not prose_translation_issue(value, source_text, evidence_refs)
 
 
 def valid_display_translation(item):

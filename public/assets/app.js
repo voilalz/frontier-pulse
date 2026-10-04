@@ -264,7 +264,7 @@
 
   const quantityValues = text => {
     const normalized = text.normalize("NFKC");
-    const scales = {hundred:100,thousand:1000,million:1e6,billion:1e9,trillion:1e12,
+    const scales = {hundred:100,thousand:1000,million:1e6,billion:1e9,trillion:1e12,decade:10,decades:10,century:100,centuries:100,
       百:100,千:1000,万:1e4,百万:1e6,千万:1e7,亿:1e8,十亿:1e9,万亿:1e12};
     const scalePattern = Object.keys(scales).sort((a,b)=>b.length-a.length).join("|");
     const values = new Set();
@@ -334,7 +334,7 @@
     };
     const scope = [
       /计划|规划|拟|预计|预期|将|即将|有望|预定|未来|可能|\b(?:plans?|planned|will|scheduled|expected|may|might|could)\b/i,
-      /仅|只|有限|限定|受限|限制|\b(?:only|limited)\b/i,
+      /仅|只|唯一|有限|限定|受限|限制|\b(?:only|limited)\b/i,
       /模拟|仿真|\b(?:simulation|simulated)\b/i,
       /初步|初期|初始|\bpreliminary\b/i,
       /部分|一些|若干|少数|小规模|\b(?:some|partial|small.scale)\b/i,
@@ -350,7 +350,7 @@
     const negationValid = (text, source) => source.split(/[.;,:]|\b(?:and|but)\b/i).every(clause => {
       if (!scope.at(-1).test(clause)) return true;
       const action = negativeActions.find(([original]) => new RegExp("\\b(?:" + original + ")\\b", "i").test(clause));
-      return !action || new RegExp("(?:不|未|没有|无|失败)[^，。；！？,;.!?]{0,16}(?:" + action[1] + ")").test(text);
+      return !action || new RegExp("(?:不|未|没有|无|失败)[^，。；！？,;.!?]{0,16}(?:" + action[1] + ")|(?:" + action[1] + ")(?:失败|未成功)").test(text);
     });
     return value && value.version === 1 && value.language === "zh-CN"
       && ["deepseek", "openai"].includes(value.provider)
@@ -359,7 +359,8 @@
       && value.sourceText === sourceText && JSON.stringify(value.sourceEvidenceRefs) === JSON.stringify(evidenceRefs)
       && typeof value.text === "string" && value.text.length >= 10 && value.text.length <= 900
       && value.text === value.text.trim() && !/[<>\x00-\x1f]|(?:https?|javascript|data|file|vbscript)\s*:/i.test(value.text)
-      && validZh(value.text, sourceText) && [...proseQuantities(value.text)].every(n => proseQuantities(sourceText).has(n))
+      && /[\u4e00-\u9fff]/.test(value.text) && [...proseQuantities(value.text)].every(n => proseQuantities(sourceText).has(n))
+      && !/\b[a-z]{2,}(?:[\s\u0085]+[a-z]{2,}){2,}\b/.test(value.text)
       && (!/[\u4e00-\u9fff]/.test(sourceText) || value.text === sourceText)
       && negationValid(value.text, sourceText) && scope.every(pattern => !pattern.test(sourceText) || pattern.test(value.text))
       ? value.text : "";
