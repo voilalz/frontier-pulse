@@ -271,15 +271,47 @@
       const primary = normalizeSource({}, raw);
       if (primary) sources.push(primary);
     }
-    const validZh = (text, source) => typeof text === "string" && typeof source === "string"
-      && /[\u4e00-\u9fff]/.test(text)
-      && (text.match(/\p{Decimal_Number}+(?:[.,]\p{Decimal_Number}+)*/gu) || []).every(n => (source.match(/\p{Decimal_Number}+(?:[.,]\p{Decimal_Number}+)*/gu) || []).includes(n));
+    const quantityValues = text => {
+      const normalized = text.normalize("NFKC");
+      const scales = {hundred:100,thousand:1000,million:1e6,billion:1e9,trillion:1e12,
+        百:100,千:1000,万:1e4,百万:1e6,千万:1e7,亿:1e8,十亿:1e9,万亿:1e12};
+      const scalePattern = Object.keys(scales).sort((a,b)=>b.length-a.length).join("|");
+      const values = new Set();
+      // Decimal coefficients and integer scales avoid binary float mismatches.
+      const canonical = (token, scale = 1) => {
+        const digits = token.replaceAll(",", "");
+        if (!/^\d+(?:\.\d+)?$/.test(digits)) return "id:" + digits;
+        const [whole, fraction = ""] = digits.split(".");
+        const coefficient = BigInt(whole + fraction) * BigInt(scale);
+        const padded = coefficient.toString().padStart(fraction.length + 1, "0");
+        const decimal = fraction.length ? padded.slice(0, -fraction.length) + "." + padded.slice(-fraction.length) : padded;
+        return "number:" + (decimal.includes(".") ? decimal.replace(/0+$/, "").replace(/\.$/, "") : decimal);
+      };
+      const digitPattern = new RegExp("(\\p{Decimal_Number}+(?:[.,]\\p{Decimal_Number}+)*)(?:\\s*("+scalePattern+"))?", "giu");
+      for (const m of normalized.matchAll(digitPattern)) values.add(canonical(m[1], scales[(m[2]||"").toLowerCase()]||1));
+      const names = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety first second third fourth fifth sixth seventh eighth ninth tenth half".split(" ");
+      const numbers = [...Array.from({length:21},(_,i)=>i),30,40,50,60,70,80,90,...Array.from({length:10},(_,i)=>i+1),0.5];
+      const words = Object.fromEntries(names.map((n,i)=>[n,numbers[i]]));
+      const tens = "twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety";
+      const ones = "one|two|three|four|five|six|seven|eight|nine";
+      const expression = "(?:"+tens+")(?:[-\\s]+(?:"+ones+"))?|"+names.sort((a,b)=>b.length-a.length).join("|");
+      const wordPattern = new RegExp("\\b("+expression+")\\b(?:\\s*("+scalePattern+"))?", "gi");
+      for (const m of normalized.matchAll(wordPattern)) values.add(canonical(String(m[1].toLowerCase().split(/[-\s]+/).reduce((total, word)=>total+words[word],0)), scales[(m[2]||"").toLowerCase()]||1));
+      const months = "Jan(?:uary)? Feb(?:ruary)? Mar(?:ch)? Apr(?:il)? May Jun(?:e)? Jul(?:y)? Aug(?:ust)? Sep(?:tember)? Oct(?:ober)? Nov(?:ember)? Dec(?:ember)?".split(" ");
+      months.forEach((month,i)=>{if(new RegExp("\\b"+month+"\\.?\\s+\\d{1,4}\\b","i").test(normalized))values.add(canonical(String(i+1)));});
+      return values;
+    };
+    const validZh = (text, source) => {
+      if(typeof text!=="string"||typeof source!=="string"||!/[\u4e00-\u9fff]/.test(text))return false;
+      const available=quantityValues(source);
+      return [...quantityValues(text)].every(n=>available.has(n));
+    };
     const t = raw.displayTranslation;
     const translated = t && t.version === 1 && t.language === "zh-CN"
       && ["deepseek", "openai"].includes(t.provider)
       && t.sourceTitle === raw.originalTitle && t.sourceSummary === raw.summary
       && JSON.stringify(t.sourceEvidenceRefs) === JSON.stringify(raw.summaryEvidenceRefs)
-      && validZh(t.title, t.sourceTitle) && validZh(t.summary, t.sourceSummary);
+      && validZh(t.title, t.sourceTitle) && validZh(t.summary, t.sourceTitle + " " + t.sourceSummary);
     const summary = clean(translated ? t.summary : raw.summary, "暂无摘要，请阅读原文核验。");
     const item = {
       id: clean(raw.id, `item-${index}`),

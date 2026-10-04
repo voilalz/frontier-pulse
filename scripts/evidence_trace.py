@@ -9,6 +9,8 @@ from __future__ import annotations
 import hashlib
 import ipaddress
 import re
+import unicodedata
+from decimal import Decimal
 from datetime import datetime
 from urllib.parse import urlsplit, unquote
 
@@ -205,12 +207,51 @@ def framing_supported(text, records, headlines=(), neutral=()):
     return isinstance(text, str) and (text in headlines or text in neutral or bool(trace_claim(text, records)))
 
 
+_NUMBER_WORDS = dict(zip(
+    "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety first second third fourth fifth sixth seventh eighth ninth tenth half".split(),
+    list(range(21)) + list(range(30, 100, 10)) + list(range(1, 11)) + [0.5]))
+_SCALES = {"hundred":100, "thousand":1000, "million":10**6, "billion":10**9, "trillion":10**12,
+           "百":100, "千":1000, "万":10**4, "百万":10**6, "千万":10**7,
+           "亿":10**8, "十亿":10**9, "万亿":10**12}
+_SCALE_PATTERN = "|".join(sorted(_SCALES, key=len, reverse=True))
+_MONTHS = "Jan(?:uary)? Feb(?:ruary)? Mar(?:ch)? Apr(?:il)? May Jun(?:e)? Jul(?:y)? Aug(?:ust)? Sep(?:tember)? Oct(?:ober)? Nov(?:ember)? Dec(?:ember)?".split()
+
+
+def _quantity_key(amount):
+    decimal = format(amount, "f")
+    return "number:" + (decimal.rstrip("0").rstrip(".") if "." in decimal else decimal)
+
+
+def quantity_values(text):
+    """Normalize digits, ordinary number words, dates and decimal scale units."""
+    text = unicodedata.normalize("NFKC", text)
+    values = set()
+    for match in re.finditer(r"(\d+(?:[.,]\d+)*)(?:\s*(" + _SCALE_PATTERN + r"))?", text, re.I):
+        token = match[1].replace(",", "")
+        if token.count(".") > 1:
+            values.add("id:" + token)
+            continue
+        amount = Decimal(token) * _SCALES.get((match[2] or "").lower(), 1)
+        values.add(_quantity_key(amount))
+    words = "|".join(sorted(_NUMBER_WORDS, key=len, reverse=True))
+    tens = "twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety"
+    ones = "one|two|three|four|five|six|seven|eight|nine"
+    expression = r"(?:" + tens + r")(?:[-\s]+(?:" + ones + r"))?|" + words
+    for match in re.finditer(r"\b(" + expression + r")\b(?:\s+(" + _SCALE_PATTERN + r"))?", text, re.I):
+        amount = sum(Decimal(str(_NUMBER_WORDS[word])) for word in re.split(r"[-\s]+", match[1].lower()))
+        amount *= _SCALES.get((match[2] or "").lower(), 1)
+        values.add(_quantity_key(amount))
+    for month, pattern in enumerate(_MONTHS, 1):
+        if re.search(r"\b" + pattern + r"\.?\s+\d{1,4}\b", text, re.I):
+            values.add("number:" + str(month))
+    return values
+
+
 def translation_text_valid(text, source):
     """Language/quantity sanity checks, not proof of semantic equivalence."""
     if not isinstance(source, str) or not isinstance(text, str) or not re.search(r"[\u4e00-\u9fff]", text):
         return False
-    source_numbers = set(re.findall(r"\d+(?:[.,]\d+)*", source))
-    return set(re.findall(r"\d+(?:[.,]\d+)*", text)) <= source_numbers
+    return quantity_values(text) <= quantity_values(source)
 
 
 def valid_display_translation(item):
@@ -227,7 +268,7 @@ def valid_display_translation(item):
             and value.get("sourceSummary") == item.get("summary")
             and value.get("sourceEvidenceRefs") == item.get("summaryEvidenceRefs")
             and translation_text_valid(value.get("title"), value["sourceTitle"])
-            and translation_text_valid(value.get("summary"), value["sourceSummary"])
+            and translation_text_valid(value.get("summary"), value["sourceTitle"] + " " + value["sourceSummary"])
             and (validate_claim_refs(item.get("summary"), item.get("summaryEvidenceRefs"), item.get("evidenceRecords"))
                  or (item.get("evidenceRecords") == [] and item.get("summaryEvidenceRefs") == []
                      and item.get("summary") == "未提取到可引用的正文，请查看原始报道。"
