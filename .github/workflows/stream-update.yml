@@ -31,6 +31,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
+          # A queued job must start from the preceding publication's data.
+          ref: main
           fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@v6

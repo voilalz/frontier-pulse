@@ -2232,7 +2232,7 @@ def item_from_article(
             f"规则参考分 {rule_score}/100",
             *score_reasons,
         ]
-    return {
+    item = {
         "id": article.id,
         "eventId": "evt-" + hashlib.sha1(article.id.encode("utf-8")).hexdigest()[:12],
         "contentType": "news",
@@ -2270,6 +2270,31 @@ def item_from_article(
         "selectionNote": article.selection_note,
         "diversityRelaxed": article.diversity_relaxed,
     }
+    # Stream caches carry a display-only translation tied to literal source
+    # excerpts. Preserve that binding when the same story enters the daily set.
+    if "_sourceTitle" in editorial or "_sourceSummary" in editorial:
+        from evidence_trace import valid_display_translation
+        item["translationProvider"] = ""
+        item["title"] = article.title
+        source_summary = editorial.get("_sourceSummary")
+        refs = trace_claim(source_summary, records) if isinstance(source_summary, str) else []
+        if editorial.get("_sourceTitle") == article.title and (
+            source_summary == summary or validate_claim_refs(source_summary, refs, records)
+        ):
+            item["summary"] = source_summary
+            item["summaryEvidenceRefs"] = refs
+            item["displayTranslation"] = {
+                "version": 1, "language": "zh-CN", "provider": editorial.get("_provider"),
+                "title": clean_text(editorial.get("titleZh"), 180),
+                "summary": reader_summary(editorial.get("summary")),
+                "sourceTitle": article.title, "sourceSummary": source_summary,
+                "sourceEvidenceRefs": list(refs),
+            }
+            if valid_display_translation(item):
+                item["translationProvider"] = editorial["_provider"]
+            else:
+                item.pop("displayTranslation")
+    return item
 
 
 class TranslationContentRejected(ValueError):
@@ -2851,7 +2876,7 @@ def recover_daily_translations(report: dict[str, Any], stream: dict[str, Any]) -
             validate_news_trace(translated)
         except (ValueError, TypeError, KeyError):
             continue
-        for name in ("title", "summary", "keyFacts", "why", "tags", "translationProvider", "traceVersion", "evidenceRecords", "summaryEvidenceRefs", "keyFactEvidence"):
+        for name in ("title", "summary", "keyFacts", "why", "tags", "translationProvider", "traceVersion", "evidenceRecords", "summaryEvidenceRefs", "keyFactEvidence", "displayTranslation"):
             if name in translated:
                 item[name] = translated[name]
         recovered += 1
