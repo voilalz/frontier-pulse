@@ -114,7 +114,7 @@ def _validate(stage, mode, expected_date):
             'History count mismatch')
     require(len(set(news.get('spotlightIds', []))) == 3 and set(news['spotlightIds']) <= {x['id'] for x in news['items']},
             'Invalid spotlight references')
-    require(deep.get('schemaVersion') == 2 and deep.get('generationRevision') == 11, 'Invalid deepread revision')
+    require(deep.get('schemaVersion') == 2 and deep.get('generationRevision') == 12, 'Invalid deepread revision')
     from evidence_trace import validate_news_trace, validate_deepread_trace
     for item in news['items']:
         validate_news_trace(item)

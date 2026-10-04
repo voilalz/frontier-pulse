@@ -262,6 +262,109 @@
     })).filter((record) => record.id && record.title).slice(0, 6);
   }
 
+  const quantityValues = text => {
+    const normalized = text.normalize("NFKC");
+    const scales = {hundred:100,thousand:1000,million:1e6,billion:1e9,trillion:1e12,
+      百:100,千:1000,万:1e4,百万:1e6,千万:1e7,亿:1e8,十亿:1e9,万亿:1e12};
+    const scalePattern = Object.keys(scales).sort((a,b)=>b.length-a.length).join("|");
+    const values = new Set();
+    // Decimal coefficients and integer scales avoid binary float mismatches.
+    const canonical = (token, scale = 1) => {
+      const digits = token.replaceAll(",", "");
+      if (!/^\d+(?:\.\d+)?$/.test(digits)) return "id:" + digits;
+      const [whole, fraction = ""] = digits.split(".");
+      const coefficient = BigInt(whole + fraction) * BigInt(scale);
+      const padded = coefficient.toString().padStart(fraction.length + 1, "0");
+      const decimal = fraction.length ? padded.slice(0, -fraction.length) + "." + padded.slice(-fraction.length) : padded;
+      return "number:" + (decimal.includes(".") ? decimal.replace(/0+$/, "").replace(/\.$/, "") : decimal);
+    };
+    const digitPattern = new RegExp("(\\p{Decimal_Number}+(?:[.,]\\p{Decimal_Number}+)*)(?:\\s*("+scalePattern+"))?", "giu");
+    for (const m of normalized.matchAll(digitPattern)) values.add(canonical(m[1], scales[(m[2]||"").toLowerCase()]||1));
+    const names = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety first second third fourth fifth sixth seventh eighth ninth tenth half".split(" ");
+    const numbers = [...Array.from({length:21},(_,i)=>i),30,40,50,60,70,80,90,...Array.from({length:10},(_,i)=>i+1),0.5];
+    const words = Object.fromEntries(names.map((n,i)=>[n,numbers[i]]));
+    const tens = "twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety";
+    const ones = "one|two|three|four|five|six|seven|eight|nine";
+    const expression = "(?:"+tens+")(?:[-\\s]+(?:"+ones+"))?|"+names.sort((a,b)=>b.length-a.length).join("|");
+    const wordPattern = new RegExp("\\b("+expression+")\\b(?:\\s*("+scalePattern+"))?", "gi");
+    for (const m of normalized.matchAll(wordPattern)) values.add(canonical(String(m[1].toLowerCase().split(/[-\s]+/).reduce((total, word)=>total+words[word],0)), scales[(m[2]||"").toLowerCase()]||1));
+    const months = "Jan(?:uary)? Feb(?:ruary)? Mar(?:ch)? Apr(?:il)? May Jun(?:e)? Jul(?:y)? Aug(?:ust)? Sep(?:tember)? Oct(?:ober)? Nov(?:ember)? Dec(?:ember)?".split(" ");
+    months.forEach((month,i)=>{if(new RegExp("\\b"+month+"\\.?\\s+\\d{1,4}\\b","i").test(normalized))values.add(canonical(String(i+1)));});
+    for (const m of normalized.matchAll(/\b(\d{1,2})[.:](\d{2})\s*(am|pm)\b/gi)) {
+      const hour=Number(m[1]), minute=Number(m[2]);
+      if(hour>=1&&hour<=12&&minute<60) [hour,minute,hour%12+(m[3].toLowerCase()==="pm"?12:0)].forEach(n=>values.add(canonical(String(n))));
+    }
+    for (const m of normalized.matchAll(/\b(\d+(?:\.\d+)?)m\s+years?\b/gi)) values.add(canonical(m[1],1e6));
+    return values;
+  };
+  const validZh = (text, source) => {
+    if(typeof text!=="string"||typeof source!=="string"||!/[\u4e00-\u9fff]/.test(text))return false;
+    const available=quantityValues(source);
+    return [...quantityValues(text)].every(n=>available.has(n));
+  };
+
+  function proseDisplayText(value, sourceText, evidenceRefs) {
+    const chineseNumber = token => {
+      const digits = Object.fromEntries([..."零〇一二两三四五六七八九"].map((char, index) => [char, [0,0,1,2,2,3,4,5,6,7,8,9][index]]));
+      if (token.includes("点")) {
+        const [whole, fraction] = token.split("点");
+        return chineseNumber(whole) + Number("0." + [...fraction].map(char => digits[char]).join(""));
+      }
+      for (const [unit, scale] of [["亿", 1e8], ["万", 1e4]]) {
+        if (token.includes(unit)) {
+          const position = token.indexOf(unit);
+          return chineseNumber(token.slice(0, position) || "一") * scale + chineseNumber(token.slice(position + 1));
+        }
+      }
+      if (!/[十百千]/.test(token)) return Number([...token].map(char => digits[char]).join("") || "0");
+      let total = 0, current = 0;
+      for (const char of token) {
+        if (Object.hasOwn(digits, char)) current = digits[char];
+        else { total += (current || 1) * {十:10, 百:100, 千:1000}[char]; current = 0; }
+      }
+      return total + current;
+    };
+    const proseQuantities = text => {
+      const values = quantityValues(text);
+      const numeral = "[零〇一二两三四五六七八九十百千万亿]+(?:点[零〇一二三四五六七八九]+)?";
+      const pattern = new RegExp("(?<![上下每这那另])(" + numeral + ")(?=个|项|名|人|家|台|艘|架|颗|枚|辆|套|组|种|年|月|日|天|次|倍|米|秒|小时|美元|元|%|％)|百分之(" + numeral + ")", "g");
+      for (const match of text.matchAll(pattern)) values.add("number:" + chineseNumber(match[1] || match[2]));
+      if (/\b(?:a|an)\b/i.test(text)) values.add("number:1");
+      return values;
+    };
+    const scope = [
+      /计划|规划|拟|预计|预期|将|即将|有望|预定|未来|可能|\b(?:plans?|planned|will|scheduled|expected|may|might|could)\b/i,
+      /仅|只|有限|限定|受限|限制|\b(?:only|limited)\b/i,
+      /模拟|仿真|\b(?:simulation|simulated)\b/i,
+      /初步|初期|初始|\bpreliminary\b/i,
+      /部分|一些|若干|少数|小规模|\b(?:some|partial|small.scale)\b/i,
+      /不|未|没有|无|失败|\b(?:not|no|without|never|failed|unsuccessful)\b|\b\w+n['’]t\b/i,
+    ];
+    const negativeActions = [
+      ["approv\\w*|permission|clearance|authori[sz]\\w*", "批准|获批|许可|授权"],
+      ["production|commercial\\w*", "量产|生产|商用|商业化"],
+      ["publish\\w*|reveal\\w*|disclos\\w*|announc\\w*", "公布|披露|发布|公开|宣布"],
+      ["launch\\w*", "发射|推出|发布"], ["deploy\\w*", "部署"],
+      ["test\\w*|validat\\w*|prov\\w*", "测试|验证|证明"], ["success\\w*|succeed\\w*", "成功"],
+    ];
+    const negationValid = (text, source) => source.split(/[.;,:]|\b(?:and|but)\b/i).every(clause => {
+      if (!scope.at(-1).test(clause)) return true;
+      const action = negativeActions.find(([original]) => new RegExp("\\b(?:" + original + ")\\b", "i").test(clause));
+      return !action || new RegExp("(?:不|未|没有|无|失败)[^，。；！？,;.!?]{0,16}(?:" + action[1] + ")").test(text);
+    });
+    return value && value.version === 1 && value.language === "zh-CN"
+      && ["deepseek", "openai"].includes(value.provider)
+      && typeof sourceText === "string" && sourceText.length >= 10 && sourceText.length <= 900 && sourceText === sourceText.trim()
+      && Array.isArray(evidenceRefs) && evidenceRefs.length
+      && value.sourceText === sourceText && JSON.stringify(value.sourceEvidenceRefs) === JSON.stringify(evidenceRefs)
+      && typeof value.text === "string" && value.text.length >= 10 && value.text.length <= 900
+      && value.text === value.text.trim() && !/[<>\x00-\x1f]|(?:https?|javascript|data|file|vbscript)\s*:/i.test(value.text)
+      && validZh(value.text, sourceText) && [...proseQuantities(value.text)].every(n => proseQuantities(sourceText).has(n))
+      && (!/[\u4e00-\u9fff]/.test(sourceText) || value.text === sourceText)
+      && negationValid(value.text, sourceText) && scope.every(pattern => !pattern.test(sourceText) || pattern.test(value.text))
+      ? value.text : "";
+  }
+
   function normalizeItem(raw, index, editionDate = "") {
     if (!raw || typeof raw !== "object" || !clean(raw.title)) throw new Error(`第 ${index + 1} 条新闻缺少标题`);
     const sources = (Array.isArray(raw.sources) ? raw.sources : [])
@@ -271,46 +374,6 @@
       const primary = normalizeSource({}, raw);
       if (primary) sources.push(primary);
     }
-    const quantityValues = text => {
-      const normalized = text.normalize("NFKC");
-      const scales = {hundred:100,thousand:1000,million:1e6,billion:1e9,trillion:1e12,
-        百:100,千:1000,万:1e4,百万:1e6,千万:1e7,亿:1e8,十亿:1e9,万亿:1e12};
-      const scalePattern = Object.keys(scales).sort((a,b)=>b.length-a.length).join("|");
-      const values = new Set();
-      // Decimal coefficients and integer scales avoid binary float mismatches.
-      const canonical = (token, scale = 1) => {
-        const digits = token.replaceAll(",", "");
-        if (!/^\d+(?:\.\d+)?$/.test(digits)) return "id:" + digits;
-        const [whole, fraction = ""] = digits.split(".");
-        const coefficient = BigInt(whole + fraction) * BigInt(scale);
-        const padded = coefficient.toString().padStart(fraction.length + 1, "0");
-        const decimal = fraction.length ? padded.slice(0, -fraction.length) + "." + padded.slice(-fraction.length) : padded;
-        return "number:" + (decimal.includes(".") ? decimal.replace(/0+$/, "").replace(/\.$/, "") : decimal);
-      };
-      const digitPattern = new RegExp("(\\p{Decimal_Number}+(?:[.,]\\p{Decimal_Number}+)*)(?:\\s*("+scalePattern+"))?", "giu");
-      for (const m of normalized.matchAll(digitPattern)) values.add(canonical(m[1], scales[(m[2]||"").toLowerCase()]||1));
-      const names = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety first second third fourth fifth sixth seventh eighth ninth tenth half".split(" ");
-      const numbers = [...Array.from({length:21},(_,i)=>i),30,40,50,60,70,80,90,...Array.from({length:10},(_,i)=>i+1),0.5];
-      const words = Object.fromEntries(names.map((n,i)=>[n,numbers[i]]));
-      const tens = "twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety";
-      const ones = "one|two|three|four|five|six|seven|eight|nine";
-      const expression = "(?:"+tens+")(?:[-\\s]+(?:"+ones+"))?|"+names.sort((a,b)=>b.length-a.length).join("|");
-      const wordPattern = new RegExp("\\b("+expression+")\\b(?:\\s*("+scalePattern+"))?", "gi");
-      for (const m of normalized.matchAll(wordPattern)) values.add(canonical(String(m[1].toLowerCase().split(/[-\s]+/).reduce((total, word)=>total+words[word],0)), scales[(m[2]||"").toLowerCase()]||1));
-      const months = "Jan(?:uary)? Feb(?:ruary)? Mar(?:ch)? Apr(?:il)? May Jun(?:e)? Jul(?:y)? Aug(?:ust)? Sep(?:tember)? Oct(?:ober)? Nov(?:ember)? Dec(?:ember)?".split(" ");
-      months.forEach((month,i)=>{if(new RegExp("\\b"+month+"\\.?\\s+\\d{1,4}\\b","i").test(normalized))values.add(canonical(String(i+1)));});
-      for (const m of normalized.matchAll(/\b(\d{1,2})[.:](\d{2})\s*(am|pm)\b/gi)) {
-        const hour=Number(m[1]), minute=Number(m[2]);
-        if(hour>=1&&hour<=12&&minute<60) [hour,minute,hour%12+(m[3].toLowerCase()==="pm"?12:0)].forEach(n=>values.add(canonical(String(n))));
-      }
-      for (const m of normalized.matchAll(/\b(\d+(?:\.\d+)?)m\s+years?\b/gi)) values.add(canonical(m[1],1e6));
-      return values;
-    };
-    const validZh = (text, source) => {
-      if(typeof text!=="string"||typeof source!=="string"||!/[\u4e00-\u9fff]/.test(text))return false;
-      const available=quantityValues(source);
-      return [...quantityValues(text)].every(n=>available.has(n));
-    };
     const t = raw.displayTranslation;
     const translated = t && t.version === 1 && t.language === "zh-CN"
       && ["deepseek", "openai"].includes(t.provider)
@@ -631,7 +694,8 @@
         const translatedExcerpt = block.type === "paragraph" && event
           && block.text === event.sourceExcerpt
           && JSON.stringify(block.evidenceIds) === JSON.stringify(event.summaryEvidenceRefs);
-        return {type: block.type, text: translatedExcerpt ? event.excerpt : clean(block.text), newsIds: refs,
+        const prose = proseDisplayText(block.displayTranslation, block.text, block.evidenceIds);
+        return {type: block.type, text: prose || (translatedExcerpt ? event.excerpt : clean(block.text)), newsIds: refs,
           evidenceIds: Array.isArray(block.evidenceIds) ? block.evidenceIds.filter((ref) => /^evd-[a-f0-9]{20}$/.test(ref)) : []};
       });
       const event = kind === "event" && newsIds.length === 1 ? byNews.get(newsIds[0]) : null;
@@ -654,7 +718,8 @@
               !refs.includes(clean(support?.newsId)) || !clean(support?.supportQuote))) {
           filtered = true; return null;
         }
-        return {text: clean(entry.text), newsIds: refs,
+        const prose = proseDisplayText(entry.displayTranslation, entry.text, supports.map(support => support.evidenceId));
+        return {text: prose || clean(entry.text), newsIds: refs,
           supports: supports.map((support) => ({newsId: clean(support.newsId), supportQuote: clean(support.supportQuote)}))};
       }).filter(Boolean);
     if (filtered) chapters.forEach((chapter) => {
