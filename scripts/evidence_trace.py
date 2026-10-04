@@ -143,8 +143,28 @@ def validate_claim_refs(text, refs, records):
     # Keep a complete sentence/clause relationship. Splitting at commas or
     # deleting arbitrary characters can attach ESA's number to NASA's action.
     sentences = re.split(r"(?<=[。！？])\s*|(?<=[.!?])\s+(?=[A-Z])", text)
-    return all(any(_literal_supported(sentence, by_id[ref]["text"]) for ref in refs)
-               for sentence in sentences if sentence.strip())
+    if all(any(_literal_supported(sentence, by_id[ref]["text"]) for ref in refs)
+           for sentence in sentences if sentence.strip()):
+        return True
+    # A quoted next paragraph can defeat punctuation-based sentence splitting.
+    # Accept only complete, unchanged referenced excerpts joined by spaces.
+    claim = text.strip()
+    quotes = {by_id[ref]["text"] for ref in refs}
+    pending, visited = [0], set()
+    while pending:
+        start = pending.pop()
+        if start in visited:
+            continue
+        visited.add(start)
+        for quote in quotes:
+            if not claim.startswith(quote, start):
+                continue
+            end = start + len(quote)
+            if end == len(claim):
+                return True
+            if claim[end:end + 1] == " ":
+                pending.append(end + 1)
+    return False
 
 
 def excerpt_summary(records, limit=600):
@@ -244,6 +264,12 @@ def quantity_values(text):
     for month, pattern in enumerate(_MONTHS, 1):
         if re.search(r"\b" + pattern + r"\.?\s+\d{1,4}\b", text, re.I):
             values.add("number:" + str(month))
+    for match in re.finditer(r"\b(\d{1,2})[.:](\d{2})\s*(am|pm)\b", text, re.I):
+        hour, minute = int(match[1]), int(match[2])
+        if 1 <= hour <= 12 and minute < 60:
+            values.update("number:" + str(n) for n in (hour, minute, hour % 12 + (12 if match[3].lower() == "pm" else 0)))
+    for match in re.finditer(r"\b(\d+(?:\.\d+)?)m\s+years?\b", text, re.I):
+        values.add(_quantity_key(Decimal(match[1]) * 10**6))
     return values
 
 
