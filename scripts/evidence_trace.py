@@ -404,6 +404,7 @@ def valid_prose_translation(value, source_text, evidence_refs):
 
 def valid_display_translation(item):
     """Bind a display-only translation to the exact traceable source payload."""
+    from reader_quality import chinese_reader_text
     value = item.get("displayTranslation")
     if not isinstance(value, dict):
         return False
@@ -415,11 +416,15 @@ def valid_display_translation(item):
             and value.get("sourceTitle") == item.get("originalTitle")
             and value.get("sourceSummary") == item.get("summary")
             and value.get("sourceEvidenceRefs") == item.get("summaryEvidenceRefs")
+            and chinese_reader_text(value.get("title"))
             and translation_text_valid(value.get("title"), value["sourceTitle"])
-            and translation_text_valid(value.get("summary"), value["sourceTitle"] + " " + value["sourceSummary"])
+            and ((chinese_reader_text(value.get("summary"))
+                  and translation_text_valid(value.get("summary"), value["sourceTitle"] + " " + value["sourceSummary"]))
+                 or (item.get("evidenceRecords") == [] and item.get("summaryEvidenceRefs") == []
+                     and item.get("summary") == value.get("summary") == ""))
             and (validate_claim_refs(item.get("summary"), item.get("summaryEvidenceRefs"), item.get("evidenceRecords"))
                  or (item.get("evidenceRecords") == [] and item.get("summaryEvidenceRefs") == []
-                     and item.get("summary") == "未提取到可引用的正文，请查看原始报道。"
+                     and item.get("summary") == ""
                      and value.get("summary") == item.get("summary"))))
 
 
@@ -434,7 +439,7 @@ def validate_news_trace(item):
     if records:
         if not validate_claim_refs(item.get("summary"), item.get("summaryEvidenceRefs"), records):
             raise ValueError("untraced summary")
-    elif item.get("summary") != "未提取到可引用的正文，请查看原始报道。" or item.get("summaryEvidenceRefs"):
+    elif item.get("summary") not in {"", "未提取到可引用的正文，请查看原始报道。"} or item.get("summaryEvidenceRefs"):
         raise ValueError("title-only story invents source facts")
     facts = item.get("keyFactEvidence")
     if not isinstance(facts, list) or item.get("keyFacts") != [f.get("text") for f in facts]:

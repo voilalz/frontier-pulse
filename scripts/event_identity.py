@@ -250,6 +250,7 @@ class _Evidence:
     subject: frozenset[str]
     target: frozenset[str]
     status: str
+    departing_people: frozenset[str] = frozenset()
 
 
 @lru_cache(maxsize=8192)
@@ -291,7 +292,20 @@ def _evidence(item: dict[str, Any]) -> _Evidence:
     # explicitly name the same organization and founding action. A generic
     # common word or model-written summary alone never suffices to merge.
     acronyms = frozenset(re.findall(r"\b[A-Z][A-Z0-9]{4,11}\b", original + " " + _text(item.get("summary"), 600)))
-    return replace(parsed, news_id=_text(item.get("id"), 200), urls=frozenset(evidence_urls(item)), acronyms=acronyms)
+    people, dates = set(), set(parsed.incident_dates)
+    if re.search(r'\b(?:outgoing|quit|resign\w*|depart\w*|leaves?|left)\b', original, re.I):
+        from evidence_trace import validate_evidence
+        records = item.get('evidenceRecords', [])
+        try:
+            validate_evidence(records)
+        except (ValueError, TypeError, KeyError):
+            records = []
+        for record in records:
+            for match in re.finditer(r'\b([A-Z][a-z]+\s+[A-Z][a-z]+)\s+(?:(?:has|recently)\s+)?(?:left|quit|resigned|departed)\b[^.!?]*', record['text']):
+                people.add(_normal(match[1]))
+                dates.update(_incident_dates(_normal(match[0]), parsed.day))
+    return replace(parsed, news_id=_text(item.get("id"), 200), urls=frozenset(evidence_urls(item)),
+                   acronyms=acronyms, departing_people=frozenset(people), incident_dates=frozenset(dates))
 
 
 def _match(first: _Evidence, second: _Evidence, semantic: bool = True) -> str:
@@ -301,7 +315,10 @@ def _match(first: _Evidence, second: _Evidence, semantic: bool = True) -> str:
     if not first.day or not second.day or not first.headline or not second.headline:
         return "article-url" if shared_url else ""
     distance = abs((first.day - second.day).days)
-    if distance > 30 or first.recurrence != second.recurrence or first.status != second.status:
+    departure = (bool(first.departing_people & second.departing_people)
+                 and bool(first.actors & second.actors) and distance <= 2
+                 and not first.actions and not second.actions)
+    if distance > 30 or (first.recurrence != second.recurrence and not departure) or first.status != second.status:
         return ""
     for left, right in ((first.places, second.places), (first.actors, second.actors), (first.objects, second.objects),
                         (first.subject, second.subject)):
@@ -327,6 +344,10 @@ def _match(first: _Evidence, second: _Evidence, semantic: bool = True) -> str:
         return ""
     if not semantic:
         return "article-url" if shared_url else ""
+    # Captured departure evidence cannot erase a headline's distinct action.
+    # All object, date, status and negation conflicts above still apply.
+    if departure:
+        return 'named-person-departure'
     if shared_url:
         return "article-url" if not (first.actions and second.actions and not first.actions & second.actions) else ""
     common_objects = first.objects & second.objects
