@@ -4,6 +4,7 @@
   const publication = window.FrontierPublication;
   const classicUI = window.FrontierClassics;
   let releaseManifest = null;
+  let editionVersion = null;
   const RELEASE_CACHE_KEY = "fp-release-manifest-v1";
   const publicationCacheKey = (key) => releaseManifest ? `${key}:${releaseManifest.releaseId}` : key;
 
@@ -60,6 +61,7 @@
   const params = new URLSearchParams(location.search);
   const initialView = VIEWS.has(params.get("view")) ? params.get("view") : "latest";
   const initialDate = /^\d{4}-\d{2}-\d{2}$/.test(params.get("date") || "") ? params.get("date") : "";
+  const initialRelease = /^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$/.test(params.get('release') || '') ? params.get('release') : '';
   const initialRange = [6, 12, 24].includes(Number(params.get("range"))) ? Number(params.get("range")) : 24;
   const storedResearchScope = readStorage(RESEARCH_SCOPE_KEY, "all") === "mine" ? "mine" : "all";
   const initialResearchScope = params.get("scope") === "mine" ? "mine" : storedResearchScope;
@@ -380,6 +382,12 @@
       ? value.text : "";
   }
 
+  function readerTextValid(value) {
+    return typeof value === 'string' && /[\u3400-\u9fff]/.test(value)
+      && !/现有元数据|元数据未(?:提供|说明)|未提取到可引用的正文|未提供更多(?:摘要|信息|细节)|这条新闻来自|现有(?:信息|报道)(?:仅包含|未提供)|目前披露的信息仅涉及|文章.{0,180}(?:最初发表于|最先发表于)/.test(value)
+      && !/\b[a-z]{2,}(?:\s+[a-z]{2,}){2,}\b/.test(value.replace(/\([^)]*\)|（[^）]*）/g,''));
+  }
+
   function normalizeItem(raw, index, editionDate = "") {
     if (!raw || typeof raw !== "object" || !clean(raw.title)) throw new Error(`第 ${index + 1} 条新闻缺少标题`);
     const sources = (Array.isArray(raw.sources) ? raw.sources : [])
@@ -394,8 +402,11 @@
       && ["deepseek", "openai"].includes(t.provider)
       && t.sourceTitle === raw.originalTitle && t.sourceSummary === raw.summary
       && JSON.stringify(t.sourceEvidenceRefs) === JSON.stringify(raw.summaryEvidenceRefs)
-      && validZh(t.title, t.sourceTitle) && validZh(t.summary, t.sourceTitle + " " + t.sourceSummary);
-    const summary = clean(translated ? t.summary : raw.summary, "暂无摘要，请阅读原文核验。");
+      && readerTextValid(t.title) && validZh(t.title, t.sourceTitle)
+      && ((readerTextValid(t.summary) && validZh(t.summary, t.sourceTitle + " " + t.sourceSummary))
+          || (raw.summary === '' && t.summary === '' && raw.evidenceRecords?.length === 0 && raw.summaryEvidenceRefs?.length === 0));
+    const readerSummary = translated ? t.summary : raw.summary;
+    const summary = raw.contentType === 'paper' ? clean(readerSummary) : readerTextValid(readerSummary) ? clean(readerSummary) : '';
     const item = {
       id: clean(raw.id, `item-${index}`),
       eventId: clean(raw.eventId),
@@ -403,6 +414,9 @@
       title: clean(translated ? t.title : raw.title),
       originalTitle: clean(raw.originalTitle || raw.title),
       summary,
+      _policySummary: clean(raw.summary),
+      contentAvailability: clean(raw.contentAvailability, raw.summary ? 'body' : 'title-only'),
+      translationStatus: translated ? 'translated' : readerTextValid(raw.summary) ? 'native' : 'pending',
       keyFacts: (Array.isArray(raw.keyFacts) ? raw.keyFacts : []).map((fact) => clean(fact)).filter(Boolean).slice(0, 4),
       why: clean(raw.why, "该事件的重要性需要结合后续公开信息继续判断。"),
       category: clean(raw.category, "前沿技术"),
@@ -457,7 +471,7 @@
     if (item.contentType === "paper") return true;
     if (!newsPolicy) return false;
     if (!newsPolicy.enabled) return true;
-    const lead = clean(item.summary || item.description)
+    const lead = clean(item._policySummary || item.summary || item.description)
       .replace(/\b(?:U\.S\.|U\.K\.|U\.N\.|E\.U\.)/gi, (match) => match.replace(/\./g, ""))
       .split(/(?<=[!?。！？])\s*|(?<=\.)\s+/)[0].slice(0, 240);
     const subject = `${clean(item.title)} ${clean(item.originalTitle)} ${lead}`
@@ -471,7 +485,8 @@
   }
 
   function normalizeReport(payload) {
-    if (!payload || typeof payload !== "object" || !Array.isArray(payload.items) || !payload.items.length) {
+    if (!payload || typeof payload !== "object" || !Array.isArray(payload.items)
+        || (!payload.items.length && payload.coverageStatus !== 'insufficient')) {
       throw new Error("日报文件不存在或没有新闻条目");
     }
     const editionDate = clean(payload.editionDate);
@@ -514,12 +529,29 @@
   }
 
   async function loadPublication(bypassCache = false) {
+    const cacheKey = initialRelease ? `${RELEASE_CACHE_KEY}:${initialRelease}` : RELEASE_CACHE_KEY;
+    editionVersion = null;
     try {
-      const manifest = publication.validateManifest(await fetchJson("./data/release.json", bypassCache));
+      const manifest = publication.validateManifest(await fetchJson(initialRelease ? `./releases/${initialRelease}/manifest.json` : './data/release.json', bypassCache));
+      if (initialRelease && manifest.releaseId !== initialRelease) throw new Error('指定版本与清单不一致');
       releaseManifest = manifest;
-      writeStorage(RELEASE_CACHE_KEY, manifest);
+      writeStorage(cacheKey, manifest);
     } catch (error) {
-      const cached = readStorage(RELEASE_CACHE_KEY, null);
+      if (initialRelease) {
+        const versionKey = `fp-edition-version-v1:${initialRelease}`;
+        try {
+          editionVersion = publication.validateEditionVersion(await fetchJson(`./data/edition-versions/${initialRelease}.json`, bypassCache), initialRelease);
+          writeStorage(versionKey, editionVersion);
+        } catch (versionError) {
+          const cachedVersion = readStorage(versionKey, null);
+          if (cachedVersion) editionVersion = publication.validateEditionVersion(cachedVersion, initialRelease);
+          else throw new Error('指定历史版本暂时无法读取，请稍后重试。');
+        }
+        releaseManifest = editionVersion.manifest;
+        writeStorage(cacheKey, releaseManifest);
+        return;
+      }
+      const cached = readStorage(cacheKey, null);
       if (cached) releaseManifest = publication.validateManifest(cached);
       else if (error.status === 404) releaseManifest = null;
       else throw error;
@@ -528,6 +560,16 @@
 
   async function fetchPublicationJson(path, bypassCache = false) {
     const pinned = releaseManifest;
+    if (editionVersion) {
+      const bundle = editionVersion, date = bundle.news.editionDate, deepDate = bundle.deepread.editionDate;
+      if (path === ENDPOINTS.latest || path === `./data/archive/${date}.json`) return bundle.news;
+      if (path === ENDPOINTS.deepread || path === `./data/deepread/${deepDate}.json`) return bundle.deepread;
+      if (path === ENDPOINTS.archive || path === ENDPOINTS.deepreadIndex) return {schemaVersion:1,releaseId:pinned.releaseId,
+        editions:[{editionDate:path === ENDPOINTS.archive ? date : deepDate, itemCount:bundle.news.items.length}]};
+      if (path === ENDPOINTS.search) return {schemaVersion:1,releaseId:pinned.releaseId,
+        items:bundle.news.items.map(item=>({...item,editionDate:date}))};
+      throw new Error('此链接仅包含所选历史版本，请返回首页查看其他日期。');
+    }
     const payload = await fetchJson(publication.resolve(pinned, path), bypassCache);
     if (pinned !== releaseManifest) throw new Error("版本已切换，请重新读取");
     const current = path === ENDPOINTS.latest || path === ENDPOINTS.deepread
@@ -598,6 +640,12 @@
       return;
     }
     if (renderEditionHealth(report, "日报", false, state.pipelineStatus?.state === "failed")) return;
+    if (report?.coverageStatus === 'insufficient') {
+      badge.textContent = '合格候选不足';
+      badge.classList.add('warning');
+      showAlert('notice', '本期按实际合格数量刊发', `当前有 ${report.items.length} 条合格独立事件，未补入不合格稿件。`);
+      return;
+    }
     if (report?.items?.length !== 10) {
       badge.textContent = "数量异常";
       badge.classList.add("warning");
@@ -618,7 +666,7 @@
       showAlert(
         "warning",
         translationStatus === "partial" ? "日报已更新，但部分中文翻译失败" : "日报已更新，但中文翻译失败",
-        [...new Set(translationWarnings)].join("；") || `Top 10 中已完成 ${translatedItemCount} 条中文翻译；英文规则字段仍可用。`,
+        [...new Set(translationWarnings)].join("；") || `已完成 ${translatedItemCount} 条中文翻译，其余条目保留原文链接与翻译状态。`,
       );
       return;
     }
@@ -710,7 +758,8 @@
           && block.text === event.sourceExcerpt
           && JSON.stringify(block.evidenceIds) === JSON.stringify(event.summaryEvidenceRefs);
         const prose = proseDisplayText(block.displayTranslation, block.text, block.evidenceIds);
-        return {type: block.type, text: prose || (translatedExcerpt ? event.excerpt : clean(block.text)), newsIds: refs,
+        const reader = prose || (translatedExcerpt ? event.excerpt : clean(block.text));
+        return {type: block.type, text: readerTextValid(reader) ? reader : '', newsIds: refs,
           evidenceIds: Array.isArray(block.evidenceIds) ? block.evidenceIds.filter((ref) => /^evd-[a-f0-9]{20}$/.test(ref)) : []};
       });
       const event = kind === "event" && newsIds.length === 1 ? byNews.get(newsIds[0]) : null;
@@ -734,7 +783,8 @@
           filtered = true; return null;
         }
         const prose = proseDisplayText(entry.displayTranslation, entry.text, supports.map(support => support.evidenceId));
-        return {text: prose || clean(entry.text), newsIds: refs,
+        const reader = prose || clean(entry.text);
+        return {text: readerTextValid(reader) ? reader : '', newsIds: refs,
           supports: supports.map((support) => ({newsId: clean(support.newsId), supportQuote: clean(support.supportQuote)}))};
       }).filter(Boolean);
     if (filtered) chapters.forEach((chapter) => {
@@ -745,6 +795,8 @@
     });
     return {
       releaseId: clean(payload.releaseId), schemaVersion: 2, editionDate: payload.editionDate, generatedAt: clean(payload.generatedAt),
+      readerStatus:clean(payload.readerStatus, 'unavailable'), publicationEditionDate:clean(payload.publicationEditionDate),
+      qualityFailures:Array.isArray(payload.qualityFailures) ? payload.qualityFailures : [],
       headline: filtered ? "今日前沿深读" : clean(payload.headline, "今日前沿深读"),
       lead: filtered ? "" : clean(payload.lead),
       generationStatus: usedEvents.length < 4 ? "insufficient" : clean(payload.generationStatus, "fallback"),
@@ -804,6 +856,15 @@
   }
 
   function renderEditorialDeepread(report) {
+    if (!['complete','retained'].includes(report?.readerStatus) || report?.generationStatus !== 'ok'
+        || report?.contentFiltered || report?.chapters?.length < 3
+        || report.chapters.some(c=>c.blocks.filter(b=>b.type==='paragraph' && readerTextValid(b.text)).length < 2)) {
+      return '<div class="empty"><h2>今日深读待更新</h2><p>今日未通过内容校验，暂无可沿用的完整版。</p></div>';
+    }
+    return renderEditorialContent(report);
+  }
+
+  function renderEditorialContent(report) {
     if (!report?.chapters?.length) return '<div class="empty"><h2>这期深读尚未发布</h2><p>请选择已有日期，或在日报更新后回来阅读。</p></div>';
     const byNews = new Map(report.events.map((event) => [event.newsId, event]));
     const length = [report.lead, ...report.chapters.flatMap((chapter) => chapter.blocks.map((block) => block.text))].join("").length;
@@ -818,7 +879,7 @@
         <header class="deepread-header"><p class="eyebrow">${esc(report.editionDate)} · FRONTIER PULSE</p>
           <h2>${esc(report.headline)}</h2>
           ${report.lead ? `<p class="deepread-lead">${esc(report.lead)}</p>` : ""}
-          ${report.generationStatus !== "ok" ? `<p class="deepread-note">本期为简版，选题或成文材料仍在补充。</p>` : ""}
+          ${report.readerStatus === 'retained' ? `<p class="deepread-note">最新完整版：${esc(report.editionDate)}；今日未通过内容校验。</p>` : ""}
         </header>
         ${report.chapters.map((chapter) => {
           const members = chapter.newsIds.map((id) => byNews.get(id)).filter(Boolean);
@@ -921,6 +982,14 @@
         showAlert("warning", report ? "当前展示已保存的深读" : "这期深读暂时无法读取", report
           ? `版本日期为 ${report.editionDate}，刷新后可重试。`
           : "请选择已有日期，或稍后刷新。每日深读从栏目上线之日起独立归档。");
+      } else if (report?.readerStatus === 'retained' && !state.historicalSelection) {
+        badge.textContent = '沿用完整版';
+        badge.classList.add('warning');
+        showAlert('notice', '今日深读未通过内容校验', `最新完整版：${report.editionDate}，正文保留实际内容日期。`);
+      } else if (report?.schemaVersion === 2 && report?.readerStatus === 'unavailable') {
+        badge.textContent = '深读待更新';
+        badge.classList.add('warning');
+        showAlert('notice', '今日深读待更新', '今日未通过内容校验，暂无可沿用的完整版。');
       } else if (renderEditionHealth(report, "深读", state.historicalSelection, state.pipelineStatus?.state === "failed")) {
         return;
       } else {
@@ -1192,6 +1261,7 @@
     if (state.view === "stream" && state.source !== "全部") query.set("source", state.source);
     if (state.view === "research" && state.researchScope === "mine" && state.researchKeywords.length) query.set("scope", "mine");
     if (state.query && state.view !== "deepread") query.set("q", state.query);
+    if (initialRelease) query.set('release', initialRelease);
     const suffix = query.toString();
     history.replaceState(null, "", `${location.pathname}${suffix ? `?${suffix}` : ""}${location.hash || ""}`);
   }
@@ -1371,6 +1441,13 @@
     $("sourceCountLabel").textContent = state.view === "research" ? "资料库" : "公开信源";
     $("categoryCountLabel").textContent = state.view === "research" ? "研究方向" : "主题领域";
     $("briefUpdated").textContent = report?.generatedAt ? `生成于 ${formatDate(report.generatedAt)}` : "本机个性化视图";
+    const revision = report?.publicationRevision;
+    if (revision) {
+      const changes = revision.changes || {};
+      const count = (changes.added?.length || 0) + (changes.corrected?.length || 0) + (changes.removed?.length || 0);
+      const link = new URLSearchParams({view:'history',date:report.editionDate,release:revision.initialReleaseId});
+      $('briefUpdated').innerHTML = `${esc(formatDate(revision.updatedAt))} 更新，新增/更正/撤回 ${count} 条 · <a href="?${esc(link.toString())}">查看初版</a>`;
+    }
   }
 
   function renderSpotlight() {
@@ -1662,7 +1739,7 @@
       <div class="story-main${item.image ? " has-image" : ""}">${visual}<div class="story-copy">
         <div class="meta"><span class="cat" data-category="${esc(item.category)}">${esc(item.category)}</span><b>${esc(item.source)}</b><time datetime="${esc(item.publishedAt)}">${esc(formatDate(item.publishedAt))}</time></div>
         <h3>${highlightText(item.title)}</h3>
-        <p class="summary">${highlightText(item.summary)}</p>
+        ${item.summary ? `<p class="summary">${highlightText(item.summary)}</p>` : `<p class="summary translation-state">${item.contentAvailability === 'title-only' ? '仅标题' : '中文翻译待完成'} · 请阅读原文</p>`}
         <div class="news-footer">
           ${item.url ? `<a class="read-original" href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">阅读原文 <span aria-hidden="true">↗</span></a>` : ""}
           <div class="story-actions"><button type="button" data-bookmark title="${saved ? "取消收藏" : "收藏"}" aria-label="${saved ? "取消收藏" : "收藏"}">${saved ? "★" : "☆"}</button><button type="button" data-share title="复制本条链接" aria-label="复制本条链接">⌁</button></div>
@@ -1898,6 +1975,13 @@
     if (item.editionDate) {
       url.searchParams.set("view", "history");
       url.searchParams.set("date", item.editionDate);
+      let report = state.editionCache.get(item.editionDate);
+      if (!report && state.currentReport?.editionDate === item.editionDate) report = state.currentReport;
+      if (!report && releaseManifest) {
+        try { report = await fetchPublicationJson(`./data/archive/${item.editionDate}.json`); }
+        catch (_) { toast('该历史版本暂时无法读取，请稍后重试'); return; }
+      }
+      if (/^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$/.test(report?.releaseId || '')) url.searchParams.set('release', report.releaseId);
     } else if (["stream", "research"].includes(state.view)) {
       url.searchParams.set("view", state.view);
     }

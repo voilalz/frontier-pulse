@@ -123,7 +123,7 @@ class DailyDisplayTranslationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_deepread_trace(report)
         normalized = self.browser_result(f'normalizeEditorialDeepread({json.dumps(report)})')
-        self.assertEqual(normalized["events"][0]["excerpt"], report["events"][0]["excerpt"])
+        self.assertEqual(normalized["events"][0]["excerpt"], '')
 
     def test_deepread_does_not_replace_other_authored_or_unbound_blocks(self):
         report = self.deepread()
@@ -133,5 +133,5 @@ class DailyDisplayTranslationTests(unittest.TestCase):
         chapter["blocks"].append({**chapter["blocks"][0], "text": authored})
         chapter["blocks"][0]["evidenceIds"] = []
         normalized = self.browser_result(f'normalizeEditorialDeepread({json.dumps(report)})')
-        self.assertEqual(normalized["chapters"][0]["blocks"][0]["text"], original_excerpt)
+        self.assertEqual(normalized["chapters"][0]["blocks"][0]["text"], '')
         self.assertEqual(normalized["chapters"][0]["blocks"][1]["text"], authored)

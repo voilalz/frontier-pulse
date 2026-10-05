@@ -26,6 +26,8 @@ def owns(name):
     if len(path.parts) != 3 or path.parts[0] != 'data':
         return False
     folder, file = path.parts[1:]
+    if folder == 'edition-versions':
+        return bool(re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,79}\.json', file))
     if folder in {'archive', 'deepread'}:
         if file == 'index.json' or (folder == 'archive' and file == 'search-index.json'):
             return True
@@ -55,6 +57,8 @@ def safe_path(path: Path, *, write=False, allow_releases=False) -> Path:
         raise ValueError('News path enters a paper namespace')
     if not allow_releases and 'releases' in path.parts:
         raise ValueError('News output cannot enter immutable releases')
+    if write and not allow_releases and 'edition-versions' in path.parts:
+        raise ValueError('News generation cannot rewrite immutable edition versions')
     if path.is_relative_to(REPO):
         relative = path.relative_to(REPO)
         parts = relative.parts
@@ -62,11 +66,11 @@ def safe_path(path: Path, *, write=False, allow_releases=False) -> Path:
         if parts and parts[0] == 'public':
             public_name = Path(*parts[1:]).as_posix()
             allowed = (len(parts) == 1 or public_name in {'data', 'data/archive', 'data/deepread',
-                       'data/weekly', 'data/release.json'} or owns(public_name))
+                       'data/weekly', 'data/edition-versions', 'data/release.json'} or owns(public_name))
             if allow_releases and len(parts) >= 2 and parts[1] == 'releases':
                 suffix = Path(*parts[3:]).as_posix()
                 allowed = (len(parts) <= 3 or suffix in {'manifest.json', 'data', 'data/archive',
-                           'data/deepread', 'data/weekly'} or owns(suffix))
+                           'data/deepread', 'data/weekly', 'data/edition-versions'} or owns(suffix))
         if not allowed:
             raise ValueError('News path enters trusted repository inputs')
     for entry in [path, *path.parents]:

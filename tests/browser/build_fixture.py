@@ -7,7 +7,9 @@ from datetime import datetime,timedelta,timezone
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'scripts'))
+sys.path.insert(0,str(ROOT/'tests'))
 import publication as pub
+from batch1_fixtures import localize_stage
 
 def command(stage,fixture,now):
     data=stage/'data'
@@ -42,7 +44,7 @@ def build(directory):
         pub.prepare_stage(public,stage)
         result=subprocess.run(command(stage,fixture,now),cwd=ROOT,capture_output=True,text=True)
         if result.returncode:raise AssertionError(result.stderr[-2000:])
-        article=json.loads((stage/'data/deepread.json').read_text())
+        article=localize_stage(stage)
         if article['eventCount']<4:raise AssertionError('authored fixture lacks four grounded deepread events')
         pub.promote(stage,public,'daily',release,'offline-browser-fixture')
     return public

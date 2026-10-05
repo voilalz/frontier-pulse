@@ -44,6 +44,8 @@ class PublicationTests(unittest.TestCase):
             command.extend(['--' + key, str(data / value)])
         command.extend(['--feed-output', str(cls.sample / 'feed.xml')])
         subprocess.run(command, cwd=ROOT, check=True, capture_output=True)
+        from batch1_fixtures import localize_stage
+        localize_stage(cls.sample)
 
     @classmethod
     def tearDownClass(cls):
@@ -62,8 +64,8 @@ class PublicationTests(unittest.TestCase):
         return {str(p.relative_to(self.public)): p.read_bytes()
                 for p in self.public.rglob('*') if p.is_file()}
 
-    def promote(self, release='r-001'):
-        return pub.promote(self.stage, self.public, 'daily', release, 'test-commit')
+    def promote(self, release='r-001', **options):
+        return pub.promote(self.stage, self.public, 'daily', release, 'test-commit', **options)
 
     def test_rejects_bad_fields_dates_references_without_touching_public(self):
         for fault in ['field', 'date', 'reference']:
@@ -155,6 +157,8 @@ class PublicationTests(unittest.TestCase):
     def test_retains_seven_snapshots_and_restores_exact_bundle(self):
         for index in range(9):
             pub.prepare_stage(self.sample, self.stage)
+            from batch1_fixtures import advance_day
+            advance_day(self.stage, f'2026-07-{16+index:02}')
             self.promote(f'r-{index:03}')
         releases = self.public / 'releases'
         self.assertEqual(sorted(p.name for p in releases.iterdir()), [f'r-{i:03}' for i in range(2, 9)])
@@ -211,7 +215,7 @@ class PublicationTests(unittest.TestCase):
             return original(source, target)
         with patch.object(pub, 'install_file', side_effect=fail_once):
             with self.assertRaises(OSError):
-                self.promote('r-002')
+                self.promote('r-002', revision_reason='演练原子安装的中断恢复', base_release_id='r-001')
         after = {p: b for p, b in self.state().items() if not p.startswith('releases/')}
         self.assertEqual(before, after)
 

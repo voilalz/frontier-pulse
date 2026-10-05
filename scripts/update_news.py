@@ -4658,6 +4658,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--skip-ai", action="store_true", help="Disable optional DeepSeek/OpenAI editorial translation")
     parser.add_argument("--skip-research", action="store_true", help="Deprecated compatibility argument; news never refreshes papers")
     parser.add_argument("--stream-only", action="store_true", help="Refresh the full stream without replacing the daily Top 10")
+    parser.add_argument('--revision-reason', default='', help='Explicit correction to an already published edition')
     parser.add_argument("--now", help="Override current time for deterministic tests")
     return parser.parse_args(argv)
 
@@ -4724,6 +4725,11 @@ def main(argv: list[str] | None = None) -> int:
         except (ValueError, OSError) as exc:
             LOGGER.error('Unsafe derived news output: %s', exc)
             return 2
+        current = read_json_safe(args.output, {})
+        edition = now.astimezone(ZoneInfo(DEFAULT_TIMEZONE)).date().isoformat()
+        if not args.stream_only and current.get('releaseId') and current.get('editionDate') == edition and not args.revision_reason.strip():
+            LOGGER.info('Formal edition already exists; retained without recollection')
+            return 0
         history_items = read_existing_search_items(args.search_index) if not args.stream_only else []
         previous_event_registry = read_json_safe(args.events_output, {})
         source_diagnostics: list[dict[str, Any]] = []
@@ -4816,10 +4822,6 @@ def main(argv: list[str] | None = None) -> int:
                             window,
                         )
                         break
-            if len(candidates) < top_n:
-                raise RuntimeError(
-                    f"分层补采后仍只有 {len(candidates)} 条可验证候选；需要 {top_n} 条，已保留上一期内容"
-                )
             if not args.fixture:
                 stream_ids = {article.id for article in stream_candidates}
                 enrich_article_descriptions([article for article in candidates if article.id not in stream_ids], config)
@@ -4945,6 +4947,14 @@ def main(argv: list[str] | None = None) -> int:
             deepread = build_daily_deepread(deepread_inputs, config, now,
                                             runtime=stream_runtime, request_json=request_structured_json,
                                             event_registry=event_registry, history_items=history_items)
+            from deepread_quality import choose_readable_deepread
+            prior_deep = [read_json_safe(args.deepread_output, {})]
+            deep_index = read_json_safe(args.deepread_output.parent / 'deepread/index.json', {})
+            for entry in deep_index.get('editions', []):
+                date = entry.get('editionDate', '')
+                if re.fullmatch(r'\d{4}-\d{2}-\d{2}', date):
+                    prior_deep.append(read_json_safe(args.deepread_output.parent / 'deepread' / f'{date}.json', {}))
+            deepread = choose_readable_deepread(deepread, prior_deep, report['editionDate'])
 
         if args.stream_only:
             write_json_atomic(args.stream_output, stream_report)
@@ -4971,7 +4981,8 @@ def main(argv: list[str] | None = None) -> int:
         write_json_atomic(args.stream_output, stream_report)
         assert deepread is not None
         write_json_atomic(args.deepread_output, deepread)
-        archive_deepread(deepread, args.deepread_output.parent / "deepread", config)
+        if deepread['readerStatus'] != 'retained':
+            archive_deepread(deepread, args.deepread_output.parent / "deepread", config)
         assert event_registry is not None and weekly_digest is not None and anomaly_report is not None
         write_json_atomic(args.events_output, event_registry)
         write_json_atomic(args.weekly_output, weekly_digest)

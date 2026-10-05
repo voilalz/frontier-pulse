@@ -59,7 +59,7 @@ class EvidenceRegressionTests(unittest.TestCase):
         recovered=news.article_from_public_item(archived,now)
         self.assertEqual(recovered.source_evidence,[])
         item=news.item_from_article(recovered,{})
-        self.assertEqual(item['summary'],'未提取到可引用的正文，请查看原始报道。')
+        self.assertEqual(item['summary'],'')
         self.assertEqual(item['keyFacts'],[])
         self.assertEqual(build_daily_deepread([item],{},now)['eventCount'],0)
 
