@@ -460,6 +460,9 @@
       eventDossier: normalizeEventDossier(raw.eventDossier, clean(raw.eventId)),
       relatedPapers: normalizeRelatedRecords(raw.relatedPapers, "paper"),
       relatedNews: normalizeRelatedRecords(raw.relatedNews, "news"),
+      evidenceRecords: (Array.isArray(raw.evidenceRecords) ? raw.evidenceRecords : [])
+        .filter(record=>record && typeof record === "object").map(record=>({...record,url:safeUrl(record.url)})),
+      releaseId: clean(raw.releaseId),
       editionDate: clean(raw.editionDate || editionDate),
       _compact: Boolean(raw._compact),
     };
@@ -496,7 +499,8 @@
       generatedAt: clean(payload.generatedAt),
       timezone: clean(payload.timezone, "Asia/Shanghai"),
       method: clean(payload.method, "rules"),
-      items: payload.items.slice(0, 100).map((item, index) => normalizeItem(item, index, editionDate)).filter(isAllowedNewsItem),
+      items: payload.items.slice(0, 100).map((item, index) => normalizeItem({...item,
+        releaseId: payload.releaseId || item.releaseId}, index, editionDate)).filter(isAllowedNewsItem),
     };
   }
 
@@ -1727,6 +1731,9 @@
     const key = itemKey(item);
     const visual = item.image ? `<figure class="story-visual"><img src="${esc(item.image)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"></figure>` : "";
     const sources = item.sources.map((source) => `<li><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.name || source.domain)}</a></li>`).join("");
+    const related = classicUI.relatedPapers(item);
+    const paperLinks = related.length ? `<aside class="news-classic-links" aria-label="相关方法论文"><span>相关方法</span>${related.map(row=>
+      `<a href="${esc(window.FrontierClassicContext.paperHref(row,item))}">${esc(window.FrontierClassicClient.displayTitle(row.paper))}</a>`).join('')}</aside>` : '';
     const sourceDetails = item._compact || item.sources.length > 1
       ? `<details class="details news-sources" data-details-key="${esc(key)}"${state.expandedKeys.has(key) ? " open" : ""}><summary>其他来源</summary>${item._compact ? '<p class="detail-loading">展开后读取原始来源链接。</p>' : `<ul class="source-list">${sources}</ul>`}</details>` : "";
     const timelineKey = `timeline::${key}`;
@@ -1745,6 +1752,7 @@
           <div class="story-actions"><button type="button" data-bookmark title="${saved ? "取消收藏" : "收藏"}" aria-label="${saved ? "取消收藏" : "收藏"}">${saved ? "★" : "☆"}</button><button type="button" data-share title="复制本条链接" aria-label="复制本条链接">⌁</button></div>
         </div>
         ${sourceDetails}
+        ${paperLinks}
       </div></div>
       ${timelineDetails}
     </article>`;
@@ -2003,13 +2011,13 @@
   }
 
   function openDialog(type) {
-      $("dialogEyebrow").textContent = "SCORING METHODOLOGY";
+      $("dialogEyebrow").textContent = "阅读说明";
       if (state.view === "research") {
-        $("dialogTitle").textContent = "论文相关度如何理解";
-        $("dialogContent").innerHTML = `<ul><li><b>研究相关度：</b>综合关注领域优先级、标题与摘要的主题命中、系统采集词、摘要完整度和发布时间，仅用于排列阅读顺序。</li><li><b>我的论文关键词：</b>只在当前浏览器中筛选和高亮已采集论文；添加后自动进入专属论文流，不会上传服务器。</li><li><b>系统采集词：</b>由仓库配置直接查询 arXiv 标题与摘要，可发现既有分类候选之外的特定方向。</li><li><b>预印本：</b>arXiv 条目不代表已经同行评审、独立复现或获得学术共同体认可。</li><li><b>中文编辑：</b>配置 DeepSeek 或 OpenAI 时只依据标题与摘要提炼问题、方法、发现和局限；摘要未说明的内容必须明确标注。</li><li><b>研究判断：</b>重要结论应回到完整论文、实验设置、数据和后续评审。</li></ul>`;
+        $("dialogTitle").textContent = "如何阅读经典论文";
+        $("dialogContent").innerHTML = `<ul><li><b>标题：</b>中文译名用于阅读和检索，英文原名保留在标题下方及引用中。</li><li><b>日期：</b>发表年份是论文原始发表时间；推荐日期是本站这次推荐的日期，历史推荐可单独回看。</li><li><b>导读：</b>保留研究问题、方法、贡献、适用条件、局限和阅读建议，并附全文页码或章节定位；阅读推论单独标识。</li><li><b>关联：</b>来源明确描述采用某种具体方法时，提供相应论文与新闻入口。这种关联用于理解方法背景，不代表新系统复现了论文或具备相同性能。</li><li><b>个人工具：</b>收藏只保存在当前浏览器；复制引用使用英文书目原名。</li></ul>`;
       } else {
-        $("dialogTitle").textContent = "关于新闻摘要";
-        $("dialogContent").innerHTML = "<p>摘要依据来源提供的标题、导语与正文整理，尽量保留事件背景、关键细节和最新进展。来源信息不足时，摘要会相应缩短；点击原文可阅读完整报道。</p>";
+        $("dialogTitle").textContent = "新闻如何整理与更新";
+        $("dialogContent").innerHTML = `<ul><li><b>选稿：</b>精选新闻与深读采用具有有效正文、可核查事实的报道。合格候选不足时展示实际数量；仅标题信息可留在动态，明确标识状态并提供原文入口。</li><li><b>摘要：</b>只整理来源支持的事实，不用采集缺失说明填充摘要，也不把整段英文当作中文摘要。信息有限时允许摘要更短。</li><li><b>合并与来源：</b>同一期的重复事件合并展示，保留可用来源；同一机构的不同事件分别保留。</li><li><b>后续：</b>主题相同不等于事件相同。回看不同日期的报道时，请结合原文核对新增事实，重复出现本身不代表有新进展。</li><li><b>正式版本：</b>日期按北京时间计算。同日重试不自动改写正式日报；必要更正保留初版、差异及对应版本入口。</li><li><b>更新失败：</b>内容未通过校验时保留之前的合格版本。深读独立判断是否更新，沿用前期时显示真实内容日期；没有合格旧版时显示未更新状态。</li></ul>`;
       }
     $("infoDialog").showModal();
   }
@@ -2192,6 +2200,7 @@
   });
   $("themeBtn").addEventListener("click", () => applyTheme(state.theme === "dark" ? "light" : "dark", true));
   $("scoringHelp").addEventListener("click", () => openDialog("scoring"));
+  document.querySelectorAll('[data-reading-help]').forEach(button=>button.addEventListener('click',()=>openDialog('reading')));
   document.querySelector("[data-close-dialog]").addEventListener("click", () => $("infoDialog").close());
   $("infoDialog").addEventListener("click", (event) => { if (event.target === $("infoDialog")) $("infoDialog").close(); });
   $("alertClose").addEventListener("click", hideAlert);
@@ -2209,9 +2218,20 @@
       await loadPublication();
       await loadLatest();
       await ensureArchiveIndex();
+      // Paper availability must not delay an otherwise usable news edition.
+      classicUI.ensureContext().then(()=>{
+        if(state.view !== 'research' && state.items.length)renderStories();
+      }).catch(()=>{});
     })().catch(error => { newsContextPromise = null; throw error; });
     return newsContextPromise;
   }
+  classicUI.setNewsProvider(async({date}={})=>{
+    await ensureNewsContext();
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(date || ''))return (state.latestReport?.items || []).filter(isAllowedNewsItem);
+    const report=state.editionCache.get(date)
+      || normalizeReport(await fetchPublicationJson(`./data/archive/${date}.json`));
+    return report.items.map(item=>({...item,releaseId:report.releaseId || item.releaseId})).filter(isAllowedNewsItem);
+  });
   async function init() {
     applyTheme(state.theme);
     if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {

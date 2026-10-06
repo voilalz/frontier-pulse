@@ -1,8 +1,10 @@
 (function (root, factory) {
-  const api = factory();
+  const context = typeof module === 'object' && module.exports
+    ? require('./classic-context.js') : root.FrontierClassicContext;
+  const api = factory(context);
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.FrontierClassicClient = api;
-})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (context) {
   'use strict';
   const FILES = ['edition.json', 'archive.json', 'queue.json', 'status.json'];
   const SECTIONS = ['problem', 'method', 'contribution', 'applicability', 'limitations', 'readingAdvice'];
@@ -121,11 +123,12 @@
     return Object.entries(archive.editions).filter(([date])=>date<=today).sort(([a],[b])=>b.localeCompare(a))
       .flatMap(([date,e])=>e.items.map(paper=>({date,paper})))
       .filter(({paper})=>(!domain||paper.primaryDomain===domain)
-        && (!q||[paper.title,...paper.authors].join(' ').toLocaleLowerCase().includes(q)));
+        && (!q||[context?.displayTitle(paper),paper.title,...paper.authors].join(' ').toLocaleLowerCase().includes(q)));
   }
   function validFavorite(value) {
     try { check(day(value?.date),'收藏日期错误'); paperCheck(value.paper); return true; } catch (_) { return false; }
   }
   const citation = p => `${p.authors.join(', ')}. ${p.title}. ${p.venue}, ${p.year}. ${p.canonicalUrl}`;
-  return {load,verify,select,health,search,citation,beijingDate,validFavorite};
+  const displayTitle = paper => context?.displayTitle(paper) || paper.title;
+  return {load,verify,select,health,search,citation,beijingDate,validFavorite,displayTitle};
 });
