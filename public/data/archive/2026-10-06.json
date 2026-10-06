@@ -1,6 +1,6 @@
 {
   "schemaVersion": 11,
-  "generatedAt": "2026-10-06T01:01:13Z",
+  "generatedAt": "2026-10-06T02:55:27Z",
   "editionDate": "2026-10-06",
   "timezone": "Asia/Shanghai",
   "method": "deepseek",
@@ -10,7 +10,7 @@
   "selectionProvider": "deepseek",
   "selectionModel": "deepseek-v4-flash",
   "selectionNotices": [
-    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 4 个 Top 10 入选位"
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 5 个 Top 10 入选位"
   ],
   "selectionWarnings": [],
   "selectionDiagnostics": {
@@ -26,59 +26,60 @@
     "aiUnscoredItemCount": 0,
     "unconstrainedTop": {
       "categoryCounts": {
-        "军事动态": 7,
+        "军事动态": 8,
         "航空航天": 1,
-        "前沿技术": 1,
-        "局部冲突": 1
+        "前沿技术": 1
       },
       "domainCounts": {
         "twz.com": 2,
-        "defensenews.com": 4,
-        "navalnews.com": 2,
+        "navalnews.com": 1,
+        "defensenews.com": 5,
         "semiengineering.com": 1,
-        "aljazeera.com": 1
+        "theguardian.com": 1
       },
       "categoryViolations": {
-        "军事动态": 7
+        "军事动态": 8
       },
       "domainViolations": {
-        "defensenews.com": 4
+        "defensenews.com": 5
       }
     },
     "finalTop": {
       "categoryCounts": {
         "军事动态": 3,
-        "航空航天": 1,
+        "航空航天": 2,
         "前沿技术": 1,
         "局部冲突": 1,
-        "无人系统": 3,
+        "无人系统": 2,
         "AI": 1
       },
       "domainCounts": {
         "twz.com": 1,
-        "defensenews.com": 2,
         "navalnews.com": 1,
+        "defensenews.com": 2,
         "semiengineering.com": 1,
         "aljazeera.com": 1,
         "unmannedairspace.info": 2,
-        "therobotreport.com": 1,
-        "spectrum.ieee.org": 1
+        "science.nasa.gov": 1,
+        "the-decoder.com": 1
       },
       "categoryViolations": {},
       "domainViolations": {}
     },
-    "adjustedItemCount": 4,
+    "adjustedItemCount": 5,
     "adjustedOutIds": [
       "b899b2a6e000db",
       "6791bdb9711e3d",
-      "3e1cdf2fd2b25e",
-      "cac956fc32b277"
+      "07013e2bf51f97",
+      "aeeadbec07a680",
+      "079693f8568e2c"
     ],
     "adjustedInIds": [
-      "4afcdce27d1043",
+      "7d1be2688ff2f3",
       "70b6425eedca2c",
-      "853823b4121d35",
-      "0722a3e342dab3"
+      "4afcdce27d1043",
+      "0e0dc8f08351a7",
+      "df746c21e27339"
     ],
     "relaxedItemCount": 0
   },
@@ -87,11 +88,12 @@
   "translationModel": "deepseek-v4-flash",
   "translatedItemCount": 9,
   "translationWarnings": [
+    "日报中文翻译在拆分重试后仍缺失 1/1 条：拆分重试后仍有条目缺失",
     "日报中文翻译不完整：9/10"
   ],
   "translationDiagnostics": {
-    "requestedItemCount": 3,
-    "completedItemCount": 2,
+    "requestedItemCount": 1,
+    "completedItemCount": 0,
     "missingItemCount": 1,
     "missingItemIds": [
       "98770ddd824281"
@@ -104,19 +106,18 @@
     ],
     "initialBatchSize": 5,
     "initialBatchCount": 1,
-    "requestCount": 5,
-    "retryRequestCount": 4,
+    "requestCount": 3,
+    "retryRequestCount": 2,
     "providerFailureCount": 0,
-    "structuralFailureCount": 4,
-    "completionReason": "partial_stream_recovery",
-    "completionMessage": "已从动态补齐部分中文摘要",
+    "structuralFailureCount": 3,
+    "completionReason": "partial_after_retry",
+    "completionMessage": "拆分重试后仍有条目缺失",
     "lastProviderError": "",
     "targetItemCount": 10,
-    "reusedItemCount": 7,
-    "newlyTranslatedItemCount": 1,
+    "reusedItemCount": 9,
+    "newlyTranslatedItemCount": 0,
     "totalTranslatedItemCount": 9,
-    "totalMissingItemCount": 1,
-    "recoveredFromStreamItemCount": 1
+    "totalMissingItemCount": 1
   },
   "historyAnalysisStatus": "ok",
   "historyAnalysisProvider": "deepseek",
@@ -145,16 +146,17 @@
     "caf49eb1852ad1"
   ],
   "warnings": [
+    "日报中文翻译在拆分重试后仍缺失 1/1 条：拆分重试后仍有条目缺失",
     "日报中文翻译不完整：9/10"
   ],
-  "candidateCount": 143,
-  "freshCandidateCount": 143,
+  "candidateCount": 146,
+  "freshCandidateCount": 146,
   "supplementalCandidateCount": 0,
   "freshItemCount": 10,
   "supplementalItemCount": 0,
   "coverageStatus": "complete",
   "effectiveLookbackHours": 24,
-  "sourceCount": 54,
+  "sourceCount": 55,
   "scoring": {
     "label": "重要度，不等同于事实真伪",
     "formula": "基础分 + 来源 + 主题优先级 + 时效 + 影响信号 + 相关性 + 证据完整度 + 多源印证 - 编辑降权",
@@ -162,11 +164,11 @@
   },
   "brief": {
     "headline": "First Release Of USAF’s New HACM Hypersonic Cruise Missile Has Happened Over Australian Range",
-    "summary": "本期从 54 个公开信源筛选出 10 条重点事件，覆盖科技、AI、航空航天、安全动态与无人系统。",
+    "summary": "本期从 55 个公开信源筛选出 10 条重点事件，覆盖科技、AI、航空航天、安全动态与无人系统。",
     "signals": [
-      "军事动态：The U.S. Air Force’s scramjet-powered Hypersonic Attack Cruise Missile (HACM) has finally reached the flight test phase, with at least one “release” having been carried out so far over a range in Australia. DARPA “The U.S. Air Force, in partnership with Australia, has conducted a flight test of the Hypersonic Attack Cruise Missile (HACM) as part of our continuous work to advance long-range strike capabilities,” an Air Force spokesperson confirmed to TWZ today.",
-      "军事动态：MANILA, Philippines — The U.S. Marine Corps will deploy its ground-based anti-ship and air-defense systems to Japan’s southwesternmost island for exercise Keen Sword, placing new U.S.-Japan capabilities on an island sitting just 110 kilometers from Taiwan.",
-      "军事动态：Blackbeard, an air-launched, long-range hypersonic strike missile, successfully completed another milestone recently, with a flight test on an F/A-18E/F Super Hornet at Naval Air Station (NAS) Patuxent River, Maryland. This represents a key developmental test step in the program’s progression to Early Operational Capability (EOC)."
+      "军事动态：The U.S. Air Force’s scramjet-powered Hypersonic Attack Cruise Missile (HACM) has finally reached the flight test phase, with at least one “release” having been carried out s…",
+      "军事动态：Blackbeard, an air-launched, long-range hypersonic strike missile, successfully completed another milestone recently, with a flight test on an F/A-18E/F Super Hornet at Naval…",
+      "军事动态：MANILA, Philippines — The U.S. Marine Corps will deploy its ground-based anti-ship and air-defense systems to Japan’s southwesternmost island for exercise Keen Sword, placing…"
     ]
   },
   "items": [
@@ -184,35 +186,35 @@
           "evidenceId": "evd-ebb35aeeab121c9df991",
           "text": "Air Force’s scramjet-powered Hypersonic Attack Cruise Missile (HACM) has finally reached the flight test phase, with at least one “release” having been carried out so far over a range in Australia.",
           "url": "https://www.twz.com/air/first-release-of-usafs-new-hacm-hypersonic-cruise-missile-has-happened-over-a-test-range-in-australia",
-          "fetchedAt": "2026-10-06T01:06:39+00:00",
+          "fetchedAt": "2026-10-06T02:59:29+00:00",
           "kind": "feed"
         },
         {
           "evidenceId": "evd-9ea06b04ac796b08c779",
           "text": "DARPA “The U.S.",
           "url": "https://www.twz.com/air/first-release-of-usafs-new-hacm-hypersonic-cruise-missile-has-happened-over-a-test-range-in-australia",
-          "fetchedAt": "2026-10-06T01:06:39+00:00",
+          "fetchedAt": "2026-10-06T02:59:29+00:00",
           "kind": "feed"
         },
         {
           "evidenceId": "evd-0566234d4dc12a1b3c86",
           "text": "Air Force, in partnership with Australia, has conducted a flight test of the Hypersonic Attack Cruise Missile (HACM) as part of our continuous work to advance long-range strike capabilities,” an Air Force spokesperson confirmed to TWZ today.",
           "url": "https://www.twz.com/air/first-release-of-usafs-new-hacm-hypersonic-cruise-missile-has-happened-over-a-test-range-in-australia",
-          "fetchedAt": "2026-10-06T01:06:39+00:00",
+          "fetchedAt": "2026-10-06T02:59:29+00:00",
           "kind": "feed"
         },
         {
           "evidenceId": "evd-e1c9ec150608fb5e6b31",
           "text": "“This effort is part of the Southern Cross Integrated Flight Research Experiment (SCIFiRE), a collaborative agreement built on more than 15 years of partnership between our two nations.” “Leveraging this enduring alliance, the Royal Australian Air Force executed the release of a HACM flight test unit over a designated Australian test range, gathering crucial data to advance the program’s objectives,” the spokesperson added.",
           "url": "https://www.twz.com/air/first-release-of-usafs-new-hacm-hypersonic-cruise-missile-has-happened-over-a-test-range-in-australia",
-          "fetchedAt": "2026-10-06T01:06:39+00:00",
+          "fetchedAt": "2026-10-06T02:59:29+00:00",
           "kind": "feed"
         },
         {
           "evidenceId": "evd-21fe41127c3bb5824fb3",
           "text": "In 2023, the Air Force did release a picture , seen below, showing an air-breathing hypersonic cruise missile test article related to either HACM or the preceding HAWC effort.",
           "url": "https://www.twz.com/air/first-release-of-usafs-new-hacm-hypersonic-cruise-missile-has-happened-over-a-test-range-in-australia",
-          "fetchedAt": "2026-10-06T01:06:39+00:00",
+          "fetchedAt": "2026-10-06T02:59:29+00:00",
           "kind": "feed"
         }
       ],
@@ -261,13 +263,13 @@
       "country": "国际",
       "publishedAt": "2026-10-05T23:26:47Z",
       "url": "https://www.twz.com/air/first-release-of-usafs-new-hacm-hypersonic-cruise-missile-has-happened-over-a-test-range-in-australia",
-      "score": 91,
+      "score": 90,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 15,
         "主题优先级": 10,
-        "时效": 19,
+        "时效": 18,
         "影响信号": 22,
         "主题相关性": 12,
         "证据完整度": 3,
@@ -278,10 +280,10 @@
       },
       "scoreReasons": [
         "DeepSeek 候选重要度 88/100",
-        "综合排序分 91/100（AI 65% + 规则 35%）",
-        "规则参考分 96/100",
+        "综合排序分 90/100（AI 65% + 规则 35%）",
+        "规则参考分 95/100",
         "来源权重 15/20",
-        "发布约 1.6 小时",
+        "发布约 3.5 小时",
         "命中 12 个主题信号",
         "影响信号：first、launch、test"
       ],
@@ -309,6 +311,22 @@
       "selectionWindowHours": 24,
       "selectionNote": "",
       "diversityRelaxed": false,
+      "displayTranslation": {
+        "version": 1,
+        "language": "zh-CN",
+        "provider": "deepseek",
+        "title": "美国空军新型HACM高超声速巡航导弹在澳大利亚靶场上空完成首次释放",
+        "summary": "美国空军的超燃冲压发动机驱动的高超声速攻击巡航导弹（HACM）已进入飞行试验阶段，迄今至少在澳大利亚一处靶场上空进行了一次“释放”。美国空军发言人向TWZ确认，美国空军与澳大利亚合作开展了HACM飞行试验，这是美方持续推进远程打击能力工作的一部分。HACM由DARPA参与。目前仅确认已实施至少一次释放，具体时间、次数与结果尚未公布。",
+        "sourceTitle": "First Release Of USAF’s New HACM Hypersonic Cruise Missile Has Happened Over Australian Range",
+        "sourceSummary": "The U.S. Air Force’s scramjet-powered Hypersonic Attack Cruise Missile (HACM) has finally reached the flight test phase, with at least one “release” having been carried out so far over a range in Australia. DARPA “The U.S. Air Force, in partnership with Australia, has conducted a flight test of the Hypersonic Attack Cruise Missile (HACM) as part of our continuous work to advance long-range strike capabilities,” an Air Force spokesperson confirmed to TWZ today.",
+        "sourceEvidenceRefs": [
+          "evd-ebb35aeeab121c9df991",
+          "evd-9ea06b04ac796b08c779",
+          "evd-0566234d4dc12a1b3c86",
+          "evd-e1c9ec150608fb5e6b31",
+          "evd-21fe41127c3bb5824fb3"
+        ]
+      },
       "historyContext": {
         "status": "no-match",
         "lookbackDays": 365,
@@ -326,8 +344,8 @@
       },
       "eventIdentity": {
         "version": 2,
-        "decision": "new-event",
-        "reason": "no-unambiguous-match",
+        "decision": "registry-match",
+        "reason": "immutable-article",
         "semanticEligible": true,
         "representativeId": "cddcfe029b5e13",
         "mergedFrom": [],
@@ -423,27 +441,350 @@
             "summaryLead": "The U.S. Air Force’s scramjet-powered Hypersonic Attack Cruise Missile (HACM) has finally reached the flight test phase, with at least one “release” having been carried out so far over a range in Australia. DARPA “The U.S. Air Force, in pa…",
             "source": "The War Zone",
             "publishedAt": "2026-10-05T23:26:47Z",
-            "score": 91
+            "score": 90
           }
         ],
         "independentSourceCount": 1,
         "paperCount": 0
       },
+      "relatedPapers": []
+    },
+    {
+      "id": "4cd2c5417e2ca3",
+      "eventId": "evt-ec879b2041ff",
+      "contentType": "news",
+      "title": "U.S. Navy Completes Successful Test Flight of Blackbeard Long-range Hypersonic Strike Missile",
+      "originalTitle": "U.S. Navy Completes Successful Test Flight of Blackbeard Long-range Hypersonic Strike Missile",
+      "summary": "Blackbeard, an air-launched, long-range hypersonic strike missile, successfully completed another milestone recently, with a flight test on an F/A-18E/F Super Hornet at Naval Air Station (NAS) Patuxent River, Maryland. This represents a key developmental test step in the program’s progression to Early Operational Capability (EOC).",
+      "summaryRevision": 5,
+      "traceVersion": 1,
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-8ac9cb4efc12a1823512",
+          "text": "Blackbeard, an air-launched, long-range hypersonic strike missile, successfully completed another milestone recently, with a flight test on an F/A-18E/F Super Hornet at Naval Air Station (NAS) Patuxent River, Maryland.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-1b8b37aed9b7e7d2dcf7",
+          "text": "Navy press release Developed by Castelion and led by the Portfolio Acquisition Executive Aviation (PAE(A)) through its Future Capability Development and Integration (FCD&I) Aviation Rapid Capabilities Cell, in coordination with the Naval Air Warfare Centers and the DON Rapid Capabilities Office, Blackbeard will provide carrier-based strike fighters with a responsive, high-speed strike option to pierce contested anti-access/area-denial (A2/AD) envelopes while significantly expanding theater magazine depth.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-a4503dd257f6a6f6ed8b",
+          "text": "This represents a key developmental test step in the program’s progression to Early Operational Capability (EOC).",
+          "url": "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-8ac9cb4efc12a1823512",
+        "evd-1b8b37aed9b7e7d2dcf7",
+        "evd-a4503dd257f6a6f6ed8b"
+      ],
+      "keyFactEvidence": [
+        {
+          "text": "an air-launched",
+          "evidenceIds": [
+            "evd-8ac9cb4efc12a1823512"
+          ]
+        },
+        {
+          "text": "long-range hypersonic strike missile",
+          "evidenceIds": [
+            "evd-8ac9cb4efc12a1823512"
+          ]
+        },
+        {
+          "text": "successfully completed another milestone recently",
+          "evidenceIds": [
+            "evd-8ac9cb4efc12a1823512"
+          ]
+        }
+      ],
+      "summaryEvidence": {
+        "status": "body",
+        "candidateCount": 24,
+        "selectedCount": 1,
+        "reason": "selected-public-body"
+      },
+      "summaryInputHash": "cede8b876ad68f5dc333cdfa",
+      "keyFacts": [
+        "an air-launched",
+        "long-range hypersonic strike missile",
+        "successfully completed another milestone recently"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Naval News",
+      "country": "国际",
+      "publishedAt": "2026-10-05T15:00:00Z",
+      "url": "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile",
+      "score": 86,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 14,
+        "影响信号": 20,
+        "主题相关性": 12,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 84/100",
+        "综合排序分 86/100（AI 65% + 规则 35%）",
+        "规则参考分 90/100",
+        "来源权重 16/20",
+        "发布约 11.9 小时",
+        "命中 8 个主题信号",
+        "影响信号：test、production、strike"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "高超声速导弹",
+        "美海军",
+        "飞行试验"
+      ],
+      "image": "https://www.navalnews.com/wp-content/uploads/2026/10/FA18-with-blackbeard-scaled.png",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Naval News",
+          "domain": "navalnews.com",
+          "url": "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile",
+          "publishedAt": "2026-10-05T15:00:00Z",
+          "evidenceGroup": "outlet:navalnews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
       "displayTranslation": {
         "version": 1,
         "language": "zh-CN",
         "provider": "deepseek",
-        "title": "美国空军新型HACM高超声速巡航导弹在澳大利亚靶场上空完成首次释放",
-        "summary": "美国空军的超燃冲压发动机驱动的高超声速攻击巡航导弹（HACM）已进入飞行试验阶段，迄今至少在澳大利亚一处靶场上空进行了一次“释放”。美国空军发言人向TWZ确认，美国空军与澳大利亚合作开展了HACM飞行试验，这是美方持续推进远程打击能力工作的一部分。HACM由DARPA参与。目前仅确认已实施至少一次释放，具体时间、次数与结果尚未公布。",
-        "sourceTitle": "First Release Of USAF’s New HACM Hypersonic Cruise Missile Has Happened Over Australian Range",
-        "sourceSummary": "The U.S. Air Force’s scramjet-powered Hypersonic Attack Cruise Missile (HACM) has finally reached the flight test phase, with at least one “release” having been carried out so far over a range in Australia. DARPA “The U.S. Air Force, in partnership with Australia, has conducted a flight test of the Hypersonic Attack Cruise Missile (HACM) as part of our continuous work to advance long-range strike capabilities,” an Air Force spokesperson confirmed to TWZ today.",
+        "title": "美海军完成“黑胡子”远程高超声速打击导弹成功试飞",
+        "summary": "“黑胡子”是一款空射远程高超声速打击导弹，近日在位于马里兰州的帕塔克森特河海军航空站，由一架F/A-18E/F“超级大黄蜂”战斗机完成又一次试飞，成功达到新的里程碑。这标志着该项目在迈向“早期作战能力”过程中完成了一项关键开发测试步骤。",
+        "sourceTitle": "U.S. Navy Completes Successful Test Flight of Blackbeard Long-range Hypersonic Strike Missile",
+        "sourceSummary": "Blackbeard, an air-launched, long-range hypersonic strike missile, successfully completed another milestone recently, with a flight test on an F/A-18E/F Super Hornet at Naval Air Station (NAS) Patuxent River, Maryland. This represents a key developmental test step in the program’s progression to Early Operational Capability (EOC).",
         "sourceEvidenceRefs": [
-          "evd-ebb35aeeab121c9df991",
-          "evd-9ea06b04ac796b08c779",
-          "evd-0566234d4dc12a1b3c86",
-          "evd-e1c9ec150608fb5e6b31",
-          "evd-21fe41127c3bb5824fb3"
+          "evd-8ac9cb4efc12a1823512",
+          "evd-1b8b37aed9b7e7d2dcf7",
+          "evd-a4503dd257f6a6f6ed8b"
         ]
+      },
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 1,
+        "relatedStories": [
+          {
+            "id": "06fc09dd388511",
+            "eventId": "evt-53650a1a0526",
+            "editionDate": "2026-09-18",
+            "title": "美海军授予防务初创公司2亿美元用于Blackbeard高超音速导弹",
+            "originalTitle": "US Navy awards defense startup $200 million for Blackbeard hypersonic missile",
+            "summary": "美国海军授予防务初创公司Castelion 2亿美元，用于生产其Blackbeard高超音速导弹。",
+            "category": "军事动态",
+            "source": "Defense News",
+            "publishedAt": "2026-09-17T15:35:43Z",
+            "associationScore": 51,
+            "relationLabel": "同一事件后续",
+            "associationReasons": [
+              "标题结构显示为同一事件的后续报道",
+              "标题共享关键词：blackbeard、hypersonic、missile、navy",
+              "共同标签：美海军"
+            ]
+          }
+        ],
+        "timelineSummary": "2026年9月17日归档报道显示，美海军授予防务初创公司2亿美元用于Blackbeard高超音速导弹生产。10月5日报道称，该空射远程高超音速打击导弹在马里兰州帕塔克森特河海军航空站由F/A-18E/F完成又一次飞行测试，项目朝早期作战能力推进。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "后续可观察该项目是否披露更多飞行测试节点及早期作战能力时间表。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "若进入生产或部署阶段，则需关注合同调整及载机适配的进一步公开信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "deepseek"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "4cd2c5417e2ca3",
+        "mergedFrom": [],
+        "evidence": {
+          "newsIds": [
+            "4cd2c5417e2ca3"
+          ],
+          "urls": [
+            "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile"
+          ],
+          "anchors": [
+            "blackbeard",
+            "completes",
+            "hypersonic",
+            "long-range",
+            "missile",
+            "successful",
+            "test"
+          ],
+          "date": "2026-10-05"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:navalnews.com"
+        ],
+        "claims": [
+          {
+            "text": "an air-launched",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:navalnews.com"
+            ]
+          },
+          {
+            "text": "long-range hypersonic strike missile",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:navalnews.com"
+            ]
+          },
+          {
+            "text": "successfully completed another milestone recently",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:navalnews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-801d41418fdc",
+          "eventId": "evt-ec879b2041ff",
+          "statement": "后续可观察该弹是否公布更多飞行试验节点及早期作战能力时间表。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "4cd2c5417e2ca3"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        },
+        {
+          "predictionId": "pred-f37262c542bb",
+          "eventId": "evt-ec879b2041ff",
+          "statement": "若项目推进至早期作战能力，则需关注其与载机集成及生产交付节奏。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2027-01-04",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "4cd2c5417e2ca3"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        },
+        {
+          "predictionId": "pred-e54cf7ae8b95",
+          "eventId": "evt-ec879b2041ff",
+          "statement": "后续可观察该项目是否披露更多飞行测试节点及早期作战能力时间表。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "4cd2c5417e2ca3"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        },
+        {
+          "predictionId": "pred-e527b1cfd218",
+          "eventId": "evt-ec879b2041ff",
+          "statement": "若进入生产或部署阶段，则需关注合同调整及载机适配的进一步公开信息。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2027-01-04",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "4cd2c5417e2ca3"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-ec879b2041ff",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-10-06",
+            "newsId": "4cd2c5417e2ca3",
+            "title": "U.S. Navy Completes Successful Test Flight of Blackbeard Long-range Hypersonic Strike Missile",
+            "originalTitle": "U.S. Navy Completes Successful Test Flight of Blackbeard Long-range Hypersonic Strike Missile",
+            "summaryLead": "Blackbeard, an air-launched, long-range hypersonic strike missile, successfully completed another milestone recently, with a flight test on an F/A-18E/F Super Hornet at Naval Air Station (NAS) Patuxent River, Maryland. This represents a ke…",
+            "source": "Naval News",
+            "publishedAt": "2026-10-05T15:00:00Z",
+            "score": 86
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
       },
       "relatedPapers": []
     },
@@ -461,14 +802,14 @@
           "evidenceId": "evd-549bd337ae705d92007d",
           "text": "MANILA, Philippines — The U.S.",
           "url": "https://www.defensenews.com/global/asia-pacific/2026/10/05/us-marine-corps-anti-ship-weaponry-to-see-exercise-action-on-remote-japan-island-near-taiwan",
-          "fetchedAt": "2026-10-06T01:04:34+00:00",
+          "fetchedAt": "2026-10-06T02:59:33+00:00",
           "kind": "feed"
         },
         {
           "evidenceId": "evd-658ceb2da7c891962ec0",
           "text": "Marine Corps will deploy its ground-based anti-ship and air-defense systems to Japan’s southwesternmost island for exercise Keen Sword, placing new U.S.-Japan capabilities on an island sitting just 110 kilometers from Taiwan.",
           "url": "https://www.defensenews.com/global/asia-pacific/2026/10/05/us-marine-corps-anti-ship-weaponry-to-see-exercise-action-on-remote-japan-island-near-taiwan",
-          "fetchedAt": "2026-10-06T01:04:34+00:00",
+          "fetchedAt": "2026-10-06T02:59:33+00:00",
           "kind": "feed"
         }
       ],
@@ -507,13 +848,13 @@
       "country": "国际",
       "publishedAt": "2026-10-05T12:24:45Z",
       "url": "https://www.defensenews.com/global/asia-pacific/2026/10/05/us-marine-corps-anti-ship-weaponry-to-see-exercise-action-on-remote-japan-island-near-taiwan",
-      "score": 87,
+      "score": 85,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 14,
+        "时效": 13,
         "影响信号": 22,
         "主题相关性": 12,
         "证据完整度": 3,
@@ -523,11 +864,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 84/100",
-        "综合排序分 87/100（AI 65% + 规则 35%）",
-        "规则参考分 92/100",
+        "DeepSeek 候选重要度 82/100",
+        "综合排序分 85/100（AI 65% + 规则 35%）",
+        "规则参考分 91/100",
         "来源权重 16/20",
-        "发布约 12.6 小时",
+        "发布约 14.5 小时",
         "命中 10 个主题信号",
         "影响信号：first、deploy、strike"
       ],
@@ -676,308 +1017,7 @@
             "summaryLead": "MANILA, Philippines — The U.S. Marine Corps will deploy its ground-based anti-ship and air-defense systems to Japan’s southwesternmost island for exercise Keen Sword, placing new U.S.-Japan capabilities on an island sitting just 110 kilome…",
             "source": "Defense News",
             "publishedAt": "2026-10-05T12:24:45Z",
-            "score": 87
-          }
-        ],
-        "independentSourceCount": 1,
-        "paperCount": 0
-      },
-      "relatedPapers": []
-    },
-    {
-      "id": "4cd2c5417e2ca3",
-      "eventId": "evt-ec879b2041ff",
-      "contentType": "news",
-      "title": "U.S. Navy Completes Successful Test Flight of Blackbeard Long-range Hypersonic Strike Missile",
-      "originalTitle": "U.S. Navy Completes Successful Test Flight of Blackbeard Long-range Hypersonic Strike Missile",
-      "summary": "Blackbeard, an air-launched, long-range hypersonic strike missile, successfully completed another milestone recently, with a flight test on an F/A-18E/F Super Hornet at Naval Air Station (NAS) Patuxent River, Maryland. This represents a key developmental test step in the program’s progression to Early Operational Capability (EOC).",
-      "summaryRevision": 5,
-      "traceVersion": 1,
-      "evidenceRecords": [
-        {
-          "evidenceId": "evd-8ac9cb4efc12a1823512",
-          "text": "Blackbeard, an air-launched, long-range hypersonic strike missile, successfully completed another milestone recently, with a flight test on an F/A-18E/F Super Hornet at Naval Air Station (NAS) Patuxent River, Maryland.",
-          "url": "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile",
-          "fetchedAt": "2026-10-06T01:04:33+00:00",
-          "kind": "feed"
-        },
-        {
-          "evidenceId": "evd-1b8b37aed9b7e7d2dcf7",
-          "text": "Navy press release Developed by Castelion and led by the Portfolio Acquisition Executive Aviation (PAE(A)) through its Future Capability Development and Integration (FCD&I) Aviation Rapid Capabilities Cell, in coordination with the Naval Air Warfare Centers and the DON Rapid Capabilities Office, Blackbeard will provide carrier-based strike fighters with a responsive, high-speed strike option to pierce contested anti-access/area-denial (A2/AD) envelopes while significantly expanding theater magazine depth.",
-          "url": "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile",
-          "fetchedAt": "2026-10-06T01:04:33+00:00",
-          "kind": "feed"
-        },
-        {
-          "evidenceId": "evd-a4503dd257f6a6f6ed8b",
-          "text": "This represents a key developmental test step in the program’s progression to Early Operational Capability (EOC).",
-          "url": "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile",
-          "fetchedAt": "2026-10-05T22:44:40+00:00",
-          "kind": "body"
-        }
-      ],
-      "summaryEvidenceRefs": [
-        "evd-8ac9cb4efc12a1823512",
-        "evd-1b8b37aed9b7e7d2dcf7",
-        "evd-a4503dd257f6a6f6ed8b"
-      ],
-      "keyFactEvidence": [
-        {
-          "text": "an air-launched",
-          "evidenceIds": [
-            "evd-8ac9cb4efc12a1823512"
-          ]
-        },
-        {
-          "text": "long-range hypersonic strike missile",
-          "evidenceIds": [
-            "evd-8ac9cb4efc12a1823512"
-          ]
-        },
-        {
-          "text": "successfully completed another milestone recently",
-          "evidenceIds": [
-            "evd-8ac9cb4efc12a1823512"
-          ]
-        }
-      ],
-      "summaryEvidence": {
-        "status": "body",
-        "candidateCount": 24,
-        "selectedCount": 1,
-        "reason": "selected-public-body"
-      },
-      "summaryInputHash": "cede8b876ad68f5dc333cdfa",
-      "keyFacts": [
-        "an air-launched",
-        "long-range hypersonic strike missile",
-        "successfully completed another milestone recently"
-      ],
-      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
-      "category": "军事动态",
-      "source": "Naval News",
-      "country": "国际",
-      "publishedAt": "2026-10-05T15:00:00Z",
-      "url": "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile",
-      "score": 86,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 15,
-        "影响信号": 20,
-        "主题相关性": 12,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 84/100",
-        "综合排序分 86/100（AI 65% + 规则 35%）",
-        "规则参考分 91/100",
-        "来源权重 16/20",
-        "发布约 10.0 小时",
-        "命中 8 个主题信号",
-        "影响信号：test、production、strike"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "高超声速导弹",
-        "美海军",
-        "飞行试验"
-      ],
-      "image": "https://www.navalnews.com/wp-content/uploads/2026/10/FA18-with-blackbeard-scaled.png",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "Naval News",
-          "domain": "navalnews.com",
-          "url": "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile",
-          "publishedAt": "2026-10-05T15:00:00Z",
-          "evidenceGroup": "outlet:navalnews.com"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "displayTranslation": {
-        "version": 1,
-        "language": "zh-CN",
-        "provider": "deepseek",
-        "title": "美海军完成“黑胡子”远程高超声速打击导弹成功试飞",
-        "summary": "“黑胡子”是一款空射远程高超声速打击导弹，近日在位于马里兰州的帕塔克森特河海军航空站，由一架F/A-18E/F“超级大黄蜂”战斗机完成又一次试飞，成功达到新的里程碑。这标志着该项目在迈向“早期作战能力”过程中完成了一项关键开发测试步骤。",
-        "sourceTitle": "U.S. Navy Completes Successful Test Flight of Blackbeard Long-range Hypersonic Strike Missile",
-        "sourceSummary": "Blackbeard, an air-launched, long-range hypersonic strike missile, successfully completed another milestone recently, with a flight test on an F/A-18E/F Super Hornet at Naval Air Station (NAS) Patuxent River, Maryland. This represents a key developmental test step in the program’s progression to Early Operational Capability (EOC).",
-        "sourceEvidenceRefs": [
-          "evd-8ac9cb4efc12a1823512",
-          "evd-1b8b37aed9b7e7d2dcf7",
-          "evd-a4503dd257f6a6f6ed8b"
-        ]
-      },
-      "historyContext": {
-        "status": "linked",
-        "lookbackDays": 365,
-        "relatedCount": 1,
-        "relatedStories": [
-          {
-            "id": "06fc09dd388511",
-            "eventId": "evt-53650a1a0526",
-            "editionDate": "2026-09-18",
-            "title": "美海军授予防务初创公司2亿美元用于Blackbeard高超音速导弹",
-            "originalTitle": "US Navy awards defense startup $200 million for Blackbeard hypersonic missile",
-            "summary": "美国海军授予防务初创公司Castelion 2亿美元，用于生产其Blackbeard高超音速导弹。",
-            "category": "军事动态",
-            "source": "Defense News",
-            "publishedAt": "2026-09-17T15:35:43Z",
-            "associationScore": 51,
-            "relationLabel": "同一事件后续",
-            "associationReasons": [
-              "标题结构显示为同一事件的后续报道",
-              "标题共享关键词：blackbeard、hypersonic、missile、navy",
-              "共同标签：美海军"
-            ]
-          }
-        ],
-        "timelineSummary": "2026年9月17日，美海军授予防务初创公司Castelion 2亿美元用于生产Blackbeard高超音速导弹。2026年10月5日，该项目在马里兰州帕塔克森特河海军航空站由F/A-18E/F超级大黄蜂完成一次飞行试验，被描述为迈向早期作战能力的关键开发测试步骤。",
-        "outlook": [
-          {
-            "horizon": "短期",
-            "text": "后续可观察该弹是否公布更多飞行试验节点及早期作战能力时间表。",
-            "confidence": "中"
-          },
-          {
-            "horizon": "中期",
-            "text": "若项目推进至早期作战能力，则需关注其与载机集成及生产交付节奏。",
-            "confidence": "低"
-          }
-        ],
-        "analysisProvider": "deepseek"
-      },
-      "eventIdentity": {
-        "version": 2,
-        "decision": "registry-match",
-        "reason": "immutable-article",
-        "semanticEligible": true,
-        "representativeId": "4cd2c5417e2ca3",
-        "mergedFrom": [],
-        "evidence": {
-          "newsIds": [
-            "4cd2c5417e2ca3"
-          ],
-          "urls": [
-            "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile"
-          ],
-          "anchors": [
-            "blackbeard",
-            "completes",
-            "hypersonic",
-            "long-range",
-            "missile",
-            "successful",
-            "test"
-          ],
-          "date": "2026-10-05"
-        }
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:navalnews.com"
-        ],
-        "claims": [
-          {
-            "text": "an air-launched",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:navalnews.com"
-            ]
-          },
-          {
-            "text": "long-range hypersonic strike missile",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:navalnews.com"
-            ]
-          },
-          {
-            "text": "successfully completed another milestone recently",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:navalnews.com"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-801d41418fdc",
-          "eventId": "evt-ec879b2041ff",
-          "statement": "后续可观察该弹是否公布更多飞行试验节点及早期作战能力时间表。",
-          "horizon": "短期",
-          "confidence": "中",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-10-06",
-          "dueAfter": "2026-11-05",
-          "verificationSignals": [
-            "正式合同、预算或部署文件",
-            "后续演训、交付或作战序列变化"
-          ],
-          "evidenceIds": [
-            "4cd2c5417e2ca3"
-          ],
-          "lastReviewedAt": "2026-10-06"
-        },
-        {
-          "predictionId": "pred-f37262c542bb",
-          "eventId": "evt-ec879b2041ff",
-          "statement": "若项目推进至早期作战能力，则需关注其与载机集成及生产交付节奏。",
-          "horizon": "中期",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-10-06",
-          "dueAfter": "2027-01-04",
-          "verificationSignals": [
-            "正式合同、预算或部署文件",
-            "后续演训、交付或作战序列变化"
-          ],
-          "evidenceIds": [
-            "4cd2c5417e2ca3"
-          ],
-          "lastReviewedAt": "2026-10-06"
-        }
-      ],
-      "eventDossier": {
-        "eventId": "evt-ec879b2041ff",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-10-06",
-        "lastSeen": "2026-10-06",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-10-06",
-            "newsId": "4cd2c5417e2ca3",
-            "title": "U.S. Navy Completes Successful Test Flight of Blackbeard Long-range Hypersonic Strike Missile",
-            "originalTitle": "U.S. Navy Completes Successful Test Flight of Blackbeard Long-range Hypersonic Strike Missile",
-            "summaryLead": "Blackbeard, an air-launched, long-range hypersonic strike missile, successfully completed another milestone recently, with a flight test on an F/A-18E/F Super Hornet at Naval Air Station (NAS) Patuxent River, Maryland. This represents a ke…",
-            "source": "Naval News",
-            "publishedAt": "2026-10-05T15:00:00Z",
-            "score": 86
+            "score": 85
           }
         ],
         "independentSourceCount": 1,
@@ -999,42 +1039,42 @@
           "evidenceId": "evd-81593739db0ed790a2df",
           "text": "PARIS — European defense startups are forecast to raise a record $10.5 billion of funding this year, roughly four times the $2.6 billion raised a year earlier and led by investments in firms developing drone technology, according to Dealroom, which tracks data on venture capital funding.",
           "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
-          "fetchedAt": "2026-10-06T01:04:33+00:00",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
           "kind": "feed"
         },
         {
           "evidenceId": "evd-7e29aeaef6581256e884",
           "text": "That compares to $1.5 billion of funding for European startups in the defense space as of September a year earlier, based on the 2025 report.",
           "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
-          "fetchedAt": "2026-10-06T01:04:33+00:00",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
           "kind": "feed"
         },
         {
           "evidenceId": "evd-930be75915021f84a218",
           "text": "“EU 27 funding more than doubled in a year.” Mega rounds made up more than 85% of the venture capital invested in European defense startups this year, including Helsing’s $1.8 billion Series E round in July according to Dealroom.",
           "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
-          "fetchedAt": "2026-10-06T01:04:33+00:00",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
           "kind": "feed"
         },
         {
           "evidenceId": "evd-09b5f3cf2a31d768e34d",
           "text": "European startups in that segment that raised money included Helsing, Quantum Systems and Stark in Germany, Harmattan AI in France and Cambridge Aerospace in the U.K.",
           "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
-          "fetchedAt": "2026-10-06T01:04:33+00:00",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
           "kind": "feed"
         },
         {
           "evidenceId": "evd-1aa204ff309edeebf241",
           "text": "In Europe, the segment of unmanned aerial vehicles accounted for $4.7 billion raised as of September, according to the Dealroom data, followed by Earth observation and satellite imagery with $1.8 billion, anti-drone solutions and launch vehicles, each with $1.2 billion, and maritime robotics, with $796 million raised.",
           "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
-          "fetchedAt": "2026-10-06T01:04:33+00:00",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
           "kind": "feed"
         },
         {
           "evidenceId": "evd-0903283756f1e410822b",
           "text": "Behind them a younger cohort is forming across ground robotics, counter-drone and hypersonics.” Funding for defense startups is diversifying as the sector grows, and total private investment in NATO defense startups, which also includes private equity, debt and grants, is forecast to reach $42.7 billion from $16.9 billion a year earlier, according to Dealroom.",
           "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
-          "fetchedAt": "2026-10-06T01:04:33+00:00",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
           "kind": "feed"
         },
         {
@@ -1132,13 +1172,13 @@
       "country": "国际",
       "publishedAt": "2026-10-05T14:54:11Z",
       "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
-      "score": 81,
+      "score": 78,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 9,
-        "时效": 15,
+        "时效": 14,
         "影响信号": 14,
         "主题相关性": 12,
         "证据完整度": 3,
@@ -1148,11 +1188,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 79/100",
-        "综合排序分 81/100（AI 65% + 规则 35%）",
-        "规则参考分 84/100",
+        "DeepSeek 候选重要度 75/100",
+        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "规则参考分 83/100",
         "来源权重 16/20",
-        "发布约 10.1 小时",
+        "发布约 12.0 小时",
         "命中 9 个主题信号",
         "影响信号：launch、quantum、autonomous"
       ],
@@ -1292,7 +1332,7 @@
             "summaryLead": "PARIS — European defense startups are forecast to raise a record $10.5 billion of funding this year, roughly four times the $2.6 billion raised a year earlier and led by investments in firms developing drone technology, according to Dealro…",
             "source": "Defense News",
             "publishedAt": "2026-10-05T14:54:11Z",
-            "score": 81
+            "score": 78
           }
         ],
         "independentSourceCount": 1,
@@ -1314,28 +1354,28 @@
           "evidenceId": "evd-f4f952666eb05ead1e35",
           "text": "Key Takeaways: Orbital data centers, military/aerospace vehicles, HPC experiments, quantum, and advanced manufacturing equipment are all putting pressure on chips to withstand extreme environments.",
           "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
-          "fetchedAt": "2026-10-06T01:04:35+00:00",
+          "fetchedAt": "2026-10-06T02:59:36+00:00",
           "kind": "feed"
         },
         {
           "evidenceId": "evd-71a7f2065e16727980f0",
           "text": "Chips that were once qualified against a limited set of operating conditions are now being designed for environments where multiple stresses hit at once.",
           "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
-          "fetchedAt": "2026-10-06T01:04:35+00:00",
+          "fetchedAt": "2026-10-06T02:59:36+00:00",
           "kind": "feed"
         },
         {
           "evidenceId": "evd-ca97161d87dc971fa507",
           "text": "For example, Pacific Northwest National Laboratory (PNNL) is working with Morgan State University, Northrop Grumman, and Project Omega on the DARPA-funded Rads to Watts program, which aims to convert Cold War-era radioactive decay into high-density nuclear micro-power radiovoltaic systems for extreme environments, including space, remote sensing, undersea infrastructure, and defense applications. [1] Radioisotopes such as Strontium-90 will be converted directly into electricity to operate for decades without refueling or battery replacement.",
           "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
-          "fetchedAt": "2026-10-06T01:04:35+00:00",
+          "fetchedAt": "2026-10-06T02:59:36+00:00",
           "kind": "feed"
         },
         {
           "evidenceId": "evd-40e3134974b4645eb47f",
           "text": "2: This illustrated setup shows how ASU’s extreme environments lab would test radiation and extreme cold together to mimic space.",
           "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
-          "fetchedAt": "2026-10-06T01:04:35+00:00",
+          "fetchedAt": "2026-10-06T02:59:36+00:00",
           "kind": "feed"
         },
         {
@@ -1449,6 +1489,13 @@
           "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
           "fetchedAt": "2026-10-06T01:04:35+00:00",
           "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-6e330617e598e98e061b",
+          "text": "Department of Energy For example, Pacific Northwest National Laboratory (PNNL) is working with Morgan State University, Northrop Grumman, and Project Omega on the DARPA-funded Rads to Watts program, which aims to convert Cold War-era radioactive decay into high-density nuclear micro-power radiovoltaic systems for extreme environments, including space, remote sensing, undersea infrastructure, and defense applications. [1] Fig.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-06T02:59:36+00:00",
+          "kind": "feed"
         }
       ],
       "summaryEvidenceRefs": [
@@ -1471,7 +1518,8 @@
         "evd-cc1c85bb8f5a39c7a1f3",
         "evd-3df176657e12db452073",
         "evd-78302ca92ea59472da69",
-        "evd-a3641aeaf0fc67a2c1a4"
+        "evd-a3641aeaf0fc67a2c1a4",
+        "evd-6e330617e598e98e061b"
       ],
       "keyFactEvidence": [
         {
@@ -1511,13 +1559,13 @@
       "country": "国际",
       "publishedAt": "2026-10-05T07:01:21Z",
       "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
-      "score": 81,
+      "score": 78,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 17,
         "主题优先级": 8,
-        "时效": 11,
+        "时效": 10,
         "影响信号": 21,
         "主题相关性": 12,
         "证据完整度": 3,
@@ -1527,11 +1575,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 78/100",
-        "综合排序分 81/100（AI 65% + 规则 35%）",
-        "规则参考分 87/100",
+        "DeepSeek 候选重要度 74/100",
+        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "规则参考分 86/100",
         "来源权重 17/20",
-        "发布约 18.0 小时",
+        "发布约 19.9 小时",
         "命中 10 个主题信号",
         "影响信号：test、missile、nuclear"
       ],
@@ -1587,7 +1635,8 @@
           "evd-cc1c85bb8f5a39c7a1f3",
           "evd-3df176657e12db452073",
           "evd-78302ca92ea59472da69",
-          "evd-a3641aeaf0fc67a2c1a4"
+          "evd-a3641aeaf0fc67a2c1a4",
+          "evd-6e330617e598e98e061b"
         ]
       },
       "historyContext": {
@@ -1702,7 +1751,7 @@
             "summaryLead": "Orbital data centers, military/aerospace vehicles, HPC experiments, quantum, and advanced manufacturing equipment are all putting pressure on chips to withstand extreme environments. Chips that were once qualified against a limited set of…",
             "source": "Semiconductor Engineering",
             "publishedAt": "2026-10-05T07:01:21Z",
-            "score": 81
+            "score": 78
           }
         ],
         "independentSourceCount": 1,
@@ -1793,13 +1842,13 @@
       "country": "国际",
       "publishedAt": "2026-10-05T20:03:06Z",
       "url": "https://www.aljazeera.com/news/2026/10/5/ukraine-says-russian-drone-attack-sinks-ship-in-romanian-waters?traffic_source=rss",
-      "score": 79,
+      "score": 75,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 18,
+        "时效": 17,
         "影响信号": 6,
         "主题相关性": 8,
         "证据完整度": 3,
@@ -1809,11 +1858,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 81/100",
-        "综合排序分 79/100（AI 65% + 规则 35%）",
-        "规则参考分 76/100",
+        "DeepSeek 候选重要度 75/100",
+        "综合排序分 75/100（AI 65% + 规则 35%）",
+        "规则参考分 75/100",
         "来源权重 16/20",
-        "发布约 5.0 小时",
+        "发布约 6.9 小时",
         "命中 4 个主题信号",
         "影响信号：attack"
       ],
@@ -1897,16 +1946,16 @@
             ]
           }
         ],
-        "timelineSummary": "2026年7月21日，乌克兰苏梅一购物中心遭俄无人机袭击后起火。8月1日，基辅遭袭致9人死亡，乌方击沉一艘俄集装箱船。10月5日，乌总统泽连斯基指俄无人机袭击致一艘船在罗马尼亚黑海海域沉没，罗方称2人死亡、11人获救。",
+        "timelineSummary": "2026年7月21日归档报道记录俄无人机袭击乌克兰苏梅购物中心引发大火；8月1日报道记录基辅遭袭9人死亡、乌方击沉俄集装箱船。10月5日报道称，乌总统指俄无人机袭击致一艘船在罗马尼亚黑海海域沉没，罗方称2人死亡、11人获救，疑为俄无人机最新越境事件。",
         "outlook": [
           {
             "horizon": "短期",
-            "text": "后续可观察罗马尼亚及北约对此次黑海海域事件的调查结论与公开回应。",
+            "text": "后续可观察罗马尼亚及北约对黑海海域事件的调查结论与公开回应。",
             "confidence": "中"
           },
           {
             "horizon": "中期",
-            "text": "若北约东翼类似事件继续出现，则需关注其是否推动联盟层面态势调整。",
+            "text": "若类似越境事件再次发生，则需关注北约东翼安全态势及相关方应对措施。",
             "confidence": "低"
           }
         ],
@@ -2008,6 +2057,44 @@
             "7d1be2688ff2f3"
           ],
           "lastReviewedAt": "2026-10-06"
+        },
+        {
+          "predictionId": "pred-8608a53205a5",
+          "eventId": "evt-566039aeb796",
+          "statement": "后续可观察罗马尼亚及北约对黑海海域事件的调查结论与公开回应。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "7d1be2688ff2f3"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        },
+        {
+          "predictionId": "pred-48e0a84b7c88",
+          "eventId": "evt-566039aeb796",
+          "statement": "若类似越境事件再次发生，则需关注北约东翼安全态势及相关方应对措施。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2027-01-04",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "7d1be2688ff2f3"
+          ],
+          "lastReviewedAt": "2026-10-06"
         }
       ],
       "eventDossier": {
@@ -2026,7 +2113,7 @@
             "summaryLead": "The incident is the latest suspected Russian drone incursion, as fears grow that the war in Ukraine could spill over. Ukraine’s President Volodymyr Zelenskyy has blamed a Russian drone attack for the sinking of a ship in Romania’s section…",
             "source": "Al Jazeera",
             "publishedAt": "2026-10-05T20:03:06Z",
-            "score": 79
+            "score": 75
           }
         ],
         "independentSourceCount": 1,
@@ -2048,21 +2135,21 @@
           "evidenceId": "evd-727a619bbdf146a52d14",
           "text": "Kraken Technology Group and Saab UK have tested a prototype autonomous ‘drone seeker’ vessel for maritime environments.",
           "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/kraken-and-saab-team-up-for-drone-detection-aboard-uncrewed-vessels",
-          "fetchedAt": "2026-10-06T01:04:34+00:00",
+          "fetchedAt": "2026-10-06T02:59:34+00:00",
           "kind": "feed"
         },
         {
           "evidenceId": "evd-99d8646c74165f307577",
           "text": "The experimental vessel combines Kraken’s K3 SCOUT uncrewed surface vessel with Saab UK’s Giraffe 1X radar designed to detect and track airborne threats in real time.",
           "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/kraken-and-saab-team-up-for-drone-detection-aboard-uncrewed-vessels",
-          "fetchedAt": "2026-10-06T01:04:34+00:00",
+          "fetchedAt": "2026-10-06T02:59:34+00:00",
           "kind": "feed"
         },
         {
           "evidenceId": "evd-f15b0377b74ca1412e08",
           "text": "The post Kraken and Saab team up for drone detection aboard uncrewed vessels first appeared on Unmanned airspace .",
           "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/kraken-and-saab-team-up-for-drone-detection-aboard-uncrewed-vessels",
-          "fetchedAt": "2026-10-06T01:04:34+00:00",
+          "fetchedAt": "2026-10-06T02:59:34+00:00",
           "kind": "feed"
         },
         {
@@ -2133,13 +2220,13 @@
       "country": "国际",
       "publishedAt": "2026-10-05T11:01:53Z",
       "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/kraken-and-saab-team-up-for-drone-detection-aboard-uncrewed-vessels",
-      "score": 79,
+      "score": 75,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 13,
+        "时效": 12,
         "影响信号": 15,
         "主题相关性": 12,
         "证据完整度": 3,
@@ -2149,11 +2236,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 76/100",
-        "综合排序分 79/100（AI 65% + 规则 35%）",
-        "规则参考分 84/100",
+        "DeepSeek 候选重要度 71/100",
+        "综合排序分 75/100（AI 65% + 规则 35%）",
+        "规则参考分 83/100",
         "来源权重 16/20",
-        "发布约 14.0 小时",
+        "发布约 15.9 小时",
         "命中 7 个主题信号",
         "影响信号：first、production、autonomous"
       ],
@@ -2311,7 +2398,7 @@
             "summaryLead": "Kraken Technology Group and Saab UK have tested a prototype autonomous ‘drone seeker’ vessel for maritime environments. The experimental vessel combines Kraken’s K3 SCOUT uncrewed surface vessel with Saab UK’s Giraffe 1X radar designed to…",
             "source": "Unmanned Airspace",
             "publishedAt": "2026-10-05T11:01:53Z",
-            "score": 79
+            "score": 75
           }
         ],
         "independentSourceCount": 1,
@@ -2333,7 +2420,7 @@
           "evidenceId": "evd-7790856d9031b46c48cf",
           "text": "The post Merchant shipping steps up demand for C-UAS as attacks increase first appeared on Unmanned airspace .",
           "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/merchant-shipping-steps-up-demand-for-c-uas-as-attacks-increase",
-          "fetchedAt": "2026-10-06T01:04:35+00:00",
+          "fetchedAt": "2026-10-06T02:59:35+00:00",
           "kind": "feed"
         },
         {
@@ -2387,13 +2474,13 @@
       "country": "国际",
       "publishedAt": "2026-10-05T10:11:12Z",
       "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/merchant-shipping-steps-up-demand-for-c-uas-as-attacks-increase",
-      "score": 79,
+      "score": 75,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
         "来源": 16,
         "主题优先级": 10,
-        "时效": 13,
+        "时效": 12,
         "影响信号": 16,
         "主题相关性": 12,
         "证据完整度": 3,
@@ -2403,11 +2490,11 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 76/100",
-        "综合排序分 79/100（AI 65% + 规则 35%）",
-        "规则参考分 85/100",
+        "DeepSeek 候选重要度 70/100",
+        "综合排序分 75/100（AI 65% + 规则 35%）",
+        "规则参考分 84/100",
         "来源权重 16/20",
-        "发布约 14.8 小时",
+        "发布约 16.7 小时",
         "命中 11 个主题信号",
         "影响信号：first、attack、missile"
       ],
@@ -2555,7 +2642,7 @@
             "summaryLead": "D-fend Solutions chief marketing officer Jeffrey Starr told the FT that the company is seeing “huge demand” from shipping groups as shipowners, shippers and naval forces face “an asymmetric threat”. And Drone Defence chief executive Richar…",
             "source": "Unmanned Airspace",
             "publishedAt": "2026-10-05T10:11:12Z",
-            "score": 79
+            "score": 75
           }
         ],
         "independentSourceCount": 1,
@@ -2564,363 +2651,121 @@
       "relatedPapers": []
     },
     {
-      "id": "853823b4121d35",
-      "eventId": "evt-74a834ede12c",
+      "id": "0e0dc8f08351a7",
+      "eventId": "evt-487ad71de889",
       "contentType": "news",
-      "title": "Teradyne invests in Bright Machines to bring robotics to AI infrastructure manufacturing",
-      "originalTitle": "Teradyne invests in Bright Machines to bring robotics to AI infrastructure manufacturing",
-      "summary": "Bright Factory is an intelligent manufacturing platform connecting design, automation, and data. | Source: Bright Machines Teradyne Inc. today announced a strategic investment in Bright Machines Inc., a builder of AI and data center infrastructure. The companies are also launching a strategic collaboration focused on integrating Teradyne robotics and test technologies with Bright Machines’ manufacturing platform.",
+      "title": "Suspected Second-generation Planet Solves NASA Hubble Cold Case",
+      "originalTitle": "Suspected Second-generation Planet Solves NASA Hubble Cold Case",
+      "summary": "Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope. In a study published Monday in Nature Astronomy, researchers report uncovering a surprising chemical clue that indicates the white dwarf star HS 0209+0832 may host a second-generation planet. This artist’s concept depicts a possible explanation for the unusual chemical abundances NASA’s Hubble Space Telescope detected in the HS 0209+0832 system: a second-generation planet orbiting a white dwarf star. What if a star’s death could give rise to an entirely new planet?",
       "summaryRevision": 5,
       "traceVersion": 1,
       "evidenceRecords": [
         {
-          "evidenceId": "evd-e8a325ec3c3c817d9e16",
-          "text": "Bright Factory is an intelligent manufacturing platform connecting design, automation, and data. | Source: Bright Machines Teradyne Inc. today announced a strategic investment in Bright Machines Inc., a builder of AI and data center infrastructure.",
-          "url": "https://www.therobotreport.com/teradyne-invests-ibright-machines-brings-robotics-ai-infrastructure-manufacturing",
-          "fetchedAt": "2026-10-06T01:06:39+00:00",
+          "evidenceId": "evd-ee6ef27fec0e42b8eb38",
+          "text": "Explore Hubble Science Hubble Space Telescope Suspected Second-generation… Hubble Home Overview About Hubble The History of Hubble Hubble Timeline Why Have a Telescope in Space?",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-06T02:59:31+00:00",
           "kind": "feed"
         },
         {
-          "evidenceId": "evd-632252ac4ef62b87d111",
-          "text": "The companies are also launching a strategic collaboration focused on integrating Teradyne robotics and test technologies with Bright Machines’ manufacturing platform.",
-          "url": "https://www.therobotreport.com/teradyne-invests-ibright-machines-brings-robotics-ai-infrastructure-manufacturing",
-          "fetchedAt": "2026-10-06T01:06:39+00:00",
+          "evidenceId": "evd-ab75c036d1dfb4de462d",
+          "text": "Roman Team Hubble Team Career Aspirations Hubble Astronauts Multimedia Images Videos Online Activities e-Books Sonifications Podcasts 3D Hubble Models Lithographs Fact Sheets Posters Hubble on the NASA App Glossary News Hubble News Social Media Media Resources 35th Anniversary More Online Activities 5 Min Read Suspected Second-generation Planet Solves NASA Hubble Cold Case This artist’s concept depicts a possible explanation for the unusual chemical abundances NASA’s Hubble Space Telescope detected in the HS 0209+0832 system: a second-generation planet orbiting a white dwarf star.",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-06T02:59:31+00:00",
           "kind": "feed"
         },
         {
-          "evidenceId": "evd-7acc1e4097b1ada75996",
-          "text": "“Physical AI is changing what is possible on the factory floor, and Teradyne and Bright Machines are partnering to accelerate this evolution,” said Shantnu Sharma, chief development officer at Teradyne.",
-          "url": "https://www.therobotreport.com/teradyne-invests-ibright-machines-brings-robotics-ai-infrastructure-manufacturing",
-          "fetchedAt": "2026-10-06T01:06:39+00:00",
+          "evidenceId": "evd-e4acf88c7faf0c0b3086",
+          "text": "Credits: Artwork: NASA, ESA, Leah Hustak (STScI) Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope .",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-06T02:59:31+00:00",
           "kind": "feed"
         },
         {
-          "evidenceId": "evd-21206d1076e0e53ab66b",
-          "text": "“The combination of Bright Machines’ depth in software-defined manufacturing and Teradyne’s decades of experience in robotics and test gives companies building AI infrastructure a faster path from design into production, with data behind every unit they build.” Teradyne and Bright Machines jointly automate production The partners said they plan to integrate Teradyne’s technologies into Bright Machines’ production environments.",
-          "url": "https://www.therobotreport.com/teradyne-invests-ibright-machines-brings-robotics-ai-infrastructure-manufacturing",
-          "fetchedAt": "2026-10-06T01:06:39+00:00",
-          "kind": "feed"
+          "evidenceId": "evd-b3d1496b552948d5cf64",
+          "text": "Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope.",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-05T22:44:41+00:00",
+          "kind": "body"
         },
         {
-          "evidenceId": "evd-3ddaaa1ca652e6ae22e9",
-          "text": "At these sites, the Bright Machines manufacturing platform , Universal Robots’ force- and power-limited robots , and Teradyne’s board test systems would operate together on a production floor.",
-          "url": "https://www.therobotreport.com/teradyne-invests-ibright-machines-brings-robotics-ai-infrastructure-manufacturing",
-          "fetchedAt": "2026-10-06T01:06:39+00:00",
-          "kind": "feed"
+          "evidenceId": "evd-6cffc48463a542a1e558",
+          "text": "In a study published Monday in Nature Astronomy, researchers report uncovering a surprising chemical clue that indicates the white dwarf star HS 0209+0832 may host a second-generation planet.",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-05T22:44:41+00:00",
+          "kind": "body"
         },
         {
-          "evidenceId": "evd-0a6c2f271bdc27955ca5",
-          "text": "“By connecting these data streams with Bright Machines’ product genealogy and manufacturing intelligence capabilities, customers can maintain an end-to-end production data thread linking design decisions, assembly execution, and electrical performance,” asserted Teradyne.",
-          "url": "https://www.therobotreport.com/teradyne-invests-ibright-machines-brings-robotics-ai-infrastructure-manufacturing",
-          "fetchedAt": "2026-10-06T01:06:39+00:00",
-          "kind": "feed"
+          "evidenceId": "evd-3a0d3a467ba639548d42",
+          "text": "This artist’s concept depicts a possible explanation for the unusual chemical abundances NASA’s Hubble Space Telescope detected in the HS 0209+0832 system: a second-generation planet orbiting a white dwarf star.",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-05T22:44:41+00:00",
+          "kind": "body"
         },
         {
-          "evidenceId": "evd-4211c75f92089cf806cf",
-          "text": "“The next generation of AI infrastructure calls for a manufacturing approach that is more automated, software-defined, data-driven, and responsive to change,” stated Sviat Dulianinov, CEO of Bright Machines.",
-          "url": "https://www.therobotreport.com/teradyne-invests-ibright-machines-brings-robotics-ai-infrastructure-manufacturing",
-          "fetchedAt": "2026-10-06T01:06:39+00:00",
-          "kind": "feed"
+          "evidenceId": "evd-d7d32b9e1143ee5b4718",
+          "text": "What if a star’s death could give rise to an entirely new planet?",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-05T22:44:41+00:00",
+          "kind": "body"
         },
         {
-          "evidenceId": "evd-ec61f14200e52b89e647",
-          "text": "Their robotics and test technologies are complementary to our platform, and together we can help customers simplify integration, accelerate deployment, and maintain a complete production data thread.” Partners share AI infrastructure experience AI infrastructure is driving one of the largest electronics manufacturing buildouts in recent history, noted Teradyne.",
-          "url": "https://www.therobotreport.com/teradyne-invests-ibright-machines-brings-robotics-ai-infrastructure-manufacturing",
-          "fetchedAt": "2026-10-06T01:06:39+00:00",
-          "kind": "feed"
-        },
-        {
-          "evidenceId": "evd-3634bbfc82a8a56b5401",
-          "text": "Burlingame, Calif.-based Bright Machines brings a software-defined manufacturing platform spanning design, robotics, automation, inspection, material movement, production intelligence, and operations.",
-          "url": "https://www.therobotreport.com/teradyne-invests-ibright-machines-brings-robotics-ai-infrastructure-manufacturing",
-          "fetchedAt": "2026-10-06T01:06:39+00:00",
-          "kind": "feed"
-        }
-      ],
-      "summaryEvidenceRefs": [
-        "evd-e8a325ec3c3c817d9e16",
-        "evd-632252ac4ef62b87d111",
-        "evd-7acc1e4097b1ada75996",
-        "evd-21206d1076e0e53ab66b",
-        "evd-3ddaaa1ca652e6ae22e9",
-        "evd-0a6c2f271bdc27955ca5",
-        "evd-4211c75f92089cf806cf",
-        "evd-ec61f14200e52b89e647",
-        "evd-3634bbfc82a8a56b5401"
-      ],
-      "keyFactEvidence": [
-        {
-          "text": "Bright Factory is an intelligent manufacturing platform connecting design",
-          "evidenceIds": [
-            "evd-e8a325ec3c3c817d9e16"
-          ]
-        },
-        {
-          "text": "| Source: Bright Machines Teradyne Inc",
-          "evidenceIds": [
-            "evd-e8a325ec3c3c817d9e16"
-          ]
-        },
-        {
-          "text": "today announced a strategic investment in Bright Machines Inc",
-          "evidenceIds": [
-            "evd-e8a325ec3c3c817d9e16"
-          ]
-        }
-      ],
-      "summaryEvidence": {
-        "status": "feed",
-        "candidateCount": 27,
-        "selectedCount": 9,
-        "reason": "selected-feed"
-      },
-      "summaryInputHash": "82495c55aff0867d3152f476",
-      "keyFacts": [
-        "Bright Factory is an intelligent manufacturing platform connecting design",
-        "| Source: Bright Machines Teradyne Inc",
-        "today announced a strategic investment in Bright Machines Inc"
-      ],
-      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
-      "category": "无人系统",
-      "source": "The Robot Report",
-      "country": "国际",
-      "publishedAt": "2026-10-05T23:34:35Z",
-      "url": "https://www.therobotreport.com/teradyne-invests-ibright-machines-brings-robotics-ai-infrastructure-manufacturing",
-      "score": 78,
-      "scoreBasis": "AI重要度 · 规则约束",
-      "scoreComponents": {
-        "基础分": 15,
-        "来源": 16,
-        "主题优先级": 10,
-        "时效": 19,
-        "影响信号": 20,
-        "主题相关性": 2,
-        "证据完整度": 3,
-        "多源印证": 0,
-        "编辑降权": 0,
-        "日期异常降权": 0,
-        "补充窗口降权": 0
-      },
-      "scoreReasons": [
-        "DeepSeek 候选重要度 74/100",
-        "综合排序分 78/100（AI 65% + 规则 35%）",
-        "规则参考分 85/100",
-        "来源权重 16/20",
-        "发布约 1.4 小时",
-        "命中 1 个主题信号",
-        "影响信号：deploy、test、production"
-      ],
-      "confidence": "中",
-      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
-      "tags": [
-        "机器人",
-        "AI基础设施",
-        "战略投资"
-      ],
-      "image": "",
-      "corroboration": 1,
-      "sources": [
-        {
-          "name": "The Robot Report",
-          "domain": "therobotreport.com",
-          "url": "https://www.therobotreport.com/teradyne-invests-ibright-machines-brings-robotics-ai-infrastructure-manufacturing",
-          "publishedAt": "2026-10-05T23:34:35Z",
-          "evidenceGroup": "outlet:therobotreport.com"
-        }
-      ],
-      "selectionProvider": "deepseek",
-      "translationProvider": "deepseek",
-      "isSupplemental": false,
-      "selectionWindowHours": 24,
-      "selectionNote": "",
-      "diversityRelaxed": false,
-      "displayTranslation": {
-        "version": 1,
-        "language": "zh-CN",
-        "provider": "deepseek",
-        "title": "Teradyne投资Bright Machines，将机器人技术引入AI基础设施制造",
-        "summary": "Bright Factory是一个连接设计、自动化和数据的智能制造平台。| 来源：Bright Machines Teradyne Inc.今日宣布对AI和数据中心基础设施建造商Bright Machines Inc.进行战略投资。两家公司还启动战略合作，重点是将Teradyne的机器人和测试技术与Bright Machines的制造平台相整合。",
-        "sourceTitle": "Teradyne invests in Bright Machines to bring robotics to AI infrastructure manufacturing",
-        "sourceSummary": "Bright Factory is an intelligent manufacturing platform connecting design, automation, and data. | Source: Bright Machines Teradyne Inc. today announced a strategic investment in Bright Machines Inc., a builder of AI and data center infrastructure. The companies are also launching a strategic collaboration focused on integrating Teradyne robotics and test technologies with Bright Machines’ manufacturing platform.",
-        "sourceEvidenceRefs": [
-          "evd-e8a325ec3c3c817d9e16",
-          "evd-632252ac4ef62b87d111",
-          "evd-7acc1e4097b1ada75996",
-          "evd-21206d1076e0e53ab66b",
-          "evd-3ddaaa1ca652e6ae22e9",
-          "evd-0a6c2f271bdc27955ca5",
-          "evd-4211c75f92089cf806cf",
-          "evd-ec61f14200e52b89e647",
-          "evd-3634bbfc82a8a56b5401"
-        ]
-      },
-      "historyContext": {
-        "status": "no-match",
-        "lookbackDays": 365,
-        "relatedCount": 0,
-        "relatedStories": [],
-        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
-        "outlook": [
-          {
-            "horizon": "观察",
-            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-            "confidence": "低"
-          }
-        ],
-        "analysisProvider": "rules"
-      },
-      "eventIdentity": {
-        "version": 2,
-        "decision": "new-event",
-        "reason": "no-unambiguous-match",
-        "semanticEligible": true,
-        "representativeId": "853823b4121d35",
-        "mergedFrom": [],
-        "evidence": {
-          "newsIds": [
-            "853823b4121d35"
-          ],
-          "urls": [
-            "https://www.therobotreport.com/teradyne-invests-ibright-machines-brings-robotics-ai-infrastructure-manufacturing"
-          ],
-          "anchors": [
-            "ai",
-            "bright",
-            "bring",
-            "infrastructure",
-            "invests",
-            "machines",
-            "manufacturing",
-            "robotics",
-            "teradyne"
-          ],
-          "date": "2026-10-05"
-        }
-      },
-      "evidenceMatrix": {
-        "overallStatus": "single-source",
-        "independentSourceCount": 1,
-        "sourceGroups": [
-          "outlet:therobotreport.com"
-        ],
-        "claims": [
-          {
-            "text": "Bright Factory is an intelligent manufacturing platform connecting design",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:therobotreport.com"
-            ]
-          },
-          {
-            "text": "| Source: Bright Machines Teradyne Inc",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:therobotreport.com"
-            ]
-          },
-          {
-            "text": "today announced a strategic investment in Bright Machines Inc",
-            "status": "single-source",
-            "statusLabel": "当前仅见单一独立来源",
-            "sourceGroups": [
-              "outlet:therobotreport.com"
-            ]
-          }
-        ],
-        "disputes": [],
-        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
-      },
-      "forecastLedger": [
-        {
-          "predictionId": "pred-2d7310f06655",
-          "eventId": "evt-74a834ede12c",
-          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
-          "horizon": "观察",
-          "confidence": "低",
-          "status": "open",
-          "statusLabel": "待验证",
-          "createdAt": "2026-10-06",
-          "dueAfter": "2026-11-05",
-          "verificationSignals": [
-            "后续试验与任务数据",
-            "规模化部署、采购或反制变化"
-          ],
-          "evidenceIds": [
-            "853823b4121d35"
-          ],
-          "lastReviewedAt": "2026-10-06"
-        }
-      ],
-      "eventDossier": {
-        "eventId": "evt-74a834ede12c",
-        "status": "new",
-        "statusLabel": "新事件",
-        "firstSeen": "2026-10-06",
-        "lastSeen": "2026-10-06",
-        "updateCount": 1,
-        "timeline": [
-          {
-            "editionDate": "2026-10-06",
-            "newsId": "853823b4121d35",
-            "title": "Teradyne invests in Bright Machines to bring robotics to AI infrastructure manufacturing",
-            "originalTitle": "Teradyne invests in Bright Machines to bring robotics to AI infrastructure manufacturing",
-            "summaryLead": "Bright Factory is an intelligent manufacturing platform connecting design, automation, and data. | Source: Bright Machines Teradyne Inc. today announced a strategic investment in Bright Machines Inc., a builder of AI and data center infras…",
-            "source": "The Robot Report",
-            "publishedAt": "2026-10-05T23:34:35Z",
-            "score": 78
-          }
-        ],
-        "independentSourceCount": 1,
-        "paperCount": 0
-      },
-      "relatedPapers": []
-    },
-    {
-      "id": "0722a3e342dab3",
-      "eventId": "evt-b26e5ec4ae2b",
-      "contentType": "news",
-      "title": "6 Guidelines for Governing AI",
-      "originalTitle": "6 Guidelines for Governing AI",
-      "summary": "6 Guidelines for Governing AI",
-      "summaryRevision": 5,
-      "traceVersion": 1,
-      "evidenceRecords": [
-        {
-          "evidenceId": "evd-043c561ea8aea99068c1",
-          "text": "6 Guidelines for Governing AI",
-          "url": "https://spectrum.ieee.org/6-guidelines-governing-ai",
-          "fetchedAt": "2026-10-05T22:44:43+00:00",
+          "evidenceId": "evd-e591e015772a6218969d",
+          "text": "New analysis of archival Hubble data points to the possibility of \"dead\" white dwarf stars hosting second-generation planetary systems.",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-05T22:44:41+00:00",
           "kind": "body"
         }
       ],
       "summaryEvidenceRefs": [
-        "evd-043c561ea8aea99068c1"
+        "evd-ee6ef27fec0e42b8eb38",
+        "evd-ab75c036d1dfb4de462d",
+        "evd-e4acf88c7faf0c0b3086",
+        "evd-b3d1496b552948d5cf64",
+        "evd-6cffc48463a542a1e558",
+        "evd-3a0d3a467ba639548d42",
+        "evd-d7d32b9e1143ee5b4718",
+        "evd-e591e015772a6218969d"
       ],
-      "keyFactEvidence": [],
+      "keyFactEvidence": [
+        {
+          "text": "Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope",
+          "evidenceIds": [
+            "evd-e4acf88c7faf0c0b3086"
+          ]
+        },
+        {
+          "text": "In a study published Monday in Nature Astronomy",
+          "evidenceIds": [
+            "evd-6cffc48463a542a1e558"
+          ]
+        }
+      ],
       "summaryEvidence": {
         "status": "body",
-        "candidateCount": 81,
-        "selectedCount": 1,
+        "candidateCount": 71,
+        "selectedCount": 3,
         "reason": "selected-public-body"
       },
-      "summaryInputHash": "3c0509c94ebc5087b65d9aeb",
-      "keyFacts": [],
-      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
-      "category": "AI",
-      "source": "IEEE Spectrum",
+      "summaryInputHash": "170bbcaebe382cb7d03bb2bd",
+      "keyFacts": [
+        "Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope",
+        "In a study published Monday in Nature Astronomy"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
       "country": "国际",
-      "publishedAt": "2026-10-05T18:00:02Z",
-      "url": "https://spectrum.ieee.org/6-guidelines-governing-ai",
-      "score": 73,
+      "publishedAt": "2026-10-05T15:00:35Z",
+      "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+      "score": 72,
       "scoreBasis": "AI重要度 · 规则约束",
       "scoreComponents": {
         "基础分": 15,
-        "来源": 17,
-        "主题优先级": 10,
-        "时效": 16,
-        "影响信号": 9,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 14,
+        "影响信号": 12,
         "主题相关性": 4,
         "证据完整度": 3,
         "多源印证": 0,
@@ -2929,29 +2774,30 @@
         "补充窗口降权": 0
       },
       "scoreReasons": [
-        "DeepSeek 候选重要度 72/100",
-        "综合排序分 73/100（AI 65% + 规则 35%）",
-        "规则参考分 74/100",
-        "来源权重 17/20",
-        "发布约 7.0 小时",
+        "DeepSeek 候选重要度 70/100",
+        "综合排序分 72/100（AI 65% + 规则 35%）",
+        "规则参考分 77/100",
+        "来源权重 20/20",
+        "发布约 11.9 小时",
         "命中 2 个主题信号",
-        "影响信号：first、contract"
+        "影响信号：first、nuclear"
       ],
       "confidence": "中",
-      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
       "tags": [
-        "人工智能治理",
-        "准则"
+        "哈勃",
+        "白矮星",
+        "系外行星"
       ],
-      "image": "https://spectrum.ieee.org/media-library/illustration-of-floating-hands-rearranging-various-ai-chat-boxes-and-tasks.jpg?id=68052366&width=980",
+      "image": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2026/10/STScI-01M3CBK3T6SRKP4Q7WV9CGFGW9.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
       "corroboration": 1,
       "sources": [
         {
-          "name": "IEEE Spectrum",
-          "domain": "spectrum.ieee.org",
-          "url": "https://spectrum.ieee.org/6-guidelines-governing-ai",
-          "publishedAt": "2026-10-05T18:00:02Z",
-          "evidenceGroup": "outlet:spectrum.ieee.org"
+          "name": "NASA",
+          "domain": "science.nasa.gov",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "publishedAt": "2026-10-05T15:00:35Z",
+          "evidenceGroup": "outlet:science.nasa.gov"
         }
       ],
       "selectionProvider": "deepseek",
@@ -2964,12 +2810,19 @@
         "version": 1,
         "language": "zh-CN",
         "provider": "deepseek",
-        "title": "治理人工智能的6项准则",
-        "summary": "现有元数据未提供摘要。",
-        "sourceTitle": "6 Guidelines for Governing AI",
-        "sourceSummary": "6 Guidelines for Governing AI",
+        "title": "疑似第二代行星破解NASA哈勃悬案",
+        "summary": "天文学家细致排查，破解了NASA哈勃空间望远镜数据档案中的一桩悬案。研究人员在周一发表于《自然·天文学》的研究中报告，发现一条出人意料的化学线索，表明白矮星HS 0209+0832可能拥有一颗第二代行星。NASA哈勃空间望远镜在HS 0209+0832系统中探测到异常化学丰度，这幅艺术概念图描绘了一种可能解释：一颗第二代行星环绕白矮星运行。现有元数据未说明该行星是否已确认及后续观测安排。",
+        "sourceTitle": "Suspected Second-generation Planet Solves NASA Hubble Cold Case",
+        "sourceSummary": "Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope. In a study published Monday in Nature Astronomy, researchers report uncovering a surprising chemical clue that indicates the white dwarf star HS 0209+0832 may host a second-generation planet. This artist’s concept depicts a possible explanation for the unusual chemical abundances NASA’s Hubble Space Telescope detected in the HS 0209+0832 system: a second-generation planet orbiting a white dwarf star. What if a star’s death could give rise to an entirely new planet?",
         "sourceEvidenceRefs": [
-          "evd-043c561ea8aea99068c1"
+          "evd-ee6ef27fec0e42b8eb38",
+          "evd-ab75c036d1dfb4de462d",
+          "evd-e4acf88c7faf0c0b3086",
+          "evd-b3d1496b552948d5cf64",
+          "evd-6cffc48463a542a1e558",
+          "evd-3a0d3a467ba639548d42",
+          "evd-d7d32b9e1143ee5b4718",
+          "evd-e591e015772a6218969d"
         ]
       },
       "historyContext": {
@@ -2992,19 +2845,23 @@
         "decision": "registry-match",
         "reason": "immutable-article",
         "semanticEligible": true,
-        "representativeId": "0722a3e342dab3",
+        "representativeId": "0e0dc8f08351a7",
         "mergedFrom": [],
         "evidence": {
           "newsIds": [
-            "0722a3e342dab3"
+            "0e0dc8f08351a7"
           ],
           "urls": [
-            "https://spectrum.ieee.org/6-guidelines-governing-ai"
+            "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case"
           ],
           "anchors": [
-            "ai",
-            "governing",
-            "guidelines"
+            "case",
+            "cold",
+            "hubble",
+            "planet",
+            "second-generation",
+            "solves",
+            "suspected"
           ],
           "date": "2026-10-05"
         }
@@ -3013,16 +2870,387 @@
         "overallStatus": "single-source",
         "independentSourceCount": 1,
         "sourceGroups": [
-          "outlet:spectrum.ieee.org"
+          "outlet:science.nasa.gov"
         ],
-        "claims": [],
+        "claims": [
+          {
+            "text": "Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          },
+          {
+            "text": "In a study published Monday in Nature Astronomy",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          }
+        ],
         "disputes": [],
         "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
       },
       "forecastLedger": [
         {
-          "predictionId": "pred-45665d889103",
-          "eventId": "evt-b26e5ec4ae2b",
+          "predictionId": "pred-43202bf31d22",
+          "eventId": "evt-487ad71de889",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "0e0dc8f08351a7"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-487ad71de889",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-10-06",
+            "newsId": "0e0dc8f08351a7",
+            "title": "Suspected Second-generation Planet Solves NASA Hubble Cold Case",
+            "originalTitle": "Suspected Second-generation Planet Solves NASA Hubble Cold Case",
+            "summaryLead": "Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope. In a study published Monday in Nature Astronomy, researchers report uncovering a surprising chemical clue that indicates th…",
+            "source": "NASA",
+            "publishedAt": "2026-10-05T15:00:35Z",
+            "score": 72
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "df746c21e27339",
+      "eventId": "evt-57e7399f5c54",
+      "contentType": "news",
+      "title": "OpenAI will watermark ChatGPT text in the EU but makes it optional for API users worldwide",
+      "originalTitle": "OpenAI will watermark ChatGPT text in the EU but makes it optional for API users worldwide",
+      "summary": "OpenAI is adding invisible watermarks to ChatGPT text to comply with EU rules. Unlike Anthropic, it will let API customers worldwide turn them off. The EU AI Act reportedly requires AI providers to label generated text in a machine-readable format. OpenAI's answer is textGrain, a technology that embeds an invisible statistical signal in the model's word choices. It works much like Claude's SynthID watermark, which uses Google's open-source technology. OpenAI says it will turn on watermarking for ChatGPT and Codex users in the European Union over the coming weeks.",
+      "summaryRevision": 5,
+      "traceVersion": 1,
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-4c1c21ad1cf84db4dc96",
+          "text": "OpenAI is adding invisible textGrain watermarks to ChatGPT in the EU, but unlike Anthropic, it will let API customers worldwide opt out.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-06T02:59:30+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-74cf3849ed8efaa36ce5",
+          "text": "The article OpenAI will watermark ChatGPT text in the EU but makes it optional for API users worldwide appeared first on The Decoder .",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-06T02:59:30+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-2fde29e8f3943b401958",
+          "text": "OpenAI is adding invisible watermarks to ChatGPT text to comply with EU rules.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a062ecd4d27b504f0a5f",
+          "text": "Unlike Anthropic, it will let API customers worldwide turn them off.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-ce27c100c3e6649ee6dc",
+          "text": "The EU AI Act reportedly requires AI providers to label generated text in a machine-readable format.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-c86ad0d3c58c219f3c11",
+          "text": "OpenAI's answer is textGrain, a technology that embeds an invisible statistical signal in the model's word choices.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a0b13b98028fb84e4b97",
+          "text": "It works much like Claude's SynthID watermark, which uses Google's open-source technology.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-0b012e0da82b5f5eaf35",
+          "text": "OpenAI says it will turn on watermarking for ChatGPT and Codex users in the European Union over the coming weeks.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a93ebe66986e4f7c4b07",
+          "text": "API watermarking will be opt-in worldwide, unlike Anthropic's mandatory watermarking for Claude, which applies globally regardless of how users access the models.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-dd5d8f093cca4900ddc4",
+          "text": "OpenAI's API watermarking will also be available through cloud partners such as Microsoft Azure in the coming weeks.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-935865cc7b5f9e74fab4",
+          "text": "Editing the text also makes the watermark harder to detect.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-cbf624f2aca069dd42a5",
+          "text": "OpenAI says replacing just 10 percent of words with synonyms cuts detection rates for 400-token passages from about 92 percent to 66 percent.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-0dd5331a8e98c4316c6b",
+          "text": "Replacing a quarter of the words drops detection to 17 percent, making the watermark easy to evade.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-0f932a425bd6925d6fa2",
+          "text": "That weakness could work in OpenAI's favor.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a9130226883e7c2caae5",
+          "text": "OpenAI also says a detected watermark reveals nothing about how much human creativity or editing went into the text.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:45:51+00:00",
+          "kind": "feed"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-4c1c21ad1cf84db4dc96",
+        "evd-74cf3849ed8efaa36ce5",
+        "evd-2fde29e8f3943b401958",
+        "evd-a062ecd4d27b504f0a5f",
+        "evd-ce27c100c3e6649ee6dc",
+        "evd-c86ad0d3c58c219f3c11",
+        "evd-a0b13b98028fb84e4b97",
+        "evd-0b012e0da82b5f5eaf35",
+        "evd-a93ebe66986e4f7c4b07",
+        "evd-dd5d8f093cca4900ddc4",
+        "evd-935865cc7b5f9e74fab4",
+        "evd-cbf624f2aca069dd42a5",
+        "evd-0dd5331a8e98c4316c6b",
+        "evd-0f932a425bd6925d6fa2",
+        "evd-a9130226883e7c2caae5"
+      ],
+      "keyFactEvidence": [
+        {
+          "text": "OpenAI is adding invisible watermarks to ChatGPT text to comply with EU rules",
+          "evidenceIds": [
+            "evd-2fde29e8f3943b401958"
+          ]
+        },
+        {
+          "text": "it will let API customers worldwide turn them off",
+          "evidenceIds": [
+            "evd-a062ecd4d27b504f0a5f"
+          ]
+        }
+      ],
+      "summaryEvidence": {
+        "status": "body",
+        "candidateCount": 26,
+        "selectedCount": 6,
+        "reason": "selected-public-body"
+      },
+      "summaryInputHash": "1f6b33c9b6f38f57459f67e1",
+      "keyFacts": [
+        "OpenAI is adding invisible watermarks to ChatGPT text to comply with EU rules",
+        "it will let API customers worldwide turn them off"
+      ],
+      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
+      "category": "AI",
+      "source": "The Decoder",
+      "country": "国际",
+      "publishedAt": "2026-10-05T17:32:42Z",
+      "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+      "score": 67,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 5,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 68/100",
+        "综合排序分 67/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
+        "来源权重 15/20",
+        "发布约 9.4 小时",
+        "命中 1 个主题信号",
+        "影响信号：first"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "OpenAI",
+        "水印",
+        "欧盟AI法案"
+      ],
+      "image": "https://the-decoder.com/wp-content/uploads/2026/10/openai_chatgpt_text_detection-2-1200x675.png",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The Decoder",
+          "domain": "the-decoder.com",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "publishedAt": "2026-10-05T17:32:42Z",
+          "evidenceGroup": "outlet:the-decoder.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "displayTranslation": {
+        "version": 1,
+        "language": "zh-CN",
+        "provider": "deepseek",
+        "title": "OpenAI将在欧盟为ChatGPT文本添加水印，但全球API用户可自行关闭",
+        "summary": "OpenAI正在为ChatGPT文本添加不可见水印，以遵守欧盟规定。与Anthropic不同，它将允许全球API客户关闭该功能。据报道，欧盟《人工智能法案》要求AI提供商以机器可读格式标注生成的文本。OpenAI的解决方案是textGrain，该技术通过模型选词嵌入不可见的统计信号，其原理与Claude使用谷歌开源技术的SynthID水印类似。OpenAI表示，将在未来几周内为欧盟的ChatGPT和Codex用户开启水印功能。",
+        "sourceTitle": "OpenAI will watermark ChatGPT text in the EU but makes it optional for API users worldwide",
+        "sourceSummary": "OpenAI is adding invisible watermarks to ChatGPT text to comply with EU rules. Unlike Anthropic, it will let API customers worldwide turn them off. The EU AI Act reportedly requires AI providers to label generated text in a machine-readable format. OpenAI's answer is textGrain, a technology that embeds an invisible statistical signal in the model's word choices. It works much like Claude's SynthID watermark, which uses Google's open-source technology. OpenAI says it will turn on watermarking for ChatGPT and Codex users in the European Union over the coming weeks.",
+        "sourceEvidenceRefs": [
+          "evd-4c1c21ad1cf84db4dc96",
+          "evd-74cf3849ed8efaa36ce5",
+          "evd-2fde29e8f3943b401958",
+          "evd-a062ecd4d27b504f0a5f",
+          "evd-ce27c100c3e6649ee6dc",
+          "evd-c86ad0d3c58c219f3c11",
+          "evd-a0b13b98028fb84e4b97",
+          "evd-0b012e0da82b5f5eaf35",
+          "evd-a93ebe66986e4f7c4b07",
+          "evd-dd5d8f093cca4900ddc4",
+          "evd-935865cc7b5f9e74fab4",
+          "evd-cbf624f2aca069dd42a5",
+          "evd-0dd5331a8e98c4316c6b",
+          "evd-0f932a425bd6925d6fa2",
+          "evd-a9130226883e7c2caae5"
+        ]
+      },
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "df746c21e27339",
+        "mergedFrom": [],
+        "evidence": {
+          "newsIds": [
+            "df746c21e27339"
+          ],
+          "urls": [
+            "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide"
+          ],
+          "anchors": [
+            "api",
+            "chatgpt",
+            "eu",
+            "makes",
+            "openai",
+            "optional",
+            "text",
+            "users",
+            "watermark",
+            "worldwide"
+          ],
+          "date": "2026-10-05"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:the-decoder.com"
+        ],
+        "claims": [
+          {
+            "text": "OpenAI is adding invisible watermarks to ChatGPT text to comply with EU rules",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:the-decoder.com"
+            ]
+          },
+          {
+            "text": "it will let API customers worldwide turn them off",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:the-decoder.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-6603217fc078",
+          "eventId": "evt-57e7399f5c54",
           "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
           "horizon": "观察",
           "confidence": "低",
@@ -3035,13 +3263,13 @@
             "监管、部署或算力计划变化"
           ],
           "evidenceIds": [
-            "0722a3e342dab3"
+            "df746c21e27339"
           ],
           "lastReviewedAt": "2026-10-06"
         }
       ],
       "eventDossier": {
-        "eventId": "evt-b26e5ec4ae2b",
+        "eventId": "evt-57e7399f5c54",
         "status": "new",
         "statusLabel": "新事件",
         "firstSeen": "2026-10-06",
@@ -3050,13 +3278,13 @@
         "timeline": [
           {
             "editionDate": "2026-10-06",
-            "newsId": "0722a3e342dab3",
-            "title": "6 Guidelines for Governing AI",
-            "originalTitle": "6 Guidelines for Governing AI",
-            "summaryLead": "6 Guidelines for Governing AI",
-            "source": "IEEE Spectrum",
-            "publishedAt": "2026-10-05T18:00:02Z",
-            "score": 73
+            "newsId": "df746c21e27339",
+            "title": "OpenAI will watermark ChatGPT text in the EU but makes it optional for API users worldwide",
+            "originalTitle": "OpenAI will watermark ChatGPT text in the EU but makes it optional for API users worldwide",
+            "summaryLead": "OpenAI is adding invisible watermarks to ChatGPT text to comply with EU rules. Unlike Anthropic, it will let API customers worldwide turn them off. The EU AI Act reportedly requires AI providers to label generated text in a machine-readabl…",
+            "source": "The Decoder",
+            "publishedAt": "2026-10-05T17:32:42Z",
+            "score": 67
           }
         ],
         "independentSourceCount": 1,
@@ -3065,12 +3293,12 @@
       "relatedPapers": []
     }
   ],
-  "qualifiedCandidateCount": 143,
+  "qualifiedCandidateCount": 141,
   "paperLinkedItemCount": 0,
   "eventCount": 10,
   "weeklyDigest": {
     "schemaVersion": 1,
-    "generatedAt": "2026-10-06T01:01:13Z",
+    "generatedAt": "2026-10-06T02:55:27Z",
     "timezone": "Asia/Shanghai",
     "weekId": "2026-W41",
     "fromDate": "2026-10-05",
@@ -3158,6 +3386,19 @@
         "outlook": "继续观察新的独立来源与正式信息。"
       },
       {
+        "eventId": "evt-c3f7212a8554",
+        "title": "Trump approves firing-squad execution of Fort Hood shooter, Pentagon says",
+        "category": "军事动态",
+        "summary": "Donald Trump has approved the execution by US army firing squad of Nidal Hasan, who was sentenced to death for killing 13 soldiers at Fort Hood in 2009, chief Pentagon spokesperson Sean Parnell said in a social media post.",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 2,
+        "paperCount": 0,
+        "outlook": "继续观察新的独立来源与正式信息。"
+      },
+      {
         "eventId": "evt-ae4e0a1e027e",
         "title": "Germany to set up first drone regiment next year, modeled after Ukraine war lessons",
         "category": "军事动态",
@@ -3169,25 +3410,12 @@
         "independentSourceCount": 1,
         "paperCount": 0,
         "outlook": "继续观察新的独立来源与正式信息。"
-      },
-      {
-        "eventId": "evt-e230fb50ad6a",
-        "title": "US Marine Corps anti-ship weaponry to see exercise action on remote Japan island near Taiwan",
-        "category": "军事动态",
-        "summary": "MANILA, Philippines — The U.S. Marine Corps will deploy its ground-based anti-ship and air-defense systems to Japan’s southwesternmost island for exercise Keen Sword, placing new U.S.-Japan capabilities on an island sitting just 110 kilometers from Taiwan.",
-        "firstSeen": "2026-10-06",
-        "lastSeen": "2026-10-06",
-        "trend": "本周新出现",
-        "updateCount": 1,
-        "independentSourceCount": 1,
-        "paperCount": 0,
-        "outlook": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。"
       }
     ]
   },
   "anomalySignals": {
     "schemaVersion": 1,
-    "generatedAt": "2026-10-06T01:01:13Z",
+    "generatedAt": "2026-10-06T02:55:27Z",
     "timezone": "Asia/Shanghai",
     "status": "stable",
     "baselineDays": 30,
@@ -3196,5 +3424,5 @@
     "summary": "基于过去 29 个有归档日建立稳健基线，检测到 0 个升温信号。",
     "signals": []
   },
-  "releaseId": "r20261006T010850-62785bd3"
+  "releaseId": "r20261006T030452-342ca4fc"
 }
