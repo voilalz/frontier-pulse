@@ -236,6 +236,17 @@ _SCALES = {"hundred":100, "thousand":1000, "million":10**6, "billion":10**9, "tr
            "亿":10**8, "十亿":10**9, "万亿":10**12}
 _SCALE_PATTERN = "|".join(sorted(_SCALES, key=len, reverse=True))
 _MONTHS = "Jan(?:uary)? Feb(?:ruary)? Mar(?:ch)? Apr(?:il)? May Jun(?:e)? Jul(?:y)? Aug(?:ust)? Sep(?:tember)? Oct(?:ober)? Nov(?:ember)? Dec(?:ember)?".split()
+_MONTH_NAMES = "January February March April May June July August September October November December".split()
+_CALENDAR_MAY = re.compile(
+    r"\bMay\.?\s+\d{1,4}\b|"
+    r"\b\d{1,2}(?:st|nd|rd|th)?\s+May\b(?=\s*(?:[,.;:!?]|$|\d{4}\b))|"
+    r"\b(?:in|on|by|for|until|during|from|since|through|before|after)\s+(?:\d{1,2}(?:st|nd|rd|th)?\s+)?May\b|"
+    r"\b(?:next|last|this|early|late)\s+May\b(?=\s*(?:[,.;:!?]|$|(?:the|a|an)\b))", re.I)
+
+
+def _without_calendar_may(text):
+    # Capitalization alone cannot disambiguate Title Case modal headlines.
+    return _CALENDAR_MAY.sub(" calendar month ", text)
 
 
 def _quantity_key(amount):
@@ -252,7 +263,15 @@ def quantity_values(text):
         if token.count(".") > 1:
             values.add("id:" + token)
             continue
-        amount = Decimal(token) * _SCALES.get((match[2] or "").lower(), 1)
+        scale = _SCALES.get((match[2] or "").lower(), 1)
+        if not match[2]:
+            tail = text[match.end():]
+            abbreviation = re.match(r"\s*([kmbt])\b(?![.-][a-z0-9])", tail, re.I)
+            currency_before = re.search(r"(?:[$€£¥]|\b(?:USD|EUR|GBP|JPY|CNY))\s*$", text[:match.start()], re.I)
+            currency_after = abbreviation and re.match(r"\s*(?:dollars?|euros?|pounds?|yen|yuan|USD|EUR|GBP|JPY|CNY)\b", tail[abbreviation.end():], re.I)
+            if abbreviation and (currency_before or currency_after):
+                scale = {"k": 10**3, "m": 10**6, "b": 10**9, "t": 10**12}[abbreviation[1].lower()]
+        amount = Decimal(token) * scale
         values.add(_quantity_key(amount))
     words = "|".join(sorted(_NUMBER_WORDS, key=len, reverse=True))
     tens = "twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety"
@@ -263,7 +282,14 @@ def quantity_values(text):
         amount *= _SCALES.get((match[2] or "").lower(), 1)
         values.add(_quantity_key(amount))
     for month, pattern in enumerate(_MONTHS, 1):
-        if re.search(r"\b" + pattern + r"\.?\s+\d{1,4}\b", text, re.I):
+        dated = (re.search(r"\b" + pattern + r"\.?\s+\d{1,4}\b", text, re.I)
+                 or re.search(r"\b\d{1,2}(?:st|nd|rd|th)?\s+" + pattern + r"\b", text, re.I)
+                 or re.search(r"\b(?:in|by|until|during|from|since|through|before|after|next|last|this|early|late)\s+" + pattern + r"\b", text, re.I))
+        if month == 5:
+            dated = _without_calendar_may(text) != text
+        # May can be a modal verb and march an action; require date context.
+        named = month not in {3, 5} and re.search(r"\b" + _MONTH_NAMES[month - 1] + r"\b", text, re.I)
+        if dated or named:
             values.add("number:" + str(month))
     for match in re.finditer(r"\b(\d{1,2})[.:](\d{2})\s*(am|pm)\b", text, re.I):
         hour, minute = int(match[1]), int(match[2])
@@ -271,6 +297,12 @@ def quantity_values(text):
             values.update("number:" + str(n) for n in (hour, minute, hour % 12 + (12 if match[3].lower() == "pm" else 0)))
     for match in re.finditer(r"\b(\d+(?:\.\d+)?)m\s+years?\b", text, re.I):
         values.add(_quantity_key(Decimal(match[1]) * 10**6))
+    # Dates and amounts cannot authorize a newly invented short model code.
+    ignored = {"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec",
+               "in", "on", "by", "for", "at", "of", "to", "a", "an", "usd", "eur", "gbp", "jpy", "cny", "us", "uk", "esa", "ai"}
+    for match in re.finditer(r"(?<![a-z0-9])([a-z]{1,3})[.\s-]?(\d+(?:\.\d+)*)([a-z]{0,2})(?![a-z0-9])", text, re.I):
+        if match[1].lower() not in ignored:
+            values.add("model:" + match[1].lower() + match[2] + match[3].lower())
     return values
 
 
@@ -391,8 +423,9 @@ def prose_translation_issue(value, source_text, evidence_refs):
         return "Chinese-source-rewritten"
     if not _translation_negation_valid(text, source_text):
         return "negated-action"
+    scope_source = _without_calendar_may(source_text)
     for label, pattern in zip(("planned", "limited", "simulation", "preliminary", "partial", "negation"), _TRANSLATION_SCOPE):
-        if pattern.search(source_text) and not pattern.search(text):
+        if pattern.search(scope_source) and not pattern.search(text):
             return "qualifier:" + label
     return ""
 

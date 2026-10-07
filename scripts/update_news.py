@@ -454,7 +454,7 @@ def current_featured_translation_ids(
         and valid_display_translation(item)
         and item.get("summaryRevision") == SUMMARY_REVISION
         and item.get("summaryInputHash") == summary_input_hash(article)
-        and item.get("summary") == item_from_article(article, {})["summary"]
+        and translation_supported_by_article(item, article)
     }
 
 
@@ -1638,16 +1638,22 @@ def article_identity_input(article: Article) -> dict[str, Any]:
 def deduplicate(articles: Iterable[Article]) -> list[Article]:
     from event_identity import same_event
     groups: list[list[Article]] = []
+    identities: dict[int, dict[str, Any]] = {}
     for article in sorted(articles, key=lambda item: item.published_at, reverse=True):
         ensure_evidence_sources(article)
+        identity = article_identity_input(article)
+        identities[id(article)] = identity
         group = next((members for members in groups if all(
-            same_event(article_identity_input(article), article_identity_input(member)) for member in members)), None)
+            same_event(identity, identities[id(member)]) for member in members)), None)
         if group is None:
             groups.append([article])
         else:
             merge_evidence_sources(group[0], article)
             if not group[0].description and article.description:
                 group[0].description = article.description
+            # A representative gains source URLs/body evidence when merged.
+            # Refresh only that member; retain the all-members matching rule.
+            identities[id(group[0])] = article_identity_input(group[0])
             group.append(article)
     return [group[0] for group in groups]
 
@@ -1719,6 +1725,22 @@ def source_weight(article: Article, config: dict[str, Any]) -> int:
     )
 
 
+def articles_in_window(articles: Iterable[Article], now: datetime, hours: int) -> list[Article]:
+    threshold = now - timedelta(hours=hours)
+    latest = now + timedelta(hours=2)
+    return [article for article in articles if threshold <= article.published_at <= latest]
+
+
+def rank_candidates(
+    articles: Iterable[Article], config: dict[str, Any], now: datetime, *, lookback_hours: int
+) -> list[Article]:
+    # Feed history outside the requested window cannot contribute to this run.
+    # Bound the expensive event/evidence work before pairwise deduplication.
+    current = articles_in_window(articles, now, lookback_hours)
+    return score_articles(deduplicate(eligible_articles(current, config)), config, now,
+                          lookback_hours=lookback_hours)
+
+
 def score_articles(
     articles: list[Article],
     config: dict[str, Any],
@@ -1728,11 +1750,8 @@ def score_articles(
 ) -> list[Article]:
     primary_window = int(config["lookback_hours"])
     active_window = int(lookback_hours or primary_window)
-    threshold = now - timedelta(hours=active_window)
     scored: list[Article] = []
-    for article in eligible_articles(articles, config):
-        if article.published_at < threshold or article.published_at > now + timedelta(hours=2):
-            continue
+    for article in eligible_articles(articles_in_window(articles, now, active_window), config):
         article.category, article.tags = classify(article, config)
         text = f"{article.title} {article.description}".lower()
         if any(keyword_matches(text, keyword) for keyword in config.get("editorial_exclude_keywords", [])):
@@ -2203,6 +2222,16 @@ def ai_select(candidates: list[Article], config: dict[str, Any], runtime: dict[s
     raise RuntimeError(f"{runtime['provider']} structured output could not be parsed after one retry: {error}")
 
 
+def remove_repeated_summary_facts(item: dict[str, Any]) -> None:
+    """Use the publication validator's comparison after the final summary is set."""
+    summary = normalized_title(item.get("summary", ""))
+    if "keyFacts" in item:
+        item["keyFacts"] = [fact for fact in item["keyFacts"] if normalized_title(fact) != summary]
+    if "keyFactEvidence" in item:
+        item["keyFactEvidence"] = [fact for fact in item["keyFactEvidence"]
+                                   if normalized_title(fact.get("text", "")) != summary]
+
+
 def item_from_article(
     article: Article,
     config: dict[str, Any],
@@ -2303,11 +2332,26 @@ def item_from_article(
             if valid_display_translation(candidate):
                 item.update(candidate)
                 item["translationProvider"] = editorial["_provider"]
+    remove_repeated_summary_facts(item)
     return item
 
 
 class TranslationContentRejected(ValueError):
     """A valid response contained rejected translations, not a provider outage."""
+
+
+def translation_supported_by_article(item: dict[str, Any], article: Article) -> bool:
+    """Unchanged text hashes do not guarantee unchanged source evidence."""
+    from evidence_trace import valid_display_translation, trace_claim
+    if not valid_display_translation(item) or item.get("originalTitle") != article.title:
+        return False
+    current = item_from_article(article, {})
+    value = item["displayTranslation"]
+    summary = value["sourceSummary"]
+    refs = trace_claim(summary, current["evidenceRecords"])
+    current.update(summary=summary, summaryEvidenceRefs=refs,
+                   displayTranslation={**value, "sourceEvidenceRefs": refs})
+    return valid_display_translation(current)
 
 
 def run_resilient_ai_batches(
@@ -2835,6 +2879,8 @@ def reusable_stream_translations(
             or item.get("summaryInputHash") != summary_input_hash(article)
         ):
             continue
+        if not translation_supported_by_article(item, article):
+            continue
         key_facts = [
             clean_text(fact, 140) for fact in item.get("keyFacts", [])
             if clean_text(fact)
@@ -2886,6 +2932,7 @@ def merge_featured_stream_item(item: dict[str, Any], daily_item: dict[str, Any])
         for field_name in ("originalTitle", "title", "summary", "summaryRevision", "summaryInputHash", "keyFacts", "why", "tags", "translationProvider", "traceVersion", "evidenceRecords", "summaryEvidenceRefs", "keyFactEvidence", "displayTranslation"):
             if field_name in daily_item:
                 item[field_name] = daily_item[field_name]
+    remove_repeated_summary_facts(item)
 
 
 def recover_daily_translations(report: dict[str, Any], stream: dict[str, Any]) -> None:
@@ -2912,6 +2959,7 @@ def recover_daily_translations(report: dict[str, Any], stream: dict[str, Any]) -
         for name in ("title", "summary", "keyFacts", "why", "tags", "translationProvider", "traceVersion", "evidenceRecords", "summaryEvidenceRefs", "keyFactEvidence", "displayTranslation"):
             if name in translated:
                 item[name] = translated[name]
+        remove_repeated_summary_facts(item)
         recovered += 1
     if not recovered:
         return
@@ -2938,6 +2986,32 @@ def recover_daily_translations(report: dict[str, Any], stream: dict[str, Any]) -
     report["translationDiagnostics"] = diagnostics
     report["brief"] = fallback_brief(report["items"], int(report.get("sourceCount", 0)))
     LOGGER.info("Recovered %d daily Chinese summaries from the current stream", recovered)
+
+
+def refresh_stream_translation_coverage(report: dict[str, Any]) -> None:
+    """Recount final display claims after construction or daily recovery."""
+    from evidence_trace import valid_display_translation
+    items = report["items"]
+    valid = [valid_display_translation(item) for item in items]
+    translated = sum(valid)
+    missing = [item["id"] for item, accepted in zip(items, valid) if not accepted]
+    status = ("ok" if translated == len(items) else "partial" if translated
+              else report.get("translationStatus", "not-configured"))
+    if status not in {"disabled", "not-configured"} and not translated and items:
+        status = "failed"
+    report.update(translatedItemCount=translated, translationStatus=status,
+                  titleOnlyTranslatedItemCount=sum(accepted and item.get("contentAvailability") == "title-only"
+                                                   for item, accepted in zip(items, valid)))
+    warnings = [warning for warning in report.get("translationWarnings", [])
+                if not warning.startswith("全量动态中文翻译不完整：")]
+    if status in {"partial", "failed"}:
+        warnings.append(f"全量动态中文翻译不完整：{translated}/{len(items)}")
+    report["translationWarnings"] = list(dict.fromkeys(warnings))
+    diagnostics = report.get("translationDiagnostics", {})
+    if diagnostics:
+        diagnostics.update(targetItemCount=len(items), totalTranslatedItemCount=translated,
+                           totalMissingItemCount=len(missing), totalMissingItemIds=missing,
+                           coverageCompletionMessage=f"还有 {len(missing)} 条中文译文待完成" if missing else "中文译文已全部完成")
 
 
 def build_stream_report(
@@ -2999,6 +3073,7 @@ def build_stream_report(
                 item["tags"] = editorial.get("tags", item["tags"])
             else:
                 item.pop("displayTranslation")
+        remove_repeated_summary_facts(item)
         item["isTopStory"] = article.id in featured
         item["streamRank"] = len(items) + 1
         items.append(item)
@@ -3013,11 +3088,7 @@ def build_stream_report(
         (clean_text(item.get("translationProvider")) for item in items if clean_text(item.get("translationProvider"))),
         "",
     )
-    translated_count = sum(valid_display_translation(item) for item in items)
-    warnings = list(translation_warnings or [])
-    if translation_runtime and translated_count < len(items):
-        warnings.append(f"全量动态中文翻译不完整：{translated_count}/{len(items)}")
-    return {
+    report = {
         "schemaVersion": 7,
         "generatedAt": now.isoformat().replace("+00:00", "Z"),
         "timezone": config.get("timezone", DEFAULT_TIMEZONE),
@@ -3029,11 +3100,14 @@ def build_stream_report(
         "sourceCounts": dict(sorted(source_counts.items(), key=lambda pair: (-pair[1], pair[0]))),
         "translationProvider": translation_runtime.get("provider") if translation_runtime else inferred_provider,
         "translationModel": translation_runtime.get("model") if translation_runtime else "",
-        "translatedItemCount": translated_count,
-        "translationWarnings": list(dict.fromkeys(warnings)),
+        "translationStatus": ("disabled" if not config.get("stream_translation_enabled", True)
+                              else "failed" if translation_runtime or inferred_provider else "not-configured"),
+        "translationWarnings": list(translation_warnings or []),
         "translationDiagnostics": dict(translation_diagnostics or {}),
         "items": items,
     }
+    refresh_stream_translation_coverage(report)
+    return report
 
 
 def request_research_editorial_batch(
@@ -4268,6 +4342,19 @@ def validate_stream_report(report: dict[str, Any]) -> None:
     translated = sum(valid_display_translation(item) for item in items)
     if int(report.get("translatedItemCount", translated)) != translated:
         raise ValueError("stream translatedItemCount does not match items")
+    status = report.get("translationStatus")
+    if status is not None and (status not in {"ok", "partial", "failed", "disabled", "not-configured"}
+            or (status == "ok" and translated != len(items))
+            or (status == "partial" and not 0 < translated < len(items))
+            or (status in {"failed", "disabled", "not-configured"} and translated)):
+        raise ValueError("stream translationStatus does not match items")
+    diagnostics = report.get("translationDiagnostics", {})
+    missing_ids = [item["id"] for item in items if not valid_display_translation(item)]
+    if diagnostics and "totalMissingItemIds" in diagnostics and (
+            diagnostics.get("totalTranslatedItemCount") != translated
+            or diagnostics.get("totalMissingItemCount") != len(missing_ids)
+            or diagnostics["totalMissingItemIds"] != missing_ids):
+        raise ValueError("stream total translation coverage does not match items")
     validate_ai_batch_diagnostics(report.get("translationDiagnostics"), "stream translation")
 
 
@@ -4595,6 +4682,7 @@ def write_pipeline_status(
         "streamItemCount": int(stream_report.get("itemCount", 0)) if success and stream_report else previous.get("streamItemCount", 0),
         "streamTranslationProvider": stream_report.get("translationProvider") if success and stream_report else previous.get("streamTranslationProvider"),
         "streamTranslationModel": stream_report.get("translationModel") if success and stream_report else previous.get("streamTranslationModel"),
+        "streamTranslationStatus": stream_report.get("translationStatus") if success and stream_report else previous.get("streamTranslationStatus"),
         "streamTranslatedItemCount": int(stream_report.get("translatedItemCount", 0)) if success and stream_report else previous.get("streamTranslatedItemCount", 0),
         "streamTranslationWarnings": stream_report.get("translationWarnings", []) if success and stream_report else previous.get("streamTranslationWarnings", []),
         "streamTranslationDiagnostics": stream_report.get("translationDiagnostics", {}) if success and stream_report else previous.get("streamTranslationDiagnostics", {}),
@@ -4628,7 +4716,9 @@ def write_stream_status(
         "itemCount": int(stream_report.get("itemCount", 0)) if success else previous.get("itemCount", 0),
         "translationProvider": stream_report.get("translationProvider") if success else previous.get("translationProvider"),
         "translationModel": stream_report.get("translationModel") if success else previous.get("translationModel"),
+        "translationStatus": stream_report.get("translationStatus") if success else previous.get("translationStatus"),
         "translatedItemCount": int(stream_report.get("translatedItemCount", 0)) if success else previous.get("translatedItemCount", 0),
+        "titleOnlyTranslatedItemCount": int(stream_report.get("titleOnlyTranslatedItemCount", 0)) if success else previous.get("titleOnlyTranslatedItemCount", 0),
         "translationWarnings": stream_report.get("translationWarnings", []) if success else previous.get("translationWarnings", []),
         "translationDiagnostics": stream_report.get("translationDiagnostics", {}) if success else previous.get("translationDiagnostics", {}),
         "message": clean_text(message, 300),
@@ -4742,9 +4832,7 @@ def main(argv: list[str] | None = None) -> int:
         collection_report.update(schemaVersion=1, generatedAt=now.isoformat().replace("+00:00", "Z"))
         write_json_atomic(args.source_health_output, collection_report)
         primary_window = int(config["lookback_hours"])
-        stream_candidates = score_articles(
-            deduplicate(eligible_articles(raw, config)), config, now, lookback_hours=primary_window
-        )
+        stream_candidates = rank_candidates(raw, config, now, lookback_hours=primary_window)
 
         # The three-hour stream is a fresh, already-validated resilience input.
         # It protects the daily job from a transient RSS/GDELT outage without
@@ -4759,12 +4847,8 @@ def main(argv: list[str] | None = None) -> int:
                 max_generated_age_hours=stream_cache_age,
             )
             if cached_stream:
-                recovered_primary = score_articles(
-                    deduplicate(eligible_articles([*raw, *cached_stream], config)),
-                    config,
-                    now,
-                    lookback_hours=primary_window,
-                )
+                recovered_primary = rank_candidates([*raw, *cached_stream], config, now,
+                                                    lookback_hours=primary_window)
                 if len(recovered_primary) > len(stream_candidates):
                     LOGGER.info(
                         "Fresh stream cache increased the 24-hour pool from %d to %d",
@@ -4778,9 +4862,10 @@ def main(argv: list[str] | None = None) -> int:
 
         enrich_article_descriptions(stream_candidates, {**config, "article_text_enabled": False} if args.fixture else config)
         stream_runtime = resolve_ai_runtime(config) if not args.skip_ai else None
+        visible_candidates = stream_candidates[:max(1, int(config.get("stream_limit", 300)))]
         previous_stream = read_json_safe(args.stream_output, {})
         stream_translations = reusable_stream_translations(
-            previous_stream, stream_candidates, stream_runtime
+            previous_stream, visible_candidates, stream_runtime
         )
 
         report: dict[str, Any] | None = None
@@ -4806,9 +4891,7 @@ def main(argv: list[str] | None = None) -> int:
                 ))
                 known_ids = {article.id for article in candidates}
                 for window in windows:
-                    expanded = score_articles(
-                        deduplicate(eligible_articles(recovery_raw, config)), config, now, lookback_hours=window
-                    )
+                    expanded = rank_candidates(recovery_raw, config, now, lookback_hours=window)
                     for article in expanded:
                         if article.id in known_ids:
                             continue
@@ -4847,7 +4930,7 @@ def main(argv: list[str] | None = None) -> int:
             }
         stream_translation_warnings: list[str] = []
         stream_translation_diagnostics: dict[str, Any] = {}
-        featured_translated_ids = current_featured_translation_ids(stream_candidates, top_stories, stream_runtime)
+        featured_translated_ids = current_featured_translation_ids(visible_candidates, top_stories, stream_runtime)
         if (
             stream_runtime
             and bool(config.get("stream_translation_enabled", True))
@@ -4855,27 +4938,36 @@ def main(argv: list[str] | None = None) -> int:
             reused_translation_count = len(stream_translations)
             translation_limit = max(0, min(
                 int(config.get("stream_limit", 300)),
-                int(config.get("stream_translation_limit", 120)),
+                int(config.get("stream_translation_limit", config.get("stream_limit", 300))),
             ))
             already_translated = featured_translated_ids | set(stream_translations)
-            translation_candidates = [
-                article for article in stream_candidates[:translation_limit]
+            pending_translations = [
+                article for article in visible_candidates
                 if article.id not in already_translated
             ]
+            translation_candidates = pending_translations[:translation_limit]
             new_translations, stream_translation_warnings, stream_translation_diagnostics = ai_translate_articles(
                 translation_candidates, config, stream_runtime
             )
             stream_translation_diagnostics["reusedItemCount"] = reused_translation_count
             stream_translation_diagnostics["featuredTranslatedItemCount"] = len(featured_translated_ids)
+            not_attempted = [article.id for article in pending_translations[translation_limit:]]
+            not_attempted.extend(value["id"] for value in stream_translation_diagnostics.get("missingItems", [])
+                                 if value.get("reason", "").startswith("not_attempted"))
+            stream_translation_diagnostics["notAttemptedItemIds"] = not_attempted
+            stream_translation_diagnostics["notAttemptedItemCount"] = len(not_attempted)
+            stream_translation_diagnostics["budgetDeferredItemCount"] = len(pending_translations[translation_limit:])
+            if pending_translations[translation_limit:]:
+                deferred = len(pending_translations[translation_limit:])
+                stream_translation_diagnostics["completionMessage"] += f"；另有 {deferred} 条受本轮预算限制尚未请求"
             stream_translations.update(new_translations)
-        has_translated_top_story = bool(featured_translated_ids)
         stream_report = build_stream_report(
             stream_candidates,
-            config,
+            {**config, "stream_translation_enabled": False} if args.skip_ai else config,
             now,
             top_stories,
             stream_translations,
-            stream_runtime if stream_translations or has_translated_top_story else None,
+            stream_runtime,
             stream_translation_warnings,
             stream_translation_diagnostics,
         )
@@ -4936,6 +5028,7 @@ def main(argv: list[str] | None = None) -> int:
                 daily_item = top_stories.get(clean_text(stream_item.get("id")))
                 if isinstance(daily_item, dict):
                     merge_featured_stream_item(stream_item, daily_item)
+            refresh_stream_translation_coverage(stream_report)
             validate_report(report, int(config["top_n"]))
             validate_stream_report(stream_report)
             from deepread_editorial import build_daily_deepread

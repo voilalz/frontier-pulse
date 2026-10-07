@@ -198,9 +198,11 @@ python scripts/update_news.py
 
 - `public/data/news.json`：`selectionMethod` 记录评分提供方，`selectionStrategy: ai-ranked-rule-constrained` 表示 AI 排序后由程序约束，`selectionStatus` 区分 `ok`、`adjusted`、`relaxed` 与 `fallback`；`translationStatus: ok`、`translationModel: deepseek-v4-flash`、`translatedItemCount: 10` 表示中文编辑完整。
 - `public/data/research.json`：`editorialProvider: deepseek`、`translatedItemCount > 0`。
-- `public/data/stream.json`：`translationProvider: deepseek`、`translatedItemCount > 0`。
+- `public/data/stream.json`：`translationStatus: ok` 且 `translatedItemCount == itemCount` 表示可用原文的中文翻译完整；`titleOnlyTranslatedItemCount` 单列只有标题的条目。`partial` / `failed` 会明确说明尚未完成的译文。
 - `public/data/status.json` 和 `stream-status.json`：记录模型、翻译数量、缺失 ID、重试次数、逐项失败原因和完成原因，但绝不包含密钥或原始提示词。
 - `public/data/news.json` 的每条 `historyContext`：保存程序匹配的历史记录、关联分、理由、时间线总结和后续观察；顶层 `historyAnalysisStatus`、`historyLinkedItemCount`、`historyAnalyzedItemCount` 用于区分规则关联与 AI 总结完成度。
+
+全量动态默认最多展示 300 条，`stream_translation_limit` 默认为 300，表示每轮新增翻译的预算。先排除受当前证据支持的缓存和日报译文，再从实际展示范围中选择待翻译条目；调小预算后，下一轮会继续补译后段。`translationDiagnostics.requestedItemCount` / `completedItemCount` / `missingItemCount` 保留本轮请求历史，`targetItemCount` / `totalTranslatedItemCount` / `totalMissingItemCount` 记录最终展示覆盖，`notAttemptedItemIds` 标识预算或熔断后尚未请求的条目。前端按实际有效译文重新计数，旧版元数据占位句不计为正文；只有有效中文标题时会明确显示仅标题或部分完成。
 
 本地运行可复制 `.env.example` 中的变量到当前终端环境，再执行 `python scripts/update_news.py`。不要提交真实 `.env`。系统使用官方兼容地址 `https://api.deepseek.com/chat/completions`；模型与 JSON 输出参数以 [DeepSeek 官方 API 文档](https://api-docs.deepseek.com/) 为准。
 
