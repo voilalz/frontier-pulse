@@ -8,6 +8,8 @@ const APP_SHELL = [
   "./assets/styles.css",
   "./assets/app.js",
   "./assets/publication-client.js",
+  "./assets/classic-titles.js",
+  "./assets/classic-context.js",
   "./assets/classic-client.js",
   "./assets/classic-papers.js",
   "./assets/news-policy.json",

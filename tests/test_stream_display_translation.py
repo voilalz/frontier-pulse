@@ -132,7 +132,7 @@ class StreamDisplayTranslationTests(unittest.TestCase):
             with self.subTest(number=number):
                 item["displayTranslation"]["summary"] = f"美国航天局于{number}年发射卫星。"
                 normalized = self.browser_result(f'normalizeItem({json.dumps(item)}, 0)')
-                self.assertEqual(normalized["summary"], "A satellite launch is scheduled for Monday.")
+                self.assertEqual(normalized["summary"], '')
 
     def test_current_featured_display_is_reused_without_another_translation(self):
         article, stream = self.stream()
@@ -179,12 +179,12 @@ class StreamDisplayTranslationTests(unittest.TestCase):
         item = MODULE.item_from_article(article, self.config)
         validate_news_trace(item)
 
-    def test_title_only_response_keeps_source_placeholder(self):
+    def test_title_only_response_keeps_empty_summary(self):
         article = self.article("Iran war live: latest news", "")
         translated = self.translation(article)
         stream = MODULE.build_stream_report([article], self.config, self.now, translations=translated)
         self.assertEqual(stream["translatedItemCount"], 1)
-        self.assertEqual(stream["items"][0]["displayTranslation"]["summary"], "未提取到可引用的正文，请查看原始报道。")
+        self.assertEqual(stream["items"][0]["displayTranslation"]["summary"], '')
 
     def test_rejected_content_does_not_prevent_later_stream_batches(self):
         articles = [self.article("NASA satellite mission") for _ in range(3)]

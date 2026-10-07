@@ -3,8 +3,8 @@
 
 Scheduled primary/recovery events and workflow-definition pushes are
 idempotent: a healthy 10-item edition for the current publication date and
-current data and summary contracts is retained. Manual force or a contract
-upgrade bypasses that guard.
+current data and summary contracts is retained. A formal release is immutable;
+only an explicit correction can replace it on the same date.
 """
 
 from __future__ import annotations
@@ -45,8 +45,18 @@ def decide_refresh(
     require_history_analysis: bool = False,
     deepread: dict[str, Any] | None = None,
     required_deepread_revision: int = 0,
+    release: dict[str, Any] | None = None,
+    revision_reason: str = '',
+    local_minutes: int | None = None,
 ) -> tuple[bool, str]:
     event = str(event_name or "").strip()
+    formal = isinstance(release,dict) and release.get('releaseId') and release.get('editionDate') == today
+    if formal:
+        if event == 'workflow_dispatch' and revision_reason.strip():
+            return True, 'explicit_revision'
+        return False, 'formal_edition_exists'
+    if local_minutes is not None and local_minutes < 460 and not (event == 'workflow_dispatch' and force_refresh):
+        return False, 'before_preparation_window'
     if event == "workflow_dispatch" and force_refresh:
         return True, "manual_force_refresh"
 
@@ -95,6 +105,8 @@ def append_github_output(path: Path, values: dict[str, str]) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--status", type=Path, required=True)
+    parser.add_argument('--release', type=Path)
+    parser.add_argument('--revision-reason', default='')
     parser.add_argument("--deepread", type=Path)
     parser.add_argument("--required-deepread-revision", type=int, default=0)
     parser.add_argument("--timezone", default="Asia/Shanghai")
@@ -106,12 +118,16 @@ def main() -> int:
     parser.add_argument("--github-output", type=Path)
     args = parser.parse_args()
 
-    today = datetime.now(ZoneInfo(args.timezone)).date().isoformat()
+    local = datetime.now(ZoneInfo(args.timezone))
+    today = local.date().isoformat()
     should_run, reason = decide_refresh(
         load_status(args.status),
         today=today,
         event_name=args.event_name,
         force_refresh=parse_bool(args.force),
+        release=load_status(args.release) if args.release else None,
+        revision_reason=args.revision_reason,
+        local_minutes=local.hour*60+local.minute,
         required_schema=max(0, args.required_schema),
         required_summary_revision=max(0, args.required_summary_revision),
         require_history_analysis=args.require_history_analysis,

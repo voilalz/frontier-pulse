@@ -13,6 +13,8 @@ import os
 import re
 import shutil
 import tempfile
+import fcntl
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -70,8 +72,8 @@ def prepare_stage(public: Path, stage: Path):
     copy_news(public, stage)
 
 
-def validate_publication(stage: Path, mode: str, expected_date: str | None = None):
-    stage = checked_root(stage)
+def validate_publication(stage: Path, mode: str, expected_date: str | None = None, *, snapshot=False):
+    stage = checked_root(stage, releases=snapshot)
     artifacts(stage)  # Guard every owned path, without reading unrelated content.
     try:
         _validate(stage, mode, expected_date)
@@ -112,20 +114,25 @@ def _validate(stage, mode, expected_date):
             'Translation count mismatch')
     require(news.get('historyLinkedItemCount') == sum(x['historyContext'].get('status') == 'linked' for x in news['items']),
             'History count mismatch')
-    require(len(set(news.get('spotlightIds', []))) == 3 and set(news['spotlightIds']) <= {x['id'] for x in news['items']},
+    require(len(set(news.get('spotlightIds', []))) == min(3,len(news['items'])) and set(news['spotlightIds']) <= {x['id'] for x in news['items']},
             'Invalid spotlight references')
     require(deep.get('schemaVersion') == 2 and deep.get('generationRevision') == 12, 'Invalid deepread revision')
-    from evidence_trace import validate_news_trace, validate_deepread_trace
+    from evidence_trace import validate_news_trace, valid_display_translation
+    from reader_quality import assess_admissibility, chinese_reader_text
+    from deepread_quality import validate_readable
     for item in news['items']:
         validate_news_trace(item)
-    validate_deepread_trace(deep)
-    require(deep.get('editionDate') == edition, 'Deepread edition differs from news')
+        require(assess_admissibility(item)['eligible'], 'Featured story is not a body event')
+        display = item['displayTranslation'] if valid_display_translation(item) else item
+        require(chinese_reader_text(display.get('title')) and chinese_reader_text(display.get('summary')), 'Featured Chinese reader quality failed')
+    validate_readable(deep, edition)
+    deep_date = deep.get('editionDate')
     events, chapters = deep['events'], deep['chapters']
     ids = {x['newsId'] for x in events}
     require(len(events) == deep.get('eventCount') <= 6 and deep.get('candidateCount', 13) <= 12,
             'Invalid deepread counts')
     require(len(ids) == len(events) == len({x['eventId'] for x in events}), 'Repeated deepread event')
-    require(ids <= known, 'Deepread references absent from event registry')
+    require(deep.get('readerStatus') == 'retained' or ids <= known, 'Deepread references absent from event registry')
     chapter_ids = [n for chapter in chapters for n in chapter['newsIds']]
     require(set(chapter_ids) == ids and len(chapter_ids) == len(ids), 'Invalid chapter references')
     for chapter in chapters:
@@ -150,13 +157,16 @@ def _validate(stage, mode, expected_date):
     status = read_json(data / 'status.json')
     require(status.get('state') == 'ok' and status.get('editionDate') == edition, 'Unhealthy daily generation')
     require(read_json(data / f'archive/{edition}.json') == news, 'Daily archive differs from current report')
-    require(read_json(data / f'deepread/{edition}.json') == deep, 'Deepread archive differs from current report')
+    def deep_content(value):
+        return {k:v for k,v in value.items() if k not in {'releaseId','readerStatus','publicationEditionDate','qualityFailures'}}
+    require(deep_content(read_json(data / f'deepread/{deep_date}.json')) == deep_content(deep), 'Deepread archive differs from current report')
     archive_ids = {}
     for name in ['archive/index.json', 'deepread/index.json']:
         index = read_json(data / name)
         require(isinstance(index.get('editions'), list), 'Invalid archive index')
         seen_dates = set()
-        require(edition in {x['editionDate'] for x in index['editions']}, 'Edition missing from archive index')
+        required_date = edition if name.startswith('archive/') else deep_date
+        require(required_date in {x['editionDate'] for x in index['editions']}, 'Edition missing from archive index')
         for entry in index['editions']:
             date = entry['editionDate']
             require(bool(re.fullmatch(r'\d{4}-\d{2}-\d{2}', date)), 'Invalid archive date')
@@ -167,7 +177,8 @@ def _validate(stage, mode, expected_date):
             require(isinstance(archived, dict) and archived.get('editionDate') == date, 'Archive date mismatch')
             if name.startswith('archive/'):
                 rows = archived.get('items')
-                require(isinstance(rows, list) and rows and all(isinstance(row, dict) and row.get('id') for row in rows), 'Invalid archived items')
+                require(isinstance(rows, list) and (rows or archived.get('coverageStatus') == 'insufficient')
+                        and all(isinstance(row, dict) and row.get('id') for row in rows), 'Invalid archived items')
                 ids = {row['id'] for row in rows}
                 require(len(ids) == len(rows) and archived.get('itemCount', len(rows)) == len(rows), 'Invalid archive count')
                 archive_ids[date] = ids
@@ -218,10 +229,10 @@ def _validate(stage, mode, expected_date):
         raise ValueError('Invalid Atom feed') from exc
 
 
-def artifacts(root: Path):
+def artifacts(root: Path, *, include_versions=False):
     root = checked_root(root, releases=True)
     candidates = [root/'feed.xml', *(root/'data'/name for name in sorted(NEWS_TOP))]
-    for folder in ['archive', 'deepread', 'weekly']:
+    for folder in ['archive', 'deepread', 'weekly', *(['edition-versions'] if include_versions else [])]:
         directory = safe_path(root/'data'/folder, allow_releases=True)
         if directory.exists():
             require(directory.is_dir(), 'News archive is not a directory')
@@ -244,7 +255,7 @@ def artifact_name(path):
 
 def pure_news_snapshot(snapshot):
     # Unlike restoration, deletion requires every descendant to be ours.
-    allowed_dirs = {'data', 'data/archive', 'data/deepread', 'data/weekly'}
+    allowed_dirs = {'data', 'data/archive', 'data/deepread', 'data/weekly', 'data/edition-versions'}
     for directory, folders, files in os.walk(snapshot, followlinks=False):
         base = Path(directory)
         for name in folders:
@@ -263,7 +274,7 @@ def pure_news_snapshot(snapshot):
 
 def install_file(source: Path, target: Path):
     source = safe_path(source, allow_releases=True)
-    target = safe_path(target, write=True)
+    target = safe_path(target, write=True, allow_releases=True)
     require(owns(artifact_name(source)) and owns(artifact_name(target)), 'Unowned news file install')
     require(source.is_file(), 'Missing news source')
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -289,7 +300,7 @@ def install_bundle(source: Path, public: Path, files: list[str], manifest=None):
     for name in files:
         require(safe_path(source/name, allow_releases=True).is_file(), 'Missing news source')
     for name in targets:
-        path = safe_path(public/name, write=True)
+        path = safe_path(public/name, write=True, allow_releases=True)
         require(not path.exists() or path.is_file(), 'News target is not a file')
     before = {name: (public/name).read_bytes() if (public/name).is_file() else None for name in targets}
     try:
@@ -301,7 +312,7 @@ def install_bundle(source: Path, public: Path, files: list[str], manifest=None):
             write_json_atomic(public/'data/release.json', manifest)
     except BaseException:
         for name, content in before.items():
-            target = safe_path(public/name, write=True)
+            target = safe_path(public/name, write=True, allow_releases=True)
             if content is None:
                 target.unlink(missing_ok=True)
             else:
@@ -327,7 +338,7 @@ def verify_snapshot(snapshot: Path):
         require(owns(name), 'Unowned snapshot path')
         require(isinstance(digest, str) and bool(re.fullmatch(r'[0-9a-f]{64}', digest)), 'Invalid news checksum')
         expected[name] = digest
-    actual = {p.relative_to(snapshot).as_posix() for p in artifacts(snapshot)}
+    actual = {p.relative_to(snapshot).as_posix() for p in artifacts(snapshot, include_versions=True)}
     require(bool(expected) and set(expected) == actual, 'Snapshot file set differs')
     for name, digest in expected.items():
         require(hashlib.sha256(safe_path(snapshot/name, allow_releases=True).read_bytes()).hexdigest() == digest,
@@ -338,12 +349,47 @@ def verify_snapshot(snapshot: Path):
 
 def preflight_public(public):
     public = checked_root(public, write=True)
-    for path in [*artifacts(public), public/'data/release.json', public/'releases']:
+    for path in [*artifacts(public, include_versions=True), public/'data/release.json', public/'releases']:
         safe_path(path, write=True, allow_releases=True)
     return public
 
 
-def promote(stage: Path, public: Path, mode: str, release_id: str, code_revision: str):
+@contextmanager
+def publication_lock(public):
+    root = Path(tempfile.gettempdir()) / f'frontier-news-locks-{os.getuid()}'
+    try:
+        root.mkdir(mode=0o700)
+    except FileExistsError:
+        pass
+    require(not root.is_symlink() and root.is_dir() and root.stat().st_uid == os.getuid()
+            and root.stat().st_mode & 0o777 == 0o700, 'Unsafe publication lock directory')
+    key = hashlib.sha256(str(safe_path(public)).encode()).hexdigest()
+    fd = os.open(root / (key + '.lock'), os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
+    try:
+        require(os.fstat(fd).st_nlink == 1 and os.fstat(fd).st_uid == os.getuid(), 'Unsafe publication lock file')
+        fcntl.flock(fd, fcntl.LOCK_EX)
+        yield
+    finally:
+        os.close(fd)
+
+
+def revision_changes(previous, current):
+    old = {item['id']:item for item in previous['items']}
+    new = {item['id']:item for item in current['items']}
+    fields = ['title','originalTitle','summary','displayTranslation','sources','keyFacts']
+    return {'added':sorted(new.keys()-old.keys()), 'removed':sorted(old.keys()-new.keys()),
+            'corrected':sorted(k for k in old.keys() & new.keys()
+                               if any(old[k].get(f) != new[k].get(f) for f in fields))}
+
+
+def promote(stage: Path, public: Path, mode: str, release_id: str, code_revision: str,
+            *, revision_reason='', base_release_id='', now=None):
+    with publication_lock(public):
+        return _promote(stage, public, mode, release_id, code_revision,
+                        revision_reason=revision_reason, base_release_id=base_release_id, now=now)
+
+
+def _promote(stage, public, mode, release_id, code_revision, *, revision_reason='', base_release_id='', now=None):
     stage = checked_root(stage)
     public = preflight_public(public)
     validate_publication(stage, mode)
@@ -354,24 +400,57 @@ def promote(stage: Path, public: Path, mode: str, release_id: str, code_revision
     target = public / 'releases' / release_id
     safe_path(target, write=True, allow_releases=True)
     require(not target.exists(), 'Release IDs are immutable')
+    incoming = read_json(stage/'data/news.json')
+    current = read_json(public/'data/release.json') if (public/'data/release.json').exists() else None
+    now = now or datetime.now(timezone.utc)
+    revision = None
+    if current:
+        current = verify_snapshot(public/'releases'/current['releaseId'])
+        require(incoming['editionDate'] >= current['editionDate'], 'Cannot replace a newer formal edition')
+        if incoming['editionDate'] == current['editionDate'] and not revision_reason.strip():
+            return current
+    if revision_reason.strip():
+        require(current and incoming['editionDate'] == current['editionDate']
+                and base_release_id == current['releaseId'] and 4 <= len(revision_reason.strip()) <= 220,
+                'Correction requires same day, current base and a meaningful reason')
+        old_revision = current.get('revision') or {}
+        revision = {'number':old_revision.get('number',0)+1,
+                    'initialReleaseId':old_revision.get('initialReleaseId', current['releaseId']),
+                    'previousReleaseId':current['releaseId'], 'reason':revision_reason.strip(),
+                    'updatedAt':now.isoformat(),
+                    'changes':revision_changes(read_json(public/'releases'/current['releaseId']/'data/news.json'), incoming)}
     target.parent.mkdir(parents=True, exist_ok=True)
     temporary = Path(tempfile.mkdtemp(prefix='.building-', dir=target.parent))
     try:
         copy_news(stage, temporary)
         news = read_json(temporary / 'data/news.json')
         edition = news['editionDate']
+        if revision:
+            news['publicationRevision'] = revision
+            write_json_atomic(temporary/'data/news.json', news, allow_releases=True)
+            write_json_atomic(temporary/f'data/archive/{edition}.json', news, allow_releases=True)
+        deep_date = read_json(temporary/'data/deepread.json')['editionDate']
         for path in [*(temporary/'data'/name for name in sorted(NEWS_TOP)),
                      temporary / f'data/archive/{edition}.json', temporary / 'data/archive/index.json', temporary / 'data/archive/search-index.json',
-                     temporary / f'data/deepread/{edition}.json', temporary / 'data/deepread/index.json']:
+                     *([temporary / f'data/deepread/{edition}.json'] if deep_date == edition else []), temporary / 'data/deepread/index.json']:
             content = read_json(path)
             content['releaseId'] = release_id
             write_json_atomic(path, content, allow_releases=True)
         manifest = {'schemaVersion': 1, 'artifactScope': NEWS_SCOPE, 'releaseId': release_id, 'editionDate': edition,
-                    'publishedAt': datetime.now(timezone.utc).isoformat(), 'codeRevision': code_revision,
+                    'publishedAt': now.isoformat(), 'codeRevision': code_revision,
+                    'deepreadEditionDate':deep_date, 'revision':revision,
                     'generationRevision': read_json(temporary / 'data/deepread.json')['generationRevision'],
-                    'basePath': f'./releases/{release_id}/',
-                    'files': {str(p.relative_to(temporary)): hashlib.sha256(p.read_bytes()).hexdigest()
-                              for p in artifacts(temporary)}}
+                    'basePath': f'./releases/{release_id}/'}
+        from publication_clock import publication_timing
+        manifest.update({k:v for k,v in publication_timing(edition, now).items() if k != 'waitSeconds'})
+        # A compact, immutable edition keeps copied links alive after the seven
+        # full browsing snapshots expire. It does not duplicate all archives.
+        version = {'schemaVersion':1, 'manifest':dict(manifest),
+                   'news':read_json(temporary/'data/news.json'),
+                   'deepread':read_json(temporary/'data/deepread.json')}
+        write_json_atomic(temporary/f'data/edition-versions/{release_id}.json', version, allow_releases=True)
+        manifest['files'] = {str(p.relative_to(temporary)):hashlib.sha256(p.read_bytes()).hexdigest()
+                             for p in artifacts(temporary, include_versions=True)}
         write_json_atomic(temporary / 'manifest.json', manifest, allow_releases=True)
         os.replace(temporary, target)
         verify_snapshot(target)
@@ -381,6 +460,7 @@ def promote(stage: Path, public: Path, mode: str, release_id: str, code_revision
         # An unreferenced complete snapshot is safe and can be inspected after a failed install.
         raise
     snapshots = []
+    protected = {release_id}
     for path in target.parent.iterdir():
         if path.is_symlink() or not path.is_dir() or not RELEASE_ID.fullmatch(path.name) or not pure_news_snapshot(path):
             continue
@@ -391,21 +471,35 @@ def promote(stage: Path, public: Path, mode: str, release_id: str, code_revision
         except (ValueError, OSError, KeyError, TypeError):
             continue  # Foreign or damaged releases are not ours to remove.
         snapshots.append((published_at, path.name, path))
-    for _, _, path in sorted(snapshots, reverse=True)[7:]:
+        if retained.get('revision'):
+            protected.update([path.name, retained['revision']['initialReleaseId'], retained['revision']['previousReleaseId']])
+    ordinary = [entry for entry in sorted(snapshots, reverse=True) if entry[1] not in protected]
+    for _, _, path in ordinary[6:]:
         shutil.rmtree(path)
     return manifest
 
 
 def restore(public: Path, release_id: str):
+    with publication_lock(public):
+        return _restore(public, release_id)
+
+
+def _restore(public, release_id):
     public = preflight_public(public)
     require(bool(RELEASE_ID.fullmatch(release_id)), 'Invalid release ID')
     snapshot = public / 'releases' / release_id
     manifest = verify_snapshot(snapshot)
+    validate_publication(snapshot, 'daily', manifest['editionDate'], snapshot=True)
     install_bundle(snapshot, public, list(manifest['files']), manifest)
     return manifest
 
 
-def record_failure(public: Path, mode: str, message: str):
+def record_failure(public: Path, mode: str, message: str, *, expected_date=None, now=None):
+    with publication_lock(public):
+        return _record_failure(public, mode, message, expected_date=expected_date, now=now)
+
+
+def _record_failure(public, mode, message, *, expected_date=None, now=None):
     require(mode in {'daily', 'stream'}, 'Invalid publication mode')
     public = checked_root(public, write=True)
     path = public / 'data' / ('stream-status.json' if mode == 'stream' else 'status.json')
@@ -414,7 +508,17 @@ def record_failure(public: Path, mode: str, message: str):
         previous = read_json(path)
     except ValueError:
         previous = {}
-    previous.update(state='failed', lastAttemptAt=datetime.now(timezone.utc).isoformat(), message=message)
+    now = now or datetime.now(timezone.utc)
+    previous.update(state='failed', lastAttemptAt=now.isoformat(), message=message)
+    if mode == 'daily':
+        from publication_clock import publication_timing
+        from zoneinfo import ZoneInfo
+        attempt_date = expected_date or now.astimezone(ZoneInfo('Asia/Shanghai')).date().isoformat()
+        previous['attemptEditionDate'] = attempt_date
+        previous.update({k:v for k,v in publication_timing(attempt_date,now).items() if k != 'waitSeconds'})
+        current = read_json(public/'data/release.json') if (public/'data/release.json').exists() else {}
+        if current.get('releaseId') and current.get('editionDate') == attempt_date:
+            previous.update(delayed=False, delayMinutes=0)
     write_json_atomic(path, previous)
 
 
@@ -427,6 +531,8 @@ def main():
     parser.add_argument('--release-id')
     parser.add_argument('--code-revision', default=os.getenv('GITHUB_SHA', 'local'))
     parser.add_argument('--expected-date')
+    parser.add_argument('--revision-reason', default='')
+    parser.add_argument('--base-release-id', default='')
     parser.add_argument('--message', default='本次生成或发布校验失败，已保留上一期合格内容。')
     args = parser.parse_args()
     try:
@@ -439,12 +545,13 @@ def main():
         elif args.action == 'promote':
             validate_publication(args.stage, args.mode, args.expected_date)
             rid = args.release_id or datetime.now(timezone.utc).strftime('r%Y%m%dT%H%M%S-') + uuid4().hex[:8]
-            promote(args.stage, args.public, args.mode, rid, args.code_revision)
+            promote(args.stage, args.public, args.mode, rid, args.code_revision,
+                    revision_reason=args.revision_reason, base_release_id=args.base_release_id)
         elif args.action == 'restore':
             require(bool(args.release_id), '--release-id is required')
             restore(args.public, args.release_id)
         else:
-            record_failure(args.public, args.mode, args.message)
+            record_failure(args.public, args.mode, args.message, expected_date=args.expected_date)
     except (ValueError, OSError) as exc:
         print(f'Publication refused: {exc}')
         return 1

@@ -114,7 +114,9 @@ class ReviewBoundaryTests(unittest.TestCase):
             ('NASA无人机导航试验失败','NASA无人机导航试验成功','NASA无人机导航试验失败。'),
             ('NASA完成无人机导航试验','ESA完成无人机导航试验','NASA完成无人机导航试验。')]:
             with self.subTest(original=original):
-                item = self.item(source,original,{'titleZh':rewritten})
+                item = self.item(source+' '+original+'，报告记录了本次测试的具体条件与后续核对安排。',original,{'titleZh':rewritten})
+                item['evidenceRecords'] = trace.make_evidence(item['summary'], item['url'], self.now.isoformat(), 'body')
+                item['summaryEvidenceRefs'] = trace.trace_claim(item['summary'], item['evidenceRecords'])
                 self.assertEqual(item['title'],original)
                 bad = copy.deepcopy(item); bad['title'] = rewritten
                 with self.assertRaises(ValueError): trace.validate_news_trace(bad)

@@ -8,6 +8,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from unittest import mock
 from xml.etree import ElementTree as ET
+from batch1_fixtures import ZH
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -293,7 +294,7 @@ class UpdateNewsTests(unittest.TestCase):
             article.source_evidence = make_evidence(article.description, article.url, self.now.isoformat())
         sources = {article.id: MODULE.item_from_article(article, self.config) for article in candidates}
         translations = {article.id: {
-            "titleZh": f"中文：{article.title}", "summary": "中文摘要", "tags": ["复用"],
+            "titleZh": ZH[article.id][0], "summary": "中文摘要", "tags": ["复用"],
             "_sourceTitle": article.title, "_sourceSummary": sources[article.id]["summary"],
             "_translationOnly": True, "_provider": "deepseek",
         } for article in candidates}
@@ -658,7 +659,8 @@ class UpdateNewsTests(unittest.TestCase):
             deepread = json.loads((root / "deepread.json").read_text())
             deep_events = deepread["events"]
             self.assertEqual(deepread["schemaVersion"], 2)
-            self.assertGreaterEqual(deepread["eventCount"], 1)
+            self.assertEqual(deepread["eventCount"], 0)
+            self.assertEqual(deepread['readerStatus'], 'unavailable')
             self.assertTrue(all(event["evidenceRecords"] for event in deep_events))
             self.assertLessEqual(deepread["eventCount"], 6)
             self.assertLessEqual(deepread["candidateCount"], 12)
@@ -678,7 +680,7 @@ class UpdateNewsTests(unittest.TestCase):
             self.assertTrue(all(item["eventId"] and item["eventDossier"] for item in payload["items"]))
             self.assertEqual(len(payload["spotlightIds"]), 3)
 
-    def test_irrecoverable_shortfall_writes_status_without_overwriting_latest(self):
+    def test_scarce_pool_publishes_actual_qualified_count(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             output = root / "news.json"
@@ -694,17 +696,19 @@ class UpdateNewsTests(unittest.TestCase):
                 "--archive-index", str(root / "archive" / "index.json"),
                 "--search-index", str(root / "archive" / "search-index.json"),
                 "--status-output", str(status_output),
+                '--feed-output', str(root/'feed.xml'),
                 "--stream-output", str(root / "stream.json"),
                 "--research-output", str(root / "research.json"),
                 "--stream-status-output", str(root / "stream-status.json"),
                 "--skip-ai",
                 "--now", "2026-07-16T00:00:00Z",
             ])
-            self.assertEqual(result, 2)
-            self.assertEqual(json.loads(output.read_text(encoding="utf-8")), {"sentinel": True})
+            self.assertEqual(result, 0)
+            report = json.loads(output.read_text(encoding='utf-8'))
+            self.assertLessEqual(len(report['items']), 2)
+            self.assertEqual(report['coverageStatus'],'insufficient')
             status = json.loads(status_output.read_text(encoding="utf-8"))
-            self.assertEqual(status["state"], "failed")
-            self.assertIn("分层补采后仍只有", status["message"])
+            self.assertEqual(status["state"], "ok")
 
     def test_daily_shortfall_is_backfilled_from_bounded_windows(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -793,7 +797,7 @@ class UpdateNewsTests(unittest.TestCase):
         candidates = []
         for index in range(10):
             article = MODULE.Article(**{
-                **MODULE.asdict(self.articles[0]),
+                **MODULE.asdict(self.articles[index]),
                 "id": f"same-domain-{index}",
                 "url": f"https://same-source.example/story-{index}",
                 "domain": "same-source.example",
@@ -865,7 +869,7 @@ class UpdateNewsTests(unittest.TestCase):
             MODULE.capture_source_evidence(article, article.description, "body")
         def translate(articles, _config, runtime):
             translated = {article.id: {
-                "titleZh": f"中文：{article.title}", "summary": "中文摘要",
+                "titleZh": ZH[article.id][0], "summary": "中文摘要",
                 "keyFacts": ["事实一", "事实二"], "why": "重要性", "tags": ["测试"],
                 "_translationOnly": True, "_provider": runtime["provider"],
             } for article in articles}
@@ -976,7 +980,7 @@ class UpdateNewsTests(unittest.TestCase):
         def translate(articles, _config, runtime):
             translated_ids.extend(article.id for article in articles)
             return ({article.id: {
-                "titleZh": f"中文：{article.title}", "summary": "中文摘要",
+                "titleZh": ZH[article.id][0], "summary": "中文摘要",
                 "keyFacts": ["事实一", "事实二"], "why": "重要性", "tags": [],
                 "_translationOnly": True, "_provider": runtime["provider"],
             } for article in articles}, [], {
@@ -1009,7 +1013,7 @@ class UpdateNewsTests(unittest.TestCase):
             MODULE.capture_source_evidence(article, article.description, "body")
         selected = MODULE.choose_diverse(candidates[:self.config["candidate_limit"]], self.config, 10)
         reusable = {article.id: {
-            "titleZh": f"复用中文：{article.title}", "summary": "已有中文摘要",
+            "titleZh": ZH[article.id][0], "summary": "已有中文摘要",
             "tags": ["复用"], "_translationOnly": True, "_provider": "deepseek",
             "_summaryRevision": MODULE.SUMMARY_REVISION, "_summaryInputHash": MODULE.summary_input_hash(article),
         } for article in selected}
@@ -1038,7 +1042,7 @@ class UpdateNewsTests(unittest.TestCase):
             for index, article in enumerate(candidates[:self.config["candidate_limit"]])
         ]}
         reusable = {article.id: {
-            "titleZh": f"中文：{article.title}", "summary": "中文摘要",
+            "titleZh": ZH[article.id][0], "summary": "中文摘要",
             "tags": ["复用"], "_translationOnly": True, "_provider": "deepseek",
             "_summaryRevision": MODULE.SUMMARY_REVISION, "_summaryInputHash": MODULE.summary_input_hash(article),
         } for article in candidates[:self.config["candidate_limit"]]}

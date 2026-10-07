@@ -23,7 +23,7 @@ class QualityFaultTests(unittest.TestCase):
 
     def test_collection_failure_cannot_promote_or_replace_last_readable_release(self):
         before=self.state();pub.prepare_stage(self.public,self.stage)
-        now=datetime(2026,9,30,0,10,tzinfo=timezone.utc)
+        now=datetime(2026,10,1,0,10,tzinfo=timezone.utc)
         args=build_fixture.command(self.stage,self.root/'authored-2026-09-30.json',now)
         with patch.object(sys,'argv',args[1:]),patch.object(news,'collect_fixture',side_effect=RuntimeError('injected collection failure')):
             self.assertEqual(news.main(),2)
@@ -44,9 +44,9 @@ class QualityFaultTests(unittest.TestCase):
         pub.prepare_stage(self.public,self.stage)
         for name in ['deepread.json','deepread/2026-09-30.json']:
             pub.write_json_atomic(self.stage/'data'/name,article)
-        pub.promote(self.stage,self.public,'daily','r-model-degraded','fixture')
-        self.assertEqual(json.loads((self.public/'data/deepread.json').read_text())['generationStatus'],'fallback')
-        pub.verify_snapshot(self.public/'releases/r-model-degraded')
+        before=self.state()
+        with self.assertRaises(ValueError):pub.promote(self.stage,self.public,'daily','r-model-degraded','fixture')
+        self.assertEqual(self.state(),before)
 
     def test_install_failure_rolls_back_files_and_preserves_snapshot(self):
         before=self.state();pub.prepare_stage(self.public,self.stage)
@@ -57,7 +57,8 @@ class QualityFaultTests(unittest.TestCase):
             if count==3:raise OSError('injected disk failure')
             return original(source,target)
         with patch.object(pub,'install_file',side_effect=failure):
-            with self.assertRaises(OSError):pub.promote(self.stage,self.public,'daily','r-install-fault','fixture')
+            with self.assertRaises(OSError):pub.promote(self.stage,self.public,'daily','r-install-fault','fixture',
+                revision_reason='演练发布安装的中断恢复',base_release_id='r-current')
         self.assertEqual(self.state(),before)
         pub.verify_snapshot(self.public/'releases/r-current')
         pub.record_failure(self.public,'daily','publication failed')

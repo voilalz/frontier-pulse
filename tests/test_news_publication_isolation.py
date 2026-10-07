@@ -42,8 +42,8 @@ class NewsPublicationIsolationTests(unittest.TestCase):
         return {k:v for k,v in tree(root).items()
                 if k.startswith(('classics/', 'data/classics/')) or k in ['data/research.json','data/foreign.json']}
 
-    def promote(self, rid='n-1'):
-        return pub.promote(self.stage, self.public, 'daily', rid, 'test')
+    def promote(self, rid='n-1', **options):
+        return pub.promote(self.stage, self.public, 'daily', rid, 'test', **options)
 
     def test_prepare_only_copies_news_and_preserves_unowned_stage(self):
         before = self.paper_bytes(self.stage)
@@ -172,7 +172,7 @@ class NewsPublicationIsolationTests(unittest.TestCase):
             if calls == 2: raise OSError('installation fault')
             return real(source,target)
         with patch.object(pub, 'install_file', side_effect=fail_after_one):
-            with self.assertRaises(OSError): self.promote('n-fault')
+            with self.assertRaises(OSError): self.promote('n-fault',revision_reason='演练新闻安装故障恢复',base_release_id='n-1')
         self.assertEqual({k:v for k,v in tree(self.public).items() if not k.startswith('releases/')}, before)
 
     def test_foreign_and_symlink_releases_survive_seven_news_pruning(self):
@@ -182,7 +182,10 @@ class NewsPublicationIsolationTests(unittest.TestCase):
         link = releases/'linked-classic'
         link.symlink_to(self.public/'classics', target_is_directory=True)
         before = tree(foreign)
-        for n in range(9): self.promote(f'n-{n:02}')
+        from batch1_fixtures import advance_day
+        for n in range(9):
+            advance_day(self.stage, f'2026-07-{16+n:02}')
+            self.promote(f'n-{n:02}')
         self.assertEqual(tree(foreign), before)
         self.assertTrue(link.is_symlink())
         self.assertEqual(sorted(p.name for p in releases.iterdir() if p.name.startswith('n-')),
@@ -202,7 +205,10 @@ class NewsPublicationIsolationTests(unittest.TestCase):
         (mixed/'data/research.json').write_bytes(b'legacy snapshot book')
         (mixed/'foreign-link').symlink_to(self.public/'classics',target_is_directory=True)
         before = tree(mixed)
-        for n in range(8): self.promote(f'n-{n:02}')
+        from batch1_fixtures import advance_day
+        for n in range(8):
+            advance_day(self.stage, f'2026-07-{17+n:02}')
+            self.promote(f'n-{n:02}')
         self.assertEqual(tree(mixed), before)
         self.assertTrue((mixed/'foreign-link').is_symlink())
         self.assertEqual(sorted(p.name for p in (self.public/'releases').iterdir() if p.name != 'n-mixed'),

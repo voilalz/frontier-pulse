@@ -142,7 +142,7 @@ class BilingualDeepreadTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_deepread_trace(report)
         normalized = self.browser_result(f'normalizeEditorialDeepread({json.dumps(report)})')
-        self.assertEqual(normalized["chapters"][0]["blocks"][0]["text"], block["text"])
+        self.assertEqual(normalized["chapters"][0]["blocks"][0]["text"], '')
 
     def test_prose_requires_literal_source_and_preserves_numbers_and_negation(self):
         item = self.items()[0]
@@ -253,7 +253,7 @@ class BilingualDeepreadTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_deepread_trace(report)
         normalized = self.browser_result(f'normalizeEditorialDeepread({json.dumps(report)})')
-        self.assertEqual(normalized["observations"][0]["text"], entry["text"])
+        self.assertEqual(normalized["observations"][0]["text"], '')
 
 
 if __name__ == "__main__":

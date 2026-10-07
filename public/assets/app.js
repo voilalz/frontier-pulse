@@ -4,6 +4,7 @@
   const publication = window.FrontierPublication;
   const classicUI = window.FrontierClassics;
   let releaseManifest = null;
+  let editionVersion = null;
   const RELEASE_CACHE_KEY = "fp-release-manifest-v1";
   const publicationCacheKey = (key) => releaseManifest ? `${key}:${releaseManifest.releaseId}` : key;
 
@@ -60,6 +61,7 @@
   const params = new URLSearchParams(location.search);
   const initialView = VIEWS.has(params.get("view")) ? params.get("view") : "latest";
   const initialDate = /^\d{4}-\d{2}-\d{2}$/.test(params.get("date") || "") ? params.get("date") : "";
+  const initialRelease = /^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$/.test(params.get('release') || '') ? params.get('release') : '';
   const initialRange = [6, 12, 24].includes(Number(params.get("range"))) ? Number(params.get("range")) : 24;
   const storedResearchScope = readStorage(RESEARCH_SCOPE_KEY, "all") === "mine" ? "mine" : "all";
   const initialResearchScope = params.get("scope") === "mine" ? "mine" : storedResearchScope;
@@ -380,6 +382,12 @@
       ? value.text : "";
   }
 
+  function readerTextValid(value) {
+    return typeof value === 'string' && /[\u3400-\u9fff]/.test(value)
+      && !/现有元数据|元数据未(?:提供|说明)|未提取到可引用的正文|未提供更多(?:摘要|信息|细节)|这条新闻来自|现有(?:信息|报道)(?:仅包含|未提供)|目前披露的信息仅涉及|文章.{0,180}(?:最初发表于|最先发表于)/.test(value)
+      && !/\b[a-z]{2,}(?:\s+[a-z]{2,}){2,}\b/.test(value.replace(/\([^)]*\)|（[^）]*）/g,''));
+  }
+
   function normalizeItem(raw, index, editionDate = "") {
     if (!raw || typeof raw !== "object" || !clean(raw.title)) throw new Error(`第 ${index + 1} 条新闻缺少标题`);
     const sources = (Array.isArray(raw.sources) ? raw.sources : [])
@@ -394,8 +402,11 @@
       && ["deepseek", "openai"].includes(t.provider)
       && t.sourceTitle === raw.originalTitle && t.sourceSummary === raw.summary
       && JSON.stringify(t.sourceEvidenceRefs) === JSON.stringify(raw.summaryEvidenceRefs)
-      && validZh(t.title, t.sourceTitle) && validZh(t.summary, t.sourceTitle + " " + t.sourceSummary);
-    const summary = clean(translated ? t.summary : raw.summary, "暂无摘要，请阅读原文核验。");
+      && readerTextValid(t.title) && validZh(t.title, t.sourceTitle)
+      && ((readerTextValid(t.summary) && validZh(t.summary, t.sourceTitle + " " + t.sourceSummary))
+          || (raw.summary === '' && t.summary === '' && raw.evidenceRecords?.length === 0 && raw.summaryEvidenceRefs?.length === 0));
+    const readerSummary = translated ? t.summary : raw.summary;
+    const summary = raw.contentType === 'paper' ? clean(readerSummary) : readerTextValid(readerSummary) ? clean(readerSummary) : '';
     const item = {
       id: clean(raw.id, `item-${index}`),
       eventId: clean(raw.eventId),
@@ -403,6 +414,9 @@
       title: clean(translated ? t.title : raw.title),
       originalTitle: clean(raw.originalTitle || raw.title),
       summary,
+      _policySummary: clean(raw.summary),
+      contentAvailability: clean(raw.contentAvailability, raw.summary ? 'body' : 'title-only'),
+      translationStatus: translated ? 'translated' : readerTextValid(raw.summary) ? 'native' : 'pending',
       keyFacts: (Array.isArray(raw.keyFacts) ? raw.keyFacts : []).map((fact) => clean(fact)).filter(Boolean).slice(0, 4),
       why: clean(raw.why, "该事件的重要性需要结合后续公开信息继续判断。"),
       category: clean(raw.category, "前沿技术"),
@@ -446,6 +460,9 @@
       eventDossier: normalizeEventDossier(raw.eventDossier, clean(raw.eventId)),
       relatedPapers: normalizeRelatedRecords(raw.relatedPapers, "paper"),
       relatedNews: normalizeRelatedRecords(raw.relatedNews, "news"),
+      evidenceRecords: (Array.isArray(raw.evidenceRecords) ? raw.evidenceRecords : [])
+        .filter(record=>record && typeof record === "object").map(record=>({...record,url:safeUrl(record.url)})),
+      releaseId: clean(raw.releaseId),
       editionDate: clean(raw.editionDate || editionDate),
       _compact: Boolean(raw._compact),
     };
@@ -457,7 +474,7 @@
     if (item.contentType === "paper") return true;
     if (!newsPolicy) return false;
     if (!newsPolicy.enabled) return true;
-    const lead = clean(item.summary || item.description)
+    const lead = clean(item._policySummary || item.summary || item.description)
       .replace(/\b(?:U\.S\.|U\.K\.|U\.N\.|E\.U\.)/gi, (match) => match.replace(/\./g, ""))
       .split(/(?<=[!?。！？])\s*|(?<=\.)\s+/)[0].slice(0, 240);
     const subject = `${clean(item.title)} ${clean(item.originalTitle)} ${lead}`
@@ -471,7 +488,8 @@
   }
 
   function normalizeReport(payload) {
-    if (!payload || typeof payload !== "object" || !Array.isArray(payload.items) || !payload.items.length) {
+    if (!payload || typeof payload !== "object" || !Array.isArray(payload.items)
+        || (!payload.items.length && payload.coverageStatus !== 'insufficient')) {
       throw new Error("日报文件不存在或没有新闻条目");
     }
     const editionDate = clean(payload.editionDate);
@@ -481,7 +499,8 @@
       generatedAt: clean(payload.generatedAt),
       timezone: clean(payload.timezone, "Asia/Shanghai"),
       method: clean(payload.method, "rules"),
-      items: payload.items.slice(0, 100).map((item, index) => normalizeItem(item, index, editionDate)).filter(isAllowedNewsItem),
+      items: payload.items.slice(0, 100).map((item, index) => normalizeItem({...item,
+        releaseId: payload.releaseId || item.releaseId}, index, editionDate)).filter(isAllowedNewsItem),
     };
   }
 
@@ -514,12 +533,29 @@
   }
 
   async function loadPublication(bypassCache = false) {
+    const cacheKey = initialRelease ? `${RELEASE_CACHE_KEY}:${initialRelease}` : RELEASE_CACHE_KEY;
+    editionVersion = null;
     try {
-      const manifest = publication.validateManifest(await fetchJson("./data/release.json", bypassCache));
+      const manifest = publication.validateManifest(await fetchJson(initialRelease ? `./releases/${initialRelease}/manifest.json` : './data/release.json', bypassCache));
+      if (initialRelease && manifest.releaseId !== initialRelease) throw new Error('指定版本与清单不一致');
       releaseManifest = manifest;
-      writeStorage(RELEASE_CACHE_KEY, manifest);
+      writeStorage(cacheKey, manifest);
     } catch (error) {
-      const cached = readStorage(RELEASE_CACHE_KEY, null);
+      if (initialRelease) {
+        const versionKey = `fp-edition-version-v1:${initialRelease}`;
+        try {
+          editionVersion = publication.validateEditionVersion(await fetchJson(`./data/edition-versions/${initialRelease}.json`, bypassCache), initialRelease);
+          writeStorage(versionKey, editionVersion);
+        } catch (versionError) {
+          const cachedVersion = readStorage(versionKey, null);
+          if (cachedVersion) editionVersion = publication.validateEditionVersion(cachedVersion, initialRelease);
+          else throw new Error('指定历史版本暂时无法读取，请稍后重试。');
+        }
+        releaseManifest = editionVersion.manifest;
+        writeStorage(cacheKey, releaseManifest);
+        return;
+      }
+      const cached = readStorage(cacheKey, null);
       if (cached) releaseManifest = publication.validateManifest(cached);
       else if (error.status === 404) releaseManifest = null;
       else throw error;
@@ -528,6 +564,16 @@
 
   async function fetchPublicationJson(path, bypassCache = false) {
     const pinned = releaseManifest;
+    if (editionVersion) {
+      const bundle = editionVersion, date = bundle.news.editionDate, deepDate = bundle.deepread.editionDate;
+      if (path === ENDPOINTS.latest || path === `./data/archive/${date}.json`) return bundle.news;
+      if (path === ENDPOINTS.deepread || path === `./data/deepread/${deepDate}.json`) return bundle.deepread;
+      if (path === ENDPOINTS.archive || path === ENDPOINTS.deepreadIndex) return {schemaVersion:1,releaseId:pinned.releaseId,
+        editions:[{editionDate:path === ENDPOINTS.archive ? date : deepDate, itemCount:bundle.news.items.length}]};
+      if (path === ENDPOINTS.search) return {schemaVersion:1,releaseId:pinned.releaseId,
+        items:bundle.news.items.map(item=>({...item,editionDate:date}))};
+      throw new Error('此链接仅包含所选历史版本，请返回首页查看其他日期。');
+    }
     const payload = await fetchJson(publication.resolve(pinned, path), bypassCache);
     if (pinned !== releaseManifest) throw new Error("版本已切换，请重新读取");
     const current = path === ENDPOINTS.latest || path === ENDPOINTS.deepread
@@ -598,6 +644,12 @@
       return;
     }
     if (renderEditionHealth(report, "日报", false, state.pipelineStatus?.state === "failed")) return;
+    if (report?.coverageStatus === 'insufficient') {
+      badge.textContent = '合格候选不足';
+      badge.classList.add('warning');
+      showAlert('notice', '本期按实际合格数量刊发', `当前有 ${report.items.length} 条合格独立事件，未补入不合格稿件。`);
+      return;
+    }
     if (report?.items?.length !== 10) {
       badge.textContent = "数量异常";
       badge.classList.add("warning");
@@ -618,7 +670,7 @@
       showAlert(
         "warning",
         translationStatus === "partial" ? "日报已更新，但部分中文翻译失败" : "日报已更新，但中文翻译失败",
-        [...new Set(translationWarnings)].join("；") || `Top 10 中已完成 ${translatedItemCount} 条中文翻译；英文规则字段仍可用。`,
+        [...new Set(translationWarnings)].join("；") || `已完成 ${translatedItemCount} 条中文翻译，其余条目保留原文链接与翻译状态。`,
       );
       return;
     }
@@ -710,7 +762,8 @@
           && block.text === event.sourceExcerpt
           && JSON.stringify(block.evidenceIds) === JSON.stringify(event.summaryEvidenceRefs);
         const prose = proseDisplayText(block.displayTranslation, block.text, block.evidenceIds);
-        return {type: block.type, text: prose || (translatedExcerpt ? event.excerpt : clean(block.text)), newsIds: refs,
+        const reader = prose || (translatedExcerpt ? event.excerpt : clean(block.text));
+        return {type: block.type, text: readerTextValid(reader) ? reader : '', newsIds: refs,
           evidenceIds: Array.isArray(block.evidenceIds) ? block.evidenceIds.filter((ref) => /^evd-[a-f0-9]{20}$/.test(ref)) : []};
       });
       const event = kind === "event" && newsIds.length === 1 ? byNews.get(newsIds[0]) : null;
@@ -734,7 +787,8 @@
           filtered = true; return null;
         }
         const prose = proseDisplayText(entry.displayTranslation, entry.text, supports.map(support => support.evidenceId));
-        return {text: prose || clean(entry.text), newsIds: refs,
+        const reader = prose || clean(entry.text);
+        return {text: readerTextValid(reader) ? reader : '', newsIds: refs,
           supports: supports.map((support) => ({newsId: clean(support.newsId), supportQuote: clean(support.supportQuote)}))};
       }).filter(Boolean);
     if (filtered) chapters.forEach((chapter) => {
@@ -745,6 +799,8 @@
     });
     return {
       releaseId: clean(payload.releaseId), schemaVersion: 2, editionDate: payload.editionDate, generatedAt: clean(payload.generatedAt),
+      readerStatus:clean(payload.readerStatus, 'unavailable'), publicationEditionDate:clean(payload.publicationEditionDate),
+      qualityFailures:Array.isArray(payload.qualityFailures) ? payload.qualityFailures : [],
       headline: filtered ? "今日前沿深读" : clean(payload.headline, "今日前沿深读"),
       lead: filtered ? "" : clean(payload.lead),
       generationStatus: usedEvents.length < 4 ? "insufficient" : clean(payload.generationStatus, "fallback"),
@@ -804,6 +860,15 @@
   }
 
   function renderEditorialDeepread(report) {
+    if (!['complete','retained'].includes(report?.readerStatus) || report?.generationStatus !== 'ok'
+        || report?.contentFiltered || report?.chapters?.length < 3
+        || report.chapters.some(c=>c.blocks.filter(b=>b.type==='paragraph' && readerTextValid(b.text)).length < 2)) {
+      return '<div class="empty"><h2>今日深读待更新</h2><p>今日未通过内容校验，暂无可沿用的完整版。</p></div>';
+    }
+    return renderEditorialContent(report);
+  }
+
+  function renderEditorialContent(report) {
     if (!report?.chapters?.length) return '<div class="empty"><h2>这期深读尚未发布</h2><p>请选择已有日期，或在日报更新后回来阅读。</p></div>';
     const byNews = new Map(report.events.map((event) => [event.newsId, event]));
     const length = [report.lead, ...report.chapters.flatMap((chapter) => chapter.blocks.map((block) => block.text))].join("").length;
@@ -818,7 +883,7 @@
         <header class="deepread-header"><p class="eyebrow">${esc(report.editionDate)} · FRONTIER PULSE</p>
           <h2>${esc(report.headline)}</h2>
           ${report.lead ? `<p class="deepread-lead">${esc(report.lead)}</p>` : ""}
-          ${report.generationStatus !== "ok" ? `<p class="deepread-note">本期为简版，选题或成文材料仍在补充。</p>` : ""}
+          ${report.readerStatus === 'retained' ? `<p class="deepread-note">最新完整版：${esc(report.editionDate)}；今日未通过内容校验。</p>` : ""}
         </header>
         ${report.chapters.map((chapter) => {
           const members = chapter.newsIds.map((id) => byNews.get(id)).filter(Boolean);
@@ -921,6 +986,14 @@
         showAlert("warning", report ? "当前展示已保存的深读" : "这期深读暂时无法读取", report
           ? `版本日期为 ${report.editionDate}，刷新后可重试。`
           : "请选择已有日期，或稍后刷新。每日深读从栏目上线之日起独立归档。");
+      } else if (report?.readerStatus === 'retained' && !state.historicalSelection) {
+        badge.textContent = '沿用完整版';
+        badge.classList.add('warning');
+        showAlert('notice', '今日深读未通过内容校验', `最新完整版：${report.editionDate}，正文保留实际内容日期。`);
+      } else if (report?.schemaVersion === 2 && report?.readerStatus === 'unavailable') {
+        badge.textContent = '深读待更新';
+        badge.classList.add('warning');
+        showAlert('notice', '今日深读待更新', '今日未通过内容校验，暂无可沿用的完整版。');
       } else if (renderEditionHealth(report, "深读", state.historicalSelection, state.pipelineStatus?.state === "failed")) {
         return;
       } else {
@@ -1192,6 +1265,7 @@
     if (state.view === "stream" && state.source !== "全部") query.set("source", state.source);
     if (state.view === "research" && state.researchScope === "mine" && state.researchKeywords.length) query.set("scope", "mine");
     if (state.query && state.view !== "deepread") query.set("q", state.query);
+    if (initialRelease) query.set('release', initialRelease);
     const suffix = query.toString();
     history.replaceState(null, "", `${location.pathname}${suffix ? `?${suffix}` : ""}${location.hash || ""}`);
   }
@@ -1371,6 +1445,13 @@
     $("sourceCountLabel").textContent = state.view === "research" ? "资料库" : "公开信源";
     $("categoryCountLabel").textContent = state.view === "research" ? "研究方向" : "主题领域";
     $("briefUpdated").textContent = report?.generatedAt ? `生成于 ${formatDate(report.generatedAt)}` : "本机个性化视图";
+    const revision = report?.publicationRevision;
+    if (revision) {
+      const changes = revision.changes || {};
+      const count = (changes.added?.length || 0) + (changes.corrected?.length || 0) + (changes.removed?.length || 0);
+      const link = new URLSearchParams({view:'history',date:report.editionDate,release:revision.initialReleaseId});
+      $('briefUpdated').innerHTML = `${esc(formatDate(revision.updatedAt))} 更新，新增/更正/撤回 ${count} 条 · <a href="?${esc(link.toString())}">查看初版</a>`;
+    }
   }
 
   function renderSpotlight() {
@@ -1650,6 +1731,9 @@
     const key = itemKey(item);
     const visual = item.image ? `<figure class="story-visual"><img src="${esc(item.image)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"></figure>` : "";
     const sources = item.sources.map((source) => `<li><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.name || source.domain)}</a></li>`).join("");
+    const related = classicUI?.relatedPapers?.(item) || [];
+    const paperLinks = related.length ? `<aside class="news-classic-links" aria-label="相关方法论文"><span>相关方法</span>${related.map(row=>
+      `<a href="${esc(window.FrontierClassicContext.paperHref(row,item))}">${esc(window.FrontierClassicClient.displayTitle(row.paper))}</a>`).join('')}</aside>` : '';
     const sourceDetails = item._compact || item.sources.length > 1
       ? `<details class="details news-sources" data-details-key="${esc(key)}"${state.expandedKeys.has(key) ? " open" : ""}><summary>其他来源</summary>${item._compact ? '<p class="detail-loading">展开后读取原始来源链接。</p>' : `<ul class="source-list">${sources}</ul>`}</details>` : "";
     const timelineKey = `timeline::${key}`;
@@ -1662,12 +1746,13 @@
       <div class="story-main${item.image ? " has-image" : ""}">${visual}<div class="story-copy">
         <div class="meta"><span class="cat" data-category="${esc(item.category)}">${esc(item.category)}</span><b>${esc(item.source)}</b><time datetime="${esc(item.publishedAt)}">${esc(formatDate(item.publishedAt))}</time></div>
         <h3>${highlightText(item.title)}</h3>
-        <p class="summary">${highlightText(item.summary)}</p>
+        ${item.summary ? `<p class="summary">${highlightText(item.summary)}</p>` : `<p class="summary translation-state">${item.contentAvailability === 'title-only' ? '仅标题' : '中文翻译待完成'} · 请阅读原文</p>`}
         <div class="news-footer">
           ${item.url ? `<a class="read-original" href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">阅读原文 <span aria-hidden="true">↗</span></a>` : ""}
           <div class="story-actions"><button type="button" data-bookmark title="${saved ? "取消收藏" : "收藏"}" aria-label="${saved ? "取消收藏" : "收藏"}">${saved ? "★" : "☆"}</button><button type="button" data-share title="复制本条链接" aria-label="复制本条链接">⌁</button></div>
         </div>
         ${sourceDetails}
+        ${paperLinks}
       </div></div>
       ${timelineDetails}
     </article>`;
@@ -1898,6 +1983,13 @@
     if (item.editionDate) {
       url.searchParams.set("view", "history");
       url.searchParams.set("date", item.editionDate);
+      let report = state.editionCache.get(item.editionDate);
+      if (!report && state.currentReport?.editionDate === item.editionDate) report = state.currentReport;
+      if (!report && releaseManifest) {
+        try { report = await fetchPublicationJson(`./data/archive/${item.editionDate}.json`); }
+        catch (_) { toast('该历史版本暂时无法读取，请稍后重试'); return; }
+      }
+      if (/^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$/.test(report?.releaseId || '')) url.searchParams.set('release', report.releaseId);
     } else if (["stream", "research"].includes(state.view)) {
       url.searchParams.set("view", state.view);
     }
@@ -1919,13 +2011,13 @@
   }
 
   function openDialog(type) {
-      $("dialogEyebrow").textContent = "SCORING METHODOLOGY";
+      $("dialogEyebrow").textContent = "阅读说明";
       if (state.view === "research") {
-        $("dialogTitle").textContent = "论文相关度如何理解";
-        $("dialogContent").innerHTML = `<ul><li><b>研究相关度：</b>综合关注领域优先级、标题与摘要的主题命中、系统采集词、摘要完整度和发布时间，仅用于排列阅读顺序。</li><li><b>我的论文关键词：</b>只在当前浏览器中筛选和高亮已采集论文；添加后自动进入专属论文流，不会上传服务器。</li><li><b>系统采集词：</b>由仓库配置直接查询 arXiv 标题与摘要，可发现既有分类候选之外的特定方向。</li><li><b>预印本：</b>arXiv 条目不代表已经同行评审、独立复现或获得学术共同体认可。</li><li><b>中文编辑：</b>配置 DeepSeek 或 OpenAI 时只依据标题与摘要提炼问题、方法、发现和局限；摘要未说明的内容必须明确标注。</li><li><b>研究判断：</b>重要结论应回到完整论文、实验设置、数据和后续评审。</li></ul>`;
+        $("dialogTitle").textContent = "如何阅读经典论文";
+        $("dialogContent").innerHTML = `<ul><li><b>标题：</b>中文译名用于阅读和检索，英文原名保留在标题下方及引用中。</li><li><b>日期：</b>发表年份是论文原始发表时间；推荐日期是本站这次推荐的日期，历史推荐可单独回看。</li><li><b>导读：</b>保留研究问题、方法、贡献、适用条件、局限和阅读建议，并附全文页码或章节定位；阅读推论单独标识。</li><li><b>关联：</b>来源明确描述采用某种具体方法时，提供相应论文与新闻入口。这种关联用于理解方法背景，不代表新系统复现了论文或具备相同性能。</li><li><b>个人工具：</b>收藏只保存在当前浏览器；复制引用使用英文书目原名。</li></ul>`;
       } else {
-        $("dialogTitle").textContent = "关于新闻摘要";
-        $("dialogContent").innerHTML = "<p>摘要依据来源提供的标题、导语与正文整理，尽量保留事件背景、关键细节和最新进展。来源信息不足时，摘要会相应缩短；点击原文可阅读完整报道。</p>";
+        $("dialogTitle").textContent = "新闻如何整理与更新";
+        $("dialogContent").innerHTML = `<ul><li><b>选稿：</b>精选新闻与深读采用具有有效正文、可核查事实的报道。合格候选不足时展示实际数量；仅标题信息可留在动态，明确标识状态并提供原文入口。</li><li><b>摘要：</b>只整理来源支持的事实，不用采集缺失说明填充摘要，也不把整段英文当作中文摘要。信息有限时允许摘要更短。</li><li><b>合并与来源：</b>同一期的重复事件合并展示，保留可用来源；同一机构的不同事件分别保留。</li><li><b>后续：</b>主题相同不等于事件相同。回看不同日期的报道时，请结合原文核对新增事实，重复出现本身不代表有新进展。</li><li><b>正式版本：</b>日期按北京时间计算。同日重试不自动改写正式日报；必要更正保留初版、差异及对应版本入口。</li><li><b>更新失败：</b>内容未通过校验时保留之前的合格版本。深读独立判断是否更新，沿用前期时显示真实内容日期；没有合格旧版时显示未更新状态。</li></ul>`;
       }
     $("infoDialog").showModal();
   }
@@ -2108,6 +2200,7 @@
   });
   $("themeBtn").addEventListener("click", () => applyTheme(state.theme === "dark" ? "light" : "dark", true));
   $("scoringHelp").addEventListener("click", () => openDialog("scoring"));
+  document.querySelectorAll('[data-reading-help]').forEach(button=>button.addEventListener('click',()=>openDialog('reading')));
   document.querySelector("[data-close-dialog]").addEventListener("click", () => $("infoDialog").close());
   $("infoDialog").addEventListener("click", (event) => { if (event.target === $("infoDialog")) $("infoDialog").close(); });
   $("alertClose").addEventListener("click", hideAlert);
@@ -2125,9 +2218,20 @@
       await loadPublication();
       await loadLatest();
       await ensureArchiveIndex();
+      // Paper availability must not delay an otherwise usable news edition.
+      classicUI.ensureContext().then(()=>{
+        if(state.view !== 'research' && state.items.length)renderStories();
+      }).catch(()=>{});
     })().catch(error => { newsContextPromise = null; throw error; });
     return newsContextPromise;
   }
+  classicUI.setNewsProvider(async({date}={})=>{
+    await ensureNewsContext();
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(date || ''))return (state.latestReport?.items || []).filter(isAllowedNewsItem);
+    const report=state.editionCache.get(date)
+      || normalizeReport(await fetchPublicationJson(`./data/archive/${date}.json`));
+    return report.items.map(item=>({...item,releaseId:report.releaseId || item.releaseId})).filter(isAllowedNewsItem);
+  });
   async function init() {
     applyTheme(state.theme);
     if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {

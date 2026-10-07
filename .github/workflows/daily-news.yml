@@ -16,18 +16,33 @@ on:
       - "scripts/audit_sources.py"
       - "scripts/check_daily_refresh.py"
       - "scripts/publication.py"
+      - "scripts/reader_quality.py"
+      - "scripts/deepread_quality.py"
+      - "scripts/publication_clock.py"
       - "config/news_config.json"
       - "public/assets/news-policy.json"
   schedule:
-    - cron: "10 7 * * *"
+    - cron: "40 7 * * *"
+      timezone: "Asia/Shanghai"
+    - cron: "10 8 * * *"
       timezone: "Asia/Shanghai"
   workflow_dispatch:
     inputs:
       force_refresh:
-        description: "即使当天日报已经健康，也强制重新生成"
+        description: "当天尚无正式版本时重新生成"
         required: false
         default: false
         type: boolean
+      revision_reason:
+        description: "已发版本确需更正时填写原因，保留初版与差异"
+        required: false
+        default: ""
+        type: string
+      base_release_id:
+        description: "更正所依据的当前发布版本 ID"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: write
@@ -58,9 +73,12 @@ jobs:
         env:
           EVENT_NAME: ${{ github.event_name }}
           FORCE_REFRESH: ${{ github.event.inputs.force_refresh || 'false' }}
+          REVISION_REASON: ${{ github.event.inputs.revision_reason || '' }}
         run: >-
           python scripts/check_daily_refresh.py
           --status public/data/status.json
+          --release public/data/release.json
+          --revision-reason "$REVISION_REASON"
           --deepread public/data/deepread.json
           --required-deepread-revision 12
           --timezone Asia/Shanghai
@@ -72,7 +90,7 @@ jobs:
           --github-output "$GITHUB_OUTPUT"
       - name: Run unit tests
         if: steps.refresh_gate.outputs.should_run == 'true'
-        run: python -m unittest discover -s tests -v
+        run: python tests/run_offline.py
       - name: Prepare isolated generation directory
         if: steps.refresh_gate.outputs.should_run == 'true'
         run: python scripts/publication.py prepare --stage "$RUNNER_TEMP/frontier-stage"
@@ -87,6 +105,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
           SITE_URL: ${{ vars.SITE_URL }}
+          REVISION_REASON: ${{ github.event.inputs.revision_reason || '' }}
         run: >-
           python scripts/update_news.py
           --output "$RUNNER_TEMP/frontier-stage/data/news.json"
@@ -101,6 +120,7 @@ jobs:
           --weekly-dir "$RUNNER_TEMP/frontier-stage/data/weekly"
           --signals-output "$RUNNER_TEMP/frontier-stage/data/signals.json"
           --feed-output "$RUNNER_TEMP/frontier-stage/feed.xml"
+          --revision-reason "$REVISION_REASON"
       - name: Validate staged publication
         id: validate
         if: steps.refresh_gate.outputs.should_run == 'true' && steps.collect.outcome == 'success'
@@ -108,10 +128,15 @@ jobs:
       - name: Promote validated publication
         id: promote
         if: steps.refresh_gate.outputs.should_run == 'true' && steps.validate.outcome == 'success'
-        run: python scripts/publication.py promote --mode daily --stage "$RUNNER_TEMP/frontier-stage" --expected-date "${{ steps.refresh_gate.outputs.edition_date }}"
+        env:
+          REVISION_REASON: ${{ github.event.inputs.revision_reason || '' }}
+          BASE_RELEASE_ID: ${{ github.event.inputs.base_release_id || '' }}
+        run: |
+          python scripts/publication_clock.py --edition "${{ steps.refresh_gate.outputs.edition_date }}" --wait
+          python scripts/publication.py promote --mode daily --stage "$RUNNER_TEMP/frontier-stage" --expected-date "${{ steps.refresh_gate.outputs.edition_date }}" --revision-reason "$REVISION_REASON" --base-release-id "$BASE_RELEASE_ID"
       - name: Record failed generation or validation
         if: always() && steps.refresh_gate.outputs.should_run == 'true' && steps.promote.outcome != 'success'
-        run: python scripts/publication.py fail --mode daily
+        run: python scripts/publication.py fail --mode daily --expected-date "${{ steps.refresh_gate.outputs.edition_date }}"
       - name: Commit edition, archive and public status
         id: publish
         if: always() && steps.refresh_gate.outputs.should_run == 'true'
@@ -163,4 +188,4 @@ jobs:
           exit 1
       - name: Report healthy edition skip
         if: steps.refresh_gate.outputs.should_run != 'true'
-        run: echo "Today's healthy 10-item edition already exists; scheduled recovery run skipped."
+        run: echo "Formal edition retained, or preparation window has not started; generation skipped."

@@ -16,7 +16,7 @@ class DeepreadFrontendTests(unittest.TestCase):
         url = event['sources'][0]['url']
         event['evidenceRecords'] = make_evidence('NASA完成无人机导航试验，飞行持续30分钟。', url, '2026-09-21T00:00:00Z')
         payload['chapters'][0]['blocks'][0]['evidenceIds'] = [r['evidenceId'] for r in event['evidenceRecords']]
-        rendered = self.browser_result(f'renderDeepreadArticle(normalizeDeepread({json.dumps(payload)}))')
+        rendered = self.browser_result(f'renderEditorialContent(normalizeDeepread({json.dumps(payload)}))')
         self.assertIn('原文依据', rendered)
         self.assertIn('NASA完成无人机导航试验，飞行持续30分钟。', rendered)
         self.assertIn('抓取', rendered)
@@ -110,7 +110,7 @@ class DeepreadFrontendTests(unittest.TestCase):
 
     def test_version_two_renders_prose_changes_and_evidence_without_old_card_template(self):
         payload = self.editorial_payload()
-        rendered = self.browser_result(f'renderDeepreadArticle(normalizeDeepread({json.dumps(payload)}))')
+        rendered = self.browser_result(f'renderEditorialContent(normalizeDeepread({json.dumps(payload)}))')
         for expected in ["任务进入实际测试", "今天公布实际测试结果", "一手来源", "2026-09-25",
                          "https://nasa.gov/news/mission", "mission.jpg"]:
             self.assertIn(expected, rendered)
@@ -156,7 +156,7 @@ class DeepreadFrontendTests(unittest.TestCase):
         ])
         payload["events"][0]["evidenceLevel"] = '<script>alert(2)</script>'
         payload["chapters"][0]["blocks"][0]["text"] = '<img src=x onerror=alert(3)>'
-        rendered = self.browser_result(f'renderDeepreadArticle(normalizeDeepread({json.dumps(payload)}))')
+        rendered = self.browser_result(f'renderEditorialContent(normalizeDeepread({json.dumps(payload)}))')
         self.assertNotIn("<script>", rendered)
         self.assertNotIn("<img src=x", rendered)
         self.assertNotIn("javascript:", rendered)
@@ -180,7 +180,7 @@ class DeepreadFrontendTests(unittest.TestCase):
         payload["observations"] = [{"text": "两项试验分别界定了当前的测试范围。", "newsIds": ["nasa", "other"],
                                      "supports": [{"newsId": "nasa", "supportQuote": "NASA 公布任务测试结果"},
                                                   {"newsId": "other", "supportQuote": "另一项智能体试验"}]}]
-        rendered = self.browser_result(f'renderDeepreadArticle(normalizeDeepread({json.dumps(payload)}))')
+        rendered = self.browser_result(f'renderEditorialContent(normalizeDeepread({json.dumps(payload)}))')
         for expected in ["并列比较不代表事件之间存在因果关系", "两项报道分别披露", "今日观察",
                          "两项试验分别界定", "https://example.org/other", "deepread-comparison"]:
             self.assertIn(expected, rendered)

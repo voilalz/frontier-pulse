@@ -37,7 +37,19 @@
     return manifest ? validateManifest(manifest).basePath + canonicalPath.slice(2) : canonicalPath;
   }
   function accepts(manifest, payload) {
-    return Boolean(payload && (!manifest || (payload.releaseId === manifest.releaseId && payload.editionDate === manifest.editionDate)));
+    const retained = payload?.schemaVersion === 2 && Array.isArray(payload.chapters)
+      && payload.readerStatus === 'retained' && payload.publicationEditionDate === manifest?.editionDate
+      && payload.editionDate === manifest?.deepreadEditionDate;
+    return Boolean(payload && (!manifest || (payload.releaseId === manifest.releaseId
+      && (payload.editionDate === manifest.editionDate || retained))));
   }
-  return {clock, formatDate, health, validateManifest, resolve, accepts};
+  function validateEditionVersion(bundle, releaseId) {
+    if (bundle?.schemaVersion !== 1) throw new Error('历史版本格式无效');
+    const manifest = validateManifest(bundle.manifest);
+    if (manifest.releaseId !== releaseId || !accepts(manifest,bundle.news)
+        || !Array.isArray(bundle.news.items) || !accepts(manifest,bundle.deepread)
+        || !Array.isArray(bundle.deepread.chapters)) throw new Error('历史版本内容不一致');
+    return bundle;
+  }
+  return {clock, formatDate, health, validateManifest, resolve, accepts, validateEditionVersion};
 });

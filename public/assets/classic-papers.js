@@ -1,6 +1,7 @@
 (() => {
   'use strict';
   const api=window.FrontierClassicClient;
+  const context=window.FrontierClassicContext;
   const section=document.getElementById('classicSection');
   const bookmarksSection=document.getElementById('classicBookmarks');
   const KEY='fp-classic-snapshot-v1', SAVED='fp-classic-bookmarks-v1';
@@ -9,6 +10,12 @@
   const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback;}catch(_){return fallback;}};
   const write=(key,value)=>{try{localStorage.setItem(key,JSON.stringify(value));}catch(_){/* privacy/quota */}};
   let state=null, active=false, request=0, mode='daily', date='', query='', domain='';
+  let contextPromise=null, newsProvider=null, associatedNews=[];
+  const entryParams=new URLSearchParams(location.search);
+  const newsDate=entryParams.get('newsDate') || '';
+  const newsRelease=entryParams.get('release') || '';
+  const entryPaper=entryParams.get('paper') || '';
+  let paperScrolled=false;
   let saved=read(SAVED,[]);
   if(!Array.isArray(saved))saved=[];
   saved=saved.filter(api.validFavorite);
@@ -27,17 +34,26 @@
   const $=id=>document.getElementById(id);
   const savedKey=s=>s.paper.id; // One identity; reread does not duplicate a favorite.
   const isSaved=p=>saved.some(s=>savedKey(s)===p.id);
+  const paperRows=()=>state?Object.entries(state.archive.editions)
+    .flatMap(([date,edition])=>edition.items.map(paper=>({date,paper}))):[];
+  const paperAnchor=(id,day)=>'classic-'+String(id).replace(/[^a-zA-Z0-9_-]+/g,'-').replace(/^-+|-+$/g,'')+'-'+day;
+  function newsLinks(paper) {
+    const linked=context?.relatedNews(paper,associatedNews,paperRows()) || [];
+    return linked.length?`<aside class="classic-news-links" aria-label="采用相关方法的新闻"><span>相关动态</span><ul>${linked.map(news=>
+      `<li><a href="${esc(context.newsHref(news))}">${esc(news.title)}</a><time datetime="${esc(news.editionDate)}">${esc(news.editionDate)}</time></li>`).join('')}</ul></aside>`:'';
+  }
 
   function card({paper:p,date:d}) {
     const guides=Object.entries(labels).map(([key,label])=>`<section><h4>${label}</h4><p>${esc(p.guide[key])}</p>
       <small>${esc((p.sourceLocators||[]).filter(l=>l.section===key).map(l=>(l.classification==='readerInference'?'阅读推论 · ':'全文依据 · ')+l.locator).join('；'))}</small></section>`).join('');
-    return `<article class="classic-card" data-classic-id="${esc(p.id)}" data-classic-date="${esc(d)}"><div class="meta"><span class="cat">${esc(domains[p.primaryDomain]||p.primaryDomain)}</span>
+    const title=api.displayTitle(p);
+    return `<article class="classic-card" id="${esc(paperAnchor(p.id,d))}" data-classic-id="${esc(p.id)}" data-classic-date="${esc(d)}"><div class="meta"><span class="cat">${esc(domains[p.primaryDomain]||p.primaryDomain)}</span>
       ${p.classicReread?`<span>经典重读 · 上次 ${esc(p.previousRecommendationDate)}</span>`:''}</div>
-      <h3>${esc(p.title)}</h3><p class="classic-authors">${esc(p.authors.join(', '))}</p>
+      <h3>${esc(title)}</h3>${title!==p.title?`<p class="classic-original-title" lang="en">${esc(p.title)}</p>`:''}<p class="classic-authors">${esc(p.authors.join(', '))}</p>
       <p class="classic-bibliography">发表年份：<b>${esc(p.year)}</b> · ${esc(p.venue)}<br>推荐日期：<time datetime="${esc(d)}">${esc(d)}</time></p>
       <p class="classic-overview">${esc(p.overview)}</p><div class="classic-actions">${link(p.canonicalUrl,'书目原文')}${link(p.fullText?.url,'阅读全文')}
       <button type="button" data-classic-save aria-pressed="${isSaved(p)}">${isSaved(p)?'取消收藏':'收藏'}</button><button type="button" data-classic-cite>复制引用</button></div>
-      <details><summary>阅读导读</summary><div class="classic-guide">${guides}</div></details></article>`;
+      <details><summary>阅读导读</summary><div class="classic-guide">${guides}</div></details>${newsLinks(p)}</article>`;
   }
   function rows(){
     if(!state)return [];
@@ -49,7 +65,10 @@
     const params=new URLSearchParams({view:'research'});
     if(mode==='history'){params.set('classic','history');if(query)params.set('q',query);if(domain)params.set('domain',domain);}
     else if(date)params.set('date',date);
-    history.replaceState(null,'',location.pathname+'?'+params.toString());
+    if(newsDate)params.set('newsDate',newsDate);
+    if(newsRelease)params.set('release',newsRelease);
+    if(entryPaper)params.set('paper',entryPaper);
+    history.replaceState(null,'',location.pathname+'?'+params.toString()+(location.hash || ''));
   }
   function render(){
     if(!active)return;
@@ -81,6 +100,24 @@
     $('classicCards').setAttribute('aria-busy','false');
     $('dataNote').textContent='';
     sync();
+    const entry=list.find(row=>row.paper.id===entryPaper);
+    if(entry && !paperScrolled){
+      paperScrolled=true;requestAnimationFrame(()=>$(paperAnchor(entryPaper,entry.date))?.scrollIntoView({block:'start'}));
+    }
+  }
+  async function ensureContext(bypass=false){
+    if(contextPromise){await contextPromise;if(!bypass)return state;}
+    if(state && !bypass)return state;
+    contextPromise=(async()=>{
+      const loaded=await api.load(window.fetch.bind(window),state?.cache||read(KEY,null),bypass);
+      state=loaded;if(!state.cached)write(KEY,state.cache);return state;
+    })();
+    try{return await contextPromise;}finally{contextPromise=null;}
+  }
+  async function loadAssociatedNews(){
+    if(!context || !newsProvider){associatedNews=[];return;}
+    try{associatedNews=await newsProvider({date:newsDate,release:newsRelease});}
+    catch(_){associatedNews=[];}
   }
   async function show(options={}){
     active=true;section.hidden=false;const ticket=++request;
@@ -89,14 +126,16 @@
     if(!state||options.bypassCache){
       $('classicCards').setAttribute('aria-busy','true');
       try{
-        const loaded=await api.load(window.fetch.bind(window),state?.cache||read(KEY,null),Boolean(options.bypassCache));
+        await ensureContext(Boolean(options.bypassCache));
         if(ticket!==request)return;
-        state=loaded;if(!state.cached)write(KEY,state.cache);
       }catch(error){
         if(ticket!==request)return;
         state=null;render();$('classicNotice').hidden=false;$('classicNotice').textContent='经典推荐读取失败：'+error.message+'；可点击刷新重试。';return;
       }
     }
+    // Render the paper first; optional news failures cannot hide its guide.
+    if(ticket===request)render();
+    await loadAssociatedNews();
     if(ticket===request)render();
   }
   function hide(){active=false;++request;section.hidden=true;}
@@ -124,5 +163,7 @@
   $('classicDate').addEventListener('change',e=>{date=e.target.value;render();});
   $('classicSearch').addEventListener('input',e=>{query=e.target.value;render();});
   $('classicDomain').addEventListener('change',e=>{domain=e.target.value;render();});
-  window.FrontierClassics={show,hide,renderBookmarks};
+  window.FrontierClassics={show,hide,renderBookmarks,ensureContext,
+    setNewsProvider:provider=>{newsProvider=provider;},
+    relatedPapers:item=>context?.relatedPapers(item,paperRows()) || []};
 })();

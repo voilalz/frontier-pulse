@@ -110,7 +110,7 @@ class FrontendTests(unittest.TestCase):
         self.assertIn('"timezone": "Asia/Shanghai"', config)
         self.assertIn('timezone: "Asia/Shanghai"', daily)
         self.assertIn('timezone: "Asia/Shanghai"', stream)
-        self.assertIn('cron: "10 7 * * *"', daily)
+        self.assertIn('cron: "40 7 * * *"', daily)
         self.assertIn('paths:\n      - ".github/workflows/daily-news.yml"', daily)
         self.assertIn("python scripts/check_daily_refresh.py", daily)
         self.assertIn("--required-schema 11", daily)
