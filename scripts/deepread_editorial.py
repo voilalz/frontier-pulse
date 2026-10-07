@@ -889,6 +889,14 @@ def build_daily_deepread(
         item["_evidenceLevel"] = _evidence_level(item, normalized, config, now)
         item["_deltaScore"] = delta_score(item, item["_history"])
         item["_comparisonKeys"] = comparison_keys(item)
+    # Reader chapters need two distinct source facts. Feed/body copies that
+    # differ only in punctuation cannot support a second paragraph. Require
+    # four independent events after history aliases, not four reprints.
+    complete_sources = [item for item in eligible if len({re.sub(r'\W', '', r['text']).casefold()
+        for r in item['evidenceRecords']
+        if len(r['text']) >= 140 or len(re.findall(r'[\u3400-\u9fff]', r['text'])) >= 30}) >= 2]
+    if len({item['eventId'] for item in complete_sources}) >= 4:
+        eligible = complete_sources
     # The shared feed selection ranks body length before score. Compare all
     # same-day reports with verified history before choosing this event's lead.
     # Event identity alone does not prove that another report supports the

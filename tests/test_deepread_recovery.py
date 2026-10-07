@@ -114,6 +114,51 @@ class DeepreadRecoveryTests(unittest.TestCase):
         self.assertEqual(state['errorCode'], 'deepread-unavailable')
         self.assertEqual(state['diagnostics']['candidateCount'], 12)
 
+    def test_actor_negation_accepts_erfei_but_does_not_accept_affirmative_text(self):
+        from evidence_trace import valid_prose_translation
+        source='This contract places the execution risk on Aster Labs, not the customer, and ties payments to demonstrated production outcomes.'
+        refs=['evd-'+'a'*20]
+        value={'version':1,'language':'zh-CN','provider':'deepseek','sourceText':source,'sourceEvidenceRefs':refs,
+               'text':'这份合同将执行风险交给Aster Labs而非客户承担，并将支付款项与已证明的生产结果挂钩。'}
+        self.assertTrue(valid_prose_translation(value,source,refs))
+        case=reading_tests.NewsReadingTests();case.setUp()
+        self.assertEqual(case.browser_result('proseDisplayText('+json.dumps(value)+','+json.dumps(source)+','+json.dumps(refs)+')'),value['text'])
+        for affirmative in ('这份合同将执行风险交给客户承担，并将支付款项与已证明的生产结果挂钩。',
+                            '这份合同非常清楚地将执行风险交给客户承担，并将支付款项与已证明的生产结果挂钩。'):
+            value['text']=affirmative
+            self.assertFalse(valid_prose_translation(value,source,refs))
+
+    def test_single_fact_with_spacing_duplicates_is_not_selected_when_complete_sources_exist(self):
+        from deepread_editorial import build_daily_deepread
+        from evidence_trace import make_evidence, trace_claim
+        now=datetime(2026,7,16,tzinfo=timezone.utc);items=[]
+        for i,actor in enumerate('甲乙丙丁戊己'):
+            title=actor+'团队公布卫星载荷测试结果'
+            first=title+'，报告列出本次测试的运行条件以及测量记录，便于后续核对已完成的工作。'
+            second=actor+'团队介绍卫星载荷后续试验安排，工程人员将依据已有记录继续开展受控试验，核对设备在不同条件下的表现。'
+            if i==0: second=first[:-1]+' 。'
+            url=f'https://publisher.example/complete-{i}'
+            records=make_evidence(first+' '+second,url,now.isoformat(),'body')
+            items.append({'id':f'complete-{i}','eventId':f'evt-{i:012x}','title':title,'originalTitle':title,
+                'summary':first,'summaryEvidenceRefs':trace_claim(first,records),'evidenceRecords':records,
+                'url':url,'sources':[{'name':actor+'团队','url':url}],'category':'航空航天',
+                'publishedAt':'2026-07-15T23:00:00Z','score':99-i})
+        result=build_daily_deepread(items,{'deepread_core_events':5},now)
+        self.assertNotIn('complete-0',[e['newsId'] for e in result['events']])
+        self.assertEqual(result['eventCount'],5)
+        reprints=[{**copy.deepcopy(item),'eventId':'evt-shared'} for item in items[1:5]]
+        brief=[]
+        for i in range(3):
+            item=copy.deepcopy(items[0]);url=f'https://publisher.example/brief-{i}'
+            records=make_evidence(item['summary'],url,now.isoformat(),'body')
+            item.update(id=f'brief-{i}',eventId=f'evt-brief-{i}',url=url,
+                sources=[{'name':'甲团队','url':url}],evidenceRecords=records,
+                summaryEvidenceRefs=trace_claim(item['summary'],records))
+            brief.append(item)
+        fallback=build_daily_deepread(reprints+brief,{'deepread_core_events':5},now)
+        self.assertEqual(fallback['eventCount'],4)
+        self.assertEqual(fallback['generationStatus'],'fallback')
+
     def test_chapter_recovery_retries_only_bad_chapters_and_completes_observations(self):
         from deepread_editorial import build_daily_deepread
         from evidence_trace import make_evidence, trace_claim
@@ -232,6 +277,18 @@ class DeepreadOnlyPublicationTests(unittest.TestCase):
         self.assertEqual(state['state'],'ok')
         self.assertEqual(build.call_args.kwargs['event_registry'],original)
         self.assertEqual(publication_tests.load(self.public/'data/events.json')['identityAliases'],live['identityAliases'])
+
+    def test_retries_after_a_failed_correction_keep_using_initial_formal_evidence(self):
+        self.missing_reader()
+        initial=publication_tests.load(self.public/'releases/r-original/data/events.json')
+        live=copy.deepcopy(initial);live['identityAliases']={'evt-later-alias':'evt-later-canonical'}
+        publication_tests.save(self.public/'data/events.json',live)
+        failed,_=self.recover({'generationStatus':'failed'})
+        self.assertEqual(failed['state'],'failed')
+        state,build=self.recover(self.good)
+        self.assertEqual(state['state'],'ok')
+        self.assertEqual(build.call_args.kwargs['event_registry'],initial)
+        self.assertEqual(publication_tests.load(self.public/'data/release.json')['revision']['initialReleaseId'],'r-original')
 
     def test_a_concurrent_stream_update_cannot_be_overwritten_by_deepread_recovery(self):
         import recover_deepread

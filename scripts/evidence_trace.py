@@ -319,7 +319,7 @@ _TRANSLATION_SCOPE = tuple(re.compile(pattern, re.I) for pattern in (
     r"模拟|仿真|\b(?:simulation|simulated)\b",
     r"初步|初期|初始|\bpreliminary\b",
     r"部分|一些|若干|少数|小规模|\b(?:some|partial|small.scale)\b",
-    r"不|未|没有|无|失败|\b(?:not|no|without|never|failed|unsuccessful)\b|\b\w+n['’]t\b",
+    r"并非|而非|不|未|没有|无|失败|\b(?:not|no|without|never|failed|unsuccessful)\b|\b\w+n['’]t\b",
 ))
 
 
