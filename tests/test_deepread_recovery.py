@@ -26,6 +26,27 @@ class DeepreadRecoveryTests(unittest.TestCase):
         self.assertEqual(result['generationStatus'], 'ok')
         self.assertEqual(result['generationAttemptStatus'], 'partial')
 
+    def test_grouped_heading_uses_only_a_member_bound_title_translation(self):
+        draft=copy.deepcopy(self.good)
+        left,right=draft['chapters'][:2]
+        event=next(e for e in draft['events'] if e['newsId']==left['newsIds'][0])
+        left.update(kind='event',comparisonKey='',title=event['title'],angle='追踪本次报道中的具体变化',
+            newsIds=left['newsIds']+right['newsIds'],blocks=left['blocks']+right['blocks'])
+        draft['chapters'].pop(1)
+        validate_complete(draft)
+        case=reading_tests.NewsReadingTests();case.setUp()
+        result=case.browser_result('normalizeDeepreadForReader('+json.dumps(draft)+')')
+        self.assertEqual(result['readerStatus'],'complete')
+        normalized=case.browser_result('normalizeDeepread('+json.dumps(result)+')')
+        self.assertEqual(normalized['chapters'][0]['title'],event['displayTranslation']['title'])
+        for fault in ('unbound','nonmember'):
+            broken=copy.deepcopy(draft)
+            if fault=='unbound': broken['events'][0]['displayTranslation']['sourceTitle']='Unrelated headline.'
+            else: broken['chapters'][0]['title']=broken['events'][2]['title']
+            with self.assertRaises(ValueError): validate_complete(broken)
+            rendered=case.browser_result('normalizeDeepreadForReader('+json.dumps(broken)+').then(renderDeepreadArticle)')
+            self.assertNotIn('<article',rendered)
+
     def test_partial_label_does_not_authorize_a_short_or_unbound_chapter(self):
         for fault in ('short', 'unbound'):
             draft = copy.deepcopy(self.good)

@@ -866,7 +866,7 @@
         return {type: block.type, text: readerTextValid(reader) ? reader : '', newsIds: refs,
           evidenceIds: Array.isArray(block.evidenceIds) ? block.evidenceIds.filter((ref) => /^evd-[a-f0-9]{20}$/.test(ref)) : []};
       });
-      const event = kind === "event" && newsIds.length === 1 ? byNews.get(newsIds[0]) : null;
+      const event = newsIds.map((id) => byNews.get(id)).find((member) => chapter?.title === member.sourceTitle);
       const title = event && chapter?.title === event.sourceTitle ? event.title : clean(chapter?.title, "本期进展");
       return {id: `deepread-chapter-${index + 1}`, title,
         angle: clean(chapter?.angle), kind, comparisonKey: kind === "comparison" ? clean(chapter.comparisonKey) : "",
