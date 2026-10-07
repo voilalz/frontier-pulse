@@ -26,7 +26,9 @@ def recover(public, stage, config, now, runtime, request_json, code_revision='')
     release = publication.read_json(release_path)
     if release.get('editionDate') != edition:
         return {'state':'skipped', 'changed':False, 'reason':'formal-edition-not-current'}
-    snapshot = public / 'releases' / release['releaseId']
+    publication.verify_snapshot(public / 'releases' / release['releaseId'])
+    source_release_id = (release.get('revision') or {}).get('initialReleaseId', release['releaseId'])
+    snapshot = public / 'releases' / source_release_id
     publication.verify_snapshot(snapshot)
     current = publication.read_json(public / 'data/deepread.json')
     try:

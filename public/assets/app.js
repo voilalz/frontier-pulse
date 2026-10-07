@@ -378,7 +378,7 @@
       /模拟|仿真|\b(?:simulation|simulated)\b/i,
       /初步|初期|初始|\bpreliminary\b/i,
       /部分|一些|若干|少数|小规模|\b(?:some|partial|small.scale)\b/i,
-      /不|未|没有|无|失败|\b(?:not|no|without|never|failed|unsuccessful)\b|\b\w+n['’]t\b/i,
+      /并非|而非|不|未|没有|无|失败|\b(?:not|no|without|never|failed|unsuccessful)\b|\b\w+n['’]t\b/i,
     ];
     const negativeActions = [
       ["approv\\w*|permission|clearance|authori[sz]\\w*", "批准|获批|许可|授权"],
