@@ -264,6 +264,8 @@
     })).filter((record) => record.id && record.title).slice(0, 6);
   }
 
+  const withoutCalendarMay = text => text.replace(/\bMay\.?\s+\d{1,4}\b|\b\d{1,2}(?:st|nd|rd|th)?\s+May\b(?=\s*(?:[,.;:!?]|$|\d{4}\b))|\b(?:in|on|by|for|until|during|from|since|through|before|after)\s+(?:\d{1,2}(?:st|nd|rd|th)?\s+)?May\b|\b(?:next|last|this|early|late)\s+May\b(?=\s*(?:[,.;:!?]|$|(?:the|a|an)\b))/gi, ' calendar month ');
+
   const quantityValues = text => {
     const normalized = text.normalize("NFKC");
     const scales = {hundred:100,thousand:1000,million:1e6,billion:1e9,trillion:1e12,decade:10,decades:10,century:100,centuries:100,
@@ -281,7 +283,17 @@
       return "number:" + (decimal.includes(".") ? decimal.replace(/0+$/, "").replace(/\.$/, "") : decimal);
     };
     const digitPattern = new RegExp("(\\p{Decimal_Number}+(?:[.,]\\p{Decimal_Number}+)*)(?:\\s*("+scalePattern+"))?", "giu");
-    for (const m of normalized.matchAll(digitPattern)) values.add(canonical(m[1], scales[(m[2]||"").toLowerCase()]||1));
+    for (const m of normalized.matchAll(digitPattern)) {
+      let scale = scales[(m[2]||"").toLowerCase()]||1;
+      if (!m[2]) {
+        const tail = normalized.slice(m.index + m[0].length);
+        const abbreviation = /^\s*([kmbt])\b(?![.-][a-z0-9])/i.exec(tail);
+        const currencyBefore = /(?:[$€£¥]|\b(?:USD|EUR|GBP|JPY|CNY))\s*$/i.test(normalized.slice(0, m.index));
+        const currencyAfter = abbreviation && /^\s*(?:dollars?|euros?|pounds?|yen|yuan|USD|EUR|GBP|JPY|CNY)\b/i.test(tail.slice(abbreviation[0].length));
+        if (abbreviation && (currencyBefore || currencyAfter)) scale = {k:1e3,m:1e6,b:1e9,t:1e12}[abbreviation[1].toLowerCase()];
+      }
+      values.add(canonical(m[1], scale));
+    }
     const names = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety first second third fourth fifth sixth seventh eighth ninth tenth half".split(" ");
     const numbers = [...Array.from({length:21},(_,i)=>i),30,40,50,60,70,80,90,...Array.from({length:10},(_,i)=>i+1),0.5];
     const words = Object.fromEntries(names.map((n,i)=>[n,numbers[i]]));
@@ -291,12 +303,24 @@
     const wordPattern = new RegExp("\\b("+expression+")\\b(?:\\s*("+scalePattern+"))?", "gi");
     for (const m of normalized.matchAll(wordPattern)) values.add(canonical(String(m[1].toLowerCase().split(/[-\s]+/).reduce((total, word)=>total+words[word],0)), scales[(m[2]||"").toLowerCase()]||1));
     const months = "Jan(?:uary)? Feb(?:ruary)? Mar(?:ch)? Apr(?:il)? May Jun(?:e)? Jul(?:y)? Aug(?:ust)? Sep(?:tember)? Oct(?:ober)? Nov(?:ember)? Dec(?:ember)?".split(" ");
-    months.forEach((month,i)=>{if(new RegExp("\\b"+month+"\\.?\\s+\\d{1,4}\\b","i").test(normalized))values.add(canonical(String(i+1)));});
+    const monthNames = "January February March April May June July August September October November December".split(" ");
+    months.forEach((month,i)=>{
+      const dated = i === 4 ? withoutCalendarMay(normalized) !== normalized
+        : new RegExp("\\b"+month+"\\.?\\s+\\d{1,4}\\b", "i").test(normalized)
+        || new RegExp("\\b\\d{1,2}(?:st|nd|rd|th)?\\s+"+month+"\\b", "i").test(normalized)
+        || new RegExp("\\b(?:in|by|until|during|from|since|through|before|after|next|last|this|early|late)\\s+"+month+"\\b", "i").test(normalized);
+      const named = ![2,4].includes(i) && new RegExp("\\b"+monthNames[i]+"\\b", "i").test(normalized);
+      if (dated || named) values.add(canonical(String(i+1)));
+    });
     for (const m of normalized.matchAll(/\b(\d{1,2})[.:](\d{2})\s*(am|pm)\b/gi)) {
       const hour=Number(m[1]), minute=Number(m[2]);
       if(hour>=1&&hour<=12&&minute<60) [hour,minute,hour%12+(m[3].toLowerCase()==="pm"?12:0)].forEach(n=>values.add(canonical(String(n))));
     }
     for (const m of normalized.matchAll(/\b(\d+(?:\.\d+)?)m\s+years?\b/gi)) values.add(canonical(m[1],1e6));
+    const ignoredModels = new Set("jan feb mar apr may jun jul aug sep oct nov dec in on by for at of to a an usd eur gbp jpy cny us uk esa ai".split(" "));
+    for (const m of normalized.matchAll(/(?<![a-z0-9])([a-z]{1,3})[.\s-]?(\d+(?:\.\d+)*)([a-z]{0,2})(?![a-z0-9])/gi)) {
+      if (!ignoredModels.has(m[1].toLowerCase())) values.add("model:" + m[1].toLowerCase() + m[2] + m[3].toLowerCase());
+    }
     return values;
   };
   const validZh = (text, source) => {
@@ -368,6 +392,7 @@
       const action = negativeActions.find(([original]) => new RegExp("\\b(?:" + original + ")\\b", "i").test(clause));
       return !action || new RegExp("(?:不|未|没有|无|失败)[^，。；！？,;.!?]{0,16}(?:" + action[1] + ")|(?:" + action[1] + ")(?:失败|未成功)").test(text);
     });
+    const scopeSource = typeof sourceText === 'string' ? withoutCalendarMay(sourceText) : '';
     return value && value.version === 1 && value.language === "zh-CN"
       && ["deepseek", "openai"].includes(value.provider)
       && typeof sourceText === "string" && sourceText.length >= 10 && sourceText.length <= 900 && sourceText === sourceText.trim()
@@ -378,7 +403,7 @@
       && /[\u4e00-\u9fff]/.test(value.text) && [...proseQuantities(value.text)].every(n => proseQuantities(sourceText).has(n))
       && !/\b[a-z]{2,}(?:[\s\u0085]+[a-z]{2,}){2,}\b/.test(value.text)
       && (!/[\u4e00-\u9fff]/.test(sourceText) || value.text === sourceText)
-      && negationValid(value.text, sourceText) && scope.every(pattern => !pattern.test(sourceText) || pattern.test(value.text))
+      && negationValid(value.text, sourceText) && scope.every(pattern => !pattern.test(scopeSource) || pattern.test(value.text))
       ? value.text : "";
   }
 
@@ -386,6 +411,16 @@
     return typeof value === 'string' && /[\u3400-\u9fff]/.test(value)
       && !/现有元数据|元数据未(?:提供|说明)|未提取到可引用的正文|未提供更多(?:摘要|信息|细节)|这条新闻来自|现有(?:信息|报道)(?:仅包含|未提供)|目前披露的信息仅涉及|文章.{0,180}(?:最初发表于|最先发表于)/.test(value)
       && !/\b[a-z]{2,}(?:\s+[a-z]{2,}){2,}\b/.test(value.replace(/\([^)]*\)|（[^）]*）/g,''));
+  }
+
+  function legacyReaderSummary(value) {
+    if (typeof value !== 'string') return '';
+    // Older editions appended collection notes to otherwise usable Chinese.
+    // Remove only a separate note sentence; validate all remaining prose.
+    const noteStart = /^(?:现有元数据|元数据未(?:提供|说明)|未提取到可引用的正文|未提供更多(?:摘要|信息|细节)|这条新闻来自|现有(?:信息|报道)(?:仅包含|未提供)|目前披露的信息仅涉及|文章.{0,180}(?:最初发表于|最先发表于))/;
+    const sentences = value.split(/(?<=[。！？])\s*/);
+    return sentences.some(sentence=>noteStart.test(sentence.trim()))
+      ? sentences.filter(sentence=>!noteStart.test(sentence.trim())).join(' ').trim() : value;
   }
 
   function normalizeItem(raw, index, editionDate = "") {
@@ -398,25 +433,35 @@
       if (primary) sources.push(primary);
     }
     const t = raw.displayTranslation;
-    const translated = t && t.version === 1 && t.language === "zh-CN"
+    const sourceSummary = typeof raw._policySummary === 'string' ? raw._policySummary : raw.summary;
+    const sourceRefs = raw.summaryEvidenceRefs;
+    const records = (Array.isArray(raw.evidenceRecords) ? raw.evidenceRecords : [])
+      .filter(record=>record && typeof record === "object").map(record=>({...record,url:safeUrl(record.url)}));
+    const bound = t && t.version === 1 && t.language === "zh-CN"
       && ["deepseek", "openai"].includes(t.provider)
-      && t.sourceTitle === raw.originalTitle && t.sourceSummary === raw.summary
-      && JSON.stringify(t.sourceEvidenceRefs) === JSON.stringify(raw.summaryEvidenceRefs)
-      && readerTextValid(t.title) && validZh(t.title, t.sourceTitle)
-      && ((readerTextValid(t.summary) && validZh(t.summary, t.sourceTitle + " " + t.sourceSummary))
-          || (raw.summary === '' && t.summary === '' && raw.evidenceRecords?.length === 0 && raw.summaryEvidenceRefs?.length === 0));
-    const readerSummary = translated ? t.summary : raw.summary;
+      && typeof t.sourceTitle === 'string' && typeof t.sourceSummary === 'string'
+      && t.sourceTitle === raw.originalTitle && t.sourceSummary === sourceSummary
+      && Array.isArray(t.sourceEvidenceRefs) && Array.isArray(sourceRefs)
+      && JSON.stringify(t.sourceEvidenceRefs) === JSON.stringify(sourceRefs);
+    const translatedTitle = bound && readerTextValid(t.title) && validZh(t.title, t.sourceTitle);
+    const titleOnly = records.length === 0 && sourceRefs?.length === 0
+      && legacyReaderSummary(sourceSummary) === '';
+    const displaySummary = bound ? legacyReaderSummary(t.summary) : '';
+    const translatedSummary = translatedTitle && (titleOnly ? displaySummary === ''
+      : readerTextValid(displaySummary) && validZh(displaySummary, t.sourceTitle + " " + t.sourceSummary));
+    const translated = translatedTitle && translatedSummary;
+    const readerSummary = translated ? displaySummary : sourceSummary;
     const summary = raw.contentType === 'paper' ? clean(readerSummary) : readerTextValid(readerSummary) ? clean(readerSummary) : '';
     const item = {
       id: clean(raw.id, `item-${index}`),
       eventId: clean(raw.eventId),
       contentType: clean(raw.contentType, "news"),
-      title: clean(translated ? t.title : raw.title),
+      title: clean(translatedTitle ? t.title : raw.title),
       originalTitle: clean(raw.originalTitle || raw.title),
       summary,
-      _policySummary: clean(raw.summary),
-      contentAvailability: clean(raw.contentAvailability, raw.summary ? 'body' : 'title-only'),
-      translationStatus: translated ? 'translated' : readerTextValid(raw.summary) ? 'native' : 'pending',
+      _policySummary: clean(sourceSummary),
+      contentAvailability: titleOnly ? 'title-only' : clean(raw.contentAvailability, sourceSummary ? 'body' : 'title-only'),
+      translationStatus: translated ? 'translated' : translatedTitle ? 'partial' : readerTextValid(sourceSummary) ? 'native' : 'pending',
       keyFacts: (Array.isArray(raw.keyFacts) ? raw.keyFacts : []).map((fact) => clean(fact)).filter(Boolean).slice(0, 4),
       why: clean(raw.why, "该事件的重要性需要结合后续公开信息继续判断。"),
       category: clean(raw.category, "前沿技术"),
@@ -460,8 +505,9 @@
       eventDossier: normalizeEventDossier(raw.eventDossier, clean(raw.eventId)),
       relatedPapers: normalizeRelatedRecords(raw.relatedPapers, "paper"),
       relatedNews: normalizeRelatedRecords(raw.relatedNews, "news"),
-      evidenceRecords: (Array.isArray(raw.evidenceRecords) ? raw.evidenceRecords : [])
-        .filter(record=>record && typeof record === "object").map(record=>({...record,url:safeUrl(record.url)})),
+      evidenceRecords: records,
+      summaryEvidenceRefs: Array.isArray(sourceRefs) ? [...sourceRefs] : undefined,
+      displayTranslation: bound ? {...t, sourceEvidenceRefs:[...t.sourceEvidenceRefs]} : undefined,
       releaseId: clean(raw.releaseId),
       editionDate: clean(raw.editionDate || editionDate),
       _compact: Boolean(raw._compact),
@@ -493,7 +539,7 @@
       throw new Error("日报文件不存在或没有新闻条目");
     }
     const editionDate = clean(payload.editionDate);
-    return {
+    return withTranslationCoverage({
       ...payload,
       editionDate,
       generatedAt: clean(payload.generatedAt),
@@ -501,7 +547,7 @@
       method: clean(payload.method, "rules"),
       items: payload.items.slice(0, 100).map((item, index) => normalizeItem({...item,
         releaseId: payload.releaseId || item.releaseId}, index, editionDate)).filter(isAllowedNewsItem),
-    };
+    });
   }
 
   function normalizeCollection(payload, type) {
@@ -509,11 +555,37 @@
       throw new Error(`${type === "paper" ? "论文" : "动态"}数据文件不可用`);
     }
     const limit = type === "paper" ? 200 : 500;
-    return {
+    const report = {
       ...payload,
       generatedAt: clean(payload.generatedAt),
       items: payload.items.slice(0, limit).map((item, index) => normalizeItem({ ...item, contentType: item.contentType || type }, index)).filter(isAllowedNewsItem),
     };
+    return type === 'paper' ? report : withTranslationCoverage(report);
+  }
+
+  function withTranslationCoverage(report) {
+    const count = report.items.filter(item=>item.translationStatus === 'translated').length;
+    const partial = report.items.filter(item=>item.translationStatus === 'partial').length;
+    const titleOnly = report.items.filter(item=>item.translationStatus === 'translated' && item.contentAvailability === 'title-only').length;
+    const total = report.items.length;
+    const configured = report.translationProvider || report.items.some(item=>item.displayTranslation);
+    const status = total && count === total ? 'ok' : count || partial ? 'partial'
+      : configured ? 'failed' : ['disabled', 'not-configured'].includes(report.translationStatus) ? report.translationStatus : 'not-configured';
+    const warnings = (Array.isArray(report.translationWarnings) ? report.translationWarnings : [])
+      .filter(value=>typeof value === 'string' && !/^(?:日报|全量动态)中文翻译(?:不完整|未完成)/.test(value));
+    if (['partial', 'failed'].includes(status)) warnings.push(`中文翻译未完成：${count}/${total}${partial ? `，${partial} 条仅完成标题` : ''}`);
+    let diagnostics = report.translationDiagnostics;
+    if (diagnostics && typeof diagnostics === 'object' && Object.keys(diagnostics).length) {
+      const missing = report.items.filter(item=>item.translationStatus !== 'translated').map(item=>item.id);
+      const notAttempted = (Array.isArray(diagnostics.notAttemptedItemIds) ? diagnostics.notAttemptedItemIds : []).filter(id=>missing.includes(id));
+      diagnostics = {...diagnostics, targetItemCount:total, totalTranslatedItemCount:count,
+        totalMissingItemCount:missing.length, totalMissingItemIds:missing,
+        notAttemptedItemIds:notAttempted, notAttemptedItemCount:notAttempted.length,
+        coverageCompletionMessage:missing.length ? `还有 ${missing.length} 条中文译文待完成` : '中文译文已全部完成'};
+    }
+    return {...report, translatedItemCount:count, partialTranslatedItemCount:partial,
+      titleOnlyTranslatedItemCount:titleOnly, translationStatus:status, translationWarnings:warnings,
+      translationDiagnostics:diagnostics};
   }
 
   async function fetchJson(url, bypassCache = false) {
@@ -658,12 +730,11 @@
     }
     const warnings = Array.isArray(state.pipelineStatus?.warnings) ? state.pipelineStatus.warnings.filter(Boolean) : [];
     const translationWarnings = [
-      ...(Array.isArray(state.pipelineStatus?.translationWarnings) ? state.pipelineStatus.translationWarnings : []),
-      ...(Array.isArray(report?.translationWarnings) ? report.translationWarnings : []),
-      batchDiagnosticWarning(state.pipelineStatus?.translationDiagnostics || report?.translationDiagnostics, "日报"),
+      ...(Array.isArray(report?.translationWarnings) ? report.translationWarnings : state.pipelineStatus?.translationWarnings || []),
+      batchDiagnosticWarning(report?.translationDiagnostics || state.pipelineStatus?.translationDiagnostics, "日报"),
     ].filter(Boolean);
-    const translationStatus = clean(state.pipelineStatus?.translationStatus || report?.translationStatus);
-    const translatedItemCount = Number(state.pipelineStatus?.translatedItemCount ?? report?.translatedItemCount) || 0;
+    const translationStatus = clean(report?.translationStatus || state.pipelineStatus?.translationStatus);
+    const translatedItemCount = Number(report?.translatedItemCount ?? state.pipelineStatus?.translatedItemCount) || 0;
     if (["partial", "failed"].includes(translationStatus)) {
       badge.textContent = translationStatus === "partial" ? "部分中文" : "翻译失败";
       badge.classList.add("warning");
@@ -1373,10 +1444,11 @@
   function batchDiagnosticWarning(diagnostics, contentLabel) {
     const missing = Number(diagnostics?.totalMissingItemCount ?? diagnostics?.missingItemCount) || 0;
     if (!missing) return "";
-    const requested = Number(diagnostics?.targetItemCount ?? diagnostics?.requestedItemCount) || 0;
     const completed = Number(diagnostics?.totalTranslatedItemCount ?? diagnostics?.completedItemCount) || 0;
-    const reason = clean(diagnostics?.completionMessage, "拆分重试后仍有条目缺失");
-    return `${contentLabel}翻译完成 ${completed}/${requested}，仍缺失 ${missing} 条：${reason}；缺失 ID 与原因已写入公开状态数据`;
+    const global = diagnostics?.totalTranslatedItemCount != null && diagnostics?.totalMissingItemCount != null;
+    const requested = Number(diagnostics?.targetItemCount ?? (global ? completed + missing : diagnostics?.requestedItemCount)) || 0;
+    const reason = clean(diagnostics?.coverageCompletionMessage || diagnostics?.completionMessage, "仍有条目待完成中文翻译");
+    return `${contentLabel}翻译完成 ${completed}/${requested}，仍缺失 ${missing} 条：${reason}`;
   }
 
   function renderBrief() {
@@ -1405,7 +1477,7 @@
       signals = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1]).slice(0, 3)
         .map(([category, count]) => `${category}：${count} 条动态`);
       method = Number(report?.translatedItemCount) > 0
-        ? `每 3 小时采集 · ${providerLabel(report) || "AI"} 中文翻译`
+        ? `每 3 小时采集 · 中文翻译 ${translatedCount}/${reportItemCount}${report?.titleOnlyTranslatedItemCount ? ` · ${report.titleOnlyTranslatedItemCount} 条仅标题` : ''}`
         : "每 3 小时采集 · 规则去重";
     } else if (state.view === "research") {
       headline = `${metricItems.length} 篇前沿论文进入当前研究视图`;
