@@ -1,41 +1,58 @@
 {
   "schemaVersion": 3,
   "state": "ok",
-  "lastAttemptAt": "2026-10-07T10:11:50Z",
-  "lastSuccessAt": "2026-10-07T10:11:50Z",
-  "itemCount": 131,
+  "lastAttemptAt": "2026-10-07T14:35:28Z",
+  "lastSuccessAt": "2026-10-07T14:35:28Z",
+  "itemCount": 133,
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
-  "translationStatus": "ok",
+  "translationStatus": "partial",
   "translatedItemCount": 131,
-  "titleOnlyTranslatedItemCount": 19,
-  "translationWarnings": [],
+  "titleOnlyTranslatedItemCount": 28,
+  "translationWarnings": [
+    "新闻中文翻译在拆分重试后仍缺失 2/65 条：拆分重试后仍有条目缺失",
+    "全量动态中文翻译不完整：131/133"
+  ],
   "translationDiagnostics": {
-    "requestedItemCount": 3,
-    "completedItemCount": 3,
-    "missingItemCount": 0,
-    "missingItemIds": [],
-    "missingItems": [],
+    "requestedItemCount": 65,
+    "completedItemCount": 63,
+    "missingItemCount": 2,
+    "missingItemIds": [
+      "14912524dfd120",
+      "3c05858bc62856"
+    ],
+    "missingItems": [
+      {
+        "id": "14912524dfd120",
+        "reason": "translation_content_rejected"
+      },
+      {
+        "id": "3c05858bc62856",
+        "reason": "translation_content_rejected"
+      }
+    ],
     "initialBatchSize": 6,
-    "initialBatchCount": 1,
-    "requestCount": 1,
-    "retryRequestCount": 0,
+    "initialBatchCount": 11,
+    "requestCount": 15,
+    "retryRequestCount": 4,
     "providerFailureCount": 0,
-    "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "structuralFailureCount": 4,
+    "completionReason": "partial_after_retry",
+    "completionMessage": "拆分重试后仍有条目缺失",
     "lastProviderError": "",
-    "reusedItemCount": 128,
-    "featuredTranslatedItemCount": 8,
+    "reusedItemCount": 68,
+    "featuredTranslatedItemCount": 5,
     "notAttemptedItemIds": [],
     "notAttemptedItemCount": 0,
     "budgetDeferredItemCount": 0,
-    "targetItemCount": 131,
+    "targetItemCount": 133,
     "totalTranslatedItemCount": 131,
-    "totalMissingItemCount": 0,
-    "totalMissingItemIds": [],
-    "coverageCompletionMessage": "中文译文已全部完成"
+    "totalMissingItemCount": 2,
+    "totalMissingItemIds": [
+      "14912524dfd120",
+      "3c05858bc62856"
+    ],
+    "coverageCompletionMessage": "还有 2 条中文译文待完成"
   },
-  "message": "全量动态更新成功，共 131 条",
-  "releaseId": "r20261007T101441-38e509c7"
+  "message": "全量动态更新成功，共 133 条"
 }
