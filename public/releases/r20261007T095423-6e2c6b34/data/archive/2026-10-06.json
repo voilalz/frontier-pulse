@@ -1,0 +1,3428 @@
+{
+  "schemaVersion": 11,
+  "generatedAt": "2026-10-06T02:55:27Z",
+  "editionDate": "2026-10-06",
+  "timezone": "Asia/Shanghai",
+  "method": "deepseek",
+  "selectionMethod": "deepseek",
+  "selectionStrategy": "ai-ranked-rule-constrained",
+  "selectionStatus": "adjusted",
+  "selectionProvider": "deepseek",
+  "selectionModel": "deepseek-v4-flash",
+  "selectionNotices": [
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 5 个 Top 10 入选位"
+  ],
+  "selectionWarnings": [],
+  "selectionDiagnostics": {
+    "attempted": true,
+    "status": "adjusted",
+    "failureReason": "",
+    "candidateCount": 72,
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "aiWeight": 0.65,
+    "ruleWeight": 0.35,
+    "aiScoredItemCount": 72,
+    "aiUnscoredItemCount": 0,
+    "unconstrainedTop": {
+      "categoryCounts": {
+        "军事动态": 8,
+        "航空航天": 1,
+        "前沿技术": 1
+      },
+      "domainCounts": {
+        "twz.com": 2,
+        "navalnews.com": 1,
+        "defensenews.com": 5,
+        "semiengineering.com": 1,
+        "theguardian.com": 1
+      },
+      "categoryViolations": {
+        "军事动态": 8
+      },
+      "domainViolations": {
+        "defensenews.com": 5
+      }
+    },
+    "finalTop": {
+      "categoryCounts": {
+        "军事动态": 3,
+        "航空航天": 2,
+        "前沿技术": 1,
+        "局部冲突": 1,
+        "无人系统": 2,
+        "AI": 1
+      },
+      "domainCounts": {
+        "twz.com": 1,
+        "navalnews.com": 1,
+        "defensenews.com": 2,
+        "semiengineering.com": 1,
+        "aljazeera.com": 1,
+        "unmannedairspace.info": 2,
+        "science.nasa.gov": 1,
+        "the-decoder.com": 1
+      },
+      "categoryViolations": {},
+      "domainViolations": {}
+    },
+    "adjustedItemCount": 5,
+    "adjustedOutIds": [
+      "b899b2a6e000db",
+      "6791bdb9711e3d",
+      "07013e2bf51f97",
+      "aeeadbec07a680",
+      "079693f8568e2c"
+    ],
+    "adjustedInIds": [
+      "7d1be2688ff2f3",
+      "70b6425eedca2c",
+      "4afcdce27d1043",
+      "0e0dc8f08351a7",
+      "df746c21e27339"
+    ],
+    "relaxedItemCount": 0
+  },
+  "translationStatus": "partial",
+  "translationProvider": "deepseek",
+  "translationModel": "deepseek-v4-flash",
+  "translatedItemCount": 9,
+  "translationWarnings": [
+    "日报中文翻译在拆分重试后仍缺失 1/1 条：拆分重试后仍有条目缺失",
+    "日报中文翻译不完整：9/10"
+  ],
+  "translationDiagnostics": {
+    "requestedItemCount": 1,
+    "completedItemCount": 0,
+    "missingItemCount": 1,
+    "missingItemIds": [
+      "98770ddd824281"
+    ],
+    "missingItems": [
+      {
+        "id": "98770ddd824281",
+        "reason": "translation_content_rejected"
+      }
+    ],
+    "initialBatchSize": 5,
+    "initialBatchCount": 1,
+    "requestCount": 3,
+    "retryRequestCount": 2,
+    "providerFailureCount": 0,
+    "structuralFailureCount": 3,
+    "completionReason": "partial_after_retry",
+    "completionMessage": "拆分重试后仍有条目缺失",
+    "lastProviderError": "",
+    "targetItemCount": 10,
+    "reusedItemCount": 9,
+    "newlyTranslatedItemCount": 0,
+    "totalTranslatedItemCount": 9,
+    "totalMissingItemCount": 1
+  },
+  "historyAnalysisStatus": "ok",
+  "historyAnalysisProvider": "deepseek",
+  "historyLinkedItemCount": 2,
+  "historyAnalyzedItemCount": 2,
+  "historyAnalysisWarnings": [],
+  "historyAnalysisDiagnostics": {
+    "requestedItemCount": 2,
+    "completedItemCount": 2,
+    "missingItemCount": 0,
+    "missingItemIds": [],
+    "missingItems": [],
+    "initialBatchSize": 5,
+    "initialBatchCount": 1,
+    "requestCount": 1,
+    "retryRequestCount": 0,
+    "providerFailureCount": 0,
+    "structuralFailureCount": 0,
+    "completionReason": "complete_first_pass",
+    "completionMessage": "全部条目首轮完成",
+    "lastProviderError": ""
+  },
+  "spotlightIds": [
+    "cddcfe029b5e13",
+    "98770ddd824281",
+    "caf49eb1852ad1"
+  ],
+  "warnings": [
+    "日报中文翻译在拆分重试后仍缺失 1/1 条：拆分重试后仍有条目缺失",
+    "日报中文翻译不完整：9/10"
+  ],
+  "candidateCount": 146,
+  "freshCandidateCount": 146,
+  "supplementalCandidateCount": 0,
+  "freshItemCount": 10,
+  "supplementalItemCount": 0,
+  "coverageStatus": "complete",
+  "effectiveLookbackHours": 24,
+  "sourceCount": 55,
+  "scoring": {
+    "label": "重要度，不等同于事实真伪",
+    "formula": "基础分 + 来源 + 主题优先级 + 时效 + 影响信号 + 相关性 + 证据完整度 + 多源印证 - 编辑降权",
+    "confidenceNote": "置信度仅反映已收录来源的权重与独立来源数量，不替代事实核查。"
+  },
+  "brief": {
+    "headline": "First Release Of USAF’s New HACM Hypersonic Cruise Missile Has Happened Over Australian Range",
+    "summary": "本期从 55 个公开信源筛选出 10 条重点事件，覆盖科技、AI、航空航天、安全动态与无人系统。",
+    "signals": [
+      "军事动态：The U.S. Air Force’s scramjet-powered Hypersonic Attack Cruise Missile (HACM) has finally reached the flight test phase, with at least one “release” having been carried out s…",
+      "军事动态：Blackbeard, an air-launched, long-range hypersonic strike missile, successfully completed another milestone recently, with a flight test on an F/A-18E/F Super Hornet at Naval…",
+      "军事动态：MANILA, Philippines — The U.S. Marine Corps will deploy its ground-based anti-ship and air-defense systems to Japan’s southwesternmost island for exercise Keen Sword, placing…"
+    ]
+  },
+  "items": [
+    {
+      "id": "cddcfe029b5e13",
+      "eventId": "evt-0517e77a7df2",
+      "contentType": "news",
+      "title": "First Release Of USAF’s New HACM Hypersonic Cruise Missile Has Happened Over Australian Range",
+      "originalTitle": "First Release Of USAF’s New HACM Hypersonic Cruise Missile Has Happened Over Australian Range",
+      "summary": "The U.S. Air Force’s scramjet-powered Hypersonic Attack Cruise Missile (HACM) has finally reached the flight test phase, with at least one “release” having been carried out so far over a range in Australia. DARPA “The U.S. Air Force, in partnership with Australia, has conducted a flight test of the Hypersonic Attack Cruise Missile (HACM) as part of our continuous work to advance long-range strike capabilities,” an Air Force spokesperson confirmed to TWZ today.",
+      "summaryRevision": 5,
+      "traceVersion": 1,
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-ebb35aeeab121c9df991",
+          "text": "Air Force’s scramjet-powered Hypersonic Attack Cruise Missile (HACM) has finally reached the flight test phase, with at least one “release” having been carried out so far over a range in Australia.",
+          "url": "https://www.twz.com/air/first-release-of-usafs-new-hacm-hypersonic-cruise-missile-has-happened-over-a-test-range-in-australia",
+          "fetchedAt": "2026-10-06T02:59:29+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-9ea06b04ac796b08c779",
+          "text": "DARPA “The U.S.",
+          "url": "https://www.twz.com/air/first-release-of-usafs-new-hacm-hypersonic-cruise-missile-has-happened-over-a-test-range-in-australia",
+          "fetchedAt": "2026-10-06T02:59:29+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-0566234d4dc12a1b3c86",
+          "text": "Air Force, in partnership with Australia, has conducted a flight test of the Hypersonic Attack Cruise Missile (HACM) as part of our continuous work to advance long-range strike capabilities,” an Air Force spokesperson confirmed to TWZ today.",
+          "url": "https://www.twz.com/air/first-release-of-usafs-new-hacm-hypersonic-cruise-missile-has-happened-over-a-test-range-in-australia",
+          "fetchedAt": "2026-10-06T02:59:29+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-e1c9ec150608fb5e6b31",
+          "text": "“This effort is part of the Southern Cross Integrated Flight Research Experiment (SCIFiRE), a collaborative agreement built on more than 15 years of partnership between our two nations.” “Leveraging this enduring alliance, the Royal Australian Air Force executed the release of a HACM flight test unit over a designated Australian test range, gathering crucial data to advance the program’s objectives,” the spokesperson added.",
+          "url": "https://www.twz.com/air/first-release-of-usafs-new-hacm-hypersonic-cruise-missile-has-happened-over-a-test-range-in-australia",
+          "fetchedAt": "2026-10-06T02:59:29+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-21fe41127c3bb5824fb3",
+          "text": "In 2023, the Air Force did release a picture , seen below, showing an air-breathing hypersonic cruise missile test article related to either HACM or the preceding HAWC effort.",
+          "url": "https://www.twz.com/air/first-release-of-usafs-new-hacm-hypersonic-cruise-missile-has-happened-over-a-test-range-in-australia",
+          "fetchedAt": "2026-10-06T02:59:29+00:00",
+          "kind": "feed"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-ebb35aeeab121c9df991",
+        "evd-9ea06b04ac796b08c779",
+        "evd-0566234d4dc12a1b3c86",
+        "evd-e1c9ec150608fb5e6b31",
+        "evd-21fe41127c3bb5824fb3"
+      ],
+      "keyFactEvidence": [
+        {
+          "text": "Air Force’s scramjet-powered Hypersonic Attack Cruise Missile (HACM) has finally reached the flight test phase",
+          "evidenceIds": [
+            "evd-ebb35aeeab121c9df991"
+          ]
+        },
+        {
+          "text": "with at least one “release” having been carried out so far over a range in Australia",
+          "evidenceIds": [
+            "evd-ebb35aeeab121c9df991"
+          ]
+        },
+        {
+          "text": "DARPA “The U.S",
+          "evidenceIds": [
+            "evd-9ea06b04ac796b08c779"
+          ]
+        }
+      ],
+      "summaryEvidence": {
+        "status": "feed",
+        "candidateCount": 58,
+        "selectedCount": 4,
+        "reason": "restricted-page-selected-feed"
+      },
+      "summaryInputHash": "8f1a464b5629596fc0ddb098",
+      "keyFacts": [
+        "Air Force’s scramjet-powered Hypersonic Attack Cruise Missile (HACM) has finally reached the flight test phase",
+        "with at least one “release” having been carried out so far over a range in Australia",
+        "DARPA “The U.S"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-10-05T23:26:47Z",
+      "url": "https://www.twz.com/air/first-release-of-usafs-new-hacm-hypersonic-cruise-missile-has-happened-over-a-test-range-in-australia",
+      "score": 90,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 22,
+        "主题相关性": 12,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 88/100",
+        "综合排序分 90/100（AI 65% + 规则 35%）",
+        "规则参考分 95/100",
+        "来源权重 15/20",
+        "发布约 3.5 小时",
+        "命中 12 个主题信号",
+        "影响信号：first、launch、test"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "HACM",
+        "高超声速",
+        "美澳合作"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/10/hacm-flight-testing-has-begun.jpg?quality=85",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/air/first-release-of-usafs-new-hacm-hypersonic-cruise-missile-has-happened-over-a-test-range-in-australia",
+          "publishedAt": "2026-10-05T23:26:47Z",
+          "evidenceGroup": "outlet:twz.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "displayTranslation": {
+        "version": 1,
+        "language": "zh-CN",
+        "provider": "deepseek",
+        "title": "美国空军新型HACM高超声速巡航导弹在澳大利亚靶场上空完成首次释放",
+        "summary": "美国空军的超燃冲压发动机驱动的高超声速攻击巡航导弹（HACM）已进入飞行试验阶段，迄今至少在澳大利亚一处靶场上空进行了一次“释放”。美国空军发言人向TWZ确认，美国空军与澳大利亚合作开展了HACM飞行试验，这是美方持续推进远程打击能力工作的一部分。HACM由DARPA参与。目前仅确认已实施至少一次释放，具体时间、次数与结果尚未公布。",
+        "sourceTitle": "First Release Of USAF’s New HACM Hypersonic Cruise Missile Has Happened Over Australian Range",
+        "sourceSummary": "The U.S. Air Force’s scramjet-powered Hypersonic Attack Cruise Missile (HACM) has finally reached the flight test phase, with at least one “release” having been carried out so far over a range in Australia. DARPA “The U.S. Air Force, in partnership with Australia, has conducted a flight test of the Hypersonic Attack Cruise Missile (HACM) as part of our continuous work to advance long-range strike capabilities,” an Air Force spokesperson confirmed to TWZ today.",
+        "sourceEvidenceRefs": [
+          "evd-ebb35aeeab121c9df991",
+          "evd-9ea06b04ac796b08c779",
+          "evd-0566234d4dc12a1b3c86",
+          "evd-e1c9ec150608fb5e6b31",
+          "evd-21fe41127c3bb5824fb3"
+        ]
+      },
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "cddcfe029b5e13",
+        "mergedFrom": [],
+        "evidence": {
+          "newsIds": [
+            "cddcfe029b5e13"
+          ],
+          "urls": [
+            "https://www.twz.com/air/first-release-of-usafs-new-hacm-hypersonic-cruise-missile-has-happened-over-a-test-range-in-australia"
+          ],
+          "anchors": [
+            "australian",
+            "cruise",
+            "hacm",
+            "happened",
+            "hypersonic",
+            "missile",
+            "range",
+            "usaf"
+          ],
+          "date": "2026-10-05"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "Air Force’s scramjet-powered Hypersonic Attack Cruise Missile (HACM) has finally reached the flight test phase",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "with at least one “release” having been carried out so far over a range in Australia",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "DARPA “The U.S",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-5a5269664349",
+          "eventId": "evt-0517e77a7df2",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "cddcfe029b5e13"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-0517e77a7df2",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-10-06",
+            "newsId": "cddcfe029b5e13",
+            "title": "First Release Of USAF’s New HACM Hypersonic Cruise Missile Has Happened Over Australian Range",
+            "originalTitle": "First Release Of USAF’s New HACM Hypersonic Cruise Missile Has Happened Over Australian Range",
+            "summaryLead": "The U.S. Air Force’s scramjet-powered Hypersonic Attack Cruise Missile (HACM) has finally reached the flight test phase, with at least one “release” having been carried out so far over a range in Australia. DARPA “The U.S. Air Force, in pa…",
+            "source": "The War Zone",
+            "publishedAt": "2026-10-05T23:26:47Z",
+            "score": 90
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "4cd2c5417e2ca3",
+      "eventId": "evt-ec879b2041ff",
+      "contentType": "news",
+      "title": "U.S. Navy Completes Successful Test Flight of Blackbeard Long-range Hypersonic Strike Missile",
+      "originalTitle": "U.S. Navy Completes Successful Test Flight of Blackbeard Long-range Hypersonic Strike Missile",
+      "summary": "Blackbeard, an air-launched, long-range hypersonic strike missile, successfully completed another milestone recently, with a flight test on an F/A-18E/F Super Hornet at Naval Air Station (NAS) Patuxent River, Maryland. This represents a key developmental test step in the program’s progression to Early Operational Capability (EOC).",
+      "summaryRevision": 5,
+      "traceVersion": 1,
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-8ac9cb4efc12a1823512",
+          "text": "Blackbeard, an air-launched, long-range hypersonic strike missile, successfully completed another milestone recently, with a flight test on an F/A-18E/F Super Hornet at Naval Air Station (NAS) Patuxent River, Maryland.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-1b8b37aed9b7e7d2dcf7",
+          "text": "Navy press release Developed by Castelion and led by the Portfolio Acquisition Executive Aviation (PAE(A)) through its Future Capability Development and Integration (FCD&I) Aviation Rapid Capabilities Cell, in coordination with the Naval Air Warfare Centers and the DON Rapid Capabilities Office, Blackbeard will provide carrier-based strike fighters with a responsive, high-speed strike option to pierce contested anti-access/area-denial (A2/AD) envelopes while significantly expanding theater magazine depth.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-a4503dd257f6a6f6ed8b",
+          "text": "This represents a key developmental test step in the program’s progression to Early Operational Capability (EOC).",
+          "url": "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-8ac9cb4efc12a1823512",
+        "evd-1b8b37aed9b7e7d2dcf7",
+        "evd-a4503dd257f6a6f6ed8b"
+      ],
+      "keyFactEvidence": [
+        {
+          "text": "an air-launched",
+          "evidenceIds": [
+            "evd-8ac9cb4efc12a1823512"
+          ]
+        },
+        {
+          "text": "long-range hypersonic strike missile",
+          "evidenceIds": [
+            "evd-8ac9cb4efc12a1823512"
+          ]
+        },
+        {
+          "text": "successfully completed another milestone recently",
+          "evidenceIds": [
+            "evd-8ac9cb4efc12a1823512"
+          ]
+        }
+      ],
+      "summaryEvidence": {
+        "status": "body",
+        "candidateCount": 24,
+        "selectedCount": 1,
+        "reason": "selected-public-body"
+      },
+      "summaryInputHash": "cede8b876ad68f5dc333cdfa",
+      "keyFacts": [
+        "an air-launched",
+        "long-range hypersonic strike missile",
+        "successfully completed another milestone recently"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Naval News",
+      "country": "国际",
+      "publishedAt": "2026-10-05T15:00:00Z",
+      "url": "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile",
+      "score": 86,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 14,
+        "影响信号": 20,
+        "主题相关性": 12,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 84/100",
+        "综合排序分 86/100（AI 65% + 规则 35%）",
+        "规则参考分 90/100",
+        "来源权重 16/20",
+        "发布约 11.9 小时",
+        "命中 8 个主题信号",
+        "影响信号：test、production、strike"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "高超声速导弹",
+        "美海军",
+        "飞行试验"
+      ],
+      "image": "https://www.navalnews.com/wp-content/uploads/2026/10/FA18-with-blackbeard-scaled.png",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Naval News",
+          "domain": "navalnews.com",
+          "url": "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile",
+          "publishedAt": "2026-10-05T15:00:00Z",
+          "evidenceGroup": "outlet:navalnews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "displayTranslation": {
+        "version": 1,
+        "language": "zh-CN",
+        "provider": "deepseek",
+        "title": "美海军完成“黑胡子”远程高超声速打击导弹成功试飞",
+        "summary": "“黑胡子”是一款空射远程高超声速打击导弹，近日在位于马里兰州的帕塔克森特河海军航空站，由一架F/A-18E/F“超级大黄蜂”战斗机完成又一次试飞，成功达到新的里程碑。这标志着该项目在迈向“早期作战能力”过程中完成了一项关键开发测试步骤。",
+        "sourceTitle": "U.S. Navy Completes Successful Test Flight of Blackbeard Long-range Hypersonic Strike Missile",
+        "sourceSummary": "Blackbeard, an air-launched, long-range hypersonic strike missile, successfully completed another milestone recently, with a flight test on an F/A-18E/F Super Hornet at Naval Air Station (NAS) Patuxent River, Maryland. This represents a key developmental test step in the program’s progression to Early Operational Capability (EOC).",
+        "sourceEvidenceRefs": [
+          "evd-8ac9cb4efc12a1823512",
+          "evd-1b8b37aed9b7e7d2dcf7",
+          "evd-a4503dd257f6a6f6ed8b"
+        ]
+      },
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 1,
+        "relatedStories": [
+          {
+            "id": "06fc09dd388511",
+            "eventId": "evt-53650a1a0526",
+            "editionDate": "2026-09-18",
+            "title": "美海军授予防务初创公司2亿美元用于Blackbeard高超音速导弹",
+            "originalTitle": "US Navy awards defense startup $200 million for Blackbeard hypersonic missile",
+            "summary": "美国海军授予防务初创公司Castelion 2亿美元，用于生产其Blackbeard高超音速导弹。",
+            "category": "军事动态",
+            "source": "Defense News",
+            "publishedAt": "2026-09-17T15:35:43Z",
+            "associationScore": 51,
+            "relationLabel": "同一事件后续",
+            "associationReasons": [
+              "标题结构显示为同一事件的后续报道",
+              "标题共享关键词：blackbeard、hypersonic、missile、navy",
+              "共同标签：美海军"
+            ]
+          }
+        ],
+        "timelineSummary": "2026年9月17日归档报道显示，美海军授予防务初创公司2亿美元用于Blackbeard高超音速导弹生产。10月5日报道称，该空射远程高超音速打击导弹在马里兰州帕塔克森特河海军航空站由F/A-18E/F完成又一次飞行测试，项目朝早期作战能力推进。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "后续可观察该项目是否披露更多飞行测试节点及早期作战能力时间表。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "若进入生产或部署阶段，则需关注合同调整及载机适配的进一步公开信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "deepseek"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "4cd2c5417e2ca3",
+        "mergedFrom": [],
+        "evidence": {
+          "newsIds": [
+            "4cd2c5417e2ca3"
+          ],
+          "urls": [
+            "https://www.navalnews.com/naval-news/2026/10/u-s-navy-completes-successful-test-flight-of-blackbeard-long-range-hypersonic-strike-missile"
+          ],
+          "anchors": [
+            "blackbeard",
+            "completes",
+            "hypersonic",
+            "long-range",
+            "missile",
+            "successful",
+            "test"
+          ],
+          "date": "2026-10-05"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:navalnews.com"
+        ],
+        "claims": [
+          {
+            "text": "an air-launched",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:navalnews.com"
+            ]
+          },
+          {
+            "text": "long-range hypersonic strike missile",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:navalnews.com"
+            ]
+          },
+          {
+            "text": "successfully completed another milestone recently",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:navalnews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-801d41418fdc",
+          "eventId": "evt-ec879b2041ff",
+          "statement": "后续可观察该弹是否公布更多飞行试验节点及早期作战能力时间表。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "4cd2c5417e2ca3"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        },
+        {
+          "predictionId": "pred-f37262c542bb",
+          "eventId": "evt-ec879b2041ff",
+          "statement": "若项目推进至早期作战能力，则需关注其与载机集成及生产交付节奏。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2027-01-04",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "4cd2c5417e2ca3"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        },
+        {
+          "predictionId": "pred-e54cf7ae8b95",
+          "eventId": "evt-ec879b2041ff",
+          "statement": "后续可观察该项目是否披露更多飞行测试节点及早期作战能力时间表。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "4cd2c5417e2ca3"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        },
+        {
+          "predictionId": "pred-e527b1cfd218",
+          "eventId": "evt-ec879b2041ff",
+          "statement": "若进入生产或部署阶段，则需关注合同调整及载机适配的进一步公开信息。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2027-01-04",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "4cd2c5417e2ca3"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-ec879b2041ff",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-10-06",
+            "newsId": "4cd2c5417e2ca3",
+            "title": "U.S. Navy Completes Successful Test Flight of Blackbeard Long-range Hypersonic Strike Missile",
+            "originalTitle": "U.S. Navy Completes Successful Test Flight of Blackbeard Long-range Hypersonic Strike Missile",
+            "summaryLead": "Blackbeard, an air-launched, long-range hypersonic strike missile, successfully completed another milestone recently, with a flight test on an F/A-18E/F Super Hornet at Naval Air Station (NAS) Patuxent River, Maryland. This represents a ke…",
+            "source": "Naval News",
+            "publishedAt": "2026-10-05T15:00:00Z",
+            "score": 86
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "db9bad3b403a70",
+      "eventId": "evt-e230fb50ad6a",
+      "contentType": "news",
+      "title": "US Marine Corps anti-ship weaponry to see exercise action on remote Japan island near Taiwan",
+      "originalTitle": "US Marine Corps anti-ship weaponry to see exercise action on remote Japan island near Taiwan",
+      "summary": "MANILA, Philippines — The U.S. Marine Corps will deploy its ground-based anti-ship and air-defense systems to Japan’s southwesternmost island for exercise Keen Sword, placing new U.S.-Japan capabilities on an island sitting just 110 kilometers from Taiwan.",
+      "summaryRevision": 5,
+      "traceVersion": 1,
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-549bd337ae705d92007d",
+          "text": "MANILA, Philippines — The U.S.",
+          "url": "https://www.defensenews.com/global/asia-pacific/2026/10/05/us-marine-corps-anti-ship-weaponry-to-see-exercise-action-on-remote-japan-island-near-taiwan",
+          "fetchedAt": "2026-10-06T02:59:33+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-658ceb2da7c891962ec0",
+          "text": "Marine Corps will deploy its ground-based anti-ship and air-defense systems to Japan’s southwesternmost island for exercise Keen Sword, placing new U.S.-Japan capabilities on an island sitting just 110 kilometers from Taiwan.",
+          "url": "https://www.defensenews.com/global/asia-pacific/2026/10/05/us-marine-corps-anti-ship-weaponry-to-see-exercise-action-on-remote-japan-island-near-taiwan",
+          "fetchedAt": "2026-10-06T02:59:33+00:00",
+          "kind": "feed"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-549bd337ae705d92007d",
+        "evd-658ceb2da7c891962ec0"
+      ],
+      "keyFactEvidence": [
+        {
+          "text": "Philippines — The U.S",
+          "evidenceIds": [
+            "evd-549bd337ae705d92007d"
+          ]
+        },
+        {
+          "text": "Marine Corps will deploy its ground-based anti-ship",
+          "evidenceIds": [
+            "evd-658ceb2da7c891962ec0"
+          ]
+        }
+      ],
+      "summaryEvidence": {
+        "status": "body",
+        "candidateCount": 35,
+        "selectedCount": 1,
+        "reason": "selected-public-body"
+      },
+      "summaryInputHash": "2853b9f6010c077275febc79",
+      "keyFacts": [
+        "Philippines — The U.S",
+        "Marine Corps will deploy its ground-based anti-ship"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-10-05T12:24:45Z",
+      "url": "https://www.defensenews.com/global/asia-pacific/2026/10/05/us-marine-corps-anti-ship-weaponry-to-see-exercise-action-on-remote-japan-island-near-taiwan",
+      "score": 85,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 13,
+        "影响信号": 22,
+        "主题相关性": 12,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 82/100",
+        "综合排序分 85/100（AI 65% + 规则 35%）",
+        "规则参考分 91/100",
+        "来源权重 16/20",
+        "发布约 14.5 小时",
+        "命中 10 个主题信号",
+        "影响信号：first、deploy、strike"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美日演习",
+        "反舰武器",
+        "台湾周边"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/6WTAPTRRWBETFKXJJUUOVMAW54.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/global/asia-pacific/2026/10/05/us-marine-corps-anti-ship-weaponry-to-see-exercise-action-on-remote-japan-island-near-taiwan",
+          "publishedAt": "2026-10-05T12:24:45Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "displayTranslation": {
+        "version": 1,
+        "language": "zh-CN",
+        "provider": "deepseek",
+        "title": "美海军陆战队反舰武器将在临近台湾的日本偏远岛屿参加演习",
+        "summary": "美国海军陆战队将在“利剑”演习中把其陆基反舰和防空系统部署到日本最西南端的岛屿。该岛距离台湾仅110公里，此举将把美日新能力部署到这一位置。报道未说明演习的具体时间、参演兵力规模或相关武器型号。",
+        "sourceTitle": "US Marine Corps anti-ship weaponry to see exercise action on remote Japan island near Taiwan",
+        "sourceSummary": "MANILA, Philippines — The U.S. Marine Corps will deploy its ground-based anti-ship and air-defense systems to Japan’s southwesternmost island for exercise Keen Sword, placing new U.S.-Japan capabilities on an island sitting just 110 kilometers from Taiwan.",
+        "sourceEvidenceRefs": [
+          "evd-549bd337ae705d92007d",
+          "evd-658ceb2da7c891962ec0"
+        ]
+      },
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "db9bad3b403a70",
+        "mergedFrom": [],
+        "evidence": {
+          "newsIds": [
+            "db9bad3b403a70"
+          ],
+          "urls": [
+            "https://www.defensenews.com/global/asia-pacific/2026/10/05/us-marine-corps-anti-ship-weaponry-to-see-exercise-action-on-remote-japan-island-near-taiwan"
+          ],
+          "anchors": [
+            "action",
+            "anti-ship",
+            "corps",
+            "exercise",
+            "island",
+            "japan",
+            "marine",
+            "near",
+            "remote",
+            "see"
+          ],
+          "date": "2026-10-05"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "Philippines — The U.S",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          },
+          {
+            "text": "Marine Corps will deploy its ground-based anti-ship",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-b0f602fb60ca",
+          "eventId": "evt-e230fb50ad6a",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "db9bad3b403a70"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-e230fb50ad6a",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-10-06",
+            "newsId": "db9bad3b403a70",
+            "title": "US Marine Corps anti-ship weaponry to see exercise action on remote Japan island near Taiwan",
+            "originalTitle": "US Marine Corps anti-ship weaponry to see exercise action on remote Japan island near Taiwan",
+            "summaryLead": "MANILA, Philippines — The U.S. Marine Corps will deploy its ground-based anti-ship and air-defense systems to Japan’s southwesternmost island for exercise Keen Sword, placing new U.S.-Japan capabilities on an island sitting just 110 kilome…",
+            "source": "Defense News",
+            "publishedAt": "2026-10-05T12:24:45Z",
+            "score": 85
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "98770ddd824281",
+      "eventId": "evt-10b637d8fd95",
+      "contentType": "news",
+      "title": "European defense startups to raise record $10.5 billion in 2026, Dealroom forecasts",
+      "originalTitle": "European defense startups to raise record $10.5 billion in 2026, Dealroom forecasts",
+      "summary": "PARIS — European defense startups are forecast to raise a record $10.5 billion of funding this year, roughly four times the $2.6 billion raised a year earlier and led by investments in firms developing drone technology, according to Dealroom, which tracks data on venture capital funding. Defense startup funding in Europe already reached $7.4 billion as of Sept. 20, led by so-called “mega rounds” raised by Germany’s Helsing and Quantum systems, Dealroom and Resilience Media said in their annual State of Defence Tech report published Monday.",
+      "summaryRevision": 5,
+      "traceVersion": 1,
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-81593739db0ed790a2df",
+          "text": "PARIS — European defense startups are forecast to raise a record $10.5 billion of funding this year, roughly four times the $2.6 billion raised a year earlier and led by investments in firms developing drone technology, according to Dealroom, which tracks data on venture capital funding.",
+          "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-7e29aeaef6581256e884",
+          "text": "That compares to $1.5 billion of funding for European startups in the defense space as of September a year earlier, based on the 2025 report.",
+          "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-930be75915021f84a218",
+          "text": "“EU 27 funding more than doubled in a year.” Mega rounds made up more than 85% of the venture capital invested in European defense startups this year, including Helsing’s $1.8 billion Series E round in July according to Dealroom.",
+          "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-09b5f3cf2a31d768e34d",
+          "text": "European startups in that segment that raised money included Helsing, Quantum Systems and Stark in Germany, Harmattan AI in France and Cambridge Aerospace in the U.K.",
+          "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-1aa204ff309edeebf241",
+          "text": "In Europe, the segment of unmanned aerial vehicles accounted for $4.7 billion raised as of September, according to the Dealroom data, followed by Earth observation and satellite imagery with $1.8 billion, anti-drone solutions and launch vehicles, each with $1.2 billion, and maritime robotics, with $796 million raised.",
+          "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-0903283756f1e410822b",
+          "text": "Behind them a younger cohort is forming across ground robotics, counter-drone and hypersonics.” Funding for defense startups is diversifying as the sector grows, and total private investment in NATO defense startups, which also includes private equity, debt and grants, is forecast to reach $42.7 billion from $16.9 billion a year earlier, according to Dealroom.",
+          "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
+          "fetchedAt": "2026-10-06T02:59:32+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-e68dcfa93b56f9c408b1",
+          "text": "Defense startup funding in Europe already reached $7.4 billion as of Sept. 20, led by so-called “mega rounds” raised by Germany’s Helsing and Quantum systems, Dealroom and Resilience Media said in their annual State of Defence Tech report published Monday.",
+          "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-b26de564e4d35da267db",
+          "text": "Mega rounds made up more than 85% of the venture capital invested in European defense startups this year, including Helsing’s $1.8 billion Series E round in July according to Dealroom.",
+          "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-7bf5caf3c0986cf32084",
+          "text": "German startups have set every fundraising record in European defense-tech venture capital funding since 2023, the report said.",
+          "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-bc9d5a4be0eb8f1fadd7",
+          "text": "“Munich is the powerhouse of the European defense tech ecosystem,” Dealroom said. “Helsing and Quantum Systems drive most of it, together worth $25.7 billion.",
+          "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-5f40dfb85f9aadda8dfe",
+          "text": "Behind them a younger cohort is forming across ground robotics, counter-drone and hypersonics.”",
+          "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a99a1db1dda7092c947c",
+          "text": "Funding for defense startups is diversifying as the sector grows, and total private investment in NATO defense startups, which also includes private equity, debt and grants, is forecast to reach $42.7 billion from $16.9 billion a year earlier, according to Dealroom.",
+          "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-81593739db0ed790a2df",
+        "evd-7e29aeaef6581256e884",
+        "evd-930be75915021f84a218",
+        "evd-09b5f3cf2a31d768e34d",
+        "evd-1aa204ff309edeebf241",
+        "evd-0903283756f1e410822b",
+        "evd-e68dcfa93b56f9c408b1",
+        "evd-b26de564e4d35da267db",
+        "evd-7bf5caf3c0986cf32084",
+        "evd-bc9d5a4be0eb8f1fadd7",
+        "evd-5f40dfb85f9aadda8dfe",
+        "evd-a99a1db1dda7092c947c"
+      ],
+      "keyFactEvidence": [
+        {
+          "text": "PARIS — European defense startups are forecast to raise a record $10.5 billion of funding this year",
+          "evidenceIds": [
+            "evd-81593739db0ed790a2df"
+          ]
+        },
+        {
+          "text": "roughly four times the $2.6 billion raised a year earlier",
+          "evidenceIds": [
+            "evd-81593739db0ed790a2df"
+          ]
+        },
+        {
+          "text": "led by investments in firms developing drone technology",
+          "evidenceIds": [
+            "evd-81593739db0ed790a2df"
+          ]
+        }
+      ],
+      "summaryEvidence": {
+        "status": "body",
+        "candidateCount": 24,
+        "selectedCount": 5,
+        "reason": "selected-public-body"
+      },
+      "summaryInputHash": "ecb723e449417db34094dae3",
+      "keyFacts": [
+        "PARIS — European defense startups are forecast to raise a record $10.5 billion of funding this year",
+        "roughly four times the $2.6 billion raised a year earlier",
+        "led by investments in firms developing drone technology"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-10-05T14:54:11Z",
+      "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
+      "score": 78,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 14,
+        "影响信号": 14,
+        "主题相关性": 12,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 75/100",
+        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "规则参考分 83/100",
+        "来源权重 16/20",
+        "发布约 12.0 小时",
+        "命中 9 个主题信号",
+        "影响信号：launch、quantum、autonomous"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "satellite",
+        "aerospace",
+        "launch"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/LFNLDHZRTFHWDIU4C6W2ZZWQ2I.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts",
+          "publishedAt": "2026-10-05T14:54:11Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "98770ddd824281",
+        "mergedFrom": [],
+        "evidence": {
+          "newsIds": [
+            "98770ddd824281"
+          ],
+          "urls": [
+            "https://www.defensenews.com/global/europe/2026/10/05/european-defense-startups-to-raise-record-105-billion-in-2026-dealroom-forecasts"
+          ],
+          "anchors": [
+            "billion",
+            "dealroom",
+            "forecasts",
+            "raise",
+            "record",
+            "startups"
+          ],
+          "date": "2026-10-05"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defensenews.com"
+        ],
+        "claims": [
+          {
+            "text": "PARIS — European defense startups are forecast to raise a record $10.5 billion of funding this year",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          },
+          {
+            "text": "roughly four times the $2.6 billion raised a year earlier",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          },
+          {
+            "text": "led by investments in firms developing drone technology",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defensenews.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-58d96d0585c5",
+          "eventId": "evt-10b637d8fd95",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "98770ddd824281"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-10b637d8fd95",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-10-06",
+            "newsId": "98770ddd824281",
+            "title": "European defense startups to raise record $10.5 billion in 2026, Dealroom forecasts",
+            "originalTitle": "European defense startups to raise record $10.5 billion in 2026, Dealroom forecasts",
+            "summaryLead": "PARIS — European defense startups are forecast to raise a record $10.5 billion of funding this year, roughly four times the $2.6 billion raised a year earlier and led by investments in firms developing drone technology, according to Dealro…",
+            "source": "Defense News",
+            "publishedAt": "2026-10-05T14:54:11Z",
+            "score": 78
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "caf49eb1852ad1",
+      "eventId": "evt-460a7a43436a",
+      "contentType": "news",
+      "title": "Extreme Environments Push Chips To Their Breaking Point",
+      "originalTitle": "Extreme Environments Push Chips To Their Breaking Point",
+      "summary": "Orbital data centers, military/aerospace vehicles, HPC experiments, quantum, and advanced manufacturing equipment are all putting pressure on chips to withstand extreme environments. Chips that were once qualified against a limited set of operating conditions are now being designed for environments where multiple stresses hit at once. Radiation, thermal shock, vibration, pressure, noise, and cryogenic temperatures are colliding in applications ranging from orbital data centers and defense systems to particle physics, quantum computing, and advanced manufacturing.",
+      "summaryRevision": 5,
+      "traceVersion": 1,
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-f4f952666eb05ead1e35",
+          "text": "Key Takeaways: Orbital data centers, military/aerospace vehicles, HPC experiments, quantum, and advanced manufacturing equipment are all putting pressure on chips to withstand extreme environments.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-06T02:59:36+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-71a7f2065e16727980f0",
+          "text": "Chips that were once qualified against a limited set of operating conditions are now being designed for environments where multiple stresses hit at once.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-06T02:59:36+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-ca97161d87dc971fa507",
+          "text": "For example, Pacific Northwest National Laboratory (PNNL) is working with Morgan State University, Northrop Grumman, and Project Omega on the DARPA-funded Rads to Watts program, which aims to convert Cold War-era radioactive decay into high-density nuclear micro-power radiovoltaic systems for extreme environments, including space, remote sensing, undersea infrastructure, and defense applications. [1] Radioisotopes such as Strontium-90 will be converted directly into electricity to operate for decades without refueling or battery replacement.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-06T02:59:36+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-40e3134974b4645eb47f",
+          "text": "2: This illustrated setup shows how ASU’s extreme environments lab would test radiation and extreme cold together to mimic space.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-06T02:59:36+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-98e67a324bd5c84e0e74",
+          "text": "Orbital data centers, military/aerospace vehicles, HPC experiments, quantum, and advanced manufacturing equipment are all putting pressure on chips to withstand extreme environments.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-7097d5efa9e25f3a75e9",
+          "text": "Radiation, thermal shock, vibration, pressure, noise, and cryogenic temperatures are colliding in applications ranging from orbital data centers and defense systems to particle physics, quantum computing, and advanced manufacturing.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-d043dfcdb02f864fea33",
+          "text": "For example, Pacific Northwest National Laboratory (PNNL) is working with Morgan State University, Northrop Grumman, and Project Omega on the DARPA-funded Rads to Watts program, which aims to convert Cold War-era radioactive decay into high-density nuclear micro-power radiovoltaic systems for extreme environments, including space, remote sensing, undersea infrastructure, and defense applications. [1]",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a3d2881b28019fa7ea64",
+          "text": "Fig. 2: This illustrated setup shows how ASU’s extreme environments lab would test radiation and extreme cold together to mimic space.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-7233cd087c4f0e560be9",
+          "text": "Illustration by Sophia Franz.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-c6193fac68420b56f658",
+          "text": "Source: ASU",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-eb038bc16c336e1c35f5",
+          "text": "Extreme environments such as space benefit from a 4D geospatial model and digital twin, which can include thermal and radiation data.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-7ae76adf0be2b6e9bc50",
+          "text": "As chips move into increasingly unforgiving environments, reliability can no longer be treated as a final qualification step.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-65e937ac0e8f37fe55e4",
+          "text": "$3.37M DARPA “Rads to Watts” Contract Awarded to Morgan State University and a Multi-Organizational Team to Deliver Next-Generation Nuclear Micro-Power Systems for Extreme Environments (Morgan State University)",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-18e0d8edbcb57511e41a",
+          "text": "Fermilab leads multi-lab AI initiative to accelerate design of chips used in extreme environments (Fermi National Accelerator Laboratory)",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-7bffdc29d4bdc862e480",
+          "text": "Tags: Arizona State University ASIU DARPA electromagnetic pulses EMP extreme environments Fermi National Accelerator Laboratory Imagination Infineon LADA laser-assisted device alteration Morgan State University Northrop Grumman orbital data centers Pacific Northwest National Laboratory PNNL Project Omega rad-hard chips radiation damage Siemens space chips Strontium-90 Synopsys U.S.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-601c1ddf3d1967ce1b60",
+          "text": "Department of Defense U.S.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-05T22:45:07+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-cc1c85bb8f5a39c7a1f3",
+          "text": "Department of Energy",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-05T22:45:07+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-3df176657e12db452073",
+          "text": "For example, Pacific Northwest National Laboratory (PNNL) is working with Morgan State University, Northrop Grumman, and Project Omega on the DARPA-funded Rads to Watts program, which aims to convert Cold War-era radioactive decay into high-density nuclear micro-power radiovoltaic systems for extreme environments, including space, remote sensing, undersea infrastructure, and defense applications. [1] Fig.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-06T01:04:35+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-78302ca92ea59472da69",
+          "text": "Source: ASU Extreme environments such as space benefit from a 4D geospatial model and digital twin, which can include thermal and radiation data.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-06T01:04:35+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-a3641aeaf0fc67a2c1a4",
+          "text": "As chips move into increasingly unforgiving environments, reliability can no longer be treated as a final qualification step. $3.37M DARPA “Rads to Watts” Contract Awarded to Morgan State University and a Multi-Organizational Team to Deliver Next-Generation Nuclear Micro-Power Systems for Extreme Environments (Morgan State University) Fermilab leads multi-lab AI initiative to accelerate design of chips used in extreme environments (Fermi National Accelerator Laboratory) Tags: Arizona State University ASIU DARPA electromagnetic pulses EMP extreme environments Fermi National Accelerator",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-06T01:04:35+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-6e330617e598e98e061b",
+          "text": "Department of Energy For example, Pacific Northwest National Laboratory (PNNL) is working with Morgan State University, Northrop Grumman, and Project Omega on the DARPA-funded Rads to Watts program, which aims to convert Cold War-era radioactive decay into high-density nuclear micro-power radiovoltaic systems for extreme environments, including space, remote sensing, undersea infrastructure, and defense applications. [1] Fig.",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "fetchedAt": "2026-10-06T02:59:36+00:00",
+          "kind": "feed"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-f4f952666eb05ead1e35",
+        "evd-71a7f2065e16727980f0",
+        "evd-ca97161d87dc971fa507",
+        "evd-40e3134974b4645eb47f",
+        "evd-98e67a324bd5c84e0e74",
+        "evd-7097d5efa9e25f3a75e9",
+        "evd-d043dfcdb02f864fea33",
+        "evd-a3d2881b28019fa7ea64",
+        "evd-7233cd087c4f0e560be9",
+        "evd-c6193fac68420b56f658",
+        "evd-eb038bc16c336e1c35f5",
+        "evd-7ae76adf0be2b6e9bc50",
+        "evd-65e937ac0e8f37fe55e4",
+        "evd-18e0d8edbcb57511e41a",
+        "evd-7bffdc29d4bdc862e480",
+        "evd-601c1ddf3d1967ce1b60",
+        "evd-cc1c85bb8f5a39c7a1f3",
+        "evd-3df176657e12db452073",
+        "evd-78302ca92ea59472da69",
+        "evd-a3641aeaf0fc67a2c1a4",
+        "evd-6e330617e598e98e061b"
+      ],
+      "keyFactEvidence": [
+        {
+          "text": "Orbital data centers",
+          "evidenceIds": [
+            "evd-f4f952666eb05ead1e35"
+          ]
+        },
+        {
+          "text": "military/aerospace vehicles",
+          "evidenceIds": [
+            "evd-f4f952666eb05ead1e35"
+          ]
+        },
+        {
+          "text": "HPC experiments",
+          "evidenceIds": [
+            "evd-f4f952666eb05ead1e35"
+          ]
+        }
+      ],
+      "summaryEvidence": {
+        "status": "body",
+        "candidateCount": 219,
+        "selectedCount": 9,
+        "reason": "selected-public-body"
+      },
+      "summaryInputHash": "9c98ba1b7de87daad4434c5b",
+      "keyFacts": [
+        "Orbital data centers",
+        "military/aerospace vehicles",
+        "HPC experiments"
+      ],
+      "why": "该进展可能缩短技术工程化周期，并改变关键产业与供应链竞争。",
+      "category": "前沿技术",
+      "source": "Semiconductor Engineering",
+      "country": "国际",
+      "publishedAt": "2026-10-05T07:01:21Z",
+      "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+      "score": 78,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 8,
+        "时效": 10,
+        "影响信号": 21,
+        "主题相关性": 12,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 74/100",
+        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "规则参考分 86/100",
+        "来源权重 17/20",
+        "发布约 19.9 小时",
+        "命中 10 个主题信号",
+        "影响信号：test、missile、nuclear"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "芯片",
+        "极端环境",
+        "半导体工程"
+      ],
+      "image": "https://semiengineering.com/wp-content/uploads/2026/10/extreme1.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Semiconductor Engineering",
+          "domain": "semiengineering.com",
+          "url": "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point",
+          "publishedAt": "2026-10-05T07:01:21Z",
+          "evidenceGroup": "outlet:semiengineering.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "displayTranslation": {
+        "version": 1,
+        "language": "zh-CN",
+        "provider": "deepseek",
+        "title": "极端环境将芯片推向承受极限",
+        "summary": "轨道数据中心、军用/航空航天载具、高性能计算实验、量子计算与先进制造设备，都在对芯片耐受极端环境的能力施压。过去只针对有限运行条件做认证的芯片，如今被要求面向多种应力同时出现的环境进行设计。辐射、热冲击、振动、压力、噪声和低温正在轨道数据中心、防御系统、粒子物理、量子计算与先进制造等应用中交汇叠加。报道指出，这些应用场景共同推动芯片设计标准发生变化。",
+        "sourceTitle": "Extreme Environments Push Chips To Their Breaking Point",
+        "sourceSummary": "Orbital data centers, military/aerospace vehicles, HPC experiments, quantum, and advanced manufacturing equipment are all putting pressure on chips to withstand extreme environments. Chips that were once qualified against a limited set of operating conditions are now being designed for environments where multiple stresses hit at once. Radiation, thermal shock, vibration, pressure, noise, and cryogenic temperatures are colliding in applications ranging from orbital data centers and defense systems to particle physics, quantum computing, and advanced manufacturing.",
+        "sourceEvidenceRefs": [
+          "evd-f4f952666eb05ead1e35",
+          "evd-71a7f2065e16727980f0",
+          "evd-ca97161d87dc971fa507",
+          "evd-40e3134974b4645eb47f",
+          "evd-98e67a324bd5c84e0e74",
+          "evd-7097d5efa9e25f3a75e9",
+          "evd-d043dfcdb02f864fea33",
+          "evd-a3d2881b28019fa7ea64",
+          "evd-7233cd087c4f0e560be9",
+          "evd-c6193fac68420b56f658",
+          "evd-eb038bc16c336e1c35f5",
+          "evd-7ae76adf0be2b6e9bc50",
+          "evd-65e937ac0e8f37fe55e4",
+          "evd-18e0d8edbcb57511e41a",
+          "evd-7bffdc29d4bdc862e480",
+          "evd-601c1ddf3d1967ce1b60",
+          "evd-cc1c85bb8f5a39c7a1f3",
+          "evd-3df176657e12db452073",
+          "evd-78302ca92ea59472da69",
+          "evd-a3641aeaf0fc67a2c1a4",
+          "evd-6e330617e598e98e061b"
+        ]
+      },
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "caf49eb1852ad1",
+        "mergedFrom": [],
+        "evidence": {
+          "newsIds": [
+            "caf49eb1852ad1"
+          ],
+          "urls": [
+            "https://semiengineering.com/extreme-environments-push-chips-to-their-breaking-point"
+          ],
+          "anchors": [
+            "breaking",
+            "chips",
+            "environments",
+            "extreme",
+            "point",
+            "push"
+          ],
+          "date": "2026-10-05"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:semiengineering.com"
+        ],
+        "claims": [
+          {
+            "text": "Orbital data centers",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:semiengineering.com"
+            ]
+          },
+          {
+            "text": "military/aerospace vehicles",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:semiengineering.com"
+            ]
+          },
+          {
+            "text": "HPC experiments",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:semiengineering.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-a6e5d6c92ea8",
+          "eventId": "evt-460a7a43436a",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "可复现实验或第三方验证",
+            "工程化、量产或监管节点"
+          ],
+          "evidenceIds": [
+            "caf49eb1852ad1"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-460a7a43436a",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-10-06",
+            "newsId": "caf49eb1852ad1",
+            "title": "Extreme Environments Push Chips To Their Breaking Point",
+            "originalTitle": "Extreme Environments Push Chips To Their Breaking Point",
+            "summaryLead": "Orbital data centers, military/aerospace vehicles, HPC experiments, quantum, and advanced manufacturing equipment are all putting pressure on chips to withstand extreme environments. Chips that were once qualified against a limited set of…",
+            "source": "Semiconductor Engineering",
+            "publishedAt": "2026-10-05T07:01:21Z",
+            "score": 78
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "7d1be2688ff2f3",
+      "eventId": "evt-566039aeb796",
+      "contentType": "news",
+      "title": "Ukraine says Russian drone attack sinks ship in Romanian waters",
+      "originalTitle": "Ukraine says Russian drone attack sinks ship in Romanian waters",
+      "summary": "The incident is the latest suspected Russian drone incursion, as fears grow that the war in Ukraine could spill over. Ukraine’s President Volodymyr Zelenskyy has blamed a Russian drone attack for the sinking of a ship in Romania’s section of the Black Sea. Romania reported that two people were killed and 11 rescued when a grain ship caught fire and sank in its waters on Monday. The Ukrainian president’s claim suggests the incident is the latest in a series of suspected incursions along NATO’s eastern flank, and will fuel concerns that Moscow’s war in Ukraine could spill over.",
+      "summaryRevision": 5,
+      "traceVersion": 1,
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-9aabe38ac421fa981d0c",
+          "text": "The incident is the latest suspected Russian drone incursion, as fears grow that the war in Ukraine could spill over.",
+          "url": "https://www.aljazeera.com/news/2026/10/5/ukraine-says-russian-drone-attack-sinks-ship-in-romanian-waters?traffic_source=rss",
+          "fetchedAt": "2026-10-05T22:44:42+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a08374849afcf5aee277",
+          "text": "Ukraine’s President Volodymyr Zelenskyy has blamed a Russian drone attack for the sinking of a ship in Romania’s section of the Black Sea.",
+          "url": "https://www.aljazeera.com/news/2026/10/5/ukraine-says-russian-drone-attack-sinks-ship-in-romanian-waters?traffic_source=rss",
+          "fetchedAt": "2026-10-05T22:44:42+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-feaba195ec628a7eda0e",
+          "text": "Romania reported that two people were killed and 11 rescued when a grain ship caught fire and sank in its waters on Monday.",
+          "url": "https://www.aljazeera.com/news/2026/10/5/ukraine-says-russian-drone-attack-sinks-ship-in-romanian-waters?traffic_source=rss",
+          "fetchedAt": "2026-10-05T22:44:42+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-ba04045b9c980c18ea41",
+          "text": "The Ukrainian president’s claim suggests the incident is the latest in a series of suspected incursions along NATO’s eastern flank, and will fuel concerns that Moscow’s war in Ukraine could spill over.",
+          "url": "https://www.aljazeera.com/news/2026/10/5/ukraine-says-russian-drone-attack-sinks-ship-in-romanian-waters?traffic_source=rss",
+          "fetchedAt": "2026-10-05T22:44:42+00:00",
+          "kind": "body"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-9aabe38ac421fa981d0c",
+        "evd-a08374849afcf5aee277",
+        "evd-feaba195ec628a7eda0e",
+        "evd-ba04045b9c980c18ea41"
+      ],
+      "keyFactEvidence": [
+        {
+          "text": "The incident is the latest suspected Russian drone incursion",
+          "evidenceIds": [
+            "evd-9aabe38ac421fa981d0c"
+          ]
+        },
+        {
+          "text": "as fears grow that the war in Ukraine could spill over",
+          "evidenceIds": [
+            "evd-9aabe38ac421fa981d0c"
+          ]
+        },
+        {
+          "text": "Ukraine’s President Volodymyr Zelenskyy has blamed a Russian drone attack for the sinking of a ship in Romania’s section of the Black Sea",
+          "evidenceIds": [
+            "evd-a08374849afcf5aee277"
+          ]
+        }
+      ],
+      "summaryEvidence": {
+        "status": "body",
+        "candidateCount": 24,
+        "selectedCount": 3,
+        "reason": "selected-public-body"
+      },
+      "summaryInputHash": "e4657a43ed5e5a8dcdb811fd",
+      "keyFacts": [
+        "The incident is the latest suspected Russian drone incursion",
+        "as fears grow that the war in Ukraine could spill over",
+        "Ukraine’s President Volodymyr Zelenskyy has blamed a Russian drone attack for the sinking of a ship in Romania’s section of the Black Sea"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-10-05T20:03:06Z",
+      "url": "https://www.aljazeera.com/news/2026/10/5/ukraine-says-russian-drone-attack-sinks-ship-in-romanian-waters?traffic_source=rss",
+      "score": 75,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 6,
+        "主题相关性": 8,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 75/100",
+        "综合排序分 75/100（AI 65% + 规则 35%）",
+        "规则参考分 75/100",
+        "来源权重 16/20",
+        "发布约 6.9 小时",
+        "命中 4 个主题信号",
+        "影响信号：attack"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "俄乌战争",
+        "北约东翼",
+        "无人机袭击"
+      ],
+      "image": "https://www.aljazeera.com/wp-content/uploads/2026/10/reuters_6ac3b961-1791211873.jpg?resize=1920%2C1440",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/10/5/ukraine-says-russian-drone-attack-sinks-ship-in-romanian-waters?traffic_source=rss",
+          "publishedAt": "2026-10-05T20:03:06Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "displayTranslation": {
+        "version": 1,
+        "language": "zh-CN",
+        "provider": "deepseek",
+        "title": "乌克兰称俄罗斯无人机袭击致罗马尼亚水域一船只沉没",
+        "summary": "乌克兰总统泽连斯基将一艘船只在罗马尼亚黑海海域沉没归咎于俄罗斯无人机袭击。罗马尼亚方面报告，周一该国水域一艘运粮船起火并沉没，造成两人死亡、11人获救。泽连斯基的说法表明，这起事件是北约东翼一系列疑似入侵事件中的最新一起，将进一步加剧外界对莫斯科在乌克兰的战争可能外溢的担忧。",
+        "sourceTitle": "Ukraine says Russian drone attack sinks ship in Romanian waters",
+        "sourceSummary": "The incident is the latest suspected Russian drone incursion, as fears grow that the war in Ukraine could spill over. Ukraine’s President Volodymyr Zelenskyy has blamed a Russian drone attack for the sinking of a ship in Romania’s section of the Black Sea. Romania reported that two people were killed and 11 rescued when a grain ship caught fire and sank in its waters on Monday. The Ukrainian president’s claim suggests the incident is the latest in a series of suspected incursions along NATO’s eastern flank, and will fuel concerns that Moscow’s war in Ukraine could spill over.",
+        "sourceEvidenceRefs": [
+          "evd-9aabe38ac421fa981d0c",
+          "evd-a08374849afcf5aee277",
+          "evd-feaba195ec628a7eda0e",
+          "evd-ba04045b9c980c18ea41"
+        ]
+      },
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 2,
+        "relatedStories": [
+          {
+            "id": "e6021f34ace937",
+            "eventId": "",
+            "editionDate": "2026-07-21",
+            "title": "Huge fire at Ukraine shopping centre after Russian drone strike",
+            "originalTitle": "Huge fire at Ukraine shopping centre after Russian drone strike",
+            "summary": "A fire engulfed a shopping centre in Ukraine's Sumy after Russian drone strikes hit the building.",
+            "category": "局部冲突",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-07-21T09:52:56Z",
+            "associationScore": 34,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：drone、russian、ukraine",
+              "同属局部冲突"
+            ]
+          },
+          {
+            "id": "1ff5373d60b037",
+            "eventId": "",
+            "editionDate": "2026-08-02",
+            "title": "基辅遭袭9人死亡，乌克兰击沉俄罗斯集装箱船",
+            "originalTitle": "Nine killed in strikes on Kyiv, as Ukraine sinks Russian container ship",
+            "summary": "在俄罗斯对乌克兰首都发动致命弹道导弹袭击升级之际，乌克兰击沉了一艘俄集装箱船。",
+            "category": "局部冲突",
+            "source": "BBC World",
+            "publishedAt": "2026-08-01T13:35:39Z",
+            "associationScore": 53,
+            "relationLabel": "同一事件后续",
+            "associationReasons": [
+              "标题结构显示为同一事件的后续报道",
+              "标题共享关键词：russian、ship、sinks、ukraine",
+              "同属局部冲突"
+            ]
+          }
+        ],
+        "timelineSummary": "2026年7月21日归档报道记录俄无人机袭击乌克兰苏梅购物中心引发大火；8月1日报道记录基辅遭袭9人死亡、乌方击沉俄集装箱船。10月5日报道称，乌总统指俄无人机袭击致一艘船在罗马尼亚黑海海域沉没，罗方称2人死亡、11人获救，疑为俄无人机最新越境事件。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "后续可观察罗马尼亚及北约对黑海海域事件的调查结论与公开回应。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "若类似越境事件再次发生，则需关注北约东翼安全态势及相关方应对措施。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "deepseek"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "7d1be2688ff2f3",
+        "mergedFrom": [],
+        "evidence": {
+          "newsIds": [
+            "7d1be2688ff2f3"
+          ],
+          "urls": [
+            "https://www.aljazeera.com/news/2026/10/5/ukraine-says-russian-drone-attack-sinks-ship-in-romanian-waters?traffic_source=rss"
+          ],
+          "anchors": [
+            "romanian",
+            "ship",
+            "sinks",
+            "waters"
+          ],
+          "date": "2026-10-05"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "The incident is the latest suspected Russian drone incursion",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "as fears grow that the war in Ukraine could spill over",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "Ukraine’s President Volodymyr Zelenskyy has blamed a Russian drone attack for the sinking of a ship in Romania’s section of the Black Sea",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-5f59af8c3229",
+          "eventId": "evt-566039aeb796",
+          "statement": "后续可观察罗马尼亚及北约对此次黑海海域事件的调查结论与公开回应。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "7d1be2688ff2f3"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        },
+        {
+          "predictionId": "pred-e3753f00cde2",
+          "eventId": "evt-566039aeb796",
+          "statement": "若北约东翼类似事件继续出现，则需关注其是否推动联盟层面态势调整。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2027-01-04",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "7d1be2688ff2f3"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        },
+        {
+          "predictionId": "pred-8608a53205a5",
+          "eventId": "evt-566039aeb796",
+          "statement": "后续可观察罗马尼亚及北约对黑海海域事件的调查结论与公开回应。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "7d1be2688ff2f3"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        },
+        {
+          "predictionId": "pred-48e0a84b7c88",
+          "eventId": "evt-566039aeb796",
+          "statement": "若类似越境事件再次发生，则需关注北约东翼安全态势及相关方应对措施。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2027-01-04",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "7d1be2688ff2f3"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-566039aeb796",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-10-06",
+            "newsId": "7d1be2688ff2f3",
+            "title": "Ukraine says Russian drone attack sinks ship in Romanian waters",
+            "originalTitle": "Ukraine says Russian drone attack sinks ship in Romanian waters",
+            "summaryLead": "The incident is the latest suspected Russian drone incursion, as fears grow that the war in Ukraine could spill over. Ukraine’s President Volodymyr Zelenskyy has blamed a Russian drone attack for the sinking of a ship in Romania’s section…",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-10-05T20:03:06Z",
+            "score": 75
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "70b6425eedca2c",
+      "eventId": "evt-cfb30602db79",
+      "contentType": "news",
+      "title": "Kraken and Saab team up for drone detection aboard uncrewed vessels",
+      "originalTitle": "Kraken and Saab team up for drone detection aboard uncrewed vessels",
+      "summary": "Kraken Technology Group and Saab UK have tested a prototype autonomous ‘drone seeker’ vessel for maritime environments. The experimental vessel combines Kraken’s K3 SCOUT uncrewed surface vessel with Saab UK’s Giraffe 1X radar designed to detect and track airborne threats in real time. Integrated into K3 SCOUT’s modular payload bay, Giraffe 1X is designed to provide early warning of aerial threats, detecting even small airborne targets at extended ranges. Kraken and Saab UK are both based in Fareham, where the K3 SCOUT and Giraffe 1X are manufactured.",
+      "summaryRevision": 5,
+      "traceVersion": 1,
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-727a619bbdf146a52d14",
+          "text": "Kraken Technology Group and Saab UK have tested a prototype autonomous ‘drone seeker’ vessel for maritime environments.",
+          "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/kraken-and-saab-team-up-for-drone-detection-aboard-uncrewed-vessels",
+          "fetchedAt": "2026-10-06T02:59:34+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-99d8646c74165f307577",
+          "text": "The experimental vessel combines Kraken’s K3 SCOUT uncrewed surface vessel with Saab UK’s Giraffe 1X radar designed to detect and track airborne threats in real time.",
+          "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/kraken-and-saab-team-up-for-drone-detection-aboard-uncrewed-vessels",
+          "fetchedAt": "2026-10-06T02:59:34+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-f15b0377b74ca1412e08",
+          "text": "The post Kraken and Saab team up for drone detection aboard uncrewed vessels first appeared on Unmanned airspace .",
+          "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/kraken-and-saab-team-up-for-drone-detection-aboard-uncrewed-vessels",
+          "fetchedAt": "2026-10-06T02:59:34+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-bc433164fe5c6a0103b2",
+          "text": "Integrated into K3 SCOUT’s modular payload bay, Giraffe 1X is designed to provide early warning of aerial threats, detecting even small airborne targets at extended ranges.",
+          "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/kraken-and-saab-team-up-for-drone-detection-aboard-uncrewed-vessels",
+          "fetchedAt": "2026-10-05T22:44:41+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-de14e28cfe33154924ed",
+          "text": "Kraken and Saab UK are both based in Fareham, where the K3 SCOUT and Giraffe 1X are manufactured.",
+          "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/kraken-and-saab-team-up-for-drone-detection-aboard-uncrewed-vessels",
+          "fetchedAt": "2026-10-05T22:44:41+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-702198c2b7f9001a79f3",
+          "text": "Kraken is scaling production to 1000 vessels per year.",
+          "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/kraken-and-saab-team-up-for-drone-detection-aboard-uncrewed-vessels",
+          "fetchedAt": "2026-10-05T22:44:41+00:00",
+          "kind": "body"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-727a619bbdf146a52d14",
+        "evd-99d8646c74165f307577",
+        "evd-f15b0377b74ca1412e08",
+        "evd-bc433164fe5c6a0103b2",
+        "evd-de14e28cfe33154924ed",
+        "evd-702198c2b7f9001a79f3"
+      ],
+      "keyFactEvidence": [
+        {
+          "text": "Kraken Technology Group",
+          "evidenceIds": [
+            "evd-727a619bbdf146a52d14"
+          ]
+        },
+        {
+          "text": "Saab UK have tested a prototype autonomous ‘drone seeker’ vessel for maritime environments",
+          "evidenceIds": [
+            "evd-727a619bbdf146a52d14"
+          ]
+        },
+        {
+          "text": "The experimental vessel combines Kraken’s K3 SCOUT uncrewed surface vessel with Saab UK’s Giraffe 1X radar designed to detect",
+          "evidenceIds": [
+            "evd-99d8646c74165f307577"
+          ]
+        }
+      ],
+      "summaryEvidence": {
+        "status": "body",
+        "candidateCount": 23,
+        "selectedCount": 3,
+        "reason": "selected-public-body"
+      },
+      "summaryInputHash": "0e312630362d2136354a43d8",
+      "keyFacts": [
+        "Kraken Technology Group",
+        "Saab UK have tested a prototype autonomous ‘drone seeker’ vessel for maritime environments",
+        "The experimental vessel combines Kraken’s K3 SCOUT uncrewed surface vessel with Saab UK’s Giraffe 1X radar designed to detect"
+      ],
+      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
+      "category": "无人系统",
+      "source": "Unmanned Airspace",
+      "country": "国际",
+      "publishedAt": "2026-10-05T11:01:53Z",
+      "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/kraken-and-saab-team-up-for-drone-detection-aboard-uncrewed-vessels",
+      "score": 75,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 12,
+        "影响信号": 15,
+        "主题相关性": 12,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 71/100",
+        "综合排序分 75/100（AI 65% + 规则 35%）",
+        "规则参考分 83/100",
+        "来源权重 16/20",
+        "发布约 15.9 小时",
+        "命中 7 个主题信号",
+        "影响信号：first、production、autonomous"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "无人艇",
+        "反无人机",
+        "雷达"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Unmanned Airspace",
+          "domain": "unmannedairspace.info",
+          "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/kraken-and-saab-team-up-for-drone-detection-aboard-uncrewed-vessels",
+          "publishedAt": "2026-10-05T11:01:53Z",
+          "evidenceGroup": "outlet:unmannedairspace.info"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "displayTranslation": {
+        "version": 1,
+        "language": "zh-CN",
+        "provider": "deepseek",
+        "title": "Kraken与Saab UK合作，为无人艇配备无人机探测能力",
+        "summary": "Kraken Technology Group与Saab UK已测试一款面向海上环境的自主“无人机搜寻者”原型艇。这艘实验艇将Kraken的K3 SCOUT无人水面艇与Saab UK的Giraffe 1X雷达结合，后者旨在实时探测和跟踪空中威胁。Giraffe 1X集成于K3 SCOUT的模块化载荷舱，设计用于提供空中威胁预警，可在较远距离探测到小型空中目标。两家公司均位于Fareham，K3 SCOUT和Giraffe 1X也在当地制造。",
+        "sourceTitle": "Kraken and Saab team up for drone detection aboard uncrewed vessels",
+        "sourceSummary": "Kraken Technology Group and Saab UK have tested a prototype autonomous ‘drone seeker’ vessel for maritime environments. The experimental vessel combines Kraken’s K3 SCOUT uncrewed surface vessel with Saab UK’s Giraffe 1X radar designed to detect and track airborne threats in real time. Integrated into K3 SCOUT’s modular payload bay, Giraffe 1X is designed to provide early warning of aerial threats, detecting even small airborne targets at extended ranges. Kraken and Saab UK are both based in Fareham, where the K3 SCOUT and Giraffe 1X are manufactured.",
+        "sourceEvidenceRefs": [
+          "evd-727a619bbdf146a52d14",
+          "evd-99d8646c74165f307577",
+          "evd-f15b0377b74ca1412e08",
+          "evd-bc433164fe5c6a0103b2",
+          "evd-de14e28cfe33154924ed",
+          "evd-702198c2b7f9001a79f3"
+        ]
+      },
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "70b6425eedca2c",
+        "mergedFrom": [],
+        "evidence": {
+          "newsIds": [
+            "70b6425eedca2c"
+          ],
+          "urls": [
+            "https://www.unmannedairspace.info/counter-uas-systems-and-policies/kraken-and-saab-team-up-for-drone-detection-aboard-uncrewed-vessels"
+          ],
+          "anchors": [
+            "detection",
+            "kraken",
+            "saab",
+            "team",
+            "uncrewed",
+            "up",
+            "vessels"
+          ],
+          "date": "2026-10-05"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:unmannedairspace.info"
+        ],
+        "claims": [
+          {
+            "text": "Kraken Technology Group",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:unmannedairspace.info"
+            ]
+          },
+          {
+            "text": "Saab UK have tested a prototype autonomous ‘drone seeker’ vessel for maritime environments",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:unmannedairspace.info"
+            ]
+          },
+          {
+            "text": "The experimental vessel combines Kraken’s K3 SCOUT uncrewed surface vessel with Saab UK’s Giraffe 1X radar designed to detect",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:unmannedairspace.info"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-8ab947f285db",
+          "eventId": "evt-cfb30602db79",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "后续试验与任务数据",
+            "规模化部署、采购或反制变化"
+          ],
+          "evidenceIds": [
+            "70b6425eedca2c"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-cfb30602db79",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-10-06",
+            "newsId": "70b6425eedca2c",
+            "title": "Kraken and Saab team up for drone detection aboard uncrewed vessels",
+            "originalTitle": "Kraken and Saab team up for drone detection aboard uncrewed vessels",
+            "summaryLead": "Kraken Technology Group and Saab UK have tested a prototype autonomous ‘drone seeker’ vessel for maritime environments. The experimental vessel combines Kraken’s K3 SCOUT uncrewed surface vessel with Saab UK’s Giraffe 1X radar designed to…",
+            "source": "Unmanned Airspace",
+            "publishedAt": "2026-10-05T11:01:53Z",
+            "score": 75
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "4afcdce27d1043",
+      "eventId": "evt-080c9baf7ae3",
+      "contentType": "news",
+      "title": "Merchant shipping steps up demand for C-UAS as attacks increase",
+      "originalTitle": "Merchant shipping steps up demand for C-UAS as attacks increase",
+      "summary": "D-fend Solutions chief marketing officer Jeffrey Starr told the FT that the company is seeing “huge demand” from shipping groups as shipowners, shippers and naval forces face “an asymmetric threat”. And Drone Defence chief executive Richard Gill said interest in C-UAS is growing among oil tanker and liquefied natural gas carrier operators that want to keep serving riskier routes.",
+      "summaryRevision": 5,
+      "traceVersion": 1,
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-7790856d9031b46c48cf",
+          "text": "The post Merchant shipping steps up demand for C-UAS as attacks increase first appeared on Unmanned airspace .",
+          "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/merchant-shipping-steps-up-demand-for-c-uas-as-attacks-increase",
+          "fetchedAt": "2026-10-06T02:59:35+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-48682b1bcab609af6510",
+          "text": "D-fend Solutions chief marketing officer Jeffrey Starr told the FT that the company is seeing “huge demand” from shipping groups as shipowners, shippers and naval forces face “an asymmetric threat”.",
+          "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/merchant-shipping-steps-up-demand-for-c-uas-as-attacks-increase",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-e4b5dfbe9dbc857f429a",
+          "text": "And Drone Defence chief executive Richard Gill said interest in C-UAS is growing among oil tanker and liquefied natural gas carrier operators that want to keep serving riskier routes.",
+          "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/merchant-shipping-steps-up-demand-for-c-uas-as-attacks-increase",
+          "fetchedAt": "2026-10-05T22:44:40+00:00",
+          "kind": "body"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-7790856d9031b46c48cf",
+        "evd-48682b1bcab609af6510",
+        "evd-e4b5dfbe9dbc857f429a"
+      ],
+      "keyFactEvidence": [
+        {
+          "text": "naval forces face “an asymmetric threat”",
+          "evidenceIds": [
+            "evd-48682b1bcab609af6510"
+          ]
+        },
+        {
+          "text": "And Drone Defence chief executive Richard Gill said interest in C-UAS is growing among oil tanker",
+          "evidenceIds": [
+            "evd-e4b5dfbe9dbc857f429a"
+          ]
+        }
+      ],
+      "summaryEvidence": {
+        "status": "body",
+        "candidateCount": 29,
+        "selectedCount": 1,
+        "reason": "selected-public-body"
+      },
+      "summaryInputHash": "8d5cbfa134c0364c20bee605",
+      "keyFacts": [
+        "naval forces face “an asymmetric threat”",
+        "And Drone Defence chief executive Richard Gill said interest in C-UAS is growing among oil tanker"
+      ],
+      "why": "该进展可能推动无人平台从单机应用转向协同、规模化与体系化运用。",
+      "category": "无人系统",
+      "source": "Unmanned Airspace",
+      "country": "国际",
+      "publishedAt": "2026-10-05T10:11:12Z",
+      "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/merchant-shipping-steps-up-demand-for-c-uas-as-attacks-increase",
+      "score": 75,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 12,
+        "影响信号": 16,
+        "主题相关性": 12,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 70/100",
+        "综合排序分 75/100（AI 65% + 规则 35%）",
+        "规则参考分 84/100",
+        "来源权重 16/20",
+        "发布约 16.7 小时",
+        "命中 11 个主题信号",
+        "影响信号：first、attack、missile"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "商船",
+        "反无人机",
+        "海上安全"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Unmanned Airspace",
+          "domain": "unmannedairspace.info",
+          "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/merchant-shipping-steps-up-demand-for-c-uas-as-attacks-increase",
+          "publishedAt": "2026-10-05T10:11:12Z",
+          "evidenceGroup": "outlet:unmannedairspace.info"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "displayTranslation": {
+        "version": 1,
+        "language": "zh-CN",
+        "provider": "deepseek",
+        "title": "袭击增多，商船对反无人机需求升温",
+        "summary": "D-fend Solutions首席营销官杰弗里·斯塔尔对英国《金融时报》表示，随着船东、托运人和海军力量面对“不对称威胁”，公司正看到航运集团的“巨大需求”。Drone Defence首席执行官理查德·吉尔则表示，希望继续服务风险较高航线的油轮和液化天然气运输船运营商对反无人机的兴趣正在上升。",
+        "sourceTitle": "Merchant shipping steps up demand for C-UAS as attacks increase",
+        "sourceSummary": "D-fend Solutions chief marketing officer Jeffrey Starr told the FT that the company is seeing “huge demand” from shipping groups as shipowners, shippers and naval forces face “an asymmetric threat”. And Drone Defence chief executive Richard Gill said interest in C-UAS is growing among oil tanker and liquefied natural gas carrier operators that want to keep serving riskier routes.",
+        "sourceEvidenceRefs": [
+          "evd-7790856d9031b46c48cf",
+          "evd-48682b1bcab609af6510",
+          "evd-e4b5dfbe9dbc857f429a"
+        ]
+      },
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "4afcdce27d1043",
+        "mergedFrom": [],
+        "evidence": {
+          "newsIds": [
+            "4afcdce27d1043"
+          ],
+          "urls": [
+            "https://www.unmannedairspace.info/counter-uas-systems-and-policies/merchant-shipping-steps-up-demand-for-c-uas-as-attacks-increase"
+          ],
+          "anchors": [
+            "attacks",
+            "c-uas",
+            "demand",
+            "increase",
+            "merchant",
+            "shipping",
+            "steps",
+            "up"
+          ],
+          "date": "2026-10-05"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:unmannedairspace.info"
+        ],
+        "claims": [
+          {
+            "text": "naval forces face “an asymmetric threat”",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:unmannedairspace.info"
+            ]
+          },
+          {
+            "text": "And Drone Defence chief executive Richard Gill said interest in C-UAS is growing among oil tanker",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:unmannedairspace.info"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-b5163aa9cf31",
+          "eventId": "evt-080c9baf7ae3",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "后续试验与任务数据",
+            "规模化部署、采购或反制变化"
+          ],
+          "evidenceIds": [
+            "4afcdce27d1043"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-080c9baf7ae3",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-10-06",
+            "newsId": "4afcdce27d1043",
+            "title": "Merchant shipping steps up demand for C-UAS as attacks increase",
+            "originalTitle": "Merchant shipping steps up demand for C-UAS as attacks increase",
+            "summaryLead": "D-fend Solutions chief marketing officer Jeffrey Starr told the FT that the company is seeing “huge demand” from shipping groups as shipowners, shippers and naval forces face “an asymmetric threat”. And Drone Defence chief executive Richar…",
+            "source": "Unmanned Airspace",
+            "publishedAt": "2026-10-05T10:11:12Z",
+            "score": 75
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "0e0dc8f08351a7",
+      "eventId": "evt-487ad71de889",
+      "contentType": "news",
+      "title": "Suspected Second-generation Planet Solves NASA Hubble Cold Case",
+      "originalTitle": "Suspected Second-generation Planet Solves NASA Hubble Cold Case",
+      "summary": "Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope. In a study published Monday in Nature Astronomy, researchers report uncovering a surprising chemical clue that indicates the white dwarf star HS 0209+0832 may host a second-generation planet. This artist’s concept depicts a possible explanation for the unusual chemical abundances NASA’s Hubble Space Telescope detected in the HS 0209+0832 system: a second-generation planet orbiting a white dwarf star. What if a star’s death could give rise to an entirely new planet?",
+      "summaryRevision": 5,
+      "traceVersion": 1,
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-ee6ef27fec0e42b8eb38",
+          "text": "Explore Hubble Science Hubble Space Telescope Suspected Second-generation… Hubble Home Overview About Hubble The History of Hubble Hubble Timeline Why Have a Telescope in Space?",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-06T02:59:31+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-ab75c036d1dfb4de462d",
+          "text": "Roman Team Hubble Team Career Aspirations Hubble Astronauts Multimedia Images Videos Online Activities e-Books Sonifications Podcasts 3D Hubble Models Lithographs Fact Sheets Posters Hubble on the NASA App Glossary News Hubble News Social Media Media Resources 35th Anniversary More Online Activities 5 Min Read Suspected Second-generation Planet Solves NASA Hubble Cold Case This artist’s concept depicts a possible explanation for the unusual chemical abundances NASA’s Hubble Space Telescope detected in the HS 0209+0832 system: a second-generation planet orbiting a white dwarf star.",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-06T02:59:31+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-e4acf88c7faf0c0b3086",
+          "text": "Credits: Artwork: NASA, ESA, Leah Hustak (STScI) Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope .",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-06T02:59:31+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-b3d1496b552948d5cf64",
+          "text": "Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope.",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-05T22:44:41+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-6cffc48463a542a1e558",
+          "text": "In a study published Monday in Nature Astronomy, researchers report uncovering a surprising chemical clue that indicates the white dwarf star HS 0209+0832 may host a second-generation planet.",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-05T22:44:41+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-3a0d3a467ba639548d42",
+          "text": "This artist’s concept depicts a possible explanation for the unusual chemical abundances NASA’s Hubble Space Telescope detected in the HS 0209+0832 system: a second-generation planet orbiting a white dwarf star.",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-05T22:44:41+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-d7d32b9e1143ee5b4718",
+          "text": "What if a star’s death could give rise to an entirely new planet?",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-05T22:44:41+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-e591e015772a6218969d",
+          "text": "New analysis of archival Hubble data points to the possibility of \"dead\" white dwarf stars hosting second-generation planetary systems.",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "fetchedAt": "2026-10-05T22:44:41+00:00",
+          "kind": "body"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-ee6ef27fec0e42b8eb38",
+        "evd-ab75c036d1dfb4de462d",
+        "evd-e4acf88c7faf0c0b3086",
+        "evd-b3d1496b552948d5cf64",
+        "evd-6cffc48463a542a1e558",
+        "evd-3a0d3a467ba639548d42",
+        "evd-d7d32b9e1143ee5b4718",
+        "evd-e591e015772a6218969d"
+      ],
+      "keyFactEvidence": [
+        {
+          "text": "Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope",
+          "evidenceIds": [
+            "evd-e4acf88c7faf0c0b3086"
+          ]
+        },
+        {
+          "text": "In a study published Monday in Nature Astronomy",
+          "evidenceIds": [
+            "evd-6cffc48463a542a1e558"
+          ]
+        }
+      ],
+      "summaryEvidence": {
+        "status": "body",
+        "candidateCount": 71,
+        "selectedCount": 3,
+        "reason": "selected-public-body"
+      },
+      "summaryInputHash": "170bbcaebe382cb7d03bb2bd",
+      "keyFacts": [
+        "Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope",
+        "In a study published Monday in Nature Astronomy"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
+      "country": "国际",
+      "publishedAt": "2026-10-05T15:00:35Z",
+      "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+      "score": 72,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 14,
+        "影响信号": 12,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 70/100",
+        "综合排序分 72/100（AI 65% + 规则 35%）",
+        "规则参考分 77/100",
+        "来源权重 20/20",
+        "发布约 11.9 小时",
+        "命中 2 个主题信号",
+        "影响信号：first、nuclear"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "哈勃",
+        "白矮星",
+        "系外行星"
+      ],
+      "image": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2026/10/STScI-01M3CBK3T6SRKP4Q7WV9CGFGW9.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "NASA",
+          "domain": "science.nasa.gov",
+          "url": "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case",
+          "publishedAt": "2026-10-05T15:00:35Z",
+          "evidenceGroup": "outlet:science.nasa.gov"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "displayTranslation": {
+        "version": 1,
+        "language": "zh-CN",
+        "provider": "deepseek",
+        "title": "疑似第二代行星破解NASA哈勃悬案",
+        "summary": "天文学家细致排查，破解了NASA哈勃空间望远镜数据档案中的一桩悬案。研究人员在周一发表于《自然·天文学》的研究中报告，发现一条出人意料的化学线索，表明白矮星HS 0209+0832可能拥有一颗第二代行星。NASA哈勃空间望远镜在HS 0209+0832系统中探测到异常化学丰度，这幅艺术概念图描绘了一种可能解释：一颗第二代行星环绕白矮星运行。现有元数据未说明该行星是否已确认及后续观测安排。",
+        "sourceTitle": "Suspected Second-generation Planet Solves NASA Hubble Cold Case",
+        "sourceSummary": "Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope. In a study published Monday in Nature Astronomy, researchers report uncovering a surprising chemical clue that indicates the white dwarf star HS 0209+0832 may host a second-generation planet. This artist’s concept depicts a possible explanation for the unusual chemical abundances NASA’s Hubble Space Telescope detected in the HS 0209+0832 system: a second-generation planet orbiting a white dwarf star. What if a star’s death could give rise to an entirely new planet?",
+        "sourceEvidenceRefs": [
+          "evd-ee6ef27fec0e42b8eb38",
+          "evd-ab75c036d1dfb4de462d",
+          "evd-e4acf88c7faf0c0b3086",
+          "evd-b3d1496b552948d5cf64",
+          "evd-6cffc48463a542a1e558",
+          "evd-3a0d3a467ba639548d42",
+          "evd-d7d32b9e1143ee5b4718",
+          "evd-e591e015772a6218969d"
+        ]
+      },
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "0e0dc8f08351a7",
+        "mergedFrom": [],
+        "evidence": {
+          "newsIds": [
+            "0e0dc8f08351a7"
+          ],
+          "urls": [
+            "https://science.nasa.gov/missions/hubble/suspected-second-generation-planet-solves-nasa-hubble-cold-case"
+          ],
+          "anchors": [
+            "case",
+            "cold",
+            "hubble",
+            "planet",
+            "second-generation",
+            "solves",
+            "suspected"
+          ],
+          "date": "2026-10-05"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:science.nasa.gov"
+        ],
+        "claims": [
+          {
+            "text": "Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          },
+          {
+            "text": "In a study published Monday in Nature Astronomy",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-43202bf31d22",
+          "eventId": "evt-487ad71de889",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "0e0dc8f08351a7"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-487ad71de889",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-10-06",
+            "newsId": "0e0dc8f08351a7",
+            "title": "Suspected Second-generation Planet Solves NASA Hubble Cold Case",
+            "originalTitle": "Suspected Second-generation Planet Solves NASA Hubble Cold Case",
+            "summaryLead": "Diligent sleuthing by astronomers has broken open a cold case in the data archive of NASA’s Hubble Space Telescope. In a study published Monday in Nature Astronomy, researchers report uncovering a surprising chemical clue that indicates th…",
+            "source": "NASA",
+            "publishedAt": "2026-10-05T15:00:35Z",
+            "score": 72
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "df746c21e27339",
+      "eventId": "evt-57e7399f5c54",
+      "contentType": "news",
+      "title": "OpenAI will watermark ChatGPT text in the EU but makes it optional for API users worldwide",
+      "originalTitle": "OpenAI will watermark ChatGPT text in the EU but makes it optional for API users worldwide",
+      "summary": "OpenAI is adding invisible watermarks to ChatGPT text to comply with EU rules. Unlike Anthropic, it will let API customers worldwide turn them off. The EU AI Act reportedly requires AI providers to label generated text in a machine-readable format. OpenAI's answer is textGrain, a technology that embeds an invisible statistical signal in the model's word choices. It works much like Claude's SynthID watermark, which uses Google's open-source technology. OpenAI says it will turn on watermarking for ChatGPT and Codex users in the European Union over the coming weeks.",
+      "summaryRevision": 5,
+      "traceVersion": 1,
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-4c1c21ad1cf84db4dc96",
+          "text": "OpenAI is adding invisible textGrain watermarks to ChatGPT in the EU, but unlike Anthropic, it will let API customers worldwide opt out.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-06T02:59:30+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-74cf3849ed8efaa36ce5",
+          "text": "The article OpenAI will watermark ChatGPT text in the EU but makes it optional for API users worldwide appeared first on The Decoder .",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-06T02:59:30+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-2fde29e8f3943b401958",
+          "text": "OpenAI is adding invisible watermarks to ChatGPT text to comply with EU rules.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a062ecd4d27b504f0a5f",
+          "text": "Unlike Anthropic, it will let API customers worldwide turn them off.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-ce27c100c3e6649ee6dc",
+          "text": "The EU AI Act reportedly requires AI providers to label generated text in a machine-readable format.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-c86ad0d3c58c219f3c11",
+          "text": "OpenAI's answer is textGrain, a technology that embeds an invisible statistical signal in the model's word choices.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a0b13b98028fb84e4b97",
+          "text": "It works much like Claude's SynthID watermark, which uses Google's open-source technology.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-0b012e0da82b5f5eaf35",
+          "text": "OpenAI says it will turn on watermarking for ChatGPT and Codex users in the European Union over the coming weeks.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a93ebe66986e4f7c4b07",
+          "text": "API watermarking will be opt-in worldwide, unlike Anthropic's mandatory watermarking for Claude, which applies globally regardless of how users access the models.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-dd5d8f093cca4900ddc4",
+          "text": "OpenAI's API watermarking will also be available through cloud partners such as Microsoft Azure in the coming weeks.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-935865cc7b5f9e74fab4",
+          "text": "Editing the text also makes the watermark harder to detect.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-cbf624f2aca069dd42a5",
+          "text": "OpenAI says replacing just 10 percent of words with synonyms cuts detection rates for 400-token passages from about 92 percent to 66 percent.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-0dd5331a8e98c4316c6b",
+          "text": "Replacing a quarter of the words drops detection to 17 percent, making the watermark easy to evade.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-0f932a425bd6925d6fa2",
+          "text": "That weakness could work in OpenAI's favor.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:44:49+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a9130226883e7c2caae5",
+          "text": "OpenAI also says a detected watermark reveals nothing about how much human creativity or editing went into the text.",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "fetchedAt": "2026-10-05T22:45:51+00:00",
+          "kind": "feed"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-4c1c21ad1cf84db4dc96",
+        "evd-74cf3849ed8efaa36ce5",
+        "evd-2fde29e8f3943b401958",
+        "evd-a062ecd4d27b504f0a5f",
+        "evd-ce27c100c3e6649ee6dc",
+        "evd-c86ad0d3c58c219f3c11",
+        "evd-a0b13b98028fb84e4b97",
+        "evd-0b012e0da82b5f5eaf35",
+        "evd-a93ebe66986e4f7c4b07",
+        "evd-dd5d8f093cca4900ddc4",
+        "evd-935865cc7b5f9e74fab4",
+        "evd-cbf624f2aca069dd42a5",
+        "evd-0dd5331a8e98c4316c6b",
+        "evd-0f932a425bd6925d6fa2",
+        "evd-a9130226883e7c2caae5"
+      ],
+      "keyFactEvidence": [
+        {
+          "text": "OpenAI is adding invisible watermarks to ChatGPT text to comply with EU rules",
+          "evidenceIds": [
+            "evd-2fde29e8f3943b401958"
+          ]
+        },
+        {
+          "text": "it will let API customers worldwide turn them off",
+          "evidenceIds": [
+            "evd-a062ecd4d27b504f0a5f"
+          ]
+        }
+      ],
+      "summaryEvidence": {
+        "status": "body",
+        "candidateCount": 26,
+        "selectedCount": 6,
+        "reason": "selected-public-body"
+      },
+      "summaryInputHash": "1f6b33c9b6f38f57459f67e1",
+      "keyFacts": [
+        "OpenAI is adding invisible watermarks to ChatGPT text to comply with EU rules",
+        "it will let API customers worldwide turn them off"
+      ],
+      "why": "该进展可能影响模型能力、安全治理、算力需求或产业竞争格局。",
+      "category": "AI",
+      "source": "The Decoder",
+      "country": "国际",
+      "publishedAt": "2026-10-05T17:32:42Z",
+      "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+      "score": 67,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 5,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 68/100",
+        "综合排序分 67/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
+        "来源权重 15/20",
+        "发布约 9.4 小时",
+        "命中 1 个主题信号",
+        "影响信号：first"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "OpenAI",
+        "水印",
+        "欧盟AI法案"
+      ],
+      "image": "https://the-decoder.com/wp-content/uploads/2026/10/openai_chatgpt_text_detection-2-1200x675.png",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The Decoder",
+          "domain": "the-decoder.com",
+          "url": "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide",
+          "publishedAt": "2026-10-05T17:32:42Z",
+          "evidenceGroup": "outlet:the-decoder.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "displayTranslation": {
+        "version": 1,
+        "language": "zh-CN",
+        "provider": "deepseek",
+        "title": "OpenAI将在欧盟为ChatGPT文本添加水印，但全球API用户可自行关闭",
+        "summary": "OpenAI正在为ChatGPT文本添加不可见水印，以遵守欧盟规定。与Anthropic不同，它将允许全球API客户关闭该功能。据报道，欧盟《人工智能法案》要求AI提供商以机器可读格式标注生成的文本。OpenAI的解决方案是textGrain，该技术通过模型选词嵌入不可见的统计信号，其原理与Claude使用谷歌开源技术的SynthID水印类似。OpenAI表示，将在未来几周内为欧盟的ChatGPT和Codex用户开启水印功能。",
+        "sourceTitle": "OpenAI will watermark ChatGPT text in the EU but makes it optional for API users worldwide",
+        "sourceSummary": "OpenAI is adding invisible watermarks to ChatGPT text to comply with EU rules. Unlike Anthropic, it will let API customers worldwide turn them off. The EU AI Act reportedly requires AI providers to label generated text in a machine-readable format. OpenAI's answer is textGrain, a technology that embeds an invisible statistical signal in the model's word choices. It works much like Claude's SynthID watermark, which uses Google's open-source technology. OpenAI says it will turn on watermarking for ChatGPT and Codex users in the European Union over the coming weeks.",
+        "sourceEvidenceRefs": [
+          "evd-4c1c21ad1cf84db4dc96",
+          "evd-74cf3849ed8efaa36ce5",
+          "evd-2fde29e8f3943b401958",
+          "evd-a062ecd4d27b504f0a5f",
+          "evd-ce27c100c3e6649ee6dc",
+          "evd-c86ad0d3c58c219f3c11",
+          "evd-a0b13b98028fb84e4b97",
+          "evd-0b012e0da82b5f5eaf35",
+          "evd-a93ebe66986e4f7c4b07",
+          "evd-dd5d8f093cca4900ddc4",
+          "evd-935865cc7b5f9e74fab4",
+          "evd-cbf624f2aca069dd42a5",
+          "evd-0dd5331a8e98c4316c6b",
+          "evd-0f932a425bd6925d6fa2",
+          "evd-a9130226883e7c2caae5"
+        ]
+      },
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "eventIdentity": {
+        "version": 2,
+        "decision": "registry-match",
+        "reason": "immutable-article",
+        "semanticEligible": true,
+        "representativeId": "df746c21e27339",
+        "mergedFrom": [],
+        "evidence": {
+          "newsIds": [
+            "df746c21e27339"
+          ],
+          "urls": [
+            "https://the-decoder.com/openai-will-watermark-chatgpt-text-in-the-eu-but-makes-it-optional-for-api-users-worldwide"
+          ],
+          "anchors": [
+            "api",
+            "chatgpt",
+            "eu",
+            "makes",
+            "openai",
+            "optional",
+            "text",
+            "users",
+            "watermark",
+            "worldwide"
+          ],
+          "date": "2026-10-05"
+        }
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:the-decoder.com"
+        ],
+        "claims": [
+          {
+            "text": "OpenAI is adding invisible watermarks to ChatGPT text to comply with EU rules",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:the-decoder.com"
+            ]
+          },
+          {
+            "text": "it will let API customers worldwide turn them off",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:the-decoder.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-6603217fc078",
+          "eventId": "evt-57e7399f5c54",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-10-06",
+          "dueAfter": "2026-11-05",
+          "verificationSignals": [
+            "正式模型卡或评测结果",
+            "监管、部署或算力计划变化"
+          ],
+          "evidenceIds": [
+            "df746c21e27339"
+          ],
+          "lastReviewedAt": "2026-10-06"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-57e7399f5c54",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-10-06",
+            "newsId": "df746c21e27339",
+            "title": "OpenAI will watermark ChatGPT text in the EU but makes it optional for API users worldwide",
+            "originalTitle": "OpenAI will watermark ChatGPT text in the EU but makes it optional for API users worldwide",
+            "summaryLead": "OpenAI is adding invisible watermarks to ChatGPT text to comply with EU rules. Unlike Anthropic, it will let API customers worldwide turn them off. The EU AI Act reportedly requires AI providers to label generated text in a machine-readabl…",
+            "source": "The Decoder",
+            "publishedAt": "2026-10-05T17:32:42Z",
+            "score": 67
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    }
+  ],
+  "qualifiedCandidateCount": 141,
+  "paperLinkedItemCount": 0,
+  "eventCount": 10,
+  "weeklyDigest": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-10-06T02:55:27Z",
+    "timezone": "Asia/Shanghai",
+    "weekId": "2026-W41",
+    "fromDate": "2026-10-05",
+    "toDate": "2026-10-11",
+    "eventCount": 8,
+    "headline": "Russia strikes Kyiv bridge as German chancellor visits Ukraine in show of support",
+    "summary": "本周已收敛 8 条主要事件线；按最新重要度、独立来源、更新次数与研究关联综合排序。",
+    "events": [
+      {
+        "eventId": "evt-fb538cb6e0f2",
+        "title": "Russia strikes Kyiv bridge as German chancellor visits Ukraine in show of support",
+        "category": "局部冲突",
+        "summary": "Russia has struck another major bridge in Kyiv as the German chancellor, Friedrich Merz, arrived in the capital in a show of support for Ukraine. Russia had already damaged Kyiv’s Northern Bridge and repeatedly struck its Southern Bridge. Although the crossin…",
+        "firstSeen": "2026-10-05",
+        "lastSeen": "2026-10-05",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 3,
+        "paperCount": 0,
+        "outlook": "继续观察新的独立来源与正式信息。"
+      },
+      {
+        "eventId": "evt-7288b99d7053",
+        "title": "Russia strikes Kyiv bridge as German chancellor visits Ukraine in show of support",
+        "category": "局部冲突",
+        "summary": "Russia has struck another major bridge in Kyiv as the German chancellor, Friedrich Merz, arrived in the capital in a show of support for Ukraine. Russia had already damaged Kyiv’s Northern Bridge and repeatedly struck its Southern Bridge. Although the crossin…",
+        "firstSeen": "2026-10-05",
+        "lastSeen": "2026-10-05",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 3,
+        "paperCount": 0,
+        "outlook": "继续观察新的独立来源与正式信息。"
+      },
+      {
+        "eventId": "evt-7f1ae9cb3d5d",
+        "title": "Russia strikes Kyiv bridge as German chancellor visits Ukraine in show of support",
+        "category": "局部冲突",
+        "summary": "Russia has struck another major bridge in Kyiv as the German chancellor, Friedrich Merz, arrived in the capital in a show of support for Ukraine. Russia had already damaged Kyiv’s Northern Bridge and repeatedly struck its Southern Bridge. Although the crossin…",
+        "firstSeen": "2026-10-05",
+        "lastSeen": "2026-10-05",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 3,
+        "paperCount": 0,
+        "outlook": "继续观察新的独立来源与正式信息。"
+      },
+      {
+        "eventId": "evt-0517e77a7df2",
+        "title": "First Release Of USAF’s New HACM Hypersonic Cruise Missile Has Happened Over Australian Range",
+        "category": "军事动态",
+        "summary": "The U.S. Air Force’s scramjet-powered Hypersonic Attack Cruise Missile (HACM) has finally reached the flight test phase, with at least one “release” having been carried out so far over a range in Australia. DARPA “The U.S. Air Force, in partnership with Austr…",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 1,
+        "paperCount": 0,
+        "outlook": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。"
+      },
+      {
+        "eventId": "evt-ffbca6dac905",
+        "title": "Boeing locks in 7-year deal to triple PAC-3 MSE seeker output",
+        "category": "军事动态",
+        "summary": "The agreement follows the framework deal that was announced in April. Production will be spread over seven years, matching Lockheed Martin’s push to surge production on the PAC-3 MSE all-up round. Lockheed in January announced a seven-year framework agreement…",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 1,
+        "paperCount": 0,
+        "outlook": "继续观察新的独立来源与正式信息。"
+      },
+      {
+        "eventId": "evt-22c43fd291f2",
+        "title": "SpaceX scrubs launch attempt for 21 data transport satellites for the Space Development Agency",
+        "category": "航空航天",
+        "summary": "SpaceX will have to wait at least another day before launching a new batch of data satellites to low Earth orbit on behalf of the United States Space Force’s Space Development Agency (SDA). A collection of 21 Northrop Grumman-build satellites for the Space De…",
+        "firstSeen": "2026-10-05",
+        "lastSeen": "2026-10-06",
+        "trend": "本周新出现",
+        "updateCount": 2,
+        "independentSourceCount": 1,
+        "paperCount": 0,
+        "outlook": "继续观察新的独立来源与正式信息。"
+      },
+      {
+        "eventId": "evt-c3f7212a8554",
+        "title": "Trump approves firing-squad execution of Fort Hood shooter, Pentagon says",
+        "category": "军事动态",
+        "summary": "Donald Trump has approved the execution by US army firing squad of Nidal Hasan, who was sentenced to death for killing 13 soldiers at Fort Hood in 2009, chief Pentagon spokesperson Sean Parnell said in a social media post.",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 2,
+        "paperCount": 0,
+        "outlook": "继续观察新的独立来源与正式信息。"
+      },
+      {
+        "eventId": "evt-ae4e0a1e027e",
+        "title": "Germany to set up first drone regiment next year, modeled after Ukraine war lessons",
+        "category": "军事动态",
+        "summary": "VIENNA — Germany plans to stand up its first dedicated drone regiment next year, Defense Minister Boris Pistorius announced, as Berlin attempts to institutionalize lessons from the war in Ukraine after years of domestic foot-dragging on unmanned warfare.",
+        "firstSeen": "2026-10-06",
+        "lastSeen": "2026-10-06",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 1,
+        "paperCount": 0,
+        "outlook": "继续观察新的独立来源与正式信息。"
+      }
+    ]
+  },
+  "anomalySignals": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-10-06T02:55:27Z",
+    "timezone": "Asia/Shanghai",
+    "status": "stable",
+    "baselineDays": 30,
+    "observationDays": 29,
+    "signalCount": 0,
+    "summary": "基于过去 29 个有归档日建立稳健基线，检测到 0 个升温信号。",
+    "signals": []
+  },
+  "releaseId": "r20261006T030452-342ca4fc"
+}
