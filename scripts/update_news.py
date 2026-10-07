@@ -4622,6 +4622,7 @@ def write_pipeline_status(
     report: dict[str, Any] | None = None,
     stream_report: dict[str, Any] | None = None,
     research_report: dict[str, Any] | None = None,
+    deepread_report: dict[str, Any] | None = None,
 ) -> None:
     previous = read_json_safe(path, {})
     previous = previous if isinstance(previous, dict) else {}
@@ -4694,6 +4695,11 @@ def write_pipeline_status(
         "researchWarnings": research_report.get("warnings", []) if success and research_report else ([] if success else previous.get("researchWarnings", [])),
         "researchEditorialDiagnostics": research_report.get("editorialDiagnostics", {}) if success and research_report else ({} if success else previous.get("researchEditorialDiagnostics", {})),
     }
+    if deepread_report is not None:
+        from deepread_quality import deepread_status
+        payload['deepread'] = deepread_status(deepread_report, payload['editionDate'])
+    elif previous.get('deepread'):
+        payload['deepread'] = previous['deepread']
     write_json_atomic(path, payload)
 
 
@@ -5096,6 +5102,7 @@ def main(argv: list[str] | None = None) -> int:
             message=success_message,
             report=report,
             stream_report=stream_report,
+            deepread_report=deepread,
         )
         write_stream_status(
             args.stream_status_output,

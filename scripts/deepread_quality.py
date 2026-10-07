@@ -5,7 +5,30 @@ import copy
 import re
 
 from evidence_trace import validate_deepread_trace, valid_display_translation, valid_prose_translation
-from reader_quality import assess_admissibility, chinese_reader_text
+from reader_quality import assess_admissibility, chinese_reader_text, metadata_filler
+
+
+def normalize_legacy_deepread(article):
+    """Adapt presentation notes without changing captured evidence or the archive."""
+    result = copy.deepcopy(article)
+    if not isinstance(result, dict):
+        return result
+    for event in result.get('events', []):
+        display = event.get('displayTranslation')
+        if not isinstance(display, dict) or not metadata_filler(display.get('summary')):
+            continue
+        sentences = re.split(r'(?<=[。！？])\s*', display.get('summary', ''))
+        note_start = re.compile(r'^(?:现有元数据|元数据未(?:提供|说明)|未提取到可引用的正文|'
+                                r'未提供更多(?:摘要|信息|细节)|这条新闻来自|现有(?:信息|报道)(?:仅包含|未提供)|'
+                                r'目前披露的信息仅涉及|文章.{0,180}(?:最初发表于|最先发表于))')
+        summary = ' '.join(s for s in sentences if not note_start.search(s.strip())).strip()
+        repaired = {**event, 'summary':event.get('excerpt', ''),
+                    'displayTranslation':{**display, 'summary':summary}}
+        # All original title/summary/reference bindings and translation guards
+        # still apply. A note embedded in a factual sentence is not repaired.
+        if summary and valid_display_translation(repaired):
+            event['displayTranslation'] = repaired['displayTranslation']
+    return result
 
 
 def display_text(value, refs=None):
@@ -16,9 +39,29 @@ def display_text(value, refs=None):
     return raw
 
 
+def validate_chapter_prose(chapter, seen=None):
+    seen = set() if seen is None else seen
+    paragraphs = [b for b in chapter.get('blocks', []) if b.get('type') == 'paragraph']
+    if len(paragraphs) < 2:
+        raise ValueError('chapter-needs-two-paragraphs')
+    claims = set()
+    for block in chapter['blocks']:
+        text = display_text(block)
+        if not chinese_reader_text(text) or not re.search(r'[。！？.!?][”"’）)]?$', text) or text.endswith(('…', '...')):
+            raise ValueError('reader-prose-invalid-or-truncated')
+        if block['type'] == 'paragraph':
+            normalized = re.sub(r'\W', '', text)
+            if len(re.findall(r'[\u3400-\u9fff]', text)) < 30 or normalized in seen:
+                raise ValueError('reader-paragraph-short-or-repeated')
+            seen.add(normalized)
+            claims.add(re.sub(r'\W', '', block['text']))
+    if len(claims) < 2:
+        raise ValueError('repeated-source-paragraph')
+
+
 def validate_complete(article):
-    if not isinstance(article, dict) or article.get('generationStatus') != 'ok':
-        raise ValueError('generation-incomplete')
+    if not isinstance(article, dict):
+        raise ValueError('invalid-article')
     try:
         validate_deepread_trace(article)
     except (KeyError, TypeError, ValueError) as exc:
@@ -45,28 +88,15 @@ def validate_complete(article):
                 heading = event['displayTranslation']['title']
         if not chinese_reader_text(heading) or not chinese_reader_text(chapter.get('angle')):
             raise ValueError('reader-heading-invalid')
-        paragraphs = [b for b in chapter.get('blocks', []) if b.get('type') == 'paragraph']
-        if len(paragraphs) < 2:
-            raise ValueError('chapter-needs-two-paragraphs')
-        claims = set()
-        for block in chapter['blocks']:
-            text = display_text(block)
-            if not chinese_reader_text(text) or not re.search(r'[。！？.!?][”"’）)]?$', text) or text.endswith(('…', '...')):
-                raise ValueError('reader-prose-invalid-or-truncated')
-            if block['type'] == 'paragraph':
-                normalized = re.sub(r'\W', '', text)
-                if len(re.findall(r'[\u3400-\u9fff]', text)) < 30 or normalized in seen:
-                    raise ValueError('reader-paragraph-short-or-repeated')
-                seen.add(normalized)
-                claims.add(re.sub(r'\W', '', block['text']))
-        if len(claims) < 2:
-            raise ValueError('repeated-source-paragraph')
+        validate_chapter_prose(chapter, seen)
     observations = article.get('observations', [])
     if not 2 <= len(observations) <= 3 or any(not chinese_reader_text(display_text(o, [s['evidenceId'] for s in o['supports']])) for o in observations):
         raise ValueError('reader-observation-invalid')
 
 
 def choose_readable_deepread(draft, previous, publication_date):
+    draft = normalize_legacy_deepread(draft)
+    diagnostics = generation_diagnostics(draft)
     try:
         validate_complete(draft)
         if draft.get('editionDate') != publication_date:
@@ -76,25 +106,58 @@ def choose_readable_deepread(draft, previous, publication_date):
         failures = [str(exc)]
     if not failures:
         result = copy.deepcopy(draft)
+        if result.get('generationStatus') != 'ok':
+            result['generationAttemptStatus'] = result.get('generationStatus')
+        result['generationStatus'] = 'ok'
         result.update(readerStatus='complete', publicationEditionDate=publication_date, qualityFailures=[])
         return result
     for candidate in sorted((p for p in previous if isinstance(p, dict)), key=lambda p:str(p.get('editionDate', '')), reverse=True):
         if not candidate.get('editionDate') or candidate['editionDate'] > publication_date:
             continue
         try:
+            candidate = normalize_legacy_deepread(candidate)
             validate_complete(candidate)
         except (ValueError, TypeError, KeyError):
             continue
         result = copy.deepcopy(candidate)
         result.pop('releaseId', None)
-        result.update(readerStatus='retained', publicationEditionDate=publication_date, qualityFailures=failures)
+        if result.get('generationStatus') != 'ok':
+            result['generationAttemptStatus'] = result.get('generationStatus')
+        result.update(generationStatus='ok', readerStatus='retained', publicationEditionDate=publication_date,
+                      qualityFailures=failures, generationDiagnostics=diagnostics)
         return result
     return {'schemaVersion':2, 'generationRevision':12, 'editionDate':publication_date,
         'publicationEditionDate':publication_date, 'generatedAt':draft.get('generatedAt') if isinstance(draft,dict) else None,
-        'headline':f'每日深读｜{publication_date}', 'lead':'本期暂无合格的最新事件。',
+        'headline':f'每日深读｜{publication_date}', 'lead':'本期深读生成未通过校验。',
         'generationStatus':'unavailable', 'readerStatus':'unavailable', 'qualityFailures':failures,
+        'generationDiagnostics':diagnostics,
         'events':[], 'chapters':[], 'observations':[], 'eventCount':0, 'candidateCount':0,
-        'sourceCount':0, 'warnings':['今日未通过内容校验，暂无可沿用的完整版。']}
+        'sourceCount':0, 'warnings':diagnostics.get('warnings', []) + ['今日未通过内容校验，暂无可沿用的完整版。']}
+
+
+def generation_diagnostics(draft):
+    if not isinstance(draft, dict):
+        return {'generationStatus':'invalid'}
+    keys = ('generationStatus', 'generatedAt', 'candidateCount', 'eventCount', 'sourceCount',
+            'warnings', 'recoveryDiagnostics', 'contentFailures')
+    return {key:copy.deepcopy(draft[key]) for key in keys if key in draft}
+
+
+def deepread_status(article, publication_date):
+    """Deep read failures are independent of a successfully published daily brief."""
+    status = article.get('readerStatus')
+    failures = list(article.get('qualityFailures', []))
+    try:
+        validate_readable(article, publication_date)
+    except (ValueError, KeyError, TypeError) as exc:
+        status = 'unavailable'
+        failures.append(str(exc))
+    state = 'ok' if status == 'complete' else 'degraded' if status == 'retained' else 'failed'
+    return {'state':state, 'errorCode':None if state == 'ok' else 'deepread-retained' if state == 'degraded' else 'deepread-unavailable',
+            'editionDate':publication_date, 'contentEditionDate':article.get('editionDate'),
+            'readerStatus':status, 'qualityFailures':failures,
+            'message':'深读已通过正文与证据校验。' if state == 'ok' else '今日深读未通过校验，沿用历史完整版。' if state == 'degraded' else '深读生成失败，暂无合格完整版；日报状态独立记录。',
+            'diagnostics':copy.deepcopy(article.get('generationDiagnostics') or generation_diagnostics(article))}
 
 
 def validate_readable(article, publication_date):

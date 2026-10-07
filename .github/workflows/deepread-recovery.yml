@@ -1,0 +1,75 @@
+name: Deepread recovery
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: [Daily news update]
+    types: [completed]
+    branches: [main]
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/deepread-recovery.yml
+      - scripts/recover_deepread.py
+      - scripts/deepread_editorial.py
+      - scripts/deepread_quality.py
+
+permissions:
+  contents: write
+
+concurrency:
+  group: frontier-data-main
+  queue: max
+  cancel-in-progress: false
+
+jobs:
+  recover:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout current publication
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Recover deepread without regenerating the daily brief
+        id: recovery
+        env:
+          AI_PROVIDER: ${{ vars.AI_PROVIDER }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          DEEPSEEK_MODEL: ${{ vars.DEEPSEEK_MODEL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+        run: >-
+          python scripts/recover_deepread.py
+          --stage "$RUNNER_TEMP/frontier-deepread-stage"
+          --code-revision "$(git rev-parse HEAD)"
+          --github-output "$GITHUB_OUTPUT"
+      - name: Publish recovered article or its independent failure status
+        if: steps.recovery.outputs.changed == 'true'
+        run: |
+          git add -A -- public/data public/releases public/feed.xml
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name "frontier-pulse-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(data): publish deepread recovery and independent status"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              exit 1
+            fi
+            if git push origin HEAD:main; then exit 0; fi
+            sleep "$((attempt * 2))"
+          done
+          exit 1
+      - name: Report independent deepread failure
+        if: steps.recovery.outputs.state == 'failed' || steps.recovery.outputs.state == 'degraded'
+        run: |
+          echo "::error title=Deepread generation failed::Daily news remains published. See status.json deepread diagnostics."
+          exit 1
