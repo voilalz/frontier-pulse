@@ -82,10 +82,11 @@ def validate_complete(article):
     seen = set()
     for chapter in chapters:
         heading = chapter.get('title', '')
-        if len(chapter['newsIds']) == 1:
-            event = by_id[chapter['newsIds'][0]]
+        for news_id in chapter['newsIds']:
+            event = by_id[news_id]
             if heading == event['title'] and valid_display_translation({**event, 'summary':event['excerpt']}):
                 heading = event['displayTranslation']['title']
+                break
         if not chinese_reader_text(heading) or not chinese_reader_text(chapter.get('angle')):
             raise ValueError('reader-heading-invalid')
         validate_chapter_prose(chapter, seen)
