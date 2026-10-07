@@ -1,10 +1,10 @@
 {
   "schemaVersion": 11,
   "state": "ok",
-  "lastAttemptAt": "2026-10-04T09:30:45Z",
+  "lastAttemptAt": "2026-10-07T06:42:34Z",
   "summaryRevision": 5,
-  "lastSuccessAt": "2026-10-04T09:30:45Z",
-  "editionDate": "2026-10-04",
+  "lastSuccessAt": "2026-10-07T06:42:34Z",
+  "editionDate": "2026-10-07",
   "itemCount": 10,
   "message": "日报更新成功",
   "method": "deepseek",
@@ -21,67 +21,68 @@
     "attempted": true,
     "status": "adjusted",
     "failureReason": "",
-    "candidateCount": 39,
+    "candidateCount": 72,
     "provider": "deepseek",
     "model": "deepseek-v4-flash",
     "aiWeight": 0.65,
     "ruleWeight": 0.35,
-    "aiScoredItemCount": 39,
+    "aiScoredItemCount": 72,
     "aiUnscoredItemCount": 0,
     "unconstrainedTop": {
       "categoryCounts": {
-        "军事动态": 2,
-        "局部冲突": 5,
-        "航空航天": 1,
-        "无人系统": 1,
-        "AI": 1
+        "军事动态": 6,
+        "局部冲突": 1,
+        "无人系统": 2,
+        "航空航天": 1
       },
       "domainCounts": {
-        "navalnews.com": 2,
-        "theguardian.com": 2,
-        "nasaspaceflight.com": 1,
+        "defenseone.com": 1,
+        "defensenews.com": 4,
+        "aljazeera.com": 1,
+        "navalnews.com": 1,
         "twz.com": 1,
-        "france24.com": 1,
-        "dw.com": 2,
-        "aljazeera.com": 1
+        "unmannedairspace.info": 1,
+        "nasaspaceflight.com": 1
       },
       "categoryViolations": {
-        "局部冲突": 5
+        "军事动态": 6
       },
-      "domainViolations": {}
+      "domainViolations": {
+        "defensenews.com": 4
+      }
     },
     "finalTop": {
       "categoryCounts": {
-        "军事动态": 2,
-        "局部冲突": 2,
-        "航空航天": 1,
-        "无人系统": 1,
-        "AI": 3,
+        "军事动态": 3,
+        "局部冲突": 1,
+        "无人系统": 2,
+        "航空航天": 2,
+        "AI": 1,
         "前沿技术": 1
       },
       "domainCounts": {
-        "navalnews.com": 2,
-        "theguardian.com": 1,
-        "nasaspaceflight.com": 1,
-        "twz.com": 1,
-        "france24.com": 1,
-        "dw.com": 1,
-        "the-decoder.com": 2,
-        "sciencedaily.com": 1
+        "defenseone.com": 1,
+        "defensenews.com": 2,
+        "aljazeera.com": 1,
+        "navalnews.com": 1,
+        "unmannedairspace.info": 1,
+        "nasaspaceflight.com": 2,
+        "news.mit.edu": 1,
+        "thequantuminsider.com": 1
       },
       "categoryViolations": {},
       "domainViolations": {}
     },
     "adjustedItemCount": 3,
     "adjustedOutIds": [
-      "966cba13b52408",
-      "4b44a7c0f27651",
-      "3447d98fe68b7a"
+      "9a64ae3cc1999d",
+      "5dd4a0d4824d5d",
+      "f73597598520e8"
     ],
     "adjustedInIds": [
-      "481b50da33d6b4",
-      "f51aea6f4c7393",
-      "5e1abf4d5e8089"
+      "cfcf65a3631dd0",
+      "cc060c5c550295",
+      "51e5daa0d04455"
     ],
     "relaxedItemCount": 0
   },
@@ -91,23 +92,23 @@
   "translatedItemCount": 10,
   "translationWarnings": [],
   "translationDiagnostics": {
-    "requestedItemCount": 0,
-    "completedItemCount": 0,
+    "requestedItemCount": 1,
+    "completedItemCount": 1,
     "missingItemCount": 0,
     "missingItemIds": [],
     "missingItems": [],
     "initialBatchSize": 5,
-    "initialBatchCount": 0,
-    "requestCount": 0,
+    "initialBatchCount": 1,
+    "requestCount": 1,
     "retryRequestCount": 0,
     "providerFailureCount": 0,
     "structuralFailureCount": 0,
-    "completionReason": "not_needed",
-    "completionMessage": "没有需要翻译的新条目",
+    "completionReason": "complete_first_pass",
+    "completionMessage": "全部条目首轮完成",
     "lastProviderError": "",
     "targetItemCount": 10,
-    "reusedItemCount": 10,
-    "newlyTranslatedItemCount": 0,
+    "reusedItemCount": 9,
+    "newlyTranslatedItemCount": 1,
     "totalTranslatedItemCount": 10,
     "totalMissingItemCount": 0
   },
@@ -134,35 +135,56 @@
   },
   "eventCount": 10,
   "weeklyEventCount": 8,
-  "anomalySignalCount": 1,
+  "anomalySignalCount": 2,
   "paperLinkedItemCount": 0,
   "warnings": [],
   "coverageStatus": "complete",
   "freshItemCount": 10,
   "supplementalItemCount": 0,
   "effectiveLookbackHours": 24,
-  "streamItemCount": 39,
+  "streamItemCount": 126,
   "streamTranslationProvider": "deepseek",
   "streamTranslationModel": "deepseek-v4-flash",
-  "streamTranslatedItemCount": 39,
-  "streamTranslationWarnings": [],
+  "streamTranslationStatus": "partial",
+  "streamTranslatedItemCount": 125,
+  "streamTranslationWarnings": [
+    "新闻中文翻译在拆分重试后仍缺失 1/2 条：拆分重试后仍有条目缺失",
+    "全量动态中文翻译不完整：125/126"
+  ],
   "streamTranslationDiagnostics": {
-    "requestedItemCount": 0,
-    "completedItemCount": 0,
-    "missingItemCount": 0,
-    "missingItemIds": [],
-    "missingItems": [],
+    "requestedItemCount": 2,
+    "completedItemCount": 1,
+    "missingItemCount": 1,
+    "missingItemIds": [
+      "8b3b9413c682ba"
+    ],
+    "missingItems": [
+      {
+        "id": "8b3b9413c682ba",
+        "reason": "translation_content_rejected"
+      }
+    ],
     "initialBatchSize": 6,
-    "initialBatchCount": 0,
-    "requestCount": 0,
-    "retryRequestCount": 0,
+    "initialBatchCount": 1,
+    "requestCount": 3,
+    "retryRequestCount": 2,
     "providerFailureCount": 0,
-    "structuralFailureCount": 0,
-    "completionReason": "not_needed",
-    "completionMessage": "没有需要翻译的新条目",
+    "structuralFailureCount": 2,
+    "completionReason": "partial_after_retry",
+    "completionMessage": "拆分重试后仍有条目缺失",
     "lastProviderError": "",
-    "reusedItemCount": 39,
-    "featuredTranslatedItemCount": 10
+    "reusedItemCount": 123,
+    "featuredTranslatedItemCount": 10,
+    "notAttemptedItemIds": [],
+    "notAttemptedItemCount": 0,
+    "budgetDeferredItemCount": 0,
+    "targetItemCount": 126,
+    "totalTranslatedItemCount": 125,
+    "totalMissingItemCount": 1,
+    "totalMissingItemIds": [
+      "8b3b9413c682ba"
+    ],
+    "coverageCompletionMessage": "还有 1 条中文译文待完成"
   },
   "researchItemCount": 0,
   "researchEditorialStatus": null,
@@ -171,5 +193,5 @@
   "researchTranslatedItemCount": 0,
   "researchWarnings": [],
   "researchEditorialDiagnostics": {},
-  "releaseId": "r20261004T093730-e1ded820"
+  "releaseId": "r20261007T064526-094d670a"
 }
