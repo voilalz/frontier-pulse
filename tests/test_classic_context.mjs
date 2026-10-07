@@ -68,6 +68,32 @@ test('topic, title-only, negated, prospective and other-subject mentions are omi
   const n=news('ORB-SLAM2');n.evidenceRecords[0].url='https://other.test/unsupported';
   assert.deepEqual(context.relatedPapers(n,rows),[]);
 });
+test('a shared manufacturer does not associate a different named product', () => {
+  for (const sentence of [
+    "Acme's Beacon uses ORB-SLAM2 for navigation.",
+    'Acme’s Beacon uses ORB-SLAM2 for navigation.',
+    'Acme Beacon uses ORB-SLAM2 for navigation.',
+  ]) {
+    const n=news('ORB-SLAM2');n.evidenceRecords[0].text=sentence;
+    assert.deepEqual(context.relatedPapers(n,rows,'2026-10-06'),[],sentence);
+  }
+  const n=news('ORB-SLAM2');n.originalTitle='阿克米发布阿特拉斯';
+  n.evidenceRecords[0].text='阿克米的信标使用 ORB-SLAM2 进行导航。';
+  assert.deepEqual(context.relatedPapers(n,rows,'2026-10-06'),[]);
+});
+test('discontinued adoption and intended future adoption do not create links', () => {
+  for (const sentence of [
+    "Acme's Atlas no longer uses ORB-SLAM2.",
+    "Acme's Atlas aims to use ORB-SLAM2.",
+    "Acme's Atlas intends to use ORB-SLAM2.",
+    'Atlas 不会使用 ORB-SLAM2。',
+    'Atlas 将会使用 ORB-SLAM2。',
+    'Atlas 打算使用 ORB-SLAM2。',
+  ]) {
+    const n=news('ORB-SLAM2');n.evidenceRecords[0].text=sentence;
+    assert.deepEqual(context.relatedPapers(n,rows,'2026-10-06'),[],sentence);
+  }
+});
 test('unpublished classics are omitted and both directions preserve dates and versions', () => {
   assert.equal(typeof context.relatedPapers,'function');
   const n=news('ORB-SLAM2'),p=rows.find(r=>r.paper.id==='classic:slam:orbslam2');

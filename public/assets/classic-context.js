@@ -29,12 +29,13 @@
   const stop = new Set(('the a an its new now for from with and of our this that these their company system platform robot robots rover vehicle drone navigation model network method product team research researchers software hardware launch launches unveils released announces uses'.split(' ')));
   function sameSubject(item, subject) {
     const title=clean(item.originalTitle || item.title).toLowerCase();
-    const words=subject.toLowerCase().match(/[a-z][a-z0-9-]{2,}/g) || [];
-    if (words.some(word=>!stop.has(word) && new RegExp('(^|[^a-z0-9-])'+word+'([^a-z0-9-]|$)','i').test(title))) return true;
-    const names=subject.split(/[的\s]+|系统|模型|无人机|机器人/).filter(name=>/^[\u4e00-\u9fff]{2,12}$/.test(name));
-    return names.some(name=>!['研究人员','研究团队','该公司','新平台','该平台'].includes(name) && title.includes(name));
+    const words=(subject.toLowerCase().match(/[a-z][a-z0-9-]{2,}/g) || []).filter(word=>!stop.has(word));
+    if (words.length) return words.every(word=>new RegExp('(^|[^a-z0-9-])'+word+'([^a-z0-9-]|$)','i').test(title));
+    const names=subject.split(/[的\s]+|系统|模型|无人机|机器人/).filter(name=>/^[\u4e00-\u9fff]{2,12}$/.test(name)
+      && !['研究人员','研究团队','该公司','新平台','该平台'].includes(name));
+    return names.length>0 && names.every(name=>title.includes(name));
   }
-  const uncertain = /\b(?:not|never|without|may|might|could|will|plans?|considering|expected|previously|formerly|said|says|reports?|reported|compares?|compared|unlike|whereas|while|which|according)\b|不采用|不使用|未采用|未使用|没有|计划|可能|将采用|拟采用|此前|曾经|表示|声称|相比|而另一/i;
+  const uncertain = /\b(?:not|never|without|may|might|could|will|plans?|considering|expected|previously|formerly|said|says|reports?|reported|compares?|compared|unlike|whereas|while|which|according)\b|\bno\s+longer\b|\b(?:aims?|intends?|hopes?|seeks?|expects?)\s+to\b|不采用|不使用|不会|不再|未采用|未使用|没有|计划|打算|准备采用|准备使用|可能|将采用|将使用|将会|拟采用|拟使用|此前|曾经|表示|声称|相比|而另一/i;
   function adoption(item, clause) {
     if (uncertain.test(clause)) return '';
     const english=clause.match(/^(.{2,180}?)\s+(?:now\s+)?(?:uses?|adopts?|employs?|implements?|integrates?|is based on|is built on|is powered by)\s+(.+)$/i);

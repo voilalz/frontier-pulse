@@ -1731,7 +1731,7 @@
     const key = itemKey(item);
     const visual = item.image ? `<figure class="story-visual"><img src="${esc(item.image)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"></figure>` : "";
     const sources = item.sources.map((source) => `<li><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.name || source.domain)}</a></li>`).join("");
-    const related = classicUI.relatedPapers(item);
+    const related = classicUI?.relatedPapers?.(item) || [];
     const paperLinks = related.length ? `<aside class="news-classic-links" aria-label="相关方法论文"><span>相关方法</span>${related.map(row=>
       `<a href="${esc(window.FrontierClassicContext.paperHref(row,item))}">${esc(window.FrontierClassicClient.displayTitle(row.paper))}</a>`).join('')}</aside>` : '';
     const sourceDetails = item._compact || item.sources.length > 1
