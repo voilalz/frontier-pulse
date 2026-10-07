@@ -74,7 +74,8 @@ class BilingualDeepreadTests(unittest.TestCase):
 
     def test_english_sources_generate_complete_chinese_prose_and_observations(self):
         report = self.report()
-        self.assertEqual(report["generationStatus"], "ok")
+        self.assertEqual(report["generationStatus"], "partial")
+        self.assertTrue(report["contentFailures"])
         validate_deepread_trace(report)
         normalized = self.browser_result(f'normalizeEditorialDeepread({json.dumps(report)})')
         self.assertEqual(len(normalized["observations"]), 2)
@@ -109,7 +110,9 @@ class BilingualDeepreadTests(unittest.TestCase):
                                      {"provider": "deepseek"}, provider)
         self.assertEqual(calls.count("deepread_prose_v2"), 1)
         self.assertEqual(calls.count("deepread_observations_v2"), 1)
-        self.assertEqual(report["generationStatus"], "ok")
+        # This source-binding fixture lacks full reader-length, distinct paragraphs.
+        self.assertEqual(report["generationStatus"], "partial")
+        self.assertTrue(report["contentFailures"])
         validate_deepread_trace(report)
         normalized = self.browser_result(f'normalizeEditorialDeepread({json.dumps(report)})')
         self.assertEqual(len(normalized["observations"]), 2)
@@ -214,7 +217,9 @@ class BilingualDeepreadTests(unittest.TestCase):
         report = build_daily_deepread(self.items(), {**self.config, "deepread_core_events": 4}, self.now,
                                      {"provider": "deepseek"}, provider)
         self.assertEqual(calls, ["deepread_outline_v2"])
-        self.assertEqual(report["generationStatus"], "ok")
+        # This source-binding fixture lacks full reader-length, distinct paragraphs.
+        self.assertEqual(report["generationStatus"], "partial")
+        self.assertTrue(report["contentFailures"])
 
     def test_fixed_comparison_text_cannot_be_rewritten_as_a_fact(self):
         items = self.items()[:2]

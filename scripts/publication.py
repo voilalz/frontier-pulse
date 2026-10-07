@@ -158,7 +158,15 @@ def _validate(stage, mode, expected_date):
     require(status.get('state') == 'ok' and status.get('editionDate') == edition, 'Unhealthy daily generation')
     require(read_json(data / f'archive/{edition}.json') == news, 'Daily archive differs from current report')
     def deep_content(value):
-        return {k:v for k,v in value.items() if k not in {'releaseId','readerStatus','publicationEditionDate','qualityFailures'}}
+        from deepread_quality import normalize_legacy_deepread, validate_complete
+        value = normalize_legacy_deepread(value)
+        try:
+            validate_complete(value)
+            value['generationStatus'] = 'ok'
+        except (ValueError, TypeError, KeyError):
+            pass
+        return {k:v for k,v in value.items() if k not in {'releaseId','readerStatus','publicationEditionDate',
+            'qualityFailures','generationAttemptStatus','generationDiagnostics'}}
     require(deep_content(read_json(data / f'deepread/{deep_date}.json')) == deep_content(deep), 'Deepread archive differs from current report')
     archive_ids = {}
     for name in ['archive/index.json', 'deepread/index.json']:
@@ -383,15 +391,23 @@ def revision_changes(previous, current):
 
 
 def promote(stage: Path, public: Path, mode: str, release_id: str, code_revision: str,
-            *, revision_reason='', base_release_id='', now=None):
+            *, revision_reason='', base_release_id='', now=None, base_stream_hashes=None):
     with publication_lock(public):
         return _promote(stage, public, mode, release_id, code_revision,
-                        revision_reason=revision_reason, base_release_id=base_release_id, now=now)
+                        revision_reason=revision_reason, base_release_id=base_release_id, now=now,
+                        base_stream_hashes=base_stream_hashes)
 
 
-def _promote(stage, public, mode, release_id, code_revision, *, revision_reason='', base_release_id='', now=None):
+def stream_hashes(public):
+    return {name:hashlib.sha256(safe_path(public/name).read_bytes()).hexdigest() for name in STREAM_FILES}
+
+
+def _promote(stage, public, mode, release_id, code_revision, *, revision_reason='', base_release_id='', now=None,
+             base_stream_hashes=None):
     stage = checked_root(stage)
     public = preflight_public(public)
+    if base_stream_hashes is not None:
+        require(base_stream_hashes == stream_hashes(public), 'Deepread recovery base stream changed; retry from current data')
     validate_publication(stage, mode)
     if mode == 'stream':
         install_bundle(stage, public, list(STREAM_FILES))

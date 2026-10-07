@@ -229,7 +229,7 @@ const toggleStart = source.indexOf('  $("stories").addEventListener("toggle"');
 const toggleEnd = source.indexOf('  $("stories").addEventListener("error"');
 if (toggleStart < 0 || toggleEnd < toggleStart) throw new Error('Cannot locate details toggle handler');
 const elements = {}, handlers = {};
-const context = {URL, URLSearchParams, Date, Set, Map, console,
+const context = {URL, URLSearchParams, Date, Set, Map, console, TextEncoder, crypto:require('crypto').webcrypto,
   location: {origin:'https://newsfrontier.top', pathname:'/', search:'', hash:''}, localStorage:{getItem:()=>null},
   window:{FrontierPublication:require('./public/assets/publication-client.js'),matchMedia:()=>({matches:false})},
   document:{getElementById:id=>(elements[id] ||= {addEventListener:(name, callback)=>handlers[name]=callback}), querySelectorAll:()=>[]},

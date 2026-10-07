@@ -745,6 +745,13 @@
       );
       return;
     }
+    const deepreadState=state.pipelineStatus?.deepread;
+    if (deepreadState && deepreadState.editionDate===report?.editionDate && deepreadState.state!=='ok') {
+      badge.textContent='日报已更新';
+      showAlert('warning', '日报已更新，深读生成失败', deepreadFailureDetail(deepreadState)
+        +(deepreadState.state==='degraded' ? `可阅读 ${deepreadState.contentEditionDate} 的历史完整版。` : '暂无合格深读正文，日报可独立阅读。'));
+      return;
+    }
     // Ranking diagnostics remain in status.json for operators; readers only
     // see data freshness and language availability above.
     badge.textContent = "今日已更新";
@@ -768,6 +775,28 @@
       || (octets[0] === 198 && [18, 19].includes(octets[1]))));
     return url.username || url.password || host === "localhost" || host.endsWith(".localhost")
       || host.endsWith(".local") || privateIp ? "" : safe;
+  }
+
+  const verifiedLegacyDeepreads = new WeakSet();
+
+  async function normalizeDeepreadForReader(payload) {
+    if (payload?.schemaVersion === 2 && !payload.readerStatus) {
+      try {
+        const records = payload.events.flatMap(event=>event.evidenceRecords || []);
+        const valid = await Promise.all(records.map(async record=>{
+          if (!['body','feed'].includes(record.kind) || !safeEditorialUrl(record.url)
+              || typeof record.text!=='string' || record.text.length < 10 || record.text.length > 600
+              || record.text!==record.text.trim() || /[<>\x00-\x1f]/.test(record.text)
+              || !Number.isFinite(Date.parse(record.fetchedAt)) || !/(?:Z|[+-]\d\d:\d\d)$/.test(record.fetchedAt)) return false;
+          const bytes=new TextEncoder().encode(record.url+'\n'+record.kind+'\n'+record.text);
+          const digest=await crypto.subtle.digest('SHA-256',bytes);
+          const hash=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
+          return record.evidenceId==='evd-'+hash.slice(0,20);
+        }));
+        if (valid.length && valid.every(Boolean)) verifiedLegacyDeepreads.add(payload);
+      } catch (_) { /* A malformed archive cannot gain reader completion. */ }
+    }
+    return normalizeDeepread(payload);
   }
 
   function normalizeEditorialDeepread(payload) {
@@ -868,18 +897,122 @@
       chapter.blocks = chapter.newsIds.map((id) => ({type: "paragraph",
         text: byNews.get(id).excerpt || byNews.get(id).title, newsIds: [id]}));
     });
+    const readable = !filtered && editorialReaderComplete({headline:payload.headline, lead:payload.lead,
+      chapters, events:usedEvents, observations});
+    const legacyComplete = !payload.readerStatus && verifiedLegacyDeepreads.has(payload) && readable && editorialLegacyBound(payload);
+    const legacyReadable = !payload.readerStatus && verifiedLegacyDeepreads.has(payload) && !filtered && !legacyComplete
+      && readerTextValid(payload.headline) && readerTextValid(payload.lead) && usedEvents.length >= 4
+      && chapters.length >= 3 && chapters.every(c=>readerTextValid(c.title) && c.blocks.length
+        && c.blocks.every(b=>readerTextValid(b.text) && /[。！？.!?][”"’）)]?$/.test(b.text) && !/(?:…|\.\.\.)$/.test(b.text)))
+      && editorialLegacyBound(payload, false);
     return {
       releaseId: clean(payload.releaseId), schemaVersion: 2, editionDate: payload.editionDate, generatedAt: clean(payload.generatedAt),
-      readerStatus:clean(payload.readerStatus, 'unavailable'), publicationEditionDate:clean(payload.publicationEditionDate),
+      readerStatus:clean(payload.readerStatus, legacyComplete ? 'complete' : legacyReadable ? 'legacy' : 'unavailable'),
+      publicationEditionDate:clean(payload.publicationEditionDate, payload.editionDate),
       qualityFailures:Array.isArray(payload.qualityFailures) ? payload.qualityFailures : [],
+      generationDiagnostics:payload.generationDiagnostics || {},
       headline: filtered ? "今日前沿深读" : clean(payload.headline, "今日前沿深读"),
       lead: filtered ? "" : clean(payload.lead),
-      generationStatus: usedEvents.length < 4 ? "insufficient" : clean(payload.generationStatus, "fallback"),
+      generationStatus: readable ? 'ok' : usedEvents.length < 4 ? "insufficient" : clean(payload.generationStatus, "fallback"),
       contentFiltered: filtered, chapters, events: usedEvents,
       observations: filtered ? [] : observations,
       eventCount: usedEvents.length,
       sourceCount: new Set(usedEvents.flatMap((event) => event.sources.map((source) => source.url))).size,
     };
+  }
+
+  function editorialReaderComplete(report) {
+    if (!report || report.events?.length < 4 || report.events?.length > 6 || report.chapters?.length < 3
+        || !readerTextValid(report.headline) || !readerTextValid(report.lead)
+        || ![2,3].includes(report.observations?.length)
+        || report.observations.some(o=>!readerTextValid(o.text))) return false;
+    const ids=report.chapters.flatMap(c=>c.newsIds), seen=new Set();
+    if (ids.length !== report.events.length || new Set(ids).size !== ids.length) return false;
+    return report.chapters.every(chapter=>readerTextValid(chapter.title) && readerTextValid(chapter.angle)
+      && chapter.blocks.filter(b=>b.type==='paragraph').length >= 2
+      && chapter.blocks.every(block=>{
+        if (!readerTextValid(block.text) || !/[。！？.!?][”"’）)]?$/.test(block.text) || /(?:…|\.\.\.)$/.test(block.text)) return false;
+        if (block.type !== 'paragraph') return true;
+        const key=block.text.replace(/[^\p{L}\p{N}_]/gu,'');
+        if ((block.text.match(/[\u3400-\u9fff]/g)||[]).length < 30 || seen.has(key)) return false;
+        seen.add(key); return true;
+      }));
+  }
+
+  function editorialLegacyBound(payload, complete = true) {
+    const byId=new Map(payload.events.map(e=>[e.newsId,e]));
+    if (byId.size !== payload.events.length || new Set(payload.events.map(e=>e.eventId)).size !== byId.size) return false;
+    const literal=(text,refs,events)=>{
+      if (typeof text!=='string' || !Array.isArray(refs) || !refs.length || new Set(refs).size!==refs.length) return false;
+      const records=new Map(events.flatMap(e=>(e?.evidenceRecords||[])
+        .filter(r=>e.sources?.some(s=>s.url===r.url)).map(r=>[r.evidenceId,r.text])));
+      if (refs.some(ref=>!records.has(ref))) return false;
+      const pending=[0], visited=new Set(), claim=text.trim();
+      while (pending.length) {
+        const start=pending.pop(); if (visited.has(start)) continue; visited.add(start);
+        for (const ref of refs) {
+          const quote=records.get(ref); if (!claim.startsWith(quote,start)) continue;
+          const end=start+quote.length; if (end===claim.length) return true;
+          if (claim[end]===' ') pending.push(end+1);
+        }
+      }
+      const normalized=value=>value.replace(/\s+/g,' ').trim().toLowerCase();
+      return text.split(/(?<=[。！？])\s*|(?<=[.!?])\s+(?=[A-Z])/).filter(s=>s.trim()).every(sentence=>
+        refs.some(ref=>{
+          const source=records.get(ref);
+          const qualifiers=[/计划|拟|将|可能|\b(?:plans?|planned|will|scheduled|expected|may|might|could)\b/i,
+            /仅|只|有限|限制|\b(?:only|limited)\b/i, /模拟|仿真|\b(?:simulation|simulated)\b/i,
+            /初步|\bpreliminary\b/i, /部分|少数|\b(?:some|partial)\b/i,
+            /并不|并非|尚未|并未|没有|未能|失败|不支持|\b(?:not|never|failed|unsuccessful)\b/i];
+          return normalized(source).includes(normalized(sentence).replace(/[。！？.!?]+$/,''))
+            && qualifiers.every(pattern=>!pattern.test(source) || pattern.test(sentence));
+        }));
+    };
+    const frame=(text,events,allowed=[])=>allowed.includes(text)
+      || literal(text,events.flatMap(e=>e.evidenceRecords.map(r=>r.evidenceId)),events);
+    const count=payload.events.length, labels={'ai-agent':'AI 智能体','counter-uas':'反无人机技术',
+      'quantum-computing':'量子计算','hypersonic-missile':'高超音速导弹','semiconductor-fabrication':'芯片制造',
+      'robotaxi':'自动驾驶出租车','fusion':'核聚变','perovskite':'钙钛矿'};
+    const note='并列比较不代表事件之间存在因果关系。';
+    if (!frame(payload.headline,payload.events,[...payload.events.map(e=>e.title),`每日深读｜${payload.editionDate}：${count}项值得追踪的进展`])
+        || !frame(payload.lead,payload.events,[`本期从过去24小时的${payload.candidateCount}项合格候选中，选取${count}项有来源的报道，按具体进展展开。`])) return false;
+    if (payload.events.some(e=>typeof e.originalTitle!=='string'
+      || (e.title!==e.originalTitle && !literal(e.title,['headline'],[{sources:e.sources,
+        evidenceRecords:[{evidenceId:'headline',text:e.originalTitle,url:e.sources?.[0]?.url}]}]))
+      || !literal(e.excerpt,e.summaryEvidenceRefs,[e]))) return false;
+    const references=payload.chapters.flatMap(c=>c.newsIds || []);
+    if (references.length!==count || new Set(references).size!==count || references.some(id=>!byId.has(id))) return false;
+    if (payload.chapters.some(c=>{
+      const events=c.newsIds.map(id=>byId.get(id)), label=labels[c.comparisonKey], amount={2:'两',3:'三'}[events.length];
+      const comparison=c.kind==='comparison' && label && amount;
+      if (!frame(c.title,events,[...events.map(e=>e.title),...(comparison ? [`${label}：${amount}项独立进展`] : [])])
+          || !frame(c.angle,events,[comparison ? `分别核对${amount}项报道在${label}上披露的事实与未知事项` : '追踪本次报道中的具体变化'])) return true;
+      return (complete && new Set(c.blocks.filter(b=>b.type==='paragraph').map(b=>clean(b.text))).size < 2)
+        || c.blocks.some(b=>{
+          if (!b.newsIds?.length || b.newsIds.some(id=>!c.newsIds.includes(id))) return true;
+          const members=b.newsIds.map(id=>byId.get(id));
+          const allRefs=members.flatMap(e=>e.evidenceRecords.map(r=>r.evidenceId));
+          const method=`本章按${label || ''}并列呈现以上原文证据。${note}`;
+          const fixed=b.type==='comparison' && comparison && b.text===method
+            && b.newsIds.length===events.length && Array.isArray(b.evidenceIds)
+            && new Set(b.evidenceIds).size===new Set(allRefs).size && allRefs.every(id=>b.evidenceIds.includes(id));
+          return !(fixed || literal(b.text,b.evidenceIds,members));
+        });
+    })) return false;
+    return (payload.observations||[]).every(o=>o.supports?.length && o.supports.every(s=>{
+      const event=byId.get(s.newsId), record=event?.evidenceRecords?.find(r=>r.evidenceId===s.evidenceId);
+      return record && clean(s.supportQuote) && record.text.includes(s.supportQuote)
+        && literal(o.text,o.supports.map(s=>s.evidenceId),o.newsIds.map(id=>byId.get(id)));
+    }));
+  }
+
+  function deepreadFailureDetail(report) {
+    const labels={'source-trace-invalid':'来源或译文核验未通过', 'event-or-chapter-count':'事件或章节数量不足',
+      'chapter-needs-two-paragraphs':'章节正文不完整', 'reader-observation-invalid':'观察内容未通过校验',
+      'reader-prose-invalid-or-truncated':'正文含未完成的句子或无效译文',
+      'reader-paragraph-short-or-repeated':'正文段落过短或重复', 'reader-heading-invalid':'章节标题未完成中文校验'};
+    const reasons=(report?.qualityFailures||[]).map(code=>labels[code]).filter(Boolean);
+    return reasons.length ? [...new Set(reasons)].join('；')+'。' : '本期深读未通过正文与来源校验，稍后可重试。';
   }
 
   function normalizeDeepread(payload) {
@@ -931,10 +1064,10 @@
   }
 
   function renderEditorialDeepread(report) {
+    if (report?.readerStatus === 'legacy' && state.historicalSelection) return renderEditorialContent(report);
     if (!['complete','retained'].includes(report?.readerStatus) || report?.generationStatus !== 'ok'
-        || report?.contentFiltered || report?.chapters?.length < 3
-        || report.chapters.some(c=>c.blocks.filter(b=>b.type==='paragraph' && readerTextValid(b.text)).length < 2)) {
-      return '<div class="empty"><h2>今日深读待更新</h2><p>今日未通过内容校验，暂无可沿用的完整版。</p></div>';
+        || report?.contentFiltered || !editorialReaderComplete(report)) {
+      return `<div class="empty"><h2>本期深读生成失败</h2><p>${esc(deepreadFailureDetail(report))}日报可独立阅读。</p></div>`;
     }
     return renderEditorialContent(report);
   }
@@ -955,6 +1088,7 @@
           <h2>${esc(report.headline)}</h2>
           ${report.lead ? `<p class="deepread-lead">${esc(report.lead)}</p>` : ""}
           ${report.readerStatus === 'retained' ? `<p class="deepread-note">最新完整版：${esc(report.editionDate)}；今日未通过内容校验。</p>` : ""}
+          ${report.readerStatus === 'legacy' ? '<p class="deepread-note">历史简版：保留可核验的旧版正文，段落和观察可能少于现行完整版要求。</p>' : ''}
         </header>
         ${report.chapters.map((chapter) => {
           const members = chapter.newsIds.map((id) => byNews.get(id)).filter(Boolean);
@@ -1029,7 +1163,7 @@
     try {
       const report = !bypassCache && date && state.deepreadCache.has(date)
         ? state.deepreadCache.get(date)
-        : normalizeDeepread(await fetchPublicationJson(date ? `./data/deepread/${date}.json` : ENDPOINTS.deepread, bypassCache));
+        : await normalizeDeepreadForReader(await fetchPublicationJson(date ? `./data/deepread/${date}.json` : ENDPOINTS.deepread, bypassCache));
       if (date && report.editionDate !== date) throw new Error("返回了不同日期的深读");
       if (request !== state.deepreadRequest) return;
       state.deepreadReport = report;
@@ -1062,9 +1196,13 @@
         badge.classList.add('warning');
         showAlert('notice', '今日深读未通过内容校验', `最新完整版：${report.editionDate}，正文保留实际内容日期。`);
       } else if (report?.schemaVersion === 2 && report?.readerStatus === 'unavailable') {
-        badge.textContent = '深读待更新';
+        badge.textContent = '深读生成失败';
+        badge.classList.add('failed');
+        showAlert('failed', '本期深读生成失败', deepreadFailureDetail(report)+'日报可独立阅读。');
+      } else if (report?.readerStatus === 'legacy' && state.historicalSelection) {
+        badge.textContent = '历史简版';
         badge.classList.add('warning');
-        showAlert('notice', '今日深读待更新', '今日未通过内容校验，暂无可沿用的完整版。');
+        showAlert('notice', '当前阅读旧版深读', `${report.editionDate} 的可核验正文按历史简版保留，不代表今日完整版。`);
       } else if (renderEditionHealth(report, "深读", state.historicalSelection, state.pipelineStatus?.state === "failed")) {
         return;
       } else {

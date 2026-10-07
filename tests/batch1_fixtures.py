@@ -122,8 +122,10 @@ def localize_stage(stage):
     status.update(translationStatus='ok', translatedItemCount=len(report['items']))
     save(data / 'status.json', status)
     deep = full_deep(report['items'], edition)
-    from deepread_quality import choose_readable_deepread
+    from deepread_quality import choose_readable_deepread, deepread_status
     deep = choose_readable_deepread(deep, [], edition)
+    status['deepread'] = deepread_status(deep, edition)
+    save(data / 'status.json', status)
     save(data / 'deepread.json', deep)
     news.archive_deepread(deep, data / 'deepread', {'archive_retention_days':730})
     return deep

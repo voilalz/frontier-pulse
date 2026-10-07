@@ -234,9 +234,12 @@ class EditorialDeepreadTests(unittest.TestCase):
             }
         report = build_daily_deepread(items, self.config, self.now, {"provider": "fixture"}, self.source_provider(provider),
                                       event_registry=registry)
-        self.assertEqual([call["schema_name"] for call in calls], ["deepread_outline_v2", "deepread_prose_v2"])
+        self.assertEqual([call["schema_name"] for call in calls[:2]], ["deepread_outline_v2", "deepread_prose_v2"])
+        self.assertEqual(sum(call["schema_name"] == "deepread_chapter_v2" for call in calls), 10)
         self.assertNotIn("change", [block["type"] for block in calls[1]["example"]["chapters"]["chapter-1"]["blocks"]])
-        self.assertEqual(report["generationStatus"], "ok")
+        # This source-binding fixture lacks full reader-length, distinct paragraphs.
+        self.assertEqual(report["generationStatus"], "partial")
+        self.assertTrue(report["contentFailures"])
         self.assertEqual(report["eventCount"], 5)
         self.assertFalse(any(block["type"] == "change" for block in report["chapters"][0]["blocks"]))
         self.assertTrue(all(event["sources"] for event in report["events"]))
@@ -268,7 +271,9 @@ class EditorialDeepreadTests(unittest.TestCase):
                     ]} for chapter in outline}}
         report = build_daily_deepread(items, {**self.config, "deepread_core_events": 4}, self.now,
                                       {"provider": "fixture"}, self.source_provider(provider))
-        self.assertEqual(report["generationStatus"], "ok")
+        # This source-binding fixture lacks full reader-length, distinct paragraphs.
+        self.assertEqual(report["generationStatus"], "partial")
+        self.assertTrue(report["contentFailures"])
         self.assertEqual(report["eventCount"], 4)
         self.assertEqual(len(report["chapters"]), 4)
         self.assertTrue(all(len(chapter["newsIds"]) == 1 for chapter in report["chapters"]))
@@ -307,7 +312,9 @@ class EditorialDeepreadTests(unittest.TestCase):
                     "observations": observations}
         report = build_daily_deepread([self.item(n) for n in range(5)], self.config, self.now,
                                       {"provider": "fixture"}, self.source_provider(provider))
-        self.assertEqual(report["generationStatus"], "ok")
+        # This source-binding fixture lacks full reader-length, distinct paragraphs.
+        self.assertEqual(report["generationStatus"], "partial")
+        self.assertTrue(report["contentFailures"])
         self.assertEqual([entry["newsIds"] for entry in report["observations"]], [["news-0"], ["news-1"]])
 
     def test_explicit_evidence_limits_supply_short_observations_when_provider_quotes_fail(self):
@@ -402,7 +409,8 @@ class EditorialDeepreadTests(unittest.TestCase):
         report = build_daily_deepread([self.item(n) for n in range(4)], self.config, self.now,
                                       {"provider": "fixture"}, self.source_provider(provider))
         self.assertEqual(len(prose_attempts), 2)
-        self.assertEqual(report["generationStatus"], "partial")
+        self.assertEqual(report["generationStatus"], "fallback")
+        self.assertEqual(report["recoveryDiagnostics"]["chapters"]["chapter-1"]["error"], "chapter-needs-two-paragraphs")
         self.assertEqual(report["chapters"][0]["blocks"][0]["text"], self.item(0)["summary"])
         self.assertEqual(report["chapters"][1]["blocks"][0]["text"], report["events"][1]["excerpt"])
         self.assertNotIn("not-a-real-id", json.dumps(report))
@@ -759,7 +767,9 @@ class EditorialDeepreadTests(unittest.TestCase):
             return None
         report = build_daily_deepread(items, self.config, self.now,
                                       {"provider": "fixture"}, self.source_provider(provider))
-        self.assertEqual(report["generationStatus"], "ok")
+        # This source-binding fixture lacks full reader-length, distinct paragraphs.
+        self.assertEqual(report["generationStatus"], "partial")
+        self.assertTrue(report["contentFailures"])
         self.assertEqual(len(report["chapters"]), 4)
         self.assertEqual(report["chapters"][0]["kind"], "comparison")
         self.assertEqual(report["chapters"][0]["comparisonKey"], "ai-agent")
