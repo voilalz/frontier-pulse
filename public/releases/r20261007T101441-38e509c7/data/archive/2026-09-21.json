@@ -1,0 +1,2585 @@
+{
+  "schemaVersion": 10,
+  "generatedAt": "2026-09-21T01:02:00Z",
+  "editionDate": "2026-09-21",
+  "timezone": "Asia/Shanghai",
+  "method": "deepseek",
+  "selectionMethod": "deepseek",
+  "selectionStrategy": "ai-ranked-rule-constrained",
+  "selectionStatus": "relaxed",
+  "selectionProvider": "deepseek",
+  "selectionModel": "deepseek-v4-flash",
+  "selectionNotices": [
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 4 个 Top 10 入选位"
+  ],
+  "selectionWarnings": [
+    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（1 条已标注）"
+  ],
+  "selectionDiagnostics": {
+    "attempted": true,
+    "status": "relaxed",
+    "failureReason": "",
+    "candidateCount": 34,
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "aiWeight": 0.65,
+    "ruleWeight": 0.35,
+    "aiScoredItemCount": 34,
+    "aiUnscoredItemCount": 0,
+    "unconstrainedTop": {
+      "categoryCounts": {
+        "局部冲突": 8,
+        "军事动态": 2
+      },
+      "domainCounts": {
+        "france24.com": 4,
+        "theguardian.com": 3,
+        "aljazeera.com": 1,
+        "defenseone.com": 1,
+        "twz.com": 1
+      },
+      "categoryViolations": {
+        "局部冲突": 8
+      },
+      "domainViolations": {
+        "france24.com": 4,
+        "theguardian.com": 3
+      }
+    },
+    "finalTop": {
+      "categoryCounts": {
+        "局部冲突": 4,
+        "军事动态": 3,
+        "前沿技术": 2,
+        "航空航天": 1
+      },
+      "domainCounts": {
+        "france24.com": 2,
+        "theguardian.com": 2,
+        "defenseone.com": 1,
+        "twz.com": 1,
+        "sciencedaily.com": 1,
+        "therobotreport.com": 1,
+        "science.nasa.gov": 1,
+        "aljazeera.com": 1
+      },
+      "categoryViolations": {
+        "局部冲突": 4
+      },
+      "domainViolations": {}
+    },
+    "adjustedItemCount": 4,
+    "adjustedOutIds": [
+      "71309709907c0e",
+      "9e9d8d1bd79da9",
+      "6c74533c499f93",
+      "70c83e388e5eb0"
+    ],
+    "adjustedInIds": [
+      "19ece4772e9e2f",
+      "f0c0ee6d395748",
+      "3acf20d8bc231b",
+      "3ff1b698fe688f"
+    ],
+    "relaxedItemCount": 1
+  },
+  "translationStatus": "ok",
+  "translationProvider": "deepseek",
+  "translationModel": "deepseek-v4-flash",
+  "translatedItemCount": 10,
+  "translationWarnings": [],
+  "translationDiagnostics": {
+    "requestedItemCount": 1,
+    "completedItemCount": 1,
+    "missingItemCount": 0,
+    "missingItemIds": [],
+    "missingItems": [],
+    "initialBatchSize": 5,
+    "initialBatchCount": 1,
+    "requestCount": 1,
+    "retryRequestCount": 0,
+    "providerFailureCount": 0,
+    "structuralFailureCount": 0,
+    "completionReason": "complete_first_pass",
+    "completionMessage": "全部条目首轮完成",
+    "lastProviderError": "",
+    "targetItemCount": 10,
+    "reusedItemCount": 9,
+    "newlyTranslatedItemCount": 1,
+    "totalTranslatedItemCount": 10,
+    "totalMissingItemCount": 0
+  },
+  "historyAnalysisStatus": "ok",
+  "historyAnalysisProvider": "deepseek",
+  "historyLinkedItemCount": 5,
+  "historyAnalyzedItemCount": 5,
+  "historyAnalysisWarnings": [],
+  "historyAnalysisDiagnostics": {
+    "requestedItemCount": 5,
+    "completedItemCount": 5,
+    "missingItemCount": 0,
+    "missingItemIds": [],
+    "missingItems": [],
+    "initialBatchSize": 5,
+    "initialBatchCount": 1,
+    "requestCount": 1,
+    "retryRequestCount": 0,
+    "providerFailureCount": 0,
+    "structuralFailureCount": 0,
+    "completionReason": "complete_first_pass",
+    "completionMessage": "全部条目首轮完成",
+    "lastProviderError": ""
+  },
+  "spotlightIds": [
+    "d3bc103c0a7c5a",
+    "eeec90f61176cc",
+    "f0c0ee6d395748"
+  ],
+  "warnings": [
+    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（1 条已标注）"
+  ],
+  "candidateCount": 34,
+  "freshCandidateCount": 34,
+  "supplementalCandidateCount": 0,
+  "freshItemCount": 10,
+  "supplementalItemCount": 0,
+  "coverageStatus": "supplemented",
+  "effectiveLookbackHours": 24,
+  "sourceCount": 11,
+  "scoring": {
+    "label": "重要度，不等同于事实真伪",
+    "formula": "基础分 + 来源 + 主题优先级 + 时效 + 影响信号 + 相关性 + 证据完整度 + 多源印证 - 编辑降权",
+    "confidenceNote": "置信度仅反映已收录来源的权重与独立来源数量，不替代事实核查。"
+  },
+  "brief": {
+    "headline": "乌克兰对俄罗斯发动逾千架无人机袭击，称针对莫斯科的最大规模攻击",
+    "summary": "本期从 11 个公开信源筛选出 10 条重点事件，覆盖科技、AI、航空航天、安全动态与无人系统。",
+    "signals": [
+      "前沿技术今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。",
+      "无人机袭击今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 5 个独立来源组。"
+    ]
+  },
+  "items": [
+    {
+      "id": "d3bc103c0a7c5a",
+      "eventId": "evt-75b4cecffbb6",
+      "contentType": "news",
+      "title": "乌克兰对俄罗斯发动逾千架无人机袭击，称针对莫斯科的最大规模攻击",
+      "originalTitle": "Ukraine fires over 1,000 drones at Russia in \"largest ever\" attack on Moscow",
+      "summary": "法国24台报道，俄罗斯于周日结束为期三天的国家杜马选举投票，这是自其大规模入侵乌克兰以来的首次。此次选举首次也在俄罗斯占领的乌克兰地区组织。报道称选举期间多个地区遭到乌克兰无人机袭击，主要集中在莫斯科。标题显示乌克兰对俄罗斯发射超过1000架无人机，被称为针对莫斯科的“最大规模”攻击。报道未提供更多伤亡、拦截或损失细节。",
+      "summaryRevision": 3,
+      "summaryInputHash": "3d5c61169409fee97cf00bab",
+      "keyFacts": [
+        "Russia is completing its three-day vote for the Duma this Sunday – the first since its large-scale invasion of Ukraine",
+        "The election was organised for the first time also in the Ukrainian regions occupied by Russia",
+        "and it was marked by Ukrainian drone strikes at various areas - mainly Moscow"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "France 24",
+      "country": "国际",
+      "publishedAt": "2026-09-20T14:46:52Z",
+      "url": "https://www.france24.com/en/ukraine-fires-over-1-000-drones-at-russia-in-largest-ever-attack-on-moscow",
+      "score": 92,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 11,
+        "主题相关性": 8,
+        "证据完整度": 3,
+        "多源印证": 12,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 92/100",
+        "综合排序分 92/100（AI 65% + 规则 35%）",
+        "规则参考分 91/100",
+        "来源权重 17/20",
+        "发布约 10.3 小时",
+        "命中 4 个主题信号",
+        "影响信号：first、attack",
+        "4 个独立来源相互印证"
+      ],
+      "confidence": "高",
+      "confidenceReason": "主来源权重 17/20，且有 4 个独立来源报道；仍应以原文和一手材料为准。",
+      "tags": [
+        "俄乌冲突",
+        "无人机袭击",
+        "俄罗斯选举"
+      ],
+      "image": "https://s.france24.com/media/display/a1124f9e-b501-11f1-bf2f-ed3d9e22a40f/w:1024/p:16x9/EN-20260920-160125-160258-CS.jpg",
+      "corroboration": 4,
+      "sources": [
+        {
+          "name": "France 24",
+          "domain": "france24.com",
+          "url": "https://www.france24.com/en/ukraine-fires-over-1-000-drones-at-russia-in-largest-ever-attack-on-moscow",
+          "publishedAt": "2026-09-20T14:46:52Z",
+          "evidenceGroup": "outlet:france24.com"
+        },
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c34gdjk1ne8yo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-09-20T10:45:39Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        },
+        {
+          "name": "France 24",
+          "domain": "france24.com",
+          "url": "https://www.france24.com/en/europe/20260920-live-russian-election-enters-final-day-in-shadow-of-war-in-ukraine",
+          "publishedAt": "2026-09-20T05:16:20Z",
+          "evidenceGroup": "outlet:france24.com"
+        },
+        {
+          "name": "Deutsche Welle",
+          "domain": "dw.com",
+          "url": "https://www.dw.com/en/russia-ukrainian-drone-strike-on-moscow-kills-2/a-79341964?maca=en-rss-en-all-1573-rdf",
+          "publishedAt": "2026-09-20T08:37:00Z",
+          "evidenceGroup": "outlet:dw.com"
+        },
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/9/20/mass-ukrainian-drone-attack-on-moscow-kills-two-russia-says?traffic_source=rss",
+          "publishedAt": "2026-09-20T06:57:05Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 3,
+        "relatedStories": [
+          {
+            "id": "fc36760ebde322",
+            "eventId": "evt-0af1e4f6f0c5",
+            "editionDate": "2026-09-10",
+            "title": "乌克兰对俄发动史上最深无人机袭击",
+            "originalTitle": "Ukraine Carried Out Its Deepest Drone Strike On Russia Ever",
+            "summary": "袭击击中了距离乌克兰边境1700英里、位于俄罗斯天然气资源丰富的北极地区的一处能源加工厂。",
+            "category": "局部冲突",
+            "source": "The War Zone",
+            "publishedAt": "2026-09-09T21:32:35Z",
+            "associationScore": 42,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：ever、russia、ukraine、乌克",
+              "同属局部冲突"
+            ]
+          },
+          {
+            "id": "e3de7281658a7d",
+            "eventId": "evt-82d31008134d",
+            "editionDate": "2026-09-20",
+            "title": "莫斯科遭1000多架乌克兰无人机袭击",
+            "originalTitle": "Moscow attacked by more than 1,000 Ukrainian drones",
+            "summary": "现有元数据未提供摘要。标题称莫斯科遭到1000多架乌克兰无人机袭击，描述仅称这是无人机击中莫斯科一栋公寓楼并爆炸的瞬间。",
+            "category": "无人系统",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-20T13:10:35Z",
+            "associationScore": 48,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：000、1、drones、moscow",
+              "共同标签：俄乌冲突、无人机袭击"
+            ]
+          },
+          {
+            "id": "70c83e388e5eb0",
+            "eventId": "evt-ae82cd78389c",
+            "editionDate": "2026-09-20",
+            "title": "乌克兰对俄发动大规模无人机袭击，目标指向炼油厂",
+            "originalTitle": "Ukraine hits Russia with major drone attack, targetting refinery",
+            "summary": "在俄罗斯选民进入首次战时议会选举第三天、也是最后一天投票之际，乌克兰对俄罗斯首都发动了莫斯科所称的“史上最大规模”无人机袭击。据报道，基辅方面向俄境内发射超过1000架无人机，导致莫斯科地区两人死亡，并造成一座炼油厂受损。法国24台驻基辅记者格列佛·克拉格提供更多细节。",
+            "category": "局部冲突",
+            "source": "France 24",
+            "publishedAt": "2026-09-20T10:24:57Z",
+            "associationScore": 41,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：attack、russia、ukraine、乌克",
+              "同属局部冲突"
+            ]
+          }
+        ],
+        "timelineSummary": "9月9日已有报道称乌克兰对俄发动史上最深无人机袭击，击中距乌边境约1700英里的北极能源加工厂。9月20日，在俄国家杜马选举投票最后一天，乌方对俄发射逾千架无人机，被称为针对莫斯科的最大规模攻击；同日另有报道称莫斯科地区两人死亡、一座炼油厂受损。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "后续可观察俄方是否公布拦截数量、伤亡与炼油厂受损评估，以及选举结束后袭击频率是否变化。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "若乌方持续以远程无人机打击俄纵深能源设施，则需关注俄防空与能源出口环节的调整迹象。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "deepseek"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 4,
+        "sourceGroups": [
+          "outlet:france24.com",
+          "outlet:bbc.co.uk",
+          "outlet:dw.com",
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Russia is completing its three-day vote for the Duma this Sunday – the first since its large-scale invasion of Ukraine",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:france24.com",
+              "outlet:bbc.co.uk",
+              "outlet:dw.com",
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "The election was organised for the first time also in the Ukrainian regions occupied by Russia",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:france24.com",
+              "outlet:bbc.co.uk",
+              "outlet:dw.com",
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "and it was marked by Ukrainian drone strikes at various areas - mainly Moscow",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:france24.com",
+              "outlet:bbc.co.uk",
+              "outlet:dw.com",
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 4 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-e3ffb7f5d38a",
+          "eventId": "evt-75b4cecffbb6",
+          "statement": "后续可观察俄方是否公布拦截数量、伤亡与炼油厂受损评估，以及选举结束后袭击频率是否变化。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-21",
+          "dueAfter": "2026-10-21",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d3bc103c0a7c5a"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        },
+        {
+          "predictionId": "pred-302c56b4e143",
+          "eventId": "evt-75b4cecffbb6",
+          "statement": "若乌方持续以远程无人机打击俄纵深能源设施，则需关注俄防空与能源出口环节的调整迹象。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-21",
+          "dueAfter": "2026-12-20",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d3bc103c0a7c5a"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        },
+        {
+          "predictionId": "pred-f87947390837",
+          "eventId": "evt-75b4cecffbb6",
+          "statement": "后续可观察俄方是否公布拦截数量、伤亡及炼油厂等设施受损的进一步核实信息。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-10-20",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d3bc103c0a7c5a"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        },
+        {
+          "predictionId": "pred-e18a8e32e932",
+          "eventId": "evt-75b4cecffbb6",
+          "statement": "若此类远程无人机袭击持续，则需关注其对俄能源设施运转及双方攻击目标选择的影响。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-12-19",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "d3bc103c0a7c5a"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-75b4cecffbb6",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-21",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-09-20",
+            "newsId": "d3bc103c0a7c5a",
+            "title": "乌克兰对俄罗斯发动逾千架无人机袭击，称针对莫斯科的最大规模攻击",
+            "source": "France 24",
+            "publishedAt": "2026-09-20T14:46:52Z",
+            "score": 93
+          },
+          {
+            "editionDate": "2026-09-21",
+            "newsId": "d3bc103c0a7c5a",
+            "title": "乌克兰对俄罗斯发动逾千架无人机袭击，称针对莫斯科的最大规模攻击",
+            "source": "France 24",
+            "publishedAt": "2026-09-20T14:46:52Z",
+            "score": 92
+          }
+        ],
+        "independentSourceCount": 4,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "c0a5c051b9f2d4",
+      "eventId": "evt-9bad3fbd6ebe",
+      "contentType": "news",
+      "title": "乌克兰在俄罗斯选举最后一天以数百架无人机袭击莫斯科",
+      "originalTitle": "Ukraine targets Moscow with hundreds of drones on final day of Russian election",
+      "summary": "在俄罗斯议会选举最后一天，乌克兰以大规模无人机袭击莫斯科及周边地区，当局周日表示，袭击造成至少3人死亡，并损毁乌总统泽连斯基所称的俄罗斯“关键石油工业设施”之一。泽连斯基称袭击中使用的武器包括“鹈鹕”，最初被认为是短程弹道导弹，但消息人士后称其为带翼无人机；他未提供更多细节，乌媒体一度报道为弹道导弹，随后对武器识别产生质疑。泽连斯基还称乌克兰使用国产“火烈鸟”巡航导弹打击莫斯科，该远程武器此前曾用于打击俄纵深目标，射程可及俄首都。乌俄Telegram频道发布据称在莫斯科地区发现的“火烈鸟”导弹残骸图像，但无法独立核实；开源调查组织“冲突情报小组”负责人列维耶夫称残骸可能来自“火烈鸟”。莫斯科市长索比亚宁称拦截击落1600多架无人机，其中450架瞄准莫斯科，但此类数字常被夸大，乌每日无人机发射量估计在数百架。索比亚宁指责乌试图干扰俄三天选举。",
+      "summaryRevision": 3,
+      "summaryInputHash": "cf44a2720ad03a323c0818b6",
+      "keyFacts": [
+        "At least three people killed",
+        "oil refinery damaged as doubts cast over initial reports of ballistic missile use Ukraine has targeted Moscow",
+        "the surrounding region in a large-scale attack that involved hundreds of drones"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "The Guardian World",
+      "country": "国际",
+      "publishedAt": "2026-09-20T14:44:17Z",
+      "url": "https://www.theguardian.com/world/2026/sep/20/hundreds-of-drones-target-moscow-on-last-day-of-voting-in-russias-parliamentary-election",
+      "score": 83,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 15,
+        "影响信号": 11,
+        "主题相关性": 8,
+        "证据完整度": 3,
+        "多源印证": 4,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 84/100",
+        "综合排序分 83/100（AI 65% + 规则 35%）",
+        "规则参考分 82/100",
+        "来源权重 16/20",
+        "发布约 10.3 小时",
+        "命中 4 个主题信号",
+        "影响信号：attack、missile",
+        "2 个独立来源相互印证"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 2 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "乌克兰",
+        "俄罗斯",
+        "无人机袭击"
+      ],
+      "image": "",
+      "corroboration": 2,
+      "sources": [
+        {
+          "name": "The Guardian World",
+          "domain": "theguardian.com",
+          "url": "https://www.theguardian.com/world/2026/sep/20/hundreds-of-drones-target-moscow-on-last-day-of-voting-in-russias-parliamentary-election",
+          "publishedAt": "2026-09-20T14:44:17Z",
+          "evidenceGroup": "outlet:theguardian.com"
+        },
+        {
+          "name": "France 24",
+          "domain": "france24.com",
+          "url": "https://www.france24.com/en/europe/20260920-live-russian-election-enters-final-day-in-shadow-of-war-in-ukraine",
+          "publishedAt": "2026-09-20T07:10:06Z",
+          "evidenceGroup": "outlet:france24.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 3,
+        "relatedStories": [
+          {
+            "id": "fc36760ebde322",
+            "eventId": "evt-0af1e4f6f0c5",
+            "editionDate": "2026-09-10",
+            "title": "乌克兰对俄发动史上最深无人机袭击",
+            "originalTitle": "Ukraine Carried Out Its Deepest Drone Strike On Russia Ever",
+            "summary": "袭击击中了距离乌克兰边境1700英里、位于俄罗斯天然气资源丰富的北极地区的一处能源加工厂。",
+            "category": "局部冲突",
+            "source": "The War Zone",
+            "publishedAt": "2026-09-09T21:32:35Z",
+            "associationScore": 34,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：ukraine、乌克、人机、克兰",
+              "共同标签：乌克兰、俄罗斯",
+              "同属局部冲突"
+            ]
+          },
+          {
+            "id": "d3bc103c0a7c5a",
+            "eventId": "evt-75b4cecffbb6",
+            "editionDate": "2026-09-20",
+            "title": "乌克兰对俄罗斯发动逾千架无人机袭击，称针对莫斯科的最大规模攻击",
+            "originalTitle": "Ukraine fires over 1,000 drones at Russia in \"largest ever\" attack on Moscow",
+            "summary": "法国24台报道，俄罗斯于周日结束为期三天的国家杜马选举投票，这是自其大规模入侵乌克兰以来的首次。此次选举首次也在俄罗斯占领的乌克兰地区组织。报道称选举期间多个地区遭到乌克兰无人机袭击，主要集中在莫斯科。标题显示乌克兰对俄罗斯发射超过1000架无人机，被称为针对莫斯科的“最大规模”攻击。报道未提供更多伤亡、拦截或损失细节。",
+            "category": "局部冲突",
+            "source": "France 24",
+            "publishedAt": "2026-09-20T14:46:52Z",
+            "associationScore": 38,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：drones、moscow、ukraine、乌克",
+              "共同标签：无人机袭击",
+              "同属局部冲突"
+            ]
+          },
+          {
+            "id": "e3de7281658a7d",
+            "eventId": "evt-82d31008134d",
+            "editionDate": "2026-09-20",
+            "title": "莫斯科遭1000多架乌克兰无人机袭击",
+            "originalTitle": "Moscow attacked by more than 1,000 Ukrainian drones",
+            "summary": "现有元数据未提供摘要。标题称莫斯科遭到1000多架乌克兰无人机袭击，描述仅称这是无人机击中莫斯科一栋公寓楼并爆炸的瞬间。",
+            "category": "无人系统",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-20T13:10:35Z",
+            "associationScore": 36,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：drones、moscow、乌克、人机",
+              "共同标签：无人机袭击"
+            ]
+          }
+        ],
+        "timelineSummary": "9月9日报道乌方对俄实施史上最深无人机袭击，目标为北极能源加工厂。9月20日俄选举最后一天，乌方以数百架无人机袭击莫斯科及周边，造成至少3人死亡、一炼油厂受损；泽连斯基称使用国产“火烈鸟”巡航导弹，武器识别一度从弹道导弹转为带翼无人机，俄方称拦截1600余架。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "后续可观察“火烈鸟”残骸的独立核实进展，以及乌俄双方对无人机与导弹数量的口径变化。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "若“火烈鸟”被确认用于对莫斯科打击，则需关注乌方远程打击武器产能与俄方拦截手段的相应调整。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "deepseek"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "multi-source",
+        "independentSourceCount": 2,
+        "sourceGroups": [
+          "outlet:theguardian.com",
+          "outlet:france24.com"
+        ],
+        "claims": [
+          {
+            "text": "At least three people killed",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:theguardian.com",
+              "outlet:france24.com"
+            ]
+          },
+          {
+            "text": "oil refinery damaged as doubts cast over initial reports of ballistic missile use Ukraine has targeted Moscow",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:theguardian.com",
+              "outlet:france24.com"
+            ]
+          },
+          {
+            "text": "the surrounding region in a large-scale attack that involved hundreds of drones",
+            "status": "multi-source-context",
+            "statusLabel": "事件获多源报道，单项事实仍需核验",
+            "sourceGroups": [
+              "outlet:theguardian.com",
+              "outlet:france24.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前事件由 2 个独立来源组报道；这不等同于每项细节均被独立证实。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-a73e96bcb316",
+          "eventId": "evt-9bad3fbd6ebe",
+          "statement": "后续可观察“火烈鸟”残骸的独立核实进展，以及乌俄双方对无人机与导弹数量的口径变化。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-21",
+          "dueAfter": "2026-10-21",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "c0a5c051b9f2d4"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        },
+        {
+          "predictionId": "pred-e68d2a9bb49d",
+          "eventId": "evt-9bad3fbd6ebe",
+          "statement": "若“火烈鸟”被确认用于对莫斯科打击，则需关注乌方远程打击武器产能与俄方拦截手段的相应调整。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-21",
+          "dueAfter": "2026-12-20",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "c0a5c051b9f2d4"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        },
+        {
+          "predictionId": "pred-1845e2cd5ae6",
+          "eventId": "evt-9bad3fbd6ebe",
+          "statement": "关注相关机构的正式文件、时间表变化以及是否出现新的独立来源印证。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-10-20",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "c0a5c051b9f2d4"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        },
+        {
+          "predictionId": "pred-e039698228aa",
+          "eventId": "evt-9bad3fbd6ebe",
+          "statement": "关注该事件是否从单次动态演变为持续的政策、部署、采购或技术验证信号。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-12-19",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "c0a5c051b9f2d4"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        },
+        {
+          "predictionId": "pred-3201c70e10ec",
+          "eventId": "evt-9bad3fbd6ebe",
+          "statement": "后续可观察俄方对伤亡、拦截及石油设施受损的通报，以及武器类型报道是否得到澄清。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-10-20",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "c0a5c051b9f2d4"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        },
+        {
+          "predictionId": "pred-27ec51f0584f",
+          "eventId": "evt-9bad3fbd6ebe",
+          "statement": "若双方继续以无人机打击能源与城市目标，则需关注此前不攻击能源设施的说法是否被打破。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-12-19",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "c0a5c051b9f2d4"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-9bad3fbd6ebe",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-21",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-09-20",
+            "newsId": "c0a5c051b9f2d4",
+            "title": "俄罗斯议会选举最后一日，乌克兰以数百架无人机袭击莫斯科",
+            "source": "The Guardian World",
+            "publishedAt": "2026-09-20T14:44:17Z",
+            "score": 86
+          },
+          {
+            "editionDate": "2026-09-21",
+            "newsId": "c0a5c051b9f2d4",
+            "title": "乌克兰在俄罗斯选举最后一天以数百架无人机袭击莫斯科",
+            "source": "The Guardian World",
+            "publishedAt": "2026-09-20T14:44:17Z",
+            "score": 83
+          }
+        ],
+        "independentSourceCount": 2,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "5b74440e4c8d39",
+      "eventId": "evt-4db5b5f89890",
+      "contentType": "news",
+      "title": "中东准备迎接更多暴力，伊朗称美国计划重启轰炸行动",
+      "originalTitle": "Middle East braces for more violence as Iran claims US is planning to renew bombing campaign",
+      "summary": "中东各国政府正准备迎接暴力升级，此前伊朗声称获得情报，显示美国正准备对伊朗伊斯兰共和国重启轰炸行动。在本周纽约联合国大会召开前，可能出现紧张加剧的迹象：唐纳德·特朗普周日突然缩短在戴维营总统度假地的周末行程，未给出官方解释；美国国务院向中东所有美国公民发布新的安全警报。据报道，特朗普对福克斯新闻记者称“不久的将来会发生非常大的事情”，他正在考虑的选项包括“消灭伊朗、让其在经济上烂掉或达成协议”。伊斯兰革命卫队警告，若袭击发生，“美国在该地区的所有基地和利益都将成为持续、有效和痛苦袭击的目标，不受任何限制或考虑”。伊朗领导人还承诺部分报复可能延伸至印度洋的美国海军部队，并指责一些海湾领导人“两面派”，据称为美国袭击开绿灯。这番剑拔弩张似由也门伊朗支持的胡塞叛军袭击沙特首都利雅得引发。周六的密集袭击是自6月沙特与胡塞停火破裂以来，利雅得阿美石油设施首次遭受如此持续攻击。利雅得坚称拦截了导弹，但当地照片显示阿美设施冒出浓烟；对沙特石油出口至关重要的延布港也遭袭击。美国基本上将胡塞视为伊朗代理人，认为没有德黑兰批准胡塞不会袭击利雅得，伊朗否认。特朗普上周拒绝沙特王储穆罕默德·本·萨勒曼请求美国直接军事援助的呼吁，引发对美国中东盟友承诺程度的严重质疑。胡塞突然夺取也门西海岸俯瞰红海的战略港口，控制了曼德海峡。伊朗与阿曼之间的霍尔木兹海峡实际上已对西方交通关闭，欧洲能源供应压力日益增大，法国…",
+      "summaryRevision": 3,
+      "summaryInputHash": "a70fc45d4d4438073ab69787",
+      "keyFacts": [
+        "Tensions grow as Trump tells Fox News he is considering ‘wiping Iran out’",
+        "attacks on Riyadh by Houthi rebels Governments across the Middle East are bracing for an escalation of violence",
+        "Iran claimed it had received intelligence that the US was preparing for a renewed bombing campaign against the Islamic Republic"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "The Guardian World",
+      "country": "国际",
+      "publishedAt": "2026-09-20T18:56:45Z",
+      "url": "https://www.theguardian.com/world/2026/sep/20/middle-east-braces-for-more-violence-as-iran-claims-us-is-planning-to-renew-bombing-campaign",
+      "score": 78,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 7,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 82/100",
+        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "规则参考分 71/100",
+        "来源权重 15/20",
+        "发布约 6.1 小时",
+        "命中 2 个主题信号",
+        "影响信号：escalation"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "伊朗",
+        "美国",
+        "中东局势"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The Guardian World",
+          "domain": "theguardian.com",
+          "url": "https://www.theguardian.com/world/2026/sep/20/middle-east-braces-for-more-violence-as-iran-claims-us-is-planning-to-renew-bombing-campaign",
+          "publishedAt": "2026-09-20T18:56:45Z",
+          "evidenceGroup": "outlet:theguardian.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 2,
+        "relatedStories": [
+          {
+            "id": "cb6b10d235d21f",
+            "eventId": "",
+            "editionDate": "2026-07-30",
+            "title": "伊朗反击美国，地区攻击升温",
+            "originalTitle": "Iran pushes back against US as regional attacks heat up",
+            "summary": "新一轮袭击加剧了进一步升级的担忧，伊朗拒绝阿曼关于联合霍尔木兹监督的提议。",
+            "category": "局部冲突",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-07-29T17:45:27Z",
+            "associationScore": 30,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：iran、伊朗、美国",
+              "共同标签：伊朗、美国",
+              "同属局部冲突"
+            ]
+          },
+          {
+            "id": "6b46721b139772",
+            "eventId": "evt-385107bec2c0",
+            "editionDate": "2026-08-09",
+            "title": "万斯称美国已“摧毁”伊朗核计划",
+            "originalTitle": "Vance says US ‘destroyed’ Iran’s nuclear programme",
+            "summary": "美国副总统JD·万斯声称华盛顿已“摧毁”伊朗核计划，并削弱其军事力量。",
+            "category": "局部冲突",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-08T23:27:55Z",
+            "associationScore": 36,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：iran、伊朗、称美、美国",
+              "共同标签：伊朗、美国",
+              "同属局部冲突"
+            ]
+          }
+        ],
+        "timelineSummary": "7月底报道伊朗反击美国、地区袭击升温，伊朗拒绝阿曼联合霍尔木兹监督提议；8月初美方称已“摧毁”伊朗核计划。9月20日，伊朗称获情报显示美国准备重启轰炸行动，特朗普称“不久的将来会发生非常大的事情”并提及消灭伊朗等选项，伊斯兰革命卫队警告美方地区基地与利益将成为目标；此前胡塞袭击利雅得、延布港，美方拒绝沙特直接军援请求。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "后续可观察联合国大会前后美伊双方公开表态、美国务院安全警报是否调整，以及海湾地区袭击是否再现。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "若美方对伊朗目标实施新打击，则需关注伊朗对美国地区基地及霍尔木兹、曼德海峡航运的回应方式。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "deepseek"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "contested",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:theguardian.com"
+        ],
+        "claims": [
+          {
+            "text": "Tensions grow as Trump tells Fox News he is considering ‘wiping Iran out’",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:theguardian.com"
+            ]
+          },
+          {
+            "text": "attacks on Riyadh by Houthi rebels Governments across the Middle East are bracing for an escalation of violence",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:theguardian.com"
+            ]
+          },
+          {
+            "text": "Iran claimed it had received intelligence that the US was preparing for a renewed bombing campaign against the Islamic Republic",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:theguardian.com"
+            ]
+          }
+        ],
+        "disputes": [
+          {
+            "label": "公开措辞存在否认或未证实差异",
+            "current": "中东准备迎接更多暴力，伊朗称美国计划重启轰炸行动",
+            "historical": "伊朗反击美国，地区攻击升温",
+            "editionDate": "2026-07-30",
+            "note": "该标记只提示措辞差异，需要打开原始来源核验具体主张。"
+          },
+          {
+            "label": "公开措辞存在否认或未证实差异",
+            "current": "中东准备迎接更多暴力，伊朗称美国计划重启轰炸行动",
+            "historical": "万斯称美国已“摧毁”伊朗核计划",
+            "editionDate": "2026-08-09",
+            "note": "该标记只提示措辞差异，需要打开原始来源核验具体主张。"
+          }
+        ],
+        "explanation": "归档文本中出现否认、驳斥或未证实措辞差异，已列入争议观察。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-260223087d75",
+          "eventId": "evt-4db5b5f89890",
+          "statement": "后续可观察联合国大会前后美伊双方公开表态、美国务院安全警报是否调整，以及海湾地区袭击是否再现。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-21",
+          "dueAfter": "2026-10-21",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "5b74440e4c8d39"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        },
+        {
+          "predictionId": "pred-6fbe5fdca55d",
+          "eventId": "evt-4db5b5f89890",
+          "statement": "若美方对伊朗目标实施新打击，则需关注伊朗对美国地区基地及霍尔木兹、曼德海峡航运的回应方式。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-21",
+          "dueAfter": "2026-12-20",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "5b74440e4c8d39"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-4db5b5f89890",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-21",
+        "lastSeen": "2026-09-21",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-21",
+            "newsId": "5b74440e4c8d39",
+            "title": "中东准备迎接更多暴力，伊朗称美国计划重启轰炸行动",
+            "source": "The Guardian World",
+            "publishedAt": "2026-09-20T18:56:45Z",
+            "score": 78
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "b07bbe72a9ac7c",
+      "eventId": "evt-4f84ffaf1e0d",
+      "contentType": "news",
+      "title": "伊朗战争实时：德黑兰警告美国勿发动新打击，也门战事持续",
+      "originalTitle": "Iran war live: Tehran warns US against new strikes; fighting rages in Yemen",
+      "summary": "据半岛电视台报道，德黑兰方面表示已获悉美国可能正在策划新一轮打击，并警告将以“不受限制”的方式实施报复。伊朗同时警告美国不要发动新的军事打击。报道还称，也门境内战斗仍在激烈进行。目前尚无关于打击时间、地点或具体目标的信息，也未提及任何后续安排。",
+      "summaryRevision": 3,
+      "summaryInputHash": "b80f7e394b3072569046e807",
+      "keyFacts": [
+        "Tehran says it has learned the US may be planning a new round of strikes",
+        "warns of retaliation 'without limitations'"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-09-21T00:00:47Z",
+      "url": "https://www.aljazeera.com/news/liveblog/2026/9/21/iran-war-live-tehran-warns-us-against-new-strikes-fighting-rages-in-yemen?traffic_source=rss",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 78/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 65/100",
+        "来源权重 16/20",
+        "发布约 1.0 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "美国",
+        "也门"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/liveblog/2026/9/21/iran-war-live-tehran-warns-us-against-new-strikes-fighting-rages-in-yemen?traffic_source=rss",
+          "publishedAt": "2026-09-21T00:00:47Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "为补足 Top 10 放宽主题配额",
+      "diversityRelaxed": true,
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 3,
+        "relatedStories": [
+          {
+            "id": "33697d428fc072",
+            "eventId": "",
+            "editionDate": "2026-08-04",
+            "title": "伊朗战争直播：德黑兰否认与美国会谈，特朗普警告称是最后机会",
+            "originalTitle": "Iran war live: Tehran denies US talks as Trump warns of ‘last chance’",
+            "summary": "美国总统特朗普表示与伊朗的会谈正在进行，并警告称这是德黑兰达成协议的‘最后机会’。伊朗方面否认了会谈。",
+            "category": "局部冲突",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-04T00:00:00Z",
+            "associationScore": 50,
+            "relationLabel": "同一事件后续",
+            "associationReasons": [
+              "标题结构显示为同一事件的后续报道",
+              "标题共享关键词：iran、live、tehran、war",
+              "同属局部冲突"
+            ]
+          },
+          {
+            "id": "985a742aad8e74",
+            "eventId": "evt-1399f08142fa",
+            "editionDate": "2026-08-09",
+            "title": "对伊朗战争：第二阶段：第28天",
+            "originalTitle": "War on Iran: Phase II: Day 28",
+            "summary": "沙特-巴基斯坦-土耳其协定引发不同反应，伊朗与阿曼达成霍尔木兹安全框架。",
+            "category": "局部冲突",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-08T14:09:02Z",
+            "associationScore": 32,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：iran、war、伊朗、战争",
+              "共同标签：伊朗",
+              "同属局部冲突"
+            ]
+          },
+          {
+            "id": "f145a779a4b33b",
+            "eventId": "evt-1399f08142fa",
+            "editionDate": "2026-08-10",
+            "title": "对伊朗战争：第二阶段：第29天",
+            "originalTitle": "War on Iran: Phase II: Day 29",
+            "summary": "伊朗表示，除非美国满足一系列要求，否则霍尔木兹海峡将继续受到限制。",
+            "category": "局部冲突",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-09T15:46:09Z",
+            "associationScore": 37,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：iran、war、伊朗、战争",
+              "共同标签：伊朗、美国",
+              "同属局部冲突"
+            ]
+          }
+        ],
+        "timelineSummary": "8月初特朗普称与伊朗会谈并警告“最后机会”，伊朗否认会谈；8月中下旬报道霍尔木兹继续受限、伊朗与阿曼达成安全框架。9月21日，德黑兰称已获悉美国可能策划新一轮打击，警告将以“不受限制”方式报复，并警告美方不要发动新打击；也门战斗仍在激烈进行，无打击时间、地点或目标信息。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "后续可观察美方是否公开回应伊朗指控，以及也门境内战斗与红海航运安全是否出现新变化。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "若伊朗所指新一轮打击未发生，则需关注双方是否转向经由阿曼等渠道的间接沟通。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "deepseek"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "contested",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:aljazeera.com"
+        ],
+        "claims": [
+          {
+            "text": "Tehran says it has learned the US may be planning a new round of strikes",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          },
+          {
+            "text": "warns of retaliation 'without limitations'",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:aljazeera.com"
+            ]
+          }
+        ],
+        "disputes": [
+          {
+            "label": "公开措辞存在否认或未证实差异",
+            "current": "伊朗战争实时：德黑兰警告美国勿发动新打击，也门战事持续",
+            "historical": "伊朗战争直播：德黑兰否认与美国会谈，特朗普警告称是最后机会",
+            "editionDate": "2026-08-04",
+            "note": "该标记只提示措辞差异，需要打开原始来源核验具体主张。"
+          }
+        ],
+        "explanation": "归档文本中出现否认、驳斥或未证实措辞差异，已列入争议观察。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-ca259661555a",
+          "eventId": "evt-4f84ffaf1e0d",
+          "statement": "后续可观察美方是否公开回应伊朗指控，以及也门境内战斗与红海航运安全是否出现新变化。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-21",
+          "dueAfter": "2026-10-21",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "b07bbe72a9ac7c"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        },
+        {
+          "predictionId": "pred-19d27f7414be",
+          "eventId": "evt-4f84ffaf1e0d",
+          "statement": "若伊朗所指新一轮打击未发生，则需关注双方是否转向经由阿曼等渠道的间接沟通。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-21",
+          "dueAfter": "2026-12-20",
+          "verificationSignals": [
+            "至少两个独立来源确认",
+            "官方声明、停火执行或兵力态势变化"
+          ],
+          "evidenceIds": [
+            "b07bbe72a9ac7c"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-4f84ffaf1e0d",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-21",
+        "lastSeen": "2026-09-21",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-21",
+            "newsId": "b07bbe72a9ac7c",
+            "title": "伊朗战争实时：德黑兰警告美国勿发动新打击，也门战事持续",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-09-21T00:00:47Z",
+            "score": 73
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "eeec90f61176cc",
+      "eventId": "evt-b2e883e9ece6",
+      "contentType": "news",
+      "title": "美国空军能否让飞行员信任AI？未来计划成败在此",
+      "originalTitle": "Will airmen trust AI? The Air Force’s future plans depend on it",
+      "summary": "在马里兰州国家港举行的空军协会空天与网络会议上，空军领导人一边准备在未来数年把更多决策权交给AI，一边设法让飞行员适应这一变化。空军部长特洛伊·迈因克称这“有点吓人，但我们需要投入其中”，并称自主性是实现高性价比作战力量的关键技术之一。空军研究实验室航空航天系统主管迈克尔·格雷格表示存在信任与自主性问题，其第711人类效能联队的心理学家和行为科学家正在研究人机编组如何辅助决策。空军计划到2032年部署500架高度自主的协同作战飞机，并探索在保护基地免遭无人机袭击等任务中用AI智能体取代人类决策。相关讨论涉及由AI主导“火力”的争议，以及定向能、网络等非致命手段可能改变风险计算。",
+      "summaryRevision": 3,
+      "summaryInputHash": "dec299c07984cba6ad3062c3",
+      "keyFacts": [
+        "NATIONAL HARBOR",
+        "—As Air Force leaders prepare to hand AI more decision-making power in the years ahead",
+        "they're also working to get airmen comfortable with that"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Defense One",
+      "country": "国际",
+      "publishedAt": "2026-09-20T12:00:00Z",
+      "url": "https://www.defenseone.com/technology/2026/09/will-airmen-trust-ai-air-forces-future-plans-depend-it/416098",
+      "score": 70,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 13,
+        "影响信号": 22,
+        "主题相关性": 12,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 58/100",
+        "综合排序分 70/100（AI 65% + 规则 35%）",
+        "规则参考分 91/100",
+        "来源权重 16/20",
+        "发布约 13.0 小时",
+        "命中 14 个主题信号",
+        "影响信号：launch、deploy、test"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国空军",
+        "AI自主性",
+        "协同作战飞机"
+      ],
+      "image": "https://cdn.defenseone.com/media/img/cd/2026/09/20/55529107867_9706f61c67_k/thumb.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense One",
+          "domain": "defenseone.com",
+          "url": "https://www.defenseone.com/technology/2026/09/will-airmen-trust-ai-air-forces-future-plans-depend-it/416098",
+          "publishedAt": "2026-09-20T12:00:00Z",
+          "evidenceGroup": "outlet:defenseone.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 1,
+        "relatedStories": [
+          {
+            "id": "53c504da470337",
+            "eventId": "evt-fa109d75b677",
+            "editionDate": "2026-08-07",
+            "title": "美国空军批准远程JDAM生产",
+            "originalTitle": "Air Force signs off on production of long-range JDAM",
+            "summary": "据制造商波音公司称，首批JDAM LR套件将交付美国海军。",
+            "category": "军事动态",
+            "source": "Breaking Defense",
+            "publishedAt": "2026-08-06T15:45:39Z",
+            "associationScore": 31,
+            "relationLabel": "相关主题演进",
+            "associationReasons": [
+              "标题共享关键词：air、force、国空、空军",
+              "共同标签：美国空军",
+              "同属军事动态"
+            ]
+          }
+        ],
+        "timelineSummary": "8月初报道美国空军批准远程JDAM生产，首批套件将交付海军。9月20日，空军协会会议上空军领导人表示将把更多决策权交给AI，空军部长称自主性是高性价比作战力量关键技术；空军计划到2032年部署500架高度自主协同作战飞机，并研究人机编组信任问题及以AI智能体承担基地反无人机等决策。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "后续可观察空军是否公布人机编组测试结果、协同作战飞机项目节点或AI决策授权范围的说明。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "若AI决策权限进一步扩大至火力环节，则需关注相关监督机制与人员信任评估是否同步跟进。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "deepseek"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:defenseone.com"
+        ],
+        "claims": [
+          {
+            "text": "NATIONAL HARBOR",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defenseone.com"
+            ]
+          },
+          {
+            "text": "—As Air Force leaders prepare to hand AI more decision-making power in the years ahead",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defenseone.com"
+            ]
+          },
+          {
+            "text": "they're also working to get airmen comfortable with that",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:defenseone.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-e266598b370a",
+          "eventId": "evt-b2e883e9ece6",
+          "statement": "后续可观察空军是否公布人机编组测试结果、协同作战飞机项目节点或AI决策授权范围的说明。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-21",
+          "dueAfter": "2026-10-21",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "eeec90f61176cc"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        },
+        {
+          "predictionId": "pred-d4689df885de",
+          "eventId": "evt-b2e883e9ece6",
+          "statement": "若AI决策权限进一步扩大至火力环节，则需关注相关监督机制与人员信任评估是否同步跟进。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-21",
+          "dueAfter": "2026-12-20",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "eeec90f61176cc"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        },
+        {
+          "predictionId": "pred-3cac0e00f804",
+          "eventId": "evt-b2e883e9ece6",
+          "statement": "关注相关机构的正式文件、时间表变化以及是否出现新的独立来源印证。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-10-20",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "eeec90f61176cc"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        },
+        {
+          "predictionId": "pred-00822c1d4064",
+          "eventId": "evt-b2e883e9ece6",
+          "statement": "关注该事件是否从单次动态演变为持续的政策、部署、采购或技术验证信号。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-12-19",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "eeec90f61176cc"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        },
+        {
+          "predictionId": "pred-49d7cb0b5810",
+          "eventId": "evt-b2e883e9ece6",
+          "statement": "后续可观察美空军是否公布协同作战飞机项目、人机编组试验或反无人机AI应用的具体进展。",
+          "horizon": "短期",
+          "confidence": "中",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-10-20",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "eeec90f61176cc"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        },
+        {
+          "predictionId": "pred-0d8377dffc5e",
+          "eventId": "evt-b2e883e9ece6",
+          "statement": "若AI被赋予更多火力决策权，则需关注相关信任验证、伦理争议与人员培训安排如何调整。",
+          "horizon": "中期",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-20",
+          "dueAfter": "2026-12-19",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "eeec90f61176cc"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-b2e883e9ece6",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-21",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-09-20",
+            "newsId": "eeec90f61176cc",
+            "title": "美国空军能否让飞行员信任AI？未来计划成败在此",
+            "source": "Defense One",
+            "publishedAt": "2026-09-20T12:00:00Z",
+            "score": 71
+          },
+          {
+            "editionDate": "2026-09-21",
+            "newsId": "eeec90f61176cc",
+            "title": "美国空军能否让飞行员信任AI？未来计划成败在此",
+            "source": "Defense One",
+            "publishedAt": "2026-09-20T12:00:00Z",
+            "score": 70
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "d4b56126dd59e5",
+      "eventId": "evt-bd3227ea7347",
+      "contentType": "news",
+      "title": "佛罗里达渔民捞到“见证者-136”仿制无人机，埃格林空军基地承认丢失一架",
+      "originalTitle": "Shahed-136 Clone Found By Florida Fisherman, Eglin AFB Admits It Lost A Drone",
+      "summary": "佛罗里达一家海钓包船公司周六在埃格林空军基地附近海域捞出一架三角翼无人机。船长查理·格林称，阿瑟诺特船长发现该物体后将其拖上船，并在其下方发现一条大鲯鳅；船方已尽力通知当地机构，无人机最终被某一机构收走，但他不知是哪个机构。格林提供的照片显示，无人机缺失发动机、螺旋桨和机头/导引头，这类部件在入水撞击中脱落属常见现象。埃格林空军基地发言人证实“我们在做测试，测试件坠落了”，但拒绝确认是否就是这架，也未说明机型、丢失时间和地点，仅将问题转给五角大楼，后者未能立即提供细节。该基地驻扎第96测试联队，负责埃格林湾试验靶场，该靶场拥有约12万平方英里水上空域。报道称，被捞出的无人机外形酷似伊朗“见证者-136”的仿制品，即美军“低成本无人作战攻击系统”（LUCAS），其靶机版本由SpecktreWorks制造，编号FLM-136，最初为模拟“见证者-136”而逆向工程研制，用于测试与训练，后被武器化为LUCAS。LUCAS于2月28日“史诗之怒”行动首日首次实战使用。中央司令部发言人、海军上校蒂姆·霍金斯称，LUCAS单台约3.5万美元，是一种低成本、可扩展系统，能以远低于传统远程系统的成本提供类似效果，射程远、可超视距操作。中央司令部称其可自主运行，并可通过弹射器、火箭助推起飞以及地面和车载机动系统发射。该无人机隶属特种作战中央司令部下属的“蝎子打击特遣队”，这是美军首支单向攻击无人机…",
+      "summaryRevision": 3,
+      "summaryInputHash": "6a3f310c368321bfbf6f4954",
+      "keyFacts": [
+        "A Florida fishing charter boat made a very unusual catch Saturday",
+        "operating near Eglin Air Force Base",
+        "Located in the western end of the Florida Panhandle"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-09-20T20:09:32Z",
+      "url": "https://www.twz.com/air/shahed-136-clone-found-by-florida-fisherman-eglin-afb-admits-it-lost-a-drone",
+      "score": 69,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 21,
+        "主题相关性": 12,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 55/100",
+        "综合排序分 69/100（AI 65% + 规则 35%）",
+        "规则参考分 94/100",
+        "来源权重 15/20",
+        "发布约 4.9 小时",
+        "命中 14 个主题信号",
+        "影响信号：first、test、attack"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "无人机",
+        "埃格林空军基地",
+        "LUCAS"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/09/FLM136-fishing-boat-eglin.jpg?quality=85",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/air/shahed-136-clone-found-by-florida-fisherman-eglin-afb-admits-it-lost-a-drone",
+          "publishedAt": "2026-09-20T20:09:32Z",
+          "evidenceGroup": "outlet:twz.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:twz.com"
+        ],
+        "claims": [
+          {
+            "text": "A Florida fishing charter boat made a very unusual catch Saturday",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "operating near Eglin Air Force Base",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          },
+          {
+            "text": "Located in the western end of the Florida Panhandle",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:twz.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-d708546f40e4",
+          "eventId": "evt-bd3227ea7347",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-21",
+          "dueAfter": "2026-10-21",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "d4b56126dd59e5"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-bd3227ea7347",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-21",
+        "lastSeen": "2026-09-21",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-21",
+            "newsId": "d4b56126dd59e5",
+            "title": "佛罗里达渔民捞到“见证者-136”仿制无人机，埃格林空军基地承认丢失一架",
+            "source": "The War Zone",
+            "publishedAt": "2026-09-20T20:09:32Z",
+            "score": 69
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "19ece4772e9e2f",
+      "eventId": "evt-ab34a3821a4f",
+      "contentType": "news",
+      "title": "朝鲜向海上发射两枚弹道导弹，再次展示武器",
+      "originalTitle": "North Korea fires two ballistic missiles into the sea in latest weapons display",
+      "summary": "韩国军方称，朝鲜周日向其东部海岸附近海域发射了两枚短程弹道导弹。此举发生在平壤重申其拥核国家地位、并拒绝一项要求其停止核活动的联合国决议数日之后。现有元数据未提供更多细节。",
+      "summaryRevision": 3,
+      "summaryInputHash": "fbf917c98a45a5a9450c8521",
+      "keyFacts": [
+        "North Korea fired two short-range ballistic missiles into the sea off its eastern coast on Sunday",
+        "South Korea’s military said",
+        "This came days"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "France 24",
+      "country": "国际",
+      "publishedAt": "2026-09-20T11:40:58Z",
+      "url": "https://www.france24.com/en/asia-pacific/20260920-north-korea-fires-two-ballistic-missiles-into-the-sea-in-latest-weapons-display",
+      "score": 63,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 13,
+        "影响信号": 7,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 62/100",
+        "综合排序分 63/100（AI 65% + 规则 35%）",
+        "规则参考分 66/100",
+        "来源权重 16/20",
+        "发布约 13.4 小时",
+        "命中 1 个主题信号",
+        "影响信号：nuclear"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "朝鲜",
+        "弹道导弹",
+        "联合国决议"
+      ],
+      "image": "https://s.france24.com/media/display/75838ad2-b4e3-11f1-8ac0-5b4fdf021577/w:1024/p:16x9/AP26263309350737.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "France 24",
+          "domain": "france24.com",
+          "url": "https://www.france24.com/en/asia-pacific/20260920-north-korea-fires-two-ballistic-missiles-into-the-sea-in-latest-weapons-display",
+          "publishedAt": "2026-09-20T11:40:58Z",
+          "evidenceGroup": "outlet:france24.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:france24.com"
+        ],
+        "claims": [
+          {
+            "text": "North Korea fired two short-range ballistic missiles into the sea off its eastern coast on Sunday",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:france24.com"
+            ]
+          },
+          {
+            "text": "South Korea’s military said",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:france24.com"
+            ]
+          },
+          {
+            "text": "This came days",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:france24.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-cfe0c7eb95e3",
+          "eventId": "evt-ab34a3821a4f",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-21",
+          "dueAfter": "2026-10-21",
+          "verificationSignals": [
+            "正式合同、预算或部署文件",
+            "后续演训、交付或作战序列变化"
+          ],
+          "evidenceIds": [
+            "19ece4772e9e2f"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-ab34a3821a4f",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-21",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-09-20",
+            "newsId": "19ece4772e9e2f",
+            "title": "朝鲜向海上发射两枚弹道导弹，再次展示武器",
+            "source": "France 24",
+            "publishedAt": "2026-09-20T11:40:58Z",
+            "score": 71
+          },
+          {
+            "editionDate": "2026-09-21",
+            "newsId": "19ece4772e9e2f",
+            "title": "朝鲜向海上发射两枚弹道导弹，再次展示武器",
+            "source": "France 24",
+            "publishedAt": "2026-09-20T11:40:58Z",
+            "score": 63
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "f0c0ee6d395748",
+      "eventId": "evt-30207d052408",
+      "contentType": "news",
+      "title": "爱因斯坦“幽灵般的超距作用”通过物理学最极端测试之一",
+      "originalTitle": "Einstein’s “spooky action” just survived one of physics’ most extreme tests",
+      "summary": "物理学家在CERN大型强子对撞机上发现有力证据，表明较重且寿命极短的Z玻色子可在希格斯玻色子衰变过程中发生量子纠缠。该结果说明，爱因斯坦所称的“幽灵般的超距作用”在实验室迄今创造的一些最极端条件下依然成立。报道未提供更多关于实验装置、统计显著性、研究团队或后续研究安排的细节。",
+      "summaryRevision": 3,
+      "summaryInputHash": "db670050a8c82cedd3b5ffbf",
+      "keyFacts": [
+        "Physicists have detected strong evidence that heavy",
+        "fleeting Z bosons can become quantum entangled during Higgs boson decays at CERN’s Large Hadron Collider",
+        "The result shows that Einstein’s “spooky action at a distance” survives even under some of the most extreme conditions ever created in a la…"
+      ],
+      "why": "该进展可能缩短技术工程化周期，并改变关键产业与供应链竞争。",
+      "category": "前沿技术",
+      "source": "ScienceDaily Engineering",
+      "country": "国际",
+      "publishedAt": "2026-09-20T05:16:00Z",
+      "url": "https://www.sciencedaily.com/releases/2026/09/260919031023.htm",
+      "score": 62,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 8,
+        "时效": 10,
+        "影响信号": 5,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 64/100",
+        "综合排序分 62/100（AI 65% + 规则 35%）",
+        "规则参考分 59/100",
+        "来源权重 16/20",
+        "发布约 19.8 小时",
+        "命中 1 个主题信号",
+        "影响信号：quantum"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "量子纠缠",
+        "大型强子对撞机",
+        "粒子物理"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "ScienceDaily Engineering",
+          "domain": "sciencedaily.com",
+          "url": "https://www.sciencedaily.com/releases/2026/09/260919031023.htm",
+          "publishedAt": "2026-09-20T05:16:00Z",
+          "evidenceGroup": "outlet:sciencedaily.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:sciencedaily.com"
+        ],
+        "claims": [
+          {
+            "text": "Physicists have detected strong evidence that heavy",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:sciencedaily.com"
+            ]
+          },
+          {
+            "text": "fleeting Z bosons can become quantum entangled during Higgs boson decays at CERN’s Large Hadron Collider",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:sciencedaily.com"
+            ]
+          },
+          {
+            "text": "The result shows that Einstein’s “spooky action at a distance” survives even under some of the most extreme conditions ever created in a la…",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:sciencedaily.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-4e80dad4c8af",
+          "eventId": "evt-30207d052408",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-21",
+          "dueAfter": "2026-10-21",
+          "verificationSignals": [
+            "可复现实验或第三方验证",
+            "工程化、量产或监管节点"
+          ],
+          "evidenceIds": [
+            "f0c0ee6d395748"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-30207d052408",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-21",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-09-20",
+            "newsId": "f0c0ee6d395748",
+            "title": "爱因斯坦“幽灵般的超距作用”通过物理学最极端测试之一",
+            "source": "ScienceDaily Engineering",
+            "publishedAt": "2026-09-20T05:16:00Z",
+            "score": 69
+          },
+          {
+            "editionDate": "2026-09-21",
+            "newsId": "f0c0ee6d395748",
+            "title": "爱因斯坦“幽灵般的超距作用”通过物理学最极端测试之一",
+            "source": "ScienceDaily Engineering",
+            "publishedAt": "2026-09-20T05:16:00Z",
+            "score": 62
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    },
+    {
+      "id": "3acf20d8bc231b",
+      "eventId": "evt-874d58daf3e7",
+      "contentType": "news",
+      "title": "人形机器人报废后怎么办？",
+      "originalTitle": "What do you do with a humanoid robot when it breaks down?",
+      "summary": "随着人形机器人量产竞赛全面展开，其退役后的处理问题仍未得到解决。文章指出，人形机器人含有1万至1.5万个零部件，标准单元由200至500个主要子部件组成，涉及20至40个电机、30至50个结构件、1000至3000个紧固件、40至80个位置编码器、50至200个传感器以及多达80个存储半导体器件。这带来四类风险：存储介质可能泄露导航地图、生物识别记录等敏感数据；锂电池组可能热失控，液压或气动部件残留高压；碳纤维等结构件存在材料疲劳风险；每台机器人含3.5至4公斤稀土钕铁硼磁体，传统破碎回收会造成交叉污染，需要人工拆解。文章认为应推动面向回收的设计，采用模块化设计和标准化解耦接头。",
+      "summaryRevision": 3,
+      "summaryInputHash": "1db5a18d6ea4a2d53b27106b",
+      "keyFacts": [
+        "Like other complex machines such as cars",
+        "humanoids will need to be recycled",
+        "Source: Re-Teck The race to mass-produce humanoid robots is in full swing"
+      ],
+      "why": "该进展可能缩短技术工程化周期，并改变关键产业与供应链竞争。",
+      "category": "前沿技术",
+      "source": "The Robot Report",
+      "country": "国际",
+      "publishedAt": "2026-09-20T12:45:45Z",
+      "url": "https://www.therobotreport.com/what-do-you-do-with-a-humanoid-robot-when-it-breaks-down",
+      "score": 60,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 8,
+        "时效": 14,
+        "影响信号": 15,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 52/100",
+        "综合排序分 60/100（AI 65% + 规则 35%）",
+        "规则参考分 75/100",
+        "来源权重 16/20",
+        "发布约 12.3 小时",
+        "命中 2 个主题信号",
+        "影响信号：first、deploy、contract"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "人形机器人",
+        "回收",
+        "稀土磁体"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The Robot Report",
+          "domain": "therobotreport.com",
+          "url": "https://www.therobotreport.com/what-do-you-do-with-a-humanoid-robot-when-it-breaks-down",
+          "publishedAt": "2026-09-20T12:45:45Z",
+          "evidenceGroup": "outlet:therobotreport.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:therobotreport.com"
+        ],
+        "claims": [
+          {
+            "text": "Like other complex machines such as cars",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:therobotreport.com"
+            ]
+          },
+          {
+            "text": "humanoids will need to be recycled",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:therobotreport.com"
+            ]
+          },
+          {
+            "text": "Source: Re-Teck The race to mass-produce humanoid robots is in full swing",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:therobotreport.com"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-fb87c468bc19",
+          "eventId": "evt-874d58daf3e7",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-21",
+          "dueAfter": "2026-10-21",
+          "verificationSignals": [
+            "可复现实验或第三方验证",
+            "工程化、量产或监管节点"
+          ],
+          "evidenceIds": [
+            "3acf20d8bc231b"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-874d58daf3e7",
+        "status": "tracking",
+        "statusLabel": "持续跟踪",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-21",
+        "updateCount": 2,
+        "timeline": [
+          {
+            "editionDate": "2026-09-20",
+            "newsId": "3acf20d8bc231b",
+            "title": "人形机器人报废后怎么办？",
+            "source": "The Robot Report",
+            "publishedAt": "2026-09-20T12:45:45Z",
+            "score": 60
+          },
+          {
+            "editionDate": "2026-09-21",
+            "newsId": "3acf20d8bc231b",
+            "title": "人形机器人报废后怎么办？",
+            "source": "The Robot Report",
+            "publishedAt": "2026-09-20T12:45:45Z",
+            "score": 60
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 1
+      },
+      "relatedPapers": [
+        {
+          "id": "arxiv:2609.20761",
+          "title": "Agile-WAM：面向接触丰富机器人控制的敏捷触觉世界动作模型",
+          "originalTitle": "Agile-WAM: An Agile Tactile World Action Model for Contact-Rich Robot Control",
+          "researchArea": "机器学习",
+          "publishedAt": "2026-09-17T17:43:51Z",
+          "url": "https://arxiv.org/abs/2609.20761v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.20761v1",
+          "associationScore": 24,
+          "relationType": "同主题研究",
+          "associationReasons": [
+            "标题共同线索：robot、器人、机器",
+            "新闻主题与机器学习研究方向对应"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3ff1b698fe688f",
+      "eventId": "evt-e3bb86efd674",
+      "contentType": "news",
+      "title": "APOD：2026年9月20日——卡拉尼什巨石阵上空的日行迹",
+      "originalTitle": "APOD: 2026 September 20 – Analemma over the Callanish Stones",
+      "summary": "今日NASA天文每日一图展示的是在苏格兰外赫布里底群岛卡拉尼什村附近拍摄的日行迹合成图像。如果每天同一时间在同一地点拍摄包含太阳的照片，太阳位置会如何变化？日行迹就是这一问题的可视化答案，由一年中同一地点同一时间拍摄的多张图像合成。这幅日行迹由每隔几天在正午拍摄的图像组成，前景是卡拉尼什巨石阵，该石阵建于约公元前2700年的人类青铜时代。目前尚不清楚卡拉尼什巨石阵的布局是否具有或曾经具有天文学意义。日行迹呈现8字形，其根本原因是地轴倾斜和地球绕太阳轨道的椭圆率。在至日，太阳会出现在日行迹的顶端或底端。这幅图像拍摄于12月至日附近，因此太阳出现在底部附近。春分和秋分则对应日行迹的中间点，而非交点。两天后将出现昼夜等长的秋分。NASA的APOD主站正从apod.nasa.gov迁移至science.nasa.gov/apod。",
+      "summaryRevision": 3,
+      "summaryInputHash": "a9acc5bc0f395d95cb3516af",
+      "keyFacts": [
+        "APOD Science APOD APOD: 2026 September 20 –… Today’s APOD Archive Submissions Index Search Calendar RSS Education About Discuss APOD Astron…",
+        "Each day a different image or photograph of our fascinating universe is featured",
+        "along with a brief explanation written by a professional astronomer"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
+      "country": "国际",
+      "publishedAt": "2026-09-20T04:05:00Z",
+      "url": "https://science.nasa.gov/image-article/apod-2026-september-20-analemma-over-the-callanish-stones",
+      "score": 40,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 10,
+        "影响信号": 0,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 30/100",
+        "综合排序分 40/100（AI 65% + 规则 35%）",
+        "规则参考分 59/100",
+        "来源权重 20/20",
+        "发布约 20.9 小时",
+        "命中 1 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "APOD",
+        "日行迹",
+        "卡拉尼什巨石阵"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "NASA",
+          "domain": "science.nasa.gov",
+          "url": "https://science.nasa.gov/image-article/apod-2026-september-20-analemma-over-the-callanish-stones",
+          "publishedAt": "2026-09-20T04:05:00Z",
+          "evidenceGroup": "outlet:science.nasa.gov"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      },
+      "evidenceMatrix": {
+        "overallStatus": "single-source",
+        "independentSourceCount": 1,
+        "sourceGroups": [
+          "outlet:science.nasa.gov"
+        ],
+        "claims": [
+          {
+            "text": "APOD Science APOD APOD: 2026 September 20 –… Today’s APOD Archive Submissions Index Search Calendar RSS Education About Discuss APOD Astron…",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          },
+          {
+            "text": "Each day a different image or photograph of our fascinating universe is featured",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          },
+          {
+            "text": "along with a brief explanation written by a professional astronomer",
+            "status": "single-source",
+            "statusLabel": "当前仅见单一独立来源",
+            "sourceGroups": [
+              "outlet:science.nasa.gov"
+            ]
+          }
+        ],
+        "disputes": [],
+        "explanation": "当前仅有一个独立来源组，关键事实保持待核验状态。"
+      },
+      "forecastLedger": [
+        {
+          "predictionId": "pred-a3bdee525756",
+          "eventId": "evt-e3bb86efd674",
+          "statement": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+          "horizon": "观察",
+          "confidence": "低",
+          "status": "open",
+          "statusLabel": "待验证",
+          "createdAt": "2026-09-21",
+          "dueAfter": "2026-10-21",
+          "verificationSignals": [
+            "正式任务时间表或许可",
+            "后续试验、发射或在轨结果"
+          ],
+          "evidenceIds": [
+            "3ff1b698fe688f"
+          ],
+          "lastReviewedAt": "2026-09-21"
+        }
+      ],
+      "eventDossier": {
+        "eventId": "evt-e3bb86efd674",
+        "status": "new",
+        "statusLabel": "新事件",
+        "firstSeen": "2026-09-21",
+        "lastSeen": "2026-09-21",
+        "updateCount": 1,
+        "timeline": [
+          {
+            "editionDate": "2026-09-21",
+            "newsId": "3ff1b698fe688f",
+            "title": "APOD：2026年9月20日——卡拉尼什巨石阵上空的日行迹",
+            "source": "NASA",
+            "publishedAt": "2026-09-20T04:05:00Z",
+            "score": 40
+          }
+        ],
+        "independentSourceCount": 1,
+        "paperCount": 0
+      },
+      "relatedPapers": []
+    }
+  ],
+  "paperLinkedItemCount": 1,
+  "eventCount": 10,
+  "weeklyDigest": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-09-21T01:02:00Z",
+    "timezone": "Asia/Shanghai",
+    "weekId": "2026-W39",
+    "fromDate": "2026-09-21",
+    "toDate": "2026-09-27",
+    "eventCount": 8,
+    "headline": "乌克兰对俄罗斯发动逾千架无人机袭击，称针对莫斯科的最大规模攻击",
+    "summary": "本周已收敛 8 条主要事件线；按最新重要度、独立来源、更新次数与研究关联综合排序。",
+    "events": [
+      {
+        "eventId": "evt-75b4cecffbb6",
+        "title": "乌克兰对俄罗斯发动逾千架无人机袭击，称针对莫斯科的最大规模攻击",
+        "category": "局部冲突",
+        "summary": "法国24台报道，俄罗斯于周日结束为期三天的国家杜马选举投票，这是自其大规模入侵乌克兰以来的首次。此次选举首次也在俄罗斯占领的乌克兰地区组织。报道称选举期间多个地区遭到乌克兰无人机袭击，主要集中在莫斯科。标题显示乌克兰对俄罗斯发射超过1000架无人机，被称为针对莫斯科的“最大规模”攻击。报道未提供更多伤亡、拦截或损失细节。",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-21",
+        "trend": "继续发展",
+        "updateCount": 2,
+        "independentSourceCount": 4,
+        "paperCount": 0,
+        "outlook": "后续可观察俄方是否公布拦截数量、伤亡与炼油厂受损评估，以及选举结束后袭击频率是否变化。"
+      },
+      {
+        "eventId": "evt-9bad3fbd6ebe",
+        "title": "乌克兰在俄罗斯选举最后一天以数百架无人机袭击莫斯科",
+        "category": "局部冲突",
+        "summary": "在俄罗斯议会选举最后一天，乌克兰以大规模无人机袭击莫斯科及周边地区，当局周日表示，袭击造成至少3人死亡，并损毁乌总统泽连斯基所称的俄罗斯“关键石油工业设施”之一。泽连斯基称袭击中使用的武器包括“鹈鹕”，最初被认为是短程弹道导弹，但消息人士后称其为带翼无人机；他未提供更多细节，乌媒体一度报道为弹道导弹，随后对武器识别产生质疑。泽连斯基还称乌克兰使用国产“火烈鸟”巡航导弹打击莫斯科，该远程武器此前曾用于打击俄纵深目标，射程可及俄首都。乌俄Telegram频道发布据称在莫斯科地区发现的“火烈鸟”导弹残骸图像，但无法独立…",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-21",
+        "trend": "继续发展",
+        "updateCount": 2,
+        "independentSourceCount": 2,
+        "paperCount": 0,
+        "outlook": "后续可观察“火烈鸟”残骸的独立核实进展，以及乌俄双方对无人机与导弹数量的口径变化。"
+      },
+      {
+        "eventId": "evt-4db5b5f89890",
+        "title": "中东准备迎接更多暴力，伊朗称美国计划重启轰炸行动",
+        "category": "局部冲突",
+        "summary": "中东各国政府正准备迎接暴力升级，此前伊朗声称获得情报，显示美国正准备对伊朗伊斯兰共和国重启轰炸行动。在本周纽约联合国大会召开前，可能出现紧张加剧的迹象：唐纳德·特朗普周日突然缩短在戴维营总统度假地的周末行程，未给出官方解释；美国国务院向中东所有美国公民发布新的安全警报。据报道，特朗普对福克斯新闻记者称“不久的将来会发生非常大的事情”，他正在考虑的选项包括“消灭伊朗、让其在经济上烂掉或达成协议”。伊斯兰革命卫队警告，若袭击发生，“美国在该地区的所有基地和利益都将成为持续、有效和痛苦袭击的目标，不受任何限制或考虑”…",
+        "firstSeen": "2026-09-21",
+        "lastSeen": "2026-09-21",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 1,
+        "paperCount": 0,
+        "outlook": "后续可观察联合国大会前后美伊双方公开表态、美国务院安全警报是否调整，以及海湾地区袭击是否再现。"
+      },
+      {
+        "eventId": "evt-4f84ffaf1e0d",
+        "title": "伊朗战争实时：德黑兰警告美国勿发动新打击，也门战事持续",
+        "category": "局部冲突",
+        "summary": "据半岛电视台报道，德黑兰方面表示已获悉美国可能正在策划新一轮打击，并警告将以“不受限制”的方式实施报复。伊朗同时警告美国不要发动新的军事打击。报道还称，也门境内战斗仍在激烈进行。目前尚无关于打击时间、地点或具体目标的信息，也未提及任何后续安排。",
+        "firstSeen": "2026-09-21",
+        "lastSeen": "2026-09-21",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 1,
+        "paperCount": 0,
+        "outlook": "后续可观察美方是否公开回应伊朗指控，以及也门境内战斗与红海航运安全是否出现新变化。"
+      },
+      {
+        "eventId": "evt-b2e883e9ece6",
+        "title": "美国空军能否让飞行员信任AI？未来计划成败在此",
+        "category": "军事动态",
+        "summary": "在马里兰州国家港举行的空军协会空天与网络会议上，空军领导人一边准备在未来数年把更多决策权交给AI，一边设法让飞行员适应这一变化。空军部长特洛伊·迈因克称这“有点吓人，但我们需要投入其中”，并称自主性是实现高性价比作战力量的关键技术之一。空军研究实验室航空航天系统主管迈克尔·格雷格表示存在信任与自主性问题，其第711人类效能联队的心理学家和行为科学家正在研究人机编组如何辅助决策。空军计划到2032年部署500架高度自主的协同作战飞机，并探索在保护基地免遭无人机袭击等任务中用AI智能体取代人类决策。相关讨论涉及由AI…",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-21",
+        "trend": "继续发展",
+        "updateCount": 2,
+        "independentSourceCount": 1,
+        "paperCount": 0,
+        "outlook": "后续可观察空军是否公布人机编组测试结果、协同作战飞机项目节点或AI决策授权范围的说明。"
+      },
+      {
+        "eventId": "evt-bd3227ea7347",
+        "title": "佛罗里达渔民捞到“见证者-136”仿制无人机，埃格林空军基地承认丢失一架",
+        "category": "军事动态",
+        "summary": "佛罗里达一家海钓包船公司周六在埃格林空军基地附近海域捞出一架三角翼无人机。船长查理·格林称，阿瑟诺特船长发现该物体后将其拖上船，并在其下方发现一条大鲯鳅；船方已尽力通知当地机构，无人机最终被某一机构收走，但他不知是哪个机构。格林提供的照片显示，无人机缺失发动机、螺旋桨和机头/导引头，这类部件在入水撞击中脱落属常见现象。埃格林空军基地发言人证实“我们在做测试，测试件坠落了”，但拒绝确认是否就是这架，也未说明机型、丢失时间和地点，仅将问题转给五角大楼，后者未能立即提供细节。该基地驻扎第96测试联队，负责埃格林湾试验靶…",
+        "firstSeen": "2026-09-21",
+        "lastSeen": "2026-09-21",
+        "trend": "本周新出现",
+        "updateCount": 1,
+        "independentSourceCount": 1,
+        "paperCount": 0,
+        "outlook": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。"
+      },
+      {
+        "eventId": "evt-ab34a3821a4f",
+        "title": "朝鲜向海上发射两枚弹道导弹，再次展示武器",
+        "category": "军事动态",
+        "summary": "韩国军方称，朝鲜周日向其东部海岸附近海域发射了两枚短程弹道导弹。此举发生在平壤重申其拥核国家地位、并拒绝一项要求其停止核活动的联合国决议数日之后。现有元数据未提供更多细节。",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-21",
+        "trend": "继续发展",
+        "updateCount": 2,
+        "independentSourceCount": 1,
+        "paperCount": 0,
+        "outlook": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。"
+      },
+      {
+        "eventId": "evt-30207d052408",
+        "title": "爱因斯坦“幽灵般的超距作用”通过物理学最极端测试之一",
+        "category": "前沿技术",
+        "summary": "物理学家在CERN大型强子对撞机上发现有力证据，表明较重且寿命极短的Z玻色子可在希格斯玻色子衰变过程中发生量子纠缠。该结果说明，爱因斯坦所称的“幽灵般的超距作用”在实验室迄今创造的一些最极端条件下依然成立。报道未提供更多关于实验装置、统计显著性、研究团队或后续研究安排的细节。",
+        "firstSeen": "2026-09-20",
+        "lastSeen": "2026-09-21",
+        "trend": "继续发展",
+        "updateCount": 2,
+        "independentSourceCount": 1,
+        "paperCount": 0,
+        "outlook": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。"
+      }
+    ]
+  },
+  "anomalySignals": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-09-21T01:02:00Z",
+    "timezone": "Asia/Shanghai",
+    "status": "alert",
+    "baselineDays": 30,
+    "observationDays": 30,
+    "signalCount": 2,
+    "summary": "基于过去 30 个有归档日建立稳健基线，检测到 2 个升温信号。",
+    "signals": [
+      {
+        "signalId": "sig-25733a1a14a4",
+        "dimension": "category",
+        "name": "前沿技术",
+        "currentCount": 2,
+        "baselineMedian": 0.0,
+        "ratio": 4.0,
+        "robustDeviation": 2.0,
+        "independentSourceCount": 2,
+        "severity": "elevated",
+        "explanation": "前沿技术今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 2 个独立来源组。"
+      },
+      {
+        "signalId": "sig-38c4e6945d7d",
+        "dimension": "entity",
+        "name": "无人机袭击",
+        "currentCount": 2,
+        "baselineMedian": 0.0,
+        "ratio": 4.0,
+        "robustDeviation": 2.0,
+        "independentSourceCount": 5,
+        "severity": "elevated",
+        "explanation": "无人机袭击今日进入 Top 10 的相关事件为 2 条，过去 30 个有归档日的中位数为 0.0 条，来自 5 个独立来源组。"
+      }
+    ]
+  }
+}
