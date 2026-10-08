@@ -1,0 +1,15 @@
+{
+  // Production site: Cloudflare Workers Builds runs `npx wrangler deploy` on every push to main.
+  // Static assets only; no Worker script. Response headers come from public/_headers,
+  // and files listed in public/.assetsignore are not uploaded.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "frontier-pulse",
+  "compatibility_date": "2026-07-28",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "public"
+  }
+}
