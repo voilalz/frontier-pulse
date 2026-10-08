@@ -35,6 +35,11 @@ def recover(public, stage, config, now, runtime, request_json, code_revision='')
         validate_readable(current, edition)
         if current.get('readerStatus') == 'complete':
             return {'state':'ok', 'changed':False, 'reason':'deepread-already-complete'}
+        if current.get('generationRevision') == 13 and current.get('readerStatus') == 'partial':
+            planned = {tuple(p['newsIds']) for p in current.get('topicPlan',[])}
+            accepted = {tuple(c['newsIds']) for c in current.get('chapters',[])}
+            if planned and planned == accepted:
+                return {**deepread_status(current,edition), 'changed':False, 'reason':'all-planned-topics-qualified'}
     except (ValueError, KeyError, TypeError):
         pass
     publication.prepare_stage(public, stage)
@@ -49,13 +54,16 @@ def recover(public, stage, config, now, runtime, request_json, code_revision='')
     items = {item['id']:copy.deepcopy(item) for item in stream['items']}
     items.update({item['id']:copy.deepcopy(item) for item in report['items']})
     registry = publication.read_json(snapshot / 'data/events.json')
+    from deepread_topics import load_captured_history
+    captured_history = load_captured_history(snapshot / 'data')
     try:
         draft = build_daily_deepread(items.values(), config, selection_time, runtime, request_json,
-                                     event_registry=registry)
+                                     event_registry=registry, history_items=captured_history, existing_article=current)
     except Exception as exc:
         logging.warning('Deepread recovery failed: %s', type(exc).__name__)
         # Do not expose provider exception bodies or credentials in public data.
-        draft = {'generationStatus':'failed', 'warnings':['深读恢复请求未成功完成。'],
+        draft = {'schemaVersion':2, 'generationRevision':13, 'editionDate':edition, 'events':[], 'chapters':[],
+                 'candidateCount':0, 'eventCount':0, 'generationStatus':'failed', 'warnings':['深读恢复请求未成功完成。'],
                  'contentFailures':['deepread-recovery-exception']}
     draft['generatedAt'] = now.isoformat().replace('+00:00', 'Z')
     previous = [current]

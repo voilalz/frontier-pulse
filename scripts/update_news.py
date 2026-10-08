@@ -2095,6 +2095,11 @@ def request_structured_json(
     max_tokens: int,
 ) -> dict[str, Any]:
     """Call OpenAI Responses or DeepSeek ChatCompletions with local validation."""
+    request_options={}
+    if 'requestTimeoutSeconds' in runtime:
+        request_options['timeout']=max(1,min(120,int(runtime['requestTimeoutSeconds'])))
+    if 'httpAttempts' in runtime:
+        request_options['attempts']=max(1,min(2,int(runtime['httpAttempts'])))
     if runtime["provider"] == "deepseek":
         system_prompt = (
             instructions
@@ -2115,7 +2120,7 @@ def request_structured_json(
             "max_tokens": max_tokens,
             "stream": False,
         }
-        payload = http_post_json(runtime["endpoint"], body, runtime["api_key"])
+        payload = http_post_json(runtime["endpoint"], body, runtime["api_key"], **request_options)
         return parse_json_object(extract_chat_completion_text(payload))
     body = {
         "model": runtime["model"],
@@ -2125,7 +2130,7 @@ def request_structured_json(
         "text": {"format": {"type": "json_schema", "name": schema_name, "strict": True, "schema": schema}},
         "max_output_tokens": max_tokens,
     }
-    payload = http_post_json(runtime["endpoint"], body, runtime["api_key"])
+    payload = http_post_json(runtime["endpoint"], body, runtime["api_key"], **request_options)
     return parse_json_object(extract_response_text(payload))
 
 
@@ -5038,6 +5043,7 @@ def main(argv: list[str] | None = None) -> int:
             validate_report(report, int(config["top_n"]))
             validate_stream_report(stream_report)
             from deepread_editorial import build_daily_deepread
+            from deepread_topics import load_captured_history
             evidence_by_id = {article.id: article.description for article in stream_candidates if not article.date_estimated}
             deepread_inputs = [
                 {**item, "evidenceText": evidence_by_id[item["id"]]}
@@ -5045,7 +5051,8 @@ def main(argv: list[str] | None = None) -> int:
             ]
             deepread = build_daily_deepread(deepread_inputs, config, now,
                                             runtime=stream_runtime, request_json=request_structured_json,
-                                            event_registry=event_registry, history_items=history_items)
+                                            event_registry=event_registry,
+                                            history_items=[*history_items, *load_captured_history(args.output.parent)])
             from deepread_quality import choose_readable_deepread
             prior_deep = [read_json_safe(args.deepread_output, {})]
             deep_index = read_json_safe(args.deepread_output.parent / 'deepread/index.json', {})

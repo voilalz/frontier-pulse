@@ -18,6 +18,8 @@ on:
       - "scripts/publication.py"
       - "scripts/reader_quality.py"
       - "scripts/deepread_quality.py"
+      - "scripts/deepread_topics.py"
+      - "scripts/deepread_topic_quality.py"
       - "scripts/publication_clock.py"
       - "config/news_config.json"
       - "public/assets/news-policy.json"
@@ -80,7 +82,7 @@ jobs:
           --release public/data/release.json
           --revision-reason "$REVISION_REASON"
           --deepread public/data/deepread.json
-          --required-deepread-revision 12
+          --required-deepread-revision 13
           --timezone Asia/Shanghai
           --event-name "$EVENT_NAME"
           --force "$FORCE_REFRESH"

@@ -116,7 +116,7 @@ def _validate(stage, mode, expected_date):
             'History count mismatch')
     require(len(set(news.get('spotlightIds', []))) == min(3,len(news['items'])) and set(news['spotlightIds']) <= {x['id'] for x in news['items']},
             'Invalid spotlight references')
-    require(deep.get('schemaVersion') == 2 and deep.get('generationRevision') == 12, 'Invalid deepread revision')
+    require(deep.get('schemaVersion') == 2 and deep.get('generationRevision') in {12, 13}, 'Invalid deepread revision')
     from evidence_trace import validate_news_trace, valid_display_translation
     from reader_quality import assess_admissibility, chinese_reader_text
     from deepread_quality import validate_readable
@@ -134,6 +134,8 @@ def _validate(stage, mode, expected_date):
     require(len(ids) == len(events) == len({x['eventId'] for x in events}), 'Repeated deepread event')
     require(deep.get('readerStatus') == 'retained' or ids <= known, 'Deepread references absent from event registry')
     chapter_ids = [n for chapter in chapters for n in chapter['newsIds']]
+    if deep.get('generationRevision') == 13:
+        chapter_ids += [n for brief in deep.get('briefs', []) for n in brief['newsIds']]
     require(set(chapter_ids) == ids and len(chapter_ids) == len(ids), 'Invalid chapter references')
     for chapter in chapters:
         require(chapter.get('kind') in {'event', 'comparison'}, 'Invalid chapter kind')
@@ -149,7 +151,7 @@ def _validate(stage, mode, expected_date):
                 'Missing/invalid source URL')
     observations = deep.get('observations')
     require(isinstance(observations, list), 'Missing observations')
-    require(deep.get('generationStatus') != 'ok' or 2 <= len(observations) <= 3, 'Incomplete observations')
+    require(deep.get('generationRevision') == 13 or deep.get('generationStatus') != 'ok' or 2 <= len(observations) <= 3, 'Incomplete observations')
     for observation in observations:
         refs = set(observation.get('newsIds', []))
         require(bool(refs) and refs <= ids and {x.get('newsId') for x in observation.get('supports', [])} == refs,

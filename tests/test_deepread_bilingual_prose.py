@@ -4,7 +4,7 @@ import unittest
 
 import test_news_reading as reading
 from test_update_news import MODULE
-from deepread_editorial import build_daily_deepread, _validated_blocks, _validated_observations, COMPARISON_NOTE, _COMPARISON_LABELS
+from deepread_editorial import build_legacy_daily_deepread as build_daily_deepread, _validated_blocks, _validated_observations, COMPARISON_NOTE, _COMPARISON_LABELS
 from evidence_trace import make_evidence, validate_deepread_trace, valid_prose_translation
 
 

@@ -11,7 +11,7 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 import evidence_trace as trace
 import event_identity as identity
 import update_news as news
-from deepread_editorial import build_daily_deepread, _validated_observations
+from deepread_editorial import build_legacy_daily_deepread as build_daily_deepread, _validated_observations
 
 class ReviewBoundaryTests(unittest.TestCase):
     now = datetime(2026, 9, 26, 2, tzinfo=timezone.utc)

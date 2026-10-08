@@ -23,7 +23,7 @@ from evidence_trace import (make_evidence, merge_evidence, validate_evidence, tr
                             safe_title, excerpt_summary, validate_observation, source_limit_judgment,
                             framing_supported, valid_prose_translation, prose_translation_issue, valid_display_translation)
 
-GENERATION_REVISION = 12
+GENERATION_REVISION = 13
 EVIDENCE_LEVELS = ("primary", "multi", "single", "opinion")
 COMPARISON_NOTE = "并列比较不代表事件之间存在因果关系。"
 _CAUSAL_CLAIM = re.compile(r"导致|造成|促使|引发|使得|使其|因而|因此|从而|归因于|推动|带动|牵动|促成|触发|"
@@ -362,7 +362,7 @@ def _article(outline: list[dict[str, Any]], pool: list[dict[str, Any]], edition:
     selected = [item for chapter in outline for item in chapter["items"]]
     count = len(selected)
     return {
-        "schemaVersion": 2, "generationRevision": GENERATION_REVISION,
+        "schemaVersion": 2, "generationRevision": 12,
         "editionDate": edition, "generatedAt": generated,
         "headline": f"每日深读｜{edition}：{count}项值得追踪的进展" if count else f"每日深读｜{edition}",
         "lead": f"本期从过去24小时的{len(pool)}项合格候选中，选取{count}项有来源的报道，按具体进展展开。" if count else "本期暂无合格的最新事件。",
@@ -829,7 +829,7 @@ def _split_unrecovered_comparisons(article: dict[str, Any], outline: list[dict[s
         article["warnings"].append("未取得可核对的比较段，已将相关报道拆成独立章节。")
 
 
-def build_daily_deepread(
+def build_legacy_daily_deepread(
     items: Iterable[dict[str, Any]], config: dict[str, Any], now: datetime,
     runtime: dict[str, Any] | None = None,
     request_json: Callable[..., dict[str, Any]] | None = None,
@@ -957,3 +957,11 @@ def build_daily_deepread(
             article["generationStatus"] = "partial"
         article["contentFailures"] = [str(exc)]
     return article
+
+
+def build_daily_deepread(items, config, now, runtime=None, request_json=None, *,
+                        event_registry=None, history_items=None, existing_article=None):
+    """Public entry point. Legacy generation is retained for archive replay."""
+    from deepread_topics import build_topic_deepread
+    return build_topic_deepread(items, config, now, runtime, request_json,
+        event_registry=event_registry, history_items=history_items, existing_article=existing_article)

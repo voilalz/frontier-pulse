@@ -6,7 +6,7 @@ from unittest import mock
 import test_news_reading as reading
 from test_update_news import MODULE
 from evidence_trace import validate_news_trace, validate_deepread_trace
-from deepread_editorial import build_daily_deepread
+from deepread_editorial import build_legacy_daily_deepread as build_daily_deepread
 
 
 class DailyDisplayTranslationTests(unittest.TestCase):

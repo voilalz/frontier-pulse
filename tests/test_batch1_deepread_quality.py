@@ -49,7 +49,7 @@ class DeepreadQualityTests(unittest.TestCase):
         validate_readable(reader, '2026-07-17')
 
     def test_two_comparison_outline_is_repaired_before_fixed_prose_ids(self):
-        from deepread_editorial import build_daily_deepread
+        from deepread_editorial import build_legacy_daily_deepread as build_daily_deepread
         from deepread_quality import validate_complete
         from evidence_trace import make_evidence, trace_claim
         items = []

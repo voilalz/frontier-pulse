@@ -11,7 +11,7 @@ sys.path.insert(0,str(ROOT/'scripts'));sys.path.insert(0,str(ROOT/'tests/browser
 import build_fixture
 import publication as pub
 import update_news as news
-from deepread_editorial import build_daily_deepread
+from deepread_editorial import build_legacy_daily_deepread as build_daily_deepread
 from evidence_trace import validate_deepread_trace
 
 class QualityFaultTests(unittest.TestCase):

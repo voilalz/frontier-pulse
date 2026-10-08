@@ -10,7 +10,7 @@ import evidence_trace as trace
 import update_news as news
 from news_evidence import strip_caption_text
 from deepread_editorial_signals import is_political_policy
-from deepread_editorial import build_daily_deepread
+from deepread_editorial import build_legacy_daily_deepread as build_daily_deepread
 
 class EvidenceRegressionTests(unittest.TestCase):
     def records(self): return trace.make_evidence('NASA完成无人机导航试验，飞行持续30分钟。研究团队未披露量产时间。','https://nasa.gov/a','2026-09-26T01:00:00Z')

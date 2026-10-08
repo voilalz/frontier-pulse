@@ -83,14 +83,14 @@ def decide_refresh(
     if healthy_today and deepread is not None and (
         deepread.get("editionDate") != today or deepread.get("generationStatus") != "ok"
     ):
-        return True, "deepread_missing_or_incomplete"
+        return False, "deepread_independent_recovery_pending"
     if healthy_today and deepread is not None and required_deepread_revision > 0:
         try:
             deepread_revision = int(deepread.get("generationRevision", 0) or 0)
         except (TypeError, ValueError):
             deepread_revision = 0
         if deepread_revision < required_deepread_revision:
-            return True, "deepread_writing_upgrade_required"
+            return False, "deepread_independent_upgrade_pending"
     if healthy_today:
         return False, "healthy_edition_exists"
     return True, "edition_missing_or_unhealthy"
