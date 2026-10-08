@@ -552,7 +552,7 @@ def _record_failure(public, mode, message, *, expected_date=None, now=None):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['prepare', 'validate', 'promote', 'fail', 'restore'])
+    parser.add_argument('action', choices=['prepare', 'validate', 'promote', 'fail', 'restore', 'prune'])
     parser.add_argument('--public', type=Path, default=Path('public'))
     parser.add_argument('--stage', type=Path)
     parser.add_argument('--mode', choices=['daily', 'stream'], default='daily')
@@ -575,6 +575,10 @@ def main():
             rid = args.release_id or datetime.now(timezone.utc).strftime('r%Y%m%dT%H%M%S-') + uuid4().hex[:8]
             promote(args.stage, args.public, args.mode, rid, args.code_revision,
                     revision_reason=args.revision_reason, base_release_id=args.base_release_id)
+        elif args.action == 'prune':
+            with publication_lock(args.public):
+                current = verify_snapshot(preflight_public(args.public)/'releases'/read_json(args.public/'data/release.json')['releaseId'])
+                prune_snapshots(args.public/'releases', current['releaseId'], current.get('revision'))
         elif args.action == 'restore':
             require(bool(args.release_id), '--release-id is required')
             restore(args.public, args.release_id)
