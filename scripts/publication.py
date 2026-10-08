@@ -24,6 +24,7 @@ from update_news import validate_report, validate_stream_report, write_json_atom
 from news_boundary import safe_path, owns, NEWS_TOP, NEWS_SCOPE
 
 RELEASE_ID = re.compile(r'[A-Za-z0-9][A-Za-z0-9_-]{0,79}')
+RETAINED_SNAPSHOTS = 7
 STREAM_FILES = ('data/stream.json', 'data/stream-status.json', 'data/events.json', 'data/source-health.json')
 
 
@@ -477,9 +478,21 @@ def _promote(stage, public, mode, release_id, code_revision, *, revision_reason=
         shutil.rmtree(temporary, ignore_errors=True)
         # An unreferenced complete snapshot is safe and can be inspected after a failed install.
         raise
+    prune_snapshots(target.parent, release_id, revision)
+    return manifest
+
+
+def prune_snapshots(releases: Path, release_id: str, revision=None):
+    """Keep seven full snapshots, always including the current release and its revision bases.
+
+    Older revisions stay readable through data/edition-versions, so only the
+    current chain needs full snapshots (deepread recovery reads its initial one).
+    """
     snapshots = []
     protected = {release_id}
-    for path in target.parent.iterdir():
+    if revision:
+        protected.update([revision['initialReleaseId'], revision['previousReleaseId']])
+    for path in releases.iterdir():
         if path.is_symlink() or not path.is_dir() or not RELEASE_ID.fullmatch(path.name) or not pure_news_snapshot(path):
             continue
         try:
@@ -489,12 +502,9 @@ def _promote(stage, public, mode, release_id, code_revision, *, revision_reason=
         except (ValueError, OSError, KeyError, TypeError):
             continue  # Foreign or damaged releases are not ours to remove.
         snapshots.append((published_at, path.name, path))
-        if retained.get('revision'):
-            protected.update([path.name, retained['revision']['initialReleaseId'], retained['revision']['previousReleaseId']])
     ordinary = [entry for entry in sorted(snapshots, reverse=True) if entry[1] not in protected]
-    for _, _, path in ordinary[6:]:
+    for _, _, path in ordinary[max(0, RETAINED_SNAPSHOTS - len(protected)):]:
         shutil.rmtree(path)
-    return manifest
 
 
 def restore(public: Path, release_id: str):
@@ -542,7 +552,7 @@ def _record_failure(public, mode, message, *, expected_date=None, now=None):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['prepare', 'validate', 'promote', 'fail', 'restore'])
+    parser.add_argument('action', choices=['prepare', 'validate', 'promote', 'fail', 'restore', 'prune'])
     parser.add_argument('--public', type=Path, default=Path('public'))
     parser.add_argument('--stage', type=Path)
     parser.add_argument('--mode', choices=['daily', 'stream'], default='daily')
@@ -565,6 +575,10 @@ def main():
             rid = args.release_id or datetime.now(timezone.utc).strftime('r%Y%m%dT%H%M%S-') + uuid4().hex[:8]
             promote(args.stage, args.public, args.mode, rid, args.code_revision,
                     revision_reason=args.revision_reason, base_release_id=args.base_release_id)
+        elif args.action == 'prune':
+            with publication_lock(args.public):
+                current = verify_snapshot(preflight_public(args.public)/'releases'/read_json(args.public/'data/release.json')['releaseId'])
+                prune_snapshots(args.public/'releases', current['releaseId'], current.get('revision'))
         elif args.action == 'restore':
             require(bool(args.release_id), '--release-id is required')
             restore(args.public, args.release_id)

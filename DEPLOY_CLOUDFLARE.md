@@ -1,12 +1,16 @@
-# Cloudflare 静态托管 + GitHub Actions 上线清单
+# Cloudflare Workers 部署与上线清单
 
-当前正式域名为 `https://newsfrontier.top/`。Pages、Workers Static Assets 或自定义 Worker 都可能提供静态文件，不能只凭域名后缀判断部署类型；应在 Cloudflare Dashboard 的 Deployments/Settings 中核对构建来源、关联 Commit 和输出目录。仓库的 `_headers` 已在线上实测生效，但每次切换部署路线后仍必须重新验收。
+正式域名为 `https://newsfrontier.top/`，由 Cloudflare Worker `frontier-pulse` 提供（仅静态资源，没有 Worker 脚本）。部署只有一条路径：
 
-## 方案 A：Cloudflare Git Integration（推荐）
+1. GitHub Actions 按计划生成数据，并提交到 `main`；
+2. Cloudflare Workers Builds 监听 `main`，执行 `npx wrangler deploy`；
+3. Wrangler 读取仓库根目录的 `wrangler.jsonc`，把 `public/` 上传为静态资源。
 
-这是步骤最少、维护成本最低的方式。GitHub Actions 负责每天生成并提交数据，Cloudflare 检测到 `main` 更新后自动发布。
+`public/_headers` 提供安全头与缓存头；`public/.assetsignore` 中列出的文件只留在仓库里，不会上传（目前是前端从不读取、单个超过 6 MB 的 `events.json`）。
 
-### 1. 开启 GitHub Actions 写权限
+旧的 Cloudflare Pages Direct Upload 工作流（`pages-deployment.yml`）一直处于停用状态，已删除。
+
+## 1. 开启 GitHub Actions 写权限
 
 打开 <https://github.com/voilalz/frontier-pulse/settings/actions>：
 
@@ -14,48 +18,39 @@
 2. 选择 `Read and write permissions`。
 3. 保存。
 
-如 `main` 启用了分支保护，需要允许 `github-actions[bot]` 更新 `public/data/news.json`，或为自动数据提交设置对应例外。
+如 `main` 启用了分支保护，需要允许 `github-actions[bot]` 提交 `public/data` 与 `public/releases`。
 
-### 2. 连接 Cloudflare Pages
+## 2. Cloudflare Workers Builds 设置
 
-1. 登录 Cloudflare Dashboard。
-2. 进入 `Workers & Pages → Create application → Pages → Connect to Git`。
-3. 授权 GitHub，并选择 `voilalz/frontier-pulse`。
-4. Production branch：`main`。
-5. Framework preset：`None`。
-6. Build command：留空。
-7. Build output directory：`public`。
-8. Root directory：仓库根目录。
-9. 保存并部署。
+在 Cloudflare Dashboard 打开 `Workers & Pages → frontier-pulse → Settings → Build`，应为：
 
-首次完成后会得到 `https://frontier-pulse.pages.dev`，若名称被占用，Cloudflare 会提供带后缀的实际地址。
+- Git 仓库：`voilalz/frontier-pulse`，生产分支 `main`；
+- Build command：留空；
+- Deploy command：`npx wrangler deploy`；
+- Root directory：仓库根目录。
 
-### 3. 运行一次日报
+Worker 名称、资源目录和兼容日期都写在 `wrangler.jsonc`，修改部署设置请改这个文件，不要只改 Dashboard。自定义域名 `newsfrontier.top` 在 Dashboard 的 `Settings → Domains & Routes` 中维护；`wrangler.jsonc` 不声明 `routes`，部署不会改动已绑定的域名。
+
+## 3. 运行一次日报
 
 进入仓库 `Actions → Daily news update → Run workflow`。成功标准：
 
 - 工作流绿色通过；
-- `public/data/news.json` 包含 `timezone: Asia/Shanghai`；
-- `items` 恰好为 10 条；
-- Cloudflare Deployment 对应最新提交。
+- `public/data/news.json` 包含 `timezone: Asia/Shanghai`，`items` 恰好为 10 条；
+- Cloudflare Worker 最新部署对应这次数据提交；
 - `public/feed.xml` 存在且可被 Atom 阅读器解析。
 
-之后工作流会在每天 `Asia/Shanghai 07:10` 启动生成，以北京时间 08:00 发布为目标。GitHub 的计划任务不是分钟级 SLA，高负载时可能延后。
+日报工作流按 `Asia/Shanghai` 07:40 启动、08:10 补跑。GitHub 的计划任务不是分钟级 SLA，高负载时可能延后数小时。
 
-## 方案 B：Wrangler Direct Upload（可选）
+## 4. 快照保留
 
-只在你希望 GitHub Actions 直接控制部署、而不是让 Cloudflare 监听 Git 提交时使用。Direct Upload 项目之后不能原地切换为 Git Integration；二选一即可。
+每次正式发布或当日修订都会在 `public/releases/` 写入一个完整快照（约 16 MB）。发布脚本最多保留 7 个，并始终保留当前版本及其初版、上一版（深读恢复和修订对比要用）。过期快照删除后，旧分享链接仍可通过 `public/data/edition-versions/<releaseId>.json` 打开当期日报与深读。
 
-1. 在 Cloudflare 创建名为 `frontier-pulse` 的 Direct Upload Pages 项目。
-2. 创建 API Token，权限设置为 `Account → Cloudflare Pages → Edit`。
-3. 在 GitHub Actions Secrets 中添加：
-   - `CLOUDFLARE_API_TOKEN`
-   - `CLOUDFLARE_ACCOUNT_ID`
-4. 在 GitHub Actions Variables 中添加：
-   - `CLOUDFLARE_DEPLOY_ENABLED=true`
-5. 手动运行 `Deploy Cloudflare Pages`，或推送 `public/` 目录更新。
+需要手动清理时运行：
 
-`.github/workflows/pages-deployment.yml` 使用 Wrangler 将 `public` 目录部署到 `frontier-pulse` 项目。未设置启用变量时，该部署任务会安全跳过，不影响推荐的 Git Integration 方案。
+```bash
+python scripts/publication.py prune --public public
+```
 
 ## DeepSeek V4 Flash 中文标题、摘要和关键事实（推荐）
 
@@ -70,7 +65,7 @@ Actions Variables：
 - `AI_PROVIDER=deepseek`
 - `DEEPSEEK_MODEL=deepseek-v4-flash`
 
-密钥由 GitHub Actions 的 Python 采集脚本在服务端读取，Cloudflare 只托管生成后的静态 JSON；不要把密钥设置为 Pages 公开环境变量、写进 `public/`、提交到仓库或放入浏览器 JavaScript。没有 API Key 时，采集、Top 10 规则筛选和保守摘要仍会正常运行，但系统不会假装已经完成中文翻译。
+密钥由 GitHub Actions 的 Python 采集脚本在服务端读取，Cloudflare 只托管生成后的静态 JSON；不要把密钥设置为 Worker 公开环境变量、写进 `public/`、提交到仓库或放入浏览器 JavaScript。没有 API Key 时，采集、Top 10 规则筛选和保守摘要仍会正常运行，但系统不会假装已经完成中文翻译。
 
 依次手动运行 `Daily news update` 和 `Full stream update`，再检查：
 
@@ -101,21 +96,9 @@ Actions Variables：
 - `SMTP_PORT=587`
 - `SMTP_USE_SSL=false`
 - `SMTP_STARTTLS=true`
-- `SITE_URL=https://frontier-pulse.jiumi674.workers.dev`（换域名后同步修改）
+- `SITE_URL=https://newsfrontier.top`（换域名后同步修改）
 
 端口 465 通常改为 `SMTP_USE_SSL=true`。未配置核心邮件变量时会安全跳过，不会阻断日报更新。SMTP 凭证应使用服务商提供的授权码，不要提交登录密码或收件人清单。
-
-## 绑定 `news.frontier.com`
-
-只有在你拥有 `frontier.com` 或获得其 DNS 管理权限时才能使用这个子域名。
-
-1. 在 Pages 项目打开 `Custom domains → Set up a custom domain`。
-2. 输入 `news.frontier.com`。
-3. 如果 `frontier.com` 的 DNS 已托管到同一 Cloudflare 账户，系统会自动创建记录和 TLS 证书。
-4. 如果 DNS 在其他服务商，按 Cloudflare 显示的目标创建 CNAME，并等待证书变为 `Active`。
-5. 同步更新 GitHub Variable `SITE_URL`、`config/news_config.json` 的 `site_url`，以及 `public/index.html` 中 canonical/OG/Twitter 图片的绝对地址。
-
-若你不控制 `frontier.com`，请改用自己拥有的域名，例如 `news.你的域名.com`；仅修改网页代码无法取得第三方域名。
 
 ## 验收清单
 
@@ -129,7 +112,7 @@ Actions Variables：
 - `/feed.xml` 可订阅；单条新闻的复制链接能定位到 `#item-...`。
 - `public/data/status.json` 显示 `state: ok`；模拟失败时网页出现更新失败警告且不回退样例。
 - GitHub Actions 的 CI、Daily news update 均为绿色。
-- Cloudflare Pages 使用 HTTPS 正常访问。
+- `https://newsfrontier.top/` 使用 HTTPS 正常访问。
 - `Production smoke test` 通过，CSP、`nosniff` 和各类 JSON 的 `Cache-Control` 没有缺失或重复。
 - 自定义域名状态为 `Active`，且 DNS 没有重复 A/AAAA/CNAME 记录。
 
@@ -143,12 +126,12 @@ Actions Variables：
 - 页面显示“最近一次自动更新失败”：打开 `public/data/status.json` 或 Actions 日志查看已公开的简短原因；上一期数据不会被覆盖。
 - 邮件未发送：先确认工作流中 `Send administrator email digest` 步骤是否显示跳过配置；再核对 SMTP 端口、SSL/STARTTLS 和授权码。
 - `git push` 被拒绝：两个数据工作流共用 `frontier-data-main` 并发锁，并会执行最多三次冲突安全的 rebase/push；若仍失败，再检查 Actions 的 `Read and write permissions` 和 `main` 分支保护规则。
-- Pages 没有更新：确认项目连接的是 `voilalz/frontier-pulse` 的 `main`，输出目录为 `public`。
+- 站点没有更新：在 Worker 的 `Deployments` 中查看最新构建日志，确认连接的是 `voilalz/frontier-pulse` 的 `main`，部署命令为 `npx wrangler deploy`。
 - 自定义域名证书未签发：检查 DNS 是否存在冲突记录，并确认该域名确实属于当前 Cloudflare Zone。
 
 ## 线上响应头与缓存验收
 
-`_headers` 在不同 Cloudflare 托管形态下的加载路径不同；若是完全自定义的 Worker 代码，可能需要在 Worker 响应中显式写入同等响应头。部署后运行：
+Workers 静态资源会直接应用 `public/_headers`；若以后为 Worker 增加脚本，需要在脚本响应中保留同等响应头。部署后运行：
 
 ```bash
 curl -fsSI https://你的域名/
@@ -160,6 +143,6 @@ python scripts/check_production.py --site-url https://你的域名/
 
 预期首页有 CSP、`X-Content-Type-Options: nosniff`；`news.json` 为 `max-age=300`，`status.json` 为 `max-age=60`，归档与搜索清单为 `max-age=300`。同一个响应不应出现两组 `max-age`。常规前端请求不追加时间戳，只有用户主动点击刷新时才绕过缓存。
 
-## A01–A05 发布与恢复
+## 发布与恢复
 
-整期快照、单命令恢复、外部监测器的未启用配置及后续授权操作，见 [发布与恢复说明](docs/reliable-publishing.md)。本分支不自动部署监测器。
+整期快照与单命令恢复见上文“快照保留”；恢复已保留的版本可手动运行 `Restore retained release` 工作流。外部监测器（`ops/watchdog`）默认不部署。

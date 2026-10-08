@@ -17,7 +17,7 @@
 
 ## A01–A05：发布可靠性（待合并审查）
 
-新增临时生成与发布校验、七个不可变完整快照、单命令恢复，以及按版本固定的日报/深读/归档读取。所有页面时间使用北京时间，导航移除 Atom 和邮件按钮，后台订阅与邮件保留。日报生成调整为北京时间 07:10，08:00 为发布目标。独立外部监测代码默认关闭，未部署，需后续授权启用；操作、验收及限制见 [发布与恢复说明](docs/reliable-publishing.md)。
+新增临时生成与发布校验、七个不可变完整快照、单命令恢复，以及按版本固定的日报/深读/归档读取。所有页面时间使用北京时间，导航移除 Atom 和邮件按钮，后台订阅与邮件保留。日报生成调整为北京时间 07:10，08:00 为发布目标。独立外部监测代码默认关闭，未部署，需后续授权启用；快照保留与恢复见 [部署说明](DEPLOY_CLOUDFLARE.md#4-快照保留)。
 
 
 ## 2026-09-27 每日深读编辑模型
@@ -270,10 +270,9 @@ python scripts/check_production.py --site-url https://newsfrontier.top/
 ## 最简上线方式
 
 1. GitHub `Settings → Actions → General → Workflow permissions` 选择 `Read and write permissions`。
-2. Cloudflare Dashboard 进入 `Workers & Pages → Create → Pages → Connect to Git`，连接本仓库。
-3. Production branch 设为 `main`，Framework preset 设为 `None`，Build command 留空，Build output directory 设为 `public`。
-4. 手动运行一次 `Daily news update`，确认生成 10 条、归档和 `status.json`。
-5. 在 Cloudflare 部署页面确认最新 `main` 已发布，再按需绑定自有域名。
+2. Cloudflare Dashboard 进入 `Workers & Pages → Create → Import a repository`，连接本仓库，生产分支 `main`，Deploy command 为 `npx wrangler deploy`（读取根目录 `wrangler.jsonc`，发布 `public/`）。
+3. 手动运行一次 `Daily news update`，确认生成 10 条、归档和 `status.json`。
+4. 在 Worker 的 `Deployments` 页面确认最新 `main` 已发布，再在 `Domains & Routes` 绑定自有域名。
 
 完整配置和故障排查见 [DEPLOY_CLOUDFLARE.md](DEPLOY_CLOUDFLARE.md)。
 
