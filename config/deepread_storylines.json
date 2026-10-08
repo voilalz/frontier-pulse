@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "note": "长期追踪议题。深读用它把同一条线上的当天新闻合成一章，并从过去三周的已捕获报道中找背景。模式只匹配标题与摘要；新增议题时保持具体，避免“AI”“国防”这类大类。",
+  "storylines": [
+    {"id": "counter-uas", "name": "反无人机", "patterns": ["\\bC-?UA[SV]s?\\b", "counter[- ](?:drone|uas|unmanned)", "anti-drone", "drone (?:detection|defen[cs]e)", "Dronebuster", "反无人机"]},
+    {"id": "directed-energy", "name": "定向能武器", "patterns": ["directed[- ]energy", "laser weapons?", "high[- ]power microwave", "激光武器", "定向能"]},
+    {"id": "cca", "name": "协同作战飞机与无人僚机", "patterns": ["\\bCCA\\b", "collaborative combat aircraft", "loyal wingman", "\\bYFQ-\\d+", "\\bFQ-42", "Talon Blue", "协同作战飞机", "忠诚僚机"]},
+    {"id": "military-autonomy", "name": "军队自主作战体系", "patterns": ["autonomous warfare", "autonomy command", "drone (?:regiment|competition|dominance)", "unmanned systems? (?:hub|command|battle lab)", "无人机团", "自主作战"]},
+    {"id": "hypersonic", "name": "高超声速武器", "patterns": ["hypersonic", "\\bHACM\\b", "Blackbeard", "scramjet", "Dark Eagle", "\\bLRHW\\b", "高超声速", "高超音速"]},
+    {"id": "interceptor-production", "name": "拦截弹与弹药产能", "patterns": ["\\bPAC-3", "\\bSM-6\\b", "\\bAMRAAM\\b", "\\bAIM-260\\b", "Patriot interceptors?", "interceptor (?:production|output)", "munitions? production", "拦截弹"]},
+    {"id": "long-range-strike", "name": "远程精确打击弹药", "patterns": ["\\bPrSM\\b", "precision strike missile", "\\bFP-7\\b", "\\bERAM\\b", "Barracuda", "Tomahawk", "\\bNSM\\b", "精确打击导弹"]},
+    {"id": "next-gen-fighter", "name": "下一代战斗机", "patterns": ["\\bF-47\\b", "\\bF/A-XX\\b", "\\bNGAD\\b", "sixth[- ]generation", "\\bGCAP\\b", "\\bFCAS\\b", "下一代战斗机", "第六代战斗机"]},
+    {"id": "uncrewed-maritime", "name": "无人舰艇与水下无人系统", "patterns": ["uncrewed (?:vessels?|submarines?|submersibles?|surface)", "\\bUSVs?\\b", "\\bUUVs?\\b", "\\bMUSV\\b", "drone (?:ships?|boats?)", "Marauder", "ROMULUS", "XV Excalibur", "无人艇", "无人潜航器"]},
+    {"id": "naval-industrial-base", "name": "美国造船与潜艇工业基础", "patterns": ["submarine industrial base", "shipbuilding", "shipyard", "submarine (?:parts|production)", "造船", "潜艇工业"]},
+    {"id": "starship", "name": "星舰", "patterns": ["\\bStarship\\b", "星舰"]},
+    {"id": "crewed-leo", "name": "载人航天与后国际空间站时代", "patterns": ["\\bCrew-\\d+", "Starliner", "space station", "\\bISS\\b", "crew transport", "载人飞船", "空间站"]},
+    {"id": "frontier-ai-safety", "name": "前沿AI安全", "patterns": ["AI safety", "safety (?:team|engineer|researchers?|evaluators?|concerns?)", "rogue (?:attack|agents?)", "AI Security Institute", "unacceptable risk", "pauses? training", "watermark", "AI安全", "安全团队"]},
+    {"id": "quantum", "name": "量子计算", "patterns": ["quantum (?:comput\\w*|benchmark\\w*|processors?|advantage)", "\\bqubits?\\b", "Quantum Benchmarking", "量子计算"]},
+    {"id": "precision-metrology", "name": "精密测量与时间频率", "patterns": ["nuclear clocks?", "atomic clocks?", "optical clocks?", "optical cavity", "核时钟", "原子钟", "光钟"]},
+    {"id": "physical-ai", "name": "具身智能与机器人", "patterns": ["humanoid", "physical AI", "robotaxis?", "人形机器人", "具身智能"]},
+    {"id": "ai-chips", "name": "AI芯片与半导体", "patterns": ["AI chips?", "semiconductor", "chiplets?", "AI factor(?:y|ies)", "芯片"]},
+    {"id": "space-security", "name": "太空安全与军事航天", "patterns": ["space-to-space", "space weapons?", "\\bSPACECOM\\b", "(?<!& )\\bSpace Force\\b(?!s)", "太空武器", "太空军"]}
+  ]
+}
