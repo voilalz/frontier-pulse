@@ -748,8 +748,16 @@
     const deepreadState=state.pipelineStatus?.deepread;
     if (deepreadState && deepreadState.editionDate===report?.editionDate && deepreadState.state!=='ok') {
       badge.textContent='日报已更新';
-      showAlert('warning', '日报已更新，深读生成失败', deepreadFailureDetail(deepreadState)
-        +(deepreadState.state==='degraded' ? `可阅读 ${deepreadState.contentEditionDate} 的历史完整版。` : '暂无合格深读正文，日报可独立阅读。'));
+      if (deepreadState.readerStatus==='partial') {
+        showAlert('notice', '日报已更新，深读合格主题已发布', '可进入每日深读阅读已通过校对的解读，页面已标注本期内容的完整程度。');
+      } else if (deepreadState.readerStatus==='brief') {
+        showAlert('notice', '日报已更新，深读暂为简讯', '深读正文尚未就绪，已提供有来源的当日中文简讯。');
+      } else {
+        const retained=deepreadState.readerStatus==='retained'
+          || (!deepreadState.readerStatus && deepreadState.state==='degraded');
+        showAlert('warning', '日报已更新，深读生成失败', deepreadFailureDetail(deepreadState)
+          +(retained ? `可阅读 ${deepreadState.contentEditionDate} 的历史完整版。` : '暂无合格深读正文，日报可独立阅读。'));
+      }
       return;
     }
     // Ranking diagnostics remain in status.json for operators; readers only
@@ -1221,7 +1229,7 @@
     if (report.contentFiltered || report.readerStatus==='unavailable') return `<div class="empty"><h2>本期深读暂未完成</h2><p>${esc(deepreadFailureDetail(report))}可先阅读今日简报。</p></div>`;
     const byNews = new Map(report.events.map(e=>[e.newsId,e]));
     const length = report.chapters.flatMap(c=>c.blocks.map(b=>b.text)).join('').length;
-    const image = report.events.find(e=>e.image);
+    const image = (report.chapters[0]?.newsIds || []).map(id=>byNews.get(id)).find(e=>e?.image);
     const partial = report.chapters.length < (report.topicPlan?.length || report.chapters.length);
     return `<div class="deepread-layout"><aside class="deepread-toc"><p class="eyebrow">IN THIS EDITION</p><b>本期阅读</b>
       <ol>${report.chapters.map(c=>`<li><a href="#${esc(c.id)}">${esc(c.title)}</a></li>`).join('')}</ol>
@@ -1348,7 +1356,7 @@
       } else if (['partial','brief'].includes(report?.readerStatus)) {
         badge.textContent = report.readerStatus==='partial' ? '主题已发布' : '今日简讯';
         badge.classList.add('warning');
-        showAlert('notice', '今日深读部分发布', report.readerStatus==='partial' ? '可先阅读合格解读，缺失主题会单独恢复。' : '深读正文尚未完成，先展示当日中文简讯。');
+        showAlert('notice', '今日深读部分发布', report.readerStatus==='partial' ? '可先阅读已通过校对的解读，页面已标注本期内容的完整程度。' : '深读正文尚未完成，先展示当日中文简讯。');
       } else if (report?.schemaVersion === 2 && report?.readerStatus === 'unavailable') {
         badge.textContent = '深读生成失败';
         badge.classList.add('failed');
