@@ -303,6 +303,41 @@ def _public(item):
     return event
 
 
+def _writer_feedback(issues, previous, records):
+    """Give the writer actionable repairs; keep public diagnostics bounded."""
+    hints = {
+        'analysis-new-quotation': '分析、标题和导语不使用引号突出概念，不新增引语；去掉术语的强调引号。确需引用的原话放入事实段，并用原文证据支持。',
+        'analysis-causal-assertion': '分析不使用导致、造成、促使、使得、因此、因而、从而、因为等因果连接词。保留机制解释，改为有边界的条件性推理或具体待验证问题。',
+        'negated-action': '核对指定原文中的否定动作及其对象，不能把尚未验证、尚未部署写成已验证、已部署；本句未使用该项事实时，只引用真正支持本句的证据。',
+        'attribution-missing': '保留原文的说话主体，机构或企业披露的材料明确写据该机构披露或据该公司介绍，不写成已独立证实。',
+        'sentence-truncated': '用完整中文句子表达，保留句末标点，不用省略号截断。',
+        'editorial-depth': '依照具体审查原因重写相关段落，解释方法、机制或约束及尚待核对的问题，不只换词复述新闻。',
+    }
+    claims = {}
+    if isinstance(previous, dict):
+        for key in ('title', 'angle'):
+            claims[key] = {'text': previous.get(key), 'evidenceIds': previous.get('framingEvidenceIds', [])}
+        for bi, block in enumerate(previous.get('blocks', [])):
+            for si, sentence in enumerate(block.get('sentences', [])):
+                claims[f'b{bi}s{si}'] = sentence
+    result = []
+    for issue in issues:
+        rule = issue.get('rule', '')
+        hint = hints.get(rule, '按具体审查原因修复本句，必要时删除无支持的陈述，不补充新的事实。')
+        if rule.startswith('quantity:'):
+            hint = '本句出现了指定证据未支持的数字或数量；删除该数值或改用确实含该数值且支持本句的证据，不能编补数据。'
+        elif rule.startswith('qualifier:'):
+            hint = '保留本句指定证据的计划、不确定性、仅限、仿真、初步、部分或否定条件；已开展准备与预计完成的结果分开写，不能把未来计划写成已经实现。'
+        entry = {**issue, 'repairInstruction': hint}
+        claim = claims.get(issue.get('sentenceId'))
+        if claim:
+            refs = claim.get('evidenceIds', [])
+            entry.update(text=claim.get('text'),
+                         evidenceRecords=[records[ref] for ref in refs if ref in records])
+        result.append(entry)
+    return result
+
+
 def _write_and_check(topic,index,events,runtime,request_json):
     ids=[i['id'] for i in topic['items']]
     members=[e for e in events if e['newsId'] in ids]
@@ -327,13 +362,15 @@ def _write_and_check(topic,index,events,runtime,request_json):
                 '每个事实句用1–3条真实evidenceId支撑；数值、否定、计划、部分、仿真条件和说话主体必须保留，新闻稿写据该机构披露，观点不能作为事实。'
                 '每段由多句组成，sentences[].text原样相连就是该段。至少两条不同的当前事实，加至少一段有内容的分析，不把事实重复改写成分析。'
                 '分析明确是编辑推理，围绕技术机制、实验条件、适用边界及未知，不补新数字、引语、实体事实或确定因果。来源未提某事不能断言从未发生某事。'
+                '分析、标题和导语不加引号强调术语，也不使用因此、因为、导致、从而等因果连接词；用条件性推理解释机制和边界。'
+                '若validationFeedback非空，逐条按repairInstruction及所附证据修复previousDraft；其余有依据的内容可保留，不能只改措辞而保留原错误。'
                 'previousSameEvent及previousProject提供已捕获历史，历史事实只放background/change，change须同时引用此前和当前证据。没有历史不编背景；watch列具体待验证问题，核对previousWatchFor是否已有回应。'
                 '比较只围绕本章共同问题且不暗示事件因果。省略没有材料的节，不写套话、URL、HTML或Markdown。只返回指定JSON。',
                 input_text=json.dumps({'topic':{k:v for k,v in topic.items() if k!='items'},'events':[
                     {**e,'previousSameEvent':[h for h in e['history'] if h['relation']=='same-event'],
                      'previousProject':[h for h in e['history'] if h['relation']=='same-project'],
                      'previousWatchFor':[q for h in e['history'] for q in h.get('watchFor',[])]} for e in members],
-                    'validationFeedback':feedback,'previousDraft':previous},ensure_ascii=False))
+                    'validationFeedback':_writer_feedback(feedback,previous,records),'previousDraft':previous},ensure_ascii=False))
         except Exception as exc:
             feedback=[{'rule':'generation-time-budget-exhausted' if isinstance(exc,GenerationBudgetExceeded) else 'writer-request-failed'}]; previous=None
             if isinstance(exc,GenerationBudgetExceeded): break
