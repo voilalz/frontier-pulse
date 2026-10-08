@@ -1,0 +1,1022 @@
+{
+  "schemaVersion": 8,
+  "generatedAt": "2026-08-05T01:35:55Z",
+  "editionDate": "2026-08-05",
+  "timezone": "Asia/Shanghai",
+  "method": "deepseek",
+  "selectionMethod": "deepseek",
+  "selectionStrategy": "ai-ranked-rule-constrained",
+  "selectionStatus": "relaxed",
+  "selectionProvider": "deepseek",
+  "selectionModel": "deepseek-v4-flash",
+  "selectionNotices": [
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 3 个 Top 10 入选位"
+  ],
+  "selectionWarnings": [
+    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（1 条已标注）"
+  ],
+  "selectionDiagnostics": {
+    "attempted": true,
+    "status": "relaxed",
+    "failureReason": "",
+    "candidateCount": 36,
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "aiWeight": 0.65,
+    "ruleWeight": 0.35,
+    "aiScoredItemCount": 36,
+    "aiUnscoredItemCount": 0,
+    "unconstrainedTop": {
+      "categoryCounts": {
+        "局部冲突": 7,
+        "军事动态": 3
+      },
+      "domainCounts": {
+        "aljazeera.com": 5,
+        "twz.com": 2,
+        "defensenews.com": 2,
+        "bbc.co.uk": 1
+      },
+      "categoryViolations": {
+        "局部冲突": 7
+      },
+      "domainViolations": {
+        "aljazeera.com": 5
+      }
+    },
+    "finalTop": {
+      "categoryCounts": {
+        "局部冲突": 4,
+        "军事动态": 3,
+        "航空航天": 3
+      },
+      "domainCounts": {
+        "aljazeera.com": 2,
+        "twz.com": 2,
+        "defensenews.com": 2,
+        "spacenews.com": 1,
+        "nasa.gov": 2,
+        "bbc.co.uk": 1
+      },
+      "categoryViolations": {
+        "局部冲突": 4
+      },
+      "domainViolations": {}
+    },
+    "adjustedItemCount": 3,
+    "adjustedOutIds": [
+      "f62663f0eaf58e",
+      "455254c54dfed2",
+      "e2ef1ce31194c4"
+    ],
+    "adjustedInIds": [
+      "ccac1e3bbca2b8",
+      "c3b540dd2851b1",
+      "6f1d574186b742"
+    ],
+    "relaxedItemCount": 1
+  },
+  "translationStatus": "ok",
+  "translationProvider": "deepseek",
+  "translationModel": "deepseek-v4-flash",
+  "translatedItemCount": 10,
+  "translationWarnings": [],
+  "translationDiagnostics": {
+    "requestedItemCount": 1,
+    "completedItemCount": 1,
+    "missingItemCount": 0,
+    "missingItemIds": [],
+    "missingItems": [],
+    "initialBatchSize": 5,
+    "initialBatchCount": 1,
+    "requestCount": 1,
+    "retryRequestCount": 0,
+    "providerFailureCount": 0,
+    "structuralFailureCount": 0,
+    "completionReason": "complete_first_pass",
+    "completionMessage": "全部条目首轮完成",
+    "lastProviderError": "",
+    "targetItemCount": 10,
+    "reusedItemCount": 9,
+    "newlyTranslatedItemCount": 1,
+    "totalTranslatedItemCount": 10,
+    "totalMissingItemCount": 0
+  },
+  "historyAnalysisStatus": "ok",
+  "historyAnalysisProvider": "deepseek",
+  "historyLinkedItemCount": 2,
+  "historyAnalyzedItemCount": 2,
+  "historyAnalysisWarnings": [],
+  "historyAnalysisDiagnostics": {
+    "requestedItemCount": 2,
+    "completedItemCount": 2,
+    "missingItemCount": 0,
+    "missingItemIds": [],
+    "missingItems": [],
+    "initialBatchSize": 5,
+    "initialBatchCount": 1,
+    "requestCount": 1,
+    "retryRequestCount": 0,
+    "providerFailureCount": 0,
+    "structuralFailureCount": 0,
+    "completionReason": "complete_first_pass",
+    "completionMessage": "全部条目首轮完成",
+    "lastProviderError": ""
+  },
+  "warnings": [
+    "候选主题或来源分布不均，已分级放宽配额补足 Top 10（1 条已标注）"
+  ],
+  "candidateCount": 43,
+  "freshCandidateCount": 43,
+  "supplementalCandidateCount": 0,
+  "freshItemCount": 10,
+  "supplementalItemCount": 0,
+  "coverageStatus": "supplemented",
+  "effectiveLookbackHours": 24,
+  "sourceCount": 10,
+  "scoring": {
+    "label": "重要度，不等同于事实真伪",
+    "formula": "基础分 + 来源 + 主题优先级 + 时效 + 影响信号 + 相关性 + 证据完整度 + 多源印证 - 编辑降权",
+    "confidenceNote": "置信度仅反映已收录来源的权重与独立来源数量，不替代事实核查。"
+  },
+  "brief": {
+    "headline": "‘最大限度使用’：伊朗在与美国停火期间增强军力",
+    "summary": "本期从 10 个公开信源筛选出 10 条重点事件，覆盖科技、AI、航空航天、安全动态与无人系统。",
+    "signals": [
+      "局部冲突：伊朗伊斯兰革命卫队发言人侯赛因·莫赫比上月表示，伊朗在停火期间提高了导弹生产速度。",
+      "局部冲突：俄罗斯弹道导弹袭击乌克兰首都基辅，造成1人死亡、5人受伤。此前本周俄罗斯和乌克兰已有至少27人丧生，此次袭击紧随其后。",
+      "局部冲突：美国与伊朗尚未交火，特朗普称已给出最后谈判机会，海峡仍是紧迫焦点。"
+    ]
+  },
+  "items": [
+    {
+      "id": "f468b1e3ff6e93",
+      "contentType": "news",
+      "title": "‘最大限度使用’：伊朗在与美国停火期间增强军力",
+      "originalTitle": "‘Maximum use’: Iran boosts military strength during ceasefire with US",
+      "summary": "伊朗伊斯兰革命卫队发言人侯赛因·莫赫比上月表示，伊朗在停火期间提高了导弹生产速度。",
+      "keyFacts": [
+        "伊朗伊斯兰革命卫队发言人侯赛因·莫赫比上月表示，伊朗在停火期间提高了导弹生产速度。"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-04T18:34:48Z",
+      "url": "https://www.aljazeera.com/news/2026/8/4/maximum-use-iran-boosts-military-strength-during-ceasefire-with-us?traffic_source=rss",
+      "score": 86,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 12,
+        "主题相关性": 10,
+        "证据完整度": 2,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 88/100",
+        "综合排序分 86/100（AI 65% + 规则 35%）",
+        "规则参考分 81/100",
+        "来源权重 16/20",
+        "发布约 7.0 小时",
+        "命中 5 个主题信号",
+        "影响信号：ceasefire、停火"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "伊朗",
+        "停火",
+        "导弹"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/8/4/maximum-use-iran-boosts-military-strength-during-ceasefire-with-us?traffic_source=rss",
+          "publishedAt": "2026-08-04T18:34:48Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      }
+    },
+    {
+      "id": "68f8d59fcb3f66",
+      "contentType": "news",
+      "title": "俄罗斯弹道导弹袭击基辅致1死5伤",
+      "originalTitle": "One killed, five injured in Russian ballistic missile attack on Kyiv",
+      "summary": "俄罗斯弹道导弹袭击乌克兰首都基辅，造成1人死亡、5人受伤。此前本周俄罗斯和乌克兰已有至少27人丧生，此次袭击紧随其后。",
+      "keyFacts": [
+        "俄罗斯弹道导弹袭击基辅造成1人死亡、5人受伤",
+        "此前本周俄乌双方至少有27人死亡",
+        "袭击发生于2026年8月4日"
+      ],
+      "why": "此次袭击发生在双方伤亡加剧的背景之下，显示冲突持续升级，对地区安全形势有直接影响。",
+      "category": "局部冲突",
+      "source": "Al Jazeera",
+      "country": "国际",
+      "publishedAt": "2026-08-04T23:24:43Z",
+      "url": "https://www.aljazeera.com/news/2026/8/4/russia-strikes-ukrainian-capital-kyiv-with-ballistic-missiles?traffic_source=rss",
+      "score": 84,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 19,
+        "影响信号": 11,
+        "主题相关性": 8,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 85/100",
+        "综合排序分 84/100（AI 65% + 规则 35%）",
+        "规则参考分 82/100",
+        "来源权重 16/20",
+        "发布约 2.2 小时",
+        "命中 4 个主题信号",
+        "影响信号：attack、missile"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "俄乌冲突",
+        "导弹袭击",
+        "基辅"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Al Jazeera",
+          "domain": "aljazeera.com",
+          "url": "https://www.aljazeera.com/news/2026/8/4/russia-strikes-ukrainian-capital-kyiv-with-ballistic-missiles?traffic_source=rss",
+          "publishedAt": "2026-08-04T23:24:43Z",
+          "evidenceGroup": "outlet:aljazeera.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 3,
+        "relatedStories": [
+          {
+            "id": "8518093b41402b",
+            "editionDate": "2026-07-25",
+            "title": "基辅附近无人机展览遭俄袭击致十人死亡",
+            "originalTitle": "Ten killed in Russian attack on drone exhibition near Kyiv",
+            "summary": "活动有乌克兰国防工业知名人士参加，中午遭弹道导弹袭击。",
+            "category": "局部冲突",
+            "source": "BBC World",
+            "publishedAt": "2026-07-25T00:06:53Z",
+            "associationScore": 46,
+            "relationLabel": "同一事件后续",
+            "associationReasons": [
+              "标题结构显示为同一事件的后续报道",
+              "标题共享关键词：attack、killed、kyiv、russian",
+              "同属局部冲突"
+            ]
+          },
+          {
+            "id": "8518093b41402b",
+            "editionDate": "2026-07-26",
+            "title": "基辅附近无人机展览遭俄袭击致十人死亡",
+            "originalTitle": "Ten killed in Russian attack on drone exhibition near Kyiv",
+            "summary": "活动有乌克兰国防工业知名人士参加，中午遭弹道导弹袭击。",
+            "category": "局部冲突",
+            "source": "BBC World",
+            "publishedAt": "2026-07-25T00:06:53Z",
+            "associationScore": 46,
+            "relationLabel": "同一事件后续",
+            "associationReasons": [
+              "标题结构显示为同一事件的后续报道",
+              "标题共享关键词：attack、killed、kyiv、russian",
+              "同属局部冲突"
+            ]
+          },
+          {
+            "id": "686f0dc7d2a2ca",
+            "editionDate": "2026-08-02",
+            "title": "俄罗斯导弹袭击基辅致至少9人死亡",
+            "originalTitle": "At least 9 people killed in Russian missile attacks on Kyiv",
+            "summary": "俄罗斯对基辅的导弹袭击造成至少9人死亡，数十人受伤。",
+            "category": "军事动态",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-01T17:45:26Z",
+            "associationScore": 70,
+            "relationLabel": "同一事件后续",
+            "associationReasons": [
+              "标题结构显示为同一事件的后续报道",
+              "标题共享关键词：killed、kyiv、missile、russian",
+              "共同标签：基辅、导弹袭击"
+            ]
+          }
+        ],
+        "timelineSummary": "2026年7月25日，基辅附近无人机展览遭俄导弹袭击，致10人死亡。8月1日，俄导弹袭基辅致至少9死。8月4日，俄弹道导弹再袭基辅，致1死5伤，本周俄乌双方累计至少27人丧生。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "若基辅遭袭频率或伤亡数继续上升，则需关注俄对乌关键基础设施的打击是否升级。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "后续可观察俄乌谈判是否因新一轮袭击而中断，以及国际社会是否加大调停力度。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "deepseek"
+      }
+    },
+    {
+      "id": "acac2508042452",
+      "contentType": "news",
+      "title": "伊朗与阿曼合作控制霍尔木兹海峡，脆弱停火仍持续",
+      "originalTitle": "Iran And Oman Working To Control Strait Of Hormuz, Shaky Ceasefire Still Holding",
+      "summary": "美国与伊朗尚未交火，特朗普称已给出最后谈判机会，海峡仍是紧迫焦点。",
+      "keyFacts": [
+        "美国与伊朗尚未交火，特朗普称已给出最后谈判机会，海峡仍是紧迫焦点。"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-08-04T18:12:50Z",
+      "url": "https://www.twz.com/news-features/iran-and-oman-working-to-control-strait-of-hormuz-shaky-ceasefire-still-holding",
+      "score": 81,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 16,
+        "影响信号": 6,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 87/100",
+        "综合排序分 81/100（AI 65% + 规则 35%）",
+        "规则参考分 69/100",
+        "来源权重 15/20",
+        "发布约 7.4 小时",
+        "命中 2 个主题信号",
+        "影响信号：ceasefire"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "霍尔木兹海峡",
+        "停火",
+        "谈判"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/05/IRGC-New-Zone.jpg?quality=85",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/news-features/iran-and-oman-working-to-control-strait-of-hormuz-shaky-ceasefire-still-holding",
+          "publishedAt": "2026-08-04T18:12:50Z",
+          "evidenceGroup": "outlet:twz.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "linked",
+        "lookbackDays": 365,
+        "relatedCount": 1,
+        "relatedStories": [
+          {
+            "id": "b2cbc25933a514",
+            "editionDate": "2026-08-03",
+            "title": "伊朗称与阿曼关于霍尔木兹海峡的谈判进入最后阶段",
+            "originalTitle": "Iran says negotiations with Oman over Strait of Hormuz in final stages",
+            "summary": "德黑兰宣布此消息前，特朗普曾表示美国将暂缓对伊朗的新攻击，以期快速达成协议。",
+            "category": "局部冲突",
+            "source": "Al Jazeera",
+            "publishedAt": "2026-08-02T19:08:06Z",
+            "associationScore": 57,
+            "relationLabel": "同一事件后续",
+            "associationReasons": [
+              "标题结构显示为同一事件的后续报道",
+              "标题共享关键词：hormuz、iran、oman、strait",
+              "共同标签：霍尔木兹海峡"
+            ]
+          }
+        ],
+        "timelineSummary": "2026年8月2日，伊朗称与阿曼就霍尔木兹海峡谈判进入最后阶段，美方暂缓新攻击以促协议。8月4日，美伊仍未交火，特朗普称已给最后谈判机会，海峡仍是焦点，脆弱的停火持续。",
+        "outlook": [
+          {
+            "horizon": "短期",
+            "text": "若美伊双方未出现交火事件，则需关注霍尔木兹海峡航行安全是否保持稳定。",
+            "confidence": "中"
+          },
+          {
+            "horizon": "中期",
+            "text": "后续可观察伊朗与阿曼谈判结果，若达成协议则海峡局势可能进一步缓和。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "deepseek"
+      }
+    },
+    {
+      "id": "8c7f4c21115fa4",
+      "contentType": "news",
+      "title": "美国陆军寻求可摧毁小型无人机的地对空导弹",
+      "originalTitle": "US Army wants a surface-to-air missile that can destroy small drones",
+      "summary": "美国陆军希望新型地对空导弹单价低于15万美元，能够摧毁小型无人机。",
+      "keyFacts": [
+        "美国陆军希望新型地对空导弹单价低于15万美元，能够摧毁小型无人机。"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-08-04T19:29:22Z",
+      "url": "https://www.defensenews.com/industry/techwatch/2026/08/04/us-army-wants-a-surface-to-air-missile-that-can-destroy-small-drones",
+      "score": 78,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 17,
+        "影响信号": 5,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 82/100",
+        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "规则参考分 70/100",
+        "来源权重 16/20",
+        "发布约 6.1 小时",
+        "命中 2 个主题信号",
+        "影响信号：missile"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国陆军",
+        "导弹",
+        "反无人机"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/45VJ6EO4WJDXFOLDFLT64Q4HXE.jpeg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/industry/techwatch/2026/08/04/us-army-wants-a-surface-to-air-missile-that-can-destroy-small-drones",
+          "publishedAt": "2026-08-04T19:29:22Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      }
+    },
+    {
+      "id": "2b57d9598ea9fa",
+      "contentType": "news",
+      "title": "乌克兰再袭Wildberries站点，莫斯科地区袭击致五人死亡",
+      "originalTitle": "Ukraine hits more Wildberries sites as strike kills five in Moscow region",
+      "summary": "俄罗斯最大在线零售商运营的设施在圣彼得堡和特维尔也遭到袭击。",
+      "keyFacts": [
+        "俄罗斯最大在线零售商运营的设施在圣彼得堡和特维尔也遭到袭击。"
+      ],
+      "why": "该事件可能影响冲突强度、地区安全、武器运用方式或外交空间。",
+      "category": "局部冲突",
+      "source": "BBC World",
+      "country": "国际",
+      "publishedAt": "2026-08-04T11:19:01Z",
+      "url": "https://www.bbc.co.uk/news/articles/c151pkww79zo?at_medium=RSS&at_campaign=rss",
+      "score": 78,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 17,
+        "主题优先级": 10,
+        "时效": 13,
+        "影响信号": 6,
+        "主题相关性": 6,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 82/100",
+        "综合排序分 78/100（AI 65% + 规则 35%）",
+        "规则参考分 70/100",
+        "来源权重 17/20",
+        "发布约 14.3 小时",
+        "命中 3 个主题信号",
+        "影响信号：strike"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 17/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "乌克兰",
+        "Wildberries",
+        "袭击"
+      ],
+      "image": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/ad4f/live/138d6250-8fed-11f1-a10e-47119dd4425c.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "BBC World",
+          "domain": "bbc.co.uk",
+          "url": "https://www.bbc.co.uk/news/articles/c151pkww79zo?at_medium=RSS&at_campaign=rss",
+          "publishedAt": "2026-08-04T11:19:01Z",
+          "evidenceGroup": "outlet:bbc.co.uk"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "为补足 Top 10 放宽主题配额",
+      "diversityRelaxed": true,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      }
+    },
+    {
+      "id": "8f4426fdc08a4c",
+      "contentType": "news",
+      "title": "陆军重启巨型火炮以推进高超音速测试",
+      "originalTitle": "Army Revives Giant Cannon to Advance Hypersonic Testing",
+      "summary": "陆军正将其取消的远程超级炮改装成测试平台，以加速高超音速研发，减少对昂贵飞行测试的依赖。",
+      "keyFacts": [
+        "陆军正将其取消的远程超级炮改装成测试平台，以加速高超音速研发，减少对昂贵飞行测试的依赖。"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "The War Zone",
+      "country": "国际",
+      "publishedAt": "2026-08-04T21:15:52Z",
+      "url": "https://www.twz.com/land/army-revives-giant-cannon-to-advance-hypersonic-testing",
+      "score": 76,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 15,
+        "主题优先级": 10,
+        "时效": 18,
+        "影响信号": 4,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 80/100",
+        "综合排序分 76/100（AI 65% + 规则 35%）",
+        "规则参考分 69/100",
+        "来源权重 15/20",
+        "发布约 4.3 小时",
+        "命中 2 个主题信号",
+        "影响信号：test"
+      ],
+      "confidence": "待核验",
+      "confidenceReason": "当前仅收录 1 个来源（权重 15/20），不代表事实已经独立证实。",
+      "tags": [
+        "陆军",
+        "高超音速",
+        "超级炮"
+      ],
+      "image": "https://www.twz.com/wp-content/uploads/2026/08/HYPERSONIC-GUN-TEST.jpg?quality=85",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "The War Zone",
+          "domain": "twz.com",
+          "url": "https://www.twz.com/land/army-revives-giant-cannon-to-advance-hypersonic-testing",
+          "publishedAt": "2026-08-04T21:15:52Z",
+          "evidenceGroup": "outlet:twz.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      }
+    },
+    {
+      "id": "1d9eb3f8935c30",
+      "contentType": "news",
+      "title": "消息人士称美国在伊朗战争中几乎用尽远程精确导弹",
+      "originalTitle": "US used ‘virtually all’ long-range precision missiles during Iran war, sources say",
+      "summary": "据报道，美军在与伊朗五个月的战争中消耗了大量高精度远程导弹库存。",
+      "keyFacts": [
+        "据报道，美军在与伊朗五个月的战争中消耗了大量高精度远程导弹库存。"
+      ],
+      "why": "该动态可能影响装备采购、战备部署、工业产能或跨域作战体系。",
+      "category": "军事动态",
+      "source": "Defense News",
+      "country": "国际",
+      "publishedAt": "2026-08-04T13:08:32Z",
+      "url": "https://www.defensenews.com/industry/techwatch/2026/08/04/us-used-virtually-all-long-range-precision-missiles-during-iran-war-sources-say",
+      "score": 76,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 10,
+        "时效": 14,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 84/100",
+        "综合排序分 76/100（AI 65% + 规则 35%）",
+        "规则参考分 62/100",
+        "来源权重 16/20",
+        "发布约 12.5 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "美国",
+        "伊朗",
+        "导弹"
+      ],
+      "image": "https://cloudfront-us-east-1.images.arcpublishing.com/archetype/7BX4WITMO5GKRFOF2DLGNKN6IQ.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "Defense News",
+          "domain": "defensenews.com",
+          "url": "https://www.defensenews.com/industry/techwatch/2026/08/04/us-used-virtually-all-long-range-precision-missiles-during-iran-war-sources-say",
+          "publishedAt": "2026-08-04T13:08:32Z",
+          "evidenceGroup": "outlet:defensenews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      }
+    },
+    {
+      "id": "ccac1e3bbca2b8",
+      "contentType": "news",
+      "title": "Telesat获得16.3亿加元加拿大国防合同",
+      "originalTitle": "Telesat lands $1.63 billion Canadian defense contract",
+      "summary": "北极通信合同将资助Telesat的Lightspeed扩建，使计划中的LEO网络达到225颗卫星。",
+      "keyFacts": [
+        "北极通信合同将资助Telesat的Lightspeed扩建，使计划中的LEO网络达到225颗卫星。"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "SpaceNews",
+      "country": "国际",
+      "publishedAt": "2026-08-04T22:00:15Z",
+      "url": "https://spacenews.com/telesat-lands-1-63-billion-canadian-defense-contract",
+      "score": 74,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 16,
+        "主题优先级": 9,
+        "时效": 18,
+        "影响信号": 4,
+        "主题相关性": 2,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 77/100",
+        "综合排序分 74/100（AI 65% + 规则 35%）",
+        "规则参考分 67/100",
+        "来源权重 16/20",
+        "发布约 3.6 小时",
+        "命中 1 个主题信号",
+        "影响信号：contract"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 16/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "Telesat",
+        "加拿大",
+        "国防合同"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "SpaceNews",
+          "domain": "spacenews.com",
+          "url": "https://spacenews.com/telesat-lands-1-63-billion-canadian-defense-contract",
+          "publishedAt": "2026-08-04T22:00:15Z",
+          "evidenceGroup": "outlet:spacenews.com"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      }
+    },
+    {
+      "id": "6f1d574186b742",
+      "contentType": "news",
+      "title": "NASA将尝试观测火箭部件撞击月球",
+      "originalTitle": "NASA Will Attempt to Observe Rocket Part’s Lunar Impact",
+      "summary": "NASA与SpaceX利用地面和太空望远镜追踪一枚猎鹰9号上面级，预计8月5日撞击月球爱因斯坦陨石坑附近，对地球无威胁，科学家将收集月球数据。",
+      "keyFacts": [
+        "NASA与SpaceX利用地面和太空望远镜追踪一枚猎鹰9号上面级，预计8月5日撞击月球爱因斯坦陨石坑附近，对地球无威胁，科学家将收集月球数据。"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
+      "country": "国际",
+      "publishedAt": "2026-08-04T20:00:14Z",
+      "url": "https://www.nasa.gov/humans-in-space/commercial-space/nasa-will-attempt-to-observe-rocket-parts-lunar-impact",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 17,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 75/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 68/100",
+        "来源权重 20/20",
+        "发布约 5.6 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "NASA",
+        "月球撞击",
+        "猎鹰9号"
+      ],
+      "image": "",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "NASA",
+          "domain": "nasa.gov",
+          "url": "https://www.nasa.gov/humans-in-space/commercial-space/nasa-will-attempt-to-observe-rocket-parts-lunar-impact",
+          "publishedAt": "2026-08-04T20:00:14Z",
+          "evidenceGroup": "outlet:nasa.gov"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      }
+    },
+    {
+      "id": "c3b540dd2851b1",
+      "contentType": "news",
+      "title": "NASA提供月球基地货物着陆器和技术演示的最新进展",
+      "originalTitle": "NASA Provides Updates on Moon Base Cargo Landers, Tech Demonstrations",
+      "summary": "NASA正在推进月球基地建设，该基地将成为月球南极附近的一个弹性前哨，用于科学、技术和未来人类操作。商业伙伴如Blue Origin、Firefly Aerospace、Intuitive Machines和Voyager Lunar Systems正致力于在2028年前交付着陆器。",
+      "keyFacts": [
+        "NASA正在推进月球基地建设，该基地将成为月球南极附近的一个弹性前哨，用于科学、技术和未来人类操作。商业伙伴如Blue Origin、Firefly Aerospace、Intuitive Machines和Voyager Lunar Systems正致力于在2028年前交付着…"
+      ],
+      "why": "该进展可能改变发射、轨道基础设施、航空平台或深空任务的能力边界。",
+      "category": "航空航天",
+      "source": "NASA",
+      "country": "国际",
+      "publishedAt": "2026-08-04T16:14:51Z",
+      "url": "https://www.nasa.gov/missions/moon-base/nasa-provides-updates-on-moon-base-cargo-landers-tech-demonstrations",
+      "score": 73,
+      "scoreBasis": "AI重要度 · 规则约束",
+      "scoreComponents": {
+        "基础分": 15,
+        "来源": 20,
+        "主题优先级": 9,
+        "时效": 15,
+        "影响信号": 0,
+        "主题相关性": 4,
+        "证据完整度": 3,
+        "多源印证": 0,
+        "编辑降权": 0,
+        "日期异常降权": 0,
+        "补充窗口降权": 0
+      },
+      "scoreReasons": [
+        "DeepSeek 候选重要度 77/100",
+        "综合排序分 73/100（AI 65% + 规则 35%）",
+        "规则参考分 66/100",
+        "来源权重 20/20",
+        "发布约 9.4 小时",
+        "命中 2 个主题信号"
+      ],
+      "confidence": "中",
+      "confidenceReason": "来源权重 20/20，共 1 个独立来源；关键事实建议继续交叉核验。",
+      "tags": [
+        "NASA",
+        "月球基地",
+        "商业航天"
+      ],
+      "image": "https://www.nasa.gov/wp-content/uploads/2026/08/moon-base-update-slate.jpg",
+      "corroboration": 1,
+      "sources": [
+        {
+          "name": "NASA",
+          "domain": "nasa.gov",
+          "url": "https://www.nasa.gov/missions/moon-base/nasa-provides-updates-on-moon-base-cargo-landers-tech-demonstrations",
+          "publishedAt": "2026-08-04T16:14:51Z",
+          "evidenceGroup": "outlet:nasa.gov"
+        }
+      ],
+      "selectionProvider": "deepseek",
+      "translationProvider": "deepseek",
+      "isSupplemental": false,
+      "selectionWindowHours": 24,
+      "selectionNote": "",
+      "diversityRelaxed": false,
+      "historyContext": {
+        "status": "no-match",
+        "lookbackDays": 365,
+        "relatedCount": 0,
+        "relatedStories": [],
+        "timelineSummary": "在近 365 日已归档日报中，尚未发现达到关联阈值的历史事件。",
+        "outlook": [
+          {
+            "horizon": "观察",
+            "text": "历史证据不足，暂不作方向性预判；等待新的独立来源或后续正式信息。",
+            "confidence": "低"
+          }
+        ],
+        "analysisProvider": "rules"
+      }
+    }
+  ]
+}
