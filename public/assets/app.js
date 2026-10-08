@@ -32,6 +32,7 @@
   const RESEARCH_KEYWORDS_KEY = "fp-research-keywords-v1";
   const RESEARCH_SCOPE_KEY = "fp-research-scope-v1";
   const THEME_KEY = "fp-theme-v1";
+  const DISMISSED_NOTICE_KEY = "fp-dismissed-notice-v1";
 
   const $ = (id) => document.getElementById(id);
   const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({
@@ -113,6 +114,17 @@
     hashHandled: false,
   };
   if (!state.researchKeywords.length) state.researchScope = "all";
+
+  const svgIcon = (body, filled = false) => `<svg class="icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="${filled ? "currentColor" : "none"}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
+  const STAR = '<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.1 1 5.8L12 16.9l-5.25 2.7 1-5.8L3.5 9.7l5.9-.9z"/>';
+  const ICONS = {
+    star: svgIcon(STAR),
+    starFilled: svgIcon(STAR, true),
+    link: svgIcon('<path d="M10 13.5a4.5 4.5 0 0 0 6.4.2l2.6-2.6a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2"/><path d="M14 10.5a4.5 4.5 0 0 0-6.4-.2L5 12.9a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2"/>'),
+    external: svgIcon('<path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>'),
+    moon: svgIcon('<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>'),
+    sun: svgIcon('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'),
+  };
 
   function formatDate(value, includeTime = true) {
     return publication.formatDate(value, includeTime);
@@ -667,7 +679,16 @@
     if (icon) icon.textContent = alertKind === "notice" ? "i" : "!";
     $("alertTitle").textContent = title;
     $("alertDetail").textContent = detail;
-    alert.hidden = false;
+    // Informational notices stay closed once the reader dismisses that exact
+    // notice; warnings and failures always surface.
+    alert.dataset.notice = alertKind === "notice" ? `${title}|${detail}` : "";
+    alert.hidden = Boolean(alert.dataset.notice) && readStorage(DISMISSED_NOTICE_KEY, "") === alert.dataset.notice;
+  }
+
+  function dismissAlert() {
+    const notice = $("systemAlert").dataset.notice;
+    if (notice) writeStorage(DISMISSED_NOTICE_KEY, notice);
+    hideAlert();
   }
 
   function hideAlert() { $("systemAlert").hidden = true; }
@@ -1187,7 +1208,7 @@
     const length = [report.lead, ...report.chapters.flatMap((chapter) => chapter.blocks.map((block) => block.text))].join("").length;
     const minutes = Math.max(2, Math.round(length / 450));
     return `<div class="deepread-layout">
-      <aside class="deepread-toc"><p class="eyebrow">IN THIS EDITION</p><b>本期阅读</b>
+      <aside class="deepread-toc"><b>本期阅读</b>
         <ol>${report.chapters.map((chapter) => `<li><a href="#${esc(chapter.id)}">${esc(chapter.title)}</a></li>`).join("")}</ol>
         <p>${report.eventCount} 项核心进展 · 约 ${minutes} 分钟</p>
         <p class="deepread-evidence-guide">证据标签说明材料来源类型，不代表所有细节已经独立核实。</p>
@@ -1231,7 +1252,7 @@
     const length = report.chapters.flatMap(c=>c.blocks.map(b=>b.text)).join('').length;
     const image = (report.chapters[0]?.newsIds || []).map(id=>byNews.get(id)).find(e=>e?.image);
     const partial = report.chapters.length < (report.topicPlan?.length || report.chapters.length);
-    return `<div class="deepread-layout"><aside class="deepread-toc"><p class="eyebrow">IN THIS EDITION</p><b>本期阅读</b>
+    return `<div class="deepread-layout"><aside class="deepread-toc"><b>本期阅读</b>
       <ol>${report.chapters.map(c=>`<li><a href="#${esc(c.id)}">${esc(c.title)}</a></li>`).join('')}</ol>
       <p>${report.chapters.length} 个主题${length ? ` · 约 ${Math.max(2,Math.round(length/450))} 分钟` : ''}</p>
       </aside><article class="deepread-article deepread-editorial deepread-topics">
@@ -1278,7 +1299,7 @@
     const minutes = Math.max(2, Math.round(length / 450));
     let number = 0;
     return `<div class="deepread-layout">
-      <aside class="deepread-toc"><p class="eyebrow">IN THIS EDITION</p><b>本期阅读</b>
+      <aside class="deepread-toc"><b>本期阅读</b>
         <ol>${report.sections.map((section) => `<li><a href="#${esc(section.id)}">${esc(section.title)}</a><span>${section.events.length} 项进展</span></li>`).join("")}</ol>
         <p>${report.eventCount} 项事件 · ${report.sourceCount} 个来源<br>约 ${minutes} 分钟</p>
       </aside>
@@ -1300,7 +1321,7 @@
             <div class="deepread-citations"><span>报道来源</span>${event.sources.map((source) => `<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.name)} ↗</a>`).join("")}</div>
           </section>`).join("")}
         </section>`).join("")}
-        ${report.conclusion ? `<footer class="deepread-conclusion"><p class="eyebrow">LOOKING AHEAD</p><h2>接下来，观察什么</h2><p>${esc(report.conclusion)}</p></footer>` : ""}
+        ${report.conclusion ? `<footer class="deepread-conclusion"><h2>接下来，观察什么</h2><p>${esc(report.conclusion)}</p></footer>` : ""}
       </article>
     </div>`;
   }
@@ -1652,7 +1673,7 @@
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", state.theme === "dark" ? "#0b151b" : "#102a38");
     const button = $("themeBtn");
     if (button) {
-      button.textContent = state.theme === "dark" ? "☀" : "◐";
+      button.innerHTML = state.theme === "dark" ? ICONS.sun : ICONS.moon;
       button.title = state.theme === "dark" ? "切换浅色模式" : "切换深色模式";
       button.setAttribute("aria-label", button.title);
     }
@@ -1661,20 +1682,19 @@
 
   function renderViewCopy() {
     const copy = {
-      latest: ["DAILY BRIEF", "今日前沿态势", "科技 · AI · 航空航天 · 安全 · 前沿研究", "TOP 10", "今日 Top 10"],
-      deepread: ["THE DAILY READ", "每日深读", "读懂今日进展，连接事实与趋势", "DAILY READ", "每日深读"],
-      stream: ["FULL STREAM", `过去 ${state.rangeHours} 小时`, "全量合格动态", "STREAM", "全量动态"],
-      research: ["DAILY CLASSICS", "每日经典论文", "", "CLASSICS", "当日推荐"],
-      history: ["ARCHIVE", "历史脉络", state.query ? "跨日期检索" : "按日期回看", "ARCHIVE", state.query ? "跨日期搜索" : "历史要闻"],
-      bookmarks: ["COLLECTION", "我的收藏", "仅保存在当前浏览器", "SAVED", "收藏新闻"],
-      watchlist: ["WATCHLIST", "关注词", "从历史索引中追踪持续信号", "SIGNALS", "关注词命中"],
+      latest: ["DAILY BRIEF", "今日前沿态势", "科技 · AI · 航空航天 · 安全 · 前沿研究", "今日 Top 10"],
+      deepread: ["THE DAILY READ", "每日深读", "读懂今日进展，连接事实与趋势", "每日深读"],
+      stream: ["FULL STREAM", `过去 ${state.rangeHours} 小时`, "全量合格动态", "全量动态"],
+      research: ["DAILY CLASSICS", "每日经典论文", "", "当日推荐"],
+      history: ["ARCHIVE", "历史脉络", state.query ? "跨日期检索" : "按日期回看", state.query ? "跨日期搜索" : "历史要闻"],
+      bookmarks: ["COLLECTION", "我的收藏", "仅保存在当前浏览器", "收藏新闻"],
+      watchlist: ["WATCHLIST", "关注词", "从历史索引中追踪持续信号", "关注词命中"],
     }[state.view];
     $("viewEyebrow").textContent = copy[0];
     $("viewTitle").textContent = copy[1];
     $("viewDescription").textContent = copy[2];
     $("viewDescription").hidden = !copy[2];
-    $("feedEyebrow").textContent = copy[3];
-    $("feedTitle").textContent = copy[4];
+    $("feedTitle").textContent = copy[3];
     $("watchPanel").hidden = state.view !== "watchlist";
     $("spotlightSection").hidden = state.view !== "latest";
     $("classicSection").hidden = state.view !== "research";
@@ -1805,6 +1825,8 @@
       signals = items.slice(0, 3).map((item) => `${item.category}：${item.summary}`);
     }
     $("briefHeadline").textContent = clean(headline, items.length ? items[0].title : "暂无可用内容");
+    // News views carry no editorial headline here, so the banner collapses to its metrics row.
+    $("briefSection").classList.toggle("brief-compact", state.view !== "research");
     if (state.view !== "research") {
       headline = ["latest", "history"].includes(state.view) ? "本期新闻概览" : headline;
       summary = `共 ${metricItems.length} 条新闻，摘要涵盖事件背景、关键细节与最新进展。`;
@@ -1831,12 +1853,16 @@
     }
   }
 
-  function renderSpotlight() {
-    if (state.view !== "latest") return;
+  function spotlightItems() {
     const reportItems = (state.latestReport?.items || []).filter(isAllowedNewsItem);
     const requested = Array.isArray(state.latestReport?.spotlightIds) ? state.latestReport.spotlightIds : [];
     const requestedItems = requested.map((id) => reportItems.find((item) => item.id === id)).filter(Boolean);
-    const items = requestedItems.length === 3 ? requestedItems : diverseSpotlightItems(reportItems);
+    return requestedItems.length === 3 ? requestedItems : diverseSpotlightItems(reportItems);
+  }
+
+  function renderSpotlight() {
+    if (state.view !== "latest") return;
+    const items = spotlightItems();
     $("spotlightStories").innerHTML = items.length ? items.map((item, index) => `
       <article class="spotlight-card tone-${esc(categoryTone(item.category))}${index === 0 && item.image ? " has-backdrop" : ""}${index > 0 && item.image ? " has-thumb" : ""}">
         ${index === 0 && item.image ? `<img class="spotlight-image spotlight-backdrop" src="${esc(item.image)}" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer">` : ""}
@@ -1845,7 +1871,7 @@
           <div class="spotlight-meta"><b>0${index + 1}</b><span>${esc(item.category)}</span><span>${esc(item.source)}</span></div>
           <h3>${highlightText(item.title)}</h3>
           <p>${highlightText(item.summary)}</p>
-          <a href="#${esc(anchorId(item))}">阅读完整摘要 <span aria-hidden="true">↓</span></a>
+          <a href="#${esc(anchorId(item))}">查看详情 <span aria-hidden="true">↓</span></a>
         </div>
       </article>`).join("") : '<div class="empty"><b>今日必读暂不可用</b>请检查日报更新状态。</div>';
     document.querySelectorAll(".spotlight-image").forEach((image) => {
@@ -2088,10 +2114,10 @@
       <div class="story-side">
         <div class="score"><b>${item.score ?? "—"}</b><small>研究相关度</small></div>
         <div class="story-actions">
-          <button type="button" data-bookmark title="${saved ? "取消收藏" : "收藏"}" aria-label="${saved ? "取消收藏" : "收藏"}">${saved ? "★" : "☆"}</button>
-          <button type="button" data-share title="复制本条链接" aria-label="复制本条链接">⌁</button>
+          <button type="button" data-bookmark title="${saved ? "取消收藏" : "收藏"}" aria-label="${saved ? "取消收藏" : "收藏"}"${saved ? ' aria-pressed="true"' : ""}>${saved ? ICONS.starFilled : ICONS.star}</button>
+          <button type="button" data-share title="复制本条链接" aria-label="复制本条链接">${ICONS.link}</button>
           ${item.pdfUrl ? `<a href="${esc(item.pdfUrl)}" target="_blank" rel="noopener noreferrer" title="打开 PDF" aria-label="打开论文 PDF">PDF</a>` : ""}
-          ${item.url ? `<a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer" title="打开论文页面" aria-label="打开论文页面">↗</a>` : ""}
+          ${item.url ? `<a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer" title="打开论文页面" aria-label="打开论文页面">${ICONS.external}</a>` : ""}
         </div>
       </div>
       <details class="details" data-details-key="${esc(key)}"${opened}>
@@ -2104,7 +2130,7 @@
     </article>`;
   }
 
-  function renderStory(item, index, saved) {
+  function renderStory(item, index, saved, mustRead = false) {
     const key = itemKey(item);
     const visual = item.image ? `<figure class="story-visual"><img src="${esc(item.image)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"></figure>` : "";
     const sources = item.sources.map((source) => `<li><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.name || source.domain)}</a></li>`).join("");
@@ -2121,12 +2147,12 @@
     return `<article class="story news-story" id="${esc(anchorId(item))}" data-key="${esc(key)}">
       <span class="rank">${String(index + 1).padStart(2, "0")}</span>
       <div class="story-main${item.image ? " has-image" : ""}">${visual}<div class="story-copy">
-        <div class="meta"><span class="cat" data-category="${esc(item.category)}">${esc(item.category)}</span><b>${esc(item.source)}</b><time datetime="${esc(item.publishedAt)}">${esc(formatDate(item.publishedAt))}</time></div>
+        <div class="meta">${mustRead ? '<span class="must-read-badge">今日必读</span>' : ""}<span class="cat" data-category="${esc(item.category)}">${esc(item.category)}</span><b>${esc(item.source)}</b><time datetime="${esc(item.publishedAt)}">${esc(formatDate(item.publishedAt))}</time></div>
         <h3>${highlightText(item.title)}</h3>
         ${item.summary ? `<p class="summary">${highlightText(item.summary)}</p>` : `<p class="summary translation-state">${item.contentAvailability === 'title-only' ? '仅标题' : '中文翻译待完成'} · 请阅读原文</p>`}
         <div class="news-footer">
           ${item.url ? `<a class="read-original" href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">阅读原文 <span aria-hidden="true">↗</span></a>` : ""}
-          <div class="story-actions"><button type="button" data-bookmark title="${saved ? "取消收藏" : "收藏"}" aria-label="${saved ? "取消收藏" : "收藏"}">${saved ? "★" : "☆"}</button><button type="button" data-share title="复制本条链接" aria-label="复制本条链接">⌁</button></div>
+          <div class="story-actions"><button type="button" data-bookmark title="${saved ? "取消收藏" : "收藏"}" aria-label="${saved ? "取消收藏" : "收藏"}"${saved ? ' aria-pressed="true"' : ""}>${saved ? ICONS.starFilled : ICONS.star}</button><button type="button" data-share title="复制本条链接" aria-label="复制本条链接">${ICONS.link}</button></div>
         </div>
         ${sourceDetails}
         ${paperLinks}
@@ -2153,13 +2179,14 @@
     if (!state.visible.length) {
       const message = state.view === "watchlist" && !state.watchwords.length
         ? "先添加一个关注词，匹配结果会显示在这里。"
-        : state.view === "bookmarks" ? "尚未收藏新闻。点击新闻卡片上的 ☆ 即可收藏。"
+        : state.view === "bookmarks" ? "尚未收藏新闻。点击新闻卡片上的星标按钮即可收藏。"
           : state.view === "research" && !state.researchKeywords.length ? "先添加论文关键词，系统会自动生成你的专属论文流。"
             : state.view === "research" && state.researchScope === "mine" ? "当前论文中暂无关键词命中；可添加英文同义词，或由管理员把该方向加入系统采集词。"
           : "没有匹配的新闻，请更换分类、日期或搜索词。";
       $("stories").innerHTML = `<div class="empty"><b>暂无结果</b>${esc(message)}</div>`;
     } else {
       const grouped = state.view === "watchlist" || (state.view === "history" && state.query);
+      const mustRead = new Set(state.view === "latest" ? spotlightItems().map(itemKey) : []);
       let previousEdition = "";
       $("stories").innerHTML = state.visible.map((item, index) => {
         const heading = grouped && item.editionDate !== previousEdition
@@ -2167,7 +2194,7 @@
         previousEdition = item.editionDate;
         return heading + (item.contentType === "paper"
           ? renderPaper(item, index, saved.has(itemKey(item)))
-          : renderStory(item, index, saved.has(itemKey(item))));
+          : renderStory(item, index, saved.has(itemKey(item)), mustRead.has(itemKey(item))));
       }).join("");
     }
     $("loadMoreBtn").hidden = !paginated || state.visible.length >= state.totalVisible;
@@ -2593,7 +2620,7 @@
   document.querySelectorAll('[data-reading-help]').forEach(button=>button.addEventListener('click',()=>openDialog('reading')));
   document.querySelector("[data-close-dialog]").addEventListener("click", () => $("infoDialog").close());
   $("infoDialog").addEventListener("click", (event) => { if (event.target === $("infoDialog")) $("infoDialog").close(); });
-  $("alertClose").addEventListener("click", hideAlert);
+  $("alertClose").addEventListener("click", dismissAlert);
   document.addEventListener("keydown", (event) => {
     if (event.key === "/" && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) {
       event.preventDefault(); $("search").focus();

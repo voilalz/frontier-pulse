@@ -55,7 +55,7 @@ async function main() {
         if (scenario === "today") {
           assert.equal(await page.locator("#dataState").textContent(),"今日已更新");
           assert.equal(await page.locator("#atomBtn,#atomButton,#emailBtn,a[href$='feed.xml']").count(),0);
-          assert.match(await page.locator("#briefUpdated").textContent(),/09.*30.*08:10/);
+          assert.match(await page.locator("#briefUpdated").textContent(),/9月30日 08:10/);
         } else if (scenario === "navigation-evidence") {
           for (const view of ["deepread","stream","research","history","bookmarks","watchlist","latest"]) {
             await page.locator(`.view-tabs [data-view="${view}"]`).click();

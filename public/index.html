@@ -48,8 +48,8 @@
           <input id="search" type="search" placeholder="搜索标题、摘要、来源…" autocomplete="off">
           <kbd>/</kbd>
         </label>
-        <button class="icon-button" id="themeBtn" type="button" title="切换深色模式" aria-label="切换深色模式">◐</button>
-        <button class="icon-button" id="reloadBtn" type="button" title="刷新数据" aria-label="刷新数据">↻</button>
+        <button class="icon-button" id="themeBtn" type="button" title="切换深色模式" aria-label="切换深色模式"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+        <button class="icon-button" id="reloadBtn" type="button" title="刷新数据" aria-label="刷新数据"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg></button>
       </div>
     </div>
   </header>
@@ -80,7 +80,7 @@
 
     <section class="shell spotlight" id="spotlightSection" aria-labelledby="spotlightTitle">
       <div class="section-intro">
-        <div><p class="eyebrow">TODAY'S MUST READ</p><h2 id="spotlightTitle">今日必读</h2></div>
+        <h2 id="spotlightTitle">今日必读</h2>
       </div>
       <div class="spotlight-grid" id="spotlightStories" aria-live="polite"></div>
     </section>
@@ -103,7 +103,6 @@
 
     <section class="shell watch-panel" id="watchPanel" hidden>
       <div>
-        <p class="eyebrow">LOCAL WATCHLIST</p>
         <h2>我的关注词</h2>
         <p>关注词只保存在当前浏览器；系统会在跨日期索引中匹配标题、摘要、标签和来源。</p>
       </div>
@@ -123,7 +122,7 @@
 
     <section class="shell feed" id="feedSection" aria-labelledby="feedTitle">
       <div class="feed-head">
-        <div><p class="eyebrow" id="feedEyebrow">TOP STORIES</p><h2 id="feedTitle">今日要闻</h2><p id="resultNote">正在加载…</p></div>
+        <div><h2 id="feedTitle">今日要闻</h2><p id="resultNote">正在加载…</p></div>
         <div class="feed-actions">
           <button class="action subtle" id="exportBtn" type="button">导出当前结果</button>
           <label class="source-filter" id="sourceFilterWrap" hidden>

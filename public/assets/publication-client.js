@@ -14,10 +14,16 @@
   function formatDate(value, includeTime = true) {
     const date = new Date(value);
     if (!Number.isFinite(date.valueOf())) return '时间未知';
-    return new Intl.DateTimeFormat('zh-CN', {
-      timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit',
-      ...(includeTime ? {hour:'2-digit', minute:'2-digit', hour12:false, timeZoneName:'short'} : {}),
-    }).format(date);
+    // Reader-facing times are always China time (stated once in the page header),
+    // written the way Chinese readers write dates: 10月8日 04:13, with the year
+    // only when it is not the current one.
+    const parts = Object.fromEntries(new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Asia/Shanghai', year: 'numeric', month: 'numeric', day: 'numeric',
+      hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+    }).formatToParts(date).filter(p => p.type !== 'literal').map(p => [p.type, p.value]));
+    const year = parts.year === clock().date.slice(0, 4) ? '' : `${parts.year}年`;
+    const day = `${year}${Number(parts.month)}月${Number(parts.day)}日`;
+    return includeTime ? `${day} ${parts.hour}:${parts.minute}` : day;
   }
   function health({editionDate, historical = false, failed = false, now = new Date()}) {
     if (historical) return {label:'历史版本', kind:'history', overdue:false};
