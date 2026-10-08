@@ -48,7 +48,7 @@ class ReviewRegressions(unittest.TestCase):
         self.assertTrue(prose_translation_issue(value, source, refs))
 
     def test_old_complete_edition_cannot_be_retained_for_two_days(self):
-        previous = json.loads((ROOT/'public/data/deepread.json').read_text())
+        previous = json.loads((ROOT/'public/data/deepread/2026-10-07.json').read_text())
         self.assertEqual(previous['editionDate'], '2026-10-07')
         result = choose_readable_deepread({'generationStatus':'failed'}, [previous], '2026-10-09')
         self.assertNotEqual(result['readerStatus'], 'retained')

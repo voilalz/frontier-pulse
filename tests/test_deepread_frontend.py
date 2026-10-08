@@ -108,7 +108,7 @@ class DeepreadFrontendTests(unittest.TestCase):
         self.assertEqual(result.count('class="deepread-footnotes"'),2)
 
     def test_latest_retained_publication_date_fetches_latest_and_keeps_content_date(self):
-        payload=json.loads((ROOT/'public/data/deepread.json').read_text())
+        payload=json.loads((ROOT/'public/data/deepread/2026-10-07.json').read_text())
         payload.update(readerStatus='retained',publicationEditionDate='2026-10-08')
         result=self.browser_result('''(async()=>{
           const urls=[];state.latestReport={editionDate:'2026-10-08'};
@@ -120,6 +120,28 @@ class DeepreadFrontendTests(unittest.TestCase):
         self.assertEqual(result['date'],'2026-10-07')
         self.assertTrue(result['cached'])
         self.assertIn('今日深读未更新，以下为 2026-10-07 内容',result['html'])
+
+    def test_daily_notice_distinguishes_published_topics_briefs_and_failed_prose(self):
+        for reader, state, expected, historical in (
+            ('partial', 'degraded', '合格主题已发布', False),
+            ('brief', 'degraded', '深读暂为简讯', False),
+            ('retained', 'degraded', '深读生成失败', True),
+            ('unavailable', 'failed', '深读生成失败', False),
+        ):
+            with self.subTest(reader=reader):
+                result = self.browser_result('''(() => {
+                  state.view='latest';state.pipelineStatus={state:'ok',deepread:DEEPREAD};
+                  renderEditionHealth=()=>false;
+                  let notice;showAlert=(kind,title,detail)=>{notice={kind,title,detail};};
+                  updateHealth({editionDate:'2026-10-08',items:Array.from({length:10},()=>({})),translationStatus:'ok'});
+                  return notice;
+                })()'''.replace('DEEPREAD', json.dumps({
+                    'readerStatus': reader, 'state': state, 'editionDate': '2026-10-08',
+                    'contentEditionDate': '2026-10-07' if historical else '2026-10-08'})))
+                self.assertIn(expected, result['title'])
+                self.assertEqual('历史完整版' in result['detail'], historical)
+                if reader in ('partial', 'brief'):
+                    self.assertNotIn('失败', result['title'])
 
     def test_real_archives_keep_original_format_without_becoming_new_complete_editions(self):
         payloads=[json.loads(path.read_text()) for path in sorted((ROOT/'public/data/deepread').glob('????-??-??.json'))]
