@@ -49,6 +49,20 @@ class BatchPublicationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.promote('r-stale', revision_reason='再次补充来源支持安排', base_release_id='r-001')
 
+    def test_same_day_revisions_do_not_accumulate_full_snapshots(self):
+        self.promote('r-001')
+        current = 'r-001'
+        for number in range(10):
+            current = self.promote(f'r-rev-{number:02}', revision_reason=f'第{number}次恢复当日深读',
+                                   base_release_id=current)['releaseId']
+        kept = sorted(p.name for p in (self.public/'releases').iterdir())
+        self.assertEqual(len(kept), 7)
+        self.assertIn('r-001', kept)
+        self.assertIn('r-rev-09', kept)
+        self.assertIn('r-rev-08', kept)
+        self.assertNotIn('r-rev-00', kept)
+        self.assertEqual(load(self.public/'data/edition-versions/r-rev-00.json')['manifest']['releaseId'], 'r-rev-00')
+
     def test_concurrent_same_day_promotions_create_only_one_formal_edition(self):
         def publish(index):
             return self.promote(f'r-concurrent-{index}')['releaseId']
