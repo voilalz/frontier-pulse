@@ -402,7 +402,15 @@ _NEGATIVE_ACTIONS = (
 )
 
 
+def _without_difficulty_idiom(source):
+    # "proved no easy feat" describes difficulty, not an unproven result.
+    # Leave every other negative clause intact for the action/scope guards.
+    return re.sub(r"\bprov(?:ed|es|ing)\s+(?:to\s+be\s+)?no\s+easy\s+feat\b",
+                  "was difficult", source, flags=re.I)
+
+
 def _translation_negation_valid(text, source):
+    source = _without_difficulty_idiom(source)
     for clause in re.split(r"[.;,:]|\b(?:and|but)\b", source, flags=re.I):
         if not _TRANSLATION_SCOPE[-1].search(clause):
             continue

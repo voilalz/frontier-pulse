@@ -9,7 +9,7 @@ from datetime import date
 
 from evidence_trace import (validate_evidence, validate_claim_refs, valid_display_translation,
                             _prose_quantities, _translation_negation_valid, _TRANSLATION_SCOPE,
-                            _without_calendar_may, safe_title, safe_url)
+                            _without_calendar_may, _without_difficulty_idiom, safe_title, safe_url)
 from reader_quality import chinese_reader_text
 from deepread_editorial_signals import is_political_policy
 
@@ -74,7 +74,7 @@ def rule_issue(text, role, refs, records, attribution=False):
         return 'negated-action'
     # A Chinese paraphrase can omit unrelated clauses. Only explicit source
     # uncertainty is guarded here; the independent checker judges entailment.
-    scoped = _without_calendar_may(source)
+    scoped = _without_difficulty_idiom(_without_calendar_may(source))
     for label, pattern in zip(('planned','limited','simulation','preliminary','partial','negation'), _TRANSLATION_SCOPE):
         if pattern.search(scoped) and not pattern.search(text):
             if (label == 'planned' and re.search(r'\bcould\b', scoped, re.I)
