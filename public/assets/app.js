@@ -1505,13 +1505,17 @@
     }
   }
 
-  async function loadStream(showToast = false, bypassCache = false) {
+  function fetchStreamPayloads(bypassCache = false) {
+    return Promise.all([
+      fetchJson(ENDPOINTS.stream, bypassCache),
+      fetchJson(ENDPOINTS.streamStatus, bypassCache).catch(() => null),
+    ]);
+  }
+
+  async function loadStream(showToast = false, bypassCache = false, prefetched = null) {
     state.streamLoadError = "";
     try {
-      const [payload, status] = await Promise.all([
-        fetchJson(ENDPOINTS.stream, bypassCache),
-        fetchJson(ENDPOINTS.streamStatus, bypassCache).catch(() => null),
-      ]);
+      const [payload, status] = await (prefetched || fetchStreamPayloads(bypassCache));
       state.streamReport = normalizeCollection(payload, "news");
       state.streamStatus = status && typeof status === "object" ? status : null;
       writeStorage(STREAM_CACHE_KEY, state.streamReport);
@@ -2248,6 +2252,10 @@
       renderAll();
       return;
     }
+    // The stream does not depend on the daily edition, so its download overlaps
+    // the news context instead of waiting behind it.
+    const streamPrefetch = view === "stream" ? fetchStreamPayloads(Boolean(options.bypassCache)) : null;
+    streamPrefetch?.catch(() => {});
     try { await ensureNewsContext(); }
     catch (error) {
       if (request !== state.viewRequest) return;
@@ -2284,7 +2292,7 @@
       state.editionDate = state.latestReport?.editionDate || "";
     } else if (view === "stream") {
       state.sort = "latest";
-      await loadStream(Boolean(options.showToast), Boolean(options.bypassCache));
+      await loadStream(Boolean(options.showToast), Boolean(options.bypassCache), streamPrefetch);
       if (request !== state.viewRequest) return;
       state.currentReport = state.streamReport;
       state.items = state.streamReport?.items || [];
@@ -2595,11 +2603,12 @@
   let newsContextPromise;
   async function ensureNewsContext() {
     if (!newsContextPromise) newsContextPromise = (async () => {
-      newsPolicy = await fetchJson("./assets/news-policy.json");
+      // Independent requests run together; each serial step costs a full
+      // network round trip before any news can render.
+      const [policy] = await Promise.all([fetchJson("./assets/news-policy.json"), loadPublication()]);
+      newsPolicy = policy;
       if (!Array.isArray(newsPolicy?.subject_terms) || !newsPolicy.subject_terms.length) throw new Error("新闻内容规则暂时不可用，请刷新重试。");
-      await loadPublication();
-      await loadLatest();
-      await ensureArchiveIndex();
+      await Promise.all([loadLatest(), ensureArchiveIndex()]);
       // Paper availability must not delay an otherwise usable news edition.
       classicUI.ensureContext().then(()=>{
         if(state.view !== 'research' && state.items.length)renderStories();
