@@ -778,8 +778,62 @@
   }
 
   const verifiedLegacyDeepreads = new WeakSet();
+  const verifiedTopicDeepreads = new WeakSet();
+
+  async function verifyTopicBindings(payload) {
+    const records = new Map();
+    for (const event of payload.events || []) {
+      for (const record of [...(event.evidenceRecords || []), ...(event.history || []).flatMap(h=>h.evidenceRecords || [])]) {
+        if (!['body','feed'].includes(record.kind) || !safeEditorialUrl(record.url)
+            || typeof record.text !== 'string' || record.text.length < 10 || record.text.length > 600
+            || record.text !== record.text.trim() || !Number.isFinite(Date.parse(record.fetchedAt))) return false;
+        const bytes = new TextEncoder().encode(record.url+'\n'+record.kind+'\n'+record.text);
+        const hash = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
+        if (record.evidenceId !== 'evd-'+hash.slice(0,20)) return false;
+        records.set(record.evidenceId,record);
+      }
+    }
+    const check = async (text, role, refs, proof) => {
+      if (!proof || proof.version !== 1 || proof.verdict !== 'supported'
+          || !['openai','deepseek'].includes(proof.provider) || !Array.isArray(refs)
+          || !refs.length || refs.length > 3 || new Set(refs).size !== refs.length
+          || refs.some(ref=>!records.has(ref))) return false;
+      const source = refs.map(ref=>ref+'\t'+records.get(ref).text+'\t'+records.get(ref).url).join('\n');
+      const bytes = new TextEncoder().encode(role+'\n'+text+'\n'+source);
+      const hash = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
+      return proof.binding === hash;
+    };
+    for (const chapter of payload.chapters || []) {
+      const editorial = chapter.editorialCheck;
+      const material=[chapter.title,chapter.angle,chapter.newsIds,chapter.blocks.map(b=>
+        [b.type,b.newsIds,b.sentences.map(s=>[s.text,s.evidenceIds])])];
+      const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(material)));
+      const binding=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
+      if (!editorial || editorial.version !== 1 || editorial.verdict !== 'ready'
+          || !['openai','deepseek'].includes(editorial.provider) || editorial.binding !== binding) return false;
+      for (const key of ['title','angle']) {
+        if (!await check(chapter[key],'analysis',chapter.framingEvidenceIds,chapter[key+'Check'])) return false;
+      }
+      for (const block of chapter.blocks || []) {
+        if (!Array.isArray(block.sentences) || block.text !== block.sentences.map(s=>s.text).join('')) return false;
+        for (const sentence of block.sentences) {
+          const role = ['paragraph','background','change'].includes(block.type) ? 'fact' : 'analysis';
+          if (!await check(sentence.text,role,sentence.evidenceIds,sentence.semanticCheck)) return false;
+        }
+      }
+    }
+    if (payload.chapters?.length) {
+      for (const key of ['headline','lead']) {
+        if (!await check(payload[key],'analysis',payload.framingEvidenceIds,payload[key+'Check'])) return false;
+      }
+    }
+    return true;
+  }
 
   async function normalizeDeepreadForReader(payload) {
+    if (payload?.generationRevision === 13) {
+      try { if (await verifyTopicBindings(payload)) verifiedTopicDeepreads.add(payload); } catch (_) { /* fail closed */ }
+    }
     if (payload?.schemaVersion === 2 && !payload.readerStatus) {
       try {
         const records = payload.events.flatMap(event=>event.evidenceRecords || []);
@@ -800,8 +854,12 @@
   }
 
   function normalizeEditorialDeepread(payload) {
+    if (payload?.generationRevision === 13) return normalizeTopicDeepread(payload);
     if (!/^\d{4}-\d{2}-\d{2}$/.test(payload.editionDate || "")
         || !Array.isArray(payload.events) || !Array.isArray(payload.chapters)) throw new Error("深读文件格式不完整");
+    const archiveOriginal = !payload.readerStatus && (
+      (Number(payload.generationRevision) < 12 && !payload.events.some(e=>e.evidenceRecords?.length))
+      || (Number(payload.generationRevision) <= 12 && verifiedLegacyDeepreads.has(payload) && editorialLegacyBound(payload,false)));
     const seenEvents = new Set(), seenNews = new Set();
     let filtered = Boolean(payload.contentFiltered);
     const events = payload.events.slice(0, 12).filter((event) => {
@@ -862,8 +920,8 @@
           && block.text === event.sourceExcerpt
           && JSON.stringify(block.evidenceIds) === JSON.stringify(event.summaryEvidenceRefs);
         const prose = proseDisplayText(block.displayTranslation, block.text, block.evidenceIds);
-        const reader = prose || (translatedExcerpt ? event.excerpt : clean(block.text));
-        return {type: block.type, text: readerTextValid(reader) ? reader : '', newsIds: refs,
+        const reader = prose || (translatedExcerpt ? (event.excerpt || (archiveOriginal ? clean(block.text) : '')) : clean(block.text));
+        return {type: block.type, text: archiveOriginal || readerTextValid(reader) ? reader : '', newsIds: refs,
           evidenceIds: Array.isArray(block.evidenceIds) ? block.evidenceIds.filter((ref) => /^evd-[a-f0-9]{20}$/.test(ref)) : []};
       });
       const event = newsIds.map((id) => byNews.get(id)).find((member) => chapter?.title === member.sourceTitle);
@@ -891,7 +949,7 @@
         return {text: readerTextValid(reader) ? reader : '', newsIds: refs,
           supports: supports.map((support) => ({newsId: clean(support.newsId), supportQuote: clean(support.supportQuote)}))};
       }).filter(Boolean);
-    if (filtered) chapters.forEach((chapter) => {
+    if (filtered && !(archiveOriginal && verifiedLegacyDeepreads.has(payload))) chapters.forEach((chapter) => {
       chapter.title = "本期进展"; chapter.angle = ""; chapter.kind = "event";
       chapter.comparisonKey = ""; chapter.comparisonNote = "";
       chapter.blocks = chapter.newsIds.map((id) => ({type: "paragraph",
@@ -900,13 +958,18 @@
     const readable = !filtered && editorialReaderComplete({headline:payload.headline, lead:payload.lead,
       chapters, events:usedEvents, observations});
     const legacyComplete = !payload.readerStatus && verifiedLegacyDeepreads.has(payload) && readable && editorialLegacyBound(payload);
-    const legacyReadable = !payload.readerStatus && verifiedLegacyDeepreads.has(payload) && !filtered && !legacyComplete
+    const oldRevisionReadable = archiveOriginal && (!filtered || verifiedLegacyDeepreads.has(payload))
+      && clean(payload.headline) && usedEvents.length && chapters.length
+      && chapters.every(c=>clean(c.title) && c.blocks.length && c.blocks.every(b=>clean(b.text)));
+    const legacyReadable = oldRevisionReadable || (!payload.readerStatus && verifiedLegacyDeepreads.has(payload) && !filtered && !legacyComplete
       && readerTextValid(payload.headline) && readerTextValid(payload.lead) && usedEvents.length >= 4
       && chapters.length >= 3 && chapters.every(c=>readerTextValid(c.title) && c.blocks.length
         && c.blocks.every(b=>readerTextValid(b.text) && /[。！？.!?][”"’）)]?$/.test(b.text) && !/(?:…|\.\.\.)$/.test(b.text)))
-      && editorialLegacyBound(payload, false);
+      && editorialLegacyBound(payload, false));
     return {
       releaseId: clean(payload.releaseId), schemaVersion: 2, editionDate: payload.editionDate, generatedAt: clean(payload.generatedAt),
+      generationRevision:Number(payload.generationRevision) || 0,
+      historicalOriginalFormat:archiveOriginal,
       readerStatus:clean(payload.readerStatus, legacyComplete ? 'complete' : legacyReadable ? 'legacy' : 'unavailable'),
       publicationEditionDate:clean(payload.publicationEditionDate, payload.editionDate),
       qualityFailures:Array.isArray(payload.qualityFailures) ? payload.qualityFailures : [],
@@ -919,6 +982,43 @@
       eventCount: usedEvents.length,
       sourceCount: new Set(usedEvents.flatMap((event) => event.sources.map((source) => source.url))).size,
     };
+  }
+
+  function normalizeTopicDeepread(payload) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(payload.editionDate || '') || !Array.isArray(payload.events)
+        || !Array.isArray(payload.chapters)) throw new Error('深读文件格式不完整');
+    let filtered = !verifiedTopicDeepreads.has(payload);
+    const seen = new Set();
+    const events = payload.events.slice(0,6).filter(event=> {
+      if (!event?.newsId || seen.has(event.newsId) || !isAllowedNewsItem({...event,summary:event.excerpt})) { filtered=true; return false; }
+      seen.add(event.newsId); return true;
+    }).map(event=> {
+      const original = {...event,title:event.sourceTitle || event.title,summary:event.sourceExcerpt || event.excerpt};
+      const display = normalizeItem(original,0);
+      return {...event,title:display.title,excerpt:display.summary,sourceTitle:original.title,sourceExcerpt:original.summary,
+        sources:(event.sources || []).map(s=>({name:clean(s.name),url:safeEditorialUrl(s.url)})).filter(s=>s.url),
+        image:safeEditorialUrl(event.image), imageSource:clean(event.imageSource),
+        history:(event.history || []).filter(h=>/^\d{4}-\d{2}-\d{2}$/.test(h.editionDate || '') && h.editionDate < payload.editionDate)};
+    });
+    const ids = new Set(events.map(e=>e.newsId));
+    const chapters = payload.chapters.slice(0,3).filter(chapter=> {
+      if (!Array.isArray(chapter.newsIds) || !chapter.newsIds.length || chapter.newsIds.some(id=>!ids.has(id))
+          || !readerTextValid(chapter.title) || !readerTextValid(chapter.angle)
+          || !Array.isArray(chapter.blocks) || chapter.blocks.length < 3
+          || chapter.blocks.some(b=>!readerTextValid(b.text))) { filtered=true; return false; }
+      return true;
+    }).map((chapter,i)=>({...chapter,id:'deepread-chapter-'+(i+1)}));
+    const briefs = (payload.briefs || []).filter(b=>readerTextValid(b.title) && b.newsIds?.every(id=>ids.has(id)))
+      .map(b=>({...b,title:clean(b.title),sources:(b.sources || []).map(s=>({name:clean(s.name),url:safeEditorialUrl(s.url)})).filter(s=>s.url)}));
+    let status = ['complete','partial','brief','retained','unavailable'].includes(payload.readerStatus) ? payload.readerStatus : 'unavailable';
+    if (filtered || (['complete','partial','retained'].includes(status) && !chapters.length)) status='unavailable';
+    if (status==='retained') {
+      const age=(Date.parse(payload.publicationEditionDate)-Date.parse(payload.editionDate))/86400000;
+      if (!(age>=0 && age<=1)) status='unavailable';
+    }
+    return {...payload,schemaVersion:2,generationRevision:13,readerStatus:status,contentFiltered:filtered,
+      headline:clean(payload.headline),lead:clean(payload.lead),chapters:status==='unavailable' ? [] : chapters,
+      briefs:status==='unavailable' ? [] : briefs,events,eventCount:events.length,observations:[]};
   }
 
   function editorialReaderComplete(report) {
@@ -1064,6 +1164,7 @@
   }
 
   function renderEditorialDeepread(report) {
+    if (report?.generationRevision === 13) return renderTopicContent(report);
     if (report?.readerStatus === 'legacy' && state.historicalSelection) return renderEditorialContent(report);
     if (!['complete','retained'].includes(report?.readerStatus) || report?.generationStatus !== 'ok'
         || report?.contentFiltered || !editorialReaderComplete(report)) {
@@ -1087,8 +1188,8 @@
         <header class="deepread-header"><p class="eyebrow">${esc(report.editionDate)} · FRONTIER PULSE</p>
           <h2>${esc(report.headline)}</h2>
           ${report.lead ? `<p class="deepread-lead">${esc(report.lead)}</p>` : ""}
-          ${report.readerStatus === 'retained' ? `<p class="deepread-note">最新完整版：${esc(report.editionDate)}；今日未通过内容校验。</p>` : ""}
-          ${report.readerStatus === 'legacy' ? '<p class="deepread-note">历史简版：保留可核验的旧版正文，段落和观察可能少于现行完整版要求。</p>' : ''}
+          ${report.readerStatus === 'retained' ? `<p class="deepread-note deepread-retained-note">今日深读未更新，以下为 ${esc(report.editionDate)} 内容。</p>` : ""}
+          ${report.readerStatus === 'legacy' ? '<p class="deepread-note">历史简版 · 按发布时的内容与语言保留，未按现行深读标准重新生成。</p>' : ''}
         </header>
         ${report.chapters.map((chapter) => {
           const members = chapter.newsIds.map((id) => byNews.get(id)).filter(Boolean);
@@ -1114,6 +1215,50 @@
             }).join(" · ")}</small></li>`).join("")}</ol></section>` : ""}
       </article>
     </div>`;
+  }
+
+  function renderTopicContent(report) {
+    if (report.contentFiltered || report.readerStatus==='unavailable') return `<div class="empty"><h2>本期深读暂未完成</h2><p>${esc(deepreadFailureDetail(report))}可先阅读今日简报。</p></div>`;
+    const byNews = new Map(report.events.map(e=>[e.newsId,e]));
+    const length = report.chapters.flatMap(c=>c.blocks.map(b=>b.text)).join('').length;
+    const image = report.events.find(e=>e.image);
+    const partial = report.chapters.length < (report.topicPlan?.length || report.chapters.length);
+    return `<div class="deepread-layout"><aside class="deepread-toc"><p class="eyebrow">IN THIS EDITION</p><b>本期阅读</b>
+      <ol>${report.chapters.map(c=>`<li><a href="#${esc(c.id)}">${esc(c.title)}</a></li>`).join('')}</ol>
+      <p>${report.chapters.length} 个主题${length ? ` · 约 ${Math.max(2,Math.round(length/450))} 分钟` : ''}</p>
+      </aside><article class="deepread-article deepread-editorial deepread-topics">
+      <header class="deepread-header"><p class="eyebrow">${esc(report.publicationEditionDate || report.editionDate)} · FRONTIER PULSE</p>
+      ${report.readerStatus==='retained' ? `<p class="deepread-retained-note">今日深读未更新，以下为 ${esc(report.editionDate)} 内容。</p>` : ''}
+      <h2>${esc(report.headline)}</h2>${report.lead ? `<p class="deepread-lead">${esc(report.lead)}</p>` : ''}
+      ${report.readerStatus==='partial' ? `<p class="deepread-note">${partial ? '合格主题已先行发布，其余主题待恢复。' : '本期先发布有依据的解读，篇幅尚未达到完整版目标。'}</p>` : ''}
+      ${report.readerStatus==='brief' ? '<p class="deepread-note">今日深读正文尚未完成，以下为当日中文简讯。</p>' : ''}</header>
+      ${image && report.chapters.length ? `<figure class="deepread-figure deepread-hero"><img src="${esc(image.image)}" alt="${esc(image.title)}" loading="lazy" referrerpolicy="no-referrer"><figcaption>图片来源：${esc(image.imageSource || image.sources[0]?.name)}</figcaption></figure>` : ''}
+      ${report.chapters.map((chapter,index)=> {
+        const members = chapter.newsIds.map(id=>byNews.get(id)).filter(Boolean);
+        const cited = [...new Set(chapter.blocks.flatMap(b=>b.sentences.flatMap(s=>s.evidenceIds)))];
+        const records = new Map(members.flatMap(e=>[...(e.evidenceRecords || []),...(e.history || []).flatMap(h=>(h.evidenceRecords || []).map(r=>({...r,editionDate:h.editionDate})))])
+          .map(r=>[r.evidenceId,r]));
+        const target = ref=>`cite-${index+1}-${cited.indexOf(ref)+1}`;
+        let analysisLabel = false;
+        return `<section class="deepread-chapter" id="${esc(chapter.id)}"><h2>${esc(chapter.title)}</h2>
+          ${chapter.comparisonNote ? `<p class="deepread-comparison-note">${esc(chapter.comparisonNote)}</p>` : ''}
+          ${chapter.blocks.map(block=> {
+            const analysis = ['analysis','comparison','watch'].includes(block.type);
+            const label = analysis && !analysisLabel; if (analysis) analysisLabel=true;
+            return `${label ? '<p class="deepread-analysis-label">编辑分析</p>' : ''}<p class="deepread-paragraph${analysis ? ' deepread-editor-analysis' : ''}${block.type==='change' ? ' deepread-change' : ''}">${block.sentences.map(s=>
+              esc(s.text)+`<sup class="deepread-ref">${s.evidenceIds.map(ref=>`<a href="#${esc(target(ref))}" data-evidence-target="${esc(target(ref))}" aria-label="查看原文证据 ${cited.indexOf(ref)+1}">[${cited.indexOf(ref)+1}]</a>`).join('')}</sup>`).join('')}</p>`;
+          }).join('')}
+          <div class="deepread-source-list"><b>本节来源</b>${members.map(e=>`<div class="deepread-source-row"><span class="deepread-evidence-tag">${EVIDENCE_LABELS[e.evidenceLevel] || '单源报道'}</span>
+          ${index>0 && e.image ? `<img class="deepread-source-thumb" src="${esc(e.image)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ''}
+          ${e.sources.map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.name)} ↗</a>`).join('')}
+          ${(e.history || []).length ? `<small>此前材料：${e.history.map(h=>`<a href="?view=deepread&amp;date=${esc(h.editionDate)}">${esc(h.editionDate)}</a>`).join('、')}</small>` : ''}</div>`).join('')}</div>
+          <details class="deepread-footnotes"><summary>原文证据 · ${cited.length} 条</summary><ol>${cited.map(ref=> {
+            const record=records.get(ref); return record ? `<li id="${esc(target(ref))}">${record.editionDate ? `<small>背景材料 · ${esc(record.editionDate)}</small>` : ''}
+              <blockquote>${esc(record.text)}</blockquote><a href="${esc(record.url)}" target="_blank" rel="noopener noreferrer">查看原报道 ↗</a></li>` : '';
+          }).join('')}</ol></details></section>`;
+      }).join('')}
+      ${report.briefs?.length ? `<section class="deepread-briefs"><h2>待恢复主题的简讯</h2><ul>${report.briefs.map(b=>`<li>${esc(b.title)} ${b.sources.map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.name)} ↗</a>`).join(' · ')}</li>`).join('')}</ul></section>` : ''}
+      </article></div>`;
   }
 
   function renderDeepreadArticle(report) {
@@ -1161,20 +1306,25 @@
         if (request === state.deepreadRequest) state.deepreadIndex = index;
       }).catch(() => {});
     try {
+      const currentPublication = releaseManifest?.editionDate || state.latestReport?.editionDate
+        || state.deepreadReport?.publicationEditionDate;
+      const latest = !date || date === currentPublication;
       const report = !bypassCache && date && state.deepreadCache.has(date)
         ? state.deepreadCache.get(date)
-        : await normalizeDeepreadForReader(await fetchPublicationJson(date ? `./data/deepread/${date}.json` : ENDPOINTS.deepread, bypassCache));
-      if (date && report.editionDate !== date) throw new Error("返回了不同日期的深读");
+        : await normalizeDeepreadForReader(await fetchPublicationJson(latest ? ENDPOINTS.deepread : `./data/deepread/${date}.json`, bypassCache));
+      if (date && (latest ? (report.publicationEditionDate || report.editionDate) : report.editionDate) !== date) throw new Error("返回了不同日期的深读");
       if (request !== state.deepreadRequest) return;
       state.deepreadReport = report;
-      state.deepreadCache.set(report.editionDate, report);
-      if (!date) writeStorage(publicationCacheKey(DEEPREAD_CACHE_KEY), report);
+      state.deepreadCache.set(latest ? (report.publicationEditionDate || report.editionDate) : report.editionDate, report);
+      if (latest) writeStorage(publicationCacheKey(DEEPREAD_CACHE_KEY), report);
     } catch (error) {
       if (request !== state.deepreadRequest) return;
       state.deepreadLoadError = clean(error?.message, "暂时无法读取");
       try {
-        const cached = normalizeDeepread(state.deepreadCache.get(date) || readStorage(publicationCacheKey(DEEPREAD_CACHE_KEY), null));
-        state.deepreadReport = ((!date && publication.accepts(releaseManifest, cached)) || (date && cached.editionDate === date)) ? cached : null;
+        const cached = await normalizeDeepreadForReader(state.deepreadCache.get(date) || readStorage(publicationCacheKey(DEEPREAD_CACHE_KEY), null));
+        state.deepreadReport = ((!date && publication.accepts(releaseManifest, cached))
+          || (date && (cached.publicationEditionDate || cached.editionDate) === date)
+          || (date && cached.editionDate === date && cached.readerStatus !== 'retained')) ? cached : null;
       } catch (_) { state.deepreadReport = null; }
     }
     await indexPromise;
@@ -1195,14 +1345,18 @@
         badge.textContent = '沿用完整版';
         badge.classList.add('warning');
         showAlert('notice', '今日深读未通过内容校验', `最新完整版：${report.editionDate}，正文保留实际内容日期。`);
+      } else if (['partial','brief'].includes(report?.readerStatus)) {
+        badge.textContent = report.readerStatus==='partial' ? '主题已发布' : '今日简讯';
+        badge.classList.add('warning');
+        showAlert('notice', '今日深读部分发布', report.readerStatus==='partial' ? '可先阅读合格解读，缺失主题会单独恢复。' : '深读正文尚未完成，先展示当日中文简讯。');
       } else if (report?.schemaVersion === 2 && report?.readerStatus === 'unavailable') {
         badge.textContent = '深读生成失败';
         badge.classList.add('failed');
         showAlert('failed', '本期深读生成失败', deepreadFailureDetail(report)+'日报可独立阅读。');
       } else if (report?.readerStatus === 'legacy' && state.historicalSelection) {
-        badge.textContent = '历史简版';
+        badge.textContent = '历史归档';
         badge.classList.add('warning');
-        showAlert('notice', '当前阅读旧版深读', `${report.editionDate} 的可核验正文按历史简版保留，不代表今日完整版。`);
+        showAlert('notice', '当前阅读旧版深读', `${report.editionDate} 按原发布格式保留，未按现行深读标准重新生成。`);
       } else if (renderEditionHealth(report, "深读", state.historicalSelection, state.pipelineStatus?.state === "failed")) {
         return;
       } else {
@@ -1432,6 +1586,7 @@
     if (state.view === "deepread") {
       const dates = new Set((state.deepreadIndex?.editions || []).map((item) => item.editionDate));
       if (state.deepreadReport?.editionDate) dates.add(state.deepreadReport.editionDate);
+      if (state.deepreadReport?.publicationEditionDate) dates.add(state.deepreadReport.publicationEditionDate);
       return [...dates].filter((date) => /^\d{4}-\d{2}-\d{2}$/.test(date)).sort().reverse();
     }
     const dates = new Set((state.archiveIndex?.editions || []).map((item) => item.editionDate));
@@ -2109,7 +2264,7 @@
       await loadDeepread(options.date || "", Boolean(options.bypassCache));
       if (request !== state.viewRequest) return;
       state.currentReport = state.deepreadReport;
-      state.editionDate = options.date || state.deepreadReport?.editionDate || "";
+      state.editionDate = options.date || state.deepreadReport?.publicationEditionDate || state.deepreadReport?.editionDate || "";
       updateViewHealth();
       renderAll();
       return;
@@ -2249,6 +2404,15 @@
 
   document.addEventListener("click", async (event) => {
     const target = event.target instanceof Element ? event.target : event.target.parentElement;
+    const evidenceLink = target?.closest('[data-evidence-target]');
+    if (evidenceLink) {
+      const evidence = document.getElementById(evidenceLink.dataset.evidenceTarget);
+      if (evidence) {
+        const details = evidence.closest('details');
+        if (details) details.open = true;
+        evidence.scrollIntoView({behavior:'smooth',block:'center'});
+      }
+    }
     const viewButton = target?.closest("[data-view]");
     if (viewButton && VIEWS.has(viewButton.dataset.view)) {
       event.preventDefault();

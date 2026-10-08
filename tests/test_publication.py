@@ -95,6 +95,55 @@ class PublicationTests(unittest.TestCase):
             self.assertEqual(load(self.public / 'releases/r-001/data' / name)['releaseId'], 'r-001')
         pub.verify_snapshot(self.public / 'releases/r-001')
 
+    def test_topic_partial_and_brief_use_the_real_atomic_publication_contract(self):
+        from datetime import datetime, timezone
+        from test_deepread_topics import story, BODY, FACTS, EditorialProvider
+        from deepread_editorial import build_daily_deepread
+        from deepread_quality import choose_readable_deepread, deepread_status
+        from update_news import archive_deepread
+        from recover_deepread import recover
+        now=datetime(2026,7,16,tzinfo=timezone.utc)
+        inputs=[story('navigation','Aster Labs navigation simulation results',body=BODY),
+                story('sensor','Optical sensing benchmark protocol','前沿技术',body=BODY)]
+        for item in inputs:
+            item['publishedAt']='2026-07-15T23:00:00Z'
+            item['displayTranslation']={'version':1,'language':'zh-CN','provider':'deepseek',
+                'title':'自主导航仿真评估结果','summary':FACTS[0],
+                'sourceTitle':item['originalTitle'],'sourceSummary':item['summary'],
+                'sourceEvidenceRefs':item['summaryEvidenceRefs']}
+        for state in ('partial','brief'):
+            with self.subTest(state=state):
+                pub.prepare_stage(self.sample,self.stage)
+                registry=load(self.stage/'data/events.json')
+                registry['items'] += [{'eventId':i['eventId'],'newsIds':[i['id']]} for i in inputs]
+                registry['eventCount']=len(registry['items'])
+                save(self.stage/'data/events.json',registry)
+                provider=EditorialProvider(fail='sensor',checker_down=state=='brief')
+                draft=build_daily_deepread(inputs,{},now,{'provider':'deepseek'},provider)
+                reader=choose_readable_deepread(draft,[],'2026-07-16')
+                self.assertEqual(reader['readerStatus'],state)
+                save(self.stage/'data/deepread.json',reader)
+                archive_deepread(reader,self.stage/'data/deepread',{})
+                status=load(self.stage/'data/status.json')
+                status['deepread']=deepread_status(reader,'2026-07-16')
+                save(self.stage/'data/status.json',status)
+                before=load(self.public/'data/news.json')['items']
+                result=self.promote('r-topics-'+state,
+                    **({'revision_reason':'验收简讯状态','base_release_id':'r-topics-partial'} if state=='brief' else {}))
+                self.assertEqual(result['generationRevision'],13)
+                self.assertEqual(load(self.public/'data/deepread.json')['readerStatus'],state)
+                self.assertEqual(load(self.public/'data/news.json')['items'],before)
+                pub.verify_snapshot(self.public/'releases'/result['releaseId'])
+        provider=EditorialProvider()
+        result=recover(self.public,self.stage,{},now,{'provider':'deepseek'},provider)
+        self.assertTrue(result['changed'])
+        self.assertEqual(load(self.public/'data/news.json')['items'],before)
+        qualified=load(self.public/'data/deepread.json')
+        self.assertEqual(len(qualified['chapters']),2)
+        result=recover(self.public,self.stage,{},now,{'provider':'deepseek'},EditorialProvider())
+        self.assertFalse(result['changed'])
+        self.assertEqual(result['reason'],'all-planned-topics-qualified')
+
     def add_legacy_deepread_archive(self):
         # Production's 2026-09-26 edition nests events inside schema-1 sections.
         archived = load(ROOT / 'tests/fixtures/deepread-legacy-2026-09-26.json')

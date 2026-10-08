@@ -102,20 +102,20 @@ class DailyRefreshGateTests(unittest.TestCase):
             force_refresh=False,
         )[0])
 
-    def test_incomplete_deepread_is_retried_even_when_daily_brief_is_healthy(self):
+    def test_incomplete_deepread_does_not_regenerate_a_healthy_daily_brief(self):
         healthy = {"state": "ok", "editionDate": TODAY, "itemCount": 10}
         ready = {"editionDate": TODAY, "generationStatus": "ok", "eventCount": 12}
-        for report, expected in (({}, True), ({**ready, "editionDate": "2026-08-04"}, True),
-                                 ({**ready, "generationStatus": "fallback"}, True),
-                                 ({**ready, "generationStatus": "insufficient"}, True),
+        for report, expected in (({}, False), ({**ready, "editionDate": "2026-08-04"}, False),
+                                 ({**ready, "generationStatus": "fallback"}, False),
+                                 ({**ready, "generationStatus": "insufficient"}, False),
                                  (ready, False)):
             with self.subTest(report=report):
                 self.assertEqual(decide_refresh(healthy, today=TODAY, event_name="push",
                     force_refresh=False, deepread=report)[0], expected)
 
-    def test_deepread_writing_revision_refreshes_the_article_once(self):
+    def test_deepread_upgrade_is_handled_by_independent_recovery(self):
         healthy = {"state": "ok", "editionDate": TODAY, "itemCount": 10}
-        for revision, expected in ((None, True), (1, True), (2, False)):
+        for revision, expected in ((None, False), (1, False), (2, False)):
             self.assertEqual(decide_refresh(healthy, today=TODAY, event_name="push", force_refresh=False,
                 deepread={"editionDate": TODAY, "generationStatus": "ok", "generationRevision": revision},
                 required_deepread_revision=2)[0], expected)

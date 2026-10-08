@@ -77,6 +77,64 @@ class DeepreadFrontendTests(unittest.TestCase):
         expression = '(() => {state.view="deepread"; state.archiveIndex={editions:[{editionDate:"2026-01-01"}]}; state.deepreadIndex={editions:[{editionDate:"2026-09-21"}]}; return availableDates();})()'
         self.assertEqual(self.browser_result(expression), ["2026-09-21"])
 
+    def topic_payload(self, failed=False):
+        from test_deepread_topics import TopicPublicationTests, EditorialProvider
+        from deepread_quality import choose_readable_deepread
+        draft=TopicPublicationTests().build(EditorialProvider(fail='sensor' if failed else None))
+        for event in draft['events']:
+            event.update(image='https://example.org/'+event['newsId']+'.jpg',imageSource='Lab Journal')
+        return choose_readable_deepread(draft,[],'2026-10-08')
+
+    def test_topic_partial_renders_prose_analysis_and_compact_sentence_footnotes(self):
+        payload=self.topic_payload(failed=True)
+        result=self.browser_result('(async()=>{const r=await normalizeDeepreadForReader('+json.dumps(payload)+');return {status:r.readerStatus,html:renderDeepreadArticle(r)};})()')
+        self.assertEqual(result['status'],'partial')
+        for text in ['合格主题已先行发布','编辑分析','deepread-ref','data-evidence-target','原文证据','deepread-hero']:
+            self.assertIn(text,result['html'])
+        self.assertEqual(result['html'].count('class="deepread-footnotes"'),1)
+        self.assertNotIn('本期深读生成失败',result['html'])
+
+    def test_topic_chapter_order_is_bound_to_its_editorial_review(self):
+        payload=self.topic_payload()
+        payload['chapters'][0]['blocks'].reverse()
+        result=self.browser_result('(async()=>{const r=await normalizeDeepreadForReader('+json.dumps(payload)+');return {status:r.readerStatus,html:renderDeepreadArticle(r)};})()')
+        self.assertEqual(result['status'],'unavailable')
+        self.assertNotIn('封闭仿真中的问题',result['html'])
+
+    def test_topic_layout_has_one_hero_for_multiple_topics(self):
+        result=self.browser_result('(async()=>renderDeepreadArticle(await normalizeDeepreadForReader('+json.dumps(self.topic_payload())+')))()')
+        self.assertEqual(result.count('class="deepread-figure deepread-hero"'),1)
+        self.assertEqual(result.count('class="deepread-source-thumb"'),1)
+        self.assertEqual(result.count('class="deepread-footnotes"'),2)
+
+    def test_latest_retained_publication_date_fetches_latest_and_keeps_content_date(self):
+        payload=json.loads((ROOT/'public/data/deepread.json').read_text())
+        payload.update(readerStatus='retained',publicationEditionDate='2026-10-08')
+        result=self.browser_result('''(async()=>{
+          const urls=[];state.latestReport={editionDate:'2026-10-08'};
+          fetchPublicationJson=async url=>{urls.push(url);return url.endsWith('index.json') ? {editions:[]} : PAYLOAD;};
+          await loadDeepread('2026-10-08',true);
+          return {urls,date:state.deepreadReport?.editionDate,cached:state.deepreadCache.has('2026-10-08'),html:renderDeepreadArticle(state.deepreadReport)};
+        })()'''.replace('PAYLOAD',json.dumps(payload)))
+        self.assertIn('./data/deepread.json',result['urls'])
+        self.assertEqual(result['date'],'2026-10-07')
+        self.assertTrue(result['cached'])
+        self.assertIn('今日深读未更新，以下为 2026-10-07 内容',result['html'])
+
+    def test_real_archives_keep_original_format_without_becoming_new_complete_editions(self):
+        payloads=[json.loads(path.read_text()) for path in sorted((ROOT/'public/data/deepread').glob('????-??-??.json'))]
+        result=self.browser_result('(async()=>{state.historicalSelection=true;return Promise.all('+json.dumps(payloads)+'.map(async p=>{const r=await normalizeDeepreadForReader(p);return {date:p.editionDate,revision:p.generationRevision,status:r.readerStatus,rendered:renderDeepreadArticle(r).includes("deepread-article")};}));})()')
+        self.assertTrue(all(r['rendered'] for r in result),result)
+        self.assertTrue(all(r.get('status')!='complete' for r in result if r['revision']<12))
+
+    def test_old_revision_with_corrupted_captured_evidence_cannot_use_format_compatibility(self):
+        payload=json.loads((ROOT/'public/data/deepread/2026-10-04.json').read_text())
+        payload['generationRevision']=10
+        payload['events'][0]['evidenceRecords'][0]['text']+=' Uncaptured claim.'
+        result=self.browser_result('(async()=>{state.historicalSelection=true;const r=await normalizeDeepreadForReader('+json.dumps(payload)+');return {status:r.readerStatus,html:renderDeepreadArticle(r)};})()')
+        self.assertEqual(result['status'],'unavailable')
+        self.assertNotIn('deepread-article',result['html'])
+
     def test_slower_previous_date_response_cannot_replace_newer_selection(self):
         old = {**self.payload, "editionDate": "2026-09-20"}
         expression = '''(async () => {

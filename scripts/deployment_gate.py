@@ -4,7 +4,8 @@ import json
 import os
 from pathlib import Path
 
-TRUSTED = {'Daily classic papers', 'Daily news update', 'Full stream update', 'Restore retained release'}
+TRUSTED = {'Daily classic papers', 'Daily news update', 'Full stream update', 'Restore retained release',
+           'Deepread recovery'}
 
 
 def allowed(name, event, repository, ref):

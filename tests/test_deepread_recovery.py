@@ -150,7 +150,7 @@ class DeepreadRecoveryTests(unittest.TestCase):
             self.assertFalse(valid_prose_translation(value,source,refs))
 
     def test_single_fact_with_spacing_duplicates_is_not_selected_when_complete_sources_exist(self):
-        from deepread_editorial import build_daily_deepread
+        from deepread_editorial import build_legacy_daily_deepread as build_daily_deepread
         from evidence_trace import make_evidence, trace_claim
         now=datetime(2026,7,16,tzinfo=timezone.utc);items=[]
         for i,actor in enumerate('甲乙丙丁戊己'):
@@ -181,7 +181,7 @@ class DeepreadRecoveryTests(unittest.TestCase):
         self.assertEqual(fallback['generationStatus'],'fallback')
 
     def test_chapter_recovery_retries_only_bad_chapters_and_completes_observations(self):
-        from deepread_editorial import build_daily_deepread
+        from deepread_editorial import build_legacy_daily_deepread as build_daily_deepread
         from evidence_trace import make_evidence, trace_claim
         now = datetime(2026,7,16,tzinfo=timezone.utc)
         items=[]

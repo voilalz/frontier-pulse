@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import copy
 import re
+from datetime import date
 
 from evidence_trace import validate_deepread_trace, valid_display_translation, valid_prose_translation
 from reader_quality import assess_admissibility, chinese_reader_text, metadata_filler
@@ -60,6 +61,9 @@ def validate_chapter_prose(chapter, seen=None):
 
 
 def validate_complete(article):
+    if isinstance(article, dict) and article.get('generationRevision', 0) >= 13:
+        from deepread_topic_quality import validate_topic_article
+        return validate_topic_article(article, complete=True)
     if not isinstance(article, dict):
         raise ValueError('invalid-article')
     try:
@@ -96,6 +100,9 @@ def validate_complete(article):
 
 
 def choose_readable_deepread(draft, previous, publication_date):
+    if isinstance(draft, dict) and draft.get('generationRevision', 0) >= 13:
+        from deepread_topic_quality import choose_topic_publication
+        return choose_topic_publication(draft, previous, publication_date)
     draft = normalize_legacy_deepread(draft)
     diagnostics = generation_diagnostics(draft)
     try:
@@ -113,7 +120,11 @@ def choose_readable_deepread(draft, previous, publication_date):
         result.update(readerStatus='complete', publicationEditionDate=publication_date, qualityFailures=[])
         return result
     for candidate in sorted((p for p in previous if isinstance(p, dict)), key=lambda p:str(p.get('editionDate', '')), reverse=True):
-        if not candidate.get('editionDate') or candidate['editionDate'] > publication_date:
+        try:
+            age = (date.fromisoformat(publication_date) - date.fromisoformat(candidate.get('editionDate', ''))).days
+        except (ValueError, TypeError):
+            continue
+        if not 0 <= age <= 1:
             continue
         try:
             candidate = normalize_legacy_deepread(candidate)
@@ -140,7 +151,7 @@ def generation_diagnostics(draft):
     if not isinstance(draft, dict):
         return {'generationStatus':'invalid'}
     keys = ('generationStatus', 'generatedAt', 'candidateCount', 'eventCount', 'sourceCount',
-            'warnings', 'recoveryDiagnostics', 'contentFailures')
+            'warnings', 'recoveryDiagnostics', 'contentFailures', 'selectionDiagnostics', 'qualityMetrics')
     return {key:copy.deepcopy(draft[key]) for key in keys if key in draft}
 
 
@@ -153,15 +164,22 @@ def deepread_status(article, publication_date):
     except (ValueError, KeyError, TypeError) as exc:
         status = 'unavailable'
         failures.append(str(exc))
-    state = 'ok' if status == 'complete' else 'degraded' if status == 'retained' else 'failed'
-    return {'state':state, 'errorCode':None if state == 'ok' else 'deepread-retained' if state == 'degraded' else 'deepread-unavailable',
+    state = 'ok' if status == 'complete' else 'degraded' if status in {'retained','partial','brief'} else 'failed'
+    error = 'deepread-'+status if status in {'retained','partial','brief'} else 'deepread-unavailable'
+    partial_message=('合格主题已发布，篇幅尚未达到完整版目标。'
+        if article.get('topicPlan') and len(article.get('chapters',[])) == len(article['topicPlan'])
+        else '已发表合格主题，其余主题待恢复。')
+    return {'state':state, 'errorCode':None if state == 'ok' else error,
             'editionDate':publication_date, 'contentEditionDate':article.get('editionDate'),
             'readerStatus':status, 'qualityFailures':failures,
-            'message':'深读已通过正文与证据校验。' if state == 'ok' else '今日深读未通过校验，沿用历史完整版。' if state == 'degraded' else '深读生成失败，暂无合格完整版；日报状态独立记录。',
+            'message':'深读已通过正文与证据校验。' if state == 'ok' else '今日深读未更新，沿用一天内的历史完整版。' if status == 'retained' else partial_message if status == 'partial' else '当日简讯已发布，深读正文待恢复。' if status == 'brief' else '深读生成失败，暂无合格内容；日报状态独立记录。',
             'diagnostics':copy.deepcopy(article.get('generationDiagnostics') or generation_diagnostics(article))}
 
 
 def validate_readable(article, publication_date):
+    if article.get('generationRevision', 0) >= 13:
+        from deepread_topic_quality import validate_topic_publication
+        return validate_topic_publication(article, publication_date)
     if article.get('publicationEditionDate') != publication_date:
         raise ValueError('Reader publication date differs')
     status = article.get('readerStatus')
@@ -174,6 +192,7 @@ def validate_readable(article, publication_date):
     validate_complete(article)
     if status == 'complete' and article.get('editionDate') == publication_date and article.get('qualityFailures') == []:
         return
-    if status == 'retained' and article.get('editionDate', '') <= publication_date and article.get('qualityFailures'):
+    age = (date.fromisoformat(publication_date) - date.fromisoformat(article.get('editionDate', ''))).days
+    if status == 'retained' and 0 <= age <= 1 and article.get('qualityFailures'):
         return
     raise ValueError('Reader status/date differs')

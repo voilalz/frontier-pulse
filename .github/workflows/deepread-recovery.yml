@@ -1,6 +1,13 @@
 name: Deepread recovery
 
 on:
+  schedule:
+    - cron: '30 8 * * *'
+      timezone: Asia/Shanghai
+    - cron: '0 9 * * *'
+      timezone: Asia/Shanghai
+    - cron: '45 9 * * *'
+      timezone: Asia/Shanghai
   workflow_dispatch:
   workflow_run:
     workflows: [Daily news update]
@@ -13,6 +20,9 @@ on:
       - scripts/recover_deepread.py
       - scripts/deepread_editorial.py
       - scripts/deepread_quality.py
+      - scripts/deepread_topics.py
+      - scripts/deepread_topic_quality.py
+      - scripts/evidence_trace.py
 
 permissions:
   contents: write
@@ -69,7 +79,10 @@ jobs:
           done
           exit 1
       - name: Report independent deepread failure
-        if: steps.recovery.outputs.state == 'failed' || steps.recovery.outputs.state == 'degraded'
+        if: steps.recovery.outputs.state == 'failed'
         run: |
           echo "::error title=Deepread generation failed::Daily news remains published. See status.json deepread diagnostics."
           exit 1
+      - name: Report partial publication
+        if: steps.recovery.outputs.state == 'degraded'
+        run: echo "::warning title=Deepread partial publication::Readable topics or dated briefs are published. Only missing topics will be retried."

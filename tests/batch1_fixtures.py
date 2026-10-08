@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 import update_news as news
-from deepread_editorial import build_daily_deepread
+from deepread_editorial import build_legacy_daily_deepread as build_daily_deepread
 
 ZH = {
  'ai-1': ('前沿实验室发布更高效的多模态模型', '此次发布着重降低推理成本，支持结构化输出，并开展模型安全评估。'),

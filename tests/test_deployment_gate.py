@@ -28,6 +28,17 @@ class DeploymentGateTests(unittest.TestCase):
             self.assertFalse(allowed('workflow_run', candidate, REPO, 'refs/heads/main'))
         self.assertFalse(allowed('workflow_run', {}, REPO, 'refs/heads/main'))
 
+    def test_deepread_recovery_hands_off_only_successful_trusted_main_runs(self):
+        event=self.event('Deepread recovery')
+        self.assertTrue(allowed('workflow_run',event,REPO,'refs/heads/main'))
+        workflow=Path(__file__).resolve().parents[1]/'.github/workflows/pages-deployment.yml'
+        self.assertIn('"Deepread recovery"',workflow.read_text())
+        for change in ({'conclusion':'failure'},{'head_branch':'feature'},
+                       {'head_repository':{'full_name':'other/fork'}}):
+            candidate=copy.deepcopy(event)
+            candidate['workflow_run'].update(change)
+            self.assertFalse(allowed('workflow_run',candidate,REPO,'refs/heads/main'))
+
     def test_main_push_and_manual_dispatch_only(self):
         for event in ('push', 'workflow_dispatch'):
             self.assertTrue(allowed(event, {}, REPO, 'refs/heads/main'))

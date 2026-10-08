@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from deepread_editorial import build_daily_deepread as real_builder
+from deepread_editorial import build_legacy_daily_deepread as real_builder
 from evidence_trace import make_evidence
 
 def build_daily_deepread(items, *args, **kwargs):

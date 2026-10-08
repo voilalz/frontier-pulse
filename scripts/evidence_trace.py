@@ -64,6 +64,22 @@ def _id(text, url, kind):
     return "evd-" + hashlib.sha256((url + "\n" + kind + "\n" + text).encode()).hexdigest()[:20]
 
 
+def split_evidence_sentences(text):
+    """Preserve abbreviation wording and never drop the beginning of a claim."""
+    abbreviation = re.compile(r'(?:\b(?:[A-Za-z]\.){2,}|\b(?:Dr|Mr|Mrs|Ms|Prof|Adm|Gen|Lt|Col|Capt|St|Sr|Jr|vs|e\.g|i\.e)\.)$', re.I)
+    start, result = 0, []
+    for boundary in re.finditer(r'(?<=[。！？])\s*|(?<=[.!?])\s+(?=[A-Z])', text):
+        if abbreviation.search(text[:boundary.start()]):
+            continue
+        sentence = text[start:boundary.start()].strip()
+        if sentence:
+            result.append(sentence)
+        start = boundary.end()
+    if text[start:].strip():
+        result.append(text[start:].strip())
+    return result
+
+
 def make_evidence(text, url, fetched_at, kind="body"):
     if not safe_url(url) or not _stamp(fetched_at) or kind not in {"body", "feed"}:
         return []
@@ -71,7 +87,7 @@ def make_evidence(text, url, fetched_at, kind="body"):
     cleaned = strip_caption_text(text)
     for paragraph in re.split(r"\n\s*\n", cleaned):
         # Preserve sentence wording exactly after extraction whitespace cleanup.
-        for sentence in re.split(r"(?<=[。！？])\s*|(?<=[.!?])\s+(?=[A-Z])", paragraph):
+        for sentence in split_evidence_sentences(paragraph):
             sentence = re.sub(r"\s+", " ", sentence).strip()
             if len(sentence) < 10 or _MISSING.search(sentence):
                 continue
@@ -142,7 +158,7 @@ def validate_claim_refs(text, refs, records):
         return False
     # Keep a complete sentence/clause relationship. Splitting at commas or
     # deleting arbitrary characters can attach ESA's number to NASA's action.
-    sentences = re.split(r"(?<=[。！？])\s*|(?<=[.!?])\s+(?=[A-Z])", text)
+    sentences = split_evidence_sentences(text)
     if all(any(_literal_supported(sentence, by_id[ref]["text"]) for ref in refs)
            for sentence in sentences if sentence.strip()):
         return True
@@ -318,7 +334,7 @@ _TRANSLATION_SCOPE = tuple(re.compile(pattern, re.I) for pattern in (
     r"仅|只|唯一|有限|限定|受限|限制|\b(?:only|limited)\b",
     r"模拟|仿真|\b(?:simulation|simulated)\b",
     r"初步|初期|初始|\bpreliminary\b",
-    r"部分|一些|若干|少数|小规模|\b(?:some|partial|small.scale)\b",
+    r"部分|一些|有些|有的|若干|少数|小规模|\b(?:some|partial|small.scale)\b",
     r"并非|而非|不|未|没有|无|失败|\b(?:not|no|without|never|failed|unsuccessful)\b|\b\w+n['’]t\b",
 ))
 
@@ -426,6 +442,12 @@ def prose_translation_issue(value, source_text, evidence_refs):
     scope_source = _without_calendar_may(source_text)
     for label, pattern in zip(("planned", "limited", "simulation", "preliminary", "partial", "negation"), _TRANSLATION_SCOPE):
         if pattern.search(scope_source) and not pattern.search(text):
+            # Capability 'could' can be 可以/能够. This does not authorize
+            # translating plans/will/may into an accomplished result.
+            if (label == 'planned' and re.search(r'\bcould\b', scope_source, re.I)
+                    and not re.search(r'\b(?:plans?|planned|will|scheduled|expected|may|might)\b', scope_source, re.I)
+                    and re.search(r'可以|能够', text) and not re.search(r'已|完成|成功', text)):
+                continue
             return "qualifier:" + label
     return ""
 
@@ -484,6 +506,9 @@ def validate_news_trace(item):
 
 
 def validate_deepread_trace(article):
+    if article.get('generationRevision', 0) >= 13:
+        from deepread_topic_quality import validate_topic_article
+        return validate_topic_article(article)
     from deepread_editorial_signals import is_political_policy
     by_id = {event["newsId"]: event for event in article["events"]}
     for event in by_id.values():
