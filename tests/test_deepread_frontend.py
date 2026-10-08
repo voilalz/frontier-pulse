@@ -107,6 +107,22 @@ class DeepreadFrontendTests(unittest.TestCase):
         self.assertEqual(result.count('class="deepread-source-thumb"'),1)
         self.assertEqual(result.count('class="deepread-footnotes"'),2)
 
+    def test_failed_topic_image_cannot_be_used_as_the_published_topic_cover(self):
+        payload=self.topic_payload(failed=True)
+        accepted=set(payload['chapters'][0]['newsIds'])
+        for event in payload['events']:
+            if event['newsId'] in accepted:
+                event['image']=''
+        failed=copy.deepcopy(next(e for e in payload['generationInputs'] if e['newsId'] not in accepted))
+        failed['image']='https://example.org/sensor.jpg'
+        payload['events'].append(failed)
+        payload['eventCount']=len(payload['events'])
+        result=self.browser_result('(async()=>{const r=await normalizeDeepreadForReader('+json.dumps(payload)+');return {status:r.readerStatus,events:r.events.length,html:renderDeepreadArticle(r)};})()')
+        self.assertEqual(result['status'],'partial')
+        self.assertEqual(result['events'],2)
+        self.assertNotIn('deepread-hero',result['html'])
+        self.assertNotIn('/sensor.jpg',result['html'])
+
     def test_latest_retained_publication_date_fetches_latest_and_keeps_content_date(self):
         payload=json.loads((ROOT/'public/data/deepread/2026-10-07.json').read_text())
         payload.update(readerStatus='retained',publicationEditionDate='2026-10-08')

@@ -1229,7 +1229,7 @@
     if (report.contentFiltered || report.readerStatus==='unavailable') return `<div class="empty"><h2>本期深读暂未完成</h2><p>${esc(deepreadFailureDetail(report))}可先阅读今日简报。</p></div>`;
     const byNews = new Map(report.events.map(e=>[e.newsId,e]));
     const length = report.chapters.flatMap(c=>c.blocks.map(b=>b.text)).join('').length;
-    const image = report.events.find(e=>e.image);
+    const image = (report.chapters[0]?.newsIds || []).map(id=>byNews.get(id)).find(e=>e?.image);
     const partial = report.chapters.length < (report.topicPlan?.length || report.chapters.length);
     return `<div class="deepread-layout"><aside class="deepread-toc"><p class="eyebrow">IN THIS EDITION</p><b>本期阅读</b>
       <ol>${report.chapters.map(c=>`<li><a href="#${esc(c.id)}">${esc(c.title)}</a></li>`).join('')}</ol>
