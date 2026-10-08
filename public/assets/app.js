@@ -1208,7 +1208,7 @@
     const length = [report.lead, ...report.chapters.flatMap((chapter) => chapter.blocks.map((block) => block.text))].join("").length;
     const minutes = Math.max(2, Math.round(length / 450));
     return `<div class="deepread-layout">
-      <aside class="deepread-toc"><p class="eyebrow">IN THIS EDITION</p><b>本期阅读</b>
+      <aside class="deepread-toc"><b>本期阅读</b>
         <ol>${report.chapters.map((chapter) => `<li><a href="#${esc(chapter.id)}">${esc(chapter.title)}</a></li>`).join("")}</ol>
         <p>${report.eventCount} 项核心进展 · 约 ${minutes} 分钟</p>
         <p class="deepread-evidence-guide">证据标签说明材料来源类型，不代表所有细节已经独立核实。</p>
@@ -1252,7 +1252,7 @@
     const length = report.chapters.flatMap(c=>c.blocks.map(b=>b.text)).join('').length;
     const image = (report.chapters[0]?.newsIds || []).map(id=>byNews.get(id)).find(e=>e?.image);
     const partial = report.chapters.length < (report.topicPlan?.length || report.chapters.length);
-    return `<div class="deepread-layout"><aside class="deepread-toc"><p class="eyebrow">IN THIS EDITION</p><b>本期阅读</b>
+    return `<div class="deepread-layout"><aside class="deepread-toc"><b>本期阅读</b>
       <ol>${report.chapters.map(c=>`<li><a href="#${esc(c.id)}">${esc(c.title)}</a></li>`).join('')}</ol>
       <p>${report.chapters.length} 个主题${length ? ` · 约 ${Math.max(2,Math.round(length/450))} 分钟` : ''}</p>
       </aside><article class="deepread-article deepread-editorial deepread-topics">
@@ -1299,7 +1299,7 @@
     const minutes = Math.max(2, Math.round(length / 450));
     let number = 0;
     return `<div class="deepread-layout">
-      <aside class="deepread-toc"><p class="eyebrow">IN THIS EDITION</p><b>本期阅读</b>
+      <aside class="deepread-toc"><b>本期阅读</b>
         <ol>${report.sections.map((section) => `<li><a href="#${esc(section.id)}">${esc(section.title)}</a><span>${section.events.length} 项进展</span></li>`).join("")}</ol>
         <p>${report.eventCount} 项事件 · ${report.sourceCount} 个来源<br>约 ${minutes} 分钟</p>
       </aside>
@@ -1321,7 +1321,7 @@
             <div class="deepread-citations"><span>报道来源</span>${event.sources.map((source) => `<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.name)} ↗</a>`).join("")}</div>
           </section>`).join("")}
         </section>`).join("")}
-        ${report.conclusion ? `<footer class="deepread-conclusion"><p class="eyebrow">LOOKING AHEAD</p><h2>接下来，观察什么</h2><p>${esc(report.conclusion)}</p></footer>` : ""}
+        ${report.conclusion ? `<footer class="deepread-conclusion"><h2>接下来，观察什么</h2><p>${esc(report.conclusion)}</p></footer>` : ""}
       </article>
     </div>`;
   }
@@ -1682,20 +1682,19 @@
 
   function renderViewCopy() {
     const copy = {
-      latest: ["DAILY BRIEF", "今日前沿态势", "科技 · AI · 航空航天 · 安全 · 前沿研究", "TOP 10", "今日 Top 10"],
-      deepread: ["THE DAILY READ", "每日深读", "读懂今日进展，连接事实与趋势", "DAILY READ", "每日深读"],
-      stream: ["FULL STREAM", `过去 ${state.rangeHours} 小时`, "全量合格动态", "STREAM", "全量动态"],
-      research: ["DAILY CLASSICS", "每日经典论文", "", "CLASSICS", "当日推荐"],
-      history: ["ARCHIVE", "历史脉络", state.query ? "跨日期检索" : "按日期回看", "ARCHIVE", state.query ? "跨日期搜索" : "历史要闻"],
-      bookmarks: ["COLLECTION", "我的收藏", "仅保存在当前浏览器", "SAVED", "收藏新闻"],
-      watchlist: ["WATCHLIST", "关注词", "从历史索引中追踪持续信号", "SIGNALS", "关注词命中"],
+      latest: ["DAILY BRIEF", "今日前沿态势", "科技 · AI · 航空航天 · 安全 · 前沿研究", "今日 Top 10"],
+      deepread: ["THE DAILY READ", "每日深读", "读懂今日进展，连接事实与趋势", "每日深读"],
+      stream: ["FULL STREAM", `过去 ${state.rangeHours} 小时`, "全量合格动态", "全量动态"],
+      research: ["DAILY CLASSICS", "每日经典论文", "", "当日推荐"],
+      history: ["ARCHIVE", "历史脉络", state.query ? "跨日期检索" : "按日期回看", state.query ? "跨日期搜索" : "历史要闻"],
+      bookmarks: ["COLLECTION", "我的收藏", "仅保存在当前浏览器", "收藏新闻"],
+      watchlist: ["WATCHLIST", "关注词", "从历史索引中追踪持续信号", "关注词命中"],
     }[state.view];
     $("viewEyebrow").textContent = copy[0];
     $("viewTitle").textContent = copy[1];
     $("viewDescription").textContent = copy[2];
     $("viewDescription").hidden = !copy[2];
-    $("feedEyebrow").textContent = copy[3];
-    $("feedTitle").textContent = copy[4];
+    $("feedTitle").textContent = copy[3];
     $("watchPanel").hidden = state.view !== "watchlist";
     $("spotlightSection").hidden = state.view !== "latest";
     $("classicSection").hidden = state.view !== "research";
