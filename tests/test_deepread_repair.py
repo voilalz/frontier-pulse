@@ -13,7 +13,7 @@ from deepread_editorial import build_daily_deepread
 from deepread_quality import choose_readable_deepread, validate_readable
 from deepread_topic_quality import rule_issue
 from evidence_trace import make_evidence
-from test_deepread_topics import EditorialProvider, BODY, NOW, story
+from test_deepread_topics import EditorialProvider, ANALYSIS, BODY, NOW, story
 
 
 class WriterRepairTests(unittest.TestCase):
@@ -51,12 +51,13 @@ class WriterRepairTests(unittest.TestCase):
             if kwargs['schema_name'] == 'deepread_topic_write_v13':
                 writes.append(data)
                 feedback.extend(data['validationFeedback'])
-                repaired = any('因果' in entry.get('repairInstruction', '')
+                repaired = any('引语' in entry.get('repairInstruction', '')
                                and 'text' in entry and entry.get('evidenceRecords')
                                for entry in data['validationFeedback'])
                 if not repaired:
                     response = copy.deepcopy(response)
-                    response['blocks'][2]['sentences'][0]['text'] = '因此该方法导致模型变得成熟。'
+                    response['blocks'][2]['sentences'][0]['text'] = (
+                        ANALYSIS + '公司负责人称“这是我们迄今最成熟的导航模型，可以直接投入使用”。')
             elif kwargs['schema_name'] == 'deepread_topic_check_v13':
                 reviews.append(data)
             return response
@@ -67,7 +68,7 @@ class WriterRepairTests(unittest.TestCase):
         self.assertEqual(len(draft['chapters']), 1)
         self.assertEqual(len(writes), 2)
         self.assertEqual(len(reviews), 1)
-        self.assertTrue(any(entry.get('rule') == 'analysis-causal-assertion' for entry in feedback))
+        self.assertTrue(any(entry.get('rule') == 'analysis-new-quotation' for entry in feedback))
         self.assertNotIn('repairInstruction', json.dumps(draft))
         reader = choose_readable_deepread(draft, [], '2026-10-08')
         validate_readable(reader, '2026-10-08')

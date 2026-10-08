@@ -1,4 +1,8 @@
-"""Revision 13: sentence evidence, editorial analysis, and chapter publication."""
+"""Revision 13: sentence evidence, editorial analysis, and chapter publication.
+
+Facts stay bound to evidence. Analysis may reason about causes; the
+independent checker, not a connective blacklist, judges whether it holds.
+"""
 from __future__ import annotations
 
 import copy
@@ -16,8 +20,13 @@ from deepread_editorial_signals import is_political_policy
 REVISION = 13
 FACT_TYPES = {'paragraph', 'background', 'change'}
 ANALYSIS_TYPES = {'analysis', 'comparison', 'watch'}
-CAUSAL = re.compile(r'导致|造成|促使|使得|因而|因此|从而|归因于|致使|迫使|因为|\b(?:caused?|therefore|because)\b', re.I)
 END = re.compile(r'[。！？.!?][”"’）)]?$')
+# Short quoted terms (名称、术语) are expression, not quotation. Longer quoted
+# text must still appear verbatim in the cited evidence.
+TERM_QUOTE_MAX = 12
+_QUALIFIER_LABELS = ('planned', 'limited', 'simulation', 'preliminary', 'partial')
+_CLAUSE = re.compile(r'[;:\u2014\u2013]|,\s+(?:and|but|while|whereas|although|however)\b', re.I)
+_ANCHOR = re.compile(r'[A-Za-z][A-Za-z0-9]*(?:[-/.][A-Za-z0-9]+)*|\d+(?:\.\d+)?')
 
 
 def han_count(text):
@@ -62,29 +71,63 @@ def rule_issue(text, role, refs, records, attribution=False):
     if quantities:
         return 'quantity:'+','.join(sorted(quantities))[:100]
     if role == 'analysis':
-        if CAUSAL.search(text):
-            return 'analysis-causal-assertion'
-        if re.search(r'[“”「」『』"]', text) and not all(
-                quote in source for quote in re.findall(r'[“「『"]([^”」』"]+)[”」』"]', text)):
-            return 'analysis-new-quotation'
+        # Reasoned causal analysis is allowed; the independent checker rejects
+        # causal claims the evidence cannot carry. Invented quotations are not.
+        for quote in re.findall(r'[“「『"]([^”」』"]+)[”」』"]', text):
+            if quote not in source and (len(quote) > TERM_QUOTE_MAX or re.search(r'[，。！？,.!?；;]', quote)):
+                return 'analysis-new-quotation'
         return ''
     if not END.search(text) or text.endswith(('…', '...')):
         return 'sentence-truncated'
     if not _translation_negation_valid(text, source):
         return 'negated-action'
-    # A Chinese paraphrase can omit unrelated clauses. Only explicit source
-    # uncertainty is guarded here; the independent checker judges entailment.
     scoped = _without_difficulty_idiom(_without_calendar_may(source))
-    for label, pattern in zip(('planned','limited','simulation','preliminary','partial','negation'), _TRANSLATION_SCOPE):
-        if pattern.search(scoped) and not pattern.search(text):
-            if (label == 'planned' and re.search(r'\bcould\b', scoped, re.I)
-                    and not re.search(r'\b(?:plans?|planned|will|may|might|expected|scheduled)\b', scoped, re.I)
-                    and re.search(r'可以|能够', text) and not re.search(r'已|完成|成功', text)):
-                continue
-            return 'qualifier:'+label
+    if _TRANSLATION_SCOPE[-1].search(scoped) and not _TRANSLATION_SCOPE[-1].search(text):
+        return 'qualifier:negation'
+    # Only source clauses that share a name or number with the claim are held
+    # to the hard qualifier rule. A will/may elsewhere in a cited sentence is
+    # handed to the independent checker as a flag instead of rejecting.
+    label = _missing_qualifier(text, _anchored_clauses(text, scoped))
+    if label:
+        return 'qualifier:'+label
     if attribution and not re.search(r'据|根据|称|表示|报道|披露|介绍|公告|新闻稿', text):
         return 'attribution-missing'
     return ''
+
+
+def _anchors(text):
+    return {token.casefold() for token in _ANCHOR.findall(text or '')
+            if len(token) > 1 or token.isdigit()}
+
+
+def _anchored_clauses(text, source):
+    anchors = _anchors(text)
+    if not anchors:
+        return ''
+    clauses = [c for c in _CLAUSE.split(source) if c and c.strip()]
+    return ' '.join(c for c in clauses if _anchors(c) & anchors)
+
+
+def _missing_qualifier(text, source):
+    if not source:
+        return ''
+    for label, pattern in zip(_QUALIFIER_LABELS, _TRANSLATION_SCOPE):
+        if pattern.search(source) and not pattern.search(text):
+            if (label == 'planned' and re.search(r'\bcould\b', source, re.I)
+                    and not re.search(r'\b(?:plans?|planned|will|may|might|expected|scheduled)\b', source, re.I)
+                    and re.search(r'可以|能够', text) and not re.search(r'已|完成|成功', text)):
+                continue
+            return label
+    return ''
+
+
+def qualifier_flags(text, refs, records):
+    """Source qualifiers a fact sentence drops; the checker must rule on them."""
+    if not isinstance(text, str) or not isinstance(refs, list) or any(ref not in records for ref in refs):
+        return []
+    source = _without_difficulty_idiom(_without_calendar_may(' '.join(records[ref]['text'] for ref in refs)))
+    return [label for label, pattern in zip(_QUALIFIER_LABELS, _TRANSLATION_SCOPE)
+            if pattern.search(source) and not pattern.search(text)]
 
 
 def proof_valid(text, role, refs, records, proof):
