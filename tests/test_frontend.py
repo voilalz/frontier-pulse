@@ -91,7 +91,7 @@ class FrontendTests(unittest.TestCase):
         self.assertIn("--muted: #4f5c63", styles)
         self.assertIn("font-family: system-ui, -apple-system", styles)
         self.assertNotIn("font-family: Inter", styles)
-        self.assertEqual(styles.count("font-size: 8px"), 2)
+        self.assertNotIn("font-size: 8px", styles)
         self.assertNotIn("font-size: 9px", styles)
         self.assertNotIn("font: 8px", styles)
         self.assertIn(".summary { margin: 0; color: #4f5d64; font-size: var(--text-body)", styles)
