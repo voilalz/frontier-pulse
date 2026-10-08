@@ -50,6 +50,19 @@ async function networkFirst(request) {
   }
 }
 
+// Release snapshots are content-addressed and served as immutable, so a cached
+// copy is always correct and needs no network round trip.
+const IMMUTABLE_PATH = /\/(?:classics\/)?releases\//;
+
+async function cacheFirst(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cached = await cache.match(request, { ignoreSearch: false });
+  if (cached) return cached;
+  const response = await fetch(request);
+  if (response.ok) await cache.put(request, response.clone());
+  return response;
+}
+
 self.addEventListener("fetch", (event) => {
   const request = event.request;
   if (request.method !== "GET") return;
@@ -59,7 +72,11 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(fetch(request));
     return;
   }
-  // Every same-origin resource revalidates through the network and falls back
+  if (IMMUTABLE_PATH.test(url.pathname)) {
+    event.respondWith(cacheFirst(request));
+    return;
+  }
+  // Every other same-origin resource revalidates through the network and falls back
   // to the last successful response only when offline. This removes all manual
   // release-number synchronization between HTML, CSS, JS and the worker cache.
   event.respondWith(networkFirst(request));
