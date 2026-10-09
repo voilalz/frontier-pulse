@@ -31,6 +31,9 @@ function configuration(env) {
 }
 export async function inspectProduction(env, fetcher, now) {
   const {site} = configuration(env);
+  // The SITE service binding reaches the production Worker directly; a public fetch of
+  // our own domain from Cloudflare timed out. Tests and unbound deployments use fetcher.
+  if (env.SITE) fetcher = (url, options) => env.SITE.fetch(url, options);
   const manifest = await json(fetcher, new URL('data/release.json',site), {cache:'no-store'});
   if (!validManifest(manifest)) return {healthy:false, reason:'invalid-manifest'};
   if (manifest.editionDate !== chinaClock(now).date) return {healthy:false, reason:'old-edition', releaseId:manifest.releaseId};
@@ -41,6 +44,14 @@ export async function inspectProduction(env, fetcher, now) {
   const healthy = same(news) && same(deep) && news.items?.length===10
     && Array.isArray(deep.events) && deep.events.length>0 && deep.eventCount===deep.events.length;
   return {healthy, reason:healthy?'complete':'inconsistent-content', releaseId:manifest.releaseId};
+}
+
+// An accepted dispatch stays accepted even if its optional run details are unreadable.
+async function dispatchedRunId(response) {
+  try {
+    const id = (await response.json())?.workflow_run_id;
+    return Number.isSafeInteger(id) && id > 0 ? id : null;
+  } catch { return null; }
 }
 
 export async function monitor(env, storage, fetcher = fetch, now = new Date()) {
@@ -55,7 +66,7 @@ export async function monitor(env, storage, fetcher = fetch, now = new Date()) {
     await txn.put(key,state); return true;
   });
   if (!claimed) return {status:'checking'};
-  let status='error', reason='', healthy=false, releaseId='';
+  let status='error', reason='', healthy=false, releaseId='', runId=null;
   try {
     let inspection;
     try {inspection = await inspectProduction(env,fetcher,now);}
@@ -89,10 +100,12 @@ export async function monitor(env, storage, fetcher = fetch, now = new Date()) {
             status='dispatch-uncertain';
             const dispatch = await request(fetcher,`${config.api}/actions/workflows/daily-news.yml/dispatches`,{
               method:'POST',headers:{...config.headers,'Content-Type':'application/json'},
-              body:JSON.stringify({ref:'main',inputs:{force_refresh:'false'}}),
+              body:JSON.stringify({ref:'main',inputs:{force_refresh:'false'},return_run_details:true}),
             });
-            if (dispatch.status !== 204) throw new Error('Recovery dispatch rejected');
+            // 204 is the classic empty acceptance; 200 carries the created run's details.
+            if (dispatch.status !== 200 && dispatch.status !== 204) throw new Error('Recovery dispatch rejected');
             status='recovery-requested';
+            if (dispatch.status === 200) runId = await dispatchedRunId(dispatch);
           } else status='recovery-limited';
         }
       }
@@ -124,11 +137,12 @@ export async function monitor(env, storage, fetcher = fetch, now = new Date()) {
     await storage.transaction(async txn=>{
       const state=await txn.get(key);
       state.status=status; state.reason=reason; state.releaseId=releaseId; state.checkedAt=now.toISOString();
+      if (runId) state.runIds=[...(state.runIds || []), runId];
       state.checkingUntil=0;
       if (healthy && !state.firstHealthyAt) state.firstHealthyAt=now.toISOString();
       if (healthy && minutes<=480) state.onTime=true;
       else if (minutes>=480 && state.onTime !== true) state.onTime=false;
-      state.checks=[...(state.checks || []),{at:now.toISOString(),status}].slice(-20);
+      state.checks=[...(state.checks || []),{at:now.toISOString(),status,...(runId ? {runId} : {})}].slice(-20);
       await txn.put(key,state);
     });
     const cutoff = chinaClock(new Date(stamp-13*86400000)).date;
@@ -136,7 +150,7 @@ export async function monitor(env, storage, fetcher = fetch, now = new Date()) {
     const expired=[...entries.keys()].filter(key=>key.slice(4)<cutoff);
     if (expired.length) await storage.delete(expired);
   }
-  return {date,status,reason,releaseId};
+  return {date,status,reason,releaseId,...(runId ? {runId} : {})};
 }
 
 export class PublicationWatchdog {
