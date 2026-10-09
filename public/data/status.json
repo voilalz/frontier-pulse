@@ -1,10 +1,10 @@
 {
   "schemaVersion": 11,
   "state": "ok",
-  "lastAttemptAt": "2026-10-08T02:55:33Z",
+  "lastAttemptAt": "2026-10-09T01:08:25Z",
   "summaryRevision": 5,
-  "lastSuccessAt": "2026-10-08T02:55:33Z",
-  "editionDate": "2026-10-08",
+  "lastSuccessAt": "2026-10-09T01:08:25Z",
+  "editionDate": "2026-10-09",
   "itemCount": 10,
   "message": "日报更新成功",
   "method": "deepseek",
@@ -14,7 +14,7 @@
   "selectionProvider": "deepseek",
   "selectionModel": "deepseek-v4-flash",
   "selectionNotices": [
-    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 1 个 Top 10 入选位"
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 4 个 Top 10 入选位"
   ],
   "selectionWarnings": [],
   "selectionDiagnostics": {
@@ -30,51 +30,60 @@
     "aiUnscoredItemCount": 0,
     "unconstrainedTop": {
       "categoryCounts": {
-        "军事动态": 2,
-        "局部冲突": 3,
-        "前沿技术": 1,
+        "军事动态": 6,
         "航空航天": 2,
-        "无人系统": 2
+        "局部冲突": 2
       },
       "domainCounts": {
-        "twz.com": 2,
-        "bbc.co.uk": 2,
-        "physicsworld.com": 1,
+        "defenseone.com": 1,
         "nasa.gov": 1,
-        "unmannedairspace.info": 2,
-        "defensenews.com": 1,
+        "navalnews.com": 3,
+        "defensenews.com": 3,
+        "twz.com": 1,
         "theguardian.com": 1
       },
-      "categoryViolations": {},
-      "domainViolations": {}
+      "categoryViolations": {
+        "军事动态": 6
+      },
+      "domainViolations": {
+        "navalnews.com": 3,
+        "defensenews.com": 3
+      }
     },
     "finalTop": {
       "categoryCounts": {
-        "军事动态": 2,
-        "局部冲突": 2,
+        "军事动态": 3,
+        "航空航天": 3,
+        "局部冲突": 1,
+        "无人系统": 1,
         "前沿技术": 1,
-        "航空航天": 2,
-        "无人系统": 2,
         "AI": 1
       },
       "domainCounts": {
-        "twz.com": 2,
-        "bbc.co.uk": 2,
-        "physicsworld.com": 1,
+        "defenseone.com": 1,
         "nasa.gov": 1,
-        "unmannedairspace.info": 2,
-        "defensenews.com": 1,
+        "navalnews.com": 2,
+        "defensenews.com": 2,
+        "science.nasa.gov": 1,
+        "therobotreport.com": 1,
+        "thequantuminsider.com": 1,
         "the-decoder.com": 1
       },
       "categoryViolations": {},
       "domainViolations": {}
     },
-    "adjustedItemCount": 1,
+    "adjustedItemCount": 4,
     "adjustedOutIds": [
-      "331d32f0d5edd4"
+      "ce53fdc326feee",
+      "39692cd67e3b03",
+      "b72c1dfeca1085",
+      "d63dae94fa3f73"
     ],
     "adjustedInIds": [
-      "dd5d3a746f265e"
+      "c15d864270999b",
+      "2ac4a1df234428",
+      "6d5ccbd2042818",
+      "50a66e8e1b353c"
     ],
     "relaxedItemCount": 0
   },
@@ -127,44 +136,62 @@
   },
   "eventCount": 10,
   "weeklyEventCount": 8,
-  "anomalySignalCount": 0,
+  "anomalySignalCount": 3,
   "paperLinkedItemCount": 0,
   "warnings": [],
   "coverageStatus": "complete",
   "freshItemCount": 10,
   "supplementalItemCount": 0,
   "effectiveLookbackHours": 24,
-  "streamItemCount": 126,
+  "streamItemCount": 177,
   "streamTranslationProvider": "deepseek",
   "streamTranslationModel": "deepseek-v4-flash",
-  "streamTranslationStatus": "ok",
-  "streamTranslatedItemCount": 126,
-  "streamTranslationWarnings": [],
+  "streamTranslationStatus": "partial",
+  "streamTranslatedItemCount": 175,
+  "streamTranslationWarnings": [
+    "新闻中文翻译在拆分重试后仍缺失 2/39 条：拆分重试后仍有条目缺失",
+    "全量动态中文翻译不完整：175/177"
+  ],
   "streamTranslationDiagnostics": {
-    "requestedItemCount": 4,
-    "completedItemCount": 4,
-    "missingItemCount": 0,
-    "missingItemIds": [],
-    "missingItems": [],
+    "requestedItemCount": 39,
+    "completedItemCount": 37,
+    "missingItemCount": 2,
+    "missingItemIds": [
+      "e764c913054715",
+      "e199c3b0f01222"
+    ],
+    "missingItems": [
+      {
+        "id": "e764c913054715",
+        "reason": "translation_content_rejected"
+      },
+      {
+        "id": "e199c3b0f01222",
+        "reason": "translation_content_rejected"
+      }
+    ],
     "initialBatchSize": 6,
-    "initialBatchCount": 1,
-    "requestCount": 1,
-    "retryRequestCount": 0,
+    "initialBatchCount": 7,
+    "requestCount": 11,
+    "retryRequestCount": 4,
     "providerFailureCount": 0,
-    "structuralFailureCount": 0,
-    "completionReason": "complete_first_pass",
-    "completionMessage": "全部条目首轮完成",
+    "structuralFailureCount": 4,
+    "completionReason": "partial_after_retry",
+    "completionMessage": "拆分重试后仍有条目缺失",
     "lastProviderError": "",
-    "reusedItemCount": 122,
+    "reusedItemCount": 138,
     "featuredTranslatedItemCount": 10,
     "notAttemptedItemIds": [],
     "notAttemptedItemCount": 0,
     "budgetDeferredItemCount": 0,
-    "targetItemCount": 126,
-    "totalTranslatedItemCount": 126,
-    "totalMissingItemCount": 0,
-    "totalMissingItemIds": [],
-    "coverageCompletionMessage": "中文译文已全部完成"
+    "targetItemCount": 177,
+    "totalTranslatedItemCount": 175,
+    "totalMissingItemCount": 2,
+    "totalMissingItemIds": [
+      "e764c913054715",
+      "e199c3b0f01222"
+    ],
+    "coverageCompletionMessage": "还有 2 条中文译文待完成"
   },
   "researchItemCount": 0,
   "researchEditorialStatus": null,
@@ -174,110 +201,57 @@
   "researchWarnings": [],
   "researchEditorialDiagnostics": {},
   "deepread": {
-    "state": "degraded",
-    "errorCode": "deepread-partial",
-    "editionDate": "2026-10-08",
-    "contentEditionDate": "2026-10-08",
-    "readerStatus": "partial",
-    "qualityFailures": [
-      {
-        "chapterId": "chapter-2",
-        "sentenceId": "b1s0",
-        "rule": "qualifier:planned"
-      },
-      {
-        "chapterId": "chapter-2",
-        "sentenceId": "b1s1",
-        "rule": "qualifier:planned"
-      },
-      {
-        "chapterId": "chapter-3",
-        "sentenceId": "b0s0",
-        "rule": "qualifier:planned"
-      }
-    ],
-    "message": "已发表合格主题，其余主题待恢复。",
+    "state": "ok",
+    "errorCode": null,
+    "editionDate": "2026-10-09",
+    "contentEditionDate": "2026-10-09",
+    "readerStatus": "complete",
+    "qualityFailures": [],
+    "message": "深读已通过正文与证据校验。",
     "diagnostics": {
-      "generationStatus": "partial",
-      "generatedAt": "2026-10-08T10:17:02.944546Z",
+      "generationStatus": "ok",
+      "generatedAt": "2026-10-09T01:08:25Z",
       "candidateCount": 12,
-      "eventCount": 3,
-      "sourceCount": 3,
+      "eventCount": 2,
+      "sourceCount": 2,
       "warnings": [],
       "recoveryDiagnostics": {
         "chapters": {
           "chapter-1": {
-            "state": "reused",
-            "attempts": 0
+            "state": "salvaged",
+            "attempts": 2,
+            "droppedSentences": 1
           },
           "chapter-2": {
-            "state": "failed",
+            "state": "salvaged",
             "attempts": 2,
-            "issues": [
-              {
-                "sentenceId": "b1s0",
-                "rule": "qualifier:planned"
-              },
-              {
-                "sentenceId": "b1s1",
-                "rule": "qualifier:planned"
-              }
-            ]
-          },
-          "chapter-3": {
-            "state": "failed",
-            "attempts": 2,
-            "issues": [
-              {
-                "sentenceId": "b0s0",
-                "rule": "qualifier:planned"
-              }
-            ]
+            "droppedSentences": 1
           }
         }
       },
-      "contentFailures": [
-        {
-          "chapterId": "chapter-2",
-          "sentenceId": "b1s0",
-          "rule": "qualifier:planned"
-        },
-        {
-          "chapterId": "chapter-2",
-          "sentenceId": "b1s1",
-          "rule": "qualifier:planned"
-        },
-        {
-          "chapterId": "chapter-3",
-          "sentenceId": "b0s0",
-          "rule": "qualifier:planned"
-        }
-      ],
+      "contentFailures": [],
       "selectionDiagnostics": {
-        "genre-or-policy": 21,
-        "source-unavailable": 30
+        "source-unavailable": 71,
+        "genre-or-policy": 38
       },
       "qualityMetrics": {
-        "bodyHanCount": 795,
-        "publishedTopicCount": 1,
-        "plannedTopicCount": 3,
+        "bodyHanCount": 1667,
+        "publishedTopicCount": 2,
+        "plannedTopicCount": 2,
         "historicalTopicCount": 0,
         "multiSourceEventCount": 0,
         "categoryCounts": {
-          "前沿技术": 1,
-          "航空航天": 1,
-          "无人系统": 1
+          "AI": 1,
+          "军事动态": 1
         },
         "topicCategoryCounts": {
-          "前沿技术": 1,
-          "航空航天": 1,
-          "无人系统": 1
+          "AI": 1,
+          "军事动态": 1
         },
-        "maximumTopicCategoryShare": 0.3333333333333333,
-        "categoryBalanceException": ""
+        "maximumTopicCategoryShare": 0.5,
+        "categoryBalanceException": "fewer-than-three-supported-topics"
       }
-    },
-    "lastAttemptAt": "2026-10-08T10:17:02.944546Z"
+    }
   },
-  "releaseId": "r20261008T101702-40f5f4ed"
+  "releaseId": "r20261009T011137-df3700dc"
 }
