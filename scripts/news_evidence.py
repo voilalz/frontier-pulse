@@ -15,6 +15,9 @@ import unicodedata
 
 
 _BUDGET = 6000
+# Daily summaries need the article's own narrative, not only headline-matching
+# sentences. Continuation stays inside the chosen body or feed lead.
+_CONTINUATION_BUDGET = 2400
 _INPUT_LIMIT = 1_000_000
 _DASHES = str.maketrans({char: "-" for char in "‐‑‒–—−"})
 _CJK = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff]+")
@@ -473,6 +476,59 @@ def _selection(paragraphs: list[str], signature: _Signature) -> tuple[list[str],
     return [selected[index] for index in sorted(selected)], max(scores, default=0.0)
 
 
+def _continuation(paragraphs: list[str], chosen: list[str], signature: _Signature) -> list[str]:
+    """Extend chosen evidence with later paragraphs that stay on the same story.
+
+    A later paragraph qualifies only when it shares a model/identifier or at
+    least two content terms with the title plus the already chosen evidence,
+    so a body that mixes in unrelated items still cannot contribute them.
+    Two consecutive off-story paragraphs end the walk.
+    """
+    unique, seen = [], set()
+    for paragraph in paragraphs:
+        paragraph = _clean(paragraph)
+        key = _normal(paragraph)
+        if paragraph and key not in seen:
+            seen.add(key)
+            unique.append(paragraph)
+    chosen_keys = {_normal(paragraph) for paragraph in chosen}
+    indexes = [index for index, paragraph in enumerate(unique) if _normal(paragraph) in chosen_keys]
+    if not indexes:
+        return chosen
+    words = set(signature.words)
+    grams = set(signature.cjk)
+    for paragraph in chosen:
+        words |= {word for word in _terms(paragraph) if len(word) >= 4}
+        grams |= _cjk_grams(paragraph)
+    total = sum(len(paragraph) + 2 for paragraph in chosen)
+    added, misses = {}, 0
+    for index in range(indexes[0] + 1, len(unique)):
+        paragraph = unique[index]
+        if _normal(paragraph) in chosen_keys:
+            misses = 0
+            continue
+        if _NOISE_TEXT.search(paragraph) or _RESTRICTED_TEXT.search(paragraph) or signature.conflicts(paragraph):
+            break
+        common = words & _terms(paragraph)
+        on_story = (bool(signature.identifiers.keys() & _identifiers(common).keys())
+                    or len(common) >= 2 or len(grams & _cjk_grams(paragraph)) >= 4)
+        if not on_story:
+            misses += 1
+            if misses >= 2:
+                break
+            continue
+        if total + len(paragraph) + 2 > _CONTINUATION_BUDGET:
+            break
+        added[index], misses = paragraph, 0
+        total += len(paragraph) + 2
+    if not added:
+        return chosen
+    by_key = {_normal(paragraph): paragraph for paragraph in chosen}
+    ordered = {index: by_key[_normal(unique[index])] for index in indexes}
+    ordered.update(added)
+    return [ordered[index] for index in sorted(ordered)]
+
+
 def select_relevant_evidence(title: str, lead: str, page: str) -> dict:
     """Return ordered evidence (at most 6,000 characters) and honest provenance.
 
@@ -492,7 +548,7 @@ def select_relevant_evidence(title: str, lead: str, page: str) -> dict:
     except (ValueError, RecursionError):
         feed = []
     count = sum(len(paragraphs) for _, paragraphs in candidates) + len(feed)
-    best, best_rank = [], (-1.0, -1.0, -1.0)
+    best, best_rank, best_source = [], (-1.0, -1.0, -1.0), []
     if not restricted:
         for headline, paragraphs in candidates:
             headline_score = signature.score(headline) if headline else 0.0
@@ -501,10 +557,16 @@ def select_relevant_evidence(title: str, lead: str, page: str) -> dict:
             chosen, score = _selection(paragraphs, signature)
             rank = (float(bool(headline)), headline_score, score)
             if chosen and rank > best_rank:
-                best, best_rank = chosen, rank
+                best, best_rank, best_source = chosen, rank, paragraphs
+    # Only a body whose own headline matches the title may contribute its
+    # following paragraphs; an untitled container could hold other stories.
+    if best and best_rank[0]:
+        best = _continuation(best_source, best, signature)
     status, reason = "body", "selected-public-body"
     if not best:
         best, _ = _selection(feed, signature)
+        if best:
+            best = _continuation(feed, best, signature)
         if not best and len(feed) == 1 and _short_feed_matches(title, feed[0], signature):
             best = feed
         status = "feed" if best else "title-only"

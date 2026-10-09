@@ -63,6 +63,28 @@ class NewsEvidenceTests(unittest.TestCase):
         self.assertEqual(result["selectedCount"], 2)
         self.assertGreaterEqual(result["candidateCount"], 3)
 
+    def test_on_story_paragraphs_after_the_match_extend_the_evidence(self):
+        first = "Shield AI expects to fly its X-BAT unmanned fighter jet by the end of the year."
+        detail = "The Navy is giving Shield AI another $150 million to keep developing the X-BAT."
+        quote = "Company officials said the aircraft would take off vertically from ships and austere bases."
+        unrelated = "City councillors voted to extend the football stadium lease."
+        page = (f'<article><h1>Shield AI expects to fly its unmanned fighter jet within months</h1>'
+                f'<p>{first}</p><p>{detail}</p><p>{unrelated}</p><p>{quote}</p></article>')
+        result = select_relevant_evidence("Shield AI expects to fly its unmanned fighter jet within months", "", page)
+        self.assertIn(detail, result["paragraphs"])
+        self.assertNotIn(unrelated, result["paragraphs"])
+        self.assertEqual(result["paragraphs"][0], first)
+
+    def test_story_continuation_stays_within_its_budget(self):
+        title = "NASA launches Europa Clipper"
+        lead = "NASA launched Europa Clipper toward Jupiter on Monday."
+        details = [f"A probe stage {n} will travel toward Jupiter after the launch window." for n in range(80)]
+        page = f'<article><h1>{title}</h1><p>{lead}</p>' + "".join(f"<p>{d}</p>" for d in details) + "</article>"
+        result = select_relevant_evidence(title, "", page)
+        self.assertGreater(len(result["paragraphs"]), 1)
+        self.assertLessEqual(len(result["text"]), 2400)
+        self.assertEqual(result["paragraphs"][0], lead)
+
     def test_adjacent_mission_details_remain_supported_context(self):
         first = "NASA's Europa Clipper spacecraft launched on Monday."
         detail = "The spacecraft carries nine scientific instruments to study the icy moon."

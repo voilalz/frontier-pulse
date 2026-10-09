@@ -43,6 +43,9 @@ USER_AGENT = "FrontierPulseBot/2.0 (+https://github.com/voilalz/frontier-pulse; 
 CATEGORIES = ("AI", "航空航天", "军事动态", "局部冲突", "前沿技术", "无人系统")
 DEFAULT_TIMEZONE = "Asia/Shanghai"
 SOURCE_TEXT_LIMIT = 6000
+# Top 10 Chinese summaries target 300-500 characters, which needs roughly
+# 1,000-1,600 characters of English source excerpts. The stream keeps 600.
+DAILY_SUMMARY_SOURCE_LIMIT = 1600
 SUMMARY_REVISION = 5
 from reader_quality import CONTENT_RULES_REVISION, chinese_reader_text, content_availability, assess_admissibility
 
@@ -1999,9 +2002,13 @@ WHY_TEMPLATES = {
 }
 
 
-def fallback_summary(article: Article) -> str:
+def daily_summary_limit(config: dict[str, Any]) -> int:
+    return max(600, min(3000, int(config.get("daily_summary_source_chars", DAILY_SUMMARY_SOURCE_LIMIT))))
+
+
+def fallback_summary(article: Article, limit: int = 600) -> str:
     if article.description:
-        return reader_summary(article.description)
+        return reader_summary(article.description, limit)
     return ""
 
 
@@ -2242,13 +2249,14 @@ def item_from_article(
     config: dict[str, Any],
     editorial: dict[str, Any] | None = None,
     selection: dict[str, Any] | None = None,
+    summary_limit: int = 600,
 ) -> dict[str, Any]:
     editorial = editorial or {}
     selection = selection or {}
     score = int(selection.get("score", round(article.raw_score)))
     category = article.category
     tags = [clean_text(tag, 24) for tag in editorial.get("tags", article.tags) if clean_text(tag)][:3]
-    summary = reader_summary(editorial.get("summary") or fallback_summary(article))
+    summary = reader_summary(editorial.get("summary") or fallback_summary(article, summary_limit), summary_limit)
     key_facts = [clean_text(fact, 140) for fact in editorial.get("keyFacts", []) if clean_text(fact)][:3]
     if not key_facts:
         key_facts = fallback_key_facts(article, summary)
@@ -2257,7 +2265,8 @@ def item_from_article(
     records = capture_source_evidence(article)
     summary_refs = editorial.get("summaryEvidenceRefs") or trace_claim(summary, records)
     if not validate_claim_refs(summary, summary_refs, records):
-        summary = excerpt_summary(records) if records else ""
+        summary = (excerpt_summary(records, summary_limit, 3 if summary_limit <= 600 else 12)
+                   if records else "")
         summary_refs = trace_claim(summary, records)
     facts = [{"text": fact, "evidenceIds": refs} for fact in key_facts
              if fact != summary and (refs := trace_claim(fact, records))]
@@ -2498,7 +2507,8 @@ def request_daily_translation_batch(
 ) -> dict[str, dict[str, Any]]:
     """Translate and edit already-selected daily stories without changing selection."""
     index_to_article = {index: article for index, article in enumerate(batch, 1)}
-    source_items = {index: item_from_article(article, config) for index, article in index_to_article.items()}
+    source_items = {index: item_from_article(article, config, summary_limit=daily_summary_limit(config))
+                    for index, article in index_to_article.items()}
     indexes = list(index_to_article)
     item_schema = {
         "type": "object",
@@ -2531,17 +2541,19 @@ def request_daily_translation_batch(
     example = {"items": [{
         "index": index,
         "titleZh": "忠实中文标题",
-        "summary": "忠实翻译给定description中的事实，使用自然中文",
+        "summary": "依据给定description编译的300至500字中文摘要",
         "tags": ["标签"],
     } for index in indexes]}
     result = request_structured_json(
         runtime,
         instructions=(
             "你是国际科技与安全新闻中文编辑。这些新闻已经入选，不得改变顺序、取舍或重要度。"
-            "将原始title与description中的原文片段忠实翻译成自然中文；evidenceRecords供核对来源。"
+            "将原始title忠实翻译成自然中文，并依据description中的原文片段编写中文摘要；evidenceRecords供核对来源。"
             f"本批共有{len(batch)}条，items必须恰好输出{len(batch)}条且每个index只出现一次。"
             "titleZh和summary必须为中文，专有名称可保留原文。保留原始主体、否定、归属和阶段。"
-            "summary只翻译给定description中的事实。正文通常120至220字，导语40至80字，信息不足可更短。"
+            "summary只使用给定description中的事实，写成300至500个汉字的中文摘要：先用一两句交代核心事件，"
+            "再按原文顺序整理背景、关键细节与数字、各方表态和后续安排，不逐句硬译。"
+            "description不足以支撑300字时如实写短，不得为凑字数重复或推测。"
             "description为空时summary必须为空字符串。禁止现有元数据、未提取正文等采集缺失话术。"
             "在证据支持时保留时间、地点、主体、动作、关键数值及后续安排；没有的信息不要补写。"
             "篇幅取决于可用事实，原文不足时直接写短，不要罗列原文未交代的地点、人名、规模等信息凑字数。"
@@ -4023,7 +4035,14 @@ def build_report(
                 and clean_text(reusable.get("summary"))
                 and reusable.get("_summaryRevision") == SUMMARY_REVISION
                 and reusable.get("_summaryInputHash") == summary_input_hash(article)
-                and valid_display_translation(item_from_article(article, config, reusable))
+                # Stream translations cover a shorter source excerpt; reuse only
+                # when it is the same excerpt the daily summary would translate.
+                and (daily_source := item_from_article(
+                    article, config, summary_limit=daily_summary_limit(config))["summary"])
+                == reusable.get("_sourceSummary", daily_source)
+                and valid_display_translation(
+                    item_from_article(article, config, reusable, summary_limit=daily_summary_limit(config))
+                )
             ):
                 editorial_by_id[article.id] = dict(reusable)
         reused_count = len(editorial_by_id)
@@ -4087,6 +4106,7 @@ def build_report(
             config,
             editorial_by_id.get(article.id),
             selection_by_id.get(article.id),
+            summary_limit=daily_summary_limit(config),
         )
         for article in selected
     ]

@@ -33,6 +33,27 @@ class DailyDisplayTranslationTests(unittest.TestCase):
         self.assertEqual(result["summary"], "卫星计划于周一发射。")
         self.assertEqual(item["summary"], "A satellite launch is scheduled for Monday.")
 
+    def test_daily_summary_source_is_longer_than_stream_excerpt(self):
+        sentences = [f"The satellite team {n} completed a scheduled check of the spacecraft systems on Monday." for n in range(20)]
+        article = self.article("NASA satellite mission", " ".join(sentences))
+        stream = MODULE.item_from_article(article, self.config)
+        daily = MODULE.item_from_article(article, self.config, summary_limit=MODULE.daily_summary_limit(self.config))
+        self.assertLessEqual(len(stream["summary"]), 600)
+        self.assertGreater(len(daily["summary"]), 1000)
+        self.assertLessEqual(len(daily["summary"]), MODULE.DAILY_SUMMARY_SOURCE_LIMIT)
+        validate_news_trace(daily)
+
+    def test_daily_translation_requests_a_300_to_500_character_summary(self):
+        sentences = [f"The satellite team {n} completed a scheduled check of the spacecraft systems on Monday." for n in range(20)]
+        article = self.article("NASA satellite mission", " ".join(sentences))
+        response = {"items":[{"index":1,"titleZh":"美国航天局卫星任务","summary":"卫星团队周一完成了航天器系统的例行检查。","tags":[]}]}
+        with mock.patch.object(MODULE, "request_structured_json", return_value=response) as request:
+            MODULE.request_daily_translation_batch([article], self.config, {"provider":"deepseek"})
+        kwargs = request.call_args.kwargs
+        self.assertIn("300至500个汉字", kwargs["instructions"])
+        evidence = json.loads(kwargs["input_text"].split("\n", 1)[1])
+        self.assertGreater(len(evidence[0]["description"]), 1000)
+
     def test_daily_provider_marker_cannot_count_an_english_response(self):
         article = self.article("NASA satellite mission")
         item = MODULE.item_from_article(article, self.config, {

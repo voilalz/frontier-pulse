@@ -183,13 +183,13 @@ def validate_claim_refs(text, refs, records):
     return False
 
 
-def excerpt_summary(records, limit=600):
+def excerpt_summary(records, limit=600, max_parts=3):
     """Choose whole bounded source excerpts, never truncate into new prose."""
     parts = []
     for record in records:
         if len(" ".join([*parts, record["text"]])) <= limit:
             parts.append(record["text"])
-        if len(parts) == 3:
+        if len(parts) == max_parts:
             break
     return " ".join(parts)
 
