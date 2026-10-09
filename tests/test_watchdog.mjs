@@ -11,16 +11,18 @@ class MemoryStorage {
   transaction(fn) {const job = this.queue.then(()=>fn(this)); this.queue = job.catch(()=>{}); return job;}
 }
 const env = {ENABLED:'true', SITE_URL:'https://newsfrontier.top/', GITHUB_REPO:'voilalz/frontier-pulse', GITHUB_TOKEN:'test', ALERT_WEBHOOK_URL:'https://alerts.example.test/hook'};
-function source({fresh=false, repoFresh=false, active=false, brokenDispatch=false, mismatched=false}={}) {
+function source({fresh=false, repoFresh=false, active=false, brokenDispatch=false, mismatched=false, dispatchStatus=204, dispatchBody=null}={}) {
   const calls=[];
   const manifest={schemaVersion:1, releaseId:'r-test', basePath:'./releases/r-test/', editionDate:fresh?'2026-09-28':'2026-09-27'};
   const fetcher=async(url, options={})=>{
     url=String(url); calls.push({url, ...options});
     const response=(data, status=200)=>new Response(JSON.stringify(data),{status});
     if (url.includes('/dispatches')) {
-      assert.equal(options.method,'POST'); assert.deepEqual(JSON.parse(options.body),{ref:'main',inputs:{force_refresh:'false'}});
+      assert.equal(options.method,'POST');
+      assert.deepEqual(JSON.parse(options.body),{ref:'main',inputs:{force_refresh:'false'},return_run_details:true});
       if (brokenDispatch) throw new Error('ambiguous connection loss');
-      return new Response(null,{status:204});
+      if (dispatchStatus === 204) return new Response(null,{status:204});
+      return new Response(typeof dispatchBody === 'string' ? dispatchBody : JSON.stringify(dispatchBody),{status:dispatchStatus});
     }
     if (url === env.ALERT_WEBHOOK_URL) return new Response(null,{status:204});
     if (url.includes('/runs?')) return response({workflow_runs: active ? [{status:'in_progress'}] : []});
@@ -112,4 +114,38 @@ test('production checks go through the SITE service binding when present',async(
   };
   const result=await monitor(bound,new MemoryStorage(),guarded,at('00:00:00'));
   assert.equal(result.status,'healthy'); assert.equal(site.length,3);
+});
+test('a 200 dispatch with run details succeeds and records the run ID',async()=>{
+  assert.ok(monitor); const s=new MemoryStorage();
+  const x=source({dispatchStatus:200, dispatchBody:{workflow_run_id:37868180309, run_url:'https://api.github.com/x', html_url:'https://github.com/x'}});
+  const result=await monitor(env,s,x.fetcher,at('00:05:00'));
+  assert.equal(result.status,'recovery-requested'); assert.equal(result.runId,37868180309);
+  const state=await s.get('day:2026-09-28');
+  assert.deepEqual(state.runIds,[37868180309]); assert.equal(state.checks.at(-1).runId,37868180309);
+  assert.equal(state.attempts,1);
+});
+test('a 204 dispatch still succeeds without a run ID',async()=>{
+  assert.ok(monitor); const s=new MemoryStorage(),x=source();
+  const result=await monitor(env,s,x.fetcher,at('00:05:00'));
+  assert.equal(result.status,'recovery-requested'); assert.equal(result.runId,undefined);
+  assert.equal((await s.get('day:2026-09-28')).runIds,undefined);
+});
+test('a 200 dispatch with unreadable details is still accepted once',async()=>{
+  assert.ok(monitor);
+  for (const dispatchBody of ['not json', {workflow_run_id:'37868180309'}, {}]) {
+    const s=new MemoryStorage(),x=source({dispatchStatus:200, dispatchBody});
+    const result=await monitor(env,s,x.fetcher,at('00:05:00'));
+    assert.equal(result.status,'recovery-requested'); assert.equal(result.runId,undefined);
+    assert.equal(dispatches(x),1); assert.equal((await s.get('day:2026-09-28')).attempts,1);
+  }
+});
+test('other dispatch responses are failures that keep the attempt and cooldown',async()=>{
+  assert.ok(monitor);
+  for (const dispatchStatus of [201, 403, 422]) {
+    const s=new MemoryStorage(),x=source({dispatchStatus, dispatchBody:{message:'no'}});
+    const first=await monitor(env,s,x.fetcher,at('00:05:00'));
+    assert.equal(first.status,'dispatch-uncertain'); assert.equal(first.reason,'upstream-error');
+    assert.equal((await monitor(env,s,x.fetcher,at('00:15:00'))).status,'recovery-limited');
+    assert.equal(dispatches(x),1); assert.equal((await s.get('day:2026-09-28')).attempts,1);
+  }
 });
