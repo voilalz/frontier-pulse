@@ -103,3 +103,13 @@ test('disabled monitor has no requests and public requests cannot trigger checks
   assert.equal(result.status,'disabled'); assert.equal(requests,0);
   assert.equal((await handler.fetch(new Request('https://watchdog.example/check'),env)).status,404);
 });
+test('production checks go through the SITE service binding when present',async()=>{
+  assert.ok(monitor); const x=source({fresh:true}), site=[];
+  const bound={...env, SITE:{fetch:async(url,options)=>{site.push(String(url)); return x.fetcher(url,options);}}};
+  const guarded=async(url,options)=>{
+    if (String(url).startsWith(env.SITE_URL)) throw new Error('public production fetch');
+    return x.fetcher(url,options);
+  };
+  const result=await monitor(bound,new MemoryStorage(),guarded,at('00:00:00'));
+  assert.equal(result.status,'healthy'); assert.equal(site.length,3);
+});

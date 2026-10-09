@@ -31,6 +31,9 @@ function configuration(env) {
 }
 export async function inspectProduction(env, fetcher, now) {
   const {site} = configuration(env);
+  // The SITE service binding reaches the production Worker directly; a public fetch of
+  // our own domain from Cloudflare timed out. Tests and unbound deployments use fetcher.
+  if (env.SITE) fetcher = (url, options) => env.SITE.fetch(url, options);
   const manifest = await json(fetcher, new URL('data/release.json',site), {cache:'no-store'});
   if (!validManifest(manifest)) return {healthy:false, reason:'invalid-manifest'};
   if (manifest.editionDate !== chinaClock(now).date) return {healthy:false, reason:'old-edition', releaseId:manifest.releaseId};

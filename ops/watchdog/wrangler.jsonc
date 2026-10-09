@@ -12,6 +12,8 @@
     // UTC: Beijing 07:41 (primary dispatch) / 07:50 / 08:00 / 08:05 (alert) / 08:15 (retry) / 08:35 / 09:05.
     "crons": ["41,50 23 * * *", "0,5,15,35 0 * * *", "5 1 * * *"]
   },
+  // Production site (see the root wrangler.jsonc), reached without leaving Cloudflare.
+  "services": [{"binding": "SITE", "service": "frontier-pulse"}],
   "durable_objects": {
     "bindings": [{"name": "WATCHDOG", "class_name": "PublicationWatchdog"}]
   },
