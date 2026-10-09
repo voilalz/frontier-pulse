@@ -149,3 +149,82 @@ test('other dispatch responses are failures that keep the attempt and cooldown',
     assert.equal(dispatches(x),1); assert.equal((await s.get('day:2026-09-28')).attempts,1);
   }
 });
+
+let monitorClassics;
+try { monitorClassics = (await import('../ops/watchdog/worker.mjs')).monitorClassics; } catch {}
+const CID='c-'+'a'.repeat(64), OLD='c-'+'b'.repeat(64);
+function classicSource({live=false, repo=false, attempted=false, active=false, dispatchStatus=204, dispatchBody=null}={}) {
+  const calls=[];
+  const manifest=(id, day)=>({schemaVersion:1, kind:'classicRelease', releaseId:id, basePath:`./releases/${id}/`, recommendationDate:day});
+  const fetcher=async(url, options={})=>{
+    url=String(url); calls.push({url, ...options});
+    const response=(data, status=200)=>new Response(JSON.stringify(data),{status});
+    if (url.includes('/dispatches')) {
+      assert.ok(url.includes('/daily-classics.yml/'));
+      assert.deepEqual(JSON.parse(options.body),{ref:'main',return_run_details:true});
+      if (dispatchStatus === 204) return new Response(null,{status:204});
+      return response(dispatchBody, dispatchStatus);
+    }
+    if (url.includes('/daily-classics.yml/runs?')) return response({workflow_runs: active ? [{status:'queued'}] : []});
+    if (url.includes('/contents/public/classics/release.json')) return response(repo ? manifest(CID,'2026-09-28') : manifest(OLD,'2026-09-27'));
+    if (url.includes(`/contents/public/classics/releases/${OLD}/status.json`)) return response({inventoryDate: attempted ? '2026-09-28' : '2026-09-27'});
+    if (url === env.SITE_URL+'classics/release.json') return response(live ? manifest(CID,'2026-09-28') : manifest(OLD,'2026-09-27'));
+    throw new Error('Unexpected request '+url);
+  };
+  return {fetcher, calls};
+}
+const classicDispatches=x=>x.calls.filter(c=>c.url.includes('/dispatches')).length;
+test('classics: today live is healthy, before 0710 only waits',async()=>{
+  assert.ok(monitorClassics);
+  const x=classicSource({live:true});
+  assert.equal((await monitorClassics(env,new MemoryStorage(),x.fetcher,new Date('2026-09-27T23:11:00Z'))).status,'healthy');
+  const y=classicSource();
+  assert.equal((await monitorClassics(env,new MemoryStorage(),y.fetcher,new Date('2026-09-27T23:05:00Z'))).status,'waiting');
+  assert.equal(classicDispatches(x)+classicDispatches(y),0);
+});
+test('classics: 0711 dispatches the classic workflow with run ID, then sees it running',async()=>{
+  assert.ok(monitorClassics); const s=new MemoryStorage();
+  const x=classicSource({dispatchStatus:200, dispatchBody:{workflow_run_id:37871145401}});
+  const r=await monitorClassics(env,s,x.fetcher,new Date('2026-09-27T23:11:00Z'));
+  assert.equal(r.status,'recovery-requested'); assert.equal(r.runId,37871145401); assert.equal(classicDispatches(x),1);
+  assert.deepEqual((await s.get('classics:2026-09-28')).runIds,[37871145401]);
+  const later=classicSource({active:true});
+  assert.equal((await monitorClassics(env,s,later.fetcher,new Date('2026-09-27T23:41:00Z'))).status,'running');
+  assert.equal(classicDispatches(later),0);
+});
+test('classics: deployment lag and a pending no-inventory run never dispatch',async()=>{
+  assert.ok(monitorClassics);
+  for (const [options, status] of [[{repo:true},'deployment-lag'],[{attempted:true},'published-pending']]) {
+    const x=classicSource(options);
+    assert.equal((await monitorClassics(env,new MemoryStorage(),x.fetcher,new Date('2026-09-27T23:41:00Z'))).status,status);
+    assert.equal(classicDispatches(x),0);
+  }
+});
+test('classics: at most two dispatches a day, thirty minutes apart, separate from the edition quota',async()=>{
+  assert.ok(monitorClassics); const s=new MemoryStorage(),x=classicSource();
+  await s.put('day:2026-09-28',{attempts:2});
+  for (const time of ['2026-09-27T23:11:00Z','2026-09-27T23:41:00Z','2026-09-27T23:50:00Z','2026-09-28T00:15:00Z','2026-09-28T00:35:00Z'])
+    await monitorClassics(env,s,x.fetcher,new Date(time));
+  assert.equal(classicDispatches(x),2); assert.equal((await s.get('classics:2026-09-28')).attempts,2);
+  assert.equal((await s.get('day:2026-09-28')).attempts,2);
+});
+test('classics: a rejected dispatch keeps the attempt and cooldown',async()=>{
+  assert.ok(monitorClassics); const s=new MemoryStorage(),x=classicSource({dispatchStatus:403, dispatchBody:{message:'no'}});
+  assert.equal((await monitorClassics(env,s,x.fetcher,new Date('2026-09-27T23:11:00Z'))).status,'dispatch-uncertain');
+  assert.equal((await monitorClassics(env,s,x.fetcher,new Date('2026-09-27T23:20:00Z'))).status,'recovery-limited');
+  assert.equal(classicDispatches(x),1);
+});
+test('classics: the live check uses the SITE binding',async()=>{
+  assert.ok(monitorClassics); const x=classicSource({live:true}); let site=0;
+  const bound={...env, SITE:{fetch:async(url,options)=>{site++; return x.fetcher(url,options);}}};
+  const guarded=async(url,options)=>{if (String(url).startsWith(env.SITE_URL)) throw new Error('public fetch'); return x.fetcher(url,options);};
+  assert.equal((await monitorClassics(bound,new MemoryStorage(),guarded,new Date('2026-09-27T23:11:00Z'))).status,'healthy');
+  assert.equal(site,1);
+});
+test('the scheduled check runs both monitors',async()=>{
+  assert.ok(monitorClassics);
+  const {PublicationWatchdog}=await import('../ops/watchdog/worker.mjs');
+  const dog=new PublicationWatchdog({storage:new MemoryStorage()},{...env,ENABLED:'false'});
+  const body=await (await dog.fetch(new Request('https://internal/check',{method:'POST'}))).json();
+  assert.equal(body.status,'disabled'); assert.equal(body.classics.status,'disabled');
+});

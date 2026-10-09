@@ -139,7 +139,7 @@ scripts/check_production.py         线上安全头与缓存头验收
 config/news_config.json             主题、信源、权重、时区、模型和归档期限
 tests/                              完全离线测试与固定样例
 .github/workflows/daily-news.yml     日报生成、08:00 发布、提交与发信（看门狗触发，07:40/08:10 定时兜底）
-ops/watchdog/                        发布看门狗 Worker：07:41 触发日报、失败重试与告警
+ops/watchdog/                        发布看门狗 Worker：07:11 触发经典论文、07:41 触发日报、失败重试与告警
 .github/workflows/stream-update.yml  按中国标准时间每 3 小时更新全量动态流
 ```
 

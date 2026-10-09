@@ -1,4 +1,4 @@
-/* Independent publication watchdog and primary daily trigger.
+/* Independent publication watchdog and primary daily trigger (daily edition and classic papers).
  * GitHub's own schedule routinely starts hours late, so from 07:40 Beijing the watchdog
  * dispatches the daily workflow itself (workflow_dispatch starts within a minute).
  * The workflow's refresh gate accepts runs from 07:40 and promotes at 08:00. */
@@ -153,11 +153,105 @@ export async function monitor(env, storage, fetcher = fetch, now = new Date()) {
   return {date,status,reason,releaseId,...(runId ? {runId} : {})};
 }
 
+// Classic papers are deterministic and cheap: one idempotent run per Beijing day from 07:10.
+// A run that found no ready inventory still records today's status, which counts as done.
+const CLASSICS_FROM = 430; // 07:10, the classic workflow's own schedule
+const CLASSIC_RELEASE = /^c-[0-9a-f]{64}$/;
+function validClassicManifest(value) {
+  return value?.schemaVersion === 1 && value.kind === 'classicRelease' && CLASSIC_RELEASE.test(value.releaseId)
+    && value.basePath === `./releases/${value.releaseId}/`;
+}
+export async function monitorClassics(env, storage, fetcher = fetch, now = new Date()) {
+  if (env.ENABLED !== 'true') return {status:'disabled'};
+  const {date, minutes} = chinaClock(now), key = `classics:${date}`, stamp = now.valueOf();
+  const claimed = await storage.transaction(async txn=>{
+    const state = await txn.get(key) || {date,attempts:0,checks:[]};
+    if ((state.checkingUntil || 0) > stamp) return false;
+    state.checkingUntil = stamp + 120000;
+    await txn.put(key,state); return true;
+  });
+  if (!claimed) return {status:'checking'};
+  let status='error', reason='', releaseId='', runId=null;
+  try {
+    const config = configuration(env);
+    const site = env.SITE ? (url, options) => env.SITE.fetch(url, options) : fetcher;
+    let live = null;
+    try {live = await json(site, new URL('classics/release.json', config.site), {cache:'no-store'});} catch {}
+    if (validClassicManifest(live) && live.recommendationDate === date) {
+      status='healthy'; releaseId=live.releaseId;
+    } else if (minutes < CLASSICS_FROM) status='waiting';
+    else {
+      if (!env.GITHUB_TOKEN) throw new Error('Missing GitHub token');
+      const raw = path => request(fetcher, `${config.api}/contents/public/classics/${path}?ref=main`, {
+        headers:{...config.headers,Accept:'application/vnd.github.raw+json'},
+      });
+      const response = await raw('release.json');
+      let committed = null;
+      if (response.ok) committed = await response.json();
+      else if (response.status !== 404) throw new Error('Repository check unavailable');
+      if (validClassicManifest(committed) && committed.recommendationDate === date) {
+        status='deployment-lag'; releaseId=committed.releaseId;
+      } else {
+        let attempted = false;
+        if (validClassicManifest(committed)) {
+          const statusFile = await raw(`releases/${committed.releaseId}/status.json`);
+          if (!statusFile.ok) throw new Error('Repository check unavailable');
+          attempted = (await statusFile.json())?.inventoryDate === date;
+        }
+        if (attempted) {status='published-pending'; reason='no-ready-inventory'; releaseId=committed.releaseId;}
+        else {
+          const runs = await json(fetcher,`${config.api}/actions/workflows/daily-classics.yml/runs?branch=main&per_page=20`,{headers:config.headers});
+          if (!Array.isArray(runs.workflow_runs)) throw new Error('Invalid workflow response');
+          if (runs.workflow_runs.some(run=>ACTIVE.has(run.status))) status='running';
+          else {
+            const reserved = await storage.transaction(async txn=>{
+              const state = await txn.get(key);
+              if (state.attempts>=2 || stamp-(state.lastAttemptAt || 0)<1800000) return false;
+              state.attempts++; state.lastAttemptAt=stamp;
+              await txn.put(key,state); return true;
+            });
+            if (reserved) {
+              status='dispatch-uncertain';
+              const dispatch = await request(fetcher,`${config.api}/actions/workflows/daily-classics.yml/dispatches`,{
+                method:'POST',headers:{...config.headers,'Content-Type':'application/json'},
+                body:JSON.stringify({ref:'main',return_run_details:true}),
+              });
+              if (dispatch.status !== 200 && dispatch.status !== 204) throw new Error('Recovery dispatch rejected');
+              status='recovery-requested';
+              if (dispatch.status === 200) runId = await dispatchedRunId(dispatch);
+            } else status='recovery-limited';
+          }
+        }
+      }
+    }
+  } catch (error) {
+    if (status!=='dispatch-uncertain') status='check-failed';
+    reason = error?.message === 'Missing GitHub token' ? 'missing-token' : 'upstream-error';
+  } finally {
+    await storage.transaction(async txn=>{
+      const state=await txn.get(key);
+      state.status=status; state.reason=reason; state.releaseId=releaseId; state.checkedAt=now.toISOString();
+      if (runId) state.runIds=[...(state.runIds || []), runId];
+      state.checkingUntil=0;
+      if (status==='healthy' && !state.firstHealthyAt) state.firstHealthyAt=now.toISOString();
+      state.checks=[...(state.checks || []),{at:now.toISOString(),status,...(runId ? {runId} : {})}].slice(-20);
+      await txn.put(key,state);
+    });
+    const cutoff = chinaClock(new Date(stamp-13*86400000)).date;
+    const entries=await storage.list({prefix:'classics:'});
+    const expired=[...entries.keys()].filter(key=>key.slice(9)<cutoff);
+    if (expired.length) await storage.delete(expired);
+  }
+  return {date,status,reason,releaseId,...(runId ? {runId} : {})};
+}
+
 export class PublicationWatchdog {
   constructor(ctx,env) {this.ctx=ctx;this.env=env;}
   async fetch(request) {
     if (request.method==='POST' && new URL(request.url).pathname==='/check') {
-      return Response.json(await monitor(this.env,this.ctx.storage));
+      const edition = await monitor(this.env,this.ctx.storage);
+      const classics = await monitorClassics(this.env,this.ctx.storage).catch(()=>({status:'check-failed',reason:'internal-error'}));
+      return Response.json({...edition, classics});
     }
     return new Response('Not found',{status:404});
   }
