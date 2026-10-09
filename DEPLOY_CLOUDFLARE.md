@@ -40,7 +40,7 @@ Worker 名称、资源目录和兼容日期都写在 `wrangler.jsonc`，修改�
 - Cloudflare Worker 最新部署对应这次数据提交；
 - `public/feed.xml` 存在且可被 Atom 阅读器解析。
 
-日报工作流按 `Asia/Shanghai` 07:40 启动、08:10 补跑。GitHub 的计划任务不是分钟级 SLA，高负载时可能延后数小时。
+日报由发布看门狗在北京时间 07:41 触发（见下文第 5 节）；工作流自身的 07:40 / 08:10 定时任务只作兜底，GitHub 的计划任务实际常晚 2–3 小时启动。
 
 ## 4. 快照保留
 
@@ -51,6 +51,29 @@ Worker 名称、资源目录和兼容日期都写在 `wrangler.jsonc`，修改�
 ```bash
 python scripts/publication.py prune --public public
 ```
+
+## 5. 准时触发（发布看门狗）
+
+GitHub Actions 的 `schedule` 不保证准点：2026 年 9–10 月日报的 07:40 定时任务实际在 09:50–10:55 之间才启动。`ops/watchdog` 是一个独立的 Cloudflare Worker，用 Cloudflare Cron 准时调用 `workflow_dispatch`（通常一分钟内开始运行）：
+
+| 北京时间 | 动作 |
+|---|---|
+| 07:41 | 线上还不是今天的版本且没有运行中的日报任务 → 触发日报 |
+| 07:50 / 08:00 | 只检查，任务运行中或已发布就不动 |
+| 08:05 | 仍未发布 → 发告警（配置了 `ALERT_WEBHOOK_URL` 时） |
+| 08:15 | 首次运行失败 → 再触发一次（每天最多两次，间隔至少 30 分钟） |
+| 08:35 / 09:05 | 记录状态 |
+
+日报工作流自己的门禁保证不会重复出刊：07:40 前不生成，当天已发布就跳过，生成完成后等到 08:00 再发布。
+
+### 一次性部署
+
+1. **创建 GitHub 令牌**：GitHub `Settings → Developer settings → Fine-grained tokens → Generate new token`，Repository access 只选 `voilalz/frontier-pulse`，权限 `Actions: Read and write`、`Contents: Read-only`。
+2. **创建 Worker**：Cloudflare Dashboard `Workers & Pages → Create → Import a repository`，选本仓库，Root directory 填 `ops/watchdog`，Deploy command `npx wrangler deploy`。建议在 Build watch paths 只保留 `ops/watchdog/*`，避免每次数据提交都重新部署。
+3. **添加密钥**：在新 Worker `frontier-publication-watchdog` 的 `Settings → Variables and Secrets` 添加 Secret `GITHUB_TOKEN`（第 1 步的令牌）；需要告警时再添加 `ALERT_WEBHOOK_URL`（HTTPS，收到 JSON `{text, date, status, reason}`）。
+4. **验收**：次日 07:41 后在 Worker 的 `Logs` 中应看到 `recovery-requested`，GitHub Actions 出现一次 `workflow_dispatch` 触发的 `Daily news update`。
+
+看门狗没有公开入口，`fetch` 一律返回 404；临时停用时把 `wrangler.jsonc` 里的 `ENABLED` 改为 `"false"` 并重新部署。
 
 ## DeepSeek V4 Flash 中文标题、摘要和关键事实（推荐）
 
@@ -145,4 +168,4 @@ python scripts/check_production.py --site-url https://你的域名/
 
 ## 发布与恢复
 
-整期快照与单命令恢复见上文“快照保留”；恢复已保留的版本可手动运行 `Restore retained release` 工作流。外部监测器（`ops/watchdog`）默认不部署。
+整期快照与单命令恢复见上文“快照保留”；恢复已保留的版本可手动运行 `Restore retained release` 工作流。发布看门狗（`ops/watchdog`）的部署见第 5 节。

@@ -40,11 +40,27 @@ test('healthy edition does not dispatch and records deadline observation',async(
   assert.equal(result.status,'healthy'); assert.equal(dispatches(x),0);
   assert.equal((await s.get('day:2026-09-28')).onTime,true);
 });
-test('0750 check observes missing edition without dispatch or alert',async()=>{
+test('before 0740 the monitor only waits',async()=>{
   assert.ok(monitor); const s=new MemoryStorage(),x=source();
-  const result=await monitor(env,s,x.fetcher,new Date('2026-09-27T23:50:00Z'));
+  const result=await monitor(env,s,x.fetcher,new Date('2026-09-27T23:35:00Z'));
   assert.equal(result.status,'waiting'); assert.equal(dispatches(x),0);
   assert.equal(x.calls.filter(c=>c.url===env.ALERT_WEBHOOK_URL).length,0);
+});
+test('0741 dispatches the daily edition without alerting, then sees it running',async()=>{
+  assert.ok(monitor); const s=new MemoryStorage(),x=source();
+  const result=await monitor(env,s,x.fetcher,new Date('2026-09-27T23:41:00Z'));
+  assert.equal(result.status,'recovery-requested'); assert.equal(dispatches(x),1);
+  assert.equal(x.calls.filter(c=>c.url===env.ALERT_WEBHOOK_URL).length,0);
+  const later=source({active:true});
+  assert.equal((await monitor(env,s,later.fetcher,new Date('2026-09-27T23:50:00Z'))).status,'running');
+  assert.equal(dispatches(later),0);
+});
+test('a failed 0741 run is retried once at 0815 and alerted at 0805',async()=>{
+  assert.ok(monitor); const s=new MemoryStorage(),x=source();
+  for(const time of ['2026-09-27T23:41:00Z','2026-09-27T23:50:00Z','2026-09-28T00:05:00Z','2026-09-28T00:15:00Z','2026-09-28T00:35:00Z'])
+    await monitor(env,s,x.fetcher,new Date(time));
+  assert.equal(dispatches(x),2);
+  assert.equal(x.calls.filter(c=>c.url===env.ALERT_WEBHOOK_URL).length,1);
 });
 test('0805 old edition alerts and dispatches once, cooldown and daily cap are durable',async()=>{
   assert.ok(monitor); const s=new MemoryStorage(),x=source();
