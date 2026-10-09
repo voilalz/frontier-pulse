@@ -1,5 +1,10 @@
-/* Independent publication watchdog. Delivered disabled; deployment is explicit. */
+/* Independent publication watchdog and primary daily trigger.
+ * GitHub's own schedule routinely starts hours late, so from 07:40 Beijing the watchdog
+ * dispatches the daily workflow itself (workflow_dispatch starts within a minute).
+ * The workflow's refresh gate accepts runs from 07:40 and promotes at 08:00. */
 const ACTIVE = new Set(['queued', 'in_progress', 'waiting', 'requested', 'pending']);
+const DISPATCH_FROM = 460; // 07:40, the workflow's earliest generation window
+const ALERT_FROM = 485;    // 08:05, after the 08:00 target and deployment
 export function chinaClock(now) {
   const shifted = new Date(now.valueOf() + 8 * 3600000);
   return {date:shifted.toISOString().slice(0,10), minutes:shifted.getUTCHours()*60+shifted.getUTCMinutes()};
@@ -57,7 +62,7 @@ export async function monitor(env, storage, fetcher = fetch, now = new Date()) {
     catch {inspection = {healthy:false,reason:'production-unreachable'};}
     ({healthy, reason, releaseId = ''} = inspection);
     if (healthy) status='healthy';
-    else if (minutes < 485) status='waiting';
+    else if (minutes < DISPATCH_FROM) status='waiting';
     else {
       const config = configuration(env);
       if (!env.GITHUB_TOKEN) throw new Error('Missing GitHub token');
@@ -97,7 +102,7 @@ export async function monitor(env, storage, fetcher = fetch, now = new Date()) {
     reason = error?.message === 'Missing GitHub token' ? 'missing-token' : 'upstream-error';
   }
   try {
-    if (!healthy && minutes >= 485 && env.ALERT_WEBHOOK_URL) {
+    if (!healthy && minutes >= ALERT_FROM && env.ALERT_WEBHOOK_URL) {
       const alertURL = new URL(env.ALERT_WEBHOOK_URL);
       if (alertURL.protocol !== 'https:') throw new Error('Alert webhook must use HTTPS');
       const alert = await storage.transaction(async txn=>{

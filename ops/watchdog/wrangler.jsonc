@@ -4,13 +4,13 @@
   "compatibility_date": "2026-09-28",
   "workers_dev": false,
   "vars": {
-    "ENABLED": "false",
+    "ENABLED": "true",
     "SITE_URL": "https://newsfrontier.top/",
     "GITHUB_REPO": "voilalz/frontier-pulse"
   },
   "triggers": {
-    // UTC: Beijing 07:50 / 08:00 / 08:05 / 08:35 / 09:05.
-    "crons": ["50 23 * * *", "0,5,35 0 * * *", "5 1 * * *"]
+    // UTC: Beijing 07:41 (primary dispatch) / 07:50 / 08:00 / 08:05 (alert) / 08:15 (retry) / 08:35 / 09:05.
+    "crons": ["41,50 23 * * *", "0,5,15,35 0 * * *", "5 1 * * *"]
   },
   "durable_objects": {
     "bindings": [{"name": "WATCHDOG", "class_name": "PublicationWatchdog"}]
