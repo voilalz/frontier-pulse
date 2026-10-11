@@ -180,44 +180,35 @@
   "researchEditorialDiagnostics": {},
   "deepread": {
     "state": "degraded",
-    "errorCode": "deepread-retained",
+    "errorCode": "deepread-partial",
     "editionDate": "2026-10-11",
-    "contentEditionDate": "2026-10-10",
-    "readerStatus": "retained",
+    "contentEditionDate": "2026-10-11",
+    "readerStatus": "partial",
     "qualityFailures": [
       {
         "chapterId": "chapter-1",
-        "sentenceId": "b4s0",
-        "rule": "quantity:number:10,number:6"
+        "sentenceId": "angle",
+        "rule": "analysis-new-quotation"
       },
       {
         "chapterId": "chapter-1",
-        "sentenceId": "b5s0",
-        "rule": "quantity:number:4"
-      },
-      {
-        "chapterId": "chapter-1",
-        "sentenceId": "b5s3",
-        "rule": "quantity:number:2"
+        "sentenceId": "b4s1",
+        "rule": "analysis-new-quotation"
       },
       {
         "chapterId": "chapter-2",
-        "sentenceId": "b2s1",
-        "rule": "quantity:number:10,number:6"
-      },
-      {
-        "chapterId": "chapter-3",
-        "sentenceId": "b1s0",
-        "rule": "quantity:number:2"
-      },
-      {
-        "chapterId": "chapter-3",
         "sentenceId": "b1s1",
-        "rule": "quantity:number:1"
+        "rule": "qualifier:planned"
       }
     ],
-    "message": "今日深读未更新，沿用一天内的历史完整版。",
+    "message": "已发表合格主题，其余主题待恢复。",
     "diagnostics": {
+      "generationStatus": "partial",
+      "generatedAt": "2026-10-11T00:11:43.626562Z",
+      "candidateCount": 12,
+      "eventCount": 1,
+      "sourceCount": 1,
+      "warnings": [],
       "recoveryDiagnostics": {
         "chapters": {
           "chapter-1": {
@@ -225,16 +216,12 @@
             "attempts": 2,
             "issues": [
               {
-                "sentenceId": "b4s0",
-                "rule": "quantity:number:10,number:6"
+                "sentenceId": "angle",
+                "rule": "analysis-new-quotation"
               },
               {
-                "sentenceId": "b5s0",
-                "rule": "quantity:number:4"
-              },
-              {
-                "sentenceId": "b5s3",
-                "rule": "quantity:number:2"
+                "sentenceId": "b4s1",
+                "rule": "analysis-new-quotation"
               }
             ]
           },
@@ -243,64 +230,59 @@
             "attempts": 2,
             "issues": [
               {
-                "sentenceId": "b2s1",
-                "rule": "quantity:number:10,number:6"
+                "sentenceId": "b1s1",
+                "rule": "qualifier:planned"
               }
             ]
           },
           "chapter-3": {
-            "state": "failed",
-            "attempts": 2,
-            "issues": [
-              {
-                "sentenceId": "b1s0",
-                "rule": "quantity:number:2"
-              },
-              {
-                "sentenceId": "b1s1",
-                "rule": "quantity:number:1"
-              }
-            ]
+            "state": "complete",
+            "attempts": 2
           }
         }
       },
       "contentFailures": [
         {
           "chapterId": "chapter-1",
-          "sentenceId": "b4s0",
-          "rule": "quantity:number:10,number:6"
+          "sentenceId": "angle",
+          "rule": "analysis-new-quotation"
         },
         {
           "chapterId": "chapter-1",
-          "sentenceId": "b5s0",
-          "rule": "quantity:number:4"
-        },
-        {
-          "chapterId": "chapter-1",
-          "sentenceId": "b5s3",
-          "rule": "quantity:number:2"
+          "sentenceId": "b4s1",
+          "rule": "analysis-new-quotation"
         },
         {
           "chapterId": "chapter-2",
-          "sentenceId": "b2s1",
-          "rule": "quantity:number:10,number:6"
-        },
-        {
-          "chapterId": "chapter-3",
-          "sentenceId": "b1s0",
-          "rule": "quantity:number:2"
-        },
-        {
-          "chapterId": "chapter-3",
           "sentenceId": "b1s1",
-          "rule": "quantity:number:1"
+          "rule": "qualifier:planned"
         }
       ],
       "selectionDiagnostics": {
         "genre-or-policy": 22,
         "source-unavailable": 5
+      },
+      "qualityMetrics": {
+        "bodyHanCount": 369,
+        "publishedTopicCount": 1,
+        "plannedTopicCount": 3,
+        "historicalTopicCount": 0,
+        "multiSourceEventCount": 0,
+        "categoryCounts": {
+          "AI": 1,
+          "军事动态": 1,
+          "前沿技术": 1
+        },
+        "topicCategoryCounts": {
+          "AI": 1,
+          "军事动态": 1,
+          "前沿技术": 1
+        },
+        "maximumTopicCategoryShare": 0.3333333333333333,
+        "categoryBalanceException": ""
       }
-    }
+    },
+    "lastAttemptAt": "2026-10-11T00:11:43.626562Z"
   },
-  "releaseId": "r20261011T001116-240c0788"
+  "releaseId": "r20261011T001143-5cfaa79c"
 }
