@@ -1765,22 +1765,37 @@
     "categoryBalanceException": ""
   },
   "briefs": [],
-  "publicationEditionDate": "2026-10-10",
+  "publicationEditionDate": "2026-10-11",
   "qualityFailures": [
     {
       "chapterId": "chapter-1",
-      "sentenceId": "angle",
-      "rule": "analysis-new-quotation"
+      "sentenceId": "b4s0",
+      "rule": "quantity:number:10,number:6"
     },
     {
       "chapterId": "chapter-1",
-      "sentenceId": "b2s1",
-      "rule": "negated-action"
+      "sentenceId": "b5s0",
+      "rule": "quantity:number:4"
     },
     {
       "chapterId": "chapter-1",
-      "sentenceId": "b5s1",
+      "sentenceId": "b5s3",
       "rule": "quantity:number:2"
+    },
+    {
+      "chapterId": "chapter-2",
+      "sentenceId": "b2s1",
+      "rule": "quantity:number:10,number:6"
+    },
+    {
+      "chapterId": "chapter-3",
+      "sentenceId": "b1s0",
+      "rule": "quantity:number:2"
+    },
+    {
+      "chapterId": "chapter-3",
+      "sentenceId": "b1s1",
+      "rule": "quantity:number:1"
     }
   ],
   "framingEvidenceIds": [
@@ -1799,6 +1814,90 @@
     "verdict": "supported",
     "binding": "ec2b5fd57e6c5bb60eefcc3b9d3419e1cffe9cd699cd7f7c51c93896bbe89f35"
   },
-  "readerStatus": "complete",
-  "releaseId": "r20261010T001307-a593359f"
+  "readerStatus": "retained",
+  "generationDiagnostics": {
+    "recoveryDiagnostics": {
+      "chapters": {
+        "chapter-1": {
+          "state": "failed",
+          "attempts": 2,
+          "issues": [
+            {
+              "sentenceId": "b4s0",
+              "rule": "quantity:number:10,number:6"
+            },
+            {
+              "sentenceId": "b5s0",
+              "rule": "quantity:number:4"
+            },
+            {
+              "sentenceId": "b5s3",
+              "rule": "quantity:number:2"
+            }
+          ]
+        },
+        "chapter-2": {
+          "state": "failed",
+          "attempts": 2,
+          "issues": [
+            {
+              "sentenceId": "b2s1",
+              "rule": "quantity:number:10,number:6"
+            }
+          ]
+        },
+        "chapter-3": {
+          "state": "failed",
+          "attempts": 2,
+          "issues": [
+            {
+              "sentenceId": "b1s0",
+              "rule": "quantity:number:2"
+            },
+            {
+              "sentenceId": "b1s1",
+              "rule": "quantity:number:1"
+            }
+          ]
+        }
+      }
+    },
+    "contentFailures": [
+      {
+        "chapterId": "chapter-1",
+        "sentenceId": "b4s0",
+        "rule": "quantity:number:10,number:6"
+      },
+      {
+        "chapterId": "chapter-1",
+        "sentenceId": "b5s0",
+        "rule": "quantity:number:4"
+      },
+      {
+        "chapterId": "chapter-1",
+        "sentenceId": "b5s3",
+        "rule": "quantity:number:2"
+      },
+      {
+        "chapterId": "chapter-2",
+        "sentenceId": "b2s1",
+        "rule": "quantity:number:10,number:6"
+      },
+      {
+        "chapterId": "chapter-3",
+        "sentenceId": "b1s0",
+        "rule": "quantity:number:2"
+      },
+      {
+        "chapterId": "chapter-3",
+        "sentenceId": "b1s1",
+        "rule": "quantity:number:1"
+      }
+    ],
+    "selectionDiagnostics": {
+      "genre-or-policy": 22,
+      "source-unavailable": 5
+    }
+  },
+  "releaseId": "r20261011T001116-240c0788"
 }

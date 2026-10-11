@@ -1,0 +1,1265 @@
+{
+  "schemaVersion": 2,
+  "generationRevision": 13,
+  "editionDate": "2026-10-09",
+  "generatedAt": "2026-10-09T01:08:25Z",
+  "headline": "一个公开代理就能接管全账户，AgentCore隔离边界去哪了",
+  "lead": "本篇回答：为什么只拿到一个公开AI代理的聊天权限，就能接管同一AWS账户与区域内所有AgentCore代理，这暴露的是产品实现缺陷还是AI代理架构的固有风险，对企业部署意味着什么。Zenity Labs披露的AgentCorruption漏洞链显示，隔离边界缺失让代理自身的元数据服务凭证成为横移跳板；值得写是因为企业正把带工具、记忆与权限的代理接入核心业务，而权限边界共享正是横移的温床。尚不清楚AWS是否已修复、以何方式修复、企业受影响范围有多大。",
+  "chapters": [
+    {
+      "id": "chapter-1",
+      "kind": "event",
+      "comparisonKey": "",
+      "comparisonNote": "",
+      "title": "一个公开代理就能接管全账户，AgentCore隔离边界去哪了",
+      "angle": "本篇回答：为什么只拿到一个公开AI代理的聊天权限，就能接管同一AWS账户与区域内所有AgentCore代理，这暴露的是产品实现缺陷还是AI代理架构的固有风险，对企业部署意味着什么。Zenity Labs披露的AgentCorruption漏洞链显示，隔离边界缺失让代理自身的元数据服务凭证成为横移跳板；值得写是因为企业正把带工具、记忆与权限的代理接入核心业务，而权限边界共享正是横移的温床。尚不清楚AWS是否已修复、以何方式修复、企业受影响范围有多大。",
+      "newsIds": [
+        "50a66e8e1b353c"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "newsIds": [
+            "50a66e8e1b353c"
+          ],
+          "sentences": [
+            {
+              "text": "据安全公司Zenity Labs披露，研究人员发现了一条被称为AgentCorruption的漏洞链，利用它只需通过聊天界面访问一个公开代理，就能接管同一AWS账户和区域内全部AgentCore代理。",
+              "evidenceIds": [
+                "evd-f63915e5887a82966e01",
+                "evd-d62ab2d3e7224e3f6b46",
+                "evd-f74d77e4080e904bb143"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "ccf6ec5a7ea7e2b4245996a9bba0b4b5506944667bb73beeb9cc5b2ecf6ae782"
+              }
+            },
+            {
+              "text": "Amazon Bedrock AgentCore是AWS用于运行企业AI代理的平台，具备工具、记忆和访问管理能力。",
+              "evidenceIds": [
+                "evd-80a9eee3a277ed7d17e0"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "2ce5803073fe2065f55174b91c3330655a3a5aa947cc677dd5ae705443406969"
+              }
+            },
+            {
+              "text": "研究人员称，单条提示即可窃取同一账户与区域内所有代理的私密对话、源代码和存储的凭证。",
+              "evidenceIds": [
+                "evd-89350f89e9642d92983a"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "04e2daec330e0954636c46a0d65b5ee1bbd2e425253735c49df564976ff57dfa"
+              }
+            }
+          ],
+          "text": "据安全公司Zenity Labs披露，研究人员发现了一条被称为AgentCorruption的漏洞链，利用它只需通过聊天界面访问一个公开代理，就能接管同一AWS账户和区域内全部AgentCore代理。Amazon Bedrock AgentCore是AWS用于运行企业AI代理的平台，具备工具、记忆和访问管理能力。研究人员称，单条提示即可窃取同一账户与区域内所有代理的私密对话、源代码和存储的凭证。",
+          "evidenceIds": [
+            "evd-f63915e5887a82966e01",
+            "evd-d62ab2d3e7224e3f6b46",
+            "evd-f74d77e4080e904bb143",
+            "evd-80a9eee3a277ed7d17e0",
+            "evd-89350f89e9642d92983a"
+          ]
+        },
+        {
+          "type": "analysis",
+          "newsIds": [
+            "50a66e8e1b353c"
+          ],
+          "sentences": [
+            {
+              "text": "从公开证据看，这条链条的关键起点不是代理被诱导说错话，而是代理运行环境缺少应有的隔离。依据Zenity技术博客的描述，代理本不该触达元数据服务，但AgentCore缺乏适当隔离，因而被越权访问。",
+              "evidenceIds": [
+                "evd-19f773ad666aba45bd93"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "05a3fc895a100acdd1969e6f56a3427e423d52937996bcde28aaaedba71de05d"
+              }
+            },
+            {
+              "text": "研究人员用AWS开源框架Strands搭建了测试代理并自带网页工具；当以自然语言要求它查询元数据服务并将结果发送到外部服务器时，代理照做了。据其技术博客描述，本应存在的沙箱边界根本不存在。",
+              "evidenceIds": [
+                "evd-a9f08c96a5c11714cccf",
+                "evd-54d8e5935fd1d651a00d"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "3c9e6bc8d17f917843031e1f02bf5d5fb1fb1832fcc2ce297c5d4ea2c038124c"
+              }
+            },
+            {
+              "text": "一旦元数据服务暴露了证书、密钥材料以及不属于研究者账户的内部S3预签名URL，攻击就不再依赖代理本身。被盗凭证在研究者的自有机器上即可使用，攻击者不再需要代理继续留在平台内。",
+              "evidenceIds": [
+                "evd-a801c0c1ae4b3d87ad8e",
+                "evd-1fe1c258a4a228f7dc53"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "bd03265720af16886ae521fb5728c0f3e269bf54a292f04a2e5fd521acfe4e68"
+              }
+            },
+            {
+              "text": "这批凭证权限据Zenity披露适用于同一账户与区域内的每个代理，带有读、写、删能力并允许执行破坏性操作，这就是单点失陷升级为全域接管的机制。",
+              "evidenceIds": [
+                "evd-a82665c0a86291f6acc5"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "3b592f4b3e3f4642084945989f7e55c84ef4442cebd29ff71dbb79c42e7b1253"
+              }
+            },
+            {
+              "text": "以此为据，我的判断是：漏洞链中真正可归为产品缺陷的，是运行环境未能维持沙箱边界；而代理身份过度共享、权限粒度不足，则更接近平台架构层面的设计取舍。前者可以打补丁，后者需要重新划分代理实例之间以及与平台基础设施之间的信任边界。",
+              "evidenceIds": [
+                "evd-19f773ad666aba45bd93",
+                "evd-a82665c0a86291f6acc5"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "022f6896114ca270570490c262970fecc1c3051f2e972704324244b1c6b2afbb"
+              }
+            }
+          ],
+          "text": "从公开证据看，这条链条的关键起点不是代理被诱导说错话，而是代理运行环境缺少应有的隔离。依据Zenity技术博客的描述，代理本不该触达元数据服务，但AgentCore缺乏适当隔离，因而被越权访问。研究人员用AWS开源框架Strands搭建了测试代理并自带网页工具；当以自然语言要求它查询元数据服务并将结果发送到外部服务器时，代理照做了。据其技术博客描述，本应存在的沙箱边界根本不存在。一旦元数据服务暴露了证书、密钥材料以及不属于研究者账户的内部S3预签名URL，攻击就不再依赖代理本身。被盗凭证在研究者的自有机器上即可使用，攻击者不再需要代理继续留在平台内。这批凭证权限据Zenity披露适用于同一账户与区域内的每个代理，带有读、写、删能力并允许执行破坏性操作，这就是单点失陷升级为全域接管的机制。以此为据，我的判断是：漏洞链中真正可归为产品缺陷的，是运行环境未能维持沙箱边界；而代理身份过度共享、权限粒度不足，则更接近平台架构层面的设计取舍。前者可以打补丁，后者需要重新划分代理实例之间以及与平台基础设施之间的信任边界。",
+          "evidenceIds": [
+            "evd-19f773ad666aba45bd93",
+            "evd-a9f08c96a5c11714cccf",
+            "evd-54d8e5935fd1d651a00d",
+            "evd-a801c0c1ae4b3d87ad8e",
+            "evd-1fe1c258a4a228f7dc53",
+            "evd-a82665c0a86291f6acc5"
+          ]
+        },
+        {
+          "type": "comparison",
+          "newsIds": [
+            "50a66e8e1b353c"
+          ],
+          "sentences": [
+            {
+              "text": "把这次披露放进坐标里看，它更接近云上实例元数据凭证被滥用这一类历史问题的代理时代翻版：攻击者不打加密算法，而是利用运行环境与底层服务之间被默认信任的连接。不同之处在于，过去的元数据窃取通常以一台实例为界，而这次Zenity描述的后果直接覆盖同一账户和区域内的所有代理，横向影响被代理平台的共享身份模型放大。",
+              "evidenceIds": [
+                "evd-a801c0c1ae4b3d87ad8e",
+                "evd-f74d77e4080e904bb143"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "03531a2a39062af13c488a4710b2cf3f6b82488403ccb9532a8469a8129690e3"
+              }
+            },
+            {
+              "text": "另一个值得注意的对比是入口门槛：攻击只需聊天访问一个公开代理，不需要代理平台账号或API密钥。需要说明的是，这些结论目前均来自Zenity单方技术描述，受影响的AWS账户数量与实际企业范围尚未由AWS确认。",
+              "evidenceIds": [
+                "evd-d62ab2d3e7224e3f6b46",
+                "evd-2c0c82846313e7ed38f7"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "45e3e3f6525bfde8dd8a55ee04ac179b6ff09529147181628b70b80cee31dad5"
+              }
+            }
+          ],
+          "text": "把这次披露放进坐标里看，它更接近云上实例元数据凭证被滥用这一类历史问题的代理时代翻版：攻击者不打加密算法，而是利用运行环境与底层服务之间被默认信任的连接。不同之处在于，过去的元数据窃取通常以一台实例为界，而这次Zenity描述的后果直接覆盖同一账户和区域内的所有代理，横向影响被代理平台的共享身份模型放大。另一个值得注意的对比是入口门槛：攻击只需聊天访问一个公开代理，不需要代理平台账号或API密钥。需要说明的是，这些结论目前均来自Zenity单方技术描述，受影响的AWS账户数量与实际企业范围尚未由AWS确认。",
+          "evidenceIds": [
+            "evd-a801c0c1ae4b3d87ad8e",
+            "evd-f74d77e4080e904bb143",
+            "evd-d62ab2d3e7224e3f6b46",
+            "evd-2c0c82846313e7ed38f7"
+          ]
+        },
+        {
+          "type": "watch",
+          "newsIds": [
+            "50a66e8e1b353c"
+          ],
+          "sentences": [
+            {
+              "text": "接下来看什么：一是AWS是否发布修复公告及修复方式，例如是收敛元数据服务可达性、恢复沙箱隔离，还是调整代理凭证的账户级权限粒度。",
+              "evidenceIds": [
+                "evd-19f773ad666aba45bd93",
+                "evd-a82665c0a86291f6acc5"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "15542a2ff267e5d21fe7864fb48da054d6c94db90d07675290e3ffffc5bc5ccb"
+              }
+            },
+            {
+              "text": "二是Zenity所称影响多个AWS账户中是否有企业实际部署被波及的公开证据，或AWS对受影响范围给出明确说法。",
+              "evidenceIds": [
+                "evd-2c0c82846313e7ed38f7"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "a851af3ea335bc91de6508265b107721c06d9782f2dc69b73c473ddaf2d23a60"
+              }
+            },
+            {
+              "text": "三是AgentCore的访问管理模型是否调整默认行为：公开可聊天的代理能否继续持有可读写删的跨代理凭证，这是客户可自行核验的配置项。",
+              "evidenceIds": [
+                "evd-a82665c0a86291f6acc5",
+                "evd-d62ab2d3e7224e3f6b46"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "d5779edd71592d25f8fea8fc952879e3ef43558321d51de3bcb71b1177d4a560"
+              }
+            },
+            {
+              "text": "四是企业侧是否开始把公开代理与内部代理放入不同账户或不同权限边界以作隔离，尤其在代理接入工具、记忆与凭证之后。",
+              "evidenceIds": [
+                "evd-80a9eee3a277ed7d17e0",
+                "evd-f74d77e4080e904bb143"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "042586d237252e67f254941634c7d045f36bd9a8eeda1d177f57ada821f64468"
+              }
+            }
+          ],
+          "text": "接下来看什么：一是AWS是否发布修复公告及修复方式，例如是收敛元数据服务可达性、恢复沙箱隔离，还是调整代理凭证的账户级权限粒度。二是Zenity所称影响多个AWS账户中是否有企业实际部署被波及的公开证据，或AWS对受影响范围给出明确说法。三是AgentCore的访问管理模型是否调整默认行为：公开可聊天的代理能否继续持有可读写删的跨代理凭证，这是客户可自行核验的配置项。四是企业侧是否开始把公开代理与内部代理放入不同账户或不同权限边界以作隔离，尤其在代理接入工具、记忆与凭证之后。",
+          "evidenceIds": [
+            "evd-19f773ad666aba45bd93",
+            "evd-a82665c0a86291f6acc5",
+            "evd-2c0c82846313e7ed38f7",
+            "evd-d62ab2d3e7224e3f6b46",
+            "evd-80a9eee3a277ed7d17e0",
+            "evd-f74d77e4080e904bb143"
+          ]
+        }
+      ],
+      "framingEvidenceIds": [
+        "evd-f74d77e4080e904bb143",
+        "evd-2ba7f1f67a64b0a8e844",
+        "evd-19f773ad666aba45bd93"
+      ],
+      "titleCheck": {
+        "version": 1,
+        "provider": "deepseek",
+        "verdict": "supported",
+        "binding": "39966ee23eef8f940d85a24315a210d4bd25568a6a0bfc8db2ac6b86946d58d6"
+      },
+      "angleCheck": {
+        "version": 1,
+        "provider": "deepseek",
+        "verdict": "supported",
+        "binding": "467170cfee4b5d065c501b8ae27bad8330317ccebf63db52f084c1d5bbd12773"
+      },
+      "editorialCheck": {
+        "version": 1,
+        "provider": "deepseek",
+        "verdict": "ready",
+        "binding": "7a60cae87b4d244a6ef35ad5ca136e5d13d6eebe1bcac728fa1dc377c092953d"
+      }
+    },
+    {
+      "id": "chapter-2",
+      "kind": "event",
+      "comparisonKey": "",
+      "comparisonNote": "",
+      "title": "日本常规潜艇越造越强，为何还要讨论核动力",
+      "angle": "日本一边继续列装锂电大鲸级潜艇，一边由防卫省专家小组提出研究“下一代推进”与垂发潜艇，核动力由此进入讨论。这值得写，是因为第七艘大鲸级下水与这场辩论同时出现，说明争夺的不是单艇性能而是未来潜艇的能力路线。据该机构披露，专家小组并未明确要求核动力，日本也未作决定；尚不清楚的是垂发潜艇最终推进方案与决策时间表。",
+      "newsIds": [
+        "b72c1dfeca1085"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "newsIds": [
+            "b72c1dfeca1085"
+          ],
+          "sentences": [
+            {
+              "text": "10月8日，三菱重工为日本海上自卫队下水了第七艘大鲸级柴电攻击潜艇“しょうげい”，同期日本正把核动力推进视为未来潜艇的可能选项。",
+              "evidenceIds": [
+                "evd-bae287a9d652562a807d"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "7c71fe5bb7bb32ed9ebaebbd6b270b675e5ae528ef44688becdaa4e82b2730c4"
+              }
+            },
+            {
+              "text": "大鲸级采用大容量锂离子电池以提升水下续航与作战能力，并沿用最后四艘苍龙级潜艇配备的鱼雷对抗系统。",
+              "evidenceIds": [
+                "evd-c923d1d53db72a4c1fad",
+                "evd-c07eb79d801fc3851018"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "870e118f2fa23c84e750b94d6aca5eab46f43d4d205dd00e74c2742397d60ce4"
+              }
+            },
+            {
+              "text": "武器方面，该级艇使用取代89式的日本最新型18式鱼雷，据称在推进、目标探测与处理上有所改进。",
+              "evidenceIds": [
+                "evd-bdbaff5d4e60e8706392",
+                "evd-4af22bc40b599d5292cf"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "00c185e4249b9491f6ce1aaaaba7ff4fb4ccdd6c763f909cfd1be70965b8e154"
+              }
+            },
+            {
+              "text": "该级艇还可发射UGM-84L“鱼叉”Block II反舰导弹打击水面目标，据报道该导弹射程248公里。",
+              "evidenceIds": [
+                "evd-6ec026929b7c2305fa9c",
+                "evd-cb69f4a485c1c4b9ec6e"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "83964b45217a52beec83a53cc98d46bacdcfa29f74b83e1ed41643720368052d"
+              }
+            }
+          ],
+          "text": "10月8日，三菱重工为日本海上自卫队下水了第七艘大鲸级柴电攻击潜艇“しょうげい”，同期日本正把核动力推进视为未来潜艇的可能选项。大鲸级采用大容量锂离子电池以提升水下续航与作战能力，并沿用最后四艘苍龙级潜艇配备的鱼雷对抗系统。武器方面，该级艇使用取代89式的日本最新型18式鱼雷，据称在推进、目标探测与处理上有所改进。该级艇还可发射UGM-84L“鱼叉”Block II反舰导弹打击水面目标，据报道该导弹射程248公里。",
+          "evidenceIds": [
+            "evd-bae287a9d652562a807d",
+            "evd-c923d1d53db72a4c1fad",
+            "evd-c07eb79d801fc3851018",
+            "evd-bdbaff5d4e60e8706392",
+            "evd-4af22bc40b599d5292cf",
+            "evd-6ec026929b7c2305fa9c",
+            "evd-cb69f4a485c1c4b9ec6e"
+          ]
+        },
+        {
+          "type": "background",
+          "newsIds": [
+            "b72c1dfeca1085"
+          ],
+          "sentences": [
+            {
+              "text": "该建议并未明确呼吁核动力，日本也尚未决定未来配备垂发系统的潜艇是否采用核动力；就目前而言，日本没有作出获取核动力潜艇的决定。",
+              "evidenceIds": [
+                "evd-2c111fb645e10be23d80",
+                "evd-b41b493a5866b6c441c3"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "5877d47f0d27e6d6c8096a252b9ecbce274fc2dfba6d419f00c78347c7f92562"
+              }
+            }
+          ],
+          "text": "该建议并未明确呼吁核动力，日本也尚未决定未来配备垂发系统的潜艇是否采用核动力；就目前而言，日本没有作出获取核动力潜艇的决定。",
+          "evidenceIds": [
+            "evd-2c111fb645e10be23d80",
+            "evd-b41b493a5866b6c441c3"
+          ]
+        },
+        {
+          "type": "analysis",
+          "newsIds": [
+            "b72c1dfeca1085"
+          ],
+          "sentences": [
+            {
+              "text": "把这两条线索并读，可以判断辩论焦点不在现役大鲸级：它的锂电和鱼雷升级仍按既有路线推进，而下水第七艘说明这条路线短期不会中断。",
+              "evidenceIds": [
+                "evd-c923d1d53db72a4c1fad",
+                "evd-bae287a9d652562a807d"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "61aa69267d5505b01ad0f29edcb396860cfe13944b6b4c794fddb0c49f88a0d0"
+              }
+            },
+            {
+              "text": "但专家小组把“下一代推进”与垂发潜艇放在同一份建议里，暗示需求侧的变化可能来自任务集而非潜艇本身——报道也把核心问题归结为未来潜艇要执行哪些任务、哪种推进方式能在保障艇员安全的前提下最好地满足要求。",
+              "evidenceIds": [
+                "evd-2c111fb645e10be23d80",
+                "evd-a55ec453beb1120bbeb3"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "f9c10a7e82331b6cc64a77c97c852720ee52a1845e9faf0ba6552c52e86b5a81"
+              }
+            },
+            {
+              "text": "需要区分的是判断与事实：核动力目前只是一个被讨论的选项，联合建议未点名核动力，日本也未作决定，因此把它读成已选定的技术路线并不成立。",
+              "evidenceIds": [
+                "evd-2c111fb645e10be23d80",
+                "evd-b41b493a5866b6c441c3"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "ae3b2d64b2c1584a734fbb0efbf3d5f7e3ccc3d51bba847afbc93023f28949af"
+              }
+            }
+          ],
+          "text": "把这两条线索并读，可以判断辩论焦点不在现役大鲸级：它的锂电和鱼雷升级仍按既有路线推进，而下水第七艘说明这条路线短期不会中断。但专家小组把“下一代推进”与垂发潜艇放在同一份建议里，暗示需求侧的变化可能来自任务集而非潜艇本身——报道也把核心问题归结为未来潜艇要执行哪些任务、哪种推进方式能在保障艇员安全的前提下最好地满足要求。需要区分的是判断与事实：核动力目前只是一个被讨论的选项，联合建议未点名核动力，日本也未作决定，因此把它读成已选定的技术路线并不成立。",
+          "evidenceIds": [
+            "evd-c923d1d53db72a4c1fad",
+            "evd-bae287a9d652562a807d",
+            "evd-2c111fb645e10be23d80",
+            "evd-a55ec453beb1120bbeb3",
+            "evd-b41b493a5866b6c441c3"
+          ]
+        },
+        {
+          "type": "comparison",
+          "newsIds": [
+            "b72c1dfeca1085"
+          ],
+          "sentences": [
+            {
+              "text": "纵向看，从苍龙级后期沿用鱼雷对抗系统到大鲸级采用锂电、再换装18式鱼雷，日本走的是一条以常规动力平台叠加传感器与武器升级的渐进路线。",
+              "evidenceIds": [
+                "evd-c07eb79d801fc3851018",
+                "evd-c923d1d53db72a4c1fad",
+                "evd-bdbaff5d4e60e8706392"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "0ee7d6a849c350d2b20e0c5d449d3b70fc4c17f020dce792693f4849783f6edd"
+              }
+            },
+            {
+              "text": "横向看，核动力讨论是另一条轴上的选择，不构成对现有锂电路线的立即替代，因为专家建议只留下“下一代推进”这一未定表述、日本亦未作出决定。",
+              "evidenceIds": [
+                "evd-2c111fb645e10be23d80",
+                "evd-b41b493a5866b6c441c3"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "3b3c1fb2da2221ad4584fa30e9e89bed74635401a2e5f822e3a3f9bf7bf3d052"
+              }
+            }
+          ],
+          "text": "纵向看，从苍龙级后期沿用鱼雷对抗系统到大鲸级采用锂电、再换装18式鱼雷，日本走的是一条以常规动力平台叠加传感器与武器升级的渐进路线。横向看，核动力讨论是另一条轴上的选择，不构成对现有锂电路线的立即替代，因为专家建议只留下“下一代推进”这一未定表述、日本亦未作出决定。",
+          "evidenceIds": [
+            "evd-c07eb79d801fc3851018",
+            "evd-c923d1d53db72a4c1fad",
+            "evd-bdbaff5d4e60e8706392",
+            "evd-2c111fb645e10be23d80",
+            "evd-b41b493a5866b6c441c3"
+          ]
+        },
+        {
+          "type": "watch",
+          "newsIds": [
+            "b72c1dfeca1085"
+          ],
+          "sentences": [
+            {
+              "text": "我们的判断是：短期内日本更可能继续列装大鲸级并推进垂发潜艇的技术研究，核动力仍停留在选项层面，因为专家建议未点名核动力、日本亦未作决定；这一判断的边界是，若任务需求被正式界定为需要更长水下续航与更大载荷，天平可能移动。",
+              "evidenceIds": [
+                "evd-2c111fb645e10be23d80",
+                "evd-b41b493a5866b6c441c3",
+                "evd-a55ec453beb1120bbeb3"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "3c7ac8e01fbdc610551c0bcc6a4b82b7584ca76ddb1bb8b44eb36c109ef5d2ef"
+              }
+            },
+            {
+              "text": "接下来可核对的观察点：防卫省是否就垂发潜艇的推进方式发布进一步研究或开发安排；专家建议中的“下一代推进”是否被具体化为可选项；日本是否就核动力潜艇作出正式决定。",
+              "evidenceIds": [
+                "evd-2c111fb645e10be23d80",
+                "evd-b41b493a5866b6c441c3"
+              ],
+              "semanticCheck": {
+                "version": 1,
+                "provider": "deepseek",
+                "verdict": "supported",
+                "binding": "15e7b8310aa6b36bb38eb5361399b62aa2e91181cec0afc2cabfc2ea1d23406b"
+              }
+            }
+          ],
+          "text": "我们的判断是：短期内日本更可能继续列装大鲸级并推进垂发潜艇的技术研究，核动力仍停留在选项层面，因为专家建议未点名核动力、日本亦未作决定；这一判断的边界是，若任务需求被正式界定为需要更长水下续航与更大载荷，天平可能移动。接下来可核对的观察点：防卫省是否就垂发潜艇的推进方式发布进一步研究或开发安排；专家建议中的“下一代推进”是否被具体化为可选项；日本是否就核动力潜艇作出正式决定。",
+          "evidenceIds": [
+            "evd-2c111fb645e10be23d80",
+            "evd-b41b493a5866b6c441c3",
+            "evd-a55ec453beb1120bbeb3"
+          ]
+        }
+      ],
+      "framingEvidenceIds": [
+        "evd-bae287a9d652562a807d",
+        "evd-2c111fb645e10be23d80",
+        "evd-b41b493a5866b6c441c3"
+      ],
+      "titleCheck": {
+        "version": 1,
+        "provider": "deepseek",
+        "verdict": "supported",
+        "binding": "b17671f3746b226f4fcb5a49b4b9f1f7da0cc3e8be8ea1f00248099dfbdef9fc"
+      },
+      "angleCheck": {
+        "version": 1,
+        "provider": "deepseek",
+        "verdict": "supported",
+        "binding": "b4d8419464c36f145b048b4b1f7ddcd20a546de09009b520c41ffa742e3f5b96"
+      },
+      "editorialCheck": {
+        "version": 1,
+        "provider": "deepseek",
+        "verdict": "ready",
+        "binding": "df5b062d84011631e0490ba3ae9cb58d46a6f6467f848c498ee81adb83cfe019"
+      }
+    }
+  ],
+  "events": [
+    {
+      "newsId": "50a66e8e1b353c",
+      "eventId": "evt-249314febcf3",
+      "title": "A single prompt was enough to hijack every AI agent in an AWS account, Zenity researchers found",
+      "originalTitle": "A single prompt was enough to hijack every AI agent in an AWS account, Zenity researchers found",
+      "excerpt": "A chain of vulnerabilities in Amazon's Bedrock AgentCore platform let researchers take over all of a company's AI agents in the same AWS region through a single chat message to one public agent. Researchers at Zenity Labs say a single publicly accessible AI agent on Amazon's Bedrock AgentCore was enough to take over every AgentCore agent in the same AWS account and region. Amazon Bedrock AgentCore is AWS' platform for running enterprise AI agents with tools, memory, and access management.",
+      "category": "AI",
+      "publishedAt": "2026-10-08T13:01:01Z",
+      "sources": [
+        {
+          "name": "The Decoder",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found"
+        }
+      ],
+      "image": "https://the-decoder.com/wp-content/uploads/2026/07/cybersecurity_AI_pattern-1200x655.png",
+      "imageSource": "The Decoder",
+      "evidenceLevel": "single",
+      "deltaScore": 0,
+      "history": [],
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-f74d77e4080e904bb143",
+          "text": "Zenity Labs researchers say a single publicly accessible AI agent on Amazon's Bedrock AgentCore was enough to take over every AgentCore agent in the same AWS account and region.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-09T01:09:28+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-1c43a4e5c057a9e819f9",
+          "text": "The article A single prompt was enough to hijack every AI agent in an AWS account, Zenity researchers found appeared first on The Decoder .",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-09T01:09:28+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-2ba7f1f67a64b0a8e844",
+          "text": "A chain of vulnerabilities in Amazon's Bedrock AgentCore platform let researchers take over all of a company's AI agents in the same AWS region through a single chat message to one public agent.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-dff6d0f53398f545e7ba",
+          "text": "Researchers at Zenity Labs say a single publicly accessible AI agent on Amazon's Bedrock AgentCore was enough to take over every AgentCore agent in the same AWS account and region.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-80a9eee3a277ed7d17e0",
+          "text": "Amazon Bedrock AgentCore is AWS' platform for running enterprise AI agents with tools, memory, and access management.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-f63915e5887a82966e01",
+          "text": "Security firm Zenity Labs found a chain of vulnerabilities that the researchers call \"AgentCorruption.\"",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-d62ab2d3e7224e3f6b46",
+          "text": "An attacker needed only chat access to one public agent to exploit the flaws.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-89350f89e9642d92983a",
+          "text": "The researchers say a single prompt let them take over every AgentCore agent in the same AWS account and region, exposing private conversations, source code, and stored credentials.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-2c0c82846313e7ed38f7",
+          "text": "According to Zenity, the problem was systemic and affected agents with built-in tools in multiple AWS accounts.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-19f773ad666aba45bd93",
+          "text": "An AI agent normally shouldn't be able to reach that service, but AgentCore lacked proper isolation, according to Zenity's technical blog post.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a9f08c96a5c11714cccf",
+          "text": "The researchers built a test agent using Strands, an open-source framework from AWS that ships with a web tool.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-54d8e5935fd1d651a00d",
+          "text": "When asked in plain language to query the metadata service and send the results to an external server, the agent followed the instructions. \"The sandbox boundary we were supposed to be fighting simply wasn't there,\" the researchers write.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-1fe1c258a4a228f7dc53",
+          "text": "The stolen credentials worked on the researchers' own machine outside the platform, so they no longer needed the agent to continue the attack.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a801c0c1ae4b3d87ad8e",
+          "text": "The metadata service also exposed certificate and key material for an internal AWS service, along with a presigned URL for internal S3 storage that didn't belong to the researchers' account.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a82665c0a86291f6acc5",
+          "text": "According to Zenity, they applied to every agent in the same account and region, granting read, write, and delete access that allowed destructive operations.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:46:12+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-593f90c555badffdbf94",
+          "text": "Security firm Zenity Labs found a chain of vulnerabilities that the researchers call \"AgentCorruption.\" An attacker needed only chat access to one public agent to exploit the flaws.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-09T01:09:35+00:00",
+          "kind": "feed"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-f74d77e4080e904bb143",
+        "evd-1c43a4e5c057a9e819f9",
+        "evd-2ba7f1f67a64b0a8e844",
+        "evd-dff6d0f53398f545e7ba",
+        "evd-80a9eee3a277ed7d17e0",
+        "evd-f63915e5887a82966e01",
+        "evd-d62ab2d3e7224e3f6b46",
+        "evd-89350f89e9642d92983a",
+        "evd-2c0c82846313e7ed38f7",
+        "evd-19f773ad666aba45bd93",
+        "evd-a9f08c96a5c11714cccf",
+        "evd-54d8e5935fd1d651a00d",
+        "evd-1fe1c258a4a228f7dc53",
+        "evd-a801c0c1ae4b3d87ad8e",
+        "evd-a82665c0a86291f6acc5",
+        "evd-593f90c555badffdbf94"
+      ],
+      "displayTranslation": {
+        "version": 1,
+        "language": "zh-CN",
+        "provider": "deepseek",
+        "title": "Zenity研究人员发现：单个提示即可劫持AWS账户中所有AI代理",
+        "summary": "Zenity Labs研究人员称，亚马逊Bedrock AgentCore平台存在一系列漏洞，仅需向一个公开AI代理发送一条聊天消息，就能接管同一AWS账户和区域内所有AgentCore代理。Amazon Bedrock AgentCore是AWS用于运行企业AI代理的平台，具备工具、记忆和访问管理功能。",
+        "sourceTitle": "A single prompt was enough to hijack every AI agent in an AWS account, Zenity researchers found",
+        "sourceSummary": "A chain of vulnerabilities in Amazon's Bedrock AgentCore platform let researchers take over all of a company's AI agents in the same AWS region through a single chat message to one public agent. Researchers at Zenity Labs say a single publicly accessible AI agent on Amazon's Bedrock AgentCore was enough to take over every AgentCore agent in the same AWS account and region. Amazon Bedrock AgentCore is AWS' platform for running enterprise AI agents with tools, memory, and access management.",
+        "sourceEvidenceRefs": [
+          "evd-f74d77e4080e904bb143",
+          "evd-1c43a4e5c057a9e819f9",
+          "evd-2ba7f1f67a64b0a8e844",
+          "evd-dff6d0f53398f545e7ba",
+          "evd-80a9eee3a277ed7d17e0",
+          "evd-f63915e5887a82966e01",
+          "evd-d62ab2d3e7224e3f6b46",
+          "evd-89350f89e9642d92983a",
+          "evd-2c0c82846313e7ed38f7",
+          "evd-19f773ad666aba45bd93",
+          "evd-a9f08c96a5c11714cccf",
+          "evd-54d8e5935fd1d651a00d",
+          "evd-1fe1c258a4a228f7dc53",
+          "evd-a801c0c1ae4b3d87ad8e",
+          "evd-a82665c0a86291f6acc5",
+          "evd-593f90c555badffdbf94"
+        ]
+      },
+      "projectKeys": [],
+      "watchFor": [
+        "接下来看什么：一是AWS是否发布修复公告及修复方式，例如是收敛元数据服务可达性、恢复沙箱隔离，还是调整代理凭证的账户级权限粒度。",
+        "二是Zenity所称影响多个AWS账户中是否有企业实际部署被波及的公开证据，或AWS对受影响范围给出明确说法。",
+        "三是AgentCore的访问管理模型是否调整默认行为：公开可聊天的代理能否继续持有可读写删的跨代理凭证，这是客户可自行核验的配置项。",
+        "四是企业侧是否开始把公开代理与内部代理放入不同账户或不同权限边界以作隔离，尤其在代理接入工具、记忆与凭证之后。"
+      ]
+    },
+    {
+      "newsId": "b72c1dfeca1085",
+      "eventId": "evt-b8c35f98c3d4",
+      "title": "Japan Launches Seventh Taigei-Class Submarine as Nuclear Propulsion Debate Grows",
+      "originalTitle": "Japan Launches Seventh Taigei-Class Submarine as Nuclear Propulsion Debate Grows",
+      "excerpt": "On October 8, Japan’s Mitsubishi Heavy Industries (MHI) launched the seventh Taigei-class diesel-electric attack submarine, “Shogei” (しょうげい), for the Japan Maritime Self-Defense Force (JMSDF), as Japan considers nuclear propulsion as a possible option for its future submarines. The Taigei-class employs the same torpedo countermeasures system incorporated into the last four Soryu-class submarines. It uses Japan’s newest Type 18 torpedo, which succeeds the Type 89. The new torpedo features improvements in propulsion, target detection, and processing.",
+      "category": "军事动态",
+      "publishedAt": "2026-10-08T06:38:18Z",
+      "sources": [
+        {
+          "name": "Naval News",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows"
+        }
+      ],
+      "image": "https://www.navalnews.com/wp-content/uploads/2026/10/2610080201_dl.jpg",
+      "imageSource": "Naval News",
+      "evidenceLevel": "single",
+      "deltaScore": 0,
+      "history": [],
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-bae287a9d652562a807d",
+          "text": "On October 8, Japan’s Mitsubishi Heavy Industries (MHI) launched the seventh Taigei-class diesel-electric attack submarine, “Shogei” (しょうげい), for the Japan Maritime Self-Defense Force (JMSDF), as Japan considers nuclear propulsion as a possible option for its future submarines.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-09T01:09:30+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-c923d1d53db72a4c1fad",
+          "text": "The seventh Taigei-class submarine, “Shogei” (Credit: Mitsubishi Heavy Industries) Why Japan is considering nuclear-powered submarines The Taigei-class submarines use large-capacity lithium-ion batteries to improve their underwater endurance and operational capabilities.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-09T01:09:30+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-2c111fb645e10be23d80",
+          "text": "In September 2025, a panel of experts advising the MoD recommended further research and technological development on VLS-equipped submarines, including consideration of what it described as “next-generation propulsion.” The recommendation did not explicitly call for nuclear propulsion, and Japan has not decided whether its future VLS-equipped submarines will be nuclear-powered.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-09T01:09:30+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-c07eb79d801fc3851018",
+          "text": "The Taigei-class employs the same torpedo countermeasures system incorporated into the last four Soryu-class submarines.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-08T22:45:52+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-bdbaff5d4e60e8706392",
+          "text": "It uses Japan’s newest Type 18 torpedo, which succeeds the Type 89.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-08T22:45:52+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-4af22bc40b599d5292cf",
+          "text": "The new torpedo features improvements in propulsion, target detection, and processing.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-08T22:45:52+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-6ec026929b7c2305fa9c",
+          "text": "The class is also capable of launching the UGM-84L Harpoon Block II anti-ship missile against surface targets.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-08T22:45:52+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-cb69f4a485c1c4b9ec6e",
+          "text": "The missile has a reported range of 248 kilometers.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-08T22:45:52+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-b41b493a5866b6c441c3",
+          "text": "For now, Japan has made no decision to acquire nuclear-powered submarines.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-08T22:45:52+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a55ec453beb1120bbeb3",
+          "text": "The central question is what missions its future submarine force will be expected to perform, and which propulsion system would best meet those requirements while protecting the safety of its crews.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-08T22:45:52+00:00",
+          "kind": "body"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-bae287a9d652562a807d",
+        "evd-c923d1d53db72a4c1fad",
+        "evd-2c111fb645e10be23d80",
+        "evd-c07eb79d801fc3851018",
+        "evd-bdbaff5d4e60e8706392",
+        "evd-4af22bc40b599d5292cf",
+        "evd-6ec026929b7c2305fa9c",
+        "evd-cb69f4a485c1c4b9ec6e",
+        "evd-b41b493a5866b6c441c3",
+        "evd-a55ec453beb1120bbeb3"
+      ],
+      "displayTranslation": {
+        "version": 1,
+        "language": "zh-CN",
+        "provider": "deepseek",
+        "title": "日本推出第七艘大鲸级潜艇，核动力推进辩论升温",
+        "summary": "10月8日，日本三菱重工（MHI）为日本海上自卫队（JMSDF）下水第七艘大鲸级柴电攻击潜艇“しょうげい”（Shogei），同时日本正考虑将核动力推进作为未来潜艇的选项。大鲸级沿用最后四艘苍龙级潜艇配备的鱼雷对抗系统，并使用日本最新型18式鱼雷，取代89式。新型鱼雷在推进、目标探测和处理方面有所改进。",
+        "sourceTitle": "Japan Launches Seventh Taigei-Class Submarine as Nuclear Propulsion Debate Grows",
+        "sourceSummary": "On October 8, Japan’s Mitsubishi Heavy Industries (MHI) launched the seventh Taigei-class diesel-electric attack submarine, “Shogei” (しょうげい), for the Japan Maritime Self-Defense Force (JMSDF), as Japan considers nuclear propulsion as a possible option for its future submarines. The Taigei-class employs the same torpedo countermeasures system incorporated into the last four Soryu-class submarines. It uses Japan’s newest Type 18 torpedo, which succeeds the Type 89. The new torpedo features improvements in propulsion, target detection, and processing.",
+        "sourceEvidenceRefs": [
+          "evd-bae287a9d652562a807d",
+          "evd-c923d1d53db72a4c1fad",
+          "evd-2c111fb645e10be23d80",
+          "evd-c07eb79d801fc3851018",
+          "evd-bdbaff5d4e60e8706392",
+          "evd-4af22bc40b599d5292cf",
+          "evd-6ec026929b7c2305fa9c",
+          "evd-cb69f4a485c1c4b9ec6e",
+          "evd-b41b493a5866b6c441c3",
+          "evd-a55ec453beb1120bbeb3"
+        ]
+      },
+      "projectKeys": [],
+      "watchFor": [
+        "我们的判断是：短期内日本更可能继续列装大鲸级并推进垂发潜艇的技术研究，核动力仍停留在选项层面，因为专家建议未点名核动力、日本亦未作决定；这一判断的边界是，若任务需求被正式界定为需要更长水下续航与更大载荷，天平可能移动。",
+        "接下来可核对的观察点：防卫省是否就垂发潜艇的推进方式发布进一步研究或开发安排；专家建议中的“下一代推进”是否被具体化为可选项；日本是否就核动力潜艇作出正式决定。"
+      ]
+    }
+  ],
+  "observations": [],
+  "candidateCount": 12,
+  "eventCount": 2,
+  "sourceCount": 2,
+  "generationStatus": "ok",
+  "warnings": [],
+  "selectionDiagnostics": {
+    "source-unavailable": 71,
+    "genre-or-policy": 38
+  },
+  "topicPlan": [
+    {
+      "title": "一次提示就能劫持全部代理，企业AI安全边界在哪",
+      "angle": "本篇回答：为什么单个公开AI代理能被用来接管同一AWS账户与区域内的所有AgentCore代理，这是产品缺陷还是代理架构的固有风险，对企业部署意味着什么。之所以现在值得写，是因为企业正把带工具、记忆与权限的AI代理接入核心业务，而这一漏洞揭示了多代理共享身份与权限边界时的横移路径。证据来自Zenity Labs对Amazon Bedrock AgentCore漏洞链的技术描述及其影响范围。尚不清楚的是AWS是否已修复、修复方式与受影响企业范围。",
+      "newsIds": [
+        "50a66e8e1b353c"
+      ]
+    },
+    {
+      "title": "日本常规潜艇越造越强，为何还要讨论核动力",
+      "angle": "本篇回答：日本在持续列装大鲸级锂电潜艇的同时，为何开始讨论未来潜艇的下一代推进方式，核动力选项面对哪些技术与政策约束。之所以现在值得写，是因为第七艘大鲸级下水与核动力辩论同时出现，说明这是能力路线之争而非单一装备新闻。证据来自该艇的锂电与武器配置、2025年9月专家小组建议以及日本尚未就核动力作出决定的事实。尚不清楚的是VLS型潜艇的最终推进方案与决策时间表。",
+      "newsIds": [
+        "b72c1dfeca1085"
+      ]
+    }
+  ],
+  "generationInputs": [
+    {
+      "newsId": "50a66e8e1b353c",
+      "eventId": "evt-249314febcf3",
+      "title": "A single prompt was enough to hijack every AI agent in an AWS account, Zenity researchers found",
+      "originalTitle": "A single prompt was enough to hijack every AI agent in an AWS account, Zenity researchers found",
+      "excerpt": "A chain of vulnerabilities in Amazon's Bedrock AgentCore platform let researchers take over all of a company's AI agents in the same AWS region through a single chat message to one public agent. Researchers at Zenity Labs say a single publicly accessible AI agent on Amazon's Bedrock AgentCore was enough to take over every AgentCore agent in the same AWS account and region. Amazon Bedrock AgentCore is AWS' platform for running enterprise AI agents with tools, memory, and access management.",
+      "category": "AI",
+      "publishedAt": "2026-10-08T13:01:01Z",
+      "sources": [
+        {
+          "name": "The Decoder",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found"
+        }
+      ],
+      "image": "https://the-decoder.com/wp-content/uploads/2026/07/cybersecurity_AI_pattern-1200x655.png",
+      "imageSource": "The Decoder",
+      "evidenceLevel": "single",
+      "deltaScore": 0,
+      "history": [],
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-f74d77e4080e904bb143",
+          "text": "Zenity Labs researchers say a single publicly accessible AI agent on Amazon's Bedrock AgentCore was enough to take over every AgentCore agent in the same AWS account and region.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-09T01:09:28+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-1c43a4e5c057a9e819f9",
+          "text": "The article A single prompt was enough to hijack every AI agent in an AWS account, Zenity researchers found appeared first on The Decoder .",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-09T01:09:28+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-2ba7f1f67a64b0a8e844",
+          "text": "A chain of vulnerabilities in Amazon's Bedrock AgentCore platform let researchers take over all of a company's AI agents in the same AWS region through a single chat message to one public agent.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-dff6d0f53398f545e7ba",
+          "text": "Researchers at Zenity Labs say a single publicly accessible AI agent on Amazon's Bedrock AgentCore was enough to take over every AgentCore agent in the same AWS account and region.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-80a9eee3a277ed7d17e0",
+          "text": "Amazon Bedrock AgentCore is AWS' platform for running enterprise AI agents with tools, memory, and access management.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-f63915e5887a82966e01",
+          "text": "Security firm Zenity Labs found a chain of vulnerabilities that the researchers call \"AgentCorruption.\"",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-d62ab2d3e7224e3f6b46",
+          "text": "An attacker needed only chat access to one public agent to exploit the flaws.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-89350f89e9642d92983a",
+          "text": "The researchers say a single prompt let them take over every AgentCore agent in the same AWS account and region, exposing private conversations, source code, and stored credentials.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-2c0c82846313e7ed38f7",
+          "text": "According to Zenity, the problem was systemic and affected agents with built-in tools in multiple AWS accounts.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-19f773ad666aba45bd93",
+          "text": "An AI agent normally shouldn't be able to reach that service, but AgentCore lacked proper isolation, according to Zenity's technical blog post.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a9f08c96a5c11714cccf",
+          "text": "The researchers built a test agent using Strands, an open-source framework from AWS that ships with a web tool.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-54d8e5935fd1d651a00d",
+          "text": "When asked in plain language to query the metadata service and send the results to an external server, the agent followed the instructions. \"The sandbox boundary we were supposed to be fighting simply wasn't there,\" the researchers write.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-1fe1c258a4a228f7dc53",
+          "text": "The stolen credentials worked on the researchers' own machine outside the platform, so they no longer needed the agent to continue the attack.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a801c0c1ae4b3d87ad8e",
+          "text": "The metadata service also exposed certificate and key material for an internal AWS service, along with a presigned URL for internal S3 storage that didn't belong to the researchers' account.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:45:56+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a82665c0a86291f6acc5",
+          "text": "According to Zenity, they applied to every agent in the same account and region, granting read, write, and delete access that allowed destructive operations.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-08T22:46:12+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-593f90c555badffdbf94",
+          "text": "Security firm Zenity Labs found a chain of vulnerabilities that the researchers call \"AgentCorruption.\" An attacker needed only chat access to one public agent to exploit the flaws.",
+          "url": "https://the-decoder.com/a-single-prompt-was-enough-to-hijack-every-ai-agent-in-an-aws-account-zenity-researchers-found",
+          "fetchedAt": "2026-10-09T01:09:35+00:00",
+          "kind": "feed"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-f74d77e4080e904bb143",
+        "evd-1c43a4e5c057a9e819f9",
+        "evd-2ba7f1f67a64b0a8e844",
+        "evd-dff6d0f53398f545e7ba",
+        "evd-80a9eee3a277ed7d17e0",
+        "evd-f63915e5887a82966e01",
+        "evd-d62ab2d3e7224e3f6b46",
+        "evd-89350f89e9642d92983a",
+        "evd-2c0c82846313e7ed38f7",
+        "evd-19f773ad666aba45bd93",
+        "evd-a9f08c96a5c11714cccf",
+        "evd-54d8e5935fd1d651a00d",
+        "evd-1fe1c258a4a228f7dc53",
+        "evd-a801c0c1ae4b3d87ad8e",
+        "evd-a82665c0a86291f6acc5",
+        "evd-593f90c555badffdbf94"
+      ],
+      "displayTranslation": {
+        "version": 1,
+        "language": "zh-CN",
+        "provider": "deepseek",
+        "title": "Zenity研究人员发现：单个提示即可劫持AWS账户中所有AI代理",
+        "summary": "Zenity Labs研究人员称，亚马逊Bedrock AgentCore平台存在一系列漏洞，仅需向一个公开AI代理发送一条聊天消息，就能接管同一AWS账户和区域内所有AgentCore代理。Amazon Bedrock AgentCore是AWS用于运行企业AI代理的平台，具备工具、记忆和访问管理功能。",
+        "sourceTitle": "A single prompt was enough to hijack every AI agent in an AWS account, Zenity researchers found",
+        "sourceSummary": "A chain of vulnerabilities in Amazon's Bedrock AgentCore platform let researchers take over all of a company's AI agents in the same AWS region through a single chat message to one public agent. Researchers at Zenity Labs say a single publicly accessible AI agent on Amazon's Bedrock AgentCore was enough to take over every AgentCore agent in the same AWS account and region. Amazon Bedrock AgentCore is AWS' platform for running enterprise AI agents with tools, memory, and access management.",
+        "sourceEvidenceRefs": [
+          "evd-f74d77e4080e904bb143",
+          "evd-1c43a4e5c057a9e819f9",
+          "evd-2ba7f1f67a64b0a8e844",
+          "evd-dff6d0f53398f545e7ba",
+          "evd-80a9eee3a277ed7d17e0",
+          "evd-f63915e5887a82966e01",
+          "evd-d62ab2d3e7224e3f6b46",
+          "evd-89350f89e9642d92983a",
+          "evd-2c0c82846313e7ed38f7",
+          "evd-19f773ad666aba45bd93",
+          "evd-a9f08c96a5c11714cccf",
+          "evd-54d8e5935fd1d651a00d",
+          "evd-1fe1c258a4a228f7dc53",
+          "evd-a801c0c1ae4b3d87ad8e",
+          "evd-a82665c0a86291f6acc5",
+          "evd-593f90c555badffdbf94"
+        ]
+      },
+      "projectKeys": []
+    },
+    {
+      "newsId": "b72c1dfeca1085",
+      "eventId": "evt-b8c35f98c3d4",
+      "title": "Japan Launches Seventh Taigei-Class Submarine as Nuclear Propulsion Debate Grows",
+      "originalTitle": "Japan Launches Seventh Taigei-Class Submarine as Nuclear Propulsion Debate Grows",
+      "excerpt": "On October 8, Japan’s Mitsubishi Heavy Industries (MHI) launched the seventh Taigei-class diesel-electric attack submarine, “Shogei” (しょうげい), for the Japan Maritime Self-Defense Force (JMSDF), as Japan considers nuclear propulsion as a possible option for its future submarines. The Taigei-class employs the same torpedo countermeasures system incorporated into the last four Soryu-class submarines. It uses Japan’s newest Type 18 torpedo, which succeeds the Type 89. The new torpedo features improvements in propulsion, target detection, and processing.",
+      "category": "军事动态",
+      "publishedAt": "2026-10-08T06:38:18Z",
+      "sources": [
+        {
+          "name": "Naval News",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows"
+        }
+      ],
+      "image": "https://www.navalnews.com/wp-content/uploads/2026/10/2610080201_dl.jpg",
+      "imageSource": "Naval News",
+      "evidenceLevel": "single",
+      "deltaScore": 0,
+      "history": [],
+      "evidenceRecords": [
+        {
+          "evidenceId": "evd-bae287a9d652562a807d",
+          "text": "On October 8, Japan’s Mitsubishi Heavy Industries (MHI) launched the seventh Taigei-class diesel-electric attack submarine, “Shogei” (しょうげい), for the Japan Maritime Self-Defense Force (JMSDF), as Japan considers nuclear propulsion as a possible option for its future submarines.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-09T01:09:30+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-c923d1d53db72a4c1fad",
+          "text": "The seventh Taigei-class submarine, “Shogei” (Credit: Mitsubishi Heavy Industries) Why Japan is considering nuclear-powered submarines The Taigei-class submarines use large-capacity lithium-ion batteries to improve their underwater endurance and operational capabilities.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-09T01:09:30+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-2c111fb645e10be23d80",
+          "text": "In September 2025, a panel of experts advising the MoD recommended further research and technological development on VLS-equipped submarines, including consideration of what it described as “next-generation propulsion.” The recommendation did not explicitly call for nuclear propulsion, and Japan has not decided whether its future VLS-equipped submarines will be nuclear-powered.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-09T01:09:30+00:00",
+          "kind": "feed"
+        },
+        {
+          "evidenceId": "evd-c07eb79d801fc3851018",
+          "text": "The Taigei-class employs the same torpedo countermeasures system incorporated into the last four Soryu-class submarines.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-08T22:45:52+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-bdbaff5d4e60e8706392",
+          "text": "It uses Japan’s newest Type 18 torpedo, which succeeds the Type 89.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-08T22:45:52+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-4af22bc40b599d5292cf",
+          "text": "The new torpedo features improvements in propulsion, target detection, and processing.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-08T22:45:52+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-6ec026929b7c2305fa9c",
+          "text": "The class is also capable of launching the UGM-84L Harpoon Block II anti-ship missile against surface targets.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-08T22:45:52+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-cb69f4a485c1c4b9ec6e",
+          "text": "The missile has a reported range of 248 kilometers.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-08T22:45:52+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-b41b493a5866b6c441c3",
+          "text": "For now, Japan has made no decision to acquire nuclear-powered submarines.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-08T22:45:52+00:00",
+          "kind": "body"
+        },
+        {
+          "evidenceId": "evd-a55ec453beb1120bbeb3",
+          "text": "The central question is what missions its future submarine force will be expected to perform, and which propulsion system would best meet those requirements while protecting the safety of its crews.",
+          "url": "https://www.navalnews.com/naval-news/2026/10/japan-launches-seventh-taigei-class-submarine-as-nuclear-propulsion-debate-grows",
+          "fetchedAt": "2026-10-08T22:45:52+00:00",
+          "kind": "body"
+        }
+      ],
+      "summaryEvidenceRefs": [
+        "evd-bae287a9d652562a807d",
+        "evd-c923d1d53db72a4c1fad",
+        "evd-2c111fb645e10be23d80",
+        "evd-c07eb79d801fc3851018",
+        "evd-bdbaff5d4e60e8706392",
+        "evd-4af22bc40b599d5292cf",
+        "evd-6ec026929b7c2305fa9c",
+        "evd-cb69f4a485c1c4b9ec6e",
+        "evd-b41b493a5866b6c441c3",
+        "evd-a55ec453beb1120bbeb3"
+      ],
+      "displayTranslation": {
+        "version": 1,
+        "language": "zh-CN",
+        "provider": "deepseek",
+        "title": "日本推出第七艘大鲸级潜艇，核动力推进辩论升温",
+        "summary": "10月8日，日本三菱重工（MHI）为日本海上自卫队（JMSDF）下水第七艘大鲸级柴电攻击潜艇“しょうげい”（Shogei），同时日本正考虑将核动力推进作为未来潜艇的选项。大鲸级沿用最后四艘苍龙级潜艇配备的鱼雷对抗系统，并使用日本最新型18式鱼雷，取代89式。新型鱼雷在推进、目标探测和处理方面有所改进。",
+        "sourceTitle": "Japan Launches Seventh Taigei-Class Submarine as Nuclear Propulsion Debate Grows",
+        "sourceSummary": "On October 8, Japan’s Mitsubishi Heavy Industries (MHI) launched the seventh Taigei-class diesel-electric attack submarine, “Shogei” (しょうげい), for the Japan Maritime Self-Defense Force (JMSDF), as Japan considers nuclear propulsion as a possible option for its future submarines. The Taigei-class employs the same torpedo countermeasures system incorporated into the last four Soryu-class submarines. It uses Japan’s newest Type 18 torpedo, which succeeds the Type 89. The new torpedo features improvements in propulsion, target detection, and processing.",
+        "sourceEvidenceRefs": [
+          "evd-bae287a9d652562a807d",
+          "evd-c923d1d53db72a4c1fad",
+          "evd-2c111fb645e10be23d80",
+          "evd-c07eb79d801fc3851018",
+          "evd-bdbaff5d4e60e8706392",
+          "evd-4af22bc40b599d5292cf",
+          "evd-6ec026929b7c2305fa9c",
+          "evd-cb69f4a485c1c4b9ec6e",
+          "evd-b41b493a5866b6c441c3",
+          "evd-a55ec453beb1120bbeb3"
+        ]
+      },
+      "projectKeys": []
+    }
+  ],
+  "recoveryDiagnostics": {
+    "chapters": {
+      "chapter-1": {
+        "state": "salvaged",
+        "attempts": 2,
+        "droppedSentences": 1
+      },
+      "chapter-2": {
+        "state": "salvaged",
+        "attempts": 2,
+        "droppedSentences": 1
+      }
+    }
+  },
+  "contentFailures": [],
+  "qualityMetrics": {
+    "bodyHanCount": 1667,
+    "publishedTopicCount": 2,
+    "plannedTopicCount": 2,
+    "historicalTopicCount": 0,
+    "multiSourceEventCount": 0,
+    "categoryCounts": {
+      "AI": 1,
+      "军事动态": 1
+    },
+    "topicCategoryCounts": {
+      "AI": 1,
+      "军事动态": 1
+    },
+    "maximumTopicCategoryShare": 0.5,
+    "categoryBalanceException": "fewer-than-three-supported-topics"
+  },
+  "briefs": [],
+  "publicationEditionDate": "2026-10-09",
+  "qualityFailures": [],
+  "framingEvidenceIds": [
+    "evd-f74d77e4080e904bb143",
+    "evd-2ba7f1f67a64b0a8e844",
+    "evd-19f773ad666aba45bd93"
+  ],
+  "headlineCheck": {
+    "version": 1,
+    "provider": "deepseek",
+    "verdict": "supported",
+    "binding": "39966ee23eef8f940d85a24315a210d4bd25568a6a0bfc8db2ac6b86946d58d6"
+  },
+  "leadCheck": {
+    "version": 1,
+    "provider": "deepseek",
+    "verdict": "supported",
+    "binding": "467170cfee4b5d065c501b8ae27bad8330317ccebf63db52f084c1d5bbd12773"
+  },
+  "readerStatus": "complete",
+  "releaseId": "r20261009T011137-df3700dc"
+}
