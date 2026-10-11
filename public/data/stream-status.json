@@ -1,40 +1,52 @@
 {
   "schemaVersion": 3,
   "state": "ok",
-  "lastAttemptAt": "2026-10-11T14:07:55Z",
-  "lastSuccessAt": "2026-10-11T14:07:55Z",
-  "itemCount": 46,
+  "lastAttemptAt": "2026-10-11T20:19:33Z",
+  "lastSuccessAt": "2026-10-11T20:19:33Z",
+  "itemCount": 47,
   "translationProvider": "deepseek",
   "translationModel": "deepseek-v4-flash",
-  "translationStatus": "ok",
+  "translationStatus": "partial",
   "translatedItemCount": 46,
   "titleOnlyTranslatedItemCount": 5,
-  "translationWarnings": [],
+  "translationWarnings": [
+    "新闻中文翻译在拆分重试后仍缺失 1/26 条：拆分重试后仍有条目缺失",
+    "全量动态中文翻译不完整：46/47"
+  ],
   "translationDiagnostics": {
-    "requestedItemCount": 30,
-    "completedItemCount": 30,
-    "missingItemCount": 0,
-    "missingItemIds": [],
-    "missingItems": [],
+    "requestedItemCount": 26,
+    "completedItemCount": 25,
+    "missingItemCount": 1,
+    "missingItemIds": [
+      "a49756c40c1d40"
+    ],
+    "missingItems": [
+      {
+        "id": "a49756c40c1d40",
+        "reason": "translation_content_rejected"
+      }
+    ],
     "initialBatchSize": 6,
     "initialBatchCount": 5,
-    "requestCount": 9,
-    "retryRequestCount": 4,
+    "requestCount": 8,
+    "retryRequestCount": 3,
     "providerFailureCount": 0,
-    "structuralFailureCount": 1,
-    "completionReason": "complete_after_retry",
-    "completionMessage": "缺失条目经拆分重试后已全部完成",
+    "structuralFailureCount": 2,
+    "completionReason": "partial_after_retry",
+    "completionMessage": "拆分重试后仍有条目缺失",
     "lastProviderError": "",
-    "reusedItemCount": 16,
-    "featuredTranslatedItemCount": 4,
+    "reusedItemCount": 21,
+    "featuredTranslatedItemCount": 2,
     "notAttemptedItemIds": [],
     "notAttemptedItemCount": 0,
     "budgetDeferredItemCount": 0,
-    "targetItemCount": 46,
+    "targetItemCount": 47,
     "totalTranslatedItemCount": 46,
-    "totalMissingItemCount": 0,
-    "totalMissingItemIds": [],
-    "coverageCompletionMessage": "中文译文已全部完成"
+    "totalMissingItemCount": 1,
+    "totalMissingItemIds": [
+      "a49756c40c1d40"
+    ],
+    "coverageCompletionMessage": "还有 1 条中文译文待完成"
   },
-  "message": "全量动态更新成功，共 46 条"
+  "message": "全量动态更新成功，共 47 条"
 }
