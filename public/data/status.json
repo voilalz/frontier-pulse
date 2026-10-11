@@ -186,76 +186,88 @@
     "readerStatus": "partial",
     "qualityFailures": [
       {
-        "chapterId": "chapter-1",
-        "sentenceId": "angle",
-        "rule": "analysis-new-quotation"
-      },
-      {
-        "chapterId": "chapter-1",
-        "sentenceId": "b4s1",
-        "rule": "analysis-new-quotation"
+        "chapterId": "chapter-2",
+        "rule": "block-event-reference",
+        "sentenceId": "b1"
       },
       {
         "chapterId": "chapter-2",
-        "sentenceId": "b1s1",
-        "rule": "qualifier:planned"
+        "rule": "block-event-reference",
+        "sentenceId": "b2"
+      },
+      {
+        "chapterId": "chapter-2",
+        "rule": "block-event-reference",
+        "sentenceId": "b4"
+      },
+      {
+        "chapterId": "chapter-2",
+        "sentenceId": "b3s2",
+        "rule": "quantity:number:2"
       }
     ],
     "message": "已发表合格主题，其余主题待恢复。",
     "diagnostics": {
       "generationStatus": "partial",
-      "generatedAt": "2026-10-11T00:11:43.626562Z",
+      "generatedAt": "2026-10-11T02:08:57.839859Z",
       "candidateCount": 12,
-      "eventCount": 1,
-      "sourceCount": 1,
+      "eventCount": 2,
+      "sourceCount": 2,
       "warnings": [],
       "recoveryDiagnostics": {
         "chapters": {
           "chapter-1": {
-            "state": "failed",
-            "attempts": 2,
-            "issues": [
-              {
-                "sentenceId": "angle",
-                "rule": "analysis-new-quotation"
-              },
-              {
-                "sentenceId": "b4s1",
-                "rule": "analysis-new-quotation"
-              }
-            ]
+            "state": "complete",
+            "attempts": 2
           },
           "chapter-2": {
             "state": "failed",
             "attempts": 2,
             "issues": [
               {
-                "sentenceId": "b1s1",
-                "rule": "qualifier:planned"
+                "rule": "block-event-reference",
+                "sentenceId": "b1"
+              },
+              {
+                "rule": "block-event-reference",
+                "sentenceId": "b2"
+              },
+              {
+                "rule": "block-event-reference",
+                "sentenceId": "b4"
+              },
+              {
+                "sentenceId": "b3s2",
+                "rule": "quantity:number:2"
               }
             ]
           },
           "chapter-3": {
-            "state": "complete",
-            "attempts": 2
+            "state": "reused",
+            "attempts": 0
           }
         }
       },
       "contentFailures": [
         {
-          "chapterId": "chapter-1",
-          "sentenceId": "angle",
-          "rule": "analysis-new-quotation"
-        },
-        {
-          "chapterId": "chapter-1",
-          "sentenceId": "b4s1",
-          "rule": "analysis-new-quotation"
+          "chapterId": "chapter-2",
+          "rule": "block-event-reference",
+          "sentenceId": "b1"
         },
         {
           "chapterId": "chapter-2",
-          "sentenceId": "b1s1",
-          "rule": "qualifier:planned"
+          "rule": "block-event-reference",
+          "sentenceId": "b2"
+        },
+        {
+          "chapterId": "chapter-2",
+          "rule": "block-event-reference",
+          "sentenceId": "b4"
+        },
+        {
+          "chapterId": "chapter-2",
+          "sentenceId": "b3s2",
+          "rule": "quantity:number:2"
         }
       ],
       "selectionDiagnostics": {
@@ -263,10 +275,10 @@
         "source-unavailable": 5
       },
       "qualityMetrics": {
-        "bodyHanCount": 369,
-        "publishedTopicCount": 1,
+        "bodyHanCount": 1058,
+        "publishedTopicCount": 2,
         "plannedTopicCount": 3,
-        "historicalTopicCount": 0,
+        "historicalTopicCount": 1,
         "multiSourceEventCount": 0,
         "categoryCounts": {
           "AI": 1,
@@ -282,7 +294,7 @@
         "categoryBalanceException": ""
       }
     },
-    "lastAttemptAt": "2026-10-11T00:11:43.626562Z"
+    "lastAttemptAt": "2026-10-11T02:08:57.839859Z"
   },
-  "releaseId": "r20261011T001143-5cfaa79c"
+  "releaseId": "r20261011T020857-af573693"
 }
