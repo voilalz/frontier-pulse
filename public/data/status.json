@@ -187,43 +187,23 @@
   "researchEditorialDiagnostics": {},
   "deepread": {
     "state": "degraded",
-    "errorCode": "deepread-brief",
+    "errorCode": "deepread-partial",
     "editionDate": "2026-10-12",
     "contentEditionDate": "2026-10-12",
-    "readerStatus": "brief",
+    "readerStatus": "partial",
     "qualityFailures": [
       {
         "chapterId": "chapter-1",
-        "sentenceId": "b2s1",
-        "rule": "qualifier:negation"
-      },
-      {
-        "chapterId": "chapter-1",
-        "sentenceId": "b4s0",
+        "sentenceId": "b3s2",
         "rule": "quantity:number:1"
-      },
-      {
-        "chapterId": "chapter-2",
-        "sentenceId": "b2s0",
-        "rule": "quantity:number:1"
-      },
-      {
-        "chapterId": "chapter-2",
-        "sentenceId": "b2s2",
-        "rule": "quantity:number:1"
-      },
-      {
-        "chapterId": "chapter-2",
-        "sentenceId": "b4s1",
-        "rule": "evidence-reference"
       }
     ],
-    "message": "当日简讯已发布，深读正文待恢复。",
+    "message": "已发表合格主题，其余主题待恢复。",
     "diagnostics": {
       "generationStatus": "partial",
-      "generatedAt": "2026-10-12T00:09:02Z",
+      "generatedAt": "2026-10-12T00:12:30.400261Z",
       "candidateCount": 12,
-      "eventCount": 1,
+      "eventCount": 2,
       "sourceCount": 2,
       "warnings": [],
       "recoveryDiagnostics": {
@@ -233,60 +213,23 @@
             "attempts": 2,
             "issues": [
               {
-                "sentenceId": "b2s1",
-                "rule": "qualifier:negation"
-              },
-              {
-                "sentenceId": "b4s0",
+                "sentenceId": "b3s2",
                 "rule": "quantity:number:1"
               }
             ]
           },
           "chapter-2": {
-            "state": "failed",
+            "state": "salvaged",
             "attempts": 2,
-            "issues": [
-              {
-                "sentenceId": "b2s0",
-                "rule": "quantity:number:1"
-              },
-              {
-                "sentenceId": "b2s2",
-                "rule": "quantity:number:1"
-              },
-              {
-                "sentenceId": "b4s1",
-                "rule": "evidence-reference"
-              }
-            ]
+            "droppedSentences": 2
           }
         }
       },
       "contentFailures": [
         {
           "chapterId": "chapter-1",
-          "sentenceId": "b2s1",
-          "rule": "qualifier:negation"
-        },
-        {
-          "chapterId": "chapter-1",
-          "sentenceId": "b4s0",
+          "sentenceId": "b3s2",
           "rule": "quantity:number:1"
-        },
-        {
-          "chapterId": "chapter-2",
-          "sentenceId": "b2s0",
-          "rule": "quantity:number:1"
-        },
-        {
-          "chapterId": "chapter-2",
-          "sentenceId": "b2s2",
-          "rule": "quantity:number:1"
-        },
-        {
-          "chapterId": "chapter-2",
-          "sentenceId": "b4s1",
-          "rule": "evidence-reference"
         }
       ],
       "selectionDiagnostics": {
@@ -294,8 +237,8 @@
         "source-unavailable": 7
       },
       "qualityMetrics": {
-        "bodyHanCount": 0,
-        "publishedTopicCount": 0,
+        "bodyHanCount": 523,
+        "publishedTopicCount": 1,
         "plannedTopicCount": 2,
         "historicalTopicCount": 0,
         "multiSourceEventCount": 0,
@@ -310,7 +253,8 @@
         "maximumTopicCategoryShare": 0.5,
         "categoryBalanceException": "fewer-than-three-supported-topics"
       }
-    }
+    },
+    "lastAttemptAt": "2026-10-12T00:12:30.400261Z"
   },
-  "releaseId": "r20261012T001159-23b850aa"
+  "releaseId": "r20261012T001230-009184c4"
 }
