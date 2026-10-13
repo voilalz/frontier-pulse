@@ -228,3 +228,25 @@ test('the scheduled check runs both monitors',async()=>{
   const body=await (await dog.fetch(new Request('https://internal/check',{method:'POST'}))).json();
   assert.equal(body.status,'disabled'); assert.equal(body.classics.status,'disabled');
 });
+test('upstream errors log the failed step, status and GitHub message',async()=>{
+  assert.ok(monitor);
+  const base=source();
+  const denied=async(url,options={})=>{
+    if (String(url).includes('/contents/')) return new Response(JSON.stringify({message:'Resource not accessible by personal access token'}),{status:403});
+    return base.fetcher(url,options);
+  };
+  const s=new MemoryStorage();
+  const result=await monitor(env,s,denied,at('00:05:00'));
+  assert.equal(result.reason,'upstream-error');
+  assert.equal(result.detail,'contents HTTP 403: Resource not accessible by personal access token');
+  assert.equal((await s.get('day:2026-09-28')).detail,result.detail);
+  const x=source({dispatchStatus:422, dispatchBody:{message:'Unexpected inputs provided'}});
+  assert.equal((await monitor(env,new MemoryStorage(),x.fetcher,at('00:05:00'))).detail,'dispatch HTTP 422: Unexpected inputs provided');
+  assert.equal((await monitor(env,new MemoryStorage(),source({fresh:true}).fetcher,at('00:05:00'))).detail,undefined);
+});
+test('classics: upstream errors log the failed step',async()=>{
+  assert.ok(monitorClassics); const base=classicSource();
+  const broken=async(url,options={})=>String(url).includes('/runs?') ? new Response('',{status:401}) : base.fetcher(url,options);
+  const result=await monitorClassics(env,new MemoryStorage(),broken,new Date('2026-09-27T23:11:00Z'));
+  assert.equal(result.status,'check-failed'); assert.equal(result.detail,'runs HTTP 401');
+});
