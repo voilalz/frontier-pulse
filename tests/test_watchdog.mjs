@@ -250,3 +250,19 @@ test('classics: upstream errors log the failed step',async()=>{
   const result=await monitorClassics(env,new MemoryStorage(),broken,new Date('2026-09-27T23:11:00Z'));
   assert.equal(result.status,'check-failed'); assert.equal(result.detail,'runs HTTP 401');
 });
+test('requests never ask fetch for redirect:error, which Workers rejects',async()=>{
+  assert.ok(monitor); const x=source();
+  const strict=async(url,options={})=>{
+    if (!['follow','manual',undefined].includes(options.redirect)) throw new TypeError('Invalid redirect value');
+    return x.fetcher(url,options);
+  };
+  const s=new MemoryStorage();
+  assert.equal((await monitor(env,s,strict,at('00:05:00'))).status,'recovery-requested');
+  assert.ok(x.calls.every(c=>c.redirect==='manual'));
+  const y=classicSource();
+  const strictClassic=async(url,options={})=>{
+    if (options.redirect!=='manual') throw new TypeError('Invalid redirect value');
+    return y.fetcher(url,options);
+  };
+  assert.equal((await monitorClassics(env,new MemoryStorage(),strictClassic,new Date('2026-09-27T23:11:00Z'))).status,'recovery-requested');
+});

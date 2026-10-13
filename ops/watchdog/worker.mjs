@@ -13,8 +13,10 @@ function validManifest(value) {
   return value?.schemaVersion === 1 && /^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$/.test(value.releaseId)
     && /^\d{4}-\d{2}-\d{2}$/.test(value.editionDate) && value.basePath === `./releases/${value.releaseId}/`;
 }
+// Workers' fetch rejects redirect:'error' with a TypeError, which failed every check.
+// 'manual' returns a 3xx as a non-ok response, so a redirect is still never followed.
 async function request(fetcher, url, options = {}) {
-  return fetcher(url, {redirect:'error', signal:AbortSignal.timeout(8000), ...options});
+  return fetcher(url, {redirect:'manual', signal:AbortSignal.timeout(8000), ...options});
 }
 // Names the failed step, HTTP status and GitHub's own message so logs explain an upstream error.
 async function upstream(step, response) {
