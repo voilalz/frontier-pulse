@@ -13,12 +13,23 @@ function validManifest(value) {
   return value?.schemaVersion === 1 && /^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$/.test(value.releaseId)
     && /^\d{4}-\d{2}-\d{2}$/.test(value.editionDate) && value.basePath === `./releases/${value.releaseId}/`;
 }
+// Workers' fetch rejects redirect:'error' with a TypeError, which failed every check.
+// 'manual' returns a 3xx as a non-ok response, so a redirect is still never followed.
 async function request(fetcher, url, options = {}) {
-  return fetcher(url, {redirect:'error', signal:AbortSignal.timeout(8000), ...options});
+  return fetcher(url, {redirect:'manual', signal:AbortSignal.timeout(8000), ...options});
 }
-async function json(fetcher, url, options) {
+// Names the failed step, HTTP status and GitHub's own message so logs explain an upstream error.
+async function upstream(step, response) {
+  let message = '';
+  try {message = String((await response.json())?.message || '');} catch {}
+  return new Error(`${step} HTTP ${response.status}${message ? `: ${message}` : ''}`);
+}
+function detail(error) {
+  return String(error?.message || error?.name || 'unknown').replace(/[^\w .:/()'-]/g, '').slice(0, 160);
+}
+async function json(fetcher, url, options, step = 'fetch') {
   const response = await request(fetcher, url, options);
-  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  if (!response.ok) throw await upstream(step, response);
   return response.json();
 }
 function configuration(env) {
@@ -66,7 +77,7 @@ export async function monitor(env, storage, fetcher = fetch, now = new Date()) {
     await txn.put(key,state); return true;
   });
   if (!claimed) return {status:'checking'};
-  let status='error', reason='', healthy=false, releaseId='', runId=null;
+  let status='error', reason='', healthy=false, releaseId='', runId=null, errorDetail='';
   try {
     let inspection;
     try {inspection = await inspectProduction(env,fetcher,now);}
@@ -83,10 +94,10 @@ export async function monitor(env, storage, fetcher = fetch, now = new Date()) {
         headers:{...config.headers,Accept:'application/vnd.github.raw+json'},
       });
       if (response.ok) committed = await response.json();
-      else if (response.status !== 404) throw new Error('Repository check unavailable');
+      else if (response.status !== 404) throw await upstream('contents', response);
       if (validManifest(committed) && committed.editionDate===date) status='deployment-lag';
       else {
-        const runs = await json(fetcher,`${config.api}/actions/workflows/daily-news.yml/runs?branch=main&per_page=20`,{headers:config.headers});
+        const runs = await json(fetcher,`${config.api}/actions/workflows/daily-news.yml/runs?branch=main&per_page=20`,{headers:config.headers},'runs');
         if (!Array.isArray(runs.workflow_runs)) throw new Error('Invalid workflow response');
         if (runs.workflow_runs.some(run=>ACTIVE.has(run.status))) status='running';
         else {
@@ -103,7 +114,7 @@ export async function monitor(env, storage, fetcher = fetch, now = new Date()) {
               body:JSON.stringify({ref:'main',inputs:{force_refresh:'false'},return_run_details:true}),
             });
             // 204 is the classic empty acceptance; 200 carries the created run's details.
-            if (dispatch.status !== 200 && dispatch.status !== 204) throw new Error('Recovery dispatch rejected');
+            if (dispatch.status !== 200 && dispatch.status !== 204) throw await upstream('dispatch', dispatch);
             status='recovery-requested';
             if (dispatch.status === 200) runId = await dispatchedRunId(dispatch);
           } else status='recovery-limited';
@@ -113,6 +124,7 @@ export async function monitor(env, storage, fetcher = fetch, now = new Date()) {
   } catch (error) {
     if (status!=='dispatch-uncertain') status='check-failed';
     reason = error?.message === 'Missing GitHub token' ? 'missing-token' : 'upstream-error';
+    if (reason === 'upstream-error') errorDetail = detail(error);
   }
   try {
     if (!healthy && minutes >= ALERT_FROM && env.ALERT_WEBHOOK_URL) {
@@ -137,6 +149,7 @@ export async function monitor(env, storage, fetcher = fetch, now = new Date()) {
     await storage.transaction(async txn=>{
       const state=await txn.get(key);
       state.status=status; state.reason=reason; state.releaseId=releaseId; state.checkedAt=now.toISOString();
+      state.detail=errorDetail;
       if (runId) state.runIds=[...(state.runIds || []), runId];
       state.checkingUntil=0;
       if (healthy && !state.firstHealthyAt) state.firstHealthyAt=now.toISOString();
@@ -150,7 +163,7 @@ export async function monitor(env, storage, fetcher = fetch, now = new Date()) {
     const expired=[...entries.keys()].filter(key=>key.slice(4)<cutoff);
     if (expired.length) await storage.delete(expired);
   }
-  return {date,status,reason,releaseId,...(runId ? {runId} : {})};
+  return {date,status,reason,releaseId,...(errorDetail ? {detail:errorDetail} : {}),...(runId ? {runId} : {})};
 }
 
 // Classic papers are deterministic and cheap: one idempotent run per Beijing day from 07:10.
@@ -171,7 +184,7 @@ export async function monitorClassics(env, storage, fetcher = fetch, now = new D
     await txn.put(key,state); return true;
   });
   if (!claimed) return {status:'checking'};
-  let status='error', reason='', releaseId='', runId=null;
+  let status='error', reason='', releaseId='', runId=null, errorDetail='';
   try {
     const config = configuration(env);
     const site = env.SITE ? (url, options) => env.SITE.fetch(url, options) : fetcher;
@@ -188,19 +201,19 @@ export async function monitorClassics(env, storage, fetcher = fetch, now = new D
       const response = await raw('release.json');
       let committed = null;
       if (response.ok) committed = await response.json();
-      else if (response.status !== 404) throw new Error('Repository check unavailable');
+      else if (response.status !== 404) throw await upstream('contents', response);
       if (validClassicManifest(committed) && committed.recommendationDate === date) {
         status='deployment-lag'; releaseId=committed.releaseId;
       } else {
         let attempted = false;
         if (validClassicManifest(committed)) {
           const statusFile = await raw(`releases/${committed.releaseId}/status.json`);
-          if (!statusFile.ok) throw new Error('Repository check unavailable');
+          if (!statusFile.ok) throw await upstream('contents', statusFile);
           attempted = (await statusFile.json())?.inventoryDate === date;
         }
         if (attempted) {status='published-pending'; reason='no-ready-inventory'; releaseId=committed.releaseId;}
         else {
-          const runs = await json(fetcher,`${config.api}/actions/workflows/daily-classics.yml/runs?branch=main&per_page=20`,{headers:config.headers});
+          const runs = await json(fetcher,`${config.api}/actions/workflows/daily-classics.yml/runs?branch=main&per_page=20`,{headers:config.headers},'runs');
           if (!Array.isArray(runs.workflow_runs)) throw new Error('Invalid workflow response');
           if (runs.workflow_runs.some(run=>ACTIVE.has(run.status))) status='running';
           else {
@@ -216,7 +229,7 @@ export async function monitorClassics(env, storage, fetcher = fetch, now = new D
                 method:'POST',headers:{...config.headers,'Content-Type':'application/json'},
                 body:JSON.stringify({ref:'main',return_run_details:true}),
               });
-              if (dispatch.status !== 200 && dispatch.status !== 204) throw new Error('Recovery dispatch rejected');
+              if (dispatch.status !== 200 && dispatch.status !== 204) throw await upstream('dispatch', dispatch);
               status='recovery-requested';
               if (dispatch.status === 200) runId = await dispatchedRunId(dispatch);
             } else status='recovery-limited';
@@ -227,10 +240,12 @@ export async function monitorClassics(env, storage, fetcher = fetch, now = new D
   } catch (error) {
     if (status!=='dispatch-uncertain') status='check-failed';
     reason = error?.message === 'Missing GitHub token' ? 'missing-token' : 'upstream-error';
+    if (reason === 'upstream-error') errorDetail = detail(error);
   } finally {
     await storage.transaction(async txn=>{
       const state=await txn.get(key);
       state.status=status; state.reason=reason; state.releaseId=releaseId; state.checkedAt=now.toISOString();
+      state.detail=errorDetail;
       if (runId) state.runIds=[...(state.runIds || []), runId];
       state.checkingUntil=0;
       if (status==='healthy' && !state.firstHealthyAt) state.firstHealthyAt=now.toISOString();
@@ -242,7 +257,7 @@ export async function monitorClassics(env, storage, fetcher = fetch, now = new D
     const expired=[...entries.keys()].filter(key=>key.slice(9)<cutoff);
     if (expired.length) await storage.delete(expired);
   }
-  return {date,status,reason,releaseId,...(runId ? {runId} : {})};
+  return {date,status,reason,releaseId,...(errorDetail ? {detail:errorDetail} : {}),...(runId ? {runId} : {})};
 }
 
 export class PublicationWatchdog {
