@@ -208,69 +208,44 @@
   "researchEditorialDiagnostics": {},
   "deepread": {
     "state": "degraded",
-    "errorCode": "deepread-brief",
+    "errorCode": "deepread-partial",
     "editionDate": "2026-10-14",
     "contentEditionDate": "2026-10-14",
-    "readerStatus": "brief",
+    "readerStatus": "partial",
     "qualityFailures": [
       {
         "chapterId": "chapter-1",
-        "rule": "block-event-reference",
-        "sentenceId": "b1"
-      },
-      {
-        "chapterId": "chapter-1",
-        "rule": "block-event-reference",
-        "sentenceId": "b2"
-      },
-      {
-        "chapterId": "chapter-1",
-        "rule": "block-event-reference",
-        "sentenceId": "b3"
-      },
-      {
-        "chapterId": "chapter-1",
-        "rule": "block-event-reference",
-        "sentenceId": "b4"
-      },
-      {
-        "chapterId": "chapter-1",
-        "rule": "block-event-reference",
-        "sentenceId": "b5"
-      },
-      {
-        "chapterId": "chapter-2",
-        "sentenceId": "title",
+        "sentenceId": "b5s1",
         "rule": "evidence-reference"
       },
       {
         "chapterId": "chapter-2",
         "sentenceId": "angle",
-        "rule": "evidence-reference"
+        "rule": "quantity:model:c2"
       },
       {
         "chapterId": "chapter-2",
-        "sentenceId": "b0s2",
-        "rule": "quantity:number:1"
+        "sentenceId": "b1s1",
+        "rule": "qualifier:planned"
       },
       {
         "chapterId": "chapter-2",
-        "sentenceId": "b5s1",
-        "rule": "quantity:number:2,number:2028"
+        "sentenceId": "b3s0",
+        "rule": "quantity:approx:10"
       },
       {
-        "chapterId": "chapter-3",
-        "sentenceId": "b1s0",
-        "rule": "quantity:number:1"
+        "chapterId": "chapter-2",
+        "sentenceId": "b5s0",
+        "rule": "quantity:model:c2"
       }
     ],
-    "message": "当日简讯已发布，深读正文待恢复。",
+    "message": "已发表合格主题，其余主题待恢复。",
     "diagnostics": {
       "generationStatus": "partial",
-      "generatedAt": "2026-10-14T00:00:26.497867Z",
+      "generatedAt": "2026-10-14T02:08:11.140144Z",
       "candidateCount": 12,
-      "eventCount": 2,
-      "sourceCount": 5,
+      "eventCount": 3,
+      "sourceCount": 3,
       "warnings": [],
       "recoveryDiagnostics": {
         "chapters": {
@@ -279,24 +254,8 @@
             "attempts": 2,
             "issues": [
               {
-                "rule": "block-event-reference",
-                "sentenceId": "b1"
-              },
-              {
-                "rule": "block-event-reference",
-                "sentenceId": "b2"
-              },
-              {
-                "rule": "block-event-reference",
-                "sentenceId": "b3"
-              },
-              {
-                "rule": "block-event-reference",
-                "sentenceId": "b4"
-              },
-              {
-                "rule": "block-event-reference",
-                "sentenceId": "b5"
+                "sentenceId": "b5s1",
+                "rule": "evidence-reference"
               }
             ]
           },
@@ -305,85 +264,55 @@
             "attempts": 2,
             "issues": [
               {
-                "sentenceId": "title",
-                "rule": "evidence-reference"
-              },
-              {
                 "sentenceId": "angle",
-                "rule": "evidence-reference"
+                "rule": "quantity:model:c2"
               },
               {
-                "sentenceId": "b0s2",
-                "rule": "quantity:number:1"
+                "sentenceId": "b1s1",
+                "rule": "qualifier:planned"
               },
               {
-                "sentenceId": "b5s1",
-                "rule": "quantity:number:2,number:2028"
+                "sentenceId": "b3s0",
+                "rule": "quantity:approx:10"
+              },
+              {
+                "sentenceId": "b5s0",
+                "rule": "quantity:model:c2"
               }
             ]
           },
           "chapter-3": {
-            "state": "failed",
+            "state": "salvaged",
             "attempts": 2,
-            "issues": [
-              {
-                "sentenceId": "b1s0",
-                "rule": "quantity:number:1"
-              }
-            ]
+            "droppedSentences": 1
           }
         }
       },
       "contentFailures": [
         {
           "chapterId": "chapter-1",
-          "rule": "block-event-reference",
-          "sentenceId": "b1"
-        },
-        {
-          "chapterId": "chapter-1",
-          "rule": "block-event-reference",
-          "sentenceId": "b2"
-        },
-        {
-          "chapterId": "chapter-1",
-          "rule": "block-event-reference",
-          "sentenceId": "b3"
-        },
-        {
-          "chapterId": "chapter-1",
-          "rule": "block-event-reference",
-          "sentenceId": "b4"
-        },
-        {
-          "chapterId": "chapter-1",
-          "rule": "block-event-reference",
-          "sentenceId": "b5"
-        },
-        {
-          "chapterId": "chapter-2",
-          "sentenceId": "title",
+          "sentenceId": "b5s1",
           "rule": "evidence-reference"
         },
         {
           "chapterId": "chapter-2",
           "sentenceId": "angle",
-          "rule": "evidence-reference"
+          "rule": "quantity:model:c2"
         },
         {
           "chapterId": "chapter-2",
-          "sentenceId": "b0s2",
-          "rule": "quantity:number:1"
+          "sentenceId": "b1s1",
+          "rule": "qualifier:planned"
         },
         {
           "chapterId": "chapter-2",
-          "sentenceId": "b5s1",
-          "rule": "quantity:number:2,number:2028"
+          "sentenceId": "b3s0",
+          "rule": "quantity:approx:10"
         },
         {
-          "chapterId": "chapter-3",
-          "sentenceId": "b1s0",
-          "rule": "quantity:number:1"
+          "chapterId": "chapter-2",
+          "sentenceId": "b5s0",
+          "rule": "quantity:model:c2"
         }
       ],
       "selectionDiagnostics": {
@@ -392,8 +321,8 @@
         "duplicate-report": 1
       },
       "qualityMetrics": {
-        "bodyHanCount": 0,
-        "publishedTopicCount": 0,
+        "bodyHanCount": 407,
+        "publishedTopicCount": 1,
         "plannedTopicCount": 3,
         "historicalTopicCount": 0,
         "multiSourceEventCount": 0,
@@ -411,7 +340,7 @@
         "categoryBalanceException": ""
       }
     },
-    "lastAttemptAt": "2026-10-14T00:00:26.497867Z"
+    "lastAttemptAt": "2026-10-14T02:08:11.140144Z"
   },
-  "releaseId": "r20261014T000026-c8469db7"
+  "releaseId": "r20261014T020811-ce970142"
 }
