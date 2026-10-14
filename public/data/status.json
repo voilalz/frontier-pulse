@@ -215,40 +215,59 @@
     "qualityFailures": [
       {
         "chapterId": "chapter-1",
-        "sentenceId": "b1s1",
-        "rule": "quantity:number:1"
+        "rule": "block-event-reference",
+        "sentenceId": "b1"
       },
       {
         "chapterId": "chapter-1",
-        "sentenceId": "b2s0",
-        "rule": "qualifier:planned"
+        "rule": "block-event-reference",
+        "sentenceId": "b2"
+      },
+      {
+        "chapterId": "chapter-1",
+        "rule": "block-event-reference",
+        "sentenceId": "b3"
+      },
+      {
+        "chapterId": "chapter-1",
+        "rule": "block-event-reference",
+        "sentenceId": "b4"
+      },
+      {
+        "chapterId": "chapter-1",
+        "rule": "block-event-reference",
+        "sentenceId": "b5"
+      },
+      {
+        "chapterId": "chapter-2",
+        "sentenceId": "title",
+        "rule": "evidence-reference"
       },
       {
         "chapterId": "chapter-2",
         "sentenceId": "angle",
-        "rule": "quantity:number:2"
+        "rule": "evidence-reference"
       },
       {
         "chapterId": "chapter-2",
-        "sentenceId": "b5s2",
-        "rule": "quantity:number:2"
+        "sentenceId": "b0s2",
+        "rule": "quantity:number:1"
+      },
+      {
+        "chapterId": "chapter-2",
+        "sentenceId": "b5s1",
+        "rule": "quantity:number:2,number:2028"
       },
       {
         "chapterId": "chapter-3",
-        "sentenceId": "title",
-        "rule": "semantic-partial",
-        "detail": "标题为问句形式，正文analysis给出的是较弱信号解读而未被证据直接判定“为何”的答案；且evidence未解释选址原因，问题本身超出证据。"
-      },
-      {
-        "chapterId": "chapter-3",
-        "rule": "editorial-depth",
-        "detail": "chapter围绕标题问题给出了判断，解释了参会构成这一具体线索，分析也有边界与后续观察点，整体不属新闻罗列。但标题直接问“为何把一站放在林肯实验室”，正文并未对选址原因给出有证据的解释，仅以“信号/需求侧与供给侧对接”取而代之；b1s0与b1s1的推断较空泛，未真正回答标题问题。需修改title或补一段基于现有证据的"
+        "sentenceId": "b1s0",
+        "rule": "quantity:number:1"
       }
     ],
     "message": "当日简讯已发布，深读正文待恢复。",
     "diagnostics": {
       "generationStatus": "partial",
-      "generatedAt": "2026-10-13T23:44:23Z",
+      "generatedAt": "2026-10-14T00:00:26.497867Z",
       "candidateCount": 12,
       "eventCount": 2,
       "sourceCount": 5,
@@ -260,12 +279,24 @@
             "attempts": 2,
             "issues": [
               {
-                "sentenceId": "b1s1",
-                "rule": "quantity:number:1"
+                "rule": "block-event-reference",
+                "sentenceId": "b1"
               },
               {
-                "sentenceId": "b2s0",
-                "rule": "qualifier:planned"
+                "rule": "block-event-reference",
+                "sentenceId": "b2"
+              },
+              {
+                "rule": "block-event-reference",
+                "sentenceId": "b3"
+              },
+              {
+                "rule": "block-event-reference",
+                "sentenceId": "b4"
+              },
+              {
+                "rule": "block-event-reference",
+                "sentenceId": "b5"
               }
             ]
           },
@@ -274,12 +305,20 @@
             "attempts": 2,
             "issues": [
               {
-                "sentenceId": "angle",
-                "rule": "quantity:number:2"
+                "sentenceId": "title",
+                "rule": "evidence-reference"
               },
               {
-                "sentenceId": "b5s2",
-                "rule": "quantity:number:2"
+                "sentenceId": "angle",
+                "rule": "evidence-reference"
+              },
+              {
+                "sentenceId": "b0s2",
+                "rule": "quantity:number:1"
+              },
+              {
+                "sentenceId": "b5s1",
+                "rule": "quantity:number:2,number:2028"
               }
             ]
           },
@@ -288,13 +327,8 @@
             "attempts": 2,
             "issues": [
               {
-                "sentenceId": "title",
-                "rule": "semantic-partial",
-                "detail": "标题为问句形式，正文analysis给出的是较弱信号解读而未被证据直接判定“为何”的答案；且evidence未解释选址原因，问题本身超出证据。"
-              },
-              {
-                "rule": "editorial-depth",
-                "detail": "chapter围绕标题问题给出了判断，解释了参会构成这一具体线索，分析也有边界与后续观察点，整体不属新闻罗列。但标题直接问“为何把一站放在林肯实验室”，正文并未对选址原因给出有证据的解释，仅以“信号/需求侧与供给侧对接”取而代之；b1s0与b1s1的推断较空泛，未真正回答标题问题。需修改title或补一段基于现有证据的"
+                "sentenceId": "b1s0",
+                "rule": "quantity:number:1"
               }
             ]
           }
@@ -303,34 +337,53 @@
       "contentFailures": [
         {
           "chapterId": "chapter-1",
-          "sentenceId": "b1s1",
-          "rule": "quantity:number:1"
+          "rule": "block-event-reference",
+          "sentenceId": "b1"
         },
         {
           "chapterId": "chapter-1",
-          "sentenceId": "b2s0",
-          "rule": "qualifier:planned"
+          "rule": "block-event-reference",
+          "sentenceId": "b2"
+        },
+        {
+          "chapterId": "chapter-1",
+          "rule": "block-event-reference",
+          "sentenceId": "b3"
+        },
+        {
+          "chapterId": "chapter-1",
+          "rule": "block-event-reference",
+          "sentenceId": "b4"
+        },
+        {
+          "chapterId": "chapter-1",
+          "rule": "block-event-reference",
+          "sentenceId": "b5"
+        },
+        {
+          "chapterId": "chapter-2",
+          "sentenceId": "title",
+          "rule": "evidence-reference"
         },
         {
           "chapterId": "chapter-2",
           "sentenceId": "angle",
-          "rule": "quantity:number:2"
+          "rule": "evidence-reference"
         },
         {
           "chapterId": "chapter-2",
-          "sentenceId": "b5s2",
-          "rule": "quantity:number:2"
+          "sentenceId": "b0s2",
+          "rule": "quantity:number:1"
+        },
+        {
+          "chapterId": "chapter-2",
+          "sentenceId": "b5s1",
+          "rule": "quantity:number:2,number:2028"
         },
         {
           "chapterId": "chapter-3",
-          "sentenceId": "title",
-          "rule": "semantic-partial",
-          "detail": "标题为问句形式，正文analysis给出的是较弱信号解读而未被证据直接判定“为何”的答案；且evidence未解释选址原因，问题本身超出证据。"
-        },
-        {
-          "chapterId": "chapter-3",
-          "rule": "editorial-depth",
-          "detail": "chapter围绕标题问题给出了判断，解释了参会构成这一具体线索，分析也有边界与后续观察点，整体不属新闻罗列。但标题直接问“为何把一站放在林肯实验室”，正文并未对选址原因给出有证据的解释，仅以“信号/需求侧与供给侧对接”取而代之；b1s0与b1s1的推断较空泛，未真正回答标题问题。需修改title或补一段基于现有证据的"
+          "sentenceId": "b1s0",
+          "rule": "quantity:number:1"
         }
       ],
       "selectionDiagnostics": {
@@ -357,7 +410,8 @@
         "maximumTopicCategoryShare": 0.3333333333333333,
         "categoryBalanceException": ""
       }
-    }
+    },
+    "lastAttemptAt": "2026-10-14T00:00:26.497867Z"
   },
-  "releaseId": "r20261014T000002-8d94a64f"
+  "releaseId": "r20261014T000026-c8469db7"
 }
