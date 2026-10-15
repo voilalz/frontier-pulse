@@ -223,36 +223,26 @@
     "qualityFailures": [
       {
         "chapterId": "chapter-1",
-        "sentenceId": "angle",
-        "rule": "quantity:number:2028"
-      },
-      {
-        "chapterId": "chapter-1",
-        "sentenceId": "b6s1",
-        "rule": "quantity:number:3"
-      },
-      {
-        "chapterId": "chapter-2",
         "rule": "block-event-reference",
         "sentenceId": "b1"
       },
       {
-        "chapterId": "chapter-2",
+        "chapterId": "chapter-1",
         "rule": "block-event-reference",
         "sentenceId": "b2"
       },
       {
-        "chapterId": "chapter-2",
+        "chapterId": "chapter-1",
         "rule": "block-event-reference",
         "sentenceId": "b3"
       },
       {
-        "chapterId": "chapter-2",
+        "chapterId": "chapter-1",
         "rule": "block-event-reference",
         "sentenceId": "b4"
       },
       {
-        "chapterId": "chapter-2",
+        "chapterId": "chapter-1",
         "rule": "block-event-reference",
         "sentenceId": "b5"
       },
@@ -260,12 +250,17 @@
         "chapterId": "chapter-2",
         "sentenceId": "angle",
         "rule": "quantity:number:25"
+      },
+      {
+        "chapterId": "chapter-2",
+        "sentenceId": "b2s0",
+        "rule": "quantity:number:25"
       }
     ],
     "message": "当日简讯已发布，深读正文待恢复。",
     "diagnostics": {
       "generationStatus": "partial",
-      "generatedAt": "2026-10-14T23:44:07Z",
+      "generatedAt": "2026-10-15T00:00:25.338353Z",
       "candidateCount": 12,
       "eventCount": 3,
       "sourceCount": 3,
@@ -273,20 +268,6 @@
       "recoveryDiagnostics": {
         "chapters": {
           "chapter-1": {
-            "state": "failed",
-            "attempts": 2,
-            "issues": [
-              {
-                "sentenceId": "angle",
-                "rule": "quantity:number:2028"
-              },
-              {
-                "sentenceId": "b6s1",
-                "rule": "quantity:number:3"
-              }
-            ]
-          },
-          "chapter-2": {
             "state": "failed",
             "attempts": 2,
             "issues": [
@@ -309,9 +290,19 @@
               {
                 "rule": "block-event-reference",
                 "sentenceId": "b5"
-              },
+              }
+            ]
+          },
+          "chapter-2": {
+            "state": "failed",
+            "attempts": 2,
+            "issues": [
               {
                 "sentenceId": "angle",
+                "rule": "quantity:number:25"
+              },
+              {
+                "sentenceId": "b2s0",
                 "rule": "quantity:number:25"
               }
             ]
@@ -321,42 +312,37 @@
       "contentFailures": [
         {
           "chapterId": "chapter-1",
-          "sentenceId": "angle",
-          "rule": "quantity:number:2028"
-        },
-        {
-          "chapterId": "chapter-1",
-          "sentenceId": "b6s1",
-          "rule": "quantity:number:3"
-        },
-        {
-          "chapterId": "chapter-2",
           "rule": "block-event-reference",
           "sentenceId": "b1"
         },
         {
-          "chapterId": "chapter-2",
+          "chapterId": "chapter-1",
           "rule": "block-event-reference",
           "sentenceId": "b2"
         },
         {
-          "chapterId": "chapter-2",
+          "chapterId": "chapter-1",
           "rule": "block-event-reference",
           "sentenceId": "b3"
         },
         {
-          "chapterId": "chapter-2",
+          "chapterId": "chapter-1",
           "rule": "block-event-reference",
           "sentenceId": "b4"
         },
         {
-          "chapterId": "chapter-2",
+          "chapterId": "chapter-1",
           "rule": "block-event-reference",
           "sentenceId": "b5"
         },
         {
           "chapterId": "chapter-2",
           "sentenceId": "angle",
+          "rule": "quantity:number:25"
+        },
+        {
+          "chapterId": "chapter-2",
+          "sentenceId": "b2s0",
           "rule": "quantity:number:25"
         }
       ],
@@ -383,7 +369,8 @@
         "maximumTopicCategoryShare": 0.5,
         "categoryBalanceException": "fewer-than-three-supported-topics"
       }
-    }
+    },
+    "lastAttemptAt": "2026-10-15T00:00:25.338353Z"
   },
-  "releaseId": "r20261015T000001-dc550cd6"
+  "releaseId": "r20261015T000025-d09b48a6"
 }
