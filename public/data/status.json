@@ -217,51 +217,38 @@
     "qualityFailures": [
       {
         "chapterId": "chapter-1",
-        "rule": "checker-request-failed"
-      },
-      {
-        "chapterId": "chapter-2",
-        "sentenceId": "title",
-        "rule": "semantic-partial",
-        "detail": "标题称「国际展商规模持平」，但证据只给出165家国际企业和9个国际展团，以及国际代表团约2000人属「平均水平」，没有任何上届基数或同比数据可以证明「持平」，把「平均水平」推断为「持平」且冠以「收官」属于部分支持。"
+        "rule": "change-needs-current-and-history"
       },
       {
         "chapterId": "chapter-2",
         "sentenceId": "angle",
-        "rule": "semantic-unsupported",
-        "detail": "导语中165家、9个展团、约2000人、92国均有依据，但「规模属平均水平」被改写成「规模属」而丢失其仅指代表团的限定；更严重的是「更值得追踪的不是展台数字，而是同期落地的资金动作」以及「部分参展力量绕开正式展团体系的信号」，两个evidenceRecord均不含资金动作信息，绕开体系只是后文推测，导语却写成既有信号，"
+        "rule": "quantity:number:500000000"
       },
       {
         "chapterId": "chapter-2",
-        "sentenceId": "b1s0",
-        "rule": "semantic-partial",
-        "detail": "「平均水平」被合理引申为未跃升、仍稳定但没有新扩张动能，属可接受的编辑判断；但把仅描述国际代表团规模的「平均水平」同时用于「国际展商数量」，扩大了原文限定范围，故仅部分支持。"
-      },
-      {
-        "chapterId": "chapter-2",
-        "rule": "editorial-depth",
-        "detail": "需修的具体段落：（1）导语及标题把「平均水平」写成「持平」并称「国际展商规模持平」，但evidenceRecords无任何同比基数，属无依据的事实断言，应改为「国际代表团规模约2000人、属平均水平」并删除或弱化「持平」；（2）导语及b1s1中「同期落地的资金动作」「绕开正式展团体系」超出所引证据，导语需删除资金动作，"
+        "sentenceId": "b1s2",
+        "rule": "quantity:number:2"
       },
       {
         "chapterId": "chapter-3",
-        "rule": "block-event-reference",
-        "sentenceId": "b4"
+        "sentenceId": "angle",
+        "rule": "quantity:number:10"
       },
       {
         "chapterId": "chapter-3",
-        "rule": "block-event-reference",
-        "sentenceId": "b5"
+        "sentenceId": "b2s1",
+        "rule": "qualifier:negation"
       },
       {
         "chapterId": "chapter-3",
-        "sentenceId": "b2s0",
-        "rule": "qualifier:planned"
+        "sentenceId": "b4s0",
+        "rule": "quantity:number:10,number:9"
       }
     ],
     "message": "当日简讯已发布，深读正文待恢复。",
     "diagnostics": {
       "generationStatus": "partial",
-      "generatedAt": "2026-10-15T23:43:21Z",
+      "generatedAt": "2026-10-16T00:00:27.722151Z",
       "candidateCount": 12,
       "eventCount": 3,
       "sourceCount": 3,
@@ -273,7 +260,7 @@
             "attempts": 2,
             "issues": [
               {
-                "rule": "checker-request-failed"
+                "rule": "change-needs-current-and-history"
               }
             ]
           },
@@ -282,23 +269,12 @@
             "attempts": 2,
             "issues": [
               {
-                "sentenceId": "title",
-                "rule": "semantic-partial",
-                "detail": "标题称「国际展商规模持平」，但证据只给出165家国际企业和9个国际展团，以及国际代表团约2000人属「平均水平」，没有任何上届基数或同比数据可以证明「持平」，把「平均水平」推断为「持平」且冠以「收官」属于部分支持。"
-              },
-              {
                 "sentenceId": "angle",
-                "rule": "semantic-unsupported",
-                "detail": "导语中165家、9个展团、约2000人、92国均有依据，但「规模属平均水平」被改写成「规模属」而丢失其仅指代表团的限定；更严重的是「更值得追踪的不是展台数字，而是同期落地的资金动作」以及「部分参展力量绕开正式展团体系的信号」，两个evidenceRecord均不含资金动作信息，绕开体系只是后文推测，导语却写成既有信号，"
+                "rule": "quantity:number:500000000"
               },
               {
-                "sentenceId": "b1s0",
-                "rule": "semantic-partial",
-                "detail": "「平均水平」被合理引申为未跃升、仍稳定但没有新扩张动能，属可接受的编辑判断；但把仅描述国际代表团规模的「平均水平」同时用于「国际展商数量」，扩大了原文限定范围，故仅部分支持。"
-              },
-              {
-                "rule": "editorial-depth",
-                "detail": "需修的具体段落：（1）导语及标题把「平均水平」写成「持平」并称「国际展商规模持平」，但evidenceRecords无任何同比基数，属无依据的事实断言，应改为「国际代表团规模约2000人、属平均水平」并删除或弱化「持平」；（2）导语及b1s1中「同期落地的资金动作」「绕开正式展团体系」超出所引证据，导语需删除资金动作，"
+                "sentenceId": "b1s2",
+                "rule": "quantity:number:2"
               }
             ]
           },
@@ -307,16 +283,16 @@
             "attempts": 2,
             "issues": [
               {
-                "rule": "block-event-reference",
-                "sentenceId": "b4"
+                "sentenceId": "angle",
+                "rule": "quantity:number:10"
               },
               {
-                "rule": "block-event-reference",
-                "sentenceId": "b5"
+                "sentenceId": "b2s1",
+                "rule": "qualifier:negation"
               },
               {
-                "sentenceId": "b2s0",
-                "rule": "qualifier:planned"
+                "sentenceId": "b4s0",
+                "rule": "quantity:number:10,number:9"
               }
             ]
           }
@@ -325,45 +301,32 @@
       "contentFailures": [
         {
           "chapterId": "chapter-1",
-          "rule": "checker-request-failed"
-        },
-        {
-          "chapterId": "chapter-2",
-          "sentenceId": "title",
-          "rule": "semantic-partial",
-          "detail": "标题称「国际展商规模持平」，但证据只给出165家国际企业和9个国际展团，以及国际代表团约2000人属「平均水平」，没有任何上届基数或同比数据可以证明「持平」，把「平均水平」推断为「持平」且冠以「收官」属于部分支持。"
+          "rule": "change-needs-current-and-history"
         },
         {
           "chapterId": "chapter-2",
           "sentenceId": "angle",
-          "rule": "semantic-unsupported",
-          "detail": "导语中165家、9个展团、约2000人、92国均有依据，但「规模属平均水平」被改写成「规模属」而丢失其仅指代表团的限定；更严重的是「更值得追踪的不是展台数字，而是同期落地的资金动作」以及「部分参展力量绕开正式展团体系的信号」，两个evidenceRecord均不含资金动作信息，绕开体系只是后文推测，导语却写成既有信号，"
+          "rule": "quantity:number:500000000"
         },
         {
           "chapterId": "chapter-2",
-          "sentenceId": "b1s0",
-          "rule": "semantic-partial",
-          "detail": "「平均水平」被合理引申为未跃升、仍稳定但没有新扩张动能，属可接受的编辑判断；但把仅描述国际代表团规模的「平均水平」同时用于「国际展商数量」，扩大了原文限定范围，故仅部分支持。"
-        },
-        {
-          "chapterId": "chapter-2",
-          "rule": "editorial-depth",
-          "detail": "需修的具体段落：（1）导语及标题把「平均水平」写成「持平」并称「国际展商规模持平」，但evidenceRecords无任何同比基数，属无依据的事实断言，应改为「国际代表团规模约2000人、属平均水平」并删除或弱化「持平」；（2）导语及b1s1中「同期落地的资金动作」「绕开正式展团体系」超出所引证据，导语需删除资金动作，"
+          "sentenceId": "b1s2",
+          "rule": "quantity:number:2"
         },
         {
           "chapterId": "chapter-3",
-          "rule": "block-event-reference",
-          "sentenceId": "b4"
+          "sentenceId": "angle",
+          "rule": "quantity:number:10"
         },
         {
           "chapterId": "chapter-3",
-          "rule": "block-event-reference",
-          "sentenceId": "b5"
+          "sentenceId": "b2s1",
+          "rule": "qualifier:negation"
         },
         {
           "chapterId": "chapter-3",
-          "sentenceId": "b2s0",
-          "rule": "qualifier:planned"
+          "sentenceId": "b4s0",
+          "rule": "quantity:number:10,number:9"
         }
       ],
       "selectionDiagnostics": {
@@ -390,7 +353,8 @@
         "maximumTopicCategoryShare": 0.3333333333333333,
         "categoryBalanceException": ""
       }
-    }
+    },
+    "lastAttemptAt": "2026-10-16T00:00:27.722151Z"
   },
-  "releaseId": "r20261016T000001-143e6c15"
+  "releaseId": "r20261016T000027-b0df821a"
 }
