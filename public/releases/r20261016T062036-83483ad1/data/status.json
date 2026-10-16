@@ -1,0 +1,415 @@
+{
+  "schemaVersion": 11,
+  "state": "ok",
+  "lastAttemptAt": "2026-10-15T23:43:21Z",
+  "summaryRevision": 5,
+  "lastSuccessAt": "2026-10-15T23:43:21Z",
+  "editionDate": "2026-10-16",
+  "itemCount": 10,
+  "message": "日报更新成功",
+  "method": "deepseek",
+  "selectionMethod": "deepseek",
+  "selectionStrategy": "ai-ranked-rule-constrained",
+  "selectionStatus": "adjusted",
+  "selectionProvider": "deepseek",
+  "selectionModel": "deepseek-v4-flash",
+  "selectionNotices": [
+    "DeepSeek 已完成候选重要度排序；程序为满足每主题最多 3 条、每来源域名最多 2 条的约束，校正了 4 个 Top 10 入选位"
+  ],
+  "selectionWarnings": [],
+  "selectionDiagnostics": {
+    "attempted": true,
+    "status": "adjusted",
+    "failureReason": "",
+    "candidateCount": 72,
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "aiWeight": 0.65,
+    "ruleWeight": 0.35,
+    "aiScoredItemCount": 72,
+    "aiUnscoredItemCount": 0,
+    "unconstrainedTop": {
+      "categoryCounts": {
+        "局部冲突": 4,
+        "军事动态": 4,
+        "航空航天": 2
+      },
+      "domainCounts": {
+        "bbc.co.uk": 1,
+        "defensenews.com": 3,
+        "twz.com": 2,
+        "dw.com": 1,
+        "theguardian.com": 1,
+        "defenseone.com": 1,
+        "science.nasa.gov": 1
+      },
+      "categoryViolations": {
+        "局部冲突": 4,
+        "军事动态": 4
+      },
+      "domainViolations": {
+        "defensenews.com": 3
+      }
+    },
+    "finalTop": {
+      "categoryCounts": {
+        "局部冲突": 1,
+        "军事动态": 3,
+        "航空航天": 3,
+        "无人系统": 1,
+        "前沿技术": 1,
+        "AI": 1
+      },
+      "domainCounts": {
+        "bbc.co.uk": 1,
+        "defensenews.com": 2,
+        "twz.com": 2,
+        "science.nasa.gov": 1,
+        "navalnews.com": 1,
+        "aljazeera.com": 1,
+        "thequantuminsider.com": 1,
+        "techcrunch.com": 1
+      },
+      "categoryViolations": {},
+      "domainViolations": {}
+    },
+    "adjustedItemCount": 4,
+    "adjustedOutIds": [
+      "d9330a9cb539b9",
+      "1b581b375ed49d",
+      "a7837e6e1f9a49",
+      "f67996ae33a5c5"
+    ],
+    "adjustedInIds": [
+      "b137ee36177688",
+      "30d70aedf56fd0",
+      "244726b3310d8c",
+      "d5bac5a69bce90"
+    ],
+    "relaxedItemCount": 0
+  },
+  "translationStatus": "ok",
+  "translationProvider": "deepseek",
+  "translationModel": "deepseek-v4-flash",
+  "translatedItemCount": 10,
+  "translationWarnings": [],
+  "translationDiagnostics": {
+    "requestedItemCount": 9,
+    "completedItemCount": 9,
+    "missingItemCount": 0,
+    "missingItemIds": [],
+    "missingItems": [],
+    "initialBatchSize": 5,
+    "initialBatchCount": 2,
+    "requestCount": 8,
+    "retryRequestCount": 6,
+    "providerFailureCount": 0,
+    "structuralFailureCount": 6,
+    "completionReason": "complete_after_stream_recovery",
+    "completionMessage": "已复用同轮动态的中文摘要",
+    "lastProviderError": "",
+    "targetItemCount": 10,
+    "reusedItemCount": 1,
+    "newlyTranslatedItemCount": 5,
+    "totalTranslatedItemCount": 10,
+    "totalMissingItemCount": 0,
+    "recoveredFromStreamItemCount": 4
+  },
+  "historyAnalysisStatus": "ok",
+  "historyAnalysisProvider": "deepseek",
+  "historyLinkedItemCount": 4,
+  "historyAnalyzedItemCount": 4,
+  "historyAnalysisWarnings": [],
+  "historyAnalysisDiagnostics": {
+    "requestedItemCount": 4,
+    "completedItemCount": 4,
+    "missingItemCount": 0,
+    "missingItemIds": [],
+    "missingItems": [],
+    "initialBatchSize": 5,
+    "initialBatchCount": 1,
+    "requestCount": 1,
+    "retryRequestCount": 0,
+    "providerFailureCount": 0,
+    "structuralFailureCount": 0,
+    "completionReason": "complete_first_pass",
+    "completionMessage": "全部条目首轮完成",
+    "lastProviderError": ""
+  },
+  "eventCount": 10,
+  "weeklyEventCount": 8,
+  "anomalySignalCount": 1,
+  "paperLinkedItemCount": 0,
+  "warnings": [],
+  "coverageStatus": "complete",
+  "freshItemCount": 10,
+  "supplementalItemCount": 0,
+  "effectiveLookbackHours": 24,
+  "streamItemCount": 165,
+  "streamTranslationProvider": "deepseek",
+  "streamTranslationModel": "deepseek-v4-flash",
+  "streamTranslationStatus": "partial",
+  "streamTranslatedItemCount": 162,
+  "streamTranslationWarnings": [
+    "新闻中文翻译在拆分重试后仍缺失 3/15 条：拆分重试后仍有条目缺失",
+    "全量动态中文翻译不完整：162/165"
+  ],
+  "streamTranslationDiagnostics": {
+    "requestedItemCount": 15,
+    "completedItemCount": 12,
+    "missingItemCount": 3,
+    "missingItemIds": [
+      "965bc13eddf950",
+      "a62cc8109d446c",
+      "0b4a2a6e636ad2"
+    ],
+    "missingItems": [
+      {
+        "id": "965bc13eddf950",
+        "reason": "translation_content_rejected"
+      },
+      {
+        "id": "a62cc8109d446c",
+        "reason": "translation_content_rejected"
+      },
+      {
+        "id": "0b4a2a6e636ad2",
+        "reason": "translation_content_rejected"
+      }
+    ],
+    "initialBatchSize": 6,
+    "initialBatchCount": 3,
+    "requestCount": 9,
+    "retryRequestCount": 6,
+    "providerFailureCount": 0,
+    "structuralFailureCount": 6,
+    "completionReason": "partial_after_retry",
+    "completionMessage": "拆分重试后仍有条目缺失",
+    "lastProviderError": "",
+    "reusedItemCount": 150,
+    "featuredTranslatedItemCount": 6,
+    "notAttemptedItemIds": [],
+    "notAttemptedItemCount": 0,
+    "budgetDeferredItemCount": 0,
+    "targetItemCount": 165,
+    "totalTranslatedItemCount": 162,
+    "totalMissingItemCount": 3,
+    "totalMissingItemIds": [
+      "965bc13eddf950",
+      "a62cc8109d446c",
+      "0b4a2a6e636ad2"
+    ],
+    "coverageCompletionMessage": "还有 3 条中文译文待完成"
+  },
+  "researchItemCount": 0,
+  "researchEditorialStatus": null,
+  "researchEditorialProvider": null,
+  "researchEditorialModel": null,
+  "researchTranslatedItemCount": 0,
+  "researchWarnings": [],
+  "researchEditorialDiagnostics": {},
+  "deepread": {
+    "state": "degraded",
+    "errorCode": "deepread-partial",
+    "editionDate": "2026-10-16",
+    "contentEditionDate": "2026-10-16",
+    "readerStatus": "partial",
+    "qualityFailures": [
+      {
+        "chapterId": "chapter-2",
+        "sentenceId": "b1s0",
+        "rule": "semantic-partial",
+        "detail": "'平均水平'仅指国际代表团规模，不等于整个展会国际化程度未突破区间；且'回应外界关注'属对官方动机的推测，证据未显示其意图，超出可核查范围。"
+      },
+      {
+        "chapterId": "chapter-2",
+        "sentenceId": "b1s1",
+        "rule": "semantic-partial",
+        "detail": "'不在九个官方国际展团之列'是从两份证据推得的否定断定，但材料未明言乌克兰企业不属展团；'展位资源约束'与'对接采购方'均为并列假设且已注明动机不明，但前半否定事实依据不足。"
+      },
+      {
+        "chapterId": "chapter-2",
+        "sentenceId": "b2s2",
+        "rule": "semantic-partial",
+        "detail": "展会与协议的'时间重合'是推断，材料未将其并列为同一政策方向的两条线；'平行推进'缺少证据依据，属超出材料的框架化表述。"
+      },
+      {
+        "chapterId": "chapter-2",
+        "sentenceId": "b4s2",
+        "rule": "semantic-partial",
+        "detail": "以'是否补齐成交与合同数据'为观察点尚可，但'缺失的成交与合同数据'预设了官方应当公布此类数据，材料并未表明该展会惯例有此披露，属额外框架。"
+      },
+      {
+        "chapterId": "chapter-2",
+        "rule": "editorial-depth",
+        "detail": "章节总体围绕'国际展商平平、资金通道刚开头'给出判断，并解释了BOND—SBA推荐机制、信息边界与观察点，但存在需修的具体问题：b1s0把'代表团规模属平均水平'扩大为整个展会国际化未突破区间，并将官方公布动机写成'回应外界关注'的推测；b1s1的'不在九个官方国际展团之列'为证据未支持的否定断言；b2s2把展会与融资"
+      },
+      {
+        "chapterId": "chapter-3",
+        "rule": "block-event-reference",
+        "sentenceId": "b4"
+      },
+      {
+        "chapterId": "chapter-3",
+        "rule": "block-event-reference",
+        "sentenceId": "b5"
+      },
+      {
+        "chapterId": "chapter-3",
+        "sentenceId": "b0s2",
+        "rule": "qualifier:negation"
+      },
+      {
+        "chapterId": "chapter-3",
+        "sentenceId": "b2s1",
+        "rule": "attribution-missing"
+      }
+    ],
+    "message": "已发表合格主题，其余主题待恢复。",
+    "diagnostics": {
+      "generationStatus": "partial",
+      "generatedAt": "2026-10-16T06:20:36.404753Z",
+      "candidateCount": 12,
+      "eventCount": 3,
+      "sourceCount": 3,
+      "warnings": [],
+      "recoveryDiagnostics": {
+        "chapters": {
+          "chapter-1": {
+            "state": "reused",
+            "attempts": 0
+          },
+          "chapter-2": {
+            "state": "failed",
+            "attempts": 2,
+            "issues": [
+              {
+                "sentenceId": "b1s0",
+                "rule": "semantic-partial",
+                "detail": "'平均水平'仅指国际代表团规模，不等于整个展会国际化程度未突破区间；且'回应外界关注'属对官方动机的推测，证据未显示其意图，超出可核查范围。"
+              },
+              {
+                "sentenceId": "b1s1",
+                "rule": "semantic-partial",
+                "detail": "'不在九个官方国际展团之列'是从两份证据推得的否定断定，但材料未明言乌克兰企业不属展团；'展位资源约束'与'对接采购方'均为并列假设且已注明动机不明，但前半否定事实依据不足。"
+              },
+              {
+                "sentenceId": "b2s2",
+                "rule": "semantic-partial",
+                "detail": "展会与协议的'时间重合'是推断，材料未将其并列为同一政策方向的两条线；'平行推进'缺少证据依据，属超出材料的框架化表述。"
+              },
+              {
+                "sentenceId": "b4s2",
+                "rule": "semantic-partial",
+                "detail": "以'是否补齐成交与合同数据'为观察点尚可，但'缺失的成交与合同数据'预设了官方应当公布此类数据，材料并未表明该展会惯例有此披露，属额外框架。"
+              },
+              {
+                "rule": "editorial-depth",
+                "detail": "章节总体围绕'国际展商平平、资金通道刚开头'给出判断，并解释了BOND—SBA推荐机制、信息边界与观察点，但存在需修的具体问题：b1s0把'代表团规模属平均水平'扩大为整个展会国际化未突破区间，并将官方公布动机写成'回应外界关注'的推测；b1s1的'不在九个官方国际展团之列'为证据未支持的否定断言；b2s2把展会与融资"
+              }
+            ]
+          },
+          "chapter-3": {
+            "state": "failed",
+            "attempts": 2,
+            "issues": [
+              {
+                "rule": "block-event-reference",
+                "sentenceId": "b4"
+              },
+              {
+                "rule": "block-event-reference",
+                "sentenceId": "b5"
+              },
+              {
+                "sentenceId": "b0s2",
+                "rule": "qualifier:negation"
+              },
+              {
+                "sentenceId": "b2s1",
+                "rule": "attribution-missing"
+              }
+            ]
+          }
+        }
+      },
+      "contentFailures": [
+        {
+          "chapterId": "chapter-2",
+          "sentenceId": "b1s0",
+          "rule": "semantic-partial",
+          "detail": "'平均水平'仅指国际代表团规模，不等于整个展会国际化程度未突破区间；且'回应外界关注'属对官方动机的推测，证据未显示其意图，超出可核查范围。"
+        },
+        {
+          "chapterId": "chapter-2",
+          "sentenceId": "b1s1",
+          "rule": "semantic-partial",
+          "detail": "'不在九个官方国际展团之列'是从两份证据推得的否定断定，但材料未明言乌克兰企业不属展团；'展位资源约束'与'对接采购方'均为并列假设且已注明动机不明，但前半否定事实依据不足。"
+        },
+        {
+          "chapterId": "chapter-2",
+          "sentenceId": "b2s2",
+          "rule": "semantic-partial",
+          "detail": "展会与协议的'时间重合'是推断，材料未将其并列为同一政策方向的两条线；'平行推进'缺少证据依据，属超出材料的框架化表述。"
+        },
+        {
+          "chapterId": "chapter-2",
+          "sentenceId": "b4s2",
+          "rule": "semantic-partial",
+          "detail": "以'是否补齐成交与合同数据'为观察点尚可，但'缺失的成交与合同数据'预设了官方应当公布此类数据，材料并未表明该展会惯例有此披露，属额外框架。"
+        },
+        {
+          "chapterId": "chapter-2",
+          "rule": "editorial-depth",
+          "detail": "章节总体围绕'国际展商平平、资金通道刚开头'给出判断，并解释了BOND—SBA推荐机制、信息边界与观察点，但存在需修的具体问题：b1s0把'代表团规模属平均水平'扩大为整个展会国际化未突破区间，并将官方公布动机写成'回应外界关注'的推测；b1s1的'不在九个官方国际展团之列'为证据未支持的否定断言；b2s2把展会与融资"
+        },
+        {
+          "chapterId": "chapter-3",
+          "rule": "block-event-reference",
+          "sentenceId": "b4"
+        },
+        {
+          "chapterId": "chapter-3",
+          "rule": "block-event-reference",
+          "sentenceId": "b5"
+        },
+        {
+          "chapterId": "chapter-3",
+          "sentenceId": "b0s2",
+          "rule": "qualifier:negation"
+        },
+        {
+          "chapterId": "chapter-3",
+          "sentenceId": "b2s1",
+          "rule": "attribution-missing"
+        }
+      ],
+      "selectionDiagnostics": {
+        "source-unavailable": 57,
+        "genre-or-policy": 21,
+        "duplicate-report": 1
+      },
+      "qualityMetrics": {
+        "bodyHanCount": 1038,
+        "publishedTopicCount": 1,
+        "plannedTopicCount": 3,
+        "historicalTopicCount": 0,
+        "multiSourceEventCount": 0,
+        "categoryCounts": {
+          "前沿技术": 1,
+          "军事动态": 1,
+          "航空航天": 1
+        },
+        "topicCategoryCounts": {
+          "前沿技术": 1,
+          "军事动态": 1,
+          "航空航天": 1
+        },
+        "maximumTopicCategoryShare": 0.3333333333333333,
+        "categoryBalanceException": ""
+      }
+    },
+    "lastAttemptAt": "2026-10-16T06:20:36.404753Z"
+  },
+  "releaseId": "r20261016T062036-83483ad1"
+}
