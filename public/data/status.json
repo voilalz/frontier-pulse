@@ -217,49 +217,29 @@
     "qualityFailures": [
       {
         "chapterId": "chapter-2",
-        "sentenceId": "title",
-        "rule": "quantity:number:500000000"
-      },
-      {
-        "chapterId": "chapter-2",
         "sentenceId": "angle",
         "rule": "quantity:number:500000000"
       },
       {
-        "chapterId": "chapter-2",
-        "sentenceId": "b1s0",
-        "rule": "quantity:number:2"
-      },
-      {
-        "chapterId": "chapter-2",
-        "sentenceId": "b2s0",
-        "rule": "evidence-reference"
+        "chapterId": "chapter-3",
+        "rule": "block-event-reference",
+        "sentenceId": "b2"
       },
       {
         "chapterId": "chapter-3",
-        "sentenceId": "b1s1",
-        "rule": "qualifier:negation"
+        "rule": "block-event-reference",
+        "sentenceId": "b4"
       },
       {
         "chapterId": "chapter-3",
-        "sentenceId": "b2s0",
-        "rule": "attribution-missing"
-      },
-      {
-        "chapterId": "chapter-3",
-        "sentenceId": "b2s1",
-        "rule": "quantity:number:5"
-      },
-      {
-        "chapterId": "chapter-3",
-        "sentenceId": "b4s2",
-        "rule": "evidence-reference"
+        "rule": "block-event-reference",
+        "sentenceId": "b5"
       }
     ],
     "message": "已发表合格主题，其余主题待恢复。",
     "diagnostics": {
       "generationStatus": "partial",
-      "generatedAt": "2026-10-16T01:37:42.373103Z",
+      "generatedAt": "2026-10-16T04:22:13.909224Z",
       "candidateCount": 12,
       "eventCount": 3,
       "sourceCount": 3,
@@ -267,28 +247,16 @@
       "recoveryDiagnostics": {
         "chapters": {
           "chapter-1": {
-            "state": "complete",
-            "attempts": 2
+            "state": "reused",
+            "attempts": 0
           },
           "chapter-2": {
             "state": "failed",
             "attempts": 2,
             "issues": [
               {
-                "sentenceId": "title",
-                "rule": "quantity:number:500000000"
-              },
-              {
                 "sentenceId": "angle",
                 "rule": "quantity:number:500000000"
-              },
-              {
-                "sentenceId": "b1s0",
-                "rule": "quantity:number:2"
-              },
-              {
-                "sentenceId": "b2s0",
-                "rule": "evidence-reference"
               }
             ]
           },
@@ -297,20 +265,16 @@
             "attempts": 2,
             "issues": [
               {
-                "sentenceId": "b1s1",
-                "rule": "qualifier:negation"
+                "rule": "block-event-reference",
+                "sentenceId": "b2"
               },
               {
-                "sentenceId": "b2s0",
-                "rule": "attribution-missing"
+                "rule": "block-event-reference",
+                "sentenceId": "b4"
               },
               {
-                "sentenceId": "b2s1",
-                "rule": "quantity:number:5"
-              },
-              {
-                "sentenceId": "b4s2",
-                "rule": "evidence-reference"
+                "rule": "block-event-reference",
+                "sentenceId": "b5"
               }
             ]
           }
@@ -319,43 +283,23 @@
       "contentFailures": [
         {
           "chapterId": "chapter-2",
-          "sentenceId": "title",
-          "rule": "quantity:number:500000000"
-        },
-        {
-          "chapterId": "chapter-2",
           "sentenceId": "angle",
           "rule": "quantity:number:500000000"
         },
         {
-          "chapterId": "chapter-2",
-          "sentenceId": "b1s0",
-          "rule": "quantity:number:2"
-        },
-        {
-          "chapterId": "chapter-2",
-          "sentenceId": "b2s0",
-          "rule": "evidence-reference"
+          "chapterId": "chapter-3",
+          "rule": "block-event-reference",
+          "sentenceId": "b2"
         },
         {
           "chapterId": "chapter-3",
-          "sentenceId": "b1s1",
-          "rule": "qualifier:negation"
+          "rule": "block-event-reference",
+          "sentenceId": "b4"
         },
         {
           "chapterId": "chapter-3",
-          "sentenceId": "b2s0",
-          "rule": "attribution-missing"
-        },
-        {
-          "chapterId": "chapter-3",
-          "sentenceId": "b2s1",
-          "rule": "quantity:number:5"
-        },
-        {
-          "chapterId": "chapter-3",
-          "sentenceId": "b4s2",
-          "rule": "evidence-reference"
+          "rule": "block-event-reference",
+          "sentenceId": "b5"
         }
       ],
       "selectionDiagnostics": {
@@ -383,7 +327,7 @@
         "categoryBalanceException": ""
       }
     },
-    "lastAttemptAt": "2026-10-16T01:37:42.373103Z"
+    "lastAttemptAt": "2026-10-16T04:22:13.909224Z"
   },
-  "releaseId": "r20261016T013742-b956ffa8"
+  "releaseId": "r20261016T042213-5e7de6d4"
 }
