@@ -2502,6 +2502,32 @@ def run_resilient_ai_batches(
     return completed, warnings, diagnostics
 
 
+def translation_rejection_reason(text: str, source: str) -> str:
+    """Name which gate failed, for logs only; never shown to readers."""
+    from evidence_trace import quantity_values
+    if not chinese_reader_text(text):
+        return "not Chinese reader text"
+    extra = sorted(quantity_values(text) - quantity_values(source))
+    return "unsupported values: " + ", ".join(extra[:6]) if extra else "language check"
+
+
+def salvage_daily_summary(summary: str, source: str) -> str:
+    """Keep whole supported sentences of a long summary; never rewrite or add text.
+
+    A 300-500 character summary is usually rejected for one sentence that adds
+    a date or converted figure, or keeps an English phrase. Dropping only those
+    sentences preserves the rest; more than half removed counts as a failure.
+    """
+    from evidence_trace import translation_text_valid
+    sentences = [part for part in re.split(r"(?<=[。！？])", summary) if part.strip()]
+    kept = "".join(part for part in sentences
+                   if chinese_reader_text(part) and translation_text_valid(part, source)).strip()
+    if (len(kept) * 2 < len(summary.strip()) or not chinese_reader_text(kept)
+            or not translation_text_valid(kept, source)):
+        return ""
+    return kept
+
+
 def request_daily_translation_batch(
     batch: list[Article], config: dict[str, Any], runtime: dict[str, str]
 ) -> dict[str, dict[str, Any]]:
@@ -2555,6 +2581,8 @@ def request_daily_translation_batch(
             "再按原文顺序整理背景、关键细节与数字、各方表态和后续安排，不逐句硬译。"
             "description不足以支撑300字时如实写短，不得为凑字数重复或推测。"
             "description为空时summary必须为空字符串。禁止现有元数据、未提取正文等采集缺失话术。"
+            "日期和数字只能照抄description中已有的写法，不得根据publishedAt推算日期或星期，不得换算单位、货币或时区。"
+            "除机构、产品等专有名称外不要保留英文短语。"
             "在证据支持时保留时间、地点、主体、动作、关键数值及后续安排；没有的信息不要补写。"
             "篇幅取决于可用事实，原文不足时直接写短，不要罗列原文未交代的地点、人名、规模等信息凑字数。"
             "禁止输出核实程度、信源数量、评分或编辑过程等内部字段。不得把整段英文原文混入中文摘要。"
@@ -2590,10 +2618,22 @@ def request_daily_translation_batch(
             source = source_items[item_index]
             if not source["evidenceRecords"]:
                 item = {**item, "summary": source["summary"]}
+            source_text = article.title + " " + source["summary"]
+            if source["evidenceRecords"] and not (
+                    chinese_reader_text(item["summary"]) and translation_text_valid(item["summary"], source_text)):
+                salvaged = salvage_daily_summary(item["summary"], source_text)
+                LOGGER.warning("Daily translation summary for %s failed the language/quantity gate (%s); %s",
+                               article.id, translation_rejection_reason(item["summary"], source_text),
+                               "kept %d/%d characters of supported sentences" % (len(salvaged), len(item["summary"]))
+                               if salvaged else "nothing salvageable")
+                item = {**item, "summary": salvaged}
             if not (chinese_reader_text(item["titleZh"]) and translation_text_valid(item["titleZh"], article.title)
                     and ((not source["evidenceRecords"] and item['summary'] == '')
                          or (chinese_reader_text(item['summary'])
-                             and translation_text_valid(item["summary"], article.title + " " + source["summary"])))):
+                             and translation_text_valid(item["summary"], source_text)))):
+                if not (chinese_reader_text(item["titleZh"]) and translation_text_valid(item["titleZh"], article.title)):
+                    LOGGER.warning("Daily translation title for %s failed the language/quantity gate (%s)",
+                                   article.id, translation_rejection_reason(item["titleZh"], article.title))
                 rejected = True
                 continue
             translated[article.id] = {
