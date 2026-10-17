@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "generationRevision": 13,
   "editionDate": "2026-10-16",
-  "generatedAt": "2026-10-16T01:37:42.373103Z",
+  "generatedAt": "2026-10-16T06:20:36.404753Z",
   "headline": "ADI设机器人初创陪跑平台，能否补上量产断层",
   "lead": "机器人初创企业在传感、运动控制和AI上往往跑得很快，却在电子、系统集成、验证与制造环节卡住。ADI把Emerging Tech Hub放进Analog Garage，试图以弹性工程支持和制造资源弥合这段断层，但能否真正帮企业规模化，还取决于资源如何匹配不同阶段的需求。",
   "chapters": [
@@ -2059,28 +2059,36 @@
   "recoveryDiagnostics": {
     "chapters": {
       "chapter-1": {
-        "state": "complete",
-        "attempts": 2
+        "state": "reused",
+        "attempts": 0
       },
       "chapter-2": {
         "state": "failed",
         "attempts": 2,
         "issues": [
           {
-            "sentenceId": "title",
-            "rule": "quantity:number:500000000"
-          },
-          {
-            "sentenceId": "angle",
-            "rule": "quantity:number:500000000"
-          },
-          {
             "sentenceId": "b1s0",
-            "rule": "quantity:number:2"
+            "rule": "semantic-partial",
+            "detail": "'平均水平'仅指国际代表团规模，不等于整个展会国际化程度未突破区间；且'回应外界关注'属对官方动机的推测，证据未显示其意图，超出可核查范围。"
           },
           {
-            "sentenceId": "b2s0",
-            "rule": "evidence-reference"
+            "sentenceId": "b1s1",
+            "rule": "semantic-partial",
+            "detail": "'不在九个官方国际展团之列'是从两份证据推得的否定断定，但材料未明言乌克兰企业不属展团；'展位资源约束'与'对接采购方'均为并列假设且已注明动机不明，但前半否定事实依据不足。"
+          },
+          {
+            "sentenceId": "b2s2",
+            "rule": "semantic-partial",
+            "detail": "展会与协议的'时间重合'是推断，材料未将其并列为同一政策方向的两条线；'平行推进'缺少证据依据，属超出材料的框架化表述。"
+          },
+          {
+            "sentenceId": "b4s2",
+            "rule": "semantic-partial",
+            "detail": "以'是否补齐成交与合同数据'为观察点尚可，但'缺失的成交与合同数据'预设了官方应当公布此类数据，材料并未表明该展会惯例有此披露，属额外框架。"
+          },
+          {
+            "rule": "editorial-depth",
+            "detail": "章节总体围绕'国际展商平平、资金通道刚开头'给出判断，并解释了BOND—SBA推荐机制、信息边界与观察点，但存在需修的具体问题：b1s0把'代表团规模属平均水平'扩大为整个展会国际化未突破区间，并将官方公布动机写成'回应外界关注'的推测；b1s1的'不在九个官方国际展团之列'为证据未支持的否定断言；b2s2把展会与融资"
           }
         ]
       },
@@ -2089,20 +2097,20 @@
         "attempts": 2,
         "issues": [
           {
-            "sentenceId": "b1s1",
+            "rule": "block-event-reference",
+            "sentenceId": "b4"
+          },
+          {
+            "rule": "block-event-reference",
+            "sentenceId": "b5"
+          },
+          {
+            "sentenceId": "b0s2",
             "rule": "qualifier:negation"
           },
           {
-            "sentenceId": "b2s0",
-            "rule": "attribution-missing"
-          },
-          {
             "sentenceId": "b2s1",
-            "rule": "quantity:number:5"
-          },
-          {
-            "sentenceId": "b4s2",
-            "rule": "evidence-reference"
+            "rule": "attribution-missing"
           }
         ]
       }
@@ -2111,43 +2119,52 @@
   "contentFailures": [
     {
       "chapterId": "chapter-2",
-      "sentenceId": "title",
-      "rule": "quantity:number:500000000"
-    },
-    {
-      "chapterId": "chapter-2",
-      "sentenceId": "angle",
-      "rule": "quantity:number:500000000"
-    },
-    {
-      "chapterId": "chapter-2",
       "sentenceId": "b1s0",
-      "rule": "quantity:number:2"
+      "rule": "semantic-partial",
+      "detail": "'平均水平'仅指国际代表团规模，不等于整个展会国际化程度未突破区间；且'回应外界关注'属对官方动机的推测，证据未显示其意图，超出可核查范围。"
     },
     {
       "chapterId": "chapter-2",
-      "sentenceId": "b2s0",
-      "rule": "evidence-reference"
+      "sentenceId": "b1s1",
+      "rule": "semantic-partial",
+      "detail": "'不在九个官方国际展团之列'是从两份证据推得的否定断定，但材料未明言乌克兰企业不属展团；'展位资源约束'与'对接采购方'均为并列假设且已注明动机不明，但前半否定事实依据不足。"
+    },
+    {
+      "chapterId": "chapter-2",
+      "sentenceId": "b2s2",
+      "rule": "semantic-partial",
+      "detail": "展会与协议的'时间重合'是推断，材料未将其并列为同一政策方向的两条线；'平行推进'缺少证据依据，属超出材料的框架化表述。"
+    },
+    {
+      "chapterId": "chapter-2",
+      "sentenceId": "b4s2",
+      "rule": "semantic-partial",
+      "detail": "以'是否补齐成交与合同数据'为观察点尚可，但'缺失的成交与合同数据'预设了官方应当公布此类数据，材料并未表明该展会惯例有此披露，属额外框架。"
+    },
+    {
+      "chapterId": "chapter-2",
+      "rule": "editorial-depth",
+      "detail": "章节总体围绕'国际展商平平、资金通道刚开头'给出判断，并解释了BOND—SBA推荐机制、信息边界与观察点，但存在需修的具体问题：b1s0把'代表团规模属平均水平'扩大为整个展会国际化未突破区间，并将官方公布动机写成'回应外界关注'的推测；b1s1的'不在九个官方国际展团之列'为证据未支持的否定断言；b2s2把展会与融资"
     },
     {
       "chapterId": "chapter-3",
-      "sentenceId": "b1s1",
+      "rule": "block-event-reference",
+      "sentenceId": "b4"
+    },
+    {
+      "chapterId": "chapter-3",
+      "rule": "block-event-reference",
+      "sentenceId": "b5"
+    },
+    {
+      "chapterId": "chapter-3",
+      "sentenceId": "b0s2",
       "rule": "qualifier:negation"
     },
     {
       "chapterId": "chapter-3",
-      "sentenceId": "b2s0",
-      "rule": "attribution-missing"
-    },
-    {
-      "chapterId": "chapter-3",
       "sentenceId": "b2s1",
-      "rule": "quantity:number:5"
-    },
-    {
-      "chapterId": "chapter-3",
-      "sentenceId": "b4s2",
-      "rule": "evidence-reference"
+      "rule": "attribution-missing"
     }
   ],
   "qualityMetrics": {
@@ -2199,43 +2216,52 @@
   "qualityFailures": [
     {
       "chapterId": "chapter-2",
-      "sentenceId": "title",
-      "rule": "quantity:number:500000000"
-    },
-    {
-      "chapterId": "chapter-2",
-      "sentenceId": "angle",
-      "rule": "quantity:number:500000000"
-    },
-    {
-      "chapterId": "chapter-2",
       "sentenceId": "b1s0",
-      "rule": "quantity:number:2"
+      "rule": "semantic-partial",
+      "detail": "'平均水平'仅指国际代表团规模，不等于整个展会国际化程度未突破区间；且'回应外界关注'属对官方动机的推测，证据未显示其意图，超出可核查范围。"
     },
     {
       "chapterId": "chapter-2",
-      "sentenceId": "b2s0",
-      "rule": "evidence-reference"
+      "sentenceId": "b1s1",
+      "rule": "semantic-partial",
+      "detail": "'不在九个官方国际展团之列'是从两份证据推得的否定断定，但材料未明言乌克兰企业不属展团；'展位资源约束'与'对接采购方'均为并列假设且已注明动机不明，但前半否定事实依据不足。"
+    },
+    {
+      "chapterId": "chapter-2",
+      "sentenceId": "b2s2",
+      "rule": "semantic-partial",
+      "detail": "展会与协议的'时间重合'是推断，材料未将其并列为同一政策方向的两条线；'平行推进'缺少证据依据，属超出材料的框架化表述。"
+    },
+    {
+      "chapterId": "chapter-2",
+      "sentenceId": "b4s2",
+      "rule": "semantic-partial",
+      "detail": "以'是否补齐成交与合同数据'为观察点尚可，但'缺失的成交与合同数据'预设了官方应当公布此类数据，材料并未表明该展会惯例有此披露，属额外框架。"
+    },
+    {
+      "chapterId": "chapter-2",
+      "rule": "editorial-depth",
+      "detail": "章节总体围绕'国际展商平平、资金通道刚开头'给出判断，并解释了BOND—SBA推荐机制、信息边界与观察点，但存在需修的具体问题：b1s0把'代表团规模属平均水平'扩大为整个展会国际化未突破区间，并将官方公布动机写成'回应外界关注'的推测；b1s1的'不在九个官方国际展团之列'为证据未支持的否定断言；b2s2把展会与融资"
     },
     {
       "chapterId": "chapter-3",
-      "sentenceId": "b1s1",
+      "rule": "block-event-reference",
+      "sentenceId": "b4"
+    },
+    {
+      "chapterId": "chapter-3",
+      "rule": "block-event-reference",
+      "sentenceId": "b5"
+    },
+    {
+      "chapterId": "chapter-3",
+      "sentenceId": "b0s2",
       "rule": "qualifier:negation"
     },
     {
       "chapterId": "chapter-3",
-      "sentenceId": "b2s0",
-      "rule": "attribution-missing"
-    },
-    {
-      "chapterId": "chapter-3",
       "sentenceId": "b2s1",
-      "rule": "quantity:number:5"
-    },
-    {
-      "chapterId": "chapter-3",
-      "sentenceId": "b4s2",
-      "rule": "evidence-reference"
+      "rule": "attribution-missing"
     }
   ],
   "framingEvidenceIds": [
@@ -2256,5 +2282,5 @@
     "binding": "75b41b4b0235b655d51226ea9163b6b730e26adaa30511b844f8693538535da2"
   },
   "readerStatus": "partial",
-  "releaseId": "r20261016T013742-b956ffa8"
+  "releaseId": "r20261016T062036-83483ad1"
 }
