@@ -102,6 +102,35 @@ class DailyDisplayTranslationTests(unittest.TestCase):
             with self.assertRaises(MODULE.TranslationContentRejected):
                 MODULE.request_daily_translation_batch([article], self.config, {"provider": "deepseek"})
 
+    def test_daily_translation_drops_only_unsupported_sentences(self):
+        article = self.article("NASA satellite mission",
+                               "A satellite launch is scheduled for Monday. The team completed final checks of the spacecraft.")
+        summary = ("美国航天局的一颗卫星计划于周一发射，任务团队已经完成航天器的最终检查。"
+                   "发射准备工作按照既定流程推进，团队将在发射前继续监测航天器状态。"
+                   "此次发射定于10月20日进行。")
+        response = {"items": [{"index": 1, "titleZh": "美国航天局卫星任务", "summary": summary, "tags": []}]}
+        with mock.patch.object(MODULE, "request_structured_json", return_value=response):
+            translations = MODULE.request_daily_translation_batch([article], self.config, {"provider": "deepseek"})
+        kept = translations[article.id]["summary"]
+        self.assertNotIn("10月20日", kept)
+        self.assertTrue(summary.startswith(kept))
+        validate_news_trace(MODULE.item_from_article(article, self.config, translations[article.id],
+                                                     summary_limit=MODULE.daily_summary_limit(self.config)))
+
+    def test_daily_translation_drops_sentences_with_english_phrases(self):
+        article = self.article("NASA satellite mission")
+        summary = ("美国航天局的一颗卫星计划于周一发射，任务团队正在进行发射前的最后准备工作。"
+                   "该任务被称为 a new science mission 项目。")
+        response = {"items": [{"index": 1, "titleZh": "美国航天局卫星任务", "summary": summary, "tags": []}]}
+        with mock.patch.object(MODULE, "request_structured_json", return_value=response):
+            translations = MODULE.request_daily_translation_batch([article], self.config, {"provider": "deepseek"})
+        self.assertNotIn("science", translations[article.id]["summary"])
+
+    def test_daily_salvage_refuses_when_most_sentences_are_unsupported(self):
+        self.assertEqual(MODULE.salvage_daily_summary(
+            "卫星于周一发射。此次发射定于10月20日进行，共携带99台仪器和12名乘员。",
+            "NASA satellite mission A satellite launch is scheduled for Monday."), "")
+
     def test_compact_history_search_uses_valid_chinese_display(self):
         _, item = self.daily()
         compact = MODULE.compact_search_item(item, "2026-09-20")
